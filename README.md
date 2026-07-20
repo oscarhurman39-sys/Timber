@@ -42,3 +42,16 @@ Append objects to the `PLANTS` array in `timber.html`. Keep the exact field name
 (`common, latin, hue, visual, water, aspect, soil, prune, source, peak, order, bench, root,
 trade, retail, margin, type, shrink, returnRisk, pots, cvs, hardiness, resilience, uses, size`).
 `hue` (0–360) sets the card's colour.
+
+## Scaling the plant list (no hand-editing)
+
+```
+node plants-tool.js export   # dumps PLANTS to plants.csv — open in Excel / Google Sheets
+node plants-tool.js import   # validates plants.csv and writes it back into timber.html
+```
+
+The importer enforces the locked schema hard: exactly the 25 fields, every cell filled,
+hue 0–360, no duplicate names. **It never invents values** — a missing cell is an error
+naming the row and field, not a default. On import the app auto-detects the changed list
+and starts a fresh deck (saved progress can't go stale). A `timber.html.bak` backup is
+written before every import.
