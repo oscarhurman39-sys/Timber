@@ -55,3 +55,27 @@ hue 0–360, no duplicate names. **It never invents values** — a missing cell 
 naming the row and field, not a default. On import the app auto-detects the changed list
 and starts a fresh deck (saved progress can't go stale). A `timber.html.bak` backup is
 written before every import.
+
+## Finding real, licence-safe plant photos
+
+```
+node plant-images-tool.js search "Nandina domestica"   # writes plant-images/.../candidates.html — open it, look
+node plant-images-tool.js pick "Nandina domestica" 2    # downloads candidate #2 + its licence record
+```
+
+Queries Wikimedia Commons (which only hosts content free for reuse, including
+commercially — non-commercial-only licences aren't accepted there at all). `search`
+never auto-picks anything; it hands you a visual gallery with licence + credit per
+image so you confirm it's actually the right plant before anything gets saved. `pick`
+downloads the chosen image plus a `credit.json` recording the licence, author, source
+URL, and the date — your permanent record, independent of whether the source page
+still exists later (Creative Commons licences are irrevocable for a copy you've
+already obtained).
+
+**This tool needs an internet connection to run** (unlike everything else here) and
+has not yet been run against the live API — Wikimedia isn't reachable from the
+environment that built it. First run is the real test: if `search` for a common plant
+comes back with zero results, something in the request needs fixing before trusting
+it further. Downloaded photos aren't wired into `timber.html` yet — that's a separate
+step once a batch of images has been chosen (need to decide: inline data URIs like the
+icons, which bloats the file at scale, vs. separate files the service worker caches).
