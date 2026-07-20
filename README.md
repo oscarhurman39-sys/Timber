@@ -22,7 +22,12 @@ of them.
 | Double-tap a card | Flip to the **Buyer Trade Sheet** (prices, margin, order weeks, risk) |
 | Tap the back | Flip back — swiping is locked while flipped |
 | 🔍 top right | **Search** — type a common or latin name, get the full info sheet instantly |
-| ☰ menu | Learned count, Dictionary mode, Install app, Reset progress |
+| 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
+| ☰ menu | Learned count, Dictionary mode, **Quiz mode** (streak + best), Install app, Reset progress |
+
+Progress (learned/skipped/undo history) and your best quiz streak persist in the browser via
+localStorage — closing the app doesn't lose them. "Reset progress" / "Reset deck" clears the deck
+state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
 
 ## Files
 

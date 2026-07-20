@@ -178,6 +178,45 @@
     border-radius:20px;letter-spacing:.3px}
   .d-eyebrow{font-size:12px;color:var(--leaf1);font-weight:600}
   .s-detail ul.facts{gap:8px}
+  .d-customer{border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold),#e0a52f);color:#1a120a;
+    font-family:inherit;font-size:13px;font-weight:700;padding:8px 12px;cursor:pointer;margin-left:auto}
+
+  /* customer-facing view — big, friendly, no trade data */
+  .cust .c-name{font-size:30px;font-weight:800;letter-spacing:-.5px;margin:2px 0 0}
+  .cust .c-latin{font-style:italic;font-size:15px;color:var(--muted)}
+  .cust .c-eyebrow{font-size:15px;color:var(--leaf1);font-weight:600;margin:4px 0 6px}
+  .cust ul.facts{gap:12px}
+  .cust ul.facts li{font-size:17px;line-height:1.4}
+  .cust ul.facts li .k{font-size:20px;width:26px;flex:0 0 26px}
+  .cust .c-price{display:flex;align-items:baseline;gap:10px;background:rgba(245,196,81,.1);
+    border:1px solid rgba(245,196,81,.3);border-radius:12px;padding:12px 14px;margin-top:4px}
+  .cust .c-price .l{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+  .cust .c-price .n{font-size:20px;font-weight:800;color:var(--gold)}
+
+  /* quiz overlay — compact panel, opened from the menu */
+  .quiz{position:fixed;inset:0;z-index:60;visibility:hidden}
+  .quiz.open{visibility:visible}
+  .quiz .q-scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .25s}
+  .quiz.open .q-scrim{opacity:1}
+  .quiz .q-panel{position:absolute;top:0;left:0;right:0;max-height:78%;display:flex;flex-direction:column;
+    background:#0e1d14;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0 0 18px 18px;
+    transform:translateY(-102%);transition:transform .28s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 18px 40px rgba(0,0,0,.45);padding:14px 16px 16px;gap:12px}
+  .quiz.open .q-panel{transform:translateY(0)}
+  .q-head{display:flex;align-items:center;gap:10px}
+  .q-title{font-weight:800;font-size:16px}
+  .q-stats{margin-left:auto;font-size:12px;color:var(--muted)}
+  .q-stats b{color:var(--gold)}
+  .q-question{font-size:15px;line-height:1.45;color:#eafff2}
+  .q-question em{color:var(--leaf1);font-style:normal;font-weight:600}
+  .q-options{display:grid;gap:8px;overflow-y:auto}
+  .q-opt{border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.04);
+    color:var(--ink);font-family:inherit;font-size:15px;font-weight:600;text-align:left;
+    padding:12px 14px;cursor:pointer}
+  .q-opt:hover,.q-opt:focus-visible{background:rgba(255,255,255,.08)}
+  .q-opt.correct{border-color:var(--leaf1);background:rgba(76,215,135,.15);color:#eafff2}
+  .q-opt.wrong{border-color:#ff6b6b;background:rgba(255,107,107,.15)}
+  .q-opt[disabled]{cursor:default}
 </style>
 </head>
 <body>
@@ -231,6 +270,7 @@
     <div class="row"><span class="ic">⚙️</span> Settings</div>
     <div class="row"><span class="ic">⭐</span> Learned <small id="doneMenu">0</small></div>
     <div class="row" id="dictRow" role="button" tabindex="0"><span class="ic">🔎</span> Dictionary mode</div>
+    <div class="row" id="quizRow" role="button" tabindex="0"><span class="ic">❓</span> Quiz mode <small id="quizBestMenu"></small></div>
     <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic">📲</span> Install app</div>
     <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic">↻</span> Reset progress</div>
     <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.</div>
@@ -250,6 +290,19 @@
     </div>
     <div class="s-results" id="searchResults"></div>
     <div class="s-detail" id="searchDetail" hidden></div>
+  </div>
+</div>
+
+<div class="quiz" id="quiz" role="dialog" aria-modal="true" aria-label="Quiz mode">
+  <div class="q-scrim" data-qclose></div>
+  <div class="q-panel">
+    <div class="q-head">
+      <span class="q-title">❓ Quiz</span>
+      <span class="q-stats">Streak <b id="qStreak">0</b> · Best <b id="qBest">0</b></span>
+      <button class="s-close" id="quizClose" aria-label="Close quiz">✕</button>
+    </div>
+    <div class="q-question" id="qQuestion"></div>
+    <div class="q-options" id="qOptions"></div>
   </div>
 </div>
 
@@ -312,13 +365,40 @@ const deck=document.getElementById('deck'),empty=document.getElementById('empty'
 const leftEl=document.getElementById('left'),doneEl=document.getElementById('done'),doneMenu=document.getElementById('doneMenu');
 let order=[],history=[],learnedCount=0;
 
+/* ---------- progress persistence (survives closing the app) ---------- */
+const STORE_KEY='timber-progress-v1';
+const FINGERPRINT=PLANTS.map(p=>p.latin).join('|');  /* deck layout invalidates if the plant list changes */
+function saveProgress(){
+  try{
+    const stack=[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx);
+    localStorage.setItem(STORE_KEY,JSON.stringify({fp:FINGERPRINT,stack,history,learnedCount}));
+  }catch(e){/* private mode / storage full — app still works, just won't persist */}
+}
+function loadProgress(){
+  try{
+    const d=JSON.parse(localStorage.getItem(STORE_KEY));
+    if(!d||d.fp!==FINGERPRINT)return null;
+    const okIdx=i=>Number.isInteger(i)&&i>=0&&i<PLANTS.length;
+    if(!Array.isArray(d.stack)||!d.stack.every(okIdx)||new Set(d.stack).size!==d.stack.length)return null;
+    if(!Array.isArray(d.history)||!d.history.every(h=>h&&okIdx(h.idx)&&typeof h.learned==='boolean'))return null;
+    if(!Number.isInteger(d.learnedCount)||d.learnedCount<0||d.learnedCount>PLANTS.length)return null;
+    return d;
+  }catch(e){return null;}
+}
+function restoreDeck(d){
+  deck.querySelectorAll('.card').forEach(c=>c.remove());
+  d.stack.forEach(renderCard);         /* saved bottom-to-top, rendered in the same order */
+  order=[...d.stack];history=d.history;learnedCount=d.learnedCount;
+  updateCounts();refreshEmpty();
+}
+
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
 
 function buildDeck(){
   deck.querySelectorAll('.card').forEach(c=>c.remove());
   order=PLANTS.map((_,i)=>i);history=[];learnedCount=0;
   [...order].reverse().forEach(renderCard);
-  updateCounts();refreshEmpty();
+  updateCounts();refreshEmpty();saveProgress();
 }
 
 function renderCard(idx){
@@ -421,10 +501,10 @@ function fling(card,dir,learned){
   card.style.opacity='0';setTimeout(()=>card.remove(),320);
   order=order.filter(i=>i!==idx);history.push({idx,learned});
   if(learned)learnedCount++;
-  updateCounts();refreshEmpty();
+  updateCounts();refreshEmpty();saveProgress();
 }
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
-function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);updateCounts();refreshEmpty();}
+function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);updateCounts();refreshEmpty();saveProgress();}
 function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;}
 function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show',done);document.getElementById('actions').style.visibility=done?'hidden':'visible';}
 
@@ -447,12 +527,13 @@ const searchDetail=document.getElementById('searchDetail');
 
 function openSearch(){
   search.classList.add('open');
+  customerMode=false;
   showResultsList();
   searchInput.value='';
   renderResults('');
   setTimeout(()=>searchInput.focus(),120);
 }
-function closeSearch(){search.classList.remove('open');showResultsList();document.getElementById('searchBtn').focus();}
+function closeSearch(){search.classList.remove('open');customerMode=false;showResultsList();document.getElementById('searchBtn').focus();}
 function showResultsList(){searchDetail.hidden=true;searchResults.hidden=false;}
 function backToResults(){  /* from detail view — keep keyboard focus somewhere useful */
   showResultsList();
@@ -476,10 +557,14 @@ function renderResults(q){
   searchResults.querySelectorAll('.s-row').forEach(btn=>btn.onclick=()=>showPlant(+btn.dataset.i));
 }
 
+let detailIdx=null,customerMode=false;
 function showPlant(i){
+  detailIdx=i;customerMode=false;
   const p=PLANTS[i];
+  searchDetail.classList.remove('cust');
   searchDetail.innerHTML=`
-    <div class="d-top"><button class="d-back" id="dBack">← Results</button></div>
+    <div class="d-top"><button class="d-back" id="dBack">← Results</button>
+      <button class="d-customer" id="dCustomer">👥 Show customer</button></div>
     <div class="d-head"><h3>${p.common}</h3><em>${p.latin}</em><span class="h">${p.hardiness}</span></div>
     <div class="d-eyebrow">${p.visual}</div>
     <ul class="facts">
@@ -511,7 +596,36 @@ function showPlant(i){
   searchDetail.hidden=false;
   const dBack=document.getElementById('dBack');
   dBack.onclick=backToResults;
+  document.getElementById('dCustomer').onclick=()=>showCustomer(i);
   dBack.focus();
+}
+
+/* customer-facing view: big type, friendly labels, retail price only — no trade data */
+function showCustomer(i){
+  detailIdx=i;customerMode=true;
+  const p=PLANTS[i];
+  searchDetail.classList.add('cust');
+  searchDetail.innerHTML=`
+    <div class="d-top"><button class="d-back" id="dStaff">← Staff view</button></div>
+    <h3 class="c-name">${p.common}</h3>
+    <div class="c-latin">${p.latin}</div>
+    <div class="c-eyebrow">${p.visual}</div>
+    <ul class="facts">
+      <li><span class="k">💧</span><span class="v"><b>Watering</b>${p.water}</span></li>
+      <li><span class="k">☀️</span><span class="v"><b>Where to plant</b>${p.aspect}</span></li>
+      <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
+      <li><span class="k">✂️</span><span class="v"><b>Pruning</b>${p.prune}</span></li>
+      <li><span class="k">❄️</span><span class="v"><b>Hardiness</b>${p.hardiness}</span></li>
+      <li><span class="k">📏</span><span class="v"><b>Grows to</b>${p.size}</span></li>
+      <li><span class="k">🌿</span><span class="v"><b>Great for</b>${p.uses}</span></li>
+      <li><span class="k">✨</span><span class="v"><b>Varieties</b>${p.cvs}</span></li>
+    </ul>
+    <div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`;
+  searchResults.hidden=true;
+  searchDetail.hidden=false;
+  const back=document.getElementById('dStaff');
+  back.onclick=()=>{showPlant(i);};
+  back.focus();
 }
 
 document.getElementById('searchBtn').onclick=openSearch;
@@ -527,10 +641,69 @@ dictRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();dictRo
 document.getElementById('resetRow').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();buildDeck();closeSheet();}};
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape')return;
-  if(search.classList.contains('open')){
-    if(!searchDetail.hidden)backToResults();else closeSearch();
+  if(quizEl.classList.contains('open')){closeQuiz();}
+  else if(search.classList.contains('open')){
+    if(customerMode)showPlant(detailIdx);
+    else if(!searchDetail.hidden)backToResults();
+    else closeSearch();
   }else if(sheet.classList.contains('open'))closeSheet();
 });
+
+/* ---------- quiz mode (opened from the top-right menu, compact overlay) ---------- */
+const quizEl=document.getElementById('quiz');
+const qQuestion=document.getElementById('qQuestion'),qOptions=document.getElementById('qOptions');
+const qStreakEl=document.getElementById('qStreak'),qBestEl=document.getElementById('qBest');
+const QUIZ_KEY='timber-quiz-v1';
+let qStreak=0,qBest=0,qTimer=null;
+try{qBest=Math.max(0,parseInt(localStorage.getItem(QUIZ_KEY),10)||0);}catch(e){}
+const QUIZ_CLUES=[
+  ['visual','Which plant looks like this:'],
+  ['latin','Which plant has the latin name'],
+  ['cvs','Whose cultivars are these:'],
+  ['peak','Which plant peaks'],
+  ['uses','Which plant is best for:'],
+  ['prune','Whose pruning note is this:'],
+  ['source','Which plant do you source'],
+];
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function updateQuizStats(){
+  qStreakEl.textContent=qStreak;qBestEl.textContent=qBest;
+  document.getElementById('quizBestMenu').textContent=qBest?'best '+qBest:'';
+}
+function nextQuestion(){
+  clearTimeout(qTimer);
+  const answer=PLANTS[Math.floor(Math.random()*PLANTS.length)];
+  /* only ask about fields whose value is unique to the answer — no ambiguous questions */
+  const clues=QUIZ_CLUES.filter(([f])=>PLANTS.filter(p=>p[f]===answer[f]).length===1);
+  const [field,prompt]=clues[Math.floor(Math.random()*clues.length)];
+  qQuestion.innerHTML=`${prompt} <em>“${answer[field]}”</em>`;
+  const opts=shuffle([...PLANTS]).slice(0,4);
+  if(!opts.includes(answer)){opts[0]=answer;shuffle(opts);}
+  qOptions.innerHTML=opts.map(p=>`<button class="q-opt" data-i="${PLANTS.indexOf(p)}">${p.common}</button>`).join('');
+  qOptions.querySelectorAll('.q-opt').forEach(btn=>btn.onclick=()=>{
+    if(btn.disabled)return;
+    const right=PLANTS[+btn.dataset.i]===answer;
+    qOptions.querySelectorAll('.q-opt').forEach(b=>{
+      b.disabled=true;
+      if(PLANTS[+b.dataset.i]===answer)b.classList.add('correct');
+    });
+    if(right){
+      qStreak++;
+      if(qStreak>qBest){qBest=qStreak;try{localStorage.setItem(QUIZ_KEY,String(qBest));}catch(e){}}
+    }else{btn.classList.add('wrong');qStreak=0;}
+    updateQuizStats();
+    qTimer=setTimeout(nextQuestion,right?900:1600);
+  });
+  const first=qOptions.querySelector('.q-opt');
+  if(first)first.focus();
+}
+function openQuiz(){quizEl.classList.add('open');qStreak=0;updateQuizStats();nextQuestion();}
+function closeQuiz(){quizEl.classList.remove('open');clearTimeout(qTimer);document.getElementById('menuBtn').focus();}
+document.getElementById('quizClose').onclick=closeQuiz;
+quizEl.querySelectorAll('[data-qclose]').forEach(el=>el.onclick=closeQuiz);
+const quizRow=document.getElementById('quizRow');
+quizRow.onclick=()=>{closeSheet();openQuiz();};
+quizRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();quizRow.onclick();}};
 
 /* ---------- PWA: manifest, service worker, install prompt ---------- */
 const ICON192="data:image/png;base64,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";
@@ -581,7 +754,9 @@ installRow.onclick=async()=>{
 };
 installRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();installRow.onclick();}};
 
-buildDeck();
+const savedProgress=loadProgress();
+if(savedProgress)restoreDeck(savedProgress);else buildDeck();
+updateQuizStats();
 </script>
 </body>
 </html>
