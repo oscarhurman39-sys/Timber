@@ -154,7 +154,7 @@ function writeGallery(latin, candidates, dir) {
   a{color:#5b9bd5}
 </style></head><body>
 <h1>${esc(latin)} — ${candidates.length} candidate(s)</h1>
-<div class="hint">Pick one, then run: node plant-images-tool.js pick "${esc(latin)}" &lt;#index or exact title&gt;</div>
+<div class="hint">Pick one, then run: node plant-images-tool.js pick "${esc(latin)}" &lt;#index&gt; [label] — e.g. add "wide" or "leaf" as a label to pick more than one shot per plant</div>
 <div class="grid">${cards || '<p>No candidates found.</p>'}</div>
 </body></html>`;
   fs.writeFileSync(path.join(dir, 'candidates.html'), html);
@@ -187,8 +187,8 @@ async function doSearch(latin) {
   console.log(`\nOpen plant-images/${slug(latin)}/candidates.html in a browser to review them visually.`);
 }
 
-async function doPick(latin, which) {
-  if (!latin || !which) { console.error('Usage: node plant-images-tool.js pick "<Latin name>" <#index or exact file title>'); process.exit(1); }
+async function doPick(latin, which, label) {
+  if (!latin || !which) { console.error('Usage: node plant-images-tool.js pick "<Latin name>" <#index or exact file title> [label]'); process.exit(1); }
   const dir = path.join(OUT_DIR, slug(latin));
   const jsonPath = path.join(dir, 'candidates.json');
   if (!fs.existsSync(jsonPath)) { console.error(`No search results for "${latin}" yet — run "search" first.`); process.exit(1); }
@@ -200,13 +200,15 @@ async function doPick(latin, which) {
   if (!chosen) { console.error(`Could not find candidate "${which}" — check the index or title from candidates.json.`); process.exit(1); }
   if (chosen.isNcOrNd) { console.error('Refusing to pick: this candidate is NC/ND-licensed, not commercial-safe.'); process.exit(1); }
 
+  const tag = label ? `-${label.replace(/[^a-z0-9]+/gi, '-')}` : ''; // e.g. "wide"/"leaf" — lets you pick more than one shot per plant without overwriting
+
   console.log(`Downloading: ${chosen.title} (${chosen.license}, credit: ${chosen.artist})`);
   const res = await fetch(chosen.thumbUrl, { headers: { 'User-Agent': UA } });
   if (!res.ok) { console.error(`Download failed: HTTP ${res.status}`); process.exit(1); }
   const buf = Buffer.from(await res.arrayBuffer());
   const ext = chosen.mime === 'image/png' ? 'png' : chosen.mime === 'image/webp' ? 'webp' : 'jpg';
-  fs.writeFileSync(path.join(dir, `photo.${ext}`), buf);
-  fs.writeFileSync(path.join(dir, 'credit.json'), JSON.stringify({
+  fs.writeFileSync(path.join(dir, `photo${tag}.${ext}`), buf);
+  fs.writeFileSync(path.join(dir, `credit${tag}.json`), JSON.stringify({
     title: chosen.title,
     license: chosen.license,
     licenseUrl: chosen.licenseUrl,
@@ -214,16 +216,16 @@ async function doPick(latin, which) {
     sourceUrl: chosen.descriptionUrl,
     retrievedAt: new Date().toISOString().slice(0, 10),
   }, null, 2));
-  console.log(`Saved plant-images/${slug(latin)}/photo.${ext} + credit.json (${(buf.length / 1024).toFixed(0)} KB)`);
+  console.log(`Saved plant-images/${slug(latin)}/photo${tag}.${ext} + credit${tag}.json (${(buf.length / 1024).toFixed(0)} KB)`);
   console.log('Not wired into timber.html yet — that\'s a separate step once you\'ve picked images for a batch of plants.');
 }
 
-const [, , cmd, arg1, arg2] = process.argv;
+const [, , cmd, arg1, arg2, arg3] = process.argv;
 (async () => {
   try {
     if (cmd === 'search') await doSearch(arg1);
-    else if (cmd === 'pick') await doPick(arg1, arg2);
-    else { console.log('Usage:\n  node plant-images-tool.js search "<Latin name>"\n  node plant-images-tool.js pick "<Latin name>" <#index or file title>'); process.exit(cmd ? 1 : 0); }
+    else if (cmd === 'pick') await doPick(arg1, arg2, arg3);
+    else { console.log('Usage:\n  node plant-images-tool.js search "<Latin name>"\n  node plant-images-tool.js pick "<Latin name>" <#index or file title> [label]'); process.exit(cmd ? 1 : 0); }
   } catch (e) {
     console.error('ERROR:', e.message);
     process.exit(1);
