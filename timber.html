@@ -21,7 +21,7 @@
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   [hidden]{display:none!important}
-  html,body{margin:0;height:100%;overflow:hidden}
+  html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
   body{
     background:radial-gradient(120% 80% at 50% -10%,var(--bg2),var(--bg));
     color:var(--ink);
@@ -131,6 +131,14 @@
   .row .ic{font-size:20px;width:24px;text-align:center}
   .row small{margin-left:auto;color:var(--leaf1);font-weight:700}
   .sheet .foot{margin-top:auto;font-size:12px;color:rgba(255,255,255,.35);line-height:1.5}
+
+  /* keep header/fabs clear of the notch & home indicator in installed iOS standalone mode */
+  @supports(padding:max(0px)){
+    header{padding-top:max(14px,env(safe-area-inset-top,0px))}
+    .actions{padding-bottom:max(22px,calc(env(safe-area-inset-bottom,0px) + 10px))}
+    .sheet .panel{padding-top:max(22px,env(safe-area-inset-top,0px))}
+    .search .s-bar{padding-top:max(14px,env(safe-area-inset-top,0px))}
+  }
 
   /* search / dictionary overlay */
   .search{position:fixed;inset:0;z-index:60;visibility:hidden}
@@ -363,12 +371,12 @@ function renderCard(idx){
   attachGestures(c);
 }
 
-function topCard(){return [...deck.querySelectorAll('.card')].pop();}
+function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].pop();}
 
 function attachGestures(card){
   let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false;
   const learnStamp=card.querySelector('.stamp.learn'),skipStamp=card.querySelector('.stamp.skip');
-  const start=(x,y)=>{drag=true;moved=false;sx=x;sy=y;card.style.transition='none';};
+  const start=(x,y)=>{if(card.dataset.gone)return;drag=true;moved=false;sx=x;sy=y;card.style.transition='none';};
   const move=(x,y)=>{
     if(!drag)return;dx=x-sx;dy=y-sy;
     if(Math.hypot(dx,dy)>10)moved=true;
@@ -405,6 +413,8 @@ function handleTap(card){
 }
 
 function fling(card,dir,learned){
+  if(card.dataset.gone)return;card.dataset.gone='1';  /* a card can only be swiped once —
+      guards double fab presses / second-finger taps during the 320ms fling animation */
   const idx=+card.dataset.idx;
   card.classList.remove('flipped');
   card.style.transform=`translate(${dir*140}%,${learned?-40:60}px) rotate(${dir*24}deg)`;
@@ -426,7 +436,7 @@ document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
 
 const sheet=document.getElementById('sheet');
 document.getElementById('menuBtn').onclick=()=>sheet.classList.add('open');
-function closeSheet(){sheet.classList.remove('open');}
+function closeSheet(){sheet.classList.remove('open');document.getElementById('menuBtn').focus();}
 sheet.querySelectorAll('[data-close]').forEach(el=>el.onclick=closeSheet);
 
 /* ---------- search / dictionary mode ---------- */
@@ -442,8 +452,13 @@ function openSearch(){
   renderResults('');
   setTimeout(()=>searchInput.focus(),120);
 }
-function closeSearch(){search.classList.remove('open');showResultsList();}
+function closeSearch(){search.classList.remove('open');showResultsList();document.getElementById('searchBtn').focus();}
 function showResultsList(){searchDetail.hidden=true;searchResults.hidden=false;}
+function backToResults(){  /* from detail view — keep keyboard focus somewhere useful */
+  showResultsList();
+  const first=searchResults.querySelector('.s-row');
+  (first||searchInput).focus();
+}
 
 function renderResults(q){
   const t=q.trim().toLowerCase();
@@ -494,7 +509,9 @@ function showPlant(i){
     </div>`;
   searchResults.hidden=true;
   searchDetail.hidden=false;
-  document.getElementById('dBack').onclick=showResultsList;
+  const dBack=document.getElementById('dBack');
+  dBack.onclick=backToResults;
+  dBack.focus();
 }
 
 document.getElementById('searchBtn').onclick=openSearch;
@@ -502,7 +519,7 @@ document.getElementById('searchClose').onclick=closeSearch;
 search.querySelectorAll('[data-sclose]').forEach(el=>el.onclick=closeSearch);
 searchInput.addEventListener('input',()=>{showResultsList();renderResults(searchInput.value);});
 searchInput.addEventListener('keydown',e=>{
-  if(e.key==='Enter'){const first=searchResults.querySelector('.s-row');if(first)first.click();}
+  if(e.key==='Enter'&&searchDetail.hidden){const first=searchResults.querySelector('.s-row');if(first)first.click();}
 });
 const dictRow=document.getElementById('dictRow');
 dictRow.onclick=()=>{closeSheet();openSearch();};
@@ -511,7 +528,7 @@ document.getElementById('resetRow').onkeydown=e=>{if(e.key==='Enter'||e.key===' 
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape')return;
   if(search.classList.contains('open')){
-    if(!searchDetail.hidden)showResultsList();else closeSearch();
+    if(!searchDetail.hidden)backToResults();else closeSearch();
   }else if(sheet.classList.contains('open'))closeSheet();
 });
 
