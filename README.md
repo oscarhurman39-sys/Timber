@@ -23,6 +23,7 @@ of them.
 | Tap the back | Flip back — swiping is locked while flipped |
 | 🔍 top right | **Search** — type a common or latin name, get the full info sheet instantly |
 | 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
+| 🔊 next to latin name | Speaks the latin name aloud (built-in speech engine, Italian phonology; no files, works for every plant you add). Hidden on devices without speech support |
 | ☰ menu | Learned count, Dictionary mode, **Quiz mode** (streak + best), Install app, Reset progress |
 
 Progress (learned/skipped/undo history) and your best quiz streak persist in the browser via
