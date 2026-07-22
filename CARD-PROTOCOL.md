@@ -64,6 +64,7 @@ Focal point recorded here when off-centre:
 | Pittosporum 'Elizabeth' | pittosporum-tenuifolium-elizabeth.jpg | centre |
 | Osmanthus 'Tricolor' | osmanthus-heterophyllus-tricolor.jpg | centre |
 | Cercis 'Eternal Flame' | cercis-canadensis-eternal-flame-wide.jpg / -leaf.jpg | wide: centre · leaf: ~70% 40% (leaf sits right of centre) |
+| Agastache 'Summerlong Coral' | agastache-summerlong-coral-flowers.jpg / -leaf.jpg | flowers: ~35% 40% (edges) · leaf: ~60% 45% windowed centre |
 | Nandina domestica | (processed, not yet staged) | photo1 centre |
 
 ## 5. Decision changelog
@@ -75,6 +76,10 @@ Focal point recorded here when off-centre:
   photo dominant, slim top + bottom panels only; keep the fact oblongs; coffee-stain
   vintage paper; compass instead of sun for direction-bearing aspect data; fix leaf
   photo centring; dedupe "well-drained" repetition.
+- **v3 (Oscar)**: two-photo merge recipe approved for trial — flower/habit photo
+  full-bleed at edges, detail photo soft-windowed (elliptical mask ~46%x26% at
+  50% 40%) into the clear band above the Water box. Dedupe rule caught its second
+  live case (Agastache drainage stated in both Water and Soil; trimmed at source).
 - **Open**: final design not yet declared; trade-sheet back styling undecided
   (lean: keep dark); fallback for photo-less plants = gradient+watermark inside the
   same frame.
