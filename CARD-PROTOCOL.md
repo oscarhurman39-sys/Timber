@@ -80,6 +80,17 @@ Focal point recorded here when off-centre:
   full-bleed at edges, detail photo soft-windowed (elliptical mask ~46%x26% at
   50% 40%) into the clear band above the Water box. Dedupe rule caught its second
   live case (Agastache drainage stated in both Water and Soil; trimmed at source).
-- **Open**: final design not yet declared; trade-sheet back styling undecided
-  (lean: keep dark); fallback for photo-less plants = gradient+watermark inside the
-  same frame.
+- **v4 (Oscar's vibe image, rebuilt original)**: gold hardiness SHIELD top-right;
+  compass as a 44px parchment BADGE on the photo (solves legibility); stats header
+  renamed "GROWER STATS" — Oscar correctly ruled "Cultivar Power Stats" wrong for
+  straight species (cultivar = named cultivated variety in quotes only). Star
+  ratings from the vibe image REJECTED as invented data; replaced with honest
+  derivations only: hardiness as pips on the real H1–H7 scale + tolerance chips
+  emitted only when the `resilience` field states them. Footer: front says
+  "⇅ Double-tap to dig deeper"; rhyming line reserved for empty state. Back keeps
+  the full trade sheet and gains a 🔖 Remember button (double-tap only flips;
+  saving is a deliberate button press — no accidental saves).
+- **Open**: final design not yet declared; v4 dropped the Position oblong (compass
+  carries direction) but sun/shade wording is real data — restore slim Position row
+  or caption the compass? Remember list feature approved in concept, not yet built;
+  fallback for photo-less plants = gradient+watermark inside the same frame.
