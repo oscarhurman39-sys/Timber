@@ -65,6 +65,7 @@ Focal point recorded here when off-centre:
 | Osmanthus 'Tricolor' | osmanthus-heterophyllus-tricolor.jpg | centre |
 | Cercis 'Eternal Flame' | cercis-canadensis-eternal-flame-wide.jpg / -leaf.jpg | wide: centre · leaf: ~70% 40% (leaf sits right of centre) |
 | Agastache 'Summerlong Coral' | agastache-summerlong-coral-flowers.jpg / -leaf.jpg | flowers: ~35% 40% (edges) · leaf: ~60% 45% windowed centre |
+| Kniphofia 'Pyromania Orange Blaze' | kniphofia-pyromania-orange-blaze.jpg | torches, ~42% 40% |
 | Nandina domestica | (processed, not yet staged) | photo1 centre |
 
 ## 5. Decision changelog
@@ -90,7 +91,11 @@ Focal point recorded here when off-centre:
   "⇅ Double-tap to dig deeper"; rhyming line reserved for empty state. Back keeps
   the full trade sheet and gains a 🔖 Remember button (double-tap only flips;
   saving is a deliberate button press — no accidental saves).
-- **Open**: final design not yet declared; v4 dropped the Position oblong (compass
-  carries direction) but sun/shade wording is real data — restore slim Position row
-  or caption the compass? Remember list feature approved in concept, not yet built;
-  fallback for photo-less plants = gradient+watermark inside the same frame.
+- **v4b (Kniphofia)**: proposed resolution to the Position question demonstrated —
+  compass badge only when aspect names a facing; otherwise the Position oblong
+  stays on the card (sun/shade wording is real data, never dropped). Awaiting
+  Oscar's sign-off. Dedupe caught cases 3 and 4 (drought in Water+Resilience,
+  winter-wet in Soil+Resilience).
+- **Open**: final design not yet declared; Position rule above awaiting sign-off;
+  Remember list feature approved in concept, not yet built; fallback for
+  photo-less plants = gradient+watermark inside the same frame.
