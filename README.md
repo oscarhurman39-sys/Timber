@@ -24,11 +24,18 @@ of them.
 | 🔍 top right | **Search** — type a common or latin name, get the full info sheet instantly |
 | 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
 | 🔊 next to latin name | Speaks the latin name aloud (built-in speech engine, Italian phonology; no files, works for every plant you add). Hidden on devices without speech support |
-| ☰ menu | Learned count, Dictionary mode, **Quiz mode** (streak + best), Install app, Reset progress |
+| ♡ on a card | **Favourite** a plant — hearted plants collect in the Favourites tab, tap one to jump to its full care sheet |
+| ☰ → My plants | The **collection**: every plant is a slot, uncaught ones show as dashed silhouettes. Tap a plant you actually own and hit **Caught it** to unlock its tile |
+| A caught plant | **Health tracking** — health bar (colour shifts green → amber → red), quick mood chips (Thriving / Doing fine / Wilting / Emergency), a free-text note on how it's doing, and a last-check-in date. **Release** removes it again |
+| ☰ menu | Learned count, Dictionary mode, **Quiz mode** (streak + best), Favourites, My plants, Install app, Reset progress |
 
 Progress (learned/skipped/undo history) and your best quiz streak persist in the browser via
 localStorage — closing the app doesn't lose them. "Reset progress" / "Reset deck" clears the deck
 state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
+
+The collection (favourites + caught plants + their health notes) is stored separately, keyed by
+latin name — so it survives both "Reset progress" **and** the plant list growing. Your real plants
+aren't study state.
 
 ## Files
 
