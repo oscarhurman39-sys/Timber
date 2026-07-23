@@ -114,6 +114,17 @@ Focal point recorded here when off-centre:
   stays on the card (sun/shade wording is real data, never dropped). Awaiting
   Oscar's sign-off. Dedupe caught cases 3 and 4 (drought in Water+Resilience,
   winter-wet in Soil+Resilience).
+- **v9 (Oscar's refined composition — "so much closer")**: unified warm-cream
+  paper card with FRAMED photo window (photo unobstructed inside its window —
+  replaces the full-bleed-photo paradigm); Power Points panel overlaps the
+  window's bottom edge; ornate vintage compass gets its own "facing" panel
+  (needle to stated facing; muted + "any aspect" caption when data names none —
+  compass rule survives); LIGHT promoted to a front spectrum slider
+  (navy→gold, marker from lightLevel); blue LISTEN pill for pronunciation;
+  Water text + Prune move to the card BACK (front = at-a-glance). Thirst =
+  100 − droughtTolerance rendered as blue droplet pips (v8 decision kept);
+  detailed hand-drawn icons (sprout/berries+flower/ladybird/watering-can)
+  replace system emoji (v8). Wholesome cream palette from Oscar's reference.
 - **v6 (Oscar art-direction brief — major pivot)**: from "playful trading card"
   to "premium botanical collectible". Thin matte aged-walnut frame (not glossy,
   not thick) + ONE antique-brass keyline; warm ivory translucent panels; deep
