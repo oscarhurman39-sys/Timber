@@ -114,6 +114,18 @@ Focal point recorded here when off-centre:
   stays on the card (sun/shade wording is real data, never dropped). Awaiting
   Oscar's sign-off. Dedupe caught cases 3 and 4 (drought in Water+Resilience,
   winter-wet in Soil+Resilience).
+- **v10 (design-system doc adopted)**: Oscar supplied a full "Plinder Plant Card
+  Design System" md + generated reference image. Adopted as CARD-DESIGN-SYSTEM.md
+  (with Timber addendum mapping it to our CSV columns and vanilla stack). Key
+  changes vs v9: forest-green ornamental border + gold trim replaces walnut;
+  STATURE vertical rail; growth-speed transparent overlay on photo; plaque rows
+  become Bloom (month timeline, not a score), Pests (mite emblem + spray-bottle
+  widgets = (100−powerPest)/20), Thirst (drops = (100−powerWater)/20), Care
+  (secateurs — needs new careLevel column, demo until then); light scale
+  shade→sun with tolerance bands; quarter-step geometric clipping (never
+  opacity). Measured acceptance: centred, heading horizontal, fills match data,
+  timeline unclipped. Generated image's invented "South/West" aspect and
+  "June–August" bloom rejected — data outranks art.
 - **v9 (Oscar's refined composition — "so much closer")**: unified warm-cream
   paper card with FRAMED photo window (photo unobstructed inside its window —
   replaces the full-bleed-photo paradigm); Power Points panel overlaps the
