@@ -114,6 +114,20 @@ Focal point recorded here when off-centre:
   stays on the card (sun/shade wording is real data, never dropped). Awaiting
   Oscar's sign-off. Dedupe caught cases 3 and 4 (drought in Water+Resilience,
   winter-wet in Soil+Resilience).
+- **v6 (Oscar art-direction brief — major pivot)**: from "playful trading card"
+  to "premium botanical collectible". Thin matte aged-walnut frame (not glossy,
+  not thick) + ONE antique-brass keyline; warm ivory translucent panels; deep
+  green serif plant name + restrained sans-serif care text; monochrome ENGRAVED
+  botanical emblems (no emoji, no cartoon icons); H5 as an enamel-style medallion
+  in the title plaque; Water/Light/Soil/Care unified into ONE parchment panel
+  separated by thin rules (not four boxes); footer "Double tap to master."
+  Photo target raised to >=70% unobstructed. To hit it, PLANT POWER POINTS +
+  the lightLevel spectrum slider MOVE TO THE CARD BACK (front = photo + plaque +
+  care panel only); leaf pips replace gold stars, with numeric score alongside.
+  Measured front photo-clear: 63% fully-opaque (panels are ~91% translucent so
+  more shows through) — short of strict 70%; closing the gap needs single-line
+  care values or a shorter care panel. Awaiting Oscar's call on that + overall
+  sign-off. This supersedes the v2/v4 wood+coffee-paper look if approved.
 - **v5 (Oscar)**: stats section renamed **PLANT POWER POINTS**; star ratings
   REINSTATED on Oscar's structural fix — scores become real reviewable CSV
   columns (26–30) generated against the rubric in §1b, resolving the earlier
