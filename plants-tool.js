@@ -20,7 +20,11 @@ const path = require('path');
 
 const FIELDS = ['common','latin','hue','visual','water','aspect','soil','prune',
   'source','peak','order','bench','root','trade','retail','margin','type','shrink',
-  'returnRisk','pots','cvs','hardiness','resilience','uses','size'];
+  'returnRisk','pots','cvs','hardiness','resilience','uses','size',
+  // Plant Power Points (0-100 ratings, rubric in CARD-PROTOCOL.md) + light level.
+  // Ratings are editorial judgements, not measurements — blank = not yet rated.
+  'powerSeasonal','powerGrowth','powerPest','powerWater','lightLevel'];
+const SCORE_FIELDS = new Set(['powerSeasonal','powerGrowth','powerPest','powerWater','lightLevel']);
 const HTML = path.join(__dirname, 'timber.html');
 const CSV = path.join(__dirname, 'plants.csv');
 const BEGIN = '/* PLANTS:BEGIN';
@@ -79,7 +83,7 @@ function csvParse(text) {
 function doExport() {
   const { plants } = readPlantsFromHtml();
   const lines = [FIELDS.map(csvEscape).join(',')];
-  for (const p of plants) lines.push(FIELDS.map(f => csvEscape(p[f])).join(','));
+  for (const p of plants) lines.push(FIELDS.map(f => csvEscape(p[f] ?? '')).join(','));
   fs.writeFileSync(CSV, lines.join('\n') + '\n');
   console.log(`Exported ${plants.length} plants to plants.csv (${FIELDS.length} columns).`);
   console.log('Open it in a spreadsheet, add rows with YOUR verified values, then run: node plants-tool.js import');
@@ -95,7 +99,7 @@ function doImport() {
   const missing = FIELDS.filter(f => !header.includes(f));
   const extra = header.filter(h => !FIELDS.includes(h));
   if (missing.length) errors.push('missing column(s): ' + missing.join(', '));
-  if (extra.length) errors.push('unknown column(s): ' + extra.join(', ') + ' — only the 25 locked fields are allowed');
+  if (extra.length) errors.push('unknown column(s): ' + extra.join(', ') + ' — only the locked fields are allowed');
   const dupHdr = header.filter((h, i) => header.indexOf(h) !== i);
   if (dupHdr.length) errors.push('duplicate column(s): ' + dupHdr.join(', '));
   if (errors.length) fail(errors);
@@ -111,12 +115,20 @@ function doImport() {
     const p = {};
     header.forEach((h, i) => { p[h] = cells[i].trim(); });
     for (const f of FIELDS) {
+      if (SCORE_FIELDS.has(f)) continue; // ratings may be blank = not yet rated
       if (p[f] === '') errors.push(`row ${rowNo} (${p.common || '?'}): "${f}" is empty — fill it with your real value, the importer never invents data`);
     }
     const hue = Number(p.hue);
     if (!Number.isInteger(hue) || hue < 0 || hue > 360) {
       errors.push(`row ${rowNo} (${p.common || '?'}): hue "${p.hue}" must be a whole number 0-360`);
     } else p.hue = hue;
+    for (const f of SCORE_FIELDS) {
+      if (p[f] === '') continue;
+      const n = Number(p[f]);
+      if (!Number.isInteger(n) || n < 0 || n > 100) {
+        errors.push(`row ${rowNo} (${p.common || '?'}): "${f}" is "${p[f]}" — must be a whole number 0-100, or blank if not yet rated`);
+      } else p[f] = n;
+    }
     for (const k of ['common', 'latin']) {
       const key = p[k].toLowerCase();
       if (key && seen[k].has(key)) errors.push(`row ${rowNo}: duplicate ${k} "${p[k]}" (also row ${seen[k].get(key)})`);
