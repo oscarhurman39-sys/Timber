@@ -1,6 +1,6 @@
 const { chromium } = require('playwright');
 const URL = 'http://localhost:8477/timber.html';
-const NPLANTS = 10;  // plants in the demo deck
+const NPLANTS = 11;  // plants in the demo deck
 let passed = 0, failed = 0;
 const fails = [];
 function check(name, cond, extra) {

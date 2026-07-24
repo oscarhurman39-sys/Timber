@@ -96,9 +96,19 @@ Focal point recorded here when off-centre:
 | Cornus kousa 'Flower Tower' | cornus-kousa-flower-tower.jpg | centre (default 50% 40%) — leaf close-up, arcuate kousa veining; no bracts or columnar habit in shot, re-shoot at bloom if wanted |
 | Ajuga 'Burgundy Glow' | ajuga-reptans-burgundy-glow.jpg | spike, 57% 45% — [flag] cropped from an AI-remade card image titled 'Pink Lightning'; cultivar unverifiable from artwork; 680px source, below the 1200px standard |
 | Spiraea 'Double Play Doozie' | spiraea-double-play-doozie.jpg (merged) / -flowers.jpg / -leaf.jpg | cluster, 55% 38% — merged: leaf photo full-bleed + sharp bud cluster soft-windowed (v3 recipe, first live use); both source photos staged |
+| Potentilla 'Pink Beauty' | potentilla-fruticosa-pink-beauty.jpg | flower, 25% 32% — [flag] blooms in photo are near-white with a faint blush, not deep pink; consistent with the cultivar's documented heat fade (and it was shot in a July heat spell) but unverifiable; orange potentilla visible in background (mixed bench) |
 
 ## 5. Decision changelog
 
+- **v12.7 (Pink Beauty Potentilla)**: from nested JSON + Oscar's photo. All
+  conversions exact (0.5/5→pestRisk 2 — second live half-icon card; growth
+  0.5→10). H7. First live "Any aspect" card from the nested-JSON pipeline —
+  compass correctly muted, no facing invented. Photo flagged: blooms shot
+  near-white (documented heat fade of this cultivar; July heat spell) —
+  photo-colour honesty flag, same class as Sweet Cupcake's. Long soil warning
+  measured against its panel: fits with 16.6px clearance (checked, not
+  eyeballed). syn. 'Lovely Pink' recorded in cvs. Suites green: 94/94, 8/8,
+  SW PASS, verifier PASS.
 - **v12.6 (Double Play Doozie Spirea — v3 two-photo merge goes live)**: Oscar
   supplied the nested JSON + two of his own photos, asking for a clean in-frame
   leaf with the flowers merged in. First live use of the v3 merge recipe:
