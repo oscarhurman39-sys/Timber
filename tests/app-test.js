@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 7;  // plants in the demo deck
+const NPLANTS = 8;  // plants in the demo deck
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -403,12 +403,12 @@ function topFlipped(page) {
   await page.setViewportSize({ width: 390, height: 844 });
 
   /* ---- 14. data integrity: exact PLANTS field names ---- */
-  const fieldCheck = await page.evaluate(() => {
+  const fieldCheck = await page.evaluate((NPLANTS) => {
     const required = ['common','latin','hue','visual','water','aspect','soil','prune','source','peak','order','bench','root','trade','retail','margin','type','shrink','returnRisk','pots','cvs','hardiness','resilience','uses','size'];
-    return PLANTS.length === 7 && PLANTS.every(p => required.every(k => k in p)) &&
+    return PLANTS.length === NPLANTS && PLANTS.every(p => required.every(k => k in p)) &&
       PLANTS[0].trade === '2L £3.80–£4.50' && PLANTS[2].latin === 'Weigela florida ‘Nana Variegata’' &&
       PLANTS[3].pestRisk === 3 && PLANTS[4].hardiness === 'H2';
-  });
+  }, NPLANTS);
   check('PLANTS: all plants, exact field names, data intact', fieldCheck);
 
   /* ---- 15. touch device behaviour (single vs double tap, touch swipe) ---- */

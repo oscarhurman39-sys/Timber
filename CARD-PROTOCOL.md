@@ -93,9 +93,21 @@ Focal point recorded here when off-centre:
 | Pennisetum 'Rubrum' | pennisetum-rubrum.jpg | plumes, ~50% 40% |
 | Abelia 'Raspberry Profusion' | abelia-raspberry-profusion.jpg | ~50% 45% — correct cultivar, pink bells + raspberry sepals |
 | Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
+| Cornus kousa 'Flower Tower' | cornus-kousa-flower-tower.jpg | centre (default 50% 40%) — leaf close-up, arcuate kousa veining; no bracts or columnar habit in shot, re-shoot at bloom if wanted |
 
 ## 5. Decision changelog
 
+- **v12.4 (Flower Tower Dogwood — first card from the new nested-JSON shape)**:
+  Oscar supplied a nested card JSON (0–5 ratings, 0–1 scale values) + his leaf
+  photo. Converted per the v12.2 rule: pests 1.5→pestRisk 6, thirst 3→12, care
+  2.5→careLevel 10, growth 0.55→11, light 0.78→sunNeed 78, tolerated floor
+  0.48→sunMin 48. H6 per the JSON. Latin follows the Sweet Cupcake precedent
+  (trade name in quotes, registered 'Zuilb1' in cvs). hue 150 is an editorial
+  pick (Choisya white-flower precedent) — the JSON carries no hue. water/prune/
+  resilience/uses left blank (not in the JSON; blank is honest). checker PASS,
+  zero warnings. Test hygiene: edge-test.js and app-test.js had the deck size
+  hardcoded as literal 7s — both now use a real `NPLANTS` const (NEW-SESSION.md
+  already claimed they did). Suites green: 94/94, 8/8, SW PASS, verifier PASS.
 - **v12.3 (growth label on the rail + Raspberry Profusion Abelia)**: Oscar: the
   vertical GROWTH SPEED text "was meant to be like inside the line… it's now
   outside the line". Correct — the painted rail breaks and the label runs *through*
