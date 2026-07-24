@@ -93,6 +93,21 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.1 (LIVE — the locked template is now the app's deck card)**: `renderCard()`
+  in `timber.html` now builds the v12 card for every deck card. The fixed-geometry
+  420×543 card scales to any phone via a `--cs` transform (gestures untouched — the
+  scale wrapper sits inside the flip faces; the trade-sheet back is wrapped to the
+  same footprint). Data mapping from the locked PLANTS schema: `size` → HEIGHT/
+  SPREAD rail values; `peak` → bloom calendar (range parser wraps year-end, e.g.
+  Nandina Sep–Feb); `soil` splits at the first separator into value + warning
+  (warning triangle auto-hidden when none); aspect passes the compass rule
+  (facing shown only when the data names one — Nandina "S/W" shows, "Full sun"
+  plants show Any aspect); photos load from `photos/<latin-slug>.jpg` with the
+  hue-gradient + leaf watermark as the photo-less fallback; blank scores render
+  blank rows (never faked). Kniphofia + Pennisetum added to the demo deck as the
+  first complete v12 rows (real photos, 0–20 scores); their commercial fields
+  stay blank until Oscar fills them. Regression suites updated for a 5-plant deck
+  and green: 94/94 app tests, 8/8 edge tests, SW update path PASS.
 - **v12 (NEW LOCKED TEMPLATE — full aesthetic re-sync)**: Oscar supplied the
   final approved card image (aa4c9fc4, 1103×1426) + the locked-template asset-kit
   master doc, declared it perfect, and asked for every saved aesthetic part to

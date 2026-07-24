@@ -81,9 +81,12 @@
   .fliphint{margin-top:14px;font-size:11px;letter-spacing:.4px;color:var(--muted);display:flex;align-items:center;gap:6px}
   .fliphint b{color:#cfeede;font-weight:600}
 
-  /* BACK — the buyer trade sheet */
-  .back{transform:rotateY(180deg);background:linear-gradient(180deg,#0d1c13,#0a160e);
-    padding:18px 18px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+  /* BACK — the buyer trade sheet (content lives in .backfit, sized to the card) */
+  .back{transform:rotateY(180deg)}
+  .backfit{position:absolute;left:50%;top:50%;width:calc(420px*var(--cs,0.75));height:calc(543px*var(--cs,0.75));
+    transform:translate(-50%,-50%);border-radius:16px;background:linear-gradient(180deg,#0d1c13,#0a160e);
+    padding:18px 18px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
+    box-shadow:0 18px 40px rgba(0,0,0,.45)}
   .back-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;
     border-bottom:1px solid rgba(255,255,255,.09);padding-bottom:10px}
   .back-head h3{margin:0;font-size:18px;font-weight:800;letter-spacing:-.3px}
@@ -221,6 +224,125 @@
   .q-opt.correct{border-color:var(--leaf1);background:rgba(76,215,135,.15);color:#eafff2}
   .q-opt.wrong{border-color:#ff6b6b;background:rgba(255,107,107,.15)}
   .q-opt[disabled]{cursor:default}
+  /* ============ v12 LOCKED CARD TEMPLATE (design/card-builder.html) ============
+     The card front is assembled from the final approved artwork's own painted
+     assets (art/); plant-specific values render live from PLANTS data. The card
+     is authored at 420x543 and scaled to the deck with --cs. Do not restyle. */
+  .face{box-shadow:none;border-radius:0;overflow:visible}
+  .tscale{position:absolute;left:50%;top:50%;width:420px;height:543px;
+    transform:translate(-50%,-50%) scale(var(--cs,0.75))}
+  .tscale .stamp{z-index:30}
+  .tcard{width:420px;height:543px;position:relative;
+    background:url(art/frame-full.png);background-size:100% 100%;
+    border-radius:15px;box-shadow:0 18px 42px rgba(0,0,0,.6);
+    font-family:Georgia,"Times New Roman",serif}
+  .tcard img{display:block}
+  .tinner{position:absolute;left:13.96%;top:2.10%;right:2.81%;bottom:4.91%;
+    overflow:hidden;border-radius:5px;z-index:1}
+  .tphoto{position:absolute;inset:0}
+  .tphoto>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pfall{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .pfall svg{width:60%;height:60%;opacity:.18}
+  .tinner::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(20,32,16,.36) 0%,rgba(20,32,16,.10) 14%,transparent 22% 80%,rgba(15,25,12,.22) 100%)}
+  .thead{position:absolute;top:3.2%;left:4.5%;right:22%;z-index:2}
+  .thead h2{margin:0;font-size:21px;font-weight:700;color:#f6ecd2;line-height:1.04;letter-spacing:0;
+    text-shadow:0 1px 6px rgba(15,32,15,.9),0 0 18px rgba(15,32,15,.55)}
+  .thead .bot{font-size:10px;font-style:italic;color:#eee3bd;margin-top:3px;
+    text-shadow:0 1px 5px rgba(15,32,15,.9)}
+  .tcard .say{width:auto;height:auto;flex:none;font-family:system-ui,sans-serif;font-size:7.5px;
+    letter-spacing:2px;font-weight:700;text-transform:uppercase;color:#fff;background:#0F6196;
+    border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:3.5px 11px;
+    display:inline-flex;align-items:center;gap:4px;margin-top:8px;box-shadow:0 2px 6px rgba(0,0,0,.45)}
+  .tcard .say:active,.tcard .say.speaking{background:#1478b8}
+  .growth{position:absolute;inset:0;z-index:2;pointer-events:none;font-family:Georgia,serif;color:#f2e8c8}
+  .growth .end{position:absolute;font-size:9px;text-shadow:0 1px 4px rgba(0,0,0,.85)}
+  .growth .axis{position:absolute;width:1.5px;background:#efe5c2;box-shadow:0 0 3px rgba(0,0,0,.7)}
+  .growth .tick{position:absolute;height:1.5px;background:#efe5c2;box-shadow:0 0 3px rgba(0,0,0,.7)}
+  .growth .lab{position:absolute;writing-mode:vertical-rl;transform:rotate(180deg);
+    font-size:8px;letter-spacing:3px;color:#efe0b4;text-transform:uppercase;
+    text-shadow:0 1px 4px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7)}
+  .growth .mk{position:absolute;width:17px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+  .crest{position:absolute;left:80.33%;top:3.23%;width:17.23%;z-index:3;text-align:center;
+    filter:drop-shadow(0 2px 5px rgba(0,0,0,.35))}
+  .crest img{width:100%}
+  .crest .hnum{position:absolute;left:0;right:0;top:29%;text-align:center;font-family:Georgia,serif;
+    font-weight:700;font-size:23px;letter-spacing:1px;color:#F2E5C4;
+    text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
+  .railval{position:absolute;z-index:2}
+  .railval img{position:absolute;inset:0;width:100%;height:100%}
+  .railval .v{position:absolute;inset:0;display:grid;place-items:center;
+    writing-mode:vertical-rl;transform:rotate(180deg);
+    font-size:12px;letter-spacing:1px;color:#e7ddb9;white-space:nowrap}
+  .rail-h{left:2.72%;top:37.87%;width:7.62%;height:11.22%}
+  .rail-s{left:2.72%;top:65.22%;width:7.62%;height:11.36%}
+  .ppp{position:absolute;left:15.14%;width:63.46%;top:53.9%;z-index:4;text-align:center;
+    font-family:Georgia,serif;font-size:9.5px;font-weight:700;letter-spacing:3.5px;
+    text-transform:uppercase;color:#ecd7a0;
+    text-shadow:0 1px 3px rgba(10,20,10,.92),0 0 8px rgba(10,20,10,.7)}
+  .plaque{position:absolute;left:15.14%;top:55.82%;width:63.46%;z-index:3}
+  .plaque>img,.soilp>img,.band>img{width:100%}
+  .soilp{position:absolute;left:80.33%;top:63.04%;width:15.59%;z-index:3}
+  .band{position:absolute;left:14.32%;top:87.10%;width:81.60%;z-index:3}
+  .patch{position:absolute;background:url(art/parch-swatch.png);background-size:72px 64px;
+    mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
+    mask-composite:intersect;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
+    -webkit-mask-composite:source-in}
+  .patch.tightv{
+    mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 3px,#000 calc(100% - 3px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 3px,#000 calc(100% - 3px),transparent)}
+  .patch.sharpb{
+    mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 6px,#000 100%);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 6px,#000 100%)}
+  .val-ink{position:absolute;color:#4d4131;font-family:Georgia,serif}
+  .p-bloom-val{left:12.6%;top:9.4%;width:16.4%;height:14.3%}
+  .p-pest-val{left:12.7%;top:37.2%;width:10%;height:12%}
+  .p-thirst-val{left:12.4%;top:60.3%;width:8.3%;height:9.5%}
+  .p-care-val{left:12.4%;top:76.7%;width:16%;height:20.4%}
+  .p-bloom-w{left:39.3%;top:2.2%;width:59.4%;height:22%}
+  .p-pest-w{left:40.4%;top:25.1%;width:58%;height:24.4%}
+  .p-thirst-w{left:40.4%;top:51.6%;width:58%;height:18.6%}
+  .p-care-w{left:40.1%;top:71.3%;width:58.6%;height:26.5%}
+  .t-bloom{left:14.9%;top:12.1%;width:23%;height:7.6%;font-size:10px;white-space:nowrap}
+  .t-pest{left:13.9%;top:39.5%;width:10%;height:6.7%}
+  .t-thirst{left:13.9%;top:61.9%;width:10%;height:5.4%}
+  .t-care{left:13.9%;top:80.2%;width:15%;height:16%}
+  .pval{font-size:11px;line-height:1.25;display:flex;align-items:center}
+  .pval.two{flex-direction:column;align-items:flex-start;justify-content:center;gap:0px;font-size:10.5px;line-height:1.15}
+  .wrow{display:flex;align-items:center;justify-content:space-between;padding:0 4px;height:100%}
+  .ricon{position:relative}
+  .ricon>img{height:100%;width:auto}
+  .ricon .fillwrap{position:absolute;left:0;top:0;height:100%;overflow:hidden;width:calc(var(--fill)*100%)}
+  .ricon .fillwrap img{height:100%;width:auto;max-width:none}
+  .wrow.pest .ricon{height:31px}
+  .wrow.thirst .ricon{height:18px}
+  .wrow.care .ricon{height:39px}
+  .tline{display:flex;gap:1.25px;align-items:center;justify-content:center;height:100%}
+  .tline span{font-family:Georgia,serif;font-size:7px;font-weight:700;width:11.5px;height:16px;
+    display:grid;place-items:center;border-radius:3px;color:#8c7c48;flex:0 0 11.5px}
+  .tline span.on{background:#173B24;color:#D8BD78}
+  .s-val{left:11%;top:28.2%;width:75.6%;height:14.5%}
+  .s-tri-cover{left:33.7%;top:41.6%;width:29.1%;height:16.3%}
+  .s-warn{left:7.6%;top:54.9%;width:84.3%;height:30.2%}
+  .s-val-ink{font-size:9px;text-align:center;display:grid;place-items:center;white-space:nowrap}
+  .s-warn-ink{font-size:8.5px;line-height:1.35;display:grid;place-items:center;text-align:center}
+  .b-aspect{left:11.3%;top:42.4%;width:17%;height:42.4%}
+  .t-baspect{left:13.7%;top:45.8%;width:14.5%;height:23.7%}
+  .b-aspect-ink{font-size:9.5px;display:flex;align-items:center}
+  .b-pointer-cover{left:78.7%;top:13.6%;width:16%;height:33.9%}
+  .b-tri{position:absolute;width:0;height:0;border-left:5px solid transparent;
+    border-right:5px solid transparent;border-top:8px solid #1c3a26;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.3));top:calc(48.3% - 8px)}
+  .b-wiggle{position:absolute;font-family:Georgia,serif;font-style:italic;font-size:7.5px;
+    color:#5d5230;top:20%;transform:translateX(-100%);padding-right:3px;white-space:nowrap}
+  .b-leader{position:absolute;width:1px;background:rgba(80,64,32,.6);top:34%;height:14.3%}
 </style>
 </head>
 <body>
@@ -386,6 +508,30 @@ const PLANTS = [
    cvs:"‘Bristol Ruby’ – deep red blooms · ‘Wine & Roses’ – purple foliage, pink blooms",
    hardiness:"H6", resilience:"Pollution tolerant, pest-free",
    uses:"Mixed borders, small gardens, urban", size:"1–1.5m H × 1–1.5m W"},
+  {common:"Red Hot Poker", latin:"Kniphofia 'Pyromania Orange Blaze'", hue:28,
+   visual:"Orange-yellow torch spikes over grassy clumps, summer–autumn",
+   water:"Low once established",
+   aspect:"Full sun",
+   soil:"Free-draining; avoid winter waterlogging",
+   prune:"Cut spent spikes; tidy foliage in spring",
+   source:"", peak:"Jul-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"Pyromania series",
+   hardiness:"H5", resilience:"Drought-tolerant once established",
+   uses:"Borders, gravel gardens, pollinators", size:"75 cm H × 60 cm W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:3, thirst:4, careLevel:6, sunNeed:88, sunMin:""},
+  {common:"Purple Fountain Grass", latin:"Pennisetum 'Rubrum'", hue:330,
+   visual:"Burgundy arching blades, buff-pink bottlebrush plumes",
+   water:"Low; water in prolonged drought",
+   aspect:"Full sun",
+   soil:"Well-drained; avoid heavy clay and winter waterlogging",
+   prune:"Cut back dead growth in spring",
+   source:"", peak:"Jul-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H2", resilience:"Drought-tolerant; tender — shelter from frost",
+   uses:"Containers, seasonal displays, hot borders", size:"60–90 cm H × 45–60 cm W",
+   seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:12, careLevel:8, sunNeed:90, sunMin:""},
 ];
 /* PLANTS:END */
 
@@ -429,29 +575,125 @@ function buildDeck(){
   updateCounts();refreshEmpty();saveProgress();
 }
 
+/* ---- v12 card template helpers (design/card-builder.html; CARD-STATS.md) ---- */
+const getRatingSegments=(value,max=5)=>Array.from({length:max},(_,i)=>{
+  const r=value-i;if(r>=1)return 1;if(r<=0)return 0;return Math.round(r*4)/4;});
+const fmt5=s=>(Math.round((s/4)*100)/100)+'/5';
+const num=v=>{const n=Number(v);return v===''||v==null||!Number.isFinite(n)?null:n;};
+const wIcon=kind=>fill=>`<span class="ricon" style="--fill:${fill}"><img src="art/widget-${kind}-out.png" alt=""><span class="fillwrap"><img src="art/widget-${kind}-fill.png" alt=""></span></span>`;
+const wRow=(kind,score)=>score==null?'':getRatingSegments(score/4).map(wIcon(kind)).join('');
+const MONTHS={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+function parseMonths(str){                    /* "Jul-Oct" -> [7,8,9,10]; wraps Oct-Feb */
+  if(!str)return[];
+  const found=(str.toLowerCase().match(/[a-z]{3,}/g)||[]).map(w=>MONTHS[w.slice(0,3)]).filter(Boolean);
+  if(!found.length)return[];
+  if(found.length===1)return[found[0]];
+  const out=[];let m=found[0];
+  while(true){out.push(m);if(m===found[found.length-1]||out.length>12)break;m=m%12+1;}
+  return out;
+}
+function parseSize(str){                      /* "60–90 cm H × 45–60 cm W" -> {h,s} */
+  if(!str)return{h:'',s:''};
+  const parts=str.split(/[x×]/i).map(t=>t.replace(/\b[HW]\b\.?/g,'').trim());
+  return{h:parts[0]||'',s:parts[1]||''};
+}
+function extractFacing(aspect){               /* compass rule: facing ONLY if data names one */
+  if(!aspect)return'Any aspect';
+  const m=aspect.match(/\b([NSEW](?:\s*\/\s*[NSEW])+)\b/);
+  if(m)return m[1].replace(/\s*\/\s*/g,' / ');
+  const w=aspect.match(/\b(north|south|east|west)[- ]facing\b/i);
+  if(w)return w[1][0].toUpperCase()+w[1].slice(1).toLowerCase();
+  return'Any aspect';
+}
+const careLabel=s=>s==null?'':(s<=8?'Easy':s<=14?'Moderate':'High');
+const cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
+function splitSoil(str){                      /* first clause = value; rest = warning */
+  if(!str)return{val:'',warn:''};
+  const i=str.search(/[;,·]/);
+  if(i===-1)return{val:str.trim(),warn:''};
+  return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
+}
+const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%'};
+
+function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
+  const top=102.9,bot=198.1,ax=23.2;
+  let h=`<span class="end" style="right:${ax}px;top:85px;transform:translateX(50%)">Fast</span>
+    <div class="tick" style="right:${ax-3.5}px;top:${top}px;width:7px"></div>
+    <div class="axis" style="right:${ax-0.75}px;top:${top}px;height:${bot-top}px"></div>
+    <div class="tick" style="right:${ax-3.5}px;top:${bot}px;width:7px"></div>
+    <span class="lab" style="right:${ax+5}px;top:206px">Growth speed</span>
+    <div class="axis" style="right:${ax-0.75}px;top:292px;height:8px"></div>
+    <div class="tick" style="right:${ax-3.5}px;top:299px;width:7px"></div>
+    <span class="end" style="right:${ax}px;top:304px;transform:translateX(50%)">Slow</span>`;
+  if(growthSpeed!=null){
+    const fy=bot-(growthSpeed/20)*(bot-top);
+    h+=`<img class="mk" src="art/growth-diamond.png" style="right:${ax}px;top:${fy-7.5}px;transform:translateX(50%)" alt="">`;
+  }
+  return h;
+}
+const lightX=v=>40.4+(v/100)*(93.2-40.4);     /* bar spans 40.4%..93.2% of the band */
+
 function renderCard(idx){
   const p=PLANTS[idx];
   const c=document.createElement('div');c.className='card';c.dataset.idx=idx;
   const bg=`linear-gradient(160deg,hsl(${p.hue} 45% 22%),hsl(${p.hue+20} 55% 12%))`;
+  const slug=slugLatin(p.latin);
+  const sz=parseSize(p.size), soil=splitSoil(p.soil), months=parseMonths(p.peak);
+  const pest=num(p.pestRisk), thirst=num(p.thirst), care=num(p.careLevel),
+        growth=num(p.growthSpeed), sun=num(p.sunNeed), sunMin=num(p.sunMin);
+  const tline=[...'JFMAMJJASOND'].map((m,i)=>`<span class="${months.includes(i+1)?'on':''}">${m}</span>`).join('');
   c.innerHTML=`
    <div class="card-inner">
     <div class="face front">
-      <div class="photo" style="background:${bg}"></div>
-      <div class="leafmark" style="color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
+     <div class="tscale">
       <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>
-      <div class="fbody">
-        <div class="title"><h2>${p.common}</h2><em>${p.latin}</em><button class="say" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">🔊</button></div>
-        <div class="eyebrow">${p.visual}</div>
-        <ul class="facts">
-          <li><span class="k">💧</span><span class="v"><b>Water</b>${p.water}</span></li>
-          <li><span class="k">☀️</span><span class="v"><b>Position</b>${p.aspect}</span></li>
-          <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
-          <li><span class="k">✂️</span><span class="v"><b>Prune</b>${p.prune}</span></li>
-        </ul>
-        <div class="fliphint">⇅ <b>Double-tap</b> for trade &amp; buyer data</div>
+      <div class="tcard">
+        <div class="tinner">
+          <div class="tphoto">
+            <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
+            <img src="photos/${slug}.jpg" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
+          </div>
+          <div class="thead">
+            <h2>${p.common}</h2>
+            <div class="bot">${p.latin}</div>
+            <button class="say" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">&#9654; Listen</button>
+          </div>
+          <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
+        </div>
+        <div class="railval rail-h"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
+        <div class="railval rail-s"><img src="art/rail-patch-s.png" alt=""><span class="v">${sz.s}</span></div>
+        <div class="crest"><img src="art/crest-blank.png" alt=""><span class="hnum">${p.hardiness}</span></div>
+        <div class="ppp">Plant Power Points</div>
+        <div class="plaque">
+          <img src="art/plaque-full.png" alt="">
+          <div class="patch p-bloom-val"></div><div class="val-ink pval t-bloom">${p.peak||''}</div>
+          <div class="patch p-pest-val"></div><div class="val-ink pval t-pest">${pest==null?'':fmt5(pest)}</div>
+          <div class="patch p-thirst-val"></div><div class="val-ink pval t-thirst">${thirst==null?'':fmt5(thirst)}</div>
+          <div class="patch p-care-val"></div><div class="val-ink pval two t-care">${care==null?'':`<span>${careLabel(care)}</span><span>${fmt5(care)}</span>`}</div>
+          <div class="patch tightv p-bloom-w"></div><div class="val-ink p-bloom-w"><div class="tline">${tline}</div></div>
+          <div class="patch p-pest-w"></div><div class="val-ink p-pest-w"><div class="wrow pest">${wRow('spray',pest)}</div></div>
+          <div class="patch p-thirst-w"></div><div class="val-ink p-thirst-w"><div class="wrow thirst">${wRow('drop',thirst)}</div></div>
+          <div class="patch tightv p-care-w"></div><div class="val-ink p-care-w"><div class="wrow care">${wRow('seca',care)}</div></div>
+        </div>
+        <div class="soilp">
+          <img src="art/soil-full.png" alt="">
+          <div class="patch s-val"></div><div class="val-ink s-val s-val-ink">${soil.val}</div>
+          ${soil.warn
+            ?`<div class="patch s-warn"></div><div class="val-ink s-warn s-warn-ink">${soil.warn}</div>`
+            :`<div class="patch s-tri-cover"></div><div class="patch s-warn"></div>`}
+        </div>
+        <div class="band">
+          <img src="art/band-full.png" alt="">
+          <div class="patch b-aspect"></div><div class="val-ink t-baspect b-aspect-ink">${extractFacing(p.aspect)}</div>
+          <div class="patch sharpb b-pointer-cover"></div>
+          ${sunMin!=null?`<span class="b-wiggle" style="left:${lightX(sunMin)}%">wiggle room</span><div class="b-leader" style="left:${lightX(sunMin)}%"></div>`:''}
+          ${sun!=null?`<div class="b-tri" style="left:calc(${lightX(sun)}% - 5px)"></div>`:''}
+        </div>
       </div>
+     </div>
     </div>
-    <div class="face back">
+    <div class="face back"><div class="backfit">
       <div class="back-head"><h3>${p.latin}</h3><span class="h">${p.hardiness}</span></div>
       <div class="price">
         <div class="cell"><div class="l">Trade</div><div class="n">${p.trade}</div></div>
@@ -473,7 +715,7 @@ function renderCard(idx){
         <div class="g"><div class="l">Uses</div><div class="n">${p.uses}</div></div>
       </div>
       <div class="fliphint">⇅ Tap to flip back</div>
-    </div>
+    </div></div>
    </div>`;
   deck.appendChild(c);
   attachGestures(c);
@@ -786,6 +1028,17 @@ installRow.onclick=async()=>{
   deferredInstall=null;installRow.hidden=true;closeSheet();
 };
 installRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();installRow.onclick();}};
+
+/* fit the fixed-geometry 420x543 card to whatever deck space the phone gives us */
+function updateCardScale(){
+  const r=deck.getBoundingClientRect();
+  if(!r.width||!r.height)return;
+  const cs=Math.min(r.width/420,r.height/543,1.3);
+  document.documentElement.style.setProperty('--cs',cs.toFixed(4));
+}
+window.addEventListener('resize',updateCardScale);
+window.addEventListener('orientationchange',updateCardScale);
+updateCardScale();
 
 const savedProgress=loadProgress();
 if(savedProgress)restoreDeck(savedProgress);else buildDeck();
