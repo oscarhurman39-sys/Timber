@@ -48,7 +48,9 @@
   /* painted overlays at their exact reference positions */
   .crest{position:absolute;left:82.44%;top:2.0%;width:15.15%;z-index:3;
     filter:drop-shadow(0 2px 5px rgba(0,0,0,.35))}
+  .crest{text-align:center}
   .crest img{width:100%}
+  .crest .hnum{position:absolute;left:0;right:0;top:30%;text-align:center;font-family:Georgia,serif;font-weight:700;font-size:21px;letter-spacing:1px;color:#F2E5C4;text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
   .railfix{position:absolute;left:1.78%;top:22.47%;width:7.49%;height:27.46%;z-index:2}
   .railfix>img.bg{position:absolute;inset:0;width:100%;height:100%}
   .railfix .slabel{position:absolute;left:7.1%;top:12.2%;width:40.5%;height:60.3%}
@@ -148,14 +150,14 @@
 <body>
 
 <div>
-<div class="label">V11 — the painted card itself, live data patched in</div>
+<div class="label">Pennisetum — production card (v11 template, refined)</div>
 <div class="tcard">
 
   <div class="inner">
-    <div class="photo"><img src="../photos/kniphofia-pyromania-orange-blaze.jpg" style="object-position:42% 40%"></div>
+    <div class="photo"><img src="../photos/pennisetum-rubrum.jpg" style="object-position:50% 40%"></div>
     <div class="header">
-      <h1>Red Hot Poker</h1>
-      <div class="bot">Kniphofia 'Pyromania Orange Blaze'</div>
+      <h1>Purple Fountain Grass</h1>
+      <div class="bot">Pennisetum 'Rubrum'</div>
       <span class="listen">&#9654; Listen</span>
     </div>
     <div class="growth" id="growth"></div>
@@ -164,19 +166,19 @@
   <div class="railfix">
     <img class="bg" src="../art/railfix.png">
     <img class="slabel" src="../art/stature-label.png">
-    <span class="val">75 cm H &times; 60 cm W</span>
+    <span class="val">60&ndash;90 cm H &times; 45&ndash;60 cm W</span>
   </div>
 
-  <div class="crest"><img src="../art/crest-h5.png"></div>
+  <div class="crest"><img src="../art/crest-blank.png"><span class="hnum">H2</span></div>
   <div class="railppp"></div>
   <div class="ppp">Plant Power Points</div>
 
   <div class="plaque">
     <img src="../art/plaque-full.png">
     <div class="patch p-bloom-val"></div><div class="val-ink pval p-bloom-val">Jul&ndash;Oct</div>
-    <div class="patch p-pest-val"></div><div class="val-ink pval p-pest-val">0.75/5</div>
-    <div class="patch p-thirst-val"></div><div class="val-ink pval p-thirst-val">1/5</div>
-    <div class="patch p-care-val"></div><div class="val-ink pval two p-care-val"><span>Easy</span><span>1.5/5</span></div>
+    <div class="patch p-pest-val"></div><div class="val-ink pval p-pest-val">1/5</div>
+    <div class="patch p-thirst-val"></div><div class="val-ink pval p-thirst-val">3/5</div>
+    <div class="patch p-care-val"></div><div class="val-ink pval two p-care-val"><span>Easy</span><span>2/5</span></div>
     <div class="patch p-bloom-w"></div><div class="val-ink p-bloom-w"><div class="timeline" id="bloomTL"></div></div>
     <div class="patch p-pest-w"></div><div class="val-ink p-pest-w"><div class="wrow" id="pestW"></div></div>
     <div class="patch p-thirst-w"></div><div class="val-ink p-thirst-w"><div class="wrow" id="thirstW"></div></div>
@@ -185,8 +187,8 @@
 
   <div class="soil">
     <img src="../art/soil-full.png">
-    <div class="patch s-val"></div><div class="val-ink s-val s-val-ink">Free-draining</div>
-    <div class="patch tight s-warn"></div><div class="val-ink s-warn s-warn-ink">Avoid winter waterlogging</div>
+    <div class="patch s-val"></div><div class="val-ink s-val s-val-ink">Well-drained</div>
+    <div class="patch tight s-warn"></div><div class="val-ink s-warn s-warn-ink">Avoid heavy clay &amp; winter waterlogging</div>
   </div>
 
   <div class="band">
@@ -213,7 +215,7 @@
 <script>
 /* ---- data (Kniphofia 'Pyromania Orange Blaze', from plants.csv) ---- */
 const D = {
-  powerPest: 85, powerWater: 80, powerGrowth: 60, lightLevel: 88,
+  powerPest: 80, powerWater: 40, powerGrowth: 70, lightLevel: 90,
   bloomMonths: [7,8,9,10],
 };
 
@@ -231,7 +233,7 @@ const widget = (kind) => (fill) =>
      <span class="fillwrap"><img src="../art/widget-${kind}-fill.png"></span></span>`;
 document.getElementById('pestW').innerHTML  = getRatingSegments((100-D.powerPest)/20).map(widget('spray')).join('');
 document.getElementById('thirstW').innerHTML= getRatingSegments((100-D.powerWater)/20).map(widget('drop')).join('');
-document.getElementById('careW').innerHTML  = getRatingSegments(1.5).map(widget('seca')).join(''); // careLevel: demo until column exists
+document.getElementById('careW').innerHTML  = getRatingSegments(2).map(widget('seca')).join(''); // careLevel: demo until column exists
 
 document.getElementById('bloomTL').innerHTML=[...'JFMAMJJASOND'].map((m,i)=>
   `<span class="${D.bloomMonths.includes(i+1)?'on':''}">${m}</span>`).join('');

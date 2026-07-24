@@ -93,6 +93,21 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v11.1 (Oscar refinement pass, via ChatGPT micro-edit brief)**: three layout
+  edits, no restyle. (1) **Growth-speed scale** restored to the earlier preferred
+  treatment — thin warm-off-white vertical line, small **gold diamond marker**
+  (45°), `Fast`/`Slow` ends, `GROWTH SPEED` vertical, transparent over the photo
+  (replaces the painted-leaf marker + High/Low). (2) **`PLANT POWER POINTS`** added
+  as a delicate horizontal gold heading floating just above the main plaque; the
+  now-redundant **vertical PPP baked on the left rail was patched out** (clean rail
+  texture overlay) so it isn't shown twice — the one frame change in this pass,
+  flagged for Oscar. (3) **Aspect/light band decomposed & compacted**: sun icon
+  removed, compass shrunk ~20% (separate `compass-sm` sprite), `Full sun` relocated
+  into the left ASPECT text block, gradient bar kept as a marker-free sprite
+  (`light-bar`, stale baked tick clone-patched out) with a code-drawn marker driven
+  by `sunNeed`; painted band interior blanked to clean parchment, painted border
+  kept; panel ~15% shorter. New assets: `art/compass-sm.png`, `art/light-bar.png`.
+  Data still outranks art (aspect "Any aspect" not the painted "South/West").
 - **v11 (built from the reference's own pixels)**: Oscar rejected hand-drawn
   icons ("the emojis suck, the aesthetic is far worse than chatgpt's model") and
   asked for the ChatGPT reference card to be used directly, changing nothing of
