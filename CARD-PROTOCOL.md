@@ -94,9 +94,22 @@ Focal point recorded here when off-centre:
 | Abelia 'Raspberry Profusion' | abelia-raspberry-profusion.jpg | ~50% 45% — correct cultivar, pink bells + raspberry sepals |
 | Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
 | Cornus kousa 'Flower Tower' | cornus-kousa-flower-tower.jpg | centre (default 50% 40%) — leaf close-up, arcuate kousa veining; no bracts or columnar habit in shot, re-shoot at bloom if wanted |
+| Ajuga 'Burgundy Glow' | ajuga-reptans-burgundy-glow.jpg | spike, 57% 45% — [flag] cropped from an AI-remade card image titled 'Pink Lightning'; cultivar unverifiable from artwork; 680px source, below the 1200px standard |
 
 ## 5. Decision changelog
 
+- **v12.5 (Burgundy Glow Ajuga — the remade-image test)**: Oscar supplied the
+  nested JSON + an AI-remade full card image to test whether a remade image
+  helps. Verdict: **as data, it drifts — as a photo source, it's usable.** The
+  remade card contradicted the JSON on five fields (title 'Pink Lightning' vs
+  'Burgundy Glow', H6 vs H7, spread 30–45 cm vs 0.5–1 m, thirst 2/5 vs 3/5,
+  bloom M–J–J vs May–Jun, plus aspect/soil text) — the same drift failure as
+  regenerated master docs, so the standing rule held: JSON outranks the image
+  everywhere. The image's clean photo region was cropped out (card furniture
+  excluded) and staged as the card photo; flagged in the register as AI
+  artwork of an unverifiable cultivar at 680px (below the 1200px standard).
+  Conversions per v12.2; growthSpeed 0.78→15.6 rounded to 16 (first non-exact
+  conversion). Suites green: 94/94, 8/8, SW PASS, verifier PASS.
 - **v12.4 (Flower Tower Dogwood — first card from the new nested-JSON shape)**:
   Oscar supplied a nested card JSON (0–5 ratings, 0–1 scale values) + his leaf
   photo. Converted per the v12.2 rule: pests 1.5→pestRisk 6, thirst 3→12, care

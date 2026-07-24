@@ -568,6 +568,18 @@ const PLANTS = [
    hardiness:"H6", resilience:"",
    uses:"", size:"2.5–4 m H × 0.5–1 m W",
    seasonalImpact:"", growthSpeed:11, pestRisk:6, thirst:12, careLevel:10, sunNeed:78, sunMin:48},
+  {common:"Burgundy Glow Bugle", latin:"Ajuga reptans 'Burgundy Glow'", hue:340,
+   visual:"Cream, green and wine-red variegated carpet, upright blue spikes May–June",
+   water:"",
+   aspect:"North / East / West",
+   soil:"Moist, humus-rich; Avoid drought, scorching sun and stagnant winter water",
+   prune:"",
+   source:"", peak:"May-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H7", resilience:"",
+   uses:"", size:"10–20 cm H × 0.5–1 m W",
+   seasonalImpact:"", growthSpeed:16, pestRisk:4, thirst:12, careLevel:6, sunNeed:42, sunMin:12},
 ];
 /* PLANTS:END */
 
@@ -662,7 +674,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
