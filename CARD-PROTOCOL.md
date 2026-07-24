@@ -95,9 +95,21 @@ Focal point recorded here when off-centre:
 | Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
 | Cornus kousa 'Flower Tower' | cornus-kousa-flower-tower.jpg | centre (default 50% 40%) — leaf close-up, arcuate kousa veining; no bracts or columnar habit in shot, re-shoot at bloom if wanted |
 | Ajuga 'Burgundy Glow' | ajuga-reptans-burgundy-glow.jpg | spike, 57% 45% — [flag] cropped from an AI-remade card image titled 'Pink Lightning'; cultivar unverifiable from artwork; 680px source, below the 1200px standard |
+| Spiraea 'Double Play Doozie' | spiraea-double-play-doozie.jpg (merged) / -flowers.jpg / -leaf.jpg | cluster, 55% 38% — merged: leaf photo full-bleed + sharp bud cluster soft-windowed (v3 recipe, first live use); both source photos staged |
 
 ## 5. Decision changelog
 
+- **v12.6 (Double Play Doozie Spirea — v3 two-photo merge goes live)**: Oscar
+  supplied the nested JSON + two of his own photos, asking for a clean in-frame
+  leaf with the flowers merged in. First live use of the v3 merge recipe:
+  leaf photo full-bleed (cropped to the 0.77 card-window ratio) + the sharp
+  bud cluster from the flower photo soft-windowed in with a feathered ellipse
+  (~46%×26% at 55% 38% — positioned for the v12 card's clear zone rather than
+  v3's "band above the Water box", which no longer exists). Both source photos
+  staged alongside the merged file per the Agastache precedent. Conversions
+  per v12.2; growthSpeed 0.58→11.6 rounded to 12. Flag: supplied JSON labels
+  thirst "Average" but rates 2/5 (→8/20, low-average) — number taken as
+  authority. Suites green: 94/94, 8/8, SW PASS, verifier PASS.
 - **v12.5 (Burgundy Glow Ajuga — the remade-image test)**: Oscar supplied the
   nested JSON + an AI-remade full card image to test whether a remade image
   helps. Verdict: **as data, it drifts — as a photo source, it's usable.** The
