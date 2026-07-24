@@ -8,11 +8,15 @@
                                  inside timber.html (a timber.html.bak backup is kept)
 
   Rules the importer enforces — it NEVER invents values:
-    - exactly the 25 required columns, no extras, any order
-    - every cell filled (an empty cell is an error naming the row and field)
-    - hue must be an integer 0-360
+    - the locked columns only, no extras, any order
+    - REQUIRED cells (common, latin, hue, hardiness) must be filled; every other
+      field may be blank = "not yet entered" (commercial data + ratings fill in
+      over time — a blank is never guessed)
+    - hue must be an integer 0-360; hardiness like H1a..H7
+    - 0-20 rating fields (seasonalImpact/growthSpeed/pestRisk/thirst/careLevel)
+      must be a whole number 0-20 or blank; sunNeed a whole number 0-100 or blank
     - no duplicate common or latin names
-  On any error, nothing is written.
+  On any error, nothing is written. Rubric + scales: CARD-STATS.md.
 */
 'use strict';
 const fs = require('fs');
@@ -21,10 +25,14 @@ const path = require('path');
 const FIELDS = ['common','latin','hue','visual','water','aspect','soil','prune',
   'source','peak','order','bench','root','trade','retail','margin','type','shrink',
   'returnRisk','pots','cvs','hardiness','resilience','uses','size',
-  // Plant Power Points (0-100 ratings, rubric in CARD-PROTOCOL.md) + light level.
-  // Ratings are editorial judgements, not measurements — blank = not yet rated.
-  'powerSeasonal','powerGrowth','powerPest','powerWater','lightLevel'];
-const SCORE_FIELDS = new Set(['powerSeasonal','powerGrowth','powerPest','powerWater','lightLevel']);
+  // Card stats (CARD-STATS.md). Editorial ratings, not measurements — blank = not
+  // yet rated. 0-20 rows map 1:1 to the 5-icon quarter-fill widgets; sunNeed 0-100.
+  'seasonalImpact','growthSpeed','pestRisk','thirst','careLevel','sunNeed'];
+// Fields that may be blank and, when present, are integers within a max.
+const SCORE_MAX = { seasonalImpact:20, growthSpeed:20, pestRisk:20, thirst:20, careLevel:20, sunNeed:100 };
+const SCORE_FIELDS = new Set(Object.keys(SCORE_MAX));
+// Blank-rejected fields = identity + the hardiness crest (common, latin, hardiness
+// checked as text; hue checked numerically). Every other field may be blank.
 const HTML = path.join(__dirname, 'timber.html');
 const CSV = path.join(__dirname, 'plants.csv');
 const BEGIN = '/* PLANTS:BEGIN';
@@ -114,19 +122,19 @@ function doImport() {
     }
     const p = {};
     header.forEach((h, i) => { p[h] = cells[i].trim(); });
-    for (const f of FIELDS) {
-      if (SCORE_FIELDS.has(f)) continue; // ratings may be blank = not yet rated
-      if (p[f] === '') errors.push(`row ${rowNo} (${p.common || '?'}): "${f}" is empty — fill it with your real value, the importer never invents data`);
+    // required identity/hardiness fields must be present; everything else may be blank
+    for (const f of ['common', 'latin', 'hardiness']) {
+      if (p[f] === '') errors.push(`row ${rowNo} (${p.common || '?'}): "${f}" is required — fill it (the importer never invents data, but identity + hardiness must be real)`);
     }
     const hue = Number(p.hue);
-    if (!Number.isInteger(hue) || hue < 0 || hue > 360) {
+    if (p.hue === '' || !Number.isInteger(hue) || hue < 0 || hue > 360) {
       errors.push(`row ${rowNo} (${p.common || '?'}): hue "${p.hue}" must be a whole number 0-360`);
     } else p.hue = hue;
     for (const f of SCORE_FIELDS) {
       if (p[f] === '') continue;
-      const n = Number(p[f]);
-      if (!Number.isInteger(n) || n < 0 || n > 100) {
-        errors.push(`row ${rowNo} (${p.common || '?'}): "${f}" is "${p[f]}" — must be a whole number 0-100, or blank if not yet rated`);
+      const n = Number(p[f]), max = SCORE_MAX[f];
+      if (!Number.isInteger(n) || n < 0 || n > max) {
+        errors.push(`row ${rowNo} (${p.common || '?'}): "${f}" is "${p[f]}" — must be a whole number 0-${max}, or blank if not yet rated`);
       } else p[f] = n;
     }
     for (const k of ['common', 'latin']) {

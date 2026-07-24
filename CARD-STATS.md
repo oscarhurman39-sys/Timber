@@ -263,10 +263,16 @@ Spot-check (Kniphofia old → new): powerPest 85 → pestRisk 3 (0.75/5 ✓);
 powerWater 80 → thirst 4 (1/5 ✓); powerGrowth 60 → growthSpeed 12 (marker 60% ✓);
 lightLevel 88 → sunNeed 88 ✓.
 
-**Implementation is a separate brick** (rename columns in `plants.csv` + `plants-tool.js`
-FIELDS/SCORE_FIELDS, update the 0–20 validation, update `renderCard()` formulas). Not
-done here — this file defines the target; migrating the data + tooling comes next and
-must keep the Playwright suite green.
+**Status — DONE for data + tooling** (renderCard still pending the v11 build):
+`plants.csv` migrated (124 rows, all score cells were blank so it was lossless — header
+renamed + blank `careLevel` inserted; 31 columns). `plants-tool.js` now validates the
+0–20 fields (max 20) and `sunNeed` (max 100), and **only `common`, `latin`, `hue`,
+`hardiness` are required** — every other field may be blank ("not yet entered"), so
+AI-drafted rows with blank commercial data import cleanly. Regression suite: 94/94 green.
+The remaining step is wiring these columns into the card render formulas (§10) when the
+v11 design goes into `timber.html`.
+
+See **PORTFOLIO-BUILD-BRIEF.md** for the paste-ready generation prompt built on this schema.
 
 ---
 
