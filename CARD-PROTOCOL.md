@@ -90,9 +90,30 @@ Focal point recorded here when off-centre:
 | Agastache 'Summerlong Coral' | agastache-summerlong-coral-flowers.jpg / -leaf.jpg | flowers: ~35% 40% (edges) · leaf: ~60% 45% windowed centre |
 | Kniphofia 'Pyromania Orange Blaze' | kniphofia-pyromania-orange-blaze.jpg | torches, ~42% 40% |
 | Nandina domestica | (processed, not yet staged) | photo1 centre |
+| Pennisetum 'Rubrum' | pennisetum-rubrum.jpg | plumes, ~50% 40% |
+| Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
 
 ## 5. Decision changelog
 
+- **v12.2 (Sweet Cupcake Hydrangea — first card built from an external JSON spec)**:
+  Oscar supplied a ChatGPT-generated plant JSON + a v5 master doc + his own photo,
+  asking whether the locked-template docs still help. Verdict recorded: **the JSON
+  fact payload is genuinely useful** (sourced ranges, notes, toxicity — it converts
+  mechanically to our schema: 0–5 ratings ×4 → our 0–20, 0–1 scale values ×100/×20),
+  but **regenerating the whole master doc each time causes drift** — the v5 doc
+  re-introduced light tolerance/optimal *bands* that the locked template (§18.2)
+  had already removed, and still carried an uncalibrated `cardAspectRatio: 0.8`
+  (measured: 0.774). Rule going forward: **send the plant JSON, not a new master
+  doc**; CARD-STATS.md + the calibrated manifest are the authority.
+  The build exposed and fixed two real renderer bugs: `extractFacing()` only
+  matched letter aspects (`S/W`) so "East / West" silently fell back to "Any
+  aspect" — now parses full words and orders them N/E/S/W; and `splitSoil()` cut
+  at the first comma, mangling "Moist, fertile, humus-rich" — now splits on
+  `;`/`·` or a comma only before an instruction word. Soil value wraps to two
+  lines. This is also the first card to exercise a real compass facing and the
+  wiggle-room leader together. Test suites moved out of scratchpad into `tests/`
+  (they were lost on every container restart); `tests/README.md` documents the run
+  order. Suites green: 94/94, 8/8, SW PASS, card verifier PASS.
 - **v12.1 (LIVE — the locked template is now the app's deck card)**: `renderCard()`
   in `timber.html` now builds the v12 card for every deck card. The fixed-geometry
   420×543 card scales to any phone via a `--cs` transform (gestures untouched — the

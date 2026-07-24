@@ -54,5 +54,34 @@
     "soil": "Well-drained",
     "soilWarning": "Avoid heavy clay and winter waterlogging",
     "sunMin": 82
+  },
+  {
+    "id": "hydrangea-macrophylla-sweet-cupcake",
+    "common": "Sweet Cupcake Hydrangea",
+    "latin": "Hydrangea macrophylla 'Sweet Cupcake'",
+    "photo": "../photos/hydrangea-macrophylla-sweet-cupcake.jpg",
+    "photoPos": "50% 45%",
+    "hardiness": "H6",
+    "height": "0.8–1m",
+    "spread": "0.9–1.2m",
+    "growthSpeed": 11,
+    "bloomLabel": "Jun–Oct",
+    "bloomMonths": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "pestRisk": 8,
+    "thirst": 16,
+    "careLevel": 8,
+    "careLabel": "Easy",
+    "aspect": "East / West",
+    "sunNeed": 52,
+    "sunLabel": "Part shade",
+    "sunMin": 34,
+    "soil": "Moist, fertile, humus-rich",
+    "soilWarning": "Do not let the root ball dry out"
   }
 ]

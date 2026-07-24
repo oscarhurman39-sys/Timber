@@ -328,10 +328,10 @@
   .tline span{font-family:Georgia,serif;font-size:7px;font-weight:700;width:11.5px;height:16px;
     display:grid;place-items:center;border-radius:3px;color:#8c7c48;flex:0 0 11.5px}
   .tline span.on{background:#173B24;color:#D8BD78}
-  .s-val{left:11%;top:28.2%;width:75.6%;height:14.5%}
+  .s-val{left:8%;top:27.4%;width:82%;height:16.2%}
   .s-tri-cover{left:33.7%;top:41.6%;width:29.1%;height:16.3%}
   .s-warn{left:7.6%;top:54.9%;width:84.3%;height:30.2%}
-  .s-val-ink{font-size:9px;text-align:center;display:grid;place-items:center;white-space:nowrap}
+  .s-val-ink{font-size:9px;line-height:1.2;text-align:center;display:grid;place-items:center;overflow-wrap:anywhere}
   .s-warn-ink{font-size:8.5px;line-height:1.35;display:grid;place-items:center;text-align:center}
   .b-aspect{left:11.3%;top:42.4%;width:17%;height:42.4%}
   .t-baspect{left:13.7%;top:45.8%;width:14.5%;height:23.7%}
@@ -532,6 +532,18 @@ const PLANTS = [
    hardiness:"H2", resilience:"Drought-tolerant; tender — shelter from frost",
    uses:"Containers, seasonal displays, hot borders", size:"60–90 cm H × 45–60 cm W",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:12, careLevel:8, sunNeed:90, sunMin:""},
+  {common:"Sweet Cupcake Hydrangea", latin:"Hydrangea macrophylla 'Sweet Cupcake'", hue:330,
+   visual:"Rounded sugar-pink mopheads over dark green leaves, June–October",
+   water:"Keep reliably moist, especially in containers",
+   aspect:"East / West · sheltered morning or evening light",
+   soil:"Moist, fertile, humus-rich; do not let the root ball dry out",
+   prune:"Leave old flowerheads over winter; remove in spring to healthy buds",
+   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'ES14' (registered) · Flair & Flavours series",
+   hardiness:"H6", resilience:"Harmful if eaten; sap may irritate · shelter from drying winds",
+   uses:"Borders, containers, shaded patios", size:"0.8–1m H × 0.9–1.2m W",
+   seasonalImpact:"", growthSpeed:11, pestRisk:8, thirst:16, careLevel:8, sunNeed:52, sunMin:34},
 ];
 /* PLANTS:END */
 
@@ -599,17 +611,29 @@ function parseSize(str){                      /* "60–90 cm H × 45–60 cm W" 
 }
 function extractFacing(aspect){               /* compass rule: facing ONLY if data names one */
   if(!aspect)return'Any aspect';
-  const m=aspect.match(/\b([NSEW](?:\s*\/\s*[NSEW])+)\b/);
+  const cap1=w=>w[0].toUpperCase()+w.slice(1).toLowerCase();
+  /* full words, single or combined: "East / West", "south-facing", "N/E" */
+  const words=aspect.match(/\b(north|south|east|west)\b/gi);
+  if(words&&words.length){
+    const seen=[],order=['north','east','south','west'];
+    words.forEach(w=>{const k=w.toLowerCase();if(!seen.includes(k))seen.push(k);});
+    if(seen.length<=4)return seen.sort((a,b)=>order.indexOf(a)-order.indexOf(b)).map(cap1).join(' / ');
+  }
+  const m=aspect.match(/\b([NSEW](?:\s*\/\s*[NSEW])+)\b/);   /* letter form: S/W */
   if(m)return m[1].replace(/\s*\/\s*/g,' / ');
-  const w=aspect.match(/\b(north|south|east|west)[- ]facing\b/i);
-  if(w)return w[1][0].toUpperCase()+w[1].slice(1).toLowerCase();
   return'Any aspect';
 }
 const careLabel=s=>s==null?'':(s<=8?'Easy':s<=14?'Moderate':'High');
 const cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
-function splitSoil(str){                      /* first clause = value; rest = warning */
+function splitSoil(str){                      /* value = soil type; warning = the caveat after it.
+  Splits on ; or · first (they separate clauses); a comma only splits when what follows
+  reads as an instruction, so "Moist, fertile, humus-rich" stays one value. */
   if(!str)return{val:'',warn:''};
-  const i=str.search(/[;,·]/);
+  let i=str.search(/[;·]/);
+  if(i===-1){
+    const m=str.match(/,\s*(?=(avoid|do not|don't|keep|needs?|shelter|protect|not )\b)/i);
+    i=m?m.index:-1;
+  }
   if(i===-1)return{val:str.trim(),warn:''};
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
