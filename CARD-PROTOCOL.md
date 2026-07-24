@@ -88,6 +88,29 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v11 (built from the reference's own pixels)**: Oscar rejected hand-drawn
+  icons ("the emojis suck, the aesthetic is far worse than chatgpt's model") and
+  asked for the ChatGPT reference card to be used directly, changing nothing of
+  its layout or aesthetic. Strategy: the reference image IS the card —
+  `art/frame-full.png` is the base; the live photo covers the interior; the
+  painted plaque / soil panel / aspect band / crest / stature label are cropped
+  whole (`art/*-full.png`, rounded feathered masks at MEASURED pixel edges, not
+  eyeballed ones) and overlaid at their exact reference positions; only
+  plant-specific value zones are covered with matched parchment patches
+  (feather-compensated oversize) and re-rendered live from plants.csv. Rating
+  widgets re-extracted as true-alpha sprites (parchment keyed out) so chips
+  carry no background tone. Data outranked the art everywhere they disagreed:
+  painted "South / West" → "Any aspect" (compass rule; the painted rose names
+  no facing so it stays), painted "June–August" → Jul–Oct timeline (v10 rule),
+  painted 2/5 thirst → 1/5 (powerWater 80), painted 0.5/5 pests → 0.75/5
+  (powerPest 85), painted light marker (~76%) → 88% (lightLevel), imperial
+  stature → "75 cm H × 60 cm W" (size field). Tolerance bands dropped from the
+  light slider — the reference art has none. The pristine painted H5 crest is
+  used as-is (Kniphofia IS H5). Known open items: crest variants for other
+  hardiness numbers (inpaint attempt looked patchy, parked); careLevel still
+  demo 1.5/5 pending the column decision; ~2px painted-marker-tip remnant on
+  the track edge (reads as a tick mark); 4:5 card vs full-height deck aspect
+  unresolved. Assets in `art/`, mockup + extraction scripts in `design/`.
 - **v1** (original spec): dark gradient card + leaf watermark, no photos. Locked
   until Oscar reopened the design.
 - **v2 feedback (Oscar)**: photos in; wood frame on ALL cards; trading-card layout
