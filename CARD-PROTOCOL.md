@@ -93,6 +93,29 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12 (NEW LOCKED TEMPLATE — full aesthetic re-sync)**: Oscar supplied the
+  final approved card image (aa4c9fc4, 1103×1426) + the locked-template asset-kit
+  master doc, declared it perfect, and asked for every saved aesthetic part to
+  match it. Every painted asset was re-extracted from the new image at
+  luminance-measured (not eyeballed) edges: frame, plaque, soil panel, band,
+  blank crest (row-flank inpaint of the numerals), parchment swatch, and the six
+  rating widgets — **secateurs are now yellow-handled Niwaki style per §18.3 (red
+  banned)**. New template changes implemented: left rail is now two sections
+  (HEIGHT value + SPREAD value, labels baked, values patched+live); growth
+  marker is the extracted **faceted gold diamond** riding the capped scale
+  segment; PPP heading is serif gold; soil panel restacks value → warning
+  triangle → warning text (triangle auto-covered when a plant has no warning);
+  aspect area drops the redundant "Full sun" prose (§18.2); **"wiggle room"
+  leader implemented** — drawn at `sunMin` on the light scale only when that
+  field has data (compass-style honesty; Pennisetum demo value flagged). Card
+  aspect is now 1103:1426 (0.774). MD-file gems also implemented: **calibrated
+  coordinate manifest** (`data/plinder-layout-manifest.json`, §26), **missing
+  assets error visibly instead of being substituted** (§27), and a
+  **verification script** `design/verify-cards.js` (§29 visual regression +
+  rating-math assertions; baseline screenshot saved). Superseded v11 assets and
+  mockups removed (git history keeps them); `design/card-builder.html` is the
+  template of record. Both sample cards verified: fills equal data, months
+  correct, zero missing assets.
 - **v11.2 (data-driven card builder)**: Oscar supplied the locked "Plinder Plant
   Card — Reusable UI Design System" and asked to "code this into a slide builder,
   no aesthetic changes." Built `design/card-builder.html`: one `renderCard(plant)`

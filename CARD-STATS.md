@@ -124,9 +124,10 @@ The slider position, **not** an icon row. Oscar's definition:
 - **Distinct from Aspect.** Sun need = *how much light the plant wants*. Aspect = *which
   way the site faces* (§4d). A plant can be "any aspect" yet want full sun (open bed),
   or south-facing yet shade-tolerant (wall shrub). Keep them separate.
-- **Optional tolerance range** (`sunMin`–`sunMax`) may be recorded for the card back or
-  a future tolerance band — but the v11 front slider shows a single marker only (the
-  reference art has no bands; don't add them without instruction).
+- **Optional `sunMin`** (0–100): the lower edge of the plant's tolerated light range.
+  When present, the card draws the fine "wiggle room" leader line at `sunMin` on the
+  light scale (locked template §18.2). When absent/blank, no leader is shown — same
+  honesty rule as the compass. (`sunMax` reserved; not rendered.)
 
 ---
 

@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "coordinateSystem": "normalized",
+  "referenceImage": "aa4c9fc4-1000045804.png (1103x1426, final locked template)",
+  "cardAspectRatio": 0.7735,
+  "note": "Calibrated from luminance-measured pixel edges of the approved card, not eyeballed. These are locked test values (design system section 26).",
+  "regions": {
+    "photo":              { "x": 0.1396, "y": 0.0210, "w": 0.8323, "h": 0.9299 },
+    "title":              { "x": 0.1768, "y": 0.0596, "w": 0.4941, "h": 0.0530 },
+    "botanicalName":      { "x": 0.1768, "y": 0.1087, "w": 0.4488, "h": 0.0245 },
+    "listen":             { "x": 0.1768, "y": 0.1472, "w": 0.1768, "h": 0.0267 },
+    "hardinessCrest":     { "x": 0.8033, "y": 0.0323, "w": 0.1723, "h": 0.1487 },
+    "railHeightValue":    { "x": 0.0272, "y": 0.3787, "w": 0.0762, "h": 0.1122 },
+    "railSpreadValue":    { "x": 0.0272, "y": 0.6522, "w": 0.0762, "h": 0.1136 },
+    "growthRailAxisX":    0.9166,
+    "growthRailScale":    { "yTop": 0.2104, "yBottom": 0.3857 },
+    "powerPointsHeading": { "x": 0.1514, "y": 0.5407, "w": 0.6346, "h": 0.0182 },
+    "powerPointsPlaque":  { "x": 0.1568, "y": 0.5624, "w": 0.6211, "h": 0.3029 },
+    "plaqueRowDividersY": [0.6332, 0.7160, 0.7805, 0.8647],
+    "soilPlaque":         { "x": 0.8087, "y": 0.6346, "w": 0.1432, "h": 0.2307 },
+    "aspectLightPlaque":  { "x": 0.1487, "y": 0.8752, "w": 0.8033, "h": 0.0729 },
+    "lightTrack":         { "x1": 0.4733, "x2": 0.9039, "yTop": 0.9109 },
+    "footer":             { "x": 0.28, "y": 0.9537, "w": 0.44, "h": 0.0245 }
+  },
+  "movableControls": {
+    "growthMarker": { "rail": "growthRailScale", "axis": "y", "min": 0, "max": 1,
+      "binding": "growthSpeed / 20 (0 = Slow end, 1 = Fast end)" },
+    "lightPointer": { "region": "lightTrack", "axis": "x", "min": 0, "max": 1,
+      "binding": "sunNeed / 100" },
+    "wiggleLeader": { "region": "lightTrack", "axis": "x", "min": 0, "max": 1,
+      "binding": "sunMin / 100 (omitted when sunMin is null)" }
+  },
+  "dataSchema": "plants.csv / CARD-STATS.md (0-20 icon scores, sunNeed 0-100, optional sunMin)"
+}
