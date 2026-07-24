@@ -89,7 +89,7 @@ Focal point recorded here when off-centre:
 | Cercis 'Eternal Flame' | cercis-canadensis-eternal-flame-wide.jpg / -leaf.jpg | wide: centre · leaf: ~70% 40% (leaf sits right of centre) |
 | Agastache 'Summerlong Coral' | agastache-summerlong-coral-flowers.jpg / -leaf.jpg | flowers: ~35% 40% (edges) · leaf: ~60% 45% windowed centre |
 | Kniphofia 'Pyromania Orange Blaze' | kniphofia-pyromania-orange-blaze.jpg | torches, ~42% 40% |
-| Nandina domestica | (processed, not yet staged) | photo1 centre |
+| Nandina domestica | nandina-domestica.jpg | leaflet, 45% 35% — Oscar's photo, red-flushed new growth + buds; EXIF-rotated to portrait |
 | Pennisetum 'Rubrum' | pennisetum-rubrum.jpg | plumes, ~50% 40% |
 | Abelia 'Raspberry Profusion' | abelia-raspberry-profusion.jpg | ~50% 45% — correct cultivar, pink bells + raspberry sepals |
 | Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
@@ -100,6 +100,26 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.9 (blurred-labels fix + Nandina photo & ratings)**: Oscar reported
+  "strange blur" on the bottoms of Bloom/Care etc. Measured cause: the plaque's
+  value patches reached up into the baked label rows, laying feathered
+  parchment over the text. Label rows luminance-measured in plaque-full.png
+  (Bloom 9.0–12.3%, diseases →38.8%, Thirst →59.2%, Care Level →79.6%);
+  patches re-cut to start below their labels with a tight 2px top feather
+  (`.patch.lbl`), heights extended to keep the baked painted values fully
+  covered (no ghosting). New audit rule: no plaque patch may intersect the
+  measured label rows (x<36%; widget patches exempt). Nandina: Oscar's photo
+  staged + ratings merged into the legacy row from his JSON (1→pestRisk 4,
+  2.5→thirst 10, 2→careLevel 8, growth 0.44→8.8 rounded to 9, sunNeed 72,
+  sunMin 40). Kept as-is pending Oscar's call — his JSON conflicts with the
+  row's settled data: aspect (JSON E/W vs row "S/W best for colour"), bloom
+  (JSON Jun–Jul flowers vs Sep–Feb berry display per §4b's own example), and
+  soil (JSON adds shelter + toxicity; row shows legacy "· Adaptable" as its
+  warning). Fixed en route: photo imgs now `pointer-events:none` — the top
+  deck card had never had a photo before, and a visible img intercepted
+  swipe/undo pointer events (caught by app-test, 4 failures). Potentilla
+  photo re-sent this session is the identical file — no change. Gate green:
+  94/94, 8/8, SW, verifier, audit clean.
 - **v12.8 (layout correction pass + the audit gate)**: Oscar spotted three
   layout defects from his phone: long facings overwriting the band artwork,
   "wiggle room" written over the painted sun, and the growth diamond a hair

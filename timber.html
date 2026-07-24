@@ -239,8 +239,8 @@
   .tcard img{display:block}
   .tinner{position:absolute;left:13.96%;top:2.10%;right:2.81%;bottom:4.91%;
     overflow:hidden;border-radius:5px;z-index:1}
-  .tphoto{position:absolute;inset:0}
-  .tphoto>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .tphoto{position:absolute;inset:0;pointer-events:none}
+  .tphoto>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none}
   .pfall{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
   .pfall svg{width:60%;height:60%;opacity:.18}
   .tinner::after{content:"";position:absolute;inset:0;pointer-events:none;
@@ -291,6 +291,13 @@
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
     -webkit-mask-composite:source-in}
+  .patch.lbl{                                   /* tight 2px top feather: sits close under a baked label */
+    mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 2px,#000 calc(100% - 5px),transparent);
+    mask-composite:intersect;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 2px,#000 calc(100% - 5px),transparent);
+    -webkit-mask-composite:source-in}
   .patch.tightv{
     mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 3px,#000 calc(100% - 3px),transparent);
@@ -302,10 +309,13 @@
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 6px,#000 100%)}
   .val-ink{position:absolute;color:#4d4131;font-family:Georgia,serif}
-  .p-bloom-val{left:12.6%;top:9.4%;width:16.4%;height:14.3%}
-  .p-pest-val{left:12.7%;top:37.2%;width:10%;height:12%}
-  .p-thirst-val{left:12.4%;top:60.3%;width:8.3%;height:9.5%}
-  .p-care-val{left:12.4%;top:76.7%;width:16%;height:20.4%}
+  /* value patches start BELOW their baked labels (label rows luminance-measured
+     in plaque-full.png: Bloom 9.0-12.3%, diseases ends 38.8%, Thirst ends 59.2%,
+     Care Level ends 79.6%) so the feather never washes the label text */
+  .p-bloom-val{left:12.6%;top:13.2%;width:16.4%;height:9.3%}
+  .p-pest-val{left:12.7%;top:39.4%;width:10%;height:9.4%}
+  .p-thirst-val{left:12.4%;top:60.1%;width:8.3%;height:9.4%}
+  .p-care-val{left:12.4%;top:80.4%;width:16%;height:15.6%}
   .p-bloom-w{left:39.3%;top:2.2%;width:59.4%;height:22%}
   .p-pest-w{left:40.4%;top:25.1%;width:58%;height:24.4%}
   .p-thirst-w{left:40.4%;top:51.6%;width:58%;height:18.6%}
@@ -477,7 +487,8 @@ const PLANTS = [
    pots:"2L, 3L, 5L, 7.5L",
    cvs:"‘Obsessed’ – fiery red · ‘Firepower’ – lime→red, compact",
    hardiness:"H5", resilience:"Drought & pest tolerant",
-   uses:"Urban, patio containers", size:"1.5–2.5m H × 1–1.5m W"},
+   uses:"Urban, patio containers", size:"1.5–2.5m H × 1–1.5m W",
+   seasonalImpact:"", growthSpeed:9, pestRisk:4, thirst:10, careLevel:8, sunNeed:72, sunMin:40},
 
   {common:"Mexican Orange Blossom", latin:"Choisya ternata", hue:150,
    visual:"Scented white flowers, aromatic evergreen",
@@ -702,7 +713,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
@@ -758,10 +769,10 @@ function renderCard(idx){
         <div class="ppp">Plant Power Points</div>
         <div class="plaque">
           <img src="art/plaque-full.png" alt="">
-          <div class="patch p-bloom-val"></div><div class="val-ink pval t-bloom">${p.peak||''}</div>
-          <div class="patch p-pest-val"></div><div class="val-ink pval t-pest">${pest==null?'':fmt5(pest)}</div>
-          <div class="patch p-thirst-val"></div><div class="val-ink pval t-thirst">${thirst==null?'':fmt5(thirst)}</div>
-          <div class="patch p-care-val"></div><div class="val-ink pval two t-care">${care==null?'':`<span>${careLabel(care)}</span><span>${fmt5(care)}</span>`}</div>
+          <div class="patch lbl p-bloom-val"></div><div class="val-ink pval t-bloom">${p.peak||''}</div>
+          <div class="patch lbl p-pest-val"></div><div class="val-ink pval t-pest">${pest==null?'':fmt5(pest)}</div>
+          <div class="patch lbl p-thirst-val"></div><div class="val-ink pval t-thirst">${thirst==null?'':fmt5(thirst)}</div>
+          <div class="patch lbl p-care-val"></div><div class="val-ink pval two t-care">${care==null?'':`<span>${careLabel(care)}</span><span>${fmt5(care)}</span>`}</div>
           <div class="patch tightv p-bloom-w"></div><div class="val-ink p-bloom-w"><div class="tline">${tline}</div></div>
           <div class="patch p-pest-w"></div><div class="val-ink p-pest-w"><div class="wrow pest">${wRow('spray',pest)}</div></div>
           <div class="patch p-thirst-w"></div><div class="val-ink p-thirst-w"><div class="wrow thirst">${wRow('drop',thirst)}</div></div>

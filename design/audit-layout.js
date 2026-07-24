@@ -81,6 +81,26 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
         }
       }
 
+      /* B2. plaque patches must not touch the baked label rows (luminance-
+         measured in plaque-full.png; a patch's feather over a label is the
+         "blurred words" defect). Zones in % of the plaque box, x 11-42%. */
+      const plaque = card.querySelector('.plaque');
+      if (plaque) {
+        const pr = plaque.getBoundingClientRect();
+        const LABELS = [['Bloom', 9.0, 12.3], ['Pests & diseases', 29.4, 38.8], ['Thirst', 55.8, 59.2], ['Care Level', 76.2, 79.6]];
+        /* label text lives at x ~12-36%; widget patches (x0 >= ~38%) never touch it */
+        for (const patch of plaque.querySelectorAll('.patch')) {
+          const r = patch.getBoundingClientRect();
+          const x0 = (r.left - pr.left) / pr.width * 100, x1 = (r.right - pr.left) / pr.width * 100;
+          const y0 = (r.top - pr.top) / pr.height * 100, y1 = (r.bottom - pr.top) / pr.height * 100;
+          if (x1 < 12 || x0 > 36) continue;
+          for (const [lname, ly0, ly1] of LABELS) {
+            if (y0 < ly1 - 0.5 && y1 > ly0 + 0.5)
+              bad('band-collisions', `patch ${patch.className.split(' ').join('.')} overlaps the baked "${lname}" label (${y0.toFixed(1)}-${y1.toFixed(1)}% vs ${ly0}-${ly1}%)`);
+          }
+        }
+      }
+
       /* C. growth rail alignment */
       const mk = card.querySelector('.growth .mk');
       const axis = card.querySelector('.growth .axis');
