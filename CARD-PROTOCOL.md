@@ -91,10 +91,21 @@ Focal point recorded here when off-centre:
 | Kniphofia 'Pyromania Orange Blaze' | kniphofia-pyromania-orange-blaze.jpg | torches, ~42% 40% |
 | Nandina domestica | (processed, not yet staged) | photo1 centre |
 | Pennisetum 'Rubrum' | pennisetum-rubrum.jpg | plumes, ~50% 40% |
+| Abelia 'Raspberry Profusion' | abelia-raspberry-profusion.jpg | ~50% 45% — correct cultivar, pink bells + raspberry sepals |
 | Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
 
 ## 5. Decision changelog
 
+- **v12.3 (growth label on the rail + Raspberry Profusion Abelia)**: Oscar: the
+  vertical GROWTH SPEED text "was meant to be like inside the line… it's now
+  outside the line". Correct — the painted rail breaks and the label runs *through*
+  the axis path. Fixed: label centred on the axis centreline (measured offset now
+  0.0px) and letter-spacing tightened 3px→1.5px so its height matches the painted
+  label exactly (206→285.6 vs the reference's 206→285.7 in card units), which also
+  stops it colliding with the lower tick stub. Abelia added from its plant JSON —
+  first live card with a **half-icon rating** (pestRisk 2/20 → 0.5/5, one half-filled
+  spray bottle) and a real South / West facing. Photo is Oscar's own and correctly
+  shows the pink tubular bells with raspberry sepals. Suites green: 94/94, 8/8, SW.
 - **v12.2 (Sweet Cupcake Hydrangea — first card built from an external JSON spec)**:
   Oscar supplied a ChatGPT-generated plant JSON + a v5 master doc + his own photo,
   asking whether the locked-template docs still help. Verdict recorded: **the JSON

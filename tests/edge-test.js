@@ -21,7 +21,7 @@ function check(name, cond, extra) {
   });
   await page.goto(URL); await page.waitForTimeout(300);
   let c = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, left: document.getElementById('left').textContent }));
-  check('corrupted storage -> fresh deck, no crash', c.cards === 6 && c.left === '6' && errs.length === 0, JSON.stringify({ c, errs }));
+  check('corrupted storage -> fresh deck, no crash', c.cards === 7 && c.left === '7' && errs.length === 0, JSON.stringify({ c, errs }));
   await ctx.close();
 
   /* ---- 2. persisted EMPTY deck restores to empty state correctly ---- */
@@ -29,21 +29,21 @@ function check(name, cond, extra) {
   page = await ctx.newPage();
   page.on('pageerror', e => errs.push('empty:' + e));
   await page.goto(URL); await page.waitForTimeout(300);
-  for (let i = 0; i < 6; i++) { await page.click('#learn'); await page.waitForTimeout(420); }
+  for (let i = 0; i < 7; i++) { await page.click('#learn'); await page.waitForTimeout(420); }
   let s = await page.evaluate(() => ({ empty: document.getElementById('empty').classList.contains('show'), done: document.getElementById('done').textContent }));
-  check('deck cleared before reload', s.empty && s.done === '6', JSON.stringify(s));
+  check('deck cleared before reload', s.empty && s.done === '7', JSON.stringify(s));
   await page.reload(); await page.waitForTimeout(400);
   s = await page.evaluate(() => ({
     empty: document.getElementById('empty').classList.contains('show'),
     actionsHidden: document.getElementById('actions').style.visibility === 'hidden',
     done: document.getElementById('done').textContent, cards: document.querySelectorAll('.card').length,
   }));
-  check('persisted empty deck -> empty state + hidden actions + count kept', s.empty && s.actionsHidden && s.done === '6' && s.cards === 0, JSON.stringify(s));
+  check('persisted empty deck -> empty state + hidden actions + count kept', s.empty && s.actionsHidden && s.done === '7' && s.cards === 0, JSON.stringify(s));
   // undo out of restored empty state (history persisted)
   // actions bar hidden -> undo not clickable by user; but reset must work:
   await page.click('#reset2'); await page.waitForTimeout(300);
   s = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, done: document.getElementById('done').textContent }));
-  check('reset from restored empty state works', s.cards === 6 && s.done === '0', JSON.stringify(s));
+  check('reset from restored empty state works', s.cards === 7 && s.done === '0', JSON.stringify(s));
   await ctx.close();
 
   /* ---- 3. undo with empty history: no crash, no state change ---- */
@@ -54,7 +54,7 @@ function check(name, cond, extra) {
   await page.goto(URL); await page.waitForTimeout(300);
   await page.click('#back'); await page.click('#back'); await page.waitForTimeout(150);
   c = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, left: document.getElementById('left').textContent }));
-  check('undo on fresh deck is a safe no-op', c.cards === 6 && c.left === '6' && errs3.length === 0, JSON.stringify({ c, errs3 }));
+  check('undo on fresh deck is a safe no-op', c.cards === 7 && c.left === '7' && errs3.length === 0, JSON.stringify({ c, errs3 }));
   await ctx.close();
 
   /* ---- 4. search input with quotes/special chars doesn't crash rendering ---- */
@@ -106,7 +106,7 @@ function check(name, cond, extra) {
     return cards[cards.length - 1].classList.contains('flipped');
   });
   c = await page.evaluate(() => ({ left: document.getElementById('left').textContent, done: document.getElementById('done').textContent }));
-  check('undone card returns unflipped with correct counts', flipped === false && c.left === '6' && c.done === '0', JSON.stringify({ flipped, c }));
+  check('undone card returns unflipped with correct counts', flipped === false && c.left === '7' && c.done === '0', JSON.stringify({ flipped, c }));
   await ctx.close();
 
   console.log(`\n${passed} passed, ${failed} failed`);

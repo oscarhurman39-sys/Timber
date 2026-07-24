@@ -259,9 +259,9 @@
   .growth .end{position:absolute;font-size:9px;text-shadow:0 1px 4px rgba(0,0,0,.85)}
   .growth .axis{position:absolute;width:1.5px;background:#efe5c2;box-shadow:0 0 3px rgba(0,0,0,.7)}
   .growth .tick{position:absolute;height:1.5px;background:#efe5c2;box-shadow:0 0 3px rgba(0,0,0,.7)}
-  .growth .lab{position:absolute;writing-mode:vertical-rl;transform:rotate(180deg);
-    font-size:8px;letter-spacing:3px;color:#efe0b4;text-transform:uppercase;
-    text-shadow:0 1px 4px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7)}
+  .growth .lab{position:absolute;writing-mode:vertical-rl;transform:rotate(180deg) translateX(-50%);
+    transform-origin:center;font-size:8px;letter-spacing:1.5px;color:#efe0b4;text-transform:uppercase;
+    text-align:center;text-shadow:0 1px 4px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7)}
   .growth .mk{position:absolute;width:17px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
   .crest{position:absolute;left:80.33%;top:3.23%;width:17.23%;z-index:3;text-align:center;
     filter:drop-shadow(0 2px 5px rgba(0,0,0,.35))}
@@ -544,6 +544,18 @@ const PLANTS = [
    hardiness:"H6", resilience:"Harmful if eaten; sap may irritate · shelter from drying winds",
    uses:"Borders, containers, shaded patios", size:"0.8–1m H × 0.9–1.2m W",
    seasonalImpact:"", growthSpeed:11, pestRisk:8, thirst:16, careLevel:8, sunNeed:52, sunMin:34},
+  {common:"Raspberry Profusion Abelia", latin:"Abelia 'Raspberry Profusion'", hue:340,
+   visual:"Fragrant pink bells with raspberry sepals, May–October",
+   water:"Water while establishing; then tolerates short dry spells",
+   aspect:"South / West · warm, sheltered spot",
+   soil:"Fertile, light, well-drained; avoid wet, waterlogged ground",
+   prune:"Light trim in early spring to keep the compact dome",
+   source:"", peak:"May-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"PBR 18358 · 'Edward Goucher' × Abelia chinensis",
+   hardiness:"H5", resilience:"Pollinator friendly (bees, butterflies) · shelter from cold drying winds",
+   uses:"Borders, sunny shrub beds, pollinator planting", size:"0.8–1.2m H × 0.8–1.2m W",
+   seasonalImpact:"", growthSpeed:11, pestRisk:2, thirst:8, careLevel:6, sunNeed:82, sunMin:46},
 ];
 /* PLANTS:END */
 
@@ -646,7 +658,7 @@ function growthRailHTML(growthSpeed){          /* scale = capped segment, inner 
     <div class="tick" style="right:${ax-3.5}px;top:${top}px;width:7px"></div>
     <div class="axis" style="right:${ax-0.75}px;top:${top}px;height:${bot-top}px"></div>
     <div class="tick" style="right:${ax-3.5}px;top:${bot}px;width:7px"></div>
-    <span class="lab" style="right:${ax+5}px;top:206px">Growth speed</span>
+    <span class="lab" style="right:${ax}px;top:206px">Growth speed</span>
     <div class="axis" style="right:${ax-0.75}px;top:292px;height:8px"></div>
     <div class="tick" style="right:${ax-3.5}px;top:299px;width:7px"></div>
     <span class="end" style="right:${ax}px;top:304px;transform:translateX(50%)">Slow</span>`;
