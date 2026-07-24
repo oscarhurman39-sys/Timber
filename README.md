@@ -6,6 +6,25 @@ A progressive web app that teaches garden-centre staff the key details of plants
 swipe-card interface — and gets them accurate info fast when a customer is standing in front
 of them.
 
+## Adding a plant
+
+Per-plant work is data, not design. See **`NEW-SESSION.md`** for the routine and
+what to paste into a fresh chat (short version: the plant JSON + your photo, and
+nothing else — not the design docs).
+
+| File | Purpose |
+|---|---|
+| `PLANT-BRIEF.md` | Paste into ChatGPT/Gemini; produces a plant JSON in our exact schema |
+| `tools/check-plant-json.js` | Validates that JSON and prints the row to paste in |
+| `CARD-STATS.md` | Rating scales, hardiness table, compass rule |
+| `CARD-BACK.md` | Card-back spec + per-plant question checklist |
+| `CARD-PROTOCOL.md` | Layout authority + full decision changelog |
+| `tests/` | Run all suites green before pushing |
+
+```sh
+node tools/check-plant-json.js my-plant.json    # errors out rather than guessing
+```
+
 ## Use it
 
 - Open `timber.html` in any browser — it's fully self-contained and works straight from the file.
