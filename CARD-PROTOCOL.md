@@ -100,6 +100,28 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.8 (layout correction pass + the audit gate)**: Oscar spotted three
+  layout defects from his phone: long facings overwriting the band artwork,
+  "wiggle room" written over the painted sun, and the growth diamond a hair
+  off its rail. Built `design/audit-layout.js` (measures every card: ink fits
+  its zone, band collisions, rail alignment, nothing leaks the card) — the
+  pre-fix baseline logged **31 violations across 8 cards**, including two
+  nobody had seen: every rated card's Pests/Thirst value overflowed its box
+  2px (`.pval` line-height), and long soil warnings overflowed their zone
+  (Potentilla by 29px — **correction: v12.7's claim that it "fits with 16.6px
+  clearance" was wrong; that measurement compared the wrong container**).
+  Fixes: `.pval` line-height 1; `fitInk()` auto-shrink for overflowing ink;
+  aspect box widened 14.5%→25.5%; **sun icon relocated to the sun end**
+  (Oscar's call — extracted `art/sun-icon.png`, painted sun + divider covered,
+  divider redrawn in CSS, exposed a `.band>img` cascade collision that blew
+  the sprite to full band width, now an audit rule); wiggle label flips right
+  of its leader when it would cross the light zone's left edge; diamond
+  rendered with −0.8px sprite-bias compensation (alpha bbox 7..40/44px,
+  measured). Insulation: audit added to the standing five-suite gate
+  (tests/README, NEW-SESSION), checker warns on soil >45 / soilWarning >60
+  chars, full procedure + defect log in **CORRECTION-PROTOCOL.md**. Deferred:
+  `design/card-builder.html` still has the old band (see protocol §5).
+  Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.7 (Pink Beauty Potentilla)**: from nested JSON + Oscar's photo. All
   conversions exact (0.5/5→pestRisk 2 — second live half-icon card; growth
   0.5→10). H7. First live "Any aspect" card from the nested-JSON pipeline —

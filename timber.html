@@ -314,7 +314,7 @@
   .t-pest{left:13.9%;top:39.5%;width:10%;height:6.7%}
   .t-thirst{left:13.9%;top:61.9%;width:10%;height:5.4%}
   .t-care{left:13.9%;top:80.2%;width:15%;height:16%}
-  .pval{font-size:11px;line-height:1.25;display:flex;align-items:center}
+  .pval{font-size:11px;line-height:1;display:flex;align-items:center}
   .pval.two{flex-direction:column;align-items:flex-start;justify-content:center;gap:0px;font-size:10.5px;line-height:1.15}
   .wrow{display:flex;align-items:center;justify-content:space-between;padding:0 4px;height:100%}
   .ricon{position:relative}
@@ -334,14 +334,18 @@
   .s-val-ink{font-size:9px;line-height:1.2;text-align:center;display:grid;place-items:center;overflow-wrap:anywhere}
   .s-warn-ink{font-size:8.5px;line-height:1.35;display:grid;place-items:center;text-align:center}
   .b-aspect{left:11.3%;top:42.4%;width:17%;height:42.4%}
-  .t-baspect{left:13.7%;top:45.8%;width:14.5%;height:23.7%}
+  .b-sun-cover{left:28%;top:6%;width:12.2%;height:88%}
+  .t-baspect{left:13%;top:45.8%;width:25.5%;height:23.7%}
   .b-aspect-ink{font-size:9.5px;display:flex;align-items:center}
+  .b-div{position:absolute;left:38.9%;top:16%;height:68%;width:1px;background:rgba(92,74,40,.5)}
+  .band>img.b-sun{position:absolute;left:88.4%;top:4%;width:5.2%}
   .b-pointer-cover{left:78.7%;top:13.6%;width:16%;height:33.9%}
   .b-tri{position:absolute;width:0;height:0;border-left:5px solid transparent;
     border-right:5px solid transparent;border-top:8px solid #1c3a26;
     filter:drop-shadow(0 1px 1px rgba(0,0,0,.3));top:calc(48.3% - 8px)}
   .b-wiggle{position:absolute;font-family:Georgia,serif;font-style:italic;font-size:7.5px;
     color:#5d5230;top:20%;transform:translateX(-100%);padding-right:3px;white-space:nowrap}
+  .b-wiggle.flip{transform:none;padding-right:0;padding-left:3px}
   .b-leader{position:absolute;width:1px;background:rgba(80,64,32,.6);top:34%;height:14.3%}
 </style>
 </head>
@@ -712,7 +716,10 @@ function growthRailHTML(growthSpeed){          /* scale = capped segment, inner 
     <span class="end" style="right:${ax}px;top:304px;transform:translateX(50%)">Slow</span>`;
   if(growthSpeed!=null){
     const fy=bot-(growthSpeed/20)*(bot-top);
-    h+=`<img class="mk" src="art/growth-diamond.png" style="right:${ax}px;top:${fy-7.5}px;transform:translateX(50%)" alt="">`;
+    /* sprite's visible diamond sits +0.8px right of its bitmap centre at 17px
+       display width (alpha bbox 7..40 in 44px) — compensate so the visual
+       centre rides the axis; audited by design/audit-layout.js */
+    h+=`<img class="mk" src="art/growth-diamond.png" style="right:${ax}px;top:${fy-7.5}px;transform:translateX(calc(50% - 0.8px))" alt="">`;
   }
   return h;
 }
@@ -769,9 +776,11 @@ function renderCard(idx){
         </div>
         <div class="band">
           <img src="art/band-full.png" alt="">
-          <div class="patch b-aspect"></div><div class="val-ink t-baspect b-aspect-ink">${extractFacing(p.aspect)}</div>
+          <div class="patch b-aspect"></div><div class="patch b-sun-cover"></div>
+          <div class="b-div"></div><img class="b-sun" src="art/sun-icon.png" alt="">
+          <div class="val-ink t-baspect b-aspect-ink">${extractFacing(p.aspect)}</div>
           <div class="patch sharpb b-pointer-cover"></div>
-          ${sunMin!=null?`<span class="b-wiggle" style="left:${lightX(sunMin)}%">wiggle room</span><div class="b-leader" style="left:${lightX(sunMin)}%"></div>`:''}
+          ${sunMin!=null?`<span class="b-wiggle${lightX(sunMin)<51?' flip':''}" style="left:${lightX(sunMin)}%">wiggle room</span><div class="b-leader" style="left:${lightX(sunMin)}%"></div>`:''}
           ${sun!=null?`<div class="b-tri" style="left:calc(${lightX(sun)}% - 5px)"></div>`:''}
         </div>
       </div>
@@ -802,10 +811,23 @@ function renderCard(idx){
     </div></div>
    </div>`;
   deck.appendChild(c);
+  fitInk(c);
   attachGestures(c);
   const say=c.querySelector('.say');
   shieldButton(say);
   say.onclick=()=>speakLatin(p.latin,say);
+}
+
+/* shrink any live ink that overflows its measured zone — safety net for long
+   data the fixed card geometry can't hold; audited by design/audit-layout.js */
+function fitInk(root){
+  root.querySelectorAll('.val-ink').forEach(el=>{
+    if(!el.clientWidth)return;                          /* not laid out — skip */
+    let fs=parseFloat(getComputedStyle(el).fontSize);
+    while((el.scrollWidth-el.clientWidth>1||el.scrollHeight-el.clientHeight>1)&&fs>6.5){
+      fs-=0.25;el.style.fontSize=fs+'px';
+    }
+  });
 }
 
 function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].pop();}

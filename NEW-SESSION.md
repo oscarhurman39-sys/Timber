@@ -40,13 +40,15 @@ If you're using a plain chat rather than one attached to this repo, paste
 | `art/` | The painted assets extracted from the approved card |
 | `design/card-builder.html` | Standalone card builder — JSON in, card out |
 | `tests/` | 94 app checks + 8 edge checks + service-worker update + card verifier |
+| `CORRECTION-PROTOCOL.md` | Layout-defect audit (`design/audit-layout.js`), defect log, correction rules |
 
 ## The routine, per plant
 
 1. Photo → processed to 1200px and staged in `photos/<latin-slug>.jpg`
 2. JSON → converted into a `PLANTS` row in `timber.html`
 3. `NPLANTS` bumped in `tests/app-test.js` and `tests/edge-test.js`
-4. All suites run green, screenshot checked, then committed and pushed
+4. All suites run green — including `design/audit-layout.js` (layout audit) —
+   screenshot checked, then committed and pushed
 
 Takes minutes. Adding a plant should never involve touching the design.
 
