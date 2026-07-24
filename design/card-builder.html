@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<title>Plinder Card Builder</title>
+<style>
+  /* LOCKED AESTHETIC (v11.1) — do not restyle. The card is assembled from the
+     painted reference assets; every plant-specific value is rendered by code from
+     a JSON plant object (schema = plants.csv columns). One renderCard() → any plant. */
+  *{box-sizing:border-box}
+  body{margin:0;background:#0d1410;font-family:Georgia,"Times New Roman",serif;padding:26px}
+  .builder-label{font-family:system-ui,sans-serif;font-size:12px;color:#D8BD78;font-weight:700;
+    letter-spacing:1px;margin:0 0 18px;text-align:center;text-transform:uppercase}
+  .deck{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;align-items:flex-start}
+  .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  .tcard{width:420px;height:525px;position:relative;
+    background:url(../art/frame-full.png);background-size:100% 100%;
+    border-radius:16px;box-shadow:0 18px 42px rgba(0,0,0,.6)}
+  .tcard img{display:block}
+
+  .inner{position:absolute;left:10.52%;top:2.78%;right:2.32%;bottom:4.56%;
+    overflow:hidden;border-radius:5px;z-index:1}
+  .photo{position:absolute;inset:0}
+  .photo img{width:100%;height:100%;object-fit:cover}
+  .inner::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(20,32,16,.38) 0%,rgba(20,32,16,.10) 14%,transparent 22% 78%,rgba(15,25,12,.25) 100%)}
+
+  .header{position:absolute;top:2%;left:3.8%;right:20%;z-index:2}
+  .header h1{margin:0;font-size:21px;font-weight:700;color:#f6ecd2;line-height:1.04;
+    text-shadow:0 1px 6px rgba(15,32,15,.9),0 0 18px rgba(15,32,15,.55)}
+  .header .bot{font-size:10px;font-style:italic;color:#eee3bd;margin-top:3px;
+    text-shadow:0 1px 5px rgba(15,32,15,.9)}
+  .listen{font-family:system-ui,sans-serif;font-size:7.5px;letter-spacing:2px;font-weight:700;
+    text-transform:uppercase;color:#fff;background:#0F6196;border:1px solid rgba(255,255,255,.35);
+    border-radius:10px;padding:3.5px 11px;display:inline-flex;align-items:center;gap:4px;margin-top:7px;
+    box-shadow:0 2px 6px rgba(0,0,0,.45)}
+
+  .growth{position:absolute;inset:0;z-index:2;pointer-events:none;font-family:Georgia,serif;color:#f2e8c8}
+  .growth .end{position:absolute;font-size:8.5px;text-shadow:0 1px 4px rgba(0,0,0,.85)}
+  .growth .axis{position:absolute;width:1.5px;background:#efe5c2;box-shadow:0 0 3px rgba(0,0,0,.7)}
+  .growth .tick{position:absolute;height:1.5px;background:#efe5c2;box-shadow:0 0 3px rgba(0,0,0,.7)}
+  .growth .lab{position:absolute;writing-mode:vertical-rl;transform:rotate(180deg);
+    font-size:7.5px;letter-spacing:3px;color:#e6cf8f;text-transform:uppercase;font-weight:700;
+    text-shadow:0 1px 4px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7)}
+  .growth .mk{position:absolute;width:9px;height:9px;background:#D8BD78;rotate:45deg;
+    border:1.5px solid #4a3813;box-shadow:0 0 4px rgba(0,0,0,.6),0 1px 2px rgba(0,0,0,.5)}
+
+  .crest{position:absolute;left:82.44%;top:2.0%;width:15.15%;z-index:3;text-align:center;
+    filter:drop-shadow(0 2px 5px rgba(0,0,0,.35))}
+  .crest img{width:100%}
+  .crest .hnum{position:absolute;left:0;right:0;top:30%;text-align:center;font-family:Georgia,serif;
+    font-weight:700;font-size:21px;letter-spacing:1px;color:#F2E5C4;
+    text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
+  .railfix{position:absolute;left:1.78%;top:22.47%;width:7.49%;height:27.46%;z-index:2}
+  .railfix>img.bg{position:absolute;inset:0;width:100%;height:100%}
+  .railfix .slabel{position:absolute;left:7.1%;top:12.2%;width:40.5%;height:60.3%}
+  .railfix .val{position:absolute;left:45%;top:0;width:55%;height:100%;
+    display:grid;place-items:center;writing-mode:vertical-rl;transform:rotate(180deg);
+    font-size:12px;letter-spacing:1px;color:#ded4ae;white-space:nowrap}
+  .plaque{position:absolute;left:8.11%;top:48.43%;width:71.3%;z-index:3}
+  .plaque>img,.soil>img{width:100%}
+  .soil{position:absolute;left:79.68%;top:61.48%;width:17.83%;z-index:3}
+
+  .ppp{position:absolute;left:8.11%;width:71.3%;top:45.6%;z-index:4;text-align:center;
+    font-family:system-ui,sans-serif;font-size:8.5px;font-weight:700;letter-spacing:3.5px;
+    text-transform:uppercase;color:#ecd7a0;text-shadow:0 1px 3px rgba(10,20,10,.92),0 0 8px rgba(10,20,10,.7)}
+  .railppp{position:absolute;left:1.78%;top:50.5%;width:7.49%;height:42%;z-index:2;
+    background:url(../art/railfix.png);background-size:100% 100%;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 9px,#000 calc(100% - 9px),transparent);
+    mask-image:linear-gradient(180deg,transparent,#000 9px,#000 calc(100% - 9px),transparent)}
+
+  .band{position:absolute;left:9.71%;top:85.8%;width:86.72%;z-index:3}
+  .band .bandimg{width:100%;height:49px}
+  .band-blank{position:absolute;left:2.3%;top:11%;width:95.4%;height:78%;
+    background:url(../art/parch-swatch.png);background-size:80px 40px;border-radius:9px}
+  .band-compass{position:absolute;left:2.6%;top:50%;transform:translateY(-50%);height:39px;z-index:1;
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.22))}
+  .band-aspect{position:absolute;left:15.8%;top:50%;transform:translateY(-50%);z-index:1;
+    font-family:Georgia,serif;color:#4d4131;line-height:1.2}
+  .band-aspect .bk{font-family:system-ui,sans-serif;font-size:8px;font-weight:700;letter-spacing:1.5px;color:#5d5230}
+  .band-aspect .bv{font-size:9.5px}
+  .band-div{position:absolute;left:34%;top:20%;height:60%;width:1px;background:rgba(80,64,32,.38);z-index:1}
+  .band-light{position:absolute;left:37.5%;top:50%;transform:translateY(-50%);width:58.5%;height:30px;z-index:1}
+  .band-bar{position:absolute;left:0;top:8px;width:100%;height:11px}
+  .band-tri{position:absolute;top:0;width:0;height:0;border-left:5px solid transparent;
+    border-right:5px solid transparent;border-top:8px solid #1c3a26;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+  .band-e{position:absolute;top:20px;font-family:system-ui,sans-serif;font-size:7.5px;color:#6d6236}
+  .band-e.l{left:1px}.band-e.r{right:1px}
+
+  .patch{position:absolute;background:url(../art/parch-swatch.png);background-size:80px 40px;
+    mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
+    mask-composite:intersect;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
+    -webkit-mask-composite:source-in}
+  .patch.tight{
+    mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 2px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
+               linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 2px),transparent)}
+  .val-ink{position:absolute;color:#4d4131;font-family:Georgia,serif}
+
+  .p-bloom-val{left:16.6%;top:12.1%;width:22.5%;height:10.3%}
+  .p-pest-val{left:16.1%;top:37.8%;width:15%;height:11.1%}
+  .p-thirst-val{left:16.1%;top:56.7%;width:14.4%;height:11.1%}
+  .p-care-val{left:16.1%;top:74.9%;width:17.5%;height:16.6%}
+  .p-bloom-w{left:41.1%;top:3.6%;width:57.8%;height:18.6%}
+  .p-pest-w{left:41.6%;top:23.9%;width:57.3%;height:24.9%}
+  .p-thirst-w{left:41.6%;top:50.4%;width:57.3%;height:16.6%}
+  .p-care-w{left:41.6%;top:68.6%;width:57.3%;height:22.1%}
+  .pval{font-size:11px;line-height:1.25;display:flex;align-items:center}
+  .pval.two{flex-direction:column;align-items:flex-start;justify-content:center;gap:1px}
+
+  .wrow{display:flex;align-items:center;justify-content:space-between;padding:0 6px;height:100%}
+  .ricon{position:relative}
+  .ricon>img{height:100%;width:auto}
+  .ricon .fillwrap{position:absolute;left:0;top:0;height:100%;overflow:hidden;width:calc(var(--fill)*100%)}
+  .ricon .fillwrap img{height:100%;width:auto;max-width:none}
+  .wrow.pest .ricon{height:32px}
+  .wrow.thirst .ricon{height:20px}
+  .wrow.care .ricon{height:36px}
+
+  .timeline{display:flex;gap:1.5px;align-items:center;justify-content:center;height:100%}
+  .timeline span{font-family:Georgia,serif;font-size:7.5px;font-weight:700;width:12.5px;height:17px;
+    display:grid;place-items:center;border-radius:3px;color:#8c7c48;flex:0 0 12.5px}
+  .timeline span.on{background:#173B24;color:#D8BD78}
+
+  .s-val{left:6%;top:31.8%;width:86%;height:24.2%}
+  .s-warn{left:25%;top:56.1%;width:70%;height:37.6%}
+  .s-val-ink{font-size:10px;text-align:center;display:grid;place-items:center}
+  .s-warn-ink{font-size:8.5px;line-height:1.3;display:flex;align-items:center}
+</style></head>
+<body>
+<p class="builder-label">Plinder Card Builder — every card rendered from a JSON plant object</p>
+<div class="deck" id="deck"></div>
+
+<script>
+/* ============================================================================
+   PLINDER CARD BUILDER
+   One renderCard(plant) → the locked v11.1 card. Plant objects use the same
+   field names as plants.csv (CARD-STATS.md schema). Add an object to PLANTS
+   and a card appears. No aesthetic changes are made here — only data binding.
+   ============================================================================ */
+
+/* --- rating maths: 0–20 store → 0–5 quarter-step geometric fills (never opacity) */
+const getRatingSegments = (value, max = 5) =>
+  Array.from({ length: max }, (_, i) => {
+    const r = value - i;
+    if (r >= 1) return 1;
+    if (r <= 0) return 0;
+    return Math.round(r * 4) / 4;
+  });
+const fmt5 = (score20) => {
+  const v = Math.round((score20 / 4) * 100) / 100;
+  return v + '/5';
+};
+const widget = (kind) => (fill) =>
+  `<span class="ricon" style="--fill:${fill}">` +
+  `<img src="../art/widget-${kind}-out.png" alt="">` +
+  `<span class="fillwrap"><img src="../art/widget-${kind}-fill.png" alt=""></span></span>`;
+const widgets = (kind, score20) => getRatingSegments(score20 / 4).map(widget(kind)).join('');
+
+const bloomTimeline = (months = []) =>
+  [...'JFMAMJJASOND'].map((m, i) =>
+    `<span class="${months.includes(i + 1) ? 'on' : ''}">${m}</span>`).join('');
+
+/* growth rail: axis 9px in from the inner right edge, span y 92..213 (inner px);
+   gold diamond marker driven by growthSpeed (0–20). */
+const growthRail = (growthSpeed = 0) => {
+  const top = 92, bot = 213;
+  const fy = bot - (growthSpeed / 20) * (bot - top);
+  let h = `<span class="end" style="right:9px;top:76px;transform:translateX(50%)">Fast</span>
+           <span class="end" style="right:9px;top:217px;transform:translateX(50%)">Slow</span>
+           <div class="axis" style="right:8.25px;top:${top}px;height:${bot - top}px"></div>
+           <span class="lab" style="right:17px;top:114px">Growth speed</span>`;
+  for (let i = 0; i <= 4; i++) {
+    const w = (i === 0 || i === 4) ? 12 : 8;
+    h += `<div class="tick" style="right:${9 - w / 2}px;top:${top + (bot - top) * i / 4}px;width:${w}px"></div>`;
+  }
+  h += `<div class="mk" style="right:4.5px;top:${fy - 4.5}px"></div>`;
+  return h;
+};
+
+/* light pointer along the bar: 3%..94% of band-light width (rounded ends). */
+const lightPct = (sunNeed = 0) => 3 + (sunNeed / 100) * (94 - 3);
+
+/* screen-reader mirror of every metric (spec §12) */
+const accessibleData = (p) => `
+  <dl class="sr-only">
+    <dt>Common name</dt><dd>${p.common}</dd>
+    <dt>Botanical name</dt><dd>${p.latin}</dd>
+    <dt>Hardiness</dt><dd>${p.hardiness}</dd>
+    <dt>Stature</dt><dd>${p.height} high by ${p.spread} wide</dd>
+    <dt>Bloom</dt><dd>${p.bloomLabel}</dd>
+    <dt>Pests and diseases risk</dt><dd>${fmt5(p.pestRisk)}</dd>
+    <dt>Thirst</dt><dd>${fmt5(p.thirst)}</dd>
+    <dt>Care level</dt><dd>${p.careLabel}, ${fmt5(p.careLevel)}</dd>
+    <dt>Growth speed</dt><dd>${p.growthSpeed} out of 20</dd>
+    <dt>Aspect</dt><dd>${p.aspect}</dd>
+    <dt>Light</dt><dd>${p.sunLabel}</dd>
+    <dt>Soil</dt><dd>${p.soil}. ${p.soilWarning || ''}</dd>
+  </dl>`;
+
+function renderCard(p) {
+  return `
+  <article class="tcard" data-plant-id="${p.id || ''}">
+    <div class="inner">
+      <div class="photo"><img src="${p.photo}" style="object-position:${p.photoPos || '50% 40%'}" alt="${p.common}"></div>
+      <div class="header">
+        <h1>${p.common}</h1>
+        <div class="bot">${p.latin}</div>
+        <span class="listen">&#9654; Listen</span>
+      </div>
+      <div class="growth" aria-hidden="true">${growthRail(p.growthSpeed)}</div>
+    </div>
+
+    <div class="railfix">
+      <img class="bg" src="../art/railfix.png" alt="">
+      <img class="slabel" src="../art/stature-label.png" alt="">
+      <span class="val">${p.height} H &times; ${p.spread} W</span>
+    </div>
+
+    <div class="crest"><img src="../art/crest-blank.png" alt=""><span class="hnum">${p.hardiness}</span></div>
+    <div class="railppp"></div>
+    <div class="ppp">Plant Power Points</div>
+
+    <div class="plaque">
+      <img src="../art/plaque-full.png" alt="">
+      <div class="patch p-bloom-val"></div><div class="val-ink pval p-bloom-val">${p.bloomLabel}</div>
+      <div class="patch p-pest-val"></div><div class="val-ink pval p-pest-val">${fmt5(p.pestRisk)}</div>
+      <div class="patch p-thirst-val"></div><div class="val-ink pval p-thirst-val">${fmt5(p.thirst)}</div>
+      <div class="patch p-care-val"></div><div class="val-ink pval two p-care-val"><span>${p.careLabel}</span><span>${fmt5(p.careLevel)}</span></div>
+      <div class="patch p-bloom-w"></div><div class="val-ink p-bloom-w"><div class="timeline">${bloomTimeline(p.bloomMonths)}</div></div>
+      <div class="patch p-pest-w"></div><div class="val-ink p-pest-w"><div class="wrow pest">${widgets('spray', p.pestRisk)}</div></div>
+      <div class="patch p-thirst-w"></div><div class="val-ink p-thirst-w"><div class="wrow thirst">${widgets('drop', p.thirst)}</div></div>
+      <div class="patch p-care-w"></div><div class="val-ink p-care-w"><div class="wrow care">${widgets('seca', p.careLevel)}</div></div>
+    </div>
+
+    <div class="soil">
+      <img src="../art/soil-full.png" alt="">
+      <div class="patch s-val"></div><div class="val-ink s-val s-val-ink">${p.soil}</div>
+      ${p.soilWarning ? `<div class="patch tight s-warn"></div><div class="val-ink s-warn s-warn-ink">${p.soilWarning}</div>` : ''}
+    </div>
+
+    <div class="band">
+      <img class="bandimg" src="../art/band-full.png" alt="">
+      <div class="band-blank"></div>
+      <img class="band-compass" src="../art/compass-sm.png" alt="">
+      <div class="band-aspect">
+        <div class="bk">ASPECT</div>
+        <div class="bv">${p.aspect}</div>
+        <div class="bv">${p.sunLabel}</div>
+      </div>
+      <div class="band-div"></div>
+      <div class="band-light">
+        <img class="band-bar" src="../art/light-bar.png" alt="">
+        <div class="band-tri" style="left:calc(${lightPct(p.sunNeed)}% - 5px)"></div>
+        <span class="band-e l">Shade</span>
+        <span class="band-e r">Full sun</span>
+      </div>
+    </div>
+
+    ${accessibleData(p)}
+  </article>`;
+}
+
+/* ============================================================================
+   PLANT DATA — schema mirrors plants.csv (CARD-STATS.md). Scores are 0–20;
+   sunNeed 0–100. Add an object to build another slide.
+   ============================================================================ */
+const PLANTS = [
+  {
+    id: 'kniphofia-pyromania-orange-blaze',
+    common: 'Red Hot Poker', latin: "Kniphofia 'Pyromania Orange Blaze'",
+    photo: '../photos/kniphofia-pyromania-orange-blaze.jpg', photoPos: '42% 40%',
+    hardiness: 'H5', height: '75 cm', spread: '60 cm',
+    growthSpeed: 12, bloomLabel: 'Jul–Oct', bloomMonths: [7, 8, 9, 10],
+    pestRisk: 3, thirst: 4, careLevel: 6, careLabel: 'Easy',
+    aspect: 'Any aspect', sunNeed: 88, sunLabel: 'Full sun',
+    soil: 'Free-draining', soilWarning: 'Avoid winter waterlogging',
+  },
+  {
+    id: 'pennisetum-rubrum',
+    common: 'Purple Fountain Grass', latin: "Pennisetum 'Rubrum'",
+    photo: '../photos/pennisetum-rubrum.jpg', photoPos: '50% 40%',
+    hardiness: 'H2', height: '60–90 cm', spread: '45–60 cm',
+    growthSpeed: 14, bloomLabel: 'Jul–Oct', bloomMonths: [7, 8, 9, 10],
+    pestRisk: 4, thirst: 12, careLevel: 8, careLabel: 'Easy',
+    aspect: 'Any aspect', sunNeed: 90, sunLabel: 'Full sun',
+    soil: 'Well-drained', soilWarning: 'Avoid heavy clay & winter waterlogging',
+  },
+];
+
+document.getElementById('deck').innerHTML = PLANTS.map(renderCard).join('');
+</script>
+</body>
+</html>

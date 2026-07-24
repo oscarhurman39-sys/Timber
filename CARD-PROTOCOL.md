@@ -93,6 +93,22 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v11.2 (data-driven card builder)**: Oscar supplied the locked "Plinder Plant
+  Card — Reusable UI Design System" and asked to "code this into a slide builder,
+  no aesthetic changes." Built `design/card-builder.html`: one `renderCard(plant)`
+  turns any JSON plant object into the locked v11.1 card — no per-plant HTML.
+  Plant objects use the **plants.csv / CARD-STATS.md schema** (scores 0–20,
+  sunNeed 0–100) so the builder, CSV, and portfolio brief are one pipeline.
+  Aesthetic untouched; the only changes are structural: IDs→classes (many cards
+  per page), all values bound from data, the hardiness crest uses the blank shell
+  + code-rendered H-number (any band, per spec §22), a screen-reader `<dl>` mirror
+  (spec §12), and geometric quarter-fill ratings verified per card (Kniphofia
+  0.75/1/1.5, Pennisetum 1/3/2). Sample data: `data/plinder-cards.sample.json`.
+  Deferred from the spec (noted, not skipped): light tolerance/optimal bands are
+  omitted because the LOCKED treatment (spec §18.2) drops them; a rotating compass
+  needle is pending a separated needle asset (both current samples are "Any
+  aspect", so no needle is shown — compass rule holds). Not yet wired into
+  `timber.html`'s live deck — that's the next brick.
 - **v11.1 (Oscar refinement pass, via ChatGPT micro-edit brief)**: three layout
   edits, no restyle. (1) **Growth-speed scale** restored to the earlier preferred
   treatment — thin warm-off-white vertical line, small **gold diamond marker**

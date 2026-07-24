@@ -1,0 +1,32 @@
+[
+  {
+    "id": "kniphofia-pyromania-orange-blaze",
+    "common": "Red Hot Poker",
+    "latin": "Kniphofia 'Pyromania Orange Blaze'",
+    "photo": "../photos/kniphofia-pyromania-orange-blaze.jpg",
+    "photoPos": "42% 40%",
+    "hardiness": "H5",
+    "height": "75 cm", "spread": "60 cm",
+    "growthSpeed": 12,
+    "bloomLabel": "Jul–Oct", "bloomMonths": [7, 8, 9, 10],
+    "pestRisk": 3, "thirst": 4, "careLevel": 6, "careLabel": "Easy",
+    "aspect": "Any aspect",
+    "sunNeed": 88, "sunLabel": "Full sun",
+    "soil": "Free-draining", "soilWarning": "Avoid winter waterlogging"
+  },
+  {
+    "id": "pennisetum-rubrum",
+    "common": "Purple Fountain Grass",
+    "latin": "Pennisetum 'Rubrum'",
+    "photo": "../photos/pennisetum-rubrum.jpg",
+    "photoPos": "50% 40%",
+    "hardiness": "H2",
+    "height": "60–90 cm", "spread": "45–60 cm",
+    "growthSpeed": 14,
+    "bloomLabel": "Jul–Oct", "bloomMonths": [7, 8, 9, 10],
+    "pestRisk": 4, "thirst": 12, "careLevel": 8, "careLabel": "Easy",
+    "aspect": "Any aspect",
+    "sunNeed": 90, "sunLabel": "Full sun",
+    "soil": "Well-drained", "soilWarning": "Avoid heavy clay & winter waterlogging"
+  }
+]
