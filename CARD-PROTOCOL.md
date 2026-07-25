@@ -98,9 +98,21 @@ Focal point recorded here when off-centre:
 | Spiraea 'Double Play Doozie' | spiraea-double-play-doozie.jpg (merged) / -flowers.jpg / -leaf.jpg | cluster, 55% 38% — merged: leaf photo full-bleed + sharp bud cluster soft-windowed (v3 recipe, first live use); both source photos staged |
 | Potentilla 'Pink Beauty' | potentilla-fruticosa-pink-beauty.jpg | flower, 25% 32% — [flag] blooms in photo are near-white with a faint blush, not deep pink; consistent with the cultivar's documented heat fade (and it was shot in a July heat spell) but unverifiable; orange potentilla visible in background (mixed bench) |
 | Cercis chinensis 'Avondale' | cercis-chinensis-avondale.jpg | leaf, 45% 30% — glossy cordate Cercis foliage; no flowers in shot (Apr–May bloomer, shot in July); cultivar unverifiable from leaves, re-shoot at bloom if wanted |
+| Prunus lusitanica 'Angustifolia' | prunus-lusitanica-angustifolia.jpg | leaf, 50% 35% — narrow glossy leaves + red stems (species-confirming feature); no racemes in shot (June bloomer, July shot) |
 
 ## 5. Decision changelog
 
+- **v12.11 (Portuguese Laurel 'Angustifolia')**: from nested JSON + Oscar's
+  photo (red stems confirm the species). Naming call: card carries the selling
+  name 'Angustifolia' (matches the JSON's own id/slug); the JSON's
+  botanicalName 'Myrtifolia' (accepted name) + syn. 'Pyramidalis' recorded in
+  cvs — Oscar to confirm what his labels carry. Conversions per v12.2 (growth
+  0.58→11.6 rounded to 12; pestRisk 10, thirst 10, careLevel 8, sunNeed 66,
+  sunMin 30 — widest tolerance leader yet). First single-month bloom card
+  (peak "Jun" → one calendar cell; parser handles it). soilWarning condensed:
+  "ripe fruit may also be harmful if bitter" → "fruit harmful if eaten" —
+  slightly stronger than source, flagged. Gate green: 94/94, 8/8, SW,
+  verifier, audit clean.
 - **v12.10 (Chinese Redbud 'Avondale')**: from nested JSON + Oscar's leaf
   photo. Conversions per v12.2 (growth 0.42→8.4 rounded to 8; rest exact:
   pestRisk 8, thirst 12, careLevel 10, sunNeed 78, sunMin 52). H5, S/W
