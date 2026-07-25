@@ -91,6 +91,10 @@ if (Array.isArray(p.bloomMonths) && parsed.length &&
   warnings.push(`"peak" ("${p.peak}") parses to [${parsed}] but "bloomMonths" says [${p.bloomMonths}] — the card uses peak`);
 }
 
+/* ---- panel-fit lengths ---- */
+if (p.soil && p.soil.length > 26) warnings.push(`"soil" is ${p.soil.length} chars — over ~26 it overflows the soil panel into the warning triangle. Shorten the display value (detail can live in the warning or notes).`);
+if (p.soilWarning && p.soilWarning.length > 44) warnings.push(`"soilWarning" is ${p.soilWarning.length} chars — may overflow its zone (~44 max)`);
+
 /* ---- latin formatting ---- */
 if (p.latin) {
   if (!/^[A-Z]/.test(p.latin)) errors.push('"latin" should start with a capitalised genus');

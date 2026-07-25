@@ -96,6 +96,23 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.4 (sun repositioned to the sun end + one-command pipeline)**: Oscar: the
+  band's sun icon sat washed-out at the wrong place — it should be tiny and
+  directly parallel at the *sun end* of the shade→sun bar, adjacent to it, or gone.
+  Root cause found: the painted sun sits LEFT of the bar (the shade side,
+  semantically backwards) and its pale golds are genuinely low-contrast. Fixed in
+  the assets, so it's correct on every card automatically: the sun was cut from the
+  painted band as a radial-feathered chip (colour-keying failed — too close to
+  parchment, which is *why* it looked faded), its old position inpainted to clean
+  parchment (glow included; first attempt left a smudge), and the chip re-placed at
+  12px, centred on the bar line just right of its end cap (94.4% band). A generic
+  `.band>img{width:100%}` rule was silently stretching the chip to a 292px smear —
+  scoped override added. Verified on all 7 cards; suites green.
+  **Pipeline de-slopped**: `tools/add-plant.js` is now the whole routine in one
+  command (validate → photo → row → test counts → both suites → screenshot),
+  tested end-to-end in a sandboxed repo copy (8-plant deck, 94/94 + 8/8 green,
+  correct card screenshot). Validator gained soil-length overflow warnings after
+  the test card showed a 3-line soil value grazing the warning triangle.
 - **v12.3 (growth label on the rail + Raspberry Profusion Abelia)**: Oscar: the
   vertical GROWTH SPEED text "was meant to be like inside the line… it's now
   outside the line". Correct — the painted rail breaks and the label runs *through*

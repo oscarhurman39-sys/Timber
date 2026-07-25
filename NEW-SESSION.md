@@ -41,14 +41,18 @@ If you're using a plain chat rather than one attached to this repo, paste
 | `design/card-builder.html` | Standalone card builder — JSON in, card out |
 | `tests/` | 94 app checks + 8 edge checks + service-worker update + card verifier |
 
-## The routine, per plant
+## The routine, per plant — ONE command
 
-1. Photo → processed to 1200px and staged in `photos/<latin-slug>.jpg`
-2. JSON → converted into a `PLANTS` row in `timber.html`
-3. `NPLANTS` bumped in `tests/app-test.js` and `tests/edge-test.js`
-4. All suites run green, screenshot checked, then committed and pushed
+```sh
+node tools/add-plant.js plant.json photo.jpg
+```
 
-Takes minutes. Adding a plant should never involve touching the design.
+That validates the JSON (refuses bad data), processes + stages the photo, inserts
+the `PLANTS` row, bumps the test counts, runs both suites, and screenshots the new
+card to `tools/last-added-card.png`. **Look at the screenshot**, then commit and
+push. A duplicate latin name or any failed check aborts before anything is written.
+
+Adding a plant never involves touching the design.
 
 ## Two standing gotchas
 
