@@ -363,7 +363,10 @@ function topFlipped(page) {
   });
   check('manifest: name/short_name Timber', manifest && manifest.name === 'Timber' && manifest.short_name === 'Timber');
   check('manifest: theme/background #0c1810', manifest && manifest.theme_color === '#0c1810' && manifest.background_color === '#0c1810');
-  check('manifest: has 192x192 png icon', manifest && manifest.icons.some(i => i.sizes === '192x192' && i.type === 'image/png' && i.src.startsWith('data:image/png')));
+  check('manifest: has 192 + 512 + maskable icons', manifest &&
+    manifest.icons.some(i => i.sizes === '192x192' && i.src.startsWith('data:image/')) &&
+    manifest.icons.some(i => i.sizes === '512x512' && i.purpose === 'any' && i.src.startsWith('data:image/')) &&
+    manifest.icons.some(i => i.sizes === '512x512' && i.purpose === 'maskable'));
   check('manifest: absolute start_url', manifest && manifest.start_url.startsWith('http'));
 
   const swState = await page.evaluate(async () => {
