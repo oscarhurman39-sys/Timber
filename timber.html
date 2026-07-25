@@ -727,6 +727,18 @@ const PLANTS = [
    hardiness:"H5", resilience:"Harmful if eaten",
    uses:"", size:"0.5–1 m H × 0.5–1 m W",
    seasonalImpact:"", growthSpeed:11, pestRisk:12, thirst:10, careLevel:8, sunNeed:72, sunMin:38},
+  {common:"Bubblegum Blast Bee Balm", latin:"Monarda didyma 'Bubblegum Blast'", hue:330,
+   visual:"Dense whorls of vivid hot-pink flowers over aromatic dark-green leaves",
+   water:"",
+   aspect:"East / South / West",
+   soil:"Humus-rich, moist but well-drained; Avoid winter wet; give airflow to limit mildew",
+   prune:"",
+   source:"", peak:"Jun-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"Sugar Buzz series",
+   hardiness:"H5", resilience:"Nectar-rich — draws bees, butterflies and hummingbird moths",
+   uses:"", size:"50–70 cm H × 60–80 cm W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:8, thirst:14, careLevel:8, sunNeed:82, sunMin:50},
 ];
 /* PLANTS:END */
 
@@ -821,7 +833,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;

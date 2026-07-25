@@ -76,8 +76,8 @@ if (p.water && p.soil) {
 /* ---- length guards: the card's zones are fixed; long text auto-shrinks ---- */
 if (p.soilWarning && String(p.soilWarning).length > 60)
   warnings.push(`"soilWarning" is ${String(p.soilWarning).length} chars — over ~60 the soil panel shrinks the type to fit. Consider trimming.`);
-if (p.soil && String(p.soil).length > 45)
-  warnings.push(`"soil" is ${String(p.soil).length} chars — over ~45 the soil panel shrinks the type to fit. Consider trimming.`);
+if (p.soil && String(p.soil).length > 38)
+  warnings.push(`"soil" is ${String(p.soil).length} chars — over ~38 it can overflow the narrow soil-value panel (measured limit). Trim it.`);
 
 /* ---- bloom ---- */
 const MONTHS = { jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12 };

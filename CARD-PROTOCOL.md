@@ -105,10 +105,22 @@ Focal point recorded here when off-centre:
 | Salix 'Hakuro-nishiki' | salix-integra-hakuro-nishiki.jpg (composited) / -cutout.png | 50% 28% — [special] cutout composited over a darkened+blurred copy of ITSELF (hero-on-self, composite-hero.js, hue 130) per Oscar's "darken the background, slap the boy on top in full colour"; melts into the card's dark frame with no seam; raw cutout kept |
 | Plumbago auriculata | plumbago-auriculata.jpg (composited) / -cutout.png | 50% 30% — [special] cutout, hero-on-self composite (hue 215, dark navy backdrop); blue flowers pop; raw cutout kept |
 | Euonymus japonicus 'Aureomarginatus' | euonymus-japonicus-aureomarginatus.jpg (composited) / -cutout.png | 30% 28% — [special] cutout, hero-on-self (hue 50). NOTE filename is the LATIN-slug (aureomarginatus), NOT the JSON id (elegantissimus-aureus) — staged under the id first and shipped blank; caught, now an audit rule |
+| Monarda didyma 'Bubblegum Blast' | monarda-didyma-bubblegum-blast.jpg | flower, 78% 18% — real garden shot; hot-pink whorl top-right, leaves show minor mildew spotting (true to the species) |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.18 (Bubblegum Blast Bee Balm — back to a real photo)**: first non-cutout
+  in a while. Data: thirst 14 (Monarda sulks if dry), pestRisk 8 (mildew-prone —
+  the leaves in Oscar's own photo show early spotting), growth 0.58→12, H5.
+  The JSON's soil warning again mixed a moisture regime ("do not let dry out" →
+  Thirst) with mildew airflow (kept as a real siting constraint); soilWarning
+  trimmed to the two genuine constraints. Pollinator note → resilience. The
+  audit caught a 2px soil-VALUE overflow ("Fertile, humus-rich, moist but
+  well-drained", 43 chars) that slipped under the checker's old 45-char soil
+  threshold — trimmed "Fertile," (redundant with humus-rich) and tightened the
+  checker threshold to 38 so it flags at source next time. Gate green after the
+  fix: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.17 (Golden Japanese Spindle + a photo-slug audit rule)**: fourth
   cutout, hero-on-self (hue 50). Exposed a real bug: I staged the photo under
   the JSON **id** (`euonymus-japonicus-elegantissimus-aureus`) but the renderer
