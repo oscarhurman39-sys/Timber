@@ -106,10 +106,20 @@ Focal point recorded here when off-centre:
 | Plumbago auriculata | plumbago-auriculata.jpg (composited) / -cutout.png | 50% 30% — [special] cutout, hero-on-self composite (hue 215, dark navy backdrop); blue flowers pop; raw cutout kept |
 | Euonymus japonicus 'Aureomarginatus' | euonymus-japonicus-aureomarginatus.jpg (composited) / -cutout.png | 30% 28% — [special] cutout, hero-on-self (hue 50). NOTE filename is the LATIN-slug (aureomarginatus), NOT the JSON id (elegantissimus-aureus) — staged under the id first and shipped blank; caught, now an audit rule |
 | Monarda didyma 'Bubblegum Blast' | monarda-didyma-bubblegum-blast.jpg | flower, 78% 18% — real garden shot; hot-pink whorl top-right, leaves show minor mildew spotting (true to the species) |
+| Carpinus betulus | carpinus-betulus.jpg | leaf, 55% 40% — pleated corrugated doubly-serrate leaves, textbook hornbeam; species positively confirmed from foliage |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.19 (Common Hornbeam — the deck's biggest plant)**: from nested JSON +
+  Oscar's leaf photo (pleated corrugated leaves = textbook Carpinus). H7 (joint-
+  hardiest with Ajuga/Potentilla), and by far the **largest — 15–25 m**. The
+  JSON's soil warning bundled three things: siting for a large tree (kept —
+  genuine constraint), establishment watering (→ Thirst) and hedge clipping
+  (→ prune). growth 0.66→13.2 rounded to 13. Apr–May "bloom" = catkins, real
+  interest is foliage + hop-like seeds (§4b). Named upright forms (Fastigiata /
+  Frans Fontaine) in cvs — relevant since the species itself is too big for
+  most gardens. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.18 (Bubblegum Blast Bee Balm — back to a real photo)**: first non-cutout
   in a while. Data: thirst 14 (Monarda sulks if dry), pestRisk 8 (mildew-prone —
   the leaves in Oscar's own photo show early spotting), growth 0.58→12, H5.
