@@ -97,9 +97,20 @@ Focal point recorded here when off-centre:
 | Ajuga 'Burgundy Glow' | ajuga-reptans-burgundy-glow.jpg | spike, 57% 45% — [flag] cropped from an AI-remade card image titled 'Pink Lightning'; cultivar unverifiable from artwork; 680px source, below the 1200px standard |
 | Spiraea 'Double Play Doozie' | spiraea-double-play-doozie.jpg (merged) / -flowers.jpg / -leaf.jpg | cluster, 55% 38% — merged: leaf photo full-bleed + sharp bud cluster soft-windowed (v3 recipe, first live use); both source photos staged |
 | Potentilla 'Pink Beauty' | potentilla-fruticosa-pink-beauty.jpg | flower, 25% 32% — [flag] blooms in photo are near-white with a faint blush, not deep pink; consistent with the cultivar's documented heat fade (and it was shot in a July heat spell) but unverifiable; orange potentilla visible in background (mixed bench) |
+| Cercis chinensis 'Avondale' | cercis-chinensis-avondale.jpg | leaf, 45% 30% — glossy cordate Cercis foliage; no flowers in shot (Apr–May bloomer, shot in July); cultivar unverifiable from leaves, re-shoot at bloom if wanted |
 
 ## 5. Decision changelog
 
+- **v12.10 (Chinese Redbud 'Avondale')**: from nested JSON + Oscar's leaf
+  photo. Conversions per v12.2 (growth 0.42→8.4 rounded to 8; rest exact:
+  pestRisk 8, thirst 12, careLevel 10, sunNeed 78, sunMin 52). H5, S/W
+  facing, Apr–May calendar. soilWarning lightly trimmed ("Plant in a
+  sheltered position" → "Plant sheltered") to fit the panel — meaning
+  unchanged, flagged in the JSON's uncertain list. Photo is leaf-only
+  (July shot of an April bloomer) — registered like the Cornus. First card
+  through the full corrected pipeline (audit gate + label-safe patches +
+  fitInk) with zero violations on first render. Gate green: 94/94, 8/8,
+  SW, verifier, audit clean.
 - **v12.9 (blurred-labels fix + Nandina photo & ratings)**: Oscar reported
   "strange blur" on the bottoms of Bloom/Care etc. Measured cause: the plaque's
   value patches reached up into the baked label rows, laying feathered
