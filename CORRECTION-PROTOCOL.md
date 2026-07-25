@@ -22,6 +22,8 @@ card against four rule classes, exiting 1 on any violation:
 | `band-collisions` | wiggle-room label inside the band, right of the 38% line, clear of the sun icon; marker triangle within the bar span (40.4–93.2%) |
 | `rail-alignment` | growth diamond's **visual** centre on the axis centreline within 0.5px (sprite alpha-bias compensated — see §4) |
 | `within-card` | no live ink outside the card face |
+| `band-collisions` (plaque) | no value patch overlaps a baked label row (the "blurred words" defect) |
+| `focus-photo` | every PHOTO_FOCUS key is a current plant's **latin-slug** with a file on disk — catches staging a photo under the JSON `id` when the renderer keys off the latin name |
 
 **It runs on every plant in the deck**, so a new plant with unusually long
 data is caught the moment it's added, not when a customer sees it.

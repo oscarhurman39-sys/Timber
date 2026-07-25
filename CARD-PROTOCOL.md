@@ -104,10 +104,25 @@ Focal point recorded here when off-centre:
 | Buddleja 'Pugster Orchid' | buddleja-pugster-orchid.jpg (composited) / -cutout.png | 62% 30% — [special] Oscar sent a transparent-background CUTOUT, not a garden photo. Composited onto the card's own hue-315 fallback gradient (composite-cutout.js) so it reads as a specimen plate; raw cutout kept as -cutout.png for re-compositing |
 | Salix 'Hakuro-nishiki' | salix-integra-hakuro-nishiki.jpg (composited) / -cutout.png | 50% 28% — [special] cutout composited over a darkened+blurred copy of ITSELF (hero-on-self, composite-hero.js, hue 130) per Oscar's "darken the background, slap the boy on top in full colour"; melts into the card's dark frame with no seam; raw cutout kept |
 | Plumbago auriculata | plumbago-auriculata.jpg (composited) / -cutout.png | 50% 30% — [special] cutout, hero-on-self composite (hue 215, dark navy backdrop); blue flowers pop; raw cutout kept |
+| Euonymus japonicus 'Aureomarginatus' | euonymus-japonicus-aureomarginatus.jpg (composited) / -cutout.png | 30% 28% — [special] cutout, hero-on-self (hue 50). NOTE filename is the LATIN-slug (aureomarginatus), NOT the JSON id (elegantissimus-aureus) — staged under the id first and shipped blank; caught, now an audit rule |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.17 (Golden Japanese Spindle + a photo-slug audit rule)**: fourth
+  cutout, hero-on-self (hue 50). Exposed a real bug: I staged the photo under
+  the JSON **id** (`euonymus-japonicus-elegantissimus-aureus`) but the renderer
+  derives the photo slug from the **latin** name
+  (`euonymus-japonicus-aureomarginatus`), so the card shipped on the gradient
+  fallback with the leaf watermark showing. The checker had printed the correct
+  path; I didn't follow it. Fixed the filename + PHOTO_FOCUS key, and added
+  audit rule **E (focus-photo)**: every PHOTO_FOCUS key must be a current
+  plant's latin-slug with a file on disk — catches id-vs-latin drift without
+  flagging secondary source photos or out-of-deck photos. Data: growth 0.55→11
+  (exact), pestRisk 12 (spindle is vine-weevil/mildew prone), evergreen so the
+  "Bloom" cell marks the minor Jun–Jul flowers while the real draw is the gold
+  foliage (§4b). Reverted-shoot removal kept as a care note in the warning,
+  toxicity → resilience. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.16 (Cape Leadwort — H2 tender, hero-on-self cutout)**: third cutout,
   hero-on-self composite in blue (hue 215). Data: **H2 — most tender card in
   the deck** (crest correctly shows it; needs frost-free overwintering),

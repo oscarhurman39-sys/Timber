@@ -18,9 +18,15 @@
                         from alpha bounds: bbox x 7..40 in a 44px bitmap), so
                         the renderer compensates and this audit asserts the
                         compensated position. Re-measure if the sprite changes.
-   D. within-card     — no live ink may leak outside the card face.            */
+   D. within-card     — no live ink may leak outside the card face.
+   E. focus-photo     — every PHOTO_FOCUS key must be a current plant's latin-
+                        slug with a photos/<slug>.jpg on disk (filesystem check):
+                        catches id-vs-latin-slug drift that silently drops a
+                        card to the gradient fallback.                         */
 'use strict';
 const { chromium } = require('playwright');
+const fs = require('fs');
+const path = require('path');
 
 const SPRITE_BIAS = 0.8;         // growth-diamond visual-centre bias at 17px display width
 const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked manifest)
@@ -127,6 +133,26 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
     }
     return out;
   }, { SPRITE_BIAS, BAR });
+
+  /* E. focus/photo consistency — every PHOTO_FOCUS key must (a) be a current
+     plant's latin-slug and (b) have a photos/<slug>.jpg on disk. A focus entry
+     under the wrong key (e.g. the JSON id instead of the latin-slug) means the
+     card is silently on the gradient fallback. This is exactly the id-vs-latin
+     drift that shipped the Euonymus card blank. Secondary source photos and
+     out-of-deck photos have no focus entry, so are never flagged. */
+  const { slugs, focusKeys } = await page.evaluate(() => ({
+    slugs: PLANTS.map(p => p.latin.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')),
+    focusKeys: Object.keys(PHOTO_FOCUS),
+  }));
+  const slugSet = new Set(slugs);
+  const photoDir = path.join(__dirname, '..', 'photos');
+  const onDisk = new Set(fs.readdirSync(photoDir).filter(f => f.endsWith('.jpg')).map(f => f.replace(/\.jpg$/, '')));
+  for (const k of focusKeys) {
+    if (!slugSet.has(k))
+      violations.push({ plant: k, rule: 'focus-photo', detail: `PHOTO_FOCUS key "${k}" matches no plant's latin-slug — card is on the fallback` });
+    else if (!onDisk.has(k))
+      violations.push({ plant: k, rule: 'focus-photo', detail: `PHOTO_FOCUS["${k}"] set but photos/${k}.jpg is missing` });
+  }
 
   await browser.close();
 
