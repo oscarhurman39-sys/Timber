@@ -110,10 +110,26 @@ Focal point recorded here when off-centre:
 | Elaeagnus ×submacrophylla | elaeagnus-submacrophylla.jpg | leaf, 45% 48% — silver-scaled leaf undersides (the ID feature) sharp in centre; species confirmed |
 | Gunnera manicata | gunnera-manicata.jpg (composited) / -cutout.png | 50% 35% — [special] cutout hero-on-self (hue 120). ⚠ UK-RESTRICTED plant — see compliance note in changelog v12.21 |
 | Acer rubrum 'October Glory' | acer-rubrum-october-glory.jpg | leaf, 50% 62% — red petioles (the A. rubrum ID feature) on summer-green leaves; species confirmed |
+| Fatsia japonica 'Tsumugi-shibori' | fatsia-japonica-tsumugi-shibori.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 120). Filename uses the true cultivar 'Tsumugi-shibori' NOT the selling name 'Spider's Web' (apostrophe breaks the slug/checker) |
+| Griselinia littoralis | griselinia-littoralis.jpg (composited) / -cutout.png | 55% 22% — [special] cutout hero-on-self (hue 95, apple-green); glossy oval leaves |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.23 (Spider's Web Fatsia + Griselinia — two cutouts; an apostrophe bug)**:
+  both cutouts, hero-on-self. The Fatsia exposed a **cultivar-apostrophe bug**:
+  the selling name 'Spider's Web' has an apostrophe that (a) fails the checker's
+  quote-balance test and (b) slugs to `spider-s-web`, not `spiders-web` (the
+  JSON id) — so no filename would ever match. Resolved the botanically-correct
+  way per CARD-STATS §5: the card's latin uses the true cultivar epithet
+  'Tsumugi-shibori' (Japanese, no apostrophe); 'Spider's Web' is recorded as the
+  English selling name in the common name + cvs. Photo staged under the correct
+  latin-slug. Fatsia data: growth 0.3→6 (joint-slowest), **sunMin 5 — most
+  shade-tolerant card in the deck** (deep-shade architectural evergreen), autumn
+  drumstick flowers. Griselinia: growth 0.74→15 (fast coastal hedge), sunNeed 88,
+  salt/wind tolerance added to resilience (littoralis = 'of the shore'). Both
+  soil warnings split (siting/toxicity/care tips out of the soil field as usual).
+  Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.22 (October Glory Red Maple — a bloom-months judgment call)**: from
   nested JSON + Oscar's photo (red petioles confirm A. rubrum). **Changed the
   bloom months**: the JSON gave [3,4] (the small spring flowers), but the tree's
