@@ -40,10 +40,12 @@ node tools/check-plant-json.js my-plant.json    # errors out rather than guessin
 | ↺ | Undo the last swipe (corrects the count) |
 | Double-tap a card | Flip to the **Buyer Trade Sheet** (prices, margin, order weeks, risk) |
 | Tap the back | Flip back — swiping is locked while flipped |
-| 🔍 top right | **Search** — type a common or latin name, get the full info sheet instantly |
+| 🔍 top right | **Search** — type a name, soil, or use, get the full info sheet instantly |
+| Quick filters | Chips under the search bar (**Full sun · Shade-tolerant · Very hardy · Drought-tolerant · Easy care · Containers · Pollinators · Hedging**) — tap to answer "what suits X?" with a customer standing there. Chips combine with each other and with typed text. A plant only matches what its own data says — a blank field never counts as a yes |
 | 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
 | 🔊 next to latin name | Speaks the latin name aloud (built-in speech engine, Italian phonology; no files, works for every plant you add). Hidden on devices without speech support |
 | ☰ menu | Learned count, Dictionary mode, **Quiz mode** (streak + best), Install app, Reset progress |
+| Quiz learning loop | Plants you answer wrongly are remembered (per plant, persisted) and come round **more often** until you answer them right — the quiz targets your weak spots instead of quizzing uniformly. The header shows how many plants you still have to nail down |
 
 Progress (learned/skipped/undo history) and your best quiz streak persist in the browser via
 localStorage — closing the app doesn't lose them. "Reset progress" / "Reset deck" clears the deck

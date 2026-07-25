@@ -174,6 +174,12 @@
   .s-row .h{font-size:11px;font-weight:800;color:#04120a;background:var(--leaf1);padding:3px 8px;
     border-radius:20px;letter-spacing:.3px;flex:0 0 auto}
   .s-none{padding:22px 16px;color:var(--muted);font-size:14px;text-align:center}
+  .s-chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px 8px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .chip{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:var(--ink);
+    border-radius:20px;padding:6px 11px;font-size:12.5px;font-family:inherit;cursor:pointer;line-height:1}
+  .chip:hover,.chip:focus-visible{background:rgba(255,255,255,.09)}
+  .chip.on{background:linear-gradient(135deg,var(--gold),#e0a52f);color:#1a120a;border-color:transparent;font-weight:700}
+  .s-count{padding:2px 16px 0;color:var(--muted);font-size:12px}
   .s-detail{overflow-y:auto;padding:14px 16px 18px;display:flex;flex-direction:column;gap:12px}
   .d-top{display:flex;align-items:center;gap:10px}
   .d-back{border:none;border-radius:10px;background:rgba(255,255,255,.06);color:var(--gold);
@@ -214,6 +220,8 @@
   .q-title{font-weight:800;font-size:16px}
   .q-stats{margin-left:auto;font-size:12px;color:var(--muted)}
   .q-stats b{color:var(--gold)}
+  .q-review{font-size:12px;color:var(--muted);margin-top:-4px}
+  .q-review:empty{display:none}
   .q-question{font-size:15px;line-height:1.45;color:#eafff2}
   .q-question em{color:var(--leaf1);font-style:normal;font-weight:600}
   .q-options{display:grid;gap:8px;overflow-y:auto}
@@ -412,9 +420,10 @@
         <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>
         <path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
-      <input id="searchInput" type="search" placeholder="Search plants — common or latin name…" autocomplete="off" aria-label="Search plants by name">
+      <input id="searchInput" type="search" placeholder="Search plants — name, soil, use…" autocomplete="off" aria-label="Search plants by name, soil or use">
       <button class="s-close" id="searchClose" aria-label="Close search">✕</button>
     </div>
+    <div class="s-chips" id="sChips" role="group" aria-label="Quick filters"></div>
     <div class="s-results" id="searchResults"></div>
     <div class="s-detail" id="searchDetail" hidden></div>
   </div>
@@ -428,6 +437,7 @@
       <span class="q-stats">Streak <b id="qStreak">0</b> · Best <b id="qBest">0</b></span>
       <button class="s-close" id="quizClose" aria-label="Close quiz">✕</button>
     </div>
+    <div class="q-review" id="qReview" aria-live="polite"></div>
     <div class="q-question" id="qQuestion"></div>
     <div class="q-options" id="qOptions"></div>
   </div>
@@ -896,16 +906,44 @@ const searchInput=document.getElementById('searchInput');
 const searchResults=document.getElementById('searchResults');
 const searchDetail=document.getElementById('searchDetail');
 
+/* ---- customer finder: quick filter chips. Each chip is a saved question over the
+   data that's actually in PLANTS — a plant only matches what its own fields say,
+   so a blank field never counts as a yes. Chips AND together, and AND with typed text. */
+const hardNum=h=>{const m=/^H(\d)/.exec(String(h||'').trim());return m?+m[1]:null;};
+const ftxt=(p,fields)=>fields.map(f=>p[f]||'').join(' ').toLowerCase();
+const FILTERS=[
+  {key:'sun',  label:'☀️ Full sun',        test:p=>{const s=num(p.sunNeed);return(s!=null&&s>=70)||/full sun|\bsunny\b/.test(ftxt(p,['aspect','uses']));}},
+  {key:'shade',label:'🌥 Shade-tolerant',  test:p=>{const s=num(p.sunNeed),m=num(p.sunMin);return(m!=null&&m<=40)||(s!=null&&s<=50)||/(pt|part|partial|light|dappled)[ -]?shade/.test(ftxt(p,['aspect']));}},
+  {key:'hardy',label:'❄️ Very hardy',      test:p=>{const n=hardNum(p.hardiness);return n!=null&&n>=5;}},
+  {key:'dry',  label:'🌵 Drought-tolerant',test:p=>{const t=num(p.thirst);return(t!=null&&t<=6)||/drought[- ]?(tolerant|proof|hardy)/.test(ftxt(p,['resilience','water','uses']))||/^low\b/.test(ftxt(p,['water']));}},
+  {key:'easy', label:'🪶 Easy care',       test:p=>{const c=num(p.careLevel);return c!=null&&c<=8;}},
+  {key:'pots', label:'🪴 Containers',      test:p=>/container/.test(ftxt(p,['uses']))},
+  {key:'bees', label:'🐝 Pollinators',     test:p=>/pollinat|\bbees?\b/.test(ftxt(p,['uses','visual']))},
+  {key:'hedge',label:'🌳 Hedging',         test:p=>/hedg|screen/.test(ftxt(p,['uses']))},
+];
+const sChips=document.getElementById('sChips');
+const activeChips=new Set();
+function renderChips(){
+  sChips.innerHTML=FILTERS.map(f=>
+    `<button class="chip${activeChips.has(f.key)?' on':''}" data-k="${f.key}" aria-pressed="${activeChips.has(f.key)}">${f.label}</button>`).join('');
+  sChips.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k;
+    activeChips.has(k)?activeChips.delete(k):activeChips.add(k);
+    renderChips();renderResults(searchInput.value);
+  });
+}
 function openSearch(){
   search.classList.add('open');
   customerMode=false;
+  activeChips.clear();
+  renderChips();
   showResultsList();
   searchInput.value='';
   renderResults('');
   setTimeout(()=>searchInput.focus(),120);
 }
 function closeSearch(){search.classList.remove('open');customerMode=false;showResultsList();document.getElementById('searchBtn').focus();}
-function showResultsList(){searchDetail.hidden=true;searchResults.hidden=false;}
+function showResultsList(){searchDetail.hidden=true;searchResults.hidden=false;sChips.hidden=false;}
 function backToResults(){  /* from detail view — keep keyboard focus somewhere useful */
   showResultsList();
   const first=searchResults.querySelector('.s-row');
@@ -914,13 +952,16 @@ function backToResults(){  /* from detail view — keep keyboard focus somewhere
 
 function renderResults(q){
   const t=q.trim().toLowerCase();
+  const active=FILTERS.filter(f=>activeChips.has(f.key));
   const hits=PLANTS.map((p,i)=>({p,i}))
-    .filter(({p})=>!t||[p.common,p.latin,p.cvs,p.uses,p.visual].join(' ').toLowerCase().includes(t));
+    .filter(({p})=>!t||[p.common,p.latin,p.cvs,p.uses,p.visual,p.soil,p.resilience,p.water,p.aspect,p.hardiness].join(' ').toLowerCase().includes(t))
+    .filter(({p})=>active.every(f=>f.test(p)));
   if(!hits.length){
-    searchResults.innerHTML='<div class="s-none">No plants match that name.</div>';
+    searchResults.innerHTML=`<div class="s-none">${active.length?'No plants match those filters.':'No plants match that name.'}</div>`;
     return;
   }
-  searchResults.innerHTML=hits.map(({p,i})=>
+  const count=active.length||t?`<div class="s-count">${hits.length} of ${PLANTS.length} plants</div>`:'';
+  searchResults.innerHTML=count+hits.map(({p,i})=>
     `<button class="s-row" data-i="${i}">
        <span class="s-names"><b>${p.common}</b><em>${p.latin}</em></span>
        <span class="h">${p.hardiness}</span>
@@ -964,6 +1005,7 @@ function showPlant(i){
       <div class="g"><div class="l">Uses</div><div class="n">${p.uses}</div></div>
     </div>`;
   searchResults.hidden=true;
+  sChips.hidden=true;
   searchDetail.hidden=false;
   const dBack=document.getElementById('dBack');
   dBack.onclick=backToResults;
@@ -995,6 +1037,7 @@ function showCustomer(i){
     </ul>
     <div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`;
   searchResults.hidden=true;
+  sChips.hidden=true;
   searchDetail.hidden=false;
   const back=document.getElementById('dStaff');
   back.onclick=()=>{showPlant(i);};
@@ -1029,6 +1072,26 @@ const qStreakEl=document.getElementById('qStreak'),qBestEl=document.getElementBy
 const QUIZ_KEY='timber-quiz-v1';
 let qStreak=0,qBest=0,qTimer=null;
 try{qBest=Math.max(0,parseInt(localStorage.getItem(QUIZ_KEY),10)||0);}catch(e){}
+
+/* ---- learning loop: plants you get wrong come round more often until you clear them.
+   Misses persist per latin name; a plant that leaves the deck drops out on load. */
+const QUIZ_MISS_KEY='timber-quiz-miss-v1';
+const qReviewEl=document.getElementById('qReview');
+let qMissed={};
+try{
+  const d=JSON.parse(localStorage.getItem(QUIZ_MISS_KEY));
+  if(d&&typeof d==='object'&&!Array.isArray(d)){
+    for(const k in d){
+      if(PLANTS.some(p=>p.latin===k)&&Number.isInteger(d[k])&&d[k]>0)qMissed[k]=Math.min(d[k],5);
+    }
+  }
+}catch(e){}
+function saveMissed(){try{localStorage.setItem(QUIZ_MISS_KEY,JSON.stringify(qMissed));}catch(e){}}
+function pickAnswer(){
+  const pool=[];
+  PLANTS.forEach(p=>{const w=1+2*(qMissed[p.latin]||0);for(let k=0;k<w;k++)pool.push(p);});
+  return pool[Math.floor(Math.random()*pool.length)];
+}
 const QUIZ_CLUES=[
   ['visual','Which plant looks like this:'],
   ['latin','Which plant has the latin name'],
@@ -1042,10 +1105,12 @@ function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random
 function updateQuizStats(){
   qStreakEl.textContent=qStreak;qBestEl.textContent=qBest;
   document.getElementById('quizBestMenu').textContent=qBest?'best '+qBest:'';
+  const n=Object.keys(qMissed).length;
+  qReviewEl.textContent=n?`🔁 ${n} plant${n>1?'s':''} to nail down — they'll come round more often`:'';
 }
 function nextQuestion(){
   clearTimeout(qTimer);
-  const answer=PLANTS[Math.floor(Math.random()*PLANTS.length)];
+  const answer=pickAnswer();
   /* only ask about fields whose value is unique to the answer — no ambiguous questions */
   const clues=QUIZ_CLUES.filter(([f])=>PLANTS.filter(p=>p[f]===answer[f]).length===1);
   const [field,prompt]=clues[Math.floor(Math.random()*clues.length)];
@@ -1063,7 +1128,15 @@ function nextQuestion(){
     if(right){
       qStreak++;
       if(qStreak>qBest){qBest=qStreak;try{localStorage.setItem(QUIZ_KEY,String(qBest));}catch(e){}}
-    }else{btn.classList.add('wrong');qStreak=0;}
+      if(qMissed[answer.latin]){
+        if(--qMissed[answer.latin]<=0)delete qMissed[answer.latin];
+        saveMissed();
+      }
+    }else{
+      btn.classList.add('wrong');qStreak=0;
+      qMissed[answer.latin]=Math.min((qMissed[answer.latin]||0)+1,5);
+      saveMissed();
+    }
     updateQuizStats();
     qTimer=setTimeout(nextQuestion,right?900:1600);
   });

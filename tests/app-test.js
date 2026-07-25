@@ -452,6 +452,118 @@ function topFlipped(page) {
   check('touch: swipe right marks learned', touchSwipe && tc.cards === NPLANTS-1 && tc.done === 1, JSON.stringify(tc));
   await tctx.close();
 
+  /* ---- 17. customer finder: quick filter chips ---- */
+  const fctx = await browser.newContext();
+  const fpage = await fctx.newPage();
+  const ferrs = [];
+  fpage.on('pageerror', e => ferrs.push(String(e)));
+  await fpage.goto(URL); await fpage.waitForTimeout(400);
+  await fpage.click('#searchBtn'); await fpage.waitForTimeout(400);
+  check('finder: chips render', await fpage.locator('#sChips .chip').count() === 8);
+
+  await fpage.evaluate(() => [...document.querySelectorAll('#sChips .chip')].find(b => b.textContent.includes('Very hardy')).click());
+  await fpage.waitForTimeout(150);
+  let fGot = await fpage.evaluate(() => [...document.querySelectorAll('#searchResults .s-row .s-names b')].map(e => e.textContent));
+  let fWant = await fpage.evaluate(() => PLANTS.filter(p => /^H[5-7]/.test(p.hardiness)).map(p => p.common));
+  check('finder: Very hardy chip = exactly the H5+ plants, deck order', fGot.length > 0 && JSON.stringify(fGot) === JSON.stringify(fWant), JSON.stringify({ fGot, fWant }));
+  check('finder: count line shows N of total', (await fpage.locator('#searchResults .s-count').innerText()).startsWith(`${fWant.length} of `));
+
+  await fpage.fill('#searchInput', 'hydrangea'); await fpage.waitForTimeout(150);
+  fGot = await fpage.evaluate(() => [...document.querySelectorAll('#searchResults .s-row .s-names b')].map(e => e.textContent));
+  fWant = await fpage.evaluate(() => PLANTS.filter(p =>
+    /^H[5-7]/.test(p.hardiness) &&
+    [p.common, p.latin, p.cvs, p.uses, p.visual, p.soil, p.resilience, p.water, p.aspect, p.hardiness].join(' ').toLowerCase().includes('hydrangea')
+  ).map(p => p.common));
+  check('finder: chip ANDs with typed text', fGot.length > 0 && JSON.stringify(fGot) === JSON.stringify(fWant), JSON.stringify({ fGot, fWant }));
+
+  await fpage.fill('#searchInput', ''); await fpage.waitForTimeout(150);
+  await fpage.evaluate(() => [...document.querySelectorAll('#sChips .chip')].find(b => b.textContent.includes('Very hardy')).click());
+  await fpage.waitForTimeout(150);
+  const fAll = await fpage.evaluate(() => ({
+    rows: document.querySelectorAll('#searchResults .s-row').length,
+    on: document.querySelectorAll('#sChips .chip.on').length,
+    count: document.querySelectorAll('#searchResults .s-count').length,
+  }));
+  check('finder: chip toggles off -> full list, no count line', fAll.rows === NPLANTS && fAll.on === 0 && fAll.count === 0, JSON.stringify(fAll));
+
+  await fpage.evaluate(() => document.querySelector('#searchResults .s-row').click());
+  await fpage.waitForTimeout(200);
+  check('finder: chips hidden in detail view', await fpage.evaluate(() => document.getElementById('sChips').hidden === true));
+  await fpage.click('#dBack'); await fpage.waitForTimeout(200);
+  check('finder: chips return with results list', await fpage.evaluate(() => document.getElementById('sChips').hidden === false));
+
+  await fpage.evaluate(() => [...document.querySelectorAll('#sChips .chip')].find(b => b.textContent.includes('Drought')).click());
+  await fpage.waitForTimeout(150);
+  await fpage.keyboard.press('Escape'); await fpage.waitForTimeout(250);
+  await fpage.click('#searchBtn'); await fpage.waitForTimeout(400);
+  const fReset = await fpage.evaluate(() => ({
+    on: document.querySelectorAll('#sChips .chip.on').length,
+    rows: document.querySelectorAll('#searchResults .s-row').length,
+  }));
+  check('finder: reopening search resets chips', fReset.on === 0 && fReset.rows === NPLANTS, JSON.stringify(fReset));
+  check('finder: no page errors', ferrs.length === 0, ferrs.join(' | '));
+  await fctx.close();
+
+  /* ---- 18. quiz learning loop: misses re-queue until cleared ---- */
+  const qctx = await browser.newContext();
+  const qpage = await qctx.newPage();
+  const qerrs = [];
+  qpage.on('pageerror', e => qerrs.push(String(e)));
+  await qpage.goto(URL); await qpage.waitForTimeout(400);
+  await qpage.click('#menuBtn'); await qpage.waitForTimeout(300);
+  await qpage.click('#quizRow'); await qpage.waitForTimeout(400);
+
+  const QUIZ_FIELDS = ['visual', 'latin', 'cvs', 'peak', 'uses', 'prune', 'source'];
+  /* the question is `prompt “value”` and clue values are unique, so the answer is derivable */
+  const readAnswerIdx = () => qpage.evaluate(fields => {
+    const em = document.querySelector('#qQuestion em');
+    if (!em) return -1;
+    const v = em.textContent.slice(1, -1);   // strip the outer “ ”
+    return PLANTS.findIndex(p => fields.some(f => String(p[f]) === v));
+  }, QUIZ_FIELDS);
+
+  let ansIdx = await readAnswerIdx();
+  check('quiz loop: answer derivable from question', ansIdx >= 0);
+  const missedLatin = await qpage.evaluate(i => PLANTS[i].latin, ansIdx);
+  await qpage.evaluate(i => {
+    [...document.querySelectorAll('.q-opt')].find(b => +b.dataset.i !== i).click();
+  }, ansIdx);
+  await qpage.waitForTimeout(150);
+  let missStore = await qpage.evaluate(() => JSON.parse(localStorage.getItem('timber-quiz-miss-v1') || '{}'));
+  check('quiz loop: wrong answer records a miss', missStore[missedLatin] === 1, JSON.stringify(missStore));
+  check('quiz loop: review line appears', (await qpage.locator('#qReview').innerText()).includes('1 plant'));
+
+  await qpage.reload(); await qpage.waitForTimeout(400);
+  const qLoaded = await qpage.evaluate(() => qMissed);
+  check('quiz loop: misses survive reload', qLoaded[missedLatin] === 1, JSON.stringify(qLoaded));
+
+  await qpage.click('#menuBtn'); await qpage.waitForTimeout(300);
+  await qpage.click('#quizRow'); await qpage.waitForTimeout(400);
+  /* one atomic evaluate per attempt — the quiz auto-advances 900ms after a correct
+     answer, so deriving the answer and clicking must not straddle that boundary */
+  const clickCorrect = () => qpage.evaluate(fields => {
+    const em = document.querySelector('#qQuestion em');
+    if (!em) return null;
+    const v = em.textContent.slice(1, -1);
+    const idx = PLANTS.findIndex(p => fields.some(f => String(p[f]) === v));
+    if (idx < 0) return null;
+    const btn = [...document.querySelectorAll('.q-opt')].find(b => +b.dataset.i === idx && !b.disabled);
+    if (!btn) return null;
+    btn.click();
+    return PLANTS[idx].latin;
+  }, QUIZ_FIELDS);
+  let cleared = false;
+  for (let t = 0; t < 60 && !cleared; t++) {
+    if ((await clickCorrect()) === missedLatin) { cleared = true; break; }
+    await qpage.waitForTimeout(1050);   // right answers auto-advance after 900ms
+  }
+  await qpage.waitForTimeout(150);
+  missStore = await qpage.evaluate(() => JSON.parse(localStorage.getItem('timber-quiz-miss-v1') || '{}'));
+  check('quiz loop: correct answer clears the miss', cleared && !(missedLatin in missStore), JSON.stringify({ cleared, missStore }));
+  check('quiz loop: review line clears', (await qpage.locator('#qReview').innerText()) === '');
+  check('quiz loop: no page errors', qerrs.length === 0, qerrs.join(' | '));
+  await qctx.close();
+
   /* ---- 16. no JS errors anywhere ---- */
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 

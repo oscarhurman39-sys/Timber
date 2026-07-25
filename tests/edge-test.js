@@ -109,6 +109,25 @@ function check(name, cond, extra) {
   check('undone card returns unflipped with correct counts', flipped === false && c.left === '12' && c.done === '0', JSON.stringify({ flipped, c }));
   await ctx.close();
 
+  /* ---- 7. corrupt quiz-miss store: quiz still opens clean ---- */
+  ctx = await browser.newContext();
+  page = await ctx.newPage();
+  const errs7 = [];
+  page.on('pageerror', e => errs7.push(String(e)));
+  await page.addInitScript(() => {
+    localStorage.setItem('timber-quiz-miss-v1', '["not","an","object"]');
+  });
+  await page.goto(URL); await page.waitForTimeout(300);
+  await page.click('#menuBtn'); await page.waitForTimeout(250);
+  await page.click('#quizRow'); await page.waitForTimeout(400);
+  const rv = await page.evaluate(() => ({
+    open: document.getElementById('quiz').classList.contains('open'),
+    review: document.getElementById('qReview').textContent,
+    missed: Object.keys(qMissed).length,
+  }));
+  check('corrupt miss store -> quiz opens clean, no crash', rv.open && rv.review === '' && rv.missed === 0 && errs7.length === 0, JSON.stringify({ rv, errs7 }));
+  await ctx.close();
+
   console.log(`\n${passed} passed, ${failed} failed`);
   if (fails.length) fails.forEach(f => console.log(' FAIL:', f));
   await browser.close();
