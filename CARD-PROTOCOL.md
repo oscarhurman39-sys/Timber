@@ -107,10 +107,19 @@ Focal point recorded here when off-centre:
 | Euonymus japonicus 'Aureomarginatus' | euonymus-japonicus-aureomarginatus.jpg (composited) / -cutout.png | 30% 28% — [special] cutout, hero-on-self (hue 50). NOTE filename is the LATIN-slug (aureomarginatus), NOT the JSON id (elegantissimus-aureus) — staged under the id first and shipped blank; caught, now an audit rule |
 | Monarda didyma 'Bubblegum Blast' | monarda-didyma-bubblegum-blast.jpg | flower, 78% 18% — real garden shot; hot-pink whorl top-right, leaves show minor mildew spotting (true to the species) |
 | Carpinus betulus | carpinus-betulus.jpg | leaf, 55% 40% — pleated corrugated doubly-serrate leaves, textbook hornbeam; species positively confirmed from foliage |
+| Elaeagnus ×submacrophylla | elaeagnus-submacrophylla.jpg | leaf, 45% 48% — silver-scaled leaf undersides (the ID feature) sharp in centre; species confirmed |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.20 (Ebbinge's Silverberry)**: from nested JSON + Oscar's photo (silver
+  scurf = confirmed ×ebbingei). Naming: card uses the current RHS name
+  ×submacrophylla, the familiar ×ebbingei kept in cvs alongside the variegated
+  forms (Gilt Edge / Limelight). growth 0.76→15.2 rounded to 15 (fast). Autumn
+  bloomer (Oct–Nov, tiny fragrant flowers). Soil warning split again: wet+chalk
+  kept (real soil constraints), hedge trim → prune. Wind/coastal tolerance +
+  nitrogen fixing added to resilience (well-established Elaeagnus traits). Gate
+  green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.19 (Common Hornbeam — the deck's biggest plant)**: from nested JSON +
   Oscar's leaf photo (pleated corrugated leaves = textbook Carpinus). H7 (joint-
   hardiest with Ajuga/Potentilla), and by far the **largest — 15–25 m**. The

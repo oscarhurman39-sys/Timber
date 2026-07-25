@@ -751,6 +751,18 @@ const PLANTS = [
    hardiness:"H7", resilience:"",
    uses:"", size:"15–25 m H × 8–15 m W",
    seasonalImpact:"", growthSpeed:13, pestRisk:8, thirst:10, careLevel:10, sunNeed:68, sunMin:38},
+  {common:"Ebbinge's Silverberry", latin:"Elaeagnus ×submacrophylla", hue:120,
+   visual:"Leathery silver-scaled evergreen leaves; tiny fragrant cream flowers in autumn",
+   water:"",
+   aspect:"Any aspect",
+   soil:"Well-drained; Avoid waterlogging and shallow chalk (causes yellowing)",
+   prune:"Trim hedges after flowering",
+   source:"", peak:"Oct-Nov", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. ×ebbingei · 'Gilt Edge', 'Limelight' — variegated",
+   hardiness:"H5", resilience:"Wind and coastal tolerant; fixes nitrogen",
+   uses:"", size:"2.5–4 m H × 2.5–4 m W",
+   seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:8, careLevel:6, sunNeed:68, sunMin:28},
 ];
 /* PLANTS:END */
 
@@ -845,7 +857,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
