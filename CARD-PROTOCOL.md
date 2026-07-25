@@ -109,10 +109,22 @@ Focal point recorded here when off-centre:
 | Carpinus betulus | carpinus-betulus.jpg | leaf, 55% 40% — pleated corrugated doubly-serrate leaves, textbook hornbeam; species positively confirmed from foliage |
 | Elaeagnus ×submacrophylla | elaeagnus-submacrophylla.jpg | leaf, 45% 48% — silver-scaled leaf undersides (the ID feature) sharp in centre; species confirmed |
 | Gunnera manicata | gunnera-manicata.jpg (composited) / -cutout.png | 50% 35% — [special] cutout hero-on-self (hue 120). ⚠ UK-RESTRICTED plant — see compliance note in changelog v12.21 |
+| Acer rubrum 'October Glory' | acer-rubrum-october-glory.jpg | leaf, 50% 62% — red petioles (the A. rubrum ID feature) on summer-green leaves; species confirmed |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.22 (October Glory Red Maple — a bloom-months judgment call)**: from
+  nested JSON + Oscar's photo (red petioles confirm A. rubrum). **Changed the
+  bloom months**: the JSON gave [3,4] (the small spring flowers), but the tree's
+  entire selling point is October scarlet and §4b says highlight the main
+  DISPLAY not the flowers — so peak = Oct-Nov. Flagged for Oscar to veto. Data:
+  thirst 14 (needs moisture for best colour), pestRisk 10, growth 0.58→12, H6,
+  sunNeed 84. Soil warning split (alkaline/wet kept; dryness → Thirst; coastal
+  wind kept, space implied by 15–18 m size). Second soil-VALUE overflow in three
+  cards ("Moist, acidic to neutral, well-drained", 38 chars) — trimmed to
+  "acid–neutral" and tightened the checker soil threshold 38→36. Gate green
+  after fix: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.21 (Gunnera — FIRST COMPLIANCE/LEGAL CARD, needs a design decision)**:
   the JSON carried a new **`compliance` block**: Gunnera manicata is UK-
   restricted (invasive-species law) and most plants sold as manicata are the
