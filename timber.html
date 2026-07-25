@@ -655,6 +655,30 @@ const PLANTS = [
    hardiness:"H5", resilience:"",
    uses:"", size:"1–1.2 m H × 0.5–1 m W",
    seasonalImpact:"", growthSpeed:12, pestRisk:4, thirst:6, careLevel:8, sunNeed:94, sunMin:72},
+  {common:"Japanese Mahonia", latin:"Mahonia japonica", hue:55,
+   visual:"Fragrant pale-yellow winter sprays over bold spiny evergreen leaves",
+   water:"",
+   aspect:"Any aspect",
+   soil:"Humus-rich, moist but well-drained; Avoid dry or waterlogged ground; shelter from cold winds",
+   prune:"",
+   source:"", peak:"Nov-Mar", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Berberis japonica",
+   hardiness:"H5", resilience:"Do not eat the berries",
+   uses:"", size:"1.5–2 m H × 1.5–2.5 m W",
+   seasonalImpact:"", growthSpeed:8, pestRisk:4, thirst:10, careLevel:6, sunNeed:28, sunMin:0},
+  {common:"Golden Lanterns Himalayan Honeysuckle", latin:"Leycesteria formosa 'Golden Lanterns'", hue:60,
+   visual:"Glowing golden leaves, wine-red lantern bracts, white bells Jun–Sept",
+   water:"",
+   aspect:"Any aspect",
+   soil:"Moist but well-drained, fertile; Avoid heavy, waterlogged soil and strong winds",
+   prune:"",
+   source:"", peak:"Jun-Sep", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Notbruce' (registered) · sold as GOLDEN LANTERNS",
+   hardiness:"H4", resilience:"Berries ornamental — do not eat",
+   uses:"", size:"1.5–2 m H × 1.5–2 m W",
+   seasonalImpact:"", growthSpeed:14, pestRisk:2, thirst:10, careLevel:6, sunNeed:78, sunMin:42},
 ];
 /* PLANTS:END */
 
@@ -749,7 +773,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;

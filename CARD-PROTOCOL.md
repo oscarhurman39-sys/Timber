@@ -100,9 +100,25 @@ Focal point recorded here when off-centre:
 | Cercis chinensis 'Avondale' | cercis-chinensis-avondale.jpg | leaf, 45% 30% — glossy cordate Cercis foliage; no flowers in shot (Apr–May bloomer, shot in July); cultivar unverifiable from leaves, re-shoot at bloom if wanted |
 | Prunus lusitanica 'Angustifolia' | prunus-lusitanica-angustifolia.jpg | leaf, 50% 35% — narrow glossy leaves + red stems (species-confirming feature); no racemes in shot (June bloomer, July shot) |
 | Salvia 'Blue Spire' | salvia-blue-spire.jpg | 55% 35% — dissected grey-green leaves, felted stems, violet-blue buds breaking; species-confirming, best-verified photo of the batch |
+| Mahonia japonica | (no photo — awaiting Oscar's shot) | the photo first sent with this JSON was a Leycesteria (caught pre-stage); card uses the gradient fallback |
+| Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.13 (Japanese Mahonia + Golden Lanterns Leycesteria — first wrong-photo
+  catch)**: the photo sent with the Mahonia JSON showed soft wavy golden
+  red-rimmed leaves and claret hanging bracts — not a mahonia. Flagged
+  instead of staged (QA rule: photo must be the plant); Oscar confirmed it
+  was Leycesteria 'Golden Lanterns' and supplied its JSON. Mahonia shipped
+  photo-less on the gradient fallback (first live fallback card) — photo
+  pending. Mahonia: H5, sunNeed 28 (most shade-loving card), **sunMin 0**
+  (leader at the bar start, flip rule exercised), Nov–Mar calendar wraps
+  year-end, berry toxicity moved from soil warning to resilience.
+  Leycesteria: H4, growth 0.68→13.6 rounded to 14, pests 0.5/5→2, trade
+  name on card + 'Notbruce' (registered) in cvs, same berry-warning
+  treatment. Both JSONs' soil warnings carried non-soil content (toxicity)
+  — recurring pattern in the nested-JSON prompt worth fixing at source.
+  Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.12 (Blue Spire Russian Sage)**: from nested JSON + Oscar's photo
   (dissected grey foliage + felted stems + breaking violet buds — species
   confirmed, flowers in shot). Conversions per v12.2 (growth 0.58→11.6
