@@ -643,6 +643,18 @@ const PLANTS = [
    hardiness:"H5", resilience:"",
    uses:"", size:"4–8 m H × 4–8 m W",
    seasonalImpact:"", growthSpeed:12, pestRisk:10, thirst:10, careLevel:8, sunNeed:66, sunMin:30},
+  {common:"Blue Spire Russian Sage", latin:"Salvia 'Blue Spire'", hue:250,
+   visual:"Airy violet-blue spires over aromatic silver-grey foliage, Aug–October",
+   water:"",
+   aspect:"East / South / West",
+   soil:"Dry, poor, well-drained; Avoid heavy or waterlogged winter soil",
+   prune:"Cut stems back hard in early spring",
+   source:"", peak:"Aug-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Perovskia 'Blue Spire'",
+   hardiness:"H5", resilience:"",
+   uses:"", size:"1–1.2 m H × 0.5–1 m W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:4, thirst:6, careLevel:8, sunNeed:94, sunMin:72},
 ];
 /* PLANTS:END */
 
@@ -737,7 +749,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;

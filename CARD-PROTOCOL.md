@@ -99,9 +99,20 @@ Focal point recorded here when off-centre:
 | Potentilla 'Pink Beauty' | potentilla-fruticosa-pink-beauty.jpg | flower, 25% 32% — [flag] blooms in photo are near-white with a faint blush, not deep pink; consistent with the cultivar's documented heat fade (and it was shot in a July heat spell) but unverifiable; orange potentilla visible in background (mixed bench) |
 | Cercis chinensis 'Avondale' | cercis-chinensis-avondale.jpg | leaf, 45% 30% — glossy cordate Cercis foliage; no flowers in shot (Apr–May bloomer, shot in July); cultivar unverifiable from leaves, re-shoot at bloom if wanted |
 | Prunus lusitanica 'Angustifolia' | prunus-lusitanica-angustifolia.jpg | leaf, 50% 35% — narrow glossy leaves + red stems (species-confirming feature); no racemes in shot (June bloomer, July shot) |
+| Salvia 'Blue Spire' | salvia-blue-spire.jpg | 55% 35% — dissected grey-green leaves, felted stems, violet-blue buds breaking; species-confirming, best-verified photo of the batch |
 
 ## 5. Decision changelog
 
+- **v12.12 (Blue Spire Russian Sage)**: from nested JSON + Oscar's photo
+  (dissected grey foliage + felted stems + breaking violet buds — species
+  confirmed, flowers in shot). Conversions per v12.2 (growth 0.58→11.6
+  rounded to 12; pestRisk 4, thirst 6, careLevel 8, sunNeed 94 — highest
+  sun marker in the deck, sunMin 72). Field correction: the JSON's soil
+  warning carried a pruning instruction ("Cut stems back hard in early
+  spring") — moved to `prune` per CARD-STATS §4e/§6 rules (warning must be
+  a soil constraint), first live use of the prune field from the nested
+  pipeline. Latin uses the current RHS name Salvia 'Blue Spire'; Perovskia
+  synonym in cvs. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.11 (Portuguese Laurel 'Angustifolia')**: from nested JSON + Oscar's
   photo (red stems confirm the species). Naming call: card carries the selling
   name 'Angustifolia' (matches the JSON's own id/slug); the JSON's
