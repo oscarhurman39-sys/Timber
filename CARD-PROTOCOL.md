@@ -96,6 +96,12 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.4b (leader-tick remnant erased)**: verifying the sun fix across all seven
+  bands side-by-side made the last accepted blemish untenable — the baked
+  wiggle-leader's tip peeked between the pointer-cover patch and the bar as a
+  1–2px tick at ~85% on every card. Clone-stamped out of `art/band-full.png`
+  (bar columns copied from 11px left). All seven bands now carry only their own
+  data-driven marks. Suites green.
 - **v12.4 (sun repositioned to the sun end + one-command pipeline)**: Oscar: the
   band's sun icon sat washed-out at the wrong place — it should be tiny and
   directly parallel at the *sun end* of the shade→sun bar, adjacent to it, or gone.
