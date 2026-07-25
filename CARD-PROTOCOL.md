@@ -108,10 +108,31 @@ Focal point recorded here when off-centre:
 | Monarda didyma 'Bubblegum Blast' | monarda-didyma-bubblegum-blast.jpg | flower, 78% 18% — real garden shot; hot-pink whorl top-right, leaves show minor mildew spotting (true to the species) |
 | Carpinus betulus | carpinus-betulus.jpg | leaf, 55% 40% — pleated corrugated doubly-serrate leaves, textbook hornbeam; species positively confirmed from foliage |
 | Elaeagnus ×submacrophylla | elaeagnus-submacrophylla.jpg | leaf, 45% 48% — silver-scaled leaf undersides (the ID feature) sharp in centre; species confirmed |
+| Gunnera manicata | gunnera-manicata.jpg (composited) / -cutout.png | 50% 35% — [special] cutout hero-on-self (hue 120). ⚠ UK-RESTRICTED plant — see compliance note in changelog v12.21 |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.21 (Gunnera — FIRST COMPLIANCE/LEGAL CARD, needs a design decision)**:
+  the JSON carried a new **`compliance` block**: Gunnera manicata is UK-
+  restricted (invasive-species law) and most plants sold as manicata are the
+  banned hybrid G. ×cryptica — do not sell/propagate/plant without verified ID.
+  **No card field renders compliance.** Interim handling: headline surfaced in
+  `resilience` + `type` ("⚠ UK RESTRICTED — verify ID before any sale") and the
+  full warning in `returnRisk`, so it renders on the **trade back** (verified in
+  screenshot); the full block is preserved in the plant JSON. **The FRONT card
+  shows no legal warning** — for a customer-facing "learn plants" deck that's a
+  real gap. OPEN DECISION for Oscar: (a) add a front compliance ribbon/banner
+  (design change — a red corner flag when a plant has compliance data), (b)
+  keep it back-only as now, or (c) hold restricted plants out of the public
+  deck entirely. Recommend (a) — the card's value here is precisely as a "DO
+  NOT SELL" staff reference. Ratings: **thirst 20 — first max-thirst card**
+  (bog/waterside), care 16, growth 0.82→16. `[Unverified]` current exact legal
+  status — the JSON asserts it and it matches known GB invasive-species listings
+  c.2023–24; defer to official RHS/DEFRA guidance for the live position. This is
+  also the first plant carrying a compliance field at all — CARD-STATS should
+  gain a compliance section if more arrive. Gate green: 94/94, 8/8, SW,
+  verifier, audit clean.
 - **v12.20 (Ebbinge's Silverberry)**: from nested JSON + Oscar's photo (silver
   scurf = confirmed ×ebbingei). Naming: card uses the current RHS name
   ×submacrophylla, the familiar ×ebbingei kept in cvs alongside the variegated

@@ -763,6 +763,19 @@ const PLANTS = [
    hardiness:"H5", resilience:"Wind and coastal tolerant; fixes nitrogen",
    uses:"", size:"2.5–4 m H × 2.5–4 m W",
    seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:8, careLevel:6, sunNeed:68, sunMin:28},
+  {common:"Brazilian Giant Rhubarb", latin:"Gunnera manicata", hue:120,
+   visual:"Huge umbrella leaves on thick prickly stalks; conical flower spikes in summer",
+   water:"",
+   aspect:"Any aspect",
+   soil:"Deep, humus-rich, permanently moist; Never dry out; shelter from wind; frost-protect crown",
+   prune:"",
+   source:"", peak:"Jun-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"⚠ UK RESTRICTED — verify ID before any sale",
+   shrink:"", returnRisk:"Most plants sold as manicata are the banned Gunnera ×cryptica — do not sell, propagate or plant without authoritatively verified ID; do not compost unidentified material", pots:"",
+   cvs:"syn. G. brasiliensis",
+   hardiness:"H4", resilience:"⚠ UK RESTRICTED — most 'manicata' are the banned Gunnera ×cryptica; verify ID",
+   uses:"", size:"2.5–3 m H × 3–4.5 m W",
+   seasonalImpact:"", growthSpeed:16, pestRisk:6, thirst:20, careLevel:16, sunNeed:58, sunMin:28},
 ];
 /* PLANTS:END */
 
@@ -857,7 +870,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
