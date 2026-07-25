@@ -103,10 +103,19 @@ Focal point recorded here when off-centre:
 | Mahonia japonica | mahonia-japonica.jpg | bronze young shoot, 25% 50% — spiny pinnate leaflets confirm mahonia; sharp zone is the bronze new growth, mature green foliage soft-focus; replaced the mis-sent Leycesteria shot |
 | Buddleja 'Pugster Orchid' | buddleja-pugster-orchid.jpg (composited) / -cutout.png | 62% 30% — [special] Oscar sent a transparent-background CUTOUT, not a garden photo. Composited onto the card's own hue-315 fallback gradient (composite-cutout.js) so it reads as a specimen plate; raw cutout kept as -cutout.png for re-compositing |
 | Salix 'Hakuro-nishiki' | salix-integra-hakuro-nishiki.jpg (composited) / -cutout.png | 50% 28% — [special] cutout composited over a darkened+blurred copy of ITSELF (hero-on-self, composite-hero.js, hue 130) per Oscar's "darken the background, slap the boy on top in full colour"; melts into the card's dark frame with no seam; raw cutout kept |
+| Plumbago auriculata | plumbago-auriculata.jpg (composited) / -cutout.png | 50% 30% — [special] cutout, hero-on-self composite (hue 215, dark navy backdrop); blue flowers pop; raw cutout kept |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.16 (Cape Leadwort — H2 tender, hero-on-self cutout)**: third cutout,
+  hero-on-self composite in blue (hue 215). Data: **H2 — most tender card in
+  the deck** (crest correctly shows it; needs frost-free overwintering),
+  careLevel 14 (highest so far — tender lifting + pruning), sunNeed 94 (joint
+  with Buddleja/Salvia), growth 0.68→13.6 rounded to 14. The JSON's soil
+  warning bundled three things — frost-tenderness (kept as the soil/siting
+  warning), sap irritation + toxicity (moved to resilience). syn. capensis in
+  cvs. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.15 (Flamingo Willow — hero-on-self cutout treatment)**: second cutout
   input. Oscar's brief: "the background is too over the top, maybe darken it,
   then slap this back boy on top in full colour." Built `composite-hero.js`:
