@@ -102,10 +102,24 @@ Focal point recorded here when off-centre:
 | Salvia 'Blue Spire' | salvia-blue-spire.jpg | 55% 35% — dissected grey-green leaves, felted stems, violet-blue buds breaking; species-confirming, best-verified photo of the batch |
 | Mahonia japonica | mahonia-japonica.jpg | bronze young shoot, 25% 50% — spiny pinnate leaflets confirm mahonia; sharp zone is the bronze new growth, mature green foliage soft-focus; replaced the mis-sent Leycesteria shot |
 | Buddleja 'Pugster Orchid' | buddleja-pugster-orchid.jpg (composited) / -cutout.png | 62% 30% — [special] Oscar sent a transparent-background CUTOUT, not a garden photo. Composited onto the card's own hue-315 fallback gradient (composite-cutout.js) so it reads as a specimen plate; raw cutout kept as -cutout.png for re-compositing |
+| Salix 'Hakuro-nishiki' | salix-integra-hakuro-nishiki.jpg (composited) / -cutout.png | 50% 28% — [special] cutout composited over a darkened+blurred copy of ITSELF (hero-on-self, composite-hero.js, hue 130) per Oscar's "darken the background, slap the boy on top in full colour"; melts into the card's dark frame with no seam; raw cutout kept |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.15 (Flamingo Willow — hero-on-self cutout treatment)**: second cutout
+  input. Oscar's brief: "the background is too over the top, maybe darken it,
+  then slap this back boy on top in full colour." Built `composite-hero.js`:
+  a darkened + blurred + enlarged copy of the cutout as an ambient backdrop
+  over a dark hue-130 base, then the sharp full-colour cutout on top. Result
+  melts into the card's dark frame with no cutout seam — now the preferred
+  treatment for busy-background cutouts (flat-gradient composite still fine
+  for clean specimens like the Buddleja). Data: growth 0.8→16 (exact, joint-
+  fastest with Ajuga), thirst 16 + pestRisk 12 (willows are thirsty and
+  mite/rust prone — highest-maintenance card so far), H5, "Bloom" cell marks
+  the pink-FOLIAGE season Mar–Apr not flowers (§4b). Pruning instruction in
+  the soil warning again (5th) — moved to prune. Gate green: 94/94, 8/8, SW,
+  verifier, audit clean.
 - **v12.14 (Pugster Orchid Buddleja + Mahonia photo staged)**: Mahonia's real
   photo arrived (spiny pinnate leaflets, bronze new shoot) — swapped off the
   gradient fallback. Buddleja is the first **cutout** input: a transparent-

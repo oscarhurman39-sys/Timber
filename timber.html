@@ -691,6 +691,18 @@ const PLANTS = [
    hardiness:"H6", resilience:"Nectar-rich — draws butterflies and bees",
    uses:"", size:"60–80 cm H × 60–80 cm W",
    seasonalImpact:"", growthSpeed:11, pestRisk:10, thirst:8, careLevel:8, sunNeed:88, sunMin:58},
+  {common:"Flamingo Willow", latin:"Salix integra 'Hakuro-nishiki'", hue:130,
+   visual:"Pink, cream and green variegated foliage on arching stems; brightest in spring",
+   water:"",
+   aspect:"Any aspect",
+   soil:"Moist, fertile, well-drained; Do not let the soil dry out",
+   prune:"Prune in late winter or early spring for vivid pink new growth",
+   source:"", peak:"Mar-Apr", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. 'Albomaculata' · 'Nishiki Flamingo'",
+   hardiness:"H5", resilience:"",
+   uses:"", size:"1.5–2.5 m H × 1.5–2.5 m W",
+   seasonalImpact:"", growthSpeed:16, pestRisk:12, thirst:16, careLevel:10, sunNeed:82, sunMin:48},
 ];
 /* PLANTS:END */
 
@@ -785,7 +797,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
