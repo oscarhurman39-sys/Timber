@@ -101,10 +101,23 @@ Focal point recorded here when off-centre:
 | Prunus lusitanica 'Angustifolia' | prunus-lusitanica-angustifolia.jpg | leaf, 50% 35% — narrow glossy leaves + red stems (species-confirming feature); no racemes in shot (June bloomer, July shot) |
 | Salvia 'Blue Spire' | salvia-blue-spire.jpg | 55% 35% — dissected grey-green leaves, felted stems, violet-blue buds breaking; species-confirming, best-verified photo of the batch |
 | Mahonia japonica | mahonia-japonica.jpg | bronze young shoot, 25% 50% — spiny pinnate leaflets confirm mahonia; sharp zone is the bronze new growth, mature green foliage soft-focus; replaced the mis-sent Leycesteria shot |
+| Buddleja 'Pugster Orchid' | buddleja-pugster-orchid.jpg (composited) / -cutout.png | 62% 30% — [special] Oscar sent a transparent-background CUTOUT, not a garden photo. Composited onto the card's own hue-315 fallback gradient (composite-cutout.js) so it reads as a specimen plate; raw cutout kept as -cutout.png for re-compositing |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.14 (Pugster Orchid Buddleja + Mahonia photo staged)**: Mahonia's real
+  photo arrived (spiny pinnate leaflets, bronze new shoot) — swapped off the
+  gradient fallback. Buddleja is the first **cutout** input: a transparent-
+  background specimen PNG, not a garden photo. Rather than flatten to black,
+  composited onto the card's own hue-315 fallback gradient (design uses the
+  same formula) so it reads as an intentional botanical plate; raw cutout
+  kept as -cutout.png. Data: growth 0.55→11 (exact), pestRisk 10 (Buddleja
+  earns it — spider mite prone), sunNeed 88, H6, Jun–Oct. Pruning instruction
+  again lived in the JSON's soil warning ("Cut back to 20–25 cm") — moved to
+  prune (4th time this batch; source-prompt fix still pending). Butterfly/bee
+  nectar note added to resilience. Gate green: 94/94, 8/8, SW, verifier,
+  audit clean.
 - **v12.13 (Japanese Mahonia + Golden Lanterns Leycesteria — first wrong-photo
   catch)**: the photo sent with the Mahonia JSON showed soft wavy golden
   red-rimmed leaves and claret hanging bracts — not a mahonia. Flagged

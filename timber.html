@@ -679,6 +679,18 @@ const PLANTS = [
    hardiness:"H4", resilience:"Berries ornamental — do not eat",
    uses:"", size:"1.5–2 m H × 1.5–2 m W",
    seasonalImpact:"", growthSpeed:14, pestRisk:2, thirst:10, careLevel:6, sunNeed:78, sunMin:42},
+  {common:"Pugster Orchid Butterfly Bush", latin:"Buddleja 'Pugster Orchid'", hue:315,
+   visual:"Large fragrant lavender-pink panicles on a compact dwarf bush, Jun–Oct",
+   water:"",
+   aspect:"East / South / West",
+   soil:"Moist but well-drained; Avoid waterlogging",
+   prune:"Cut back to 20–25 cm in early spring",
+   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'SMNBDO' (registered) · Pugster series",
+   hardiness:"H6", resilience:"Nectar-rich — draws butterflies and bees",
+   uses:"", size:"60–80 cm H × 60–80 cm W",
+   seasonalImpact:"", growthSpeed:11, pestRisk:10, thirst:8, careLevel:8, sunNeed:88, sunMin:58},
 ];
 /* PLANTS:END */
 
@@ -773,7 +785,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
