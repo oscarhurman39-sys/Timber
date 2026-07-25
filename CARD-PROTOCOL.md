@@ -100,7 +100,7 @@ Focal point recorded here when off-centre:
 | Cercis chinensis 'Avondale' | cercis-chinensis-avondale.jpg | leaf, 45% 30% — glossy cordate Cercis foliage; no flowers in shot (Apr–May bloomer, shot in July); cultivar unverifiable from leaves, re-shoot at bloom if wanted |
 | Prunus lusitanica 'Angustifolia' | prunus-lusitanica-angustifolia.jpg | leaf, 50% 35% — narrow glossy leaves + red stems (species-confirming feature); no racemes in shot (June bloomer, July shot) |
 | Salvia 'Blue Spire' | salvia-blue-spire.jpg | 55% 35% — dissected grey-green leaves, felted stems, violet-blue buds breaking; species-confirming, best-verified photo of the batch |
-| Mahonia japonica | (no photo — awaiting Oscar's shot) | the photo first sent with this JSON was a Leycesteria (caught pre-stage); card uses the gradient fallback |
+| Mahonia japonica | mahonia-japonica.jpg | bronze young shoot, 25% 50% — spiny pinnate leaflets confirm mahonia; sharp zone is the bronze new growth, mature green foliage soft-focus; replaced the mis-sent Leycesteria shot |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog

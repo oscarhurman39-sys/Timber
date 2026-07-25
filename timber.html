@@ -773,7 +773,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
