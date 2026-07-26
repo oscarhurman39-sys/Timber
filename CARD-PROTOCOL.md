@@ -114,10 +114,18 @@ Focal point recorded here when off-centre:
 | Griselinia littoralis | griselinia-littoralis.jpg (composited) / -cutout.png | 55% 22% — [special] cutout hero-on-self (hue 95, apple-green); glossy oval leaves |
 | Indigofera himalayensis 'Silk Road' | indigofera-himalayensis-silk-road.jpg | 55% 15% — real photo; pinnate leaves + lilac-pink pea spikes against a moody sky, focus high to skip the blurred foreground |
 | Phalaenopsis Hybrid Group | phalaenopsis-hybrid-group.jpg (composited) / -cutout.png | 40% 25% — [special] cutout hero-on-self (hue 320 magenta, chosen from the visible bloom colour not the JSON's foliage default) |
+| Viburnum tinus 'Eve Price' | viburnum-tinus-eve-price.jpg (composited) / -cutout.png | 50% 45% — [special] cutout hero-on-self (hue 330); glossy leaves + metallic blue-purple berries in umbels, species-confirming |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.26 (Laurustinus 'Eve Price' — deck reaches 30 plants)**: pre-converted
+  schema + cutout, hero-on-self (hue 330). Winter bloomer (Dec–Apr, useful
+  off-season colour), the metallic blue-purple berries in the photo are
+  species-confirming. pestRisk 9 (viburnum beetle is the real risk — honest).
+  Clean pass, nothing to relocate — the pre-converted JSON format is now
+  reliably the smoothest path. Gate green: 94/94, 8/8, SW, verifier, audit
+  clean. **Deck milestone: 30 plants, every one photographed and audited.**
 - **v12.25 (Cascading Moth Orchid — first houseplant / H1b / full-year bloom)**:
   pre-converted schema + cutout, hero-on-self. Firsts: **H1b hardiness** (heated
   glasshouse — the tenderest crest in the deck, correct for an indoor orchid);
