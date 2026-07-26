@@ -113,10 +113,21 @@ Focal point recorded here when off-centre:
 | Fatsia japonica 'Tsumugi-shibori' | fatsia-japonica-tsumugi-shibori.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 120). Filename uses the true cultivar 'Tsumugi-shibori' NOT the selling name 'Spider's Web' (apostrophe breaks the slug/checker) |
 | Griselinia littoralis | griselinia-littoralis.jpg (composited) / -cutout.png | 55% 22% — [special] cutout hero-on-self (hue 95, apple-green); glossy oval leaves |
 | Indigofera himalayensis 'Silk Road' | indigofera-himalayensis-silk-road.jpg | 55% 15% — real photo; pinnate leaves + lilac-pink pea spikes against a moody sky, focus high to skip the blurred foreground |
+| Phalaenopsis Hybrid Group | phalaenopsis-hybrid-group.jpg (composited) / -cutout.png | 40% 25% — [special] cutout hero-on-self (hue 320 magenta, chosen from the visible bloom colour not the JSON's foliage default) |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.25 (Cascading Moth Orchid — first houseplant / H1b / full-year bloom)**:
+  pre-converted schema + cutout, hero-on-self. Firsts: **H1b hardiness** (heated
+  glasshouse — the tenderest crest in the deck, correct for an indoor orchid);
+  **peak Jan-Dec = all 12 calendar cells lit** (Phalaenopsis flowers year-round
+  indoors, spikes last months). Hue call: the JSON defaulted hue to 120 (foliage)
+  because "flower colour was not supplied" — but the photo shows cream-yellow
+  petals with vivid magenta lips, so I overrode to 320 magenta and the backdrop
+  now matches the bloom (a case where the photo beats the JSON's own stated
+  uncertainty). careLevel 9, sunNeed 45 (bright indirect). Kept the Pulsatio
+  supplier-brand caveat. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.24 (Himalayan Indigo 'Silk Road' — first pre-converted JSON in the
   Timber schema)**: Oscar's JSON arrived already in the exact PLANTS schema
   (0–20 ratings, sunNeed 0–100, prune/water split correctly, foliage/container
