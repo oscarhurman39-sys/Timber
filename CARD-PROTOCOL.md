@@ -115,10 +115,18 @@ Focal point recorded here when off-centre:
 | Indigofera himalayensis 'Silk Road' | indigofera-himalayensis-silk-road.jpg | 55% 15% — real photo; pinnate leaves + lilac-pink pea spikes against a moody sky, focus high to skip the blurred foreground |
 | Phalaenopsis Hybrid Group | phalaenopsis-hybrid-group.jpg (composited) / -cutout.png | 40% 25% — [special] cutout hero-on-self (hue 320 magenta, chosen from the visible bloom colour not the JSON's foliage default) |
 | Viburnum tinus 'Eve Price' | viburnum-tinus-eve-price.jpg (composited) / -cutout.png | 50% 45% — [special] cutout hero-on-self (hue 330); glossy leaves + metallic blue-purple berries in umbels, species-confirming |
+| Paeonia 'Orange Victory' | paeonia-orange-victory.jpg | 50% 45% — real photo; divided foliage + red semi-woody Itoh stems (species-consistent); no blooms in shot |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.27 (Orange Victory Itoh Peony)**: pre-converted schema + real photo.
+  The photo's red semi-woody stems + divided leaflets confirm an Itoh
+  (intersectional) peony — herbaceous peonies die to the ground, Itohs keep
+  woody-based stems. growth 5 (peonies are famously slow to establish, honest),
+  sunNeed 88. Kept the plant's own caveats (no cultivar-specific RHS/APS
+  profile, hardiness inferred from comparable Itohs). Clean pass. Gate green:
+  94/94, 8/8, SW, verifier, audit clean.
 - **v12.26 (Laurustinus 'Eve Price' — deck reaches 30 plants)**: pre-converted
   schema + cutout, hero-on-self (hue 330). Winter bloomer (Dec–Apr, useful
   off-season colour), the metallic blue-purple berries in the photo are

@@ -848,6 +848,18 @@ const PLANTS = [
    hardiness:"H4", resilience:"coastal · urban tolerant",
    uses:"hedging · screening · wildlife", size:"1.5–2.5 m H × 1.5–2.5 m W",
    seasonalImpact:"", growthSpeed:9, pestRisk:9, thirst:8, careLevel:5, sunNeed:70, sunMin:30},
+  {common:"Orange Victory Itoh Peony", latin:"Paeonia 'Orange Victory'", hue:30,
+   visual:"Apricot-orange semi-double blooms · red flares · yellow centres · sturdy stems",
+   water:"Moderate; water in dry spells",
+   aspect:"East / South / West",
+   soil:"Rich, well-drained; Plant shallow · no winter wet · irritant",
+   prune:"Cut dead stems in autumn",
+   source:"", peak:"May-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"Itoh intersectional hybrid; introduced 2001",
+   hardiness:"H6", resilience:"sturdy stems · long-lived · cold hardy",
+   uses:"mixed borders · cut flowers · containers", size:"80–90 cm H × 80–90 cm W",
+   seasonalImpact:"", growthSpeed:5, pestRisk:6, thirst:8, careLevel:6, sunNeed:88, sunMin:65},
 ];
 /* PLANTS:END */
 
@@ -942,7 +954,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
