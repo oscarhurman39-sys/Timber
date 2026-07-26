@@ -116,10 +116,18 @@ Focal point recorded here when off-centre:
 | Phalaenopsis Hybrid Group | phalaenopsis-hybrid-group.jpg (composited) / -cutout.png | 40% 25% — [special] cutout hero-on-self (hue 320 magenta, chosen from the visible bloom colour not the JSON's foliage default) |
 | Viburnum tinus 'Eve Price' | viburnum-tinus-eve-price.jpg (composited) / -cutout.png | 50% 45% — [special] cutout hero-on-self (hue 330); glossy leaves + metallic blue-purple berries in umbels, species-confirming |
 | Paeonia 'Orange Victory' | paeonia-orange-victory.jpg | 50% 45% — real photo; divided foliage + red semi-woody Itoh stems (species-consistent); no blooms in shot |
+| Lavandula stoechas 'Anouk Deluxe Purple' | lavandula-stoechas-anouk-deluxe-purple.jpg (composited) / -cutout.png | 45% 25% — [special] cutout hero-on-self (hue 275); rabbit-ear bracts confirm L. stoechas |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.28 (French Lavender 'Anouk Deluxe Purple' — sunniest card in the deck)**:
+  pre-converted schema + cutout, hero-on-self (hue 275). The rabbit-ear bracts
+  atop the flower heads confirm Lavandula stoechas (French/Spanish lavender, vs
+  English L. angustifolia). **sunNeed 95 / sunMin 80 — the most sun-demanding
+  card yet**, marker hard right; thirst 4 (drought-lover). H4 — the tender
+  French lavender, correctly a notch softer than hardy English types. Clean
+  pass. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.27 (Orange Victory Itoh Peony)**: pre-converted schema + real photo.
   The photo's red semi-woody stems + divided leaflets confirm an Itoh
   (intersectional) peony — herbaceous peonies die to the ground, Itohs keep
