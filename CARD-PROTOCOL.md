@@ -112,10 +112,21 @@ Focal point recorded here when off-centre:
 | Acer rubrum 'October Glory' | acer-rubrum-october-glory.jpg | leaf, 50% 62% — red petioles (the A. rubrum ID feature) on summer-green leaves; species confirmed |
 | Fatsia japonica 'Tsumugi-shibori' | fatsia-japonica-tsumugi-shibori.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 120). Filename uses the true cultivar 'Tsumugi-shibori' NOT the selling name 'Spider's Web' (apostrophe breaks the slug/checker) |
 | Griselinia littoralis | griselinia-littoralis.jpg (composited) / -cutout.png | 55% 22% — [special] cutout hero-on-self (hue 95, apple-green); glossy oval leaves |
+| Indigofera himalayensis 'Silk Road' | indigofera-himalayensis-silk-road.jpg | 55% 15% — real photo; pinnate leaves + lilac-pink pea spikes against a moody sky, focus high to skip the blurred foreground |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.24 (Himalayan Indigo 'Silk Road' — first pre-converted JSON in the
+  Timber schema)**: Oscar's JSON arrived already in the exact PLANTS schema
+  (0–20 ratings, sunNeed 0–100, prune/water split correctly, foliage/container
+  fields) — no conversion or field-splitting needed, first of the batch like
+  this. Converted mechanically. pestRisk 3 is a genuine 0–20 value (0.75/5), the
+  checker's ×4 heuristic warning is a false positive here. sunMin 80 — narrow,
+  sun-demanding tolerance. Real photo, focus high (55% 15%) to skip the blurred
+  garden foreground. Kept the plant's own `uncertain` notes (name status
+  unresolved at RHS, flowering/spread source variance) as honest caveats. Gate
+  green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.23 (Spider's Web Fatsia + Griselinia — two cutouts; an apostrophe bug)**:
   both cutouts, hero-on-self. The Fatsia exposed a **cultivar-apostrophe bug**:
   the selling name 'Spider's Web' has an apostrophe that (a) fails the checker's
