@@ -35,9 +35,10 @@ node tools/check-plant-json.js my-plant.json    # errors out rather than guessin
 
 | Action | Result |
 |---|---|
-| Swipe right / tap ★ | Plant marked **LEARNED** (gold stamp), starred count +1 |
-| Swipe left / tap ✕ | Plant **skipped** (red stamp), not counted |
-| ↺ | Undo the last swipe (corrects the count) |
+| Swipe right (or →) | Plant marked **LEARNED** (gold stamp), starred count +1 |
+| Swipe left (or ←) | Plant **skipped** (red stamp), not counted |
+| ↺ Undo pill (or U) | Undo the last swipe (corrects the count) — dims when there's nothing to undo |
+| Swipe feel | Low resistance: a 60px pull commits, a quick flick commits from 35px; the card glows gold/red as you pull and the next card peeks beneath. A one-time "← later / learned →" coach shows on first run. Screen-reader learn/skip buttons remain in the DOM |
 | Double-tap a card | Flip to the **Buyer Trade Sheet** (prices, margin, order weeks, risk) |
 | Tap the back | Flip back — swiping is locked while flipped |
 | 🔍 top right | **Search** — type a name, soil, or use, get the full info sheet instantly |

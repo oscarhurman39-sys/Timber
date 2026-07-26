@@ -44,8 +44,26 @@
 
   /* deck + flip */
   .deck{position:relative;flex:1 1 auto;margin:0 16px}
+  .deck::before{content:'';position:absolute;inset:-8% -12%;pointer-events:none;
+    background:radial-gradient(55% 45% at 50% 36%,var(--glow,transparent),transparent 72%);
+    filter:blur(28px);transition:background .6s}
   .card{position:absolute;inset:0;perspective:1400px;will-change:transform;
-    transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s}
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s,filter .35s}
+  /* visible stack — the next cards peek out beneath the top one */
+  .card.d1{transform:translateY(11px) scale(.965);filter:brightness(.8) saturate(.9)}
+  .card.d2{transform:translateY(20px) scale(.93);filter:brightness(.62) saturate(.8)}
+  /* one-time swipe coach — purely visual, never intercepts touches */
+  .coach{position:absolute;left:0;right:0;bottom:-4px;display:flex;justify-content:space-between;
+    padding:0 10px;pointer-events:none;font-size:12.5px;font-weight:700;letter-spacing:.4px;
+    color:var(--muted);opacity:0;transition:opacity .5s;z-index:5}
+  .coach.show{opacity:1}
+  .coach .c-l,.coach .c-r{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:20px;
+    background:rgba(10,24,16,.72);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+  .coach .c-r{color:var(--gold)}
+  .coach .arr{display:inline-block;animation:coachNudge 1.2s ease-in-out infinite}
+  .coach .c-l .arr{animation-name:coachNudgeL}
+  @keyframes coachNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+  @keyframes coachNudgeL{0%,100%{transform:translateX(0)}50%{transform:translateX(-6px)}}
   .card-inner{position:absolute;inset:0;transform-style:preserve-3d;
     transition:transform .5s cubic-bezier(.2,.8,.2,1)}
   .card.flipped .card-inner{transform:rotateY(180deg)}
@@ -105,16 +123,16 @@
   .grid .g .n{font-size:12.5px;line-height:1.4;color:#eafff2;margin-top:3px}
   .back .fliphint{margin-top:auto;padding-top:6px}
 
-  /* actions */
-  .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:22px;padding:16px 0 22px}
-  .fab{width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;
-    justify-content:center;font-size:24px;background:rgba(255,255,255,.08);color:#fff;
-    box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform .12s}
-  .fab:active{transform:scale(.9)}
-  .fab.skip{color:#ff6b6b}
-  .fab.back-btn{width:48px;height:48px;font-size:18px;color:var(--muted)}
-  .fab.learn{width:72px;height:72px;font-size:30px;color:#1a120a;
-    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 10px 22px rgba(245,196,81,.35)}
+  /* actions — swipe is the system; the only visible control is a slim undo pill.
+     Learn/skip stay in the DOM as screen-reader/keyboard targets. */
+  .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:center;padding:14px 0 18px}
+  .undo-pill{border:1px solid rgba(255,255,255,.13);border-radius:22px;padding:9px 18px;cursor:pointer;
+    background:rgba(255,255,255,.05);color:var(--muted);font-family:inherit;font-size:13px;font-weight:700;
+    letter-spacing:.4px;backdrop-filter:blur(6px);transition:opacity .25s,transform .12s}
+  .undo-pill:active{transform:scale(.94)}
+  .undo-pill.idle{opacity:.35}
+  .sr-btn{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
   .empty{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:30px;gap:14px}
@@ -384,6 +402,10 @@
 <div class="progress" aria-live="polite"><b id="left">0</b> to learn · <span id="done">0</span> starred · double-tap a card for trade data</div>
 
 <div class="deck" id="deck">
+  <div class="coach" id="coach" aria-hidden="true">
+    <span class="c-l"><span class="arr">←</span> later</span>
+    <span class="c-r">learned <span class="arr">→</span></span>
+  </div>
   <div class="empty" id="empty">
     <h3>Deck's clear 🌱</h3>
     <p>You've starred every plant. Reset to run through them again.</p>
@@ -392,9 +414,9 @@
 </div>
 
 <div class="actions" id="actions">
-  <button class="fab skip"  id="skip"  title="Skip" aria-label="Skip this plant">✕</button>
-  <button class="fab back-btn" id="back" title="Undo" aria-label="Undo last swipe">↺</button>
-  <button class="fab learn" id="learn" title="I've learned this" aria-label="Mark as learned">★</button>
+  <button class="sr-btn" id="skip" aria-label="Skip this plant (or swipe left, or press left arrow)">Skip</button>
+  <button class="undo-pill idle" id="back" aria-label="Undo last swipe">↺ Undo</button>
+  <button class="sr-btn" id="learn" aria-label="Mark as learned (or swipe right, or press right arrow)">Learned</button>
 </div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu">
@@ -847,24 +869,41 @@ function renderCard(idx){
 function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].pop();}
 
 function attachGestures(card){
-  let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false;
+  let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false,trail=[];
   const learnStamp=card.querySelector('.stamp.learn'),skipStamp=card.querySelector('.stamp.skip');
-  const start=(x,y)=>{if(card.dataset.gone)return;drag=true;moved=false;sx=x;sy=y;card.style.transition='none';};
+  const start=(x,y)=>{if(card.dataset.gone)return;drag=true;moved=false;sx=x;sy=y;
+    trail=[{x,t:performance.now()}];card.style.transition='none';};
+  const flickV=()=>{                     /* px/ms over the trailing ~100ms of the drag */
+    if(trail.length<2)return 0;
+    const tl=trail[trail.length-1];
+    let t0=trail[0];
+    for(const s of trail){if(tl.t-s.t<=100){t0=s;break;}}
+    return tl.t===t0.t?0:(tl.x-t0.x)/(tl.t-t0.t);
+  };
   const move=(x,y)=>{
     if(!drag)return;dx=x-sx;dy=y-sy;
+    trail.push({x,t:performance.now()});
+    while(trail.length>2&&trail[trail.length-1].t-trail[1].t>120)trail.shift();
     if(Math.hypot(dx,dy)>10)moved=true;
     if(card.classList.contains('flipped'))return;       /* no drag while flipped */
-    card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/18}deg)`;
-    learnStamp.style.opacity=dx>0?Math.min(dx/90,1):0;
-    skipStamp.style.opacity=dx<0?Math.min(-dx/90,1):0;
+    card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/15}deg)`;
+    const pull=Math.min(Math.abs(dx)/60,1);
+    learnStamp.style.opacity=dx>0?pull:0;
+    skipStamp.style.opacity=dx<0?pull:0;
+    card.style.filter=dx>0?`drop-shadow(0 0 ${18*pull}px rgba(120,230,150,${.45*pull}))`
+                    :dx<0?`drop-shadow(0 0 ${18*pull}px rgba(255,110,110,${.4*pull}))`:'';
   };
   const end=()=>{
     if(!drag)return;drag=false;
-    card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
+    card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s,filter .35s';
+    card.style.filter='';
     if(!moved){handleTap(card);dx=dy=0;return;}          /* a tap, not a drag */
     if(!card.classList.contains('flipped')){
-      if(dx>95){fling(card,1,true);}
-      else if(dx<-95){fling(card,-1,false);}
+      /* low resistance: a 60px pull commits; a quick flick commits from 35px */
+      const vx=flickV();
+      const commit=Math.abs(dx)>60||(Math.abs(dx)>35&&Math.abs(vx)>0.55&&Math.sign(vx)===Math.sign(dx));
+      if(commit&&dx>0){fling(card,1,true);}
+      else if(commit&&dx<0){fling(card,-1,false);}
       else{card.style.transform='';learnStamp.style.opacity=0;skipStamp.style.opacity=0;}
     }else{card.style.transform='';}
     dx=dy=0;
@@ -887,7 +926,8 @@ function handleTap(card){
 
 function fling(card,dir,learned){
   if(card.dataset.gone)return;card.dataset.gone='1';  /* a card can only be swiped once —
-      guards double fab presses / second-finger taps during the 320ms fling animation */
+      guards double presses / second-finger taps during the 320ms fling animation */
+  dismissCoach();
   const idx=+card.dataset.idx;
   card.classList.remove('flipped');
   card.style.transform=`translate(${dir*140}%,${learned?-40:60}px) rotate(${dir*24}deg)`;
@@ -898,7 +938,22 @@ function fling(card,dir,learned){
 }
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
 function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);updateCounts();refreshEmpty();saveProgress();}
-function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;}
+function restack(){                 /* visible stack depth + ambient hue glow from the top card */
+  const live=[...deck.querySelectorAll('.card:not([data-gone])')];
+  live.forEach((c,i)=>{
+    const d=live.length-1-i;
+    c.classList.toggle('d1',d===1);
+    c.classList.toggle('d2',d>=2);
+  });
+  const top=live[live.length-1];
+  if(top){const p=PLANTS[+top.dataset.idx];deck.style.setProperty('--glow',`hsl(${p.hue} 70% 45% / .4)`);}
+  else deck.style.removeProperty('--glow');
+}
+function updateCounts(){
+  leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
+  document.getElementById('back').classList.toggle('idle',history.length===0);
+  restack();
+}
 function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show',done);document.getElementById('actions').style.visibility=done?'hidden':'visible';}
 
 document.getElementById('learn').onclick=()=>act(true);
@@ -906,6 +961,34 @@ document.getElementById('skip').onclick=()=>act(false);
 document.getElementById('back').onclick=undo;
 document.getElementById('reset2').onclick=buildDeck;
 document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
+
+/* ---------- one-time swipe coach ---------- */
+const coachEl=document.getElementById('coach');
+const COACH_KEY='timber-coach-done';
+let coachTimer=null;
+function showCoach(){
+  let done=false;try{done=!!localStorage.getItem(COACH_KEY);}catch(e){}
+  if(done)return;
+  coachEl.classList.add('show');
+  coachTimer=setTimeout(dismissCoach,6000);
+}
+function dismissCoach(){
+  if(!coachEl.classList.contains('show'))return;
+  clearTimeout(coachTimer);
+  coachEl.classList.remove('show');
+  try{localStorage.setItem(COACH_KEY,'1');}catch(e){}
+}
+
+/* ---------- keyboard: → learned, ← later, U undo (desktop) ---------- */
+document.addEventListener('keydown',e=>{
+  if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight'&&e.key.toLowerCase()!=='u')return;
+  if(sheet.classList.contains('open')||search.classList.contains('open')||quizEl.classList.contains('open'))return;
+  const t=e.target;
+  if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'))return;
+  if(e.key==='ArrowRight'){dismissCoach();act(true);}
+  else if(e.key==='ArrowLeft'){dismissCoach();act(false);}
+  else undo();
+});
 
 const sheet=document.getElementById('sheet');
 document.getElementById('menuBtn').onclick=()=>sheet.classList.add('open');
@@ -1224,7 +1307,7 @@ window.addEventListener('orientationchange',updateCardScale);
 updateCardScale();
 
 const savedProgress=loadProgress();
-if(savedProgress)restoreDeck(savedProgress);else buildDeck();
+if(savedProgress)restoreDeck(savedProgress);else{buildDeck();showCoach();}
 updateQuizStats();
 </script>
 </body>

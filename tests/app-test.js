@@ -30,6 +30,7 @@ async function dragCard(page, dxTotal, opts = {}) {
   const steps = 8;
   let midOpacity = null;
   for (let i = 1; i <= steps; i++) {
+    if (opts.slow) await page.waitForTimeout(50);   // kill velocity so only distance counts
     await page.mouse.move(x + (dxTotal * i) / steps, y + (opts.dy || 0) * i / steps);
     if (i === steps && opts.sampleStamp) {
       midOpacity = await page.evaluate(sel => {
@@ -119,21 +120,21 @@ function topFlipped(page) {
   c = await counts(page);
   check('undo learn: card back, starred -1', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
 
-  /* ---- 5. buttons ---- */
-  await page.click('#learn'); await page.waitForTimeout(450);
+  /* ---- 5. keyboard: arrows drive the deck ---- */
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(450);
   c = await counts(page);
-  check('star button = learn', c.cards === NPLANTS-1 && c.done === 1, JSON.stringify(c));
-  await page.click('#skip'); await page.waitForTimeout(450);
+  check('right arrow = learn', c.cards === NPLANTS-1 && c.done === 1, JSON.stringify(c));
+  await page.keyboard.press('ArrowLeft'); await page.waitForTimeout(450);
   c = await counts(page);
-  check('x button = skip', c.cards === NPLANTS-2 && c.done === 1, JSON.stringify(c));
+  check('left arrow = skip', c.cards === NPLANTS-2 && c.done === 1, JSON.stringify(c));
   await page.click('#back'); await page.click('#back'); await page.waitForTimeout(150);
   c = await counts(page);
   check('undo restores both', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
 
-  /* ---- 5b. rapid double fab press during fling window: no state corruption ---- */
-  await page.click('#learn');
+  /* ---- 5b. rapid double arrow press during fling window: no state corruption ---- */
+  await page.keyboard.press('ArrowRight');
   await page.waitForTimeout(80);
-  await page.click('#learn');
+  await page.keyboard.press('ArrowRight');
   await page.waitForTimeout(500);
   c = await counts(page);
   check('rapid double star: two distinct cards learned', c.left === NPLANTS-2 && c.done === 2, JSON.stringify(c));
@@ -143,9 +144,9 @@ function topFlipped(page) {
   c = await counts(page);
   check('rapid double star: undo x2 restores clean state', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
 
-  /* ---- 6. sub-threshold drag snaps back ---- */
+  /* ---- 6. sub-threshold drag snaps back (slow, so the flick shortcut can't fire) ---- */
   await page.waitForTimeout(400);
-  await dragCard(page, 60);
+  await dragCard(page, 40, { slow: true });
   c = await counts(page);
   const stampReset = await page.evaluate(() => {
     const cards = document.querySelectorAll('.card');
@@ -178,27 +179,27 @@ function topFlipped(page) {
   await singleTap(page);
   check('single tap on back flips to front', await topFlipped(page) === false);
 
-  /* ---- 8. flipped + star button unflips instead of swiping ---- */
+  /* ---- 8. flipped + right arrow unflips instead of swiping ---- */
   await page.waitForTimeout(400);
   await doubleTap(page);
-  await page.click('#learn'); await page.waitForTimeout(450);
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(450);
   c = await counts(page);
-  check('star while flipped: unflips, does not swipe', c.cards === NPLANTS && c.done === 0 && (await topFlipped(page)) === false, JSON.stringify(c));
+  check('arrow while flipped: unflips, does not swipe', c.cards === NPLANTS && c.done === 0 && (await topFlipped(page)) === false, JSON.stringify(c));
 
   /* ---- 9. empty state + reset ---- */
-  for (let i = 0; i < NPLANTS; i++) { await page.click('#learn'); await page.waitForTimeout(400); }
+  for (let i = 0; i < NPLANTS; i++) { await page.keyboard.press('ArrowRight'); await page.waitForTimeout(400); }
   c = await counts(page);
   const emptyShown = await page.locator('#empty').isVisible();
   const actionsHidden = await page.evaluate(() => document.getElementById('actions').style.visibility === 'hidden');
   check('deck cleared: empty state shows', c.cards === 0 && emptyShown, JSON.stringify(c));
-  check('deck cleared: action buttons hidden', actionsHidden);
+  check('deck cleared: undo pill hidden', actionsHidden);
   check('empty state text', (await page.locator('#empty h3').innerText()).includes("Deck's clear"));
   await page.click('#reset2'); await page.waitForTimeout(150);
   c = await counts(page);
   check('reset deck restores all', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
 
   /* ---- 10. menu ---- */
-  await page.click('#learn'); await page.waitForTimeout(450);
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(450);
   await page.click('#menuBtn'); await page.waitForTimeout(350);
   check('menu opens', await page.evaluate(() => document.getElementById('sheet').classList.contains('open')));
   c = await counts(page);
@@ -560,9 +561,54 @@ function topFlipped(page) {
   await qpage.waitForTimeout(150);
   missStore = await qpage.evaluate(() => JSON.parse(localStorage.getItem('timber-quiz-miss-v1') || '{}'));
   check('quiz loop: correct answer clears the miss', cleared && !(missedLatin in missStore), JSON.stringify({ cleared, missStore }));
-  check('quiz loop: review line clears', (await qpage.locator('#qReview').innerText()) === '');
+  const qFinal = await qpage.evaluate(() => ({ review: document.getElementById('qReview').textContent, q: document.getElementById('qQuestion').textContent }));
+  check('quiz loop: review line clears', Object.keys(missStore).length === 0 && qFinal.review === '', JSON.stringify({ missStore, qFinal }));
   check('quiz loop: no page errors', qerrs.length === 0, qerrs.join(' | '));
   await qctx.close();
+
+  /* ---- 19. swipe-first system: flick physics, undo pill, coach, visible stack ---- */
+  const wctx = await browser.newContext();
+  const wpage = await wctx.newPage();
+  const werrs = [];
+  wpage.on('pageerror', e => werrs.push(String(e)));
+  await wpage.goto(URL); await wpage.waitForTimeout(400);
+
+  check('swipe UI: coach visible on first run', await wpage.evaluate(() => document.getElementById('coach').classList.contains('show')));
+  check('swipe UI: undo pill idle with no history', await wpage.evaluate(() => document.getElementById('back').classList.contains('idle')));
+  check('swipe UI: second card peeks (d1 class)', await wpage.evaluate(() => {
+    const live = [...document.querySelectorAll('.card:not([data-gone])')];
+    return live.length >= 2 && live[live.length - 2].classList.contains('d1');
+  }));
+  check('swipe UI: deck glow set from top card hue', await wpage.evaluate(() =>
+    document.getElementById('deck').style.getPropertyValue('--glow').includes('hsl')));
+
+  /* a fast 48px flick commits (distance alone would snap back) — dispatched in-page
+     so the gesture is genuinely fast; CDP mouse moves are too slow to build velocity */
+  await wpage.evaluate(() => {
+    const cards = document.querySelectorAll('.card:not([data-gone])');
+    const card = cards[cards.length - 1];
+    const r = card.getBoundingClientRect();
+    const cx = r.x + r.width / 2, cy = r.y + r.height / 2;
+    const ev = (type, x) => new MouseEvent(type, { bubbles: true, clientX: x, clientY: cy });
+    card.dispatchEvent(ev('mousedown', cx));
+    for (let i = 1; i <= 4; i++) window.dispatchEvent(ev('mousemove', cx + i * 12));
+    window.dispatchEvent(ev('mouseup', cx + 48));
+  });
+  await wpage.waitForTimeout(500);
+  let wc = await wpage.evaluate(() => ({ cards: document.querySelectorAll('.card').length, done: +document.getElementById('done').textContent }));
+  check('swipe UI: fast short flick commits', wc.cards === NPLANTS - 1 && wc.done === 1, JSON.stringify(wc));
+  check('swipe UI: coach dismissed by first swipe', await wpage.evaluate(() => !document.getElementById('coach').classList.contains('show')));
+  check('swipe UI: undo pill wakes after a swipe', await wpage.evaluate(() => !document.getElementById('back').classList.contains('idle')));
+  await wpage.click('#back'); await wpage.waitForTimeout(200);
+  wc = await wpage.evaluate(() => ({ cards: document.querySelectorAll('.card').length, done: +document.getElementById('done').textContent }));
+  check('swipe UI: undo pill restores the card', wc.cards === NPLANTS && wc.done === 0, JSON.stringify(wc));
+  await wpage.reload(); await wpage.waitForTimeout(400);
+  check('swipe UI: coach stays gone after reload', await wpage.evaluate(() => !document.getElementById('coach').classList.contains('show')));
+  check('swipe UI: sr learn/skip buttons present for a11y', await wpage.evaluate(() =>
+    !!document.getElementById('learn') && !!document.getElementById('skip') &&
+    document.getElementById('learn').className === 'sr-btn' && document.getElementById('skip').className === 'sr-btn'));
+  check('swipe UI: no page errors', werrs.length === 0, werrs.join(' | '));
+  await wctx.close();
 
   /* ---- 16. no JS errors anywhere ---- */
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));

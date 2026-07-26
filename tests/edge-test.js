@@ -29,7 +29,8 @@ function check(name, cond, extra) {
   page = await ctx.newPage();
   page.on('pageerror', e => errs.push('empty:' + e));
   await page.goto(URL); await page.waitForTimeout(300);
-  for (let i = 0; i < 13; i++) { await page.click('#learn'); await page.waitForTimeout(420); }
+  const nAll = await page.evaluate(() => PLANTS.length);
+  for (let i = 0; i < nAll; i++) { await page.keyboard.press('ArrowRight'); await page.waitForTimeout(420); }
   let s = await page.evaluate(() => ({ empty: document.getElementById('empty').classList.contains('show'), done: document.getElementById('done').textContent }));
   check('deck cleared before reload', s.empty && s.done === '13', JSON.stringify(s));
   await page.reload(); await page.waitForTimeout(400);
@@ -98,8 +99,8 @@ function check(name, cond, extra) {
   // flip top card, unflip via star (act() unflips), then star again to swipe, then undo
   await page.mouse.move(x, y); await page.mouse.down(); await page.mouse.up();
   await page.waitForTimeout(60); await page.mouse.down(); await page.mouse.up(); await page.waitForTimeout(600);
-  await page.click('#learn'); await page.waitForTimeout(200);   // unflips
-  await page.click('#learn'); await page.waitForTimeout(450);   // swipes
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(200);   // unflips
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(450);   // swipes
   await page.click('#back'); await page.waitForTimeout(200);    // restore
   const flipped = await page.evaluate(() => {
     const cards = document.querySelectorAll('.card');
