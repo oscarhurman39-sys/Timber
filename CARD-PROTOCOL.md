@@ -117,10 +117,18 @@ Focal point recorded here when off-centre:
 | Viburnum tinus 'Eve Price' | viburnum-tinus-eve-price.jpg (composited) / -cutout.png | 50% 45% — [special] cutout hero-on-self (hue 330); glossy leaves + metallic blue-purple berries in umbels, species-confirming |
 | Paeonia 'Orange Victory' | paeonia-orange-victory.jpg | 50% 45% — real photo; divided foliage + red semi-woody Itoh stems (species-consistent); no blooms in shot |
 | Lavandula stoechas 'Anouk Deluxe Purple' | lavandula-stoechas-anouk-deluxe-purple.jpg (composited) / -cutout.png | 45% 25% — [special] cutout hero-on-self (hue 275); rabbit-ear bracts confirm L. stoechas |
+| Citrus × meyeri 'Meyer' | citrus-meyeri-meyer.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 45 gold); glossy citrus foliage, no fruit in shot |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.29 (Meyer's Lemon — first edible/citrus card)**: pre-converted schema +
+  cutout, hero-on-self (hue 45). First edible-fruit card. H2 (tender — needs a
+  frost-free winter indoors, correct for citrus in the UK), careLevel 14 (joint-
+  highest with the Plumbago — citrus are demanding: feeding, overwintering, pest
+  vigilance). Kept the Kew synonymy caveat (C. × meyeri sunk under C. × limon).
+  Photo is genus-consistent glossy foliage; no fruit so cultivar unverifiable.
+  Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.28 (French Lavender 'Anouk Deluxe Purple' — sunniest card in the deck)**:
   pre-converted schema + cutout, hero-on-self (hue 275). The rabbit-ear bracts
   atop the flower heads confirm Lavandula stoechas (French/Spanish lavender, vs
