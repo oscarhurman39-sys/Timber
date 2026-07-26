@@ -93,6 +93,7 @@ Focal point recorded here when off-centre:
 | Pennisetum 'Rubrum' | pennisetum-rubrum.jpg | plumes, ~50% 40% |
 | Abelia 'Raspberry Profusion' | abelia-raspberry-profusion.jpg | ~50% 45% — correct cultivar, pink bells + raspberry sepals |
 | Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
+| Euonymus alatus | euonymus-alatus.jpg | ~50% 40% — summer macro. ID confirmed: corky wings visible as tan ridges on the green stems, leaves opposite + finely serrate. Shows none of the card's headline interest (autumn crimson, fruit); a September re-shoot would sell the plant better |
 
 ## 5. Decision changelog
 
