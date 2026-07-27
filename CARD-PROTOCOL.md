@@ -120,10 +120,21 @@ Focal point recorded here when off-centre:
 | Citrus × meyeri 'Meyer' | citrus-meyeri-meyer.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 45 gold); glossy citrus foliage, no fruit in shot |
 | Euonymus japonicus 'Green Spire' | euonymus-japonicus-green-spire.jpg | 50% 45% — real photo; dense glossy plain-green foliage (distinct from the deck's gold-margined 'Aureomarginatus') |
 | Ilex crenata 'Jenny' | ilex-crenata-jenny.jpg | 30% 55% — real photo; fine glossy small leaves on twiggy stems, species-consistent (the box-blight-safe box substitute) |
+| × Cuprocyparis leylandii 'Gold Rider' | cuprocyparis-leylandii-gold-rider.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 55 gold); brilliant golden conifer sprays |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.32 (Gold Rider Leyland Cypress — a nothogenus checker fix)**: pre-
+  converted schema + cutout, hero-on-self (hue 55). Exposed a checker bug: the
+  latin starts with the intergeneric hybrid sign **× Cuprocyparis** (a
+  nothogenus), which the "must start with a capitalised genus" rule wrongly
+  rejected. Fixed the rule to allow a leading `× ` — handles any future
+  intergeneric hybrid. **First conifer in the deck.** growth 15 (fast — it's
+  Leyland, though 'Gold Rider' is a shade tamer than the rampant green species
+  at 20), sunNeed 90 (gold colour needs sun), container "no" (only card so far
+  that can't go in a pot — a 25 m tree). Renders the × correctly in the card
+  subtitle. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.31 (Jenny Japanese Holly)**: pre-converted schema + real photo. Ilex
   crenata — the box-blight-safe substitute for Buxus, sold clipped as bush/ball/
   pyramid. Third clip-and-shape evergreen alongside the two Euonymus (topiary

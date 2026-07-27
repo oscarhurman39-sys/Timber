@@ -99,7 +99,8 @@ if (Array.isArray(p.bloomMonths) && parsed.length &&
 
 /* ---- latin formatting ---- */
 if (p.latin) {
-  if (!/^[A-Z]/.test(p.latin)) errors.push('"latin" should start with a capitalised genus');
+  /* allow a leading × (nothogenus, e.g. "× Cuprocyparis") or hybrid-species "Genus ×epithet" */
+  if (!/^(×\s*)?[A-Z]/.test(p.latin)) errors.push('"latin" should start with a capitalised genus');
   const q = (p.latin.match(/'/g) || []).length;
   if (q % 2) errors.push(`"latin" has unbalanced quotes: ${p.latin}`);
   if (/\bx\s/i.test(p.latin) && !p.latin.includes('×')) warnings.push('"latin" may need the × hybrid sign rather than the letter x');
