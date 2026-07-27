@@ -141,7 +141,7 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
      drift that shipped the Euonymus card blank. Secondary source photos and
      out-of-deck photos have no focus entry, so are never flagged. */
   const { slugs, focusKeys } = await page.evaluate(() => ({
-    slugs: PLANTS.map(p => p.latin.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')),
+    slugs: PLANTS.map(p => p.latin.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')),
     focusKeys: Object.keys(PHOTO_FOCUS),
   }));
   const slugSet = new Set(slugs);

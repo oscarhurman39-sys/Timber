@@ -147,5 +147,5 @@ console.log(`  {common:${esc(p.common)}, latin:${esc(p.latin)}, hue:${hue},
    hardiness:${esc(p.hardiness)}, resilience:${esc(p.resilience)},
    uses:${esc(p.uses)}, size:${esc(`${p.height || ''} H × ${p.spread || ''} W`)},
    seasonalImpact:"", growthSpeed:${n(p.growthSpeed)}, pestRisk:${n(p.pestRisk)}, thirst:${n(p.thirst)}, careLevel:${n(p.careLevel)}, sunNeed:${n(p.sunNeed)}, sunMin:${n(p.sunMin)}},`);
-console.log(`\nPhoto must be staged at: photos/${(p.latin||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}.jpg`);
+console.log(`\nPhoto must be staged at: photos/${(p.latin||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}.jpg`);
 console.log('Then bump NPLANTS in tests/app-test.js and tests/edge-test.js and run the suites.\n');

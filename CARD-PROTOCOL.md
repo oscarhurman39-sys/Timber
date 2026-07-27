@@ -122,10 +122,22 @@ Focal point recorded here when off-centre:
 | Ilex crenata 'Jenny' | ilex-crenata-jenny.jpg | 30% 55% — real photo; fine glossy small leaves on twiggy stems, species-consistent (the box-blight-safe box substitute) |
 | × Cuprocyparis leylandii 'Gold Rider' | cuprocyparis-leylandii-gold-rider.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 55 gold); brilliant golden conifer sprays |
 | Rhododendron 'Horizon Monarch' | rhododendron-horizon-monarch.jpg (composited) / -cutout.png | 45% 20% — [special] cutout hero-on-self (hue 48); leathery whorled foliage + developing bud, no open truss |
+| Acer palmatum 'Ōsakazuki' | acer-palmatum-osakazuki.jpg | 50% 45% — real photo; palmate leaves + red petioles, species-confirmed; slug folds the macron ō→o |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.34 (Ōsakazuki Japanese Maple — a macron/diacritic slug fix)**: pre-
+  converted schema + real photo (palmate leaves + red petioles confirm Acer
+  palmatum). Exposed a slug bug: the macron **Ō** is non-ASCII, so the old
+  slug fn collapsed 'Ōsakazuki' to `sakazuki` (dropping the o entirely).
+  Fixed `slugLatin` (and the matching computations in check-plant-json.js and
+  audit-layout.js — all three kept identical) to fold diacritics first
+  (`NFD` normalize + strip combining marks), so ō→o → `acer-palmatum-osakazuki`.
+  Handles any future macron cultivar (Shōjō, Ōgon…). Existing ASCII slugs are
+  unaffected. The Ō renders correctly in the card title/subtitle. growth 5
+  (Acer palmatum is famously slow, matches the rubric anchor), autumn colour
+  Oct-Nov (§4b). Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.33 (Horizon Monarch Rhododendron)**: pre-converted schema + cutout,
   hero-on-self (hue 48). thirst 14 (rhododendrons need constant moisture),
   shade-tolerant (sunNeed 45, sunMin 25), H4. The soil is **acid/ericaceous —
