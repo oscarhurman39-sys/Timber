@@ -119,10 +119,17 @@ Focal point recorded here when off-centre:
 | Lavandula stoechas 'Anouk Deluxe Purple' | lavandula-stoechas-anouk-deluxe-purple.jpg (composited) / -cutout.png | 45% 25% — [special] cutout hero-on-self (hue 275); rabbit-ear bracts confirm L. stoechas |
 | Citrus × meyeri 'Meyer' | citrus-meyeri-meyer.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 45 gold); glossy citrus foliage, no fruit in shot |
 | Euonymus japonicus 'Green Spire' | euonymus-japonicus-green-spire.jpg | 50% 45% — real photo; dense glossy plain-green foliage (distinct from the deck's gold-margined 'Aureomarginatus') |
+| Ilex crenata 'Jenny' | ilex-crenata-jenny.jpg | 30% 55% — real photo; fine glossy small leaves on twiggy stems, species-consistent (the box-blight-safe box substitute) |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.31 (Jenny Japanese Holly)**: pre-converted schema + real photo. Ilex
+  crenata — the box-blight-safe substitute for Buxus, sold clipped as bush/ball/
+  pyramid. Third clip-and-shape evergreen alongside the two Euonymus (topiary
+  cluster forming in the deck). Evergreen (peak Jan-Dec), growth 6 (slow, as
+  clipped topiary should be), PBR cultivar caveat kept. Gate green: 94/94, 8/8,
+  SW, verifier, audit clean.
 - **v12.30 (Green Spire Japanese Spindle — deck's first cultivar pair)**: pre-
   converted schema + real photo. Second Euonymus japonicus in the deck — the
   plain-green upright 'Green Spire' (topiary/ball form) alongside the earlier
