@@ -118,10 +118,18 @@ Focal point recorded here when off-centre:
 | Paeonia 'Orange Victory' | paeonia-orange-victory.jpg | 50% 45% — real photo; divided foliage + red semi-woody Itoh stems (species-consistent); no blooms in shot |
 | Lavandula stoechas 'Anouk Deluxe Purple' | lavandula-stoechas-anouk-deluxe-purple.jpg (composited) / -cutout.png | 45% 25% — [special] cutout hero-on-self (hue 275); rabbit-ear bracts confirm L. stoechas |
 | Citrus × meyeri 'Meyer' | citrus-meyeri-meyer.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 45 gold); glossy citrus foliage, no fruit in shot |
+| Euonymus japonicus 'Green Spire' | euonymus-japonicus-green-spire.jpg | 50% 45% — real photo; dense glossy plain-green foliage (distinct from the deck's gold-margined 'Aureomarginatus') |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.30 (Green Spire Japanese Spindle — deck's first cultivar pair)**: pre-
+  converted schema + real photo. Second Euonymus japonicus in the deck — the
+  plain-green upright 'Green Spire' (topiary/ball form) alongside the earlier
+  gold-margined 'Aureomarginatus'; distinct latin-slugs so no photo collision.
+  Evergreen (peak Jan-Dec, all cells lit), narrow columnar (spread 0.1–0.5 m,
+  narrowest in the deck), pestRisk 9 (spindle mildew/vine weevil). Kept the
+  retail-'bol'-suffix caveat. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.29 (Meyer's Lemon — first edible/citrus card)**: pre-converted schema +
   cutout, hero-on-self (hue 45). First edible-fruit card. H2 (tender — needs a
   frost-free winter indoors, correct for citrus in the UK), careLevel 14 (joint-
