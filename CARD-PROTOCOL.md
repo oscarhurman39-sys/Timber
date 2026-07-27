@@ -124,10 +124,19 @@ Focal point recorded here when off-centre:
 | Rhododendron 'Horizon Monarch' | rhododendron-horizon-monarch.jpg (composited) / -cutout.png | 45% 20% — [special] cutout hero-on-self (hue 48); leathery whorled foliage + developing bud, no open truss |
 | Acer palmatum 'Ōsakazuki' | acer-palmatum-osakazuki.jpg | 50% 45% — real photo; palmate leaves + red petioles, species-confirmed; slug folds the macron ō→o |
 | Musa basjoo | musa-basjoo.jpg (composited) / -cutout.png | 50% 20% — [special] cutout hero-on-self (hue 120); huge paddle leaves; nursery barcode in source sits below the visible band |
+| Cornus controversa 'Variegata' | cornus-controversa-variegata.jpg | 42% 48% — real photo; cream-margined arcuate-veined leaves, species-confirmed; focus left of the background pot/paving |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.36 (Wedding Cake Tree — deck reaches 40 plants)**: pre-converted schema
+  + real photo. Cornus controversa 'Variegata' — the tiered "wedding cake"
+  architectural specimen; second Cornus in the deck (with Flower Tower), distinct
+  slug. Cream-margined arcuate-veined leaves confirm it. growth 6 (slow, as this
+  choice specimen is), container "no" (a 4–8 m tree), pest 5 (trouble-free).
+  Focus set left (42%) to keep the background nursery pot/paving out of the
+  visible band. Gate green: 94/94, 8/8, SW, verifier, audit clean. **Deck
+  milestone: 40 plants, every one photographed and audited.**
 - **v12.35 (Musa basjoo — the deck's extremes card)**: pre-converted schema +
   cutout, hero-on-self. The hardy banana sets several deck records: **growth 18
   (fastest — near-rampant suckering), thirst 16 and careLevel 15** (needs
