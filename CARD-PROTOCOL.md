@@ -121,10 +121,19 @@ Focal point recorded here when off-centre:
 | Euonymus japonicus 'Green Spire' | euonymus-japonicus-green-spire.jpg | 50% 45% — real photo; dense glossy plain-green foliage (distinct from the deck's gold-margined 'Aureomarginatus') |
 | Ilex crenata 'Jenny' | ilex-crenata-jenny.jpg | 30% 55% — real photo; fine glossy small leaves on twiggy stems, species-consistent (the box-blight-safe box substitute) |
 | × Cuprocyparis leylandii 'Gold Rider' | cuprocyparis-leylandii-gold-rider.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 55 gold); brilliant golden conifer sprays |
+| Rhododendron 'Horizon Monarch' | rhododendron-horizon-monarch.jpg (composited) / -cutout.png | 45% 20% — [special] cutout hero-on-self (hue 48); leathery whorled foliage + developing bud, no open truss |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.33 (Horizon Monarch Rhododendron)**: pre-converted schema + cutout,
+  hero-on-self (hue 48). thirst 14 (rhododendrons need constant moisture),
+  shade-tolerant (sunNeed 45, sunMin 25), H4. The soil is **acid/ericaceous —
+  a genuine hard requirement** (rhododendrons fail on alkaline/limey soil), so
+  I flagged it in confidence as a real customer point, not a mere preference.
+  Photo is species-consistent foliage + a developing flower bud (no open
+  yellow truss). Kept the Hillier 'Planter'-format caveat. Gate green: 94/94,
+  8/8, SW, verifier, audit clean.
 - **v12.32 (Gold Rider Leyland Cypress — a nothogenus checker fix)**: pre-
   converted schema + cutout, hero-on-self (hue 55). Exposed a checker bug: the
   latin starts with the intergeneric hybrid sign **× Cuprocyparis** (a
