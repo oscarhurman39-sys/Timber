@@ -126,10 +126,18 @@ Focal point recorded here when off-centre:
 | Musa basjoo | musa-basjoo.jpg (composited) / -cutout.png | 50% 20% — [special] cutout hero-on-self (hue 120); huge paddle leaves; nursery barcode in source sits below the visible band |
 | Cornus controversa 'Variegata' | cornus-controversa-variegata.jpg | 42% 48% — real photo; cream-margined arcuate-veined leaves, species-confirmed; focus left of the background pot/paving |
 | Olea europaea | olea-europaea.jpg (composited) / -cutout.png | 45% 30% — [special] cutout hero-on-self (hue 75); narrow silver-grey leaves, species-confirmed |
+| Acer palmatum 'Bloodgood' | acer-palmatum-bloodgood.jpg (composited) / -cutout.png | 50% 22% — [special] single dark red-purple palmate leaf, hero-on-self (hue 350); second Acer palmatum (pair with Ōsakazuki) |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.38 (Bloodgood Japanese Maple)**: pre-converted schema + cutout, hero-on-
+  self (hue 350). Second Acer palmatum in the deck — the dark red-purple
+  'Bloodgood' paired with the autumn-scarlet 'Ōsakazuki', distinct slug. Single
+  dramatic leaf composited on the dark ground. growth 5 (slow, matches Acer
+  palmatum anchor). Clean pass, nothing to relocate — pre-converted format
+  continues to run straight through. Gate green: 94/94, 8/8, SW, verifier,
+  audit clean.
 - **v12.37 (Common Olive — a second biosecurity flag)**: pre-converted schema +
   cutout, hero-on-self (hue 75). **Xylella note kept on the FRONT card**
   ("Shelter from frost · Xylella high-risk host" in the soil warning) — olive is
