@@ -125,10 +125,21 @@ Focal point recorded here when off-centre:
 | Acer palmatum 'Ōsakazuki' | acer-palmatum-osakazuki.jpg | 50% 45% — real photo; palmate leaves + red petioles, species-confirmed; slug folds the macron ō→o |
 | Musa basjoo | musa-basjoo.jpg (composited) / -cutout.png | 50% 20% — [special] cutout hero-on-self (hue 120); huge paddle leaves; nursery barcode in source sits below the visible band |
 | Cornus controversa 'Variegata' | cornus-controversa-variegata.jpg | 42% 48% — real photo; cream-margined arcuate-veined leaves, species-confirmed; focus left of the background pot/paving |
+| Olea europaea | olea-europaea.jpg (composited) / -cutout.png | 45% 30% — [special] cutout hero-on-self (hue 75); narrow silver-grey leaves, species-confirmed |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.37 (Common Olive — a second biosecurity flag)**: pre-converted schema +
+  cutout, hero-on-self (hue 75). **Xylella note kept on the FRONT card**
+  ("Shelter from frost · Xylella high-risk host" in the soil warning) — olive is
+  a top-tier host of Xylella fastidiosa, a notifiable quarantine pathogen that
+  garden centres genuinely watch under plant-health/passport rules, so unlike a
+  care preference this is a material trade fact worth front-and-centre. Second
+  biosecurity-flagged card after Gunnera (v12.21) — reinforces the case for the
+  parked compliance-ribbon design. Data: sunNeed 95 (ties lavender for sunniest),
+  thirst 4 (drought-lover), single-facing South, H4. growth 5 (slow). Gate
+  green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.36 (Wedding Cake Tree — deck reaches 40 plants)**: pre-converted schema
   + real photo. Cornus controversa 'Variegata' — the tiered "wedding cake"
   architectural specimen; second Cornus in the deck (with Flower Tower), distinct
