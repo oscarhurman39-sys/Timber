@@ -6,6 +6,29 @@ A progressive web app that teaches garden-centre staff the key details of plants
 swipe-card interface — and gets them accurate info fast when a customer is standing in front
 of them.
 
+**This repository contains only the customer-facing swipe-card application.** Its entry
+point is `timber.html`; `index.html` redirects to it.
+
+## Not to be confused with Plantatron
+
+The employee-facing command-centre dashboard — Customer Match, Today, Plant Intelligence,
+Team Learning, Curator Queue and Value Proof — is a **separate product in a separate
+repository**: [Plantatron](https://github.com/oscarhurman39-sys/plantatron). It was
+developed here for a while and moved out on 2026-07-28.
+
+| | Timber (here) | Plantatron |
+|---|---|---|
+| Audience | Customers and floor staff learning plants | Employees running the centre |
+| Product | Swipe-card plant discovery app | Command-centre dashboard |
+| Entry point | `timber.html` | `index.html` |
+| Storage keys | `timber-progress-v1`, `timber-quiz-v1` | `plantatron.demo.*` |
+
+The two may later share plant data or schemas, but they are separate applications with
+separate deployments. Neither imports the other, and neither is served from the other's
+routes. **Never replace `timber.html` with a dashboard file** — that instruction appeared in
+an old Command Centre handoff document and would destroy this app. The mixed pre-separation
+state is preserved on the `backup/mixed-timber-plantatron` branch.
+
 ## Adding a plant
 
 Per-plant work is data, not design. See **`NEW-SESSION.md`** for the routine and
