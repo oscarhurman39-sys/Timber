@@ -2,7 +2,12 @@
    (with NO sw.js change) must reach an installed client on its next load. */
 const { chromium } = require('playwright');
 const fs = require('fs');
-const APP = '/home/user/Timber/timber.html';
+const path = require('path');
+/* Resolve from this file, not from a hardcoded absolute path: the test patches
+   the very file the server is serving, so the two must be the same copy. A
+   hardcoded path silently patched the wrong checkout and reported a false
+   FAIL whenever the repo was served from a worktree or a copy. */
+const APP = path.resolve(__dirname, '..', 'timber.html');
 
 (async () => {
   const orig = fs.readFileSync(APP, 'utf8');
