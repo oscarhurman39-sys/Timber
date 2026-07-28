@@ -5,7 +5,7 @@ brick: Add the next 5 plants from the buyer portfolio to the PLANTS array in tim
 since: 2026-07-20  sessions-unchanged: 0
 
 ## timber-command-centre  [active]
-brick: Paste TIMBER-GOAL-LAUNCHER.md into DeepSeek, commit whatever Phase 1 it returns to command-centre/timber-command-centre.html
+brick: Phase 3 slice 1 — Plant Intelligence search + detail with soilWarning/prune/toxicity/compliance as four separate blocks
 since: 2026-07-28  sessions-unchanged: 0
 
 ## garden-centre-bot  [parked]
