@@ -130,10 +130,24 @@ Focal point recorded here when off-centre:
 | Salvia 'Hot Lips' | salvia-hot-lips.jpg | 40% 45% — real photo; red + red/white bicolour lipped flowers, cultivar-confirmed; focus off the finger top-right |
 | Magnolia HONEY TULIP ('Jurmag5') | magnolia-honey-tulip-jurmag5.jpg | 40% 48% — real photo; single honey-yellow goblet flower in hand, cultivar-consistent; focus left of the hand |
 | Eryngium × olivierianum BIG BLUE ('Myersblue') | eryngium-olivierianum-big-blue-myersblue.jpg | 35% 50% — real photo; electric-blue spiny flowerheads, species-confirmed |
+| Lonicera × purpusii 'Winter Beauty' | (no photo — gradient fallback) | supplied photos were a water lily (wrong plant) + a cat blocking the Lonicera (label-confirmed ID); needs a winter shot of the scented cream flowers on bare stems |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.42 (Winter Beauty Honeysuckle — photo mismatch, first populated
+  toxicity)**: pre-converted schema. **Two supplied photos, neither usable**:
+  one was a water lily (Nymphaea — wrong plant entirely), the other a tuxedo cat
+  in front of the Lonicera (the nursery label 'Lonicera Winter Beauty' in-shot
+  confirms the ID, but the plant is blocked; a foliage crop was weak backlit
+  summer leaves and misses the point — Winter Beauty is bought for scented cream
+  winter flowers on BARE stems). Refused to stage the water lily (reality
+  filter) and shipped on the **gradient fallback** with verified data instead —
+  needs a proper winter shot. Also **first JSON with a populated `toxicity`
+  field** ("Fruit harmful if eaten · wear gloves") — surfaced in resilience
+  (no toxicity render yet; another argument for the toxicity/compliance display
+  build). Dec–Mar bloom (valuable winter-scent gap-filler). Gate green: 94/94,
+  8/8, SW, verifier, audit clean.
 - **v12.41 (Big Blue Sea Holly — FIRST populated compliance field)**: pre-
   converted schema + real photo. **First plant to carry a non-empty
   `compliance` value**: "PBR protected · propagation rights restricted" (Plant
