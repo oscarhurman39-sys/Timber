@@ -129,10 +129,23 @@ Focal point recorded here when off-centre:
 | Acer palmatum 'Bloodgood' | acer-palmatum-bloodgood.jpg (composited) / -cutout.png | 50% 22% — [special] single dark red-purple palmate leaf, hero-on-self (hue 350); second Acer palmatum (pair with Ōsakazuki) |
 | Salvia 'Hot Lips' | salvia-hot-lips.jpg | 40% 45% — real photo; red + red/white bicolour lipped flowers, cultivar-confirmed; focus off the finger top-right |
 | Magnolia HONEY TULIP ('Jurmag5') | magnolia-honey-tulip-jurmag5.jpg | 40% 48% — real photo; single honey-yellow goblet flower in hand, cultivar-consistent; focus left of the hand |
+| Eryngium × olivierianum BIG BLUE ('Myersblue') | eryngium-olivierianum-big-blue-myersblue.jpg | 35% 50% — real photo; electric-blue spiny flowerheads, species-confirmed |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.41 (Big Blue Sea Holly — FIRST populated compliance field)**: pre-
+  converted schema + real photo. **First plant to carry a non-empty
+  `compliance` value**: "PBR protected · propagation rights restricted" (Plant
+  Breeders' Rights — propagating 'Myersblue' for resale needs a licence).
+  Lower severity than Gunnera (sale ban) or Olive (Xylella) — a trade note, not
+  a customer safety issue — so surfaced on the **trade back** (type +
+  returnRisk), no front warning. This is the concrete trigger for a **tiered
+  compliance display**: three cards now carry compliance data at two severity
+  levels (legal-ban/biosecurity = front flag; PBR = back-only note). Recommend
+  building it next — the `compliance` field now feeds it directly. Records:
+  **sunNeed 98 (new deck max** — sea holly wants blazing sun), thirst 3
+  (near drought-proof). Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.40 (Honey Tulip Magnolia)**: pre-converted schema + real photo. First
   **trade-name-with-cultivar-code latin** on the card (Magnolia HONEY TULIP
   ('Jurmag5')) — renders fine in the subtitle, slugs to
