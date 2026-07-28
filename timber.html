@@ -44,9 +44,14 @@
 
   /* deck + flip */
   .deck{position:relative;flex:1 1 auto;margin:0 16px}
-  .card{position:absolute;inset:0;perspective:1400px;will-change:transform;
+  /* will-change lists opacity as well as transform so WebKit allocates the card's
+     compositing layer (with its alpha channel) up front. Fling animates both at once,
+     and a layer promoted mid-animation can present one unpainted frame — the white
+     flash seen when swiping on iOS. */
+  .card{position:absolute;inset:0;perspective:1400px;will-change:transform,opacity;
     transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s}
   .card-inner{position:absolute;inset:0;transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
     transition:transform .5s cubic-bezier(.2,.8,.2,1)}
   .card.flipped .card-inner{transform:rotateY(180deg)}
   .face{position:absolute;inset:0;border-radius:var(--card-radius);overflow:hidden;
@@ -106,17 +111,18 @@
   .back .fliphint{margin-top:auto;padding-top:6px}
 
   /* actions */
-  .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:flex-end;gap:16px;padding:14px 0 18px}
-  .fab{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;
-    justify-content:center;font-size:22px;background:rgba(255,255,255,.06);color:#fff;
-    box-shadow:0 6px 14px rgba(0,0,0,.25);transition:transform .12s,background .2s}
-  .fab:active{transform:scale(.92)}
-  .fab:hover{background:rgba(255,255,255,.1)}
-  .fab.skip{color:#ff6b6b;order:1}
-  .fab.back-btn{width:48px;height:48px;font-size:18px;color:var(--muted);order:2}
-  .fab.learn{width:68px;height:68px;font-size:28px;color:#1a120a;
-    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 9px 24px rgba(245,196,81,.3);order:3}
-  .fab.learn:hover{box-shadow:0 12px 28px rgba(245,196,81,.4)}
+  .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:22px;padding:16px 0 22px}
+  .fab{width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;
+    justify-content:center;font-size:24px;background:rgba(255,255,255,.08);color:#fff;
+    box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform .12s,background .2s,opacity .2s}
+  .fab:active{transform:scale(.9)}
+  .fab.skip{color:#ff6b6b}
+  .fab.back-btn{width:48px;height:48px;font-size:18px;color:var(--muted)}
+  /* undo is the only action with no swipe equivalent — dim it when there is nothing
+     to undo so the row reads as live state rather than three permanent decorations */
+  .fab.back-btn[disabled]{opacity:.3;cursor:default;box-shadow:none}
+  .fab.learn{width:72px;height:72px;font-size:30px;color:#1a120a;
+    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 10px 22px rgba(245,196,81,.35)}
 
   .empty{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:30px;gap:14px}
@@ -230,8 +236,7 @@
      The card front is assembled from the final approved artwork's own painted
      assets (art/); plant-specific values render live from PLANTS data. The card
      is authored at 420x543 and scaled to the deck with --cs. Do not restyle. */
-  .front{overflow:hidden}
-  .back{box-shadow:none}
+  .face{box-shadow:none;border-radius:0;overflow:visible}
   .tscale{position:absolute;left:50%;top:50%;width:420px;height:543px;
     transform:translate(-50%,-50%) scale(var(--cs,0.75))}
   .tscale .stamp{z-index:30}
@@ -376,7 +381,7 @@
   </div>
 </header>
 
-<div class="progress" aria-live="polite"><b id="left">0</b> to learn · <span id="done">0</span> starred · swipe or use arrow keys (← skip, → learn)</div>
+<div class="progress" aria-live="polite"><b id="left">0</b> to learn · <span id="done">0</span> starred · double-tap a card for trade data</div>
 
 <div class="deck" id="deck">
   <div class="empty" id="empty">
@@ -387,9 +392,9 @@
 </div>
 
 <div class="actions" id="actions">
-  <button class="fab skip"  id="skip"  title="Skip" aria-label="Skip this plant">✕</button>
-  <button class="fab back-btn" id="back" title="Undo" aria-label="Undo last swipe">↺</button>
-  <button class="fab learn" id="learn" title="I've learned this" aria-label="Mark as learned">★</button>
+  <button class="fab skip"  id="skip"  title="Skip (←)" aria-keyshortcuts="ArrowLeft" aria-label="Skip this plant">✕</button>
+  <button class="fab back-btn" id="back" title="Undo (Backspace)" aria-keyshortcuts="Backspace" aria-label="Undo last swipe" disabled>↺</button>
+  <button class="fab learn" id="learn" title="I've learned this (→)" aria-keyshortcuts="ArrowRight" aria-label="Mark as learned">★</button>
 </div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu">
@@ -403,7 +408,7 @@
     <div class="row" id="quizRow" role="button" tabindex="0"><span class="ic">❓</span> Quiz mode <small id="quizBestMenu"></small></div>
     <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic">📲</span> Install app</div>
     <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic">↻</span> Reset progress</div>
-    <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.</div>
+    <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.</div>
   </div>
 </div>
 
@@ -577,6 +582,7 @@ const PLANTS = [
 
 const deck=document.getElementById('deck'),empty=document.getElementById('empty');
 const leftEl=document.getElementById('left'),doneEl=document.getElementById('done'),doneMenu=document.getElementById('doneMenu');
+const backBtn=document.getElementById('back');
 let order=[],history=[],learnedCount=0;
 
 /* ---------- progress persistence (survives closing the app) ---------- */
@@ -600,7 +606,7 @@ function loadProgress(){
   }catch(e){return null;}
 }
 function restoreDeck(d){
-  deck.querySelectorAll('.card').forEach(c=>c.remove());
+  deck.querySelectorAll('.card').forEach(releaseCard);
   d.stack.forEach(renderCard);         /* saved bottom-to-top, rendered in the same order */
   order=[...d.stack];history=d.history;learnedCount=d.learnedCount;
   updateCounts();refreshEmpty();
@@ -609,7 +615,7 @@ function restoreDeck(d){
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
 
 function buildDeck(){
-  deck.querySelectorAll('.card').forEach(c=>c.remove());
+  deck.querySelectorAll('.card').forEach(releaseCard);
   order=PLANTS.map((_,i)=>i);history=[];learnedCount=0;
   [...order].reverse().forEach(renderCard);
   updateCounts();refreshEmpty();saveProgress();
@@ -807,9 +813,14 @@ function attachGestures(card){
   card.addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();end();});  /* preventDefault stops the browser
       synthesising a mouse tap after every touch tap, which would turn single taps into double-taps */
   card.addEventListener('mousedown',e=>start(e.clientX,e.clientY));
-  window.addEventListener('mousemove',e=>move(e.clientX,e.clientY));
-  window.addEventListener('mouseup',end);
+  /* the drag listeners have to live on window so a fast pointer that leaves the card
+     still finishes the gesture; scope them to the card's lifetime so a rebuilt or
+     swiped-away deck doesn't leave one pair behind per card it ever rendered */
+  card._drag=new AbortController();
+  window.addEventListener('mousemove',e=>move(e.clientX,e.clientY),{signal:card._drag.signal});
+  window.addEventListener('mouseup',end,{signal:card._drag.signal});
 }
+function releaseCard(card){card._drag?.abort();card.remove();}
 
 function handleTap(card){
   if(card.classList.contains('flipped')){card.classList.remove('flipped');card._t=0;return;}
@@ -824,14 +835,15 @@ function fling(card,dir,learned){
   const idx=+card.dataset.idx;
   card.classList.remove('flipped');
   card.style.transform=`translate(${dir*140}%,${learned?-40:60}px) rotate(${dir*24}deg)`;
-  card.style.opacity='0';setTimeout(()=>card.remove(),320);
+  card.style.opacity='0';setTimeout(()=>releaseCard(card),320);
   order=order.filter(i=>i!==idx);history.push({idx,learned});
   if(learned)learnedCount++;
   updateCounts();refreshEmpty();saveProgress();
 }
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
 function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);updateCounts();refreshEmpty();saveProgress();}
-function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;}
+function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
+  backBtn.disabled=history.length===0;}
 function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show',done);document.getElementById('actions').style.visibility=done?'hidden':'visible';}
 
 document.getElementById('learn').onclick=()=>act(true);
@@ -840,12 +852,21 @@ document.getElementById('back').onclick=undo;
 document.getElementById('reset2').onclick=buildDeck;
 document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
 
-/* keyboard shortcuts for accessibility */
+/* deck keyboard shortcuts — inert while any overlay owns the screen, so arrow keys
+   never swipe the card sitting underneath the menu, dictionary or quiz */
+function overlayOpen(){
+  return sheet.classList.contains('open')||search.classList.contains('open')||quizEl.classList.contains('open');
+}
 document.addEventListener('keydown',e=>{
-  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  const t=e.target;
+  if(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)return;
+  if(overlayOpen())return;
   if(e.key==='ArrowRight')act(true);
   else if(e.key==='ArrowLeft')act(false);
-  else if(e.key==='Backspace'||e.key==='z'||e.key==='Z')undo();
+  else if(e.key==='Backspace')undo();
+  else return;
+  e.preventDefault();   /* Backspace would otherwise trigger browser back-navigation */
 });
 
 const sheet=document.getElementById('sheet');
