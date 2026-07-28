@@ -128,10 +128,19 @@ Focal point recorded here when off-centre:
 | Olea europaea | olea-europaea.jpg (composited) / -cutout.png | 45% 30% — [special] cutout hero-on-self (hue 75); narrow silver-grey leaves, species-confirmed |
 | Acer palmatum 'Bloodgood' | acer-palmatum-bloodgood.jpg (composited) / -cutout.png | 50% 22% — [special] single dark red-purple palmate leaf, hero-on-self (hue 350); second Acer palmatum (pair with Ōsakazuki) |
 | Salvia 'Hot Lips' | salvia-hot-lips.jpg | 40% 45% — real photo; red + red/white bicolour lipped flowers, cultivar-confirmed; focus off the finger top-right |
+| Magnolia HONEY TULIP ('Jurmag5') | magnolia-honey-tulip-jurmag5.jpg | 40% 48% — real photo; single honey-yellow goblet flower in hand, cultivar-consistent; focus left of the hand |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.40 (Honey Tulip Magnolia)**: pre-converted schema + real photo. First
+  **trade-name-with-cultivar-code latin** on the card (Magnolia HONEY TULIP
+  ('Jurmag5')) — renders fine in the subtitle, slugs to
+  magnolia-honey-tulip-jurmag5. A yellow magnolia (goblet honey-yellow flowers)
+  — species/cultivar consistent with Oscar's in-hand photo. growth 6 (slow,
+  magnolias take years), container "no" (a 4 m tree), Mar-Apr bloom (early —
+  frost-vulnerable, kept the caveat). Fourth flower-in-hand shot handled by
+  focusing off the hand. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.39 (Hot Lips Sage — first JSON with the new toxicity + compliance
   fields)**: Oscar updated the ChatGPT prompt per the v12.38 feedback, and this
   JSON is the first to arrive with dedicated **`toxicity` and `compliance`

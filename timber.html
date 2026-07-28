@@ -1004,6 +1004,18 @@ const PLANTS = [
    hardiness:"H5", resilience:"drought tolerant · coastal",
    uses:"pollinators · gravel gardens · containers", size:"0.5–1 m H × 0.5–1 m W",
    seasonalImpact:"", growthSpeed:12, pestRisk:8, thirst:6, careLevel:8, sunNeed:90, sunMin:65},
+  {common:"Honey Tulip Magnolia", latin:"Magnolia HONEY TULIP ('Jurmag5')", hue:48,
+   visual:"Goblet-shaped honey-yellow flowers softly flushed pink at the base",
+   water:"Moderate; water in dry spells",
+   aspect:"South / West",
+   soil:"Moist, acid to neutral; Shelter from cold winds and late frost",
+   prune:"Prune minimally from midsummer to early autumn",
+   source:"", peak:"Mar-Apr", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"trade name HONEY TULIP; cultivar code 'Jurmag5'",
+   hardiness:"H5", resilience:"cold hardy once established",
+   uses:"specimen · spring colour · small gardens", size:"2.5–4 m H × 2.5–4 m W",
+   seasonalImpact:"", growthSpeed:6, pestRisk:8, thirst:10, careLevel:7, sunNeed:75, sunMin:45},
 ];
 /* PLANTS:END */
 
@@ -1099,7 +1111,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
 }
 /* fold diacritics first (ō→o, ā→a…) so Japanese cultivar names slug sensibly */
 const slugLatin=l=>l.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%'};
+const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
   const top=102.9,bot=198.1,ax=23.2;
