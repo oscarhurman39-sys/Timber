@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 8;  // plants in the demo deck
+const NPLANTS = 9;  // plants in the demo deck
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -69,7 +69,7 @@ function topFlipped(page) {
 }
 
 (async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell' });
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const pageErrors = [];
   page.on('pageerror', e => pageErrors.push(String(e)));
@@ -405,7 +405,7 @@ function topFlipped(page) {
   /* ---- 14. data integrity: exact PLANTS field names ---- */
   const fieldCheck = await page.evaluate(() => {
     const required = ['common','latin','hue','visual','water','aspect','soil','prune','source','peak','order','bench','root','trade','retail','margin','type','shrink','returnRisk','pots','cvs','hardiness','resilience','uses','size'];
-    return PLANTS.length === 8 && PLANTS.every(p => required.every(k => k in p)) &&
+    return PLANTS.length === 9 && PLANTS.every(p => required.every(k => k in p)) &&
       PLANTS[0].trade === '2L £3.80–£4.50' && PLANTS[2].latin === 'Weigela florida ‘Nana Variegata’' &&
       PLANTS[3].pestRisk === 3 && PLANTS[4].hardiness === 'H2';
   });

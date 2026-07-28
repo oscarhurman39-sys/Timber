@@ -48,7 +48,7 @@ const count = latins.length + 1;
   /* ---- 2. photo ---- */
   if (!fs.existsSync(photoPath)) die('photo not found: ' + photoPath);
   const { chromium } = require('playwright');
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell' });
   const page = await browser.newPage();
   await page.setContent('<div></div>');
   const b64 = fs.readFileSync(photoPath).toString('base64');
