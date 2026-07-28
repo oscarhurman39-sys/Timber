@@ -127,10 +127,22 @@ Focal point recorded here when off-centre:
 | Cornus controversa 'Variegata' | cornus-controversa-variegata.jpg | 42% 48% — real photo; cream-margined arcuate-veined leaves, species-confirmed; focus left of the background pot/paving |
 | Olea europaea | olea-europaea.jpg (composited) / -cutout.png | 45% 30% — [special] cutout hero-on-self (hue 75); narrow silver-grey leaves, species-confirmed |
 | Acer palmatum 'Bloodgood' | acer-palmatum-bloodgood.jpg (composited) / -cutout.png | 50% 22% — [special] single dark red-purple palmate leaf, hero-on-self (hue 350); second Acer palmatum (pair with Ōsakazuki) |
+| Salvia 'Hot Lips' | salvia-hot-lips.jpg | 40% 45% — real photo; red + red/white bicolour lipped flowers, cultivar-confirmed; focus off the finger top-right |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 
 ## 5. Decision changelog
 
+- **v12.39 (Hot Lips Sage — first JSON with the new toxicity + compliance
+  fields)**: Oscar updated the ChatGPT prompt per the v12.38 feedback, and this
+  JSON is the first to arrive with dedicated **`toxicity` and `compliance`
+  fields** (both empty here — correctly, Hot Lips is neither toxic nor
+  restricted). They're captured but **not yet rendered** on the card — when a
+  future plant populates them, that's the hook for the parked compliance-ribbon
+  + a toxicity row (the fields now exist to drive them cleanly instead of
+  improvising into soilWarning/resilience). Second Salvia in the deck (with
+  'Blue Spire'), distinct slug. Real photo; the red + red/white bicolour lipped
+  flowers confirm the cultivar (Hot Lips' blooms shift colour with temperature).
+  Clean pass. Gate green: 94/94, 8/8, SW, verifier, audit clean.
 - **v12.38 (Bloodgood Japanese Maple)**: pre-converted schema + cutout, hero-on-
   self (hue 350). Second Acer palmatum in the deck — the dark red-purple
   'Bloodgood' paired with the autumn-scarlet 'Ōsakazuki', distinct slug. Single
