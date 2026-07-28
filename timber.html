@@ -22,6 +22,10 @@
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   [hidden]{display:none!important}
   html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
+  /* carry the app background on the canvas as well as body: embedded hosts (the
+     artifact frame sets body{background:#faf9f5}) otherwise show near-white
+     through any pixel body does not cover */
+  html{background:radial-gradient(120% 80% at 50% -10%,var(--bg2),var(--bg))}
   body{
     background:radial-gradient(120% 80% at 50% -10%,var(--bg2),var(--bg));
     color:var(--ink);
