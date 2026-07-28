@@ -62,7 +62,7 @@ To share Timber as one file with no server — a Claude Artifact, an email attac
 build it:
 
 ```sh
-node tools/build-standalone.js        # -> dist/timber-standalone.html (~3.4MB)
+node tools/build-standalone.js        # -> dist/timber-standalone.html (~3.7MB)
 ```
 
 That re-encodes `art/` and `photos/` to WebP and inlines every one of them as a `data:` URI, so the
