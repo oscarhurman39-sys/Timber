@@ -106,15 +106,17 @@
   .back .fliphint{margin-top:auto;padding-top:6px}
 
   /* actions */
-  .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:22px;padding:16px 0 22px}
-  .fab{width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;
-    justify-content:center;font-size:24px;background:rgba(255,255,255,.08);color:#fff;
-    box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform .12s}
-  .fab:active{transform:scale(.9)}
-  .fab.skip{color:#ff6b6b}
-  .fab.back-btn{width:48px;height:48px;font-size:18px;color:var(--muted)}
-  .fab.learn{width:72px;height:72px;font-size:30px;color:#1a120a;
-    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 10px 22px rgba(245,196,81,.35)}
+  .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:flex-end;gap:16px;padding:14px 0 18px}
+  .fab{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;
+    justify-content:center;font-size:22px;background:rgba(255,255,255,.06);color:#fff;
+    box-shadow:0 6px 14px rgba(0,0,0,.25);transition:transform .12s,background .2s}
+  .fab:active{transform:scale(.92)}
+  .fab:hover{background:rgba(255,255,255,.1)}
+  .fab.skip{color:#ff6b6b;order:1}
+  .fab.back-btn{width:48px;height:48px;font-size:18px;color:var(--muted);order:2}
+  .fab.learn{width:68px;height:68px;font-size:28px;color:#1a120a;
+    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 9px 24px rgba(245,196,81,.3);order:3}
+  .fab.learn:hover{box-shadow:0 12px 28px rgba(245,196,81,.4)}
 
   .empty{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:30px;gap:14px}
@@ -228,7 +230,8 @@
      The card front is assembled from the final approved artwork's own painted
      assets (art/); plant-specific values render live from PLANTS data. The card
      is authored at 420x543 and scaled to the deck with --cs. Do not restyle. */
-  .face{box-shadow:none;border-radius:0;overflow:visible}
+  .front{overflow:hidden}
+  .back{box-shadow:none}
   .tscale{position:absolute;left:50%;top:50%;width:420px;height:543px;
     transform:translate(-50%,-50%) scale(var(--cs,0.75))}
   .tscale .stamp{z-index:30}
@@ -373,7 +376,7 @@
   </div>
 </header>
 
-<div class="progress" aria-live="polite"><b id="left">0</b> to learn · <span id="done">0</span> starred · double-tap a card for trade data</div>
+<div class="progress" aria-live="polite"><b id="left">0</b> to learn · <span id="done">0</span> starred · swipe or use arrow keys (← skip, → learn)</div>
 
 <div class="deck" id="deck">
   <div class="empty" id="empty">
@@ -836,6 +839,14 @@ document.getElementById('skip').onclick=()=>act(false);
 document.getElementById('back').onclick=undo;
 document.getElementById('reset2').onclick=buildDeck;
 document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
+
+/* keyboard shortcuts for accessibility */
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight')act(true);
+  else if(e.key==='ArrowLeft')act(false);
+  else if(e.key==='Backspace'||e.key==='z'||e.key==='Z')undo();
+});
 
 const sheet=document.getElementById('sheet');
 document.getElementById('menuBtn').onclick=()=>sheet.classList.add('open');
