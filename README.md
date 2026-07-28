@@ -40,10 +40,15 @@ node tools/check-plant-json.js my-plant.json    # errors out rather than guessin
 | ↺ | Undo the last swipe (corrects the count) |
 | Double-tap a card | Flip to the **Buyer Trade Sheet** (prices, margin, order weeks, risk) |
 | Tap the back | Flip back — swiping is locked while flipped |
-| 🔍 top right | **Search** — type a common or latin name, get the full info sheet instantly |
+| ← → ↑ ↓ | Keyboard: skip / learn / undo / flip (desktop and tablets with a keyboard) |
+| 🔍 top right | **Search** — type a common or latin name, get the full info sheet instantly. Words match in any order and cultivar quotes are ignored, so `kniphofia pyromania` and `hydrangea sweet cupcake` both find their plant; best match ranks first |
 | 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
 | 🔊 next to latin name | Speaks the latin name aloud (built-in speech engine, Italian phonology; no files, works for every plant you add). Hidden on devices without speech support |
 | ☰ menu | Learned count, Dictionary mode, **Quiz mode** (streak + best), Install app, Reset progress |
+
+Plants added from the plant-JSON route carry no buyer pricing yet. The trade sheet drops the
+fields nobody has filled in rather than showing blank cells — a blank price box reads as a
+missing price, not as one that was never recorded — and says so once instead.
 
 Progress (learned/skipped/undo history) and your best quiz streak persist in the browser via
 localStorage — closing the app doesn't lose them. "Reset progress" / "Reset deck" clears the deck

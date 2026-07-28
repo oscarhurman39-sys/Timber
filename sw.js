@@ -4,7 +4,18 @@
    their next load without needing a sw.js change. */
 const CACHE = 'timber-v1';
 const CORE = './timber.html';
-const EXTRA = ['./', './index.html'];
+// The painted card template. Without these the card front has no fallback — it renders as bare
+// text — so they are pre-cached at install rather than left to the runtime cache, which only
+// fills once a visit has actually rendered every card. Photos keep the runtime path: they have a
+// gradient fallback, and the list grows with every plant added.
+// tests/sw-update-test.js fails if this list drifts from the art/ files timber.html references.
+const ART = [
+  'band-full', 'crest-blank', 'frame-full', 'growth-diamond', 'parch-swatch', 'plaque-full',
+  'rail-patch-h', 'rail-patch-s', 'soil-full', 'sun-small',
+  'widget-drop-fill', 'widget-drop-out', 'widget-seca-fill', 'widget-seca-out',
+  'widget-spray-fill', 'widget-spray-out',
+].map(n => './art/' + n + '.png');
+const EXTRA = ['./', './index.html', ...ART];
 
 self.addEventListener('install', e => {
   e.waitUntil(

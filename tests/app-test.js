@@ -244,8 +244,9 @@ function topFlipped(page) {
   await page.fill('#searchInput', 'e'); await page.waitForTimeout(100);
   rows = await page.locator('.s-row').count();
   check('query "e" matches all', rows === NPLANTS, 'rows=' + rows);
-  await page.locator('.s-row').nth(2).click(); await page.waitForTimeout(150);
-  check('third row opens Weigela detail', (await page.locator('#searchDetail').innerText()).includes('Weigela'));
+  /* by name, not by index — results are relevance-ranked, so position is not a fixture */
+  await page.locator('.s-row', { hasText: 'Weigela' }).click(); await page.waitForTimeout(150);
+  check('clicking a result row opens that plant', (await page.locator('#searchDetail').innerText()).includes('Weigela'));
   check('detail moves focus to back button', await page.evaluate(() => document.activeElement && document.activeElement.id === 'dBack'));
   await page.focus('#searchInput');
   await page.keyboard.press('Enter'); await page.waitForTimeout(150);
@@ -354,6 +355,100 @@ function topFlipped(page) {
     !('speechSynthesis' in window) ? [...document.querySelectorAll('.say')].every(b => b.hidden) : 'tts-still-present');
   check('say button hidden when speech unsupported', noTtsHidden === true, String(noTtsHidden));
   await noTtsCtx.close();
+
+  /* ---- 11g. trade sheet with incomplete buyer data ----
+     Plants added from the plant-JSON route carry no buyer pricing. Blank cells read as a
+     missing price rather than one nobody has recorded, so empty fields are dropped. */
+  await page.click('#searchBtn'); await page.waitForTimeout(400);
+  await page.fill('#searchInput', 'spindle'); await page.waitForTimeout(100);
+  await page.click('.s-row'); await page.waitForTimeout(200);
+  const sparse = await page.evaluate(() => {
+    const d = document.getElementById('searchDetail');
+    return {
+      text: d.innerText,
+      priceBoxes: d.querySelectorAll('.price').length,
+      blankCells: [...d.querySelectorAll('.grid .g')].filter(g => !g.querySelector('.n').textContent.trim()).length,
+      labels: [...d.querySelectorAll('.grid .g .l')].map(l => l.textContent),
+    };
+  });
+  check('sparse plant: no blank price box', sparse.priceBoxes === 0 && sparse.text.includes('No buyer pricing recorded'), JSON.stringify(sparse.labels));
+  check('sparse plant: no empty grid cells', sparse.blankCells === 0, 'blank=' + sparse.blankCells);
+  check('sparse plant: unrecorded fields dropped, not shown empty',
+    !sparse.labels.includes('Source') && !sparse.labels.includes('Order') && !sparse.labels.includes('Type'), JSON.stringify(sparse.labels));
+  check('sparse plant: no orphan "·" where bench/root would be', !sparse.labels.includes('Bench · Root'), JSON.stringify(sparse.labels));
+  check('sparse plant: recorded fields still shown',
+    sparse.labels.includes('Peak') && sparse.labels.includes('Size') && sparse.labels.includes('Uses'), JSON.stringify(sparse.labels));
+  await page.click('#dCustomer'); await page.waitForTimeout(150);
+  const sparseCust = await page.locator('#searchDetail').innerText();
+  check('sparse plant: customer view says price is not on file, shows no blank price',
+    sparseCust.includes('Price not on file') && !/Price\s*$/m.test(sparseCust), sparseCust.slice(-80));
+  await page.keyboard.press('Escape'); await page.keyboard.press('Escape'); await page.keyboard.press('Escape');
+  await page.waitForTimeout(250);
+
+  /* a fully-recorded plant must be unchanged — and reachable, not clipped */
+  await page.click('#searchBtn'); await page.waitForTimeout(400);
+  await page.fill('#searchInput', 'nand'); await page.waitForTimeout(100);
+  await page.click('.s-row'); await page.waitForTimeout(200);
+  const richLabels = await page.evaluate(() => [...document.querySelectorAll('#searchDetail .grid .g .l')].map(l => l.textContent));
+  check('rich plant: every recorded trade field still rendered',
+    ['Source', 'Peak', 'Order', 'Bench · Root', 'Type', 'Shrink', 'Return risk', 'Pot sizes', 'Size', 'Cultivars', 'Resilience', 'Uses']
+      .every(l => richLabels.includes(l)), JSON.stringify(richLabels));
+  await page.keyboard.press('Escape'); await page.keyboard.press('Escape'); await page.waitForTimeout(250);
+
+  /* regression: .backfit is a flex column, so the grid used to be squashed and its own
+     overflow:hidden ate the last rows outright — no scrollbar, data simply gone */
+  await doubleTap(page);
+  const backGeom = await page.evaluate(() => {
+    const cards = document.querySelectorAll('.card');
+    const bf = cards[cards.length - 1].querySelector('.backfit');
+    const g = bf.querySelector('.grid');
+    const last = [...bf.querySelectorAll('.grid .g')].pop();
+    return { gridClipped: g.scrollHeight - g.clientHeight, lastLabel: last.querySelector('.l').textContent,
+             scrollable: bf.scrollHeight >= bf.clientHeight };
+  });
+  check('card back: trade grid is not clipped', backGeom.gridClipped === 0, 'clipped by ' + backGeom.gridClipped + 'px');
+  check('card back: last trade field survives to the DOM end', backGeom.lastLabel === 'Uses', backGeom.lastLabel);
+  check('card back: overflow goes to the scrollable panel', backGeom.scrollable);
+  await singleTap(page); await page.waitForTimeout(200);
+
+  /* ---- 11h. search matching: how staff actually type with a customer waiting ---- */
+  await page.click('#searchBtn'); await page.waitForTimeout(400);
+  const searchFor = async q => {
+    await page.fill('#searchInput', q); await page.waitForTimeout(120);
+    return page.evaluate(() => [...document.querySelectorAll('.s-row .s-names b')].map(b => b.textContent));
+  };
+  let r = await searchFor('kniphofia pyromania');
+  check('search: cultivar quotes do not block a match', r.length === 1 && r[0] === 'Red Hot Poker', JSON.stringify(r));
+  r = await searchFor('hydrangea sweet cupcake');
+  check('search: words match in any order', r[0] === 'Sweet Cupcake Hydrangea', JSON.stringify(r));
+  r = await searchFor('red');
+  check('search: name match outranks a buried one', r[0] === 'Red Hot Poker' && r.length > 1, JSON.stringify(r));
+  r = await searchFor('nandina hydrangea');
+  check('search: every typed word must match', r.length === 0, JSON.stringify(r));
+  r = await searchFor('  Nandina  ');
+  check('search: stray whitespace tolerated', r.length === 1 && r[0] === 'Heavenly Bamboo', JSON.stringify(r));
+  await page.keyboard.press('Escape'); await page.waitForTimeout(250);
+
+  /* ---- 11i. keyboard shortcuts for the deck ---- */
+  await page.evaluate(() => document.activeElement && document.activeElement.blur());
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(450);
+  c = await counts(page);
+  check('key →: marks learned', c.left === NPLANTS-1 && c.done === 1, JSON.stringify(c));
+  await page.keyboard.press('ArrowLeft'); await page.waitForTimeout(450);
+  c = await counts(page);
+  check('key ←: skips', c.left === NPLANTS-2 && c.done === 1, JSON.stringify(c));
+  await page.keyboard.press('ArrowUp'); await page.keyboard.press('ArrowUp'); await page.waitForTimeout(300);
+  c = await counts(page);
+  check('key ↑: undoes', c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  await page.keyboard.press('ArrowDown'); await page.waitForTimeout(600);
+  check('key ↓: flips the top card', await topFlipped(page) === true);
+  await page.keyboard.press('ArrowDown'); await page.waitForTimeout(600);
+  check('key ↓ again: flips back', await topFlipped(page) === false);
+  await page.click('#searchBtn'); await page.waitForTimeout(400);
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(400);
+  c = await counts(page);
+  check('deck keys ignored while search is open', c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  await page.keyboard.press('Escape'); await page.waitForTimeout(250);
 
   /* ---- 12. PWA: manifest + service worker ---- */
   const manifest = await page.evaluate(() => {

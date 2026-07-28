@@ -87,8 +87,9 @@
     transform:translate(-50%,-50%);border-radius:16px;background:linear-gradient(180deg,#0d1c13,#0a160e);
     padding:18px 18px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
     box-shadow:0 18px 40px rgba(0,0,0,.45)}
-  .back-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;
-    border-bottom:1px solid rgba(255,255,255,.09);padding-bottom:10px}
+  /* sticky: the sheet scrolls now, and you need to keep seeing which plant you're reading */
+  .back-head{position:sticky;top:-18px;z-index:1;display:flex;align-items:baseline;justify-content:space-between;
+    gap:8px;background:#0d1c13;border-bottom:1px solid rgba(255,255,255,.09);padding:18px 0 10px;margin-top:-18px}
   .back-head h3{margin:0;font-size:18px;font-weight:800;letter-spacing:-.3px}
   .back-head .h{font-size:11px;font-weight:800;color:#04120a;background:var(--leaf1);
     padding:3px 8px;border-radius:20px;letter-spacing:.3px}
@@ -103,7 +104,14 @@
   .grid .g.full{grid-column:1 / -1}
   .grid .g .l{font-size:9px;letter-spacing:1.1px;text-transform:uppercase;color:var(--leaf1);opacity:.85}
   .grid .g .n{font-size:12.5px;line-height:1.4;color:#eafff2;margin-top:3px}
-  .back .fliphint{margin-top:auto;padding-top:6px}
+  /* .backfit is a flex column, so its children shrink by default — the grid was being squashed
+     and its own overflow:hidden silently ate the last rows (Cultivars/Resilience/Uses) with no
+     scrollbar to reveal them. Keeping natural heights hands the overflow to .backfit, which scrolls. */
+  .backfit>*{flex:0 0 auto}
+  .back .fliphint{position:sticky;bottom:-16px;margin-top:auto;padding:10px 0 8px;
+    background:linear-gradient(180deg,rgba(10,22,14,0),#0a160e 45%)}
+  .nodata{font-size:12px;line-height:1.4;color:var(--muted);background:rgba(255,255,255,.04);
+    border:1px dashed rgba(255,255,255,.12);border-radius:12px;padding:10px 12px}
 
   /* actions */
   .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:22px;padding:16px 0 22px}
@@ -663,6 +671,38 @@ function splitSoil(str){                      /* value = soil type; warning = th
   return{val:str.slice(0,i).trim(),warn:cap(str.slice(i+1).replace(/^[;,·\s]+/,'').trim())};
 }
 const slugLatin=l=>l.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+
+/* ---- trade sheet: a field with no value yet must read as absent, not as a blank price box.
+   Plants added from the plant-JSON route carry no buyer data, so most of this grid is empty
+   for them; an empty cell rendered anyway looks like a missing price rather than one nobody
+   has recorded. Drop the empty rows and say so once. ---- */
+const has=v=>v!=null&&String(v).trim()!=='';
+const joinDot=(...v)=>v.filter(has).map(x=>String(x).trim()).join(' · ');
+function tradeCells(p){
+  const rows=[['Source',p.source],['Peak',p.peak],['Order',p.order],
+    ['Bench · Root',joinDot(p.bench,p.root)],['Type',p.type,1],['Shrink',p.shrink,1],
+    ['Return risk',p.returnRisk,1],['Pot sizes',p.pots],['Size',p.size],['Cultivars',p.cvs,1],
+    ['Resilience',p.resilience],['Uses',p.uses]]
+    .filter(r=>has(r[1])).map(r=>({l:r[0],n:r[1],full:!!r[2]}));
+  /* a half-width cell left alone on its row would show as a gap — widen it */
+  let col=0;
+  for(let i=0;i<rows.length;i++){
+    if(rows[i].full){col=0;continue;}
+    if(col===0&&(i===rows.length-1||rows[i+1].full)){rows[i].full=true;continue;}
+    col=(col+1)%2;
+  }
+  return rows.map(r=>`<div class="g${r.full?' full':''}"><div class="l">${r.l}</div><div class="n">${r.n}</div></div>`).join('');
+}
+function priceHTML(p){
+  if(!has(p.trade)&&!has(p.retail)&&!has(p.margin))
+    return '<div class="nodata">No buyer pricing recorded for this plant yet.</div>';
+  const cell=(cls,l,v)=>`<div class="cell${cls}"><div class="l">${l}</div><div class="n">${has(v)?v:'—'}</div></div>`;
+  return `<div class="price">${cell('','Trade',p.trade)}${cell('','Retail',p.retail)}${cell(' m','Margin',p.margin)}</div>`;
+}
+function tradeSheetHTML(p){
+  const cells=tradeCells(p);
+  return priceHTML(p)+(cells?`<div class="grid">${cells}</div>`:'');
+}
 const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
@@ -745,25 +785,7 @@ function renderCard(idx){
     </div>
     <div class="face back"><div class="backfit">
       <div class="back-head"><h3>${p.latin}</h3><span class="h">${p.hardiness}</span></div>
-      <div class="price">
-        <div class="cell"><div class="l">Trade</div><div class="n">${p.trade}</div></div>
-        <div class="cell"><div class="l">Retail</div><div class="n">${p.retail}</div></div>
-        <div class="cell m"><div class="l">Margin</div><div class="n">${p.margin}</div></div>
-      </div>
-      <div class="grid">
-        <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
-        <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div></div>
-        <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
-        <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
-        <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
-        <div class="g full"><div class="l">Shrink</div><div class="n">${p.shrink}</div></div>
-        <div class="g full"><div class="l">Return risk</div><div class="n">${p.returnRisk}</div></div>
-        <div class="g"><div class="l">Pot sizes</div><div class="n">${p.pots}</div></div>
-        <div class="g"><div class="l">Size</div><div class="n">${p.size}</div></div>
-        <div class="g full"><div class="l">Cultivars</div><div class="n">${p.cvs}</div></div>
-        <div class="g"><div class="l">Resilience</div><div class="n">${p.resilience}</div></div>
-        <div class="g"><div class="l">Uses</div><div class="n">${p.uses}</div></div>
-      </div>
+      ${tradeSheetHTML(p)}
       <div class="fliphint">⇅ Tap to flip back</div>
     </div></div>
    </div>`;
@@ -808,10 +830,11 @@ function attachGestures(card){
   window.addEventListener('mouseup',end);
 }
 
+function handleFlip(card){card.classList.toggle('flipped');card._t=0;}
 function handleTap(card){
-  if(card.classList.contains('flipped')){card.classList.remove('flipped');card._t=0;return;}
+  if(card.classList.contains('flipped')){handleFlip(card);return;}
   const now=Date.now();
-  if(card._t&&now-card._t<300){card.classList.add('flipped');card._t=0;}  /* double-tap → flip */
+  if(card._t&&now-card._t<300){handleFlip(card);}                        /* double-tap → flip */
   else{card._t=now;}
 }
 
@@ -864,10 +887,37 @@ function backToResults(){  /* from detail view — keep keyboard focus somewhere
   (first||searchInput).focus();
 }
 
+/* Matching has to survive how staff actually type with a customer waiting: no cultivar quotes,
+   words in any order, accents dropped. "kniphofia pyromania" and "hydrangea sweet cupcake" both
+   found nothing before, because the raw substring had to span a ‘…’ or the words in file order. */
+const norm=s=>(s==null?'':String(s)).toLowerCase()
+  .normalize('NFD').replace(/[\u0300-\u036f]/g,'')   /* fold accents */
+  .replace(/[^a-z0-9]+/g,' ').trim();                /* ‘Sweet Cupcake’ -> sweet cupcake */
+/* a hit on the name is worth more than a hit buried in a description */
+const SEARCH_FIELDS=[['common',100],['latin',90],['cvs',40],['uses',25],['visual',20]];
+function scorePlant(p,tokens){
+  let total=0;
+  for(const tok of tokens){
+    let best=0;
+    for(const [f,w] of SEARCH_FIELDS){
+      const hay=norm(p[f]);if(!hay)continue;
+      const at=hay.indexOf(tok);if(at===-1)continue;
+      /* word-start beats mid-word; the field's first word beats the rest */
+      best=Math.max(best,w+(at===0||hay[at-1]===' '?10:0)+(at===0?5:0));
+    }
+    if(!best)return -1;            /* every word the user typed must land somewhere */
+    total+=best;
+  }
+  return total;
+}
+
 function renderResults(q){
-  const t=q.trim().toLowerCase();
-  const hits=PLANTS.map((p,i)=>({p,i}))
-    .filter(({p})=>!t||[p.common,p.latin,p.cvs,p.uses,p.visual].join(' ').toLowerCase().includes(t));
+  const tokens=norm(q).split(' ').filter(Boolean);
+  let hits=PLANTS.map((p,i)=>({p,i}));
+  if(tokens.length){
+    hits=hits.map(h=>({...h,score:scorePlant(h.p,tokens)})).filter(h=>h.score>=0)
+             .sort((a,b)=>b.score-a.score);   /* stable: equal scores keep portfolio order */
+  }
   if(!hits.length){
     searchResults.innerHTML='<div class="s-none">No plants match that name.</div>';
     return;
@@ -896,25 +946,7 @@ function showPlant(i){
       <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
       <li><span class="k">✂️</span><span class="v"><b>Prune</b>${p.prune}</span></li>
     </ul>
-    <div class="price">
-      <div class="cell"><div class="l">Trade</div><div class="n">${p.trade}</div></div>
-      <div class="cell"><div class="l">Retail</div><div class="n">${p.retail}</div></div>
-      <div class="cell m"><div class="l">Margin</div><div class="n">${p.margin}</div></div>
-    </div>
-    <div class="grid">
-      <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
-      <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div></div>
-      <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
-      <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
-      <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
-      <div class="g full"><div class="l">Shrink</div><div class="n">${p.shrink}</div></div>
-      <div class="g full"><div class="l">Return risk</div><div class="n">${p.returnRisk}</div></div>
-      <div class="g"><div class="l">Pot sizes</div><div class="n">${p.pots}</div></div>
-      <div class="g"><div class="l">Size</div><div class="n">${p.size}</div></div>
-      <div class="g full"><div class="l">Cultivars</div><div class="n">${p.cvs}</div></div>
-      <div class="g"><div class="l">Resilience</div><div class="n">${p.resilience}</div></div>
-      <div class="g"><div class="l">Uses</div><div class="n">${p.uses}</div></div>
-    </div>`;
+    ${tradeSheetHTML(p)}`;
   searchResults.hidden=true;
   searchDetail.hidden=false;
   const dBack=document.getElementById('dBack');
@@ -936,16 +968,14 @@ function showCustomer(i){
     <div class="c-latin">${p.latin}</div>
     <div class="c-eyebrow">${p.visual}</div>
     <ul class="facts">
-      <li><span class="k">💧</span><span class="v"><b>Watering</b>${p.water}</span></li>
-      <li><span class="k">☀️</span><span class="v"><b>Where to plant</b>${p.aspect}</span></li>
-      <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
-      <li><span class="k">✂️</span><span class="v"><b>Pruning</b>${p.prune}</span></li>
-      <li><span class="k">❄️</span><span class="v"><b>Hardiness</b>${p.hardiness}</span></li>
-      <li><span class="k">📏</span><span class="v"><b>Grows to</b>${p.size}</span></li>
-      <li><span class="k">🌿</span><span class="v"><b>Great for</b>${p.uses}</span></li>
-      <li><span class="k">✨</span><span class="v"><b>Varieties</b>${p.cvs}</span></li>
+      ${[['💧','Watering',p.water],['☀️','Where to plant',p.aspect],['🪴','Soil',p.soil],
+         ['✂️','Pruning',p.prune],['❄️','Hardiness',p.hardiness],['📏','Grows to',p.size],
+         ['🌿','Great for',p.uses],['✨','Varieties',p.cvs]]
+        .filter(([,,v])=>has(v))   /* a blank line held up to a customer is worse than no line */
+        .map(([k,l,v])=>`<li><span class="k">${k}</span><span class="v"><b>${l}</b>${v}</span></li>`).join('')}
     </ul>
-    <div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`;
+    ${has(p.retail)?`<div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`
+                   :`<div class="nodata">Price not on file — check the label or the till.</div>`}`;
   searchResults.hidden=true;
   searchDetail.hidden=false;
   const back=document.getElementById('dStaff');
@@ -974,6 +1004,19 @@ document.addEventListener('keydown',e=>{
   }else if(sheet.classList.contains('open'))closeSheet();
 });
 
+/* ---------- keyboard shortcuts for the deck (desktop / tablet-with-keyboard) ---------- */
+const DECK_KEYS={ArrowRight:()=>act(true),ArrowLeft:()=>act(false),ArrowUp:undo,
+                 ArrowDown:()=>{const c=topCard();if(c)handleFlip(c);}};
+document.addEventListener('keydown',e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey)return;
+  if(search.classList.contains('open')||sheet.classList.contains('open')||quizEl.classList.contains('open'))return;
+  /* only when nothing is focused — otherwise the fabs' own Enter/Space would fire twice */
+  if(e.target!==document.body)return;
+  const fn=DECK_KEYS[e.key];
+  if(!fn)return;
+  e.preventDefault();fn();
+});
+
 /* ---------- quiz mode (opened from the top-right menu, compact overlay) ---------- */
 const quizEl=document.getElementById('quiz');
 const qQuestion=document.getElementById('qQuestion'),qOptions=document.getElementById('qOptions');
@@ -995,11 +1038,18 @@ function updateQuizStats(){
   qStreakEl.textContent=qStreak;qBestEl.textContent=qBest;
   document.getElementById('quizBestMenu').textContent=qBest?'best '+qBest:'';
 }
+let qLastAnswer=null;
 function nextQuestion(){
   clearTimeout(qTimer);
-  const answer=PLANTS[Math.floor(Math.random()*PLANTS.length)];
-  /* only ask about fields whose value is unique to the answer — no ambiguous questions */
-  const clues=QUIZ_CLUES.filter(([f])=>PLANTS.filter(p=>p[f]===answer[f]).length===1);
+  /* pick a plant that can actually be asked about: at least one field whose value is unique
+     to it (an ambiguous clue has no right answer), and not the plant just asked */
+  const askable=PLANTS.map(p=>({p,clues:QUIZ_CLUES.filter(([f])=>has(p[f])&&PLANTS.filter(q=>q[f]===p[f]).length===1)}))
+                      .filter(x=>x.clues.length);
+  if(!askable.length){qQuestion.textContent='Not enough distinct plant data to build a question yet.';qOptions.innerHTML='';return;}
+  const pool=askable.length>1?askable.filter(x=>x.p!==qLastAnswer):askable;
+  const pick=pool[Math.floor(Math.random()*pool.length)];
+  const answer=pick.p;qLastAnswer=answer;
+  const clues=pick.clues;
   const [field,prompt]=clues[Math.floor(Math.random()*clues.length)];
   qQuestion.innerHTML=`${prompt} <em>“${answer[field]}”</em>`;
   const opts=shuffle([...PLANTS]).slice(0,4);

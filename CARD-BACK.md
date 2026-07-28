@@ -178,7 +178,17 @@ order it's useful to collect:
 ## 6. Open decisions
 
 - Card-back **aspect**: same 1103×1426 footprint as the front (it flips in place),
-  so long sections need scroll or tighter type. Current back already scrolls.
+  so long sections need scroll or tighter type. The current back now genuinely scrolls —
+  it previously only appeared to. `.backfit` is a flex column, so the trade grid was
+  shrinking as a flex item and its own `overflow:hidden` silently ate the last rows
+  (Cultivars / Resilience / Uses were unreachable on any data-rich plant, with no
+  scrollbar to reveal them). Fixed by pinning children to their natural height so the
+  overflow reaches the scrollable panel; the head is sticky so the plant name survives
+  the scroll. Guarded by `card back: trade grid is not clipped` in `tests/app-test.js`.
+- Rule 1's **"blank stays blank"** now actually holds in the live app: the trade sheet
+  omits unrecorded fields instead of rendering empty scaffolding, and shows one honest
+  line when there is no pricing at all. The customer view does the same rather than
+  holding up an empty "Price".
 - Whether **Remember** (the 🔖 bookmark approved back in v4) ships with this build.
 - Whether the **customer view** should gain a safe subset of the back (aftercare +
   toxicity + wildlife, no trade) — likely yes, it's the natural hand-over screen.
