@@ -363,7 +363,10 @@ function topFlipped(page) {
   });
   check('manifest: name/short_name Timber', manifest && manifest.name === 'Timber' && manifest.short_name === 'Timber');
   check('manifest: theme/background #0c1810', manifest && manifest.theme_color === '#0c1810' && manifest.background_color === '#0c1810');
-  check('manifest: has 192x192 png icon', manifest && manifest.icons.some(i => i.sizes === '192x192' && i.type === 'image/png' && i.src.startsWith('data:image/png')));
+  check('manifest: has 192 + 512 + maskable icons', manifest &&
+    manifest.icons.some(i => i.sizes === '192x192' && i.src.startsWith('data:image/')) &&
+    manifest.icons.some(i => i.sizes === '512x512' && i.purpose === 'any' && i.src.startsWith('data:image/')) &&
+    manifest.icons.some(i => i.sizes === '512x512' && i.purpose === 'maskable'));
   check('manifest: absolute start_url', manifest && manifest.start_url.startsWith('http'));
 
   const swState = await page.evaluate(async () => {
@@ -403,12 +406,12 @@ function topFlipped(page) {
   await page.setViewportSize({ width: 390, height: 844 });
 
   /* ---- 14. data integrity: exact PLANTS field names ---- */
-  const fieldCheck = await page.evaluate(() => {
+  const fieldCheck = await page.evaluate((NPLANTS) => {
     const required = ['common','latin','hue','visual','water','aspect','soil','prune','source','peak','order','bench','root','trade','retail','margin','type','shrink','returnRisk','pots','cvs','hardiness','resilience','uses','size'];
-    return PLANTS.length === 47 && PLANTS.every(p => required.every(k => k in p)) &&
+    return PLANTS.length === NPLANTS && PLANTS.every(p => required.every(k => k in p)) &&
       PLANTS[0].trade === '2L £3.80–£4.50' && PLANTS[2].latin === 'Weigela florida ‘Nana Variegata’' &&
       PLANTS[3].pestRisk === 3 && PLANTS[4].hardiness === 'H2';
-  });
+  }, NPLANTS);
   check('PLANTS: all plants, exact field names, data intact', fieldCheck);
 
   /* ---- 15. touch device behaviour (single vs double tap, touch swipe) ---- */

@@ -73,6 +73,12 @@ if (p.water && p.soil) {
   if (shared.length) warnings.push(`"water" and "soil" share the word(s) ${shared.join(', ')} — drainage belongs in one field, not both`);
 }
 
+/* ---- length guards: the card's zones are fixed; long text auto-shrinks ---- */
+if (p.soilWarning && String(p.soilWarning).length > 60)
+  warnings.push(`"soilWarning" is ${String(p.soilWarning).length} chars — over ~60 the soil panel shrinks the type to fit. Consider trimming.`);
+if (p.soil && String(p.soil).length > 36)
+  warnings.push(`"soil" is ${String(p.soil).length} chars — over ~36 it can overflow the narrow soil-value panel (measured limit). Trim it.`);
+
 /* ---- bloom ---- */
 const MONTHS = { jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12 };
 function parseMonths(str) {
@@ -97,7 +103,8 @@ if (p.soilWarning && p.soilWarning.length > 44) warnings.push(`"soilWarning" is 
 
 /* ---- latin formatting ---- */
 if (p.latin) {
-  if (!/^[A-Z]/.test(p.latin)) errors.push('"latin" should start with a capitalised genus');
+  /* allow a leading × (nothogenus, e.g. "× Cuprocyparis") or hybrid-species "Genus ×epithet" */
+  if (!/^(×\s*)?[A-Z]/.test(p.latin)) errors.push('"latin" should start with a capitalised genus');
   const q = (p.latin.match(/'/g) || []).length;
   if (q % 2) errors.push(`"latin" has unbalanced quotes: ${p.latin}`);
   if (/\bx\s/i.test(p.latin) && !p.latin.includes('×')) warnings.push('"latin" may need the × hybrid sign rather than the letter x');
@@ -144,5 +151,5 @@ console.log(`  {common:${esc(p.common)}, latin:${esc(p.latin)}, hue:${hue},
    hardiness:${esc(p.hardiness)}, resilience:${esc(p.resilience)},
    uses:${esc(p.uses)}, size:${esc(`${p.height || ''} H × ${p.spread || ''} W`)},
    seasonalImpact:"", growthSpeed:${n(p.growthSpeed)}, pestRisk:${n(p.pestRisk)}, thirst:${n(p.thirst)}, careLevel:${n(p.careLevel)}, sunNeed:${n(p.sunNeed)}, sunMin:${n(p.sunMin)}},`);
-console.log(`\nPhoto must be staged at: photos/${(p.latin||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}.jpg`);
+console.log(`\nPhoto must be staged at: photos/${(p.latin||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}.jpg`);
 console.log('Then bump NPLANTS in tests/app-test.js and tests/edge-test.js and run the suites.\n');

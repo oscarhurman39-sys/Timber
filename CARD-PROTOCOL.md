@@ -89,10 +89,49 @@ Focal point recorded here when off-centre:
 | Cercis 'Eternal Flame' | cercis-canadensis-eternal-flame-wide.jpg / -leaf.jpg | wide: centre · leaf: ~70% 40% (leaf sits right of centre) |
 | Agastache 'Summerlong Coral' | agastache-summerlong-coral-flowers.jpg / -leaf.jpg | flowers: ~35% 40% (edges) · leaf: ~60% 45% windowed centre |
 | Kniphofia 'Pyromania Orange Blaze' | kniphofia-pyromania-orange-blaze.jpg | torches, ~42% 40% |
-| Nandina domestica | (processed, not yet staged) | photo1 centre |
+| Nandina domestica | nandina-domestica.jpg | leaflet, 45% 35% — Oscar's photo, red-flushed new growth + buds; EXIF-rotated to portrait |
 | Pennisetum 'Rubrum' | pennisetum-rubrum.jpg | plumes, ~50% 40% |
 | Abelia 'Raspberry Profusion' | abelia-raspberry-profusion.jpg | ~50% 45% — correct cultivar, pink bells + raspberry sepals |
 | Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
+| Cornus kousa 'Flower Tower' | cornus-kousa-flower-tower.jpg | centre (default 50% 40%) — leaf close-up, arcuate kousa veining; no bracts or columnar habit in shot, re-shoot at bloom if wanted |
+| Ajuga 'Burgundy Glow' | ajuga-reptans-burgundy-glow.jpg | spike, 57% 45% — [flag] cropped from an AI-remade card image titled 'Pink Lightning'; cultivar unverifiable from artwork; 680px source, below the 1200px standard |
+| Spiraea 'Double Play Doozie' | spiraea-double-play-doozie.jpg (merged) / -flowers.jpg / -leaf.jpg | cluster, 55% 38% — merged: leaf photo full-bleed + sharp bud cluster soft-windowed (v3 recipe, first live use); both source photos staged |
+| Potentilla 'Pink Beauty' | potentilla-fruticosa-pink-beauty.jpg | flower, 25% 32% — [flag] blooms in photo are near-white with a faint blush, not deep pink; consistent with the cultivar's documented heat fade (and it was shot in a July heat spell) but unverifiable; orange potentilla visible in background (mixed bench) |
+| Cercis chinensis 'Avondale' | cercis-chinensis-avondale.jpg | leaf, 45% 30% — glossy cordate Cercis foliage; no flowers in shot (Apr–May bloomer, shot in July); cultivar unverifiable from leaves, re-shoot at bloom if wanted |
+| Prunus lusitanica 'Angustifolia' | prunus-lusitanica-angustifolia.jpg | leaf, 50% 35% — narrow glossy leaves + red stems (species-confirming feature); no racemes in shot (June bloomer, July shot) |
+| Salvia 'Blue Spire' | salvia-blue-spire.jpg | 55% 35% — dissected grey-green leaves, felted stems, violet-blue buds breaking; species-confirming, best-verified photo of the batch |
+| Mahonia japonica | mahonia-japonica.jpg | bronze young shoot, 25% 50% — spiny pinnate leaflets confirm mahonia; sharp zone is the bronze new growth, mature green foliage soft-focus; replaced the mis-sent Leycesteria shot |
+| Buddleja 'Pugster Orchid' | buddleja-pugster-orchid.jpg (composited) / -cutout.png | 62% 30% — [special] Oscar sent a transparent-background CUTOUT, not a garden photo. Composited onto the card's own hue-315 fallback gradient (composite-cutout.js) so it reads as a specimen plate; raw cutout kept as -cutout.png for re-compositing |
+| Salix 'Hakuro-nishiki' | salix-integra-hakuro-nishiki.jpg (composited) / -cutout.png | 50% 28% — [special] cutout composited over a darkened+blurred copy of ITSELF (hero-on-self, composite-hero.js, hue 130) per Oscar's "darken the background, slap the boy on top in full colour"; melts into the card's dark frame with no seam; raw cutout kept |
+| Plumbago auriculata | plumbago-auriculata.jpg (composited) / -cutout.png | 50% 30% — [special] cutout, hero-on-self composite (hue 215, dark navy backdrop); blue flowers pop; raw cutout kept |
+| Euonymus japonicus 'Aureomarginatus' | euonymus-japonicus-aureomarginatus.jpg (composited) / -cutout.png | 30% 28% — [special] cutout, hero-on-self (hue 50). NOTE filename is the LATIN-slug (aureomarginatus), NOT the JSON id (elegantissimus-aureus) — staged under the id first and shipped blank; caught, now an audit rule |
+| Monarda didyma 'Bubblegum Blast' | monarda-didyma-bubblegum-blast.jpg | flower, 78% 18% — real garden shot; hot-pink whorl top-right, leaves show minor mildew spotting (true to the species) |
+| Carpinus betulus | carpinus-betulus.jpg | leaf, 55% 40% — pleated corrugated doubly-serrate leaves, textbook hornbeam; species positively confirmed from foliage |
+| Elaeagnus ×submacrophylla | elaeagnus-submacrophylla.jpg | leaf, 45% 48% — silver-scaled leaf undersides (the ID feature) sharp in centre; species confirmed |
+| Gunnera manicata | gunnera-manicata.jpg (composited) / -cutout.png | 50% 35% — [special] cutout hero-on-self (hue 120). ⚠ UK-RESTRICTED plant — see compliance note in changelog v12.21 |
+| Acer rubrum 'October Glory' | acer-rubrum-october-glory.jpg | leaf, 50% 62% — red petioles (the A. rubrum ID feature) on summer-green leaves; species confirmed |
+| Fatsia japonica 'Tsumugi-shibori' | fatsia-japonica-tsumugi-shibori.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 120). Filename uses the true cultivar 'Tsumugi-shibori' NOT the selling name 'Spider's Web' (apostrophe breaks the slug/checker) |
+| Griselinia littoralis | griselinia-littoralis.jpg (composited) / -cutout.png | 55% 22% — [special] cutout hero-on-self (hue 95, apple-green); glossy oval leaves |
+| Indigofera himalayensis 'Silk Road' | indigofera-himalayensis-silk-road.jpg | 55% 15% — real photo; pinnate leaves + lilac-pink pea spikes against a moody sky, focus high to skip the blurred foreground |
+| Phalaenopsis Hybrid Group | phalaenopsis-hybrid-group.jpg (composited) / -cutout.png | 40% 25% — [special] cutout hero-on-self (hue 320 magenta, chosen from the visible bloom colour not the JSON's foliage default) |
+| Viburnum tinus 'Eve Price' | viburnum-tinus-eve-price.jpg (composited) / -cutout.png | 50% 45% — [special] cutout hero-on-self (hue 330); glossy leaves + metallic blue-purple berries in umbels, species-confirming |
+| Paeonia 'Orange Victory' | paeonia-orange-victory.jpg | 50% 45% — real photo; divided foliage + red semi-woody Itoh stems (species-consistent); no blooms in shot |
+| Lavandula stoechas 'Anouk Deluxe Purple' | lavandula-stoechas-anouk-deluxe-purple.jpg (composited) / -cutout.png | 45% 25% — [special] cutout hero-on-self (hue 275); rabbit-ear bracts confirm L. stoechas |
+| Citrus × meyeri 'Meyer' | citrus-meyeri-meyer.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 45 gold); glossy citrus foliage, no fruit in shot |
+| Euonymus japonicus 'Green Spire' | euonymus-japonicus-green-spire.jpg | 50% 45% — real photo; dense glossy plain-green foliage (distinct from the deck's gold-margined 'Aureomarginatus') |
+| Ilex crenata 'Jenny' | ilex-crenata-jenny.jpg | 30% 55% — real photo; fine glossy small leaves on twiggy stems, species-consistent (the box-blight-safe box substitute) |
+| × Cuprocyparis leylandii 'Gold Rider' | cuprocyparis-leylandii-gold-rider.jpg (composited) / -cutout.png | 50% 30% — [special] cutout hero-on-self (hue 55 gold); brilliant golden conifer sprays |
+| Rhododendron 'Horizon Monarch' | rhododendron-horizon-monarch.jpg (composited) / -cutout.png | 45% 20% — [special] cutout hero-on-self (hue 48); leathery whorled foliage + developing bud, no open truss |
+| Acer palmatum 'Ōsakazuki' | acer-palmatum-osakazuki.jpg | 50% 45% — real photo; palmate leaves + red petioles, species-confirmed; slug folds the macron ō→o |
+| Musa basjoo | musa-basjoo.jpg (composited) / -cutout.png | 50% 20% — [special] cutout hero-on-self (hue 120); huge paddle leaves; nursery barcode in source sits below the visible band |
+| Cornus controversa 'Variegata' | cornus-controversa-variegata.jpg | 42% 48% — real photo; cream-margined arcuate-veined leaves, species-confirmed; focus left of the background pot/paving |
+| Olea europaea | olea-europaea.jpg (composited) / -cutout.png | 45% 30% — [special] cutout hero-on-self (hue 75); narrow silver-grey leaves, species-confirmed |
+| Acer palmatum 'Bloodgood' | acer-palmatum-bloodgood.jpg (composited) / -cutout.png | 50% 22% — [special] single dark red-purple palmate leaf, hero-on-self (hue 350); second Acer palmatum (pair with Ōsakazuki) |
+| Salvia 'Hot Lips' | salvia-hot-lips.jpg | 40% 45% — real photo; red + red/white bicolour lipped flowers, cultivar-confirmed; focus off the finger top-right |
+| Magnolia HONEY TULIP ('Jurmag5') | magnolia-honey-tulip-jurmag5.jpg | 40% 48% — real photo; single honey-yellow goblet flower in hand, cultivar-consistent; focus left of the hand |
+| Eryngium × olivierianum BIG BLUE ('Myersblue') | eryngium-olivierianum-big-blue-myersblue.jpg | 35% 50% — real photo; electric-blue spiny flowerheads, species-confirmed |
+| Lonicera × purpusii 'Winter Beauty' | (no photo — gradient fallback) | supplied photos were a water lily (wrong plant) + a cat blocking the Lonicera (label-confirmed ID); needs a winter shot of the scented cream flowers on bare stems |
+| Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 | Euonymus alatus | euonymus-alatus.jpg | ~50% 40% — summer macro. ID confirmed: corky wings visible as tan ridges on the green stems, leaves opposite + finely serrate. Shows none of the card's headline interest (autumn crimson, fruit); a September re-shoot would sell the plant better |
 
 ## 5. Decision changelog
@@ -120,6 +159,426 @@ Focal point recorded here when off-centre:
   tested end-to-end in a sandboxed repo copy (8-plant deck, 94/94 + 8/8 green,
   correct card screenshot). Validator gained soil-length overflow warnings after
   the test card showed a 3-line soil value grazing the warning triangle.
+
+- **v12.42 (Winter Beauty Honeysuckle — photo mismatch, first populated
+  toxicity)**: pre-converted schema. **Two supplied photos, neither usable**:
+  one was a water lily (Nymphaea — wrong plant entirely), the other a tuxedo cat
+  in front of the Lonicera (the nursery label 'Lonicera Winter Beauty' in-shot
+  confirms the ID, but the plant is blocked; a foliage crop was weak backlit
+  summer leaves and misses the point — Winter Beauty is bought for scented cream
+  winter flowers on BARE stems). Refused to stage the water lily (reality
+  filter) and shipped on the **gradient fallback** with verified data instead —
+  needs a proper winter shot. Also **first JSON with a populated `toxicity`
+  field** ("Fruit harmful if eaten · wear gloves") — surfaced in resilience
+  (no toxicity render yet; another argument for the toxicity/compliance display
+  build). Dec–Mar bloom (valuable winter-scent gap-filler). Gate green: 94/94,
+  8/8, SW, verifier, audit clean.
+- **v12.41 (Big Blue Sea Holly — FIRST populated compliance field)**: pre-
+  converted schema + real photo. **First plant to carry a non-empty
+  `compliance` value**: "PBR protected · propagation rights restricted" (Plant
+  Breeders' Rights — propagating 'Myersblue' for resale needs a licence).
+  Lower severity than Gunnera (sale ban) or Olive (Xylella) — a trade note, not
+  a customer safety issue — so surfaced on the **trade back** (type +
+  returnRisk), no front warning. This is the concrete trigger for a **tiered
+  compliance display**: three cards now carry compliance data at two severity
+  levels (legal-ban/biosecurity = front flag; PBR = back-only note). Recommend
+  building it next — the `compliance` field now feeds it directly. Records:
+  **sunNeed 98 (new deck max** — sea holly wants blazing sun), thirst 3
+  (near drought-proof). Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.40 (Honey Tulip Magnolia)**: pre-converted schema + real photo. First
+  **trade-name-with-cultivar-code latin** on the card (Magnolia HONEY TULIP
+  ('Jurmag5')) — renders fine in the subtitle, slugs to
+  magnolia-honey-tulip-jurmag5. A yellow magnolia (goblet honey-yellow flowers)
+  — species/cultivar consistent with Oscar's in-hand photo. growth 6 (slow,
+  magnolias take years), container "no" (a 4 m tree), Mar-Apr bloom (early —
+  frost-vulnerable, kept the caveat). Fourth flower-in-hand shot handled by
+  focusing off the hand. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.39 (Hot Lips Sage — first JSON with the new toxicity + compliance
+  fields)**: Oscar updated the ChatGPT prompt per the v12.38 feedback, and this
+  JSON is the first to arrive with dedicated **`toxicity` and `compliance`
+  fields** (both empty here — correctly, Hot Lips is neither toxic nor
+  restricted). They're captured but **not yet rendered** on the card — when a
+  future plant populates them, that's the hook for the parked compliance-ribbon
+  + a toxicity row (the fields now exist to drive them cleanly instead of
+  improvising into soilWarning/resilience). Second Salvia in the deck (with
+  'Blue Spire'), distinct slug. Real photo; the red + red/white bicolour lipped
+  flowers confirm the cultivar (Hot Lips' blooms shift colour with temperature).
+  Clean pass. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.38 (Bloodgood Japanese Maple)**: pre-converted schema + cutout, hero-on-
+  self (hue 350). Second Acer palmatum in the deck — the dark red-purple
+  'Bloodgood' paired with the autumn-scarlet 'Ōsakazuki', distinct slug. Single
+  dramatic leaf composited on the dark ground. growth 5 (slow, matches Acer
+  palmatum anchor). Clean pass, nothing to relocate — pre-converted format
+  continues to run straight through. Gate green: 94/94, 8/8, SW, verifier,
+  audit clean.
+- **v12.37 (Common Olive — a second biosecurity flag)**: pre-converted schema +
+  cutout, hero-on-self (hue 75). **Xylella note kept on the FRONT card**
+  ("Shelter from frost · Xylella high-risk host" in the soil warning) — olive is
+  a top-tier host of Xylella fastidiosa, a notifiable quarantine pathogen that
+  garden centres genuinely watch under plant-health/passport rules, so unlike a
+  care preference this is a material trade fact worth front-and-centre. Second
+  biosecurity-flagged card after Gunnera (v12.21) — reinforces the case for the
+  parked compliance-ribbon design. Data: sunNeed 95 (ties lavender for sunniest),
+  thirst 4 (drought-lover), single-facing South, H4. growth 5 (slow). Gate
+  green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.36 (Wedding Cake Tree — deck reaches 40 plants)**: pre-converted schema
+  + real photo. Cornus controversa 'Variegata' — the tiered "wedding cake"
+  architectural specimen; second Cornus in the deck (with Flower Tower), distinct
+  slug. Cream-margined arcuate-veined leaves confirm it. growth 6 (slow, as this
+  choice specimen is), container "no" (a 4–8 m tree), pest 5 (trouble-free).
+  Focus set left (42%) to keep the background nursery pot/paving out of the
+  visible band. Gate green: 94/94, 8/8, SW, verifier, audit clean. **Deck
+  milestone: 40 plants, every one photographed and audited.**
+- **v12.35 (Musa basjoo — the deck's extremes card)**: pre-converted schema +
+  cutout, hero-on-self. The hardy banana sets several deck records: **growth 18
+  (fastest — near-rampant suckering), thirst 16 and careLevel 15** (needs
+  feeding, watering and winter crown-wrapping), **first single-facing "South"
+  aspect** (it needs the warmest wall). H2 tender — the leaves are botanically
+  evergreen but frost-shredded outdoors in the UK (kept Oscar's caveat; peak
+  Jun-Oct is the foliage display). A nursery barcode tag in the source cutout
+  falls below the visible band (hidden under the plaque — QA "labels not
+  dominant" satisfied by focus 50% 20%). Gate green: 94/94, 8/8, SW, verifier,
+  audit clean.
+- **v12.34 (Ōsakazuki Japanese Maple — a macron/diacritic slug fix)**: pre-
+  converted schema + real photo (palmate leaves + red petioles confirm Acer
+  palmatum). Exposed a slug bug: the macron **Ō** is non-ASCII, so the old
+  slug fn collapsed 'Ōsakazuki' to `sakazuki` (dropping the o entirely).
+  Fixed `slugLatin` (and the matching computations in check-plant-json.js and
+  audit-layout.js — all three kept identical) to fold diacritics first
+  (`NFD` normalize + strip combining marks), so ō→o → `acer-palmatum-osakazuki`.
+  Handles any future macron cultivar (Shōjō, Ōgon…). Existing ASCII slugs are
+  unaffected. The Ō renders correctly in the card title/subtitle. growth 5
+  (Acer palmatum is famously slow, matches the rubric anchor), autumn colour
+  Oct-Nov (§4b). Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.33 (Horizon Monarch Rhododendron)**: pre-converted schema + cutout,
+  hero-on-self (hue 48). thirst 14 (rhododendrons need constant moisture),
+  shade-tolerant (sunNeed 45, sunMin 25), H4. The soil is **acid/ericaceous —
+  a genuine hard requirement** (rhododendrons fail on alkaline/limey soil), so
+  I flagged it in confidence as a real customer point, not a mere preference.
+  Photo is species-consistent foliage + a developing flower bud (no open
+  yellow truss). Kept the Hillier 'Planter'-format caveat. Gate green: 94/94,
+  8/8, SW, verifier, audit clean.
+- **v12.32 (Gold Rider Leyland Cypress — a nothogenus checker fix)**: pre-
+  converted schema + cutout, hero-on-self (hue 55). Exposed a checker bug: the
+  latin starts with the intergeneric hybrid sign **× Cuprocyparis** (a
+  nothogenus), which the "must start with a capitalised genus" rule wrongly
+  rejected. Fixed the rule to allow a leading `× ` — handles any future
+  intergeneric hybrid. **First conifer in the deck.** growth 15 (fast — it's
+  Leyland, though 'Gold Rider' is a shade tamer than the rampant green species
+  at 20), sunNeed 90 (gold colour needs sun), container "no" (only card so far
+  that can't go in a pot — a 25 m tree). Renders the × correctly in the card
+  subtitle. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.31 (Jenny Japanese Holly)**: pre-converted schema + real photo. Ilex
+  crenata — the box-blight-safe substitute for Buxus, sold clipped as bush/ball/
+  pyramid. Third clip-and-shape evergreen alongside the two Euonymus (topiary
+  cluster forming in the deck). Evergreen (peak Jan-Dec), growth 6 (slow, as
+  clipped topiary should be), PBR cultivar caveat kept. Gate green: 94/94, 8/8,
+  SW, verifier, audit clean.
+- **v12.30 (Green Spire Japanese Spindle — deck's first cultivar pair)**: pre-
+  converted schema + real photo. Second Euonymus japonicus in the deck — the
+  plain-green upright 'Green Spire' (topiary/ball form) alongside the earlier
+  gold-margined 'Aureomarginatus'; distinct latin-slugs so no photo collision.
+  Evergreen (peak Jan-Dec, all cells lit), narrow columnar (spread 0.1–0.5 m,
+  narrowest in the deck), pestRisk 9 (spindle mildew/vine weevil). Kept the
+  retail-'bol'-suffix caveat. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.29 (Meyer's Lemon — first edible/citrus card)**: pre-converted schema +
+  cutout, hero-on-self (hue 45). First edible-fruit card. H2 (tender — needs a
+  frost-free winter indoors, correct for citrus in the UK), careLevel 14 (joint-
+  highest with the Plumbago — citrus are demanding: feeding, overwintering, pest
+  vigilance). Kept the Kew synonymy caveat (C. × meyeri sunk under C. × limon).
+  Photo is genus-consistent glossy foliage; no fruit so cultivar unverifiable.
+  Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.28 (French Lavender 'Anouk Deluxe Purple' — sunniest card in the deck)**:
+  pre-converted schema + cutout, hero-on-self (hue 275). The rabbit-ear bracts
+  atop the flower heads confirm Lavandula stoechas (French/Spanish lavender, vs
+  English L. angustifolia). **sunNeed 95 / sunMin 80 — the most sun-demanding
+  card yet**, marker hard right; thirst 4 (drought-lover). H4 — the tender
+  French lavender, correctly a notch softer than hardy English types. Clean
+  pass. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.27 (Orange Victory Itoh Peony)**: pre-converted schema + real photo.
+  The photo's red semi-woody stems + divided leaflets confirm an Itoh
+  (intersectional) peony — herbaceous peonies die to the ground, Itohs keep
+  woody-based stems. growth 5 (peonies are famously slow to establish, honest),
+  sunNeed 88. Kept the plant's own caveats (no cultivar-specific RHS/APS
+  profile, hardiness inferred from comparable Itohs). Clean pass. Gate green:
+  94/94, 8/8, SW, verifier, audit clean.
+- **v12.26 (Laurustinus 'Eve Price' — deck reaches 30 plants)**: pre-converted
+  schema + cutout, hero-on-self (hue 330). Winter bloomer (Dec–Apr, useful
+  off-season colour), the metallic blue-purple berries in the photo are
+  species-confirming. pestRisk 9 (viburnum beetle is the real risk — honest).
+  Clean pass, nothing to relocate — the pre-converted JSON format is now
+  reliably the smoothest path. Gate green: 94/94, 8/8, SW, verifier, audit
+  clean. **Deck milestone: 30 plants, every one photographed and audited.**
+- **v12.25 (Cascading Moth Orchid — first houseplant / H1b / full-year bloom)**:
+  pre-converted schema + cutout, hero-on-self. Firsts: **H1b hardiness** (heated
+  glasshouse — the tenderest crest in the deck, correct for an indoor orchid);
+  **peak Jan-Dec = all 12 calendar cells lit** (Phalaenopsis flowers year-round
+  indoors, spikes last months). Hue call: the JSON defaulted hue to 120 (foliage)
+  because "flower colour was not supplied" — but the photo shows cream-yellow
+  petals with vivid magenta lips, so I overrode to 320 magenta and the backdrop
+  now matches the bloom (a case where the photo beats the JSON's own stated
+  uncertainty). careLevel 9, sunNeed 45 (bright indirect). Kept the Pulsatio
+  supplier-brand caveat. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.24 (Himalayan Indigo 'Silk Road' — first pre-converted JSON in the
+  Timber schema)**: Oscar's JSON arrived already in the exact PLANTS schema
+  (0–20 ratings, sunNeed 0–100, prune/water split correctly, foliage/container
+  fields) — no conversion or field-splitting needed, first of the batch like
+  this. Converted mechanically. pestRisk 3 is a genuine 0–20 value (0.75/5), the
+  checker's ×4 heuristic warning is a false positive here. sunMin 80 — narrow,
+  sun-demanding tolerance. Real photo, focus high (55% 15%) to skip the blurred
+  garden foreground. Kept the plant's own `uncertain` notes (name status
+  unresolved at RHS, flowering/spread source variance) as honest caveats. Gate
+  green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.23 (Spider's Web Fatsia + Griselinia — two cutouts; an apostrophe bug)**:
+  both cutouts, hero-on-self. The Fatsia exposed a **cultivar-apostrophe bug**:
+  the selling name 'Spider's Web' has an apostrophe that (a) fails the checker's
+  quote-balance test and (b) slugs to `spider-s-web`, not `spiders-web` (the
+  JSON id) — so no filename would ever match. Resolved the botanically-correct
+  way per CARD-STATS §5: the card's latin uses the true cultivar epithet
+  'Tsumugi-shibori' (Japanese, no apostrophe); 'Spider's Web' is recorded as the
+  English selling name in the common name + cvs. Photo staged under the correct
+  latin-slug. Fatsia data: growth 0.3→6 (joint-slowest), **sunMin 5 — most
+  shade-tolerant card in the deck** (deep-shade architectural evergreen), autumn
+  drumstick flowers. Griselinia: growth 0.74→15 (fast coastal hedge), sunNeed 88,
+  salt/wind tolerance added to resilience (littoralis = 'of the shore'). Both
+  soil warnings split (siting/toxicity/care tips out of the soil field as usual).
+  Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.22 (October Glory Red Maple — a bloom-months judgment call)**: from
+  nested JSON + Oscar's photo (red petioles confirm A. rubrum). **Changed the
+  bloom months**: the JSON gave [3,4] (the small spring flowers), but the tree's
+  entire selling point is October scarlet and §4b says highlight the main
+  DISPLAY not the flowers — so peak = Oct-Nov. Flagged for Oscar to veto. Data:
+  thirst 14 (needs moisture for best colour), pestRisk 10, growth 0.58→12, H6,
+  sunNeed 84. Soil warning split (alkaline/wet kept; dryness → Thirst; coastal
+  wind kept, space implied by 15–18 m size). Second soil-VALUE overflow in three
+  cards ("Moist, acidic to neutral, well-drained", 38 chars) — trimmed to
+  "acid–neutral" and tightened the checker soil threshold 38→36. Gate green
+  after fix: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.21 (Gunnera — FIRST COMPLIANCE/LEGAL CARD, needs a design decision)**:
+  the JSON carried a new **`compliance` block**: Gunnera manicata is UK-
+  restricted (invasive-species law) and most plants sold as manicata are the
+  banned hybrid G. ×cryptica — do not sell/propagate/plant without verified ID.
+  **No card field renders compliance.** Interim handling: headline surfaced in
+  `resilience` + `type` ("⚠ UK RESTRICTED — verify ID before any sale") and the
+  full warning in `returnRisk`, so it renders on the **trade back** (verified in
+  screenshot); the full block is preserved in the plant JSON. **The FRONT card
+  shows no legal warning** — for a customer-facing "learn plants" deck that's a
+  real gap. OPEN DECISION for Oscar: (a) add a front compliance ribbon/banner
+  (design change — a red corner flag when a plant has compliance data), (b)
+  keep it back-only as now, or (c) hold restricted plants out of the public
+  deck entirely. Recommend (a) — the card's value here is precisely as a "DO
+  NOT SELL" staff reference. Ratings: **thirst 20 — first max-thirst card**
+  (bog/waterside), care 16, growth 0.82→16. `[Unverified]` current exact legal
+  status — the JSON asserts it and it matches known GB invasive-species listings
+  c.2023–24; defer to official RHS/DEFRA guidance for the live position. This is
+  also the first plant carrying a compliance field at all — CARD-STATS should
+  gain a compliance section if more arrive. Gate green: 94/94, 8/8, SW,
+  verifier, audit clean.
+- **v12.20 (Ebbinge's Silverberry)**: from nested JSON + Oscar's photo (silver
+  scurf = confirmed ×ebbingei). Naming: card uses the current RHS name
+  ×submacrophylla, the familiar ×ebbingei kept in cvs alongside the variegated
+  forms (Gilt Edge / Limelight). growth 0.76→15.2 rounded to 15 (fast). Autumn
+  bloomer (Oct–Nov, tiny fragrant flowers). Soil warning split again: wet+chalk
+  kept (real soil constraints), hedge trim → prune. Wind/coastal tolerance +
+  nitrogen fixing added to resilience (well-established Elaeagnus traits). Gate
+  green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.19 (Common Hornbeam — the deck's biggest plant)**: from nested JSON +
+  Oscar's leaf photo (pleated corrugated leaves = textbook Carpinus). H7 (joint-
+  hardiest with Ajuga/Potentilla), and by far the **largest — 15–25 m**. The
+  JSON's soil warning bundled three things: siting for a large tree (kept —
+  genuine constraint), establishment watering (→ Thirst) and hedge clipping
+  (→ prune). growth 0.66→13.2 rounded to 13. Apr–May "bloom" = catkins, real
+  interest is foliage + hop-like seeds (§4b). Named upright forms (Fastigiata /
+  Frans Fontaine) in cvs — relevant since the species itself is too big for
+  most gardens. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.18 (Bubblegum Blast Bee Balm — back to a real photo)**: first non-cutout
+  in a while. Data: thirst 14 (Monarda sulks if dry), pestRisk 8 (mildew-prone —
+  the leaves in Oscar's own photo show early spotting), growth 0.58→12, H5.
+  The JSON's soil warning again mixed a moisture regime ("do not let dry out" →
+  Thirst) with mildew airflow (kept as a real siting constraint); soilWarning
+  trimmed to the two genuine constraints. Pollinator note → resilience. The
+  audit caught a 2px soil-VALUE overflow ("Fertile, humus-rich, moist but
+  well-drained", 43 chars) that slipped under the checker's old 45-char soil
+  threshold — trimmed "Fertile," (redundant with humus-rich) and tightened the
+  checker threshold to 38 so it flags at source next time. Gate green after the
+  fix: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.17 (Golden Japanese Spindle + a photo-slug audit rule)**: fourth
+  cutout, hero-on-self (hue 50). Exposed a real bug: I staged the photo under
+  the JSON **id** (`euonymus-japonicus-elegantissimus-aureus`) but the renderer
+  derives the photo slug from the **latin** name
+  (`euonymus-japonicus-aureomarginatus`), so the card shipped on the gradient
+  fallback with the leaf watermark showing. The checker had printed the correct
+  path; I didn't follow it. Fixed the filename + PHOTO_FOCUS key, and added
+  audit rule **E (focus-photo)**: every PHOTO_FOCUS key must be a current
+  plant's latin-slug with a file on disk — catches id-vs-latin drift without
+  flagging secondary source photos or out-of-deck photos. Data: growth 0.55→11
+  (exact), pestRisk 12 (spindle is vine-weevil/mildew prone), evergreen so the
+  "Bloom" cell marks the minor Jun–Jul flowers while the real draw is the gold
+  foliage (§4b). Reverted-shoot removal kept as a care note in the warning,
+  toxicity → resilience. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.16 (Cape Leadwort — H2 tender, hero-on-self cutout)**: third cutout,
+  hero-on-self composite in blue (hue 215). Data: **H2 — most tender card in
+  the deck** (crest correctly shows it; needs frost-free overwintering),
+  careLevel 14 (highest so far — tender lifting + pruning), sunNeed 94 (joint
+  with Buddleja/Salvia), growth 0.68→13.6 rounded to 14. The JSON's soil
+  warning bundled three things — frost-tenderness (kept as the soil/siting
+  warning), sap irritation + toxicity (moved to resilience). syn. capensis in
+  cvs. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.15 (Flamingo Willow — hero-on-self cutout treatment)**: second cutout
+  input. Oscar's brief: "the background is too over the top, maybe darken it,
+  then slap this back boy on top in full colour." Built `composite-hero.js`:
+  a darkened + blurred + enlarged copy of the cutout as an ambient backdrop
+  over a dark hue-130 base, then the sharp full-colour cutout on top. Result
+  melts into the card's dark frame with no cutout seam — now the preferred
+  treatment for busy-background cutouts (flat-gradient composite still fine
+  for clean specimens like the Buddleja). Data: growth 0.8→16 (exact, joint-
+  fastest with Ajuga), thirst 16 + pestRisk 12 (willows are thirsty and
+  mite/rust prone — highest-maintenance card so far), H5, "Bloom" cell marks
+  the pink-FOLIAGE season Mar–Apr not flowers (§4b). Pruning instruction in
+  the soil warning again (5th) — moved to prune. Gate green: 94/94, 8/8, SW,
+  verifier, audit clean.
+- **v12.14 (Pugster Orchid Buddleja + Mahonia photo staged)**: Mahonia's real
+  photo arrived (spiny pinnate leaflets, bronze new shoot) — swapped off the
+  gradient fallback. Buddleja is the first **cutout** input: a transparent-
+  background specimen PNG, not a garden photo. Rather than flatten to black,
+  composited onto the card's own hue-315 fallback gradient (design uses the
+  same formula) so it reads as an intentional botanical plate; raw cutout
+  kept as -cutout.png. Data: growth 0.55→11 (exact), pestRisk 10 (Buddleja
+  earns it — spider mite prone), sunNeed 88, H6, Jun–Oct. Pruning instruction
+  again lived in the JSON's soil warning ("Cut back to 20–25 cm") — moved to
+  prune (4th time this batch; source-prompt fix still pending). Butterfly/bee
+  nectar note added to resilience. Gate green: 94/94, 8/8, SW, verifier,
+  audit clean.
+- **v12.13 (Japanese Mahonia + Golden Lanterns Leycesteria — first wrong-photo
+  catch)**: the photo sent with the Mahonia JSON showed soft wavy golden
+  red-rimmed leaves and claret hanging bracts — not a mahonia. Flagged
+  instead of staged (QA rule: photo must be the plant); Oscar confirmed it
+  was Leycesteria 'Golden Lanterns' and supplied its JSON. Mahonia shipped
+  photo-less on the gradient fallback (first live fallback card) — photo
+  pending. Mahonia: H5, sunNeed 28 (most shade-loving card), **sunMin 0**
+  (leader at the bar start, flip rule exercised), Nov–Mar calendar wraps
+  year-end, berry toxicity moved from soil warning to resilience.
+  Leycesteria: H4, growth 0.68→13.6 rounded to 14, pests 0.5/5→2, trade
+  name on card + 'Notbruce' (registered) in cvs, same berry-warning
+  treatment. Both JSONs' soil warnings carried non-soil content (toxicity)
+  — recurring pattern in the nested-JSON prompt worth fixing at source.
+  Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.12 (Blue Spire Russian Sage)**: from nested JSON + Oscar's photo
+  (dissected grey foliage + felted stems + breaking violet buds — species
+  confirmed, flowers in shot). Conversions per v12.2 (growth 0.58→11.6
+  rounded to 12; pestRisk 4, thirst 6, careLevel 8, sunNeed 94 — highest
+  sun marker in the deck, sunMin 72). Field correction: the JSON's soil
+  warning carried a pruning instruction ("Cut stems back hard in early
+  spring") — moved to `prune` per CARD-STATS §4e/§6 rules (warning must be
+  a soil constraint), first live use of the prune field from the nested
+  pipeline. Latin uses the current RHS name Salvia 'Blue Spire'; Perovskia
+  synonym in cvs. Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.11 (Portuguese Laurel 'Angustifolia')**: from nested JSON + Oscar's
+  photo (red stems confirm the species). Naming call: card carries the selling
+  name 'Angustifolia' (matches the JSON's own id/slug); the JSON's
+  botanicalName 'Myrtifolia' (accepted name) + syn. 'Pyramidalis' recorded in
+  cvs — Oscar to confirm what his labels carry. Conversions per v12.2 (growth
+  0.58→11.6 rounded to 12; pestRisk 10, thirst 10, careLevel 8, sunNeed 66,
+  sunMin 30 — widest tolerance leader yet). First single-month bloom card
+  (peak "Jun" → one calendar cell; parser handles it). soilWarning condensed:
+  "ripe fruit may also be harmful if bitter" → "fruit harmful if eaten" —
+  slightly stronger than source, flagged. Gate green: 94/94, 8/8, SW,
+  verifier, audit clean.
+- **v12.10 (Chinese Redbud 'Avondale')**: from nested JSON + Oscar's leaf
+  photo. Conversions per v12.2 (growth 0.42→8.4 rounded to 8; rest exact:
+  pestRisk 8, thirst 12, careLevel 10, sunNeed 78, sunMin 52). H5, S/W
+  facing, Apr–May calendar. soilWarning lightly trimmed ("Plant in a
+  sheltered position" → "Plant sheltered") to fit the panel — meaning
+  unchanged, flagged in the JSON's uncertain list. Photo is leaf-only
+  (July shot of an April bloomer) — registered like the Cornus. First card
+  through the full corrected pipeline (audit gate + label-safe patches +
+  fitInk) with zero violations on first render. Gate green: 94/94, 8/8,
+  SW, verifier, audit clean.
+- **v12.9 (blurred-labels fix + Nandina photo & ratings)**: Oscar reported
+  "strange blur" on the bottoms of Bloom/Care etc. Measured cause: the plaque's
+  value patches reached up into the baked label rows, laying feathered
+  parchment over the text. Label rows luminance-measured in plaque-full.png
+  (Bloom 9.0–12.3%, diseases →38.8%, Thirst →59.2%, Care Level →79.6%);
+  patches re-cut to start below their labels with a tight 2px top feather
+  (`.patch.lbl`), heights extended to keep the baked painted values fully
+  covered (no ghosting). New audit rule: no plaque patch may intersect the
+  measured label rows (x<36%; widget patches exempt). Nandina: Oscar's photo
+  staged + ratings merged into the legacy row from his JSON (1→pestRisk 4,
+  2.5→thirst 10, 2→careLevel 8, growth 0.44→8.8 rounded to 9, sunNeed 72,
+  sunMin 40). Kept as-is pending Oscar's call — his JSON conflicts with the
+  row's settled data: aspect (JSON E/W vs row "S/W best for colour"), bloom
+  (JSON Jun–Jul flowers vs Sep–Feb berry display per §4b's own example), and
+  soil (JSON adds shelter + toxicity; row shows legacy "· Adaptable" as its
+  warning). Fixed en route: photo imgs now `pointer-events:none` — the top
+  deck card had never had a photo before, and a visible img intercepted
+  swipe/undo pointer events (caught by app-test, 4 failures). Potentilla
+  photo re-sent this session is the identical file — no change. Gate green:
+  94/94, 8/8, SW, verifier, audit clean.
+- **v12.8 (layout correction pass + the audit gate)**: Oscar spotted three
+  layout defects from his phone: long facings overwriting the band artwork,
+  "wiggle room" written over the painted sun, and the growth diamond a hair
+  off its rail. Built `design/audit-layout.js` (measures every card: ink fits
+  its zone, band collisions, rail alignment, nothing leaks the card) — the
+  pre-fix baseline logged **31 violations across 8 cards**, including two
+  nobody had seen: every rated card's Pests/Thirst value overflowed its box
+  2px (`.pval` line-height), and long soil warnings overflowed their zone
+  (Potentilla by 29px — **correction: v12.7's claim that it "fits with 16.6px
+  clearance" was wrong; that measurement compared the wrong container**).
+  Fixes: `.pval` line-height 1; `fitInk()` auto-shrink for overflowing ink;
+  aspect box widened 14.5%→25.5%; **sun icon relocated to the sun end**
+  (Oscar's call — extracted `art/sun-icon.png`, painted sun + divider covered,
+  divider redrawn in CSS, exposed a `.band>img` cascade collision that blew
+  the sprite to full band width, now an audit rule); wiggle label flips right
+  of its leader when it would cross the light zone's left edge; diamond
+  rendered with −0.8px sprite-bias compensation (alpha bbox 7..40/44px,
+  measured). Insulation: audit added to the standing five-suite gate
+  (tests/README, NEW-SESSION), checker warns on soil >45 / soilWarning >60
+  chars, full procedure + defect log in **CORRECTION-PROTOCOL.md**. Deferred:
+  `design/card-builder.html` still has the old band (see protocol §5).
+  Gate green: 94/94, 8/8, SW, verifier, audit clean.
+- **v12.7 (Pink Beauty Potentilla)**: from nested JSON + Oscar's photo. All
+  conversions exact (0.5/5→pestRisk 2 — second live half-icon card; growth
+  0.5→10). H7. First live "Any aspect" card from the nested-JSON pipeline —
+  compass correctly muted, no facing invented. Photo flagged: blooms shot
+  near-white (documented heat fade of this cultivar; July heat spell) —
+  photo-colour honesty flag, same class as Sweet Cupcake's. Long soil warning
+  measured against its panel: fits with 16.6px clearance (checked, not
+  eyeballed). syn. 'Lovely Pink' recorded in cvs. Suites green: 94/94, 8/8,
+  SW PASS, verifier PASS.
+- **v12.6 (Double Play Doozie Spirea — v3 two-photo merge goes live)**: Oscar
+  supplied the nested JSON + two of his own photos, asking for a clean in-frame
+  leaf with the flowers merged in. First live use of the v3 merge recipe:
+  leaf photo full-bleed (cropped to the 0.77 card-window ratio) + the sharp
+  bud cluster from the flower photo soft-windowed in with a feathered ellipse
+  (~46%×26% at 55% 38% — positioned for the v12 card's clear zone rather than
+  v3's "band above the Water box", which no longer exists). Both source photos
+  staged alongside the merged file per the Agastache precedent. Conversions
+  per v12.2; growthSpeed 0.58→11.6 rounded to 12. Flag: supplied JSON labels
+  thirst "Average" but rates 2/5 (→8/20, low-average) — number taken as
+  authority. Suites green: 94/94, 8/8, SW PASS, verifier PASS.
+- **v12.5 (Burgundy Glow Ajuga — the remade-image test)**: Oscar supplied the
+  nested JSON + an AI-remade full card image to test whether a remade image
+  helps. Verdict: **as data, it drifts — as a photo source, it's usable.** The
+  remade card contradicted the JSON on five fields (title 'Pink Lightning' vs
+  'Burgundy Glow', H6 vs H7, spread 30–45 cm vs 0.5–1 m, thirst 2/5 vs 3/5,
+  bloom M–J–J vs May–Jun, plus aspect/soil text) — the same drift failure as
+  regenerated master docs, so the standing rule held: JSON outranks the image
+  everywhere. The image's clean photo region was cropped out (card furniture
+  excluded) and staged as the card photo; flagged in the register as AI
+  artwork of an unverifiable cultivar at 680px (below the 1200px standard).
+  Conversions per v12.2; growthSpeed 0.78→15.6 rounded to 16 (first non-exact
+  conversion). Suites green: 94/94, 8/8, SW PASS, verifier PASS.
+- **v12.4 (Flower Tower Dogwood — first card from the new nested-JSON shape)**:
+  Oscar supplied a nested card JSON (0–5 ratings, 0–1 scale values) + his leaf
+  photo. Converted per the v12.2 rule: pests 1.5→pestRisk 6, thirst 3→12, care
+  2.5→careLevel 10, growth 0.55→11, light 0.78→sunNeed 78, tolerated floor
+  0.48→sunMin 48. H6 per the JSON. Latin follows the Sweet Cupcake precedent
+  (trade name in quotes, registered 'Zuilb1' in cvs). hue 150 is an editorial
+  pick (Choisya white-flower precedent) — the JSON carries no hue. water/prune/
+  resilience/uses left blank (not in the JSON; blank is honest). checker PASS,
+  zero warnings. Test hygiene: edge-test.js and app-test.js had the deck size
+  hardcoded as literal 7s — both now use a real `NPLANTS` const (NEW-SESSION.md
+  already claimed they did). Suites green: 94/94, 8/8, SW PASS, verifier PASS.
 - **v12.3 (growth label on the rail + Raspberry Profusion Abelia)**: Oscar: the
   vertical GROWTH SPEED text "was meant to be like inside the line… it's now
   outside the line". Correct — the painted rail breaks and the label runs *through*

@@ -9,9 +9,11 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/app-test.js      # 94 checks: 
 NODE_PATH=/opt/node22/lib/node_modules node tests/edge-test.js     #  8 checks: corrupt storage, empty deck, undo edge cases
 NODE_PATH=/opt/node22/lib/node_modules node tests/sw-update-test.js#  service-worker update path
 NODE_PATH=/opt/node22/lib/node_modules node design/verify-cards.js # card builder: rating maths vs data, missing assets
+NODE_PATH=/opt/node22/lib/node_modules node design/audit-layout.js # layout audit: ink fits zones, band collisions, rail alignment
 ```
 
 `NPLANTS` at the top of app-test.js / edge-test.js must match the number of
 plants in the PLANTS array. Bump it when you add a plant.
 
-All four must pass before pushing.
+All five must pass before pushing. The layout audit's rules and defect log
+live in `CORRECTION-PROTOCOL.md`.
