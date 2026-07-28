@@ -27,9 +27,25 @@ node tools/check-plant-json.js my-plant.json    # errors out rather than guessin
 
 ## Use it
 
-- Open `timber.html` in any browser — it's fully self-contained and works straight from the file.
+- **Serve the repo, don't open the file.** `timber.html` loads `art/` and `photos/` over HTTP, so
+  `file://` gives you a card with no frame and no photos. Any static server works:
+  `python3 -m http.server 8477`, then open `http://localhost:8477/timber.html`.
 - Hosted over HTTPS (e.g. GitHub Pages), it's installable as a PWA and works **offline** after
   the first visit (`sw.js` caches the app shell).
+
+### Publishing a standalone copy
+
+To share Timber as one file with no server — a Claude Artifact, an email attachment, a USB stick —
+build it:
+
+```sh
+node tools/build-standalone.js        # -> dist/timber-standalone.html (~3.4MB)
+```
+
+That re-encodes `art/` and `photos/` to WebP and inlines every one of them as a `data:` URI, so the
+output has no external requests at all. **Always publish the build output, never a hand-edited
+copy** — the repo is the source of truth, and editing a published copy directly is how the app and
+the repo fork. If they do drift, reconcile back into the repo first, then rebuild.
 
 ## How it works
 
@@ -51,7 +67,11 @@ state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
 
 ## Files
 
-- `timber.html` — the whole app: markup, styles, data, logic, inline PWA manifest. No frameworks, no build step.
+- `timber.html` — the whole app: markup, styles, data, logic, inline PWA manifest. No frameworks.
+  Needs `art/` and `photos/` alongside it, so it must be served rather than opened as a file.
+- `art/`, `photos/` — the card artwork and plant photography `timber.html` loads at runtime.
+- `tools/build-standalone.js` — inlines those assets into `dist/timber-standalone.html`, the
+  single-file build to publish. Not needed for local development.
 - `sw.js` — service worker (offline app-shell cache when hosted).
 - `index.html` — redirect so the site root opens the app.
 
@@ -96,5 +116,7 @@ has not yet been run against the live API — Wikimedia isn't reachable from the
 environment that built it. First run is the real test: if `search` for a common plant
 comes back with zero results, something in the request needs fixing before trusting
 it further. Downloaded photos aren't wired into `timber.html` yet — that's a separate
-step once a batch of images has been chosen (need to decide: inline data URIs like the
-icons, which bloats the file at scale, vs. separate files the service worker caches).
+step once a batch of images has been chosen. The inline-vs-separate question is settled:
+photos live as separate files under `photos/`, named `<latin-slug>.jpg`, and only
+`tools/build-standalone.js` inlines them, so the source stays diffable and the file size
+cost lands on the build output alone.
