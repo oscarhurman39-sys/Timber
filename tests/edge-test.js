@@ -1,4 +1,5 @@
 const { chromium } = require('playwright');
+const NPLANTS = 47;  // plants in the demo deck — keep in step with PLANTS
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
 const fails = [];
@@ -21,7 +22,7 @@ function check(name, cond, extra) {
   });
   await page.goto(URL); await page.waitForTimeout(300);
   let c = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, left: document.getElementById('left').textContent }));
-  check('corrupted storage -> fresh deck, no crash', c.cards === 8 && c.left === '8' && errs.length === 0, JSON.stringify({ c, errs }));
+  check('corrupted storage -> fresh deck, no crash', c.cards === NPLANTS && c.left === String(NPLANTS) && errs.length === 0, JSON.stringify({ c, errs }));
   await ctx.close();
 
   /* ---- 2. persisted EMPTY deck restores to empty state correctly ---- */
@@ -29,21 +30,21 @@ function check(name, cond, extra) {
   page = await ctx.newPage();
   page.on('pageerror', e => errs.push('empty:' + e));
   await page.goto(URL); await page.waitForTimeout(300);
-  for (let i = 0; i < 8; i++) { await page.click('#learn'); await page.waitForTimeout(420); }
+  for (let i = 0; i < NPLANTS; i++) { await page.click('#learn'); await page.waitForTimeout(420); }
   let s = await page.evaluate(() => ({ empty: document.getElementById('empty').classList.contains('show'), done: document.getElementById('done').textContent }));
-  check('deck cleared before reload', s.empty && s.done === '8', JSON.stringify(s));
+  check('deck cleared before reload', s.empty && s.done === String(NPLANTS), JSON.stringify(s));
   await page.reload(); await page.waitForTimeout(400);
   s = await page.evaluate(() => ({
     empty: document.getElementById('empty').classList.contains('show'),
     actionsHidden: document.getElementById('actions').style.visibility === 'hidden',
     done: document.getElementById('done').textContent, cards: document.querySelectorAll('.card').length,
   }));
-  check('persisted empty deck -> empty state + hidden actions + count kept', s.empty && s.actionsHidden && s.done === '8' && s.cards === 0, JSON.stringify(s));
+  check('persisted empty deck -> empty state + hidden actions + count kept', s.empty && s.actionsHidden && s.done === String(NPLANTS) && s.cards === 0, JSON.stringify(s));
   // undo out of restored empty state (history persisted)
   // actions bar hidden -> undo not clickable by user; but reset must work:
   await page.click('#reset2'); await page.waitForTimeout(300);
   s = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, done: document.getElementById('done').textContent }));
-  check('reset from restored empty state works', s.cards === 8 && s.done === '0', JSON.stringify(s));
+  check('reset from restored empty state works', s.cards === NPLANTS && s.done === '0', JSON.stringify(s));
   await ctx.close();
 
   /* ---- 3. undo with empty history: no crash, no state change ---- */
@@ -52,9 +53,14 @@ function check(name, cond, extra) {
   const errs3 = [];
   page.on('pageerror', e => errs3.push(String(e)));
   await page.goto(URL); await page.waitForTimeout(300);
-  await page.click('#back'); await page.click('#back'); await page.waitForTimeout(150);
+  // the button is disabled with nothing to undo, so the pointer path is closed off
+  // structurally; the keyboard path still reaches undo() and must stay a no-op
+  const backDisabled = await page.evaluate(() => document.getElementById('back').disabled);
+  check('undo button disabled on a fresh deck', backDisabled === true, JSON.stringify({ backDisabled }));
+  await page.keyboard.press('Backspace'); await page.keyboard.press('Backspace');
+  await page.waitForTimeout(150);
   c = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, left: document.getElementById('left').textContent }));
-  check('undo on fresh deck is a safe no-op', c.cards === 8 && c.left === '8' && errs3.length === 0, JSON.stringify({ c, errs3 }));
+  check('undo on fresh deck is a safe no-op', c.cards === NPLANTS && c.left === String(NPLANTS) && errs3.length === 0, JSON.stringify({ c, errs3 }));
   await ctx.close();
 
   /* ---- 4. search input with quotes/special chars doesn't crash rendering ---- */
@@ -106,7 +112,7 @@ function check(name, cond, extra) {
     return cards[cards.length - 1].classList.contains('flipped');
   });
   c = await page.evaluate(() => ({ left: document.getElementById('left').textContent, done: document.getElementById('done').textContent }));
-  check('undone card returns unflipped with correct counts', flipped === false && c.left === '8' && c.done === '0', JSON.stringify({ flipped, c }));
+  check('undone card returns unflipped with correct counts', flipped === false && c.left === String(NPLANTS) && c.done === '0', JSON.stringify({ flipped, c }));
   await ctx.close();
 
   console.log(`\n${passed} passed, ${failed} failed`);
