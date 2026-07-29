@@ -5,7 +5,10 @@ Reviewed 2026-07-28 across all 8 repos. One brick each, phone-sized.
 ## website-designers  [active]
 brick: Build a real 50-row leads CSV (one niche, one town) and run `lead_agent` on it
 since: 2026-07-28  sessions-unchanged: 0
-note: pipeline is complete; the only thing missing is real leads. test_lead.csv has 3 fake rows.
+note: send path was broken (NameError on every cold email) — fixed 2026-07-28, 25 tests green.
+Offer copy now lives in pipeline/campaigns.py, selected by CAMPAIGN env var.
+Still open: `draft_cold_email` (the Hugging Face drafting path) is never called by anything —
+every email uses the deterministic template, yet HF_API_TOKEN is still a required env var.
 
 ## timber  [active]
 brick: Re-run `node plants-tool.js export` to resync plants.csv, then finish `hardiness` + `hue` on the 20 name-only rows
