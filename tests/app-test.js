@@ -270,6 +270,18 @@ function topFlipped(page) {
   await page.keyboard.press('Escape'); await page.keyboard.press('Escape'); await page.waitForTimeout(250);
   check('escape unwinds back out of search', await page.evaluate(() => !document.getElementById('search').classList.contains('open')));
 
+  /* ---- 11b3. customer view of a portfolio plant with unfilled fields ---- */
+  await page.click('#searchBtn'); await page.waitForTimeout(400);
+  await page.fill('#searchInput', 'bugle'); await page.waitForTimeout(100);
+  await page.click('.s-row'); await page.waitForTimeout(150);
+  await page.click('#dCustomer'); await page.waitForTimeout(150);
+  const cust2 = await page.locator('#searchDetail').innerText();
+  check('customer view: no price box when retail is unfilled', !/price/i.test(cust2), cust2.slice(-60));
+  check('customer view: unfilled facts drop their rows, filled ones stay',
+    !/Watering|Pruning|Great for|Varieties/.test(cust2) && /Where to plant/.test(cust2) && /Hardiness/.test(cust2), cust2.slice(0, 120));
+  /* customer → staff → results → closed */
+  await page.keyboard.press('Escape'); await page.keyboard.press('Escape'); await page.keyboard.press('Escape'); await page.waitForTimeout(250);
+
   /* ---- 11c. mobile hardening CSS ---- */
   check('pull-to-refresh guarded (overscroll-behavior none)', await page.evaluate(() => getComputedStyle(document.body).overscrollBehaviorY === 'none'));
   check('safe-area inset styles present for installed iOS', await page.evaluate(() => [...document.styleSheets].some(s => { try { return [...s.cssRules].some(r => r.cssText.includes('safe-area-inset')); } catch (e) { return false; } })));

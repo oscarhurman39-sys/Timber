@@ -39,7 +39,7 @@ If you're using a plain chat rather than one attached to this repo, paste
 | `data/plinder-layout-manifest.json` | Measured card coordinates (locked test values) |
 | `art/` | The painted assets extracted from the approved card |
 | `design/card-builder.html` | Standalone card builder — JSON in, card out |
-| `tests/` | 94 app checks + 8 edge checks + service-worker update + card verifier |
+| `tests/` | 96 app checks + 9 edge checks + service-worker update + card verifier |
 | `CORRECTION-PROTOCOL.md` | Layout-defect audit (`design/audit-layout.js`), defect log, correction rules |
 
 ## The routine, per plant — ONE command

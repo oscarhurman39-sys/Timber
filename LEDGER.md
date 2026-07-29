@@ -4,7 +4,19 @@
 brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below the
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
-since: 2026-07-28  sessions-unchanged: 0
+since: 2026-07-28  sessions-unchanged: 1
+progress: 2026-07-29 — customer-view empty-field fix. The portfolio batch left 44/47
+  plants with retail:"" and up to 20 with empty water/prune/uses/cvs text; the
+  customer view rendered every one as a bare label — worst case an empty gold PRICE
+  box on the screen meant to be handed to a customer. Now a fact with no value (and
+  the price box with no price) is dropped, never invented; the "Bench · Root" cells
+  on both trade sheets stop printing a stray "·" when both halves are empty. Two new
+  app-test checks lock it in (96 total). All five suites green; standalone rebuilt
+  (3.74MB, 47 cards, zero external requests) and republished to the existing artifact
+  URL. The Ajuga-photo brick was ATTEMPTED and is blocked from this session's
+  environment: the agent proxy denies CONNECT to commons.wikimedia.org (policy), so
+  plant-images-tool.js cannot reach the Commons API here. Needs either a network
+  policy that allows wikimedia.org or a photo supplied by hand.
 progress: 2026-07-28 — **repository separated.** The Command Centre dashboard moved
   out to its own repo (Plantatron); Timber is now only the customer-facing swipe-card
   app. **Deck consolidated**: the flower-tower branch merged in, resolving the split

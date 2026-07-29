@@ -1257,7 +1257,7 @@ function renderCard(idx){
         <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
         <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div></div>
         <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
-        <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
+        <div class="g"><div class="l">Bench · Root</div><div class="n">${[p.bench,p.root].filter(Boolean).join(' · ')}</div></div>
         <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
         <div class="g full"><div class="l">Shrink</div><div class="n">${p.shrink}</div></div>
         <div class="g full"><div class="l">Return risk</div><div class="n">${p.returnRisk}</div></div>
@@ -1444,7 +1444,7 @@ function showPlant(i){
       <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
       <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div></div>
       <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
-      <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
+      <div class="g"><div class="l">Bench · Root</div><div class="n">${[p.bench,p.root].filter(Boolean).join(' · ')}</div></div>
       <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
       <div class="g full"><div class="l">Shrink</div><div class="n">${p.shrink}</div></div>
       <div class="g full"><div class="l">Return risk</div><div class="n">${p.returnRisk}</div></div>
@@ -1464,10 +1464,13 @@ function showPlant(i){
   dBack.focus();
 }
 
-/* customer-facing view: big type, friendly labels, retail price only — no trade data */
+/* customer-facing view: big type, friendly labels, retail price only — no trade data.
+   Portfolio plants ship with text fields still unfilled: a fact with no value — and
+   the price box with no price — is dropped, never shown as a bare label. */
 function showCustomer(i){
   detailIdx=i;customerMode=true;
   const p=PLANTS[i];
+  const fact=(k,label,v)=>v?`<li><span class="k">${k}</span><span class="v"><b>${label}</b>${v}</span></li>`:'';
   searchDetail.classList.add('cust');
   searchDetail.innerHTML=`
     <div class="d-top"><button class="d-back" id="dStaff">← Staff view</button></div>
@@ -1475,16 +1478,16 @@ function showCustomer(i){
     <div class="c-latin">${p.latin}</div>
     <div class="c-eyebrow">${p.visual}</div>
     <ul class="facts">
-      <li><span class="k">💧</span><span class="v"><b>Watering</b>${p.water}</span></li>
-      <li><span class="k">☀️</span><span class="v"><b>Where to plant</b>${p.aspect}</span></li>
-      <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
-      <li><span class="k">✂️</span><span class="v"><b>Pruning</b>${p.prune}</span></li>
-      <li><span class="k">❄️</span><span class="v"><b>Hardiness</b>${p.hardiness}</span></li>
-      <li><span class="k">📏</span><span class="v"><b>Grows to</b>${p.size}</span></li>
-      <li><span class="k">🌿</span><span class="v"><b>Great for</b>${p.uses}</span></li>
-      <li><span class="k">✨</span><span class="v"><b>Varieties</b>${p.cvs}</span></li>
+      ${fact('💧','Watering',p.water)}
+      ${fact('☀️','Where to plant',p.aspect)}
+      ${fact('🪴','Soil',p.soil)}
+      ${fact('✂️','Pruning',p.prune)}
+      ${fact('❄️','Hardiness',p.hardiness)}
+      ${fact('📏','Grows to',p.size)}
+      ${fact('🌿','Great for',p.uses)}
+      ${fact('✨','Varieties',p.cvs)}
     </ul>
-    <div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`;
+    ${p.retail?`<div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`:''}`;
   searchResults.hidden=true;
   searchDetail.hidden=false;
   const back=document.getElementById('dStaff');
