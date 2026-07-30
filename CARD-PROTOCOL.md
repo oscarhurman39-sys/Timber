@@ -95,6 +95,7 @@ Focal point recorded here when off-centre:
 | Hydrangea 'Sweet Cupcake' | hydrangea-macrophylla-sweet-cupcake.jpg | ~50% 45% — [flag] photo is a blue/purple mophead close-up, not the pink cultivar |
 | Euonymus alatus | euonymus-alatus.jpg | ~50% 40% — summer macro. ID confirmed: corky wings visible as tan ridges on the green stems, leaves opposite + finely serrate. Shows none of the card's headline interest (autumn crimson, fruit); a September re-shoot would sell the plant better |
 | Ligularia 'Treasure Island' | ligularia-treasure-island.jpg | centre — foliage + rhubarb-red stems, buds not yet open; golden flowers (the card's headline) not shown. Nursery label at the photo's foot sits hidden behind the plaque on-card |
+| Hylotelephium 'Dream Dazzler' | hylotelephium-dream-dazzler.jpg | centre — correct cultivar (pink-edged purple-grey foliage). [flag] source is a background-removed cutout; its transparent regions render as solid black voids on the card (mid-left wedge + holes between stems). Wants the original full-frame photo re-staged through the pipeline |
 
 ## 5. Decision changelog
 
