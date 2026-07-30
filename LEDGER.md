@@ -1,10 +1,13 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below the
-  1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
-  last known data-quality defect in the 47-card deck.
-since: 2026-07-28  sessions-unchanged: 2
+brick: Photograph the 4 photo-gap plants at work — Choisya ternata, Weigela 'Nana
+  Variegata' and Lonicera 'Winter Beauty' have NO photo (cards show the leaf
+  gradient), and the Ajuga 'Burgundy Glow' is below standard — then add each with
+  `node tools/add-plant.js` / drop into photos/. Supersedes the Ajuga re-source
+  brick, which stayed blocked 2 sessions (Wikimedia unreachable from this
+  environment); a phone shoot needs no network and covers all four.
+since: 2026-07-30  sessions-unchanged: 0
 progress: 2026-07-30 — learning-flow upgrade. Skipped cards now come back: the deck
   runs in rounds ("Round done — Go again with the N you skipped") instead of silently
   dropping swiped-left plants; the deck deals shuffled every round so you learn plants,
