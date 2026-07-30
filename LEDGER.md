@@ -4,7 +4,22 @@
 brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below the
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
-since: 2026-07-28  sessions-unchanged: 0
+since: 2026-07-28  sessions-unchanged: 1
+progress: 2026-07-30 — **artifact re-synced, deck 57.** The published artifact had forked
+  again: artifact-side sessions had added 10 cards (Ligularia 'Treasure Island', Dream Dazzler
+  Stonecrop, Hydrangea aspera 'Rosemary Foster', Ginkgo, Cordyline Charlie Boy, Gaura 'Gaudi
+  Rose', Hydrangea 'Wim's Red', Rhododendron 'Gartendirektor Glocker', Acer shirasawanum
+  Moonrise, Callistemon 'Splendens') that never landed in the repo, while main sat at 47 and
+  the artifact showed only 18. All 10 rows + their photos are merged into main's newer app
+  shell (deck 57), NPLANTS bumped, all five suites green, standalone rebuilt (4.6MB, 54/57
+  photos) and republished to BOTH artifact URLs so either link now shows the full deck.
+  Photo caveat: the 10 photos came back through one webp→jpeg re-encode of the artifact's
+  inlined copies (still ~1200px). Photo-less (never had one anywhere): Choisya ternata,
+  Weigela 'Nana Variegata', Winter Beauty Honeysuckle. Improvements-branch note: 6 plants
+  (Pink Annabelle, Pittosporum 'Elizabeth', Osmanthus 'Tricolor', Cercis 'Eternal Flame',
+  Agastache 'Summerlong Coral', Yucca 'Variegata') exist only on the old timber-improvements
+  branch — left out, as the 07-28 consolidation excluded them; their photos are already in
+  photos/. Say the word if they should be resurrected.
 progress: 2026-07-28 — **repository separated.** The Command Centre dashboard moved
   out to its own repo (Plantatron); Timber is now only the customer-facing swipe-card
   app. **Deck consolidated**: the flower-tower branch merged in, resolving the split
