@@ -108,9 +108,9 @@ const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
 
   const photoConst = 'const PHOTO_DATA={' +
     Object.entries(photoMap).map(([k, v]) => `${JSON.stringify(k)}:${JSON.stringify(v)}`).join(',') + '};\n';
-  const PHOTO_SRC = 'src="photos/${slug}.jpg"';
-  if (!html.includes(PHOTO_SRC)) die('photo <img> src not found in renderCard');
-  html = html.replace(PHOTO_SRC, 'src="${PHOTO_DATA[slug]||\'\'}"');
+  const PHOTO_SRC = 'const photoSrc=slug=>`photos/${slug}.jpg`;';
+  if (!html.includes(PHOTO_SRC)) die('photoSrc helper not found');
+  html = html.replace(PHOTO_SRC, "const photoSrc=slug=>PHOTO_DATA[slug]||'';");
   // declare the map just above the slug helper that keys it
   const anchor = '/* fold diacritics first';
   if (!html.includes(anchor)) die('slugLatin anchor comment not found');

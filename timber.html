@@ -135,6 +135,7 @@
   .empty p{margin:0;color:var(--muted);max-width:260px;line-height:1.5}
   .empty button{margin-top:6px;padding:12px 22px;border:none;border-radius:30px;font-weight:700;
     background:linear-gradient(120deg,var(--leaf1),var(--leaf2));color:#04120a;cursor:pointer;font-size:15px}
+  .empty button.ghost{background:none;border:1px solid rgba(255,255,255,.22);color:var(--muted);margin-top:0}
 
   .sheet{position:fixed;inset:0;z-index:50;visibility:hidden}
   .sheet.open{visibility:visible}
@@ -228,6 +229,8 @@
   .q-stats b{color:var(--gold)}
   .q-question{font-size:15px;line-height:1.45;color:#eafff2}
   .q-question em{color:var(--leaf1);font-style:normal;font-weight:600}
+  .q-question .q-photo{display:block;width:100%;max-height:200px;object-fit:cover;border-radius:12px;
+    margin-top:10px;border:1px solid rgba(255,255,255,.12)}
   .q-options{display:grid;gap:8px;overflow-y:auto}
   .q-opt{border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.04);
     color:var(--ink);font-family:inherit;font-size:15px;font-weight:600;text-align:left;
@@ -402,8 +405,9 @@
 
 <div class="deck" id="deck">
   <div class="empty" id="empty">
-    <h3>Deck's clear 🌱</h3>
-    <p>You've starred every plant. Reset to run through them again.</p>
+    <h3 id="emptyHead">Deck's clear 🌱</h3>
+    <p id="emptyMsg">You've starred every plant. Reset to run through them again.</p>
+    <button id="again" hidden>Go again</button>
     <button id="reset2">Reset deck</button>
   </div>
 </div>
@@ -1070,7 +1074,7 @@ const PLANTS = [
 const deck=document.getElementById('deck'),empty=document.getElementById('empty');
 const leftEl=document.getElementById('left'),doneEl=document.getElementById('done'),doneMenu=document.getElementById('doneMenu');
 const backBtn=document.getElementById('back');
-let order=[],history=[],learnedCount=0;
+let order=[],history=[],learnedCount=0,skipped=[];  /* skipped = swiped left, waiting for the next round */
 
 /* ---------- progress persistence (survives closing the app) ---------- */
 const STORE_KEY='timber-progress-v1';
@@ -1078,7 +1082,7 @@ const FINGERPRINT=PLANTS.map(p=>p.latin).join('|');  /* deck layout invalidates 
 function saveProgress(){
   try{
     const stack=[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx);
-    localStorage.setItem(STORE_KEY,JSON.stringify({fp:FINGERPRINT,stack,history,learnedCount}));
+    localStorage.setItem(STORE_KEY,JSON.stringify({fp:FINGERPRINT,stack,history,learnedCount,skipped}));
   }catch(e){/* private mode / storage full — app still works, just won't persist */}
 }
 function loadProgress(){
@@ -1089,13 +1093,19 @@ function loadProgress(){
     if(!Array.isArray(d.stack)||!d.stack.every(okIdx)||new Set(d.stack).size!==d.stack.length)return null;
     if(!Array.isArray(d.history)||!d.history.every(h=>h&&okIdx(h.idx)&&typeof h.learned==='boolean'))return null;
     if(!Number.isInteger(d.learnedCount)||d.learnedCount<0||d.learnedCount>PLANTS.length)return null;
+    /* saves from before the round loop carry no skipped list — recover it from
+       history (skips still in history and absent from the stack are pending) */
+    if(d.skipped===undefined)d.skipped=d.history.filter(h=>!h.learned).map(h=>h.idx).filter(i=>!d.stack.includes(i));
+    const inStack=new Set(d.stack);
+    if(!Array.isArray(d.skipped)||!d.skipped.every(okIdx)||new Set(d.skipped).size!==d.skipped.length
+       ||d.skipped.some(i=>inStack.has(i)))return null;
     return d;
   }catch(e){return null;}
 }
 function restoreDeck(d){
   deck.querySelectorAll('.card').forEach(releaseCard);
   d.stack.forEach(renderCard);         /* saved bottom-to-top, rendered in the same order */
-  order=[...d.stack];history=d.history;learnedCount=d.learnedCount;
+  order=[...d.stack];history=d.history;learnedCount=d.learnedCount;skipped=d.skipped;
   updateCounts();refreshEmpty();
 }
 
@@ -1103,7 +1113,13 @@ function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d=
 
 function buildDeck(){
   deck.querySelectorAll('.card').forEach(releaseCard);
-  order=PLANTS.map((_,i)=>i);history=[];learnedCount=0;
+  order=shuffle(PLANTS.map((_,i)=>i));history=[];learnedCount=0;skipped=[];
+  [...order].reverse().forEach(renderCard);
+  updateCounts();refreshEmpty();saveProgress();
+}
+function dealAgain(){                    /* next round: only the cards swiped left last time */
+  if(order.length||!skipped.length)return;
+  order=shuffle([...skipped]);skipped=[];history=[];
   [...order].reverse().forEach(renderCard);
   updateCounts();refreshEmpty();saveProgress();
 }
@@ -1160,6 +1176,7 @@ function splitSoil(str){                      /* value = soil type; warning = th
 }
 /* fold diacritics first (ō→o, ā→a…) so Japanese cultivar names slug sensibly */
 const slugLatin=l=>l.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+const photoSrc=slug=>`photos/${slug}.jpg`;  /* build-standalone rewrites this to the inlined PHOTO_DATA map */
 const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/widget-drop-out.png","widget-seca-fill":"art/widget-seca-fill.png","widget-seca-out":"art/widget-seca-out.png","widget-spray-fill":"art/widget-spray-fill.png","widget-spray-out":"art/widget-spray-out.png"};
 
 const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%'};
@@ -1203,7 +1220,7 @@ function renderCard(idx){
         <div class="tinner">
           <div class="tphoto">
             <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
-            <img src="photos/${slug}.jpg" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
+            <img src="${photoSrc(slug)}" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
           </div>
           <div class="thead">
             <h2>${p.common}</h2>
@@ -1344,19 +1361,36 @@ function fling(card,dir,learned){
   card.style.transform=`translate(${dir*140}%,${learned?-40:60}px) rotate(${dir*24}deg)`;
   card.style.opacity='0';setTimeout(()=>releaseCard(card),320);
   order=order.filter(i=>i!==idx);history.push({idx,learned});
-  if(learned)learnedCount++;
+  if(learned)learnedCount++;else skipped.push(idx);
   updateCounts();refreshEmpty();saveProgress();
 }
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
-function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);updateCounts();refreshEmpty();saveProgress();}
-function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
+function undo(){const last=history.pop();if(!last)return;order.push(last.idx);
+  if(last.learned)learnedCount=Math.max(0,learnedCount-1);else skipped=skipped.filter(i=>i!==last.idx);
+  renderCard(last.idx);updateCounts();refreshEmpty();saveProgress();}
+function updateCounts(){leftEl.textContent=order.length+skipped.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
   backBtn.disabled=history.length===0;}
-function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show',done);document.getElementById('actions').style.visibility=done?'hidden':'visible';}
+function refreshEmpty(){
+  const done=order.length===0,n=skipped.length;
+  if(done){
+    document.getElementById('emptyHead').textContent=n?'Round done 🌱':"Deck's clear 🌱";
+    document.getElementById('emptyMsg').textContent=n
+      ?`${learnedCount} starred so far — the ${n} you skipped come back for another pass.`
+      :"You've starred every plant. Reset to run through them again.";
+    const again=document.getElementById('again');
+    again.hidden=!n;
+    if(n)again.textContent=`Go again — ${n} to learn`;
+    document.getElementById('reset2').classList.toggle('ghost',n>0);
+  }
+  empty.classList.toggle('show',done);
+  document.getElementById('actions').style.visibility=done?'hidden':'visible';
+}
 
 document.getElementById('learn').onclick=()=>act(true);
 document.getElementById('skip').onclick=()=>act(false);
 document.getElementById('back').onclick=undo;
 document.getElementById('reset2').onclick=buildDeck;
+document.getElementById('again').onclick=dealAgain;
 document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
 
 /* deck keyboard shortcuts — inert while any overlay owns the screen, so arrow keys
@@ -1524,6 +1558,7 @@ const QUIZ_KEY='timber-quiz-v1';
 let qStreak=0,qBest=0,qTimer=null;
 try{qBest=Math.max(0,parseInt(localStorage.getItem(QUIZ_KEY),10)||0);}catch(e){}
 const QUIZ_CLUES=[
+  ['__photo__','Which plant is this?'],
   ['visual','Which plant looks like this:'],
   ['latin','Which plant has the latin name'],
   ['cvs','Whose cultivars are these:'],
@@ -1540,10 +1575,17 @@ function updateQuizStats(){
 function nextQuestion(){
   clearTimeout(qTimer);
   const answer=PLANTS[Math.floor(Math.random()*PLANTS.length)];
-  /* only ask about fields whose value is unique to the answer — no ambiguous questions */
-  const clues=QUIZ_CLUES.filter(([f])=>PLANTS.filter(p=>p[f]===answer[f]).length===1);
+  /* only ask about fields whose value is unique to the answer — no ambiguous questions.
+     The photo clue is always unique (one photo per plant, latin names deduped on entry). */
+  const clues=QUIZ_CLUES.filter(([f])=>f==='__photo__'||PLANTS.filter(p=>p[f]===answer[f]).length===1);
   const [field,prompt]=clues[Math.floor(Math.random()*clues.length)];
-  qQuestion.innerHTML=`${prompt} <em>“${answer[field]}”</em>`;
+  if(field==='__photo__'){
+    const slug=slugLatin(answer.latin);
+    /* a missing photo falls back to the visual description, so the question stays answerable */
+    qQuestion.innerHTML=`${prompt}<img class="q-photo" src="${photoSrc(slug)}" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="Mystery plant photo" onerror="this.hidden=true;this.nextElementSibling.hidden=false"> <em class="q-fallback" hidden>“${answer.visual}”</em>`;
+  }else{
+    qQuestion.innerHTML=`${prompt} <em>“${answer[field]}”</em>`;
+  }
   const opts=shuffle([...PLANTS]).slice(0,4);
   if(!opts.includes(answer)){opts[0]=answer;shuffle(opts);}
   qOptions.innerHTML=opts.map(p=>`<button class="q-opt" data-i="${PLANTS.indexOf(p)}">${p.common}</button>`).join('');

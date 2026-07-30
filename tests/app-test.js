@@ -109,7 +109,8 @@ function topFlipped(page) {
   const skipOp = await dragCard(page, -150, { sampleStamp: '.stamp.skip' });
   c = await counts(page);
   check('swipe left: SKIP stamp visible mid-drag', skipOp !== null && parseFloat(skipOp) > 0.5, 'opacity=' + skipOp);
-  check('swipe left: card removed, starred unchanged', c.cards === NPLANTS-2 && c.left === NPLANTS-2 && c.done === 1, JSON.stringify(c));
+  /* a skipped card leaves the deck but stays in the to-learn count — it returns next round */
+  check('swipe left: card removed, still counted to learn', c.cards === NPLANTS-2 && c.left === NPLANTS-1 && c.done === 1, JSON.stringify(c));
 
   /* ---- 4. undo ---- */
   await page.click('#back'); await page.waitForTimeout(100);
@@ -185,14 +186,28 @@ function topFlipped(page) {
   c = await counts(page);
   check('star while flipped: unflips, does not swipe', c.cards === NPLANTS && c.done === 0 && (await topFlipped(page)) === false, JSON.stringify(c));
 
-  /* ---- 9. empty state + reset ---- */
-  for (let i = 0; i < NPLANTS; i++) { await page.click('#learn'); await page.waitForTimeout(400); }
+  /* ---- 9. round loop: skip 3, star the rest, review the skipped, then clear ---- */
+  for (let i = 0; i < 3; i++) { await page.click('#skip'); await page.waitForTimeout(400); }
+  for (let i = 0; i < NPLANTS - 3; i++) { await page.click('#learn'); await page.waitForTimeout(400); }
   c = await counts(page);
   const emptyShown = await page.locator('#empty').isVisible();
   const actionsHidden = await page.evaluate(() => document.getElementById('actions').style.visibility === 'hidden');
-  check('deck cleared: empty state shows', c.cards === 0 && emptyShown, JSON.stringify(c));
-  check('deck cleared: action buttons hidden', actionsHidden);
-  check('empty state text', (await page.locator('#empty h3').innerText()).includes("Deck's clear"));
+  check('round done: empty state shows, skipped still to learn', c.cards === 0 && emptyShown && c.left === 3 && c.done === NPLANTS-3, JSON.stringify(c));
+  check('round done: action buttons hidden', actionsHidden);
+  check('round done: heading + go-again button', (await page.locator('#emptyHead').innerText()).includes('Round done')
+    && (await page.locator('#again').isVisible()) && (await page.locator('#again').innerText()).includes('3'));
+  await page.reload(); await page.waitForTimeout(400);
+  c = await counts(page);
+  check('round done: skipped list survives reload', c.cards === 0 && c.left === 3 && c.done === NPLANTS-3
+    && (await page.locator('#again').isVisible()), JSON.stringify(c));
+  await page.click('#again'); await page.waitForTimeout(200);
+  c = await counts(page);
+  check('go again deals only the skipped cards', c.cards === 3 && c.left === 3 && c.done === NPLANTS-3, JSON.stringify(c));
+  for (let i = 0; i < 3; i++) { await page.click('#learn'); await page.waitForTimeout(400); }
+  c = await counts(page);
+  check('all starred: Deck\'s clear, go-again gone', c.cards === 0 && c.left === 0 && c.done === NPLANTS
+    && (await page.locator('#emptyHead').innerText()).includes("Deck's clear")
+    && !(await page.locator('#again').isVisible()), JSON.stringify(c));
   await page.click('#reset2'); await page.waitForTimeout(150);
   c = await counts(page);
   check('reset deck restores all', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
@@ -290,6 +305,12 @@ function topFlipped(page) {
   const deriveCorrect = async () => {
     const t = await page.locator('#qQuestion').innerText();
     return page.evaluate(txt => {
+      const img = document.querySelector('#qQuestion .q-photo');
+      if (img) {                       /* photo question — recover the plant from the src slug */
+        const src = img.getAttribute('src');
+        const p = PLANTS.find(pl => src === photoSrc(slugLatin(pl.latin)));
+        return p ? p.common : null;
+      }
       const m = txt.match(/“([\s\S]+)”/);
       if (!m) return null;
       const p = PLANTS.find(pl => Object.values(pl).some(v => v === m[1]));
@@ -314,6 +335,26 @@ function topFlipped(page) {
   check('wrong answer resets streak and reveals correct',
     (await page.locator('#qStreak').innerText()) === '0' && (await page.locator('.q-opt.correct').count()) === 1);
   check('best streak retained in session', (await page.locator('#qBest').innerText()) === '1');
+
+  /* ---- 11d2. photo question — force it by narrowing the clue pool ---- */
+  await page.waitForTimeout(1700);  // let the wrong-answer auto-advance land first
+  await page.evaluate(() => {
+    QUIZ_CLUES.length = 0;
+    QUIZ_CLUES.push(['__photo__', 'Which plant is this?']);
+    nextQuestion();
+  });
+  await page.waitForTimeout(150);
+  const qImg = await page.evaluate(() => {
+    const i = document.querySelector('#qQuestion .q-photo');
+    return i ? { src: i.getAttribute('src'), hidden: i.hidden } : null;
+  });
+  check('photo question renders a photo', qImg && qImg.src.length > 0 && !qImg.hidden, JSON.stringify(qImg));
+  correct = await deriveCorrect();
+  check('photo question resolves to a real plant', !!correct, qImg && qImg.src);
+  await page.locator('.q-opt', { hasText: correct }).click();
+  await page.waitForTimeout(100);
+  check('photo question answerable, streak bumps', (await page.locator('#qStreak').innerText()) === '1');
+
   await page.click('#quizClose'); await page.waitForTimeout(200);
   c = await counts(page);
   check('quiz closes, deck untouched', !(await page.evaluate(() => document.getElementById('quiz').classList.contains('open'))) && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
@@ -344,7 +385,12 @@ function topFlipped(page) {
   await sayBtn.click(); // two quick taps — must NOT count as card double-tap
   await page.waitForTimeout(500);
   const speak1 = await page.evaluate(() => ({ calls: window.__speakCalls, text: window.__lastUtterance }));
-  check('say button triggers speech with latin name', speak1.calls >= 2 && speak1.text === 'Nandina domestica', JSON.stringify(speak1));
+  /* the deck deals shuffled, so compare against whatever card is on top */
+  const topLatin = await page.evaluate(() => {
+    const cards = document.querySelectorAll('.card');
+    return cards[cards.length - 1].querySelector('.thead .bot').textContent;
+  });
+  check('say button triggers speech with latin name', speak1.calls >= 2 && speak1.text === topLatin, JSON.stringify({ speak1, topLatin }));
   check('rapid say taps do not flip the card', await topFlipped(page) === false);
   c = await counts(page);
   check('say taps do not swipe or count', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));

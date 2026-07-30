@@ -4,7 +4,16 @@
 brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below the
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
-since: 2026-07-28  sessions-unchanged: 1
+since: 2026-07-28  sessions-unchanged: 2
+progress: 2026-07-30 — learning-flow upgrade. Skipped cards now come back: the deck
+  runs in rounds ("Round done — Go again with the N you skipped") instead of silently
+  dropping swiped-left plants; the deck deals shuffled every round so you learn plants,
+  not sequence; the quiz gained photo questions ("Which plant is this?" over the real
+  card photo, falling back to the visual description for the 3 plants still missing
+  photos: Choisya, Weigela Nana Variegata, Winter Beauty Lonicera). add-plant.js
+  screenshot and build-standalone.js photo inlining updated for the shuffle/photoSrc
+  changes. App suite 96→102 checks, all five suites green, standalone rebuilt (3.74MB)
+  and republished. Wikimedia re-tested from this environment: still blocked by proxy.
 progress: 2026-07-29 — customer-view empty-field fix. The portfolio batch left 44/47
   plants with retail:"" and up to 20 with empty water/prune/uses/cvs text; the
   customer view rendered every one as a bare label — worst case an empty gold PRICE
