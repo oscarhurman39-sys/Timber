@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 11;  // plants in the demo deck
+const NPLANTS = 12;  // plants in the demo deck
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -405,7 +405,7 @@ function topFlipped(page) {
   /* ---- 14. data integrity: exact PLANTS field names ---- */
   const fieldCheck = await page.evaluate(() => {
     const required = ['common','latin','hue','visual','water','aspect','soil','prune','source','peak','order','bench','root','trade','retail','margin','type','shrink','returnRisk','pots','cvs','hardiness','resilience','uses','size'];
-    return PLANTS.length === 11 && PLANTS.every(p => required.every(k => k in p)) &&
+    return PLANTS.length === 12 && PLANTS.every(p => required.every(k => k in p)) &&
       PLANTS[0].trade === '2L £3.80–£4.50' && PLANTS[2].latin === 'Weigela florida ‘Nana Variegata’' &&
       PLANTS[3].pestRisk === 3 && PLANTS[4].hardiness === 'H2';
   });

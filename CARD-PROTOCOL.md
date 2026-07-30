@@ -97,6 +97,7 @@ Focal point recorded here when off-centre:
 | Ligularia 'Treasure Island' | ligularia-treasure-island.jpg | centre — foliage + rhubarb-red stems, buds not yet open; golden flowers (the card's headline) not shown. Nursery label at the photo's foot sits hidden behind the plaque on-card |
 | Hylotelephium 'Dream Dazzler' | hylotelephium-dream-dazzler.jpg | centre — correct cultivar (pink-edged purple-grey foliage). [flag] source is a background-removed cutout; its transparent regions render as solid black voids on the card (mid-left wedge + holes between stems). Wants the original full-frame photo re-staged through the pipeline |
 | Hydrangea aspera 'Rosemary Foster' | hydrangea-aspera-rosemary-foster.jpg | centre — garden-centre shot, ID confirmed by the in-frame label. Foliage only (May); the purple-blue lacecaps (headline) not shown — an Aug re-shoot would sell it better. Sliver of the white label peeks out under the soil panel; source image carries a phone "AI-generated content" tag bottom-left, hidden behind the aspect band on-card |
+| Ginkgo biloba | ginkgo-biloba.jpg | centre — single-leaf macro on a background-removed cutout; the transparency renders as solid black, which on this clean single subject reads as a deliberate botanical-plate look (unlike the Dream Dazzler's ragged voids). Summer green, not the golden autumn headline. Oscar to confirm the look is intended |
 
 ## 5. Decision changelog
 
