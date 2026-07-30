@@ -96,6 +96,7 @@ Focal point recorded here when off-centre:
 | Euonymus alatus | euonymus-alatus.jpg | ~50% 40% — summer macro. ID confirmed: corky wings visible as tan ridges on the green stems, leaves opposite + finely serrate. Shows none of the card's headline interest (autumn crimson, fruit); a September re-shoot would sell the plant better |
 | Ligularia 'Treasure Island' | ligularia-treasure-island.jpg | centre — foliage + rhubarb-red stems, buds not yet open; golden flowers (the card's headline) not shown. Nursery label at the photo's foot sits hidden behind the plaque on-card |
 | Hylotelephium 'Dream Dazzler' | hylotelephium-dream-dazzler.jpg | centre — correct cultivar (pink-edged purple-grey foliage). [flag] source is a background-removed cutout; its transparent regions render as solid black voids on the card (mid-left wedge + holes between stems). Wants the original full-frame photo re-staged through the pipeline |
+| Hydrangea aspera 'Rosemary Foster' | hydrangea-aspera-rosemary-foster.jpg | centre — garden-centre shot, ID confirmed by the in-frame label. Foliage only (May); the purple-blue lacecaps (headline) not shown — an Aug re-shoot would sell it better. Sliver of the white label peeks out under the soil panel; source image carries a phone "AI-generated content" tag bottom-left, hidden behind the aspect band on-card |
 
 ## 5. Decision changelog
 
