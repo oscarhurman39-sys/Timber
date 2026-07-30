@@ -104,6 +104,7 @@ Focal point recorded here when off-centre:
 | Cordyline australis CHARLIE BOY | cordyline-australis-charlie-boy-ric01.jpg | centre — correct cultivar, radiating burgundy-pink blades fill the frame edge to edge. Source image carries a phone "AI-generated content" tag bottom-left, hidden behind the aspect band on-card, same as the Rosemary Foster photo |
 | Oenothera lindheimeri GAUDI ROSE | oenothera-lindheimeri-gaudi-rose-florgaucomro.jpg | centre — dense clustered trumpet flowers + dark leathery lance-shaped leaves read visually as an oleander-type shrub rather than gaura's typical wispy, sparse-foliage habit; Oscar confirmed the photo is correct, flagged here in case the card ever needs a second look. Background-removal cutout: black voids plus a visible white outline halo along the top/left silhouette edge |
 | Hydrangea paniculata 'Wim's Red' | hydrangea-paniculata-wim-s-red.jpg | centre — foliage-only shot (red stems, dark green leaves), no panicles; the wine-red headline colour isn't shown. ID plausible from stem/leaf character, not confirmed by a label in-frame |
+| Rhododendron 'Gartendirektor Glocker' | rhododendron-gartendirektor-glocker.jpg | centre — glossy foliage + rose-tinted buds, pre-bloom; the rose-red bells (headline) not shown. [flag] background-removal cutout leaves a large contiguous black void bottom-right of the frame (bigger and more visible than prior thin-gap cutouts) — wants a full-frame re-photo or a better-masked cutout |
 
 ## 5. Decision changelog
 
