@@ -60,6 +60,9 @@ the rubric. Stored in columns 26–30 of plants.csv.
 - [ ] **Compass rule** respected (see anatomy) — direction shown only if data states it.
 - [ ] **Commercial fields**: blank stays blank. Never a guessed price/margin on a card.
 - [ ] **Hardiness pill** matches the data row; latin spelling eyeballed.
+- [ ] **Possessive apostrophe inside a cultivar name** (e.g. Wim's Red) uses a
+      curly `’` — a straight `'` collides with the delimiting quotes and the
+      validator rejects it as unbalanced.
 - [ ] **Contrast**: dark ink on paper, shadowed white on photo, nothing marginal.
 - [ ] **Render + screenshot + look at it** before sending. Measured, not assumed
       (frame padding equal on all sides; panels not overlapping).
@@ -100,6 +103,7 @@ Focal point recorded here when off-centre:
 | Ginkgo biloba | ginkgo-biloba.jpg | centre — single-leaf macro on a background-removed cutout; the transparency renders as solid black, which on this clean single subject reads as a deliberate botanical-plate look (unlike the Dream Dazzler's ragged voids). Summer green, not the golden autumn headline. Oscar to confirm the look is intended |
 | Cordyline australis CHARLIE BOY | cordyline-australis-charlie-boy-ric01.jpg | centre — correct cultivar, radiating burgundy-pink blades fill the frame edge to edge. Source image carries a phone "AI-generated content" tag bottom-left, hidden behind the aspect band on-card, same as the Rosemary Foster photo |
 | Oenothera lindheimeri GAUDI ROSE | oenothera-lindheimeri-gaudi-rose-florgaucomro.jpg | centre — dense clustered trumpet flowers + dark leathery lance-shaped leaves read visually as an oleander-type shrub rather than gaura's typical wispy, sparse-foliage habit; Oscar confirmed the photo is correct, flagged here in case the card ever needs a second look. Background-removal cutout: black voids plus a visible white outline halo along the top/left silhouette edge |
+| Hydrangea paniculata 'Wim's Red' | hydrangea-paniculata-wims-red.jpg | centre — foliage-only shot (red stems, dark green leaves), no panicles; the wine-red headline colour isn't shown. ID plausible from stem/leaf character, not confirmed by a label in-frame |
 
 ## 5. Decision changelog
 
