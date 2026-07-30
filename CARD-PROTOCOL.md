@@ -110,6 +110,25 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.5 (value-patch label bleed fixed)**: Oscar flagged Bloom and Care Level
+  specifically as having "an overly dramatic paper effect covering" the words,
+  and asked whether it was a card-piecing issue and whether the patch outline
+  needed trimming. Measured (not eyeballed) the baked label/value ink bands in
+  `art/plaque-full.png` by luminance-thresholding each row's text column: the
+  live-value cover patches (`.p-bloom-val`, `.p-pest-val`, `.p-care-val`) all
+  started above their own row's label bottom edge, so the flat parchment patch
+  was painting over the tail of the baked label text before the live value
+  drew on top — worst on Care Level (14px overlap) and Bloom (14px), smaller on
+  Pests (8px), and confirmed zero overlap on Thirst (which is why Oscar never
+  flagged that row). Fixed by lowering each patch's `top` and shrinking its
+  `height` by the same amount, keeping the previously-unchanged bottom edge so
+  value-text coverage isn't reduced. Verified on a blank-rating card (label
+  crispness, card-agnostic) and on the Callistemon card's real two-line Care
+  value ("Moderate" + "2.25/5", the tallest case) — clean, no clipping. This is
+  a shared-CSS change, so it applies to every card, old and new, automatically.
+  App (94), edge (8) and sw-update suites green; `design/verify-cards.js` was
+  not re-run since it targets the separate `design/card-builder.html`
+  prototype, not `timber.html`'s live `renderCard()` — unaffected by this fix.
 - **v12.4b (leader-tick remnant erased)**: verifying the sun fix across all seven
   bands side-by-side made the last accepted blemish untenable — the baked
   wiggle-leader's tip peeked between the pointer-cover patch and the bar as a
