@@ -120,13 +120,12 @@ const count = latins.length + 1;
   const ok1 = run('tests/app-test.js');
   const ok2 = run('tests/edge-test.js');
 
-  /* ---- 6. screenshot the new card (it renders bottom of the deck: skip count-1) ---- */
+  /* ---- 6. screenshot the new card (newest deals first: it is already on top) ---- */
   const shot = await browser.newPage({ viewport: { width: 390, height: 780 }, deviceScaleFactor: 2 });
   await shot.goto('http://localhost:8477/timber.html', { waitUntil: 'networkidle' });
   await shot.evaluate(() => localStorage.clear());
   await shot.reload({ waitUntil: 'networkidle' });
   await shot.waitForTimeout(500);
-  for (let i = 0; i < count - 1; i++) { await shot.click('#skip'); await shot.waitForTimeout(380); }
   await shot.waitForTimeout(400);
   await shot.screenshot({ path: path.join(__dirname, 'last-added-card.png') });
   await browser.close();

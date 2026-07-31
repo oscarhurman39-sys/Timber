@@ -1214,8 +1214,11 @@ function loadProgress(){
 }
 function restoreDeck(d){
   deck.querySelectorAll('.card').forEach(releaseCard);
-  d.stack.forEach(renderCard);         /* saved bottom-to-top, rendered in the same order */
-  order=[...d.stack];history=d.history;learnedCount=d.learnedCount;
+  /* saved bottom-to-top; re-sort into the canonical newest-first sequence so a
+     save made under an older deal order still deals newest card on top */
+  const stack=[...d.stack].sort((a,b)=>a-b);
+  stack.forEach(renderCard);
+  order=[...stack].reverse();history=d.history;learnedCount=d.learnedCount;
   updateCounts();refreshEmpty();
 }
 
@@ -1223,7 +1226,9 @@ function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d=
 
 function buildDeck(){
   deck.querySelectorAll('.card').forEach(releaseCard);
-  order=PLANTS.map((_,i)=>i);history=[];learnedCount=0;
+  /* newest addition deals first — PLANTS appends chronologically, so reversing
+     puts fresh cards on top instead of burying them behind the whole back-catalogue */
+  order=PLANTS.map((_,i)=>i).reverse();history=[];learnedCount=0;
   [...order].reverse().forEach(renderCard);
   updateCounts();refreshEmpty();saveProgress();
 }
