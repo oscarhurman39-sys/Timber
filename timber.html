@@ -53,7 +53,13 @@
      and a layer promoted mid-animation can present one unpainted frame — the white
      flash seen when swiping on iOS. */
   .card{position:absolute;inset:0;perspective:1400px;will-change:transform,opacity;
-    transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s}
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s;
+    /* the app owns card touches outright: without this, hosts that embed the app in
+       a scrollable page (the published artifact) pan the outer page during a drag,
+       so a swipe scrolls the header and fabs off-screen mid-gesture */
+    touch-action:none}
+  .card.flipped{touch-action:pan-y}   /* swiping is locked while flipped; let the trade sheet scroll */
+  .card[data-gone]{pointer-events:none}  /* a card mid-fling must never swallow the next card's touches */
   .card-inner{position:absolute;inset:0;transform-style:preserve-3d;
     -webkit-transform-style:preserve-3d;
     transition:transform .5s cubic-bezier(.2,.8,.2,1)}
@@ -1444,6 +1450,15 @@ function attachGestures(card){
   card.addEventListener('touchmove',e=>move(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
   card.addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();end();});  /* preventDefault stops the browser
       synthesising a mouse tap after every touch tap, which would turn single taps into double-taps */
+  /* the browser cancels (not ends) a touch when it takes the gesture — scroll takeover,
+     notification shade, app switch. Without this the card is stranded mid-drag with its
+     transition off, ghosting over the next card until the deck is touched again */
+  card.addEventListener('touchcancel',()=>{
+    if(!drag)return;drag=false;
+    card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
+    card.style.transform='';learnStamp.style.opacity=0;skipStamp.style.opacity=0;
+    dx=dy=0;
+  });
   card.addEventListener('mousedown',e=>start(e.clientX,e.clientY));
   /* the drag listeners have to live on window so a fast pointer that leaves the card
      still finishes the gesture; scope them to the card's lifetime so a rebuilt or
