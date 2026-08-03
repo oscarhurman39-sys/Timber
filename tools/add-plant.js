@@ -119,6 +119,7 @@ const count = latins.length + 1;
   };
   const ok1 = run('tests/app-test.js');
   const ok2 = run('tests/edge-test.js');
+  const ok3 = run('tests/deck-audit.js');   /* catches a bad new row before it is committed */
 
   /* ---- 6. screenshot the new card (newest deals first: it is already on top) ---- */
   const shot = await browser.newPage({ viewport: { width: 390, height: 780 }, deviceScaleFactor: 2 });
@@ -131,7 +132,7 @@ const count = latins.length + 1;
   await browser.close();
   if (server) process.kill(-server.pid);
 
-  if (!ok1 || !ok2) die('suites FAILED after insert — inspect before committing');
+  if (!ok1 || !ok2 || !ok3) die('suites FAILED after insert — inspect before committing');
   console.log(`\nDONE: ${p.common} added and verified.`);
   console.log('Screenshot: tools/last-added-card.png — LOOK AT IT before committing.');
   console.log('Then: git add -A && commit && push.');

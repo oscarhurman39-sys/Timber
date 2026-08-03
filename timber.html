@@ -52,12 +52,25 @@
      compositing layer (with its alpha channel) up front. Fling animates both at once,
      and a layer promoted mid-animation can present one unpainted frame — the white
      flash seen when swiping on iOS. */
-  .card{position:absolute;inset:0;perspective:1400px;will-change:transform,opacity;
+  .card{position:absolute;inset:0;perspective:1400px;
     transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s;
     /* the app owns card touches outright: without this, hosts that embed the app in
        a scrollable page (the published artifact) pan the outer page during a drag,
        so a swipe scrolls the header and fabs off-screen mid-gesture */
     touch-action:none}
+  /* will-change gives a card its own GPU layer. The card being moved needs one — WebKit
+     otherwise presents a single unpainted frame mid-fling (the white flash on iOS). Applied
+     to the whole deck it is ruinous: 57 layers is ~200MB of GPU memory and, because every
+     layer composites independently, it defeats occlusion culling — the phone paints 55
+     cards it cannot show. Only the cards that actually move are promoted; see markHot(). */
+  .card.hot{will-change:transform,opacity}
+  /* A buried card's CONTENTS are completely hidden by the card above it, but its box is
+     not: 30-odd stacked box-shadows are what build the deck's halo, so hiding whole cards
+     visibly lightens it. Hide only the contents and the halo is pixel-identical (asserted
+     by tests/perf-test.js) while the browser stops painting — and so stops holding decoded
+     bitmaps for — every buried photo. visibility:hidden keeps layout intact, so
+     design/audit-layout.js still measures all 57 cards. */
+  .card.deep .tcard>*{visibility:hidden}
   .card.flipped{touch-action:pan-y}   /* swiping is locked while flipped; let the trade sheet scroll */
   .card[data-gone]{pointer-events:none}  /* a card mid-fling must never swallow the next card's touches */
   .card-inner{position:absolute;inset:0;transform-style:preserve-3d;
@@ -1225,7 +1238,7 @@ function restoreDeck(d){
   const stack=[...d.stack].sort((a,b)=>a-b);
   stack.forEach(renderCard);
   order=[...stack].reverse();history=d.history;learnedCount=d.learnedCount;
-  updateCounts();refreshEmpty();
+  markHot();updateCounts();refreshEmpty();
 }
 
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
@@ -1236,7 +1249,7 @@ function buildDeck(){
      puts fresh cards on top instead of burying them behind the whole back-catalogue */
   order=PLANTS.map((_,i)=>i).reverse();history=[];learnedCount=0;
   [...order].reverse().forEach(renderCard);
-  updateCounts();refreshEmpty();saveProgress();
+  markHot();updateCounts();refreshEmpty();saveProgress();
 }
 
 /* ---- v12 card template helpers (design/card-builder.html; CARD-STATS.md) ---- */
@@ -1318,7 +1331,10 @@ const lightX=v=>40.4+(v/100)*(93.2-40.4);     /* bar spans 40.4%..93.2% of the b
 
 function renderCard(idx){
   const p=PLANTS[idx];
-  const c=document.createElement('div');c.className='card';c.dataset.idx=idx;
+  /* born buried: markHot() reveals the few cards that are actually on top. Cards are
+     created hidden so a freshly dealt deck never paints — and so never decodes the
+     photo of — the 50-odd cards sitting behind the top one. */
+  const c=document.createElement('div');c.className='card deep';c.dataset.idx=idx;
   const bg=`linear-gradient(160deg,hsl(${p.hue} 45% 22%),hsl(${p.hue+20} 55% 12%))`;
   const slug=slugLatin(p.latin);
   const sz=parseSize(p.size), soil=splitSoil(p.soil), months=parseMonths(p.peak);
@@ -1423,6 +1439,22 @@ function fitInk(root){
 
 function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].pop();}
 
+/* Promote only what moves: whatever is mid-fling, plus the top two live cards (the one
+   under the thumb and the one about to be revealed). Everything below stays unpromoted
+   so the browser can cull it. Cheap enough to re-run on every deck change. */
+const PAINT_DEPTH=3;   /* top card + a decoded buffer for the next swipes */
+function markHot(){
+  const cards=[...deck.querySelectorAll('.card')];
+  const live=cards.filter(c=>!c.dataset.gone);
+  const going=cards.filter(c=>c.dataset.gone);          /* still animating out */
+  const hot=new Set([...going,...live.slice(-2)]);
+  const shown=new Set([...going,...live.slice(-PAINT_DEPTH)]);
+  cards.forEach(c=>{
+    c.classList.toggle('hot',hot.has(c));
+    c.classList.toggle('deep',!shown.has(c));
+  });
+}
+
 function attachGestures(card){
   let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false;
   const learnStamp=card.querySelector('.stamp.learn'),skipStamp=card.querySelector('.stamp.skip');
@@ -1485,10 +1517,10 @@ function fling(card,dir,learned){
   card.style.opacity='0';setTimeout(()=>releaseCard(card),320);
   order=order.filter(i=>i!==idx);history.push({idx,learned});
   if(learned)learnedCount++;
-  updateCounts();refreshEmpty();saveProgress();
+  markHot();updateCounts();refreshEmpty();saveProgress();   /* promote the card being revealed */
 }
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
-function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);updateCounts();refreshEmpty();saveProgress();}
+function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);markHot();updateCounts();refreshEmpty();saveProgress();}
 function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
   backBtn.disabled=history.length===0;}
 function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show',done);document.getElementById('actions').style.visibility=done?'hidden':'visible';}
