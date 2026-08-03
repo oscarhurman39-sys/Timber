@@ -11,7 +11,7 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/sw-update-test.js#  service-wo
 NODE_PATH=/opt/node22/lib/node_modules node tests/perf-test.js     #  8 checks: compositing budget, pixel parity, no layout on drag
 NODE_PATH=/opt/node22/lib/node_modules node tests/deck-audit.js    #  whole-deck data audit (errors fail; honest gaps warn)
 NODE_PATH=/opt/node22/lib/node_modules node tests/srs-test.js      # 24 checks: spaced repetition boxes, review mode, storage safety
-NODE_PATH=/opt/node22/lib/node_modules node tests/features-test.js # 38 checks: quiz v2 rounds/summary, deck filters, fuzzy search, stats, photos, focus trap
+NODE_PATH=/opt/node22/lib/node_modules node tests/features-test.js # 47 checks: quiz v2, filters, fuzzy search, stats, photos, shell polish, focus trap
 NODE_PATH=/opt/node22/lib/node_modules node design/verify-cards.js # card builder: rating maths vs data, missing assets
 NODE_PATH=/opt/node22/lib/node_modules node design/audit-layout.js # layout audit: ink fits zones, band collisions, rail alignment
 ```

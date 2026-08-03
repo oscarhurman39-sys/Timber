@@ -298,6 +298,22 @@
   .d-photo{margin:0 0 10px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.04)}
   .d-photo img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
 
+  /* modern shell polish — everything below styles the app around the cards, never the cards */
+  .learnbar{height:3px;margin:0 18px 8px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;flex:0 0 auto}
+  .learnbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--leaf2),var(--leaf1));border-radius:2px;transition:width .4s ease}
+  .fab{transition:transform .12s ease}
+  .fab:active{transform:scale(.88)}
+  .fab[disabled]{opacity:.35}
+  .s-sub{display:block;font-size:11px;color:var(--muted);margin-top:2px;font-style:normal}
+  .r-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);padding:10px 4px 6px}
+  .r-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 0 10px}
+  .r-chip{padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);
+    color:var(--ink);font-size:12px;font-family:inherit;cursor:pointer;transition:transform .12s ease}
+  .r-chip:active{transform:scale(.95)}
+  .mdots{display:flex;gap:3px;margin-top:5px}
+  .mdots span{flex:1;text-align:center;font-size:8px;line-height:1;padding:3px 0;border-radius:3px;background:rgba(255,255,255,.06);color:var(--muted)}
+  .mdots span.on{background:var(--leaf2);color:#04120a;font-weight:700}
+
   @media (prefers-reduced-motion:reduce){  /* new overlays/chips only — card animations are locked as-is */
     .stats .st-panel,.stats .st-scrim,.chip{transition-duration:.01ms}
   }
@@ -464,6 +480,7 @@
 </header>
 
 <div class="progress" aria-live="polite"><b id="left">0</b> to learn · <span id="done">0</span> starred · double-tap a card for trade data</div>
+<div class="learnbar" aria-hidden="true"><i id="learnBar"></i></div>
 
 <div class="deck" id="deck">
   <div class="empty" id="empty">
@@ -1742,7 +1759,8 @@ function fling(card,dir,learned){
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
 function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);markHot();updateCounts();refreshEmpty();saveProgress();}
 function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
-  backBtn.disabled=history.length===0;}
+  backBtn.disabled=history.length===0;
+  document.getElementById('learnBar').style.width=(PLANTS.length?learnedCount/PLANTS.length*100:0)+'%';}
 function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show',done);document.getElementById('actions').style.visibility=done?'hidden':'visible';}
 
 document.getElementById('learn').onclick=()=>act(true);
@@ -1838,6 +1856,18 @@ function searchScore(entry,tokens){            /* lower = better; null = no matc
   return sum;
 }
 
+/* recently viewed — the till workflow is "same few plants all shift"; validated, capped, additive */
+const RECENT_KEY='timber-recent-v1';
+function loadRecent(){
+  try{
+    const d=JSON.parse(localStorage.getItem(RECENT_KEY));
+    return Array.isArray(d)?d.filter(l=>typeof l==='string'&&PLANTS.some(p=>p.latin===l)).slice(0,6):[];
+  }catch(e){return[];}
+}
+function pushRecent(latin){
+  try{localStorage.setItem(RECENT_KEY,JSON.stringify([latin,...loadRecent().filter(l=>l!==latin)].slice(0,6)));}catch(e){}
+}
+
 function renderResults(q){
   const t=q.trim().toLowerCase();
   const tokens=t?t.split(/\s+/):[];
@@ -1848,22 +1878,33 @@ function renderResults(q){
     searchResults.innerHTML='<div class="s-none">No plants match that name.</div>';
     return;
   }
-  searchResults.innerHTML=hits.map(({p,i})=>
+  const rec=t?[]:loadRecent();
+  const recHtml=rec.length?`<div class="r-label">Recently viewed</div><div class="r-chips">${
+    rec.map(l=>{const i=PLANTS.findIndex(p=>p.latin===l);
+      return `<button class="r-chip" data-i="${i}">${PLANTS[i].common}</button>`;}).join('')}</div>`:'';
+  searchResults.innerHTML=recHtml+hits.map(({p,i})=>
     `<button class="s-row" data-i="${i}">
-       <span class="s-names"><b>${p.common}</b><em>${p.latin}</em></span>
+       <span class="s-names"><b>${p.common}</b><em>${p.latin}</em><small class="s-sub">${typeCategory(p)}${p.peak?' · peak '+p.peak:''}</small></span>
        <span class="h">${p.hardiness}</span>
      </button>`).join('');
-  searchResults.querySelectorAll('.s-row').forEach(btn=>btn.onclick=()=>showPlant(+btn.dataset.i));
+  searchResults.querySelectorAll('.s-row,.r-chip').forEach(btn=>btn.onclick=()=>showPlant(+btn.dataset.i));
 }
 
 let detailIdx=null,customerMode=false;
+const monthDots=peak=>{                       /* 12-month strip, active months from the data only */
+  const act=parseMonths(peak);if(!act.length)return'';
+  return `<div class="mdots">${'JFMAMJJASOND'.split('').map((ch,i)=>
+    `<span class="${act.includes(i+1)?'on':''}">${ch}</span>`).join('')}</div>`;
+};
 function showPlant(i){
   detailIdx=i;customerMode=false;
+  pushRecent(PLANTS[i].latin);
   const p=PLANTS[i];
   searchDetail.classList.remove('cust');
   searchDetail.innerHTML=`
     <div class="d-photo"><img src="photos/${slugLatin(p.latin)}.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     <div class="d-top"><button class="d-back" id="dBack">← Results</button>
+      <button class="d-customer" id="dShare" hidden>↗ Share</button>
       <button class="d-customer" id="dCustomer">👥 Show customer</button></div>
     <div class="d-head"><h3>${p.common}</h3><em>${p.latin}</em><button class="say" id="dSay" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">🔊</button><span class="h">${p.hardiness}</span></div>
     <div class="d-eyebrow">${p.visual}</div>
@@ -1880,7 +1921,7 @@ function showPlant(i){
     </div>
     <div class="grid">
       <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
-      <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div></div>
+      <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div>${monthDots(p.peak)}</div>
       <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
       <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
       <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
@@ -1899,6 +1940,13 @@ function showPlant(i){
   document.getElementById('dCustomer').onclick=()=>showCustomer(i);
   const dSay=document.getElementById('dSay');
   dSay.onclick=()=>speakLatin(p.latin,dSay);
+  const dShare=document.getElementById('dShare');
+  if(navigator.share){                          /* feature-detected — hidden where unsupported */
+    dShare.hidden=false;
+    dShare.onclick=()=>navigator.share({title:p.common,
+      text:`${p.common} (${p.latin}) — Water: ${p.water} · Position: ${p.aspect} · Soil: ${p.soil} · Size: ${p.size}`,
+      url:location.href}).catch(()=>{});
+  }
   dBack.focus();
 }
 
@@ -1937,6 +1985,19 @@ search.querySelectorAll('[data-sclose]').forEach(el=>el.onclick=closeSearch);
 searchInput.addEventListener('input',()=>{showResultsList();renderResults(searchInput.value);});
 searchInput.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&searchDetail.hidden){const first=searchResults.querySelector('.s-row');if(first)first.click();}
+  if(e.key==='ArrowDown'&&searchDetail.hidden){
+    const first=searchResults.querySelector('.s-row');
+    if(first){e.preventDefault();first.focus();}
+  }
+});
+searchResults.addEventListener('keydown',e=>{  /* arrow keys walk the result list */
+  if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+  const rows=[...searchResults.querySelectorAll('.s-row')];
+  const i=rows.indexOf(document.activeElement);
+  if(i===-1)return;
+  e.preventDefault();
+  if(e.key==='ArrowUp'&&i===0){searchInput.focus();return;}
+  (rows[i+(e.key==='ArrowDown'?1:-1)]||rows[i]).focus();
 });
 const dictRow=document.getElementById('dictRow');
 dictRow.onclick=()=>{closeSheet();openSearch();};

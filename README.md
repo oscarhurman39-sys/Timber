@@ -79,7 +79,7 @@ the repo fork. If they do drift, reconcile back into the repo first, then rebuil
 | ↺ | Undo the last swipe (corrects the count) |
 | Double-tap a card | Flip to the **Buyer Trade Sheet** (prices, margin, order weeks, risk) |
 | Tap the back | Flip back — swiping is locked while flipped |
-| 🔍 top right | **Search** — common/latin/cultivar/use, typo-tolerant ("choysia" finds Choisya); exact matches always rank above fuzzy ones. Info sheets show the plant photo when one exists |
+| 🔍 top right | **Search** — common/latin/cultivar/use, typo-tolerant ("choysia" finds Choisya); exact matches always rank above fuzzy ones. Arrow keys walk results; recently-viewed chips resurface till lookups; info sheets show the plant photo, a 12-month peak strip and a Share button (where supported) |
 | 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
 | 🔊 next to latin name | Speaks the latin name aloud (built-in speech engine, Italian phonology; no files, works for every plant you add). Hidden on devices without speech support |
 | ☰ menu | Learned count, Dictionary mode, **Quiz mode**, **Review due** (spaced repetition), **My progress** (stats), **Filter deck** chips, Install app, Reset progress |

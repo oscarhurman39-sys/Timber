@@ -249,6 +249,53 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     await page.evaluate(() => !!document.querySelector('#searchDetail .d-photo img')));
   await page.evaluate(() => closeSearch());
 
+  /* ================= UI polish: learn bar, richer results, recents, month dots ================= */
+  await page.evaluate(() => localStorage.clear());
+  await page.reload(); await page.waitForTimeout(400);
+  check('learn bar starts empty',
+    await page.evaluate(() => document.getElementById('learnBar').style.width) === '0%');
+  await dragCard(page, 160);
+  const barW = await page.evaluate(() => parseFloat(document.getElementById('learnBar').style.width));
+  check('learn bar grows after a learn swipe', barW > 0 && barW < 100, 'width=' + barW);
+
+  await page.evaluate(() => { openSearch(); });
+  await page.fill('#searchInput', 'nandina'); await page.waitForTimeout(150);
+  check('result rows carry a type/peak sub-line',
+    await page.evaluate(() => {
+      const sub = document.querySelector('.s-row .s-sub');
+      return !!sub && sub.textContent.length > 0;
+    }));
+  await page.click('.s-row'); await page.waitForTimeout(250);
+  check('detail shows the 12-month peak strip when peak parses',
+    await page.evaluate(() => document.querySelectorAll('#searchDetail .mdots span').length === 12
+      && document.querySelectorAll('#searchDetail .mdots span.on').length > 0));
+  check('share button stays hidden without navigator.share',
+    await page.evaluate(() => !navigator.share ? document.getElementById('dShare').hidden : true));
+  await page.evaluate(() => closeSearch());
+  await page.evaluate(() => { openSearch(); }); await page.waitForTimeout(200);
+  const recent = await page.evaluate(() => ({
+    chip: document.querySelector('.r-chip') ? document.querySelector('.r-chip').textContent : null,
+    stored: JSON.parse(localStorage.getItem('timber-recent-v1') || '[]'),
+  }));
+  check('viewed plant appears as a recently-viewed chip',
+    recent.chip === 'Heavenly Bamboo' && recent.stored.includes('Nandina domestica'), JSON.stringify(recent));
+  await page.click('.r-chip'); await page.waitForTimeout(250);
+  check('recent chip opens the plant detail',
+    (await page.evaluate(() => document.getElementById('searchDetail').textContent)).includes('Nandina domestica'));
+  await page.evaluate(() => closeSearch());
+
+  /* keyboard: ArrowDown from the input walks into the results */
+  await page.evaluate(() => { openSearch(); }); await page.waitForTimeout(200);
+  await page.focus('#searchInput');
+  await page.keyboard.press('ArrowDown'); await page.waitForTimeout(100);
+  check('ArrowDown moves focus from input to first result',
+    await page.evaluate(() => document.activeElement.classList.contains('s-row')));
+  await page.keyboard.press('ArrowDown'); await page.waitForTimeout(100);
+  await page.keyboard.press('ArrowUp'); await page.keyboard.press('ArrowUp'); await page.waitForTimeout(100);
+  check('ArrowUp from first result returns to the input',
+    await page.evaluate(() => document.activeElement.id === 'searchInput'));
+  await page.evaluate(() => closeSearch());
+
   /* ================= WS7: focus trap ================= */
   await page.click('#menuBtn'); await page.waitForTimeout(350);
   await page.click('#statsRow'); await page.waitForTimeout(350);
