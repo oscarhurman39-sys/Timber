@@ -4,7 +4,19 @@
 brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below the
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
-since: 2026-07-28  sessions-unchanged: 2
+since: 2026-07-28  sessions-unchanged: 3
+progress: 2026-08-03 (later) — **learning layer merged onto deck 57; site live.** The
+  feature line built earlier today against the stale 8-plant branch (spaced repetition +
+  review-due deck, quiz v2 with reverse/trade rounds + weakest-first picking + session
+  summary, data-discovered deck filters, typo-tolerant ranked search, My-progress stats,
+  photos on search/customer sheets, focus traps) is re-based onto this branch and adapted
+  to its conventions: deck rebuilds go through releaseCard()/markHot() so the compositing
+  budget holds (perf suite green), review/filter are ephemeral views that never persist
+  over saved progress, statsEl joins overlayOpen(). Two new suites (srs-test 24,
+  features-test 38) recalibrated for 57 plants; all NINE suites green. GitHub Pages
+  enabled (self-deploying workflow; Oscar flipped the one admin toggle) — the app is
+  live at https://oscarhurman39-sys.github.io/Timber/ and redeploys on every push to the
+  default branch.
 progress: 2026-08-03 — **swipe glitch root-caused; two new suites.** The tearing on the
   phone was compositing pressure, not gesture logic: `will-change` sat on all 57 cards
   (57 GPU layers, ~200MB, which also defeats occlusion culling) and every buried card

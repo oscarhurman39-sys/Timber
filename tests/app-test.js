@@ -218,7 +218,9 @@ function topFlipped(page) {
   await page.fill('#searchInput', 'nand');
   await page.waitForTimeout(100);
   rows = await page.locator('.s-row').count();
-  check('query "nand" → 1 result', rows === 1, 'rows=' + rows);
+  // fuzzy search may add near-miss rows (e.g. ‘Nana’) — the contract is Nandina ranks first
+  check('query "nand" ranks Nandina first', rows >= 1 &&
+    (await page.locator('.s-row .s-names b').first().innerText()) === 'Heavenly Bamboo', 'rows=' + rows);
   await page.click('.s-row'); await page.waitForTimeout(150);
   const detail = await page.locator('#searchDetail').innerText();
   check('detail shows care + trade data', detail.includes('Nandina domestica') && detail.includes('£3.80–£4.50') && detail.includes('Book Wk25') && detail.includes('Water'), detail.slice(0, 80));
@@ -244,8 +246,8 @@ function topFlipped(page) {
   await page.fill('#searchInput', 'e'); await page.waitForTimeout(100);
   rows = await page.locator('.s-row').count();
   check('query "e" matches all', rows === NPLANTS, 'rows=' + rows);
-  await page.locator('.s-row').nth(2).click(); await page.waitForTimeout(150);
-  check('third row opens Weigela detail', (await page.locator('#searchDetail').innerText()).includes('Weigela'));
+  await page.locator('.s-row', { hasText: 'Weigela' }).click(); await page.waitForTimeout(150);
+  check('Weigela row opens Weigela detail', (await page.locator('#searchDetail').innerText()).includes('Weigela'));
   check('detail moves focus to back button', await page.evaluate(() => document.activeElement && document.activeElement.id === 'dBack'));
   await page.focus('#searchInput');
   await page.keyboard.press('Enter'); await page.waitForTimeout(150);
@@ -281,7 +283,9 @@ function topFlipped(page) {
       const m = txt.match(/“([\s\S]+)”/);
       if (!m) return null;
       const p = PLANTS.find(pl => Object.values(pl).some(v => v === m[1]));
-      return p ? p.common : null;
+      if (!p) return null;
+      // reverse rounds show latin names as options; classic/trade show common names
+      return document.getElementById('qOptions').dataset.round === 'reverse' ? p.latin : p.common;
     }, t);
   };
   await page.click('#menuBtn'); await page.waitForTimeout(350);
@@ -303,6 +307,10 @@ function topFlipped(page) {
     (await page.locator('#qStreak').innerText()) === '0' && (await page.locator('.q-opt.correct').count()) === 1);
   check('best streak retained in session', (await page.locator('#qBest').innerText()) === '1');
   await page.click('#quizClose'); await page.waitForTimeout(200);
+  // an answered session shows a summary on the first close — dismiss it
+  if (await page.evaluate(() => !document.getElementById('qSummary').hidden)) {
+    await page.click('#qSummaryClose'); await page.waitForTimeout(200);
+  }
   c = await counts(page);
   check('quiz closes, deck untouched', !(await page.evaluate(() => document.getElementById('quiz').classList.contains('open'))) && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
 

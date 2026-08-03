@@ -79,10 +79,27 @@ the repo fork. If they do drift, reconcile back into the repo first, then rebuil
 | ↺ | Undo the last swipe (corrects the count) |
 | Double-tap a card | Flip to the **Buyer Trade Sheet** (prices, margin, order weeks, risk) |
 | Tap the back | Flip back — swiping is locked while flipped |
-| 🔍 top right | **Search** — type a common or latin name, get the full info sheet instantly |
+| 🔍 top right | **Search** — common/latin/cultivar/use, typo-tolerant ("choysia" finds Choisya); exact matches always rank above fuzzy ones. Info sheets show the plant photo when one exists |
 | 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
 | 🔊 next to latin name | Speaks the latin name aloud (built-in speech engine, Italian phonology; no files, works for every plant you add). Hidden on devices without speech support |
-| ☰ menu | Learned count, Dictionary mode, **Quiz mode** (streak + best), Install app, Reset progress |
+| ☰ menu | Learned count, Dictionary mode, **Quiz mode**, **Review due** (spaced repetition), **My progress** (stats), **Filter deck** chips, Install app, Reset progress |
+
+**Spaced repetition:** every swipe schedules the plant in a Leitner box (`timber-srs-v1`,
+keyed by latin name so it survives deck changes). Learn = box up, next review 1/3/7/16/35
+days out by box; skip or a wrong quiz answer = back to box 1, due tomorrow. "Review due (N)"
+in the menu opens a due-only deck; swipes there update the schedule but never touch your
+saved full-deck progress, and it drops back to the full deck when the last due card is swiped.
+Resetting the deck keeps review history.
+
+**Quiz v2:** rounds mix three types — classic clue→name, reverse (common→latin) and trade
+(unique retail price→plant); the answer plant is picked weighted toward your weakest
+(lowest review box). Closing the quiz shows a session summary ("7/9 · weakest: X").
+A question is only asked when its shown value is unique to one plant — never ambiguous.
+
+**Filter deck:** chips discovered from the data at runtime — "In season now" (peak months
+vs today), "Order in next 4 wks" (order week vs current ISO week), type category and
+hardiness. Filters are ephemeral views: swipes update review scheduling but your saved
+full-deck progress is untouched, and clearing the chip restores the deck exactly.
 
 Progress (learned/skipped/undo history) and your best quiz streak persist in the browser via
 localStorage — closing the app doesn't lose them. "Reset progress" / "Reset deck" clears the deck

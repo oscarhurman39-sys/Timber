@@ -1,6 +1,6 @@
 # Timber test suites
 
-All seven drive a real headless Chromium against a locally served `timber.html`.
+All nine drive a real headless Chromium against a locally served `timber.html`.
 Start a server at the repo root first, then run from the repo root:
 
 ```sh
@@ -10,6 +10,8 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/edge-test.js     #  9 checks: 
 NODE_PATH=/opt/node22/lib/node_modules node tests/sw-update-test.js#  service-worker update path
 NODE_PATH=/opt/node22/lib/node_modules node tests/perf-test.js     #  8 checks: compositing budget, pixel parity, no layout on drag
 NODE_PATH=/opt/node22/lib/node_modules node tests/deck-audit.js    #  whole-deck data audit (errors fail; honest gaps warn)
+NODE_PATH=/opt/node22/lib/node_modules node tests/srs-test.js      # 24 checks: spaced repetition boxes, review mode, storage safety
+NODE_PATH=/opt/node22/lib/node_modules node tests/features-test.js # 38 checks: quiz v2 rounds/summary, deck filters, fuzzy search, stats, photos, focus trap
 NODE_PATH=/opt/node22/lib/node_modules node design/verify-cards.js # card builder: rating maths vs data, missing assets
 NODE_PATH=/opt/node22/lib/node_modules node design/audit-layout.js # layout audit: ink fits zones, band collisions, rail alignment
 ```
@@ -17,7 +19,7 @@ NODE_PATH=/opt/node22/lib/node_modules node design/audit-layout.js # layout audi
 `NPLANTS` at the top of app-test.js / edge-test.js must match the number of
 plants in the PLANTS array. Bump it when you add a plant.
 
-All seven must pass before pushing. The layout audit's rules and defect log
+All nine must pass before pushing. The layout audit's rules and defect log
 live in `CORRECTION-PROTOCOL.md`.
 
 `perf-test.js` guards the deck's compositing budget: every plant stays in the DOM (the

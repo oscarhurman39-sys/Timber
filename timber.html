@@ -255,6 +255,52 @@
   .q-opt.correct{border-color:var(--leaf1);background:rgba(76,215,135,.15);color:#eafff2}
   .q-opt.wrong{border-color:#ff6b6b;background:rgba(255,107,107,.15)}
   .q-opt[disabled]{cursor:default}
+  .q-summary{display:flex;flex-direction:column;gap:12px;text-align:center;padding:8px 0 2px;font-size:16px;color:#eafff2}
+  .q-summary small{color:var(--muted);font-size:13px}
+  #qSummaryClose{border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.04);
+    color:var(--ink);font-family:inherit;font-size:15px;font-weight:600;padding:12px 14px;cursor:pointer}
+  #qSummaryClose:hover,#qSummaryClose:focus-visible{background:rgba(255,255,255,.08)}
+
+  /* menu — deck filter chips (values discovered from PLANTS at runtime) */
+  .f-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin:12px 4px 2px}
+  .f-chips{display:flex;flex-wrap:wrap;gap:6px;padding:6px 0 4px}
+  .chip{padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);
+    color:var(--ink);font-size:12px;font-family:inherit;cursor:pointer;transition:background .15s}
+  .chip small{opacity:.6;margin-left:2px}
+  .chip.on{background:var(--leaf1);border-color:var(--leaf1);color:#04120a}
+  .chip.on small{opacity:.8}
+  .chip[disabled]{opacity:.35;cursor:default}
+
+  /* stats overlay — same top-sheet pattern as the quiz */
+  .stats{position:fixed;inset:0;z-index:60;visibility:hidden}
+  .stats.open{visibility:visible}
+  .stats .st-scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .25s}
+  .stats.open .st-scrim{opacity:1}
+  .stats .st-panel{position:absolute;top:0;left:0;right:0;max-height:82%;display:flex;flex-direction:column;
+    background:#0e1d14;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0 0 18px 18px;
+    transform:translateY(-102%);transition:transform .28s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 18px 40px rgba(0,0,0,.45);padding:14px 16px 16px;gap:10px;overflow-y:auto}
+  .stats.open .st-panel{transform:translateY(0)}
+  .st-row{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;padding:3px 0}
+  .st-row .l{color:var(--muted)}
+  .st-row .n{font-weight:700}
+  .st-bar{height:6px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
+  .st-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--leaf2),var(--leaf1));border-radius:4px}
+  .st-boxes{display:flex;gap:8px;align-items:flex-end;height:44px;padding-top:4px}
+  .st-boxes .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
+  .st-boxes .col i{display:block;width:100%;background:var(--gold);border-radius:2px 2px 0 0;min-height:2px}
+  .st-boxes .col small{font-size:9px;color:var(--muted)}
+  .st-list{list-style:none;padding:0;margin:0}
+  .st-list li{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}
+  .st-list li small{color:var(--muted);font-size:11px}
+
+  /* photo strip on search detail + customer sheets (swipe cards handle their own photos) */
+  .d-photo{margin:0 0 10px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.04)}
+  .d-photo img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+
+  @media (prefers-reduced-motion:reduce){  /* new overlays/chips only — card animations are locked as-is */
+    .stats .st-panel,.stats .st-scrim,.chip{transition-duration:.01ms}
+  }
   /* ============ v12 LOCKED CARD TEMPLATE (design/card-builder.html) ============
      The card front is assembled from the final approved artwork's own painted
      assets (art/); plant-specific values render live from PLANTS data. The card
@@ -442,6 +488,10 @@
     <div class="row"><span class="ic">⭐</span> Learned <small id="doneMenu">0</small></div>
     <div class="row" id="dictRow" role="button" tabindex="0"><span class="ic">🔎</span> Dictionary mode</div>
     <div class="row" id="quizRow" role="button" tabindex="0"><span class="ic">❓</span> Quiz mode <small id="quizBestMenu"></small></div>
+    <div class="row" id="reviewRow" role="button" tabindex="0"><span class="ic">📅</span> Review due <small id="reviewDueMenu">0</small></div>
+    <div class="row" id="statsRow" role="button" tabindex="0"><span class="ic">📊</span> My progress</div>
+    <div class="f-label" id="filterLabel">Filter deck</div>
+    <div class="f-chips" id="filterChips" role="group" aria-labelledby="filterLabel"></div>
     <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic">📲</span> Install app</div>
     <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic">↻</span> Reset progress</div>
     <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.</div>
@@ -474,6 +524,21 @@
     </div>
     <div class="q-question" id="qQuestion"></div>
     <div class="q-options" id="qOptions"></div>
+    <div class="q-summary" id="qSummary" hidden>
+      <div id="qSummaryStats"></div>
+      <button id="qSummaryClose">Done</button>
+    </div>
+  </div>
+</div>
+
+<div class="stats" id="stats" role="dialog" aria-modal="true" aria-label="My progress">
+  <div class="st-scrim" data-stclose></div>
+  <div class="st-panel">
+    <div class="q-head">
+      <span class="q-title">📊 My progress</span>
+      <button class="s-close" id="statsClose" aria-label="Close progress">✕</button>
+    </div>
+    <div id="statsContent"></div>
   </div>
 </div>
 
@@ -1215,6 +1280,7 @@ let order=[],history=[],learnedCount=0;
 const STORE_KEY='timber-progress-v1';
 const FINGERPRINT=PLANTS.map(p=>p.latin).join('|');  /* deck layout invalidates if the plant list changes */
 function saveProgress(){
+  if(reviewMode||activeFilter)return;  /* review/filter are ephemeral views — never persist over the full deck */
   try{
     const stack=[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx);
     localStorage.setItem(STORE_KEY,JSON.stringify({fp:FINGERPRINT,stack,history,learnedCount}));
@@ -1244,12 +1310,153 @@ function restoreDeck(d){
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
 
 function buildDeck(){
+  if(reviewMode){reviewMode=false;reviewBackup=null;}  /* a reset always lands on the full deck */
+  if(activeFilter){activeFilter=null;filterBackup=null;}
   deck.querySelectorAll('.card').forEach(releaseCard);
   /* newest addition deals first — PLANTS appends chronologically, so reversing
      puts fresh cards on top instead of burying them behind the whole back-catalogue */
   order=PLANTS.map((_,i)=>i).reverse();history=[];learnedCount=0;
   [...order].reverse().forEach(renderCard);
   markHot();updateCounts();refreshEmpty();saveProgress();
+}
+
+/* ---------- spaced repetition (Leitner boxes) — an overlay on the deck, keyed by latin name
+   so records survive plant-list changes; FINGERPRINT resets never touch it ---------- */
+const SRS_KEY='timber-srs-v1';
+const SRS_INTERVALS=[1,3,7,16,35];            /* days until due, per box 1..5 */
+function srsDateStr(offsetDays){              /* local calendar date — "due today" behaves at 7am */
+  const d=new Date();d.setDate(d.getDate()+(offsetDays||0));
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function loadSRS(){
+  try{
+    const d=JSON.parse(localStorage.getItem(SRS_KEY));
+    if(!d||typeof d!=='object'||Array.isArray(d))return{};
+    const ok={},re=/^\d{4}-\d{2}-\d{2}$/;
+    for(const k in d){const r=d[k];
+      if(r&&Number.isInteger(r.box)&&r.box>=1&&r.box<=5&&typeof r.due==='string'&&re.test(r.due))ok[k]={box:r.box,due:r.due};}
+    return ok;
+  }catch(e){return{};}
+}
+function saveSRS(data){try{localStorage.setItem(SRS_KEY,JSON.stringify(data));}catch(e){}}
+function srsOnSwipe(latin,learned){           /* right: box up, longer interval · left: back to box 1, due tomorrow */
+  const data=loadSRS(),rec=data[latin];
+  const box=learned?Math.min((rec?rec.box:0)+1,5):1;
+  data[latin]={box,due:srsDateStr(learned?SRS_INTERVALS[box-1]:1)};
+  saveSRS(data);
+}
+function srsOnQuizWrong(latin){               /* a miss drops a box and comes due tomorrow */
+  const data=loadSRS(),rec=data[latin];
+  data[latin]={box:Math.max((rec?rec.box:2)-1,1),due:srsDateStr(1)};
+  saveSRS(data);
+}
+function srsDueIdx(){                         /* deck indexes due today or overdue, most overdue first */
+  const today=srsDateStr(0),data=loadSRS();
+  return PLANTS.map((p,i)=>({rec:data[p.latin],i}))
+    .filter(x=>x.rec&&x.rec.due<=today)
+    .sort((a,b)=>a.rec.due<b.rec.due?-1:a.rec.due>b.rec.due?1:0)
+    .map(x=>x.i);
+}
+function srsNextDue(){                        /* earliest future due date among current plants, or null */
+  const today=srsDateStr(0),data=loadSRS();let next=null;
+  PLANTS.forEach(p=>{const r=data[p.latin];
+    if(r&&r.due>today&&(next===null||r.due<next))next=r.due;});
+  return next;
+}
+
+/* ---------- review mode: due-only deck as an ephemeral view over the full deck ---------- */
+let reviewMode=false,reviewBackup=null,reviewMenuTimer=null;
+const reviewDueMenu=document.getElementById('reviewDueMenu');
+function updateReviewMenu(){
+  clearTimeout(reviewMenuTimer);
+  reviewDueMenu.textContent=reviewMode?'exit review':String(srsDueIdx().length);
+}
+function enterReview(){
+  if(activeFilter)clearFilter();               /* one ephemeral view at a time */
+  const due=srsDueIdx();
+  if(!due.length){
+    const next=srsNextDue();
+    reviewDueMenu.textContent=next?'all caught up · next '+next:'all caught up';
+    clearTimeout(reviewMenuTimer);reviewMenuTimer=setTimeout(updateReviewMenu,2500);
+    return;
+  }
+  reviewBackup={
+    stack:[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx),
+    order:[...order],history:[...history],learnedCount};
+  deck.querySelectorAll('.card').forEach(releaseCard);
+  order=[...due];history=[];
+  [...due].reverse().forEach(renderCard);     /* most overdue ends up on top */
+  reviewMode=true;
+  markHot();updateCounts();refreshEmpty();updateReviewMenu();
+  closeSheet();
+}
+function exitReview(){
+  if(!reviewMode)return;
+  reviewMode=false;
+  deck.querySelectorAll('.card').forEach(releaseCard);
+  reviewBackup.stack.forEach(renderCard);
+  order=reviewBackup.order;history=reviewBackup.history;learnedCount=reviewBackup.learnedCount;
+  reviewBackup=null;
+  markHot();updateCounts();refreshEmpty();updateReviewMenu();
+}
+
+/* ---------- deck filters: ephemeral views over the full deck (same model as review mode;
+   swipes update SRS but never persist over saved full-deck progress) ---------- */
+let activeFilter=null,filterBackup=null;
+function isoWeek(){                            /* ISO-8601 week number, local time */
+  const t=new Date();t.setHours(0,0,0,0);
+  t.setDate(t.getDate()+3-((t.getDay()+6)%7));
+  const w1=new Date(t.getFullYear(),0,4);
+  return 1+Math.round(((t-w1)/86400000-3+((w1.getDay()+6)%7))/7);
+}
+function parseOrderWeek(str){const m=(str||'').match(/wk\s*(\d{1,2})/i);return m?+m[1]:null;}
+const typeCategory=p=>(p.type||'').split('·')[0].trim();   /* "Planned · winter colour" → "Planned" */
+const FILTER_DEFS=(()=>{                       /* chip values discovered from PLANTS — never hardcoded */
+  const defs=[
+    {id:'season',label:'🌿 In season now',test:p=>parseMonths(p.peak).includes(new Date().getMonth()+1)},
+    {id:'order',label:'📦 Order in next 4 wks',test:p=>{const wk=parseOrderWeek(p.order),now=isoWeek();
+      return wk!==null&&wk>=now&&wk<=now+4;}},  /* unparseable order strings simply don't match */
+  ];
+  [...new Set(PLANTS.map(typeCategory).filter(Boolean))].sort().forEach(t=>
+    defs.push({id:'type:'+t,label:'🪴 '+t,test:p=>typeCategory(p)===t}));
+  [...new Set(PLANTS.map(p=>(p.hardiness||'').trim()).filter(Boolean))].sort().forEach(h=>
+    defs.push({id:'hard:'+h,label:'❄️ '+h,test:p=>(p.hardiness||'').trim()===h}));
+  return defs;
+})();
+function applyFilter(id){
+  const def=FILTER_DEFS.find(d=>d.id===id);if(!def)return;
+  if(reviewMode)exitReview();                  /* one ephemeral view at a time */
+  const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0);
+  if(!match.length)return;                     /* zero-match chips are disabled in the menu anyway */
+  if(!activeFilter)filterBackup={
+    stack:[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx),
+    order:[...order],history:[...history],learnedCount};
+  deck.querySelectorAll('.card').forEach(releaseCard);
+  order=[...match];history=[];
+  [...match].reverse().forEach(renderCard);
+  activeFilter=id;
+  markHot();updateCounts();refreshEmpty();
+}
+function clearFilter(){
+  if(!activeFilter)return;
+  activeFilter=null;
+  deck.querySelectorAll('.card').forEach(releaseCard);
+  filterBackup.stack.forEach(renderCard);
+  order=filterBackup.order;history=filterBackup.history;learnedCount=filterBackup.learnedCount;
+  filterBackup=null;
+  markHot();updateCounts();refreshEmpty();
+}
+function renderFilterChips(){
+  const box=document.getElementById('filterChips');
+  box.innerHTML=FILTER_DEFS.map(d=>{
+    const n=PLANTS.filter(d.test).length;
+    return `<button class="chip${activeFilter===d.id?' on':''}" data-f="${d.id}" ${n?'':'disabled'}>${d.label} <small>${n}</small></button>`;
+  }).join('');
+  box.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
+    if(activeFilter===b.dataset.f)clearFilter();else applyFilter(b.dataset.f);
+    renderFilterChips();
+    if(activeFilter)closeSheet();
+  });
 }
 
 /* ---- v12 card template helpers (design/card-builder.html; CARD-STATS.md) ---- */
@@ -1517,7 +1724,11 @@ function fling(card,dir,learned){
   card.style.opacity='0';setTimeout(()=>releaseCard(card),320);
   order=order.filter(i=>i!==idx);history.push({idx,learned});
   if(learned)learnedCount++;
+  srsOnSwipe(PLANTS[idx].latin,learned);
   markHot();updateCounts();refreshEmpty();saveProgress();   /* promote the card being revealed */
+  updateReviewMenu();
+  if(reviewMode&&!order.length)exitReview();       /* last due card swiped — drop back to the full deck */
+  else if(activeFilter&&!order.length)clearFilter(); /* filtered deck exhausted — same */
 }
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
 function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);markHot();updateCounts();refreshEmpty();saveProgress();}
@@ -1534,7 +1745,7 @@ document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
 /* deck keyboard shortcuts — inert while any overlay owns the screen, so arrow keys
    never swipe the card sitting underneath the menu, dictionary or quiz */
 function overlayOpen(){
-  return sheet.classList.contains('open')||search.classList.contains('open')||quizEl.classList.contains('open');
+  return sheet.classList.contains('open')||search.classList.contains('open')||quizEl.classList.contains('open')||statsEl.classList.contains('open');
 }
 document.addEventListener('keydown',e=>{
   if(e.metaKey||e.ctrlKey||e.altKey)return;
@@ -1549,7 +1760,7 @@ document.addEventListener('keydown',e=>{
 });
 
 const sheet=document.getElementById('sheet');
-document.getElementById('menuBtn').onclick=()=>sheet.classList.add('open');
+document.getElementById('menuBtn').onclick=()=>{updateReviewMenu();renderFilterChips();sheet.classList.add('open');};  /* recount + rechip on open — dates roll over */
 function closeSheet(){sheet.classList.remove('open');document.getElementById('menuBtn').focus();}
 sheet.querySelectorAll('[data-close]').forEach(el=>el.onclick=closeSheet);
 
@@ -1575,10 +1786,55 @@ function backToResults(){  /* from detail view — keep keyboard focus somewhere
   (first||searchInput).focus();
 }
 
+/* fuzzy ranking: exact word > prefix > substring > 1-typo > 2-typo. Typo budget
+   scales with token length (1 edit at 4-6 chars, 2 at 7+) so short queries stay precise. */
+function lev2(a,b){                            /* Levenshtein bounded at 2 — returns 3 for "worse" */
+  if(a===b)return 0;
+  const la=a.length,lb=b.length;
+  if(Math.abs(la-lb)>2)return 3;
+  let prev=Array.from({length:lb+1},(_,j)=>j),cur=new Array(lb+1);
+  for(let i=1;i<=la;i++){
+    cur[0]=i;let rowMin=i;
+    for(let j=1;j<=lb;j++){
+      cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+      if(cur[j]<rowMin)rowMin=cur[j];
+    }
+    if(rowMin>2)return 3;
+    [prev,cur]=[cur,prev];
+  }
+  return prev[lb]>2?3:prev[lb];
+}
+const SEARCH_INDEX=PLANTS.map(p=>{             /* built once at startup, not per keystroke */
+  const full=[p.common,p.latin,p.cvs,p.uses,p.visual].join(' ').toLowerCase();
+  return{full,words:full.split(/[^a-z0-9]+/).filter(w=>w.length>1)};
+});
+function searchScore(entry,tokens){            /* lower = better; null = no match */
+  let sum=0;
+  for(const tok of tokens){
+    let s=null;
+    if(entry.words.includes(tok))s=0;
+    else if(entry.words.some(w=>w.startsWith(tok)))s=1;
+    else if(entry.full.includes(tok))s=2;
+    else{
+      const maxE=tok.length>=7?2:tok.length>=4?1:0;  /* typo budget scales with token length */
+      if(maxE){
+        let best=3;
+        for(const w of entry.words){const d=lev2(tok,w);if(d<best)best=d;if(best<=1)break;}
+        if(best<=maxE)s=2+best;
+      }
+    }
+    if(s===null)return null;                   /* every token must match somewhere */
+    sum+=s;
+  }
+  return sum;
+}
+
 function renderResults(q){
   const t=q.trim().toLowerCase();
-  const hits=PLANTS.map((p,i)=>({p,i}))
-    .filter(({p})=>!t||[p.common,p.latin,p.cvs,p.uses,p.visual].join(' ').toLowerCase().includes(t));
+  const tokens=t?t.split(/\s+/):[];
+  const hits=PLANTS.map((p,i)=>({p,i,score:tokens.length?searchScore(SEARCH_INDEX[i],tokens):0}))
+    .filter(h=>h.score!==null)
+    .sort((a,b)=>a.score-b.score||a.i-b.i);
   if(!hits.length){
     searchResults.innerHTML='<div class="s-none">No plants match that name.</div>';
     return;
@@ -1597,6 +1853,7 @@ function showPlant(i){
   const p=PLANTS[i];
   searchDetail.classList.remove('cust');
   searchDetail.innerHTML=`
+    <div class="d-photo"><img src="photos/${slugLatin(p.latin)}.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     <div class="d-top"><button class="d-back" id="dBack">← Results</button>
       <button class="d-customer" id="dCustomer">👥 Show customer</button></div>
     <div class="d-head"><h3>${p.common}</h3><em>${p.latin}</em><button class="say" id="dSay" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">🔊</button><span class="h">${p.hardiness}</span></div>
@@ -1642,6 +1899,7 @@ function showCustomer(i){
   const p=PLANTS[i];
   searchDetail.classList.add('cust');
   searchDetail.innerHTML=`
+    <div class="d-photo"><img src="photos/${slugLatin(p.latin)}.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     <div class="d-top"><button class="d-back" id="dStaff">← Staff view</button></div>
     <h3 class="c-name">${p.common}</h3>
     <div class="c-latin">${p.latin}</div>
@@ -1677,7 +1935,8 @@ dictRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();dictRo
 document.getElementById('resetRow').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();buildDeck();closeSheet();}};
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape')return;
-  if(quizEl.classList.contains('open')){closeQuiz();}
+  if(statsEl.classList.contains('open')){closeStats();}
+  else if(quizEl.classList.contains('open')){closeQuiz();}
   else if(search.classList.contains('open')){
     if(customerMode)showPlant(detailIdx);
     else if(!searchDetail.hidden)backToResults();
@@ -1706,16 +1965,41 @@ function updateQuizStats(){
   qStreakEl.textContent=qStreak;qBestEl.textContent=qBest;
   document.getElementById('quizBestMenu').textContent=qBest?'best '+qBest:'';
 }
+const qSummary=document.getElementById('qSummary');
+let qSession=null;                             /* per-session tally: {total, right, wrong:Map(latin→misses)} */
+function pickWeightedPlant(){                  /* weight 1/(box+1): unseen plants heaviest, box-5 lightest */
+  const srs=loadSRS();
+  const w=PLANTS.map(p=>{const r=srs[p.latin];return 1/((r?r.box:0)+1);});
+  let r=Math.random()*w.reduce((s,x)=>s+x,0);
+  for(let i=0;i<PLANTS.length;i++){r-=w[i];if(r<=0)return PLANTS[i];}
+  return PLANTS[PLANTS.length-1];
+}
 function nextQuestion(){
   clearTimeout(qTimer);
-  const answer=PLANTS[Math.floor(Math.random()*PLANTS.length)];
-  /* only ask about fields whose value is unique to the answer — no ambiguous questions */
-  const clues=QUIZ_CLUES.filter(([f])=>PLANTS.filter(p=>p[f]===answer[f]).length===1);
-  const [field,prompt]=clues[Math.floor(Math.random()*clues.length)];
-  qQuestion.innerHTML=`${prompt} <em>“${answer[field]}”</em>`;
+  const answer=pickWeightedPlant();
+  /* only ask questions whose shown value is unique to the answer — no ambiguous rounds */
+  const uniq=f=>PLANTS.filter(p=>p[f]===answer[f]).length===1;
+  const clues=QUIZ_CLUES.filter(([f])=>uniq(f));
+  const pool=[];                               /* round mix ≈ classic 50% / reverse 30% / trade 20% */
+  if(clues.length)pool.push('classic','classic','classic','classic','classic');
+  if(uniq('common'))pool.push('reverse','reverse','reverse');
+  if(answer.retail&&uniq('retail'))pool.push('trade','trade');
+  const round=pool.length?pool[Math.floor(Math.random()*pool.length)]:'classic';
+  qOptions.dataset.round=round;
+  let display=p=>p.common;
+  if(round==='reverse'){
+    qQuestion.innerHTML=`Which latin name belongs to <em>“${answer.common}”</em>?`;
+    display=p=>p.latin;
+  }else if(round==='trade'){
+    qQuestion.innerHTML=`Which plant retails at <em>“${answer.retail}”</em> — ${answer.type}?`;
+  }else{
+    const source=clues.length?clues:QUIZ_CLUES;
+    const [field,prompt]=source[Math.floor(Math.random()*source.length)];
+    qQuestion.innerHTML=`${prompt} <em>“${answer[field]}”</em>`;
+  }
   const opts=shuffle([...PLANTS]).slice(0,4);
   if(!opts.includes(answer)){opts[0]=answer;shuffle(opts);}
-  qOptions.innerHTML=opts.map(p=>`<button class="q-opt" data-i="${PLANTS.indexOf(p)}">${p.common}</button>`).join('');
+  qOptions.innerHTML=opts.map(p=>`<button class="q-opt" data-i="${PLANTS.indexOf(p)}">${display(p)}</button>`).join('');
   qOptions.querySelectorAll('.q-opt').forEach(btn=>btn.onclick=()=>{
     if(btn.disabled)return;
     const right=PLANTS[+btn.dataset.i]===answer;
@@ -1723,23 +2007,104 @@ function nextQuestion(){
       b.disabled=true;
       if(PLANTS[+b.dataset.i]===answer)b.classList.add('correct');
     });
+    if(qSession){qSession.total++;if(right)qSession.right++;}
     if(right){
       qStreak++;
       if(qStreak>qBest){qBest=qStreak;try{localStorage.setItem(QUIZ_KEY,String(qBest));}catch(e){}}
-    }else{btn.classList.add('wrong');qStreak=0;}
+    }else{
+      btn.classList.add('wrong');qStreak=0;
+      if(qSession)qSession.wrong.set(answer.latin,(qSession.wrong.get(answer.latin)||0)+1);
+      srsOnQuizWrong(answer.latin);updateReviewMenu();
+    }
     updateQuizStats();
     qTimer=setTimeout(nextQuestion,right?900:1600);
   });
   const first=qOptions.querySelector('.q-opt');
   if(first)first.focus();
 }
-function openQuiz(){quizEl.classList.add('open');qStreak=0;updateQuizStats();nextQuestion();}
-function closeQuiz(){quizEl.classList.remove('open');clearTimeout(qTimer);document.getElementById('menuBtn').focus();}
+function showQuizSummary(){
+  clearTimeout(qTimer);
+  const s=qSession,srs=loadSRS();
+  let weak=null;                               /* most-missed this session; ties break to lowest box */
+  s.wrong.forEach((n,latin)=>{
+    const box=(srs[latin]&&srs[latin].box)||0;
+    if(!weak||n>weak.n||(n===weak.n&&box<weak.box))weak={latin,n,box};
+  });
+  const plant=weak?PLANTS.find(p=>p.latin===weak.latin):null;
+  document.getElementById('qSummaryStats').innerHTML=
+    `<b>${s.right} / ${s.total}</b> this session`+
+    (plant?`<br><small>Weakest: ${plant.common} — due for review tomorrow</small>`
+          :'<br><small>No misses — clean run 🌿</small>');
+  qQuestion.hidden=true;qOptions.hidden=true;qSummary.hidden=false;
+  document.getElementById('qSummaryClose').focus();
+}
+function openQuiz(){
+  qSession={total:0,right:0,wrong:new Map()};
+  qSummary.hidden=true;qQuestion.hidden=false;qOptions.hidden=false;
+  quizEl.classList.add('open');qStreak=0;updateQuizStats();nextQuestion();
+}
+function closeQuiz(){
+  if(qSession&&qSession.total>0&&qSummary.hidden&&quizEl.classList.contains('open')){showQuizSummary();return;}
+  quizEl.classList.remove('open');qSession=null;clearTimeout(qTimer);
+  qSummary.hidden=true;qQuestion.hidden=false;qOptions.hidden=false;
+  document.getElementById('menuBtn').focus();
+}
+document.getElementById('qSummaryClose').onclick=()=>{qSession=null;closeQuiz();};
 document.getElementById('quizClose').onclick=closeQuiz;
 quizEl.querySelectorAll('[data-qclose]').forEach(el=>el.onclick=closeQuiz);
 const quizRow=document.getElementById('quizRow');
 quizRow.onclick=()=>{closeSheet();openQuiz();};
 quizRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();quizRow.onclick();}};
+const reviewRow=document.getElementById('reviewRow');
+reviewRow.onclick=()=>{if(reviewMode){exitReview();closeSheet();}else enterReview();};
+reviewRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();reviewRow.onclick();}};
+
+/* ---------- stats dashboard (menu → My progress) — numbers derive live, nothing cached ---------- */
+const statsEl=document.getElementById('stats');
+function renderStats(){
+  const srs=loadSRS();
+  const boxes=[0,0,0,0,0,0];                   /* index 0 = never swiped ("new") */
+  PLANTS.forEach(p=>{const r=srs[p.latin];boxes[r?r.box:0]++;});
+  const maxBox=Math.max(...boxes,1);
+  const nextUp=PLANTS.map(p=>({p,rec:srs[p.latin]})).filter(x=>x.rec)
+    .sort((a,b)=>a.rec.due<b.rec.due?-1:a.rec.due>b.rec.due?1:0).slice(0,3);
+  const weakest=PLANTS.map(p=>{const r=srs[p.latin];return{p,box:r?r.box:0,due:r?r.due:'~'};})
+    .sort((a,b)=>a.box-b.box||(a.due<b.due?-1:1)).slice(0,3);
+  const pct=Math.round((learnedCount/PLANTS.length)*100);
+  document.getElementById('statsContent').innerHTML=`
+    <div class="st-row"><span class="l">Learned</span><span class="n">${learnedCount} / ${PLANTS.length} (${pct}%)</span></div>
+    <div class="st-bar"><i style="width:${pct}%"></i></div>
+    <div class="st-row"><span class="l">Quiz best streak</span><span class="n">${qBest}</span></div>
+    <div class="st-row"><span class="l">Review boxes</span><span class="n" style="font-size:11px;color:var(--muted)">box 5 = mastered</span></div>
+    <div class="st-boxes">${boxes.map((n,b)=>
+      `<div class="col"><i style="height:${(n/maxBox)*100}%"></i><small>${b===0?'new':'box '+b}</small></div>`).join('')}</div>
+    ${nextUp.length?`<div class="st-row"><span class="l">Next reviews</span></div>
+    <ul class="st-list">${nextUp.map(x=>`<li>${x.p.common}<small>due ${x.rec.due}</small></li>`).join('')}</ul>`:''}
+    <div class="st-row"><span class="l">Weakest plants</span></div>
+    <ul class="st-list">${weakest.map(x=>`<li>${x.p.common}<small>${x.box===0?'new':'box '+x.box}</small></li>`).join('')}</ul>`;
+}
+function openStats(){renderStats();statsEl.classList.add('open');document.getElementById('statsClose').focus();}
+function closeStats(){statsEl.classList.remove('open');document.getElementById('menuBtn').focus();}
+const statsRow=document.getElementById('statsRow');
+statsRow.onclick=()=>{closeSheet();openStats();};
+statsRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();statsRow.onclick();}};
+document.getElementById('statsClose').onclick=closeStats;
+statsEl.querySelectorAll('[data-stclose]').forEach(el=>el.onclick=closeStats);
+
+/* ---------- focus trap: Tab cycles inside whichever overlay is open ----------
+   focusables are queried per keypress — quiz options and stats content are rebuilt live */
+function trapFocus(container){
+  container.addEventListener('keydown',e=>{
+    if(e.key!=='Tab')return;
+    const f=[...container.querySelectorAll('button:not([disabled]),input,[tabindex="0"]')]
+      .filter(el=>el.offsetParent!==null&&!el.hidden);
+    if(!f.length)return;
+    const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  });
+}
+[sheet,search,quizEl,statsEl].forEach(trapFocus);
 
 /* ---------- PWA: manifest, service worker, install prompt ---------- */
 const ICON192="data:image/png;base64,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";
@@ -1804,6 +2169,7 @@ updateCardScale();
 const savedProgress=loadProgress();
 if(savedProgress)restoreDeck(savedProgress);else buildDeck();
 updateQuizStats();
+updateReviewMenu();
 </script>
 </body>
 </html>
