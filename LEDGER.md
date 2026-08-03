@@ -4,7 +4,24 @@
 brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below the
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
-since: 2026-07-28  sessions-unchanged: 1
+since: 2026-07-28  sessions-unchanged: 2
+progress: 2026-08-03 — **swipe glitch root-caused; two new suites.** The tearing on the
+  phone was compositing pressure, not gesture logic: `will-change` sat on all 57 cards
+  (57 GPU layers, ~200MB, which also defeats occlusion culling) and every buried card
+  stayed painted though the stack is fully occluded. markHot() now promotes only the card
+  mid-fling plus the top two, and paints only the top three. Buried cards keep their BOX
+  painted — ~30 stacked box-shadows build the deck's halo, so hiding whole cards lightens
+  it; hiding only their contents is pixel-identical (0/1,316,640 px differ). Measured: 57
+  layers -> 2, 54 painted photos -> 3, no layout during a drag. NOT verifiable here —
+  headless has no GPU memory pressure, so the smoothness gain needs confirming on a real
+  phone. New: tests/perf-test.js (8 checks, locks the compositing budget + pixel parity)
+  and tests/deck-audit.js (whole-deck audit; judges rendered output, not raw fields —
+  auditing the stored format directly gave ~120 false alarms). Seven suites now, all
+  green. Deck audit found 2 genuinely broken cards (Choisya, Weigela: no photo, all
+  ratings blank, aspect "Full sun / pt shade" silently rendered as "Any aspect" with no
+  light bar) — recorded in KNOWN_GAPS. Also confirmed NOT problems: soil-length warnings
+  (the card splits the joined field), rating scales (genuinely 0-20), H5 (evenly spread,
+  not the mock-up pattern), quiz (no empty questions, no crash path).
 progress: 2026-07-30 — **artifact re-synced, deck 57.** The published artifact had forked
   again: artifact-side sessions had added 10 cards (Ligularia 'Treasure Island', Dream Dazzler
   Stonecrop, Hydrangea aspera 'Rosemary Foster', Ginkgo, Cordyline Charlie Boy, Gaura 'Gaudi
