@@ -5,6 +5,18 @@ brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below t
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
 since: 2026-07-28  sessions-unchanged: 3
+progress: 2026-08-03 (evening) — **phone tearing diagnosed from screen recording.** Frame
+  extraction of Oscar's Pages recording showed the real failure the 07-03 compositing fix
+  predicted it couldn't verify headless: the moving card tears into strips (its rail
+  renders detached and rotated over the next card) and the revealed card flashes a black
+  unpainted photo panel. Cause: markHot() promoted (will-change) and first-painted cards
+  in the same frame the fling starts — layer + raster churn on visible content. Fix:
+  buffer one card deeper than anything a swipe can reveal (hot = top 3, PAINT_DEPTH = 4)
+  so churn only ever touches fully occluded cards, decode upcoming photos while still
+  buried (img.decode()), and move per-swipe SRS bookkeeping to a 360ms timer so the
+  animation frame carries zero extra work. perf-test budgets raised 3→4 to match (still
+  O(1) vs 57). All nine suites green. Real-phone confirmation still needed — headless
+  cannot reproduce GPU raster scheduling.
 progress: 2026-08-03 (later) — **learning layer merged onto deck 57; site live.** The
   feature line built earlier today against the stale 8-plant branch (spaced repetition +
   review-due deck, quiz v2 with reverse/trade rounds + weakest-first picking + session

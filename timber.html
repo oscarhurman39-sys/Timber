@@ -1649,16 +1649,24 @@ function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].p
 /* Promote only what moves: whatever is mid-fling, plus the top two live cards (the one
    under the thumb and the one about to be revealed). Everything below stays unpromoted
    so the browser can cull it. Cheap enough to re-run on every deck change. */
-const PAINT_DEPTH=3;   /* top card + a decoded buffer for the next swipes */
+const PAINT_DEPTH=4;   /* deep enough that a swipe never promotes or first-paints a VISIBLE card:
+                          the card a swipe reveals was already painted (and decoding) while fully
+                          occluded, and the newly promoted card sits two opaque cards down. Layer/
+                          raster churn mid-animation on a real phone tears the moving card into
+                          strips and flashes unpainted panels — churn must stay out of sight. */
 function markHot(){
   const cards=[...deck.querySelectorAll('.card')];
   const live=cards.filter(c=>!c.dataset.gone);
   const going=cards.filter(c=>c.dataset.gone);          /* still animating out */
-  const hot=new Set([...going,...live.slice(-2)]);
+  const hot=new Set([...going,...live.slice(-3)]);      /* one deeper than visible motion */
   const shown=new Set([...going,...live.slice(-PAINT_DEPTH)]);
   cards.forEach(c=>{
     c.classList.toggle('hot',hot.has(c));
     c.classList.toggle('deep',!shown.has(c));
+  });
+  live.slice(-PAINT_DEPTH).forEach(c=>{                 /* decode upcoming photos while occluded */
+    const img=c.querySelector('.tphoto img');
+    if(img&&img.decode)img.decode().catch(()=>{});
   });
 }
 
@@ -1724,9 +1732,10 @@ function fling(card,dir,learned){
   card.style.opacity='0';setTimeout(()=>releaseCard(card),320);
   order=order.filter(i=>i!==idx);history.push({idx,learned});
   if(learned)learnedCount++;
-  srsOnSwipe(PLANTS[idx].latin,learned);
+  const latin=PLANTS[idx].latin;                   /* SRS bookkeeping (storage I/O + menu text)
+      lands after the fling settles so the animation frame carries zero extra work */
+  setTimeout(()=>{srsOnSwipe(latin,learned);updateReviewMenu();},360);
   markHot();updateCounts();refreshEmpty();saveProgress();   /* promote the card being revealed */
-  updateReviewMenu();
   if(reviewMode&&!order.length)exitReview();       /* last due card swiped — drop back to the full deck */
   else if(activeFilter&&!order.length)clearFilter(); /* filtered deck exhausted — same */
 }

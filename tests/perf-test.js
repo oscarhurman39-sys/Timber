@@ -15,8 +15,9 @@
 const { chromium } = require('playwright');
 
 const URL = 'http://localhost:8477/timber.html';
-const MAX_LAYERS = 3;       /* mid-fling card + top two live */
-const MAX_PAINTED = 3;      /* PAINT_DEPTH in timber.html */
+const MAX_LAYERS = 4;       /* mid-fling card + top three live — one deeper than visible motion,
+                               so a swipe never promotes a card the user can see (phone tearing) */
+const MAX_PAINTED = 4;      /* PAINT_DEPTH in timber.html */
 
 let passed = 0, failed = 0; const fails = [];
 const check = (name, ok, detail = '') => {
