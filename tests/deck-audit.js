@@ -37,6 +37,11 @@ const errors = [], warnings = [], known = [];
   await page.goto(URL);
   await page.waitForTimeout(1000);
 
+  /* photos fetch in a sliding window in the live app — reveal them all for the audit */
+  await page.evaluate(() =>
+    document.querySelectorAll('.tphoto img').forEach(i => { if (!i.getAttribute('src') && i.dataset.psrc) i.src = i.dataset.psrc; }));
+  await page.waitForTimeout(2500);
+
   const cards = await page.evaluate(() => {
     /* read each card as the user sees it: the rendered ink, not the source field */
     document.querySelectorAll('.deck .card').forEach(c => c.classList.remove('deep'));

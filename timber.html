@@ -313,6 +313,9 @@
   .mdots{display:flex;gap:3px;margin-top:5px}
   .mdots span{flex:1;text-align:center;font-size:8px;line-height:1;padding:3px 0;border-radius:3px;background:rgba(255,255,255,.06);color:var(--muted)}
   .mdots span.on{background:var(--leaf2);color:#04120a;font-weight:700}
+  .update-pill{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+    z-index:80;padding:10px 18px;border:none;border-radius:24px;background:linear-gradient(120deg,var(--gold),#e0a52f);
+    color:#1a120a;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.45)}
 
   @media (prefers-reduced-motion:reduce){  /* new overlays/chips only — card animations are locked as-is */
     .stats .st-panel,.stats .st-scrim,.chip{transition-duration:.01ms}
@@ -511,7 +514,7 @@
     <div class="f-chips" id="filterChips" role="group" aria-labelledby="filterLabel"></div>
     <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic">📲</span> Install app</div>
     <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic">↻</span> Reset progress</div>
-    <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.</div>
+    <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.<br><span id="buildTag"></span></div>
   </div>
 </div>
 
@@ -559,8 +562,13 @@
   </div>
 </div>
 
+<button class="update-pill" id="updatePill" hidden>Update ready · tap to refresh</button>
+
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
+const BUILD='r6 · 2026-08-03';   /* bump per deploy — shown in the menu foot so a phone's
+                                    version is checkable at a glance (the SW double-load
+                                    made "which build am I on?" a real question) */
 const TTS='speechSynthesis' in window;
 if(TTS){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();}
 function speakLatin(text,btn){
@@ -1574,7 +1582,7 @@ function renderCard(idx){
         <div class="tinner">
           <div class="tphoto">
             <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
-            <img src="photos/${slug}.jpg" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
+            <img data-psrc="photos/${slug}.jpg" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
           </div>
           <div class="thead">
             <h2>${p.common}</h2>
@@ -1666,6 +1674,7 @@ function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].p
 /* Promote only what moves: whatever is mid-fling, plus the top two live cards (the one
    under the thumb and the one about to be revealed). Everything below stays unpromoted
    so the browser can cull it. Cheap enough to re-run on every deck change. */
+const FETCH_DEPTH=10;  /* cards this close to the top get their photo fetched (window slides per swipe) */
 const PAINT_DEPTH=4;   /* deep enough that a swipe never promotes or first-paints a VISIBLE card:
                           the card a swipe reveals was already painted (and decoding) while fully
                           occluded, and the newly promoted card sits two opaque cards down. Layer/
@@ -1680,6 +1689,12 @@ function markHot(){
   cards.forEach(c=>{
     c.classList.toggle('hot',hot.has(c));
     c.classList.toggle('deep',!shown.has(c));
+  });
+  live.slice(-FETCH_DEPTH).forEach(c=>{                 /* photos fetch as cards near the top —
+      hidden imgs with src still hit the network, and a 57-photo stampede at load is
+      exactly what the first ten swipes were fighting */
+    const img=c.querySelector('.tphoto img');
+    if(img&&!img.getAttribute('src')&&img.dataset.psrc)img.src=img.dataset.psrc;
   });
   live.slice(-PAINT_DEPTH).forEach(c=>{                 /* decode upcoming photos while occluded */
     const img=c.querySelector('.tphoto img');
@@ -2205,6 +2220,15 @@ const ICON512="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkO
   document.head.appendChild(apple);
 })();
 
+/* the SW serves stale-while-revalidate, so a deploy normally needs a second open to
+   show — the pill closes that gap: the worker pings when a fresher shell landed */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.addEventListener('message',e=>{
+    if(e.data==='timber-updated')document.getElementById('updatePill').hidden=false;
+  });
+}
+document.getElementById('updatePill').onclick=()=>location.reload();
+
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('./sw.js')
@@ -2240,6 +2264,16 @@ const savedProgress=loadProgress();
 if(savedProgress)restoreDeck(savedProgress);else buildDeck();
 updateQuizStats();
 updateReviewMenu();
+document.getElementById('buildTag').textContent='build '+BUILD;
+/* trickle the remaining photos in after the opening swipes are clear, so offline
+   still ends up with the whole deck cached — without the load-time stampede */
+function tricklePhotos(){
+  const pending=[...deck.querySelectorAll('.card .tphoto img')].filter(i=>!i.getAttribute('src')&&i.dataset.psrc);
+  if(!pending.length)return;
+  pending.slice(0,2).forEach(i=>i.src=i.dataset.psrc);
+  setTimeout(tricklePhotos,900);
+}
+setTimeout(tricklePhotos,9000);
 </script>
 </body>
 </html>

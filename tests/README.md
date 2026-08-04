@@ -8,7 +8,7 @@ python3 -m http.server 8477 &
 NODE_PATH=/opt/node22/lib/node_modules node tests/app-test.js      # 94 checks: gestures, flip, search, quiz, persistence, a11y
 NODE_PATH=/opt/node22/lib/node_modules node tests/edge-test.js     #  9 checks: corrupt storage, empty deck, undo edge cases
 NODE_PATH=/opt/node22/lib/node_modules node tests/sw-update-test.js#  service-worker update path
-NODE_PATH=/opt/node22/lib/node_modules node tests/perf-test.js     #  8 checks: compositing budget, pixel parity, no layout on drag
+NODE_PATH=/opt/node22/lib/node_modules node tests/perf-test.js     #  9 checks: photo-fetch window, compositing budget, pixel parity, no layout on drag
 NODE_PATH=/opt/node22/lib/node_modules node tests/deck-audit.js    #  whole-deck data audit (errors fail; honest gaps warn)
 NODE_PATH=/opt/node22/lib/node_modules node tests/srs-test.js      # 24 checks: spaced repetition boxes, review mode, storage safety
 NODE_PATH=/opt/node22/lib/node_modules node tests/features-test.js # 47 checks: quiz v2, filters, fuzzy search, stats, photos, shell polish, focus trap

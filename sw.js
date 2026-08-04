@@ -31,7 +31,20 @@ self.addEventListener('fetch', e => {
       const refresh = fetch(e.request).then(res => {
         if (res.ok && !res.redirected && new URL(e.request.url).origin === location.origin) {
           const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(key, copy));
+          caches.open(CACHE).then(async c => {
+            /* a fresher app shell just replaced the stale one we already served —
+               tell open pages so they can offer a refresh instead of waiting for
+               the user's next visit */
+            if (new URL(key).pathname.endsWith('timber.html')) {
+              const prev = await c.match(key);
+              const a = prev && prev.headers.get('etag'), b = copy.headers.get('etag');
+              if (prev && a && b && a !== b) {
+                const cs = await self.clients.matchAll();
+                cs.forEach(cl => cl.postMessage('timber-updated'));
+              }
+            }
+            c.put(key, copy);
+          });
         }
         return res;
       });

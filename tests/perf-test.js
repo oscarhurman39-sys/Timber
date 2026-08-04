@@ -31,10 +31,15 @@ const check = (name, ok, detail = '') => {
   const page = await ctx.newPage();
   const pageErrors = [];
   page.on('pageerror', (e) => pageErrors.push(e.message));
+  let photoReqs = 0;
+  page.on('request', (r) => { if (r.url().includes('/photos/')) photoReqs++; });
   await page.goto(URL);
   await page.waitForTimeout(1200);
 
   const total = await page.evaluate(() => document.querySelectorAll('.deck .card').length);
+
+  /* ---- 0. photo fetching is windowed, not a load-time stampede ---- */
+  check(`photo fetching stays windowed at load (${photoReqs} requests, not ${total})`, photoReqs <= 12, `${photoReqs} > 12`);
 
   /* ---- 1. compositing layers ---- */
   const layers = await page.evaluate(() =>
