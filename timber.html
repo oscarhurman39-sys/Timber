@@ -148,6 +148,7 @@
   .grid .g.full{grid-column:1 / -1}
   .grid .g .l{font-size:9px;letter-spacing:1.1px;text-transform:uppercase;color:var(--leaf1);opacity:.85}
   .grid .g .n{font-size:12.5px;line-height:1.4;color:#eafff2;margin-top:3px}
+  .nodata{font-size:11.5px;font-style:italic;color:var(--muted);padding:2px 2px 4px}
   .back .fliphint{margin-top:auto;padding-top:6px}
 
   /* actions */
@@ -456,7 +457,7 @@
   .s-val{left:8%;top:27.4%;width:82%;height:16.2%}
   .s-tri-cover{left:33.7%;top:41.6%;width:29.1%;height:16.3%}
   .s-warn{left:7.6%;top:54.9%;width:84.3%;height:30.2%}
-  .s-val-ink{font-size:9px;line-height:1.2;text-align:center;display:grid;place-items:center;overflow-wrap:anywhere}
+  .s-val-ink{font-size:8.5px;line-height:1.15;text-align:center;display:grid;place-items:center;overflow-wrap:anywhere}
   .s-warn-ink{font-size:8.5px;line-height:1.35;display:grid;place-items:center;text-align:center}
   .b-aspect{left:11.3%;top:42.4%;width:17%;height:42.4%}
   .b-sun-cover{left:28%;top:6%;width:12.2%;height:88%}
@@ -1664,6 +1665,31 @@ const getRatingSegments=(value,max=5)=>Array.from({length:max},(_,i)=>{
   const r=value-i;if(r>=1)return 1;if(r<=0)return 0;return Math.round(r*4)/4;});
 const fmt5=s=>(Math.round((s/4)*100)/100)+'/5';
 const num=v=>{const n=Number(v);return v===''||v==null||!Number.isFinite(n)?null:n;};
+
+/* A field that was never filled in must not render as an orphan caption. Commercial data
+   only ever comes from Oscar, so on most cards it is blank — the trade sheet was printing
+   nine empty labels on 54 of 57 cards, which reads as broken rather than "not entered
+   yet", and "Bench · Root" emitted a lone "·" when both halves were empty. Blank stays
+   honest: it is simply not shown, and a card with no buyer data at all says so once. */
+const has=v=>v!=null&&String(v).trim()!=='';
+const cellIf=(cls,label,val)=>has(val)?`<div class="${cls}"><div class="l">${label}</div><div class="n">${val}</div></div>`:'';
+const dots=(...v)=>v.filter(has).join(' · ');
+
+/* the trade sheet is rendered in two places — the card back and the search detail —
+   so it is built once here rather than kept in sync by hand */
+function tradeBlocks(p){
+  const price=cellIf('cell','Trade',p.trade)+cellIf('cell','Retail',p.retail)+cellIf('cell m','Margin',p.margin);
+  const grid=cellIf('g','Source',p.source)+cellIf('g','Peak',p.peak)
+    +cellIf('g','Order',p.order)+cellIf('g','Bench · Root',dots(p.bench,p.root))
+    +cellIf('g full','Type',p.type)+cellIf('g full','Shrink',p.shrink)
+    +cellIf('g full','Return risk',p.returnRisk)+cellIf('g','Pot sizes',p.pots)
+    +cellIf('g','Size',p.size)+cellIf('g full','Cultivars',p.cvs)
+    +cellIf('g','Resilience',p.resilience)+cellIf('g','Uses',p.uses);
+  const buyer=[p.trade,p.retail,p.margin,p.source,p.order,p.bench,p.root,p.type,p.shrink,p.returnRisk,p.pots];
+  return (price?`<div class="price">${price}</div>`:'')
+    +(buyer.some(has)?'':'<div class="nodata">Buyer data not entered for this plant yet</div>')
+    +(grid?`<div class="grid">${grid}</div>`:'');
+}
 const wIcon=kind=>fill=>`<span class="ricon" style="--fill:${fill}"><img src="${ART[`widget-${kind}-out`]}" alt=""><span class="fillwrap"><img src="${ART[`widget-${kind}-fill`]}" alt=""></span></span>`;
 const wRow=(kind,score)=>score==null?'':getRatingSegments(score/4).map(wIcon(kind)).join('');
 const MONTHS={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
@@ -1802,25 +1828,7 @@ function renderCard(idx){
     </div>
     <div class="face back"><div class="backfit">
       <div class="back-head"><h3>${p.latin}</h3><span class="h">${p.hardiness}</span></div>
-      <div class="price">
-        <div class="cell"><div class="l">Trade</div><div class="n">${p.trade}</div></div>
-        <div class="cell"><div class="l">Retail</div><div class="n">${p.retail}</div></div>
-        <div class="cell m"><div class="l">Margin</div><div class="n">${p.margin}</div></div>
-      </div>
-      <div class="grid">
-        <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
-        <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div></div>
-        <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
-        <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
-        <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
-        <div class="g full"><div class="l">Shrink</div><div class="n">${p.shrink}</div></div>
-        <div class="g full"><div class="l">Return risk</div><div class="n">${p.returnRisk}</div></div>
-        <div class="g"><div class="l">Pot sizes</div><div class="n">${p.pots}</div></div>
-        <div class="g"><div class="l">Size</div><div class="n">${p.size}</div></div>
-        <div class="g full"><div class="l">Cultivars</div><div class="n">${p.cvs}</div></div>
-        <div class="g"><div class="l">Resilience</div><div class="n">${p.resilience}</div></div>
-        <div class="g"><div class="l">Uses</div><div class="n">${p.uses}</div></div>
-      </div>
+      ${tradeBlocks(p)}
       <div class="fliphint">⇅ Tap to flip back</div>
     </div></div>
    </div>`;
@@ -2104,25 +2112,7 @@ function showPlant(i){
       <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
       <li><span class="k">✂️</span><span class="v"><b>Prune</b>${p.prune}</span></li>
     </ul>
-    <div class="price">
-      <div class="cell"><div class="l">Trade</div><div class="n">${p.trade}</div></div>
-      <div class="cell"><div class="l">Retail</div><div class="n">${p.retail}</div></div>
-      <div class="cell m"><div class="l">Margin</div><div class="n">${p.margin}</div></div>
-    </div>
-    <div class="grid">
-      <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
-      <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div>${monthDots(p.peak)}</div>
-      <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
-      <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
-      <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
-      <div class="g full"><div class="l">Shrink</div><div class="n">${p.shrink}</div></div>
-      <div class="g full"><div class="l">Return risk</div><div class="n">${p.returnRisk}</div></div>
-      <div class="g"><div class="l">Pot sizes</div><div class="n">${p.pots}</div></div>
-      <div class="g"><div class="l">Size</div><div class="n">${p.size}</div></div>
-      <div class="g full"><div class="l">Cultivars</div><div class="n">${p.cvs}</div></div>
-      <div class="g"><div class="l">Resilience</div><div class="n">${p.resilience}</div></div>
-      <div class="g"><div class="l">Uses</div><div class="n">${p.uses}</div></div>
-    </div>`;
+    ${tradeBlocks(p)}`;
   searchResults.hidden=true;
   searchDetail.hidden=false;
   const dBack=document.getElementById('dBack');
@@ -2161,7 +2151,8 @@ function showCustomer(i){
       <li><span class="k">🌿</span><span class="v"><b>Great for</b>${p.uses}</span></li>
       <li><span class="k">✨</span><span class="v"><b>Varieties</b>${p.cvs}</span></li>
     </ul>
-    <div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`;
+    ${has(p.retail)?`<div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`:''}`;
+  /* an empty price box is the one thing here a customer actually sees — never show it */
   searchResults.hidden=true;
   searchDetail.hidden=false;
   const back=document.getElementById('dStaff');
