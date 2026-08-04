@@ -5,6 +5,18 @@ brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below t
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
 since: 2026-07-28  sessions-unchanged: 2
+progress: 2026-08-04 — **trade sheet stopped rendering empty captions.** Commercial data
+  only ever comes from Oscar, so it is blank on 54 of 57 cards — and the back was printing
+  all of it anyway: nine labels (Trade, Retail, Margin, Source, Order, Type, Shrink, Return
+  risk, Pot sizes) with nothing under them, plus a lone "·" from joining two empty fields
+  in "Bench · Root". Those empty rows also pushed Cultivars/Resilience/Uses past the fold,
+  so real content was being clipped mid-word. Cells now render only when they have a value,
+  a card with no buyer data says so once, and the two duplicated copies of that markup (card
+  back + search detail) are built from one `tradeBlocks()`. The customer-facing view no
+  longer shows an empty gold PRICE box — the one blank a customer actually sees. Guarded by
+  a new orphan-trade-cells check in deck-audit (verified it reports 9 on the pre-fix build).
+  Search was stress-tested too and needed nothing: diacritics fold both ways, regex
+  metacharacters are safe, empty states correct.
 progress: 2026-08-04 — Winter Beauty Honeysuckle photo added at Oscar's call: the shot an
   earlier session rejected as "cat-blocked" is his own photo, shows stem, leaf and the
   nursery label, and the tuxedo cat is wanted, not a defect. EXIF orientation 8, so upright
