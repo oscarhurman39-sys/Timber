@@ -183,7 +183,8 @@
   .sheet h4{margin:6px 0 14px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
   .row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-radius:12px;cursor:pointer;font-size:16px}
   .row:hover{background:rgba(255,255,255,.05)}
-  .row .ic{font-size:20px;width:24px;text-align:center}
+  .row .ic{width:24px;height:24px;flex:0 0 24px;display:inline-flex;align-items:center;justify-content:center;color:var(--gold)}
+  .row .ic svg{width:22px;height:22px;display:block}
   .row small{margin-left:auto;color:var(--leaf1);font-weight:700}
   .sheet .foot{margin-top:auto;font-size:12px;color:rgba(255,255,255,.35);line-height:1.5}
 
@@ -259,7 +260,8 @@
     box-shadow:0 18px 40px rgba(0,0,0,.45);padding:14px 16px 16px;gap:12px}
   .quiz.open .q-panel{transform:translateY(0)}
   .q-head{display:flex;align-items:center;gap:10px}
-  .q-title{font-weight:800;font-size:16px}
+  .q-title{font-weight:800;font-size:16px;display:inline-flex;align-items:center;gap:9px}
+  .q-title svg{width:20px;height:20px;flex:0 0 20px;color:var(--gold)}
   .q-stats{margin-left:auto;font-size:12px;color:var(--muted)}
   .q-stats b{color:var(--gold)}
   .q-question{font-size:15px;line-height:1.45;color:#eafff2}
@@ -520,17 +522,17 @@
   <div class="scrim" data-close></div>
   <div class="panel">
     <h4>Timber</h4>
-    <div class="row"><span class="ic">👤</span> Account</div>
-    <div class="row"><span class="ic">⚙️</span> Settings</div>
-    <div class="row"><span class="ic">⭐</span> Learned <small id="doneMenu">0</small></div>
-    <div class="row" id="dictRow" role="button" tabindex="0"><span class="ic">🔎</span> Dictionary mode</div>
-    <div class="row" id="quizRow" role="button" tabindex="0"><span class="ic">❓</span> Quiz mode <small id="quizBestMenu"></small></div>
-    <div class="row" id="reviewRow" role="button" tabindex="0"><span class="ic">📅</span> Review due <small id="reviewDueMenu">0</small></div>
-    <div class="row" id="statsRow" role="button" tabindex="0"><span class="ic">📊</span> My progress</div>
+    <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></span> Account</div>
+    <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9"/><path d="M18 7h2"/><circle cx="15.5" cy="7" r="2.3"/><path d="M4 17h5"/><path d="M14 17h6"/><circle cx="11.5" cy="17" r="2.3"/></svg></span> Settings</div>
+    <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.8l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></span> Learned <small id="doneMenu">0</small></div>
+    <div class="row" id="dictRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v14.5H6.5A2.5 2.5 0 0 0 4 20z"/><path d="M4 20V5.5"/></svg></span> Dictionary mode</div>
+    <div class="row" id="quizRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.85c0 1.7-2.6 2.05-2.6 3.55"/><path d="M12 17h.01"/></svg></span> Quiz mode <small id="quizBestMenu"></small></div>
+    <div class="row" id="reviewRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9.5h16"/><path d="M8 3v4"/><path d="M16 3v4"/></svg></span> Review due <small id="reviewDueMenu">0</small></div>
+    <div class="row" id="statsRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"/><path d="M12 20V4"/><path d="M19 20v-6"/></svg></span> My progress</div>
     <div class="f-label" id="filterLabel">Filter deck</div>
     <div class="f-chips" id="filterChips" role="group" aria-labelledby="filterLabel"></div>
-    <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic">📲</span> Install app</div>
-    <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic">↻</span> Reset progress</div>
+    <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v9"/><path d="M8 9.5l4 4 4-4"/><path d="M5 19h14"/></svg></span> Install app</div>
+    <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg></span> Reset progress</div>
     <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.<br><span id="buildTag"></span></div>
   </div>
 </div>
@@ -555,7 +557,7 @@
   <div class="q-scrim" data-qclose></div>
   <div class="q-panel">
     <div class="q-head">
-      <span class="q-title">❓ Quiz</span>
+      <span class="q-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.85c0 1.7-2.6 2.05-2.6 3.55"/><path d="M12 17h.01"/></svg>Quiz</span>
       <span class="q-stats">Streak <b id="qStreak">0</b> · Best <b id="qBest">0</b></span>
       <button class="s-close" id="quizClose" aria-label="Close quiz">✕</button>
     </div>
@@ -572,7 +574,7 @@
   <div class="st-scrim" data-stclose></div>
   <div class="st-panel">
     <div class="q-head">
-      <span class="q-title">📊 My progress</span>
+      <span class="q-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"/><path d="M12 20V4"/><path d="M19 20v-6"/></svg>My progress</span>
       <button class="s-close" id="statsClose" aria-label="Close progress">✕</button>
     </div>
     <div id="statsContent"></div>
