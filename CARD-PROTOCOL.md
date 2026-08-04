@@ -136,6 +136,16 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.6 (soil-panel 3-line overflow fixed)**: the standing brick — a long
+  hyphenated soil value ("Rich, moisture-retentive", 24 chars, under the
+  validator's 26-char warning threshold) wrapped to 3 lines and its third line
+  visually collided with the warning-triangle icon below (measured: 3-line
+  text needs ~32.4px, only ~30.7px of clearance exists before the warning
+  zone starts). Fixed by matching `.s-val-ink` to the warning text's existing
+  8.5px/1.15 sizing (was 9px/1.2) — not a new invented size, reuses
+  `.s-warn-ink`'s token. Confirmed on Ligularia 'Treasure Island' (the
+  flagged case): now wraps to 2 clean lines with margin to spare. Shared CSS,
+  applies to every card. All suites green (94 app + 8 edge + sw-update).
 - **v12.5 (matching wooden edging on all parchment boxes)**: Oscar: the aspect
   band had a nice thin wooden edging but the Plant Power Points plaque and the
   SOIL box didn't — the card wasn't cohesive. Fixed in the assets so every card
@@ -146,6 +156,25 @@ Focal point recorded here when off-centre:
   contour, so the rim hugs the rounded corners; deterministic + idempotent).
   All three boxes now carry the same rim at the same on-card scale. Suites
   green, layout audit clean.
+- **v12.5 (value-patch label bleed fixed)**: Oscar flagged Bloom and Care Level
+  specifically as having "an overly dramatic paper effect covering" the words,
+  and asked whether it was a card-piecing issue and whether the patch outline
+  needed trimming. Measured (not eyeballed) the baked label/value ink bands in
+  `art/plaque-full.png` by luminance-thresholding each row's text column: the
+  live-value cover patches (`.p-bloom-val`, `.p-pest-val`, `.p-care-val`) all
+  started above their own row's label bottom edge, so the flat parchment patch
+  was painting over the tail of the baked label text before the live value
+  drew on top — worst on Care Level (14px overlap) and Bloom (14px), smaller on
+  Pests (8px), and confirmed zero overlap on Thirst (which is why Oscar never
+  flagged that row). Fixed by lowering each patch's `top` and shrinking its
+  `height` by the same amount, keeping the previously-unchanged bottom edge so
+  value-text coverage isn't reduced. Verified on a blank-rating card (label
+  crispness, card-agnostic) and on the Callistemon card's real two-line Care
+  value ("Moderate" + "2.25/5", the tallest case) — clean, no clipping. This is
+  a shared-CSS change, so it applies to every card, old and new, automatically.
+  App (94), edge (8) and sw-update suites green; `design/verify-cards.js` was
+  not re-run since it targets the separate `design/card-builder.html`
+  prototype, not `timber.html`'s live `renderCard()` — unaffected by this fix.
 - **v12.4b (leader-tick remnant erased)**: verifying the sun fix across all seven
   bands side-by-side made the last accepted blemish untenable — the baked
   wiggle-leader's tip peeked between the pointer-cover patch and the bar as a
