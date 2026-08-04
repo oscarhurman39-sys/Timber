@@ -133,8 +133,33 @@ Focal point recorded here when off-centre:
 | Lonicera × purpusii 'Winter Beauty' | (no photo — gradient fallback) | supplied photos were a water lily (wrong plant) + a cat blocking the Lonicera (label-confirmed ID); needs a winter shot of the scented cream flowers on bare stems |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 | Euonymus alatus | euonymus-alatus.jpg | ~50% 40% — summer macro. ID confirmed: corky wings visible as tan ridges on the green stems, leaves opposite + finely serrate. Shows none of the card's headline interest (autumn crimson, fruit); a September re-shoot would sell the plant better |
+| Eriobotrya japonica | eriobotrya-japonica.jpg (composited) / -cutout.png | 50% 40% — [special] cutout, hero-on-self (hue 120); bold corrugated deeply-veined evergreen leaves confirm the loquat. Rebuilt `tools/composite-hero.js` (the scratchpad original was never committed). Faint pink/blue nursery-label smudge low-left in the source cutout — soft, not dominant |
 
 ## 5. Decision changelog
+
+- **v12.43 (Japanese Loquat — 2nd Xylella card · both toxicity + compliance populated ·
+  composite-hero.js rebuilt)**: pre-converted schema + a transparent-background
+  **cutout** (32% transparent). The `composite-hero.js` the changelog has referenced
+  since v12.15 was a scratchpad one-off that never got committed — rebuilt it as
+  `tools/composite-hero.js` (dark hue-120 base matching the card's photo-less
+  fallback gradient → darkened+blurred enlarged backdrop → sharp full-colour hero on
+  top; opaque 1200×1558 out). First card whose JSON carries **both** a populated
+  `toxicity` AND a populated `compliance` field. Neither is mapped by `add-plant.js`,
+  so both were folded into fields it does map, following the standing precedents:
+  **Xylella → front `soilWarning`** ("Shelter from frost/wind · Xylella host") — the
+  Olive treatment (v12.37), since Eriobotrya is a documented Xylella host and that's
+  a material trade fact worth front-and-centre; **seed toxicity → `resilience`**
+  (back sheet) — the Winter Beauty treatment (v12.42): "seeds toxic — discard before
+  eating fruit". `returnRisk` was NOT used (commercial field; the checker rejects it).
+  `[Unverified]` the exact live Xylella host-list status — the JSON asserts it and it
+  matches the EU host-plant listing; defer to official plant-health guidance for the
+  current position. This is a **customer-facing edible-fruit card** (fruit edible,
+  seeds toxic), reinforcing the case for the still-parked tiered compliance/toxicity
+  display — three+ cards now carry compliance data and several carry toxicity, all
+  handled by folding into soil/resilience for want of dedicated rows. Data: H4
+  (flowers/fruit more frost-tender than the plant, per hardinessNote), evergreen
+  (peak Jan-Dec = year-round architectural foliage, §4b), sunNeed 90 / sunMin 75,
+  growth 9, container "with care". Gate green: 94/94, 9/9, deck audit PASS (58 cards).
 
 - **v12.4b (leader-tick remnant erased)**: verifying the sun fix across all seven
   bands side-by-side made the last accepted blemish untenable — the baked

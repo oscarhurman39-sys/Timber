@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 57;  // plants in the demo deck — keep in step with PLANTS
+const NPLANTS = 58;  // plants in the demo deck — keep in step with PLANTS
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
 const fails = [];
