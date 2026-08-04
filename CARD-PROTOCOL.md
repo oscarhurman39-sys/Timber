@@ -111,6 +111,16 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.6 (soil-panel 3-line overflow fixed)**: the standing brick — a long
+  hyphenated soil value ("Rich, moisture-retentive", 24 chars, under the
+  validator's 26-char warning threshold) wrapped to 3 lines and its third line
+  visually collided with the warning-triangle icon below (measured: 3-line
+  text needs ~32.4px, only ~30.7px of clearance exists before the warning
+  zone starts). Fixed by matching `.s-val-ink` to the warning text's existing
+  8.5px/1.15 sizing (was 9px/1.2) — not a new invented size, reuses
+  `.s-warn-ink`'s token. Confirmed on Ligularia 'Treasure Island' (the
+  flagged case): now wraps to 2 clean lines with margin to spare. Shared CSS,
+  applies to every card. All suites green (94 app + 8 edge + sw-update).
 - **v12.5 (value-patch label bleed fixed)**: Oscar flagged Bloom and Care Level
   specifically as having "an overly dramatic paper effect covering" the words,
   and asked whether it was a card-piecing issue and whether the patch outline
