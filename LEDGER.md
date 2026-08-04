@@ -5,6 +5,18 @@ brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below t
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
 since: 2026-07-28  sessions-unchanged: 3
+progress: 2026-08-04 — **the real compositing monster found: 3D flip machinery.** Oscar's
+  glitch screenshots (white screens, a slab of the previous card stuck over the new one)
+  are GPU tile eviction. CDP LayerTree measurement showed the truth the will-change
+  proxy never could: 228 REAL composited layers. Three per-card triggers, each removed
+  for non-hot cards only (top card is the only tappable/flippable one): perspective +
+  preserve-3d contexts, the back face's rotateY(180deg) — a 3D transform is a layer
+  trigger even when backface-invisible, so 54 unseen trade sheets were rasterised —
+  and backface-visibility:hidden itself, which layerised every front face and dragged
+  buried cards along via overlap. 228 → 16 layers (3 hot cards × flip machinery + doc).
+  Verified pixel-safe (max delta 1/255 AA jitter). perf-test now measures REAL layer
+  count via CDP (≤24) instead of trusting will-change; 10 checks. All nine suites green.
+  Phone re-test needed as ever — but this is the first fix aimed at the measured cause.
 progress: 2026-08-03 (evening) — **phone tearing diagnosed from screen recording.** Frame
   extraction of Oscar's Pages recording showed the real failure the 07-03 compositing fix
   predicted it couldn't verify headless: the moving card tears into strips (its rail

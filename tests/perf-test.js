@@ -46,6 +46,22 @@ const check = (name, ok, detail = '') => {
     [...document.querySelectorAll('.deck .card')].filter(c => getComputedStyle(c).willChange !== 'auto').length);
   check(`only moving cards are promoted (${layers} layers, not ${total})`, layers <= MAX_LAYERS, `${layers} > ${MAX_LAYERS}`);
 
+  /* ---- 1b. REAL composited layer count (CDP) — will-change is only a proxy.
+     perspective + preserve-3d + hidden backfaces on every card once forced ~4 real
+     layers per card (228 measured): phones evicted tiles → white screens, stale
+     card slabs. Only hot cards may keep a 3D context. ---- */
+  const ltCdp = await ctx.newCDPSession(page);
+  let realLayers = null;
+  ltCdp.on('LayerTree.layerTreeDidChange', (e) => { if (e.layers) realLayers = e.layers.length; });
+  await ltCdp.send('LayerTree.enable');
+  /* the enable-time snapshot still carries load-time layers the compositor hasn't
+     collected — provoke a swipe and read the settled steady-state tree instead */
+  await page.evaluate(() => act(true));
+  await page.waitForTimeout(900);
+  check(`real composited layer count stays flat (${realLayers} layers)`, realLayers !== null && realLayers <= 24,
+    `${realLayers} > 24`);
+  await ltCdp.send('LayerTree.disable');
+
   /* ---- 2. painted content ---- */
   const painted = await page.evaluate(() => document.querySelectorAll('.deck .card:not(.deep)').length);
   check(`only the top ${MAX_PAINTED} cards paint their content (${painted} of ${total})`, painted <= MAX_PAINTED, `${painted} > ${MAX_PAINTED}`);

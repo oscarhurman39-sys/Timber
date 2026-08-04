@@ -71,6 +71,23 @@
      bitmaps for — every buried photo. visibility:hidden keeps layout intact, so
      design/audit-layout.js still measures all 57 cards. */
   .card.deep .tcard>*{visibility:hidden}
+  /* Only a card that can flip needs its 3D machinery. perspective + preserve-3d +
+     two hidden backfaces force ~4 REAL compositing layers per card — 228 layers /
+     ~225MB measured across a 57-deck — which will-change budgeting never sees.
+     Real phones evict tiles under that pressure: white screens, stale card slabs.
+     Only the top card is tappable, so only hot cards keep a 3D context; a flat
+     card with rotateY(0) front and backface-hidden back renders pixel-identically. */
+  .card:not(.hot){perspective:none}
+  .card:not(.hot) .card-inner{transform-style:flat;-webkit-transform-style:flat}
+  /* the back face's rotateY(180deg) is a 3D transform — it forces a real layer per
+     card even though backface-visibility keeps it invisible. Only hot cards can flip;
+     buried backs are hidden outright, which is what backface-visibility already showed. */
+  .card:not(.hot) .face.back{visibility:hidden}
+  /* backface-visibility:hidden is itself a compositing trigger — it kept every front
+     face on its own layer (56 measured) and dragged buried cards along via overlap.
+     A non-hot card's front never rotates and its back is hidden above, so neither
+     face needs backface handling at all. */
+  .card:not(.hot) .face{backface-visibility:visible;-webkit-backface-visibility:visible}
   .card.flipped{touch-action:pan-y}   /* swiping is locked while flipped; let the trade sheet scroll */
   .card[data-gone]{pointer-events:none}  /* a card mid-fling must never swallow the next card's touches */
   .card-inner{position:absolute;inset:0;transform-style:preserve-3d;
@@ -566,7 +583,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r6 · 2026-08-03';   /* bump per deploy — shown in the menu foot so a phone's
+const BUILD='r7 · 2026-08-04';   /* bump per deploy — shown in the menu foot so a phone's
                                     version is checkable at a glance (the SW double-load
                                     made "which build am I on?" a real question) */
 const TTS='speechSynthesis' in window;
