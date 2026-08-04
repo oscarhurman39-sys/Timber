@@ -5,6 +5,13 @@ brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below t
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
 since: 2026-07-28  sessions-unchanged: 2
+progress: 2026-08-04 — Winter Beauty Honeysuckle photo added at Oscar's call: the shot an
+  earlier session rejected as "cat-blocked" is his own photo, shows stem, leaf and the
+  nursery label, and the tuxedo cat is wanted, not a defect. EXIF orientation 8, so upright
+  it is 3000x4000 portrait — a 0.75 ratio against the card's 0.773, so it crops by 17px and
+  needs no PHOTO_FOCUS entry. Photo-less cards now 2 (Choisya, Weigela). Standing caveat:
+  the card's peak is Dec-Mar and its visual describes bare winter branches with cream
+  flowers, but the photo is autumn foliage — the flowers appear only on the label in shot.
 progress: 2026-08-03 — **swipe glitch root-caused; two new suites.** The tearing on the
   phone was compositing pressure, not gesture logic: `will-change` sat on all 57 cards
   (57 GPU layers, ~200MB, which also defeats occlusion culling) and every buried card
