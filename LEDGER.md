@@ -5,6 +5,17 @@ brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below t
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
 since: 2026-07-28  sessions-unchanged: 3
+progress: 2026-08-04 (later) — **deck 57 → 66: nine displaced plants restored.** Full
+  branch+artifact audit found 14 plants stranded on four unmerged branches. Restored the
+  9 that pass the gates with full data AND photos (recovered from donor branches, all
+  1200px): Pink Annabelle Hydrangea, Pittosporum 'Elizabeth', Holly Osmanthus 'Tricolor',
+  Cercis 'Eternal Flame', Agastache 'Summerlong Coral', Yucca 'Variegata', Alstroemeria
+  INDIAN SUMMER, Cornus kousa FLOWER TOWER, Uncinia 'Everflame'. One layout defect found
+  and fixed (Osmanthus bloom text trimmed to fit its zone). NOT restored: the 5 climbers
+  (4 Clematis + Russian Vine) — deck-audit errors them (aspect info lost: light data but
+  no sunNeed value), they lack the whole buyer-trade layer, ratings, and photos. They need
+  a proper data pass with Oscar's sign-off; rows preserved on plant-card-addition-sbil3n.
+  NPLANTS 66 in all four suites; whole gate green. Build r8.
 progress: 2026-08-04 — **the real compositing monster found: 3D flip machinery.** Oscar's
   glitch screenshots (white screens, a slab of the previous card stuck over the new one)
   are GPU tile eviction. CDP LayerTree measurement showed the truth the will-change
