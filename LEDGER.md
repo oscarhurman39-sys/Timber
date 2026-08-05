@@ -1,10 +1,20 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Confirm or correct the five climbers' editorial sunNeed/sunMin values
-  (Nelly Moser 55/35, PPE 65/40, montana 65/40, armandii 75/55, Russian Vine 70/20)
-  — Oscar's call; they're rubric guesses, not his portfolio data.
+brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
+  rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 0
+progress: 2026-08-05 (evening) — **climber sun values researched and corrected** (was
+  the brick; Oscar said "just research and find out"). Sources: RHS plant pages +
+  Gardeners' World shade guides via search (direct RHS fetch blocked from container).
+  Nelly Moser 55/35 -> 45/25 (performs BETTER in part shade, sun bleaches the bars,
+  classic north-wall pick); montana rubens sunMin 40 -> 30 (Group 1, among the most
+  shade-tolerant, north walls fine); armandii sunMin 55 -> 45 (most shade-tolerant
+  evergreen clematis, manages dappled shade, flowers less); Russian Vine sunMin
+  20 -> 35 (semi-shade tolerant, but 20 = deep shade overstated it); PPE 65/40
+  confirmed unchanged (viticellas want sun, tolerate some shade). CSV synced (Nelly
+  only — CSV carries no sunMin). Build r10. All nine suites green. NOT yet live:
+  sits on claude/timber-blocker-h7f5oo pending fast-forward of the pwa branch.
 progress: 2026-08-05 (later) — **72-plant deck LIVE.** claude/timber-plant-pwa-j69h5e
   fast-forwarded c210f80 -> 8710df2 with Oscar's permission; Pages deploy run #10 green
   (deploy-pages step succeeded). Ajuga photo brick closed by decision: Oscar keeps the
