@@ -1,10 +1,14 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below the
-  1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
-  last known data-quality defect in the 47-card deck.
-since: 2026-07-28  sessions-unchanged: 3
+brick: Confirm or correct the five climbers' editorial sunNeed/sunMin values
+  (Nelly Moser 55/35, PPE 65/40, montana 65/40, armandii 75/55, Russian Vine 70/20)
+  — Oscar's call; they're rubric guesses, not his portfolio data.
+since: 2026-08-05  sessions-unchanged: 0
+progress: 2026-08-05 (later) — **72-plant deck LIVE.** claude/timber-plant-pwa-j69h5e
+  fast-forwarded c210f80 -> 8710df2 with Oscar's permission; Pages deploy run #10 green
+  (deploy-pages step succeeded). Ajuga photo brick closed by decision: Oscar keeps the
+  current photo — no longer a defect, it's the chosen art.
 progress: 2026-08-05 — **deck 66 → 72: the last six stranded plants are in.** The five
   climbers (Clematis 'Nelly Moser', 'Purpurea Plena Elegans', montana var. rubens,
   armandii, Russian Vine) came in from their preserved plants.csv rows, and Japanese
