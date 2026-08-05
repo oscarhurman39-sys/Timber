@@ -5,6 +5,19 @@ brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below t
   1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
   last known data-quality defect in the 47-card deck.
 since: 2026-07-28  sessions-unchanged: 3
+progress: 2026-08-05 — **deck 66 → 72: the last six stranded plants are in.** The five
+  climbers (Clematis 'Nelly Moser', 'Purpurea Plena Elegans', montana var. rubens,
+  armandii, Russian Vine) came in from their preserved plants.csv rows, and Japanese
+  Loquat (card + 1200px photo) from the japanese-loquat-card branch — the deck and
+  plants.csv are back in sync at 72. The climbers' deck-audit blocker (aspect light-info
+  lost) is cleared by moving light into the rubric fields: aspect set to a facing
+  ("Any aspect" / "Sheltered S / W" for armandii), sunNeed+sunMin set per CARD-STATS
+  anchors (Nelly Moser 55/35, PPE 65/40, montana 65/40, armandii 75/55, Russian Vine
+  70/20; "roots in shade" kept in the soil line). [Unverified] those five sunNeed/sunMin
+  values are editorial calls from the rubric, not Oscar's portfolio — review and adjust.
+  Climbers still carry no buyer-trade layer, other ratings, or photos (honest blanks —
+  15 audit warnings, 0 errors). NPLANTS 72 in all four suites; whole gate green (app 94,
+  edge 9, features 47, srs 24, perf 10, sw-update, deck-audit PASS). Build r9.
 progress: 2026-08-04 (later) — **deck 57 → 66: nine displaced plants restored.** Full
   branch+artifact audit found 14 plants stranded on four unmerged branches. Restored the
   9 that pass the gates with full data AND photos (recovered from donor branches, all
