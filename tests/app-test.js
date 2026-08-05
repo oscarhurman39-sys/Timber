@@ -340,9 +340,11 @@ function topFlipped(page) {
   await sayBtn.click(); // two quick taps — must NOT count as card double-tap
   await page.waitForTimeout(500);
   const speak1 = await page.evaluate(() => ({ calls: window.__speakCalls, text: window.__lastUtterance }));
-  /* compare against whatever card is on top so the check survives deal-order changes */
+  /* compare against whatever card is on top so the check survives deal-order changes;
+     spoken form anglicises the latin: "var." said in full, hybrid sign silent */
   const topLatin = await page.evaluate(() => PLANTS[+document.querySelector('.deck .card:last-child').dataset.idx].latin);
-  check('say button triggers speech with latin name', speak1.calls >= 2 && speak1.text === topLatin, JSON.stringify(speak1));
+  const topSpoken = topLatin.replace(/\bvar\.\s*/g, 'variety ').replace(/×\s*/g, '');
+  check('say button triggers speech with latin name', speak1.calls >= 2 && speak1.text === topSpoken, JSON.stringify(speak1));
   check('rapid say taps do not flip the card', await topFlipped(page) === false);
   c = await counts(page);
   check('say taps do not swipe or count', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));

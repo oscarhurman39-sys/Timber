@@ -4,6 +4,12 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 0
+progress: 2026-08-05 (night) — **say-button voice anglicised.** Was it-IT (full Italian
+  phonology — authentic but hard to parse); now prefers en-GB (falls back to any en),
+  the RHS-style trade pronunciation. Spoken text only: "var." said as "variety", hybrid
+  sign x silent; display text untouched. Rate .85 -> .9. app-test's utterance check
+  updated to the spoken form. Build r11. All nine suites green. [Unverified] how it
+  sounds on Oscar's phone — depends on the device's en-GB voice; needs his ear.
 progress: 2026-08-05 (evening) — **climber sun values researched and corrected** (was
   the brick; Oscar said "just research and find out"). Sources: RHS plant pages +
   Gardeners' World shade guides via search (direct RHS fetch blocked from container).

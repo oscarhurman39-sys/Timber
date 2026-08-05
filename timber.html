@@ -583,7 +583,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r10 · 2026-08-05';   /* bump per deploy — shown in the menu foot so a phone's
+const BUILD='r11 · 2026-08-05';   /* bump per deploy — shown in the menu foot so a phone's
                                     version is checkable at a glance (the SW double-load
                                     made "which build am I on?" a real question) */
 const TTS='speechSynthesis' in window;
@@ -591,13 +591,15 @@ if(TTS){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSy
 function speakLatin(text,btn){
   if(!TTS)return;
   speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
+  /* anglicised botanical latin — the trade pronunciation (RHS style), so customers can
+     parse it; "var." is spoken in full and the hybrid sign × is silent, as spoken aloud */
+  const spoken=text.replace(/\bvar\.\s*/g,'variety ').replace(/×\s*/g,'');
+  const u=new SpeechSynthesisUtterance(spoken);
   const voices=speechSynthesis.getVoices();
-  /* botanical latin ≈ italian phonology; fall back to a latin voice if a device ever has one */
-  const v=voices.find(x=>/^it([-_]|$)/i.test(x.lang))||voices.find(x=>/^la([-_]|$)/i.test(x.lang));
+  const v=voices.find(x=>/^en[-_]GB/i.test(x.lang))||voices.find(x=>/^en([-_]|$)/i.test(x.lang));
   if(v)u.voice=v;
-  u.lang=v?v.lang:'it-IT';
-  u.rate=.85;
+  u.lang=v?v.lang:'en-GB';
+  u.rate=.9;
   if(btn){u.onstart=()=>btn.classList.add('speaking');u.onend=u.onerror=()=>btn.classList.remove('speaking');}
   speechSynthesis.speak(u);
 }
