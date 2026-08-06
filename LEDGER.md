@@ -3,7 +3,15 @@
 ## timber  [active]
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
-since: 2026-08-05  sessions-unchanged: 0
+since: 2026-08-05  sessions-unchanged: 1
+progress: 2026-08-06 — **v12.5 matching wooden edging shipped + monetisation research.**
+  Oscar flagged the plaque and SOIL box missing the band's thin wooden rim; band's rim
+  profile pixel-measured and baked onto both assets by design/bake-rim.py (idempotent,
+  guard against double-bake). All nine suites + layout audit green. NOT yet live: sits
+  on claude/timber-plant-card-edging-c661sc pending landing on the pwa branch. Also:
+  MONETISATION-BRIEF.md written (app packaging, user acquisition, charging, card count,
+  revenue — sourced, speculation labelled). Route decision pending: consumer app vs
+  B2B staff-training; brief recommends validating B2B at Oscar's own centre first.
 progress: 2026-08-05 (evening) — **climber sun values researched and corrected** (was
   the brick; Oscar said "just research and find out"). Sources: RHS plant pages +
   Gardeners' World shade guides via search (direct RHS fetch blocked from container).
