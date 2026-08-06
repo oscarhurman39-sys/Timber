@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Timber — v13 full-screen card mock</title>
+<!-- MOCK ONLY — CARD-PROTOCOL §3 step 1, round 2 (Oscar's /goal 2026-08-06).
+     The card engulfs the whole phone screen: no app bar, no action buttons.
+     Brand floats top-left over the photo; a faded 3-dash menu floats top-right.
+     Boxes carry the reference's cartouche corners: concave scallop bites drawn
+     as real SVG paths (thick dark outline + cream halo + inner gold pinstripe
+     + edge vignette), parchment-tiled and clipped to the scalloped shape.
+     Left rail rebuilt: gold small-caps labels, bud ornaments, large cream
+     serif values, diamond-node axis. Data = real Japanese Loquat deck entry. -->
+<style>
+  *{box-sizing:border-box;margin:0}
+  html,body{height:100%}
+  body{background:#070d08;overflow:hidden;display:grid;place-items:center;
+    font-family:Georgia,"Times New Roman",serif}
+  .phone{position:relative;width:390px;height:844px;transform:scale(var(--cs,1));
+    transform-origin:center}
+
+  /* ===== the card fills the phone ===== */
+  .tcard{position:absolute;inset:0;border-radius:20px;
+    background:
+      repeating-linear-gradient(88deg,rgba(60,38,8,.12) 0 3px,transparent 3px 9px),
+      repeating-linear-gradient(2deg,rgba(255,226,150,.10) 0 2px,transparent 2px 7px),
+      linear-gradient(160deg,#c99a3e,#a87c28 30%,#c99f47 52%,#96691f 78%,#b8892f);
+    box-shadow:0 0 0 1px #050a05,inset 0 0 0 1px rgba(255,230,160,.5),
+      inset 0 0 22px rgba(60,36,6,.55)}
+  .tinner{position:absolute;inset:9px;border-radius:13px;overflow:hidden;
+    background:linear-gradient(180deg,#111e13,#0c1810);
+    box-shadow:inset 0 0 0 1px rgba(20,14,4,.9)}
+
+  /* left rail */
+  .rail{position:absolute;left:0;top:0;bottom:0;width:52px;z-index:3;
+    background:linear-gradient(100deg,#22371f,#1a2d1a 55%,#152616);
+    border-right:1px solid rgba(201,162,75,.65);
+    box-shadow:inset -6px 0 12px rgba(0,0,0,.35);
+    display:flex;flex-direction:column;align-items:center;color:#e9dcb2}
+  .rail svg{display:block}
+  .r-lab{font-size:8.5px;letter-spacing:2.2px;color:#cfa64e;font-variant:small-caps;
+    text-transform:uppercase;font-weight:700}
+  .r-val{font-size:17px;line-height:1.12;color:#efe4c0;text-align:center}
+  .r-grp{display:flex;flex-direction:column;align-items:center;gap:5px}
+
+  /* photo */
+  .photo{position:absolute;left:52px;right:0;top:0;height:470px}
+  .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 32%}
+  .photo::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(10,18,10,.52) 0%,rgba(10,18,10,.16) 12%,transparent 22% 68%,rgba(12,20,12,.72) 88%,#0c1810 100%)}
+
+  /* floating chrome over the photo */
+  .brand{position:absolute;left:64px;top:12px;z-index:6;display:flex;align-items:center;gap:6px;
+    font-size:15px;font-weight:700;color:#f5c451;opacity:.82;
+    text-shadow:0 1px 5px rgba(8,14,8,.9)}
+  .brand svg{width:17px;height:17px;filter:drop-shadow(0 1px 3px rgba(8,14,8,.8))}
+  .menu{position:absolute;right:12px;top:12px;z-index:6;width:34px;height:28px;
+    display:flex;flex-direction:column;justify-content:center;gap:4px;align-items:center;
+    opacity:.48}
+  .menu i{width:17px;height:2px;border-radius:1px;background:#f2e6c2;
+    box-shadow:0 1px 3px rgba(8,14,8,.8)}
+
+  .thead{position:absolute;left:66px;top:44px;right:110px;z-index:5}
+  .thead h2{font-size:27px;font-weight:700;color:#f6ecd2;line-height:1.04;
+    text-shadow:0 1px 6px rgba(15,32,15,.92),0 0 20px rgba(15,32,15,.55)}
+  .thead .lat{font-size:14px;font-style:italic;color:#eee3bd;margin-top:4px;
+    text-shadow:0 1px 5px rgba(15,32,15,.9)}
+  .say{font-family:system-ui,sans-serif;font-size:8.5px;letter-spacing:2px;font-weight:700;
+    text-transform:uppercase;color:#fff;background:#0F6196;border:1px solid rgba(255,255,255,.35);
+    border-radius:11px;padding:4.5px 13px;display:inline-flex;align-items:center;gap:5px;
+    margin-top:11px;box-shadow:0 2px 6px rgba(0,0,0,.45)}
+  .crest{position:absolute;right:12px;top:46px;width:68px;z-index:5;
+    filter:drop-shadow(0 2px 5px rgba(0,0,0,.4))}
+  .crest img{width:100%;display:block}
+  .crest .hnum{position:absolute;left:0;right:0;top:29%;text-align:center;font-weight:700;
+    font-size:25px;letter-spacing:1px;color:#F2E5C4;
+    text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
+
+  .growth{position:absolute;right:22px;top:186px;z-index:5;text-align:center;color:#f2e8c8}
+  .growth .cap{font-size:7.5px;letter-spacing:2.4px;color:#e9cf92;text-transform:uppercase;
+    line-height:1.5;text-shadow:0 1px 4px rgba(0,0,0,.9)}
+  .growth .end{font-size:10px;text-shadow:0 1px 4px rgba(0,0,0,.9)}
+  .growth .axis{position:relative;width:1.5px;height:158px;margin:5px auto;
+    background:#efe5c2;box-shadow:0 0 3px rgba(0,0,0,.7)}
+  .growth .axis::before,.growth .axis::after{content:"";position:absolute;left:50%;
+    width:5px;height:5px;background:#efe5c2;transform:translateX(-50%) rotate(45deg)}
+  .growth .axis::before{top:-2px}.growth .axis::after{bottom:-2px}
+  .growth .mk{position:absolute;width:18px;left:50%;transform:translate(-50%,50%);
+    filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+
+  /* ===== ornate scallop-corner boxes ===== */
+  .obox{position:absolute;z-index:4}
+  .obox>svg.frame{position:absolute;inset:0;width:100%;height:100%}
+  .obox>.content{position:absolute;inset:0;z-index:1}
+
+  .plaque{left:64px;right:16px;top:458px;height:274px}
+  .plaque .content{padding:9px 12px 8px;display:flex;flex-direction:column}
+  .ptitle{display:flex;align-items:center;justify-content:center;gap:10px;
+    color:#4a3410;font-size:10.5px;font-weight:700;letter-spacing:3px;padding:2px 0 5px;white-space:nowrap}
+  .prow{flex:1;display:flex;align-items:center;gap:10px;
+    border-top:1px solid rgba(92,74,40,.42);padding:3px 0}
+  .prow .icon{width:30px;flex:0 0 30px;display:grid;place-items:center}
+  .prow .icon img{max-width:30px;max-height:38px}
+  .prow .txt{width:74px;flex:0 0 74px;color:#3d3222}
+  .prow .txt b{font-size:12.5px;line-height:1.1;display:block;color:#2e3d24}
+  .prow .txt span{font-size:11.5px;color:#5d5230;line-height:1.3}
+  .prow .wid{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 3px}
+  .months{flex:1;display:flex;gap:2px;justify-content:space-between}
+  .months i{flex:1;font-style:normal;font-size:8px;font-weight:700;height:20px;
+    display:grid;place-items:center;border-radius:3px;color:#8c7c48}
+  .months i.on{background:#173B24;color:#D8BD78;box-shadow:0 1px 2px rgba(46,32,8,.4)}
+  .ricon{position:relative}
+  .ricon>img{height:100%;width:auto;display:block}
+  .ricon .fw{position:absolute;left:0;top:0;height:100%;overflow:hidden;width:calc(var(--fill)*100%)}
+  .ricon .fw img{height:100%;width:auto;max-width:none;display:block}
+  .prow.pest .ricon{height:37px}
+  .prow.thirst .ricon{height:22px}
+  .prow.care .ricon{height:39px}
+
+  .bband{left:64px;right:16px;top:740px;height:68px}
+  .bband .content{padding:7px 12px 6px;display:flex;align-items:stretch}
+  .cell{flex:1;display:flex;align-items:center;gap:8px;min-width:0}
+  .cell.aspect{flex:1.3}
+  .cell .cicon{width:30px;flex:0 0 30px}
+  .cell .cicon img{width:100%;display:block}
+  .cell .body{flex:1;min-width:0;color:#3d3222}
+  .clab{font-size:9px;font-weight:700;letter-spacing:2.2px;color:#4a3a16}
+  .cval{font-size:11.5px;color:#5d5230;line-height:1.2;margin-top:1px}
+  .bdiv{width:1px;background:rgba(92,74,40,.5);margin:3px 10px}
+  .wig{font-style:italic;font-size:8px;color:#5d5230;text-align:right;padding-right:24%;margin-top:1px}
+  .sunbar{position:relative;height:8px;border-radius:4px;margin-top:1px;
+    background:linear-gradient(90deg,#241a30,#5c3550 25%,#c96f3a 55%,#e8b84d 78%,#f2dd7c);
+    box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+  .sunbar .rng{position:absolute;top:-2px;bottom:-2px;border-left:1px solid #2c5136;
+    border-right:1px solid #2c5136;background:rgba(46,94,58,.28)}
+  .sunbar .tri{position:absolute;top:-7px;width:0;height:0;transform:translateX(-50%);
+    border-left:4.5px solid transparent;border-right:4.5px solid transparent;
+    border-top:6.5px solid #1c3a26;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+  .sunlabs{display:flex;justify-content:space-between;font-size:7.5px;color:#5d5230;margin-top:2px}
+  .cell .sun{width:14px;flex:0 0 14px;align-self:center}
+  .warn{display:flex;align-items:center;gap:5px;margin-top:2px}
+  .warn img{width:12px}
+  .warn i{font-style:italic;font-size:9px;color:#5d5230;line-height:1.15}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="tcard">
+    <div class="tinner">
+
+      <div class="rail">
+        <svg width="30" height="52" viewBox="0 0 30 52" style="margin-top:14px">
+          <g stroke="#c9a24b" fill="none" stroke-width="1">
+            <path d="M15 2 L20 12 L15 22 L10 12 Z"/>
+            <path d="M15 22 V50"/>
+            <path d="M15 30 C10 27 6 29 4 25 M15 30 C20 27 24 29 26 25"/>
+            <circle cx="15" cy="12" r="1.6" fill="#c9a24b" stroke="none"/>
+          </g>
+        </svg>
+        <div style="flex:1.1"></div>
+        <div class="r-grp">
+          <div class="r-lab">Height</div>
+          <svg width="34" height="9" viewBox="0 0 34 9"><g stroke="#c9a24b" fill="#c9a24b" stroke-width="1"><path d="M2 4.5 H32" fill="none"/><path d="M17 1 L20 4.5 L17 8 L14 4.5 Z"/></g></svg>
+          <div class="r-val">4–8<br>m</div>
+        </div>
+        <div style="flex:.7"></div>
+        <svg width="10" height="64" viewBox="0 0 10 64"><g stroke="#c9a24b" fill="#c9a24b"><path d="M5 0 V64" stroke-width="1" fill="none"/><path d="M5 27 L8 32 L5 37 L2 32 Z" stroke-width="0"/></g></svg>
+        <div style="flex:.7"></div>
+        <div class="r-grp">
+          <div class="r-lab">Spread</div>
+          <svg width="34" height="9" viewBox="0 0 34 9"><g stroke="#c9a24b" fill="#c9a24b" stroke-width="1"><path d="M2 4.5 H32" fill="none"/><path d="M17 1 L20 4.5 L17 8 L14 4.5 Z"/></g></svg>
+          <div class="r-val">4–8<br>m</div>
+        </div>
+        <div style="flex:1.4"></div>
+        <svg width="18" height="180" viewBox="0 0 18 180"><path d="M9 0 V180" stroke="#c9a24b" stroke-width=".8" opacity=".7"/></svg>
+        <svg width="30" height="40" viewBox="0 0 30 40" style="margin-bottom:12px">
+          <g stroke="#c9a24b" fill="none" stroke-width="1">
+            <path d="M15 38 L19 28 L15 18 L11 28 Z"/>
+            <path d="M15 18 V4 M15 10 C10 8 8 4 5 4 M15 10 C20 8 22 4 25 4"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="photo"><img src="../photos/eriobotrya-japonica.jpg" alt=""></div>
+
+      <div class="brand">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.6" stroke="#e0a52f" stroke-width="1.5"/><circle cx="12.5" cy="11.6" r="6.4" stroke="#f5c451" stroke-width="1.3"/><circle cx="11.7" cy="12.3" r="3.3" stroke="#e0a52f" stroke-width="1.2"/><circle cx="12.1" cy="11.9" r="1" fill="#f5c451"/></svg>
+        Timber
+      </div>
+      <div class="menu"><i></i><i></i><i></i></div>
+
+      <div class="thead">
+        <h2>Japanese Loquat</h2>
+        <div class="lat">Eriobotrya japonica</div>
+        <span class="say">▶ Listen</span>
+      </div>
+      <div class="crest"><img src="../art/crest-blank.png" alt=""><div class="hnum">H4</div></div>
+
+      <div class="growth">
+        <div class="cap">Growth<br>Speed</div>
+        <div class="end" style="margin-top:4px">Fast</div>
+        <div class="axis"><img class="mk" src="../art/growth-diamond.png" style="bottom:9%" alt=""></div>
+        <div class="end">Slow</div>
+      </div>
+
+      <div class="obox plaque">
+        <div class="content">
+          <div class="ptitle">
+            <svg width="26" height="10" viewBox="0 0 36 10"><g stroke="#a1802f" fill="#a1802f" stroke-width="1"><path d="M0 5 H28" fill="none"/><path d="M28 5 L33 2 L36 5 L33 8 Z" stroke-width="0"/><path d="M20 5 C17 2 14 2 12 0 M20 5 C17 8 14 8 12 10" fill="none" stroke-width=".8"/></g></svg>
+            PLANT POWER POINTS
+            <svg width="36" height="10" viewBox="0 0 36 10" style="transform:scaleX(-1)"><g stroke="#a1802f" fill="#a1802f" stroke-width="1"><path d="M0 5 H28" fill="none"/><path d="M28 5 L33 2 L36 5 L33 8 Z" stroke-width="0"/><path d="M20 5 C17 2 14 2 12 0 M20 5 C17 8 14 8 12 10" fill="none" stroke-width=".8"/></g></svg>
+          </div>
+          <div class="prow" style="border-top:none">
+            <div class="icon"><img src="mock-assets/flower.png" alt=""></div>
+            <div class="txt"><b>Bloom</b><span>Jan–Dec</span></div>
+            <div class="months">
+              <i class="on">J</i><i class="on">F</i><i class="on">M</i><i class="on">A</i><i class="on">M</i><i class="on">J</i><i class="on">J</i><i class="on">A</i><i class="on">S</i><i class="on">O</i><i class="on">N</i><i class="on">D</i>
+            </div>
+          </div>
+          <div class="prow pest">
+            <div class="icon"><img src="mock-assets/mite.png" alt=""></div>
+            <div class="txt"><b>Pests &amp; diseases</b><span>1.75/5</span></div>
+            <div class="wid">
+              <span class="ricon" style="--fill:1"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+              <span class="ricon" style="--fill:.75"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+            </div>
+          </div>
+          <div class="prow thirst">
+            <div class="icon"><img src="../art/widget-drop-fill.png" style="max-height:27px"></div>
+            <div class="txt"><b>Thirst</b><span>2.25/5</span></div>
+            <div class="wid">
+              <span class="ricon" style="--fill:1"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+              <span class="ricon" style="--fill:1"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+              <span class="ricon" style="--fill:.25"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+            </div>
+          </div>
+          <div class="prow care">
+            <div class="icon"><img src="../art/widget-seca-fill.png" style="max-height:36px"></div>
+            <div class="txt"><b>Care Level</b><span>Moderate<br>2.25/5</span></div>
+            <div class="wid">
+              <span class="ricon" style="--fill:1"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+              <span class="ricon" style="--fill:1"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+              <span class="ricon" style="--fill:.25"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="obox bband">
+        <div class="content">
+          <div class="cell aspect">
+            <div class="cicon"><img src="mock-assets/compass.png" alt=""></div>
+            <div class="body">
+              <div class="clab">ASPECT</div>
+              <div class="cval">East / South</div>
+              <div class="wig">wiggle room</div>
+              <div class="sunbar">
+                <span class="rng" style="left:75%;width:15%"></span>
+                <span class="tri" style="left:90%"></span>
+              </div>
+              <div class="sunlabs"><span>Shade</span><span>Full sun</span></div>
+            </div>
+            <div class="sun"><img src="../art/sun-small.png" style="width:100%" alt=""></div>
+          </div>
+          <div class="bdiv"></div>
+          <div class="cell">
+            <div class="body">
+              <div class="clab" style="display:flex;align-items:center;gap:6px">SOIL <img src="mock-assets/soil-mound.png" style="width:17px" alt=""></div>
+              <div class="cval">Fertile, well-drained</div>
+              <div class="warn"><img src="mock-assets/warn-tri.png" alt=""><i>Shelter from frost/wind</i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /* scallop-cornered cartouche frame, drawn to each box's real size */
+  function scallopPath(w, h, i, r) {
+    return `M ${i+r},${i} H ${w-i-r} A ${r},${r} 0 0 0 ${w-i},${i+r} V ${h-i-r}
+            A ${r},${r} 0 0 0 ${w-i-r},${h-i} H ${i+r} A ${r},${r} 0 0 0 ${i},${h-i-r}
+            V ${i+r} A ${r},${r} 0 0 0 ${i+r},${i} Z`;
+  }
+  let uid = 0;
+  document.querySelectorAll('.obox').forEach(box => {
+    const w = box.offsetWidth, h = box.offsetHeight, id = 'ob' + (uid++);
+    const outer = scallopPath(w, h, 2.5, 10);
+    const inner = scallopPath(w, h, 8.5, 6.5);
+    const svg = `
+    <svg class="frame" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="${id}p" patternUnits="userSpaceOnUse" width="72" height="64">
+          <image href="../art/parch-swatch.png" width="72" height="64"/>
+        </pattern>
+        <clipPath id="${id}c"><path d="${outer}"/></clipPath>
+      </defs>
+      <path d="${outer}" fill="url(#${id}p)"/>
+      <g clip-path="url(#${id}c)">
+        <path d="${outer}" fill="none" stroke="#8a5f28" stroke-width="26" opacity=".26"/>
+        <path d="${outer}" fill="none" stroke="#6b4718" stroke-width="9" opacity=".22"/>
+      </g>
+      <path d="${outer}" fill="none" stroke="#e9d6a6" stroke-width="5.5" opacity=".9"/>
+      <path d="${outer}" fill="none" stroke="#3b2a10" stroke-width="2.6"/>
+      <path d="${inner}" fill="none" stroke="#7c5a1e" stroke-width="1.2" opacity=".8"/>
+    </svg>`;
+    box.insertAdjacentHTML('afterbegin', svg);
+  });
+
+  const fit = () => {
+    const s = Math.min(innerWidth / 390, innerHeight / 844);
+    document.querySelector('.phone').style.setProperty('--cs', Math.min(s, 1.6).toFixed(4));
+  };
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>
