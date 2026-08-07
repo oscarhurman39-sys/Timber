@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Timber — card v13 mock (round 3: locked reference reproduction)</title>
+<!-- MOCK ONLY — CARD-PROTOCOL §3 step 1, round 3 (Oscar's corrections 2026-08-06).
+     Reproduces the supplied reference composition exactly; structural fixes only:
+     app chrome (Timber, search, menu, progress) OUTSIDE the card; no action
+     buttons — their space goes to the card; left rail ~12% ornamental only;
+     one-line serif title; hardiness compact top-right; growth speed a narrow
+     gold scale hugging the photo's right edge (data-positioned marker);
+     PLANT POWER POINTS floats as small gold lettering over the photo above the
+     parchment panel (no header row inside it); panel starts at the Bloom row,
+     four equal rows, spans nearly the full central width; Aspect/Soil footer
+     fully visible; scallop-cartouche box borders. Icons unchanged (mite,
+     flower, drop, yellow secateurs). Data = real Japanese Loquat deck entry. -->
+<style>
+  *{box-sizing:border-box;margin:0}
+  html,body{height:100%}
+  body{background:#0c150d;overflow:hidden;display:grid;place-items:center;
+    font-family:system-ui,sans-serif}
+  .phone{position:relative;width:390px;height:844px;transform:scale(var(--cs,1));
+    transform-origin:center}
+
+  /* ===== app chrome (outside the card) ===== */
+  header{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;
+    gap:10px;padding:10px 16px 0}
+  .brand{display:flex;align-items:center;gap:9px;font-family:Georgia,serif;
+    font-size:26px;font-weight:700;color:#f5c451}
+  .brand svg{width:29px;height:29px}
+  .head-btns{margin-left:auto;display:flex;gap:8px}
+  .head-btns .btn{width:42px;height:42px;border-radius:13px;background:#18251a;
+    display:grid;place-items:center;color:#cfd8cc}
+  .menu-btn{display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center}
+  .menu-btn i{width:18px;height:2px;border-radius:1px;background:#cfd8cc;display:block}
+  .progress{position:absolute;left:16px;right:16px;top:59px;color:#9fae9b;font-size:12px;white-space:nowrap}
+  .progress b{color:#39d98a}
+
+  /* ===== the card ===== */
+  .tcard{position:absolute;left:14px;right:14px;top:84px;bottom:8px;border-radius:18px;
+    font-family:Georgia,"Times New Roman",serif;
+    background:
+      repeating-linear-gradient(93deg,rgba(58,36,8,.14) 0 2px,transparent 2px 7px),
+      linear-gradient(150deg,#c1913a,#9c7124 32%,#c39b45 55%,#8f631d 80%,#b0842c);
+    box-shadow:0 10px 30px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,230,160,.45),
+      inset 0 0 14px rgba(56,34,6,.55)}
+  .tinner{position:absolute;inset:6px;border-radius:13px;overflow:hidden;
+    background:linear-gradient(180deg,#111e13,#0c1810)}
+
+  /* left ornamental rail (~12%) */
+  .rail{position:absolute;left:0;top:0;bottom:0;width:44px;z-index:3;
+    background:linear-gradient(100deg,#21361f,#192c19 55%,#142415);
+    border-right:1px solid rgba(201,162,75,.6);
+    box-shadow:inset -5px 0 10px rgba(0,0,0,.35);
+    display:flex;flex-direction:column;align-items:center;color:#e9dcb2}
+  .rail svg{display:block;flex:0 0 auto}
+  .r-lab{font-size:8px;letter-spacing:1.8px;color:#cfa64e;font-weight:700}
+  .r-val{font-size:15.5px;line-height:1.1;color:#efe4c0;text-align:center}
+  .r-grp{display:flex;flex-direction:column;align-items:center;gap:4px;flex:0 0 auto}
+
+  /* photo — the canvas */
+  .photo{position:absolute;left:44px;right:0;top:0;bottom:0}
+  .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+  .photo::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(10,18,10,.5) 0%,rgba(10,18,10,.15) 11%,transparent 18% 48%,rgba(10,17,10,.62) 60%,rgba(9,15,9,.86) 70% 100%)}
+
+  .thead{position:absolute;left:56px;top:14px;right:78px;z-index:5}
+  .thead h2{font-size:26px;font-weight:700;color:#f6ecd2;line-height:1.04;white-space:nowrap;
+    text-shadow:0 1px 6px rgba(15,32,15,.92),0 0 20px rgba(15,32,15,.55)}
+  .thead .lat{font-size:13.5px;font-style:italic;color:#eee3bd;margin-top:4px;
+    text-shadow:0 1px 5px rgba(15,32,15,.9)}
+  .say{font-family:system-ui,sans-serif;font-size:8.5px;letter-spacing:2px;font-weight:700;
+    text-transform:uppercase;color:#fff;background:#0F6196;border:1px solid rgba(255,255,255,.35);
+    border-radius:11px;padding:4.5px 13px;display:inline-flex;align-items:center;gap:5px;
+    margin-top:10px;box-shadow:0 2px 6px rgba(0,0,0,.45)}
+  .crest{position:absolute;right:9px;top:9px;width:62px;z-index:5;
+    filter:drop-shadow(0 2px 5px rgba(0,0,0,.4))}
+  .crest img{width:100%;display:block}
+  .crest .hnum{position:absolute;left:0;right:0;top:29%;text-align:center;font-weight:700;
+    font-size:23px;letter-spacing:1px;color:#F2E5C4;
+    text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
+
+  /* growth speed — narrow gold instrument on the photo's right edge */
+  .growth{position:absolute;right:8px;top:150px;z-index:5;text-align:center;color:#e9d29a;width:44px}
+  .growth .cap{font-size:6.5px;letter-spacing:2px;color:#dfc182;text-transform:uppercase;
+    line-height:1.6;text-shadow:0 1px 4px rgba(0,0,0,.9)}
+  .growth .end{font-size:8.5px;color:#efe0b4;text-shadow:0 1px 4px rgba(0,0,0,.9)}
+  .growth .axis{position:relative;width:1.5px;height:158px;margin:4px auto;
+    background:#d9b96a;box-shadow:0 0 3px rgba(0,0,0,.7)}
+  .growth .axis::before,.growth .axis::after{content:"";position:absolute;left:50%;
+    width:5px;height:5px;border-radius:50%;background:#d9b96a;transform:translateX(-50%)}
+  .growth .axis::before{top:-2px}.growth .axis::after{bottom:-2px}
+  .growth .mk{position:absolute;width:16px;left:50%;transform:translate(-50%,50%);
+    filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+
+  /* PLANT POWER POINTS — floating gold lettering on the photo */
+  .ppp{position:absolute;left:56px;right:10px;top:409px;z-index:5;text-align:center;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    font-size:9.5px;font-weight:700;letter-spacing:3.4px;color:#ecd7a0;white-space:nowrap;
+    text-shadow:0 1px 3px rgba(10,20,10,.92),0 0 8px rgba(10,20,10,.7)}
+  .ppp svg{flex:0 0 auto;filter:drop-shadow(0 1px 2px rgba(10,20,10,.8))}
+
+  /* ===== scallop-cartouche parchment boxes ===== */
+  .obox{position:absolute;z-index:4}
+  .obox>svg.frame{position:absolute;inset:0;width:100%;height:100%}
+  .obox>.content{position:absolute;inset:0;z-index:1}
+
+  .plaque{left:56px;right:14px;top:424px;height:238px}
+  .plaque .content{padding:7px 6px 6px 8px;display:flex;flex-direction:column}
+  .prow{flex:1;display:flex;align-items:center;gap:5px;padding:2px 0}
+  .prow+.prow{border-top:1px solid rgba(92,74,40,.42)}
+  .prow .icon{width:28px;flex:0 0 28px;display:grid;place-items:center}
+  .prow .icon img{max-width:28px;max-height:38px}
+  .prow .txt{width:66px;flex:0 0 66px;color:#3d3222}
+  .prow .txt b{font-size:12px;line-height:1.1;display:block;color:#2e3d24}
+  .prow .txt span{font-size:11px;color:#5d5230;line-height:1.3}
+  .prow .wid{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 4px}
+  .months{flex:1;display:flex;gap:2px;justify-content:space-between;padding:0 2px}
+  .months i{flex:1;font-style:normal;font-size:8.5px;font-weight:700;height:22px;
+    display:grid;place-items:center;border-radius:3px;color:#8c7c48}
+  .months i.on{background:#173B24;color:#D8BD78;box-shadow:0 1px 2px rgba(46,32,8,.4)}
+  .ricon{position:relative}
+  .ricon>img{height:100%;width:auto;display:block}
+  .ricon .fw{position:absolute;left:0;top:0;height:100%;overflow:hidden;width:calc(var(--fill)*100%)}
+  .ricon .fw img{height:100%;width:auto;max-width:none;display:block}
+  .prow.pest .ricon{height:36px}
+  .prow.thirst .ricon{height:21px}
+  .prow.care .ricon{height:38px}
+
+  .bband{left:56px;right:14px;top:666px;height:62px}
+  .bband .content{padding:6px 11px 5px;display:flex;align-items:stretch}
+  .cell{flex:1;display:flex;align-items:center;gap:7px;min-width:0}
+  .cell.aspect{flex:1.3}
+  .cell .cicon{width:28px;flex:0 0 28px}
+  .cell .cicon img{width:100%;display:block}
+  .cell .body{flex:1;min-width:0;color:#3d3222}
+  .clab{font-size:8.5px;font-weight:700;letter-spacing:2px;color:#4a3a16}
+  .cval{font-size:11px;color:#5d5230;line-height:1.2;margin-top:1px}
+  .bdiv{width:1px;background:rgba(92,74,40,.5);margin:3px 9px}
+  .wig{font-style:italic;font-size:7.5px;color:#5d5230;text-align:right;padding-right:24%}
+  .sunbar{position:relative;height:7px;border-radius:4px;margin-top:1px;
+    background:linear-gradient(90deg,#241a30,#5c3550 25%,#c96f3a 55%,#e8b84d 78%,#f2dd7c);
+    box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+  .sunbar .rng{position:absolute;top:-2px;bottom:-2px;border-left:1px solid #2c5136;
+    border-right:1px solid #2c5136;background:rgba(46,94,58,.28)}
+  .sunbar .tri{position:absolute;top:-6px;width:0;height:0;transform:translateX(-50%);
+    border-left:4px solid transparent;border-right:4px solid transparent;
+    border-top:6px solid #1c3a26;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+  .sunlabs{display:flex;justify-content:space-between;font-size:7px;color:#5d5230;margin-top:1px}
+  .cell .sun{width:13px;flex:0 0 13px;align-self:center}
+  .warn{display:flex;align-items:center;gap:5px;margin-top:2px}
+  .warn img{width:11px}
+  .warn i{font-style:italic;font-size:8.5px;color:#5d5230;line-height:1.15}
+
+  .foot{position:absolute;left:56px;right:14px;top:732px;z-index:3;text-align:center;
+    color:#caa64c;font-size:7px;letter-spacing:3px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.6" stroke="#e0a52f" stroke-width="1.5"/><circle cx="12.5" cy="11.6" r="6.4" stroke="#f5c451" stroke-width="1.3"/><circle cx="11.7" cy="12.3" r="3.3" stroke="#e0a52f" stroke-width="1.2"/><circle cx="12.1" cy="11.9" r="1" fill="#f5c451"/></svg>
+      Timber
+    </div>
+    <div class="head-btns">
+      <div class="btn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <div class="btn menu-btn"><i></i><i></i><i></i></div>
+    </div>
+  </header>
+  <div class="progress"><b>72</b> to learn · 0 starred · double-tap a card for trade data</div>
+
+  <div class="tcard">
+    <div class="tinner">
+
+      <div class="photo"><img src="../photos/eriobotrya-japonica.jpg" alt=""></div>
+
+      <div class="rail">
+        <svg width="26" height="46" viewBox="0 0 26 46" style="margin-top:12px">
+          <g stroke="#c9a24b" fill="none" stroke-width="1">
+            <path d="M13 2 L17 10 L13 18 L9 10 Z"/>
+            <path d="M13 18 V44"/>
+            <path d="M13 26 C9 23 6 25 4 21 M13 26 C17 23 20 25 22 21"/>
+            <circle cx="13" cy="10" r="1.4" fill="#c9a24b" stroke="none"/>
+          </g>
+        </svg>
+        <div style="flex:1"></div>
+        <div class="r-grp">
+          <div class="r-lab">HEIGHT</div>
+          <svg width="30" height="8" viewBox="0 0 30 8"><g stroke="#c9a24b" fill="#c9a24b" stroke-width="1"><path d="M2 4 H28" fill="none"/><path d="M15 1 L18 4 L15 7 L12 4 Z"/></g></svg>
+          <div class="r-val">4–8<br>m</div>
+        </div>
+        <div style="flex:.55"></div>
+        <svg width="8" height="48" viewBox="0 0 8 48"><g stroke="#c9a24b" fill="#c9a24b"><path d="M4 0 V48" stroke-width=".9" fill="none"/><path d="M4 20 L6.5 24 L4 28 L1.5 24 Z" stroke-width="0"/></g></svg>
+        <div style="flex:.55"></div>
+        <div class="r-grp">
+          <div class="r-lab">SPREAD</div>
+          <svg width="30" height="8" viewBox="0 0 30 8"><g stroke="#c9a24b" fill="#c9a24b" stroke-width="1"><path d="M2 4 H28" fill="none"/><path d="M15 1 L18 4 L15 7 L12 4 Z"/></g></svg>
+          <div class="r-val">4–8<br>m</div>
+        </div>
+        <div style="flex:1.5"></div>
+        <svg width="14" height="150" viewBox="0 0 14 150"><path d="M7 0 V150" stroke="#c9a24b" stroke-width=".8" opacity=".65"/></svg>
+        <svg width="26" height="36" viewBox="0 0 26 36" style="margin-bottom:10px">
+          <g stroke="#c9a24b" fill="none" stroke-width="1">
+            <path d="M13 34 L16 26 L13 18 L10 26 Z"/>
+            <path d="M13 18 V4 M13 10 C9 8 7 4 4 4 M13 10 C17 8 19 4 22 4"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="thead">
+        <h2>Japanese Loquat</h2>
+        <div class="lat">Eriobotrya japonica</div>
+        <span class="say">▶ Listen</span>
+      </div>
+      <div class="crest"><img src="../art/crest-blank.png" alt=""><div class="hnum">H4</div></div>
+
+      <div class="growth">
+        <div class="cap">Growth<br>Speed</div>
+        <div class="end" style="margin-top:3px">Fast</div>
+        <div class="axis"><img class="mk" src="../art/growth-diamond.png" style="bottom:9%" alt=""></div>
+        <div class="end">Slow</div>
+      </div>
+
+      <div class="ppp">
+        <svg width="30" height="8" viewBox="0 0 30 8"><g stroke="#ecd7a0" fill="#ecd7a0" stroke-width="1"><path d="M0 4 H23" fill="none"/><path d="M23 4 L27 1.5 L30 4 L27 6.5 Z" stroke-width="0"/></g></svg>
+        PLANT POWER POINTS
+        <svg width="30" height="8" viewBox="0 0 30 8" style="transform:scaleX(-1)"><g stroke="#ecd7a0" fill="#ecd7a0" stroke-width="1"><path d="M0 4 H23" fill="none"/><path d="M23 4 L27 1.5 L30 4 L27 6.5 Z" stroke-width="0"/></g></svg>
+      </div>
+
+      <div class="obox plaque">
+        <div class="content">
+          <div class="prow">
+            <div class="icon"><img src="mock-assets/flower.png" alt=""></div>
+            <div class="txt"><b>Bloom</b><span>Jan–Dec</span></div>
+            <div class="months">
+              <i class="on">J</i><i class="on">F</i><i class="on">M</i><i class="on">A</i><i class="on">M</i><i class="on">J</i><i class="on">J</i><i class="on">A</i><i class="on">S</i><i class="on">O</i><i class="on">N</i><i class="on">D</i>
+            </div>
+          </div>
+          <div class="prow pest">
+            <div class="icon"><img src="mock-assets/mite.png" alt=""></div>
+            <div class="txt"><b>Pests &amp; diseases</b><span>1.75/5</span></div>
+            <div class="wid">
+              <span class="ricon" style="--fill:1"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+              <span class="ricon" style="--fill:.75"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-spray-out.png"><span class="fw"><img src="../art/widget-spray-fill.png"></span></span>
+            </div>
+          </div>
+          <div class="prow thirst">
+            <div class="icon"><img src="../art/widget-drop-fill.png" style="max-height:25px"></div>
+            <div class="txt"><b>Thirst</b><span>2.25/5</span></div>
+            <div class="wid">
+              <span class="ricon" style="--fill:1"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+              <span class="ricon" style="--fill:1"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+              <span class="ricon" style="--fill:.25"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-drop-out.png"><span class="fw"><img src="../art/widget-drop-fill.png"></span></span>
+            </div>
+          </div>
+          <div class="prow care">
+            <div class="icon"><img src="../art/widget-seca-fill.png" style="max-height:35px"></div>
+            <div class="txt"><b>Care Level</b><span>Moderate<br>2.25/5</span></div>
+            <div class="wid">
+              <span class="ricon" style="--fill:1"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+              <span class="ricon" style="--fill:1"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+              <span class="ricon" style="--fill:.25"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+              <span class="ricon" style="--fill:0"><img src="../art/widget-seca-out.png"><span class="fw"><img src="../art/widget-seca-fill.png"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="obox bband">
+        <div class="content">
+          <div class="cell aspect">
+            <div class="cicon"><img src="mock-assets/compass.png" alt=""></div>
+            <div class="body">
+              <div class="clab">ASPECT</div>
+              <div class="cval">East / South</div>
+              <div class="wig">wiggle room</div>
+              <div class="sunbar">
+                <span class="rng" style="left:75%;width:15%"></span>
+                <span class="tri" style="left:90%"></span>
+              </div>
+              <div class="sunlabs"><span>Shade</span><span>Full sun</span></div>
+            </div>
+            <div class="sun"><img src="../art/sun-small.png" style="width:100%" alt=""></div>
+          </div>
+          <div class="bdiv"></div>
+          <div class="cell">
+            <div class="body">
+              <div class="clab" style="display:flex;align-items:center;gap:6px">SOIL <img src="mock-assets/soil-mound.png" style="width:16px" alt=""></div>
+              <div class="cval">Fertile, well-drained</div>
+              <div class="warn"><img src="mock-assets/warn-tri.png" alt=""><i>Shelter from frost/wind</i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">⟿ DOUBLE TAP TO MASTER ⟿</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /* scallop-cornered cartouche frame, drawn to each box's real size */
+  function scallopPath(w, h, i, r) {
+    return `M ${i+r},${i} H ${w-i-r} A ${r},${r} 0 0 0 ${w-i},${i+r} V ${h-i-r}
+            A ${r},${r} 0 0 0 ${w-i-r},${h-i} H ${i+r} A ${r},${r} 0 0 0 ${i},${h-i-r}
+            V ${i+r} A ${r},${r} 0 0 0 ${i+r},${i} Z`;
+  }
+  let uid = 0;
+  document.querySelectorAll('.obox').forEach(box => {
+    const w = box.offsetWidth, h = box.offsetHeight, id = 'ob' + (uid++);
+    const outer = scallopPath(w, h, 2.5, 9);
+    const inner = scallopPath(w, h, 8, 6);
+    box.insertAdjacentHTML('afterbegin', `
+    <svg class="frame" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="${id}p" patternUnits="userSpaceOnUse" width="72" height="64">
+          <image href="../art/parch-swatch.png" width="72" height="64"/>
+        </pattern>
+        <clipPath id="${id}c"><path d="${outer}"/></clipPath>
+      </defs>
+      <path d="${outer}" fill="url(#${id}p)"/>
+      <g clip-path="url(#${id}c)">
+        <path d="${outer}" fill="none" stroke="#8a5f28" stroke-width="24" opacity=".25"/>
+        <path d="${outer}" fill="none" stroke="#6b4718" stroke-width="8" opacity=".22"/>
+      </g>
+      <path d="${outer}" fill="none" stroke="#e9d6a6" stroke-width="5" opacity=".9"/>
+      <path d="${outer}" fill="none" stroke="#3b2a10" stroke-width="2.4"/>
+      <path d="${inner}" fill="none" stroke="#7c5a1e" stroke-width="1.1" opacity=".8"/>
+    </svg>`);
+  });
+
+  const fit = () => {
+    const s = Math.min(innerWidth / 390, innerHeight / 844);
+    document.querySelector('.phone').style.setProperty('--cs', Math.min(s, 1.6).toFixed(4));
+  };
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

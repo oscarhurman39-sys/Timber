@@ -3,7 +3,23 @@
 ## timber  [active]
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
-since: 2026-08-05  sessions-unchanged: 0
+since: 2026-08-05  sessions-unchanged: 1
+progress: 2026-08-06 (later) — **v13 card redesign mock, three rounds.** Oscar supplied
+  an AI reference (ornate scallop-corner parchment boxes, merged aspect/soil footer,
+  no action buttons). Round 1: inset card mock. Round 2 (full-screen) rejected — his
+  detailed critique: geometry wrong, chrome belongs outside the card, PPP must stay
+  floating gold over the photo, rail max ~12%. Round 3 reproduces his locked second
+  reference exactly: design/card-v13-mock.html + V13-REDESIGN-NOTES.md. Scallop
+  cartouche borders are runtime SVG (scallopPath); icons unchanged per Oscar. Awaiting
+  his verdict before any template work.
+progress: 2026-08-06 — **v12.5 matching wooden edging shipped + monetisation research.**
+  Oscar flagged the plaque and SOIL box missing the band's thin wooden rim; band's rim
+  profile pixel-measured and baked onto both assets by design/bake-rim.py (idempotent,
+  guard against double-bake). All nine suites + layout audit green. NOT yet live: sits
+  on claude/timber-plant-card-edging-c661sc pending landing on the pwa branch. Also:
+  MONETISATION-BRIEF.md written (app packaging, user acquisition, charging, card count,
+  revenue — sourced, speculation labelled). Route decision pending: consumer app vs
+  B2B staff-training; brief recommends validating B2B at Oscar's own centre first.
 progress: 2026-08-05 (night) — **say-button voice anglicised.** Was it-IT (full Italian
   phonology — authentic but hard to parse); now prefers en-GB (falls back to any en),
   the RHS-style trade pronunciation. Spoken text only: "var." said as "variety", hybrid

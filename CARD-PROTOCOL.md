@@ -136,6 +136,16 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v12.5 (matching wooden edging on all parchment boxes)**: Oscar: the aspect
+  band had a nice thin wooden edging but the Plant Power Points plaque and the
+  SOIL box didn't — the card wasn't cohesive. Fixed in the assets so every card
+  gets it automatically: the band's rim profile was pixel-measured from
+  `art/band-full.png` (dark outline → 2–3px lit gold → 1px dark inner line →
+  parchment) and baked onto `art/plaque-full.png` and `art/soil-full.png` by
+  `design/bake-rim.py` (erosion bands traced from each asset's own alpha
+  contour, so the rim hugs the rounded corners; deterministic + idempotent).
+  All three boxes now carry the same rim at the same on-card scale. Suites
+  green, layout audit clean.
 - **v12.4b (leader-tick remnant erased)**: verifying the sun fix across all seven
   bands side-by-side made the last accepted blemish untenable — the baked
   wiggle-leader's tip peeked between the pointer-cover patch and the bar as a
