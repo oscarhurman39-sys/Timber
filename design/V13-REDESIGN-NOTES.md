@@ -58,6 +58,22 @@ accent colour, generous vertical gaps.
   stacked with 1–3px gaps; vertical hairline divider between cells.
 - Uniform icon language: flower / mite / drop / secateurs — no boxed icons.
 
+## Round 3 corrections (Oscar, 2026-08-06 — supersedes the full-screen round)
+
+Oscar rejected the full-screen round: geometry wrong, not aesthetics. Locked
+target = his second reference image. Corrections applied in
+`card-v13-mock.html` (round 3, now the canonical mock):
+- App chrome (Timber brand, search, menu, progress) OUTSIDE the card; nothing
+  app-level inside it. Card margins ~14px, height extended only into the
+  space the three action buttons used to occupy. Frame thinned to 6px.
+- Left rail 44px ≈ 12% — ornamental measurement rail only.
+- One-line serif title; compact crest top-right; growth speed a narrow gold
+  instrument hugging the photo's right edge (no right column).
+- PLANT POWER POINTS: floating gold lettering over the photo above the panel
+  — never a header row inside it. Panel starts at the Bloom row, 4 equal rows,
+  spans rail edge → near right card edge. Aspect/Soil footer fully visible.
+- Icons locked as-is: painted flower, spider mite, drop, yellow secateurs.
+
 ## Deviations from the locked v12 template (decisions for Oscar)
 
 1. Card is full-screen 390×844 — swipe/tap gestures replace the three

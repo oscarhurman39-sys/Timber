@@ -4,6 +4,14 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 1
+progress: 2026-08-06 (later) — **v13 card redesign mock, three rounds.** Oscar supplied
+  an AI reference (ornate scallop-corner parchment boxes, merged aspect/soil footer,
+  no action buttons). Round 1: inset card mock. Round 2 (full-screen) rejected — his
+  detailed critique: geometry wrong, chrome belongs outside the card, PPP must stay
+  floating gold over the photo, rail max ~12%. Round 3 reproduces his locked second
+  reference exactly: design/card-v13-mock.html + V13-REDESIGN-NOTES.md. Scallop
+  cartouche borders are runtime SVG (scallopPath); icons unchanged per Oscar. Awaiting
+  his verdict before any template work.
 progress: 2026-08-06 — **v12.5 matching wooden edging shipped + monetisation research.**
   Oscar flagged the plaque and SOIL box missing the band's thin wooden rim; band's rim
   profile pixel-measured and baked onto both assets by design/bake-rim.py (idempotent,
