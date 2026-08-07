@@ -3,7 +3,15 @@
 ## timber  [active]
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
-since: 2026-08-05  sessions-unchanged: 1
+since: 2026-08-05  sessions-unchanged: 2
+progress: 2026-08-07 (later) — **action circles squished into slim card-styled bars;
+  cards bigger.** Oscar's call: the three big round fabs were obnoxious. Now three
+  38px space-bar panels (58px total vs ~110px) in the card's own language — Georgia
+  small-caps, deep-green panel, thin gold trim, gold LEARNED primary, red-tinted
+  SKIP, compact undo square. Deck margins 16→12px; card scale 0.852→0.871 at 390px
+  wide, more on height-bound screens. IDs/aria/shortcuts untouched; all nine suites
+  green. On claude/card-redesign-compact-buttons-ikf8ki pending Oscar's verdict on
+  the preview artifact (photos + art inlined, build script in session scratchpad).
 progress: 2026-08-07 — **parallel lines combined; nothing left stranded.** Oscar ran two
   sessions at once and their work forked at r10: voice change (blocker branch) vs edging
   assets + v13 mocks + monetisation brief (edging branch). Merged, then a branch sweep
