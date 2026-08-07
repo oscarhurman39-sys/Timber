@@ -4,6 +4,13 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 2
+progress: 2026-08-07 (later still) — **7 photo-less cards parked out of the deck.**
+  Oscar's call: no photo = on hold. Choisya, Weigela and the five climbers moved to
+  PLANTS_ON_HOLD (outside the plants-tool markers; data kept in-file + plants.csv —
+  move an entry back into PLANTS to re-deal). Deck 65, NPLANTS 65 in all four suites;
+  test refs to held plants repointed; features-test chip pick now needs n>=2 (the old
+  type:Impulse n=2 chip was exactly Choisya+Weigela). All nine green. Preview artifact
+  republished. Sourcing the climber photos (the standing brick) now also un-parks them.
 progress: 2026-08-07 (later) — **action circles squished into slim card-styled bars;
   cards bigger.** Oscar's call: the three big round fabs were obnoxious. Now three
   38px space-bar panels (58px total vs ~110px) in the card's own language — Georgia
