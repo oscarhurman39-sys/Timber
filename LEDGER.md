@@ -4,6 +4,16 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 1
+progress: 2026-08-07 — **parallel lines combined; nothing left stranded.** Oscar ran two
+  sessions at once and their work forked at r10: voice change (blocker branch) vs edging
+  assets + v13 mocks + monetisation brief (edging branch). Merged, then a branch sweep
+  found four finished fixes never combined into ANY line: Winter Beauty Honeysuckle
+  photo (deck-audit gap closed), gold-SVG chrome icon retheme, tradeBlocks() — trade
+  sheet/search detail stop printing empty captions + customer PRICE box only when
+  priced, and the soil-panel 3-line collision fix (8.5px). The 07-30 era commits
+  (shuffled deals/photo quiz, drop-unfilled-facts) predate two shell rewrites — parked,
+  likely superseded; Oscar to say if the quiz is missing anything he remembers. Build
+  r12. Whole gate green.
 progress: 2026-08-06 (later) — **v13 card redesign mock, three rounds.** Oscar supplied
   an AI reference (ornate scallop-corner parchment boxes, merged aspect/soil footer,
   no action buttons). Round 1: inset card mock. Round 2 (full-screen) rejected — his

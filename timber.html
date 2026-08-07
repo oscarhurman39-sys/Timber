@@ -586,7 +586,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r11 · 2026-08-05';   /* bump per deploy — shown in the menu foot so a phone's
+const BUILD='r12 · 2026-08-07';   /* bump per deploy — shown in the menu foot so a phone's
                                     version is checkable at a glance (the SW double-load
                                     made "which build am I on?" a real question) */
 const TTS='speechSynthesis' in window;
@@ -1672,14 +1672,14 @@ const num=v=>{const n=Number(v);return v===''||v==null||!Number.isFinite(n)?null
    yet", and "Bench · Root" emitted a lone "·" when both halves were empty. Blank stays
    honest: it is simply not shown, and a card with no buyer data at all says so once. */
 const has=v=>v!=null&&String(v).trim()!=='';
-const cellIf=(cls,label,val)=>has(val)?`<div class="${cls}"><div class="l">${label}</div><div class="n">${val}</div></div>`:'';
+const cellIf=(cls,label,val,extra='')=>has(val)?`<div class="${cls}"><div class="l">${label}</div><div class="n">${val}</div>${extra}</div>`:'';
 const dots=(...v)=>v.filter(has).join(' · ');
 
 /* the trade sheet is rendered in two places — the card back and the search detail —
    so it is built once here rather than kept in sync by hand */
 function tradeBlocks(p){
   const price=cellIf('cell','Trade',p.trade)+cellIf('cell','Retail',p.retail)+cellIf('cell m','Margin',p.margin);
-  const grid=cellIf('g','Source',p.source)+cellIf('g','Peak',p.peak)
+  const grid=cellIf('g','Source',p.source)+cellIf('g','Peak',p.peak,monthDots(p.peak))
     +cellIf('g','Order',p.order)+cellIf('g','Bench · Root',dots(p.bench,p.root))
     +cellIf('g full','Type',p.type)+cellIf('g full','Shrink',p.shrink)
     +cellIf('g full','Return risk',p.returnRisk)+cellIf('g','Pot sizes',p.pots)
