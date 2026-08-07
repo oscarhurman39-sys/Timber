@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 72;  // plants in the demo deck
+const NPLANTS = 65;  // plants in the demo deck (7 more parked in PLANTS_ON_HOLD until photos land)
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -246,12 +246,12 @@ function topFlipped(page) {
   await page.fill('#searchInput', 'e'); await page.waitForTimeout(100);
   rows = await page.locator('.s-row').count();
   check('query "e" matches all', rows === NPLANTS, 'rows=' + rows);
-  await page.locator('.s-row', { hasText: 'Weigela' }).click(); await page.waitForTimeout(150);
-  check('Weigela row opens Weigela detail', (await page.locator('#searchDetail').innerText()).includes('Weigela'));
+  await page.locator('.s-row', { hasText: 'Gunnera' }).click(); await page.waitForTimeout(150);
+  check('Gunnera row opens Gunnera detail', (await page.locator('#searchDetail').innerText()).includes('Gunnera'));
   check('detail moves focus to back button', await page.evaluate(() => document.activeElement && document.activeElement.id === 'dBack'));
   await page.focus('#searchInput');
   await page.keyboard.press('Enter'); await page.waitForTimeout(150);
-  check('enter while detail open does NOT swap plant', (await page.locator('#searchDetail').innerText()).includes('Weigela') && (await page.locator('#searchDetail').isVisible()));
+  check('enter while detail open does NOT swap plant', (await page.locator('#searchDetail').innerText()).includes('Gunnera') && (await page.locator('#searchDetail').isVisible()));
   await page.click('#dBack'); await page.waitForTimeout(100);
   check('back from detail focuses a result row', await page.evaluate(() => document.activeElement && document.activeElement.classList.contains('s-row')));
   await page.keyboard.press('Escape'); await page.waitForTimeout(200);
@@ -350,11 +350,11 @@ function topFlipped(page) {
   check('say taps do not swipe or count', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
 
   await page.click('#searchBtn'); await page.waitForTimeout(400);
-  await page.fill('#searchInput', 'choisya'); await page.waitForTimeout(100);
+  await page.fill('#searchInput', 'gunnera'); await page.waitForTimeout(100);
   await page.click('.s-row'); await page.waitForTimeout(150);
   await page.click('#dSay'); await page.waitForTimeout(200);
   const speak2 = await page.evaluate(() => window.__lastUtterance);
-  check('search detail say button speaks its plant', speak2 === 'Choisya ternata', speak2);
+  check('search detail say button speaks its plant', speak2 === 'Gunnera manicata', speak2);
   await page.keyboard.press('Escape'); await page.keyboard.press('Escape'); await page.waitForTimeout(250);
 
   /* say button hides when speech is unsupported */
@@ -421,8 +421,8 @@ function topFlipped(page) {
   const fieldCheck = await page.evaluate((NPLANTS) => {
     const required = ['common','latin','hue','visual','water','aspect','soil','prune','source','peak','order','bench','root','trade','retail','margin','type','shrink','returnRisk','pots','cvs','hardiness','resilience','uses','size'];
     return PLANTS.length === NPLANTS && PLANTS.every(p => required.every(k => k in p)) &&
-      PLANTS[0].trade === '2L £3.80–£4.50' && PLANTS[2].latin === 'Weigela florida ‘Nana Variegata’' &&
-      PLANTS[3].pestRisk === 3 && PLANTS[4].hardiness === 'H2';
+      PLANTS[0].trade === '2L £3.80–£4.50' && PLANTS[1].latin === "Kniphofia 'Pyromania Orange Blaze'" &&
+      PLANTS[1].pestRisk === 3 && PLANTS[2].hardiness === 'H2';
   }, NPLANTS);
   check('PLANTS: all plants, exact field names, data intact', fieldCheck);
 
