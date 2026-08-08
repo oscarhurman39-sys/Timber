@@ -586,7 +586,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r12 · 2026-08-07';   /* bump per deploy — shown in the menu foot so a phone's
+const BUILD='r13 · 2026-08-07';   /* bump per deploy — shown in the menu foot so a phone's
                                     version is checkable at a glance (the SW double-load
                                     made "which build am I on?" a real question) */
 const TTS='speechSynthesis' in window;
@@ -1479,7 +1479,13 @@ let order=[],history=[],learnedCount=0;
 
 /* ---------- progress persistence (survives closing the app) ---------- */
 const STORE_KEY='timber-progress-v1';
-const FINGERPRINT=PLANTS.map(p=>p.latin).join('|');  /* deck layout invalidates if the plant list changes */
+/* TEMP (2026-08-07, Oscar's call): cards with no photo are held out of every deck view
+   until their photos land. Data stays — search, dictionary and quiz still know these
+   plants. Delete a latin from this set (or empty it) to restore the cards. */
+const PHOTO_HOLDOUT=new Set(["Choisya ternata","Weigela florida ‘Nana Variegata’","Clematis 'Nelly Moser'","Clematis viticella 'Purpurea Plena Elegans'","Clematis montana var. rubens","Clematis armandii","Fallopia baldschuanica"]);
+const dealable=i=>!PHOTO_HOLDOUT.has(PLANTS[i].latin);
+const DECK_SIZE=PLANTS.reduce((n,_,i)=>n+dealable(i),0);
+const FINGERPRINT=PLANTS.map(p=>p.latin).join('|')+'||holdout:'+[...PHOTO_HOLDOUT].join('|');  /* deck layout invalidates if the plant list or holdout changes */
 function saveProgress(){
   if(reviewMode||activeFilter)return;  /* review/filter are ephemeral views — never persist over the full deck */
   try{
@@ -1516,7 +1522,7 @@ function buildDeck(){
   deck.querySelectorAll('.card').forEach(releaseCard);
   /* newest addition deals first — PLANTS appends chronologically, so reversing
      puts fresh cards on top instead of burying them behind the whole back-catalogue */
-  order=PLANTS.map((_,i)=>i).reverse();history=[];learnedCount=0;
+  order=PLANTS.map((_,i)=>i).filter(dealable).reverse();history=[];learnedCount=0;
   [...order].reverse().forEach(renderCard);
   markHot();updateCounts();refreshEmpty();saveProgress();
 }
@@ -1554,7 +1560,7 @@ function srsOnQuizWrong(latin){               /* a miss drops a box and comes du
 function srsDueIdx(){                         /* deck indexes due today or overdue, most overdue first */
   const today=srsDateStr(0),data=loadSRS();
   return PLANTS.map((p,i)=>({rec:data[p.latin],i}))
-    .filter(x=>x.rec&&x.rec.due<=today)
+    .filter(x=>x.rec&&x.rec.due<=today&&dealable(x.i))
     .sort((a,b)=>a.rec.due<b.rec.due?-1:a.rec.due>b.rec.due?1:0)
     .map(x=>x.i);
 }
@@ -1627,7 +1633,7 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
 function applyFilter(id){
   const def=FILTER_DEFS.find(d=>d.id===id);if(!def)return;
   if(reviewMode)exitReview();                  /* one ephemeral view at a time */
-  const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0);
+  const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0&&dealable(i));
   if(!match.length)return;                     /* zero-match chips are disabled in the menu anyway */
   if(!activeFilter)filterBackup={
     stack:[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx),
@@ -1650,7 +1656,7 @@ function clearFilter(){
 function renderFilterChips(){
   const box=document.getElementById('filterChips');
   box.innerHTML=FILTER_DEFS.map(d=>{
-    const n=PLANTS.filter(d.test).length;
+    const n=PLANTS.filter((p,i)=>dealable(i)&&d.test(p)).length;
     return `<button class="chip${activeFilter===d.id?' on':''}" data-f="${d.id}" ${n?'':'disabled'}>${d.label} <small>${n}</small></button>`;
   }).join('');
   box.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
@@ -1958,7 +1964,7 @@ function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('fl
 function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);markHot();updateCounts();refreshEmpty();saveProgress();}
 function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
   backBtn.disabled=history.length===0;
-  document.getElementById('learnBar').style.width=(PLANTS.length?learnedCount/PLANTS.length*100:0)+'%';}
+  document.getElementById('learnBar').style.width=(DECK_SIZE?learnedCount/DECK_SIZE*100:0)+'%';}
 function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show',done);document.getElementById('actions').style.visibility=done?'hidden':'visible';}
 
 document.getElementById('learn').onclick=()=>act(true);
@@ -2321,9 +2327,9 @@ function renderStats(){
     .sort((a,b)=>a.rec.due<b.rec.due?-1:a.rec.due>b.rec.due?1:0).slice(0,3);
   const weakest=PLANTS.map(p=>{const r=srs[p.latin];return{p,box:r?r.box:0,due:r?r.due:'~'};})
     .sort((a,b)=>a.box-b.box||(a.due<b.due?-1:1)).slice(0,3);
-  const pct=Math.round((learnedCount/PLANTS.length)*100);
+  const pct=Math.round((learnedCount/DECK_SIZE)*100);
   document.getElementById('statsContent').innerHTML=`
-    <div class="st-row"><span class="l">Learned</span><span class="n">${learnedCount} / ${PLANTS.length} (${pct}%)</span></div>
+    <div class="st-row"><span class="l">Learned</span><span class="n">${learnedCount} / ${DECK_SIZE} (${pct}%)</span></div>
     <div class="st-bar"><i style="width:${pct}%"></i></div>
     <div class="st-row"><span class="l">Quiz best streak</span><span class="n">${qBest}</span></div>
     <div class="st-row"><span class="l">Review boxes</span><span class="n" style="font-size:11px;color:var(--muted)">box 5 = mastered</span></div>

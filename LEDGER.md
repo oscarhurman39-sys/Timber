@@ -4,6 +4,16 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 1
+progress: 2026-08-07 (later) — **photo-less cards held out of the deck (temporary,
+  Oscar's call).** PHOTO_HOLDOUT set in timber.html: Choisya, Weigela 'Nana Variegata'
+  and the five climbers — deck deals 65 of 72. Applies to every deck view (deal,
+  review-due, filters) plus chip counts, learn bar and stats; search, dictionary and
+  quiz still know all 72. Holdout joins FINGERPRINT so stale saves rebuild (deck
+  progress resets once; SRS learning survives — keyed by name). Delete latins from
+  the set to restore cards as photos land. Suites: NDECK=65 beside NPLANTS=72;
+  features-test chip picker needs n>=2 now (Impulse chip went 0 — its members are
+  all held out; a 1-card filter auto-exits when swiped empty). Build r13. All nine
+  suites green.
 progress: 2026-08-07 — **parallel lines combined; nothing left stranded.** Oscar ran two
   sessions at once and their work forked at r10: voice change (blocker branch) vs edging
   assets + v13 mocks + monetisation brief (edging branch). Merged, then a branch sweep

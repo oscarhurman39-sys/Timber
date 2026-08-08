@@ -1,5 +1,6 @@
 const { chromium } = require('playwright');
 const NPLANTS = 72;  // plants in the demo deck
+const NDECK = 65;    // dealt cards: 7 photo-less plants temporarily held out
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -86,12 +87,12 @@ function topFlipped(page) {
 
   /* ---- 1. initial state & branding ---- */
   let c = await counts(page);
-  check('initial: all cards dealt, 0 starred', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('initial: all cards dealt, 0 starred', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
   check('title is Timber', (await page.title()).includes('Timber'));
   const bodyText = await page.evaluate(() => document.documentElement.outerHTML.toLowerCase());
   check('no "plinder" anywhere', !bodyText.includes('plinder'));
   const progressText = await page.locator('.progress').innerText();
-  check('progress line format', new RegExp(NPLANTS + ' to learn · 0 starred · double-tap a card for trade data').test(progressText), progressText);
+  check('progress line format', new RegExp(NDECK + ' to learn · 0 starred · double-tap a card for trade data').test(progressText), progressText);
   check('brand wordmark says Timber', (await page.locator('.brand span').innerText()) === 'Timber');
   check('search button visible top right', await page.locator('#searchBtn').isVisible());
   await page.click('#menuBtn'); await page.waitForTimeout(350);
@@ -103,32 +104,32 @@ function topFlipped(page) {
   const learnOp = await dragCard(page, 150, { sampleStamp: '.stamp.learn' });
   c = await counts(page);
   check('swipe right: LEARNED stamp visible mid-drag', learnOp !== null && parseFloat(learnOp) > 0.5, 'opacity=' + learnOp);
-  check('swipe right: card removed, starred +1', c.cards === NPLANTS-1 && c.left === NPLANTS-1 && c.done === 1, JSON.stringify(c));
+  check('swipe right: card removed, starred +1', c.cards === NDECK-1 && c.left === NDECK-1 && c.done === 1, JSON.stringify(c));
 
   /* ---- 3. swipe left = skip ---- */
   const skipOp = await dragCard(page, -150, { sampleStamp: '.stamp.skip' });
   c = await counts(page);
   check('swipe left: SKIP stamp visible mid-drag', skipOp !== null && parseFloat(skipOp) > 0.5, 'opacity=' + skipOp);
-  check('swipe left: card removed, starred unchanged', c.cards === NPLANTS-2 && c.left === NPLANTS-2 && c.done === 1, JSON.stringify(c));
+  check('swipe left: card removed, starred unchanged', c.cards === NDECK-2 && c.left === NDECK-2 && c.done === 1, JSON.stringify(c));
 
   /* ---- 4. undo ---- */
   await page.click('#back'); await page.waitForTimeout(100);
   c = await counts(page);
-  check('undo skip: card back, starred unchanged', c.cards === NPLANTS-1 && c.left === NPLANTS-1 && c.done === 1, JSON.stringify(c));
+  check('undo skip: card back, starred unchanged', c.cards === NDECK-1 && c.left === NDECK-1 && c.done === 1, JSON.stringify(c));
   await page.click('#back'); await page.waitForTimeout(100);
   c = await counts(page);
-  check('undo learn: card back, starred -1', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('undo learn: card back, starred -1', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
 
   /* ---- 5. buttons ---- */
   await page.click('#learn'); await page.waitForTimeout(450);
   c = await counts(page);
-  check('star button = learn', c.cards === NPLANTS-1 && c.done === 1, JSON.stringify(c));
+  check('star button = learn', c.cards === NDECK-1 && c.done === 1, JSON.stringify(c));
   await page.click('#skip'); await page.waitForTimeout(450);
   c = await counts(page);
-  check('x button = skip', c.cards === NPLANTS-2 && c.done === 1, JSON.stringify(c));
+  check('x button = skip', c.cards === NDECK-2 && c.done === 1, JSON.stringify(c));
   await page.click('#back'); await page.click('#back'); await page.waitForTimeout(150);
   c = await counts(page);
-  check('undo restores both', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('undo restores both', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
 
   /* ---- 5b. rapid double fab press during fling window: no state corruption ---- */
   await page.click('#learn');
@@ -136,12 +137,12 @@ function topFlipped(page) {
   await page.click('#learn');
   await page.waitForTimeout(500);
   c = await counts(page);
-  check('rapid double star: two distinct cards learned', c.left === NPLANTS-2 && c.done === 2, JSON.stringify(c));
+  check('rapid double star: two distinct cards learned', c.left === NDECK-2 && c.done === 2, JSON.stringify(c));
   const orderClean = await page.evaluate(() => new Set(order).size === order.length);
   check('rapid double star: no duplicate indices in order', orderClean);
   await page.click('#back'); await page.click('#back'); await page.waitForTimeout(200);
   c = await counts(page);
-  check('rapid double star: undo x2 restores clean state', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('rapid double star: undo x2 restores clean state', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
 
   /* ---- 6. sub-threshold drag snaps back ---- */
   await page.waitForTimeout(400);
@@ -152,7 +153,7 @@ function topFlipped(page) {
     const top = cards[cards.length - 1];
     return top.querySelector('.stamp.learn').style.opacity;
   });
-  check('sub-threshold drag: card stays, counts unchanged', c.cards === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('sub-threshold drag: card stays, counts unchanged', c.cards === NDECK && c.done === 0, JSON.stringify(c));
   check('sub-threshold drag: stamp fades back out', stampReset === '0' || stampReset === '', 'opacity=' + stampReset);
 
   /* ---- 7. double-tap flip + swipe lock ---- */
@@ -167,7 +168,7 @@ function topFlipped(page) {
   check('back shows latin name + trade sheet', backVisible === 'Heavenly Bamboo' || backVisible.length > 0, backVisible);
   await dragCard(page, 160); // try to swipe while flipped
   c = await counts(page);
-  check('drag while flipped: card NOT swiped', c.cards === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('drag while flipped: card NOT swiped', c.cards === NDECK && c.done === 0, JSON.stringify(c));
   check('drag while flipped: still flipped', await topFlipped(page) === true);
   const transformWhileFlipped = await page.evaluate(() => {
     const cards = document.querySelectorAll('.card');
@@ -183,10 +184,10 @@ function topFlipped(page) {
   await doubleTap(page);
   await page.click('#learn'); await page.waitForTimeout(450);
   c = await counts(page);
-  check('star while flipped: unflips, does not swipe', c.cards === NPLANTS && c.done === 0 && (await topFlipped(page)) === false, JSON.stringify(c));
+  check('star while flipped: unflips, does not swipe', c.cards === NDECK && c.done === 0 && (await topFlipped(page)) === false, JSON.stringify(c));
 
   /* ---- 9. empty state + reset ---- */
-  for (let i = 0; i < NPLANTS; i++) { await page.click('#learn'); await page.waitForTimeout(400); }
+  for (let i = 0; i < NDECK; i++) { await page.click('#learn'); await page.waitForTimeout(400); }
   c = await counts(page);
   const emptyShown = await page.locator('#empty').isVisible();
   const actionsHidden = await page.evaluate(() => document.getElementById('actions').style.visibility === 'hidden');
@@ -195,7 +196,7 @@ function topFlipped(page) {
   check('empty state text', (await page.locator('#empty h3').innerText()).includes("Deck's clear"));
   await page.click('#reset2'); await page.waitForTimeout(150);
   c = await counts(page);
-  check('reset deck restores all', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('reset deck restores all', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
 
   /* ---- 10. menu ---- */
   await page.click('#learn'); await page.waitForTimeout(450);
@@ -206,7 +207,7 @@ function topFlipped(page) {
   await page.click('#resetRow'); await page.waitForTimeout(350);
   c = await counts(page);
   const sheetClosed = await page.evaluate(() => !document.getElementById('sheet').classList.contains('open'));
-  check('menu reset works + closes sheet', c.cards === NPLANTS && c.done === 0 && sheetClosed, JSON.stringify(c));
+  check('menu reset works + closes sheet', c.cards === NDECK && c.done === 0 && sheetClosed, JSON.stringify(c));
   check('closing menu returns focus to menu button', await page.evaluate(() => document.activeElement && document.activeElement.id === 'menuBtn'));
 
   /* ---- 11. search / dictionary ---- */
@@ -233,7 +234,7 @@ function topFlipped(page) {
   await page.keyboard.press('Escape'); await page.waitForTimeout(200);
   check('escape closes search', await page.evaluate(() => !document.getElementById('search').classList.contains('open')));
   c = await counts(page);
-  check('search leaves deck untouched', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('search leaves deck untouched', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
 
   /* dictionary mode row opens search */
   await page.click('#menuBtn'); await page.waitForTimeout(350);
@@ -312,24 +313,24 @@ function topFlipped(page) {
     await page.click('#qSummaryClose'); await page.waitForTimeout(200);
   }
   c = await counts(page);
-  check('quiz closes, deck untouched', !(await page.evaluate(() => document.getElementById('quiz').classList.contains('open'))) && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('quiz closes, deck untouched', !(await page.evaluate(() => document.getElementById('quiz').classList.contains('open'))) && c.left === NDECK && c.done === 0, JSON.stringify(c));
 
   /* ---- 11e. persistence across reloads ---- */
   await page.waitForTimeout(300);
   await dragCard(page, 150);
   c = await counts(page);
-  check('persist: learn one before reload', c.left === NPLANTS-1 && c.done === 1, JSON.stringify(c));
+  check('persist: learn one before reload', c.left === NDECK-1 && c.done === 1, JSON.stringify(c));
   await page.reload(); await page.waitForTimeout(400);
   c = await counts(page);
-  check('persist: progress survives reload', c.cards === NPLANTS-1 && c.left === NPLANTS-1 && c.done === 1 && c.menu === 1, JSON.stringify(c));
+  check('persist: progress survives reload', c.cards === NDECK-1 && c.left === NDECK-1 && c.done === 1 && c.menu === 1, JSON.stringify(c));
   await page.click('#back'); await page.waitForTimeout(150);
   c = await counts(page);
-  check('persist: undo works after reload (history restored)', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('persist: undo works after reload (history restored)', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
   await page.reload(); await page.waitForTimeout(400);
   c = await counts(page);
-  check('persist: clean state persists too', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('persist: clean state persists too', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
   check('persist: quiz best streak survives reload', await page.evaluate(() => document.getElementById('qBest').textContent) === '1');
-  const resetPersists = await page.evaluate((n) => JSON.parse(localStorage.getItem('timber-progress-v1')).stack.length === n, NPLANTS);
+  const resetPersists = await page.evaluate((n) => JSON.parse(localStorage.getItem('timber-progress-v1')).stack.length === n, NDECK);
   check('persist: storage reflects live state', resetPersists);
 
   /* ---- 11f. latin pronunciation button ---- */
@@ -347,7 +348,7 @@ function topFlipped(page) {
   check('say button triggers speech with latin name', speak1.calls >= 2 && speak1.text === topSpoken, JSON.stringify(speak1));
   check('rapid say taps do not flip the card', await topFlipped(page) === false);
   c = await counts(page);
-  check('say taps do not swipe or count', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
+  check('say taps do not swipe or count', c.cards === NDECK && c.left === NDECK && c.done === 0, JSON.stringify(c));
 
   await page.click('#searchBtn'); await page.waitForTimeout(400);
   await page.fill('#searchInput', 'choisya'); await page.waitForTimeout(100);
@@ -402,7 +403,7 @@ function topFlipped(page) {
   if (offlineOk) {
     await page.waitForTimeout(300);
     const t = await page.title().catch(() => '');
-    offlineOk = t.includes('Timber') && (await counts(page)).cards === NPLANTS;
+    offlineOk = t.includes('Timber') && (await counts(page)).cards === NDECK;
   }
   check('works offline after first visit', offlineOk);
   await context.setOffline(false);
@@ -464,7 +465,7 @@ function topFlipped(page) {
   });
   await tpage.waitForTimeout(450);
   const tc = await counts(tpage);
-  check('touch: swipe right marks learned', touchSwipe && tc.cards === NPLANTS-1 && tc.done === 1, JSON.stringify(tc));
+  check('touch: swipe right marks learned', touchSwipe && tc.cards === NDECK-1 && tc.done === 1, JSON.stringify(tc));
   await tctx.close();
 
   /* ---- 16. no JS errors anywhere ---- */
