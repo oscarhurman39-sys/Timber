@@ -4,6 +4,11 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 2
+progress: 2026-08-08 — **r13 LIVE on Pages.** Oscar: the artifact preview isn't his
+  link — deployed for real. Feature branch fast-forwarded onto the pwa branch
+  (289fc40 -> 6848ee9), Pages run #13 green. [Unverified] served bytes — github.io
+  is egress-blocked from the container; verified via the successful deploy run on
+  the exact commit. Phone note: the SW serves r12 once more, then r13 on next open.
 progress: 2026-08-07 (later still) — **7 photo-less cards parked out of the deck.**
   Oscar's call: no photo = on hold. Choisya, Weigela and the five climbers moved to
   PLANTS_ON_HOLD (outside the plants-tool markers; data kept in-file + plants.csv —
