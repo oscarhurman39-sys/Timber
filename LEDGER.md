@@ -3,17 +3,27 @@
 ## timber  [active]
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
-since: 2026-08-05  sessions-unchanged: 1
-progress: 2026-08-07 (later) — **photo-less cards held out of the deck (temporary,
-  Oscar's call).** PHOTO_HOLDOUT set in timber.html: Choisya, Weigela 'Nana Variegata'
-  and the five climbers — deck deals 65 of 72. Applies to every deck view (deal,
-  review-due, filters) plus chip counts, learn bar and stats; search, dictionary and
-  quiz still know all 72. Holdout joins FINGERPRINT so stale saves rebuild (deck
-  progress resets once; SRS learning survives — keyed by name). Delete latins from
-  the set to restore cards as photos land. Suites: NDECK=65 beside NPLANTS=72;
-  features-test chip picker needs n>=2 now (Impulse chip went 0 — its members are
-  all held out; a 1-card filter auto-exits when swiped empty). Build r13. All nine
-  suites green.
+since: 2026-08-05  sessions-unchanged: 2
+progress: 2026-08-07 (later still) — **7 photo-less cards parked out of the deck.**
+  Oscar's call: no photo = on hold. Choisya, Weigela and the five climbers moved to
+  PLANTS_ON_HOLD (outside the plants-tool markers; data kept in-file + plants.csv —
+  move an entry back into PLANTS to re-deal). Deck 65, NPLANTS 65 in all four suites;
+  test refs to held plants repointed; features-test chip pick now needs n>=2 (the old
+  type:Impulse n=2 chip was exactly Choisya+Weigela). All nine green. Preview artifact
+  republished. Sourcing the climber photos (the standing brick) now also un-parks them.
+progress: 2026-08-07 (later) — **action circles squished into slim card-styled bars;
+  cards bigger.** Oscar's call: the three big round fabs were obnoxious. Now three
+  38px space-bar panels (58px total vs ~110px) in the card's own language — Georgia
+  small-caps, deep-green panel, thin gold trim, gold LEARNED primary, red-tinted
+  SKIP, compact undo square. Deck margins 16→12px; card scale 0.852→0.871 at 390px
+  wide, more on height-bound screens. IDs/aria/shortcuts untouched; all nine suites
+  green. On claude/card-redesign-compact-buttons-ikf8ki pending Oscar's verdict on
+  the preview artifact (photos + art inlined, build script in session scratchpad).
+progress: 2026-08-07 (later) — **duplicate holdout retired.** Both chats were asked to
+  park the photo-less cards and built it in parallel: this line's PHOTO_HOLDOUT filter
+  (kept the 7 searchable/quizzable) lost the race to the deployed PLANTS_ON_HOLD move
+  (7 gone from search/dictionary/quiz too until re-added). Deployed version adopted;
+  lines converged on the blocker branch. One live-app change per chat at a time.
 progress: 2026-08-07 — **parallel lines combined; nothing left stranded.** Oscar ran two
   sessions at once and their work forked at r10: voice change (blocker branch) vs edging
   assets + v13 mocks + monetisation brief (edging branch). Merged, then a branch sweep

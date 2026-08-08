@@ -47,7 +47,7 @@
   .progress b{color:var(--leaf1)}
 
   /* deck + flip */
-  .deck{position:relative;flex:1 1 auto;margin:0 16px}
+  .deck{position:relative;flex:1 1 auto;margin:0 12px}
   /* will-change lists opacity as well as transform so WebKit allocates the card's
      compositing layer (with its alpha channel) up front. Fling animates both at once,
      and a layer promoted mid-animation can present one unpainted frame — the white
@@ -151,19 +151,28 @@
   .nodata{font-size:11.5px;font-style:italic;color:var(--muted);padding:2px 2px 4px}
   .back .fliphint{margin-top:auto;padding-top:6px}
 
-  /* actions */
-  .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:22px;padding:16px 0 22px}
-  .fab{width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;
-    justify-content:center;font-size:24px;background:rgba(255,255,255,.08);color:#fff;
-    box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform .12s,background .2s,opacity .2s}
-  .fab:active{transform:scale(.9)}
-  .fab.skip{color:#ff6b6b}
-  .fab.back-btn{width:48px;height:48px;font-size:18px;color:var(--muted)}
+  /* actions — three slim bars in the card's own language (Georgia small-caps,
+     deep green panels, thin gold trim) instead of the old 60-72px circles.
+     Total bar footprint ~58px vs the circles' ~110px; the freed height goes
+     to the deck, so --cs (and the card) grows on height-bound screens. */
+  .actions{flex:0 0 auto;display:flex;align-items:stretch;gap:8px;padding:8px 12px 12px}
+  .fab{height:38px;border:1px solid rgba(216,189,120,.28);border-radius:11px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    font-family:Georgia,"Times New Roman",serif;font-size:11px;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;
+    background:#14301f;color:#D8BD78;
+    box-shadow:0 4px 12px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06);
+    transition:transform .12s,background .2s,opacity .2s}
+  .fab .g{font-size:13px;letter-spacing:0}
+  .fab:active{transform:scale(.97)}
+  .fab.skip{flex:1 1 0;color:#ff9c94;border-color:rgba(255,107,107,.4);
+    background:linear-gradient(180deg,rgba(255,107,107,.10),rgba(255,107,107,.04)) #1c211a}
+  .fab.back-btn{flex:0 0 56px;font-size:15px;color:var(--muted);border-color:rgba(216,189,120,.18)}
   /* undo is the only action with no swipe equivalent — dim it when there is nothing
      to undo so the row reads as live state rather than three permanent decorations */
   .fab.back-btn[disabled]{opacity:.3;cursor:default;box-shadow:none}
-  .fab.learn{width:72px;height:72px;font-size:30px;color:#1a120a;
-    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 10px 22px rgba(245,196,81,.35)}
+  .fab.learn{flex:1.25 1 0;font-size:11px;color:#1a120a;border-color:rgba(245,196,81,.6);
+    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 5px 14px rgba(245,196,81,.28)}
 
   .empty{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:30px;gap:14px}
@@ -192,7 +201,7 @@
   /* keep header/fabs clear of the notch & home indicator in installed iOS standalone mode */
   @supports(padding:max(0px)){
     header{padding-top:max(14px,env(safe-area-inset-top,0px))}
-    .actions{padding-bottom:max(22px,calc(env(safe-area-inset-bottom,0px) + 10px))}
+    .actions{padding-bottom:max(12px,calc(env(safe-area-inset-bottom,0px) + 6px))}
     .sheet .panel{padding-top:max(22px,env(safe-area-inset-top,0px))}
     .search .s-bar{padding-top:max(14px,env(safe-area-inset-top,0px))}
   }
@@ -322,7 +331,7 @@
   .learnbar{height:3px;margin:0 18px 8px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;flex:0 0 auto}
   .learnbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--leaf2),var(--leaf1));border-radius:2px;transition:width .4s ease}
   .fab{transition:transform .12s ease}
-  .fab:active{transform:scale(.88)}
+  .fab:active{transform:scale(.96)}
   .fab[disabled]{opacity:.35}
   .s-sub{display:block;font-size:11px;color:var(--muted);margin-top:2px;font-style:normal}
   .r-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);padding:10px 4px 6px}
@@ -514,9 +523,9 @@
 </div>
 
 <div class="actions" id="actions">
-  <button class="fab skip"  id="skip"  title="Skip (←)" aria-keyshortcuts="ArrowLeft" aria-label="Skip this plant">✕</button>
+  <button class="fab skip"  id="skip"  title="Skip (←)" aria-keyshortcuts="ArrowLeft" aria-label="Skip this plant"><span class="g" aria-hidden="true">✕</span>Skip</button>
   <button class="fab back-btn" id="back" title="Undo (Backspace)" aria-keyshortcuts="Backspace" aria-label="Undo last swipe" disabled>↺</button>
-  <button class="fab learn" id="learn" title="I've learned this (→)" aria-keyshortcuts="ArrowRight" aria-label="Mark as learned">★</button>
+  <button class="fab learn" id="learn" title="I've learned this (→)" aria-keyshortcuts="ArrowRight" aria-label="Mark as learned"><span class="g" aria-hidden="true">★</span>Learned</button>
 </div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu">
@@ -586,7 +595,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r13 · 2026-08-07';   /* bump per deploy — shown in the menu foot so a phone's
+const BUILD='r13 · 2026-08-08';   /* bump per deploy — shown in the menu foot so a phone's
                                     version is checkable at a glance (the SW double-load
                                     made "which build am I on?" a real question) */
 const TTS='speechSynthesis' in window;
@@ -633,39 +642,6 @@ const PLANTS = [
    uses:"Urban, patio containers", size:"1.5–2.5m H × 1–1.5m W",
    seasonalImpact:"", growthSpeed:9, pestRisk:4, thirst:10, careLevel:8, sunNeed:72, sunMin:40},
 
-  {common:"Mexican Orange Blossom", latin:"Choisya ternata", hue:150,
-   visual:"Scented white flowers, aromatic evergreen",
-   water:"Moderate · Adaptable",
-   aspect:"Full sun / pt shade · Adaptable",
-   soil:"Fertile, well-drained · Adaptable",
-   prune:"RHS 8 · Trim after flowering",
-   source:"Wk14–16 (white bud showing)", peak:"Apr–May", order:"Book Wk6",
-   bench:"8–10 wks", root:"MED",
-   trade:"2L £3.90–£4.60", retail:"£11.99–£14.99", margin:"55–60%",
-   type:"Impulse · scented bloom",
-   shrink:"LOW · Reliable bench survivor",
-   returnRisk:"MED · Leaf scorch if hot S-facing pot dries → advise pt shade & even moisture",
-   pots:"2L, 3L, 5L",
-   cvs:"‘Sundance’ – yellow foliage · ‘Aztec Pearl’ – fine leaves",
-   hardiness:"H4", resilience:"Pest-free, drought tolerant once established",
-   uses:"Sensory gardens, hedging, gap fillers", size:"1.5–2.5m H × 1.5–2.5m W"},
-
-  {common:"Variegated Dwarf Weigela", latin:"Weigela florida ‘Nana Variegata’", hue:325,
-   visual:"Pink tubular flowers, cream-edged leaves",
-   water:"Moderate · Adaptable",
-   aspect:"Full sun / pt shade · Sun best for flowers & colour · Adaptable",
-   soil:"Well-drained, any · Tolerates clay · Adaptable",
-   prune:"RHS 2 · Cut flowered shoots post-bloom",
-   source:"Wk17–19 (pink bud showing)", peak:"May–Jul", order:"Book Wk10",
-   bench:"6–8 wks", root:"MED",
-   trade:"2L £3.50–£4.20", retail:"£10.99–£12.99", margin:"55–60%",
-   type:"Impulse · spring bloom & variegated leaf",
-   shrink:"LOW · Hardy bench survivor",
-   returnRisk:"LOW · Tough deciduous shrub",
-   pots:"2L, 3L, 5L",
-   cvs:"‘Bristol Ruby’ – deep red blooms · ‘Wine & Roses’ – purple foliage, pink blooms",
-   hardiness:"H6", resilience:"Pollution tolerant, pest-free",
-   uses:"Mixed borders, small gardens, urban", size:"1–1.5m H × 1–1.5m W"},
   {common:"Red Hot Poker", latin:"Kniphofia 'Pyromania Orange Blaze'", hue:28,
    visual:"Orange-yellow torch spikes over grassy clumps, summer–autumn",
    water:"Low once established",
@@ -1396,6 +1372,59 @@ const PLANTS = [
    cvs:"trade name EVERFLAME; accepted taxonomy is Carex punicea but retail labels retain Uncinia", hardiness:"H3", resilience:"generally pest and disease free", uses:"containers · edging · rock gardens",
    size:"25–30 cm H × 30–40 cm W", seasonalImpact:"", growthSpeed:6, pestRisk:2,
    thirst:10, careLevel:8, sunNeed:80, sunMin:55},
+  {common:"Japanese Loquat", latin:"Eriobotrya japonica", hue:120,
+   visual:"Bold corrugated evergreen leaves · scented white autumn flowers · orange fruit",
+   water:"Water moderately; reduce in winter",
+   aspect:"East / South",
+   soil:"Fertile, well-drained; Shelter from frost/wind · Xylella host",
+   prune:"Remove dead wood; restrict size after fruiting",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H4", resilience:"coastal · urban tolerant · low maintenance · seeds toxic — discard before eating fruit",
+   uses:"architectural specimen · wall borders · conservatory", size:"4–8 m H × 4–8 m W",
+   seasonalImpact:"", growthSpeed:9, pestRisk:7, thirst:9, careLevel:9, sunNeed:90, sunMin:75},
+];
+/* PLANTS:END */
+/* ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
+   fallbacks, so they are parked out of the deck until a 1200px photo lands.
+   To re-deal one, move its entry back inside the PLANTS marker block above
+   (rows also live in plants.csv). This array sits OUTSIDE the plants-tool.js
+   markers, so csv export/import never sees it. */
+const PLANTS_ON_HOLD=[
+  {common:"Mexican Orange Blossom", latin:"Choisya ternata", hue:150,
+   visual:"Scented white flowers, aromatic evergreen",
+   water:"Moderate · Adaptable",
+   aspect:"Full sun / pt shade · Adaptable",
+   soil:"Fertile, well-drained · Adaptable",
+   prune:"RHS 8 · Trim after flowering",
+   source:"Wk14–16 (white bud showing)", peak:"Apr–May", order:"Book Wk6",
+   bench:"8–10 wks", root:"MED",
+   trade:"2L £3.90–£4.60", retail:"£11.99–£14.99", margin:"55–60%",
+   type:"Impulse · scented bloom",
+   shrink:"LOW · Reliable bench survivor",
+   returnRisk:"MED · Leaf scorch if hot S-facing pot dries → advise pt shade & even moisture",
+   pots:"2L, 3L, 5L",
+   cvs:"‘Sundance’ – yellow foliage · ‘Aztec Pearl’ – fine leaves",
+   hardiness:"H4", resilience:"Pest-free, drought tolerant once established",
+   uses:"Sensory gardens, hedging, gap fillers", size:"1.5–2.5m H × 1.5–2.5m W"},
+
+  {common:"Variegated Dwarf Weigela", latin:"Weigela florida ‘Nana Variegata’", hue:325,
+   visual:"Pink tubular flowers, cream-edged leaves",
+   water:"Moderate · Adaptable",
+   aspect:"Full sun / pt shade · Sun best for flowers & colour · Adaptable",
+   soil:"Well-drained, any · Tolerates clay · Adaptable",
+   prune:"RHS 2 · Cut flowered shoots post-bloom",
+   source:"Wk17–19 (pink bud showing)", peak:"May–Jul", order:"Book Wk10",
+   bench:"6–8 wks", root:"MED",
+   trade:"2L £3.50–£4.20", retail:"£10.99–£12.99", margin:"55–60%",
+   type:"Impulse · spring bloom & variegated leaf",
+   shrink:"LOW · Hardy bench survivor",
+   returnRisk:"LOW · Tough deciduous shrub",
+   pots:"2L, 3L, 5L",
+   cvs:"‘Bristol Ruby’ – deep red blooms · ‘Wine & Roses’ – purple foliage, pink blooms",
+   hardiness:"H6", resilience:"Pollution tolerant, pest-free",
+   uses:"Mixed borders, small gardens, urban", size:"1–1.5m H × 1–1.5m W"},
   {common:"Clematis 'Nelly Moser'", latin:"Clematis 'Nelly Moser'", hue:310,
    visual:"Large pale pink flowers with deep pink bars \u00b7 late spring/summer",
    water:"Moist, well-drained",
@@ -1456,20 +1485,7 @@ const PLANTS = [
    hardiness:"H5", resilience:"Extremely vigorous - needs space",
    uses:"Covering ugly structures, quick screen", size:"10-15m",
    seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:70, sunMin:35},
-  {common:"Japanese Loquat", latin:"Eriobotrya japonica", hue:120,
-   visual:"Bold corrugated evergreen leaves · scented white autumn flowers · orange fruit",
-   water:"Water moderately; reduce in winter",
-   aspect:"East / South",
-   soil:"Fertile, well-drained; Shelter from frost/wind · Xylella host",
-   prune:"Remove dead wood; restrict size after fruiting",
-   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
-   cvs:"",
-   hardiness:"H4", resilience:"coastal · urban tolerant · low maintenance · seeds toxic — discard before eating fruit",
-   uses:"architectural specimen · wall borders · conservatory", size:"4–8 m H × 4–8 m W",
-   seasonalImpact:"", growthSpeed:9, pestRisk:7, thirst:9, careLevel:9, sunNeed:90, sunMin:75},
 ];
-/* PLANTS:END */
 
 
 const deck=document.getElementById('deck'),empty=document.getElementById('empty');
@@ -1479,13 +1495,7 @@ let order=[],history=[],learnedCount=0;
 
 /* ---------- progress persistence (survives closing the app) ---------- */
 const STORE_KEY='timber-progress-v1';
-/* TEMP (2026-08-07, Oscar's call): cards with no photo are held out of every deck view
-   until their photos land. Data stays — search, dictionary and quiz still know these
-   plants. Delete a latin from this set (or empty it) to restore the cards. */
-const PHOTO_HOLDOUT=new Set(["Choisya ternata","Weigela florida ‘Nana Variegata’","Clematis 'Nelly Moser'","Clematis viticella 'Purpurea Plena Elegans'","Clematis montana var. rubens","Clematis armandii","Fallopia baldschuanica"]);
-const dealable=i=>!PHOTO_HOLDOUT.has(PLANTS[i].latin);
-const DECK_SIZE=PLANTS.reduce((n,_,i)=>n+dealable(i),0);
-const FINGERPRINT=PLANTS.map(p=>p.latin).join('|')+'||holdout:'+[...PHOTO_HOLDOUT].join('|');  /* deck layout invalidates if the plant list or holdout changes */
+const FINGERPRINT=PLANTS.map(p=>p.latin).join('|');  /* deck layout invalidates if the plant list changes */
 function saveProgress(){
   if(reviewMode||activeFilter)return;  /* review/filter are ephemeral views — never persist over the full deck */
   try{
@@ -1522,7 +1532,7 @@ function buildDeck(){
   deck.querySelectorAll('.card').forEach(releaseCard);
   /* newest addition deals first — PLANTS appends chronologically, so reversing
      puts fresh cards on top instead of burying them behind the whole back-catalogue */
-  order=PLANTS.map((_,i)=>i).filter(dealable).reverse();history=[];learnedCount=0;
+  order=PLANTS.map((_,i)=>i).reverse();history=[];learnedCount=0;
   [...order].reverse().forEach(renderCard);
   markHot();updateCounts();refreshEmpty();saveProgress();
 }
@@ -1560,7 +1570,7 @@ function srsOnQuizWrong(latin){               /* a miss drops a box and comes du
 function srsDueIdx(){                         /* deck indexes due today or overdue, most overdue first */
   const today=srsDateStr(0),data=loadSRS();
   return PLANTS.map((p,i)=>({rec:data[p.latin],i}))
-    .filter(x=>x.rec&&x.rec.due<=today&&dealable(x.i))
+    .filter(x=>x.rec&&x.rec.due<=today)
     .sort((a,b)=>a.rec.due<b.rec.due?-1:a.rec.due>b.rec.due?1:0)
     .map(x=>x.i);
 }
@@ -1633,7 +1643,7 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
 function applyFilter(id){
   const def=FILTER_DEFS.find(d=>d.id===id);if(!def)return;
   if(reviewMode)exitReview();                  /* one ephemeral view at a time */
-  const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0&&dealable(i));
+  const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0);
   if(!match.length)return;                     /* zero-match chips are disabled in the menu anyway */
   if(!activeFilter)filterBackup={
     stack:[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx),
@@ -1656,7 +1666,7 @@ function clearFilter(){
 function renderFilterChips(){
   const box=document.getElementById('filterChips');
   box.innerHTML=FILTER_DEFS.map(d=>{
-    const n=PLANTS.filter((p,i)=>dealable(i)&&d.test(p)).length;
+    const n=PLANTS.filter(d.test).length;
     return `<button class="chip${activeFilter===d.id?' on':''}" data-f="${d.id}" ${n?'':'disabled'}>${d.label} <small>${n}</small></button>`;
   }).join('');
   box.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
@@ -1964,7 +1974,7 @@ function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('fl
 function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);markHot();updateCounts();refreshEmpty();saveProgress();}
 function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
   backBtn.disabled=history.length===0;
-  document.getElementById('learnBar').style.width=(DECK_SIZE?learnedCount/DECK_SIZE*100:0)+'%';}
+  document.getElementById('learnBar').style.width=(PLANTS.length?learnedCount/PLANTS.length*100:0)+'%';}
 function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show',done);document.getElementById('actions').style.visibility=done?'hidden':'visible';}
 
 document.getElementById('learn').onclick=()=>act(true);
@@ -2327,9 +2337,9 @@ function renderStats(){
     .sort((a,b)=>a.rec.due<b.rec.due?-1:a.rec.due>b.rec.due?1:0).slice(0,3);
   const weakest=PLANTS.map(p=>{const r=srs[p.latin];return{p,box:r?r.box:0,due:r?r.due:'~'};})
     .sort((a,b)=>a.box-b.box||(a.due<b.due?-1:1)).slice(0,3);
-  const pct=Math.round((learnedCount/DECK_SIZE)*100);
+  const pct=Math.round((learnedCount/PLANTS.length)*100);
   document.getElementById('statsContent').innerHTML=`
-    <div class="st-row"><span class="l">Learned</span><span class="n">${learnedCount} / ${DECK_SIZE} (${pct}%)</span></div>
+    <div class="st-row"><span class="l">Learned</span><span class="n">${learnedCount} / ${PLANTS.length} (${pct}%)</span></div>
     <div class="st-bar"><i style="width:${pct}%"></i></div>
     <div class="st-row"><span class="l">Quiz best streak</span><span class="n">${qBest}</span></div>
     <div class="st-row"><span class="l">Review boxes</span><span class="n" style="font-size:11px;color:var(--muted)">box 5 = mastered</span></div>

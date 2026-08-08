@@ -1,6 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 72;  // plants in the demo deck
-const NDECK = 65;    // dealt cards: 7 photo-less plants temporarily held out
+const NPLANTS = 65;  // plants in the demo deck (7 more parked in PLANTS_ON_HOLD until photos land)
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -132,10 +131,9 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   check('zero-match chips are disabled, others enabled',
     chips.every(c => c.disabled === (c.n === 0)), JSON.stringify(chips));
 
-  /* need n >= 2: swiping the only card of a 1-card view auto-exits the filter.
-     Type chips all sit at 1 while the photo holdout is on, so fall back to hard: chips. */
-  const typeChip = chips.find(c => c.id.startsWith('type:') && c.n > 1 && c.n < NDECK)
-    || chips.find(c => c.id.startsWith('hard:') && c.n > 1 && c.n < NDECK);
+  /* need n >= 2: swiping a 1-card filtered view empties it, which auto-clears the
+     filter — the toggle-off steps below assume the filter is still active */
+  const typeChip = chips.find(c => (c.id.startsWith('type:') || c.id.startsWith('hard:')) && c.n > 1 && c.n < NPLANTS);
   const progressSnap = await page.evaluate(() => localStorage.getItem('timber-progress-v1'));
   if (typeChip) {
     await page.click(`#filterChips .chip[data-f="${typeChip.id}"]`); await page.waitForTimeout(350);
@@ -144,7 +142,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
       sheetOpen: document.getElementById('sheet').classList.contains('open'),
       progress: localStorage.getItem('timber-progress-v1'),
     }));
-    check('type chip filters the deck to its count', st.cards === typeChip.n, JSON.stringify({ st: st.cards, want: typeChip.n }));
+    check('data chip filters the deck to its count', st.cards === typeChip.n, JSON.stringify({ st: st.cards, want: typeChip.n }));
     check('applying a filter closes the menu', !st.sheetOpen);
     check('filter never touches saved progress', st.progress === progressSnap);
 
@@ -170,17 +168,16 @@ const answerRound = (page, correctly) => page.evaluate(right => {
       cards: document.querySelectorAll('.card').length,
       done: +document.getElementById('done').textContent,
     }));
-    check('clearing the filter restores the full deck', restored.cards === NDECK && restored.done === 0, JSON.stringify(restored));
+    check('clearing the filter restores the full deck', restored.cards === NPLANTS && restored.done === 0, JSON.stringify(restored));
     await page.click('.sheet .scrim', { position: { x: 15, y: 300 } }); await page.waitForTimeout(350);
   } else {
-    check('type chip filters the deck to its count', false, 'no partial type chip in data — inspect FILTER_DEFS');
+    check('data chip filters the deck to its count', false, 'no chip with 2<=n<NPLANTS in data — inspect FILTER_DEFS');
   }
 
   /* filter ↔ review: one ephemeral view at a time */
   await page.evaluate(() => {
     const srs = {};
-    let made = 0;
-    PLANTS.forEach((p, i) => { if (dealable(i) && made < 2) { made++; srs[p.latin] = { box: 1, due: srsDateStr(0) }; } });
+    PLANTS.forEach((p, i) => { if (i < 2) srs[p.latin] = { box: 1, due: srsDateStr(0) }; });
     localStorage.setItem('timber-srs-v1', JSON.stringify(srs));
   });
   if (typeChip) {
@@ -196,7 +193,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     await page.click('#menuBtn'); await page.waitForTimeout(350);
     await page.click('#reviewRow'); await page.waitForTimeout(350); // exit review (also closes the sheet)
     check('exiting review lands on the full deck',
-      await page.evaluate(() => document.querySelectorAll('.card').length) === NDECK);
+      await page.evaluate(() => document.querySelectorAll('.card').length) === NPLANTS);
   }
 
   /* ================= WS4: fuzzy search ================= */
@@ -210,11 +207,11 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     await page.evaluate(() => closeSearch());
     return rows;
   };
-  check('typo choysia finds Mexican Orange Blossom', (await firstHit('choysia')).includes('Mexican Orange Blossom'));
+  check('typo griselina finds New Zealand Broadleaf', (await firstHit('griselina')).includes('New Zealand Broadleaf'));
   check('typo nandena finds Heavenly Bamboo', (await firstHit('nandena')).includes('Heavenly Bamboo'));
   check('exact match ranks first', (await firstHit('nandina'))[0] === 'Heavenly Bamboo');
   check('cultivar search firepower hits its plant', (await firstHit('firepower')).includes('Heavenly Bamboo'));
-  check('multi-word query works', (await firstHit('orange blossom')).includes('Mexican Orange Blossom'));
+  check('multi-word query works', (await firstHit('hot lips')).includes('Hot Lips Sage'));
   check('gibberish shows no-match message', (await firstHit('zzqqxx')).length === 0);
   check('empty query lists the whole deck', (await firstHit('')).length === NPLANTS);
 
@@ -227,7 +224,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     cols: document.querySelectorAll('.st-boxes .col').length,
   }));
   check('stats overlay opens from menu', stats.open);
-  check('stats shows learned tally', new RegExp(`0 / ${NDECK}`).test(stats.text), stats.text.slice(0, 60));
+  check('stats shows learned tally', new RegExp(`0 / ${NPLANTS}`).test(stats.text), stats.text.slice(0, 60));
   check('stats shows 6 review-box columns (new + 5)', stats.cols === 6, 'cols=' + stats.cols);
   check('stats shows weakest plants', /Weakest plants/.test(stats.text));
   await page.keyboard.press('Escape'); await page.waitForTimeout(200);

@@ -1,6 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 72;  // plants in the demo deck
-const NDECK = 65;    // dealt cards: 7 photo-less plants temporarily held out
+const NPLANTS = 65;  // plants in the demo deck (7 more parked in PLANTS_ON_HOLD until photos land)
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -35,9 +34,7 @@ async function openReview(page) {
 // seed n plants due today, the rest due far in the future; deck progress cleared for a known 8-card start
 const seedDue = (page, n) => page.evaluate(count => {
   const srs = {};
-  let made = 0;   /* due plants must be dealable — photo-holdout cards never enter the review deck */
-  PLANTS.forEach((p, i) => { const isDue = dealable(i) && made < count; if (isDue) made++;
-    srs[p.latin] = { box: 1, due: isDue ? srsDateStr(0) : '2099-01-01' }; });
+  PLANTS.forEach((p, i) => { srs[p.latin] = { box: 1, due: i < count ? srsDateStr(0) : '2099-01-01' }; });
   localStorage.setItem('timber-srs-v1', JSON.stringify(srs));
   localStorage.removeItem('timber-progress-v1');
 }, n);
@@ -148,7 +145,7 @@ const seedDue = (page, n) => page.evaluate(count => {
     left: +document.getElementById('left').textContent,
     done: +document.getElementById('done').textContent,
   }));
-  check('exit review restores full deck', restored.cards === NDECK && restored.left === NDECK
+  check('exit review restores full deck', restored.cards === NPLANTS && restored.left === NPLANTS
     && restored.done === 0, JSON.stringify(restored));
   check('progress still byte-identical after exit',
     await page.evaluate(() => localStorage.getItem('timber-progress-v1')) === progressBefore);
@@ -160,7 +157,7 @@ const seedDue = (page, n) => page.evaluate(count => {
   await dragCard(page, 160);
   await page.waitForTimeout(200);
   check('last due swipe drops back to the full deck',
-    await page.evaluate(() => document.querySelectorAll('.card').length) === NDECK);
+    await page.evaluate(() => document.querySelectorAll('.card').length) === NPLANTS);
 
   /* ---- 11. all caught up ---- */
   await seedDue(page, 0); // everything due 2099
@@ -173,7 +170,7 @@ const seedDue = (page, n) => page.evaluate(count => {
   }));
   check('zero due shows all-caught-up with next date',
     /all caught up · next 2099-01-01/.test(caught.label), JSON.stringify(caught));
-  check('zero due leaves deck + menu alone', caught.cards === NDECK && caught.sheetOpen);
+  check('zero due leaves deck + menu alone', caught.cards === NPLANTS && caught.sheetOpen);
 
   /* ---- 12. deck reset never wipes SRS ---- */
   await page.click('.sheet .scrim', { position: { x: 15, y: 300 } }); await page.waitForTimeout(350);
