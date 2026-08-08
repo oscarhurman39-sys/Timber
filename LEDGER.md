@@ -4,6 +4,20 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 2
+progress: 2026-08-08 — **plant-build line brought across: deck 65 -> 88 (95 known).**
+  Oscar: "bring across all plant 80 something" — the claude/plant-build-timber-6ta360
+  branch (another chat, forked at the 66-deck r8 shell) had built to 89, of which 23
+  cards + 1200px photos were new to this line: Goshiki Osmanthus, Camellia 'Doctor
+  King', Worcester Gold Caryopteris, two Achilleas, Leucothoe WHITEWATER, Hydrangea
+  DAREDEVIL, Rhaphiolepis ENCHANTRESS, Philadelphus PETITE PERFUME PINK, Phlomis
+  italica, Scabiosa FLUTTER, Cotoneaster 'Variegatus', Crinodendron, Prunus
+  'Kojo-no-mai', Escallonia PINK ELLE, Euonymus 'Harlequin', Miscanthus 'Morning
+  Light', Festuca INTENSE BLUE, Berberis 'Orange Ice', Pennisetum TINY TAILS, Katsura,
+  Lobelia STARSHIP, Lomandra WHITE SANDS (Loquat already here). Cards + photos ported
+  onto the current shell; that branch never synced plants.csv, so the 23 CSV rows were
+  generated from the card objects (deck and csv both 95, no dupes). NPLANTS 88 in all
+  four suites. Build r14. All nine suites green. Old Plantatron backup's ~105-name
+  catalogue list is stock data, not cards — NOT ported.
 progress: 2026-08-08 — **r13 LIVE on Pages.** Oscar: the artifact preview isn't his
   link — deployed for real. Feature branch fast-forwarded onto the pwa branch
   (289fc40 -> 6848ee9), Pages run #13 green. [Unverified] served bytes — github.io
