@@ -3,7 +3,25 @@
 ## timber  [active]
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
-since: 2026-08-05  sessions-unchanged: 2
+since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-08 (later) — **deck fills the screen + two Euonymus: deck 88 -> 90.**
+  Oscar flagged the dead space above/below the card and the grimy black fade over the
+  action bar. Two causes, two fixes: (1) the 420x543 card is width-bound on phones and
+  was centred with the spare height split into two gaps — the card now stretches
+  vertically into that space (--csx/--csy split, capped at 1.25x; whole subtree scales
+  as one raster so internal alignment is untouched, photos crop via the same transform);
+  (2) the old always-on card shadow stacked ~57 deep into a near-solid ~60px halo — the
+  drop shadow now sits on hot cards only (3 stacked, clean edge, perf pixel-parity test
+  still green). Deck margins 12->8px. Added Emerald 'n' Gold + Emerald Gaiety Spindles
+  (JSON + photos via add-plant.js). Tool/test debt paid down along the way: add-plant
+  counted PLANTS_ON_HOLD rows into NPLANTS (set 96 with an 89 deck — suites imploded)
+  and only bumped 2 of the 4 counting suites — both fixed; perf-test's no-layout-on-drag
+  guard was timing-dependent on the photo trickle loader landing a load event inside
+  the drag window (any deck-size change re-rolled that dice) — photos now settle before
+  the measurement. plants.csv: note plants-tool.js export DROPS the 7 on-hold rows
+  (they live outside the PLANTS markers), so the 2 new rows were appended by hand;
+  export needs teaching about the hold block before it's safe to run again. Build r15.
+  All nine suites green.
 progress: 2026-08-08 — **plant-build line brought across: deck 65 -> 88 (95 known).**
   Oscar: "bring across all plant 80 something" — the claude/plant-build-timber-6ta360
   branch (another chat, forked at the 66-deck r8 shell) had built to 89, of which 23
