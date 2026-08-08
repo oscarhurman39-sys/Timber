@@ -128,7 +128,7 @@
 
   /* BACK — the buyer trade sheet (content lives in .backfit, sized to the card) */
   .back{transform:rotateY(180deg)}
-  .backfit{position:absolute;left:50%;top:50%;width:calc(420px*var(--csx,0.75));height:calc(543px*var(--csy,0.75));
+  .backfit{position:absolute;left:50%;top:50%;width:calc(420px*var(--csx,0.75));height:calc(600px*var(--csy,0.75));
     transform:translate(-50%,-50%);border-radius:16px;background:linear-gradient(180deg,#0d1c13,#0a160e);
     padding:18px 18px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
     box-shadow:0 10px 24px rgba(0,0,0,.4)}
@@ -349,20 +349,24 @@
   @media (prefers-reduced-motion:reduce){  /* new overlays/chips only — card animations are locked as-is */
     .stats .st-panel,.stats .st-scrim,.chip{transition-duration:.01ms}
   }
-  /* ============ v12 LOCKED CARD TEMPLATE (design/card-builder.html) ============
+  /* ============ v14 ELONGATED CARD TEMPLATE (design/card-builder.html) ============
      The card front is assembled from the final approved artwork's own painted
      assets (art/); plant-specific values render live from PLANTS data. The card
-     is authored at 420x543 and scaled to the deck with --csx/--csy: width-fit,
-     plus a capped vertical stretch (see updateCardScale) so the card fills the
-     deck's spare height on tall phones instead of floating between two dead
-     gaps. The whole subtree scales as one raster, so internal alignment is
-     untouched. Do not restyle. */
+     is authored at 420x600 — the v12 420x543 template elongated by inserting
+     150 art-px of plain spine/trim into the photo region of the frame
+     (art/frame-600.png, mirror-tiled seam at art rows 323..473; every visible
+     surface — trim, spine, bottom strip — is row-continuous). Top furniture
+     (title, crest, growth rail) keeps its pixel position from the top edge;
+     bottom furniture (ppp, plaque, soil, band) keeps its pixel position from
+     the bottom, so every overlay still lands exactly on its baked twin. The
+     card scales to the deck with --csx/--csy: width-fit plus a small capped
+     vertical stretch (see updateCardScale). Do not restyle. */
   .face{box-shadow:none;border-radius:0;overflow:visible}
-  .tscale{position:absolute;left:50%;top:50%;width:420px;height:543px;
+  .tscale{position:absolute;left:50%;top:50%;width:420px;height:600px;
     transform:translate(-50%,-50%) scale(var(--csx,0.75),var(--csy,0.75))}
   .tscale .stamp{z-index:30}
-  .tcard{width:420px;height:543px;position:relative;
-    background:url(art/frame-full.png);background-size:100% 100%;
+  .tcard{width:420px;height:600px;position:relative;
+    background:url(art/frame-600.png);background-size:100% 100%;
     border-radius:15px;
     font-family:Georgia,"Times New Roman",serif}
   /* Shadow on hot cards only. The old always-on shadow stacked ~57 deep: the
@@ -372,7 +376,7 @@
      pixel-identity check still holds (the hot set is identical in both shots). */
   .card.hot .tcard{box-shadow:0 10px 24px rgba(0,0,0,.4)}
   .tcard img{display:block}
-  .tinner{position:absolute;left:13.96%;top:2.10%;right:2.81%;bottom:4.91%;
+  .tinner{position:absolute;left:13.96%;top:1.90%;right:2.81%;bottom:4.44%;
     overflow:hidden;border-radius:5px;z-index:1}
   .tphoto{position:absolute;inset:0;pointer-events:none}
   .tphoto>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none}
@@ -398,7 +402,7 @@
     transform-origin:center;font-size:8px;letter-spacing:1.5px;color:#efe0b4;text-transform:uppercase;
     text-align:center;text-shadow:0 1px 4px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7)}
   .growth .mk{position:absolute;width:17px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
-  .crest{position:absolute;left:80.33%;top:3.23%;width:17.23%;z-index:3;text-align:center;
+  .crest{position:absolute;left:80.33%;top:2.92%;width:17.23%;z-index:3;text-align:center;
     filter:drop-shadow(0 2px 5px rgba(0,0,0,.35))}
   .crest img{width:100%}
   .crest .hnum{position:absolute;left:0;right:0;top:29%;text-align:center;font-family:Georgia,serif;
@@ -409,16 +413,16 @@
   .railval .v{position:absolute;inset:0;display:grid;place-items:center;
     writing-mode:vertical-rl;transform:rotate(180deg);
     font-size:12px;letter-spacing:1px;color:#e7ddb9;white-space:nowrap}
-  .rail-h{left:2.72%;top:37.87%;width:7.62%;height:11.22%}
-  .rail-s{left:2.72%;top:65.22%;width:7.62%;height:11.36%}
-  .ppp{position:absolute;left:15.14%;width:63.46%;top:53.9%;z-index:4;text-align:center;
+  .rail-h{left:2.72%;top:43.77%;width:7.62%;height:10.16%}
+  .rail-s{left:2.72%;top:68.52%;width:7.62%;height:10.28%}
+  .ppp{position:absolute;left:15.14%;width:63.46%;top:58.28%;z-index:4;text-align:center;
     font-family:Georgia,serif;font-size:9.5px;font-weight:700;letter-spacing:3.5px;
     text-transform:uppercase;color:#ecd7a0;
     text-shadow:0 1px 3px rgba(10,20,10,.92),0 0 8px rgba(10,20,10,.7)}
-  .plaque{position:absolute;left:15.14%;top:55.82%;width:63.46%;z-index:3}
+  .plaque{position:absolute;left:15.14%;top:60.02%;width:63.46%;z-index:3}
   .plaque>img,.soilp>img,.band>img{width:100%}
-  .soilp{position:absolute;left:80.33%;top:63.04%;width:15.59%;z-index:3}
-  .band{position:absolute;left:14.32%;top:87.10%;width:81.60%;z-index:3}
+  .soilp{position:absolute;left:80.33%;top:66.55%;width:15.59%;z-index:3}
+  .band{position:absolute;left:14.32%;top:88.33%;width:81.60%;z-index:3}
   .patch{position:absolute;background:url(art/parch-swatch.png);background-size:72px 64px;
     mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
@@ -605,7 +609,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r15 · 2026-08-08';   /* bump per deploy — shown in the menu foot so a phone's
+const BUILD='r16 · 2026-08-08';   /* bump per deploy — shown in the menu foot so a phone's
                                     version is checkable at a glance (the SW double-load
                                     made "which build am I on?" a real question) */
 const TTS='speechSynthesis' in window;
@@ -2741,16 +2745,17 @@ installRow.onclick=async()=>{
 };
 installRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();installRow.onclick();}};
 
-/* fit the fixed-geometry 420x543 card to whatever deck space the phone gives us.
+/* fit the fixed-geometry 420x600 card to whatever deck space the phone gives us.
    --csx is the uniform fit (width- or height-bound, as before). Tall phones are
-   width-bound, which used to strand the card between two big dead gaps; --csy
-   stretches the card into that spare height, capped at 1.25x so the artwork
-   stays believable. Any remaining slack stays centred. */
+   width-bound, which used to strand the card between two big dead gaps; the
+   natively taller v14 template covers most of that, and --csy stretches the
+   last bit, capped at 1.12x — at that level the artwork distortion is
+   invisible. Any remaining slack stays centred. */
 function updateCardScale(){
   const r=deck.getBoundingClientRect();
   if(!r.width||!r.height)return;
-  const fit=Math.min(r.width/420,r.height/543,1.3);
-  const csy=Math.max(fit,Math.min(r.height/543,fit*1.25));
+  const fit=Math.min(r.width/420,r.height/600,1.3);
+  const csy=Math.max(fit,Math.min(r.height/600,fit*1.12));
   const s=document.documentElement.style;
   s.setProperty('--csx',fit.toFixed(4));
   s.setProperty('--csy',csy.toFixed(4));

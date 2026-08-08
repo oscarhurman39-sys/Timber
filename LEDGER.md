@@ -4,6 +4,18 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-08 (later still) — **v14 elongated template: the card is natively
+  420×600.** Oscar wanted the card longer; a ChatGPT frame regeneration drifted
+  (restyled gold, redrawn ornaments, dropped the baked DOUBLE TAP TO MASTER strip)
+  and was rejected in favour of slicing the v12 art from its own pixels:
+  art/frame-600.png = frame-full + 150px of plain spine mirror-tiled in at a
+  measured plain row (row-continuous seams; interior seams invisible under the
+  live photo). Top furniture keeps px-from-top, bottom furniture px-from-bottom,
+  so overlays still land on their baked twins exactly. Extra height all goes to
+  the photo; runtime stretch cap cut to 1.12. card-builder + manifest (v3) +
+  protocol changelog updated in lockstep. Build r16. All nine suites + layout
+  audit green, zero audit-rule changes. Parked from ChatGPT's spec, Oscar's
+  call needed: folding SOIL into the aspect footer to widen the stats plaque.
 progress: 2026-08-08 (later) — **deck fills the screen + two Euonymus: deck 88 -> 90.**
   Oscar flagged the dead space above/below the card and the grimy black fade over the
   action bar. Two causes, two fixes: (1) the 420x543 card is width-bound on phones and

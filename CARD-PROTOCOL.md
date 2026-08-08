@@ -136,6 +136,23 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14 (ELONGATED TEMPLATE — card is now 420×600)**: Oscar wanted the card
+  longer without a reckless redesign (a ChatGPT frame regen drifted: restyled
+  gold, redrawn ornaments, deleted the baked master strip — rejected). Instead
+  the v12 art was elongated from its own pixels: 150 art-px of plain spine/trim
+  inserted into `frame-full.png` at row 323 (a measured plain window between
+  the top flourish and the HEIGHT lettering), mirror-tiled in two 75px
+  reflected segments so every seam is row-continuous → `art/frame-600.png`
+  (1103×1576). Only trim/spine/bottom-strip are ever visible (the live photo
+  covers the whole window), so interior seams don't matter. Re-anchoring rule:
+  regions above the insert keep px from the TOP edge (title, crest, listen,
+  growth rail), regions below keep px from the BOTTOM edge (ppp, plaque, soil,
+  band, both rail values) — identical to the art shift, so every overlay still
+  lands exactly on its baked twin (verified: plaque baked 0.60025 vs anchor
+  60.02%). All extra height goes to the photo. Deck runtime stretch cap cut
+  1.25 → 1.12 (near-invisible). Manifest v3 remapped the same way.
+  `design/card-builder.html` updated in lockstep. All nine suites + layout
+  audit green with zero rule changes.
 - **v12.6 (soil-panel 3-line overflow fixed)**: the standing brick — a long
   hyphenated soil value ("Rich, moisture-retentive", 24 chars, under the
   validator's 26-char warning threshold) wrapped to 3 lines and its third line
