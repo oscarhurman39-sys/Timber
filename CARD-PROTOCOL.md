@@ -53,6 +53,81 @@ The master strip sits at ~96% on a holo card rather than the baked ~98.2%,
 because the ornate border on the Eternal Flame frame swallows text at that
 height. If a future frame has a plain foot, move it back.
 
+### Effects: panels and wisps
+
+A holo entry is a config object, so a card can take its own panel artwork and any
+number of animated layers:
+
+```js
+const HOLO={
+  'cercis-canadensis-eternal-flame':{
+    frame:'art/frame-eternal-flame.png',
+    plaque:'art/holo/eternal-flame-plaque.png',
+    soil:'art/holo/eternal-flame-soil.png',
+    band:'art/holo/eternal-flame-band.png',
+    swatch:'art/holo/eternal-flame-swatch.png',
+    wisps:[
+      {src:'art/holo/eternal-flame-wisp.png', anim:'drift', dur:34, opacity:0.55, scale:1.7},
+    ],
+  },
+};
+```
+
+**Panels — two commands, and one rule you must not break.**
+
+```sh
+node tools/extract-frame-assets.js art/frame-<name>.png <name>
+```
+
+Cuts the plaque, soil and band out of the frame at the slot rectangles **read from
+the app's own CSS**, flattens each one against the standard parchment with a
+multiply, and writes an opaque PNG. It also makes a matching swatch for the value
+patches.
+
+The rule: **the panels must stay fully opaque.** The parchment carries baked
+SAMPLE values — `Jul–Oct`, `1/5`, `3/5`, `2/5`, lit month chips, filled widget
+icons — and the `.patch` swatches exist to hide them before the live values are
+printed. Doing the multiply in CSS instead of offline makes the panel translucent,
+the samples show through, and every row reads double. That was tried; it looked
+exactly as broken as it sounds. Flattening offline keeps the whole patch mechanism
+working untouched, and flattening the swatch with the same artwork is what stops
+the patches sitting on the panel as beige rectangles.
+
+**Wisps — the generic effect layer.**
+
+```sh
+node tools/extract-wisps.js art/frame-<name>.png <name>-wisp --mode shards --region 18,4,74,52
+```
+
+Keys an effect out of any artwork onto transparency. `--mode rainbow` keeps
+saturated iridescence, `--mode shards` keeps the brightest streaks and spikes,
+`--mode bright` keeps everything luminous; `--region x,y,w,h` in percent crops
+first, which is how you avoid pulling the border thorns into a layer meant to
+drift across the middle.
+
+Each entry in `wisps` becomes one animated layer inside the photo window. Three
+generic animations are available and no card needs CSS of its own:
+
+| `anim` | Motion |
+|---|---|
+| `drift` | slow wander with a little rotation — the base "alive" layer |
+| `sweep` | a shine travelling diagonally across the card |
+| `shimmer` | breathing glint, no travel |
+
+Constraints the system holds to, and why:
+
+- **Only `transform` and `opacity` animate**, so every layer stays on the
+  compositor. `perf-test` guards the layer budget and it does not move.
+- **Layers exist only on `.hot` cards** (`.card:not(.hot) .wisps{display:none}`),
+  so a 129-card deck never carries three animated elements per card.
+- **`mix-blend-mode:screen`** means an effect can only ADD light — it cannot muddy
+  the photograph underneath.
+- **`prefers-reduced-motion` holds a single frame** rather than hiding the layer,
+  so the card keeps its character and simply stops moving.
+- `perf-test` pauses all animations before its pixel-parity assertion, because
+  that check is about the deep toggle and an animation would break it for
+  unrelated reasons.
+
 **Commissioning a new frame:** `FRAME-BRIEF.md` has the exact geometry and a
 paste-ready prompt. Note that the Eternal Flame frame came back without the
 spine lettering and master strip despite the brief asking for them, and with the

@@ -436,6 +436,67 @@
           hidden and the value is set in gold directly on the artwork.
      Positions mirror the baked originals measured on frame-600.png. */
   .tcard.holo{background-size:100% 100%}
+
+  /* ---- panels: holo artwork with the parchment's ink composited onto it ----
+     NOT a blend mode. The parchment carries baked SAMPLE values ("Jul–Oct",
+     "1/5", "3/5", "2/5") which the opaque .patch swatches exist to cover before
+     the live value is printed. Any translucency lets those samples show through
+     and the card reads double. So the holo panels are flattened offline by
+     tools/extract-frame-assets.js — artwork underneath, real ink and icons on
+     top, fully opaque — and swapped in as ordinary images. Every mechanism above
+     them, patches included, then works exactly as it does on a standard card.
+     The patches get their own holo swatch for the same reason: they must stay
+     opaque, so they are re-skinned rather than blended. */
+  .tcard.holo .patch{background-image:var(--holo-swatch,url(art/parch-swatch.png))}
+
+  /* ============ WISPS — the generic effect layer ============
+     A reusable way to float anything over a card. Each .wisp is one transparent
+     PNG driven by one of the generic animations below; a card declares as many
+     as it likes in its HOLO entry and needs no CSS of its own.
+
+     Rules that keep this cheap:
+       - only transform and opacity are animated, so every layer stays on the
+         compositor and nothing triggers layout or paint,
+       - layers exist only on hot cards, so a 129-card deck never carries 3x129
+           animated elements,
+       - screen blending means the effect only ever ADDS light: it cannot muddy
+         the photograph underneath,
+       - the whole thing is inert under prefers-reduced-motion.  */
+  .wisps{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;
+    border-radius:5px;contain:strict}
+  .wisp{position:absolute;top:50%;left:50%;width:100%;height:100%;
+    background-repeat:no-repeat;background-position:center;background-size:contain;
+    mix-blend-mode:screen;opacity:0;will-change:transform,opacity;
+    transform:translate(-50%,-50%) scale(var(--ws,1.5))}
+  /* nothing animates until the card is near the top of the deck */
+  .card.hot .wisp{animation-duration:var(--wd,24s);animation-iteration-count:infinite;
+    animation-timing-function:ease-in-out;animation-direction:alternate}
+  .card:not(.hot) .wisps{display:none}
+
+  .card.hot .w-drift{animation-name:wispDrift}
+  .card.hot .w-sweep{animation-name:wispSweep;animation-direction:normal;animation-timing-function:linear}
+  .card.hot .w-shimmer{animation-name:wispShimmer}
+
+  @keyframes wispDrift{            /* slow wander, the base "alive" layer */
+    0%  {transform:translate(-54%,-47%) scale(var(--ws)) rotate(-2deg);opacity:calc(var(--wo)*.55)}
+    50% {transform:translate(-47%,-53%) scale(calc(var(--ws)*1.06)) rotate(1.5deg);opacity:var(--wo)}
+    100%{transform:translate(-52%,-49%) scale(var(--ws)) rotate(3deg);opacity:calc(var(--wo)*.7)}
+  }
+  @keyframes wispSweep{            /* a shine travelling across the card */
+    0%  {transform:translate(-115%,-70%) scale(var(--ws)) rotate(-14deg);opacity:0}
+    12% {opacity:var(--wo)}
+    88% {opacity:var(--wo)}
+    100%{transform:translate(15%,-30%) scale(var(--ws)) rotate(-14deg);opacity:0}
+  }
+  @keyframes wispShimmer{          /* breathing glint, no travel */
+    0%  {transform:translate(-50%,-50%) scale(var(--ws));opacity:calc(var(--wo)*.25)}
+    100%{transform:translate(-50%,-50%) scale(calc(var(--ws)*1.12));opacity:var(--wo)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    /* hold one frame rather than hiding it — the card keeps its character, it
+       just stops moving */
+    .card.hot .wisp{animation:none;opacity:calc(var(--wo)*.6)}
+  }
   .tcard.holo .railval img{display:none}                 /* green parchment patch, wrong on a red spine */
   .tcard.holo .railval .v{color:#ffe9a8;font-weight:600;
     text-shadow:0 1px 3px rgba(60,6,0,.95),0 0 7px rgba(90,10,0,.8)}
@@ -642,7 +703,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r20 · 2026-08-09 · 79e1dec';
+const BUILD='r21 · 2026-08-09 · 66c5afa';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4334,7 +4395,42 @@ const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/
    because those are baked into the standard frame art and not into these.
    Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
    card goes through the same layout audit as any other. */
-const HOLO={'cercis-canadensis-eternal-flame':'art/frame-eternal-flame.png'};
+const HOLO={
+  'cercis-canadensis-eternal-flame':{
+    frame:'art/frame-eternal-flame.png',
+    /* panel artwork cut from the frame by tools/extract-frame-assets.js. The
+       standard parchment still renders on top in multiply, so every baked label
+       and icon survives while the artwork glows through. */
+    plaque:'art/holo/eternal-flame-plaque.png',
+    soil:'art/holo/eternal-flame-soil.png',
+    band:'art/holo/eternal-flame-band.png',
+    /* the value patches must stay opaque (they hide the parchment's baked sample
+       values), so they get re-skinned with artwork rather than blended */
+    swatch:'art/holo/eternal-flame-swatch.png',
+    /* wisps float over the photo. Each entry is one layer: any transparent PNG
+       (tools/extract-wisps.js pulls them out of the frame art), one of the
+       generic animations, and how strongly it reads. */
+    wisps:[
+      {src:'art/holo/eternal-flame-wisp.png',   anim:'drift',   dur:34, delay:0,  opacity:0.55, scale:1.7},
+      {src:'art/holo/eternal-flame-shards.png', anim:'sweep',   dur:17, delay:-6, opacity:0.30, scale:1.25},
+      {src:'art/holo/eternal-flame-wisp.png',   anim:'shimmer', dur:7,  delay:-3, opacity:0.28, scale:2.1},
+    ],
+  },
+};
+/* Accept either a bare frame path or the full config object, so an entry can start
+   life as one line and grow. */
+/* One <i> per configured wisp layer. Everything an effect needs is inline: the
+   image, which generic animation drives it, how long it takes, and how strong it
+   reads. Adding a new vibe to a card is one more entry in its wisps array — no
+   new CSS, because the animations are generic. */
+function wispsHTML(ho){
+  if(!ho||!ho.wisps||!ho.wisps.length)return '';
+  const L=ho.wisps.map(w=>`<i class="wisp w-${w.anim||'drift'}" style="background-image:url(${w.src});`
+    +`--wd:${w.dur||24}s;--wo:${w.opacity==null?0.5:w.opacity};--ws:${w.scale||1.5};`
+    +`animation-delay:${w.delay||0}s"></i>`).join('');
+  return `<div class="wisps" aria-hidden="true">${L}</div>`;
+}
+const holoOf=slug=>{const h=HOLO[slug];return !h?null:(typeof h==='string'?{frame:h}:h);};
 const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
@@ -4366,6 +4462,7 @@ function renderCard(idx){
   const c=document.createElement('div');c.className='card deep';c.dataset.idx=idx;
   const bg=`linear-gradient(160deg,hsl(${p.hue} 45% 22%),hsl(${p.hue+20} 55% 12%))`;
   const slug=slugLatin(p.latin);
+  const ho=holoOf(slug);
   const sz=parseSize(p.size), soil=splitSoil(p.soil), months=parseMonths(p.peak);
   const pest=num(p.pestRisk), thirst=num(p.thirst), care=num(p.careLevel),
         growth=num(p.growthSpeed), sun=num(p.sunNeed), sunMin=num(p.sunMin);
@@ -4375,7 +4472,7 @@ function renderCard(idx){
     <div class="face front">
      <div class="tscale">
       <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>
-      <div class="tcard${HOLO[slug]?' holo':''}"${HOLO[slug]?` style="background-image:url(${HOLO[slug]})"`:''}>
+      <div class="tcard${ho?' holo':''}"${ho?` style="background-image:url(${ho.frame})${ho.swatch?`;--holo-swatch:url(${ho.swatch})`:''}"`:''}>
         <div class="tinner">
           <div class="tphoto">
             <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
@@ -4386,6 +4483,7 @@ function renderCard(idx){
             <div class="bot">${p.latin}</div>
             <button class="say" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">&#9654; Listen</button>
           </div>
+          ${wispsHTML(ho)}
           <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
         </div>
         <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
@@ -4393,7 +4491,7 @@ function renderCard(idx){
         <div class="crest"><img src="art/crest-blank.png" alt=""><span class="hnum">${p.hardiness}</span></div>
         <div class="ppp">Plant Power Points</div>
         <div class="plaque">
-          <img src="art/plaque-full.png" alt="">
+          <img src="${ho&&ho.plaque?ho.plaque:'art/plaque-full.png'}" alt="">
           <div class="patch lbl p-bloom-val"></div><div class="val-ink pval t-bloom">${p.peak||''}</div>
           <div class="patch lbl p-pest-val"></div><div class="val-ink pval t-pest">${pest==null?'':fmt5(pest)}</div>
           <div class="patch lbl p-thirst-val"></div><div class="val-ink pval t-thirst">${thirst==null?'':fmt5(thirst)}</div>
@@ -4404,14 +4502,14 @@ function renderCard(idx){
           <div class="patch tightv p-care-w"></div><div class="val-ink p-care-w"><div class="wrow care">${wRow('seca',care)}</div></div>
         </div>
         <div class="soilp">
-          <img src="art/soil-full.png" alt="">
+          <img src="${ho&&ho.soil?ho.soil:'art/soil-full.png'}" alt="">
           <div class="patch s-val"></div><div class="val-ink s-val s-val-ink">${soil.val}</div>
           ${soil.warn
             ?`<div class="patch s-warn"></div><div class="val-ink s-warn s-warn-ink">${soil.warn}</div>`
             :`<div class="patch s-tri-cover"></div><div class="patch s-warn"></div>`}
         </div>
         <div class="band">
-          <img src="art/band-full.png" alt="">
+          <img src="${ho&&ho.band?ho.band:'art/band-full.png'}" alt="">
           <div class="patch b-aspect"></div><div class="patch b-sun-cover"></div>
           <div class="b-div"></div><img class="b-sun" src="art/sun-small.png" alt="">
           <div class="val-ink t-baspect b-aspect-ink">${extractFacing(p.aspect)}</div>

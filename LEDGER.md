@@ -4,6 +4,38 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 (latest+) — **holo effects: panels, and a generic wisp layer.**
+  Oscar asked to isolate the rainbow patterns and spiky shards from his frame and
+  float them over the photo, to have a reusable animation he can hang any effect
+  on, and to swap the plaque / soil / aspect boxes for the ones drawn in his art —
+  keeping all of it generic for future special cards.
+  Two new tools, both reading geometry from the app rather than duplicating it.
+  `extract-frame-assets.js` cuts the three panels at the slot rectangles read from
+  timber.html's own CSS; `extract-wisps.js` keys an effect onto transparency with
+  rainbow / shards / bright modes and an optional region crop (the region matters —
+  keying the whole frame drags the border thorns into a layer meant to drift
+  across the middle).
+  THE PANEL TRAP, found by building it wrong first: doing artwork-x-parchment as a
+  CSS multiply makes the panel translucent, so the parchment's baked SAMPLE values
+  (Jul-Oct, 1/5, 3/5, 2/5) stop being hidden by the .patch swatches and every row
+  renders double. Flattened offline into an opaque PNG instead, the whole patch
+  mechanism keeps working untouched — and flattening the swatch with the same
+  artwork is what stops the patches sitting on a glowing panel as beige blocks.
+  Lifting the ink off the parchment was tried before that and looked worse: the
+  parchment's uneven vignette survives as a veil and the cleared value regions
+  stand out flat against it.
+  WISPS are the generic part: any transparent PNG, one of three animations (drift /
+  sweep / shimmer), declared per card in its HOLO entry with no new CSS. Only
+  transform and opacity animate so everything stays on the compositor; layers exist
+  only on .hot cards so a 129-card deck never carries 3x129 animated elements;
+  screen blending means an effect can only add light, never muddy the photo;
+  reduced-motion holds one frame rather than hiding it. Verified moving (three
+  distinct live transform matrices, frames differing over time).
+  ALSO removed a latent flake: perf-test's pixel-parity assertion compares two
+  screenshots a second apart, which any animation breaks regardless of what the
+  assertion is about. It passed only because the one holo card is buried and its
+  wisps are display:none. Animations are now paused for that check, verified to
+  give zero drift even with the holo card forced hot. Build r21.
 progress: 2026-08-09 (latest) — **the Eternal Flame holo card is real.** Oscar
   commissioned a frame from FRAME-BRIEF.md and it came back at aspect 0.6998
   against the specified 0.700 — effectively exact — with the plaque and soil boxes
