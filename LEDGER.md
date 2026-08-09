@@ -4,6 +4,38 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 (evening) — **Pink Kousa Dogwood: deck 131 -> 132. First card
+  added deliberately WITHOUT a cultivar name.** Oscar sent three benched Cornus
+  kousa photos with an AI-generated cultivar identification ('Milky Way',
+  'Satomi', 'Heart Throb', 'Scarlet Fire', 'Venus') and asked what I made of it.
+  Answer: confident and mostly unsupportable. Pink kousa bracts shift with
+  temperature, light, flower age and plant maturity, so the same tree a fortnight
+  apart reads as two cultivars — and the writeup's groupings were built on exactly
+  that. Two claims are contradicted by the photos themselves: bract length ≈ leaf
+  length **rules out 'Venus'** (bracts about double, and it is sold as C. ×
+  elwinortonii anyway), and the narrow finely-acuminate bracts **argue against
+  'Heart Throb'**, which is sold on broad rounded overlapping bracts. What the
+  photos DO establish, and what went on the card: this is a genuinely pink-bracted
+  selection, not a white form ageing pink — the colour is deep and even while the
+  central head is still tight and green. Also found: **the two cream-bracted
+  photos are different plants** (long-acuminate with gaps and pink tips vs rounded
+  overlapping with a pink base flush); bract shape is far more stable than colour,
+  so they must not be merged into one card.
+  Oscar wanted the pink one in the deck, so it went in as a SPECIES card with cvs
+  reading "unnamed pink form — the species is cream-white". Horticultural data is
+  inherited from the deck's existing Cornus kousa 'Zuilb1' card rather than
+  invented, and that is recorded in the JSON's uncertain list; only the size is
+  changed, to the species' spreading 4-8m rather than the columnar cultivar's.
+  This is the Sweet Cupcake lesson applied before the fact rather than after.
+  Photo focus 50% 52% — the default clipped the hero bloom's lower bracts behind
+  the stats plaque, and bract shape is the identifiable feature here.
+  Good news on the tooling: this was the first plant added through add-plant.js
+  since the trailing-comma fix, and it inserted cleanly — 131 -> 132 with the
+  derived count agreeing. The EXIF path is also fine: the source reads 4000x3000
+  landscape from its SOF header but carries an orientation tag, and the tool
+  staged it correctly as 1200x1600 portrait.
+  Build r24. Deck now has THREE Cornus kousa entries, two of which are the
+  duplicate 'Flower Tower' pair from item 8 — worth resolving together.
 progress: 2026-08-09 (later still) — **Jelena Witch Hazel + Mountain Hydrangea:
   deck 129 -> 131. Two real bugs in the add-plant tooling found by using it.**
   Both from Oscar's own photos, both first-of-kind in a small way: 'Jelena' is the

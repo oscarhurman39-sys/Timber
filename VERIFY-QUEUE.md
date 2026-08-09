@@ -180,6 +180,41 @@ its breeder code passes both `add-plant.js` and `data-audit.js`. The r18 audit
 caught the Goshiki/Tricolor rename but not this. A check on **cultivar codes inside
 `cvs`** would have found it — `'Zuilb1'` appears on two cards.
 
+### 9. Pink Kousa Dogwood — the cultivar is unknown, on purpose
+Added 2026-08-09 from Oscar's photo, at his request. It is a **species card**
+(`Cornus kousa`) with `cvs` reading "unnamed pink form — the species is
+cream-white", because **named pink kousas cannot be told apart from a
+photograph.** Bract colour shifts with temperature, light, flower age and plant
+maturity; the same tree a fortnight apart can look like two different cultivars.
+
+An AI-generated identification suggested 'Satomi', 'Heart Throb' and 'Scarlet
+Fire' for photos in this group. None is supportable, and two are actively
+contradicted by what the picture shows:
+
+- **bract length ≈ leaf length** → rules out **'Venus'**, whose bracts run to
+  roughly double and clearly overrun the leaves (it is also usually sold as
+  *Cornus* × *elwinortonii*, not as a kousa);
+- **bracts narrow and finely acuminate** → argues against **'Heart Throb'**,
+  which is sold on broad, rounded, overlapping bracts.
+
+What the photo *does* establish, and what the card is entitled to say: this is a
+genuinely pink-bracted selection, not a white form flushing pink with age — the
+colour is deep and even across the whole bract while the central flower head is
+still tight and green, which is early. A white kousa pinks up later and unevenly.
+
+**To settle it, Oscar needs the label or the receipt.** Then this becomes a
+cultivar card and the species card can carry a white-bracted photo instead — he
+has two, and they are not the same plant as each other (see below).
+
+**The other two benched kousa photos differ in bract shape**, which is far more
+stable than colour: one has long-acuminate bracts with gaps between them and pink
+at the *tips*; the other has rounded, abruptly-pointed, overlapping bracts flushed
+pink at the *base*. They are two different plants and should not be merged into
+one card.
+
+Also note this makes **three** `Cornus kousa` entries in the deck, two of which are
+the duplicate 'Flower Tower' pair in item 8. Worth resolving together.
+
 ---
 
 ## Accepted, not defects
