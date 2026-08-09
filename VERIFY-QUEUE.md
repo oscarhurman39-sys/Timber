@@ -242,6 +242,55 @@ three with no AI provenance markers and the largest at 2084×2834, but it matche
 neither of the plants it came with. Most consistent with *Phlox paniculata*
 (white). **Which plant is it for?** No card has been made from it.
 
+### 12. Avondale blossom frame — supplied, tried, off-spec, not shipped
+2026-08-09. Oscar supplied a pink-blossom card frame (assembled) plus a component
+breakdown sheet, for a special Cercis 'Avondale' card. **The two-photo blink he
+asked for is live; the frame is not.** It was fitted, rendered, and rejected here
+rather than shipped broken — the same call FRAME-BRIEF §0 records for the last
+attempt. The art is staged at `art/frame-avondale.png` (re-canvased to the correct
+1103×1576) and the breakdown sheet is the source for a rebuild.
+
+Three faults, all in FRAME-BRIEF's **load-bearing** column:
+
+1. **Canvas ratio.** Supplied at 1024×1536 = **0.667**; the spec is 1103×1576 =
+   **0.700**, and §1 says never change it. Rescaling fixes the canvas but not the
+   contents.
+2. **Spine.** The spine must be the left **154px (13.96%)**, because HEIGHT and
+   SPREAD are drawn there. The supplied spine is wider and carries ornament where
+   those values land, so the numbers sit on decoration.
+3. **The panels are painted where they cannot be seen.** The photo covers
+   x 154→1072, y 30→1506 — **94% of the card** — and everything inside that is
+   invisible (§2). The blossom plaque, soil panel and band are drawn in the lower
+   middle, i.e. under the photo. Running `extract-frame-assets.js` to cut them out
+   returned background and branches, because the drawn panels do not sit at the
+   app's slot coordinates.
+
+**To make it work, the panels must be drawn at these exact slots** (printed by
+`node tools/extract-frame-assets.js <frame> <name>`):
+
+| Slot | x | y | w | h |
+|---|---|---|---|---|
+| plaque | 15.14% | 60.02% | 63.46% | 28.30% |
+| soil | 80.33% | 66.55% | 15.59% | 21.83% |
+| band | 14.32% | 88.33% | 81.60% | 7.49% |
+
+Everything else — ornament style, blossom, metalwork, grain — is **free** (§0).
+The look is right; only the geometry is wrong.
+
+### 13. Is 'Avondale' really the winter-flowering one?
+Oscar asked for this card "due to winter flowering" and called it *Cercis
+canadensis* 'Avondale'. Two things to check:
+
+- The deck's Avondale is ***Cercis chinensis* 'Avondale'** (Chinese Redbud). The
+  deck's *canadensis* is 'Eternal Flame', which already has a holo card — so the
+  two may have been conflated.
+- Its `peak` is **Apr-May**, not winter. What is unusual, and what probably
+  prompted "winter", is that the flowers break straight out of bare wood before
+  any leaf shows (cauliflory), so a flowering plant looks leafless and wintry.
+
+Nothing was changed on that basis. If the intended card was 'Eternal Flame',
+the swap moves in one line of `PHOTO_SWAP`.
+
 ---
 
 ## Accepted, not defects

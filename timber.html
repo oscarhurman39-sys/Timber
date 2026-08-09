@@ -386,6 +386,26 @@
     overflow:hidden;border-radius:5px;z-index:1}
   .tphoto{position:absolute;inset:0;pointer-events:none}
   .tphoto>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none}
+  /* ---- two-photo cards: cross-cut through black ----
+     A card with a `photos` pair in HOLO shows both images stacked and blinks
+     between them: hold, snap to black, swap underneath, snap back. The swap is
+     hidden under the black frame, so it reads as one cut rather than a dissolve.
+     --holo-swap is the hold per photo; the full cycle is twice that.
+     Driven by CSS keyframes and gated on .hot, so only the top few cards ever
+     animate — a 130-card deck must not run 130 timers, and perf-test enforces
+     that buried cards neither paint nor take a GPU layer. */
+  .tphoto>img.alt,.tphoto>.pblack{opacity:0}
+  .tphoto>.pblack{position:absolute;inset:0;background:#000}
+  .card.hot .tphoto.swap>img.alt{animation:holoAlt calc(var(--holo-swap,3.5s)*2) steps(1,end) infinite}
+  .card.hot .tphoto.swap>.pblack{animation:holoBlack calc(var(--holo-swap,3.5s)*2) linear infinite}
+  /* the alt image switches instantly (steps) at the exact moment black is opaque */
+  @keyframes holoAlt{0%,49.99%{opacity:0}50%,99.99%{opacity:1}100%{opacity:0}}
+  /* 1.5% of a 7s cycle ≈ 105ms each way — the fastest fade that still renders as
+     a fade. Anything under ~17ms is less than one frame and reads as a hard cut. */
+  @keyframes holoBlack{0%{opacity:1}1.5%{opacity:0}48.5%{opacity:0}50%{opacity:1}51.5%{opacity:0}98.5%{opacity:0}100%{opacity:1}}
+  @media (prefers-reduced-motion:reduce){
+    .card.hot .tphoto.swap>img.alt,.card.hot .tphoto.swap>.pblack{animation:none}
+  }
   .pfall{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
   .pfall svg{width:60%;height:60%;opacity:.18}
   .tinner::after{content:"";position:absolute;inset:0;pointer-events:none;
@@ -709,7 +729,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r26 · 2026-08-09 · 7fae606';
+const BUILD='r27 · 2026-08-09 · f86cb48';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4463,6 +4483,11 @@ const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/
    Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
    card goes through the same layout audit as any other. */
 const HOLO={
+  /* Avondale earns a special card on the flowers: they come straight out of the
+     bare wood before a leaf shows (cauliflory), which is why the two-photo blink
+     suits it — the deck's existing photo is summer foliage and says nothing about
+     what the card is actually selling. `swap.hold` is how long each photo holds;
+     the cut through black is fixed in the keyframes at ~105ms each way. */
   'cercis-canadensis-eternal-flame':{
     frame:'art/frame-eternal-flame.png',
     /* panel artwork cut from the frame by tools/extract-frame-assets.js. The
@@ -4498,6 +4523,25 @@ function wispsHTML(ho){
   return `<div class="wisps" aria-hidden="true">${L}</div>`;
 }
 const holoOf=slug=>{const h=HOLO[slug];return !h?null:(typeof h==='string'?{frame:h}:h);};
+/* PHOTO_SWAP — cards that blink between TWO photographs instead of showing one.
+   Keyed by latin-slug; `alt` is the second image, `focus` its object-position,
+   `hold` how long each photo stays before the cut. The cut itself is CSS (see
+   .tphoto.swap), runs only on hot cards, and stops under prefers-reduced-motion.
+
+   Deliberately a pair, not a carousel: two photos is a comparison the eye can
+   hold, and it earns its place when one image cannot tell the whole story. Cercis
+   'Avondale' is the case that motivated it — the flowers come straight out of
+   bare wood before a leaf shows, so the deck's summer-foliage photo said nothing
+   about what the card is actually selling (peak Apr-May, "dense rose-purple pea
+   flowers wreathe the bare branches"). Leaf and flower alternating say it in one
+   card. Nothing else in the deck needs this; most plants are one photo honestly. */
+const PHOTO_SWAP={
+  'cercis-chinensis-avondale':{
+    alt:'photos/cercis-chinensis-avondale-stem.jpg',
+    focus:'50% 45%',
+    hold:'3.5s',
+  },
+};
 const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%','hydrangea-serrata':'45% 16%','cornus-kousa':'50% 52%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
@@ -4530,6 +4574,7 @@ function renderCard(idx){
   const bg=`linear-gradient(160deg,hsl(${p.hue} 45% 22%),hsl(${p.hue+20} 55% 12%))`;
   const slug=slugLatin(p.latin);
   const ho=holoOf(slug);
+  const swap=PHOTO_SWAP[slug]||null;
   const sz=parseSize(p.size), soil=splitSoil(p.soil), months=parseMonths(p.peak);
   const pest=num(p.pestRisk), thirst=num(p.thirst), care=num(p.careLevel),
         growth=num(p.growthSpeed), sun=num(p.sunNeed), sunMin=num(p.sunMin);
@@ -4541,9 +4586,11 @@ function renderCard(idx){
       <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>
       <div class="tcard${ho?' holo':''}"${ho?` style="background-image:url(${ho.frame})${ho.swatch?`;--holo-swatch:url(${ho.swatch})`:''}"`:''}>
         <div class="tinner">
-          <div class="tphoto">
+          <div class="tphoto${swap?' swap':''}"${swap&&swap.hold?` style="--holo-swap:${swap.hold}"`:''}>
             <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
             <img data-psrc="photos/${slug}.jpg" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
+            ${swap?`<img class="alt" data-psrc="${swap.alt}" style="object-position:${swap.focus||PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
+            <div class="pblack" aria-hidden="true"></div>`:''}
           </div>
           <div class="thead">
             <h2>${p.common}</h2>

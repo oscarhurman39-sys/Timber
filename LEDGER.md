@@ -4,6 +4,40 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 (night) — **two-photo cards ship; the Avondale frame does
+  not.** Oscar asked for Cercis 'Avondale' as a special card alternating two
+  photos every 3.5s with quick cuts through black, and supplied blossom frame art
+  plus a component breakdown sheet.
+  SHIPPED: `PHOTO_SWAP`, a new capability — a card can name a second photograph
+  and blink between the pair. Built as CSS keyframes, not JS timers, and gated on
+  `.hot`, so a 133-card deck never runs 133 animations and perf-test's compositing
+  budget still holds; it also stops under prefers-reduced-motion. Deliberately a
+  PAIR, not a carousel. Avondale is the case that earns it: peak Apr-May, "dense
+  rose-purple pea flowers wreathe the bare branches", and the deck's photo was
+  summer foliage — the card was showing none of what it sells. Leaf ↔ flower says
+  it in one card. Oscar asked for 1ms fades; **1ms is under one frame** (16.7ms at
+  60Hz) so it would render as a hard cut with no fade at all. Used ~105ms each way,
+  the fastest that still reads as a fade, with the hold exposed as `--holo-swap`.
+  Say the word and it becomes a true instant cut.
+  NOT SHIPPED — the frame. Fitted, rendered, rejected, per FRAME-BRIEF §0's
+  standing rule, rather than shipped broken. It is off-spec in three load-bearing
+  ways: canvas 0.667 against the required 0.700; a spine wider than the 154px the
+  HEIGHT/SPREAD values are drawn on, so the numbers land on ornament; and its
+  blossom plaque/soil/band painted in the lower middle, which is INSIDE the photo
+  rectangle (94% of the card) and therefore invisible. Extracting those panels at
+  the app's own slot coordinates returned background and branches, proving the
+  drawn panels sit somewhere else. The art is kept at art/frame-avondale.png,
+  re-canvased to 1103×1576 and ready; VERIFY-QUEUE item 12 carries the three exact
+  slot rectangles it needs. The look is right — only the geometry is wrong.
+  ALSO FLAGGED (item 13): Oscar called it "winter flowering" *Cercis canadensis*
+  'Avondale'. The deck's Avondale is *C. chinensis*; the *canadensis* is 'Eternal
+  Flame', which already holds a holo card. And Avondale peaks Apr-May — what looks
+  wintry is cauliflory, flowers straight out of bare wood before any leaf.
+  CLIMBERS: asked after the held climber photos — **there are none on disk.** That
+  is why all five are held, and their `size` fields still carry no H × W split
+  ("2-3m", "8-12m"), so both rails would render blank even with a photo. One
+  errand fixes both.
+  Build r27. Full gate 14/14 at --jobs 3.
 progress: 2026-08-09 (evening) — **Pink Kousa Dogwood: deck 131 -> 132. First card
   added deliberately WITHOUT a cultivar name.** Oscar sent three benched Cornus
   kousa photos with an AI-generated cultivar identification ('Milky Way',
