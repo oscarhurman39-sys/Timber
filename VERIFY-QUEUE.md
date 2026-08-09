@@ -155,6 +155,31 @@ the two is miscalibrated, and the deck now shows them side by side in any search
 for "witch hazel". 'Jelena' carries the figures from Oscar's research JSON;
 'Arnold Promise' predates it. Worth picking one pair of numbers for both.
 
+### 8. 'Flower Tower' Cornus kousa is in the deck TWICE
+Found 2026-08-09 while checking Cornus before adding more. Two cards, one plant:
+
+| line | common | latin | growth | pest | care | sun | sunMin |
+|---|---|---|---|---|---|---|---|
+| 826 | Flower Tower Dogwood | `Cornus kousa 'Flower Tower'` | 11 | 6 | 10 | 78 | 48 |
+| 2251 | Kousa Dogwood 'Flower Tower' | `Cornus kousa FLOWER TOWER ('Zuilb1')` | 7 | 4 | 5 | 70 | 40 |
+
+**Both cards name `'Zuilb1'` in their own `cvs` field**, so each one states it is the
+other. They also disagree on aspect (East/South/West vs Any aspect), size
+(2.5–4 × 0.5–1 m vs 3–4 × 1–1.5 m) and every rating above — so a customer gets a
+different answer depending on which card comes up.
+
+**Recommendation: keep 2251, retire 826.** 826 is the v12.4 card, the first built
+from a nested JSON, and the protocol records that its `water`/`prune`/`resilience`/
+`uses` were deliberately left blank; 2251 has all four filled plus the anthracnose
+resistance note. Not done unilaterally — removing a card is Oscar's call, and
+`plants-tool.js` requires `--allow-removals` for exactly this reason.
+
+**Tooling gap this exposes:** the deck's duplicate checks compare `latin` and
+`common` as exact strings, so a plant entered under its trade name and again under
+its breeder code passes both `add-plant.js` and `data-audit.js`. The r18 audit
+caught the Goshiki/Tricolor rename but not this. A check on **cultivar codes inside
+`cvs`** would have found it — `'Zuilb1'` appears on two cards.
+
 ---
 
 ## Accepted, not defects
