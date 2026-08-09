@@ -158,6 +158,20 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.1 (menu panel scrolls — a defect that grew with the deck)**: not a card
+  change, but a layout defect found by the plant work and logged here per
+  CORRECTION-PROTOCOL §4.5. `.sheet .panel` was `height:100%` with no overflow
+  handling while its filter chips are **generated from the deck**, so it grew with
+  every plant added. At 390×844 the content reached 1098px: "Reset progress" sat
+  36px below the fold and was untappable on a phone; adding Japanese Knotweed's
+  ⚠ NEVER STOCK chip took it to 68px. This is why `app-test` had been failing at a
+  varying line and being written off as container flakiness — Playwright's retry
+  loop occasionally landed the click. Fixed at the cheapest layer (§4.2):
+  `overflow-y:auto` + `overscroll-behavior:contain`, contained so the deck behind
+  the sheet can never pull-to-refresh. Per §4.1 the defect is now visible to the
+  suite — app-test asserts every menu row is reachable, and the assertion was
+  verified failing against an unfixed copy before the fix went in. 95 checks
+  (was 94); full gate 14/14.
 - **v14 (ELONGATED TEMPLATE — card is now 420×600)**: Oscar wanted the card
   longer without a reckless redesign (a ChatGPT frame regen drifted: restyled
   gold, redrawn ornaments, deleted the baked master strip — rejected). Instead

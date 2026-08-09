@@ -1288,6 +1288,16 @@
    "commercialUseCleared": false
   },
   {
+   "file": "reynoutria-japonica.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own AI-generated composite — the generator and its commercial-use terms are unrecorded",
+   "author": "Oscar Hurman (AI-assisted)",
+   "sourceUrl": null,
+   "commit": "50e5cc0",
+   "commitSubject": "Add Japanese Knotweed (128 -> 129) and fill the Choisya data gap",
+   "commercialUseCleared": false
+  },
+  {
    "file": "rhaphiolepis-delacourii-enchantress-moness.jpg",
    "source": "unrecorded",
    "licence": "unknown",

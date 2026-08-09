@@ -210,6 +210,21 @@ function topFlipped(page) {
   check('menu opens', await page.evaluate(() => document.getElementById('sheet').classList.contains('open')));
   c = await counts(page);
   check('menu learned count matches', c.menu === 1 && c.done === 1, JSON.stringify(c));
+  /* The menu's filter chips are generated from the deck, so the panel grows as plants
+     are added. It overflowed silently: at 128 plants "Reset progress" sat 36px below
+     the fold and could not be tapped on a 390x844 phone at all. That only ever showed
+     up as an opaque click timeout below, so assert the reachability directly. */
+  const menuFit = await page.evaluate(() => {
+    const panel = document.querySelector('#sheet .panel');
+    const row = document.getElementById('resetRow');
+    const scrolls = /auto|scroll/.test(getComputedStyle(panel).overflowY);
+    const overflows = panel.scrollHeight > panel.clientHeight;
+    const rowBottom = row.getBoundingClientRect().bottom - panel.getBoundingClientRect().top;
+    return { scrolls, overflows, reachable: scrolls || rowBottom <= panel.clientHeight,
+             scrollH: panel.scrollHeight, clientH: panel.clientHeight };
+  });
+  check('every menu row is reachable (panel scrolls when the deck outgrows it)',
+    menuFit.reachable, JSON.stringify(menuFit));
   await page.click('#resetRow'); await page.waitForTimeout(350);
   c = await counts(page);
   const sheetClosed = await page.evaluate(() => !document.getElementById('sheet').classList.contains('open'));

@@ -63,15 +63,65 @@ This is only wrong if the margin column is meant to be **gross**. If the band is
 net of carriage, potting and shrink, both are fine and the tool should be told to
 stop asking. Decide once and it applies to the whole deck.
 
-### 4. Choisya has no ratings at all
-**Mexican Orange Blossom** (*Choisya ternata*) is the only card in the deck with all
-seven ratings blank, so its stat rows render empty. Already tracked as the last
-line of `KNOWN_GAPS` in `tests/deck-audit.js`. Needs:
-`growthSpeed`, `pestRisk`, `thirst`, `careLevel`, `sunNeed`, `sunMin` — rubric in
-`CARD-STATS.md` §2.
+### 4. Choisya has no ratings at all — SETTLED 2026-08-09, one figure still open
+Filled from Oscar's research JSON: `growthSpeed` 9, `thirst` 6, `careLevel` 4,
+`sunNeed` 75, `sunMin` 40, and `aspect` is now the real facing
+**East / South / West** so the compass and light bar both render. `KNOWN_GAPS` in
+`tests/deck-audit.js` is empty for the first time.
 
-Its `aspect` also reads "Full sun / pt shade" in the data but renders as
-"Any aspect" with no light bar, which is the other half of that KNOWN_GAPS line.
+**Still needs Oscar: `pestRisk`.** The JSON said **8**; the card carries **3**.
+They cannot both be right, and the repo argues for 3:
+
+- `PLANT-BRIEF.md`'s rating scale uses *Choisya itself* as the canonical example
+  of the `0–3` "bulletproof" band. Accepting 8 makes the brief's own anchor
+  contradict the card it is anchored on.
+- The card's `resilience` has read "Pest-free, drought tolerant once established"
+  since it was written, and 8 means "occasional aphid/mildew".
+
+3 is the top of the bulletproof band, so it concedes the occasional problem
+without breaking the anchor. If Oscar's source for 8 is a real UK observation
+(Choisya *does* get scale and honey fungus in some gardens), then the fix is not
+just this card — `PLANT-BRIEF.md` needs a different anchor plant for the band.
+
+Two more calls made against the same JSON, both deliberate, neither needing action
+unless Oscar disagrees:
+- **`hue` stays 150**, not the JSON's 0. The JSON claims 0 is "the Timber
+  convention for predominantly white flowers"; the protocol says the opposite —
+  changelog v12.4 records 150 as the *Choisya white-flower precedent* and built
+  Flower Tower Dogwood on it. The deck is genuinely inconsistent here (Buddleja
+  'White Profusion', Davidia and Scabiosa 'Flutter Pure White' all use 0), so
+  **"what hue is a white flower" is worth settling once for the whole deck**
+  rather than per card.
+- **`peak` moved Apr–May → May-Jun** per the JSON. This shifts which month the
+  card appears under the "In season now" filter, so it is visible behaviour, not
+  just text.
+
+### 5. Japanese Knotweed — the card is legally loaded and the photo is AI art
+Added 2026-08-09. Two things need Oscar rather than a tool.
+
+**The compliance text has no field to live in.** The schema has no `compliance`
+key, so the legal position rides in `resilience` ("⚠ ILLEGAL TO SPREAD"), `type`
+("⚠ NEVER STOCK") and the full paragraph in `returnRisk` — the same borrow
+Gunnera uses (protocol v12.21). That is now **four cards** faking the same missing
+field (Gunnera's ban, Olive's Xylella, Eryngium's PBR, this). It works, but a
+staff member reading only the front card sees "ILLEGAL TO SPREAD · 1cm rhizome
+regrows" in the soil warning and nothing else. For a plant where getting it wrong
+is a legal problem for the garden centre, that is thin. The parked
+compliance-ribbon design is the fix.
+
+**The photo is an AI composite, not a field photo.** Deliberate — Oscar's call
+that a never-stock invasive should read as dangerous on sight, and it does. But
+the leaf shape and zig-zag habit are the only ID-true parts: the **red-flecked
+hollow cane** that the card's own `visual` names, and that actually confirms
+knotweed in a customer's garden, is not visible in the shot. As a teaching image
+for the one plant on the deck where a mis-ID has legal consequences, a plain
+cane-and-leaf photo would do more work. Worth having both — the dramatic one to
+make it memorable, a real one on the info sheet to make it identifiable.
+
+`photos/CREDITS.json` records it as Oscar's, `commercialUseCleared: false`,
+because **which generator made it and what its terms say about commercial use is
+unrecorded**. That is not a blocker for a learning tool; it is a blocker the day a
+garden centre pays for the deck.
 
 ---
 

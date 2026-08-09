@@ -188,7 +188,13 @@
   .sheet.open .scrim{opacity:1}
   .sheet .panel{position:absolute;top:0;right:0;height:100%;width:min(82%,320px);background:#0e1d14;
     border-left:1px solid rgba(255,255,255,.06);transform:translateX(100%);
-    transition:transform .28s cubic-bezier(.2,.8,.2,1);padding:22px 20px;display:flex;flex-direction:column;gap:6px}
+    transition:transform .28s cubic-bezier(.2,.8,.2,1);padding:22px 20px;display:flex;flex-direction:column;gap:6px;
+    /* The filter chips are generated from the data, so this panel grows with the deck.
+       Without a scroller its last rows just fall off the bottom of the phone: at 128
+       plants "Reset progress" already sat 36px below the fold and could not be tapped
+       at all. Scroll instead of overflowing, and keep the scroll inside the panel so it
+       never chains out to the page (the deck must not pull-to-refresh behind it). */
+    overflow-y:auto;overscroll-behavior:contain}
   .sheet.open .panel{transform:translateX(0)}
   .sheet h4{margin:6px 0 14px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
   .row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-radius:12px;cursor:pointer;font-size:16px}
@@ -609,7 +615,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r18 · 2026-08-09 · a0a2c7d';
+const BUILD='r21 · 2026-08-09 · 56c5261';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -668,13 +674,13 @@ const PLANTS = [
    seasonalImpact:"", growthSpeed:9, pestRisk:4, thirst:10, careLevel:8, sunNeed:72, sunMin:40},
 
   {common:"Mexican Orange Blossom", latin:"Choisya ternata", hue:150,
-   visual:"Scented white flowers, aromatic evergreen",
-   water:"Moderate · Adaptable",
-   aspect:"Full sun / pt shade · Adaptable",
-   soil:"Fertile, well-drained · Adaptable",
-   prune:"RHS 8 · Trim after flowering",
+   visual:"Glossy aromatic evergreen leaves · fragrant white starry flowers in spring",
+   water:"Moderate; low once established",
+   aspect:"East / South / West",
+   soil:"Any well-drained soil; Sheltered · avoid winter wet",
+   prune:"RHS 8 · Lightly shape after flowering if needed",
    source:"Wk14–16 (white bud showing)",
-   peak:"Apr–May",
+   peak:"May-Jun",
    order:"Book Wk6",
    bench:"8–10 wks",
    root:"MED",
@@ -685,12 +691,12 @@ const PLANTS = [
    shrink:"LOW · Reliable bench survivor",
    returnRisk:"MED · Leaf scorch if hot S-facing pot dries → advise pt shade & even moisture",
    pots:"2L, 3L, 5L",
-   cvs:"‘Sundance’ – yellow foliage · ‘Aztec Pearl’ – fine leaves",
+   cvs:"‘Sundance’ – yellow foliage · ‘Aztec Pearl’ – fine leaves · syn. Choisya grandiflora",
    hardiness:"H4",
    resilience:"Pest-free, drought tolerant once established",
-   uses:"Sensory gardens, hedging, gap fillers",
+   uses:"Sensory gardens · shrub borders · informal hedging",
    size:"1.5–2.5m H × 1.5–2.5m W",
-   seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:"", sunMin:""},
+   seasonalImpact:"", growthSpeed:9, pestRisk:3, thirst:6, careLevel:4, sunNeed:75, sunMin:40},
 
   {common:"Variegated Dwarf Weigela", latin:"Weigela florida ‘Nana Variegata’", hue:335,
    visual:"Cream-edged green leaves · pale-pink bells · compact rounded variegated shrub",
@@ -3840,7 +3846,32 @@ const PLANTS = [
    resilience:"exposed-site tolerant · adaptable · low maintenance",
    uses:"groundcover · containers · low hedging · wall training",
    size:"0.5–1 m H × 1–1.5 m W",
-   seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:7, careLevel:5, sunNeed:65, sunMin:40}
+   seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:7, careLevel:5, sunNeed:65, sunMin:40},
+
+  {common:"Japanese Knotweed", latin:"Reynoutria japonica", hue:105,
+   visual:"Hollow bamboo-like stems flecked red · zig-zag shovel leaves · creamy sprays",
+   water:"Adaptable — thrives in moist or badly drained ground",
+   aspect:"Any aspect",
+   soil:"Any soil, any pH; ILLEGAL TO SPREAD · 1cm rhizome regrows",
+   prune:"Never strim, mow or shred — fragments spread it",
+   source:"",
+   peak:"Aug-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"⚠ NEVER STOCK — invasive, ID only",
+   shrink:"",
+   returnRisk:"Must not be planted or caused to grow in the wild, and you must stop it spreading off your property; cut material and contaminated soil are controlled waste — registered carrier and authorised facility only. Use a specialist contractor",
+   pots:"",
+   cvs:"syn. Fallopia japonica · Polygonum cuspidatum",
+   hardiness:"H7",
+   resilience:"⚠ ILLEGAL TO SPREAD — rhizomes regrow after years dormant",
+   uses:"NOT for sale or planting · ID and report only",
+   size:"1.5–2.5 m H × 2.5–4 m+ W",
+   seasonalImpact:"", growthSpeed:20, pestRisk:2, thirst:8, careLevel:20, sunNeed:70, sunMin:40}
  ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.

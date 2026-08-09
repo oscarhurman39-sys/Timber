@@ -4,6 +4,60 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 (later) — **Choisya settled + Japanese Knotweed added: deck
+  128 -> 129. First plant work built on the r18 toolchain rather than the old
+  per-plant routine.** Started on the old system by mistake — the card was built,
+  the suites run card-by-card, and it cost minutes per gate at 129 cards. Redone
+  on top of r18: `run-all.js --fast` gates the data work in **0.3s** and the
+  browser suites run once, at the end. That is the whole difference; nothing about
+  the card changed. The fast checks earned it immediately — they caught a stale
+  `plants.csv` and a stale build stamp within a second of the row landing, both of
+  which the old routine would only have surfaced after a full browser run.
+  CHOISYA: the deck audit's last KNOWN_GAP, and VERIFY-QUEUE item 4. Filled from
+  Oscar's JSON — aspect is now the real facing East / South / West (compass and
+  light bar both render), growth 9 / thirst 6 / care 4 / sun 75 floor 40, plus
+  visual, water, soil warning, prune, uses. **KNOWN_GAPS is empty for the first
+  time.** Three calls went against the JSON and all are written up in VERIFY-QUEUE
+  item 4 rather than buried here: pestRisk 3 not 8 (PLANT-BRIEF uses Choisya as
+  its own "0–3 bulletproof" anchor — if 8 is right, the brief needs a new anchor
+  plant, so this is a rubric question, not a card question); hue stays 150 per
+  protocol v12.4, though the deck is genuinely split on white-flower hue and it is
+  worth settling once; peak Apr–May -> May-Jun, which moves the card in the "In
+  season now" filter. cvs merged, not replaced, so 'Sundance' and 'Aztec Pearl'
+  survive alongside the synonym.
+  KNOTWEED: the deck's **fourth compliance card and the first NEVER-STOCK one** —
+  it is here to be recognised and reported, not sold. Compliance borrows the
+  Gunnera fields again (v12.21). Deck records: growthSpeed 20 and careLevel 20 are
+  both firsts — careLevel is the containment and legal burden, not difficulty
+  keeping it alive — against pestRisk 2, genuinely pest-free. H7, hardiest card in
+  the deck. plant-sense passes it clean, which is worth noting: a card whose prose
+  says "rampant" and whose ratings say 20/20 is self-consistent.
+  Photo is Oscar's AI composite (fire and lightning, deliberately) — recorded in
+  CREDITS.json as his, `commercialUseCleared: false` because the generator's terms
+  are unrecorded. VERIFY-QUEUE item 5 covers both that and the ID weakness: the
+  red-flecked cane the card's own `visual` names is not visible in the shot.
+  THE REAL FIND — **app-test was never flaky; the menu is broken on a phone.**
+  It had been failing at a different line each run, which reads like timing, and
+  the earlier session wrote it off as container slowness. It is not: the menu
+  panel is `height:100%` with no overflow handling, and its filter chips are
+  GENERATED FROM THE DECK, so the panel grows every time a plant is added. At 390
+  × 844 the content is 1098px tall. **"Reset progress" sat 36px below the fold and
+  could not be tapped at all** — Playwright's retry loop sometimes shifted enough
+  to land the click and sometimes didn't, which is where the "flaky" impression
+  came from. Japanese Knotweed's ⚠ NEVER STOCK chip pushed it to 68px. Fixed at
+  the cheapest layer per CORRECTION-PROTOCOL §4.2 — `overflow-y:auto` +
+  `overscroll-behavior:contain` on `.sheet .panel` (contained so the deck behind
+  it can never pull-to-refresh, which perf/edge tests guard). Per §4.1 the defect
+  is now something the suite can SEE: app-test asserts every menu row is reachable
+  (95 checks, was 94), verified failing on an unfixed copy first. **This bug
+  reached a real phone and grows with every plant added** — anything else keyed to
+  deck size deserves the same look.
+  ALSO: `photo-credits.js --init` re-derives every photo's origin commit from
+  `git log --all`, so running it in a container with more remote branches fetched
+  rewrote 56 unrelated provenance records. Backed out — the single new entry was
+  added surgically instead. **The tool's output depends on which refs happen to be
+  local**, which is worth a guard before anyone runs --init again.
+  Build r19. Fast checks 5/5.
 progress: 2026-08-09 — **integrity pass: nothing was lost, and the paths that
   could lose things are closed.** Oscar asked for the five risks from the r17
   review fixed properly, worried progress had already gone missing.
