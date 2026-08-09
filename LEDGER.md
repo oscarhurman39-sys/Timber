@@ -4,8 +4,8 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
-progress: 2026-08-09 (night) — **two-photo cards ship; the Avondale frame does
-  not.** Oscar asked for Cercis 'Avondale' as a special card alternating two
+progress: 2026-08-09 (night) — **two-photo cards and the Avondale blossom frame both
+  ship.** Oscar asked for Cercis 'Avondale' as a special card alternating two
   photos every 3.5s with quick cuts through black, and supplied blossom frame art
   plus a component breakdown sheet.
   SHIPPED: `PHOTO_SWAP`, a new capability — a card can name a second photograph
@@ -19,16 +19,28 @@ progress: 2026-08-09 (night) — **two-photo cards ship; the Avondale frame does
   60Hz) so it would render as a hard cut with no fade at all. Used ~105ms each way,
   the fastest that still reads as a fade, with the hold exposed as `--holo-swap`.
   Say the word and it becomes a true instant cut.
-  NOT SHIPPED — the frame. Fitted, rendered, rejected, per FRAME-BRIEF §0's
-  standing rule, rather than shipped broken. It is off-spec in three load-bearing
-  ways: canvas 0.667 against the required 0.700; a spine wider than the 154px the
-  HEIGHT/SPREAD values are drawn on, so the numbers land on ornament; and its
-  blossom plaque/soil/band painted in the lower middle, which is INSIDE the photo
-  rectangle (94% of the card) and therefore invisible. Extracting those panels at
-  the app's own slot coordinates returned background and branches, proving the
-  drawn panels sit somewhere else. The art is kept at art/frame-avondale.png,
-  re-canvased to 1103×1576 and ready; VERIFY-QUEUE item 12 carries the three exact
-  slot rectangles it needs. The look is right — only the geometry is wrong.
+  THE FRAME: shipped — but only after I got it wrong. Oscar sent two files, an
+  assembled frame and a component breakdown sheet. **I used the breakdown sheet as
+  the frame**, rendered the mess that produced, and wrote a detailed VERIFY-QUEUE
+  entry declaring HIS artwork off-spec on three counts: wrong canvas ratio, wrong
+  spine width, panels painted where the photo covers them. Every measurement was
+  accurate and every conclusion wrong, because they were taken against the wrong
+  file. The assembled frame is 1049x1499, ratio 0.6998 — the same artboard as
+  Eternal Flame, needing no rescale and no rebuild. It went straight on, and the
+  spine ornaments carry the HEIGHT and SPREAD values exactly as drawn. Item 12 is
+  retracted in full and rewritten. Second time today that confident, specific and
+  wrong has been the failure mode (see the photo-provenance correction); the common
+  cause is concluding from a derived artefact without checking it is the artefact I
+  think it is.
+  PANELS STAY PARCHMENT, on both special cards. Oscar on Eternal Flame: he could not
+  read the stats and they were all over the place. He is right — dark label ink on
+  orange flame, with the month strip and the n/5 values worst hit. The extracted
+  fire panels are out and standard parchment is back; Avondale never got its panels
+  swapped, for the same reason. **New rule for special cards: holo where it
+  decorates, parchment where it informs.** The plaque, soil box and band are the one
+  part of a card with a job, and a card whose numbers cannot be read has failed at
+  it however good the border looks. Extracted panels kept in art/holo/ for a future
+  frame drawn light enough behind the ink.
   ITEM 13 SETTLED same session: Oscar confirms early spring is right, so `peak`
   Apr-May stands and the blink stays on *C. chinensis* 'Avondale'. No change.
   CLIMBERS: asked after the held climber photos — **there are none on disk.** That

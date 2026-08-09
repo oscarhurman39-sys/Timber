@@ -729,7 +729,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r27 · 2026-08-09 · f86cb48';
+const BUILD='r28 · 2026-08-09 · 2aff53e';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4483,22 +4483,29 @@ const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/
    Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
    card goes through the same layout audit as any other. */
 const HOLO={
-  /* Avondale earns a special card on the flowers: they come straight out of the
-     bare wood before a leaf shows (cauliflory), which is why the two-photo blink
-     suits it — the deck's existing photo is summer foliage and says nothing about
-     what the card is actually selling. `swap.hold` is how long each photo holds;
-     the cut through black is fixed in the keyframes at ~105ms each way. */
+  /* Avondale's blossom frame, Oscar's artwork, delivered at 1049×1499 — the same
+     artboard as Eternal Flame. Panels are deliberately NOT swapped here, for the
+     reason they were taken back off Eternal Flame: the plaque, soil box and band
+     are the one part of a card that has to be READ, and standard parchment reads.
+     The frame supplies the border, the spine and the blossom; the numbers stay
+     legible. That is the rule for special cards now — holo where it decorates,
+     parchment where it informs. */
+  'cercis-chinensis-avondale':{
+    frame:'art/frame-avondale.png',
+  },
   'cercis-canadensis-eternal-flame':{
     frame:'art/frame-eternal-flame.png',
-    /* panel artwork cut from the frame by tools/extract-frame-assets.js. The
-       standard parchment still renders on top in multiply, so every baked label
-       and icon survives while the artwork glows through. */
-    plaque:'art/holo/eternal-flame-plaque.png',
-    soil:'art/holo/eternal-flame-soil.png',
-    band:'art/holo/eternal-flame-band.png',
-    /* the value patches must stay opaque (they hide the parchment's baked sample
-       values), so they get re-skinned with artwork rather than blended */
-    swatch:'art/holo/eternal-flame-swatch.png',
+    /* NO panel artwork, deliberately. The extracted fire panels were tried here
+       (plaque / soil / band / swatch, cut by tools/extract-frame-assets.js) and
+       taken back out on Oscar's read of the built card: "I can't read the stats
+       and they're all over the place". He is right — dark label ink over orange
+       flame is low contrast, and the month strip and n/5 values were the worst of
+       it. The panels are the one part of the card that has a JOB, and a plant
+       card whose numbers cannot be read has failed at it whatever the border
+       looks like. So the standard parchment renders here and the holo treatment
+       stays where it is decoration rather than obstruction: the frame and the
+       wisps. The extracted panels are kept in art/holo/ for a future frame drawn
+       light enough behind the ink. */
     /* wisps float over the photo. Each entry is one layer: any transparent PNG
        (tools/extract-wisps.js pulls them out of the frame art), one of the
        generic animations, and how strongly it reads. */

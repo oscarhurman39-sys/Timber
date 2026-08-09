@@ -242,40 +242,27 @@ three with no AI provenance markers and the largest at 2084×2834, but it matche
 neither of the plants it came with. Most consistent with *Phlox paniculata*
 (white). **Which plant is it for?** No card has been made from it.
 
-### 12. Avondale blossom frame — supplied, tried, off-spec, not shipped
-2026-08-09. Oscar supplied a pink-blossom card frame (assembled) plus a component
-breakdown sheet, for a special Cercis 'Avondale' card. **The two-photo blink he
-asked for is live; the frame is not.** It was fitted, rendered, and rejected here
-rather than shipped broken — the same call FRAME-BRIEF §0 records for the last
-attempt. The art is staged at `art/frame-avondale.png` (re-canvased to the correct
-1103×1576) and the breakdown sheet is the source for a rebuild.
+### 12. Avondale blossom frame — SHIPPED 2026-08-09 (after my own error)
+Oscar supplied two files: an assembled blossom frame and a component breakdown
+sheet. **I used the wrong one as the frame**, fitted the breakdown sheet, saw it
+render badly, and wrote this entry declaring his artwork off-spec on three counts.
+That verdict was wrong and is retracted in full.
 
-Three faults, all in FRAME-BRIEF's **load-bearing** column:
+The assembled frame is **1049×1499, ratio 0.6998** — the same artboard as the
+working Eternal Flame frame, byte-for-byte the same dimensions. It needed no
+rescaling and no rebuild. It is now live on the card, spine ornaments carrying the
+HEIGHT and SPREAD values exactly as intended.
 
-1. **Canvas ratio.** Supplied at 1024×1536 = **0.667**; the spec is 1103×1576 =
-   **0.700**, and §1 says never change it. Rescaling fixes the canvas but not the
-   contents.
-2. **Spine.** The spine must be the left **154px (13.96%)**, because HEIGHT and
-   SPREAD are drawn there. The supplied spine is wider and carries ornament where
-   those values land, so the numbers sit on decoration.
-3. **The panels are painted where they cannot be seen.** The photo covers
-   x 154→1072, y 30→1506 — **94% of the card** — and everything inside that is
-   invisible (§2). The blossom plaque, soil panel and band are drawn in the lower
-   middle, i.e. under the photo. Running `extract-frame-assets.js` to cut them out
-   returned background and branches, because the drawn panels do not sit at the
-   app's slot coordinates.
+The lesson worth keeping: when two assets arrive together, **check which is which
+before concluding the artwork is at fault.** Everything measured in the retracted
+version was measured accurately — against the wrong file. Confident, specific and
+wrong is the failure mode to watch here; it is the same shape as the photo
+provenance mistake earlier in the day.
 
-**To make it work, the panels must be drawn at these exact slots** (printed by
-`node tools/extract-frame-assets.js <frame> <name>`):
-
-| Slot | x | y | w | h |
-|---|---|---|---|---|
-| plaque | 15.14% | 60.02% | 63.46% | 28.30% |
-| soil | 80.33% | 66.55% | 15.59% | 21.83% |
-| band | 14.32% | 88.33% | 81.60% | 7.49% |
-
-Everything else — ornament style, blossom, metalwork, grain — is **free** (§0).
-The look is right; only the geometry is wrong.
+**Panels are deliberately not swapped in**, and that is a real decision rather
+than a leftover: the drawn plaque, soil box and band are the one part of a card
+that has to be read, and the standard parchment reads. Same call as Eternal Flame
+below. Holo where it decorates, parchment where it informs.
 
 ### 13. 'Avondale' flowering season — SETTLED 2026-08-09, no change needed
 Asked whether the card was meant to be winter-flowering. **Oscar: it is early
