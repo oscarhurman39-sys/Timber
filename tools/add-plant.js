@@ -33,7 +33,8 @@ try {
   execFileSync(process.execPath, [path.join(__dirname, 'check-plant-json.js'), jsonPath], { stdio: 'inherit' });
 } catch { die('plant JSON failed validation — fix it first'); }
 const p = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-const slug = p.latin.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+/* NFD-strip accents to match the app's slugLatin — 'Chōshū' must become 'choshu', not 'ch-sh' */
+const slug = p.latin.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 /* ---- duplicate check + current count ---- */
 const HTML = path.join(ROOT, 'timber.html');
