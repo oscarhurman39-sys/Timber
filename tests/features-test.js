@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 128;  // plants in the demo deck (5 more parked in PLANTS_ON_HOLD until photos land)
+const NPLANTS = 129;  // plants in the demo deck (5 more parked in PLANTS_ON_HOLD until photos land)
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -83,17 +83,24 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   if (rounds.tradeQ) check('trade question quotes the retail price', /“£/.test(rounds.tradeQ), rounds.tradeQ);
 
   /* ---- weakest-first bias ---- */
-  const bias = await page.evaluate(() => {
+  /* The expected hit rate falls as the deck grows, so derive it from the deck size rather
+     than hardcoding it — a fixed threshold calibrated at 57 plants starts failing on a
+     correct picker once the deck is big enough (it did, at 128). */
+  const { bias, n } = await page.evaluate(() => {
     const srs = {};
     PLANTS.forEach((p, i) => { if (i > 0) srs[p.latin] = { box: 5, due: '2099-01-01' }; }); // PLANTS[0] unseen
     localStorage.setItem('timber-srs-v1', JSON.stringify(srs));
     let hits = 0;
     for (let i = 0; i < 400; i++) if (pickWeightedPlant() === PLANTS[0]) hits++;
     localStorage.removeItem('timber-srs-v1');
-    return hits;
+    return { bias: hits, n: PLANTS.length };
   });
-  // 57 plants: weakest weight 1 vs 1/6 each → p≈0.097, mean≈39/400; uniform would be ≈7
-  check('picker biases toward the weakest plant', bias >= 18, `weakest picked ${bias}/400 (expected ≈39, uniform ≈7)`);
+  // weakest weight 1 vs 1/6 for every other plant → p = 1/(1+(n-1)/6)
+  const mean = Math.round(400 / (1 + (n - 1) / 6));
+  const uniform = Math.round(400 / n);
+  const floor = Math.max(Math.round(mean / 2), uniform + 2);   // same mean/2 margin the 57-plant version used
+  check('picker biases toward the weakest plant', bias >= floor,
+    `weakest picked ${bias}/400 (expected ≈${mean}, uniform ≈${uniform}, floor ${floor})`);
 
   /* ---- session summary + SRS wiring on wrong answers ---- */
   await page.click('#menuBtn'); await page.waitForTimeout(350);

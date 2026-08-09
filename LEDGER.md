@@ -4,6 +4,41 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 — **Choisya gap closed + Japanese Knotweed added: deck 128 -> 129.**
+  Choisya ternata was the deck audit's only KNOWN_GAP (all ratings blank, aspect
+  "Full sun / pt shade" lost to "Any aspect"). Filled from Oscar's research JSON:
+  aspect now the real facing East / South / West, ratings growth 9 / pest 3 /
+  thirst 6 / care 4 / sun 75 floor 40, plus visual, water, soil warning, prune,
+  uses. KNOWN_GAPS is now empty — every card in the deck audits clean.
+  Three judgement calls against the JSON, all flagged for Oscar: **hue kept at
+  150**, not the JSON's 0 — the protocol records 150 as the deck's Choisya
+  white-flower precedent and Flower Tower Dogwood was built on it, so moving it
+  would strand that card; **pestRisk set 3, not the JSON's 8** — PLANT-BRIEF.md
+  uses Choisya itself as the canonical "0–3 bulletproof" anchor and the row's own
+  "Pest-free" resilience text agrees, so 8 would contradict the repo's own
+  calibration; **peak moved Apr–May -> May-Jun** per the JSON (this shifts the
+  "In season now" filter). cvs merged rather than replaced, so 'Sundance' and
+  'Aztec Pearl' survive alongside the syn. Choisya grandiflora.
+  **Japanese Knotweed (Reynoutria japonica)** is the deck's fourth compliance card
+  and the first NEVER-STOCK one — it is in the deck to be recognised and reported,
+  not sold. Compliance carried the Gunnera way (v12.21): `resilience` "⚠ ILLEGAL TO
+  SPREAD", `type` "⚠ NEVER STOCK", full legal text in `returnRisk` on the trade
+  back, and the soil warning "ILLEGAL TO SPREAD · 1cm rhizome regrows" under the
+  front card's warning triangle. Deck records: growthSpeed 20 and careLevel 20 are
+  both firsts (careLevel is the containment and legal burden, not difficulty
+  keeping it alive) against pestRisk 2 — genuinely pest-free. H7, the hardiest card.
+  Photo is Oscar's AI composite (fiery/lightning treatment, deliberate — the card
+  should read as dangerous); leaf shape and zig-zag stem habit are ID-true, but it
+  is artwork, not a field photo, so flagged in the same class as the Ajuga remake.
+  **Still no schema field for compliance** — the full legal paragraph only reaches
+  the trade back by borrowing `returnRisk`. Fourth card to need it; the parked
+  compliance-ribbon design is now the obvious next brick after the climber photos.
+  Test hygiene: features-test's weakest-first bias threshold was calibrated at 57
+  plants and hardcoded at 18 — it had started failing on a correct picker at deck
+  128 (16–17/400 on clean HEAD). Now derived from PLANTS.length. Suites: deck
+  audit PASS (129, zero known gaps), edge 9/9, srs 24/24, features 47/47, sw-update
+  PASS. app-test is timing-flaky in the cloud container and fails on clean HEAD too
+  (different line each run) — needs a run on Oscar's machine before the release.
 progress: 2026-08-08 (later still) — **v14 elongated template: the card is natively
   420×600.** Oscar wanted the card longer; a ChatGPT frame regeneration drifted
   (restyled gold, redrawn ornaments, dropped the baked DOUBLE TAP TO MASTER strip)
