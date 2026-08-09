@@ -1078,6 +1078,17 @@
    "commercialUseCleared": false
   },
   {
+   "file": "nymphaea-marliacea-carnea.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own plant and identification; supplied image file is AI-generated",
+   "author": "Oscar Hurman (plant/ID)",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": null,
+   "commercialUseCleared": false,
+   "note": "Oscar confirmed the plant and cultivar from his own pond. The IMAGE FILE as supplied carries a C2PA manifest from the OpenAI Media Service API (softwareAgent gpt-image v2.0, action c2pa.created, IPTC digitalSourceType trainedAlgorithmicMedia), i.e. the picture itself is synthetic rather than a camera capture. Recorded as not cleared for commercial use until a real photograph of the plant replaces it. 1086px wide, below the 1200px house standard."
+  },
+  {
    "file": "oenothera-lindheimeri-gaudi-rose-florgaucomro.jpg",
    "source": "unrecorded",
    "licence": "unknown",

@@ -93,6 +93,35 @@ Recorded so the same questions don't get re-litigated every batch.
 
 ---
 
+### 5. Two cards added 2026-08-09 need real photographs
+
+**Waterlily 'Marliacea Carnea'** is **dealt** on Oscar's own identification — he
+confirmed the plant and cultivar from his own pond, which is the authority that
+matters. But the image file supplied for it is **synthetic**: its C2PA manifest
+names the OpenAI Media Service API (`gpt-image` v2.0, action `c2pa.created`, IPTC
+`digitalSourceType: trainedAlgorithmicMedia`). So the card is showing a generated
+picture of a waterlily, not a photograph of the plant it describes. It is also
+1086px wide, under the 1200px house standard. Recorded in `photos/CREDITS.json`
+as **not** cleared for commercial use. Replace with a real photo of the pond when
+convenient.
+
+**Vial's primrose (*Primula vialii*)** is **held**, awaiting a clean photograph.
+The supplied shot is a genuine Galaxy S24 capture, but it has been AI-edited
+(`Photo assist`, IPTC `digitalSourceType: compositeWithTrainedAlgorithmicMedia`)
+and carries a visible "AI-generated content" watermark burned into the bottom-left
+pixels. Oscar's call was to re-shoot rather than crop. The data is in and validated
+— set `held` to 0 in `plants.csv` and import once a photo lands.
+
+### 6. Unidentified photo supplied 2026-08-09
+
+A third photograph arrived with those two: opposite lance-shaped leaves under white
+panicles, with a small purple flower in the background. It is the only one of the
+three with no AI provenance markers and the largest at 2084×2834, but it matches
+neither of the plants it came with. Most consistent with *Phlox paniculata*
+(white). **Which plant is it for?** No card has been made from it.
+
+---
+
 ## Photo provenance (separate from card facts)
 
 146 of the 151 photos have no committed licence record — see `photos/CREDITS.json`

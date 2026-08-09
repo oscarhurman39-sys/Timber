@@ -145,6 +145,14 @@ console.log(`\nall ${pairs.length} plants validated — proceeding to write\n`);
     catch { return false; }
   };
 
+  /* Keep plants.csv in step. It used to drift every time a plant was added, because
+     nothing wrote it back -- and export was unsafe to run (it dropped the hold
+     block). Both are fixed, so sync it here and the csv stops going stale. */
+  try {
+    execFileSync(process.execPath, [path.join(ROOT, 'plants-tool.js'), 'export'], { stdio: 'pipe', cwd: ROOT });
+    console.log('plants.csv re-exported (deck + hold)');
+  } catch (e) { console.error('WARNING: could not re-export plants.csv -- run: node plants-tool.js export'); }
+
   /* The data checks cost about a third of a second and catch what a fresh batch
      actually gets wrong — a duplicate name, a rating out of range, a card that
      contradicts itself, a photo with no provenance entry. Run them FIRST so a bad

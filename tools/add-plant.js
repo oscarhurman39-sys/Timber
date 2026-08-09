@@ -129,6 +129,14 @@ const count = dealt + 1;
     try { execFileSync(process.execPath, [path.join(ROOT, t), ...args], { stdio: 'inherit', cwd: ROOT }); return true; }
     catch { return false; }
   };
+  /* Keep plants.csv in step. It used to drift every time a plant was added, because
+     nothing wrote it back -- and export was unsafe to run (it dropped the hold
+     block). Both are fixed, so sync it here and the csv stops going stale. */
+  try {
+    execFileSync(process.execPath, [path.join(ROOT, 'plants-tool.js'), 'export'], { stdio: 'pipe', cwd: ROOT });
+    console.log('plants.csv re-exported (deck + hold)');
+  } catch (e) { console.error('WARNING: could not re-export plants.csv -- run: node plants-tool.js export'); }
+
   /* Data checks first — 0.3s, and they catch what a new row actually gets wrong. */
   const ok1 = run('tools/data-audit.js') && run('tools/plant-sense.js', ['--strict'])
     && run('tools/photo-credits.js', ['--check']);

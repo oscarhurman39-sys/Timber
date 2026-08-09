@@ -4,6 +4,36 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 (later) — **deck 129 + 1 held; the new photo-provenance check
+  earned its keep on day one.** Two plants arrived with three photos. Reading the
+  embedded C2PA manifests before building anything: the waterlily image is WHOLLY
+  AI-GENERATED (OpenAI Media Service API, gpt-image v2.0, IPTC
+  digitalSourceType=trainedAlgorithmicMedia), and its JSON had reasoned the cultivar
+  ID *from* that invented picture — a circle. The Primula vialii shot is a real
+  Galaxy S24 capture that has been AI-edited (Photo assist,
+  compositeWithTrainedAlgorithmicMedia) with an "AI-generated content" watermark
+  burned into the pixels. Oscar's calls: deal the waterlily on his own knowledge of
+  his pond (his ID, his authority — recorded honestly in CREDITS.json as a synthetic
+  image, not cleared for commercial use), and hold the primula for a clean re-shoot.
+  A third photo matched neither plant (probably Phlox paniculata) — parked as a
+  question, no card invented.
+  The validator caught real data faults too: the waterlily's aspect was a light
+  level not a facing (would have silently shown "Any aspect"), and both had soil /
+  soilWarning 2-6x over the measured panel limits.
+  TWO BUGS FOUND AND FIXED IN MY OWN WORK: (1) the pretty-printer from the integrity
+  pass stopped emitting a trailing comma after the last card, so add-plant's
+  append-style insert butted two object literals together and timber.html stopped
+  parsing — the trailing comma is load-bearing and is now commented as such;
+  (2) nothing ever wrote plants.csv back after an insert, so it drifted every time —
+  both add tools now re-export it, which is only safe because export finally
+  round-trips the hold block.
+  NEW AUDIT RULE: the waterlily's height read "0.1–0.15m above water" — 133px of
+  vertical ink in a 61px rail patch, a 72px overrun straight across the baked HEIGHT
+  lettering. The layout audit passed it, because it had no rule for rail overflow
+  and .v is absolutely positioned so its own rect never grows (the overflow is only
+  visible by measuring the text with a Range). Added rule C2 rail-overflow, verified
+  by negative test: it reports the 72.5px overrun and passes on the shortened value.
+  Build r19. All 14 checks green.
 progress: 2026-08-09 — **integrity pass: nothing was lost, and the paths that
   could lose things are closed.** Oscar asked for the five risks from the r17
   review fixed properly, worried progress had already gone missing.
