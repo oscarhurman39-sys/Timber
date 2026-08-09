@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 90;  // plants in the demo deck (7 more parked in PLANTS_ON_HOLD until photos land)
+const NPLANTS = 128;  // plants in the demo deck (5 more parked in PLANTS_ON_HOLD until photos land)
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -71,6 +71,9 @@ function topFlipped(page) {
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  /* full load of the 128-card deck takes ~13s cold and more under service-worker
+     cache churn — the 30s playwright default left no headroom and flaked on reload */
+  page.setDefaultNavigationTimeout(60000);
   const pageErrors = [];
   page.on('pageerror', e => pageErrors.push(String(e)));
 
@@ -398,7 +401,8 @@ function topFlipped(page) {
   const context = page.context();
   await context.setOffline(true);
   let offlineOk = true;
-  try { await page.reload({ waitUntil: 'load', timeout: 8000 }); } catch (e) { offlineOk = false; }
+  /* 8s was tuned for a ~90-card deck; a full reload now takes ~13s+ */
+  try { await page.reload({ waitUntil: 'load', timeout: 30000 }); } catch (e) { offlineOk = false; }
   if (offlineOk) {
     await page.waitForTimeout(300);
     const t = await page.title().catch(() => '');
@@ -420,9 +424,13 @@ function topFlipped(page) {
   /* ---- 14. data integrity: exact PLANTS field names ---- */
   const fieldCheck = await page.evaluate((NPLANTS) => {
     const required = ['common','latin','hue','visual','water','aspect','soil','prune','source','peak','order','bench','root','trade','retail','margin','type','shrink','returnRisk','pots','cvs','hardiness','resilience','uses','size'];
+    /* probe three known plants BY NAME, not position — deck order shifts as
+       lines merge and cards park/unpark, but the data itself must not */
+    const by = (l) => PLANTS.find(p => p.latin === l) || {};
     return PLANTS.length === NPLANTS && PLANTS.every(p => required.every(k => k in p)) &&
-      PLANTS[0].trade === '2L £3.80–£4.50' && PLANTS[1].latin === "Kniphofia 'Pyromania Orange Blaze'" &&
-      PLANTS[1].pestRisk === 3 && PLANTS[2].hardiness === 'H2';
+      by('Nandina domestica').trade === '2L £3.80–£4.50' &&
+      by("Kniphofia 'Pyromania Orange Blaze'").pestRisk === 3 &&
+      by('Plumbago auriculata').hardiness === 'H2';
   }, NPLANTS);
   check('PLANTS: all plants, exact field names, data intact', fieldCheck);
 

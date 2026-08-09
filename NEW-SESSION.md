@@ -61,6 +61,20 @@ the `PLANTS` row, bumps the test counts, runs both suites, and screenshots the n
 card to `tools/last-added-card.png`. **Look at the screenshot**, then commit and
 push. A duplicate latin name or any failed check aborts before anything is written.
 
+## Adding SEVERAL plants — verify once, not once per plant
+
+```sh
+node tools/add-plants-bulk.js a.json a.jpg b.json b.jpg c.json c.jpg
+```
+
+The suites are the whole cost of an add (one edge check walks every card with a
+~420ms settle, so suite time grows with the deck — minutes per run at 120+
+cards). `add-plant.js` pays that per plant; the bulk tool validates and
+dedup-checks *everything* up front (nothing is written if any plant fails),
+stages all photos, inserts all rows, then runs the suites **once** for the whole
+batch. Same validator, same row format, same gates. Two or more plants → use
+bulk; a single plant → `add-plant.js` is fine.
+
 Adding a plant never involves touching the design.
 
 ## Two standing gotchas
