@@ -4,6 +4,23 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 (latest) — **the Eternal Flame holo card is real.** Oscar
+  commissioned a frame from FRAME-BRIEF.md and it came back at aspect 0.6998
+  against the specified 0.700 — effectively exact — with the plaque and soil boxes
+  drawn within ~0.5% of their real overlay slots, so the parchment covers them
+  cleanly. What it did NOT carry, despite the brief spelling both out with
+  coordinates: the HEIGHT/SPREAD spine lettering and the DOUBLE TAP TO MASTER
+  strip. It also drew panels the brief listed as do-not-draw. Recorded in the brief
+  as the lesson: the model follows proportions and box positions reliably and
+  ignores small baked text and negative instructions.
+  Rather than re-commission, added a scoped `.holo` treatment: a HOLO map keyed by
+  latin-slug swaps the frame and adds a class that supplies the spine lettering
+  (from data-label), the master strip, and gold rail values with the parchment
+  patches hidden — those patches are tinted for the green spine and read as dark
+  blocks on a red one. Everything else is the standard overlay stack at the
+  standard anchors, so the holo card goes through the same layout audit as any
+  other and cannot drift on its own. Master strip sits at ~96% not the baked 98.2%
+  because this frame's ornate border swallows text at that height. Build r20.
 progress: 2026-08-09 (later) — **deck 129 + 1 held; the new photo-provenance check
   earned its keep on day one.** Two plants arrived with three photos. Reading the
   embedded C2PA manifests before building anything: the waterlily image is WHOLLY

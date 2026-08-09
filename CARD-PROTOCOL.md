@@ -26,6 +26,41 @@ Geometry has an equivalent rule: card-level overlay anchors live in
 `data/template-anchors.json` and are applied by `tools/template-geometry.js`.
 Change the card height with `--reflow`, not by hand.
 
+## 0c. Holo cards (special editions)
+
+A card can carry its own frame artwork instead of `art/frame-600.png`. Add its
+latin-slug to the `HOLO` map in `timber.html`:
+
+```js
+const HOLO={'cercis-canadensis-eternal-flame':'art/frame-eternal-flame.png'};
+```
+
+That swaps the background and adds the `.holo` class. **Everything else is
+unchanged** — crest, plaque, soil panel, band, growth rail and all live text are
+the same overlays at the same anchors, so a holo card goes through the same
+layout audit as any other and cannot drift on its own.
+
+The standard frame bakes three things into its pixels that a commissioned frame
+generally will not, so `.holo` supplies them in CSS:
+
+| Baked into `frame-600.png` | Supplied by `.holo` |
+|---|---|
+| HEIGHT / SPREAD lettering on the spine | `.railval::before`, from `data-label` |
+| DOUBLE TAP TO MASTER strip | `.tcard.holo::after` |
+| A green spine the parchment rail patches are tinted for | patches hidden; values set in gold on the artwork |
+
+The master strip sits at ~96% on a holo card rather than the baked ~98.2%,
+because the ornate border on the Eternal Flame frame swallows text at that
+height. If a future frame has a plain foot, move it back.
+
+**Commissioning a new frame:** `FRAME-BRIEF.md` has the exact geometry and a
+paste-ready prompt. Note that the Eternal Flame frame came back without the
+spine lettering and master strip despite the brief asking for them, and with the
+plaque and soil panels drawn in despite the brief saying not to — those drawn
+panels happen to sit within ~0.5% of the real overlay slots, so the real
+parchment covers them and no harm is done. Measure a returned frame with the
+same method before wiring it in.
+
 ## 1. Card anatomy (current draft — v2)
 
 - **Wood-grain frame** on all four sides (~13px, CSS gradients, original — no copied

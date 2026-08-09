@@ -423,6 +423,39 @@
   .plaque>img,.soilp>img,.band>img{width:100%}
   .soilp{position:absolute;left:80.33%;top:66.55%;width:15.59%;z-index:3}
   .band{position:absolute;left:14.32%;top:88.33%;width:81.60%;z-index:3}
+
+  /* ============ HOLO (special-edition frames) ============
+     A holo card supplies its own frame art via an inline background-image and
+     gains .holo. The standard frame bakes three things into its pixels that the
+     Eternal Flame artwork does not carry, so they are drawn here instead — only
+     for .holo, so the locked template is untouched for the other cards:
+       1. the HEIGHT / SPREAD lettering on the spine,
+       2. the DOUBLE TAP TO MASTER strip along the bottom,
+       3. legible rail values — the parchment rail patches are tinted for the
+          standard green spine and read as dark blocks on a red one, so they are
+          hidden and the value is set in gold directly on the artwork.
+     Positions mirror the baked originals measured on frame-600.png. */
+  .tcard.holo{background-size:100% 100%}
+  .tcard.holo .railval img{display:none}                 /* green parchment patch, wrong on a red spine */
+  .tcard.holo .railval .v{color:#ffe9a8;font-weight:600;
+    text-shadow:0 1px 3px rgba(60,6,0,.95),0 0 7px rgba(90,10,0,.8)}
+  /* spine labels: each sits immediately above its value patch, reading upward */
+  .tcard.holo .railval::before{content:attr(data-label);position:absolute;
+    left:0;right:0;bottom:100%;height:9.2%;
+    display:grid;place-items:center;writing-mode:vertical-rl;transform:rotate(180deg);
+    font-family:Georgia,serif;font-size:7.5px;letter-spacing:2.2px;text-transform:uppercase;
+    color:#ffdf9a;text-shadow:0 1px 3px rgba(60,6,0,.95),0 0 6px rgba(90,10,0,.75);
+    pointer-events:none}
+  /* Master strip. The baked original sits at ~98.2%, but that lands on this
+     frame's bright ornate border and the text disappears into it. The aspect band
+     ends at 95.82% and the frame's inner bottom box ends at ~97.1%, so the strip
+     goes in that darker 8px gap instead — same reading order, legible ground. */
+  .tcard.holo::after{content:"DOUBLE TAP TO MASTER.";position:absolute;
+    left:14%;right:4%;top:95.95%;height:1.5%;
+    display:grid;place-items:center;
+    font-family:Georgia,serif;font-size:7px;letter-spacing:2.6px;text-transform:uppercase;
+    color:#ffeec2;text-shadow:0 1px 2px rgba(50,4,0,1),0 0 5px rgba(70,6,0,.95);
+    z-index:4;pointer-events:none}
   .patch{position:absolute;background:url(art/parch-swatch.png);background-size:72px 64px;
     mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
@@ -609,7 +642,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r19 · 2026-08-09 · ed68cf9';
+const BUILD='r20 · 2026-08-09 · 79e1dec';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4295,6 +4328,13 @@ function splitSoil(str){                      /* value = soil type; warning = th
 const slugLatin=l=>l.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/widget-drop-out.png","widget-seca-fill":"art/widget-seca-fill.png","widget-seca-out":"art/widget-seca-out.png","widget-spray-fill":"art/widget-spray-fill.png","widget-spray-out":"art/widget-spray-out.png"};
 
+/* HOLO — special-edition frames, keyed by latin-slug. A card listed here swaps
+   art/frame-600.png for its own artwork and gains the .holo class, which supplies
+   the spine lettering and the master strip in CSS (see the holo block in <style>)
+   because those are baked into the standard frame art and not into these.
+   Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
+   card goes through the same layout audit as any other. */
+const HOLO={'cercis-canadensis-eternal-flame':'art/frame-eternal-flame.png'};
 const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
@@ -4335,7 +4375,7 @@ function renderCard(idx){
     <div class="face front">
      <div class="tscale">
       <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>
-      <div class="tcard">
+      <div class="tcard${HOLO[slug]?' holo':''}"${HOLO[slug]?` style="background-image:url(${HOLO[slug]})"`:''}>
         <div class="tinner">
           <div class="tphoto">
             <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
@@ -4348,8 +4388,8 @@ function renderCard(idx){
           </div>
           <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
         </div>
-        <div class="railval rail-h"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
-        <div class="railval rail-s"><img src="art/rail-patch-s.png" alt=""><span class="v">${sz.s}</span></div>
+        <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
+        <div class="railval rail-s" data-label="Spread"><img src="art/rail-patch-s.png" alt=""><span class="v">${sz.s}</span></div>
         <div class="crest"><img src="art/crest-blank.png" alt=""><span class="hnum">${p.hardiness}</span></div>
         <div class="ppp">Plant Power Points</div>
         <div class="plaque">

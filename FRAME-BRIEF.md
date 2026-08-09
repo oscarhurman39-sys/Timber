@@ -211,6 +211,39 @@ assembled from two different decks.
 
 ---
 
+## 7b. What actually came back (Eternal Flame, 2026-08-09)
+
+The first frame commissioned from this brief. Worth recording, because it shows
+which parts of the spec survive a round trip and which do not.
+
+**Got right:**
+
+| | |
+|---|---|
+| Aspect ratio | 0.6998 against a specified 0.700 — effectively exact |
+| Canvas | 1049 × 1500 rather than 1103 × 1576. Harmless: the art is stretched to the card with `background-size:100% 100%`, so only the ratio matters |
+| Plaque slot | drawn box within ~0.5% of the real 15.14% / 60.02% / 63.46% slot |
+| Soil slot | drawn box within ~0.5% of the real 80.33% / 66.55% / 15.59% slot |
+| No crest, no icons, no compass | correctly left to the overlays |
+
+**Got wrong:**
+
+- **No HEIGHT / SPREAD lettering on the spine**, despite being spelled out with
+  coordinates. Supplied in CSS by `.holo` instead.
+- **No DOUBLE TAP TO MASTER strip**, despite being called out as the thing the
+  previous attempt got closed for. Also supplied by `.holo`.
+- **Drew the plaque, soil panel and band boxes** despite an explicit do-not-draw
+  list. No harm as it turned out, because they land under the real parchment —
+  but that was luck, not compliance.
+- **Spine is ~16.2% wide against a specified 13.96%**, so the photo window
+  overlaps the spine's inner gold edge by about 2%. Barely visible in practice.
+
+**The lesson for next time:** the model reliably follows *proportions and box
+positions* and reliably ignores *"do not draw X"* and *small baked text*. So
+assume any lettering will have to be added in CSS, and assume anything on the
+do-not-draw list may arrive anyway — check that it lands where the real overlay
+will cover it.
+
 ## 8. Checking what comes back
 
 Before wiring a new frame in:
