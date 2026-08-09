@@ -4,6 +4,41 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 (later still) — **Jelena Witch Hazel + Mountain Hydrangea:
+  deck 129 -> 131. Two real bugs in the add-plant tooling found by using it.**
+  Both from Oscar's own photos, both first-of-kind in a small way: 'Jelena' is the
+  second Hamamelis × intermedia (pairs with 'Arnold Promise' like the two Acer
+  palmatums), Hydrangea serrata is the seventh hydrangea and the first species
+  rather than a named cultivar.
+  **THE TOOLING BUG THAT MATTERS: `add-plants-bulk.js` corrupted timber.html.**
+  The r18 csv round-trip writes the deck's last row with NO trailing comma; both
+  add-plant.js and add-plants-bulk.js append new rows straight before the `];`,
+  assuming there is one. Result: `sunMin:40}` immediately followed by `{common:` —
+  invalid JS, PLANTS unparseable, **the whole app dead**. This was armed the moment
+  r18 reformatted the file and would have hit whoever added the next plant; it hit
+  this one. The tools now insert the separator when the previous row needs it,
+  verified by simulating a comma-less tail and re-parsing. Worse, the run left the
+  broken file ON DISK — its count guard fired after the write, not before — so both
+  tools now re-parse what they wrote and **roll timber.html back** if it doesn't
+  come out clean, matching what r18 already did for plants-tool.js.
+  Second bug, same run: the bulk tool counted the deck as every `latin:` in the
+  file, so the 5 on-hold plants were included and 129+2 was reported as "136". It
+  now counts dealt rows only. The single-plant add-plant.js always got this right,
+  which is why it never showed up.
+  PHOTO: the hydrangea shot is unusually tall (1200×2768) and the default 50% 40%
+  crop showed only the red autumn foliage, clipping the flowers off the top edge —
+  fighting the card's own Jul-Sep bloom band. Focus set to 45% 16% so a white
+  lacecap sits in frame WITH the red leaves. Jelena needed no focus entry; the
+  default frames the backlit copper ribbons perfectly.
+  TWO THINGS FOR OSCAR, both in VERIFY-QUEUE rather than guessed at: the serrata
+  card's hue is 220 (blue, the species archetype) while **his photo shows a
+  white-flowered form** — and there is a nursery label in the shot, so this may
+  want to be a cultivar card like the deck's other six hydrangeas; and the two
+  Hamamelis × intermedia cards disagree on sunNeed (65 vs 80) and thirst (9 vs 11)
+  for cultivars of one hybrid, which now sit side by side in any "witch hazel"
+  search. Toxicity rides in `resilience` again (Lonicera precedent) — the fifth
+  card to borrow a field for something the schema does not have.
+  Build r23. Fast checks 5/5 throughout; full gate at the end.
 progress: 2026-08-09 (later) — **Choisya settled + Japanese Knotweed added: deck
   128 -> 129. First plant work built on the r18 toolchain rather than the old
   per-plant routine.** Started on the old system by mistake — the card was built,

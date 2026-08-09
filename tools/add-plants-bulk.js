@@ -37,6 +37,11 @@ let html = fs.readFileSync(HTML, 'utf8');
 const marker = '];\n/* PLANTS:END */';
 if (!html.includes(marker)) die('PLANTS:END marker not found in timber.html');
 const latins = [...html.matchAll(/latin:"([^"]+)"/g)].map(m => m[1].toLowerCase());
+/* Dupes are checked across the WHOLE file (a plant parked in PLANTS_ON_HOLD still
+   owns its name), but the deck count is the DEALT rows only — those before the
+   marker. Counting every latin in the file made the count include the on-hold
+   block, so a 129-card deck plus two plants reported 136. */
+const dealtBefore = [...html.slice(0, html.indexOf(marker)).matchAll(/latin:"([^"]+)"/g)].length;
 
 const slugOf = (latin) => latin.normalize('NFD').replace(/[̀-ͯ]/g, '')
   .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
@@ -96,9 +101,27 @@ console.log(`\nall ${pairs.length} plants validated — proceeding to write\n`);
    seasonalImpact:"", growthSpeed:${num(p.growthSpeed)}, pestRisk:${num(p.pestRisk)}, thirst:${num(p.thirst)}, careLevel:${num(p.careLevel)}, sunNeed:${num(p.sunNeed)}, sunMin:${num(p.sunMin)}},
 `;
   }
+  /* The deck's last row carries NO trailing comma — plants-tool.js writes it that
+     way after a csv round-trip. Appending rows straight before the `];` therefore
+     produced `sunMin:40}` followed by `{common:` with no separator: invalid JS that
+     took the whole app down, and it would hit the FIRST plant added after any csv
+     round-trip. Add the separator when the previous row needs one. */
+  const at = html.indexOf(marker);
+  const head = html.slice(0, at);
+  if (/}\s*$/.test(head) && !/},\s*$/.test(head)) html = head.replace(/}(\s*)$/, '},$1') + html.slice(at);
+  const original = fs.readFileSync(HTML, 'utf8');
   html = html.replace(marker, rows + marker);
   fs.writeFileSync(HTML, html);
-  const count = latins.length + pairs.length;
+  const count = dealtBefore + pairs.length;
+  /* Re-parse what was just written and roll back if it broke, rather than leaving a
+     corrupt timber.html on disk for the next command to trip over. */
+  try {
+    const derived = require('./plant-data.js').readDeck(fs.readFileSync(HTML, 'utf8')).length;
+    if (derived !== count) throw new Error(`deck parses to ${derived} plants, expected ${count}`);
+  } catch (e) {
+    fs.writeFileSync(HTML, original);
+    die(`insert produced an unusable PLANTS array (${e.message}) — timber.html rolled back, nothing changed`);
+  }
   console.log(`rows inserted: deck now ${count} plants`);
 
   /* ---- 4. plant-count literals in the suites ----

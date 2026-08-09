@@ -125,6 +125,36 @@ it but because output rights for AI images follow the generators' terms and nobo
 has checked what OpenAI's and Google's say. That is a ten-minute question for
 someone, not a defect.
 
+### 6. Hydrangea serrata — the card says blue, the photo is white
+Added 2026-08-09. `hue` is **220 (blue)**, the species archetype from the research
+JSON, and the JSON is explicit that colour "ranges from blue and violet through
+pink and red according to cultivar and soil chemistry". **Oscar's photo shows a
+white-flowered form** with pink-red fertile centres. So the card teaches "blue"
+next to a picture of white flowers.
+
+There is a **nursery label visible in the shot**. If it names the cultivar, this
+should probably become a cultivar card (like the deck's five other hydrangeas,
+all of which are named forms) rather than a species card — which would settle the
+hue, the flower colour and the hardiness in one go, since modern serrata cultivars
+are often hardier than the species' H4.
+
+Not guessed at either way: changing the hue to match one specimen of a genuinely
+variable species is the same class of move as inferring photo provenance from a
+tool that was never run.
+
+### 7. Two Hamamelis × intermedia cards disagree on light and water
+Same hybrid, two cultivars, two different answers:
+
+| | sunNeed | thirst |
+|---|---|---|
+| 'Arnold Promise' | 65 | 9 |
+| 'Jelena' (new) | 80 | 11 |
+
+Cultivars of one hybrid should not differ this much in light preference — one of
+the two is miscalibrated, and the deck now shows them side by side in any search
+for "witch hazel". 'Jelena' carries the figures from Oscar's research JSON;
+'Arnold Promise' predates it. Worth picking one pair of numbers for both.
+
 ---
 
 ## Accepted, not defects
