@@ -29,10 +29,8 @@ progress: 2026-08-09 (night) — **two-photo cards ship; the Avondale frame does
   drawn panels sit somewhere else. The art is kept at art/frame-avondale.png,
   re-canvased to 1103×1576 and ready; VERIFY-QUEUE item 12 carries the three exact
   slot rectangles it needs. The look is right — only the geometry is wrong.
-  ALSO FLAGGED (item 13): Oscar called it "winter flowering" *Cercis canadensis*
-  'Avondale'. The deck's Avondale is *C. chinensis*; the *canadensis* is 'Eternal
-  Flame', which already holds a holo card. And Avondale peaks Apr-May — what looks
-  wintry is cauliflory, flowers straight out of bare wood before any leaf.
+  ITEM 13 SETTLED same session: Oscar confirms early spring is right, so `peak`
+  Apr-May stands and the blink stays on *C. chinensis* 'Avondale'. No change.
   CLIMBERS: asked after the held climber photos — **there are none on disk.** That
   is why all five are held, and their `size` fields still carry no H × W split
   ("2-3m", "8-12m"), so both rails would render blank even with a photo. One

@@ -277,19 +277,11 @@ Three faults, all in FRAME-BRIEF's **load-bearing** column:
 Everything else — ornament style, blossom, metalwork, grain — is **free** (§0).
 The look is right; only the geometry is wrong.
 
-### 13. Is 'Avondale' really the winter-flowering one?
-Oscar asked for this card "due to winter flowering" and called it *Cercis
-canadensis* 'Avondale'. Two things to check:
-
-- The deck's Avondale is ***Cercis chinensis* 'Avondale'** (Chinese Redbud). The
-  deck's *canadensis* is 'Eternal Flame', which already has a holo card — so the
-  two may have been conflated.
-- Its `peak` is **Apr-May**, not winter. What is unusual, and what probably
-  prompted "winter", is that the flowers break straight out of bare wood before
-  any leaf shows (cauliflory), so a flowering plant looks leafless and wintry.
-
-Nothing was changed on that basis. If the intended card was 'Eternal Flame',
-the swap moves in one line of `PHOTO_SWAP`.
+### 13. 'Avondale' flowering season — SETTLED 2026-08-09, no change needed
+Asked whether the card was meant to be winter-flowering. **Oscar: it is early
+spring, and the card is right.** `peak` stays **Apr-May**, and the two-photo blink
+stays on ***Cercis chinensis* 'Avondale'** (Chinese Redbud) — not on the deck's
+*C. canadensis* 'Eternal Flame'. Nothing to do; recorded so it is not re-asked.
 
 ---
 
