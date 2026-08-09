@@ -4,6 +4,61 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 — **integrity pass: nothing was lost, and the paths that
+  could lose things are closed.** Oscar asked for the five risks from the r17
+  review fixed properly, worried progress had already gone missing.
+  AUDIT FIRST: new `tools/data-audit.js --history` replays all 73 commits that
+  touched timber.html. Verdict — **no card has ever been silently dropped.** All
+  128 dealt cards have their photo. The single disappearance is Holly Osmanthus
+  'Tricolor', deliberately renamed to Goshiki Holly Olive at 68d61a9 ('Goshiki'
+  is the accepted name, 'Tricolor' the synonym, recorded in the card's cvs); the
+  design line had separately ported a 'Goshiki' card so both names co-existed as
+  duplicates at 2e91159 and the r17 merge correctly kept one. Recorded in
+  data/renames.json so it never reads as a loss again.
+  THE LIVE BOMB: `plants-tool.js import` rebuilt cards from its FIELDS list, and
+  `sunMin` — on 132 cards — was not in it. One import would have wiped the sun-band
+  floor deck-wide. Export also never saw PLANTS_ON_HOLD, so a round-trip deleted
+  every held plant. Both fixed: csv carries a `held` column and round-trips both
+  blocks, the tool REFUSES to write if it meets a card field with no column, an
+  import that would remove a plant needs --allow-removals, backups are timestamped
+  in .backups/ (the old single .bak was eaten by a second import), and the write is
+  re-parsed and rolled back if it breaks. Round-trip verified lossless field-for-field
+  across all 133 cards and idempotent (second pass = zero-byte diff). Cards are
+  written back in the hand-authored style, not one-line JSON, so a two-field edit
+  stays a two-line diff.
+  SECOND VERIFICATION PASS: `tools/plant-sense.js` checks every card against
+  ITSELF — prose vs ratings, margin arithmetic vs quoted prices, size vs "dwarf",
+  peak vs claimed season. First run threw 35 "contradictions"; CARD-STATS.md showed
+  my pest and care rules were inverted and three parsers were wrong, so the tool was
+  fixed, not the data. Now 5 real findings, all written up in the new VERIFY-QUEUE.md
+  rather than guessed at: five held climbers have no H × W split (rails blank),
+  Meyer's Lemon and Kinme holly may be a size band too high, two margin bands sit
+  below their own gross arithmetic, and Choisya's ratings are still open.
+  ALSO: NPLANTS is now derived from timber.html in all four suites instead of
+  hand-typed in four places (add-plant/add-plants-bulk patched to match — their
+  regex had become a silent no-op); `tools/build-stamp.js` puts a content hash in
+  the build number so a stale stamp fails the run instead of reaching a phone, and
+  the Pages workflow now gates on it and verifies the SERVED BYTES after deploy;
+  `tools/template-geometry.js` turns card-height changes into arithmetic — validated
+  by reproducing the real v12 (543px) template from v14 to 4 decimal places, which
+  also proved the rails are bottom-anchored, not top as the v14 comment says;
+  `tools/deck-diff.js` compares plant data between branches semantically so the next
+  two-line merge is not archaeology. One runner (`tests/run-all.js`) plus an optional
+  pre-push hook.
+  FOUND EN ROUTE: features-test's weakest-plant bias assertion was a coin flip. Its
+  `bias >= 18` threshold was calibrated for a 57-plant deck; at 128 plants 18 IS the
+  expected value, so it failed about half the time on chance alone and had been
+  passing on luck. Threshold and sample size are now derived from the deck size with
+  a 4-sigma margin — same disease as the hardcoded NPLANTS, same cure.
+  PROVENANCE (the item Oscar asked to leave till last): `plant-images-tool.js` did
+  record licence, author and source URL for every photo it fetched — into
+  `plant-images/`, which is gitignored, so 146 records were written to scratch and
+  lost with the container while the images stayed in git. New `photos/CREDITS.json`
+  is a committed entry per photo; git history establishes 5 as Oscar's own, the rest
+  are honestly marked unrecorded/unknown rather than given a guessed licence. `pick`
+  now writes into the committed manifest. Fine for a learning tool; the unrecorded
+  ones need re-establishing before any card is shown to a garden centre commercially.
+  Build r18. All 14 checks green.
 progress: 2026-08-08 (later still) — **v14 elongated template: the card is natively
   420×600.** Oscar wanted the card longer; a ChatGPT frame regeneration drifted
   (restyled gold, redrawn ornaments, dropped the baked DOUBLE TAP TO MASTER strip)

@@ -89,26 +89,31 @@ const count = dealt + 1;
   fs.writeFileSync(HTML, html);
   console.log(`row inserted: deck now ${count} plants`);
 
-  /* ---- 4. NPLANTS in every suite that counts the deck ---- */
+  /* ---- 4. plant-count literals in the suites ----
+     NPLANTS itself is no longer patched: the four suites now derive it from
+     timber.html (tools/plant-data.js), which is what stops a deck change from
+     updating some suites and not others. Only the remaining hardcoded literals
+     need rewriting, and the derived value is asserted afterwards. */
   for (const t of ['tests/app-test.js', 'tests/edge-test.js', 'tests/srs-test.js', 'tests/features-test.js']) {
     const f = path.join(ROOT, t);
     let s = fs.readFileSync(f, 'utf8');
     const before = s;
-    s = s.replace(/const NPLANTS = \d+/, `const NPLANTS = ${count}`);
+    if (/const NPLANTS = \d+/.test(s)) die(`${t} still hardcodes NPLANTS — it should derive it from timber.html`);
     s = s.replace(/for \(let i = 0; i < \d+; i\+\+\) \{ await page\.click\('#learn'\)/g,
                   `for (let i = 0; i < ${count}; i++) { await page.click('#learn')`);
     s = s.replace(/PLANTS\.length === \d+/g, `PLANTS.length === ${count}`);
-    // edge-test string counters ('5', '6'...) follow NPLANTS-1 patterns handled via NPLANTS var in app-test;
-    // edge-test uses literals — rewrite them:
     s = s.replace(/c\.cards === \d+ && c\.left === '\d+'/g, `c.cards === ${count} && c.left === '${count}'`);
     s = s.replace(/s\.empty && s\.done === '\d+'/g, `s.empty && s.done === '${count}'`);
     s = s.replace(/s\.done === '\d+' && s\.cards === 0/g, `s.done === '${count}' && s.cards === 0`);
     s = s.replace(/s\.cards === \d+ && s\.done === '0'/g, `s.cards === ${count} && s.done === '0'`);
     s = s.replace(/c\.left === '\d+' && c\.done === '0'/g, `c.left === '${count}' && c.done === '0'`);
-    if (s === before) die(`no plant-count patterns found in ${t} — suite format changed?`);
-    fs.writeFileSync(f, s);
+    if (s !== before) fs.writeFileSync(f, s);
   }
-  console.log(`NPLANTS -> ${count} in both suites`);
+  {
+    const derived = require('./plant-data.js').readDeck(fs.readFileSync(HTML, 'utf8')).length;
+    if (derived !== count) die(`deck says ${derived} plants but this run inserted up to ${count} — counts disagree`);
+    console.log(`deck count ${count}, derived by every suite from timber.html`);
+  }
 
   /* ---- 5. serve + run suites ---- */
   let server = null;

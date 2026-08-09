@@ -22,6 +22,19 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      # The build stamp is the only way to tell which version a phone is running,
+      # because the service worker serves the previous build once before swapping.
+      # Refuse to deploy a stamp that does not match the content it claims to
+      # describe — otherwise that one signal silently starts lying.
+      - name: Build stamp matches content
+        run: node tools/build-stamp.js --check
+
+      # The plant data lives in four places that can drift apart. A deploy is the
+      # worst time to discover they have.
+      - name: Plant data is consistent
+        run: node tools/data-audit.js
+
       - uses: actions/configure-pages@v5
         with:
           enablement: true   # creates the Pages site on first run — no manual settings step
@@ -30,3 +43,24 @@ jobs:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      # Verify the SERVED BYTES, not just that the deploy job went green. This
+      # runs on a GitHub runner, which can reach the Pages URL, so it is real
+      # end-to-end verification rather than "the workflow succeeded, so probably".
+      # Pages can take a few seconds to propagate, hence the retry loop.
+      - name: Verify the deployed page is this commit
+        run: |
+          base="${{ steps.deployment.outputs.page_url }}"
+          case "$base" in */) ;; *) base="$base/" ;; esac   # page_url normally ends in / — don't rely on it
+          url="${base}timber.html"
+          echo "checking $url"
+          for i in 1 2 3 4 5 6; do
+            if node tools/build-stamp.js --verify "$url"; then
+              echo "verified on attempt $i"
+              exit 0
+            fi
+            echo "not live yet (attempt $i) — waiting 15s"
+            sleep 15
+          done
+          echo "::error::the deployed page never matched this commit"
+          exit 1

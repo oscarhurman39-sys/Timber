@@ -1,0 +1,90 @@
+{
+ "_readme": [
+  "Locked vertical anchors for the card template, in px at the reference card height.",
+  "anchor = how the element moves when the card is resized:",
+  "  top     keeps its distance from the TOP edge",
+  "  bottom  keeps its distance from the BOTTOM edge",
+  "  percent keeps its percentage (scales with the card)",
+  "These modes were DERIVED by diffing the real v12 (543px) and v14 (600px)",
+  "templates, not assumed: the v14 comment describes the rails as top furniture",
+  "but the pixels show they are bottom-anchored. tools/template-geometry.js",
+  "applies these arithmetically and --check asserts nothing has drifted."
+ ],
+ "derivedFrom": "v12 ab63bf1 (543px) vs v14 (600px)",
+ "cardHeight": 600,
+ "toleratePx": 0.75,
+ "cardLevel": [
+  {
+   "selector": ".thead",
+   "anchor": "percent",
+   "note": "card title + botanical name — scales with the card",
+   "topPct": 3.2,
+   "expectPx": 19.2,
+   "expectFromBottom": 580.8
+  },
+  {
+   "selector": ".crest",
+   "anchor": "top",
+   "note": "hardiness crest",
+   "topPct": 2.92,
+   "expectPx": 17.52,
+   "expectFromBottom": 582.48
+  },
+  {
+   "selector": ".rail-h",
+   "anchor": "bottom",
+   "note": "height rail patch",
+   "topPct": 43.77,
+   "expectPx": 262.62,
+   "expectFromBottom": 337.38
+  },
+  {
+   "selector": ".rail-s",
+   "anchor": "bottom",
+   "note": "spread rail patch",
+   "topPct": 68.52,
+   "expectPx": 411.12,
+   "expectFromBottom": 188.88
+  },
+  {
+   "selector": ".ppp",
+   "anchor": "bottom",
+   "note": "PLANT PROFILE strapline above the plaque",
+   "topPct": 58.28,
+   "expectPx": 349.68,
+   "expectFromBottom": 250.32
+  },
+  {
+   "selector": ".plaque",
+   "anchor": "bottom",
+   "note": "stats plaque",
+   "topPct": 60.02,
+   "expectPx": 360.12,
+   "expectFromBottom": 239.88
+  },
+  {
+   "selector": ".soilp",
+   "anchor": "bottom",
+   "note": "soil patch",
+   "topPct": 66.55,
+   "expectPx": 399.3,
+   "expectFromBottom": 200.7
+  },
+  {
+   "selector": ".band",
+   "anchor": "bottom",
+   "note": "aspect band",
+   "topPct": 88.33,
+   "expectPx": 529.98,
+   "expectFromBottom": 70.02
+  },
+  {
+   "selector": ".tinner",
+   "anchor": "top",
+   "note": "photo window top inset",
+   "topPct": 1.9,
+   "expectPx": 11.4,
+   "expectFromBottom": 588.6
+  }
+ ]
+}

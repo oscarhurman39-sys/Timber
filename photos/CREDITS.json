@@ -1,0 +1,1531 @@
+{
+ "_readme": [
+  "Provenance for every file in photos/. One entry per image.",
+  "",
+  "source    : \"oscar\" (his own photograph), \"wikimedia\" (via plant-images-tool.js),",
+  "            or \"unrecorded\" (came in before the record was committed).",
+  "licence   : SPDX-ish short name, or \"unknown\". NEVER guess one — an unknown",
+  "            licence is a fact worth recording; an invented one is a liability.",
+  "commit    : the commit that added the file, and its subject line. This is",
+  "            recovered from git history and is the strongest evidence available",
+  "            for the older photos.",
+  "",
+  "plant-images-tool.js only ever fetched from Wikimedia Commons and excluded",
+  "NC/ND licences, so the \"unrecorded\" files are very likely commercially usable —",
+  "but \"very likely\" is not a licence. Before any commercial use, the unrecorded",
+  "entries need their source URL re-established, or the photo replaced."
+ ],
+ "generated": "2026-08-09",
+ "photos": [
+  {
+   "file": "abelia-raspberry-profusion.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "924aa6a",
+   "commitSubject": "Growth label runs inside the rail line; add Raspberry Profusion Abelia",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "acer-palmatum-bloodgood-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "94111b9",
+   "commitSubject": "Add Bloodgood Japanese Maple (second Acer palmatum cultivar)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "acer-palmatum-bloodgood.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "94111b9",
+   "commitSubject": "Add Bloodgood Japanese Maple (second Acer palmatum cultivar)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "acer-palmatum-osakazuki.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ca5684f",
+   "commitSubject": "Add Ōsakazuki Japanese Maple; fold diacritics in slug fn (macron ō→o)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "acer-rubrum-october-glory.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "949900d",
+   "commitSubject": "Add October Glory Red Maple; fix soil-value overflow, tighten checker to 36",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "acer-shirasawanum-moonrise-munn-001.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "achillea-millefolium-summer-fruits-lemon.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "1473c00",
+   "commitSubject": "Add Summer Fruits Lemon Yarrow to deck: 68 -> 69",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "achillea-the-beacon.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "8ad4233",
+   "commitSubject": "Add Fanal Yarrow to deck: 69 -> 70",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "agastache-summerlong-coral-flowers.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "4362878",
+   "commitSubject": "Add Agastache 'Summerlong Coral' + two-photo centre-window merge (card v3)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "agastache-summerlong-coral-leaf.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "4362878",
+   "commitSubject": "Add Agastache 'Summerlong Coral' + two-photo centre-window merge (card v3)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "agastache-summerlong-coral.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "c210f80",
+   "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "ajuga-reptans-burgundy-glow.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a627b42",
+   "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "albizia-julibrissin.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "alstroemeria-indian-summer-tesronto.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "c210f80",
+   "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "berberis-thunbergii-orange-ice.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "09770ce",
+   "commitSubject": "Add Orange Ice Japanese Barberry to deck: 83 -> 84",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "buddleja-davidii-white-profusion.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "buddleja-pugster-orchid-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "03166eb",
+   "commitSubject": "Add Pugster Orchid Buddleja (cutout composited onto hue gradient)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "buddleja-pugster-orchid.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "03166eb",
+   "commitSubject": "Add Pugster Orchid Buddleja (cutout composited onto hue gradient)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "callistemon-citrinus-splendens.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "camellia-japonica-doctor-king.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5c4681e",
+   "commitSubject": "Add Doctor King Camellia to deck: 66 -> 67",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "carpinus-betulus.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "29c5f56",
+   "commitSubject": "Add Common Hornbeam (Carpinus betulus)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "caryopteris-clandonensis-worcester-gold.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "85f3c12",
+   "commitSubject": "Add Bluebeard 'Worcester Gold' to deck: 67 -> 68",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "ceratostigma-willmottianum-sapphire-ring-lissbrill.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "81b9e2a",
+   "commitSubject": "Add Sapphire Ring Chinese Plumbago to deck: 89 -> 90",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cercidiphyllum-japonicum.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "b9c9e25",
+   "commitSubject": "Add Katsura Tree to deck: 85 -> 86",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cercis-canadensis-eternal-flame-leaf.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": "e36eb18",
+   "commitSubject": "Add Eastern Redbud 'Eternal Flame' from Oscar's photos + Gemini-drafted row",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cercis-canadensis-eternal-flame-wide.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": "e36eb18",
+   "commitSubject": "Add Eastern Redbud 'Eternal Flame' from Oscar's photos + Gemini-drafted row",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cercis-canadensis-eternal-flame.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "c210f80",
+   "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cercis-chinensis-avondale.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a627b42",
+   "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "chamaerops-humilis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": "799dc96",
+   "commitSubject": "Stage Oscar's own Chamaerops humilis photo (not wired into the app yet)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "choisya-ternata.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "1adb61f",
+   "commitSubject": "Add photo to Mexican Orange Blossom (Choisya ternata); clears photo gap",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cistus-pulverulentus-sunset.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "citrus-meyeri-meyer-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "4cd816c",
+   "commitSubject": "Add Meyer's Lemon (first edible/citrus card)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "citrus-meyeri-meyer.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "4cd816c",
+   "commitSubject": "Add Meyer's Lemon (first edible/citrus card)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "coprosma-inferno.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cordyline-australis-charlie-boy-ric01.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cornus-controversa-variegata.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "41c7623",
+   "commitSubject": "Add Wedding Cake Tree — deck reaches 40 plants",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cornus-kousa-flower-tower-zuilb1.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "c210f80",
+   "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cornus-kousa-flower-tower.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a627b42",
+   "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cotinus-coggygria-royal-purple.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "24466b6",
+   "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cotinus-grace.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "370ecf7",
+   "commitSubject": "Add Grace Smoke Bush to deck: 93 -> 94",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cotoneaster-atropurpureus-variegatus.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "260e349",
+   "commitSubject": "Add Variegated Wall Cotoneaster to deck: 76 -> 77",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "crinodendron-hookerianum.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "d9b814b",
+   "commitSubject": "Add Chile Lantern Tree to deck: 77 -> 78",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cryptomeria-japonica-globosa-nana.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cuprocyparis-leylandii-gold-rider-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "48a3eff",
+   "commitSubject": "Add Gold Rider Leyland Cypress (first conifer); fix checker for × nothogenus latin",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "cuprocyparis-leylandii-gold-rider.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "48a3eff",
+   "commitSubject": "Add Gold Rider Leyland Cypress (first conifer); fix checker for × nothogenus latin",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "davidia-involucrata.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "24466b6",
+   "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "dryopteris-erythrosora.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "d9366de",
+   "commitSubject": "Add Copper Shield Fern to deck: 92 -> 93",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "echinacea-delicious-strawberry.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "echinacea-sunseekers-rosy-ifecssrosy.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "edgeworthia-chrysantha.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "elaeagnus-submacrophylla.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "63f21b2",
+   "commitSubject": "Add Ebbinge's Silverberry (Elaeagnus xsubmacrophylla)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "eriobotrya-japonica.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a872585",
+   "commitSubject": "Complete the deck: five climbers + Japanese Loquat, 66 -> 72",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "eryngium-olivierianum-big-blue-myersblue.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "9bd66c4",
+   "commitSubject": "Add Big Blue Sea Holly (first populated compliance field: PBR)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "escallonia-laevis-pink-elle-lades.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "0936325",
+   "commitSubject": "Add Pink Elle Escallonia to deck: 79 -> 80",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euonymus-alatus.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "e7b392b",
+   "commitSubject": "Add Winged Spindle (Euonymus alatus) to the deck",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euonymus-fortunei-emerald-gaiety.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "571bf32",
+   "commitSubject": "Card fills the deck + 2 Euonymus fortunei cards: deck 88 -> 90 (r15)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euonymus-fortunei-emerald-n-gold.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "571bf32",
+   "commitSubject": "Card fills the deck + 2 Euonymus fortunei cards: deck 88 -> 90 (r15)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euonymus-fortunei-harlequin.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "99b18fa",
+   "commitSubject": "Add Harlequin Spindle to deck: 80 -> 81",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euonymus-japonicus-aureomarginatus-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ad26dd4",
+   "commitSubject": "Add Golden Japanese Spindle; fix photo-slug bug + add focus-photo audit rule",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euonymus-japonicus-aureomarginatus.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ad26dd4",
+   "commitSubject": "Add Golden Japanese Spindle; fix photo-slug bug + add focus-photo audit rule",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euonymus-japonicus-green-spire.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "0e7f3a2",
+   "commitSubject": "Add Green Spire Japanese Spindle (second Euonymus japonicus cultivar)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euphorbia-characias-silver-edge.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "fdb9291",
+   "commitSubject": "Add Silver Edge Mediterranean Spurge to deck: 96 -> 97",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euphorbia-martini-ascot-rainbow.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "97bc4ed",
+   "commitSubject": "Add Ascot Rainbow Martin's Spurge to deck: 97 -> 98",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "euphorbia-martini-miner-s-merlot-km-mm024.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "bc51e3e",
+   "commitSubject": "Add Miner's Merlot Martin's Spurge to deck: 95 -> 96",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "fatsia-japonica-tsumugi-shibori-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "0cd5c23",
+   "commitSubject": "Add Spider's Web Fatsia + Griselinia (two cutouts); fix cultivar-apostrophe slug bug",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "fatsia-japonica-tsumugi-shibori.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "0cd5c23",
+   "commitSubject": "Add Spider's Web Fatsia + Griselinia (two cutouts); fix cultivar-apostrophe slug bug",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "festuca-glauca-intense-blue-casblue.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "079905e",
+   "commitSubject": "Add Intense Blue Fescue to deck: 82 -> 83",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "ginkgo-biloba.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "griselinia-littoralis-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "0cd5c23",
+   "commitSubject": "Add Spider's Web Fatsia + Griselinia (two cutouts); fix cultivar-apostrophe slug bug",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "griselinia-littoralis.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "0cd5c23",
+   "commitSubject": "Add Spider's Web Fatsia + Griselinia (two cutouts); fix cultivar-apostrophe slug bug",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "gunnera-manicata-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "0d713f9",
+   "commitSubject": "Add Gunnera manicata; surface UK compliance/legal warning on trade back",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "gunnera-manicata.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "0d713f9",
+   "commitSubject": "Add Gunnera manicata; surface UK compliance/legal warning on trade back",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "hamamelis-intermedia-arnold-promise.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "24466b6",
+   "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "hibiscus-syriacus-oiseau-bleu.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "24466b6",
+   "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "hydrangea-arborescens-pink-annabelle.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": "d300bc6",
+   "commitSubject": "Add Pink Annabelle Hydrangea from Oscar's photo (new plant, not previously listed)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hydrangea-aspera-rosemary-foster.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "hydrangea-daredevil-jpd01.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "251b574",
+   "commitSubject": "Add Daredevil Hydrangea to deck: 71 -> 72",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "hydrangea-macrophylla-rendez-vous-french-cancan-bleu.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "hydrangea-macrophylla-sweet-cupcake.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "83f6de9",
+   "commitSubject": "Add Sweet Cupcake Hydrangea; fix aspect and soil parsers it exposed",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "hydrangea-paniculata-wim-s-red.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "hylotelephium-dream-dazzler.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "ilex-crenata-jenny.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "d4b2598",
+   "commitSubject": "Add Jenny Japanese Holly (Ilex crenata, box-blight-safe box substitute)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "ilex-crenata-kinme.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "indigofera-himalayensis-silk-road.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a253db5",
+   "commitSubject": "Add Himalayan Indigo 'Silk Road' (first pre-converted Timber-schema JSON)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "jasminum-officinale-devon-cream.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "kniphofia-pyromania-orange-blaze.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "37ef84f",
+   "commitSubject": "Add Kniphofia 'Pyromania Orange Blaze' + v4b card demonstrating Position rule",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "lavandula-stoechas-anouk-deluxe-purple-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "2b30ea4",
+   "commitSubject": "Add French Lavender 'Anouk Deluxe Purple' (sunniest card, sunNeed 95)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "lavandula-stoechas-anouk-deluxe-purple.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "2b30ea4",
+   "commitSubject": "Add French Lavender 'Anouk Deluxe Purple' (sunniest card, sunNeed 95)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "leucothoe-fontanesiana-whitewater-howw.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "98e2bad",
+   "commitSubject": "Add Whitewater Dog Hobble to deck: 70 -> 71",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "leycesteria-formosa-golden-lanterns.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "93357d6",
+   "commitSubject": "Add Japanese Mahonia (photo pending) and Golden Lanterns Leycesteria",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "liatris-spicata-cobalus.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "ligularia-treasure-island.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "liquidambar-styraciflua-slender-silhouette.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "24466b6",
+   "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "liriodendron-tulipifera-snow-bird.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "liriope-muscari.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "599930b",
+   "commitSubject": "Add Big Blue Lilyturf to deck: 91 -> 92",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "lobelia-speciosa-starship-deep-rose-pas905518.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "322566f",
+   "commitSubject": "Add Starship Deep Rose Lobelia to deck: 86 -> 87",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "lomandra-longifolia-white-sands-roma-13.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "e541e38",
+   "commitSubject": "Add White Sands Lomandra to deck: 87 -> 88",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "lonicera-purpusii-winter-beauty.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a6af042",
+   "commitSubject": "Add the Winter Beauty Honeysuckle photo",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "magnolia-honey-tulip-jurmag5.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "b879713",
+   "commitSubject": "Add Honey Tulip Magnolia (first trade-name-with-cultivar-code latin)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "mahonia-japonica.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "18506ba",
+   "commitSubject": "Stage Mahonia japonica photo (bronze new growth, species confirmed)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "miscanthus-sinensis-morning-light.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "c926e14",
+   "commitSubject": "Add Morning Light Eulalia to deck: 81 -> 82",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "monarda-didyma-bubblegum-blast.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "bdb3eb4",
+   "commitSubject": "Add Bubblegum Blast Bee Balm; fix soil-value overflow + tighten checker threshold",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "musa-basjoo-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "349b2d1",
+   "commitSubject": "Add Musa basjoo (fastest/thirstiest/highest-care, first single-facing aspect)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "musa-basjoo.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "349b2d1",
+   "commitSubject": "Add Musa basjoo (fastest/thirstiest/highest-care, first single-facing aspect)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "nandina-domestica.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a627b42",
+   "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "nerium-oleander.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ab63bf1",
+   "commitSubject": "Add Oleander to deck: 125 -> 126",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "oenothera-lindheimeri-gaudi-rose-florgaucomro.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "olea-europaea-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ce1b504",
+   "commitSubject": "Add Common Olive; keep Xylella biosecurity flag on the front card",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "olea-europaea.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ce1b504",
+   "commitSubject": "Add Common Olive; keep Xylella biosecurity flag on the front card",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "osmanthus-heterophyllus-goshiki.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "68d61a9",
+   "commitSubject": "Rename Holly Osmanthus 'Tricolor' -> Goshiki Holly Olive; refresh photo and data",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "paeonia-orange-victory.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ad55190",
+   "commitSubject": "Add Orange Victory Itoh Peony",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "passiflora-damsel-s-delight.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "9a7b2f6",
+   "commitSubject": "Add Damsel's Delight Passion Flower to deck: 94 -> 95",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "pennisetum-advena-tiny-tails-tus022.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ee2dab5",
+   "commitSubject": "Add Tiny Tails Fountain Grass to deck: 84 -> 85",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "pennisetum-rubrum.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "cf287a6",
+   "commitSubject": "Add blank hardiness crest (row-flank inpaint) + Pennisetum photo",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "phalaenopsis-hybrid-group-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "f6a4e61",
+   "commitSubject": "Add Cascading Moth Orchid (first houseplant/H1b/full-year-bloom card)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "phalaenopsis-hybrid-group.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "f6a4e61",
+   "commitSubject": "Add Cascading Moth Orchid (first houseplant/H1b/full-year-bloom card)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "philadelphus-petite-perfume-pink-p1.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "95748a2",
+   "commitSubject": "Add Petite Perfume Pink Mock Orange to deck: 73 -> 74",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "phlomis-italica.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "e5cfc1b",
+   "commitSubject": "Add Balearic Island Sage to deck: 74 -> 75",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "photinia-fraseri-pink-marble-cassini.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "pittosporum-tenuifolium-elizabeth.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": "2356e25",
+   "commitSubject": "Add Pittosporum 'Elizabeth' from Oscar's photo (new plant)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "plumbago-auriculata-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "e676e9a",
+   "commitSubject": "Add Cape Leadwort (Plumbago auriculata, H2 tender, hero-on-self cutout)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "plumbago-auriculata.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "e676e9a",
+   "commitSubject": "Add Cape Leadwort (Plumbago auriculata, H2 tender, hero-on-self cutout)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "potentilla-fruticosa-pink-beauty.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a627b42",
+   "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "prunus-cerasifera-nigra.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a7ea709",
+   "commitSubject": "Add Black Cherry Plum to deck: 99 -> 100",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "prunus-choshu-hizakura.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "prunus-incisa-kojo-no-mai.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ee575aa",
+   "commitSubject": "Add Kojo-no-mai Fuji Cherry to deck: 78 -> 79",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "prunus-lusitanica-angustifolia.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "12ed832",
+   "commitSubject": "Add Portuguese Laurel (Prunus lusitanica 'Angustifolia')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "rhaphiolepis-delacourii-enchantress-moness.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "3f14745",
+   "commitSubject": "Add Enchantress Indian Hawthorn to deck: 72 -> 73",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "rhododendron-gartendirektor-glocker.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ff494ba",
+   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "rhododendron-horizon-monarch-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "004c1a1",
+   "commitSubject": "Add Horizon Monarch Rhododendron",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "rhododendron-horizon-monarch.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "004c1a1",
+   "commitSubject": "Add Horizon Monarch Rhododendron",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "salix-integra-hakuro-nishiki-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "d9af470",
+   "commitSubject": "Add Flamingo Willow (cutout, hero-on-self composite)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "salix-integra-hakuro-nishiki.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "d9af470",
+   "commitSubject": "Add Flamingo Willow (cutout, hero-on-self composite)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "salix-sepulcralis-var-chrysocoma.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "salvia-blue-spire.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "87395ed",
+   "commitSubject": "Add Blue Spire Russian Sage (Salvia 'Blue Spire')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "salvia-hot-lips.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "ee6acfd",
+   "commitSubject": "Add Hot Lips Sage (first JSON with new toxicity + compliance fields)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "scabiosa-columbaria-flutter-pure-white-balflutturite.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "68e3c57",
+   "commitSubject": "Add Flutter Pure White Small Scabious to deck: 75 -> 76",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "sorbaria-sorbifolia-sem.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "4b9ec9d",
+   "commitSubject": "Add Sem False Spirea to deck: 98 -> 99",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "sorbus-autumn-spire-flanrock.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "spiraea-double-play-doozie-flowers.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a627b42",
+   "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "spiraea-double-play-doozie-leaf.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a627b42",
+   "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "spiraea-double-play-doozie.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a627b42",
+   "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "stachyurus-praecox.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5213b09",
+   "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "taxus-baccata-fastigiata-robusta.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "a00d797",
+   "commitSubject": "Add Fastigiata Robusta Yew to deck: 90 -> 91",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "uncinia-everflame.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "c210f80",
+   "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "viburnum-bodnantense-charles-lamont.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "24466b6",
+   "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "viburnum-bodnantense.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "04badbf",
+   "commitSubject": "Add Bodnant Viburnum to deck: 100 -> 101",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "viburnum-tinus-eve-price-cutout.png",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "3c88449",
+   "commitSubject": "Add Laurustinus 'Eve Price' — deck reaches 30 plants",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "viburnum-tinus-eve-price.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "3c88449",
+   "commitSubject": "Add Laurustinus 'Eve Price' — deck reaches 30 plants",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "weigela-florida-nana-variegata.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "5ac8d8c",
+   "commitSubject": "Enrich Variegated Dwarf Weigela: add photo, ratings, clean aspect/soil; keep trade data",
+   "commercialUseCleared": false
+  },
+  {
+   "file": "yucca-gloriosa-variegata.jpg",
+   "source": "unrecorded",
+   "licence": "unknown",
+   "author": "unknown",
+   "sourceUrl": null,
+   "commit": "c210f80",
+   "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": false
+  }
+ ]
+}
