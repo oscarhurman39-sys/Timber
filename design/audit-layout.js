@@ -12,6 +12,10 @@
    B. band-collisions — wiggle-room label must stay inside the band, clear of
                         the light bar's start, the sun icon and the marker;
                         marker triangle must sit within the bar span.
+   C2. rail-overflow  — the H/S size-rail values must fit their parchment patch.
+                        They are set vertically with nowrap, so a long value runs
+                        out of the patch and over the baked HEIGHT/SPREAD
+                        lettering instead of wrapping.
    C. rail-alignment  — growth diamond's VISUAL centre must sit on the axis
                         centreline within 0.5px. The sprite's visible content
                         is biased +0.8px right of its bitmap centre (measured
@@ -118,6 +122,31 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
         const off = (visCx - axCx) / scale;               // in card px
         if (Math.abs(off) > 0.5)
           bad('rail-alignment', `diamond visual centre ${off.toFixed(2)}px off the axis centreline`);
+      }
+
+      /* C2. size-rail values fit their parchment patch.
+         The H and S rails are ~61px tall at display size and the value is set
+         vertically with white-space:nowrap, so a long value does not wrap — it
+         runs straight out of the patch and over the baked HEIGHT / SPREAD
+         lettering on the spine. The .v element is absolutely positioned to fill
+         its box, so its own rect never grows: the overflow is only visible by
+         measuring the TEXT with a Range.
+         Caught by: Waterlily 'Marliacea Carnea' shipped with height
+         "0.1–0.15m above water" — 133px of ink in a 61px patch, a 72px overrun
+         straight across the HEIGHT label. Every other card sits ~3.6px inside.
+         Tolerance 2px: the patch edges are feathered by the mask, so a sub-2px
+         overrun is not visible ("75–100 cm" sits 1.7px over and reads fine). */
+      for (const cls of ['rail-h', 'rail-s']) {
+        const box = card.querySelector('.' + cls);
+        const v = box && box.querySelector('.v');
+        if (!v || !v.firstChild) continue;
+        const rg = document.createRange();
+        rg.selectNodeContents(v);
+        const tb = rg.getBoundingClientRect(), bb = box.getBoundingClientRect();
+        if (tb.height === 0 || bb.height === 0) continue;
+        const over = (tb.height - bb.height) / (bb.height / 60.8);   // normalise to display px
+        if (over > 2)
+          bad('rail-overflow', `${cls} value "${v.textContent.trim()}" overruns its patch by ${over.toFixed(1)}px and crosses the baked label — shorten the ${cls === 'rail-h' ? 'height' : 'spread'} value`);
       }
 
       /* D. ink stays within the card face */

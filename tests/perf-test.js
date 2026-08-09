@@ -70,7 +70,15 @@ const check = (name, ok, detail = '') => {
     [...document.querySelectorAll('.tphoto img')].filter(i => getComputedStyle(i).visibility !== 'hidden').length);
   check(`buried photos are not painted (${photos} visible)`, photos <= MAX_PAINTED, `${photos} > ${MAX_PAINTED}`);
 
-  /* ---- 3. hiding buried content must be pixel-identical ---- */
+  /* ---- 3. hiding buried content must be pixel-identical ----
+     Freeze animations first. This assertion is about ONE thing: whether the deep
+     toggle changes a visible pixel. A holo card's wisp layers animate whenever
+     they are hot, so two screenshots taken a second apart would differ no matter
+     what the toggle did, and the check would fail for a reason that has nothing
+     to do with what it tests. Today the only holo card sits deep in the deck and
+     its wisps are display:none, so this passes by luck — freeze them and it
+     passes on purpose, whatever the deck order happens to be. */
+  await page.addStyleTag({ content: '*,*::before,*::after{animation-play-state:paused !important}' });
   await page.evaluate(() => document.querySelectorAll('.deck .card').forEach(c => c.classList.remove('deep')));
   await page.waitForTimeout(2500);                       /* let every photo load and paint */
   const refShot = (await page.screenshot()).toString('base64');

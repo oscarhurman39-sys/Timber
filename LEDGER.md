@@ -144,6 +144,85 @@ progress: 2026-08-09 (later) — **Choisya settled + Japanese Knotweed added: de
   added surgically instead. **The tool's output depends on which refs happen to be
   local**, which is worth a guard before anyone runs --init again.
   Build r19. Fast checks 5/5.
+progress: 2026-08-09 (latest+) — **holo effects: panels, and a generic wisp layer.**
+  Oscar asked to isolate the rainbow patterns and spiky shards from his frame and
+  float them over the photo, to have a reusable animation he can hang any effect
+  on, and to swap the plaque / soil / aspect boxes for the ones drawn in his art —
+  keeping all of it generic for future special cards.
+  Two new tools, both reading geometry from the app rather than duplicating it.
+  `extract-frame-assets.js` cuts the three panels at the slot rectangles read from
+  timber.html's own CSS; `extract-wisps.js` keys an effect onto transparency with
+  rainbow / shards / bright modes and an optional region crop (the region matters —
+  keying the whole frame drags the border thorns into a layer meant to drift
+  across the middle).
+  THE PANEL TRAP, found by building it wrong first: doing artwork-x-parchment as a
+  CSS multiply makes the panel translucent, so the parchment's baked SAMPLE values
+  (Jul-Oct, 1/5, 3/5, 2/5) stop being hidden by the .patch swatches and every row
+  renders double. Flattened offline into an opaque PNG instead, the whole patch
+  mechanism keeps working untouched — and flattening the swatch with the same
+  artwork is what stops the patches sitting on a glowing panel as beige blocks.
+  Lifting the ink off the parchment was tried before that and looked worse: the
+  parchment's uneven vignette survives as a veil and the cleared value regions
+  stand out flat against it.
+  WISPS are the generic part: any transparent PNG, one of three animations (drift /
+  sweep / shimmer), declared per card in its HOLO entry with no new CSS. Only
+  transform and opacity animate so everything stays on the compositor; layers exist
+  only on .hot cards so a 129-card deck never carries 3x129 animated elements;
+  screen blending means an effect can only add light, never muddy the photo;
+  reduced-motion holds one frame rather than hiding it. Verified moving (three
+  distinct live transform matrices, frames differing over time).
+  ALSO removed a latent flake: perf-test's pixel-parity assertion compares two
+  screenshots a second apart, which any animation breaks regardless of what the
+  assertion is about. It passed only because the one holo card is buried and its
+  wisps are display:none. Animations are now paused for that check, verified to
+  give zero drift even with the holo card forced hot. Build r21.
+progress: 2026-08-09 (latest) — **the Eternal Flame holo card is real.** Oscar
+  commissioned a frame from FRAME-BRIEF.md and it came back at aspect 0.6998
+  against the specified 0.700 — effectively exact — with the plaque and soil boxes
+  drawn within ~0.5% of their real overlay slots, so the parchment covers them
+  cleanly. What it did NOT carry, despite the brief spelling both out with
+  coordinates: the HEIGHT/SPREAD spine lettering and the DOUBLE TAP TO MASTER
+  strip. It also drew panels the brief listed as do-not-draw. Recorded in the brief
+  as the lesson: the model follows proportions and box positions reliably and
+  ignores small baked text and negative instructions.
+  Rather than re-commission, added a scoped `.holo` treatment: a HOLO map keyed by
+  latin-slug swaps the frame and adds a class that supplies the spine lettering
+  (from data-label), the master strip, and gold rail values with the parchment
+  patches hidden — those patches are tinted for the green spine and read as dark
+  blocks on a red one. Everything else is the standard overlay stack at the
+  standard anchors, so the holo card goes through the same layout audit as any
+  other and cannot drift on its own. Master strip sits at ~96% not the baked 98.2%
+  because this frame's ornate border swallows text at that height. Build r20.
+progress: 2026-08-09 (later) — **deck 129 + 1 held; the new photo-provenance check
+  earned its keep on day one.** Two plants arrived with three photos. Reading the
+  embedded C2PA manifests before building anything: the waterlily image is WHOLLY
+  AI-GENERATED (OpenAI Media Service API, gpt-image v2.0, IPTC
+  digitalSourceType=trainedAlgorithmicMedia), and its JSON had reasoned the cultivar
+  ID *from* that invented picture — a circle. The Primula vialii shot is a real
+  Galaxy S24 capture that has been AI-edited (Photo assist,
+  compositeWithTrainedAlgorithmicMedia) with an "AI-generated content" watermark
+  burned into the pixels. Oscar's calls: deal the waterlily on his own knowledge of
+  his pond (his ID, his authority — recorded honestly in CREDITS.json as a synthetic
+  image, not cleared for commercial use), and hold the primula for a clean re-shoot.
+  A third photo matched neither plant (probably Phlox paniculata) — parked as a
+  question, no card invented.
+  The validator caught real data faults too: the waterlily's aspect was a light
+  level not a facing (would have silently shown "Any aspect"), and both had soil /
+  soilWarning 2-6x over the measured panel limits.
+  TWO BUGS FOUND AND FIXED IN MY OWN WORK: (1) the pretty-printer from the integrity
+  pass stopped emitting a trailing comma after the last card, so add-plant's
+  append-style insert butted two object literals together and timber.html stopped
+  parsing — the trailing comma is load-bearing and is now commented as such;
+  (2) nothing ever wrote plants.csv back after an insert, so it drifted every time —
+  both add tools now re-export it, which is only safe because export finally
+  round-trips the hold block.
+  NEW AUDIT RULE: the waterlily's height read "0.1–0.15m above water" — 133px of
+  vertical ink in a 61px rail patch, a 72px overrun straight across the baked HEIGHT
+  lettering. The layout audit passed it, because it had no rule for rail overflow
+  and .v is absolutely positioned so its own rect never grows (the overflow is only
+  visible by measuring the text with a Range). Added rule C2 rail-overflow, verified
+  by negative test: it reports the 72.5px overrun and passes on the shortened value.
+  Build r19. All 14 checks green.
 progress: 2026-08-09 — **integrity pass: nothing was lost, and the paths that
   could lose things are closed.** Oscar asked for the five risks from the r17
   review fixed properly, worried progress had already gone missing.

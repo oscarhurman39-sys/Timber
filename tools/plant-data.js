@@ -170,7 +170,12 @@ function formatCard(p, indent = '  ') {
 function writeBlock(html, which, cards, indent = '  ') {
   const b = bounds(html, which);
   if (!b) return null;
-  const literal = '[\n' + cards.map(p => formatCard(p, indent)).join(',\n\n') + '\n' + indent.slice(1) + ']';
+  /* Note the TRAILING comma after the final card. It is legal in a JS array
+     literal, and it is load-bearing: tools/add-plant.js appends a new row just
+     before the closing bracket, so a comma-less last card leaves two object
+     literals butted together and the file stops parsing. Leaving the comma keeps
+     append-style insertion working. */
+  const literal = '[\n' + cards.map(p => formatCard(p, indent)).join(',\n\n') + ',\n' + indent.slice(1) + ']';
   return html.slice(0, b.start) + literal + html.slice(b.end);
 }
 

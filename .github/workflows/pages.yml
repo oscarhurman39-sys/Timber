@@ -50,7 +50,9 @@ jobs:
       # Pages can take a few seconds to propagate, hence the retry loop.
       - name: Verify the deployed page is this commit
         run: |
-          url="${{ steps.deployment.outputs.page_url }}timber.html"
+          base="${{ steps.deployment.outputs.page_url }}"
+          case "$base" in */) ;; *) base="$base/" ;; esac   # page_url normally ends in / — don't rely on it
+          url="${base}timber.html"
           echo "checking $url"
           for i in 1 2 3 4 5 6; do
             if node tools/build-stamp.js --verify "$url"; then

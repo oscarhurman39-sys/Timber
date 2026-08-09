@@ -413,7 +413,7 @@
   {
    "file": "cornus-kousa.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — Samsung camera capture, scanned for C2PA/AI provenance markers on 2026-08-09: none found",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -773,7 +773,7 @@
   {
    "file": "hamamelis-intermedia-jelena.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — Samsung camera capture, scanned for C2PA/AI provenance markers on 2026-08-09: none found",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -853,7 +853,7 @@
   {
    "file": "hydrangea-serrata.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — C2PA manifest present, claim generator 'Galaxy S24', signed by Samsung Electronics; no trainedAlgorithmicMedia or composite assertion. Cryptographically the best-evidenced photo in the repo",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -1119,6 +1119,17 @@
    "commit": "ab63bf1",
    "commitSubject": "Add Oleander to deck: 125 -> 126",
    "commercialUseCleared": true
+  },
+  {
+   "file": "nymphaea-marliacea-carnea.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own plant and identification; supplied image file is AI-generated",
+   "author": "Oscar Hurman (plant/ID)",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": null,
+   "commercialUseCleared": false,
+   "note": "Oscar confirmed the plant and cultivar from his own pond. The IMAGE FILE as supplied carries a C2PA manifest from the OpenAI Media Service API (softwareAgent gpt-image v2.0, action c2pa.created, IPTC digitalSourceType trainedAlgorithmicMedia), i.e. the picture itself is synthetic rather than a camera capture. Recorded as not cleared for commercial use until a real photograph of the plant replaces it. 1086px wide, below the 1200px house standard."
   },
   {
    "file": "oenothera-lindheimeri-gaudi-rose-florgaucomro.jpg",

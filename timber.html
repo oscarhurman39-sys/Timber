@@ -429,6 +429,100 @@
   .plaque>img,.soilp>img,.band>img{width:100%}
   .soilp{position:absolute;left:80.33%;top:66.55%;width:15.59%;z-index:3}
   .band{position:absolute;left:14.32%;top:88.33%;width:81.60%;z-index:3}
+
+  /* ============ HOLO (special-edition frames) ============
+     A holo card supplies its own frame art via an inline background-image and
+     gains .holo. The standard frame bakes three things into its pixels that the
+     Eternal Flame artwork does not carry, so they are drawn here instead — only
+     for .holo, so the locked template is untouched for the other cards:
+       1. the HEIGHT / SPREAD lettering on the spine,
+       2. the DOUBLE TAP TO MASTER strip along the bottom,
+       3. legible rail values — the parchment rail patches are tinted for the
+          standard green spine and read as dark blocks on a red one, so they are
+          hidden and the value is set in gold directly on the artwork.
+     Positions mirror the baked originals measured on frame-600.png. */
+  .tcard.holo{background-size:100% 100%}
+
+  /* ---- panels: holo artwork with the parchment's ink composited onto it ----
+     NOT a blend mode. The parchment carries baked SAMPLE values ("Jul–Oct",
+     "1/5", "3/5", "2/5") which the opaque .patch swatches exist to cover before
+     the live value is printed. Any translucency lets those samples show through
+     and the card reads double. So the holo panels are flattened offline by
+     tools/extract-frame-assets.js — artwork underneath, real ink and icons on
+     top, fully opaque — and swapped in as ordinary images. Every mechanism above
+     them, patches included, then works exactly as it does on a standard card.
+     The patches get their own holo swatch for the same reason: they must stay
+     opaque, so they are re-skinned rather than blended. */
+  .tcard.holo .patch{background-image:var(--holo-swatch,url(art/parch-swatch.png))}
+
+  /* ============ WISPS — the generic effect layer ============
+     A reusable way to float anything over a card. Each .wisp is one transparent
+     PNG driven by one of the generic animations below; a card declares as many
+     as it likes in its HOLO entry and needs no CSS of its own.
+
+     Rules that keep this cheap:
+       - only transform and opacity are animated, so every layer stays on the
+         compositor and nothing triggers layout or paint,
+       - layers exist only on hot cards, so a 129-card deck never carries 3x129
+           animated elements,
+       - screen blending means the effect only ever ADDS light: it cannot muddy
+         the photograph underneath,
+       - the whole thing is inert under prefers-reduced-motion.  */
+  .wisps{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;
+    border-radius:5px;contain:strict}
+  .wisp{position:absolute;top:50%;left:50%;width:100%;height:100%;
+    background-repeat:no-repeat;background-position:center;background-size:contain;
+    mix-blend-mode:screen;opacity:0;will-change:transform,opacity;
+    transform:translate(-50%,-50%) scale(var(--ws,1.5))}
+  /* nothing animates until the card is near the top of the deck */
+  .card.hot .wisp{animation-duration:var(--wd,24s);animation-iteration-count:infinite;
+    animation-timing-function:ease-in-out;animation-direction:alternate}
+  .card:not(.hot) .wisps{display:none}
+
+  .card.hot .w-drift{animation-name:wispDrift}
+  .card.hot .w-sweep{animation-name:wispSweep;animation-direction:normal;animation-timing-function:linear}
+  .card.hot .w-shimmer{animation-name:wispShimmer}
+
+  @keyframes wispDrift{            /* slow wander, the base "alive" layer */
+    0%  {transform:translate(-54%,-47%) scale(var(--ws)) rotate(-2deg);opacity:calc(var(--wo)*.55)}
+    50% {transform:translate(-47%,-53%) scale(calc(var(--ws)*1.06)) rotate(1.5deg);opacity:var(--wo)}
+    100%{transform:translate(-52%,-49%) scale(var(--ws)) rotate(3deg);opacity:calc(var(--wo)*.7)}
+  }
+  @keyframes wispSweep{            /* a shine travelling across the card */
+    0%  {transform:translate(-115%,-70%) scale(var(--ws)) rotate(-14deg);opacity:0}
+    12% {opacity:var(--wo)}
+    88% {opacity:var(--wo)}
+    100%{transform:translate(15%,-30%) scale(var(--ws)) rotate(-14deg);opacity:0}
+  }
+  @keyframes wispShimmer{          /* breathing glint, no travel */
+    0%  {transform:translate(-50%,-50%) scale(var(--ws));opacity:calc(var(--wo)*.25)}
+    100%{transform:translate(-50%,-50%) scale(calc(var(--ws)*1.12));opacity:var(--wo)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    /* hold one frame rather than hiding it — the card keeps its character, it
+       just stops moving */
+    .card.hot .wisp{animation:none;opacity:calc(var(--wo)*.6)}
+  }
+  .tcard.holo .railval img{display:none}                 /* green parchment patch, wrong on a red spine */
+  .tcard.holo .railval .v{color:#ffe9a8;font-weight:600;
+    text-shadow:0 1px 3px rgba(60,6,0,.95),0 0 7px rgba(90,10,0,.8)}
+  /* spine labels: each sits immediately above its value patch, reading upward */
+  .tcard.holo .railval::before{content:attr(data-label);position:absolute;
+    left:0;right:0;bottom:100%;height:9.2%;
+    display:grid;place-items:center;writing-mode:vertical-rl;transform:rotate(180deg);
+    font-family:Georgia,serif;font-size:7.5px;letter-spacing:2.2px;text-transform:uppercase;
+    color:#ffdf9a;text-shadow:0 1px 3px rgba(60,6,0,.95),0 0 6px rgba(90,10,0,.75);
+    pointer-events:none}
+  /* Master strip. The baked original sits at ~98.2%, but that lands on this
+     frame's bright ornate border and the text disappears into it. The aspect band
+     ends at 95.82% and the frame's inner bottom box ends at ~97.1%, so the strip
+     goes in that darker 8px gap instead — same reading order, legible ground. */
+  .tcard.holo::after{content:"DOUBLE TAP TO MASTER.";position:absolute;
+    left:14%;right:4%;top:95.95%;height:1.5%;
+    display:grid;place-items:center;
+    font-family:Georgia,serif;font-size:7px;letter-spacing:2.6px;text-transform:uppercase;
+    color:#ffeec2;text-shadow:0 1px 2px rgba(50,4,0,1),0 0 5px rgba(70,6,0,.95);
+    z-index:4;pointer-events:none}
   .patch{position:absolute;background:url(art/parch-swatch.png);background-size:72px 64px;
     mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
@@ -615,7 +709,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r25 · 2026-08-09 · ce63390';
+const BUILD='r26 · 2026-08-09 · 7fae606';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -3909,6 +4003,30 @@ const PLANTS = [
    hardiness:"H6", resilience:"anthracnose-resistant · trouble-free · good autumn colour",
    uses:"specimen tree · small gardens · woodland edge", size:"4-8m H × 4-8m W",
    seasonalImpact:"", growthSpeed:7, pestRisk:4, thirst:12, careLevel:5, sunNeed:70, sunMin:40},
+  {common:"Waterlily 'Marliacea Carnea'", latin:"Nymphaea 'Marliacea Carnea'", hue:350,
+   visual:"Classic hardy waterlily with rounded green floating leaves, often bronze-flushed when young, and large semi-double flowers that open cream-white to very pale blush pink with a warm golden-yellow centre.",
+   water:"Permanent still water; aim for about 45–75cm of water over the crown once established, starting shallower while establishing.",
+   aspect:"Any aspect",
+   soil:"Heavy aquatic loam; Not multipurpose; it floats out",
+   prune:"Remove fading flowers and yellow or damaged leaves regularly. Cut dying foliage back low in late autumn before it sinks and decays.",
+   source:"",
+   peak:"Jun-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"Marliacea Carnea",
+   hardiness:"H5",
+   resilience:"Hardy, vigorous and long-lived in stable still water; generally low maintenance once established but dislikes constant splashing and overcrowding.",
+   uses:"Medium to large ponds, wildlife ponds, ornamental aquatic planting, water-surface cover and summer flowering.",
+   size:"0.1–0.15m H × 1–1.5m W",
+   seasonalImpact:"", growthSpeed:14, pestRisk:9, thirst:20, careLevel:6, sunNeed:95, sunMin:80},
 ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
@@ -4041,7 +4159,32 @@ const PLANTS_ON_HOLD=[
    resilience:"Extremely vigorous - needs space",
    uses:"Covering ugly structures, quick screen",
    size:"10-15m",
-   seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:70, sunMin:35}
+   seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:70, sunMin:35},
+
+  {common:"Vial's primrose", latin:"Primula vialii", hue:278,
+   visual:"Distinctive rosette-forming herbaceous perennial with upright, softly hairy, spear-shaped pale green leaves and erect flower stems topped by narrow conical spikes. The flowers open progressively from the base as vivid lilac to pinkish-purple blooms beneath a striking cap of unopened crimson-red buds, creating a miniature red-hot-poker effect.",
+   water:"Keep consistently moist through the growing season; water in dry spells and never let it dry out for long. Sun is only safe where moisture is reliable.",
+   aspect:"Best in partial shade on a sheltered north-, east- or west-facing aspect. It tolerates brighter and even sunny positions in cool conditions provided the soil remains consistently moist.",
+   soil:"Deep humus-rich loam, acid; Avoid winter waterlogging",
+   prune:"Cut spent flowering stems back after flowering. Remove dead foliage as it collapses, and divide established clumps after flowering where rejuvenation or propagation is required.",
+   source:"",
+   peak:"Jun-Aug",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"",
+   hardiness:"H5",
+   resilience:"Cold-hardy but somewhat less persistent than its hardiness rating suggests. Often relatively short-lived in cultivation and performs best where summers remain cool and the soil stays moist without becoming waterlogged in winter. It may self-seed where conditions suit it.",
+   uses:"Excellent for damp woodland borders, shady herbaceous borders, pond and stream margins, moist rock gardens and mass planting.",
+   size:"0.4-0.6m H × 0.2-0.3m W",
+   seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:16, careLevel:10, sunNeed:45, sunMin:25},
  ];
 /* HOLD:END */
 
@@ -4313,6 +4456,48 @@ function splitSoil(str){                      /* value = soil type; warning = th
 const slugLatin=l=>l.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/widget-drop-out.png","widget-seca-fill":"art/widget-seca-fill.png","widget-seca-out":"art/widget-seca-out.png","widget-spray-fill":"art/widget-spray-fill.png","widget-spray-out":"art/widget-spray-out.png"};
 
+/* HOLO — special-edition frames, keyed by latin-slug. A card listed here swaps
+   art/frame-600.png for its own artwork and gains the .holo class, which supplies
+   the spine lettering and the master strip in CSS (see the holo block in <style>)
+   because those are baked into the standard frame art and not into these.
+   Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
+   card goes through the same layout audit as any other. */
+const HOLO={
+  'cercis-canadensis-eternal-flame':{
+    frame:'art/frame-eternal-flame.png',
+    /* panel artwork cut from the frame by tools/extract-frame-assets.js. The
+       standard parchment still renders on top in multiply, so every baked label
+       and icon survives while the artwork glows through. */
+    plaque:'art/holo/eternal-flame-plaque.png',
+    soil:'art/holo/eternal-flame-soil.png',
+    band:'art/holo/eternal-flame-band.png',
+    /* the value patches must stay opaque (they hide the parchment's baked sample
+       values), so they get re-skinned with artwork rather than blended */
+    swatch:'art/holo/eternal-flame-swatch.png',
+    /* wisps float over the photo. Each entry is one layer: any transparent PNG
+       (tools/extract-wisps.js pulls them out of the frame art), one of the
+       generic animations, and how strongly it reads. */
+    wisps:[
+      {src:'art/holo/eternal-flame-wisp.png',   anim:'drift',   dur:34, delay:0,  opacity:0.55, scale:1.7},
+      {src:'art/holo/eternal-flame-shards.png', anim:'sweep',   dur:17, delay:-6, opacity:0.30, scale:1.25},
+      {src:'art/holo/eternal-flame-wisp.png',   anim:'shimmer', dur:7,  delay:-3, opacity:0.28, scale:2.1},
+    ],
+  },
+};
+/* Accept either a bare frame path or the full config object, so an entry can start
+   life as one line and grow. */
+/* One <i> per configured wisp layer. Everything an effect needs is inline: the
+   image, which generic animation drives it, how long it takes, and how strong it
+   reads. Adding a new vibe to a card is one more entry in its wisps array — no
+   new CSS, because the animations are generic. */
+function wispsHTML(ho){
+  if(!ho||!ho.wisps||!ho.wisps.length)return '';
+  const L=ho.wisps.map(w=>`<i class="wisp w-${w.anim||'drift'}" style="background-image:url(${w.src});`
+    +`--wd:${w.dur||24}s;--wo:${w.opacity==null?0.5:w.opacity};--ws:${w.scale||1.5};`
+    +`animation-delay:${w.delay||0}s"></i>`).join('');
+  return `<div class="wisps" aria-hidden="true">${L}</div>`;
+}
+const holoOf=slug=>{const h=HOLO[slug];return !h?null:(typeof h==='string'?{frame:h}:h);};
 const PHOTO_FOCUS={'kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%','hydrangea-serrata':'45% 16%','cornus-kousa':'50% 52%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
@@ -4344,6 +4529,7 @@ function renderCard(idx){
   const c=document.createElement('div');c.className='card deep';c.dataset.idx=idx;
   const bg=`linear-gradient(160deg,hsl(${p.hue} 45% 22%),hsl(${p.hue+20} 55% 12%))`;
   const slug=slugLatin(p.latin);
+  const ho=holoOf(slug);
   const sz=parseSize(p.size), soil=splitSoil(p.soil), months=parseMonths(p.peak);
   const pest=num(p.pestRisk), thirst=num(p.thirst), care=num(p.careLevel),
         growth=num(p.growthSpeed), sun=num(p.sunNeed), sunMin=num(p.sunMin);
@@ -4353,7 +4539,7 @@ function renderCard(idx){
     <div class="face front">
      <div class="tscale">
       <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>
-      <div class="tcard">
+      <div class="tcard${ho?' holo':''}"${ho?` style="background-image:url(${ho.frame})${ho.swatch?`;--holo-swatch:url(${ho.swatch})`:''}"`:''}>
         <div class="tinner">
           <div class="tphoto">
             <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
@@ -4364,14 +4550,15 @@ function renderCard(idx){
             <div class="bot">${p.latin}</div>
             <button class="say" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">&#9654; Listen</button>
           </div>
+          ${wispsHTML(ho)}
           <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
         </div>
-        <div class="railval rail-h"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
-        <div class="railval rail-s"><img src="art/rail-patch-s.png" alt=""><span class="v">${sz.s}</span></div>
+        <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
+        <div class="railval rail-s" data-label="Spread"><img src="art/rail-patch-s.png" alt=""><span class="v">${sz.s}</span></div>
         <div class="crest"><img src="art/crest-blank.png" alt=""><span class="hnum">${p.hardiness}</span></div>
         <div class="ppp">Plant Power Points</div>
         <div class="plaque">
-          <img src="art/plaque-full.png" alt="">
+          <img src="${ho&&ho.plaque?ho.plaque:'art/plaque-full.png'}" alt="">
           <div class="patch lbl p-bloom-val"></div><div class="val-ink pval t-bloom">${p.peak||''}</div>
           <div class="patch lbl p-pest-val"></div><div class="val-ink pval t-pest">${pest==null?'':fmt5(pest)}</div>
           <div class="patch lbl p-thirst-val"></div><div class="val-ink pval t-thirst">${thirst==null?'':fmt5(thirst)}</div>
@@ -4382,14 +4569,14 @@ function renderCard(idx){
           <div class="patch tightv p-care-w"></div><div class="val-ink p-care-w"><div class="wrow care">${wRow('seca',care)}</div></div>
         </div>
         <div class="soilp">
-          <img src="art/soil-full.png" alt="">
+          <img src="${ho&&ho.soil?ho.soil:'art/soil-full.png'}" alt="">
           <div class="patch s-val"></div><div class="val-ink s-val s-val-ink">${soil.val}</div>
           ${soil.warn
             ?`<div class="patch s-warn"></div><div class="val-ink s-warn s-warn-ink">${soil.warn}</div>`
             :`<div class="patch s-tri-cover"></div><div class="patch s-warn"></div>`}
         </div>
         <div class="band">
-          <img src="art/band-full.png" alt="">
+          <img src="${ho&&ho.band?ho.band:'art/band-full.png'}" alt="">
           <div class="patch b-aspect"></div><div class="patch b-sun-cover"></div>
           <div class="b-div"></div><img class="b-sun" src="art/sun-small.png" alt="">
           <div class="val-ink t-baspect b-aspect-ink">${extractFacing(p.aspect)}</div>

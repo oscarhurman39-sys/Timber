@@ -3,10 +3,18 @@
 ## Run everything
 
 ```sh
-node tests/run-all.js          # every check, starts and stops its own server
-node tests/run-all.js --fast   # data checks only (~2s, no browser)
-node tests/run-all.js --list   # what would run
+node tests/run-all.js --jobs 3  # everything, 3 browser suites at a time — ~2m40s
+node tests/run-all.js           # everything, one at a time — ~7m
+node tests/run-all.js --fast    # data checks only — 0.3s, no browser
+node tests/run-all.js --list    # what would run
 ```
+
+Measured on a 4-core box at 128 cards: `--jobs 3` does 472s of work in **2m41s**
+wall clock. Each suite launches its own Chromium against the shared static server
+with its own browser context, so they don't interfere; budget ~500MB per job.
+
+The data checks always run **first** and stop the run if they fail, so a bad batch
+costs 0.3s instead of seven minutes.
 
 `run-all.js` is the one to use. It starts a static server on :8477 if nothing is
 already serving, runs each check, prints one line each, and dumps the tail of
