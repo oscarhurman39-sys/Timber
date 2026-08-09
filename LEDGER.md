@@ -52,6 +52,25 @@ progress: 2026-08-09 (later) — **Choisya settled + Japanese Knotweed added: de
   (95 checks, was 94), verified failing on an unfixed copy first. **This bug
   reached a real phone and grows with every plant added** — anything else keyed to
   deck size deserves the same look.
+  PROVENANCE CORRECTED — **Oscar took every photo himself; the r18 record said
+  otherwise.** CREDITS.json marked 146 of 152 photos "unrecorded / licence
+  unknown", reasoning that plant-images-tool.js had fetched them from Wikimedia
+  and written the paperwork into gitignored `plant-images/` where it was lost.
+  Oscar says he shot them all, and the evidence backs him, not the inference:
+  **the downloader has never been run** (the README says so in the same file that
+  drew the conclusion, and it needs network the container lacked), `plant-images/`
+  was never committed because nothing was ever downloaded, and the photo register
+  describes ~100 images in detail without once naming an external source. The
+  missing paperwork was read as lost; it never existed. All 150 photographs are now
+  recorded as his own and cleared. EXIF can't corroborate either way — add-plant.js
+  re-encodes through a canvas and strips metadata — so the record rests on the
+  owner's account plus those three checks, which is the right basis. Only the two
+  AI images stay uncleared: knotweed (**ChatGPT + Gemini**, per Oscar) and the
+  Ajuga v12.5 remake. That closes the VERIFY-QUEUE photo section entirely and
+  removes the "not fine for commercial use" warning the README carried.
+  Worth noting as a pattern: this was a confident, well-written, thoroughly
+  documented conclusion built on one unchecked assumption, and it had already been
+  propagated into three files. Ask the owner before inferring provenance.
   ALSO: `photo-credits.js --init` re-derives every photo's origin commit from
   `git log --all`, so running it in a container with more remote branches fetched
   rewrote 56 unrelated provenance records. Backed out — the single new entry was

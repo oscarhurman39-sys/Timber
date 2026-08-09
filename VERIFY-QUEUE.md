@@ -119,9 +119,11 @@ cane-and-leaf photo would do more work. Worth having both — the dramatic one t
 make it memorable, a real one on the info sheet to make it identifiable.
 
 `photos/CREDITS.json` records it as Oscar's, `commercialUseCleared: false`,
-because **which generator made it and what its terms say about commercial use is
-unrecorded**. That is not a blocker for a learning tool; it is a blocker the day a
-garden centre pays for the deck.
+as `oscar-ai` — **Oscar generated it with ChatGPT and Gemini** (confirmed
+2026-08-09). `commercialUseCleared` is false, not because anything is wrong with
+it but because output rights for AI images follow the generators' terms and nobody
+has checked what OpenAI's and Google's say. That is a ten-minute question for
+someone, not a defect.
 
 ---
 
@@ -143,12 +145,17 @@ Recorded so the same questions don't get re-litigated every batch.
 
 ---
 
-## Photo provenance (separate from card facts)
+## Photo provenance — CLOSED 2026-08-09
 
-146 of the 151 photos have no committed licence record — see `photos/CREDITS.json`
-and the README's *Photo provenance* section. They were fetched by a tool that only
-searched Wikimedia Commons and refused NC/ND licences, so they are very likely
-fine; the records were just written to a gitignored directory and lost. This is a
-paperwork gap, not a card-data gap, and it only becomes urgent if the deck is ever
-shown commercially.
+This was listed as 146 photos with no licence record, on the assumption they had
+been fetched from Wikimedia. **Wrong: Oscar took every photograph himself.** The
+downloader has never been run, `plant-images/` was never committed because nothing
+was ever downloaded, and the photo register in `CARD-PROTOCOL.md` never records an
+external source for any of them. All 150 photographs are now recorded as his own
+and cleared for commercial use.
+
+The only residue is the two AI-generated images (knotweed, Ajuga), covered in
+item 5 above. See the README's *Photo provenance* section for the full reasoning,
+including why EXIF can't corroborate it (the photos are re-encoded on the way in,
+which strips metadata).
 

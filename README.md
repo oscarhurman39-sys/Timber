@@ -189,30 +189,46 @@ already obtained).
 
 ### Photo provenance
 
-`plant-images/` is **gitignored**, so for the first 146 photos those `credit.json`
-records were written to a scratch directory and lost with the container. The images
-are in git; the paperwork was not. That is what "unverified provenance" means here —
-not that the photos were taken carelessly (the tool only ever searched Commons and
-refuses NC/ND licences), but that the repo cannot currently *prove* it.
+**Oscar took every photograph in `photos/` himself** (established 2026-08-09). They
+are his own work and his to use, commercial use included. `photos/CREDITS.json`
+records that, one entry per image.
 
-The record is now a committed artefact:
+This section previously said the opposite — that 146 photos had "unverified
+provenance" because `plant-images-tool.js` had fetched them from Wikimedia and
+written the `credit.json` records into gitignored `plant-images/`. That inference
+was wrong on the facts, and it is worth writing down why so it isn't re-derived:
+
+- **the downloader has never been run.** It needs network access the build
+  container did not have — this README says so a few paragraphs below.
+- **`plant-images/` was never committed because nothing was ever downloaded.**
+  The missing paperwork was read as "lost"; it never existed.
+- **`CARD-PROTOCOL.md`'s photo register describes ~100 of these images in detail
+  and never once records an external source** — every one is a "real photo", a
+  "real garden shot", or a cutout/composite made from Oscar's own shots.
+
+EXIF cannot settle it either way: `add-plant.js` re-encodes every photo through a
+canvas, which strips all metadata. The evidence above and Oscar's own account are
+what the record rests on, which is the right basis — the owner saying where his
+photos came from beats a tool inferring it.
 
 ```sh
 node tools/photo-credits.js            # coverage report
 node tools/photo-credits.js --check    # fails if a photo has no entry (part of run-all)
-node tools/photo-credits.js --set <file> --source wikimedia --licence "CC BY-SA 4.0" \
-     --author "Name" --url "https://commons.wikimedia.org/..."
+node tools/photo-credits.js --set <file> --source oscar --licence "..." --author "..."
 ```
 
-`photos/CREDITS.json` has one entry per image. Five are established as Oscar's own
-photographs from git history; the rest are marked `unrecorded` with an `unknown`
-licence, which is the honest state — a guessed licence would be worse than none.
-`pick` now writes straight into this manifest, so new photos arrive with their
-paperwork attached.
+**Two images are AI-generated rather than photographed**, and they are the only
+open question: `reynoutria-japonica.jpg` (Japanese Knotweed — Oscar generated it
+with ChatGPT and Gemini) and `ajuga-reptans-burgundy-glow.jpg` (cropped from an
+AI-remade card image, protocol v12.5). Both are marked
+`commercialUseCleared: false`, not because anything is wrong with them but because
+output rights for AI images depend on the generators' terms and nobody has checked
+those. Every actual photograph is cleared.
 
-**Fine for a personal learning tool. Not fine for commercial use** — showing cards to
-a garden centre means using the photos commercially, and the unrecorded ones need
-their source re-established or the photo replaced before that happens.
+⚠ **Do not run `--init` to "refresh" this file.** It re-derives each photo's origin
+commit from `git log --all`, so its output changes depending on which remote
+branches happen to be fetched locally — one run rewrote 56 unrelated records that
+way. Use `--set` for individual entries.
 
 **This tool needs an internet connection to run** (unlike everything else here) and
 has not yet been run against the live API — Wikimedia isn't reachable from the

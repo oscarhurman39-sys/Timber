@@ -489,8 +489,15 @@ function topFlipped(page) {
     card.dispatchEvent(mk('touchend', cx + 150));
     return true;
   });
-  await tpage.waitForTimeout(450);
-  const tc = await counts(tpage);
+  /* Wait for the swiped card to actually leave the DOM rather than sleeping a fixed
+     450ms and hoping. The count updates immediately; the node goes on animation end,
+     so on a loaded machine the old fixed wait caught done:1/left:128 correct but the
+     node still present, and failed for a reason that was never about behaviour. */
+  let tc = await counts(tpage);
+  for (let i = 0; i < 20 && tc.cards !== NPLANTS - 1; i++) {
+    await tpage.waitForTimeout(100);
+    tc = await counts(tpage);
+  }
   check('touch: swipe right marks learned', touchSwipe && tc.cards === NPLANTS-1 && tc.done === 1, JSON.stringify(tc));
   await tctx.close();
 
