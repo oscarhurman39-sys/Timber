@@ -5,6 +5,27 @@ plant cards get designed, checked, and shipped. Follow it on every card mockup a
 every card that goes into `timber.html`. Update the changelog when Oscar decides
 something; never silently drift from a decision recorded here.
 
+## 0. Two rules that exist because breaking them lost data
+
+**0a. Every card field must be listed in `FIELDS` in `tools/plant-data.js`.**
+That list is the csv column set, and `plants-tool.js import` rebuilds cards from
+it. A field that is not in the list is not in the csv, and an import erases it.
+This is not hypothetical: `sunMin` lived on 132 cards and was missing from the
+list, so a single import would have wiped the sun-band floor across the whole
+deck. Adding a new field means adding it to `FIELDS` **in the same change**.
+`tools/data-audit.js` fails if a card carries a field the list doesn't know, and
+`plants-tool.js` refuses to write rather than dropping one.
+
+**0b. Both plant blocks are real data.** `PLANTS` is the dealt deck and
+`PLANTS_ON_HOLD` is cards parked pending photos. Any tool that reads or writes
+one must handle the other — export used to see only `PLANTS`, so a round-trip
+deleted every held plant. Use `tools/plant-data.js`; never re-implement the
+parsing.
+
+Geometry has an equivalent rule: card-level overlay anchors live in
+`data/template-anchors.json` and are applied by `tools/template-geometry.js`.
+Change the card height with `--reflow`, not by hand.
+
 ## 1. Card anatomy (current draft — v2)
 
 - **Wood-grain frame** on all four sides (~13px, CSS gradients, original — no copied

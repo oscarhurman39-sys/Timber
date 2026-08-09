@@ -4,41 +4,61 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
-progress: 2026-08-09 — **Choisya gap closed + Japanese Knotweed added: deck 128 -> 129.**
-  Choisya ternata was the deck audit's only KNOWN_GAP (all ratings blank, aspect
-  "Full sun / pt shade" lost to "Any aspect"). Filled from Oscar's research JSON:
-  aspect now the real facing East / South / West, ratings growth 9 / pest 3 /
-  thirst 6 / care 4 / sun 75 floor 40, plus visual, water, soil warning, prune,
-  uses. KNOWN_GAPS is now empty — every card in the deck audits clean.
-  Three judgement calls against the JSON, all flagged for Oscar: **hue kept at
-  150**, not the JSON's 0 — the protocol records 150 as the deck's Choisya
-  white-flower precedent and Flower Tower Dogwood was built on it, so moving it
-  would strand that card; **pestRisk set 3, not the JSON's 8** — PLANT-BRIEF.md
-  uses Choisya itself as the canonical "0–3 bulletproof" anchor and the row's own
-  "Pest-free" resilience text agrees, so 8 would contradict the repo's own
-  calibration; **peak moved Apr–May -> May-Jun** per the JSON (this shifts the
-  "In season now" filter). cvs merged rather than replaced, so 'Sundance' and
-  'Aztec Pearl' survive alongside the syn. Choisya grandiflora.
-  **Japanese Knotweed (Reynoutria japonica)** is the deck's fourth compliance card
-  and the first NEVER-STOCK one — it is in the deck to be recognised and reported,
-  not sold. Compliance carried the Gunnera way (v12.21): `resilience` "⚠ ILLEGAL TO
-  SPREAD", `type` "⚠ NEVER STOCK", full legal text in `returnRisk` on the trade
-  back, and the soil warning "ILLEGAL TO SPREAD · 1cm rhizome regrows" under the
-  front card's warning triangle. Deck records: growthSpeed 20 and careLevel 20 are
-  both firsts (careLevel is the containment and legal burden, not difficulty
-  keeping it alive) against pestRisk 2 — genuinely pest-free. H7, the hardiest card.
-  Photo is Oscar's AI composite (fiery/lightning treatment, deliberate — the card
-  should read as dangerous); leaf shape and zig-zag stem habit are ID-true, but it
-  is artwork, not a field photo, so flagged in the same class as the Ajuga remake.
-  **Still no schema field for compliance** — the full legal paragraph only reaches
-  the trade back by borrowing `returnRisk`. Fourth card to need it; the parked
-  compliance-ribbon design is now the obvious next brick after the climber photos.
-  Test hygiene: features-test's weakest-first bias threshold was calibrated at 57
-  plants and hardcoded at 18 — it had started failing on a correct picker at deck
-  128 (16–17/400 on clean HEAD). Now derived from PLANTS.length. Suites: deck
-  audit PASS (129, zero known gaps), edge 9/9, srs 24/24, features 47/47, sw-update
-  PASS. app-test is timing-flaky in the cloud container and fails on clean HEAD too
-  (different line each run) — needs a run on Oscar's machine before the release.
+progress: 2026-08-09 — **integrity pass: nothing was lost, and the paths that
+  could lose things are closed.** Oscar asked for the five risks from the r17
+  review fixed properly, worried progress had already gone missing.
+  AUDIT FIRST: new `tools/data-audit.js --history` replays all 73 commits that
+  touched timber.html. Verdict — **no card has ever been silently dropped.** All
+  128 dealt cards have their photo. The single disappearance is Holly Osmanthus
+  'Tricolor', deliberately renamed to Goshiki Holly Olive at 68d61a9 ('Goshiki'
+  is the accepted name, 'Tricolor' the synonym, recorded in the card's cvs); the
+  design line had separately ported a 'Goshiki' card so both names co-existed as
+  duplicates at 2e91159 and the r17 merge correctly kept one. Recorded in
+  data/renames.json so it never reads as a loss again.
+  THE LIVE BOMB: `plants-tool.js import` rebuilt cards from its FIELDS list, and
+  `sunMin` — on 132 cards — was not in it. One import would have wiped the sun-band
+  floor deck-wide. Export also never saw PLANTS_ON_HOLD, so a round-trip deleted
+  every held plant. Both fixed: csv carries a `held` column and round-trips both
+  blocks, the tool REFUSES to write if it meets a card field with no column, an
+  import that would remove a plant needs --allow-removals, backups are timestamped
+  in .backups/ (the old single .bak was eaten by a second import), and the write is
+  re-parsed and rolled back if it breaks. Round-trip verified lossless field-for-field
+  across all 133 cards and idempotent (second pass = zero-byte diff). Cards are
+  written back in the hand-authored style, not one-line JSON, so a two-field edit
+  stays a two-line diff.
+  SECOND VERIFICATION PASS: `tools/plant-sense.js` checks every card against
+  ITSELF — prose vs ratings, margin arithmetic vs quoted prices, size vs "dwarf",
+  peak vs claimed season. First run threw 35 "contradictions"; CARD-STATS.md showed
+  my pest and care rules were inverted and three parsers were wrong, so the tool was
+  fixed, not the data. Now 5 real findings, all written up in the new VERIFY-QUEUE.md
+  rather than guessed at: five held climbers have no H × W split (rails blank),
+  Meyer's Lemon and Kinme holly may be a size band too high, two margin bands sit
+  below their own gross arithmetic, and Choisya's ratings are still open.
+  ALSO: NPLANTS is now derived from timber.html in all four suites instead of
+  hand-typed in four places (add-plant/add-plants-bulk patched to match — their
+  regex had become a silent no-op); `tools/build-stamp.js` puts a content hash in
+  the build number so a stale stamp fails the run instead of reaching a phone, and
+  the Pages workflow now gates on it and verifies the SERVED BYTES after deploy;
+  `tools/template-geometry.js` turns card-height changes into arithmetic — validated
+  by reproducing the real v12 (543px) template from v14 to 4 decimal places, which
+  also proved the rails are bottom-anchored, not top as the v14 comment says;
+  `tools/deck-diff.js` compares plant data between branches semantically so the next
+  two-line merge is not archaeology. One runner (`tests/run-all.js`) plus an optional
+  pre-push hook.
+  FOUND EN ROUTE: features-test's weakest-plant bias assertion was a coin flip. Its
+  `bias >= 18` threshold was calibrated for a 57-plant deck; at 128 plants 18 IS the
+  expected value, so it failed about half the time on chance alone and had been
+  passing on luck. Threshold and sample size are now derived from the deck size with
+  a 4-sigma margin — same disease as the hardcoded NPLANTS, same cure.
+  PROVENANCE (the item Oscar asked to leave till last): `plant-images-tool.js` did
+  record licence, author and source URL for every photo it fetched — into
+  `plant-images/`, which is gitignored, so 146 records were written to scratch and
+  lost with the container while the images stayed in git. New `photos/CREDITS.json`
+  is a committed entry per photo; git history establishes 5 as Oscar's own, the rest
+  are honestly marked unrecorded/unknown rather than given a guessed licence. `pick`
+  now writes into the committed manifest. Fine for a learning tool; the unrecorded
+  ones need re-establishing before any card is shown to a garden centre commercially.
+  Build r18. All 14 checks green.
 progress: 2026-08-08 (later still) — **v14 elongated template: the card is natively
   420×600.** Oscar wanted the card longer; a ChatGPT frame regeneration drifted
   (restyled gold, redrawn ornaments, dropped the baked DOUBLE TAP TO MASTER strip)

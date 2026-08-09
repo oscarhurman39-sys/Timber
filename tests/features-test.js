@@ -1,5 +1,9 @@
 const { chromium } = require('playwright');
-const NPLANTS = 129;  // plants in the demo deck (5 more parked in PLANTS_ON_HOLD until photos land)
+const NPLANTS = require('../tools/plant-data.js')
+  .readDeck(require('fs').readFileSync(require('path').join(__dirname,'..','timber.html'),'utf8')).length;
+/* Derived from timber.html, never hand-typed. Four suites used to carry a
+   hardcoded copy of this number; a deck change that updated only some of
+   them made the rest fail for the wrong reason. */
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -82,25 +86,33 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     JSON.stringify(rounds.reverseOptsAreLatin));
   if (rounds.tradeQ) check('trade question quotes the retail price', /“£/.test(rounds.tradeQ), rounds.tradeQ);
 
-  /* ---- weakest-first bias ---- */
-  /* The expected hit rate falls as the deck grows, so derive it from the deck size rather
-     than hardcoding it — a fixed threshold calibrated at 57 plants starts failing on a
-     correct picker once the deck is big enough (it did, at 128). */
-  const { bias, n } = await page.evaluate(() => {
+  /* ---- weakest-first bias ----
+     pickWeightedPlant weights each plant 1/(box+1). Park every plant but PLANTS[0]
+     in box 5 (weight 1/6) and leave PLANTS[0] unseen (weight 1), so
+        p(weakest) = 1 / (1 + (N-1)/6) = 6 / (N+5)
+     against uniform 1/N. Both the expected value and the pass threshold are
+     DERIVED from N: this assertion used to hardcode ">= 18", calibrated when the
+     deck was 57 plants. At 128 plants 18 is the expected value itself, so the
+     test failed about half the time on chance alone. Draws are sized so that
+     "biased" and "uniform" stay several sigma apart however big the deck gets. */
+  const DRAWS = 4000;
+  const bias = await page.evaluate((draws) => {
     const srs = {};
     PLANTS.forEach((p, i) => { if (i > 0) srs[p.latin] = { box: 5, due: '2099-01-01' }; }); // PLANTS[0] unseen
     localStorage.setItem('timber-srs-v1', JSON.stringify(srs));
     let hits = 0;
-    for (let i = 0; i < 400; i++) if (pickWeightedPlant() === PLANTS[0]) hits++;
+    for (let i = 0; i < draws; i++) if (pickWeightedPlant() === PLANTS[0]) hits++;
     localStorage.removeItem('timber-srs-v1');
-    return { bias: hits, n: PLANTS.length };
-  });
-  // weakest weight 1 vs 1/6 for every other plant → p = 1/(1+(n-1)/6)
-  const mean = Math.round(400 / (1 + (n - 1) / 6));
-  const uniform = Math.round(400 / n);
-  const floor = Math.max(Math.round(mean / 2), uniform + 2);   // same mean/2 margin the 57-plant version used
+    return hits;
+  }, DRAWS);
+  const pBias = 6 / (NPLANTS + 5);
+  const expected = DRAWS * pBias;
+  const sd = Math.sqrt(DRAWS * pBias * (1 - pBias));
+  const uniform = DRAWS / NPLANTS;
+  // 4 sigma below the biased mean: ~1-in-30,000 false failures, and still far above uniform
+  const floor = Math.max(uniform * 2, expected - 4 * sd);
   check('picker biases toward the weakest plant', bias >= floor,
-    `weakest picked ${bias}/400 (expected ≈${mean}, uniform ≈${uniform}, floor ${floor})`);
+    `weakest picked ${bias}/${DRAWS} — expected ≈${expected.toFixed(0)} (±${sd.toFixed(0)}), uniform would be ≈${uniform.toFixed(0)}, floor ${floor.toFixed(0)}`);
 
   /* ---- session summary + SRS wiring on wrong answers ---- */
   await page.click('#menuBtn'); await page.waitForTimeout(350);

@@ -1,0 +1,20 @@
+{
+  "_readme": [
+    "Deliberate card renames and merges, so tools/data-audit.js --history can tell",
+    "'this card was intentionally renamed' apart from 'this card silently vanished'.",
+    "Add an entry ONLY when you deliberately rename or merge a card. Never add one",
+    "to silence a finding you haven't explained — that is exactly the mistake this",
+    "file exists to make impossible."
+  ],
+  "renames": [
+    {
+      "from": "Holly Osmanthus 'Tricolor'",
+      "to": "Goshiki Holly Olive",
+      "fromLatin": "Osmanthus heterophyllus 'Tricolor'",
+      "toLatin": "Osmanthus heterophyllus 'Goshiki'",
+      "commit": "68d61a9",
+      "date": "2026-08-08",
+      "why": "Same plant. 'Goshiki' is the accepted cultivar name and 'Tricolor' a synonym, so the card was renamed to the accepted name and its photo and data refreshed. The design line had separately ported in a 'Goshiki' card, so both names briefly co-existed as duplicates at 2e91159; the r17 merge kept the accepted-name card and dropped the synonym. The surviving card records the synonym in its cvs field."
+    }
+  ]
+}

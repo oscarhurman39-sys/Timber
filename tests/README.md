@@ -1,7 +1,31 @@
 # Timber test suites
 
-All nine drive a real headless Chromium against a locally served `timber.html`.
-Start a server at the repo root first, then run from the repo root:
+## Run everything
+
+```sh
+node tests/run-all.js          # every check, starts and stops its own server
+node tests/run-all.js --fast   # data checks only (~2s, no browser)
+node tests/run-all.js --list   # what would run
+```
+
+`run-all.js` is the one to use. It starts a static server on :8477 if nothing is
+already serving, runs each check, prints one line each, and dumps the tail of
+anything that failed. Non-zero exit if any check fails, so hooks and CI can gate
+on it. `node tools/install-hooks.js` wires the `--fast` set into a pre-push hook.
+
+Four of the checks need no browser and run in about two seconds:
+
+| Check | Guards |
+|---|---|
+| `tools/data-audit.js` | deck, hold block, `plants.csv` and `photos/` agree |
+| `tools/plant-sense.js` | no card contradicts its own prose or arithmetic |
+| `tools/build-stamp.js` | the menu-foot build number matches the app's content |
+| `tools/template-geometry.js` | card overlay anchors have not drifted |
+
+## Running a single suite by hand
+
+All nine browser suites drive a real headless Chromium against a locally served
+`timber.html`. Start a server at the repo root first, then run from the repo root:
 
 ```sh
 python3 -m http.server 8477 &
@@ -16,10 +40,12 @@ NODE_PATH=/opt/node22/lib/node_modules node design/verify-cards.js # card builde
 NODE_PATH=/opt/node22/lib/node_modules node design/audit-layout.js # layout audit: ink fits zones, band collisions, rail alignment
 ```
 
-`NPLANTS` at the top of app-test.js / edge-test.js must match the number of
-plants in the PLANTS array. Bump it when you add a plant.
+`NPLANTS` is **derived** from `timber.html` (via `tools/plant-data.js`) in all four
+suites that count the deck — do not hand-type it. It used to be a hardcoded number
+in four places, and a deck change that updated only some of them made the others
+fail for the wrong reason.
 
-All nine must pass before pushing. The layout audit's rules and defect log
+All must pass before pushing. The layout audit's rules and defect log
 live in `CORRECTION-PROTOCOL.md`.
 
 `perf-test.js` guards the deck's compositing budget: every plant stays in the DOM (the
