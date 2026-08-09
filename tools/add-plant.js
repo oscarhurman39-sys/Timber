@@ -21,9 +21,12 @@ const path = require('path');
 const { execFileSync, spawn } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 
-const [jsonPath, photoPath] = process.argv.slice(2);
+const QUICK = process.argv.includes('--quick');
+const [jsonPath, photoPath] = process.argv.slice(2).filter(a => !a.startsWith('--'));
 if (!jsonPath || !photoPath) {
-  console.error('usage: node tools/add-plant.js <plant.json> <photo.jpg>');
+  console.error('usage: node tools/add-plant.js [--quick] <plant.json> <photo.jpg>');
+  console.error('  --quick  data checks + whole-deck audit only (~17s instead of ~5min).');
+  console.error('           Then run: node tests/run-all.js --jobs 3   before pushing.');
   process.exit(1);
 }
 const die = (msg) => { console.error('ABORT: ' + msg); process.exit(1); };
@@ -122,13 +125,18 @@ const count = dealt + 1;
     server = spawn('python3', ['-m', 'http.server', '8477'], { cwd: ROOT, stdio: 'ignore', detached: true });
     await new Promise(r => setTimeout(r, 1200));
   }
-  const run = (t) => {
-    try { execFileSync(process.execPath, [path.join(ROOT, t)], { stdio: 'inherit', cwd: ROOT }); return true; }
+  const run = (t, args = []) => {
+    try { execFileSync(process.execPath, [path.join(ROOT, t), ...args], { stdio: 'inherit', cwd: ROOT }); return true; }
     catch { return false; }
   };
-  const ok1 = run('tests/app-test.js');
-  const ok2 = run('tests/edge-test.js');
-  const ok3 = run('tests/deck-audit.js');   /* catches a bad new row before it is committed */
+  /* Data checks first — 0.3s, and they catch what a new row actually gets wrong. */
+  const ok1 = run('tools/data-audit.js') && run('tools/plant-sense.js', ['--strict'])
+    && run('tools/photo-credits.js', ['--check']);
+  const ok2 = ok1 && run('tests/deck-audit.js');   /* catches a bad new row before it is committed */
+  /* app-test + edge-test walk the whole deck (~5 min at 128 cards) and test
+     BEHAVIOUR, which a new data row cannot change. Skipped with --quick; the full
+     set runs once before pushing via tests/run-all.js --jobs 3. */
+  const ok3 = (QUICK || !ok2) ? true : (run('tests/app-test.js') && run('tests/edge-test.js'));
 
   /* ---- 6. screenshot the new card (newest deals first: it is already on top) ---- */
   const shot = await browser.newPage({ viewport: { width: 390, height: 780 }, deviceScaleFactor: 2 });
@@ -141,8 +149,13 @@ const count = dealt + 1;
   await browser.close();
   if (server) process.kill(-server.pid);
 
-  if (!ok1 || !ok2 || !ok3) die('suites FAILED after insert — inspect before committing');
+  if (!ok1) die('DATA checks failed after insert — fix before committing');
+  if (!ok2) die('deck audit failed after insert — inspect before committing');
+  if (!ok3) die('behavioural suites failed after insert — inspect before committing');
   console.log(`\nDONE: ${p.common} added and verified.`);
   console.log('Screenshot: tools/last-added-card.png — LOOK AT IT before committing.');
+  console.log(QUICK
+    ? '\n--quick: gesture/undo/storage suites NOT run. Before pushing: node tests/run-all.js --jobs 3'
+    : '\nBefore pushing (sw/perf/srs/features/layout still unrun): node tests/run-all.js --jobs 3');
   console.log('Then: git add -A && commit && push.');
 })();

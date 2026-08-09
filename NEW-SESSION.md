@@ -25,7 +25,23 @@ If you're using a plain chat rather than one attached to this repo, paste
 
 > New plant for Timber. Read CARD-PROTOCOL.md, CARD-STATS.md and PLANT-BRIEF.md
 > for the rules, then add this plant to the deck from the JSON + photo below.
-> Run tests/ before pushing. Branch: claude/timber-plant-pwa-j69h5e
+> Work on a feature branch, not the deploy branch. Add with
+> `node tools/add-plants-bulk.js --quick`, then `node tests/run-all.js --jobs 3`
+> once before pushing.
+
+### Which branch
+
+Add plants on a **feature branch** (e.g. `claude/plant-build-timber-6ta360`), then
+PR into `claude/timber-plant-pwa-j69h5e`, which is the default branch and the one
+GitHub Pages deploys from.
+
+Do **not** add plants directly on the deploy branch. Every push there triggers a
+deploy, so a half-finished batch goes live, and the deploy gate (build stamp +
+data audit) turns a mid-batch mistake into a red deployment instead of a local
+test failure. A feature branch keeps the fast local loop completely free of CI.
+
+Nothing about adding a plant needs the deploy branch — the whole routine below is
+local.
 
 ## What the repo already knows
 
@@ -42,19 +58,47 @@ If you're using a plain chat rather than one attached to this repo, paste
 | `tests/` | 94 app checks + 8 edge checks + service-worker update + card verifier |
 | `CORRECTION-PROTOCOL.md` | Layout-defect audit (`design/audit-layout.js`), defect log, correction rules |
 
-## The routine, per plant — ONE command
+## The routine — ONE command
 
 ```sh
-node tools/add-plant.js plant.json photo.jpg
+node tools/add-plants-bulk.js --quick a.json a.jpg b.json b.jpg ...   # 2+ plants
+node tools/add-plant.js plant.json photo.jpg                          # a single plant
 ```
 
 That one command does the whole routine:
 
 1. Photo → processed to 1200px and staged in `photos/<latin-slug>.jpg`
 2. JSON → converted into a `PLANTS` row in `timber.html`
-3. `NPLANTS` bumped in `tests/app-test.js` and `tests/edge-test.js`
-4. All suites run green — including `design/audit-layout.js` (layout audit) —
-   screenshot checked, then committed and pushed
+3. Data checks + the whole-deck audit run green (~15s with `--quick`)
+4. Screenshot written to `tools/last-added-card.png` — **look at it**
+
+`NPLANTS` is no longer bumped anywhere: all four counting suites derive it from
+`timber.html`. It used to be hand-typed in four places, and a deck change that
+updated only some of them made the rest fail for the wrong reason.
+
+### Why `--quick`, and what it skips
+
+Adding a plant is a **data** change. It cannot alter how gestures, undo, corrupt
+storage or the service worker behave — only the data those behaviours read. So the
+per-batch gate that matters is the data gate:
+
+| | Runs | Measured cost at 128 cards |
+|---|---|---|
+| `--quick` | data audit, plant-sense, photo credits, whole-deck render audit | **17s** |
+| default | the above plus app-test and edge-test | ~5 min |
+| `run-all.js --jobs 3` | all 14 checks, 3 at a time | **2m41s** |
+| `run-all.js` | all 14 checks, one at a time | ~7 min |
+
+`app-test` and `edge-test` are the expensive pair because both walk the entire
+deck — the learn-every-card loop alone is 128 × 400ms. That cost grows with the
+deck, which is why a batch feels slower now than it did at 66 cards. Nothing was
+added to make it slower; the deck doubled.
+
+So: `--quick` per batch, and once before you push:
+
+```sh
+node tests/run-all.js --jobs 3
+```
 
 That validates the JSON (refuses bad data), processes + stages the photo, inserts
 the `PLANTS` row, bumps the test counts, runs both suites, and screenshots the new

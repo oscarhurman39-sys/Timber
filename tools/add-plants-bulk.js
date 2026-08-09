@@ -21,9 +21,15 @@ const path = require('path');
 const { execFileSync, spawn } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 
-const args = process.argv.slice(2);
+const QUICK = process.argv.includes('--quick');
+const args = process.argv.slice(2).filter(a => !a.startsWith('--'));
 if (args.length < 2 || args.length % 2) {
-  console.error('usage: node tools/add-plants-bulk.js <a.json> <a-photo> [<b.json> <b-photo> ...]');
+  console.error('usage: node tools/add-plants-bulk.js [--quick] <a.json> <a-photo> [<b.json> <b-photo> ...]');
+  console.error('  --quick  data checks + whole-deck audit only (~15s instead of ~5min).');
+  console.error('           Adding a plant is a DATA change: it cannot alter gesture,');
+  console.error('           quiz or service-worker behaviour, only the data those');
+  console.error('           behaviours read. So the data gate is the one that matters');
+  console.error('           per batch — run the full suite once before you push.');
   process.exit(1);
 }
 const die = (msg) => { console.error('ABORT: ' + msg); process.exit(1); };
@@ -134,13 +140,32 @@ console.log(`\nall ${pairs.length} plants validated — proceeding to write\n`);
     server = spawn('python3', ['-m', 'http.server', '8477'], { cwd: ROOT, stdio: 'ignore', detached: true });
     await new Promise(r => setTimeout(r, 1200));
   }
-  const run = (t) => {
-    try { execFileSync(process.execPath, [path.join(ROOT, t)], { stdio: 'inherit', cwd: ROOT }); return true; }
+  const run = (t, args = []) => {
+    try { execFileSync(process.execPath, [path.join(ROOT, t), ...args], { stdio: 'inherit', cwd: ROOT }); return true; }
     catch { return false; }
   };
-  const ok1 = run('tests/app-test.js');
-  const ok2 = run('tests/edge-test.js');
-  const ok3 = run('tests/deck-audit.js');
+
+  /* The data checks cost about a third of a second and catch what a fresh batch
+     actually gets wrong — a duplicate name, a rating out of range, a card that
+     contradicts itself, a photo with no provenance entry. Run them FIRST so a bad
+     batch fails now instead of after five minutes of Chromium. */
+  const okData = run('tools/data-audit.js') && run('tools/plant-sense.js', ['--strict'])
+    && run('tools/photo-credits.js', ['--check']);
+
+  /* deck-audit is the one browser suite that is really about the DATA: it reads
+     every card as rendered and checks photos, hues, aspects, crests, bloom bands.
+     That is the suite a new plant can genuinely break, and it costs ~15s. */
+  const okDeck = okData && run('tests/deck-audit.js');
+
+  /* app-test and edge-test are behavioural — gestures, undo, corrupt storage. A
+     new data row cannot change that behaviour, and they now cost ~4.5 min between
+     them because both walk the whole deck (the learn-every-card loop alone is
+     128 x 400ms). Skipped in --quick; run the full suite once before pushing. */
+  let okBehaviour = true;
+  if (!QUICK && okDeck) {
+    okBehaviour = run('tests/app-test.js') && run('tests/edge-test.js');
+  }
+  const ok1 = okData, ok2 = okDeck, ok3 = okBehaviour;
 
   /* ---- 6. screenshot the newest card (top of deck) once ---- */
   const shot = await browser.newPage({ viewport: { width: 390, height: 780 }, deviceScaleFactor: 2 });
@@ -152,10 +177,21 @@ console.log(`\nall ${pairs.length} plants validated — proceeding to write\n`);
   await browser.close();
   if (server) process.kill(-server.pid);
 
-  if (!ok1 || !ok2 || !ok3) die('suites FAILED after insert — inspect before committing');
-  console.log(`\nDONE: ${pairs.length} plants added and the whole deck verified once.`);
+  if (!ok1) die('DATA checks failed after insert — fix before committing');
+  if (!ok2) die('deck audit failed after insert — inspect before committing');
+  if (!ok3) die('behavioural suites failed after insert — inspect before committing');
+
+  console.log(`\nDONE: ${pairs.length} plants added, whole deck verified once.`);
   console.log('  ' + pairs.map(p => p.data.common).join('\n  '));
   console.log('Screenshot: tools/last-added-card.png — LOOK AT IT before committing.');
   console.log('The deck audit above checked every card (photos, hues, aspects) — review its output.');
+  if (QUICK) {
+    console.log('\n--quick: gesture/undo/storage suites were NOT run.');
+    console.log('Commit freely, but run the full set once before you push:');
+    console.log('  node tests/run-all.js --jobs 3');
+  } else {
+    console.log('\nStill not run here: sw-update, perf, srs, features, verify-cards, audit-layout.');
+    console.log('Before pushing:  node tests/run-all.js --jobs 3');
+  }
   console.log('Then: git add -A && commit && push.');
 })();
