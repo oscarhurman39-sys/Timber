@@ -1,4 +1,6 @@
 timber.html.bak
+# timestamped timber.html backups written by plants-tool.js import
+.backups/
 plant-images/
 dist/
 node_modules/

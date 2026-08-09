@@ -42,10 +42,12 @@ nothing else — not the design docs).
 | `CARD-STATS.md` | Rating scales, hardiness table, compass rule |
 | `CARD-BACK.md` | Card-back spec + per-plant question checklist |
 | `CARD-PROTOCOL.md` | Layout authority + full decision changelog |
-| `tests/` | Run all suites green before pushing |
+| `VERIFY-QUEUE.md` | Card facts that need a horticultural call, and why |
+| `tests/run-all.js` | One command for every check — run it green before pushing |
 
 ```sh
 node tools/check-plant-json.js my-plant.json    # errors out rather than guessing
+node tests/run-all.js                           # everything, one command
 ```
 
 ## Use it
@@ -125,15 +127,49 @@ trade, retail, margin, type, shrink, returnRisk, pots, cvs, hardiness, resilienc
 ## Scaling the plant list (no hand-editing)
 
 ```
-node plants-tool.js export   # dumps PLANTS to plants.csv — open in Excel / Google Sheets
-node plants-tool.js import   # validates plants.csv and writes it back into timber.html
+node plants-tool.js export   # dumps ALL plants (dealt + on-hold) to plants.csv
+node plants-tool.js check    # validates the csv and shows what an import WOULD change
+node plants-tool.js import   # writes it back into timber.html
 ```
 
-The importer enforces the locked schema hard: exactly the 25 fields, every cell filled,
-hue 0–360, no duplicate names. **It never invents values** — a missing cell is an error
-naming the row and field, not a default. On import the app auto-detects the changed list
-and starts a fresh deck (saved progress can't go stale). A `timber.html.bak` backup is
-written before every import.
+The importer enforces the locked schema hard: only the locked columns, identity and
+hardiness required, hue 0–360, ratings in range, no duplicate names across dealt and
+held together. **It never invents values** — a missing cell is an error naming the row
+and field, not a default. On import the app auto-detects the changed list and starts a
+fresh deck (saved progress can't go stale). Timestamped backups go to `.backups/`
+(gitignored, last 20 kept).
+
+It also refuses to lose anything:
+
+- The csv carries a **`held`** column and round-trips `PLANTS_ON_HOLD` as well as the
+  deck. Before 2026-08-09 export could not see the hold block at all, so an
+  export/import cycle deleted every held plant.
+- If a card carries a field the csv has no column for, the tool **stops** rather than
+  dropping it. `sunMin` — live on 132 cards — was missing from the column list, so one
+  import would have wiped it deck-wide.
+- An import that would **remove** a plant present in `timber.html` but absent from the
+  csv refuses to run without `--allow-removals`.
+- After writing, it re-parses the result and rolls back if the file no longer reads.
+
+## Checking nothing has been lost or gone wrong
+
+```
+node tests/run-all.js --fast     # the four data checks below, ~2s, no browser
+node tests/run-all.js            # the above plus all nine browser suites
+node tools/install-hooks.js      # run the fast checks automatically before every push
+```
+
+| Tool | Answers |
+|---|---|
+| `tools/data-audit.js` | Do the deck, the hold block, `plants.csv` and `photos/` still agree? `--history` replays every commit and reports any card that ever vanished. |
+| `tools/plant-sense.js` | Does any card contradict **itself** — prose saying drought-tolerant against a high thirst rating, a margin its own prices can't reach, a "dwarf" at 4m? |
+| `tools/build-stamp.js` | Does the build number in the menu foot actually match the app's content? `--verify <url>` compares a deployed page's bytes. |
+| `tools/template-geometry.js` | Have the card's overlay anchors drifted? `--reflow <px>` recomputes them all for a new card height. |
+| `tools/deck-diff.js` | What plant data actually differs between two branches or commits? Semantic, not textual. |
+
+Open questions these turned up that need a horticultural call live in
+[VERIFY-QUEUE.md](VERIFY-QUEUE.md). Deliberate card renames are recorded in
+`data/renames.json` so a rename never looks like a loss.
 
 ## Finding real, licence-safe plant photos
 
@@ -150,6 +186,33 @@ downloads the chosen image plus a `credit.json` recording the licence, author, s
 URL, and the date — your permanent record, independent of whether the source page
 still exists later (Creative Commons licences are irrevocable for a copy you've
 already obtained).
+
+### Photo provenance
+
+`plant-images/` is **gitignored**, so for the first 146 photos those `credit.json`
+records were written to a scratch directory and lost with the container. The images
+are in git; the paperwork was not. That is what "unverified provenance" means here —
+not that the photos were taken carelessly (the tool only ever searched Commons and
+refuses NC/ND licences), but that the repo cannot currently *prove* it.
+
+The record is now a committed artefact:
+
+```sh
+node tools/photo-credits.js            # coverage report
+node tools/photo-credits.js --check    # fails if a photo has no entry (part of run-all)
+node tools/photo-credits.js --set <file> --source wikimedia --licence "CC BY-SA 4.0" \
+     --author "Name" --url "https://commons.wikimedia.org/..."
+```
+
+`photos/CREDITS.json` has one entry per image. Five are established as Oscar's own
+photographs from git history; the rest are marked `unrecorded` with an `unknown`
+licence, which is the honest state — a guessed licence would be worse than none.
+`pick` now writes straight into this manifest, so new photos arrive with their
+paperwork attached.
+
+**Fine for a personal learning tool. Not fine for commercial use** — showing cards to
+a garden centre means using the photos commercially, and the unrecorded ones need
+their source re-established or the photo replaced before that happens.
 
 **This tool needs an internet connection to run** (unlike everything else here) and
 has not yet been run against the live API — Wikimedia isn't reachable from the

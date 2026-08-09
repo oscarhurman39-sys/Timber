@@ -1,5 +1,9 @@
 const { chromium } = require('playwright');
-const NPLANTS = 128;  // plants in the demo deck (5 more parked in PLANTS_ON_HOLD until photos land)
+const NPLANTS = require('../tools/plant-data.js')
+  .readDeck(require('fs').readFileSync(require('path').join(__dirname,'..','timber.html'),'utf8')).length;
+/* Derived from timber.html, never hand-typed. Four suites used to carry a
+   hardcoded copy of this number; a deck change that updated only some of
+   them made the rest fail for the wrong reason. */
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
 const fails = [];

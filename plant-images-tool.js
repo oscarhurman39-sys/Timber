@@ -217,6 +217,40 @@ async function doPick(latin, which, label) {
     retrievedAt: new Date().toISOString().slice(0, 10),
   }, null, 2));
   console.log(`Saved plant-images/${slug(latin)}/photo${tag}.${ext} + credit${tag}.json (${(buf.length / 1024).toFixed(0)} KB)`);
+
+  /* Also record the credit against the filename this photo will have once it is
+     wired into the app, in the COMMITTED manifest. plant-images/ is gitignored,
+     so for 146 earlier photos the licence record was written here and then lost
+     with the container — the images are in git, the paperwork was not. Writing
+     the entry now means it survives even if this scratch directory does not. */
+  try {
+    const CREDITS = path.join(__dirname, 'photos', 'CREDITS.json');
+    if (fs.existsSync(CREDITS)) {
+      const data = JSON.parse(fs.readFileSync(CREDITS, 'utf8'));
+      const target = `${slug(latin)}${tag}.${ext}`;
+      const entry = {
+        file: target,
+        source: 'wikimedia',
+        licence: chosen.license,
+        author: chosen.artist,
+        sourceUrl: chosen.descriptionUrl,
+        licenceUrl: chosen.licenseUrl,
+        retrievedAt: new Date().toISOString().slice(0, 10),
+        commit: null,
+        commitSubject: null,
+        commercialUseCleared: true,   // NC/ND candidates are refused above
+      };
+      const i = data.photos.findIndex(p => p.file === target);
+      if (i === -1) data.photos.push(entry); else data.photos[i] = entry;
+      data.photos.sort((a, b) => a.file.localeCompare(b.file));
+      fs.writeFileSync(CREDITS, JSON.stringify(data, null, 1) + '\n');
+      console.log(`Recorded provenance for ${target} in photos/CREDITS.json (committed, unlike plant-images/).`);
+    }
+  } catch (e) {
+    console.error(`WARNING: could not update photos/CREDITS.json — ${e.message}`);
+    console.error('Record it by hand: node tools/photo-credits.js --set <file> --source wikimedia --licence ... --author ... --url ...');
+  }
+
   console.log('Not wired into timber.html yet — that\'s a separate step once you\'ve picked images for a batch of plants.');
 }
 
