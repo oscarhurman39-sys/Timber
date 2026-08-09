@@ -1,10 +1,138 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Re-source the Ajuga 'Burgundy Glow' photo — it is the only card below the
-  1200px standard (680x415, cropped from AI artwork, cultivar unverifiable) and the
-  last known data-quality defect in the 47-card deck.
-since: 2026-07-28  sessions-unchanged: 3
+brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
+  rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
+since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-08 (later still) — **v14 elongated template: the card is natively
+  420×600.** Oscar wanted the card longer; a ChatGPT frame regeneration drifted
+  (restyled gold, redrawn ornaments, dropped the baked DOUBLE TAP TO MASTER strip)
+  and was rejected in favour of slicing the v12 art from its own pixels:
+  art/frame-600.png = frame-full + 150px of plain spine mirror-tiled in at a
+  measured plain row (row-continuous seams; interior seams invisible under the
+  live photo). Top furniture keeps px-from-top, bottom furniture px-from-bottom,
+  so overlays still land on their baked twins exactly. Extra height all goes to
+  the photo; runtime stretch cap cut to 1.12. card-builder + manifest (v3) +
+  protocol changelog updated in lockstep. Build r16. All nine suites + layout
+  audit green, zero audit-rule changes. Parked from ChatGPT's spec, Oscar's
+  call needed: folding SOIL into the aspect footer to widen the stats plaque.
+progress: 2026-08-08 (later) — **deck fills the screen + two Euonymus: deck 88 -> 90.**
+  Oscar flagged the dead space above/below the card and the grimy black fade over the
+  action bar. Two causes, two fixes: (1) the 420x543 card is width-bound on phones and
+  was centred with the spare height split into two gaps — the card now stretches
+  vertically into that space (--csx/--csy split, capped at 1.25x; whole subtree scales
+  as one raster so internal alignment is untouched, photos crop via the same transform);
+  (2) the old always-on card shadow stacked ~57 deep into a near-solid ~60px halo — the
+  drop shadow now sits on hot cards only (3 stacked, clean edge, perf pixel-parity test
+  still green). Deck margins 12->8px. Added Emerald 'n' Gold + Emerald Gaiety Spindles
+  (JSON + photos via add-plant.js). Tool/test debt paid down along the way: add-plant
+  counted PLANTS_ON_HOLD rows into NPLANTS (set 96 with an 89 deck — suites imploded)
+  and only bumped 2 of the 4 counting suites — both fixed; perf-test's no-layout-on-drag
+  guard was timing-dependent on the photo trickle loader landing a load event inside
+  the drag window (any deck-size change re-rolled that dice) — photos now settle before
+  the measurement. plants.csv: note plants-tool.js export DROPS the 7 on-hold rows
+  (they live outside the PLANTS markers), so the 2 new rows were appended by hand;
+  export needs teaching about the hold block before it's safe to run again. Build r15.
+  All nine suites green.
+progress: 2026-08-08 — **plant-build line brought across: deck 65 -> 88 (95 known).**
+  Oscar: "bring across all plant 80 something" — the claude/plant-build-timber-6ta360
+  branch (another chat, forked at the 66-deck r8 shell) had built to 89, of which 23
+  cards + 1200px photos were new to this line: Goshiki Osmanthus, Camellia 'Doctor
+  King', Worcester Gold Caryopteris, two Achilleas, Leucothoe WHITEWATER, Hydrangea
+  DAREDEVIL, Rhaphiolepis ENCHANTRESS, Philadelphus PETITE PERFUME PINK, Phlomis
+  italica, Scabiosa FLUTTER, Cotoneaster 'Variegatus', Crinodendron, Prunus
+  'Kojo-no-mai', Escallonia PINK ELLE, Euonymus 'Harlequin', Miscanthus 'Morning
+  Light', Festuca INTENSE BLUE, Berberis 'Orange Ice', Pennisetum TINY TAILS, Katsura,
+  Lobelia STARSHIP, Lomandra WHITE SANDS (Loquat already here). Cards + photos ported
+  onto the current shell; that branch never synced plants.csv, so the 23 CSV rows were
+  generated from the card objects (deck and csv both 95, no dupes). NPLANTS 88 in all
+  four suites. Build r14. All nine suites green. Old Plantatron backup's ~105-name
+  catalogue list is stock data, not cards — NOT ported.
+progress: 2026-08-08 — **r13 LIVE on Pages.** Oscar: the artifact preview isn't his
+  link — deployed for real. Feature branch fast-forwarded onto the pwa branch
+  (289fc40 -> 6848ee9), Pages run #13 green. [Unverified] served bytes — github.io
+  is egress-blocked from the container; verified via the successful deploy run on
+  the exact commit. Phone note: the SW serves r12 once more, then r13 on next open.
+progress: 2026-08-07 (later still) — **7 photo-less cards parked out of the deck.**
+  Oscar's call: no photo = on hold. Choisya, Weigela and the five climbers moved to
+  PLANTS_ON_HOLD (outside the plants-tool markers; data kept in-file + plants.csv —
+  move an entry back into PLANTS to re-deal). Deck 65, NPLANTS 65 in all four suites;
+  test refs to held plants repointed; features-test chip pick now needs n>=2 (the old
+  type:Impulse n=2 chip was exactly Choisya+Weigela). All nine green. Preview artifact
+  republished. Sourcing the climber photos (the standing brick) now also un-parks them.
+progress: 2026-08-07 (later) — **action circles squished into slim card-styled bars;
+  cards bigger.** Oscar's call: the three big round fabs were obnoxious. Now three
+  38px space-bar panels (58px total vs ~110px) in the card's own language — Georgia
+  small-caps, deep-green panel, thin gold trim, gold LEARNED primary, red-tinted
+  SKIP, compact undo square. Deck margins 16→12px; card scale 0.852→0.871 at 390px
+  wide, more on height-bound screens. IDs/aria/shortcuts untouched; all nine suites
+  green. On claude/card-redesign-compact-buttons-ikf8ki pending Oscar's verdict on
+  the preview artifact (photos + art inlined, build script in session scratchpad).
+progress: 2026-08-07 (later) — **duplicate holdout retired.** Both chats were asked to
+  park the photo-less cards and built it in parallel: this line's PHOTO_HOLDOUT filter
+  (kept the 7 searchable/quizzable) lost the race to the deployed PLANTS_ON_HOLD move
+  (7 gone from search/dictionary/quiz too until re-added). Deployed version adopted;
+  lines converged on the blocker branch. One live-app change per chat at a time.
+progress: 2026-08-07 — **parallel lines combined; nothing left stranded.** Oscar ran two
+  sessions at once and their work forked at r10: voice change (blocker branch) vs edging
+  assets + v13 mocks + monetisation brief (edging branch). Merged, then a branch sweep
+  found four finished fixes never combined into ANY line: Winter Beauty Honeysuckle
+  photo (deck-audit gap closed), gold-SVG chrome icon retheme, tradeBlocks() — trade
+  sheet/search detail stop printing empty captions + customer PRICE box only when
+  priced, and the soil-panel 3-line collision fix (8.5px). The 07-30 era commits
+  (shuffled deals/photo quiz, drop-unfilled-facts) predate two shell rewrites — parked,
+  likely superseded; Oscar to say if the quiz is missing anything he remembers. Build
+  r12. Whole gate green.
+progress: 2026-08-06 (later) — **v13 card redesign mock, three rounds.** Oscar supplied
+  an AI reference (ornate scallop-corner parchment boxes, merged aspect/soil footer,
+  no action buttons). Round 1: inset card mock. Round 2 (full-screen) rejected — his
+  detailed critique: geometry wrong, chrome belongs outside the card, PPP must stay
+  floating gold over the photo, rail max ~12%. Round 3 reproduces his locked second
+  reference exactly: design/card-v13-mock.html + V13-REDESIGN-NOTES.md. Scallop
+  cartouche borders are runtime SVG (scallopPath); icons unchanged per Oscar. Awaiting
+  his verdict before any template work.
+progress: 2026-08-06 — **v12.5 matching wooden edging shipped + monetisation research.**
+  Oscar flagged the plaque and SOIL box missing the band's thin wooden rim; band's rim
+  profile pixel-measured and baked onto both assets by design/bake-rim.py (idempotent,
+  guard against double-bake). All nine suites + layout audit green. NOT yet live: sits
+  on claude/timber-plant-card-edging-c661sc pending landing on the pwa branch. Also:
+  MONETISATION-BRIEF.md written (app packaging, user acquisition, charging, card count,
+  revenue — sourced, speculation labelled). Route decision pending: consumer app vs
+  B2B staff-training; brief recommends validating B2B at Oscar's own centre first.
+progress: 2026-08-05 (night) — **say-button voice anglicised.** Was it-IT (full Italian
+  phonology — authentic but hard to parse); now prefers en-GB (falls back to any en),
+  the RHS-style trade pronunciation. Spoken text only: "var." said as "variety", hybrid
+  sign x silent; display text untouched. Rate .85 -> .9. app-test's utterance check
+  updated to the spoken form. Build r11. All nine suites green. [Unverified] how it
+  sounds on Oscar's phone — depends on the device's en-GB voice; needs his ear.
+progress: 2026-08-05 (evening) — **climber sun values researched and corrected** (was
+  the brick; Oscar said "just research and find out"). Sources: RHS plant pages +
+  Gardeners' World shade guides via search (direct RHS fetch blocked from container).
+  Nelly Moser 55/35 -> 45/25 (performs BETTER in part shade, sun bleaches the bars,
+  classic north-wall pick); montana rubens sunMin 40 -> 30 (Group 1, among the most
+  shade-tolerant, north walls fine); armandii sunMin 55 -> 45 (most shade-tolerant
+  evergreen clematis, manages dappled shade, flowers less); Russian Vine sunMin
+  20 -> 35 (semi-shade tolerant, but 20 = deep shade overstated it); PPE 65/40
+  confirmed unchanged (viticellas want sun, tolerate some shade). CSV synced (Nelly
+  only — CSV carries no sunMin). Build r10. All nine suites green. NOT yet live:
+  sits on claude/timber-blocker-h7f5oo pending fast-forward of the pwa branch.
+progress: 2026-08-05 (later) — **72-plant deck LIVE.** claude/timber-plant-pwa-j69h5e
+  fast-forwarded c210f80 -> 8710df2 with Oscar's permission; Pages deploy run #10 green
+  (deploy-pages step succeeded). Ajuga photo brick closed by decision: Oscar keeps the
+  current photo — no longer a defect, it's the chosen art.
+progress: 2026-08-05 — **deck 66 → 72: the last six stranded plants are in.** The five
+  climbers (Clematis 'Nelly Moser', 'Purpurea Plena Elegans', montana var. rubens,
+  armandii, Russian Vine) came in from their preserved plants.csv rows, and Japanese
+  Loquat (card + 1200px photo) from the japanese-loquat-card branch — the deck and
+  plants.csv are back in sync at 72. The climbers' deck-audit blocker (aspect light-info
+  lost) is cleared by moving light into the rubric fields: aspect set to a facing
+  ("Any aspect" / "Sheltered S / W" for armandii), sunNeed+sunMin set per CARD-STATS
+  anchors (Nelly Moser 55/35, PPE 65/40, montana 65/40, armandii 75/55, Russian Vine
+  70/20; "roots in shade" kept in the soil line). [Unverified] those five sunNeed/sunMin
+  values are editorial calls from the rubric, not Oscar's portfolio — review and adjust.
+  Climbers still carry no buyer-trade layer, other ratings, or photos (honest blanks —
+  15 audit warnings, 0 errors). NPLANTS 72 in all four suites; whole gate green (app 94,
+  edge 9, features 47, srs 24, perf 10, sw-update, deck-audit PASS). Build r9.
 progress: 2026-08-04 (later) — **deck 57 → 66: nine displaced plants restored.** Full
   branch+artifact audit found 14 plants stranded on four unmerged branches. Restored the
   9 that pass the gates with full data AND photos (recovered from donor branches, all

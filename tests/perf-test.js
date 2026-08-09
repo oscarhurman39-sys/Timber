@@ -97,6 +97,17 @@ const check = (name, ok, detail = '') => {
     diff.px === 0, `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max}`);
 
   /* ---- 4. a drag must not force layout ---- */
+  /* settle the photo pipeline first: the background trickle loader (tricklePhotos)
+     sets img.src every 900ms for tens of seconds, and an image-load completing
+     inside the drag window counts a layout pass that the drag did not force —
+     whether one lands there is a deck-size-dependent timing accident. Load
+     everything now so the measurement sees only what the drag itself does. */
+  await page.evaluate(() => document.querySelectorAll('.card .tphoto img').forEach(i => {
+    if (!i.getAttribute('src') && i.dataset.psrc) i.src = i.dataset.psrc;
+  }));
+  await page.waitForFunction(() =>
+    [...document.querySelectorAll('.card .tphoto img')].every(i => !i.getAttribute('src') || i.complete), null, { timeout: 30000 });
+  await page.waitForTimeout(600);
   const cdp = await ctx.newCDPSession(page);
   await cdp.send('Performance.enable');
   const metric = async (n) => {

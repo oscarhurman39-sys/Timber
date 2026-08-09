@@ -25,7 +25,8 @@ live in `CORRECTION-PROTOCOL.md`.
 `perf-test.js` guards the deck's compositing budget: every plant stays in the DOM (the
 layout audit needs that), but only the top few cards may paint and only the ones that
 move may get a GPU layer. It also asserts that hiding buried content changes **no pixel**
-— the deck's halo is ~30 stacked card shadows, so hiding whole cards visibly lightens it.
+— only hot cards carry the drop shadow (an always-on shadow stacked ~57 deep once built
+a heavy black halo), and the `deep` toggle must never touch what's visible.
 
 `deck-audit.js` audits the deck as a set — the gap between `check-plant-json.js` (one
 incoming plant) and `verify-cards.js` (the 2-card design mock). It judges what the card

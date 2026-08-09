@@ -47,7 +47,7 @@
   .progress b{color:var(--leaf1)}
 
   /* deck + flip */
-  .deck{position:relative;flex:1 1 auto;margin:0 16px}
+  .deck{position:relative;flex:1 1 auto;margin:0 8px}
   /* will-change lists opacity as well as transform so WebKit allocates the card's
      compositing layer (with its alpha channel) up front. Fling animates both at once,
      and a layer promoted mid-animation can present one unpainted frame — the white
@@ -64,9 +64,9 @@
      layer composites independently, it defeats occlusion culling — the phone paints 55
      cards it cannot show. Only the cards that actually move are promoted; see markHot(). */
   .card.hot{will-change:transform,opacity}
-  /* A buried card's CONTENTS are completely hidden by the card above it, but its box is
-     not: 30-odd stacked box-shadows are what build the deck's halo, so hiding whole cards
-     visibly lightens it. Hide only the contents and the halo is pixel-identical (asserted
+  /* A buried card's CONTENTS are hidden by the card above it. Only hot cards carry a
+     drop shadow (the old always-on shadow stacked ~57 deep into a heavy black halo that
+     washed over the action bar), so hiding buried contents is pixel-identical (asserted
      by tests/perf-test.js) while the browser stops painting — and so stops holding decoded
      bitmaps for — every buried photo. visibility:hidden keeps layout intact, so
      design/audit-layout.js still measures all 57 cards. */
@@ -128,10 +128,10 @@
 
   /* BACK — the buyer trade sheet (content lives in .backfit, sized to the card) */
   .back{transform:rotateY(180deg)}
-  .backfit{position:absolute;left:50%;top:50%;width:calc(420px*var(--cs,0.75));height:calc(543px*var(--cs,0.75));
+  .backfit{position:absolute;left:50%;top:50%;width:calc(420px*var(--csx,0.75));height:calc(600px*var(--csy,0.75));
     transform:translate(-50%,-50%);border-radius:16px;background:linear-gradient(180deg,#0d1c13,#0a160e);
     padding:18px 18px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
-    box-shadow:0 18px 40px rgba(0,0,0,.45)}
+    box-shadow:0 10px 24px rgba(0,0,0,.4)}
   .back-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;
     border-bottom:1px solid rgba(255,255,255,.09);padding-bottom:10px}
   .back-head h3{margin:0;font-size:18px;font-weight:800;letter-spacing:-.3px}
@@ -148,21 +148,31 @@
   .grid .g.full{grid-column:1 / -1}
   .grid .g .l{font-size:9px;letter-spacing:1.1px;text-transform:uppercase;color:var(--leaf1);opacity:.85}
   .grid .g .n{font-size:12.5px;line-height:1.4;color:#eafff2;margin-top:3px}
+  .nodata{font-size:11.5px;font-style:italic;color:var(--muted);padding:2px 2px 4px}
   .back .fliphint{margin-top:auto;padding-top:6px}
 
-  /* actions */
-  .actions{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:22px;padding:16px 0 22px}
-  .fab{width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;
-    justify-content:center;font-size:24px;background:rgba(255,255,255,.08);color:#fff;
-    box-shadow:0 8px 18px rgba(0,0,0,.35);transition:transform .12s,background .2s,opacity .2s}
-  .fab:active{transform:scale(.9)}
-  .fab.skip{color:#ff6b6b}
-  .fab.back-btn{width:48px;height:48px;font-size:18px;color:var(--muted)}
+  /* actions — three slim bars in the card's own language (Georgia small-caps,
+     deep green panels, thin gold trim) instead of the old 60-72px circles.
+     Total bar footprint ~58px vs the circles' ~110px; the freed height goes
+     to the deck, so --cs (and the card) grows on height-bound screens. */
+  .actions{flex:0 0 auto;display:flex;align-items:stretch;gap:8px;padding:8px 12px 12px}
+  .fab{height:38px;border:1px solid rgba(216,189,120,.28);border-radius:11px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    font-family:Georgia,"Times New Roman",serif;font-size:11px;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;
+    background:#14301f;color:#D8BD78;
+    box-shadow:0 4px 12px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06);
+    transition:transform .12s,background .2s,opacity .2s}
+  .fab .g{font-size:13px;letter-spacing:0}
+  .fab:active{transform:scale(.97)}
+  .fab.skip{flex:1 1 0;color:#ff9c94;border-color:rgba(255,107,107,.4);
+    background:linear-gradient(180deg,rgba(255,107,107,.10),rgba(255,107,107,.04)) #1c211a}
+  .fab.back-btn{flex:0 0 56px;font-size:15px;color:var(--muted);border-color:rgba(216,189,120,.18)}
   /* undo is the only action with no swipe equivalent — dim it when there is nothing
      to undo so the row reads as live state rather than three permanent decorations */
   .fab.back-btn[disabled]{opacity:.3;cursor:default;box-shadow:none}
-  .fab.learn{width:72px;height:72px;font-size:30px;color:#1a120a;
-    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 10px 22px rgba(245,196,81,.35)}
+  .fab.learn{flex:1.25 1 0;font-size:11px;color:#1a120a;border-color:rgba(245,196,81,.6);
+    background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 5px 14px rgba(245,196,81,.28)}
 
   .empty{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;padding:30px;gap:14px}
@@ -183,14 +193,15 @@
   .sheet h4{margin:6px 0 14px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
   .row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-radius:12px;cursor:pointer;font-size:16px}
   .row:hover{background:rgba(255,255,255,.05)}
-  .row .ic{font-size:20px;width:24px;text-align:center}
+  .row .ic{width:24px;height:24px;flex:0 0 24px;display:inline-flex;align-items:center;justify-content:center;color:var(--gold)}
+  .row .ic svg{width:22px;height:22px;display:block}
   .row small{margin-left:auto;color:var(--leaf1);font-weight:700}
   .sheet .foot{margin-top:auto;font-size:12px;color:rgba(255,255,255,.35);line-height:1.5}
 
   /* keep header/fabs clear of the notch & home indicator in installed iOS standalone mode */
   @supports(padding:max(0px)){
     header{padding-top:max(14px,env(safe-area-inset-top,0px))}
-    .actions{padding-bottom:max(22px,calc(env(safe-area-inset-bottom,0px) + 10px))}
+    .actions{padding-bottom:max(12px,calc(env(safe-area-inset-bottom,0px) + 6px))}
     .sheet .panel{padding-top:max(22px,env(safe-area-inset-top,0px))}
     .search .s-bar{padding-top:max(14px,env(safe-area-inset-top,0px))}
   }
@@ -259,7 +270,8 @@
     box-shadow:0 18px 40px rgba(0,0,0,.45);padding:14px 16px 16px;gap:12px}
   .quiz.open .q-panel{transform:translateY(0)}
   .q-head{display:flex;align-items:center;gap:10px}
-  .q-title{font-weight:800;font-size:16px}
+  .q-title{font-weight:800;font-size:16px;display:inline-flex;align-items:center;gap:9px}
+  .q-title svg{width:20px;height:20px;flex:0 0 20px;color:var(--gold)}
   .q-stats{margin-left:auto;font-size:12px;color:var(--muted)}
   .q-stats b{color:var(--gold)}
   .q-question{font-size:15px;line-height:1.45;color:#eafff2}
@@ -319,7 +331,7 @@
   .learnbar{height:3px;margin:0 18px 8px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;flex:0 0 auto}
   .learnbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--leaf2),var(--leaf1));border-radius:2px;transition:width .4s ease}
   .fab{transition:transform .12s ease}
-  .fab:active{transform:scale(.88)}
+  .fab:active{transform:scale(.96)}
   .fab[disabled]{opacity:.35}
   .s-sub{display:block;font-size:11px;color:var(--muted);margin-top:2px;font-style:normal}
   .r-label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);padding:10px 4px 6px}
@@ -337,20 +349,34 @@
   @media (prefers-reduced-motion:reduce){  /* new overlays/chips only — card animations are locked as-is */
     .stats .st-panel,.stats .st-scrim,.chip{transition-duration:.01ms}
   }
-  /* ============ v12 LOCKED CARD TEMPLATE (design/card-builder.html) ============
+  /* ============ v14 ELONGATED CARD TEMPLATE (design/card-builder.html) ============
      The card front is assembled from the final approved artwork's own painted
      assets (art/); plant-specific values render live from PLANTS data. The card
-     is authored at 420x543 and scaled to the deck with --cs. Do not restyle. */
+     is authored at 420x600 — the v12 420x543 template elongated by inserting
+     150 art-px of plain spine/trim into the photo region of the frame
+     (art/frame-600.png, mirror-tiled seam at art rows 323..473; every visible
+     surface — trim, spine, bottom strip — is row-continuous). Top furniture
+     (title, crest, growth rail) keeps its pixel position from the top edge;
+     bottom furniture (ppp, plaque, soil, band) keeps its pixel position from
+     the bottom, so every overlay still lands exactly on its baked twin. The
+     card scales to the deck with --csx/--csy: width-fit plus a small capped
+     vertical stretch (see updateCardScale). Do not restyle. */
   .face{box-shadow:none;border-radius:0;overflow:visible}
-  .tscale{position:absolute;left:50%;top:50%;width:420px;height:543px;
-    transform:translate(-50%,-50%) scale(var(--cs,0.75))}
+  .tscale{position:absolute;left:50%;top:50%;width:420px;height:600px;
+    transform:translate(-50%,-50%) scale(var(--csx,0.75),var(--csy,0.75))}
   .tscale .stamp{z-index:30}
-  .tcard{width:420px;height:543px;position:relative;
-    background:url(art/frame-full.png);background-size:100% 100%;
-    border-radius:15px;box-shadow:0 18px 42px rgba(0,0,0,.6);
+  .tcard{width:420px;height:600px;position:relative;
+    background:url(art/frame-600.png);background-size:100% 100%;
+    border-radius:15px;
     font-family:Georgia,"Times New Roman",serif}
+  /* Shadow on hot cards only. The old always-on shadow stacked ~57 deep: the
+     blur tail saturated to near-solid black (1-(1-a)^57), a ~60px grimy fade
+     that washed over the action bar. Three stacked shadows read as one clean
+     drop shadow. Keyed to .hot, not .deep, so tests/perf-test.js's deep-toggle
+     pixel-identity check still holds (the hot set is identical in both shots). */
+  .card.hot .tcard{box-shadow:0 10px 24px rgba(0,0,0,.4)}
   .tcard img{display:block}
-  .tinner{position:absolute;left:13.96%;top:2.10%;right:2.81%;bottom:4.91%;
+  .tinner{position:absolute;left:13.96%;top:1.90%;right:2.81%;bottom:4.44%;
     overflow:hidden;border-radius:5px;z-index:1}
   .tphoto{position:absolute;inset:0;pointer-events:none}
   .tphoto>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none}
@@ -376,7 +402,7 @@
     transform-origin:center;font-size:8px;letter-spacing:1.5px;color:#efe0b4;text-transform:uppercase;
     text-align:center;text-shadow:0 1px 4px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7)}
   .growth .mk{position:absolute;width:17px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
-  .crest{position:absolute;left:80.33%;top:3.23%;width:17.23%;z-index:3;text-align:center;
+  .crest{position:absolute;left:80.33%;top:2.92%;width:17.23%;z-index:3;text-align:center;
     filter:drop-shadow(0 2px 5px rgba(0,0,0,.35))}
   .crest img{width:100%}
   .crest .hnum{position:absolute;left:0;right:0;top:29%;text-align:center;font-family:Georgia,serif;
@@ -387,16 +413,16 @@
   .railval .v{position:absolute;inset:0;display:grid;place-items:center;
     writing-mode:vertical-rl;transform:rotate(180deg);
     font-size:12px;letter-spacing:1px;color:#e7ddb9;white-space:nowrap}
-  .rail-h{left:2.72%;top:37.87%;width:7.62%;height:11.22%}
-  .rail-s{left:2.72%;top:65.22%;width:7.62%;height:11.36%}
-  .ppp{position:absolute;left:15.14%;width:63.46%;top:53.9%;z-index:4;text-align:center;
+  .rail-h{left:2.72%;top:43.77%;width:7.62%;height:10.16%}
+  .rail-s{left:2.72%;top:68.52%;width:7.62%;height:10.28%}
+  .ppp{position:absolute;left:15.14%;width:63.46%;top:58.28%;z-index:4;text-align:center;
     font-family:Georgia,serif;font-size:9.5px;font-weight:700;letter-spacing:3.5px;
     text-transform:uppercase;color:#ecd7a0;
     text-shadow:0 1px 3px rgba(10,20,10,.92),0 0 8px rgba(10,20,10,.7)}
-  .plaque{position:absolute;left:15.14%;top:55.82%;width:63.46%;z-index:3}
+  .plaque{position:absolute;left:15.14%;top:60.02%;width:63.46%;z-index:3}
   .plaque>img,.soilp>img,.band>img{width:100%}
-  .soilp{position:absolute;left:80.33%;top:63.04%;width:15.59%;z-index:3}
-  .band{position:absolute;left:14.32%;top:87.10%;width:81.60%;z-index:3}
+  .soilp{position:absolute;left:80.33%;top:66.55%;width:15.59%;z-index:3}
+  .band{position:absolute;left:14.32%;top:88.33%;width:81.60%;z-index:3}
   .patch{position:absolute;background:url(art/parch-swatch.png);background-size:72px 64px;
     mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 6px,#000 calc(100% - 6px),transparent);
@@ -454,7 +480,7 @@
   .s-val{left:8%;top:27.4%;width:82%;height:16.2%}
   .s-tri-cover{left:33.7%;top:41.6%;width:29.1%;height:16.3%}
   .s-warn{left:7.6%;top:54.9%;width:84.3%;height:30.2%}
-  .s-val-ink{font-size:9px;line-height:1.2;text-align:center;display:grid;place-items:center;overflow-wrap:anywhere}
+  .s-val-ink{font-size:8.5px;line-height:1.15;text-align:center;display:grid;place-items:center;overflow-wrap:anywhere}
   .s-warn-ink{font-size:8.5px;line-height:1.35;display:grid;place-items:center;text-align:center}
   .b-aspect{left:11.3%;top:42.4%;width:17%;height:42.4%}
   .b-sun-cover{left:28%;top:6%;width:12.2%;height:88%}
@@ -511,26 +537,26 @@
 </div>
 
 <div class="actions" id="actions">
-  <button class="fab skip"  id="skip"  title="Skip (←)" aria-keyshortcuts="ArrowLeft" aria-label="Skip this plant">✕</button>
+  <button class="fab skip"  id="skip"  title="Skip (←)" aria-keyshortcuts="ArrowLeft" aria-label="Skip this plant"><span class="g" aria-hidden="true">✕</span>Skip</button>
   <button class="fab back-btn" id="back" title="Undo (Backspace)" aria-keyshortcuts="Backspace" aria-label="Undo last swipe" disabled>↺</button>
-  <button class="fab learn" id="learn" title="I've learned this (→)" aria-keyshortcuts="ArrowRight" aria-label="Mark as learned">★</button>
+  <button class="fab learn" id="learn" title="I've learned this (→)" aria-keyshortcuts="ArrowRight" aria-label="Mark as learned"><span class="g" aria-hidden="true">★</span>Learned</button>
 </div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Menu">
   <div class="scrim" data-close></div>
   <div class="panel">
     <h4>Timber</h4>
-    <div class="row"><span class="ic">👤</span> Account</div>
-    <div class="row"><span class="ic">⚙️</span> Settings</div>
-    <div class="row"><span class="ic">⭐</span> Learned <small id="doneMenu">0</small></div>
-    <div class="row" id="dictRow" role="button" tabindex="0"><span class="ic">🔎</span> Dictionary mode</div>
-    <div class="row" id="quizRow" role="button" tabindex="0"><span class="ic">❓</span> Quiz mode <small id="quizBestMenu"></small></div>
-    <div class="row" id="reviewRow" role="button" tabindex="0"><span class="ic">📅</span> Review due <small id="reviewDueMenu">0</small></div>
-    <div class="row" id="statsRow" role="button" tabindex="0"><span class="ic">📊</span> My progress</div>
+    <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></span> Account</div>
+    <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9"/><path d="M18 7h2"/><circle cx="15.5" cy="7" r="2.3"/><path d="M4 17h5"/><path d="M14 17h6"/><circle cx="11.5" cy="17" r="2.3"/></svg></span> Settings</div>
+    <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.8l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></span> Learned <small id="doneMenu">0</small></div>
+    <div class="row" id="dictRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v14.5H6.5A2.5 2.5 0 0 0 4 20z"/><path d="M4 20V5.5"/></svg></span> Dictionary mode</div>
+    <div class="row" id="quizRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.85c0 1.7-2.6 2.05-2.6 3.55"/><path d="M12 17h.01"/></svg></span> Quiz mode <small id="quizBestMenu"></small></div>
+    <div class="row" id="reviewRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9.5h16"/><path d="M8 3v4"/><path d="M16 3v4"/></svg></span> Review due <small id="reviewDueMenu">0</small></div>
+    <div class="row" id="statsRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"/><path d="M12 20V4"/><path d="M19 20v-6"/></svg></span> My progress</div>
     <div class="f-label" id="filterLabel">Filter deck</div>
     <div class="f-chips" id="filterChips" role="group" aria-labelledby="filterLabel"></div>
-    <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic">📲</span> Install app</div>
-    <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic">↻</span> Reset progress</div>
+    <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v9"/><path d="M8 9.5l4 4 4-4"/><path d="M5 19h14"/></svg></span> Install app</div>
+    <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg></span> Reset progress</div>
     <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.<br><span id="buildTag"></span></div>
   </div>
 </div>
@@ -555,7 +581,7 @@
   <div class="q-scrim" data-qclose></div>
   <div class="q-panel">
     <div class="q-head">
-      <span class="q-title">❓ Quiz</span>
+      <span class="q-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.85c0 1.7-2.6 2.05-2.6 3.55"/><path d="M12 17h.01"/></svg>Quiz</span>
       <span class="q-stats">Streak <b id="qStreak">0</b> · Best <b id="qBest">0</b></span>
       <button class="s-close" id="quizClose" aria-label="Close quiz">✕</button>
     </div>
@@ -572,7 +598,7 @@
   <div class="st-scrim" data-stclose></div>
   <div class="st-panel">
     <div class="q-head">
-      <span class="q-title">📊 My progress</span>
+      <span class="q-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"/><path d="M12 20V4"/><path d="M19 20v-6"/></svg>My progress</span>
       <button class="s-close" id="statsClose" aria-label="Close progress">✕</button>
     </div>
     <div id="statsContent"></div>
@@ -583,7 +609,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r8 · 2026-08-04';   /* bump per deploy — shown in the menu foot so a phone's
+const BUILD='r17 · 2026-08-09';   /* bump per deploy — shown in the menu foot so a phone's
                                     version is checkable at a glance (the SW double-load
                                     made "which build am I on?" a real question) */
 const TTS='speechSynthesis' in window;
@@ -591,13 +617,15 @@ if(TTS){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSy
 function speakLatin(text,btn){
   if(!TTS)return;
   speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
+  /* anglicised botanical latin — the trade pronunciation (RHS style), so customers can
+     parse it; "var." is spoken in full and the hybrid sign × is silent, as spoken aloud */
+  const spoken=text.replace(/\bvar\.\s*/g,'variety ').replace(/×\s*/g,'');
+  const u=new SpeechSynthesisUtterance(spoken);
   const voices=speechSynthesis.getVoices();
-  /* botanical latin ≈ italian phonology; fall back to a latin voice if a device ever has one */
-  const v=voices.find(x=>/^it([-_]|$)/i.test(x.lang))||voices.find(x=>/^la([-_]|$)/i.test(x.lang));
+  const v=voices.find(x=>/^en[-_]GB/i.test(x.lang))||voices.find(x=>/^en([-_]|$)/i.test(x.lang));
   if(v)u.voice=v;
-  u.lang=v?v.lang:'it-IT';
-  u.rate=.85;
+  u.lang=v?v.lang:'en-GB';
+  u.rate=.9;
   if(btn){u.onstart=()=>btn.classList.add('speaking');u.onend=u.onerror=()=>btn.classList.remove('speaking');}
   speechSynthesis.speak(u);
 }
@@ -2116,8 +2144,101 @@ const PLANTS = [
    hardiness:"H3", resilience:"heat · drought · coastal tolerant in mild sites",
    uses:"patio containers · conservatory · Mediterranean gardens", size:"2–4 m H × 1.5–2.5 m W",
    seasonalImpact:"", growthSpeed:10, pestRisk:9, thirst:6, careLevel:9, sunNeed:95, sunMin:80},
+
+  {common:"Emerald 'n' Gold Spindle", latin:"Euonymus fortunei 'Emerald 'n' Gold'", hue:55,
+   visual:"Deep-green leaves broadly edged gold · margins flush pink-red in winter",
+   water:"Moderate until established; water in dry spells",
+   aspect:"Any aspect",
+   soil:"Moist, well-drained; Avoid waterlogging · deep shade dulls colour",
+   prune:"Trim in spring to shape; remove reverted green shoots",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H5", resilience:"exposed-site tolerant · adaptable · low maintenance",
+   uses:"groundcover · containers · low hedging · wall training", size:"0.5–1 m H × 1–1.5 m W",
+   seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:7, careLevel:5, sunNeed:65, sunMin:25},
+  {common:"Emerald Gaiety Spindle", latin:"Euonymus fortunei 'Emerald Gaiety'", hue:110,
+   visual:"Grey-green leaves edged creamy white · margins blush pink in cold weather",
+   water:"Moderate until established; water in dry spells",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Avoid waterlogging · deep shade weakens variegation",
+   prune:"Trim in spring to shape; remove reverted green shoots",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Euonymus 'Gaiety'",
+   hardiness:"H5", resilience:"exposed-site tolerant · adaptable · low maintenance",
+   uses:"groundcover · containers · low hedging · wall training", size:"0.5–1 m H × 1–1.5 m W",
+   seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:7, careLevel:5, sunNeed:65, sunMin:40},
 ];
 /* PLANTS:END */
+/* ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
+   fallbacks, so they are parked out of the deck until a 1200px photo lands.
+   To re-deal one, move its entry back inside the PLANTS marker block above
+   (rows also live in plants.csv). This array sits OUTSIDE the plants-tool.js
+   markers, so csv export/import never sees it. */
+const PLANTS_ON_HOLD=[
+  {common:"Clematis 'Nelly Moser'", latin:"Clematis 'Nelly Moser'", hue:310,
+   visual:"Large pale pink flowers with deep pink bars \u00b7 late spring/summer",
+   water:"Moist, well-drained",
+   aspect:"Any aspect",
+   soil:"Fertile, alkaline, moist; keep roots cool/shaded",
+   prune:"Group 2: light prune Feb",
+   source:"", peak:"May-Jun, Aug-Sep", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"2L, 3L",
+   cvs:"Nelly Moser",
+   hardiness:"H5", resilience:"Good with right care",
+   uses:"Walls, trellis, obelisks", size:"2-3m",
+   seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:45, sunMin:25},
+  {common:"Clematis 'Purpurea Plena Elegans'", latin:"Clematis viticella 'Purpurea Plena Elegans'", hue:290,
+   visual:"Double dusky purple-mauve flowers \u00b7 summer/autumn",
+   water:"Moist, well-drained",
+   aspect:"Any aspect",
+   soil:"Fertile, well-drained",
+   prune:"Group 3: hard prune Feb",
+   source:"", peak:"Jul-Sep", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"2L, 3L",
+   cvs:"Purpurea Plena Elegans",
+   hardiness:"H5", resilience:"Very reliable",
+   uses:"Trellis, obelisks, through shrubs", size:"2-3m",
+   seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:65, sunMin:40},
+  {common:"Clematis montana var. rubens", latin:"Clematis montana var. rubens", hue:315,
+   visual:"Masses of pink-tinged flowers, bronze young foliage \u00b7 late spring",
+   water:"Moist, well-drained",
+   aspect:"Any aspect",
+   soil:"Fertile, well-drained",
+   prune:"After flowering, can be hard pruned",
+   source:"", peak:"May-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"2L, 3L",
+   cvs:"Rubens, Tetrarose",
+   hardiness:"H5", resilience:"Very vigorous",
+   uses:"Walls, trees, large structures", size:"8-12m",
+   seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:65, sunMin:30},
+  {common:"Evergreen Clematis", latin:"Clematis armandii", hue:200,
+   visual:"Glossy evergreen leaves, fragrant white star flowers \u00b7 early spring",
+   water:"Moist, well-drained",
+   aspect:"Sheltered S / W",
+   soil:"Fertile, well-drained",
+   prune:"After flowering if needed",
+   source:"", peak:"Mar-Apr", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"3L, 5L",
+   cvs:"Apple Blossom, Snowdrift",
+   hardiness:"H4", resilience:"Good in sheltered spot",
+   uses:"Walls, pergolas, evergreen screen", size:"4-6m",
+   seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:75, sunMin:45},
+  {common:"Russian Vine", latin:"Fallopia baldschuanica", hue:220,
+   visual:"Vigorous twiner, frothy white flower sprays \u00b7 summer/autumn",
+   water:"Any well-drained",
+   aspect:"Any aspect",
+   soil:"Any, even poor",
+   prune:"Hard prune to control",
+   source:"", peak:"Jul-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"2L, 3L",
+   cvs:"",
+   hardiness:"H5", resilience:"Extremely vigorous - needs space",
+   uses:"Covering ugly structures, quick screen", size:"10-15m",
+   seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:70, sunMin:35},
+
+];
 
 
 const deck=document.getElementById('deck'),empty=document.getElementById('empty');
@@ -2313,6 +2434,31 @@ const getRatingSegments=(value,max=5)=>Array.from({length:max},(_,i)=>{
   const r=value-i;if(r>=1)return 1;if(r<=0)return 0;return Math.round(r*4)/4;});
 const fmt5=s=>(Math.round((s/4)*100)/100)+'/5';
 const num=v=>{const n=Number(v);return v===''||v==null||!Number.isFinite(n)?null:n;};
+
+/* A field that was never filled in must not render as an orphan caption. Commercial data
+   only ever comes from Oscar, so on most cards it is blank — the trade sheet was printing
+   nine empty labels on 54 of 57 cards, which reads as broken rather than "not entered
+   yet", and "Bench · Root" emitted a lone "·" when both halves were empty. Blank stays
+   honest: it is simply not shown, and a card with no buyer data at all says so once. */
+const has=v=>v!=null&&String(v).trim()!=='';
+const cellIf=(cls,label,val,extra='')=>has(val)?`<div class="${cls}"><div class="l">${label}</div><div class="n">${val}</div>${extra}</div>`:'';
+const dots=(...v)=>v.filter(has).join(' · ');
+
+/* the trade sheet is rendered in two places — the card back and the search detail —
+   so it is built once here rather than kept in sync by hand */
+function tradeBlocks(p){
+  const price=cellIf('cell','Trade',p.trade)+cellIf('cell','Retail',p.retail)+cellIf('cell m','Margin',p.margin);
+  const grid=cellIf('g','Source',p.source)+cellIf('g','Peak',p.peak,monthDots(p.peak))
+    +cellIf('g','Order',p.order)+cellIf('g','Bench · Root',dots(p.bench,p.root))
+    +cellIf('g full','Type',p.type)+cellIf('g full','Shrink',p.shrink)
+    +cellIf('g full','Return risk',p.returnRisk)+cellIf('g','Pot sizes',p.pots)
+    +cellIf('g','Size',p.size)+cellIf('g full','Cultivars',p.cvs)
+    +cellIf('g','Resilience',p.resilience)+cellIf('g','Uses',p.uses);
+  const buyer=[p.trade,p.retail,p.margin,p.source,p.order,p.bench,p.root,p.type,p.shrink,p.returnRisk,p.pots];
+  return (price?`<div class="price">${price}</div>`:'')
+    +(buyer.some(has)?'':'<div class="nodata">Buyer data not entered for this plant yet</div>')
+    +(grid?`<div class="grid">${grid}</div>`:'');
+}
 const wIcon=kind=>fill=>`<span class="ricon" style="--fill:${fill}"><img src="${ART[`widget-${kind}-out`]}" alt=""><span class="fillwrap"><img src="${ART[`widget-${kind}-fill`]}" alt=""></span></span>`;
 const wRow=(kind,score)=>score==null?'':getRatingSegments(score/4).map(wIcon(kind)).join('');
 const MONTHS={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
@@ -2451,25 +2597,7 @@ function renderCard(idx){
     </div>
     <div class="face back"><div class="backfit">
       <div class="back-head"><h3>${p.latin}</h3><span class="h">${p.hardiness}</span></div>
-      <div class="price">
-        <div class="cell"><div class="l">Trade</div><div class="n">${p.trade}</div></div>
-        <div class="cell"><div class="l">Retail</div><div class="n">${p.retail}</div></div>
-        <div class="cell m"><div class="l">Margin</div><div class="n">${p.margin}</div></div>
-      </div>
-      <div class="grid">
-        <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
-        <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div></div>
-        <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
-        <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
-        <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
-        <div class="g full"><div class="l">Shrink</div><div class="n">${p.shrink}</div></div>
-        <div class="g full"><div class="l">Return risk</div><div class="n">${p.returnRisk}</div></div>
-        <div class="g"><div class="l">Pot sizes</div><div class="n">${p.pots}</div></div>
-        <div class="g"><div class="l">Size</div><div class="n">${p.size}</div></div>
-        <div class="g full"><div class="l">Cultivars</div><div class="n">${p.cvs}</div></div>
-        <div class="g"><div class="l">Resilience</div><div class="n">${p.resilience}</div></div>
-        <div class="g"><div class="l">Uses</div><div class="n">${p.uses}</div></div>
-      </div>
+      ${tradeBlocks(p)}
       <div class="fliphint">⇅ Tap to flip back</div>
     </div></div>
    </div>`;
@@ -2753,25 +2881,7 @@ function showPlant(i){
       <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
       <li><span class="k">✂️</span><span class="v"><b>Prune</b>${p.prune}</span></li>
     </ul>
-    <div class="price">
-      <div class="cell"><div class="l">Trade</div><div class="n">${p.trade}</div></div>
-      <div class="cell"><div class="l">Retail</div><div class="n">${p.retail}</div></div>
-      <div class="cell m"><div class="l">Margin</div><div class="n">${p.margin}</div></div>
-    </div>
-    <div class="grid">
-      <div class="g"><div class="l">Source</div><div class="n">${p.source}</div></div>
-      <div class="g"><div class="l">Peak</div><div class="n">${p.peak}</div>${monthDots(p.peak)}</div>
-      <div class="g"><div class="l">Order</div><div class="n">${p.order}</div></div>
-      <div class="g"><div class="l">Bench · Root</div><div class="n">${p.bench} · ${p.root}</div></div>
-      <div class="g full"><div class="l">Type</div><div class="n">${p.type}</div></div>
-      <div class="g full"><div class="l">Shrink</div><div class="n">${p.shrink}</div></div>
-      <div class="g full"><div class="l">Return risk</div><div class="n">${p.returnRisk}</div></div>
-      <div class="g"><div class="l">Pot sizes</div><div class="n">${p.pots}</div></div>
-      <div class="g"><div class="l">Size</div><div class="n">${p.size}</div></div>
-      <div class="g full"><div class="l">Cultivars</div><div class="n">${p.cvs}</div></div>
-      <div class="g"><div class="l">Resilience</div><div class="n">${p.resilience}</div></div>
-      <div class="g"><div class="l">Uses</div><div class="n">${p.uses}</div></div>
-    </div>`;
+    ${tradeBlocks(p)}`;
   searchResults.hidden=true;
   searchDetail.hidden=false;
   const dBack=document.getElementById('dBack');
@@ -2810,7 +2920,8 @@ function showCustomer(i){
       <li><span class="k">🌿</span><span class="v"><b>Great for</b>${p.uses}</span></li>
       <li><span class="k">✨</span><span class="v"><b>Varieties</b>${p.cvs}</span></li>
     </ul>
-    <div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`;
+    ${has(p.retail)?`<div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`:''}`;
+  /* an empty price box is the one thing here a customer actually sees — never show it */
   searchResults.hidden=true;
   searchDetail.hidden=false;
   const back=document.getElementById('dStaff');
@@ -3073,12 +3184,21 @@ installRow.onclick=async()=>{
 };
 installRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();installRow.onclick();}};
 
-/* fit the fixed-geometry 420x543 card to whatever deck space the phone gives us */
+/* fit the fixed-geometry 420x600 card to whatever deck space the phone gives us.
+   --csx is the uniform fit (width- or height-bound, as before). Tall phones are
+   width-bound, which used to strand the card between two big dead gaps; the
+   natively taller v14 template covers most of that, and --csy stretches the
+   last bit, capped at 1.12x — at that level the artwork distortion is
+   invisible. Any remaining slack stays centred. */
 function updateCardScale(){
   const r=deck.getBoundingClientRect();
   if(!r.width||!r.height)return;
-  const cs=Math.min(r.width/420,r.height/543,1.3);
-  document.documentElement.style.setProperty('--cs',cs.toFixed(4));
+  const fit=Math.min(r.width/420,r.height/600,1.3);
+  const csy=Math.max(fit,Math.min(r.height/600,fit*1.12));
+  const s=document.documentElement.style;
+  s.setProperty('--csx',fit.toFixed(4));
+  s.setProperty('--csy',csy.toFixed(4));
+  s.setProperty('--cs',fit.toFixed(4));   /* legacy consumers (design docs/tools) */
 }
 window.addEventListener('resize',updateCardScale);
 window.addEventListener('orientationchange',updateCardScale);

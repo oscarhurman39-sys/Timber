@@ -22,7 +22,6 @@ const URL = 'http://localhost:8477/timber.html';
 /* latin name -> why it is knowingly broken. Delete a line once the card is fixed. */
 const KNOWN_GAPS = {
   'Choisya ternata': 'all 7 ratings blank, aspect "Full sun / pt shade" lost to "Any aspect" (photo added)',
-  'Lonicera × purpusii \'Winter Beauty\'': 'no photo — both supplied shots were unusable',
 };
 
 let failed = 0;
@@ -58,6 +57,10 @@ const errors = [], warnings = [], known = [];
         blankRatings: ['pestRisk', 'thirst', 'careLevel', 'growthSpeed', 'sunNeed', 'sunMin']
           .filter(f => p[f] === '' || p[f] == null).length,
         sizeH: txt('.rail-h .v').trim(), sizeS: txt('.rail-s .v').trim(),
+        /* a caption with nothing under it reads as broken, not as "not entered yet" */
+        orphanCells: [...c.querySelectorAll('.back .g, .back .cell')]
+          .filter(e => !((e.querySelector('.n') || {}).textContent || '').trim())
+          .map(e => ((e.querySelector('.l') || {}).textContent || '').trim()),
       };
     });
   });
@@ -99,6 +102,10 @@ const errors = [], warnings = [], known = [];
       err(c, 'sunmin-above-sunneed', `sunMin ${c.sunMin} > sunNeed ${c.sunNeed}`);
 
     if (!Number.isInteger(c.hue) || c.hue < 0 || c.hue > 360) err(c, 'hue-range', String(c.hue));
+
+    /* the trade sheet must omit a field it has no value for, never print a bare caption */
+    if (c.orphanCells.length)
+      err(c, 'orphan-trade-cells', `${c.orphanCells.length} caption(s) with no value: ${c.orphanCells.join(', ')}`);
 
     /* soft: honest gaps, reported not enforced */
     if (!c.photoOk) warn(c, 'photo-missing', 'card falls back to its leaf gradient');

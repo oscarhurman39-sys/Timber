@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const NPLANTS = 66;  // plants in the demo deck
+const NPLANTS = 128;  // plants in the demo deck (5 more parked in PLANTS_ON_HOLD until photos land)
 
 const URL = 'http://localhost:8477/timber.html';
 let passed = 0, failed = 0;
@@ -131,7 +131,9 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   check('zero-match chips are disabled, others enabled',
     chips.every(c => c.disabled === (c.n === 0)), JSON.stringify(chips));
 
-  const typeChip = chips.find(c => c.id.startsWith('type:') && c.n > 0 && c.n < NPLANTS);
+  /* need n >= 2: swiping a 1-card filtered view empties it, which auto-clears the
+     filter — the toggle-off steps below assume the filter is still active */
+  const typeChip = chips.find(c => (c.id.startsWith('type:') || c.id.startsWith('hard:')) && c.n > 1 && c.n < NPLANTS);
   const progressSnap = await page.evaluate(() => localStorage.getItem('timber-progress-v1'));
   if (typeChip) {
     await page.click(`#filterChips .chip[data-f="${typeChip.id}"]`); await page.waitForTimeout(350);
@@ -140,7 +142,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
       sheetOpen: document.getElementById('sheet').classList.contains('open'),
       progress: localStorage.getItem('timber-progress-v1'),
     }));
-    check('type chip filters the deck to its count', st.cards === typeChip.n, JSON.stringify({ st: st.cards, want: typeChip.n }));
+    check('data chip filters the deck to its count', st.cards === typeChip.n, JSON.stringify({ st: st.cards, want: typeChip.n }));
     check('applying a filter closes the menu', !st.sheetOpen);
     check('filter never touches saved progress', st.progress === progressSnap);
 
@@ -169,7 +171,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     check('clearing the filter restores the full deck', restored.cards === NPLANTS && restored.done === 0, JSON.stringify(restored));
     await page.click('.sheet .scrim', { position: { x: 15, y: 300 } }); await page.waitForTimeout(350);
   } else {
-    check('type chip filters the deck to its count', false, 'no partial type chip in data — inspect FILTER_DEFS');
+    check('data chip filters the deck to its count', false, 'no chip with 2<=n<NPLANTS in data — inspect FILTER_DEFS');
   }
 
   /* filter ↔ review: one ephemeral view at a time */
@@ -205,11 +207,11 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     await page.evaluate(() => closeSearch());
     return rows;
   };
-  check('typo choysia finds Mexican Orange Blossom', (await firstHit('choysia')).includes('Mexican Orange Blossom'));
+  check('typo griselina finds New Zealand Broadleaf', (await firstHit('griselina')).includes('New Zealand Broadleaf'));
   check('typo nandena finds Heavenly Bamboo', (await firstHit('nandena')).includes('Heavenly Bamboo'));
   check('exact match ranks first', (await firstHit('nandina'))[0] === 'Heavenly Bamboo');
   check('cultivar search firepower hits its plant', (await firstHit('firepower')).includes('Heavenly Bamboo'));
-  check('multi-word query works', (await firstHit('orange blossom')).includes('Mexican Orange Blossom'));
+  check('multi-word query works', (await firstHit('hot lips')).includes('Hot Lips Sage'));
   check('gibberish shows no-match message', (await firstHit('zzqqxx')).length === 0);
   check('empty query lists the whole deck', (await firstHit('')).length === NPLANTS);
 

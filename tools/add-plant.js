@@ -41,9 +41,12 @@ const HTML = path.join(ROOT, 'timber.html');
 let html = fs.readFileSync(HTML, 'utf8');
 const marker = '];\n/* PLANTS:END */';
 if (!html.includes(marker)) die('PLANTS:END marker not found in timber.html');
+/* dupes are checked across the WHOLE file (a plant parked in PLANTS_ON_HOLD is
+   still taken), but NPLANTS counts only the dealt deck — rows before PLANTS:END */
 const latins = [...html.matchAll(/latin:"([^"]+)"/g)].map(m => m[1].toLowerCase());
 if (latins.includes(p.latin.toLowerCase())) die(`"${p.latin}" is already in the deck`);
-const count = latins.length + 1;
+const dealt = [...html.slice(0, html.indexOf(marker)).matchAll(/latin:"([^"]+)"/g)].length;
+const count = dealt + 1;
 
 (async () => {
   /* ---- 2. photo ---- */
@@ -86,8 +89,8 @@ const count = latins.length + 1;
   fs.writeFileSync(HTML, html);
   console.log(`row inserted: deck now ${count} plants`);
 
-  /* ---- 4. NPLANTS in both suites ---- */
-  for (const t of ['tests/app-test.js', 'tests/edge-test.js']) {
+  /* ---- 4. NPLANTS in every suite that counts the deck ---- */
+  for (const t of ['tests/app-test.js', 'tests/edge-test.js', 'tests/srs-test.js', 'tests/features-test.js']) {
     const f = path.join(ROOT, t);
     let s = fs.readFileSync(f, 'utf8');
     const before = s;

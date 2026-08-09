@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [claude/timber-plant-pwa-j69h5e]
+    branches: [claude/timber-plant-pwa-j69h5e, claude/timber-plants-sync-3tdm7t]
   workflow_dispatch:
 
 permissions:
