@@ -1,0 +1,33 @@
+{
+  "common": "Early Stachyurus",
+  "latin": "Stachyurus praecox",
+  "hue": 55,
+  "visual": "Drooping chains of pale yellow-green bells hang from bare red-purple shoots",
+  "water": "Moderate; water during dry spells",
+  "aspect": "East / South / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Shelter from cold drying winds",
+  "prune": "Prune minimally after flowering if required",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Feb-Apr",
+  "cvs": "syn. Stachyurus japonicus",
+  "hardiness": "H5",
+  "hardinessNote": "RHS H5 for the accepted species",
+  "resilience": "generally pest free · woodland-edge suitable",
+  "uses": "woodland gardens · winter interest · shrub borders",
+  "height": "2.5–4 m",
+  "spread": "1.5–2.5 m",
+  "foliage": "deciduous",
+  "container": "no",
+  "growthSpeed": 7,
+  "pestRisk": 3,
+  "thirst": 10,
+  "careLevel": 5,
+  "sunNeed": 55,
+  "sunMin": 30,
+  "uncertain": [
+    "RHS describes flowering as late winter to early spring; Feb-Apr is the practical UK conversion",
+    "rating and light scores are editorial conversions from researched guidance"
+  ]
+}
