@@ -58,6 +58,30 @@ node tests/run-all.js                           # everything, one command
 - Hosted over HTTPS (e.g. GitHub Pages), it's installable as a PWA and works **offline** after
   the first visit (`sw.js` caches the app shell).
 
+### The live app publishes itself
+
+<https://oscarhurman39-sys.github.io/Timber/> — **pushing any `claude/**` branch publishes it.**
+No fast-forward step, no merge, no remembering.
+
+`.github/workflows/pages.yml` runs on every such push and, in order: refuses to publish a commit
+that does not contain the current live commit (so two parallel sessions cannot silently roll the
+app back), runs the five data checks, deploys, **verifies the bytes actually served** match this
+commit's build stamp, and only then fast-forwards the repo's default branch so there is one
+honest record of what is live.
+
+- **Push without publishing:** put `[skip ci]` in the commit message.
+- **Publish something older on purpose:** re-run the workflow from the Actions tab with
+  `force: true`. It will tell you what it is about to replace.
+- **A phone shows the old version for one load.** That is the service worker doing
+  stale-while-revalidate. It fetches the new shell in the background and posts `timber-updated`,
+  which raises the *Update ready · tap to refresh* pill — so the second load is current, or the
+  first if the pill is tapped. The build number in the menu foot is the ground truth for which
+  version a device is actually running.
+
+Before this, the workflow was pinned to two hard-coded branch names. Every session works on a new
+branch, so nothing published on its own: all 19 deploys up to 2026-08-10 came from one branch that
+had to be fast-forwarded by hand, and work routinely sat unreleased for days.
+
 ### Publishing a standalone copy
 
 To share Timber as one file with no server — a Claude Artifact, an email attachment, a USB stick —

@@ -1,18 +1,41 @@
 name: Deploy to GitHub Pages
 
+# WHY THIS TRIGGERS ON EVERY claude/** BRANCH
+#
+# It used to trigger on two hard-coded branch names. Every Claude session works
+# on a fresh claude/<topic>-<id> branch, so no session's work ever reached the
+# live site on its own — someone had to remember to fast-forward the pwa branch
+# by hand. All 19 deploys up to 2026-08-10 came from that one branch, and the
+# ledger is full of "NOT yet live: sits on branch X pending fast-forward".
+#
+# Now: push a claude/** branch and it publishes. The live line is still ONE
+# branch (the repo default) — this workflow fast-forwards it after a successful
+# deploy, so there is a single record of what is live rather than a guess.
+#
+# To push WITHOUT publishing, put [skip ci] in the commit message. That is
+# GitHub's own mechanism and skips the whole workflow.
+
 on:
   push:
-    branches: [claude/timber-plant-pwa-j69h5e, claude/timber-plants-sync-3tdm7t]
+    branches: ['claude/**', main, master]
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Publish even if this commit is behind the live branch (loses whatever is live now)'
+        type: boolean
+        default: false
 
 permissions:
-  contents: read
+  contents: write      # write, not read: the job fast-forwards the live branch after deploying
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # NOT cancel-in-progress. A cancelled run can deploy and then die before it
+  # records the live line, which is the one thing this workflow must not do.
+  # Two quick pushes queue instead of racing.
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -20,20 +43,53 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      LIVE_BRANCH: ${{ github.event.repository.default_branch }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # the ancestry check below needs real history
+
+      # Two sessions running at once is not hypothetical in this repo — it has
+      # happened (2026-08-07). Without this, the second one to push silently
+      # reverts the live app to whatever its branch forked from. Fail loudly
+      # instead; the operator can still force it from the Actions tab.
+      - name: Refuse to publish behind the live branch
+        if: inputs.force != true
+        run: |
+          live="$LIVE_BRANCH"
+          if [ -z "$live" ]; then
+            echo "no default branch reported — skipping the ancestry check"
+            exit 0
+          fi
+          git fetch --no-tags origin "$live" || {
+            echo "live branch '$live' not found on origin — first publish, nothing to be behind"
+            exit 0
+          }
+          live_sha=$(git rev-parse FETCH_HEAD)
+          echo "live=$live_sha  this=$GITHUB_SHA"
+          if [ "$live_sha" = "$GITHUB_SHA" ]; then
+            echo "this commit IS the live branch tip"
+          elif git merge-base --is-ancestor "$live_sha" "$GITHUB_SHA"; then
+            echo "this commit is ahead of the live branch — safe to publish"
+          else
+            echo "::error::${GITHUB_SHA} does not contain the live commit ${live_sha}. Publishing it would roll the live app BACK. Merge or rebase onto '${live}' first, or re-run this workflow from the Actions tab with force=true if you really mean to replace what is live."
+            exit 1
+          fi
 
       # The build stamp is the only way to tell which version a phone is running,
       # because the service worker serves the previous build once before swapping.
       # Refuse to deploy a stamp that does not match the content it claims to
       # describe — otherwise that one signal silently starts lying.
-      - name: Build stamp matches content
-        run: node tools/build-stamp.js --check
-
-      # The plant data lives in four places that can drift apart. A deploy is the
-      # worst time to discover they have.
-      - name: Plant data is consistent
-        run: node tools/data-audit.js
+      #
+      # run-all --fast is all five data checks in about a second: build stamp,
+      # deck/hold/csv/photo agreement, card self-consistency (plant-sense),
+      # overlay geometry, and photo provenance. It replaces the two checks that
+      # used to run here. The browser suites still run locally before a push —
+      # they need Playwright and about eight minutes, which is too slow to sit
+      # in front of every deploy.
+      - name: Data checks (build stamp, deck consistency, card sense, geometry, credits)
+        run: node tests/run-all.js --fast
 
       - uses: actions/configure-pages@v5
         with:
@@ -64,3 +120,15 @@ jobs:
           done
           echo "::error::the deployed page never matched this commit"
           exit 1
+
+      # Only now, with the served bytes confirmed, move the live branch. It is
+      # a plain push, so it is fast-forward-only: if it cannot fast-forward, the
+      # step fails rather than rewriting history. A push made with GITHUB_TOKEN
+      # does not retrigger workflows, so this cannot loop.
+      - name: Record this commit as the live line
+        if: success() && github.ref_name != github.event.repository.default_branch
+        run: |
+          live="$LIVE_BRANCH"
+          if [ -z "$live" ]; then echo "no default branch reported — nothing to record"; exit 0; fi
+          echo "fast-forwarding '$live' to $GITHUB_SHA"
+          git push origin "HEAD:refs/heads/${live}"

@@ -4,6 +4,38 @@
 brick: Photograph or source the first tranche of the 99 held cards — every shot
   staged as `photos/<latin-slug>.jpg` deals that card immediately.
 since: 2026-08-10  sessions-unchanged: 0
+progress: 2026-08-10 (later still) — **the live app publishes itself now.** Oscar:
+  make the GitHub preview always update with new features. It wasn't updating,
+  and the reason was exact rather than vague.
+  **The workflow was pinned to two hard-coded branch names.** Every Claude
+  session works on a fresh `claude/<topic>-<id>` branch, and none of them was in
+  that list — so no session's work has ever published on its own. Checked
+  against the API rather than assumed: **all 19 Pages deploys came from
+  `claude/timber-plant-pwa-j69h5e`**, and the newest, run #19, is commit 5e2abc3
+  — precisely the commit this branch forked from. **Today's 100 cards were not
+  live and would not have gone live.** That is the same fact the ledger keeps
+  recording as "NOT yet live: sits on branch X pending fast-forward"; it was a
+  missing trigger, not forgetfulness.
+  Now `pages.yml` fires on `claude/**`, so a push publishes. Four things guard it:
+  (1) it REFUSES a commit that does not contain the current live commit, because
+  two sessions at once is not hypothetical here (2026-08-07) and the second to
+  push would otherwise silently roll the app back — force is available from the
+  Actions tab and says what it is about to replace; (2) the deploy gate is now
+  `run-all --fast`, all five data checks (~1s), up from the two it ran before —
+  plant-sense is in that set, and it caught two bad cards of mine this morning;
+  (3) the served-bytes verification was already there and stays; (4) only after
+  that does it fast-forward the default branch, so ONE branch still records what
+  is live. Plain push, so fast-forward-only; GITHUB_TOKEN pushes don't retrigger
+  workflows, so it cannot loop. `[skip ci]` opts a commit out.
+  The CLIENT half was already right and needed nothing: sw.js is
+  stale-while-revalidate and posts `timber-updated` when a fresher shell lands,
+  which raises the "Update ready · tap to refresh" pill. One load stale at worst,
+  and the pill closes even that.
+  NOT put in CI: the nine browser suites. They need Playwright and ~8 minutes,
+  which is too slow in front of every deploy — so the full gate stays a local
+  pre-push step. Worth revisiting if a bad push ever reaches the live app.
+  [Unverified] the first real run — the workflow change publishes itself, so the
+  proof is Actions run #20 going green and the live build reading r32.
 progress: 2026-08-10 (later) — **second batch of 50: UK garden favourites. Hold
   block 55 -> 105; the deck itself is unchanged at 134.** Oscar asked for a list
   of 50 favourites; built it straight through the same pipeline rather than
