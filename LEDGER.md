@@ -1,9 +1,55 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
-  rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
-since: 2026-08-05  sessions-unchanged: 3
+brick: Photograph or source the first tranche of the 49 held cards — every shot
+  staged as `photos/<latin-slug>.jpg` deals that card immediately.
+since: 2026-08-10  sessions-unchanged: 0
+progress: 2026-08-10 — **reverse build: 50 cards created from data, 1 dealt, 49
+  held. Deck 133 -> 134.** Oscar supplied a 50-plant RHS-style JSON and asked for
+  the cards built first, photos to follow — with the standing rule that an empty
+  card never sits in the deck.
+  **The photo answer is 1 of 50, and it is worth knowing precisely.** Every latin
+  was slugged the way the app slugs it and matched against `photos/`: only
+  *Chamaerops humilis* has a file. Genus-level near-misses (three Rhododendrons,
+  five Acers, one Lonicera) are all different species and unusable. No photos
+  arrived in the chat either — the message was data only. So 49 cards go straight
+  to `PLANTS_ON_HOLD`, which is not a failure of the batch: it IS the batch. The
+  data is now in place so each card deals the moment a photograph lands.
+  The one dealt card closes a loop that was already open: CREDITS.json records
+  commit 799dc96 as *"Stage Oscar's own Chamaerops humilis photo (not wired into
+  the app yet)"*. The photo has been sitting at 1200x1600 since 09 Aug with no
+  card to hang it on. This batch supplied the card.
+  ZERO duplicates against the existing 133 — every one of the 50 is new to the
+  deck. `check-plant-json.js` passes all 50 with **0 errors**; the 49 remaining
+  warnings are all the 0-5-vs-0-20 scale heuristic firing on genuinely low
+  ratings (pestRisk 4/20 etc.), which the deck is full of already.
+  **The one real schema fight was `aspect`.** Oscar's JSON gives it as a light
+  level ("Full sun in a warm, sheltered position") and the validator rejects that
+  BY DESIGN — the card's aspect is a compass facing and light already lives in
+  sunNeed/sunMin. Rather than guess 50 times, one rule was applied across the
+  batch from the supplied sunNeed (90+ → South/West, 70-89 → East/South/West,
+  45-69 → Any aspect, 25-44 → North/East/West, under 25 → North/East), with two
+  deliberate overrides where the source explicitly warns off afternoon sun:
+  Dicksonia and Skimmia 'Rubella' go North/East, not North/East/West. Written up
+  as VERIFY-QUEUE item 15 and marked [Unverified] — editorial calls from a rubric,
+  same basis as the five climbers, not Oscar's portfolio.
+  **Fifth compliance card: *Rhododendron luteum*.** Schedule 9 Part II, WCA 1981
+  (England and Wales) — an offence to plant it or cause it to grow in the wild.
+  Deliberately NOT given knotweed's ⚠ NEVER STOCK banner: Schedule 9 is not a
+  sale ban, and a banner that over-reads the law costs Oscar sales of a plant he
+  is allowed to sell. Uses the Gunnera fields (`type` + `returnRisk`).
+  **One source claim was refused rather than repeated.** The JSON asserts
+  *Dicksonia antarctica* "is not currently listed under CITES for trade
+  restrictions". My recollection is the opposite and I could not check it from
+  this container, so the card carries the true-either-way wording ("check the
+  supplier's documentation") and VERIFY-QUEUE item 16 holds the real question.
+  Two sessions running, confident-and-specific-and-wrong has been the failure
+  mode here; this is the same trap declined.
+  Nothing from the source was thrown away: `foliage`, `container`,
+  `hardinessNote`, `toxicity` and the declared-`uncertain` lists have no home in
+  the card schema, so they are committed at `data/source-batch-2026-08-10.json`,
+  keyed by latin. Toxicity is folded into `resilience` (Lonicera precedent).
+  Build r29. Fast checks 5/5; csv re-exported at 189 rows (134 dealt + 55 held).
 progress: 2026-08-09 (night) — **two-photo cards and the Avondale blossom frame both
   ship.** Oscar asked for Cercis 'Avondale' as a special card alternating two
   photos every 3.5s with quick cuts through black, and supplied blossom frame art

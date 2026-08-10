@@ -270,6 +270,69 @@ spring, and the card is right.** `peak` stays **Apr-May**, and the two-photo bli
 stays on ***Cercis chinensis* 'Avondale'** (Chinese Redbud) — not on the deck's
 *C. canadensis* 'Eternal Flame'. Nothing to do; recorded so it is not re-asked.
 
+### 14. Reverse-build batch of 50 — 49 cards are held with no photograph
+Added 2026-08-10 from Oscar's RHS-style JSON. **One card had a photo on disk
+(*Chamaerops humilis*) and was dealt; the other 49 are in `PLANTS_ON_HOLD`.**
+
+This is the deck's standing rule (no photo = held), and here it is the *point* of
+the build: the data is in place so that a card deals the moment a photograph
+lands. Nothing about these 49 is provisional except the picture.
+
+**The errand:** every photo taken or sourced for one of these 49 must be staged as
+`photos/<latin-slug>.jpg` — the slug the app derives from the `latin` field, e.g.
+`sambucus-nigra-f-porphyrophylla-eva.jpg`. Then set `held` to 0 for that row in
+`plants.csv` and import, or move the entry into the `PLANTS` block by hand.
+`node tools/data-audit.js` lists the exact slug for each held card.
+
+### 15. `aspect` on the 50 new cards is derived, not supplied
+Oscar's JSON gave `aspect` as a **light level** ("Full sun in a warm, sheltered
+position"), which `check-plant-json.js` rejects by design — the card's aspect
+field is a **compass facing**, and light already lives in `sunNeed` / `sunMin`.
+
+Rather than guess per plant, one rule was applied to the whole batch, from the
+supplied `sunNeed`:
+
+| `sunNeed` | aspect |
+|---|---|
+| 90–100 | South / West |
+| 70–89 | East / South / West |
+| 45–69 | Any aspect |
+| 25–44 | North / East / West |
+| under 25 | North / East |
+
+**Two deliberate overrides**, both because the source text specifically warns off
+afternoon sun, which is what a west wall gives: *Dicksonia antarctica* (25 →
+North / East, "protected from strong afternoon sun") and *Skimmia japonica*
+'Rubella' (35 → North / East, "avoid hot exposed full sun").
+
+**[Unverified] — these are editorial calls from a rubric, not from your
+portfolio**, the same basis as the five climbers in item 1. Worth a skim; the
+sun values themselves came from the JSON and are untouched.
+
+### 16. *Dicksonia antarctica* — what the trade paperwork actually says
+The source JSON stated the species "is not currently listed under CITES for trade
+restrictions". **That claim is not verified here and I could not check it from
+this container** — my recollection is the opposite (Appendix II), and asserting
+either version on a card that a garden centre might rely on is exactly the kind of
+confident-and-wrong this repo has already been bitten by twice.
+
+The card therefore carries the neutral, true-either-way version: *"Imported
+tree-fern trunks are subject to source-country harvesting and trade paperwork —
+check the supplier's documentation before sale."* That is actionable regardless.
+**Settle the CITES status before the card is used commercially.**
+
+### 17. *Rhododendron luteum* — Schedule 9, and what it does not mean
+The fifth compliance card, using the Gunnera fields (`type` banner +
+`returnRisk` detail). It is listed in **Schedule 9 Part II of the Wildlife and
+Countryside Act 1981 (England and Wales)**: an offence to plant it or cause it to
+grow in the wild.
+
+**It is not a sale ban** — unlike Japanese Knotweed's ⚠ NEVER STOCK. The card says
+so explicitly, because a banner that over-reads the law would cost you sales of a
+plant you are allowed to sell. Two things to confirm: that the listing is current,
+and that you are happy selling it with the containment advice attached.
+Scotland and Northern Ireland list differently; the card names England and Wales.
+
 ---
 
 ## Accepted, not defects
