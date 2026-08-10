@@ -119,6 +119,62 @@ function check(name, cond, extra) {
   check('undone card returns unflipped with correct counts', flipped === false && c.left === String(NPLANTS) && c.done === '0', JSON.stringify({ flipped, c }));
   await ctx.close();
 
+  /* ---- 7. hold-to-reset on the undo button ----
+     The destructive half of a button people tap constantly, so both halves are
+     asserted: a short press must undo ONE card and nothing more, and only a press
+     past the 2s mark may rebuild the deck. */
+  ctx = await browser.newContext();
+  page = await ctx.newPage();
+  const errs7 = [];
+  page.on('pageerror', e => errs7.push(String(e)));
+  await page.goto(URL); await page.waitForTimeout(300);
+  const state = () => page.evaluate(() => ({
+    cards: document.querySelectorAll('.card:not([data-gone])').length,
+    left: document.getElementById('left').textContent,
+    done: document.getElementById('done').textContent,
+    history: Array.isArray(history) ? history.length : -1,   /* not window.history — the app's let-scoped array shadows it */
+    disabled: document.getElementById('back').disabled,
+    holding: document.getElementById('back').classList.contains('holding'),
+  }));
+  const holdBack = async ms => {
+    const b = await page.locator('#back').boundingBox();
+    await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+    await page.mouse.down();
+    await page.waitForTimeout(ms);
+    await page.mouse.up();
+    await page.waitForTimeout(150);
+  };
+  await page.click('#learn'); await page.waitForTimeout(450);
+  await page.click('#learn'); await page.waitForTimeout(450);
+  await page.click('#skip');  await page.waitForTimeout(450);
+
+  // mid-hold the fill must be running, so the gesture is visibly abortable
+  const b7 = await page.locator('#back').boundingBox();
+  await page.mouse.move(b7.x + b7.width / 2, b7.y + b7.height / 2);
+  await page.mouse.down(); await page.waitForTimeout(700);
+  const midHold = await state();
+  await page.mouse.up(); await page.waitForTimeout(150);
+  const aborted = await state();
+  check('short press: fill shows mid-hold, release undoes exactly one card',
+    midHold.holding === true && aborted.holding === false &&
+    aborted.history === 2 && aborted.left === String(NPLANTS - 2) && aborted.done === '2',
+    JSON.stringify({ midHold, aborted }));
+
+  await holdBack(2300);
+  const reset = await state();
+  check('2s hold: whole deck rebuilt, history cleared, undo re-disabled',
+    reset.cards === NPLANTS && reset.left === String(NPLANTS) && reset.done === '0' &&
+    reset.history === 0 && reset.disabled === true && reset.holding === false && errs7.length === 0,
+    JSON.stringify({ reset, errs7 }));
+
+  // the reset must survive a reload — buildDeck persists, it isn't just a view
+  await page.reload(); await page.waitForTimeout(400);
+  const afterReload = await state();
+  check('2s hold: reset persisted across reload',
+    afterReload.left === String(NPLANTS) && afterReload.done === '0' && afterReload.history === 0,
+    JSON.stringify(afterReload));
+  await ctx.close();
+
   console.log(`\n${passed} passed, ${failed} failed`);
   if (fails.length) fails.forEach(f => console.log(' FAIL:', f));
   await browser.close();

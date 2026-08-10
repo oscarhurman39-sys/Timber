@@ -171,6 +171,20 @@
   /* undo is the only action with no swipe equivalent — dim it when there is nothing
      to undo so the row reads as live state rather than three permanent decorations */
   .fab.back-btn[disabled]{opacity:.3;cursor:default;box-shadow:none}
+  /* hold-to-reset: a 2s press on undo rebuilds the whole deck. Undo is one card and
+     reset is all of them, so the gesture has to be unmistakably deliberate AND
+     visibly abortable — the fill is the only thing telling you the hold registered
+     and that letting go now costs nothing. No fill, and a 2s press reads as a dead
+     button right up until it wipes your progress. */
+  .fab.back-btn{position:relative;overflow:hidden;
+    -webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+  .fab.back-btn::after{content:"";position:absolute;inset:0;pointer-events:none;
+    transform:scaleY(0);transform-origin:bottom;
+    background:linear-gradient(180deg,rgba(245,196,81,.22),rgba(245,196,81,.62))}
+  /* the transition lives on .holding only, so releasing early snaps the fill back to
+     empty instead of draining over 2s and reading as "still counting" */
+  .fab.back-btn.holding::after{transform:scaleY(1);transition:transform 2s linear}
+  .fab.back-btn.holding{color:var(--gold);border-color:rgba(245,196,81,.5)}
   .fab.learn{flex:1.25 1 0;font-size:11px;color:#1a120a;border-color:rgba(245,196,81,.6);
     background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 5px 14px rgba(245,196,81,.28)}
 
@@ -658,7 +672,7 @@
 
 <div class="actions" id="actions">
   <button class="fab skip"  id="skip"  title="Skip (←)" aria-keyshortcuts="ArrowLeft" aria-label="Skip this plant"><span class="g" aria-hidden="true">✕</span>Skip</button>
-  <button class="fab back-btn" id="back" title="Undo (Backspace)" aria-keyshortcuts="Backspace" aria-label="Undo last swipe" disabled>↺</button>
+  <button class="fab back-btn" id="back" title="Undo (Backspace) · hold 2s to reset the deck" aria-keyshortcuts="Backspace" aria-label="Undo last swipe. Press and hold for two seconds to reset the whole deck." disabled>↺</button>
   <button class="fab learn" id="learn" title="I've learned this (→)" aria-keyshortcuts="ArrowRight" aria-label="Mark as learned"><span class="g" aria-hidden="true">★</span>Learned</button>
 </div>
 
@@ -6014,7 +6028,37 @@ function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show
 
 document.getElementById('learn').onclick=()=>act(true);
 document.getElementById('skip').onclick=()=>act(false);
-document.getElementById('back').onclick=undo;
+/* ---------- hold-to-reset: 2s press on undo rebuilds the whole deck ----------
+   The same button carries both actions because they are the same intent at two
+   scales — take it back. Tap undoes one card; hold long enough and it takes the
+   whole session back. Release before the fill completes and nothing happens at
+   all, which is what makes it safe to put a destructive action on a button people
+   tap constantly. */
+const HOLD_MS=2000;
+let holdTimer=null,holdFired=false;
+function cancelHold(){if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}backBtn.classList.remove('holding');}
+backBtn.addEventListener('pointerdown',e=>{
+  if(backBtn.disabled)return;
+  if(e.pointerType==='mouse'&&e.button!==0)return;   /* right/middle click must not arm it */
+  /* touch pointerdown implicitly captures to the button, which suppresses pointerleave
+     and would leave a touch hold with no way to abort but waiting it out. Hand the
+     pointer back so sliding a finger off cancels the way it does with a mouse. */
+  if(backBtn.hasPointerCapture&&backBtn.hasPointerCapture(e.pointerId))backBtn.releasePointerCapture(e.pointerId);
+  cancelHold();
+  holdFired=false;   /* also clears a flag left set by a hold whose click never arrived */
+  backBtn.classList.add('holding');
+  holdTimer=setTimeout(()=>{
+    holdTimer=null;holdFired=true;backBtn.classList.remove('holding');
+    if(navigator.vibrate)navigator.vibrate(30);   /* the deck rebuilds under your finger — say so */
+    buildDeck();
+  },HOLD_MS);
+});
+/* pointerleave is the escape hatch: slide off the button mid-hold and it aborts */
+['pointerup','pointercancel','pointerleave'].forEach(t=>backBtn.addEventListener(t,cancelHold));
+backBtn.addEventListener('contextmenu',e=>e.preventDefault());  /* long-press callout on touch */
+/* the hold's own pointerup still fires a click — swallow that one so a reset isn't
+   immediately followed by an undo of a history the reset just cleared */
+backBtn.onclick=()=>{if(holdFired){holdFired=false;return;}undo();};
 document.getElementById('reset2').onclick=buildDeck;
 document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
 
