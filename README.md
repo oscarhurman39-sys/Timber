@@ -58,29 +58,47 @@ node tests/run-all.js                           # everything, one command
 - Hosted over HTTPS (e.g. GitHub Pages), it's installable as a PWA and works **offline** after
   the first visit (`sw.js` caches the app shell).
 
-### The live app publishes itself
+### Publishing
 
-<https://oscarhurman39-sys.github.io/Timber/> — **pushing any `claude/**` branch publishes it.**
-No fast-forward step, no merge, no remembering.
+The live app is <https://oscarhurman39-sys.github.io/Timber/>. **`claude/timber-plant-pwa-j69h5e`
+is the live branch** — whatever is on it is what the world sees.
 
-`.github/workflows/pages.yml` runs on every such push and, in order: refuses to publish a commit
-that does not contain the current live commit (so two parallel sessions cannot silently roll the
-app back), runs the five data checks, deploys, **verifies the bytes actually served** match this
-commit's build stamp, and only then fast-forwards the repo's default branch so there is one
-honest record of what is live.
+Publishing is two commands, and both work from inside a Claude session:
 
-- **Push without publishing:** put `[skip ci]` in the commit message.
-- **Publish something older on purpose:** re-run the workflow from the Actions tab with
-  `force: true`. It will tell you what it is about to replace.
-- **A phone shows the old version for one load.** That is the service worker doing
-  stale-while-revalidate. It fetches the new shell in the background and posts `timber-updated`,
-  which raises the *Update ready · tap to refresh* pill — so the second load is current, or the
-  first if the pill is tapped. The build number in the menu foot is the ground truth for which
-  version a device is actually running.
+```sh
+node tests/run-all.js --jobs 3                              # full gate first, 14/14
+git push origin HEAD:refs/heads/claude/timber-plant-pwa-j69h5e   # fast-forward the live branch
+# then dispatch "Deploy to GitHub Pages" on that branch (Actions tab, or the API)
+```
 
-Before this, the workflow was pinned to two hard-coded branch names. Every session works on a new
-branch, so nothing published on its own: all 19 deploys up to 2026-08-10 came from one branch that
-had to be fast-forwarded by hand, and work routinely sat unreleased for days.
+The dispatch is not optional, and that is a platform constraint rather than a preference. Two
+things were established by experiment on 2026-08-10:
+
+- **A push made by a Claude session does not create a workflow run.** Pushing a branch produced no
+  run at all; dispatching the same workflow on the same commit produced run #20 within seconds.
+  Git pushes work — they simply do not trigger Actions. A push *Oscar* makes to the live branch
+  does trigger it normally.
+- **The `github-pages` environment will not start a job for a non-default branch.** A dispatch
+  aimed at a feature branch failed in two seconds with no step logs and no annotation, which is
+  how a deployment-branch rule presents. Hence: fast-forward first, deploy from the live branch.
+
+Because the fast-forward is a plain `git push`, it is fast-forward-only: if the live branch has
+moved on, the push is rejected rather than rewriting what is live.
+
+Once dispatched, the workflow runs the five data checks, deploys, and then **verifies the bytes
+actually served** match this commit's build stamp before going green — so a green run means live,
+not "probably live".
+
+**On a phone, expect the old version for one load.** That is the service worker doing
+stale-while-revalidate: it fetches the new shell in the background and posts `timber-updated`,
+which raises the *Update ready · tap to refresh* pill. The second load is current, or the first if
+the pill is tapped. The build number in the menu foot is the ground truth for which version a
+device is actually running.
+
+Before 2026-08-10 the workflow was pinned to two hard-coded branch names and nobody published
+anything by pushing: all 19 deploys up to that date came from one branch that had to be
+fast-forwarded by hand, which is why the ledger repeatedly records finished work sitting
+unreleased for days.
 
 ### Publishing a standalone copy
 

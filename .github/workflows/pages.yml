@@ -1,40 +1,42 @@
 name: Deploy to GitHub Pages
 
-# WHY THIS TRIGGERS ON EVERY claude/** BRANCH
+# HOW TIMBER GETS LIVE, AND WHY IT IS SHAPED THIS WAY
 #
-# It used to trigger on two hard-coded branch names. Every Claude session works
-# on a fresh claude/<topic>-<id> branch, so no session's work ever reached the
-# live site on its own — someone had to remember to fast-forward the pwa branch
-# by hand. All 19 deploys up to 2026-08-10 came from that one branch, and the
-# ledger is full of "NOT yet live: sits on branch X pending fast-forward".
+# Two platform facts drive this file. Both were established by experiment on
+# 2026-08-10, not assumed:
 #
-# Now: push a claude/** branch and it publishes. The live line is still ONE
-# branch (the repo default) — this workflow fast-forwards it after a successful
-# deploy, so there is a single record of what is live rather than a guess.
+#   1. A push made by a Claude session does NOT create a workflow run. Pushing
+#      this branch produced no run at all, while dispatching the same workflow
+#      on the same commit produced run #20 immediately. Git pushes work fine;
+#      they just do not trigger Actions.
+#   2. The github-pages environment would not start a job for a non-default
+#      branch: run #20 failed in 2 seconds with no step logs and no annotation,
+#      which is how a deployment-branch rule presents.
 #
-# To push WITHOUT publishing, put [skip ci] in the commit message. That is
-# GitHub's own mechanism and skips the whole workflow.
+# So publishing is: fast-forward the live branch, then dispatch this workflow.
+# Both steps work from a session. See "Publishing" in README.md.
+#
+#   git push origin HEAD:refs/heads/claude/timber-plant-pwa-j69h5e
+#   # then dispatch this workflow on that branch
+#
+# A push made by Oscar himself to the live branch still triggers it the normal
+# way — that path is unchanged and is why `push` is still here.
 
 on:
   push:
-    branches: ['claude/**', main, master]
+    branches: [claude/timber-plant-pwa-j69h5e, main, master]
   workflow_dispatch:
-    inputs:
-      force:
-        description: 'Publish even if this commit is behind the live branch (loses whatever is live now)'
-        type: boolean
-        default: false
 
 permissions:
-  contents: write      # write, not read: the job fast-forwards the live branch after deploying
+  contents: read
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  # NOT cancel-in-progress. A cancelled run can deploy and then die before it
-  # records the live line, which is the one thing this workflow must not do.
-  # Two quick pushes queue instead of racing.
+  # NOT cancel-in-progress: a cancelled run can deploy and then die before the
+  # served-bytes check confirms it, leaving nobody sure what is live. Two quick
+  # publishes queue instead of racing.
   cancel-in-progress: false
 
 jobs:
@@ -43,51 +45,21 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    env:
-      LIVE_BRANCH: ${{ github.event.repository.default_branch }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0        # the ancestry check below needs real history
 
-      # Two sessions running at once is not hypothetical in this repo — it has
-      # happened (2026-08-07). Without this, the second one to push silently
-      # reverts the live app to whatever its branch forked from. Fail loudly
-      # instead; the operator can still force it from the Actions tab.
-      - name: Refuse to publish behind the live branch
-        if: inputs.force != true
-        run: |
-          live="$LIVE_BRANCH"
-          if [ -z "$live" ]; then
-            echo "no default branch reported — skipping the ancestry check"
-            exit 0
-          fi
-          git fetch --no-tags origin "$live" || {
-            echo "live branch '$live' not found on origin — first publish, nothing to be behind"
-            exit 0
-          }
-          live_sha=$(git rev-parse FETCH_HEAD)
-          echo "live=$live_sha  this=$GITHUB_SHA"
-          if [ "$live_sha" = "$GITHUB_SHA" ]; then
-            echo "this commit IS the live branch tip"
-          elif git merge-base --is-ancestor "$live_sha" "$GITHUB_SHA"; then
-            echo "this commit is ahead of the live branch — safe to publish"
-          else
-            echo "::error::${GITHUB_SHA} does not contain the live commit ${live_sha}. Publishing it would roll the live app BACK. Merge or rebase onto '${live}' first, or re-run this workflow from the Actions tab with force=true if you really mean to replace what is live."
-            exit 1
-          fi
-
-      # The build stamp is the only way to tell which version a phone is running,
-      # because the service worker serves the previous build once before swapping.
-      # Refuse to deploy a stamp that does not match the content it claims to
-      # describe — otherwise that one signal silently starts lying.
+      # Was two checks (build stamp + data audit). Now all five data checks, in
+      # about a second: build stamp matches content, deck/hold/csv/photos agree,
+      # no card contradicts itself (plant-sense — which caught two bad cards on
+      # 2026-08-10), overlay geometry has not drifted, every photo has
+      # provenance. The build stamp one matters most: it is the only way to tell
+      # which version a phone is running, because the service worker serves the
+      # previous build once before swapping, so a stamp that does not match its
+      # content makes that single signal start lying.
       #
-      # run-all --fast is all five data checks in about a second: build stamp,
-      # deck/hold/csv/photo agreement, card self-consistency (plant-sense),
-      # overlay geometry, and photo provenance. It replaces the two checks that
-      # used to run here. The browser suites still run locally before a push —
-      # they need Playwright and about eight minutes, which is too slow to sit
-      # in front of every deploy.
+      # The nine browser suites are NOT here. They need Playwright and about
+      # eight minutes, which is too slow in front of every deploy, so the full
+      # gate stays a local pre-push step (node tests/run-all.js --jobs 3).
       - name: Data checks (build stamp, deck consistency, card sense, geometry, credits)
         run: node tests/run-all.js --fast
 
@@ -120,15 +92,3 @@ jobs:
           done
           echo "::error::the deployed page never matched this commit"
           exit 1
-
-      # Only now, with the served bytes confirmed, move the live branch. It is
-      # a plain push, so it is fast-forward-only: if it cannot fast-forward, the
-      # step fails rather than rewriting history. A push made with GITHUB_TOKEN
-      # does not retrigger workflows, so this cannot loop.
-      - name: Record this commit as the live line
-        if: success() && github.ref_name != github.event.repository.default_branch
-        run: |
-          live="$LIVE_BRANCH"
-          if [ -z "$live" ]; then echo "no default branch reported — nothing to record"; exit 0; fi
-          echo "fast-forwarding '$live' to $GITHUB_SHA"
-          git push origin "HEAD:refs/heads/${live}"
