@@ -21,7 +21,6 @@ const URL = 'http://localhost:8477/timber.html';
 
 /* latin name -> why it is knowingly broken. Delete a line once the card is fixed. */
 const KNOWN_GAPS = {
-  'Choisya ternata': 'all 7 ratings blank, aspect "Full sun / pt shade" lost to "Any aspect" (photo added)',
 };
 
 let failed = 0;

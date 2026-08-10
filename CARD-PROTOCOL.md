@@ -26,6 +26,116 @@ Geometry has an equivalent rule: card-level overlay anchors live in
 `data/template-anchors.json` and are applied by `tools/template-geometry.js`.
 Change the card height with `--reflow`, not by hand.
 
+## 0c. Holo cards (special editions)
+
+A card can carry its own frame artwork instead of `art/frame-600.png`. Add its
+latin-slug to the `HOLO` map in `timber.html`:
+
+```js
+const HOLO={'cercis-canadensis-eternal-flame':'art/frame-eternal-flame.png'};
+```
+
+That swaps the background and adds the `.holo` class. **Everything else is
+unchanged** — crest, plaque, soil panel, band, growth rail and all live text are
+the same overlays at the same anchors, so a holo card goes through the same
+layout audit as any other and cannot drift on its own.
+
+The standard frame bakes three things into its pixels that a commissioned frame
+generally will not, so `.holo` supplies them in CSS:
+
+| Baked into `frame-600.png` | Supplied by `.holo` |
+|---|---|
+| HEIGHT / SPREAD lettering on the spine | `.railval::before`, from `data-label` |
+| DOUBLE TAP TO MASTER strip | `.tcard.holo::after` |
+| A green spine the parchment rail patches are tinted for | patches hidden; values set in gold on the artwork |
+
+The master strip sits at ~96% on a holo card rather than the baked ~98.2%,
+because the ornate border on the Eternal Flame frame swallows text at that
+height. If a future frame has a plain foot, move it back.
+
+### Effects: panels and wisps
+
+A holo entry is a config object, so a card can take its own panel artwork and any
+number of animated layers:
+
+```js
+const HOLO={
+  'cercis-canadensis-eternal-flame':{
+    frame:'art/frame-eternal-flame.png',
+    plaque:'art/holo/eternal-flame-plaque.png',
+    soil:'art/holo/eternal-flame-soil.png',
+    band:'art/holo/eternal-flame-band.png',
+    swatch:'art/holo/eternal-flame-swatch.png',
+    wisps:[
+      {src:'art/holo/eternal-flame-wisp.png', anim:'drift', dur:34, opacity:0.55, scale:1.7},
+    ],
+  },
+};
+```
+
+**Panels — two commands, and one rule you must not break.**
+
+```sh
+node tools/extract-frame-assets.js art/frame-<name>.png <name>
+```
+
+Cuts the plaque, soil and band out of the frame at the slot rectangles **read from
+the app's own CSS**, flattens each one against the standard parchment with a
+multiply, and writes an opaque PNG. It also makes a matching swatch for the value
+patches.
+
+The rule: **the panels must stay fully opaque.** The parchment carries baked
+SAMPLE values — `Jul–Oct`, `1/5`, `3/5`, `2/5`, lit month chips, filled widget
+icons — and the `.patch` swatches exist to hide them before the live values are
+printed. Doing the multiply in CSS instead of offline makes the panel translucent,
+the samples show through, and every row reads double. That was tried; it looked
+exactly as broken as it sounds. Flattening offline keeps the whole patch mechanism
+working untouched, and flattening the swatch with the same artwork is what stops
+the patches sitting on the panel as beige rectangles.
+
+**Wisps — the generic effect layer.**
+
+```sh
+node tools/extract-wisps.js art/frame-<name>.png <name>-wisp --mode shards --region 18,4,74,52
+```
+
+Keys an effect out of any artwork onto transparency. `--mode rainbow` keeps
+saturated iridescence, `--mode shards` keeps the brightest streaks and spikes,
+`--mode bright` keeps everything luminous; `--region x,y,w,h` in percent crops
+first, which is how you avoid pulling the border thorns into a layer meant to
+drift across the middle.
+
+Each entry in `wisps` becomes one animated layer inside the photo window. Three
+generic animations are available and no card needs CSS of its own:
+
+| `anim` | Motion |
+|---|---|
+| `drift` | slow wander with a little rotation — the base "alive" layer |
+| `sweep` | a shine travelling diagonally across the card |
+| `shimmer` | breathing glint, no travel |
+
+Constraints the system holds to, and why:
+
+- **Only `transform` and `opacity` animate**, so every layer stays on the
+  compositor. `perf-test` guards the layer budget and it does not move.
+- **Layers exist only on `.hot` cards** (`.card:not(.hot) .wisps{display:none}`),
+  so a 129-card deck never carries three animated elements per card.
+- **`mix-blend-mode:screen`** means an effect can only ADD light — it cannot muddy
+  the photograph underneath.
+- **`prefers-reduced-motion` holds a single frame** rather than hiding the layer,
+  so the card keeps its character and simply stops moving.
+- `perf-test` pauses all animations before its pixel-parity assertion, because
+  that check is about the deep toggle and an animation would break it for
+  unrelated reasons.
+
+**Commissioning a new frame:** `FRAME-BRIEF.md` has the exact geometry and a
+paste-ready prompt. Note that the Eternal Flame frame came back without the
+spine lettering and master strip despite the brief asking for them, and with the
+plaque and soil panels drawn in despite the brief saying not to — those drawn
+panels happen to sit within ~0.5% of the real overlay slots, so the real
+parchment covers them and no harm is done. Measure a returned frame with the
+same method before wiring it in.
+
 ## 1. Card anatomy (current draft — v2)
 
 - **Wood-grain frame** on all four sides (~13px, CSS gradients, original — no copied
@@ -154,9 +264,27 @@ Focal point recorded here when off-centre:
 | Lonicera × purpusii 'Winter Beauty' | (no photo — gradient fallback) | supplied photos were a water lily (wrong plant) + a cat blocking the Lonicera (label-confirmed ID); needs a winter shot of the scented cream flowers on bare stems |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 | Euonymus alatus | euonymus-alatus.jpg | ~50% 40% — summer macro. ID confirmed: corky wings visible as tan ridges on the green stems, leaves opposite + finely serrate. Shows none of the card's headline interest (autumn crimson, fruit); a September re-shoot would sell the plant better |
+| Cornus kousa | cornus-kousa.jpg | **50% 52%** — real photo, Oscar's; deep rose-pink bracts, gravel bed behind. Default 50% 40% clipped the hero bloom's lower bracts behind the stats plaque; raised so the whole four-bract shape and the green button clear it, since bract *shape* is the identifiable feature here. **The cultivar is NOT known and is deliberately not guessed** — the card is species-level with `cvs` reading "unnamed pink form". What the photo does establish: narrow finely-acuminate bracts, colour deep and uniform while the central head is still tight and green, so it is a genuinely pink selection rather than a white form ageing pink. Bract length ≈ leaf length rules out 'Venus'; the narrow points argue against 'Heart Throb'. See VERIFY-QUEUE item 9 |
+| Hamamelis × intermedia 'Jelena' | hamamelis-intermedia-jelena.jpg | 50% 40% (default) — real photo, Oscar's; backlit copper-orange ribbons on bare stems against blue winter sky, frost on the ground behind. Cultivar-confirming: the copper-orange colour with red bases is exactly what separates 'Jelena' from the deck's yellow 'Arnold Promise'. Second Hamamelis × intermedia, so the pair works like the two Acer palmatums |
+| Hydrangea serrata | hydrangea-serrata.jpg | **45% 16%** — real photo, Oscar's; nursery shot, unusually tall crop (1200×2768). The default 50% 40% showed only the red autumn foliage and clipped the flowers off the top edge, which fought the card's own Jul-Sep bloom band. Raised to 16% so a white lacecap head sits in frame WITH the red leaves — flower form and autumn colour both visible. ⚠ The lacecaps here are WHITE with pink-red fertile centres while the card's hue is 220 (blue, the species archetype) — see VERIFY-QUEUE item 6; there is a nursery label in the shot that may name the cultivar |
+| Reynoutria japonica | reynoutria-japonica.jpg | 50% — [special] **AI composite, not a field photo** (Ajuga v12.5 class): broad shovel leaves on a zig-zag stem over a fire/lightning treatment. The dramatic ground is deliberate — Oscar's call that a NEVER-STOCK invasive should read as dangerous on sight. Leaf shape and stem habit are ID-true; the red-flecked hollow cane the card's `visual` names is NOT visible, so this sells the danger better than it teaches the ID. A real cane-and-leaf shot would be the stronger teaching photo. ⚠ UK-INVASIVE plant — compliance carried the Gunnera way (v12.21) |
 
 ## 5. Decision changelog
 
+- **v14.1 (menu panel scrolls — a defect that grew with the deck)**: not a card
+  change, but a layout defect found by the plant work and logged here per
+  CORRECTION-PROTOCOL §4.5. `.sheet .panel` was `height:100%` with no overflow
+  handling while its filter chips are **generated from the deck**, so it grew with
+  every plant added. At 390×844 the content reached 1098px: "Reset progress" sat
+  36px below the fold and was untappable on a phone; adding Japanese Knotweed's
+  ⚠ NEVER STOCK chip took it to 68px. This is why `app-test` had been failing at a
+  varying line and being written off as container flakiness — Playwright's retry
+  loop occasionally landed the click. Fixed at the cheapest layer (§4.2):
+  `overflow-y:auto` + `overscroll-behavior:contain`, contained so the deck behind
+  the sheet can never pull-to-refresh. Per §4.1 the defect is now visible to the
+  suite — app-test asserts every menu row is reachable, and the assertion was
+  verified failing against an unfixed copy before the fix went in. 95 checks
+  (was 94); full gate 14/14.
 - **v14 (ELONGATED TEMPLATE — card is now 420×600)**: Oscar wanted the card
   longer without a reckless redesign (a ChatGPT frame regen drifted: restyled
   gold, redrawn ornaments, deleted the baked master strip — rejected). Instead

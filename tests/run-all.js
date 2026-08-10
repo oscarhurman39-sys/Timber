@@ -3,13 +3,23 @@
   run-all.js — one command for every check, so "did I run them all?" stops being
   a question you answer from memory.
 
-    node tests/run-all.js            everything
-    node tests/run-all.js --fast     skip the browser suites (data checks only, ~2s)
+    node tests/run-all.js            everything, browser suites one at a time
+    node tests/run-all.js --jobs 3   run browser suites 3 at a time (much faster)
+    node tests/run-all.js --fast     data checks only, ~2s, no browser
     node tests/run-all.js --list     show what would run
 
   Starts its own static server if nothing is already serving :8477, and stops it
   again on the way out. Prints one line per check and a summary; exits non-zero
   if anything failed, so a hook or CI job can gate on it.
+
+  The data checks always run FIRST and in order, because they cost 0.3s and catch
+  the mistakes most likely to be in a fresh batch. Discovering a duplicate latin
+  name after five minutes of browser tests is a waste of five minutes.
+
+  --jobs: each browser suite launches its own Chromium against the shared static
+  server and keeps its state in its own browser context, so they don't interfere.
+  Budget ~500MB per job. 3 is a good default on a 4-core box; the wall clock then
+  falls to roughly the slowest single suite instead of the sum of all of them.
 */
 'use strict';
 const { spawn, spawnSync } = require('child_process');
@@ -52,6 +62,8 @@ const CHECKS = [
 
 const fast = process.argv.includes('--fast');
 const list = process.argv.includes('--list');
+const ji = process.argv.indexOf('--jobs');
+const JOBS = Math.max(1, ji === -1 ? 1 : Number(process.argv[ji + 1]) || 1);
 const todo = CHECKS.filter(c => !(fast && c.browser));
 
 if (list) {
@@ -80,18 +92,43 @@ const alive = () => new Promise(res => {
     console.log(`(started a static server on :${PORT})\n`);
   }
 
+  const ENV = { ...process.env, NODE_PATH: process.env.NODE_PATH || '/opt/node22/lib/node_modules' };
   const results = [];
-  for (const c of todo) {
-    process.stdout.write(c.name.padEnd(16));
+
+  /* One check, as a promise. Output is captured rather than inherited so parallel
+     suites don't interleave their lines into mush. */
+  const runOne = (c) => new Promise(resolve => {
     const t = Date.now();
-    const r = spawnSync(c.cmd[0], c.cmd.slice(1), {
-      cwd: ROOT, encoding: 'utf8',
-      env: { ...process.env, NODE_PATH: process.env.NODE_PATH || '/opt/node22/lib/node_modules' },
+    const p = spawn(c.cmd[0], c.cmd.slice(1), { cwd: ROOT, env: ENV });
+    let out = '';
+    p.stdout.on('data', d => (out += d));
+    p.stderr.on('data', d => (out += d));
+    p.on('close', code => resolve({ ...c, ok: code === 0, out, secs: (Date.now() - t) / 1000 }));
+  });
+
+  const report = r => console.log(`${r.name.padEnd(16)}${r.ok ? 'PASS' : 'FAIL'}  ${r.secs.toFixed(1)}s   ${r.why}`);
+
+  /* Data checks first, serially: they are ~0.1s each and they catch the errors a
+     fresh batch is most likely to contain. Fail here and the browser suites are
+     never paid for. */
+  for (const c of todo.filter(x => !x.browser)) {
+    const r = await runOne(c);
+    results.push(r); report(r);
+  }
+  if (results.some(r => !r.ok)) {
+    console.log('\ndata checks failed — stopping before the browser suites (they would take minutes and tell you nothing new).');
+  } else {
+    const browser = todo.filter(x => x.browser);
+    if (JOBS > 1 && browser.length) console.log(`(running ${browser.length} browser suites, ${JOBS} at a time)`);
+    const queue = browser.slice();
+    const workers = Array.from({ length: Math.min(JOBS, queue.length) }, async () => {
+      while (queue.length) {
+        const c = queue.shift();
+        const r = await runOne(c);
+        results.push(r); report(r);
+      }
     });
-    const secs = ((Date.now() - t) / 1000).toFixed(1);
-    const ok = r.status === 0;
-    results.push({ ...c, ok, out: (r.stdout || '') + (r.stderr || '') });
-    console.log(`${ok ? 'PASS' : 'FAIL'}  ${secs}s   ${c.why}`);
+    await Promise.all(workers);
   }
 
   if (server) { try { process.kill(-server.pid); } catch {} }
@@ -101,7 +138,12 @@ const alive = () => new Promise(res => {
     console.log(`\n--- ${f.name} output (last 25 lines) ---`);
     console.log(f.out.trimEnd().split('\n').slice(-25).join('\n'));
   }
+  const wall = results.reduce((m, r) => Math.max(m, r.secs), 0);
+  const cpu = results.reduce((s, r) => s + r.secs, 0);
+  const skipped = todo.length - results.length;
   console.log(`\n${results.length - failed.length}/${results.length} passed` +
-    (fast ? '  (--fast: browser suites skipped)' : ''));
+    (fast ? '  (--fast: browser suites skipped)' : '') +
+    (skipped > 0 ? `  (${skipped} not run)` : '') +
+    (JOBS > 1 ? `  — ${cpu.toFixed(0)}s of work across ${JOBS} jobs, slowest suite ${wall.toFixed(0)}s` : ''));
   process.exit(failed.length ? 1 : 0);
 })();

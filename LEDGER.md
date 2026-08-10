@@ -4,6 +4,269 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-09 (night) — **two-photo cards and the Avondale blossom frame both
+  ship.** Oscar asked for Cercis 'Avondale' as a special card alternating two
+  photos every 3.5s with quick cuts through black, and supplied blossom frame art
+  plus a component breakdown sheet.
+  SHIPPED: `PHOTO_SWAP`, a new capability — a card can name a second photograph
+  and blink between the pair. Built as CSS keyframes, not JS timers, and gated on
+  `.hot`, so a 133-card deck never runs 133 animations and perf-test's compositing
+  budget still holds; it also stops under prefers-reduced-motion. Deliberately a
+  PAIR, not a carousel. Avondale is the case that earns it: peak Apr-May, "dense
+  rose-purple pea flowers wreathe the bare branches", and the deck's photo was
+  summer foliage — the card was showing none of what it sells. Leaf ↔ flower says
+  it in one card. Oscar asked for 1ms fades; **1ms is under one frame** (16.7ms at
+  60Hz) so it would render as a hard cut with no fade at all. Used ~105ms each way,
+  the fastest that still reads as a fade, with the hold exposed as `--holo-swap`.
+  Say the word and it becomes a true instant cut.
+  THE FRAME: shipped — but only after I got it wrong. Oscar sent two files, an
+  assembled frame and a component breakdown sheet. **I used the breakdown sheet as
+  the frame**, rendered the mess that produced, and wrote a detailed VERIFY-QUEUE
+  entry declaring HIS artwork off-spec on three counts: wrong canvas ratio, wrong
+  spine width, panels painted where the photo covers them. Every measurement was
+  accurate and every conclusion wrong, because they were taken against the wrong
+  file. The assembled frame is 1049x1499, ratio 0.6998 — the same artboard as
+  Eternal Flame, needing no rescale and no rebuild. It went straight on, and the
+  spine ornaments carry the HEIGHT and SPREAD values exactly as drawn. Item 12 is
+  retracted in full and rewritten. Second time today that confident, specific and
+  wrong has been the failure mode (see the photo-provenance correction); the common
+  cause is concluding from a derived artefact without checking it is the artefact I
+  think it is.
+  PANELS STAY PARCHMENT, on both special cards. Oscar on Eternal Flame: he could not
+  read the stats and they were all over the place. He is right — dark label ink on
+  orange flame, with the month strip and the n/5 values worst hit. The extracted
+  fire panels are out and standard parchment is back; Avondale never got its panels
+  swapped, for the same reason. **New rule for special cards: holo where it
+  decorates, parchment where it informs.** The plaque, soil box and band are the one
+  part of a card with a job, and a card whose numbers cannot be read has failed at
+  it however good the border looks. Extracted panels kept in art/holo/ for a future
+  frame drawn light enough behind the ink.
+  ITEM 13 SETTLED same session: Oscar confirms early spring is right, so `peak`
+  Apr-May stands and the blink stays on *C. chinensis* 'Avondale'. No change.
+  CLIMBERS: asked after the held climber photos — **there are none on disk.** That
+  is why all five are held, and their `size` fields still carry no H × W split
+  ("2-3m", "8-12m"), so both rails would render blank even with a photo. One
+  errand fixes both.
+  Build r27. Full gate 14/14 at --jobs 3.
+progress: 2026-08-09 (evening) — **Pink Kousa Dogwood: deck 131 -> 132. First card
+  added deliberately WITHOUT a cultivar name.** Oscar sent three benched Cornus
+  kousa photos with an AI-generated cultivar identification ('Milky Way',
+  'Satomi', 'Heart Throb', 'Scarlet Fire', 'Venus') and asked what I made of it.
+  Answer: confident and mostly unsupportable. Pink kousa bracts shift with
+  temperature, light, flower age and plant maturity, so the same tree a fortnight
+  apart reads as two cultivars — and the writeup's groupings were built on exactly
+  that. Two claims are contradicted by the photos themselves: bract length ≈ leaf
+  length **rules out 'Venus'** (bracts about double, and it is sold as C. ×
+  elwinortonii anyway), and the narrow finely-acuminate bracts **argue against
+  'Heart Throb'**, which is sold on broad rounded overlapping bracts. What the
+  photos DO establish, and what went on the card: this is a genuinely pink-bracted
+  selection, not a white form ageing pink — the colour is deep and even while the
+  central head is still tight and green. Also found: **the two cream-bracted
+  photos are different plants** (long-acuminate with gaps and pink tips vs rounded
+  overlapping with a pink base flush); bract shape is far more stable than colour,
+  so they must not be merged into one card.
+  Oscar wanted the pink one in the deck, so it went in as a SPECIES card with cvs
+  reading "unnamed pink form — the species is cream-white". Horticultural data is
+  inherited from the deck's existing Cornus kousa 'Zuilb1' card rather than
+  invented, and that is recorded in the JSON's uncertain list; only the size is
+  changed, to the species' spreading 4-8m rather than the columnar cultivar's.
+  This is the Sweet Cupcake lesson applied before the fact rather than after.
+  Photo focus 50% 52% — the default clipped the hero bloom's lower bracts behind
+  the stats plaque, and bract shape is the identifiable feature here.
+  Good news on the tooling: this was the first plant added through add-plant.js
+  since the trailing-comma fix, and it inserted cleanly — 131 -> 132 with the
+  derived count agreeing. The EXIF path is also fine: the source reads 4000x3000
+  landscape from its SOF header but carries an orientation tag, and the tool
+  staged it correctly as 1200x1600 portrait.
+  Build r24. Deck now has THREE Cornus kousa entries, two of which are the
+  duplicate 'Flower Tower' pair from item 8 — worth resolving together.
+progress: 2026-08-09 (later still) — **Jelena Witch Hazel + Mountain Hydrangea:
+  deck 129 -> 131. Two real bugs in the add-plant tooling found by using it.**
+  Both from Oscar's own photos, both first-of-kind in a small way: 'Jelena' is the
+  second Hamamelis × intermedia (pairs with 'Arnold Promise' like the two Acer
+  palmatums), Hydrangea serrata is the seventh hydrangea and the first species
+  rather than a named cultivar.
+  **THE TOOLING BUG THAT MATTERS: `add-plants-bulk.js` corrupted timber.html.**
+  The r18 csv round-trip writes the deck's last row with NO trailing comma; both
+  add-plant.js and add-plants-bulk.js append new rows straight before the `];`,
+  assuming there is one. Result: `sunMin:40}` immediately followed by `{common:` —
+  invalid JS, PLANTS unparseable, **the whole app dead**. This was armed the moment
+  r18 reformatted the file and would have hit whoever added the next plant; it hit
+  this one. The tools now insert the separator when the previous row needs it,
+  verified by simulating a comma-less tail and re-parsing. Worse, the run left the
+  broken file ON DISK — its count guard fired after the write, not before — so both
+  tools now re-parse what they wrote and **roll timber.html back** if it doesn't
+  come out clean, matching what r18 already did for plants-tool.js.
+  Second bug, same run: the bulk tool counted the deck as every `latin:` in the
+  file, so the 5 on-hold plants were included and 129+2 was reported as "136". It
+  now counts dealt rows only. The single-plant add-plant.js always got this right,
+  which is why it never showed up.
+  PHOTO: the hydrangea shot is unusually tall (1200×2768) and the default 50% 40%
+  crop showed only the red autumn foliage, clipping the flowers off the top edge —
+  fighting the card's own Jul-Sep bloom band. Focus set to 45% 16% so a white
+  lacecap sits in frame WITH the red leaves. Jelena needed no focus entry; the
+  default frames the backlit copper ribbons perfectly.
+  TWO THINGS FOR OSCAR, both in VERIFY-QUEUE rather than guessed at: the serrata
+  card's hue is 220 (blue, the species archetype) while **his photo shows a
+  white-flowered form** — and there is a nursery label in the shot, so this may
+  want to be a cultivar card like the deck's other six hydrangeas; and the two
+  Hamamelis × intermedia cards disagree on sunNeed (65 vs 80) and thirst (9 vs 11)
+  for cultivars of one hybrid, which now sit side by side in any "witch hazel"
+  search. Toxicity rides in `resilience` again (Lonicera precedent) — the fifth
+  card to borrow a field for something the schema does not have.
+  Build r23. Fast checks 5/5 throughout; full gate at the end.
+progress: 2026-08-09 (later) — **Choisya settled + Japanese Knotweed added: deck
+  128 -> 129. First plant work built on the r18 toolchain rather than the old
+  per-plant routine.** Started on the old system by mistake — the card was built,
+  the suites run card-by-card, and it cost minutes per gate at 129 cards. Redone
+  on top of r18: `run-all.js --fast` gates the data work in **0.3s** and the
+  browser suites run once, at the end. That is the whole difference; nothing about
+  the card changed. The fast checks earned it immediately — they caught a stale
+  `plants.csv` and a stale build stamp within a second of the row landing, both of
+  which the old routine would only have surfaced after a full browser run.
+  CHOISYA: the deck audit's last KNOWN_GAP, and VERIFY-QUEUE item 4. Filled from
+  Oscar's JSON — aspect is now the real facing East / South / West (compass and
+  light bar both render), growth 9 / thirst 6 / care 4 / sun 75 floor 40, plus
+  visual, water, soil warning, prune, uses. **KNOWN_GAPS is empty for the first
+  time.** Three calls went against the JSON and all are written up in VERIFY-QUEUE
+  item 4 rather than buried here: pestRisk 3 not 8 (PLANT-BRIEF uses Choisya as
+  its own "0–3 bulletproof" anchor — if 8 is right, the brief needs a new anchor
+  plant, so this is a rubric question, not a card question); hue stays 150 per
+  protocol v12.4, though the deck is genuinely split on white-flower hue and it is
+  worth settling once; peak Apr–May -> May-Jun, which moves the card in the "In
+  season now" filter. cvs merged, not replaced, so 'Sundance' and 'Aztec Pearl'
+  survive alongside the synonym.
+  KNOTWEED: the deck's **fourth compliance card and the first NEVER-STOCK one** —
+  it is here to be recognised and reported, not sold. Compliance borrows the
+  Gunnera fields again (v12.21). Deck records: growthSpeed 20 and careLevel 20 are
+  both firsts — careLevel is the containment and legal burden, not difficulty
+  keeping it alive — against pestRisk 2, genuinely pest-free. H7, hardiest card in
+  the deck. plant-sense passes it clean, which is worth noting: a card whose prose
+  says "rampant" and whose ratings say 20/20 is self-consistent.
+  Photo is Oscar's AI composite (fire and lightning, deliberately) — recorded in
+  CREDITS.json as his, `commercialUseCleared: false` because the generator's terms
+  are unrecorded. VERIFY-QUEUE item 5 covers both that and the ID weakness: the
+  red-flecked cane the card's own `visual` names is not visible in the shot.
+  THE REAL FIND — **app-test was never flaky; the menu is broken on a phone.**
+  It had been failing at a different line each run, which reads like timing, and
+  the earlier session wrote it off as container slowness. It is not: the menu
+  panel is `height:100%` with no overflow handling, and its filter chips are
+  GENERATED FROM THE DECK, so the panel grows every time a plant is added. At 390
+  × 844 the content is 1098px tall. **"Reset progress" sat 36px below the fold and
+  could not be tapped at all** — Playwright's retry loop sometimes shifted enough
+  to land the click and sometimes didn't, which is where the "flaky" impression
+  came from. Japanese Knotweed's ⚠ NEVER STOCK chip pushed it to 68px. Fixed at
+  the cheapest layer per CORRECTION-PROTOCOL §4.2 — `overflow-y:auto` +
+  `overscroll-behavior:contain` on `.sheet .panel` (contained so the deck behind
+  it can never pull-to-refresh, which perf/edge tests guard). Per §4.1 the defect
+  is now something the suite can SEE: app-test asserts every menu row is reachable
+  (95 checks, was 94), verified failing on an unfixed copy first. **This bug
+  reached a real phone and grows with every plant added** — anything else keyed to
+  deck size deserves the same look.
+  PROVENANCE CORRECTED — **Oscar took every photo himself; the r18 record said
+  otherwise.** CREDITS.json marked 146 of 152 photos "unrecorded / licence
+  unknown", reasoning that plant-images-tool.js had fetched them from Wikimedia
+  and written the paperwork into gitignored `plant-images/` where it was lost.
+  Oscar says he shot them all, and the evidence backs him, not the inference:
+  **the downloader has never been run** (the README says so in the same file that
+  drew the conclusion, and it needs network the container lacked), `plant-images/`
+  was never committed because nothing was ever downloaded, and the photo register
+  describes ~100 images in detail without once naming an external source. The
+  missing paperwork was read as lost; it never existed. All 150 photographs are now
+  recorded as his own and cleared. EXIF can't corroborate either way — add-plant.js
+  re-encodes through a canvas and strips metadata — so the record rests on the
+  owner's account plus those three checks, which is the right basis. Only the two
+  AI images stay uncleared: knotweed (**ChatGPT + Gemini**, per Oscar) and the
+  Ajuga v12.5 remake. That closes the VERIFY-QUEUE photo section entirely and
+  removes the "not fine for commercial use" warning the README carried.
+  Worth noting as a pattern: this was a confident, well-written, thoroughly
+  documented conclusion built on one unchecked assumption, and it had already been
+  propagated into three files. Ask the owner before inferring provenance.
+  ALSO: `photo-credits.js --init` re-derives every photo's origin commit from
+  `git log --all`, so running it in a container with more remote branches fetched
+  rewrote 56 unrelated provenance records. Backed out — the single new entry was
+  added surgically instead. **The tool's output depends on which refs happen to be
+  local**, which is worth a guard before anyone runs --init again.
+  Build r19. Fast checks 5/5.
+progress: 2026-08-09 (latest+) — **holo effects: panels, and a generic wisp layer.**
+  Oscar asked to isolate the rainbow patterns and spiky shards from his frame and
+  float them over the photo, to have a reusable animation he can hang any effect
+  on, and to swap the plaque / soil / aspect boxes for the ones drawn in his art —
+  keeping all of it generic for future special cards.
+  Two new tools, both reading geometry from the app rather than duplicating it.
+  `extract-frame-assets.js` cuts the three panels at the slot rectangles read from
+  timber.html's own CSS; `extract-wisps.js` keys an effect onto transparency with
+  rainbow / shards / bright modes and an optional region crop (the region matters —
+  keying the whole frame drags the border thorns into a layer meant to drift
+  across the middle).
+  THE PANEL TRAP, found by building it wrong first: doing artwork-x-parchment as a
+  CSS multiply makes the panel translucent, so the parchment's baked SAMPLE values
+  (Jul-Oct, 1/5, 3/5, 2/5) stop being hidden by the .patch swatches and every row
+  renders double. Flattened offline into an opaque PNG instead, the whole patch
+  mechanism keeps working untouched — and flattening the swatch with the same
+  artwork is what stops the patches sitting on a glowing panel as beige blocks.
+  Lifting the ink off the parchment was tried before that and looked worse: the
+  parchment's uneven vignette survives as a veil and the cleared value regions
+  stand out flat against it.
+  WISPS are the generic part: any transparent PNG, one of three animations (drift /
+  sweep / shimmer), declared per card in its HOLO entry with no new CSS. Only
+  transform and opacity animate so everything stays on the compositor; layers exist
+  only on .hot cards so a 129-card deck never carries 3x129 animated elements;
+  screen blending means an effect can only add light, never muddy the photo;
+  reduced-motion holds one frame rather than hiding it. Verified moving (three
+  distinct live transform matrices, frames differing over time).
+  ALSO removed a latent flake: perf-test's pixel-parity assertion compares two
+  screenshots a second apart, which any animation breaks regardless of what the
+  assertion is about. It passed only because the one holo card is buried and its
+  wisps are display:none. Animations are now paused for that check, verified to
+  give zero drift even with the holo card forced hot. Build r21.
+progress: 2026-08-09 (latest) — **the Eternal Flame holo card is real.** Oscar
+  commissioned a frame from FRAME-BRIEF.md and it came back at aspect 0.6998
+  against the specified 0.700 — effectively exact — with the plaque and soil boxes
+  drawn within ~0.5% of their real overlay slots, so the parchment covers them
+  cleanly. What it did NOT carry, despite the brief spelling both out with
+  coordinates: the HEIGHT/SPREAD spine lettering and the DOUBLE TAP TO MASTER
+  strip. It also drew panels the brief listed as do-not-draw. Recorded in the brief
+  as the lesson: the model follows proportions and box positions reliably and
+  ignores small baked text and negative instructions.
+  Rather than re-commission, added a scoped `.holo` treatment: a HOLO map keyed by
+  latin-slug swaps the frame and adds a class that supplies the spine lettering
+  (from data-label), the master strip, and gold rail values with the parchment
+  patches hidden — those patches are tinted for the green spine and read as dark
+  blocks on a red one. Everything else is the standard overlay stack at the
+  standard anchors, so the holo card goes through the same layout audit as any
+  other and cannot drift on its own. Master strip sits at ~96% not the baked 98.2%
+  because this frame's ornate border swallows text at that height. Build r20.
+progress: 2026-08-09 (later) — **deck 129 + 1 held; the new photo-provenance check
+  earned its keep on day one.** Two plants arrived with three photos. Reading the
+  embedded C2PA manifests before building anything: the waterlily image is WHOLLY
+  AI-GENERATED (OpenAI Media Service API, gpt-image v2.0, IPTC
+  digitalSourceType=trainedAlgorithmicMedia), and its JSON had reasoned the cultivar
+  ID *from* that invented picture — a circle. The Primula vialii shot is a real
+  Galaxy S24 capture that has been AI-edited (Photo assist,
+  compositeWithTrainedAlgorithmicMedia) with an "AI-generated content" watermark
+  burned into the pixels. Oscar's calls: deal the waterlily on his own knowledge of
+  his pond (his ID, his authority — recorded honestly in CREDITS.json as a synthetic
+  image, not cleared for commercial use), and hold the primula for a clean re-shoot.
+  A third photo matched neither plant (probably Phlox paniculata) — parked as a
+  question, no card invented.
+  The validator caught real data faults too: the waterlily's aspect was a light
+  level not a facing (would have silently shown "Any aspect"), and both had soil /
+  soilWarning 2-6x over the measured panel limits.
+  TWO BUGS FOUND AND FIXED IN MY OWN WORK: (1) the pretty-printer from the integrity
+  pass stopped emitting a trailing comma after the last card, so add-plant's
+  append-style insert butted two object literals together and timber.html stopped
+  parsing — the trailing comma is load-bearing and is now commented as such;
+  (2) nothing ever wrote plants.csv back after an insert, so it drifted every time —
+  both add tools now re-export it, which is only safe because export finally
+  round-trips the hold block.
+  NEW AUDIT RULE: the waterlily's height read "0.1–0.15m above water" — 133px of
+  vertical ink in a 61px rail patch, a 72px overrun straight across the baked HEIGHT
+  lettering. The layout audit passed it, because it had no rule for rail overflow
+  and .v is absolutely positioned so its own rect never grows (the overflow is only
+  visible by measuring the text with a Range). Added rule C2 rail-overflow, verified
+  by negative test: it reports the 72.5px overrun and passes on the shortened value.
+  Build r19. All 14 checks green.
 progress: 2026-08-09 — **integrity pass: nothing was lost, and the paths that
   could lose things are closed.** Oscar asked for the five risks from the r17
   review fixed properly, worried progress had already gone missing.
