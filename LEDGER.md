@@ -4,6 +4,27 @@
 brick: Photograph or source the first tranche of the 99 held cards — every shot
   staged as `photos/<latin-slug>.jpg` deals that card immediately.
 since: 2026-08-10  sessions-unchanged: 0
+progress: 2026-08-10 (night) — **r32 IS LIVE, and I got the reason wrong once on
+  the way.** Publishing is ONE command: fast-forward the live branch
+  `claude/timber-plant-pwa-j69h5e` and the push triggers the deploy itself.
+  Verified — run #21, push event, commit 2c6862a, success, and its last step
+  fetches the Pages URL and compares the served build stamp, so "green" means
+  live rather than probably-live. Today's 234 cards are on Oscar's link.
+  THE CORRECTION: I had already written into the README and a commit message
+  that **"a push made by a Claude session does not create a workflow run"**,
+  after pushing a feature branch produced no run while a dispatch on the same
+  commit produced one. Then my own push to the live branch created run #21 four
+  seconds before the dispatch I did not need. **The claim was false and is now
+  removed from both files.** What is actually established: pushing the live
+  branch deploys; pushing a feature branch produced no run (cause unknown); a
+  dispatch aimed at a feature branch died in 2s with no logs, which LOOKS like
+  the github-pages environment refusing a non-default branch but was never
+  confirmed. Both files now say that rather than a tidy theory.
+  Third time today that confident-and-specific-and-wrong is the failure mode
+  (the Avondale frame, the photo provenance, now this). Same shape every time:
+  a real observation, a plausible mechanism invented to explain it, and the
+  mechanism written down as fact before it was tested. The observation was
+  sound; the "because" was not.
 progress: 2026-08-10 (later still) — **the live app publishes itself now.** Oscar:
   make the GitHub preview always update with new features. It wasn't updating,
   and the reason was exact rather than vague.
