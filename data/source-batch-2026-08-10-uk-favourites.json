@@ -1,0 +1,457 @@
+{
+ "note": "Source record for the 50-plant UK-favourites batch, 2026-08-10. UNLIKE the earlier batch this data was NOT supplied by Oscar — it was written by Claude (claude-opus-5) from general horticultural knowledge, with no network access and no RHS lookup. Every rating, size band, hardiness value and hue is therefore an editorial estimate needing Oscar or a label to confirm. See VERIFY-QUEUE item 18. Fields kept here have no home in the card schema: foliage, container, hardinessNote, toxicity and the declared-uncertain list. Toxicity is folded into each card `resilience`.",
+ "supplied": "2026-08-10",
+ "origin": "claude-generated — NOT customer-verified",
+ "dealt": [],
+ "plants": {
+  "Prunus 'Kanzan'": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Often sold as Prunus serrulata 'Kanzan'; RHS accepts the name as Prunus 'Kanzan'.",
+    "Surface roots can lift paving and lawns — allow real distance from hard landscaping."
+   ]
+  },
+  "Prunus serrula": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Blossom is modest compared with ornamental cherries — this is bought for bark, and customers expecting a flowering cherry may be disappointed."
+   ]
+  },
+  "Crataegus laevigata 'Paul’s Scarlet'": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK, including exposed and coastal sites.",
+   "toxicity": "",
+   "uncertain": [
+    "The double flowers set little or no fruit, so it carries far fewer haws than the plain species — a point for wildlife-minded customers."
+   ]
+  },
+  "Laburnum × watereri 'Vossii'": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "All parts are poisonous if eaten and the seed pods are the most dangerous part. Advise against planting where young children play unsupervised.",
+   "uncertain": [
+    "'Vossii' sets far fewer seed pods than the species, which is why it is the form usually recommended — but it is not seedless and the toxicity warning still applies."
+   ]
+  },
+  "Acer palmatum 'Sango-kaku'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy, but exposure and drying wind cause more damage than cold does.",
+   "toxicity": "",
+   "uncertain": [
+    "Stem colour is strongest on young wood and fades on older branches, so it needs occasional renewal pruning to keep the winter effect."
+   ]
+  },
+  "Fagus sylvatica": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "The winter leaf retention that sells beech hedging is a juvenile trait — it holds on clipped hedges and young trees, not on mature standards."
+   ]
+  },
+  "Buxus sempervirens": {
+   "foliage": "evergreen",
+   "container": "yes",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "Harmful if eaten.",
+   "uncertain": [
+    "pestRisk 16 is deliberately high for a plant that is otherwise trouble-free: box tree moth is now widespread in England and blight is endemic. Customers should hear this before they buy a parterre's worth."
+   ]
+  },
+  "Prunus laurocerasus 'Rotundifolia'": {
+   "foliage": "evergreen",
+   "container": "no",
+   "hardinessNote": "Hardy through most of the UK; hard winters can scorch foliage in exposed sites.",
+   "toxicity": "Leaves and seeds contain cyanogenic compounds and are harmful if eaten. Do not shred clippings in an enclosed space.",
+   "uncertain": [
+    "Frequently planted as a quick screen and then resented for its size — the mature dimensions here are what it does if left, not what a clipped hedge holds at."
+   ]
+  },
+  "Ligustrum ovalifolium": {
+   "foliage": "semi-evergreen",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "Berries are harmful if eaten.",
+   "uncertain": [
+    "Semi-evergreen is honest: it holds most leaves in a mild winter and can strip in a hard one, which surprises customers sold it as evergreen."
+   ]
+  },
+  "Lonicera nitida 'Baggesen’s Gold'": {
+   "foliage": "evergreen",
+   "container": "yes",
+   "hardinessNote": "Hardy through most UK gardens.",
+   "toxicity": "",
+   "uncertain": [
+    "Sold hard as a box alternative because it is immune to box blight and box tree moth, but it needs far more clipping to hold a crisp edge."
+   ]
+  },
+  "Laurus nobilis": {
+   "foliage": "evergreen",
+   "container": "yes",
+   "hardinessNote": "Hardy in milder and sheltered UK gardens; cold drying wind does more damage than frost alone.",
+   "toxicity": "The leaf is the culinary bay used in cooking; it is removed before eating rather than chewed.",
+   "uncertain": [
+    "Bay sucker and scale are common on container-grown standards — the pestRisk here reflects clipped pot plants, not open-ground shrubs."
+   ]
+  },
+  "Forsythia × intermedia 'Lynwood Variety'": {
+   "foliage": "deciduous",
+   "container": "with care",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Pruning at the wrong time is the single most common reason a customer's forsythia stops flowering — it flowers on the previous year's wood."
+   ]
+  },
+  "Kerria japonica 'Pleniflora'": {
+   "foliage": "deciduous",
+   "container": "with care",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "The suckering habit is the main after-sale complaint; it is easily controlled but customers are rarely warned."
+   ]
+  },
+  "Magnolia stellata": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy; it is the early flowers that are frost-vulnerable, not the wood.",
+   "toxicity": "",
+   "uncertain": [
+    "The most reliably small magnolia and the usual recommendation for a small garden — but it is genuinely slow, so customers pay for size."
+   ]
+  },
+  "Viburnum opulus 'Roseum'": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "The flowers are sterile, so unlike the plain guelder rose it carries no berries — customers buying for wildlife should be told."
+   ]
+  },
+  "Viburnum davidii": {
+   "foliage": "evergreen",
+   "container": "yes",
+   "hardinessNote": "Hardy through most UK gardens.",
+   "toxicity": "Berries are ornamental and should not be eaten.",
+   "uncertain": [
+    "Plants are effectively dioecious: a lone specimen will not berry, and nurseries rarely sell them sexed. The blue berries are the main selling point, so this matters."
+   ]
+  },
+  "Mahonia × media 'Charity'": {
+   "foliage": "evergreen",
+   "container": "with care",
+   "hardinessNote": "Hardy through most UK gardens.",
+   "toxicity": "",
+   "uncertain": [
+    "Goes bare-legged with age; customers should know it is meant to be cut hard rather than replaced."
+   ]
+  },
+  "Hypericum 'Hidcote'": {
+   "foliage": "semi-evergreen",
+   "container": "yes",
+   "hardinessNote": "Hardy through most UK gardens; may lose leaves in a hard winter.",
+   "toxicity": "",
+   "uncertain": [
+    "'Hidcote' is sterile and sets no berries, unlike the berrying Hypericum inodorum types sold for cut stems."
+   ]
+  },
+  "Fuchsia 'Mrs Popple'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Among the toughest hardy fuchsias. In colder gardens it behaves as a herbaceous plant, dying to the ground and reshooting in late spring.",
+   "toxicity": "Fuchsia berries are edible though not usually eaten.",
+   "uncertain": [
+    "Late spring emergence causes customers to write it off as dead — the old top growth should be left on until growth shows."
+   ]
+  },
+  "Weigela florida 'Bristol Ruby'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": []
+  },
+  "Spiraea japonica 'Goldflame'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "The pink flowers clash with the orange young foliage — a well-known quibble, and some gardeners shear the buds off deliberately."
+   ]
+  },
+  "Hebe 'Red Edge'": {
+   "foliage": "evergreen",
+   "container": "yes",
+   "hardinessNote": "Hardy in milder and coastal gardens; cold inland winters on heavy soil are the risk.",
+   "toxicity": "",
+   "uncertain": [
+    "Hebe hardiness varies enormously across the genus; the small-leaved types like this are the tougher end, but H4 is a genuine ceiling."
+   ]
+  },
+  "Berberis darwinii": {
+   "foliage": "evergreen",
+   "container": "no",
+   "hardinessNote": "Hardy through most UK gardens.",
+   "toxicity": "Berries are not for eating.",
+   "uncertain": [
+    "It self-seeds freely via birds and is recorded as naturalised in parts of the UK and invasive in New Zealand — worth watching, though it carries no UK legal restriction."
+   ]
+  },
+  "Cornus sanguinea 'Midwinter Fire'": {
+   "foliage": "deciduous",
+   "container": "with care",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Sold on a photograph of a coppiced mass planting; a single unpruned plant never looks like the picture, and that is the commonest disappointment."
+   ]
+  },
+  "Pyracantha SAPHYR ORANGE ('Cadange')": {
+   "foliage": "evergreen",
+   "container": "with care",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "Berries are not for eating.",
+   "uncertain": [
+    "SAPHYR is a trade series bred for scab and fireblight resistance; 'Cadange' is the cultivar denomination. Resistance is not immunity."
+   ]
+  },
+  "Cotoneaster horizontalis": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "Berries are not for eating.",
+   "uncertain": [
+    "Naturalised widely in the UK and listed as a species of concern in some habitats; it carries no Schedule 9 restriction in England and Wales, but do not dump prunings in the countryside."
+   ]
+  },
+  "Rosa GERTRUDE JEKYLL ('Ausbord')": {
+   "foliage": "deciduous",
+   "container": "with care",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Frequently described as the most fragrant English rose, and it grows tall and lanky enough that many gardeners train it as a short climber."
+   ]
+  },
+  "Rosa ICEBERG ('Korbin')": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Also widely sold as a climbing sport and as a half-standard; the dimensions here are for the bush form."
+   ]
+  },
+  "Rosa 'New Dawn'": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Its tolerance of a shaded or north wall is the reason it is still recommended after a century, but it flowers less freely there than in sun."
+   ]
+  },
+  "Rosa rugosa": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Exceptionally hardy and the toughest rose in general cultivation.",
+   "toxicity": "Hips are edible and traditionally used for syrup; the irritant seed hairs are strained out.",
+   "uncertain": [
+    "Naturalised on UK coasts and treated as invasive in several European countries. No UK legal restriction, but it should not be planted next to dunes or semi-natural coast."
+   ]
+  },
+  "Lavandula angustifolia 'Hidcote'": {
+   "foliage": "evergreen",
+   "container": "yes",
+   "hardinessNote": "Hardy across the UK given sharp drainage; it is winter wet, not cold, that shortens its life.",
+   "toxicity": "",
+   "uncertain": [
+    "Skipping the annual August cut is the reason most lavenders go woody and split within five years — the plant does not recover from bare wood."
+   ]
+  },
+  "Salvia rosmarinus 'Miss Jessopp’s Upright'": {
+   "foliage": "evergreen",
+   "container": "yes",
+   "hardinessNote": "Hardy in well-drained and milder gardens; cold wet clay is the reliable way to lose one.",
+   "toxicity": "Culinary herb in normal kitchen quantities.",
+   "uncertain": [
+    "RHS now places rosemary in Salvia as Salvia rosmarinus; the entire trade still labels it Rosmarinus officinalis, so both names should be searchable."
+   ]
+  },
+  "Hydrangea anomala subsp. petiolaris": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Notoriously slow for the first two or three years before it takes off — customers commonly return it as a failure in year two."
+   ]
+  },
+  "Parthenocissus tricuspidata": {
+   "foliage": "deciduous",
+   "container": "no",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "Berries are not for eating.",
+   "uncertain": [
+    "Adhesive pads mark render and paintwork when pulled off — sound brick and stone are fine, but this is the commonest complaint."
+   ]
+  },
+  "Jasminum nudiflorum": {
+   "foliage": "deciduous",
+   "container": "with care",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Unlike summer jasmine it is scentless — customers expecting jasmine perfume are regularly caught out."
+   ]
+  },
+  "Clematis 'Jackmanii'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "Sap may irritate skin.",
+   "uncertain": [
+    "The original 1862 hybrid and still the most-planted clematis in Britain. Group 3 pruning makes it the easiest large-flowered type to get right."
+   ]
+  },
+  "Alchemilla mollis": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Exceptionally hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "The self-seeding is the one thing customers should be warned about; shearing before seed sets prevents it entirely."
+   ]
+  },
+  "Hosta 'Halcyon'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Exceptionally hardy; the crown is fully dormant in winter.",
+   "toxicity": "Harmful to dogs and cats if eaten.",
+   "uncertain": [
+    "The blue is a waxy bloom on the leaf surface, not a pigment — it rubs off and burns away in strong sun, which is why this needs shade to look like the label."
+   ]
+  },
+  "Heuchera micrantha 'Palace Purple'": {
+   "foliage": "evergreen",
+   "container": "yes",
+   "hardinessNote": "Exceptionally hardy and evergreen through UK winters.",
+   "toxicity": "",
+   "uncertain": [
+    "Seed-raised stock varies a lot in leaf colour, from good bronze-purple to disappointing green — vegetatively propagated plants are more reliable."
+   ]
+  },
+  "Astrantia major 'Roma'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Exceptionally hardy throughout the UK.",
+   "toxicity": "Sap may irritate skin.",
+   "uncertain": [
+    "'Roma' is sterile, which is why it flowers so long and does not self-seed like the plain species — a genuine selling point over seed-raised astrantias."
+   ]
+  },
+  "Astilbe × arendsii 'Fanal'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Exceptionally hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Astilbes fail in ordinary borders far more often than they fail in shade — the limiting factor is moisture, not light."
+   ]
+  },
+  "Lamprocapnos spectabilis": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Exceptionally hardy throughout the UK.",
+   "toxicity": "Harmful if eaten and the sap may irritate skin.",
+   "uncertain": [
+    "Formerly Dicentra spectabilis and still widely sold under that name. Summer dormancy leads customers to dig it up by accident — it should be labelled in the ground."
+   ]
+  },
+  "Brunnera macrophylla 'Jack Frost'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Exceptionally hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "Bought for the silver foliage, which is exactly the part that burns in sun — placement matters more than for most shade perennials."
+   ]
+  },
+  "Anemone × hybrida 'Honorine Jobert'": {
+   "foliage": "deciduous",
+   "container": "with care",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "Sap may irritate skin.",
+   "uncertain": [
+    "Takes a year or two to establish and then runs; the same plant gets described as sulky and as invasive depending on how long the gardener has had it."
+   ]
+  },
+  "Crocosmia 'Lucifer'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy throughout the UK; the tallest and hardiest of the common crocosmias.",
+   "toxicity": "",
+   "uncertain": [
+    "Not to be confused with the invasive montbretia (Crocosmia × crocosmiiflora) naturalised in the west — 'Lucifer' is a well-behaved garden hybrid."
+   ]
+  },
+  "Agapanthus 'Northern Star'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Among the hardiest agapanthus; deciduous types are far tougher than the evergreen ones.",
+   "toxicity": "Sap may irritate skin.",
+   "uncertain": [
+    "Deciduous vs evergreen is the single most useful thing to tell an agapanthus customer, and it is rarely on the label."
+   ]
+  },
+  "Verbena bonariensis": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Borderline in cold or wet gardens; it usually persists by self-seeding rather than by the original plant surviving.",
+   "toxicity": "",
+   "uncertain": [
+    "Frequently sold as a reliable perennial when it behaves more like a self-sowing biennial in much of Britain — worth saying honestly at the till."
+   ]
+  },
+  "Rudbeckia fulgida var. sullivantii 'Goldsturm'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Exceptionally hardy throughout the UK.",
+   "toxicity": "",
+   "uncertain": [
+    "The black seed cones are half the point — customers who cut it down in autumn lose the winter structure it is planted for."
+   ]
+  },
+  "Delphinium 'Black Knight'": {
+   "foliage": "deciduous",
+   "container": "with care",
+   "hardinessNote": "Very hardy throughout the UK; the plant survives cold easily, the spring shoots are what get eaten.",
+   "toxicity": "All parts are harmful if eaten.",
+   "uncertain": [
+    "Sold as a perennial but often behaves as a short-lived one; the Pacific Giant strains in particular are frequently treated as biennials."
+   ]
+  },
+  "Lupinus 'The Governor'": {
+   "foliage": "deciduous",
+   "container": "yes",
+   "hardinessNote": "Very hardy throughout the UK.",
+   "toxicity": "Seeds are harmful if eaten.",
+   "uncertain": [
+    "Russell lupins are typically good for three or four years before they decline; customers expecting a permanent plant should hear that."
+   ]
+  }
+ }
+}

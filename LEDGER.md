@@ -1,9 +1,40 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Photograph or source the first tranche of the 49 held cards — every shot
+brick: Photograph or source the first tranche of the 99 held cards — every shot
   staged as `photos/<latin-slug>.jpg` deals that card immediately.
 since: 2026-08-10  sessions-unchanged: 0
+progress: 2026-08-10 (later) — **second batch of 50: UK garden favourites. Hold
+  block 55 -> 105; the deck itself is unchanged at 134.** Oscar asked for a list
+  of 50 favourites; built it straight through the same pipeline rather than
+  leaving a list in chat.
+  **The thing to know about this batch is whose data it is.** The morning's 50
+  came from Oscar's RHS-style JSON and I condensed it. **This 50 I chose and
+  wrote myself**, with no network and no RHS page — so every rating, size band,
+  hardiness value and hue is an editorial estimate. Written up as VERIFY-QUEUE
+  item 18 in exactly those terms. Nothing is dealt, so none of it can reach a
+  customer before he has looked at it. `origin` in the source file records it as
+  claude-generated, not customer-verified.
+  CHOSEN TO FILL REAL HOLES, not to pad a count. Before this the deck had **no
+  rose at all** — no box, no beech, no privet, no Lavandula angustifolia, no
+  hosta, no heuchera, no delphinium, no lupin. 40 of the 50 are genera the deck
+  did not have; the other 10 are distinct species in genera it did (Prunus
+  'Kanzan' and serrula, Acer 'Sango-kaku', Magnolia stellata, Viburnum opulus
+  and davidii, Mahonia 'Charity', Cotoneaster horizontalis, Clematis 'Jackmanii',
+  Lonicera nitida). Zero duplicates, checked against all 189 existing entries.
+  DELIBERATELY EXCLUDED: bulbs. Galanthus, Narcissus, Allium and Cyclamen are
+  unarguably favourites, but the card's prune / container / H×W fields fit them
+  badly and that is a schema decision for Oscar, not one to make silently.
+  **plant-sense earned its keep on new data.** It caught two of my own cards
+  contradicting themselves: Pyracantha's `visual` led with spring flowers against
+  a Sep-Jan peak (berries are what it is bought for — prose reordered, peak was
+  right), and Astilbe 'Fanal' read as drought-tolerant at thirst 18/20 because
+  `soilWarning` said "Dry soil crisps it within days" — a phrase that means the
+  opposite of what it pattern-matches to. Reworded. That second one matters: a
+  regex misread it, and a member of staff skimming the card would too.
+  0 validator errors across all 50; the 41 remaining warnings are the
+  0-5-vs-0-20 scale heuristic on genuinely low ratings.
+  Build r32. Full gate 14/14. csv 239 rows (134 dealt + 105 held).
 progress: 2026-08-10 — **reverse build: 50 cards created from data, 1 dealt, 49
   held. Deck 133 -> 134.** Oscar supplied a 50-plant RHS-style JSON and asked for
   the cards built first, photos to follow — with the standing rule that an empty

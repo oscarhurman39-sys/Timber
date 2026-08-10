@@ -333,6 +333,52 @@ plant you are allowed to sell. Two things to confirm: that the listing is curren
 and that you are happy selling it with the containment advice attached.
 Scotland and Northern Ireland list differently; the card names England and Wales.
 
+### 18. The UK-favourites batch of 50 is MY data, not yours — read this one
+Added 2026-08-10. **This is the important difference between the two batches
+added that day.** The first 50 came from your RHS-style JSON; I condensed it to
+fit the card. **This second 50 I chose and wrote myself**, from general
+horticultural knowledge, with no network access and no RHS page in front of me.
+
+That means every one of these is an estimate until you or a label says otherwise:
+
+- **`growthSpeed` / `pestRisk` / `thirst` / `careLevel`** — all 0-20 editorial calls
+- **`sunNeed` / `sunMin`** — and therefore the derived `aspect` too (item 15's rule)
+- **`hardiness`** — H-bands from memory, not from a checked source
+- **`height` / `spread`** — banded estimates
+- **`hue`** — flower or foliage colour, following protocol v12.4 (white = 150)
+
+The prose is the part I would defend hardest and the numbers are the part I would
+check first. **Nothing here is dealt** — all 50 are held with no photograph, so
+none of it can reach a customer before you have looked at it. Committed at
+`data/source-batch-2026-08-10-uk-favourites.json` with `origin` recorded as
+claude-generated.
+
+**Why these 50:** they fill genuine holes. Before this batch the deck had **no
+rose at all**, no box, no beech, no privet, no lavandula angustifolia, no hosta,
+no heuchera, no delphinium, no lupin and no clematis you could actually prune by
+a rule. 40 of the 50 are genera the deck did not have.
+
+**Deliberately left out — say the word if you want them:** bulbs. Galanthus,
+Narcissus, Tulipa, Allium and Cyclamen are unarguably UK favourites, but they are
+a different product category and the card's `prune`, `container` and H×W fields
+fit them awkwardly. That is a schema decision, not an oversight, and it is yours
+to make.
+
+### 19. Two cards in that batch contradicted themselves — and plant-sense caught it
+Worth recording because it is the tool working on new data rather than on a
+historic import. `tools/plant-sense.js` flagged two of my own 50:
+
+- **Pyracantha SAPHYR ORANGE** — `visual` led with "white spring flowers" while
+  `peak` is Sep-Jan. The berries are what the plant is bought for, so the visual
+  now leads with them and the flowering is noted as "earlier". The peak was right;
+  the prose was pointing at the wrong season.
+- **Astilbe 'Fanal'** — flagged as claiming drought tolerance at thirst 18/20.
+  The trigger was `soilWarning: "Dry soil crisps it within days"`, which matched
+  the tool's drought-tolerant pattern while meaning the exact opposite. Reworded
+  to "Crisps within days without water". **The tool was right to stop on it** —
+  a phrase that reads as drought-tolerant to a regex will read that way to a
+  skim-reading member of staff too.
+
 ---
 
 ## Accepted, not defects
