@@ -4,6 +4,44 @@
 brick: Photograph or source the first tranche of the 99 held cards — every shot
   staged as `photos/<latin-slug>.jpg` deals that card immediately.
 since: 2026-08-10  sessions-unchanged: 0
+progress: 2026-08-10 (night, later) — **Oscar checked the 50 and corrected 26 of
+  them. Two were legal facts I had backwards.** Sent him a published worksheet
+  laying the batch out for verification — prose quiet, my invented numbers on
+  parchment strips — and he came back the same evening with a correction list.
+  All 26 applied; deck still 134 dealt / 105 held, 239 total, no duplicates.
+  **THE TWO THAT MATTER: I asserted a reassuring legal negative twice and was
+  wrong twice.** *Cotoneaster horizontalis* — I wrote "carries no Schedule 9
+  restriction in England and Wales". *Rosa rugosa* — I wrote "No UK legal
+  restriction". **Both ARE on Schedule 9.** They are now compliance cards on the
+  Gunnera pattern, both stating what Schedule 9 actually means: not a sale ban,
+  an offence to plant or cause to grow in the wild. Deck now carries SEVEN
+  compliance cards. The lesson is narrower than "check the law" — nobody asked
+  me whether these were restricted. I volunteered the negative. A card silent on
+  legal status is honest; a card that says "no restriction" is a claim needing a
+  source, and I had none.
+  TEN ACCEPTED NAMES CHANGED, which matters because the photo filename derives
+  from `latin` — every one changed which file its card is waiting for. Nothing
+  had to be moved on disk, because all 50 are held with no photograph. That is
+  the reverse build paying for itself: a name correction that would have meant
+  renaming files and rewriting CREDITS entries cost nothing at all. Superseded
+  names all kept in `cvs` as `syn.` so old-name searches still land.
+  ONE RENAME REFUSED, on his instruction: *Hebe* 'Red Edge' stays *Hebe*, because
+  current RHS material uses both *Hebe* and *Veronica* treatments and a
+  destructive rename trades one right answer for another. Synonyms recorded.
+  SIZES: the deck means ULTIMATE size and several of mine were maintained size —
+  Box 1.5-2.5m -> 4-8m, Bay 4-8m -> 8-12m, Privet 2.5-4m -> 4-8m. Clipped
+  subjects invite exactly that error.
+  HARDINESS moved on seven cards and my bands were optimistic more often than
+  not (five downward, two up) — a bias worth remembering for any other
+  Claude-estimated card.
+  Six values he restated were already correct; the patch tool reported them as
+  confirmations rather than treating a no-op as an applied fix.
+  Build r33 — NOT r30. Rebuilding the rows meant restoring timber.html from the
+  batch-1 commit, which carried r29 and would have deployed r30 over a live r32:
+  a lower number on newer content, breaking the one signal that tells a phone
+  which version it has. Bumped past the high-water mark instead.
+  Still open on these 50: the four 0-20 ratings and the sun/aspect figures. His
+  pass did not cover them.
 progress: 2026-08-10 (night) — **r32 IS LIVE, and I got the reason wrong once on
   the way.** Publishing is ONE command: fast-forward the live branch
   `claude/timber-plant-pwa-j69h5e` and the push triggers the deploy itself.

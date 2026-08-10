@@ -379,6 +379,68 @@ historic import. `tools/plant-sense.js` flagged two of my own 50:
   a phrase that reads as drought-tolerant to a regex will read that way to a
   skim-reading member of staff too.
 
+### 20. Oscar checked the UK-favourites 50 — 26 amended, and I had two legal facts backwards
+2026-08-10, the same day they were added. He worked from the published worksheet
+and came back with corrections to 26 of the 50. All applied. **Item 18 is now
+partly closed:** the names, sizes and hardiness bands below have been through him.
+The 0-20 ratings and sun values were *not* part of his pass and remain estimates.
+
+**The two that matter most — I asserted a negative legal fact twice, and was wrong
+both times.**
+
+- **Wall Cotoneaster** (*Cotoneaster horizontalis*) — I wrote "carries no
+  Schedule 9 restriction in England and Wales". **It is listed on Schedule 9.**
+- **Japanese Rose** (*Rosa rugosa*) — I wrote "No UK legal restriction". **It is
+  listed on Schedule 9.**
+
+Both are now compliance cards on the Gunnera pattern, and both say what Schedule 9
+actually means: **not a sale ban** — an offence to plant or cause to grow in the
+wild. That takes the deck to **seven compliance cards**. The lesson is narrower
+than "check the law": I volunteered a *reassuring* legal negative that nobody
+asked for. A card that says nothing about legal status is honest; a card that says
+"no restriction" is a claim, and it needs a source.
+
+**Ten accepted names changed.** These matter beyond tidiness because the photo
+filename is derived from `latin`, so every one of these changed which file the
+card is waiting for. Nothing had to be moved on disk — all 50 are held with no
+photograph, which is the one advantage of the reverse build:
+
+| was | now |
+|---|---|
+| *Lonicera nitida* 'Baggesen's Gold' | *Lonicera ligustrina* var. *yunnanensis* 'Baggesen's Gold' |
+| *Hypericum* 'Hidcote' | *Hypericum* × *hidcoteense* 'Hidcote' |
+| *Weigela florida* 'Bristol Ruby' | *Weigela* 'Bristol Ruby' |
+| *Hydrangea anomala* subsp. *petiolaris* | *Hydrangea petiolaris* |
+| *Hosta* 'Halcyon' | *Hosta* × *tardiana* 'Halcyon' |
+| *Heuchera micrantha* 'Palace Purple' | *Heuchera villosa* 'Palace Purple' |
+| *Astrantia major* 'Roma' | *Astrantia* 'Roma' |
+| *Astilbe* × *arendsii* 'Fanal' | *Astilbe* 'Fanal' |
+| *Delphinium* 'Black Knight' | *Delphinium* Black Knight Group |
+| *Lupinus* 'The Governor' | *Lupinus* 'The Governor' (Band of Nobles Series) |
+
+Every superseded name is kept in `cvs` as a `syn.`, so a search for the old name
+still finds the card — the same treatment Gunnera and Knotweed already get.
+
+**One rename deliberately NOT made.** *Hebe* 'Red Edge' stays *Hebe*. Oscar's
+instruction: current RHS material itself uses both *Hebe* and *Veronica*
+treatments, so a destructive rename would trade one right answer for another.
+*Hebe albicans* 'Red Edge' and *Veronica* 'Red Edge' are recorded as synonyms.
+
+**Sizes: the deck means ULTIMATE size, and several of mine were maintained size.**
+Box 1.5-2.5m → 4-8m, Bay 4-8m → 8-12m, Privet 2.5-4m → 4-8m. Worth stating as a
+rule, because clipped subjects invite the mistake: the card describes what the
+plant becomes if left, not what a hedge is held at. Six values I had were
+confirmed unchanged.
+
+**Hardiness moved on seven cards**, all downward except Cotoneaster and 'New Dawn':
+Privet H6→H4, Kerria H6→H5, Climbing hydrangea H6→H5, Brunnera H7→H6, Crocosmia
+H6→H5, Delphinium H6→H5, Lupin H6→H5; Cotoneaster H6→H7, 'New Dawn' H6→H7. My
+H-bands were optimistic more often than not — a bias worth remembering if any
+other Claude-estimated card is ever checked.
+
+**Still open on these 50:** the four 0-20 ratings and the sun/aspect figures. Those
+are the numbers item 18 flagged and this pass did not cover.
+
 ---
 
 ## Accepted, not defects

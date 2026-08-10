@@ -1,7 +1,7 @@
 {
- "note": "Source record for the 50-plant UK-favourites batch, 2026-08-10. UNLIKE the earlier batch this data was NOT supplied by Oscar — it was written by Claude (claude-opus-5) from general horticultural knowledge, with no network access and no RHS lookup. Every rating, size band, hardiness value and hue is therefore an editorial estimate needing Oscar or a label to confirm. See VERIFY-QUEUE item 18. Fields kept here have no home in the card schema: foliage, container, hardinessNote, toxicity and the declared-uncertain list. Toxicity is folded into each card `resilience`.",
+ "note": "Source record for the 50-plant UK-favourites batch, 2026-08-10. Written by Claude (claude-opus-5) from general horticultural knowledge with no network access and no RHS lookup, then CORRECTED BY OSCAR on 2026-08-10 against his own sources — 26 plants amended, including 10 accepted-name changes and two Schedule 9 listings Claude had wrongly recorded as unrestricted. Values not touched by that pass remain Claude estimates. See VERIFY-QUEUE items 18-20. Fields kept here have no home in the card schema: foliage, container, hardinessNote, toxicity and the declared-uncertain list. Toxicity is folded into each card `resilience`; compliance rides `type` + `returnRisk`.",
  "supplied": "2026-08-10",
- "origin": "claude-generated — NOT customer-verified",
+ "origin": "claude-generated, Oscar-corrected 2026-08-10",
  "dealt": [],
  "plants": {
   "Prunus 'Kanzan'": {
@@ -86,7 +86,7 @@
     "Semi-evergreen is honest: it holds most leaves in a mild winter and can strip in a hard one, which surprises customers sold it as evergreen."
    ]
   },
-  "Lonicera nitida 'Baggesen’s Gold'": {
+  "Lonicera ligustrina var. yunnanensis 'Baggesen’s Gold'": {
    "foliage": "evergreen",
    "container": "yes",
    "hardinessNote": "Hardy through most UK gardens.",
@@ -158,7 +158,7 @@
     "Goes bare-legged with age; customers should know it is meant to be cut hard rather than replaced."
    ]
   },
-  "Hypericum 'Hidcote'": {
+  "Hypericum × hidcoteense 'Hidcote'": {
    "foliage": "semi-evergreen",
    "container": "yes",
    "hardinessNote": "Hardy through most UK gardens; may lose leaves in a hard winter.",
@@ -176,7 +176,7 @@
     "Late spring emergence causes customers to write it off as dead — the old top growth should be left on until growth shows."
    ]
   },
-  "Weigela florida 'Bristol Ruby'": {
+  "Weigela 'Bristol Ruby'": {
    "foliage": "deciduous",
    "container": "yes",
    "hardinessNote": "Very hardy throughout the UK.",
@@ -234,7 +234,7 @@
    "hardinessNote": "Very hardy throughout the UK.",
    "toxicity": "Berries are not for eating.",
    "uncertain": [
-    "Naturalised widely in the UK and listed as a species of concern in some habitats; it carries no Schedule 9 restriction in England and Wales, but do not dump prunings in the countryside."
+    "Listed on Schedule 9 of the Wildlife and Countryside Act 1981. Sale is not banned; planting or causing it to grow in the wild is an offence. An earlier draft of this card wrongly stated it carried no Schedule 9 restriction — corrected by Oscar, 2026-08-10."
    ]
   },
   "Rosa GERTRUDE JEKYLL ('Ausbord')": {
@@ -243,7 +243,8 @@
    "hardinessNote": "Very hardy throughout the UK.",
    "toxicity": "",
    "uncertain": [
-    "Frequently described as the most fragrant English rose, and it grows tall and lanky enough that many gardeners train it as a short climber."
+    "Dimensions are for the SHRUB form. It is also sold trained as a short climber, which is a separate card, not a size range on this one.",
+    "Frequently described as the most fragrant English rose."
    ]
   },
   "Rosa ICEBERG ('Korbin')": {
@@ -270,7 +271,7 @@
    "hardinessNote": "Exceptionally hardy and the toughest rose in general cultivation.",
    "toxicity": "Hips are edible and traditionally used for syrup; the irritant seed hairs are strained out.",
    "uncertain": [
-    "Naturalised on UK coasts and treated as invasive in several European countries. No UK legal restriction, but it should not be planted next to dunes or semi-natural coast."
+    "Listed on Schedule 9 of the Wildlife and Countryside Act 1981. Sale is not banned; planting or causing it to grow in the wild is an offence, and the coastal habitats it escapes into are exactly where it is most often planted. An earlier draft of this card wrongly stated it carried no UK legal restriction — corrected by Oscar, 2026-08-10."
    ]
   },
   "Lavandula angustifolia 'Hidcote'": {
@@ -291,11 +292,11 @@
     "RHS now places rosemary in Salvia as Salvia rosmarinus; the entire trade still labels it Rosmarinus officinalis, so both names should be searchable."
    ]
   },
-  "Hydrangea anomala subsp. petiolaris": {
+  "Hydrangea petiolaris": {
    "foliage": "deciduous",
    "container": "no",
    "hardinessNote": "Very hardy throughout the UK.",
-   "toxicity": "",
+   "toxicity": "Skin allergen; sap or handling may irritate sensitive skin. Harmful to dogs and cats if eaten.",
    "uncertain": [
     "Notoriously slow for the first two or three years before it takes off — customers commonly return it as a failure in year two."
    ]
@@ -336,7 +337,7 @@
     "The self-seeding is the one thing customers should be warned about; shearing before seed sets prevents it entirely."
    ]
   },
-  "Hosta 'Halcyon'": {
+  "Hosta × tardiana 'Halcyon'": {
    "foliage": "deciduous",
    "container": "yes",
    "hardinessNote": "Exceptionally hardy; the crown is fully dormant in winter.",
@@ -345,7 +346,7 @@
     "The blue is a waxy bloom on the leaf surface, not a pigment — it rubs off and burns away in strong sun, which is why this needs shade to look like the label."
    ]
   },
-  "Heuchera micrantha 'Palace Purple'": {
+  "Heuchera villosa 'Palace Purple'": {
    "foliage": "evergreen",
    "container": "yes",
    "hardinessNote": "Exceptionally hardy and evergreen through UK winters.",
@@ -354,7 +355,7 @@
     "Seed-raised stock varies a lot in leaf colour, from good bronze-purple to disappointing green — vegetatively propagated plants are more reliable."
    ]
   },
-  "Astrantia major 'Roma'": {
+  "Astrantia 'Roma'": {
    "foliage": "deciduous",
    "container": "yes",
    "hardinessNote": "Exceptionally hardy throughout the UK.",
@@ -363,7 +364,7 @@
     "'Roma' is sterile, which is why it flowers so long and does not self-seed like the plain species — a genuine selling point over seed-raised astrantias."
    ]
   },
-  "Astilbe × arendsii 'Fanal'": {
+  "Astilbe 'Fanal'": {
    "foliage": "deciduous",
    "container": "yes",
    "hardinessNote": "Exceptionally hardy throughout the UK.",
@@ -435,7 +436,7 @@
     "The black seed cones are half the point — customers who cut it down in autumn lose the winter structure it is planted for."
    ]
   },
-  "Delphinium 'Black Knight'": {
+  "Delphinium Black Knight Group": {
    "foliage": "deciduous",
    "container": "with care",
    "hardinessNote": "Very hardy throughout the UK; the plant survives cold easily, the spring shoots are what get eaten.",
@@ -444,7 +445,7 @@
     "Sold as a perennial but often behaves as a short-lived one; the Pacific Giant strains in particular are frequently treated as biennials."
    ]
   },
-  "Lupinus 'The Governor'": {
+  "Lupinus 'The Governor' (Band of Nobles Series)": {
    "foliage": "deciduous",
    "container": "yes",
    "hardinessNote": "Very hardy throughout the UK.",
