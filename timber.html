@@ -171,20 +171,26 @@
   /* undo is the only action with no swipe equivalent — dim it when there is nothing
      to undo so the row reads as live state rather than three permanent decorations */
   .fab.back-btn[disabled]{opacity:.3;cursor:default;box-shadow:none}
-  /* hold-to-reset: a 2s press on undo rebuilds the whole deck. Undo is one card and
-     reset is all of them, so the gesture has to be unmistakably deliberate AND
-     visibly abortable — the fill is the only thing telling you the hold registered
-     and that letting go now costs nothing. No fill, and a 2s press reads as a dead
-     button right up until it wipes your progress. */
-  .fab.back-btn{position:relative;overflow:hidden;
-    -webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
-  .fab.back-btn::after{content:"";position:absolute;inset:0;pointer-events:none;
-    transform:scaleY(0);transform-origin:bottom;
-    background:linear-gradient(180deg,rgba(245,196,81,.22),rgba(245,196,81,.62))}
-  /* the transition lives on .holding only, so releasing early snaps the fill back to
-     empty instead of draining over 2s and reading as "still counting" */
-  .fab.back-btn.holding::after{transform:scaleY(1);transition:transform 2s linear}
-  .fab.back-btn.holding{color:var(--gold);border-color:rgba(245,196,81,.5)}
+  /* hold-to-rewind: keep pressing undo and the deck runs backwards, accelerating,
+     until you let go or it reaches the top. Deliberately NOT a hold-to-commit
+     threshold — there is nothing to confirm, because every frame of the gesture is
+     a state you could have reached by tapping, and letting go simply stops. That is
+     what makes it safe to scrub: you can go back three cards or three hundred with
+     the same gesture and never overshoot into something you can't tap your way out of.
+     The spin is the readout — anticlockwise, at the speed the deck is running. */
+  .fab.back-btn{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+  .fab.back-btn .rw{display:block;line-height:1}
+  .fab.back-btn.rewinding{color:var(--gold);border-color:rgba(245,196,81,.5)}
+  .fab.back-btn.rewinding .rw{animation:rw-spin .45s linear infinite}
+  @keyframes rw-spin{to{transform:rotate(-360deg)}}
+  /* The card fly-in and the spin are NEW motion, not part of the card animations the
+     block at the top of this file deliberately locks. A rewind at full tilt is ~25
+     cards a second flying across the screen, which is exactly the kind of thing
+     reduced-motion is asking us not to do — so the cards cut straight to place and
+     the glyph holds still. The rewind itself still works. */
+  @media (prefers-reduced-motion:reduce){
+    .fab.back-btn.rewinding .rw{animation:none}
+  }
   .fab.learn{flex:1.25 1 0;font-size:11px;color:#1a120a;border-color:rgba(245,196,81,.6);
     background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 5px 14px rgba(245,196,81,.28)}
 
@@ -672,7 +678,7 @@
 
 <div class="actions" id="actions">
   <button class="fab skip"  id="skip"  title="Skip (←)" aria-keyshortcuts="ArrowLeft" aria-label="Skip this plant"><span class="g" aria-hidden="true">✕</span>Skip</button>
-  <button class="fab back-btn" id="back" title="Undo (Backspace) · hold 2s to reset the deck" aria-keyshortcuts="Backspace" aria-label="Undo last swipe. Press and hold for two seconds to reset the whole deck." disabled>↺</button>
+  <button class="fab back-btn" id="back" title="Undo (Backspace) · hold to rewind the deck" aria-keyshortcuts="Backspace" aria-label="Undo last swipe. Press and hold to rewind back through the deck." disabled><span class="rw" aria-hidden="true">↺</span></button>
   <button class="fab learn" id="learn" title="I've learned this (→)" aria-keyshortcuts="ArrowRight" aria-label="Mark as learned"><span class="g" aria-hidden="true">★</span>Learned</button>
 </div>
 
@@ -6020,7 +6026,32 @@ function fling(card,dir,learned){
   else if(activeFilter&&!order.length)clearFilter(); /* filtered deck exhausted — same */
 }
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
-function undo(){const last=history.pop();if(!last)return;order.push(last.idx);if(last.learned)learnedCount=Math.max(0,learnedCount-1);renderCard(last.idx);markHot();updateCounts();refreshEmpty();saveProgress();}
+const REDUCED_MOTION=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* A card comes back the way it left — same offset, same tilt, reversed. fling()'s
+   end state is this function's start state, so an undo reads as the swipe running
+   backwards rather than a card appearing from nowhere. ms is passed down because a
+   rewind at full tilt has to land a card before the next one arrives; see rewindTick. */
+function flyIn(card,dir,learned,ms){
+  if(REDUCED_MOTION)return;                    /* cut straight to place */
+  card.style.transition='none';
+  card.style.transform=`translate(${dir*140}%,${learned?-40:60}px) rotate(${dir*24}deg)`;
+  card.style.opacity='0';
+  void card.offsetWidth;                       /* commit the start frame before animating off it */
+  card.style.transition=`transform ${ms}ms cubic-bezier(.2,.8,.2,1),opacity ${ms}ms`;
+  card.style.transform='';card.style.opacity='';
+  setTimeout(()=>{card.style.transition='';},ms+40);   /* hand the card back to the stylesheet */
+}
+function undo(ms){
+  const last=history.pop();if(!last)return false;
+  order.push(last.idx);
+  if(last.learned)learnedCount=Math.max(0,learnedCount-1);
+  renderCard(last.idx);
+  markHot();                                   /* before the fly-in: a 'deep' card paints nothing */
+  const c=topCard();
+  if(c)flyIn(c,last.learned?1:-1,last.learned,ms||240);
+  updateCounts();refreshEmpty();saveProgress();
+  return true;
+}
 function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
   backBtn.disabled=history.length===0;
   document.getElementById('learnBar').style.width=(PLANTS.length?learnedCount/PLANTS.length*100:0)+'%';}
@@ -6028,37 +6059,48 @@ function refreshEmpty(){const done=order.length===0;empty.classList.toggle('show
 
 document.getElementById('learn').onclick=()=>act(true);
 document.getElementById('skip').onclick=()=>act(false);
-/* ---------- hold-to-reset: 2s press on undo rebuilds the whole deck ----------
-   The same button carries both actions because they are the same intent at two
-   scales — take it back. Tap undoes one card; hold long enough and it takes the
-   whole session back. Release before the fill completes and nothing happens at
-   all, which is what makes it safe to put a destructive action on a button people
-   tap constantly. */
-const HOLD_MS=2000;
-let holdTimer=null,holdFired=false;
-function cancelHold(){if(holdTimer){clearTimeout(holdTimer);holdTimer=null;}backBtn.classList.remove('holding');}
+/* ---------- hold-to-rewind ----------
+   Tap undoes one card; hold and the deck keeps running backwards, accelerating,
+   until you let go or it reaches the top. One gesture covers "I meant the last
+   one" and "take me back to the start", with every intermediate stop available —
+   which is the point. Somebody holding it is usually trying to get back to a
+   particular card, not to reset, so the first second is deliberately slow and
+   countable and only then does it wind up.
+
+   REWIND_DELAY is what keeps a tap a tap. Below it nothing repeats, so a press
+   and a click do the same single undo and the button has no dead zone. */
+const REWIND_DELAY=340;                      /* press shorter than this = one undo */
+const REWIND_FROM=190,REWIND_TO=40,REWIND_DECAY=.82;   /* ~10 cards in the first second, ~25/s after */
+let rwTimer=null,rwStep=0,rwDidRewind=false;
+function stopRewind(){
+  if(rwTimer){clearTimeout(rwTimer);rwTimer=null;}
+  backBtn.classList.remove('rewinding');
+}
+function rewindTick(){
+  const gap=Math.max(REWIND_TO,REWIND_FROM*Math.pow(REWIND_DECAY,rwStep));
+  /* the fly-in has to finish before the next card lands, or cards stack up mid-air
+     and markHot()'s three-hot budget starts dropping layers out from under them */
+  if(!undo(Math.min(300,Math.max(90,Math.round(gap*2.4))))){stopRewind();return;}  /* hit the top */
+  rwDidRewind=true;rwStep++;
+  rwTimer=setTimeout(rewindTick,gap);
+}
 backBtn.addEventListener('pointerdown',e=>{
   if(backBtn.disabled)return;
   if(e.pointerType==='mouse'&&e.button!==0)return;   /* right/middle click must not arm it */
   /* touch pointerdown implicitly captures to the button, which suppresses pointerleave
-     and would leave a touch hold with no way to abort but waiting it out. Hand the
-     pointer back so sliding a finger off cancels the way it does with a mouse. */
+     and would leave a touch hold with no way out but lifting off. Hand the pointer
+     back so sliding a finger off stops the rewind the way it does with a mouse. */
   if(backBtn.hasPointerCapture&&backBtn.hasPointerCapture(e.pointerId))backBtn.releasePointerCapture(e.pointerId);
-  cancelHold();
-  holdFired=false;   /* also clears a flag left set by a hold whose click never arrived */
-  backBtn.classList.add('holding');
-  holdTimer=setTimeout(()=>{
-    holdTimer=null;holdFired=true;backBtn.classList.remove('holding');
-    if(navigator.vibrate)navigator.vibrate(30);   /* the deck rebuilds under your finger — say so */
-    buildDeck();
-  },HOLD_MS);
+  stopRewind();
+  rwDidRewind=false;rwStep=0;   /* also clears a flag left set by a rewind whose click never arrived */
+  rwTimer=setTimeout(()=>{backBtn.classList.add('rewinding');rewindTick();},REWIND_DELAY);
 });
-/* pointerleave is the escape hatch: slide off the button mid-hold and it aborts */
-['pointerup','pointercancel','pointerleave'].forEach(t=>backBtn.addEventListener(t,cancelHold));
+/* pointerleave is the escape hatch: slide off the button mid-rewind and it stops */
+['pointerup','pointercancel','pointerleave'].forEach(t=>backBtn.addEventListener(t,stopRewind));
 backBtn.addEventListener('contextmenu',e=>e.preventDefault());  /* long-press callout on touch */
-/* the hold's own pointerup still fires a click — swallow that one so a reset isn't
-   immediately followed by an undo of a history the reset just cleared */
-backBtn.onclick=()=>{if(holdFired){holdFired=false;return;}undo();};
+/* the rewind's own pointerup still fires a click — swallow that one so a rewind
+   isn't followed by one extra card nobody asked for */
+backBtn.onclick=()=>{if(rwDidRewind){rwDidRewind=false;return;}undo();};
 document.getElementById('reset2').onclick=buildDeck;
 document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
 
@@ -6074,7 +6116,9 @@ document.addEventListener('keydown',e=>{
   if(overlayOpen())return;
   if(e.key==='ArrowRight')act(true);
   else if(e.key==='ArrowLeft')act(false);
-  else if(e.key==='Backspace')undo();
+  /* held Backspace repeats at the OS rate — shorten the fly-in to match, or cards
+     pile up mid-air past markHot()'s three-hot budget */
+  else if(e.key==='Backspace')undo(e.repeat?100:240);
   else return;
   e.preventDefault();   /* Backspace would otherwise trigger browser back-navigation */
 });
