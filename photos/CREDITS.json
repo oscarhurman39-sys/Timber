@@ -1121,6 +1121,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "malus-john-downie.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "miscanthus-sinensis-morning-light.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1409,6 +1419,16 @@
    "sourceUrl": null,
    "commit": "12ed832",
    "commitSubject": "Add Portuguese Laurel (Prunus lusitanica 'Angustifolia')",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "quercus-robur.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
