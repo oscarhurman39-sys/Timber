@@ -1,5 +1,10 @@
 # Plant wishlist — 50 curated additions
 
+> Readable version, phone-friendly, with the commercial gotchas as scannable chips:
+> **https://claude.ai/code/artifact/c6503139-805d-41c2-9ced-6d24279ab492**
+> Source is `docs/wishlist.html` — edit that and republish to the same URL rather
+> than creating a second page.
+
 Fifty plants that aren't in the deck's 135 and that belong in a UK garden-centre
 learning deck. Mix of genuine best-sellers, plants everyone should be able to
 name, and a few that make people stop and ask.

@@ -1,0 +1,621 @@
+<title>Timber — 50 plants to add</title>
+<style>
+  /* ---- tokens: complete light palette on bare :root ---- */
+  :root{
+    --paper:#F2F4F0;         /* recycled label card, green-biased */
+    --surface:#FBFCFA;
+    --ink:#16211B;           /* green-black */
+    --ink-2:#3A473F;
+    --slate:#5F6B64;         /* neutral biased toward the moss */
+    --rule:#D3DAD3;
+    --moss:#3E6B4A;
+    --brass:#8F7316;         /* label brass, legible on paper */
+    --brass-soft:#F0E8C8;
+    --chip:#E7ECE6;
+    --warn:#8A4A22;
+    --warn-soft:#F6E7DC;
+
+    --f-disp:Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
+    --f-body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#0E1512; --surface:#161F1A; --ink:#E7EDE6; --ink-2:#B6C2B8;
+      --slate:#8B978F; --rule:#26332C; --moss:#7FBF92; --brass:#E3C463;
+      --brass-soft:#2C2712; --chip:#1E2A23; --warn:#E0A075; --warn-soft:#2E1D13;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E1512; --surface:#161F1A; --ink:#E7EDE6; --ink-2:#B6C2B8;
+    --slate:#8B978F; --rule:#26332C; --moss:#7FBF92; --brass:#E3C463;
+    --brass-soft:#2C2712; --chip:#1E2A23; --warn:#E0A075; --warn-soft:#2E1D13;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--f-body);font-size:16px;line-height:1.55;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:46rem;margin:0 auto;padding:2rem 1.15rem 5rem}
+
+  /* ---- masthead ---- */
+  header{border-bottom:2px solid var(--ink);padding-bottom:1.1rem;margin-bottom:.4rem}
+  .eyebrow{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--slate);margin:0 0 .5rem}
+  h1{font-family:var(--f-disp);font-weight:400;font-size:clamp(1.9rem,7vw,2.7rem);
+    line-height:1.1;margin:0;text-wrap:balance}
+  h1 em{font-style:italic;color:var(--moss)}
+  .standfirst{margin:.7rem 0 0;color:var(--ink-2);max-width:34rem}
+
+  /* ---- count strip ---- */
+  .stats{display:flex;flex-wrap:wrap;gap:0;margin:1.1rem 0 0;
+    border:1px solid var(--rule);border-radius:2px;overflow:hidden;background:var(--surface)}
+  .stat{flex:1 1 7rem;padding:.6rem .75rem;border-right:1px solid var(--rule)}
+  .stat:last-child{border-right:0}
+  .stat b{display:block;font-family:var(--f-mono);font-size:1.15rem;
+    font-variant-numeric:tabular-nums;color:var(--moss)}
+  .stat span{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--slate)}
+
+  .note{margin:1.4rem 0 0;padding:.8rem .9rem;background:var(--warn-soft);
+    border-left:3px solid var(--warn);border-radius:0 2px 2px 0;font-size:.9rem;color:var(--ink)}
+  .note b{color:var(--warn)}
+
+  /* ---- sections ---- */
+  section{margin-top:2.6rem}
+  .shead{display:flex;align-items:baseline;gap:.7rem;
+    border-bottom:1px solid var(--ink);padding-bottom:.35rem;margin-bottom:.2rem}
+  .shead h2{font-family:var(--f-disp);font-weight:400;font-size:1.28rem;margin:0;flex:1}
+  .shead .n{font-family:var(--f-mono);font-size:.7rem;color:var(--slate);
+    font-variant-numeric:tabular-nums}
+  .sblurb{color:var(--slate);font-size:.88rem;margin:.55rem 0 0}
+
+  /* ---- the label rows ---- */
+  ol{list-style:none;margin:.2rem 0 0;padding:0}
+  li{display:grid;grid-template-columns:2.1rem 1fr;gap:.1rem .8rem;
+    padding:1rem 0;border-bottom:1px solid var(--rule)}
+  li:last-child{border-bottom:0}
+  .num{grid-row:1/span 3;font-family:var(--f-mono);font-size:.78rem;
+    font-variant-numeric:tabular-nums;color:var(--brass);
+    border-top:2px solid var(--brass);padding-top:.3rem;letter-spacing:.02em}
+  .latin{font-family:var(--f-disp);font-style:italic;font-size:1.06rem;
+    line-height:1.3;margin:0;color:var(--ink)}
+  .latin .cv{font-style:normal}
+  .common{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.11em;
+    text-transform:uppercase;color:var(--slate);margin:.28rem 0 0}
+  .know{margin:.5rem 0 0;color:var(--ink-2);font-size:.95rem}
+  .know strong{color:var(--ink);font-weight:600}
+
+  .chips{display:flex;flex-wrap:wrap;gap:.3rem;margin:.55rem 0 0}
+  .chip{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.09em;
+    text-transform:uppercase;padding:.2rem .42rem;border-radius:2px;
+    background:var(--chip);color:var(--slate);white-space:nowrap}
+  .chip.hot{background:var(--warn-soft);color:var(--warn)}
+  .chip.good{background:var(--brass-soft);color:var(--brass)}
+  .chip.dup{background:transparent;color:var(--slate);border:1px solid var(--rule)}
+
+  /* ---- reserve + order ---- */
+  .res{background:var(--surface);border:1px solid var(--rule);border-radius:2px;
+    padding:1rem 1.05rem;margin-top:.6rem}
+  .res h3{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--slate);margin:0 0 .3rem}
+  .res p{margin:0 0 .95rem;font-size:.92rem;color:var(--ink-2)}
+  .res p:last-child{margin-bottom:0}
+  .res i{font-family:var(--f-disp)}
+
+  .order{margin:.4rem 0 0;padding:0;list-style:none;counter-reset:o}
+  .order li{display:grid;grid-template-columns:1.6rem 1fr;gap:.7rem;
+    padding:.7rem 0;border-bottom:1px dashed var(--rule)}
+  .order li::before{counter-increment:o;content:counter(o);
+    font-family:var(--f-mono);font-size:.78rem;color:var(--moss);
+    font-variant-numeric:tabular-nums}
+  .order li:last-child{border-bottom:0}
+
+  code{font-family:var(--f-mono);font-size:.85em;background:var(--chip);
+    padding:.1rem .3rem;border-radius:2px}
+
+  footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--rule);
+    font-family:var(--f-mono);font-size:.66rem;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--slate)}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Timber · deck expansion</p>
+    <h1>Fifty plants the deck is <em>missing</em></h1>
+    <p class="standfirst">UK garden-centre stock, chosen for a mix of real best-sellers,
+      plants everyone on the shop floor should be able to name, and a few that make
+      people stop and ask what it is.</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b>135</b><span>carded now</span></div>
+    <div class="stat"><b>100</b><span>genera held</span></div>
+    <div class="stat"><b>50</b><span>picks here</span></div>
+    <div class="stat"><b>0</b><span>duplicates</span></div>
+  </div>
+
+  <p class="note"><b>Unverified.</b> Every note below is working knowledge, not a
+    checked source — no network in the session that wrote this. It's a shopping
+    list, not card data. Hardiness, sizes, ratings and prices still come from you
+    and the label when each one goes through <code>PLANT-BRIEF.md</code>.</p>
+
+  <section>
+    <div class="shead"><h2>The ones you called out</h2><span class="n">01–06</span></div>
+    <p class="sblurb">Reading “tamanax rex” as <i>Tetrapanax</i> ’Rex’ — it sits with tree
+      ferns in the exotic bay, and ’Rex’ is the actual cultivar. <i>Tamarix</i> is in
+      too, at 14, because it earns a place on its own.</p>
+    <ol>
+      <li><span class="num">01</span>
+        <p class="latin">Tetrapanax papyrifer <span class="cv">'Rex'</span></p>
+        <p class="common">Rice-paper plant</p>
+        <p class="know">The cult exotic. Lobed leaves past 60cm on a suckering stem. Root-hardy
+          in mild gardens, cut back by frost — and it <strong>suckers a long way</strong>.
+          That's the sentence to say at the till, not the leaf size.</p>
+        <div class="chips"><span class="chip hot">Suckers</span><span class="chip">Exotic</span><span class="chip">Root-hardy</span></div>
+      </li>
+      <li><span class="num">02</span>
+        <p class="latin">Dicksonia antarctica</p>
+        <p class="common">Soft tree fern</p>
+        <p class="know"><strong>Sold by trunk height</strong>, and it puts on only 2.5–5cm a
+          year — which is the whole answer to “why does it cost that”. Water <strong>into
+          the crown</strong>, not the soil. Wrap the crown over winter.</p>
+        <div class="chips"><span class="chip">CITES App. II</span><span class="chip hot">Crown-water</span><span class="chip">Slow</span></div>
+      </li>
+      <li><span class="num">03</span>
+        <p class="latin">Rhus typhina</p>
+        <p class="common">Stag's horn sumach</p>
+        <p class="know">Velvety antler stems and the best scarlet autumn in the trade. It also
+          <strong>suckers aggressively</strong> — the single most important thing to say
+          before it's sold. ’Dissecta’ gives a finer, ferny leaf. Sap irritates.</p>
+        <div class="chips"><span class="chip hot">Suckers</span><span class="chip good">Autumn star</span><span class="chip">Sap irritant</span></div>
+      </li>
+      <li><span class="num">04</span>
+        <p class="latin">Rodgersia podophylla <span class="cv">'Bronze Peacock'</span></p>
+        <p class="common">Your bronze peacock</p>
+        <p class="know">Bronze palmate leaves like a horse chestnut's, holding colour all
+          summer, cream plumes above. Moist shade or a pond margin — it crisps in dry
+          sun. Enormous texture for very little money.</p>
+        <div class="chips"><span class="chip">Moist shade</span><span class="chip good">Bold foliage</span></div>
+      </li>
+      <li><span class="num">05</span>
+        <p class="latin">Rhododendron <span class="cv">'Homebush'</span></p>
+        <p class="common">Deciduous azalea — the pink one</p>
+        <p class="know">Tight rounded rose-pink semi-double trusses. Knap Hill hybrid, AGM.
+          <strong>Deciduous azaleas are the real knowledge gap</strong> — they colour up in
+          autumn as well as flower, and take more sun than the evergreen kinds.</p>
+        <div class="chips"><span class="chip good">AGM</span><span class="chip">Ericaceous</span><span class="chip dup">2nd in genus</span></div>
+      </li>
+      <li><span class="num">06</span>
+        <p class="latin">Rhododendron luteum</p>
+        <p class="common">Yellow azalea</p>
+        <p class="know">Same gap, other half of the pitch: this is the <strong>scented</strong>
+          deciduous azalea, honeysuckle-strong, AGM. ’Homebush’ sells on colour, this
+          one sells itself before you've seen it.</p>
+        <div class="chips"><span class="chip good">AGM</span><span class="chip good">Scent</span><span class="chip">Ericaceous</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="shead"><h2>Architectural &amp; exotic</h2><span class="n">07–13</span></div>
+    <p class="sblurb">The deck already leans this way — Musa, Gunnera, Fatsia, Cordyline,
+      Yucca — so these compound rather than dilute.</p>
+    <ol>
+      <li><span class="num">07</span>
+        <p class="latin">Trachycarpus fortunei</p>
+        <p class="common">Chusan palm</p>
+        <p class="know"><strong>The hardiest palm you can honestly sell for a UK garden</strong>,
+          genuinely H5. The answer when someone asks for a palm that will actually survive.</p>
+        <div class="chips"><span class="chip good">H5 palm</span><span class="chip">Evergreen</span></div>
+      </li>
+      <li><span class="num">08</span>
+        <p class="latin">Chamaerops humilis</p>
+        <p class="common">Dwarf fan palm</p>
+        <p class="know">The other hardy palm — clump-forming, smaller, spiny leaf stalks so
+          keep it off paths. <strong>You already have a photo of this staged in the
+          repo</strong> with no card built on it. Cheapest win on the list.</p>
+        <div class="chips"><span class="chip good">Photo ready</span><span class="chip hot">Spines</span></div>
+      </li>
+      <li><span class="num">09</span>
+        <p class="latin">Melianthus major</p>
+        <p class="common">Honey bush</p>
+        <p class="know">Blue-grey saw-toothed leaves, and the foliage smells of
+          <strong>peanut butter</strong> when you brush it. A guaranteed “smell this”
+          moment on the bench.</p>
+        <div class="chips"><span class="chip good">Scent trick</span><span class="chip">Tender-ish</span></div>
+      </li>
+      <li><span class="num">10</span>
+        <p class="latin">Astelia chathamica <span class="cv">'Silver Spear'</span></p>
+        <p class="common">Silver spear</p>
+        <p class="know">Metallic silver swords, coastal-tough, evergreen. Reads expensive on
+          a bench. Wants sharp drainage or it rots at the base.</p>
+        <div class="chips"><span class="chip">Coastal</span><span class="chip">Sharp drainage</span></div>
+      </li>
+      <li><span class="num">11</span>
+        <p class="latin">Fargesia rufa</p>
+        <p class="common">Umbrella bamboo</p>
+        <p class="know"><strong>Clump-forming, not running.</strong> Probably the most useful
+          single fact in the whole bamboo bay: this one stays put, <i>Phyllostachys</i>
+          does not.</p>
+        <div class="chips"><span class="chip good">Clumping</span><span class="chip">Screening</span></div>
+      </li>
+      <li><span class="num">12</span>
+        <p class="latin">Phyllostachys nigra</p>
+        <p class="common">Black bamboo</p>
+        <p class="know">Sell it, and sell a root barrier with it. Canes mature to black in
+          their second or third year — <strong>not in the pot</strong>, which is worth
+          saying before someone feels short-changed.</p>
+        <div class="chips"><span class="chip hot">Runs</span><span class="chip">Needs barrier</span></div>
+      </li>
+      <li><span class="num">13</span>
+        <p class="latin">Arbutus unedo</p>
+        <p class="common">Strawberry tree</p>
+        <p class="know">Evergreen, and it carries <strong>flowers and last year's fruit at the
+          same time</strong>. In the heather family yet lime-tolerant, which catches
+          people out.</p>
+        <div class="chips"><span class="chip good">Lime OK</span><span class="chip">Evergreen</span><span class="chip">Edible fruit</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="shead"><h2>Shrubs — the backbone</h2><span class="n">14–30</span></div>
+    <p class="sblurb">Where the money is. Several of these are things a new member of
+      staff gets asked about on their first weekend.</p>
+    <ol>
+      <li><span class="num">14</span>
+        <p class="latin">Tamarix ramosissima <span class="cv">'Pink Cascade'</span></p>
+        <p class="common">Tamarisk</p>
+        <p class="know">One of the very few genuinely <strong>salt-tolerant</strong> shrubs —
+          a real answer for a seaside garden. Feathery pink plumes late summer. Prune
+          hard or it goes bare-legged.</p>
+        <div class="chips"><span class="chip good">Coastal</span><span class="chip">Prune hard</span></div>
+      </li>
+      <li><span class="num">15</span>
+        <p class="latin">Pieris japonica <span class="cv">'Forest Flame'</span></p>
+        <p class="common">Lily-of-the-valley shrub</p>
+        <p class="know">Brilliant red new growth, then cream flower panicles.
+          <strong>Ericaceous</strong> — far and away the most common reason it dies in a
+          customer's garden.</p>
+        <div class="chips"><span class="chip hot">Ericaceous</span><span class="chip">Shelter</span></div>
+      </li>
+      <li><span class="num">16</span>
+        <p class="latin">Skimmia japonica <span class="cv">'Rubella'</span></p>
+        <p class="common">Skimmia</p>
+        <p class="know"><strong>The winter container plant.</strong> It's male — red buds all
+          winter, but no berries. Berries mean a female (’Nymans’) <em>plus</em> a male.
+          Ericaceous, and it hates drying out.</p>
+        <div class="chips"><span class="chip good">Winter seller</span><span class="chip hot">Male — no berries</span><span class="chip">Ericaceous</span></div>
+      </li>
+      <li><span class="num">17</span>
+        <p class="latin">Ceanothus <span class="cv">'Concha'</span></p>
+        <p class="common">Californian lilac</p>
+        <p class="know">The most intense blue in the trade. Say the quiet part too:
+          <strong>short-lived, and it resents cutting into old wood</strong>. Shelter and
+          sharp drainage.</p>
+        <div class="chips"><span class="chip hot">Short-lived</span><span class="chip hot">Don't hard-prune</span></div>
+      </li>
+      <li><span class="num">18</span>
+        <p class="latin">Physocarpus opulifolius <span class="cv">'Diabolo'</span></p>
+        <p class="common">Ninebark</p>
+        <p class="know">Near-black foliage, pink-white flowers, tough as old boots. The
+          dark-leaved shrub for people who have already killed a Cotinus.</p>
+        <div class="chips"><span class="chip good">Hardy</span><span class="chip">Dark foliage</span></div>
+      </li>
+      <li><span class="num">19</span>
+        <p class="latin">Sambucus nigra <span class="cv">'Black Lace'</span></p>
+        <p class="common">Black elder</p>
+        <p class="know">Black lace-cut leaf and lemony pink flowers. Coppice in spring for
+          the best foliage. Reads like an acer, grows like an elder — which is to say,
+          anywhere.</p>
+        <div class="chips"><span class="chip good">Coppice</span><span class="chip">Edible flower</span></div>
+      </li>
+      <li><span class="num">20</span>
+        <p class="latin">Syringa meyeri <span class="cv">'Palibin'</span></p>
+        <p class="common">Dwarf lilac</p>
+        <p class="know">Lilac scent on something that genuinely suits a container. The answer
+          to “I want lilac but not a six-metre one”.</p>
+        <div class="chips"><span class="chip good">Scent</span><span class="chip">Container</span></div>
+      </li>
+      <li><span class="num">21</span>
+        <p class="latin">Daphne bholua <span class="cv">'Jacqueline Postill'</span></p>
+        <p class="common">Daphne</p>
+        <p class="know">Arguably the <strong>best scent of any hardy shrub</strong>, in
+          midwinter. And the rule that matters: <strong>Daphne resents disturbance</strong>.
+          Plant once, never move it, don't dig near it.</p>
+        <div class="chips"><span class="chip good">Best scent</span><span class="chip hot">Never move</span><span class="chip">Toxic berries</span></div>
+      </li>
+      <li><span class="num">22</span>
+        <p class="latin">Sarcococca confusa</p>
+        <p class="common">Christmas box</p>
+        <p class="know">Powerful winter scent from flowers you can barely see, and it thrives
+          in <strong>dry shade</strong> — the hardest brief anyone brings into a garden
+          centre.</p>
+        <div class="chips"><span class="chip good">Dry shade</span><span class="chip good">Winter scent</span></div>
+      </li>
+      <li><span class="num">23</span>
+        <p class="latin">Chaenomeles × superba <span class="cv">'Crimson and Gold'</span></p>
+        <p class="common">Flowering quince</p>
+        <p class="know">Flowers on bare wood in late winter, then quinces for jelly.
+          Wall-trainable, thorny, effectively indestructible.</p>
+        <div class="chips"><span class="chip">Thorny</span><span class="chip good">Edible fruit</span><span class="chip">Wall shrub</span></div>
+      </li>
+      <li><span class="num">24</span>
+        <p class="latin">Kolkwitzia amabilis <span class="cv">'Pink Cloud'</span></p>
+        <p class="common">Beauty bush</p>
+        <p class="know">Arching sprays smothered in pink bells in June. An old-fashioned
+          plant that has quietly gone out of fashion and shouldn't have.</p>
+        <div class="chips"><span class="chip good">AGM</span><span class="chip">Pollinators</span></div>
+      </li>
+      <li><span class="num">25</span>
+        <p class="latin">Deutzia gracilis <span class="cv">'Nikko'</span></p>
+        <p class="common">Deutzia</p>
+        <p class="know">Low mounding habit, drowning in white stars in late spring. Genuinely
+          low-maintenance and badly under-sold.</p>
+        <div class="chips"><span class="chip">Low maintenance</span><span class="chip">Front of border</span></div>
+      </li>
+      <li><span class="num">26</span>
+        <p class="latin">Ribes sanguineum <span class="cv">'King Edward VII'</span></p>
+        <p class="common">Flowering currant</p>
+        <p class="know">One of the earliest nectar sources for emerging bumblebees. The
+          foliage is pungent — some people love it, some really don't; worth a sniff
+          before buying.</p>
+        <div class="chips"><span class="chip good">Early nectar</span><span class="chip">Scented foliage</span></div>
+      </li>
+      <li><span class="num">27</span>
+        <p class="latin">Aucuba japonica <span class="cv">'Crotonifolia'</span></p>
+        <p class="common">Spotted laurel</p>
+        <p class="know">Gold-splashed evergreen that will grow in <strong>deep dry shade under
+          trees</strong> where nothing else will. Female plants berry if there's a male
+          nearby.</p>
+        <div class="chips"><span class="chip good">Deep shade</span><span class="chip">Dioecious</span></div>
+      </li>
+      <li><span class="num">28</span>
+        <p class="latin">Kalmia latifolia <span class="cv">'Ostbo Red'</span></p>
+        <p class="common">Calico bush</p>
+        <p class="know">Crimped red buds opening to pink cups — and the flowers have a
+          <strong>spring-loaded pollination trigger</strong> you can set off with a
+          pencil. Ericaceous, slow, expensive, worth it.</p>
+        <div class="chips"><span class="chip good">Demo-able</span><span class="chip hot">Ericaceous</span><span class="chip">Slow</span></div>
+      </li>
+      <li><span class="num">29</span>
+        <p class="latin">Enkianthus campanulatus</p>
+        <p class="common">Redvein enkianthus</p>
+        <p class="know">Tiered branches, small waxy bells, then <strong>one of the best autumn
+          colours of any shrub</strong>. A connoisseur's plant that sells itself every
+          October.</p>
+        <div class="chips"><span class="chip good">Autumn star</span><span class="chip hot">Ericaceous</span></div>
+      </li>
+      <li><span class="num">30</span>
+        <p class="latin">Fothergilla major</p>
+        <p class="common">Witch alder</p>
+        <p class="know">Bottlebrush white flowers before the leaves, then multi-coloured
+          autumn on one plant. Ericaceous, compact, criminally under-known.</p>
+        <div class="chips"><span class="chip good">Autumn star</span><span class="chip hot">Ericaceous</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="shead"><h2>Trees &amp; small trees</h2><span class="n">31–40</span></div>
+    <ol>
+      <li><span class="num">31</span>
+        <p class="latin">Betula utilis var. jacquemontii <span class="cv">'Doorenbos'</span></p>
+        <p class="common">Himalayan birch</p>
+        <p class="know">The whitest bark of any tree. Bark <strong>whitens with age</strong> —
+          a young plant in a pot isn't a con, it just hasn't got there yet. Wash the
+          trunk to keep it bright.</p>
+        <div class="chips"><span class="chip good">Winter bark</span><span class="chip">Multi-stem</span></div>
+      </li>
+      <li><span class="num">32</span>
+        <p class="latin">Amelanchier lamarckii</p>
+        <p class="common">Snowy mespilus</p>
+        <p class="know">Arguably <strong>the best small garden tree there is</strong>: white
+          blossom, bronze new leaf, edible berries, fiery autumn. Four seasons on one
+          plant, and it's cheap.</p>
+        <div class="chips"><span class="chip good">Four-season</span><span class="chip good">Edible</span><span class="chip">Wildlife</span></div>
+      </li>
+      <li><span class="num">33</span>
+        <p class="latin">Parrotia persica</p>
+        <p class="common">Persian ironwood</p>
+        <p class="know">A witch-hazel relative — spidery red flowers on bare wood, then
+          spectacular autumn. <strong>Lime-tolerant</strong>, unlike most autumn-colour
+          stars, which makes it a rescue recommendation on chalk.</p>
+        <div class="chips"><span class="chip good">Lime OK</span><span class="chip good">Autumn star</span></div>
+      </li>
+      <li><span class="num">34</span>
+        <p class="latin">Nyssa sylvatica <span class="cv">'Wisley Bonfire'</span></p>
+        <p class="common">Tupelo</p>
+        <p class="know">Autumn colour that stops traffic. Needs <strong>moist, acid,
+          lime-free</strong> ground — say it, or it comes back as a complaint.</p>
+        <div class="chips"><span class="chip hot">Acid only</span><span class="chip good">Autumn star</span></div>
+      </li>
+      <li><span class="num">35</span>
+        <p class="latin">Acer griseum</p>
+        <p class="common">Paperbark maple</p>
+        <p class="know">Cinnamon bark peeling in translucent curls, best with low winter sun
+          behind it. <strong>Slow</strong> — which is exactly why it's priced where it is.</p>
+        <div class="chips"><span class="chip good">Winter bark</span><span class="chip">Slow</span><span class="chip dup">2nd in genus</span></div>
+      </li>
+      <li><span class="num">36</span>
+        <p class="latin">Corylus avellana <span class="cv">'Contorta'</span></p>
+        <p class="common">Corkscrew hazel</p>
+        <p class="know">Twisted stems for winter structure and flower arranging, catkins in
+          February. Usually <strong>grafted</strong> — pull off straight suckers from the
+          base or it reverts to a plain hazel.</p>
+        <div class="chips"><span class="chip hot">Grafted</span><span class="chip">Cut stems</span></div>
+      </li>
+      <li><span class="num">37</span>
+        <p class="latin">Malus <span class="cv">'Evereste'</span></p>
+        <p class="common">Crab apple</p>
+        <p class="know">AGM. Blossom, then orange-red fruit that hangs for months — and it's a
+          <strong>universal pollination partner for eating apples</strong>, which is the
+          sales angle most people miss entirely.</p>
+        <div class="chips"><span class="chip good">AGM</span><span class="chip good">Pollinator</span><span class="chip">Wildlife</span></div>
+      </li>
+      <li><span class="num">38</span>
+        <p class="latin">Koelreuteria paniculata</p>
+        <p class="common">Golden rain tree</p>
+        <p class="know">Yellow panicles in high summer when almost nothing else is flowering,
+          then inflated papery lanterns. Wants a hot, dry spot.</p>
+        <div class="chips"><span class="chip good">Summer flower</span><span class="chip">Drought</span></div>
+      </li>
+      <li><span class="num">39</span>
+        <p class="latin">Gleditsia triacanthos <span class="cv">'Sunburst'</span></p>
+        <p class="common">Honey locust</p>
+        <p class="know">Golden ferny foliage casting <strong>dappled shade light enough to
+          plant underneath</strong>. Thornless form, shrugs off urban air.</p>
+        <div class="chips"><span class="chip good">Thornless</span><span class="chip">Urban</span></div>
+      </li>
+      <li><span class="num">40</span>
+        <p class="latin">Eucalyptus gunnii <span class="cv">'Azura'</span></p>
+        <p class="common">Cider gum</p>
+        <p class="know">A compact cider gum bred for gardens rather than forestry. Silver-blue,
+          evergreen, and a cut-foliage crop in its own right. Coppice to keep the round
+          juvenile leaves.</p>
+        <div class="chips"><span class="chip good">Compact form</span><span class="chip">Cut foliage</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="shead"><h2>Climbers</h2><span class="n">41–45</span></div>
+    <ol>
+      <li><span class="num">41</span>
+        <p class="latin">Wisteria floribunda <span class="cv">'Multijuga'</span></p>
+        <p class="common">Japanese wisteria</p>
+        <p class="know"><strong>Buy grafted, never seed-raised</strong> — a seedling can take
+          twenty years to flower. Two prunes: July back to five buds, February back to
+          two or three. The most valuable knowledge in the climber bay.</p>
+        <div class="chips"><span class="chip hot">Grafted only</span><span class="chip">Two prunes</span><span class="chip">Toxic seed</span></div>
+      </li>
+      <li><span class="num">42</span>
+        <p class="latin">Trachelospermum jasminoides</p>
+        <p class="common">Star jasmine</p>
+        <p class="know">Evergreen, glossy, powerfully scented white pinwheels, foliage bronzing
+          in cold. <strong>The default answer for an evergreen scented climber</strong> —
+          and already flagged as a photo gap in your notes.</p>
+        <div class="chips"><span class="chip good">Evergreen scent</span><span class="chip good">Known gap</span></div>
+      </li>
+      <li><span class="num">43</span>
+        <p class="latin">Hedera colchica <span class="cv">'Sulphur Heart'</span></p>
+        <p class="common">Persian ivy</p>
+        <p class="know">Huge gold-splashed leaves, self-clinging, shade-proof. Ivy's reputation
+          is a lot worse than the plant, and late ivy flowers are a critical autumn
+          nectar source.</p>
+        <div class="chips"><span class="chip good">Self-clinging</span><span class="chip good">Late nectar</span></div>
+      </li>
+      <li><span class="num">44</span>
+        <p class="latin">Akebia quinata</p>
+        <p class="common">Chocolate vine</p>
+        <p class="know">Vanilla-and-chocolate-scented maroon flowers in spring. Needs
+          <strong>two plants to set fruit</strong>, and the fruit is strange enough to be
+          worth the trouble.</p>
+        <div class="chips"><span class="chip good">Scent</span><span class="chip hot">Two for fruit</span><span class="chip">Vigorous</span></div>
+      </li>
+      <li><span class="num">45</span>
+        <p class="latin">Lonicera periclymenum <span class="cv">'Serotina'</span></p>
+        <p class="common">Late Dutch honeysuckle</p>
+        <p class="know">Scent is strongest <strong>at dusk</strong>, because it's
+          moth-pollinated. One of those facts that explains the whole plant the moment
+          you say it.</p>
+        <div class="chips"><span class="chip good">Evening scent</span><span class="chip">Moths</span><span class="chip dup">2nd in genus</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="shead"><h2>Small hardy plants</h2><span class="n">46–50</span></div>
+    <p class="sblurb">The Bridge Nursery end of the bench — small, hardy, bought in
+      threes. Five here; the rest are on the reserve list.</p>
+    <ol>
+      <li><span class="num">46</span>
+        <p class="latin">Geranium <span class="cv">'Rozanne'</span></p>
+        <p class="common">Cranesbill</p>
+        <p class="know"><strong>The best-selling hardy perennial there is</strong> — RHS Plant
+          of the Centenary. June to first frost, and it's sterile, so it never stops
+          trying to set seed. If one perennial belongs in this deck, it's this one.</p>
+        <div class="chips"><span class="chip good">Best-seller</span><span class="chip good">Plant of the Centenary</span></div>
+      </li>
+      <li><span class="num">47</span>
+        <p class="latin">Erysimum <span class="cv">'Bowles's Mauve'</span></p>
+        <p class="common">Perennial wallflower</p>
+        <p class="know">Flowers about ten months of the year. Also <strong>short-lived, two or
+          three years</strong> — take cuttings. Say that at the point of sale and nobody
+          minds; discover it later and they do.</p>
+        <div class="chips"><span class="chip good">Flowers 10 months</span><span class="chip hot">Short-lived</span></div>
+      </li>
+      <li><span class="num">48</span>
+        <p class="latin">Nepeta racemosa <span class="cv">'Walker's Low'</span></p>
+        <p class="common">Catmint</p>
+        <p class="know">Bees adore it and cats roll on it. The <strong>Chelsea chop</strong> in
+          late May is the difference between a neat mound and a splayed mess by July.</p>
+        <div class="chips"><span class="chip good">Pollinators</span><span class="chip">Chelsea chop</span></div>
+      </li>
+      <li><span class="num">49</span>
+        <p class="latin">Helleborus × hybridus <span class="cv">'Anna's Red'</span></p>
+        <p class="common">Hellebore</p>
+        <p class="know">Flowers in winter, in shade. <strong>Cut the old leaves off in
+          January</strong> — it reveals the flowers and takes leaf-spot away with them.</p>
+        <div class="chips"><span class="chip good">Winter flower</span><span class="chip">Cut old leaves</span><span class="chip">Toxic</span></div>
+      </li>
+      <li><span class="num">50</span>
+        <p class="latin">Hakonechloa macra <span class="cv">'Aureola'</span></p>
+        <p class="common">Japanese forest grass</p>
+        <p class="know">AGM. The one ornamental grass that genuinely <strong>prefers
+          shade</strong> and moisture, flowing like water over the edge of a pot.
+          Deciduous and very late up in spring — warn people before they dig it up
+          thinking it's died.</p>
+        <div class="chips"><span class="chip good">AGM</span><span class="chip good">Shade grass</span><span class="chip hot">Late up</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="shead"><h2>Reserve list</h2><span class="n">next</span></div>
+    <div class="res">
+      <h3>Perennials</h3>
+      <p><i>Heuchera</i> ’Marmalade’ · <i>Heucherella</i> ’Sweet Tea’ · <i>Hosta</i>
+        ’Halcyon’ (and the slug conversation) · <i>Brunnera macrophylla</i> ’Jack Frost’ ·
+        <i>Epimedium × versicolor</i> ’Sulphureum’ for dry shade · <i>Bergenia</i>
+        ’Bressingham Ruby’ · <i>Persicaria amplexicaulis</i> ’Firetail’ · <i>Anemone ×
+        hybrida</i> ’Honorine Jobert’ · <i>Crocosmia</i> ’Lucifer’ · <i>Verbena
+        bonariensis</i> · <i>Rudbeckia</i> ’Goldsturm’ · <i>Helenium</i> ’Moerheim
+        Beauty’ · <i>Alchemilla mollis</i> · <i>Lamprocapnos spectabilis</i> ·
+        <i>Papaver orientale</i> ’Patty's Plum’ · <i>Astilbe chinensis</i> ’Vision in Red’.</p>
+      <h3>Grasses</h3>
+      <p><i>Stipa gigantea</i> · <i>Calamagrostis</i> ’Karl Foerster’ · <i>Anemanthele
+        lessoniana</i> · <i>Molinia</i> ’Transparent’ · <i>Carex oshimensis</i> ’Everillo’.</p>
+      <h3>Ferns</h3>
+      <p><i>Athyrium niponicum</i> var. <i>pictum</i> · <i>Polystichum setiferum</i> ·
+        <i>Asplenium scolopendrium</i> · <i>Matteuccia struthiopteris</i> ·
+        <i>Osmunda regalis</i>.</p>
+      <h3>Alpines &amp; edging</h3>
+      <p><i>Dianthus</i> ’Pink Kisses’ · <i>Armeria maritima</i> · <i>Sempervivum</i> ·
+        <i>Phlox subulata</i> · <i>Aubrieta</i> · mossy <i>Saxifraga</i>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><h2>Order to work through them</h2><span class="n">cheapest first</span></div>
+    <ol class="order">
+      <li><strong>Chamaerops humilis</strong> — the photo is already in the repo. It only
+        needs a JSON.</li>
+      <li><strong>Trachelospermum jasminoides</strong> — already a known photo gap, and high
+        sales value.</li>
+      <li><strong>The six you named</strong> — you're already interested and can photograph
+        most of them on site.</li>
+      <li><strong>The best-sellers</strong> — Rozanne, Skimmia, Pieris, Amelanchier. These are
+        what a new starter most needs to know.</li>
+      <li><strong>The connoisseur block</strong> — Kalmia, Enkianthus, Fothergilla, Parrotia,
+        Nyssa. The ones that make the deck feel built by someone who knows plants.</li>
+    </ol>
+    <p class="sblurb">Batch them in twenties: <code>add-plants-bulk.js --quick</code> is
+      about 17 seconds a batch, then one <code>run-all.js --jobs 3</code> before pushing.</p>
+  </section>
+
+  <footer>Timber · 135 carded · 50 proposed · verify before carding</footer>
+</div>
