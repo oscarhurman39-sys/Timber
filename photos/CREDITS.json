@@ -161,6 +161,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "alchemilla-mollis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "alstroemeria-indian-summer-tesronto.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -168,6 +178,16 @@
    "sourceUrl": null,
    "commit": "c210f80",
    "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "amelanchier-lamarckii.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -808,6 +828,16 @@
    "sourceUrl": null,
    "commit": null,
    "commitSubject": null,
+   "commercialUseCleared": true
+  },
+  {
+   "file": "heuchera-villosa-timeless-night.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
