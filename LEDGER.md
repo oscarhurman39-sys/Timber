@@ -1,9 +1,40 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Photograph or source the first tranche of the 99 held cards — every shot
-  staged as `photos/<latin-slug>.jpg` deals that card immediately.
-since: 2026-08-10  sessions-unchanged: 0
+brick: Photograph the next tranche of the 53 held cards that peak in August —
+  `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
+  command. The other 50 want a May / March / November / June visit.
+since: 2026-08-11  sessions-unchanged: 0
+progress: 2026-08-11 — **the first photos arrived and the brick moved for real:
+  deck 134 -> 136.** Oscar sent three from the centre. Two dealt, one refused.
+  **NEW TOOL, `tools/deal-plant.js`** — the missing half of the toolchain.
+  `add-plant.js` creates a new card from JSON; nothing existed to attach a
+  photograph to a card already written and sitting in hold, which is the state
+  105 cards are in. One command now stages the photo at 1200px, lifts the row out
+  of `PLANTS_ON_HOLD` into `PLANTS`, and records provenance. The row is moved as
+  matched TEXT rather than re-serialised, so a dealt card is byte-identical apart
+  from where it sits; photo and html roll back together if the result does not
+  re-parse.
+  FOUND BY USING IT: `photo-credits.js --set` could only ever UPDATE an existing
+  entry, so a newly staged photo could not be recorded at all without hand-editing
+  CREDITS.json — and the whole point of that file is that it is not hand-edited.
+  It now creates the entry when the file is genuinely on disk, and still refuses
+  when it is not, so a typo'd filename is still an error rather than a phantom
+  record.
+  DEALT: *Corylus avellana* 'Contorta' (2198x3586 -> 736x1200) and *Eucalyptus
+  gunnii* Azura (2498x4000 -> 749x1200). Both render clean — checked, not assumed.
+  The hazel is interesting: August is a "wait" month for it on the shooting sheet,
+  but the shot shows the corkscrew stem legibly, so it earns its card now. The
+  sheet's advice is a default, not a rule.
+  REFUSED: the third, a Sarcococca. Oscar could not remember the species and the
+  deck's only Sarcococca card is *S. confusa* — so filing it would put it there.
+  The leaves are narrow and lanceolate on reddish stems, which reads as
+  *S. hookeriana* var. *digyna* rather than confusa. Separately, ~60% of the frame
+  is bare soil and roof tile, so the card's portrait crop would show mostly soil.
+  Written up as VERIFY-QUEUE item 21 with what would settle it. **A photo on the
+  wrong card is worse than no photo** — the deck's value is that it can be
+  trusted.
+  Build r34. Full gate 14/14. csv 239 rows (136 dealt + 103 held).
 progress: 2026-08-10 (night, later) — **Oscar checked the 50 and corrected 26 of
   them. Two were legal facts I had backwards.** Sent him a published worksheet
   laying the batch out for verification — prose quiet, my invented numbers on

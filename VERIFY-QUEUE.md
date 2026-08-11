@@ -441,6 +441,38 @@ other Claude-estimated card is ever checked.
 **Still open on these 50:** the four 0-20 ratings and the sun/aspect figures. Those
 are the numbers item 18 flagged and this pass did not cover.
 
+### 21. A Sarcococca photo arrived that may not be *S. confusa* — NOT filed
+2026-08-11. Oscar sent three photographs; two were dealt straight away
+(*Corylus avellana* 'Contorta', *Eucalyptus gunnii* Azura). The third he
+described as "a type of sarcococca, can't remember the type". **It is not
+staged, deliberately.**
+
+The deck's only Sarcococca card is ***S. confusa***, so filing the photo would
+put it there — and the leaves in the shot look wrong for confusa. They are
+narrow and lanceolate, roughly 5-7cm long against maybe 1-1.5cm wide, on
+reddish-brown stems. *S. confusa* has broader elliptic leaves, shorter relative
+to width, usually with a slight twist to the tip. The narrow leaf plus the red
+stem reads much more like ***S. hookeriana* var. *digyna***, and *S. hookeriana*
+var. *humilis* is also possible.
+
+**What settles it:** the nursery label, or leaf length — confusa runs about 2-5cm,
+digyna 5-8cm and markedly narrower. Berry colour would also do it if any are
+present (confusa black, *S. ruscifolia* red).
+
+Two separate reasons it is not on a card yet, and the second applies whatever the
+species turns out to be:
+
+1. **The identification.** A photo on the wrong card is worse than no photo,
+   because the whole value of the deck is that a member of staff can trust it.
+2. **The composition.** The plant occupies only the top-left of the frame; about
+   60% is bare soil and a roof tile. The card crops a portrait panel at focus
+   50% 40%, so most of what shows would be soil. Even with the right card this
+   needs either a reshoot or a hand-set `--focus` well up and left.
+
+If it is *S. hookeriana* var. *digyna* it wants a **new card**, not this photo on
+the confusa one — worth having anyway, since it is the better winter-scent plant
+of the two for a small garden.
+
 ---
 
 ## Accepted, not defects

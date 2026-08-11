@@ -104,8 +104,23 @@ if (argv.includes('--set')) {
   const data = load();
   if (!data) { console.error('no photos/CREDITS.json — run --init first'); process.exit(1); }
   const f = arg('--set');
-  const e = data.photos.find(p => p.file === f);
-  if (!e) { console.error(`no entry for "${f}" — is it in photos/?`); process.exit(1); }
+  let e = data.photos.find(p => p.file === f);
+  /* A photo that has just been staged has no entry yet, and --set was the only
+     way in — so a new photo could not be recorded at all without hand-editing
+     this file. Create the entry when the file is genuinely on disk; still refuse
+     when it is not, because that means a typo in the filename. */
+  if (!e) {
+    if (!files().includes(f)) {
+      console.error(`no entry for "${f}" and no such file in photos/ — check the filename`);
+      process.exit(1);
+    }
+    e = { file: f, source: 'unrecorded', licence: 'unknown', author: null, sourceUrl: null,
+          commit: null, commitSubject: 'staged after CREDITS.json was created — not yet committed',
+          commercialUseCleared: false };
+    data.photos.push(e);
+    data.photos.sort((a, b) => a.file.localeCompare(b.file));
+    console.log(`new entry created for ${f}`);
+  }
   if (arg('--source')) e.source = arg('--source');
   if (arg('--licence')) e.licence = arg('--licence');
   if (arg('--author')) e.author = arg('--author');

@@ -729,7 +729,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r33 · 2026-08-10 · 4345555';
+const BUILD='r34 · 2026-08-11 · e7f93b5';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4059,6 +4059,30 @@ const PLANTS = [
    hardiness:"H4", resilience:"wind, drought and coastal tolerant · leaf spines can injure",
    uses:"containers · gravel gardens · coastal and exotic planting", size:"1.5-2.5m H × 1-1.5m W",
    seasonalImpact:"", growthSpeed:4, pestRisk:4, thirst:6, careLevel:8, sunNeed:70, sunMin:40},
+  {common:"Corkscrew Hazel", latin:"Corylus avellana 'Contorta'", hue:40,
+   visual:"Bizarrely twisted corkscrew branches · yellow late-winter catkins · crumpled leaves",
+   water:"Water while young; copes with dry spells after",
+   aspect:"East / South / West",
+   soil:"Chalk, clay, loam or sand; Straight shoots below a graft are suckers",
+   prune:"Cut straight rootstock suckers right out · otherwise minimal",
+   source:"", peak:"Jan-Mar", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"Contorta",
+   hardiness:"H6", resilience:"robust and adaptable · grafted plants throw straight suckers",
+   uses:"winter structure · cut stems · containers · wildlife gardens", size:"2.5-4m H × 2.5-4m W",
+   seasonalImpact:"", growthSpeed:7, pestRisk:7, thirst:8, careLevel:6, sunNeed:70, sunMin:35},
+  {common:"Cider Gum 'Azura'", latin:"Eucalyptus gunnii Azura ('Cagire')", hue:190,
+   visual:"Silver-blue rounded juvenile leaves on pale stems · compact bushy habit",
+   water:"Water well while young; drought tolerant after",
+   aspect:"South / West",
+   soil:"Fertile, drained, any pH; Still a big plant unless coppiced",
+   prune:"Coppice in spring for round juvenile leaves · or train as a small tree",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"Cagire",
+   hardiness:"H5", resilience:"fast and regenerates hard after pruning · foliage harmful if eaten",
+   uses:"silver foliage · cut foliage · containers with regular pruning", size:"4-8m H × 2.5-4m W",
+   seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:9, careLevel:10, sunNeed:100, sunMin:85},
 ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
@@ -4625,18 +4649,6 @@ const PLANTS_ON_HOLD=[
    hardiness:"H5", resilience:"hardy and long-lived but slow — damage takes years to replace",
    uses:"winter bark · autumn colour · small gardens · specimens", size:"8-12m H × 4-8m W",
    seasonalImpact:"", growthSpeed:4, pestRisk:5, thirst:10, careLevel:5, sunNeed:70, sunMin:40},
-  {common:"Corkscrew Hazel", latin:"Corylus avellana 'Contorta'", hue:40,
-   visual:"Bizarrely twisted corkscrew branches · yellow late-winter catkins · crumpled leaves",
-   water:"Water while young; copes with dry spells after",
-   aspect:"East / South / West",
-   soil:"Chalk, clay, loam or sand; Straight shoots below a graft are suckers",
-   prune:"Cut straight rootstock suckers right out · otherwise minimal",
-   source:"", peak:"Jan-Mar", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
-   cvs:"Contorta",
-   hardiness:"H6", resilience:"robust and adaptable · grafted plants throw straight suckers",
-   uses:"winter structure · cut stems · containers · wildlife gardens", size:"2.5-4m H × 2.5-4m W",
-   seasonalImpact:"", growthSpeed:7, pestRisk:7, thirst:8, careLevel:6, sunNeed:70, sunMin:35},
   {common:"Crab Apple 'Evereste'", latin:"Malus 'Evereste'", hue:25,
    visual:"White blossom from red-pink buds · yellow-orange fruit hanging into winter",
    water:"Water regularly while young and in long droughts",
@@ -4673,18 +4685,6 @@ const PLANTS_ON_HOLD=[
    hardiness:"H6", resilience:"urban, heat and soil tolerant · thornless form · gall midge possible",
    uses:"urban trees · light shade · lawn specimens · gold foliage", size:"8-12m H × 8-12m W",
    seasonalImpact:"", growthSpeed:12, pestRisk:7, thirst:8, careLevel:6, sunNeed:95, sunMin:80},
-  {common:"Cider Gum 'Azura'", latin:"Eucalyptus gunnii Azura ('Cagire')", hue:190,
-   visual:"Silver-blue rounded juvenile leaves on pale stems · compact bushy habit",
-   water:"Water well while young; drought tolerant after",
-   aspect:"South / West",
-   soil:"Fertile, drained, any pH; Still a big plant unless coppiced",
-   prune:"Coppice in spring for round juvenile leaves · or train as a small tree",
-   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
-   cvs:"Cagire",
-   hardiness:"H5", resilience:"fast and regenerates hard after pruning · foliage harmful if eaten",
-   uses:"silver foliage · cut foliage · containers with regular pruning", size:"4-8m H × 2.5-4m W",
-   seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:9, careLevel:10, sunNeed:100, sunMin:85},
   {common:"Japanese Wisteria", latin:"Wisteria floribunda f. multijuga", hue:270,
    visual:"Extraordinarily long hanging racemes of fragrant lilac-violet pea flowers",
    water:"Water regularly, especially as buds form",

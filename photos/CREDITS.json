@@ -431,6 +431,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "corylus-avellana-contorta.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "cotinus-coggygria-royal-purple.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -588,6 +598,16 @@
    "sourceUrl": null,
    "commit": "0936325",
    "commitSubject": "Add Pink Elle Escallonia to deck: 79 -> 80",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "eucalyptus-gunnii-azura-cagire.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
