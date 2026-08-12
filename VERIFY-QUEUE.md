@@ -25,6 +25,21 @@ node tools/plant-sense.js --strict   # exit 1 on contradictions (used by tests/r
 
 ---
 
+## Closed
+
+**Choisya (*Choisya ternata*) — closed 2026-08-11.** Was the last `KNOWN_GAPS` entry
+in `tests/deck-audit.js`: all seven ratings blank and its aspect reduced to "Any
+aspect", losing the information the data actually held. Oscar supplied researched
+values; the card now carries all six ratings plus `sunMin`, and an aspect naming
+E/S/W facings, so the compass renders properly. `KNOWN_GAPS` is now empty.
+
+Two things were preserved rather than overwritten during that update, and are worth
+knowing if it is ever redone: the incoming JSON carried research citation markers
+(`"... in summer or autumn. 0"`) which would have rendered as stray digits, and it
+supplied no commercial block — Choisya is one of only three cards in the deck that
+HAS a trade price, retail price and margin, so the update was merged rather than
+applied wholesale.
+
 ## Needs a horticultural call (Oscar)
 
 ### 1. Five held climbers have no H × W split — size rails render blank
@@ -63,37 +78,7 @@ This is only wrong if the margin column is meant to be **gross**. If the band is
 net of carriage, potting and shrink, both are fine and the tool should be told to
 stop asking. Decide once and it applies to the whole deck.
 
-### 4. Choisya has no ratings at all
-**Mexican Orange Blossom** (*Choisya ternata*) is the only card in the deck with all
-seven ratings blank, so its stat rows render empty. Already tracked as the last
-line of `KNOWN_GAPS` in `tests/deck-audit.js`. Needs:
-`growthSpeed`, `pestRisk`, `thirst`, `careLevel`, `sunNeed`, `sunMin` — rubric in
-`CARD-STATS.md` §2.
-
-Its `aspect` also reads "Full sun / pt shade" in the data but renders as
-"Any aspect" with no light bar, which is the other half of that KNOWN_GAPS line.
-
----
-
-## Accepted, not defects
-
-Recorded so the same questions don't get re-litigated every batch.
-
-- **`seasonalImpact` is blank on all 133 cards.** The column exists and validates,
-  but nothing has been rated yet and the card renders no row for it. That's an
-  empty column, not 133 defects.
-- **Dual-season plants flagged by `peak-vs-prose`.** Kousa Dogwood 'Flower Tower'
-  and Choshu-hizakura Flowering Cherry both describe autumn colour while their
-  bloom band is spring. Both are correct: the card has one bloom band and these
-  plants have two seasons of interest. The tool reports these as warnings, not
-  contradictions, for exactly this reason.
-- **Repeated size strings across many cards.** e.g. twelve cards share
-  `"1–1.5 m H × 1–1.5 m W"`. These are banded estimates from a coarse ladder, not
-  copy-paste errors. Coarse, but deliberate.
-
----
-
-### 5. Two cards added 2026-08-09 need real photographs
+### 4. Two cards added 2026-08-09 need real photographs
 
 **Waterlily 'Marliacea Carnea'** is **dealt** on Oscar's own identification — he
 confirmed the plant and cultivar from his own pond, which is the authority that
@@ -112,7 +97,7 @@ and carries a visible "AI-generated content" watermark burned into the bottom-le
 pixels. Oscar's call was to re-shoot rather than crop. The data is in and validated
 — set `held` to 0 in `plants.csv` and import once a photo lands.
 
-### 6. Unidentified photo supplied 2026-08-09
+### 5. Unidentified photo supplied 2026-08-09
 
 A third photograph arrived with those two: opposite lance-shaped leaves under white
 panicles, with a small purple flower in the background. It is the only one of the
@@ -122,9 +107,29 @@ neither of the plants it came with. Most consistent with *Phlox paniculata*
 
 ---
 
+## Accepted, not defects
+
+Recorded so the same questions don't get re-litigated every batch.
+
+- **`seasonalImpact` is blank on all 135 cards.** The column exists and validates,
+  but nothing has been rated yet and the card renders no row for it. That's an
+  empty column, not 135 defects.
+- **Dual-season plants flagged by `peak-vs-prose`.** Kousa Dogwood 'Flower Tower'
+  and Choshu-hizakura Flowering Cherry both describe autumn colour while their
+  bloom band is spring. Both are correct: the card has one bloom band and these
+  plants have two seasons of interest. The tool reports these as warnings, not
+  contradictions, for exactly this reason.
+- **Repeated size strings across many cards.** e.g. twelve cards share
+  `"1–1.5 m H × 1–1.5 m W"`. These are banded estimates from a coarse ladder, not
+  copy-paste errors. Coarse, but deliberate.
+
+---
+
+---
+
 ## Photo provenance (separate from card facts)
 
-146 of the 151 photos have no committed licence record — see `photos/CREDITS.json`
+146 of the 152 photos have no committed licence record — see `photos/CREDITS.json`
 and the README's *Photo provenance* section. They were fetched by a tool that only
 searched Wikimedia Commons and refused NC/ND licences, so they are very likely
 fine; the records were just written to a gitignored directory and lost. This is a

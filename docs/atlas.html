@@ -143,6 +143,7 @@
   .sev.open{background:var(--danger-dim);color:var(--danger)}
   .sev.known{background:rgba(245,196,81,.13);color:var(--gold)}
   .sev.note{background:rgba(246,236,210,.08);color:var(--muted)}
+  .sev.closed{background:rgba(76,215,135,.14);color:var(--leaf1)}
   .stone h4{margin:0;font-family:var(--f-disp);font-size:1.04rem;font-weight:400}
   .stone p{margin:.3rem 0 0;font-size:.9rem;color:var(--muted)}
 
@@ -406,8 +407,8 @@ const STONES=[
    'The waterlily is dealt on Oscar&rsquo;s own identification of his own pond, but the image file carries an OpenAI C2PA manifest &mdash; synthetic, not a photograph. Recorded as not cleared for commercial use.'],
   ['known','Five held climbers have no H &times; W split',
    'Their size fields read "2-3m" with no spread, so both size rails render blank. Not auto-fixed because inventing a spread would be inventing data.'],
-  ['known','Choisya has no ratings at all',
-   'The only card in the deck with all seven ratings blank, so its stat rows render empty. Its aspect also reads as a light level rather than a facing.'],
+  ['closed','Choisya now has its ratings &mdash; the last KNOWN_GAPS entry, closed',
+   'Was the only card with all seven ratings blank and its aspect flattened to &ldquo;Any aspect&rdquo;. Researched values supplied 11 Aug; the compass now reads E/S/W and every stat row is populated. tests/deck-audit.js KNOWN_GAPS is empty.'],
   ['known','seasonalImpact is rated on no card',
    'A defined, validated, rendered column with zero values in it across the whole deck.'],
   ['note','Two "compact" plants sit in the 2.5&ndash;4 m band',
@@ -420,7 +421,7 @@ const STONES=[
    'Real camera capture, no AI markers, matches neither plant it arrived with. Probably white Phlox paniculata; kept in photos/unidentified/ rather than given a guessed name.'],
 ];
 document.getElementById('stones').innerHTML=STONES.map(([s,t,d])=>
-  `<div class="stone"><span class="sev ${s}">${s==='open'?'open':s==='known'?'tracked':'note'}</span>`+
+  `<div class="stone"><span class="sev ${s}">${s==='open'?'open':s==='known'?'tracked':s==='closed'?'closed':'note'}</span>`+
   `<div><h4>${t}</h4><p>${d}</p></div></div>`).join('');
 
 /* ---- hero: the deck fanned into light ----

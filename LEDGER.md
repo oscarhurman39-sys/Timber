@@ -4,6 +4,25 @@
 brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
   rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
 since: 2026-08-05  sessions-unchanged: 3
+progress: 2026-08-11 — **Choisya fixed: KNOWN_GAPS is now empty.** The last tracked
+  defect in the repo, standing since 2026-08-07. Oscar supplied researched values;
+  the card now carries all six ratings plus sunMin, and an aspect naming E/S/W
+  facings so the compass renders instead of collapsing to "Any aspect" and losing
+  what the data actually said. tests/deck-audit.js KNOWN_GAPS = {}.
+  MERGED, NOT REPLACED — and that mattered. Choisya is one of only THREE cards in
+  the deck with a trade price, retail price and margin (the atlas had just flagged
+  the trade layer as 2% populated), and the incoming JSON supplied no commercial
+  block at all. Applying it wholesale would have deleted the scarcest data in the
+  repository. 16 fields updated, 12 kept.
+  Also stripped research citation markers from six fields — the JSON arrived with
+  trailing reference numbers ("...in summer or autumn. 0") that would have rendered
+  as stray digits on the card — and trimmed soil/soilWarning from 114 and 160 chars
+  to 21 and 38, inside the measured panel limits.
+  The validator earned its keep twice: it queried pestRisk 5 and careLevel 4 as
+  possibly un-converted 0-5 ratings. Both are correct on the 0-20 scale (1.25/5 and
+  1/5, i.e. trouble-free and very easy) and match the prose, so they stand. Atlas
+  and VERIFY-QUEUE updated; Choisya moves to a Closed section rather than vanishing.
+  Build r22.
 progress: 2026-08-09 (latest+) — **holo effects: panels, and a generic wisp layer.**
   Oscar asked to isolate the rainbow patterns and spiky shards from his frame and
   float them over the photo, to have a reusable animation he can hang any effect

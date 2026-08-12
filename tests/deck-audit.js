@@ -20,9 +20,10 @@ const { chromium } = require('playwright');
 const URL = 'http://localhost:8477/timber.html';
 
 /* latin name -> why it is knowingly broken. Delete a line once the card is fixed. */
-const KNOWN_GAPS = {
-  'Choisya ternata': 'all 7 ratings blank, aspect "Full sun / pt shade" lost to "Any aspect" (photo added)',
-};
+/* Empty, and the aim is to keep it that way. Choisya ternata was the last entry —
+   all seven ratings blank and its aspect lost to "Any aspect" — closed 2026-08-11
+   when Oscar supplied researched values and an aspect naming E/S/W facings. */
+const KNOWN_GAPS = {};
 
 let failed = 0;
 const errors = [], warnings = [], known = [];
