@@ -116,7 +116,12 @@ for (const c of cards) {
 
   /* 4. maintenance prose vs careLevel. CARD-STATS.md §2c: HIGHER = more work. */
   const easy = /\b(no (?:regular )?prun|needs no prun|prune only to|low maintenance|virtually maintenance[- ]free|little attention)\b/.test(t);
-  const fussy = /\b(requires (?:regular|careful)|needs winter protection|fleece in winter|lift(?: and store)? (?:before|over) winter|demanding|exacting|move (?:indoors|under glass))\b/.test(t);
+  /* "demanding" and "exacting" are bare adjectives with no polarity of their own,
+     so they need a negation guard: "few demanding requirements" means the
+     opposite of "demanding" and flagged Kolkwitzia 'Pink Cloud' as a
+     contradiction when careLevel 5 was correct. The other alternatives here are
+     whole phrases that cannot be negated into their own opposite. */
+  const fussy = /\b(requires (?:regular|careful)|needs winter protection|fleece in winter|lift(?: and store)? (?:before|over) winter|(?<!\b(?:few|no|not|without|little|hardly any)\s)(?:demanding|exacting)|move (?:indoors|under glass))\b/.test(t);
   if (easy && has(care) && care >= 14)
     flag(c, 'care-vs-prose', `prose says low maintenance but careLevel is ${care}/20 (higher = more work)`);
   if (fussy && has(care) && care <= 5)

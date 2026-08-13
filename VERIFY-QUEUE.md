@@ -42,6 +42,35 @@ applied wholesale.
 
 ## Needs a horticultural call (Oscar)
 
+### 0. Wishlist batch 1 — 49 cards built and held, three loose ends
+Ingested 2026-08-13 from `data/incoming/wishlist-batch-01.json` (50 researched
+entries) via `tools/fit-incoming.js` → `tools/ingest-batch.js`. All 49 are in
+`PLANTS_ON_HOLD` because none has a photograph. Set `held` to 0 in `plants.csv`
+and re-import as photos land.
+
+**a. `Malus 'John Downie'` was not researched.** The batch supplied
+`Malus 'Evereste'` instead. Deliberately **not** built: the research is
+Evereste-specific (yellow-orange fruit, pitched on pollination) and 'John Downie'
+carries larger conical orange-red fruit pitched on jelly, so relabelling would
+have put wrong facts on a card. Wishlist entry 37 needs a re-research. The
+exclusion and its reason are in `EXCLUDE` in `tools/fit-incoming.js`.
+
+**b. `Hypericum × inodorum` MAGICAL series never arrived.** Wishlist entry 31 is
+absent from the batch entirely — 50 supplied against 51 asked for.
+
+**c. 2 legal and 26 safety notes have nowhere to live on a card.** The incoming
+schema carries `toxicity` and `compliance`; the card schema carries neither. Both
+are preserved in the batch file, and `node tools/unmapped-report.js
+data/incoming/wishlist-batch-01.json` lists them. Two matter commercially:
+*Rhododendron luteum* is **Schedule 9 Part II, Wildlife and Countryside Act 1981**
+(England and Wales) — illegal to plant or cause to grow in the wild — and
+*Dicksonia antarctica* may carry source-country harvesting and tagging controls.
+Twenty-six carry real toxicity (Daphne berries, Kalmia, Wisteria seed). Adding the
+two fields is a schema change, not a field append: CSV columns, `data-audit`, a
+rendered card slot and `template-geometry` anchors all move with it. **Decide
+whether the deck should show toxicity and legal status at all** — if it is ever
+used on a sales bench, it probably should.
+
 ### 1. Five held climbers have no H × W split — size rails render blank
 `Clematis 'Nelly Moser'`, `Clematis 'Purpurea Plena Elegans'`,
 `Clematis montana var. rubens`, `Evergreen Clematis` (*C. armandii*),
