@@ -211,6 +211,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "argyrocytisus-battandieri.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "aronia-melanocarpa.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1652,6 +1662,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "pyracantha-coccinea-orange-star.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "quercus-robur.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1762,6 +1782,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "sambucus-nigra-f-porphyrophylla-gerda.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "scabiosa-columbaria-flutter-pure-white-balflutturite.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1769,6 +1799,16 @@
    "sourceUrl": null,
    "commit": "68e3c57",
    "commitSubject": "Add Flutter Pure White Small Scabious to deck: 75 -> 76",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "skimmia-japonica-obsession-obsbolwi.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1909,6 +1949,16 @@
    "sourceUrl": null,
    "commit": "5ac8d8c",
    "commitSubject": "Enrich Variegated Dwarf Weigela: add photo, ratings, clean aspect/soil; keep trade data",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "wisteria-sinensis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

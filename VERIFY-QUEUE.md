@@ -607,6 +607,62 @@ with red-and-gold single flowers. Two quince cards is correct, not a duplicate.
 
 ---
 
+### 26–30. Five cards Oscar named 2026-08-13 from the parked photos
+He identified every one of the five plants parked the previous message
+directly — "skimmia obsession, sambucus black beauty, it is cytisus
+battandieri, [pyracantha] orange star... yeah its phlox" — so none of this is
+my identification; it's my research against his call, same division of labour
+as the rest of this session. What follows is the sourcing and what's still
+soft in each.
+
+**26. Skimmia OBSESSION ('Obsbolwi').** H5, RHS-confirmed. The one fact worth
+repeating to staff: it's **self-fertile** — every plant berries on its own,
+unlike 'Rubella' which needs a female partner. Size is genuinely disputed
+between sources (RHS/Coolings say 0.5–1m, other retailers say 1–1.5m); the RHS
+figure is what's on the card.
+
+**27. Black Elder 'Black Beauty' ('Gerda').** H6, RHS-confirmed, RHS AGM. Same
+species and near-identical care to the held 'Black Lace' ('Eva') — the two are
+told apart by leaf: Black Beauty's cut is coarser, Black Lace's is fine and
+near-fern. Toxicity (harmful raw, berries/flowers edible cooked) is RHS-stated
+for this cultivar specifically, not inferred from the genus.
+
+**28. Pineapple Broom (*Argyrocytisus battandieri*, syn. *Cytisus
+battandieri*).** **Hardiness is the soft point here — flagged, not silently
+trusted.** rhs.org.uk is blocked by this environment's egress proxy, so H5
+comes from search-engine synthesis of RHS results rather than a page read
+directly. Every source agrees it wants a warm, sheltered wall regardless of
+the exact band, which is on the card either way.
+
+**29. Firethorn 'Orange Star' (*Pyracantha coccinea* 'Orange Star').** The
+weakest-sourced of the five. No RHS page for this specific cultivar could be
+read directly; H6 is inferred by matching the deck's other Pyracantha
+(SAPHYR ORANGE, also H6) plus retailer copy claiming hardy to −20°C. Its one
+genuinely distinctive fact — **thornless**, unusual for the genus — comes from
+its US plant patent, not the photograph; the photo doesn't show enough stem to
+confirm it against the actual stock plant. Berries were green when
+photographed (11 August), which is simply early in the Sep–Jan display window,
+not a contradiction.
+
+**30. Chinese Wisteria (*Wisteria sinensis*).** H6, RHS-confirmed — same band
+as the deck's Japanese Wisteria, so hardiness doesn't distinguish them.
+**The photograph cannot itself confirm the species.** The textbook tell is
+twining direction (*sinensis* anticlockwise, *floribunda* clockwise), not
+visible in the shot, and the classic flowers-before-leaves spring display
+wasn't what was photographed — this was an August flush among leaves already
+colouring, which fits an established plant's occasional light repeat bloom
+better than a first flowering. The species rests on Oscar's identification,
+recorded as the source in the card's own `uncertain` list.
+
+**Composition, separately:** the wisteria photo has roughly 55% of the frame
+covered by a finger. Oscar's instruction was explicit — *"I like the finger
+shots for now, they feel funny and make the app feel thrown together, which it
+already is in ways"* — so it was used as-is, no crop attempted. Consistent with
+item 25: composition is his call, identification isn't, and here he made both
+calls on the same photo, separately.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

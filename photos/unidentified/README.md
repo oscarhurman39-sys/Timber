@@ -8,21 +8,17 @@ subdirectory is invisible to the audit and cannot be mistaken for a card photo.
 
 ## 2026-08-09-white-panicles-lanceolate-leaves.jpg
 
-Arrived 2026-08-09 alongside the Waterlily 'Marliacea Carnea' and *Primula vialii*
-JSONs, but matches neither. Opposite lance-shaped leaves on upright stems beneath
-white panicles, with a small purple flower in the background and a few brown
-spent leaves low down.
+**Confirmed *Phlox paniculata* by Oscar on 2026-08-13** — the guess made at the
+time it arrived, from leaf and inflorescence shape alone, was correct. **Awaiting
+stats from Oscar** rather than researched here: he said he'll send the JSON
+through, and per PLANT-BRIEF's own rule this is exactly the kind of card that
+should come from the person who can read the actual nursery label, not from a
+second guess at a cultivar RHS lists dozens of.
 
-- 2084×2834, no C2PA manifest — the only one of that batch with no AI provenance
-  markers, i.e. it reads as a straight camera capture
-- Most consistent with *Phlox paniculata* (a white cultivar), but that is a guess
-  from leaf and inflorescence shape alone and the flowers are out of focus
-- Kept here rather than discarded because it is a real photograph and the session
-  container is ephemeral
+2084×2834, no C2PA manifest — a straight camera capture.
 
-**To use it:** confirm the plant, then run the normal routine with a JSON for it —
-`node tools/add-plant.js --quick <plant>.json photos/unidentified/<this file>`,
-which will re-stage it under the correct latin slug.
+**To use it:** once the JSON arrives, `node tools/add-plant.js --quick
+phlox.json photos/unidentified/<this file>`.
 
 ## 2026-08-11-lotus-hirsutus-little-boy-blue-label.jpg
 
@@ -34,34 +30,32 @@ keeping legible rather than discarding once the card was written.
 
 The plant photo it belonged to is now dealt as `photos/lotus-hirsutus-little-boy-blue-lisbob.jpg`.
 
-## Parked 2026-08-13 — six that need Oscar, not more research
+## Resolved 2026-08-13 — five new cards, Oscar named every one
 
-All six are genuine Galaxy S24 captures from 11–12 August with no AI provenance
-markers. None is on a card, and each is here for a stated reason.
+The five photos parked the same day were all identification questions, not
+composition ones, and Oscar answered every one directly rather than leaving
+them to guesswork:
 
-- **`2026-08-12-skimmia-female-red-berries.jpg`** — a Skimmia carrying ripe red
-  berries, so it is a **female** plant. The deck's only Skimmia card is
-  *S. japonica* 'Rubella', which is the **male** clone: red flower buds, never
-  berries. This photo therefore cannot belong to that card whatever else is true.
-  Needs the cultivar (likely *S. japonica* 'Nymans' or var. *reevesiana*).
-- **`2026-08-12-sambucus-dark-leaved.jpg`** — a dark-leaved elder, but the
-  leaflets are merely serrated, not the fine near-black dissection of
-  'Black Lace' ('Eva'), which is the only elder card held. Reads closer to
-  'Black Beauty' ('Gerda'). Also carries a whitish residue — spray or mildew.
-- **`2026-08-12-silver-trifoliate-shrub.jpg`** — silver-hairy trifoliate
-  foliage with a nursery tag reading only "…JRN05…", which settles nothing.
-  Fits *Argyrocytisus battandieri* (pineapple broom, no card) and equally fits
-  the held *Laburnum* × *watereri* 'Vossii'. Two very different answers.
-- **`2026-08-11-pyracantha-green-berries.jpg`** — Oscar called it "Orange Star";
-  the held card is Pyracantha SAPHYR ORANGE ('Cadange'). The berries are still
-  green, so the photograph cannot arbitrate the name.
-- **`2026-08-12-wisteria-purple-obstructed.jpg`** — rejected twice over: a finger
-  covers about 55% of the frame, and it was named *W. chinensis* against a held
-  card for Japanese wisteria, *W. floribunda* f. *multijuga*.
-The Chaenomeles 'Kinshiden' shot was parked here too, then **dealt the same day
-on Oscar's instruction** — the thumb blur falls behind the card's stats plaque,
-which he was right about. It now lives at `photos/chaenomeles-speciosa-kinshiden.jpg`.
-See VERIFY-QUEUE 25 for what that does and does not change about the standing rule.
+| Was parked as | Oscar's answer | Now |
+|---|---|---|
+| Skimmia, female, red berries | "obsession" | *Skimmia japonica* OBSESSION ('Obsbolwi') — new card, dealt |
+| Dark-leaved elder | "black beauty" | *Sambucus nigra* f. *porphyrophylla* 'Gerda' — new card, dealt |
+| Silver trifoliate shrub | "it is cytisus battandieri" | *Argyrocytisus battandieri* (Pineapple Broom) — new card, dealt |
+| Pyracantha, green berries | "orange star" | *Pyracantha coccinea* 'Orange Star' — new card, dealt |
+| Purple wisteria, finger in frame | composition accepted ("i like the finger shots") | *Wisteria sinensis* — new card, dealt |
+
+None of these went onto an existing held card — each is a genuinely different
+plant from the deck's nearest sibling (Rubella is male-only, Black Lace has
+finer foliage, the held Laburnum 'Vossii' is a different genus entirely,
+SAPHYR ORANGE is a different cultivar, and the held wisteria is Japanese not
+Chinese). See VERIFY-QUEUE 26–30 for the facts and hardiness sources behind
+each. The wisteria finger-in-frame photo was used as-is on Oscar's explicit
+call — composition is his to decide; it was the species that needed settling,
+and he settled it.
+
+The Chaenomeles 'Kinshiden' shot went through the same "parked, then Oscar
+overruled the composition objection" path a day earlier — see VERIFY-QUEUE 25.
+It lives at `photos/chaenomeles-speciosa-kinshiden.jpg`.
 
 ## Cleared 2026-08-13
 
