@@ -488,12 +488,13 @@ things carried forward rather than resolved:
    suspiciously like an unconverted 0-5 rating. The held plain Garden Privet
    carries 9 (2.25/5). If golden privet was meant to be *harder* work than
    plain privet, this is the unconverted number; Oscar to confirm.
-3. **Hardiness disagrees with the sibling card.** This card says H5, and the
-   RHS page for *Ligustrum ovalifolium* 'Aureum' agrees (H5). But the held
-   **Garden Privet** (*L. ovalifolium*, plain) card says **H4** — same species.
-   One of the two is wrong, almost certainly the held card's H4. Not changed
-   here: the hold-block data is Oscar's settled batch, and hardiness is the
-   deck's most error-prone field precisely because it gets "fixed" casually.
+3. **Hardiness disagreed with the sibling card — RESOLVED 2026-08-13.** This
+   card says H5 and the RHS page for 'Aureum' agrees. The held **Garden Privet**
+   (*L. ovalifolium*, plain) said **H4** for the same species. On Oscar's
+   instruction to fix outstanding problems, the RHS band for the plain species
+   was checked as well — it is **H5** — and the held card was corrected H4 → H5
+   through `plants-tool.js`, which reported exactly one changed card. The two
+   privet cards now agree with each other and with the RHS.
 
 ---
 
@@ -529,6 +530,43 @@ What is *not* settled, and why each was left as-is rather than guessed:
 
 None of these is a defect in the deck. They are the points where a second
 opinion would change what a card says.
+
+---
+
+### 24. Virginia Creeper is a Schedule 9 card — check the wording
+2026-08-13. *Parthenocissus quinquefolia* is listed on **Schedule 9 Part II of
+the Wildlife and Countryside Act 1981**: an offence to plant it or cause it to
+grow in the wild. Its `resilience` field carries the same ⚠ sentence already
+used on *Rhododendron luteum* (item 17), deliberately word-for-word, so the deck
+does not state the law two different ways.
+
+As with luteum, **this is not a sale ban** and the card does not imply one.
+Two things to confirm, the same two as item 17: that the listing is current, and
+that you are content selling it with the containment advice attached. Item 17
+also gives luteum the fuller `type` banner + `returnRisk` detail treatment; this
+card does not have that, because those are your commercial fields and a JSON
+import cannot write them. If you want the banner, it needs adding by hand.
+
+Also note the card's `peak` is **Sep–Nov, the autumn-colour window**, not a
+flowering window — the flowers are green and insignificant. That follows
+CARD-STATS §4b, but it is the second card this session to use the bloom row for
+non-floral interest (Aronia is the other), so it is worth knowing it is a
+pattern and not a slip.
+
+### 25. Flowering Quince 'Kinshiden' is held with no photograph, on purpose
+2026-08-13. Oscar named this plant while sending photographs, and the card was
+written and validated — but it went into **PLANTS_ON_HOLD, not the deck**,
+because the only photograph of it is unusable: roughly 45% of the frame is an
+out-of-focus thumb, and the single flower showing is a spent August straggler on
+a shrub whose display is semi-double lemon-cream flowers on **bare spring wood**.
+
+This is the Sarcococca rule (item 21) applied a second time: a card with no
+photograph is a normal, honest state, and 87 cards are in it. A bad photograph
+on a good card is not. **Reshoot in March–April on bare stems.**
+
+Worth flagging separately: this is a **different plant from the held
+*Chaenomeles* × *superba* 'Crimson and Gold'** card, which is a different cross
+with red-and-gold single flowers. Two quince cards is correct, not a duplicate.
 
 ---
 

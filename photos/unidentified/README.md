@@ -34,6 +34,36 @@ keeping legible rather than discarding once the card was written.
 
 The plant photo it belonged to is now dealt as `photos/lotus-hirsutus-little-boy-blue-lisbob.jpg`.
 
+## Parked 2026-08-13 — six that need Oscar, not more research
+
+All six are genuine Galaxy S24 captures from 11–12 August with no AI provenance
+markers. None is on a card, and each is here for a stated reason.
+
+- **`2026-08-12-skimmia-female-red-berries.jpg`** — a Skimmia carrying ripe red
+  berries, so it is a **female** plant. The deck's only Skimmia card is
+  *S. japonica* 'Rubella', which is the **male** clone: red flower buds, never
+  berries. This photo therefore cannot belong to that card whatever else is true.
+  Needs the cultivar (likely *S. japonica* 'Nymans' or var. *reevesiana*).
+- **`2026-08-12-sambucus-dark-leaved.jpg`** — a dark-leaved elder, but the
+  leaflets are merely serrated, not the fine near-black dissection of
+  'Black Lace' ('Eva'), which is the only elder card held. Reads closer to
+  'Black Beauty' ('Gerda'). Also carries a whitish residue — spray or mildew.
+- **`2026-08-12-silver-trifoliate-shrub.jpg`** — silver-hairy trifoliate
+  foliage with a nursery tag reading only "…JRN05…", which settles nothing.
+  Fits *Argyrocytisus battandieri* (pineapple broom, no card) and equally fits
+  the held *Laburnum* × *watereri* 'Vossii'. Two very different answers.
+- **`2026-08-11-pyracantha-green-berries.jpg`** — Oscar called it "Orange Star";
+  the held card is Pyracantha SAPHYR ORANGE ('Cadange'). The berries are still
+  green, so the photograph cannot arbitrate the name.
+- **`2026-08-12-wisteria-purple-obstructed.jpg`** — rejected twice over: a finger
+  covers about 55% of the frame, and it was named *W. chinensis* against a held
+  card for Japanese wisteria, *W. floribunda* f. *multijuga*.
+- **`2026-08-12-chaenomeles-kinshiden-obstructed.jpg`** — the card
+  *Chaenomeles speciosa* 'Kinshiden' **was written** on 2026-08-13 and sits in
+  the hold block; this photo was rejected for it. About 45% of the frame is an
+  out-of-focus thumb and the one flower is a spent August straggler on a shrub
+  that flowers on bare spring wood. Reshoot in March–April.
+
 ## Cleared 2026-08-13
 
 Three photos left this folder on 2026-08-13 when cards were written for them —
