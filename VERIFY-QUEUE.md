@@ -475,6 +475,28 @@ of the two for a small garden.
 
 ---
 
+### 22. Golden Privet added 2026-08-13 — Oscar's own JSON, three loose ends
+2026-08-13. New card, Oscar supplied the JSON and the photograph together; it
+entered the deck through `add-plant.js` and the validator passed it. Three
+things carried forward rather than resolved:
+
+1. **The JSON's own declared-uncertain items**, verbatim: RHS classifies the
+   cultivar as evergreen while some UK hedge suppliers say semi-evergreen in
+   severe winters; and container suitability is inferred for regularly clipped
+   specimens rather than mature unrestricted shrubs.
+2. **careLevel is 5 (renders 1.25/5, "Easy").** The validator flagged it as
+   suspiciously like an unconverted 0-5 rating. The held plain Garden Privet
+   carries 9 (2.25/5). If golden privet was meant to be *harder* work than
+   plain privet, this is the unconverted number; Oscar to confirm.
+3. **Hardiness disagrees with the sibling card.** This card says H5, and the
+   RHS page for *Ligustrum ovalifolium* 'Aureum' agrees (H5). But the held
+   **Garden Privet** (*L. ovalifolium*, plain) card says **H4** — same species.
+   One of the two is wrong, almost certainly the held card's H4. Not changed
+   here: the hold-block data is Oscar's settled batch, and hardiness is the
+   deck's most error-prone field precisely because it gets "fixed" casually.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

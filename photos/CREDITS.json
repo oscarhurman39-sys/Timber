@@ -201,6 +201,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "arbutus-unedo.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "aucuba-japonica-crotonifolia.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -298,6 +308,16 @@
    "sourceUrl": null,
    "commit": "85f3c12",
    "commitSubject": "Add Bluebeard 'Worcester Gold' to deck: 67 -> 68",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "ceanothus-concha.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -531,6 +551,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cotoneaster-horizontalis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "crinodendron-hookerianum.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -581,6 +611,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "dicksonia-antarctica.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "dryopteris-erythrosora.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -628,6 +668,16 @@
    "sourceUrl": null,
    "commit": "63f21b2",
    "commitSubject": "Add Ebbinge's Silverberry (Elaeagnus xsubmacrophylla)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "enkianthus-campanulatus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -768,6 +818,16 @@
    "sourceUrl": null,
    "commit": "bc51e3e",
    "commitSubject": "Add Miner's Merlot Martin's Spurge to deck: 95 -> 96",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "fagus-sylvatica.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1098,6 +1158,16 @@
    "sourceUrl": null,
    "commit": "ff494ba",
    "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "ligustrum-ovalifolium-aureum.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

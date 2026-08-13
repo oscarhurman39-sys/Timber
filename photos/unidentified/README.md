@@ -24,6 +24,20 @@ spent leaves low down.
 `node tools/add-plant.js --quick <plant>.json photos/unidentified/<this file>`,
 which will re-stage it under the correct latin slug.
 
+## 2026-08-11-aronia-melanocarpa.jpg
+
+**Identified, awaiting a card.** *Aronia melanocarpa* (black chokeberry), named
+by Oscar on 2026-08-13. Ripe black berries visible bottom-left. Galaxy S24
+capture, 2026-08-11 17:23, no AI provenance markers. No Aronia card exists.
+
+## 2026-08-11-lotus-hirsutus-little-boy-blue.jpg (+ -label.jpg)
+
+**Identified by its own bench label, awaiting a card.** *Lotus hirsutus* LITTLE
+BOY BLUE (Dorycnium) — the companion `-label.jpg` shows the Knights bench label
+(£14.99, location BLACKMOO) and is kept as the identification record, not as a
+card photo. Galaxy S24 captures, 2026-08-11 17:19, no AI provenance markers.
+No Lotus/Dorycnium card exists.
+
 ## 2026-08-12-begonia-bonfire.jpg
 
 **Identified, awaiting a card.** Begonia 'Bonfire' (Begonia boliviensis), named
