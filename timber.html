@@ -459,15 +459,33 @@
          compositor and nothing triggers layout or paint,
        - layers exist only on hot cards, so a 129-card deck never carries 3x129
            animated elements,
-       - screen blending means the effect only ever ADDS light: it cannot muddy
-         the photograph underneath,
+       - the "only ever ADDS light" guarantee lives in the ASSETS, not a blend
+         mode: extract-wisps.js keys them bright-on-transparent, so plain
+         compositing can brighten but never darken. (A mix-blend-mode here would
+         silently do nothing — contain:strict isolates the stacking context, so
+         the blend never reaches the photograph. It shipped that way once: the
+         layer composited plain, structure and all, and read as an image slapped
+         on top rather than light.)
+       - z-index 1 keeps every wisp UNDER the title (.thead) and the growth rail
+         (both z2) — effects wash the photograph, never the type,
        - the whole thing is inert under prefers-reduced-motion.  */
-  .wisps{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;
+  .wisps{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
     border-radius:5px;contain:strict}
   .wisp{position:absolute;top:50%;left:50%;width:100%;height:100%;
     background-repeat:no-repeat;background-position:center;background-size:contain;
-    mix-blend-mode:screen;opacity:0;will-change:transform,opacity;
+    opacity:0;will-change:transform,opacity;
     transform:translate(-50%,-50%) scale(var(--ws,1.5))}
+  /* ---- edging: the frame's thorn-work reaching over the photograph ----
+     The frame art's sprays and flame-licks encroach well into the window, but
+     the photo sits on top and buries them, leaving a plain rounded rectangle.
+     This layer is the frame's border ring re-cut with a feathered inner edge
+     (extract-wisps.js --ring/--sides) and floated back over the photo, so the
+     edging owns the window edge again. It registers 1:1 with the frame because
+     it is cut at the .tinner rect and stretched 100%/100% across it. Static on
+     purpose: it is frame, not effect — and z1 after .wisps in the DOM, so
+     moving light passes BEHIND the thorns. */
+  .edging{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background-size:100% 100%;background-repeat:no-repeat}
   /* nothing animates until the card is near the top of the deck */
   .card.hot .wisp{animation-duration:var(--wd,24s);animation-iteration-count:infinite;
     animation-timing-function:ease-in-out;animation-direction:alternate}
@@ -703,7 +721,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r25 · 2026-08-13 · fe6192f';
+const BUILD='r26 · 2026-08-13 · b4c43be';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -5093,9 +5111,16 @@ const HOLO={
     /* the value patches must stay opaque (they hide the parchment's baked sample
        values), so they get re-skinned with artwork rather than blended */
     swatch:'art/holo/eternal-flame-swatch.png',
+    /* the frame's thorn-work, re-cut as a ring and floated OVER the photo so the
+       edging encroaches instead of stopping dead at the window edge */
+    edging:'art/holo/eternal-flame-edging.png',
     /* wisps float over the photo. Each entry is one layer: any transparent PNG
        (tools/extract-wisps.js pulls them out of the frame art), one of the
-       generic animations, and how strongly it reads. */
+       generic animations, and how strongly it reads.
+       The layers are cut from STRUCTURE-FREE interior regions of the frame —
+       an early cut took the whole frame, and the plaque outlines rode along:
+       the sweep read as a ghost card gliding past. If a re-extract ever shows
+       straight lines or rounded rectangles, the region is wrong. */
     wisps:[
       {src:'art/holo/eternal-flame-wisp.png',   anim:'drift',   dur:34, delay:0,  opacity:0.55, scale:1.7},
       {src:'art/holo/eternal-flame-shards.png', anim:'sweep',   dur:17, delay:-6, opacity:0.30, scale:1.25},
@@ -5169,7 +5194,7 @@ function renderCard(idx){
             <div class="bot">${p.latin}</div>
             <button class="say" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">&#9654; Listen</button>
           </div>
-          ${wispsHTML(ho)}
+          ${wispsHTML(ho)}${ho&&ho.edging?`<div class="edging" aria-hidden="true" style="background-image:url(${ho.edging})"></div>`:''}
           <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
         </div>
         <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
