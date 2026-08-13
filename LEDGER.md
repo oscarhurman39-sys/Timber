@@ -5,6 +5,34 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 1
+progress: 2026-08-13 (later) — **`tools/photo-run.js` — the shooting sheet is a
+  command now.** The 08-11 sheet was a chat: it could not be re-run and its
+  numbers rotted immediately.
+  **THREE BUCKETS, NOT TWO, and Corylus 'Contorta' is why.** A sheet that splits
+  on "does peak cover this month" would have said skip it in August; the shot
+  reads perfectly and it is dealt. Peak is the peak of INTEREST, not the only
+  month worth a photograph. So SHOOT (52) / LOOK (16, off-peak but still
+  physically there) / WAIT (30, flowers, named month). LOOK only ever promotes
+  out of WAIT, so a wrong guess costs one glance on a lap already being walked.
+  **TWO BUGS FOUND BY READING THE OUTPUT RATHER THAN TRUSTING IT.** Promoting on
+  "foliage" and "form" put *Dicentra spectabilis* on the August list — it is
+  fully dormant by August, there is nothing above ground — and Delphinium, tatty
+  the moment the spike is over. Narrowed to bark / stem / berries / evergreen:
+  30 -> 22. Then "stem" turned out to be grammar more often than subject —
+  "arching stems hung with pink lockets", "bare stems buried under golden
+  flowers" — where the stem is how the FLOWER is held. Forsythia, Kerria,
+  Weigela and Kolkwitzia all arrived in August that way. A carrier verb beside
+  the stem is the tell and it separates cleanly: the cards that genuinely sell a
+  stem never use one. 22 -> 16, all sixteen defensible.
+  **MY OWN BRIEF WAS WRONG ABOUT THE GROUPING.** It proposed grouping by `type`.
+  `type` is empty on 95 of 98 held cards — it carries the Schedule 9 banner and
+  nothing else, and `root`, `bench`, `pots` are empty too. There is no category
+  field at all. Grouping now comes from the height in `size` with climber /
+  hedging / rose lifted out of `uses` prose, unparseable sizes under their own
+  heading, and `--rules` printing the lot so it can be argued with.
+  Every peak string in the file must parse before any counting happens.
+  `--html` writes a phone sheet, ticks persisted per month; gitignored, because a
+  committed generated sheet is the stale document this replaces. 14/14.
 progress: 2026-08-13 — **hold-to-rewind shipped and IS LIVE (r41, run #27).**
   Oscar asked to hold the undo button to reset the deck; I built a 2s
   hold-to-commit with a filling progress bar, and he corrected the design before
