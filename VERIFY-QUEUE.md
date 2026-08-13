@@ -661,6 +661,42 @@ already is in ways"* — so it was used as-is, no crop attempted. Consistent wit
 item 25: composition is his call, identification isn't, and here he made both
 calls on the same photo, separately.
 
+### 31. All five (26–30) superseded by Oscar's own JSONs, same message
+Oscar pasted his own fully-researched JSON for all five cards immediately
+after they were dealt — the PLANT-BRIEF/NEW-SESSION route, done properly. Per
+CARD-STATS §0, editorial content is his to arbitrate, so his version replaced
+mine wholesale (every field that reaches a card) rather than being merged
+field-by-field. Applied via `plants-tool.js` CSV edit, not a re-deal — photos
+and their staged slugs are untouched, only the data changed.
+
+Three of his common names differ from mine (**Skimmia OBSESSION** →
+**Obsession Japanese Skimmia**, **Black Elder 'Black Beauty'** →
+**Black Beauty Elder**, **Firethorn 'Orange Star'** → **Orange Star
+Firethorn**) — deliberate renames, not losses, and logged in
+`data/renames.json` so `data-audit.js --history` reads them as such.
+
+Two things worth knowing that came out of applying his data:
+
+- **His Pyracantha size (2m × 1m) looks odd next to the sibling SAPHYR ORANGE
+  (2.5–3m × 2.5–3m, roughly square) — narrower and taller than a typical
+  Pyracantha habit.** Not changed: his own `uncertain` list cites Plantipp
+  (the PBR registration body) directly for this figure, which is a stronger,
+  more specific source than anything used for the sibling card.
+- **His Orange Star JSON self-contradicted on arrival** — `visual` claimed
+  "white spring flowers" while `peak` was "Sep-Feb" (no spring month), which
+  `plant-sense.js` correctly flagged as a hard contradiction, not a soft
+  warning (the checker treats an actual flowering claim differently from a
+  colour/foliage claim — see its own comment at `tools/plant-sense.js:172`).
+  Checked independently: *Pyracantha coccinea* does flower May–June, so the
+  fact is real, it just can't live in a Sep-Feb bloom band. **Fixed by copying
+  the sibling SAPHYR ORANGE's own solution to the identical problem** — its
+  visual reads "white flowers earlier" with no season word attached, true and
+  non-contradictory. Same fix, same card family, second time it's needed.
+
+Two hardiness sources from item 28–29 remain exactly as flagged before —
+Oscar's JSONs didn't add an RHS page read for either, so rhs.org.uk is still
+worth checking directly on a machine that can reach it.
+
 ---
 
 ## Accepted, not defects
