@@ -35,6 +35,13 @@ Per-plant work is data, not design. See **`NEW-SESSION.md`** for the routine and
 what to paste into a fresh chat (short version: the plant JSON + your photo, and
 nothing else — not the design docs).
 
+Cards already written and waiting on a photograph are the other half of the job:
+
+```sh
+node tools/photo-run.js --html          # what to shoot this month, and what to skip
+node tools/deal-plant.js "<latin>" photo.jpg   # a photo arrived -> deal that card
+```
+
 | File | Purpose |
 |---|---|
 | `PLANT-BRIEF.md` | Paste into ChatGPT/Gemini; produces a plant JSON in our exact schema |
@@ -209,6 +216,7 @@ node tools/install-hooks.js      # run the fast checks automatically before ever
 | `tools/build-stamp.js` | Does the build number in the menu foot actually match the app's content? `--verify <url>` compares a deployed page's bytes. |
 | `tools/template-geometry.js` | Have the card's overlay anchors drifted? `--reflow <px>` recomputes them all for a new card height. |
 | `tools/deck-diff.js` | What plant data actually differs between two branches or commits? Semantic, not textual. |
+| `tools/photo-run.js` | Which held cards are worth photographing *this month*, what to point the camera at, and when to come back for the rest. `--html` writes a phone sheet with ticks. |
 
 Open questions these turned up that need a horticultural call live in
 [VERIFY-QUEUE.md](VERIFY-QUEUE.md). Deliberate card renames are recorded in
