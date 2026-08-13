@@ -628,21 +628,37 @@ near-fern. Toxicity (harmful raw, berries/flowers edible cooked) is RHS-stated
 for this cultivar specifically, not inferred from the genus.
 
 **28. Pineapple Broom (*Argyrocytisus battandieri*, syn. *Cytisus
-battandieri*).** **Hardiness is the soft point here — flagged, not silently
-trusted.** rhs.org.uk is blocked by this environment's egress proxy, so H5
-comes from search-engine synthesis of RHS results rather than a page read
-directly. Every source agrees it wants a warm, sheltered wall regardless of
-the exact band, which is on the card either way.
+battandieri*).** **H5 — CONFIRMED by Oscar 2026-08-13.** Originally flagged
+here as search-engine synthesis rather than a direct RHS read; Oscar checked
+it and confirmed the rating is correct as it stood. No change made.
 
-**29. Firethorn 'Orange Star' (*Pyracantha coccinea* 'Orange Star').** The
-weakest-sourced of the five. No RHS page for this specific cultivar could be
-read directly; H6 is inferred by matching the deck's other Pyracantha
-(SAPHYR ORANGE, also H6) plus retailer copy claiming hardy to −20°C. Its one
-genuinely distinctive fact — **thornless**, unusual for the genus — comes from
-its US plant patent, not the photograph; the photo doesn't show enough stem to
-confirm it against the actual stock plant. Berries were green when
-photographed (11 August), which is simply early in the Sep–Jan display window,
-not a contradiction.
+**29. Firethorn 'Orange Star' (*Pyracantha coccinea* 'Orange Star').**
+**Hardiness CORRECTED 2026-08-13: H6 → H2, on Oscar's direct instruction**
+after he checked the figure that was flagged here as the weakest-sourced of
+the five (matched to the sibling SAPHYR ORANGE plus retailer copy, no direct
+RHS read). H2 means **tender — no frost at all** (1 to 5°C), a completely
+different growing proposition from H6 (hardy to −20°C), and from its own
+sibling card.
+
+**This creates a real inconsistency the automated checks cannot see and did
+not flag**, because nothing in `plant-sense.js` cross-checks hardiness against
+`uses` or `resilience` — only against prose season-words and size text. Left
+exactly as Oscar wrote it, but worth his eye:
+
+- `uses` still reads **"walls · hedging · containers · wildlife"**. Permanent
+  outdoor hedging is not really compatible with H2 across most of the UK — an
+  H2 plant is normally a container subject brought under cover for winter
+  (CARD-STATS' own H2 anchor is *Pennisetum* 'Rubrum', a patio grass, not a
+  hedge). If H2 is right, `uses` probably needs to lose "hedging" and gain
+  something like "large containers, moved under cover for winter" — but that's
+  a card-content decision, not a fact I should invent.
+- `resilience` — **"thornless · fireblight tolerant · disease resistant"** —
+  says nothing about frost tenderness, the single most operationally important
+  fact for a plant this tender in a UK garden centre.
+
+Its one genuinely distinctive fact, **thornless**, still comes from the US
+plant patent rather than the photograph, which doesn't show enough stem to
+confirm it against the actual stock plant.
 
 **30. Chinese Wisteria (*Wisteria sinensis*).** H6, RHS-confirmed — same band
 as the deck's Japanese Wisteria, so hardiness doesn't distinguish them.
