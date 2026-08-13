@@ -3,9 +3,23 @@
   extract-frame-assets.js — cut the panel artwork out of a special-edition frame.
 
     node tools/extract-frame-assets.js <frame.png> <name>
-    node tools/extract-frame-assets.js art/frame-eternal-flame.png eternal-flame
+    node tools/extract-frame-assets.js art/frame-eternal-flame.png eternal-flame \
+        --ground 30,10,48,44 --calm 0.5
 
   Writes art/holo/<name>-plaque.png, -soil.png and -band.png.
+
+  Options
+    --ground x,y,w,h  take the panel GROUND texture from this region of the frame
+                      (percent), instead of from the panel's own slot. Frames
+                      usually paint their own plaque — rules, borders and all —
+                      inside the slot, and parchment ink multiplied over painted
+                      furniture doubles every line. A clean streak region gives
+                      the same holo surface with exactly one set of furniture:
+                      the parchment's.
+    --calm N          0..1: mix the ground toward the standard parchment's own
+                      ground tone before the ink lands. 0 = raw artwork (vivid,
+                      ink struggles), 1 = reproduces the standard panel almost
+                      exactly. The readable-but-still-holo zone is the middle.
 
   WHY
   A commissioned frame usually draws its own stats plaque, soil panel and aspect
@@ -29,9 +43,15 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 
-const [frameArg, nameArg] = process.argv.slice(2);
+const argvAll = process.argv.slice(2);
+const flagOf = (f, d = null) => { const i = argvAll.indexOf(f); return i === -1 ? d : argvAll[i + 1]; };
+const [frameArg, nameArg] = argvAll.filter((a, i) => !a.startsWith('--') && !(i > 0 && argvAll[i - 1].startsWith('--')));
+const GROUND = flagOf('--ground') ? flagOf('--ground').split(',').map(Number) : null;
+if (GROUND && (GROUND.length !== 4 || GROUND.some(n => !Number.isFinite(n)))) { console.error('--ground must be x,y,w,h in percent'); process.exit(1); }
+const CALM = Number(flagOf('--calm', 0));
+if (!(CALM >= 0 && CALM <= 1)) { console.error('--calm must be 0..1'); process.exit(1); }
 if (!frameArg || !nameArg) {
-  console.error('usage: node tools/extract-frame-assets.js <frame.png> <name>');
+  console.error('usage: node tools/extract-frame-assets.js <frame.png> <name> [--ground x,y,w,h] [--calm 0..1]');
   process.exit(1);
 }
 const framePath = path.isAbsolute(frameArg) ? frameArg : path.join(ROOT, frameArg);
@@ -114,10 +134,46 @@ for (const s of slots) {
   for (const p of PANELS) standards[p.key] = fs.readFileSync(path.join(ROOT, p.art)).toString('base64');
   const swatchB64 = fs.readFileSync(path.join(ROOT, 'art', 'parch-swatch.png')).toString('base64');
 
-  const results = await page.evaluate(async ({ uri, slots, standards, swatchB64 }) => {
+  const results = await page.evaluate(async ({ uri, slots, standards, swatchB64, GROUND, CALM }) => {
     const img = new Image(); img.src = uri; await img.decode();
     const W = img.naturalWidth, H = img.naturalHeight;
     const out = [];
+
+    /* the parchment's own ground tone: the average of its light pixels (the
+       cream, not the ink). Mixing the artwork toward this before the multiply
+       is what buys the ink its contrast back. */
+    const groundTone = async (b64) => {
+      const im = new Image(); im.src = 'data:image/png;base64,' + b64; await im.decode();
+      const c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight;
+      const x = c.getContext('2d'); x.drawImage(im, 0, 0);
+      const d = x.getImageData(0, 0, c.width, c.height).data;
+      let r = 0, g = 0, b = 0, n = 0;
+      for (let i = 0; i < d.length; i += 4) {
+        if (d[i + 3] < 200) continue;
+        const l = (Math.max(d[i], d[i + 1], d[i + 2]) + Math.min(d[i], d[i + 1], d[i + 2])) / 510;
+        if (l > 0.62) { r += d[i]; g += d[i + 1]; b += d[i + 2]; n++; }
+      }
+      return n ? `rgb(${Math.round(r / n)},${Math.round(g / n)},${Math.round(b / n)})` : 'rgb(232,220,196)';
+    };
+
+    /* draw the panel ground at target size: either the slot's own crop (legacy)
+       or, with --ground, the largest target-aspect sub-rect centred inside the
+       clean region — abstract streaks survive the re-crop, painted furniture
+       is never present to survive anything. */
+    const drawGround = (x, c, slotRect) => {
+      let sx, sy, sw, sh;
+      if (GROUND) {
+        const gx = GROUND[0] / 100 * W, gy = GROUND[1] / 100 * H, gw = GROUND[2] / 100 * W, gh = GROUND[3] / 100 * H;
+        const want = c.width / c.height;
+        sw = gw; sh = gw / want;
+        if (sh > gh) { sh = gh; sw = gh * want; }
+        sx = gx + (gw - sw) / 2; sy = gy + (gh - sh) / 2;
+      } else ({ sx, sy, sw, sh } = slotRect);
+      x.filter = 'saturate(1.35) contrast(1.08) brightness(1.04)';
+      x.drawImage(img, sx, sy, sw, sh, 0, 0, c.width, c.height);
+      x.filter = 'none';
+      return `${Math.round(sx)},${Math.round(sy)} ${Math.round(sw)}x${Math.round(sh)}`;
+    };
 
     /* Flatten artwork x parchment offline.
        This is the same idea as a CSS multiply, done once into an opaque PNG. Done
@@ -140,21 +196,23 @@ for (const s of slots) {
     };
 
     for (const s of slots) {
-      const sx = Math.round(s.left / 100 * W), sy = Math.round(s.top / 100 * H);
-      const sw = Math.round(s.width / 100 * W), sh = Math.round(s.height / 100 * H);
+      const slotRect = {
+        sx: Math.round(s.left / 100 * W), sy: Math.round(s.top / 100 * H),
+        sw: Math.round(s.width / 100 * W), sh: Math.round(s.height / 100 * H),
+      };
       const c = document.createElement('canvas');
       /* keep the panel's own pixel density: match the standard art's natural size
          so the extracted panel drops into the same slot at the same resolution */
       c.width = s.nat.w; c.height = s.nat.h;
       const x = c.getContext('2d');
       x.imageSmoothingQuality = 'high';
-      /* lift the artwork a little: the panel slots fall on the calmer part of the
-         frame, and once ink is laid over the top a flat crop reads muddy */
-      x.filter = 'saturate(1.35) contrast(1.08) brightness(1.04)';
-      x.drawImage(img, sx, sy, sw, sh, 0, 0, c.width, c.height);          // artwork
-      x.filter = 'none';
+      const src = drawGround(x, c, slotRect);                              // artwork ground
+      if (CALM > 0) {                                                      // toward parchment tone
+        x.globalAlpha = CALM; x.fillStyle = await groundTone(standards[s.key]);
+        x.fillRect(0, 0, c.width, c.height); x.globalAlpha = 1;
+      }
       await flatten(c, standards[s.key]);                                  // x parchment
-      out.push({ key: s.key, src: `${sx},${sy} ${sw}x${sh}`, w: c.width, h: c.height, png: c.toDataURL('image/png') });
+      out.push({ key: s.key, src, w: c.width, h: c.height, png: c.toDataURL('image/png') });
     }
 
     /* A holo swatch for the value patches. They must stay OPAQUE (they hide the
@@ -164,13 +222,22 @@ for (const s of slots) {
       const sw0 = new Image(); sw0.src = 'data:image/png;base64,' + swatchB64; await sw0.decode();
       const c = document.createElement('canvas'); c.width = sw0.naturalWidth; c.height = sw0.naturalHeight;
       const x = c.getContext('2d');
-      x.drawImage(img, Math.round(W * 0.30), Math.round(H * 0.64), Math.round(W * 0.12), Math.round(H * 0.06),
-        0, 0, c.width, c.height);
+      /* same ground pipeline as the panels — a patch cut hotter than the panel
+         it covers reads as a glowing rectangle, which is the exact tone-mismatch
+         the patches exist to avoid */
+      const src = drawGround(x, c, {
+        sx: Math.round(W * 0.30), sy: Math.round(H * 0.64),
+        sw: Math.round(W * 0.12), sh: Math.round(H * 0.06),
+      });
+      if (CALM > 0) {
+        x.globalAlpha = CALM; x.fillStyle = await groundTone(swatchB64);
+        x.fillRect(0, 0, c.width, c.height); x.globalAlpha = 1;
+      }
       await flatten(c, swatchB64);
-      out.push({ key: 'swatch', src: 'plaque interior', w: c.width, h: c.height, png: c.toDataURL('image/png') });
+      out.push({ key: 'swatch', src, w: c.width, h: c.height, png: c.toDataURL('image/png') });
     }
     return out;
-  }, { uri: `data:image/png;base64,${b64}`, slots, standards, swatchB64 });
+  }, { uri: `data:image/png;base64,${b64}`, slots, standards, swatchB64, GROUND, CALM });
 
   for (const r of results) {
     const f = path.join(outDir, `${nameArg}-${r.key}.png`);

@@ -721,7 +721,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r26 · 2026-08-13 · b4c43be';
+const BUILD='r28 · 2026-08-13 · 376c19e';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -5102,9 +5102,14 @@ const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/
 const HOLO={
   'cercis-canadensis-eternal-flame':{
     frame:'art/frame-eternal-flame.png',
-    /* panel artwork cut from the frame by tools/extract-frame-assets.js. The
-       standard parchment still renders on top in multiply, so every baked label
-       and icon survives while the artwork glows through. */
+    /* panels built by: tools/extract-frame-assets.js art/frame-eternal-flame.png
+         eternal-flame --ground 30,10,48,44 --calm 0.5
+       --ground: the panel GROUND comes from a clean streak region of the frame,
+       not the slot itself — the frame paints its own plaque there, and parchment
+       ink over painted furniture doubled every rule line.
+       --calm: the ground is mixed halfway to the parchment's own tone before the
+       ink lands, which is what makes the stats read as crisply as a standard
+       card while the surface still shimmers. */
     plaque:'art/holo/eternal-flame-plaque.png',
     soil:'art/holo/eternal-flame-soil.png',
     band:'art/holo/eternal-flame-band.png',
