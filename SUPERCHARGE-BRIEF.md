@@ -1,9 +1,15 @@
 # Timber — supercharge brief
 
-Written 2026-08-10 at Oscar's request: a long plan for a large Claude budget
-expiring 2026-08-11 01:00. Every number below was computed from the repo, not
+Written 2026-08-13 at Oscar's request: a long plan for a large Claude budget
+expiring 2026-08-14 01:00. Every number below was computed from the repo, not
 recalled. Judgement calls are labelled `[Inference]` / `[Speculation]` /
 `[Unverified]`.
+
+**Figures refreshed 2026-08-13 against the live branch at `6f86bda`.** Between
+writing this and publishing it, ten photographs landed and seven held cards were
+dealt — the deck went 134/105 to 144/98 in a few hours. Every count here is
+therefore a snapshot with a shelf life of about a day, which is the argument for
+§1.1 computing them on demand rather than a document quoting them.
 
 ---
 
@@ -13,9 +19,9 @@ recalled. Judgement calls are labelled `[Inference]` / `[Speculation]` /
 
 | | State | Source |
 |---|---|---|
-| Cards | 239 — **134 dealt, 105 held with no photo** | `data-audit.js` |
-| Photos on disk | 141 | `photos/*.jpg` |
-| Card data provenance | 105 cards carry ratings, prices and prune advice **I wrote**, not Oscar's and not RHS's | VERIFY-QUEUE 15, 18 |
+| Cards | 242 — **144 dealt, 98 held with no photo** | `data-audit.js` |
+| Photos on disk | 151 | `photos/*.jpg` |
+| Card data provenance | 98 cards carry ratings, prices and prune advice **I wrote**, not Oscar's and not RHS's | VERIFY-QUEUE 15, 18 |
 | Last time Oscar checked my data | **26 of 50 amended**, two legal facts backwards | LEDGER 2026-08-10 |
 | Users other than Oscar | 0 | — |
 | Revenue mechanism | none | MONETISATION-BRIEF |
@@ -39,39 +45,43 @@ Anything that is only "more feature" is in Track 5, last, on purpose.
 ## 1. The finding that reshapes the brick
 
 The ledger's brick is *"photograph the first tranche of the 99 held cards"*
-(105 now). Treated as one errand it is demoralising, and it has a hidden
+(98 now). Treated as one errand it is demoralising, and it has a hidden
 property nobody has checked: **most of those plants do not look like anything
 worth photographing today.**
 
 Computed from each held card's own `peak` field against August:
 
 ```
-HELD                                    105
-  peak includes August — shoot now       57
-  peak excludes August — return trip     48
+HELD                                     98
+  peak includes August — shoot now       52
+  peak excludes August — return trip     46
 ```
 
-The 48 are not evenly spread. Greedy cover over their peak months:
+The 46 are not evenly spread. Greedy cover over their peak months:
 
 ```
-trip 1   May   23 cards
-trip 2   March 15 cards
+trip 1   May   22 cards
+trip 2   March 14 cards
 trip 3   Nov    8 cards
 trip 4   June   2 cards
                 --
-                48   uncovered: 0
+                46   uncovered: 0
 ```
 
-**So the brick is not 105. It is 57, plus a diary with four dates in it.**
+**So the brick is not 98. It is 52, plus a diary with four dates in it.**
 Daphne 'Jacqueline Postill' (Jan–Mar), Christmas Box (Dec–Mar), Forsythia,
 Kerria, Chaenomeles, Magnolia stellata, flowering currant — photographing those
 in August produces a green blob that sells nothing, and a card with a bad photo
 is worse than a held card, because a held card is honest.
 
-`[Inference]` this is also why the brick has felt heavy: it was sized at 105
-when the real August job is a bit over half that.
+`[Inference]` this is also why the brick has felt heavy: it was sized at the
+full hold block when the real August job is a bit over half of it.
 
-**Everything in Track 1 exists to make those 57 cost one lap of the centre.**
+The split survived the deck moving under it: recomputed a day later against ten
+new photographs it came out 52/46 against the same four months, rather than the
+earlier 57/48. **The four dates are the durable part; the counts are not.**
+
+**Everything in Track 1 exists to make those 52 cost one lap of the centre.**
 
 ---
 
@@ -83,7 +93,8 @@ This is the only track that moves the actual brick, so it goes first.
 
 Generates a phone-readable shot list from the held block.
 
-- Splits **shoot now** (57) from **return trip**, with the four-date diary.
+- Splits **shoot now** (52 today) from **return trip**, with the four-date diary —
+  recomputed at run time, because these counts move every time a photo lands.
 - Groups the now-list by where the plant physically stands — derived from
   `type` (tree / shrub / climber / herbaceous / hedging / rose / conifer) so
   one lap of the centre covers a whole group instead of criss-crossing.
@@ -99,23 +110,27 @@ and the counts reconcile with `data-audit.js`.
 
 ### 1.2 `tools/photo-intake.js` — dump-and-assign
 
-Today a photo has to arrive already named `<latin-slug>.jpg` or be passed
-per-plant on a command line. For 57 phone photos that naming chore *is* the
-friction, and it is the step most likely to put a photo on the wrong card.
+**Rescoped 2026-08-13: `tools/deal-plant.js` now exists and does the per-card
+half of this** — one photo, one latin name, staged under the right slug, card
+lifted out of the hold block byte-identical, provenance recorded, rolled back
+together if the result does not re-parse. That is the careful part and it is
+done.
 
-- Drop everything into `intake/`; the tool opens a browser gallery: photos down
-  one side, unassigned held cards down the other.
+What is left is the batch half, and it is the half that hurts at 52 photos:
+`deal-plant.js` still needs you to know and type the latin name for each shot,
+one command at a time.
+
+- Drop everything into `intake/`; a browser gallery pairs photos against
+  unassigned held cards, so nothing is typed and no photo can be named wrong.
 - Pre-sorts by EXIF timestamp against run-sheet order, so if he shot in sheet
   order most assignments are one click of "yes, next".
-- On confirm: processes to 1200px, stages to `photos/`, moves the card from
-  `PLANTS_ON_HOLD` into `PLANTS`, writes the `CREDITS.json` entry, runs the
-  data gate. One pass for the whole batch, same validators as
-  `add-plants-bulk.js`.
-- Nothing is written unless the whole batch validates — the existing house rule.
+- On confirm it loops `deal-plant.js`'s existing logic over the batch and runs
+  the data gate once at the end, rather than re-implementing any of it.
 
 **Done test:** 10 arbitrarily-named phone photos land as 10 correctly-slugged
 dealt cards with credits, in one command plus clicks.
-**Needs Oscar:** no to build, yes to run. **Size:** the biggest item in Track 1.
+**Needs Oscar:** no to build, yes to run. **Size:** smaller than it was — a
+front end over a tool that already works.
 
 ### 1.3 Photo sanity gate
 
@@ -144,7 +159,7 @@ This is the track I would argue hardest for, and it is not a feature.
 
 ### 2.1 Per-card provenance — the liability item
 
-**A card Oscar verified and a card I invented are visually identical.** 105
+**A card Oscar verified and a card I invented are visually identical.** 98
 cards carry my estimates for `retail`, `margin`, `trade`, `hardiness` and
 `prune`. When Oscar checked 50 of them he changed 26.
 
@@ -163,7 +178,7 @@ locked column list, `data-audit.js` fails the build on any unlisted field, and
 the CSV round-trips both blocks. This is exactly the mechanism that stopped
 `sunMin` being wiped deck-wide. Adding a column is a solved problem here.
 
-**Done test:** every one of the 239 cards carries a provenance value, no card
+**Done test:** every one of the 242 cards carries a provenance value, no card
 defaults silently to "verified", and the trade sheet shows it.
 **Needs Oscar:** no to build. **Size:** one sitting plus a data pass.
 
@@ -192,7 +207,7 @@ New checks worth building, most valuable first:
 - **Prune timing vs flowering wood.** A card telling staff to prune Forsythia,
   Kerria, Chaenomeles, Philadelphus, Weigela or Deutzia in early spring is
   telling them to cut off this year's flowers. Cross-check `prune` prose
-  against `peak` for spring-flowering shrubs. **I wrote the prune line on 105
+  against `peak` for spring-flowering shrubs. **I wrote the prune line on 98
   cards and none of it has been checked.**
 - **Toxicity silence on known-toxic genera.** Laburnum 'Vossii' and Taxus are in
   the held batch. A card that says nothing about Laburnum seed toxicity is a
@@ -234,7 +249,7 @@ open the menu.**
   the entire retention mechanic and it is currently two taps deep.
 - **Streak** — days with at least one review. The quiz has a best-streak; the
   app itself has no notion of consecutive days.
-- **Daily goal**, small and settable (10 cards). The deck is 134 dealt; "finish
+- **Daily goal**, small and settable (10 cards). The deck is 144 dealt; "finish
   the deck" is not a daily unit, "10 cards" is.
 - **Session-end summary** — the quiz has one, the deck does not.
 - `[Unverified]` **notifications**: iOS PWA push requires an installed
@@ -272,7 +287,7 @@ its keep.
 ## Track 5 — Features, last and least
 
 Real, but they widen the gap rather than closing it. In rough value order:
-accessibility pass beyond the current keyboard support; performance at 239+
+accessibility pass beyond the current keyboard support; performance at 242+
 cards (`app-test` and `edge-test` are now ~135 s and ~170 s each because both
 walk the whole deck — that is a test-harness cost that will keep growing);
 richer filters; deck sharing.
@@ -283,8 +298,8 @@ richer filters; deck sharing.
 
 Named because with a big budget the instinct runs the other way.
 
-- **Do not generate more cards.** 239 already exceeds the 200–400 the
-  monetisation brief estimates covers a shop floor, and **105 have no photo and
+- **Do not generate more cards.** 242 already exceeds the 200–400 the
+  monetisation brief estimates covers a shop floor, and **98 have no photo and
   no verified data**. More cards makes both problems worse and the app look
   bigger than it is.
 - **Do not split `timber.html` into modules.** 368 KB and ~6,500 lines is large
@@ -306,11 +321,11 @@ Named because with a big budget the instinct runs the other way.
 **Tonight, no Oscar needed** — 1.1 run sheet → 1.2 intake → 2.3 plant-sense
 checks → 2.1 provenance → 3 due-count and streak.
 
-That order is deliberate: 1.1 and 1.2 mean the moment Oscar has 57 photos they
-become 57 dealt cards with no chore; 2.3 finds my errors before he has to read
+That order is deliberate: 1.1 and 1.2 mean the moment Oscar has a batch of photos
+they become that many dealt cards with no chore; 2.3 finds my errors before he has to read
 for them; 2.1 makes the deck honest about which half is guesswork.
 
-**Needs Oscar, whenever he has it** — the 57-photo lap; four batches of 25
+**Needs Oscar, whenever he has it** — the 52-photo lap; four batches of 25
 verification; the VERIFY-QUEUE calls; one phone for the offline measurement;
 one conversation with a manager at Knights.
 
