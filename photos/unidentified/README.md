@@ -58,11 +58,10 @@ markers. None is on a card, and each is here for a stated reason.
 - **`2026-08-12-wisteria-purple-obstructed.jpg`** — rejected twice over: a finger
   covers about 55% of the frame, and it was named *W. chinensis* against a held
   card for Japanese wisteria, *W. floribunda* f. *multijuga*.
-- **`2026-08-12-chaenomeles-kinshiden-obstructed.jpg`** — the card
-  *Chaenomeles speciosa* 'Kinshiden' **was written** on 2026-08-13 and sits in
-  the hold block; this photo was rejected for it. About 45% of the frame is an
-  out-of-focus thumb and the one flower is a spent August straggler on a shrub
-  that flowers on bare spring wood. Reshoot in March–April.
+The Chaenomeles 'Kinshiden' shot was parked here too, then **dealt the same day
+on Oscar's instruction** — the thumb blur falls behind the card's stats plaque,
+which he was right about. It now lives at `photos/chaenomeles-speciosa-kinshiden.jpg`.
+See VERIFY-QUEUE 25 for what that does and does not change about the standing rule.
 
 ## Cleared 2026-08-13
 

@@ -473,6 +473,25 @@ If it is *S. hookeriana* var. *digyna* it wants a **new card**, not this photo o
 the confusa one — worth having anyway, since it is the better winter-scent plant
 of the two for a small garden.
 
+**Update 2026-08-13 — Oscar wants it in, and the composition objection is
+withdrawn.** He asked for this photo to be used: *"the sarcococca has this cool
+bright edging around the card, it's a cool photo for now."* Reason 2 above (the
+composition) is therefore **settled in favour of using it** — the bare soil and
+roof tile read as a deliberate bright border, which is his call to make.
+
+**It could not be actioned, for a reason that has nothing to do with either
+objection: the file is not in the repository.** It arrived on 2026-08-11, was
+never staged (correctly, at the time), and the session container it lived in is
+ephemeral and has since been rebuilt. A filesystem-wide search on 2026-08-13
+found no Sarcococca image anywhere. **Oscar needs to re-send it.**
+
+When it arrives, **reason 1 — the identification — is still open**, and it is
+the one that matters: the deck's only Sarcococca card is *S. confusa*, and the
+narrow lanceolate leaves on red-brown stems read like *S. hookeriana* var.
+*digyna*. Dealing it onto the confusa card would put a photograph of one species
+on another species' card, which is a different class of error from an ugly crop.
+Either confirm it is *confusa*, or it wants its own card.
+
 ---
 
 ### 22. Golden Privet added 2026-08-13 — Oscar's own JSON, three loose ends
@@ -553,16 +572,34 @@ CARD-STATS §4b, but it is the second card this session to use the bloom row for
 non-floral interest (Aronia is the other), so it is worth knowing it is a
 pattern and not a slip.
 
-### 25. Flowering Quince 'Kinshiden' is held with no photograph, on purpose
-2026-08-13. Oscar named this plant while sending photographs, and the card was
-written and validated — but it went into **PLANTS_ON_HOLD, not the deck**,
-because the only photograph of it is unusable: roughly 45% of the frame is an
-out-of-focus thumb, and the single flower showing is a spent August straggler on
-a shrub whose display is semi-double lemon-cream flowers on **bare spring wood**.
+### 25. Flowering Quince 'Kinshiden' — DEALT 2026-08-13 on Oscar's call
+Written 2026-08-13 and initially **held** with no photograph: the only shot of
+it is roughly 45% out-of-focus thumb, with one spent August flower on a shrub
+whose display is semi-double lemon-cream flowers on **bare spring wood**. That
+was the Sarcococca rule (item 21) applied a second time.
 
-This is the Sarcococca rule (item 21) applied a second time: a card with no
-photograph is a normal, honest state, and 87 cards are in it. A bad photograph
-on a good card is not. **Reshoot in March–April on bare stems.**
+**Oscar overruled it the same day, and was right on the facts.** His reasoning,
+recorded because it changes how this queue should be read:
+
+> "I understand about the idea of reshooting but I may not even be making this
+> app in a year's time, so what we've got will have to do for now. The thumb is
+> mostly under the stats card."
+
+He is correct about the crop — the card renders the photo full-bleed with the
+Plant Power Points plaque over the lower third, and the thumb falls almost
+entirely behind it. The card was dealt with `--focus '8% 50%'`, chosen by
+rendering the actual card twice: at 20% the flower cluster was clipped by the
+left edge, at 8% it sits whole and in view. **Verified by looking at the render,
+not by eye on the source file.**
+
+The general standing rule does not change — a photo of the wrong plant is still
+worse than no photo. What this settles is narrower and worth keeping straight:
+**composition is Oscar's call, identification is not.** A shot that is merely
+badly framed can be dealt if he wants it; a shot that might be the wrong species
+still cannot.
+
+A reshoot in March–April on bare stems would still be a better card, if the app
+is still being built then.
 
 Worth flagging separately: this is a **different plant from the held
 *Chaenomeles* × *superba* 'Crimson and Gold'** card, which is a different cross

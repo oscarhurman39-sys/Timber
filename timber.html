@@ -749,7 +749,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r46 · 2026-08-13 · b578987';
+const BUILD='r47 · 2026-08-13 · f112586';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4806,7 +4806,31 @@ const PLANTS = [
    uses:"walls · fences · fast screening · autumn colour",
    size:"8–12 m H × 4–8 m W",
    seasonalImpact:"", growthSpeed:18, pestRisk:2, thirst:8, careLevel:12, sunNeed:60, sunMin:20},
- ];
+   {common:"Flowering Quince 'Kinshiden'", latin:"Chaenomeles speciosa 'Kinshiden'", hue:50,
+   visual:"Semi-double lemon-cream flowers with green centres on bare spring stems · thorny",
+   water:"Moderate; low once established",
+   aspect:"Any aspect",
+   soil:"Well-drained; any pH; Goes chlorotic on very alkaline soil",
+   prune:"Shorten side shoots after flowering; spur-prune if wall-trained",
+   source:"",
+   peak:"Mar-Jun",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"'Crimson and Gold' · 'Nivalis' · 'Moerloosei'",
+   hardiness:"H6",
+   resilience:"very hardy · thorny · wall-trainable · lime-tolerant · shade-tolerant",
+   uses:"wall training · informal hedging · early nectar · fruit for jelly",
+   size:"1.5–2.5 m H × 2–3 m W",
+   seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:8, careLevel:10, sunNeed:70, sunMin:35},
+];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -6965,30 +6989,6 @@ const PLANTS_ON_HOLD=[
    size:"0.5-1m H × 0.1-0.5m W",
    seasonalImpact:"", growthSpeed:14, pestRisk:14, thirst:11, careLevel:10, sunNeed:90, sunMin:60},
 
-  {common:"Flowering Quince 'Kinshiden'", latin:"Chaenomeles speciosa 'Kinshiden'", hue:50,
-   visual:"Semi-double lemon-cream flowers with green centres on bare spring stems · thorny",
-   water:"Moderate; low once established",
-   aspect:"Any aspect",
-   soil:"Well-drained; any pH; Goes chlorotic on very alkaline soil",
-   prune:"Shorten side shoots after flowering; spur-prune if wall-trained",
-   source:"",
-   peak:"Mar-Jun",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"'Crimson and Gold' · 'Nivalis' · 'Moerloosei'",
-   hardiness:"H6",
-   resilience:"very hardy · thorny · wall-trainable · lime-tolerant · shade-tolerant",
-   uses:"wall training · informal hedging · early nectar · fruit for jelly",
-   size:"1.5–2.5 m H × 2–3 m W",
-   seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:8, careLevel:10, sunNeed:70, sunMin:35},
  ];
 /* HOLD:END */
 
@@ -7334,6 +7334,7 @@ const PHOTO_SWAP={
   },
 };
 const PHOTO_FOCUS={
+  'chaenomeles-speciosa-kinshiden':'8% 50%',
   'cornus-sanguinea-midwinter-fire':'50% 25%','kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%','hydrangea-serrata':'45% 16%','cornus-kousa':'50% 52%'};
 
 function growthRailHTML(growthSpeed){          /* scale = capped segment, inner px 102.9..198.1 */
