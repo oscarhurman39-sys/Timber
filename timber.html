@@ -486,6 +486,18 @@
      moving light passes BEHIND the thorns. */
   .edging{position:absolute;inset:0;z-index:1;pointer-events:none;
     background-size:100% 100%;background-repeat:no-repeat}
+  /* ---- grove: stop-motion botanical overlay (see the ANIM config) ----
+     z1 like the wisps: over the photograph, under the title and growth rail
+     (both z2) and under every panel outside .tinner. Clipped at the window edge
+     by .tinner's overflow, which is the "branches slide under the frame" look.
+     The animation itself is attached per-pack by buildAnimCSS(); at rest and
+     under prefers-reduced-motion each layer holds its full-bloom cell via the
+     inline background-position, so a still card shows the best frame. */
+  .grove{position:absolute;inset:0;z-index:1;pointer-events:none;contain:strict}
+  .grove .sprig{position:absolute;background-repeat:no-repeat}
+  @media (prefers-reduced-motion:reduce){
+    .card.hot .grove .sprig{animation:none}
+  }
   /* nothing animates until the card is near the top of the deck */
   .card.hot .wisp{animation-duration:var(--wd,24s);animation-iteration-count:infinite;
     animation-timing-function:ease-in-out;animation-direction:alternate}
@@ -721,7 +733,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r28 · 2026-08-13 · 376c19e';
+const BUILD='r29 · 2026-08-13 · ab7a81e';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -5135,6 +5147,80 @@ const HOLO={
 };
 /* Accept either a bare frame path or the full config object, so an entry can start
    life as one line and grow. */
+
+/* ============ ANIM — stop-motion botanical overlays ("grove" packs) ============
+   A second kind of special card, independent of HOLO: the card keeps its whole
+   standard shell — frame, rails, plaque, soil, band, all text — and gains one
+   animated layer over the photograph, under every piece of type. The plant grows
+   through the card; the card does not melt around the plant.
+
+   Each pack is a set of sprite STRIPS (all frames side by side in one PNG, cut
+   by tools/extract-anim-strips.js). Playing a frame is background-position on an
+   already-decoded image, so a mid-swap flash is structurally impossible — no
+   preloader needed, which is also why these are strips and not ten files.
+
+   durations are PER FRAME in ms and deliberately uneven: a dormant pause, a
+   hang at full bloom. Even timing reads as someone swapping a JPEG; uneven
+   timing reads as stop-motion. phase offsets a layer by that many frames —
+   only ever phase layers whose art is DISCONNECTED (floating sprigs); pieces
+   that connect (the arch/trunk/stem ring here) must stay in one layer at one
+   phase or the artwork cracks at the join.
+
+   holdFrame is the cell shown when the card is not hot and under
+   prefers-reduced-motion: full bloom, so a static view is the best view.
+
+   Avondale strips rebuilt with:
+     node tools/extract-anim-strips.js <dir-of-frame_NN.png> avondale \
+       --layer 'ring:0,0,100,100:cuts=20,58,42,42+62,74,16,26' \
+       --layer 'sprigA:20,58,42,42' --layer 'sprigB:62,74,16,26' --scale 0.5
+   (source: Oscar's avondale_special_card_10_frames zip, 1024x1536, not in the
+   repo at 22 MB — the strips are the committed artefact) */
+const ANIM={
+  'cercis-chinensis-avondale':{
+    frames:10,
+    durations:[260,160,150,150,150,220,180,150,150,220],
+    holdFrame:5,
+    layers:[
+      {src:'art/anim/avondale-ring.png',   left:0,  top:0,  width:100, height:100, phase:0},
+      {src:'art/anim/avondale-sprigA.png', left:20, top:58, width:42,  height:42,  phase:5},
+      {src:'art/anim/avondale-sprigB.png', left:62, top:74, width:16,  height:26,  phase:2},
+    ],
+  },
+};
+/* One @keyframes per pack, generated from its durations so uneven timing lives
+   in data, not hand-written CSS. step-end holds each cell then jumps — the
+   browser must never interpolate background-position or cells would smear. */
+function buildAnimCSS(){
+  let css='';
+  for(const [slug,a] of Object.entries(ANIM)){
+    const total=a.durations.reduce((s,d)=>s+d,0);
+    if(a.durations.length!==a.frames)throw new Error(`ANIM ${slug}: ${a.durations.length} durations for ${a.frames} frames`);
+    const stops=[];let t=0;
+    for(let i=0;i<a.frames;i++){
+      stops.push(`${(t/total*100).toFixed(3)}%{background-position-x:${(i/(a.frames-1)*100).toFixed(3)}%}`);
+      t+=a.durations[i];
+    }
+    stops.push(`100%{background-position-x:0%}`);
+    css+=`@keyframes grove-${slug}{${stops.join('')}}\n`
+      +`.card.hot [data-grove="${slug}"] .sprig{animation:grove-${slug} ${total}ms step-end infinite}\n`;
+  }
+  const s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
+}
+buildAnimCSS();
+function groveHTML(slug){
+  const a=ANIM[slug];
+  if(!a)return '';
+  const hold=(a.holdFrame/(a.frames-1)*100).toFixed(3);
+  const L=a.layers.map(l=>{
+    /* phase = start this layer N frames into the cycle, expressed as a negative
+       delay of the real (uneven) time those frames take */
+    let ms=0;for(let i=0;i<l.phase;i++)ms+=a.durations[i];
+    return `<div class="sprig" style="left:${l.left}%;top:${l.top}%;width:${l.width}%;height:${l.height}%;`
+      +`background-image:url(${l.src});background-size:${a.frames*100}% 100%;`
+      +`background-position:${hold}% 0;animation-delay:-${ms}ms"></div>`;
+  }).join('');
+  return `<div class="grove" data-grove="${slug}" aria-hidden="true">${L}</div>`;
+}
 /* One <i> per configured wisp layer. Everything an effect needs is inline: the
    image, which generic animation drives it, how long it takes, and how strong it
    reads. Adding a new vibe to a card is one more entry in its wisps array — no
@@ -5199,7 +5285,7 @@ function renderCard(idx){
             <div class="bot">${p.latin}</div>
             <button class="say" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">&#9654; Listen</button>
           </div>
-          ${wispsHTML(ho)}${ho&&ho.edging?`<div class="edging" aria-hidden="true" style="background-image:url(${ho.edging})"></div>`:''}
+          ${wispsHTML(ho)}${ho&&ho.edging?`<div class="edging" aria-hidden="true" style="background-image:url(${ho.edging})"></div>`:''}${groveHTML(slug)}
           <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
         </div>
         <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
