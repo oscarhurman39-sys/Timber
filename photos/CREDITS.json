@@ -201,6 +201,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "aucuba-japonica-crotonifolia.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "berberis-darwinii.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "berberis-thunbergii-orange-ice.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -458,6 +478,16 @@
    "sourceUrl": null,
    "commit": null,
    "commitSubject": null,
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cornus-sanguinea-midwinter-fire.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -921,6 +951,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hydrangea-petiolaris.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "hydrangea-serrata.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — C2PA manifest present, claim generator 'Galaxy S24', signed by Samsung Electronics; no trainedAlgorithmicMedia or composite assertion. Cryptographically the best-evidenced photo in the repo",
@@ -988,6 +1028,16 @@
    "sourceUrl": null,
    "commit": "37ef84f",
    "commitSubject": "Add Kniphofia 'Pyromania Orange Blaze' + v4b card demonstrating Position rule",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "laurus-nobilis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1063,7 +1113,7 @@
   {
    "file": "liriodendron-tulipifera-snow-bird.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": "5213b09",
@@ -1432,6 +1482,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "prunus-laurocerasus-rotundifolia.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "prunus-lusitanica-angustifolia.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1639,6 +1699,16 @@
    "sourceUrl": null,
    "commit": "c210f80",
    "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "viburnum-bodnantense-charles-lamont-leaf.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
