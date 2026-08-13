@@ -497,6 +497,41 @@ things carried forward rather than resolved:
 
 ---
 
+### 23. Three cards written 2026-08-13 from parked photos — what needs your call
+2026-08-13. Aronia, Lotus and Begonia had photographs sitting in
+`photos/unidentified/` with no cards. Oscar asked for the cards, so they were
+researched and written rather than left parked. Hardiness was verified per plant
+against the RHS and **none of the three is H5** — H6, H4 and H2 respectively.
+
+What is *not* settled, and why each was left as-is rather than guessed:
+
+1. **Begonia `careLevel` is 14, and that number depends on a decision you make,
+   not on the plant.** 14 assumes the tuber is lifted and overwintered like a
+   dahlia (the rubric's 18–20 band is "tender lifting"). If Knights sells it as
+   throwaway summer bedding, the honest number is nearer 6. Same plant, same
+   card, two defensible ratings — this one is a shop policy question.
+2. **Lotus size is the bench label's 30cm × 30cm; RHS and Shoot both say 0.5m
+   after 2–5 years.** CARD-STATS §4a says prefer the label for the plant you are
+   actually holding, so the label won — but a customer buying it for a gap will
+   get a plant half again as big as the card implies.
+3. **Lotus `toxicity` is deliberately blank.** No RHS toxicity statement was
+   found for the species, and several legumes carry toxic seed. A "pet-safe" or
+   "harmful" claim would both have been inventions; blank is the honest state.
+4. **Lotus hardiness H4 is the species band.** The RHS page for the 'Lisbob'
+   cultivar itself could not be read from this environment (rhs.org.uk is
+   blocked by the network egress proxy — the band came from search results, not
+   the page). If the cultivar is rated differently, this is where it is wrong.
+5. **Aronia `peak` is May–Oct, one band across three seasons** — white flowers
+   May–Jun, black berries from August, red autumn colour into October. The card
+   has a single bloom row and this plant has three moments; the wide band is the
+   same compromise already accepted for Parrotia (Feb–Nov) and Malus 'Evereste'
+   (Apr–Nov).
+
+None of these is a defect in the deck. They are the points where a second
+opinion would change what a card says.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

@@ -211,7 +211,27 @@
    "commercialUseCleared": true
   },
   {
+   "file": "aronia-melanocarpa.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "aucuba-japonica-crotonifolia.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "begonia-bonfire-nzcone.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -1228,6 +1248,16 @@
    "sourceUrl": null,
    "commit": "a6af042",
    "commitSubject": "Add the Winter Beauty Honeysuckle photo",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "lotus-hirsutus-little-boy-blue-lisbob.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

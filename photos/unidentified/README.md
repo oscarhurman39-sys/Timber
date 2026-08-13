@@ -24,24 +24,20 @@ spent leaves low down.
 `node tools/add-plant.js --quick <plant>.json photos/unidentified/<this file>`,
 which will re-stage it under the correct latin slug.
 
-## 2026-08-11-aronia-melanocarpa.jpg
+## 2026-08-11-lotus-hirsutus-little-boy-blue-label.jpg
 
-**Identified, awaiting a card.** *Aronia melanocarpa* (black chokeberry), named
-by Oscar on 2026-08-13. Ripe black berries visible bottom-left. Galaxy S24
-capture, 2026-08-11 17:23, no AI provenance markers. No Aronia card exists.
+**Kept as an identification record, not a card photo.** The Knights bench label
+for *Lotus hirsutus* LITTLE BOY BLUE (£14.99, location BLACKMOO, "PVR APPLIED"),
+photographed beside the plant on 2026-08-11. It is the source for that card's
+30cm × 30cm size — which is smaller than the 0.5m RHS gives — so it is worth
+keeping legible rather than discarding once the card was written.
 
-## 2026-08-11-lotus-hirsutus-little-boy-blue.jpg (+ -label.jpg)
+The plant photo it belonged to is now dealt as `photos/lotus-hirsutus-little-boy-blue-lisbob.jpg`.
 
-**Identified by its own bench label, awaiting a card.** *Lotus hirsutus* LITTLE
-BOY BLUE (Dorycnium) — the companion `-label.jpg` shows the Knights bench label
-(£14.99, location BLACKMOO) and is kept as the identification record, not as a
-card photo. Galaxy S24 captures, 2026-08-11 17:19, no AI provenance markers.
-No Lotus/Dorycnium card exists.
+## Cleared 2026-08-13
 
-## 2026-08-12-begonia-bonfire.jpg
-
-**Identified, awaiting a card.** Begonia 'Bonfire' (Begonia boliviensis), named
-by Oscar on 2026-08-13 — "a photo to hold, not in the deck". Orange pendent
-flowers, serrated lance leaves; Galaxy S24 capture, 2026-08-12 12:39, no AI
-provenance markers. No begonia card exists in the deck or the hold block yet;
-kept at full resolution so it can be staged when one is written.
+Three photos left this folder on 2026-08-13 when cards were written for them —
+*Aronia melanocarpa*, *Lotus hirsutus* LITTLE BOY BLUE and Begonia BONFIRE. They
+are now normal card photos under their latin slugs, staged from the full-resolution
+originals held here. This is the folder working as intended: nothing was lost
+while the cards did not yet exist.
