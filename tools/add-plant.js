@@ -118,7 +118,15 @@ const count = dealt + 1;
     let s = fs.readFileSync(f, 'utf8');
     const before = s;
     if (/const NPLANTS = \d+/.test(s)) die(`${t} still hardcodes NPLANTS — it should derive it from timber.html`);
-    s = s.replace(/for \(let i = 0; i < \d+; i\+\+\) \{ await page\.click\('#learn'\)/g,
+    /* Only a loop that walked the WHOLE deck is rewritten, and it is recognised
+       by its literal matching the pre-insert count. Any other number is a
+       deliberate constant, not a stale deck size.
+       This used to be /\d+/g, which also rewrote edge-test's reduced-motion
+       check — that one learns 8 cards and rewinds them inside a 1s button hold,
+       so pointing it at the deck size demanded a 150-card rewind in one second
+       and failed. It turned the suite red on 2026-08-13 and had to be reverted
+       by hand twice in one session. */
+    s = s.replace(new RegExp(`for \\(let i = 0; i < ${dealt}; i\\+\\+\\) \\{ await page\\.click\\('#learn'\\)`, 'g'),
                   `for (let i = 0; i < ${count}; i++) { await page.click('#learn')`);
     s = s.replace(/PLANTS\.length === \d+/g, `PLANTS.length === ${count}`);
     s = s.replace(/c\.cards === \d+ && c\.left === '\d+'/g, `c.cards === ${count} && c.left === '${count}'`);

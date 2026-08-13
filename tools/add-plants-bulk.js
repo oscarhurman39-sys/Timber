@@ -140,7 +140,11 @@ console.log(`\nall ${pairs.length} plants validated — proceeding to write\n`);
     let s = fs.readFileSync(f, 'utf8');
     const before = s;
     if (/const NPLANTS = \d+/.test(s)) die(`${t} still hardcodes NPLANTS — it should derive it from timber.html`);
-    s = s.replace(/for \(let i = 0; i < \d+; i\+\+\) \{ await page\.click\('#learn'\)/g,
+    /* Matches only a loop whose literal is the pre-insert deck count — see the
+       same guard in add-plant.js. A bare /\d+/g here also rewrote edge-test's
+       reduced-motion rewind (a deliberate 8), which broke the suite twice on
+       2026-08-13. */
+    s = s.replace(new RegExp(`for \\(let i = 0; i < ${dealtBefore}; i\\+\\+\\) \\{ await page\\.click\\('#learn'\\)`, 'g'),
                   `for (let i = 0; i < ${count}; i++) { await page.click('#learn')`);
     s = s.replace(/PLANTS\.length === \d+/g, `PLANTS.length === ${count}`);
     s = s.replace(/c\.cards === \d+ && c\.left === '\d+'/g, `c.cards === ${count} && c.left === '${count}'`);

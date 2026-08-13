@@ -517,6 +517,246 @@ If it is *S. hookeriana* var. *digyna* it wants a **new card**, not this photo o
 the confusa one — worth having anyway, since it is the better winter-scent plant
 of the two for a small garden.
 
+**Update 2026-08-13 — Oscar wants it in, and the composition objection is
+withdrawn.** He asked for this photo to be used: *"the sarcococca has this cool
+bright edging around the card, it's a cool photo for now."* Reason 2 above (the
+composition) is therefore **settled in favour of using it** — the bare soil and
+roof tile read as a deliberate bright border, which is his call to make.
+
+**It could not be actioned, for a reason that has nothing to do with either
+objection: the file is not in the repository.** It arrived on 2026-08-11, was
+never staged (correctly, at the time), and the session container it lived in is
+ephemeral and has since been rebuilt. A filesystem-wide search on 2026-08-13
+found no Sarcococca image anywhere. **Oscar needs to re-send it.**
+
+When it arrives, **reason 1 — the identification — is still open**, and it is
+the one that matters: the deck's only Sarcococca card is *S. confusa*, and the
+narrow lanceolate leaves on red-brown stems read like *S. hookeriana* var.
+*digyna*. Dealing it onto the confusa card would put a photograph of one species
+on another species' card, which is a different class of error from an ugly crop.
+Either confirm it is *confusa*, or it wants its own card.
+
+---
+
+### 22. Golden Privet added 2026-08-13 — Oscar's own JSON, three loose ends
+2026-08-13. New card, Oscar supplied the JSON and the photograph together; it
+entered the deck through `add-plant.js` and the validator passed it. Three
+things carried forward rather than resolved:
+
+1. **The JSON's own declared-uncertain items**, verbatim: RHS classifies the
+   cultivar as evergreen while some UK hedge suppliers say semi-evergreen in
+   severe winters; and container suitability is inferred for regularly clipped
+   specimens rather than mature unrestricted shrubs.
+2. **careLevel is 5 (renders 1.25/5, "Easy").** The validator flagged it as
+   suspiciously like an unconverted 0-5 rating. The held plain Garden Privet
+   carries 9 (2.25/5). If golden privet was meant to be *harder* work than
+   plain privet, this is the unconverted number; Oscar to confirm.
+3. **Hardiness disagreed with the sibling card — RESOLVED 2026-08-13.** This
+   card says H5 and the RHS page for 'Aureum' agrees. The held **Garden Privet**
+   (*L. ovalifolium*, plain) said **H4** for the same species. On Oscar's
+   instruction to fix outstanding problems, the RHS band for the plain species
+   was checked as well — it is **H5** — and the held card was corrected H4 → H5
+   through `plants-tool.js`, which reported exactly one changed card. The two
+   privet cards now agree with each other and with the RHS.
+
+---
+
+### 23. Three cards written 2026-08-13 from parked photos — what needs your call
+2026-08-13. Aronia, Lotus and Begonia had photographs sitting in
+`photos/unidentified/` with no cards. Oscar asked for the cards, so they were
+researched and written rather than left parked. Hardiness was verified per plant
+against the RHS and **none of the three is H5** — H6, H4 and H2 respectively.
+
+What is *not* settled, and why each was left as-is rather than guessed:
+
+1. **Begonia `careLevel` is 14, and that number depends on a decision you make,
+   not on the plant.** 14 assumes the tuber is lifted and overwintered like a
+   dahlia (the rubric's 18–20 band is "tender lifting"). If Knights sells it as
+   throwaway summer bedding, the honest number is nearer 6. Same plant, same
+   card, two defensible ratings — this one is a shop policy question.
+2. **Lotus size is the bench label's 30cm × 30cm; RHS and Shoot both say 0.5m
+   after 2–5 years.** CARD-STATS §4a says prefer the label for the plant you are
+   actually holding, so the label won — but a customer buying it for a gap will
+   get a plant half again as big as the card implies.
+3. **Lotus `toxicity` is deliberately blank.** No RHS toxicity statement was
+   found for the species, and several legumes carry toxic seed. A "pet-safe" or
+   "harmful" claim would both have been inventions; blank is the honest state.
+4. **Lotus hardiness H4 is the species band.** The RHS page for the 'Lisbob'
+   cultivar itself could not be read from this environment (rhs.org.uk is
+   blocked by the network egress proxy — the band came from search results, not
+   the page). If the cultivar is rated differently, this is where it is wrong.
+5. **Aronia `peak` is May–Oct, one band across three seasons** — white flowers
+   May–Jun, black berries from August, red autumn colour into October. The card
+   has a single bloom row and this plant has three moments; the wide band is the
+   same compromise already accepted for Parrotia (Feb–Nov) and Malus 'Evereste'
+   (Apr–Nov).
+
+None of these is a defect in the deck. They are the points where a second
+opinion would change what a card says.
+
+---
+
+### 24. Virginia Creeper is a Schedule 9 card — check the wording
+2026-08-13. *Parthenocissus quinquefolia* is listed on **Schedule 9 Part II of
+the Wildlife and Countryside Act 1981**: an offence to plant it or cause it to
+grow in the wild. Its `resilience` field carries the same ⚠ sentence already
+used on *Rhododendron luteum* (item 17), deliberately word-for-word, so the deck
+does not state the law two different ways.
+
+As with luteum, **this is not a sale ban** and the card does not imply one.
+Two things to confirm, the same two as item 17: that the listing is current, and
+that you are content selling it with the containment advice attached. Item 17
+also gives luteum the fuller `type` banner + `returnRisk` detail treatment; this
+card does not have that, because those are your commercial fields and a JSON
+import cannot write them. If you want the banner, it needs adding by hand.
+
+Also note the card's `peak` is **Sep–Nov, the autumn-colour window**, not a
+flowering window — the flowers are green and insignificant. That follows
+CARD-STATS §4b, but it is the second card this session to use the bloom row for
+non-floral interest (Aronia is the other), so it is worth knowing it is a
+pattern and not a slip.
+
+### 25. Flowering Quince 'Kinshiden' — DEALT 2026-08-13 on Oscar's call
+Written 2026-08-13 and initially **held** with no photograph: the only shot of
+it is roughly 45% out-of-focus thumb, with one spent August flower on a shrub
+whose display is semi-double lemon-cream flowers on **bare spring wood**. That
+was the Sarcococca rule (item 21) applied a second time.
+
+**Oscar overruled it the same day, and was right on the facts.** His reasoning,
+recorded because it changes how this queue should be read:
+
+> "I understand about the idea of reshooting but I may not even be making this
+> app in a year's time, so what we've got will have to do for now. The thumb is
+> mostly under the stats card."
+
+He is correct about the crop — the card renders the photo full-bleed with the
+Plant Power Points plaque over the lower third, and the thumb falls almost
+entirely behind it. The card was dealt with `--focus '8% 50%'`, chosen by
+rendering the actual card twice: at 20% the flower cluster was clipped by the
+left edge, at 8% it sits whole and in view. **Verified by looking at the render,
+not by eye on the source file.**
+
+The general standing rule does not change — a photo of the wrong plant is still
+worse than no photo. What this settles is narrower and worth keeping straight:
+**composition is Oscar's call, identification is not.** A shot that is merely
+badly framed can be dealt if he wants it; a shot that might be the wrong species
+still cannot.
+
+A reshoot in March–April on bare stems would still be a better card, if the app
+is still being built then.
+
+Worth flagging separately: this is a **different plant from the held
+*Chaenomeles* × *superba* 'Crimson and Gold'** card, which is a different cross
+with red-and-gold single flowers. Two quince cards is correct, not a duplicate.
+
+---
+
+### 26–30. Five cards Oscar named 2026-08-13 from the parked photos
+He identified every one of the five plants parked the previous message
+directly — "skimmia obsession, sambucus black beauty, it is cytisus
+battandieri, [pyracantha] orange star... yeah its phlox" — so none of this is
+my identification; it's my research against his call, same division of labour
+as the rest of this session. What follows is the sourcing and what's still
+soft in each.
+
+**26. Skimmia OBSESSION ('Obsbolwi').** H5, RHS-confirmed. The one fact worth
+repeating to staff: it's **self-fertile** — every plant berries on its own,
+unlike 'Rubella' which needs a female partner. Size is genuinely disputed
+between sources (RHS/Coolings say 0.5–1m, other retailers say 1–1.5m); the RHS
+figure is what's on the card.
+
+**27. Black Elder 'Black Beauty' ('Gerda').** H6, RHS-confirmed, RHS AGM. Same
+species and near-identical care to the held 'Black Lace' ('Eva') — the two are
+told apart by leaf: Black Beauty's cut is coarser, Black Lace's is fine and
+near-fern. Toxicity (harmful raw, berries/flowers edible cooked) is RHS-stated
+for this cultivar specifically, not inferred from the genus.
+
+**28. Pineapple Broom (*Argyrocytisus battandieri*, syn. *Cytisus
+battandieri*).** **H5 — CONFIRMED by Oscar 2026-08-13.** Originally flagged
+here as search-engine synthesis rather than a direct RHS read; Oscar checked
+it and confirmed the rating is correct as it stood. No change made.
+
+**29. Firethorn 'Orange Star' (*Pyracantha coccinea* 'Orange Star').**
+**Hardiness CORRECTED 2026-08-13: H6 → H2, on Oscar's direct instruction**
+after he checked the figure that was flagged here as the weakest-sourced of
+the five (matched to the sibling SAPHYR ORANGE plus retailer copy, no direct
+RHS read). H2 means **tender — no frost at all** (1 to 5°C), a completely
+different growing proposition from H6 (hardy to −20°C), and from its own
+sibling card.
+
+**This creates a real inconsistency the automated checks cannot see and did
+not flag**, because nothing in `plant-sense.js` cross-checks hardiness against
+`uses` or `resilience` — only against prose season-words and size text. Left
+exactly as Oscar wrote it, but worth his eye:
+
+- `uses` still reads **"walls · hedging · containers · wildlife"**. Permanent
+  outdoor hedging is not really compatible with H2 across most of the UK — an
+  H2 plant is normally a container subject brought under cover for winter
+  (CARD-STATS' own H2 anchor is *Pennisetum* 'Rubrum', a patio grass, not a
+  hedge). If H2 is right, `uses` probably needs to lose "hedging" and gain
+  something like "large containers, moved under cover for winter" — but that's
+  a card-content decision, not a fact I should invent.
+- `resilience` — **"thornless · fireblight tolerant · disease resistant"** —
+  says nothing about frost tenderness, the single most operationally important
+  fact for a plant this tender in a UK garden centre.
+
+Its one genuinely distinctive fact, **thornless**, still comes from the US
+plant patent rather than the photograph, which doesn't show enough stem to
+confirm it against the actual stock plant.
+
+**30. Chinese Wisteria (*Wisteria sinensis*).** H6, RHS-confirmed — same band
+as the deck's Japanese Wisteria, so hardiness doesn't distinguish them.
+**The photograph cannot itself confirm the species.** The textbook tell is
+twining direction (*sinensis* anticlockwise, *floribunda* clockwise), not
+visible in the shot, and the classic flowers-before-leaves spring display
+wasn't what was photographed — this was an August flush among leaves already
+colouring, which fits an established plant's occasional light repeat bloom
+better than a first flowering. The species rests on Oscar's identification,
+recorded as the source in the card's own `uncertain` list.
+
+**Composition, separately:** the wisteria photo has roughly 55% of the frame
+covered by a finger. Oscar's instruction was explicit — *"I like the finger
+shots for now, they feel funny and make the app feel thrown together, which it
+already is in ways"* — so it was used as-is, no crop attempted. Consistent with
+item 25: composition is his call, identification isn't, and here he made both
+calls on the same photo, separately.
+
+### 31. All five (26–30) superseded by Oscar's own JSONs, same message
+Oscar pasted his own fully-researched JSON for all five cards immediately
+after they were dealt — the PLANT-BRIEF/NEW-SESSION route, done properly. Per
+CARD-STATS §0, editorial content is his to arbitrate, so his version replaced
+mine wholesale (every field that reaches a card) rather than being merged
+field-by-field. Applied via `plants-tool.js` CSV edit, not a re-deal — photos
+and their staged slugs are untouched, only the data changed.
+
+Three of his common names differ from mine (**Skimmia OBSESSION** →
+**Obsession Japanese Skimmia**, **Black Elder 'Black Beauty'** →
+**Black Beauty Elder**, **Firethorn 'Orange Star'** → **Orange Star
+Firethorn**) — deliberate renames, not losses, and logged in
+`data/renames.json` so `data-audit.js --history` reads them as such.
+
+Two things worth knowing that came out of applying his data:
+
+- **His Pyracantha size (2m × 1m) looks odd next to the sibling SAPHYR ORANGE
+  (2.5–3m × 2.5–3m, roughly square) — narrower and taller than a typical
+  Pyracantha habit.** Not changed: his own `uncertain` list cites Plantipp
+  (the PBR registration body) directly for this figure, which is a stronger,
+  more specific source than anything used for the sibling card.
+- **His Orange Star JSON self-contradicted on arrival** — `visual` claimed
+  "white spring flowers" while `peak` was "Sep-Feb" (no spring month), which
+  `plant-sense.js` correctly flagged as a hard contradiction, not a soft
+  warning (the checker treats an actual flowering claim differently from a
+  colour/foliage claim — see its own comment at `tools/plant-sense.js:172`).
+  Checked independently: *Pyracantha coccinea* does flower May–June, so the
+  fact is real, it just can't live in a Sep-Feb bloom band. **Fixed by copying
+  the sibling SAPHYR ORANGE's own solution to the identical problem** — its
+  visual reads "white flowers earlier" with no season word attached, true and
+  non-contradictory. Same fix, same card family, second time it's needed.
+
+Two hardiness sources from item 28–29 remain exactly as flagged before —
+Oscar's JSONs didn't add an RHS page read for either, so rhs.org.uk is still
+worth checking directly on a machine that can reach it.
+
 ---
 
 ## Accepted, not defects
