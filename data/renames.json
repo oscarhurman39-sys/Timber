@@ -15,6 +15,33 @@
       "commit": "68d61a9",
       "date": "2026-08-08",
       "why": "Same plant. 'Goshiki' is the accepted cultivar name and 'Tricolor' a synonym, so the card was renamed to the accepted name and its photo and data refreshed. The design line had separately ported in a 'Goshiki' card, so both names briefly co-existed as duplicates at 2e91159; the r17 merge kept the accepted-name card and dropped the synonym. The surviving card records the synonym in its cvs field."
+    },
+    {
+      "from": "Skimmia OBSESSION",
+      "to": "Obsession Japanese Skimmia",
+      "fromLatin": "Skimmia japonica OBSESSION ('Obsbolwi')",
+      "toLatin": "Skimmia japonica OBSESSION ('Obsbolwi')",
+      "commit": "57bca8b",
+      "date": "2026-08-13",
+      "why": "Same plant and card, dealt earlier the same day with a draft common name. Oscar pasted his own fully-researched JSON for the card immediately afterward with this common name; his data replaced the draft wholesale, including the rename."
+    },
+    {
+      "from": "Black Elder 'Black Beauty'",
+      "to": "Black Beauty Elder",
+      "fromLatin": "Sambucus nigra f. porphyrophylla 'Gerda'",
+      "toLatin": "Sambucus nigra f. porphyrophylla 'Gerda'",
+      "commit": "57bca8b",
+      "date": "2026-08-13",
+      "why": "Same plant and card, same-day rename as the Skimmia above — Oscar's own JSON superseded the draft common name."
+    },
+    {
+      "from": "Firethorn 'Orange Star'",
+      "to": "Orange Star Firethorn",
+      "fromLatin": "Pyracantha coccinea 'Orange Star'",
+      "toLatin": "Pyracantha coccinea 'Orange Star'",
+      "commit": "57bca8b",
+      "date": "2026-08-13",
+      "why": "Same plant and card, same-day rename as the two above. Oscar's supplied JSON also fixed a peak-vs-prose contradiction in the visual text (VERIFY-QUEUE 31), applied in the same commit as this rename."
     }
   ]
 }
