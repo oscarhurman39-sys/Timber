@@ -210,6 +210,21 @@ function topFlipped(page) {
   check('menu opens', await page.evaluate(() => document.getElementById('sheet').classList.contains('open')));
   c = await counts(page);
   check('menu learned count matches', c.menu === 1 && c.done === 1, JSON.stringify(c));
+  /* The menu's filter chips are generated from the deck, so the panel grows as plants
+     are added. It overflowed silently: at 128 plants "Reset progress" sat 36px below
+     the fold and could not be tapped on a 390x844 phone at all. That only ever showed
+     up as an opaque click timeout below, so assert the reachability directly. */
+  const menuFit = await page.evaluate(() => {
+    const panel = document.querySelector('#sheet .panel');
+    const row = document.getElementById('resetRow');
+    const scrolls = /auto|scroll/.test(getComputedStyle(panel).overflowY);
+    const overflows = panel.scrollHeight > panel.clientHeight;
+    const rowBottom = row.getBoundingClientRect().bottom - panel.getBoundingClientRect().top;
+    return { scrolls, overflows, reachable: scrolls || rowBottom <= panel.clientHeight,
+             scrollH: panel.scrollHeight, clientH: panel.clientHeight };
+  });
+  check('every menu row is reachable (panel scrolls when the deck outgrows it)',
+    menuFit.reachable, JSON.stringify(menuFit));
   await page.click('#resetRow'); await page.waitForTimeout(350);
   c = await counts(page);
   const sheetClosed = await page.evaluate(() => !document.getElementById('sheet').classList.contains('open'));
@@ -474,8 +489,15 @@ function topFlipped(page) {
     card.dispatchEvent(mk('touchend', cx + 150));
     return true;
   });
-  await tpage.waitForTimeout(450);
-  const tc = await counts(tpage);
+  /* Wait for the swiped card to actually leave the DOM rather than sleeping a fixed
+     450ms and hoping. The count updates immediately; the node goes on animation end,
+     so on a loaded machine the old fixed wait caught done:1/left:128 correct but the
+     node still present, and failed for a reason that was never about behaviour. */
+  let tc = await counts(tpage);
+  for (let i = 0; i < 20 && tc.cards !== NPLANTS - 1; i++) {
+    await tpage.waitForTimeout(100);
+    tc = await counts(tpage);
+  }
   check('touch: swipe right marks learned', touchSwipe && tc.cards === NPLANTS-1 && tc.done === 1, JSON.stringify(tc));
   await tctx.close();
 

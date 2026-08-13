@@ -1,28 +1,463 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Source 1200px photos for the five climbers (Nelly Moser, PPE, montana
-  rubens, armandii, Russian Vine) — their cards still fall back to leaf gradients.
-since: 2026-08-05  sessions-unchanged: 3
-progress: 2026-08-11 — **Choisya fixed: KNOWN_GAPS is now empty.** The last tracked
-  defect in the repo, standing since 2026-08-07. Oscar supplied researched values;
-  the card now carries all six ratings plus sunMin, and an aspect naming E/S/W
-  facings so the compass renders instead of collapsing to "Any aspect" and losing
-  what the data actually said. tests/deck-audit.js KNOWN_GAPS = {}.
-  MERGED, NOT REPLACED — and that mattered. Choisya is one of only THREE cards in
-  the deck with a trade price, retail price and margin (the atlas had just flagged
-  the trade layer as 2% populated), and the incoming JSON supplied no commercial
-  block at all. Applying it wholesale would have deleted the scarcest data in the
-  repository. 16 fields updated, 12 kept.
-  Also stripped research citation markers from six fields — the JSON arrived with
-  trailing reference numbers ("...in summer or autumn. 0") that would have rendered
-  as stray digits on the card — and trimmed soil/soilWarning from 114 and 160 chars
-  to 21 and 38, inside the measured panel limits.
-  The validator earned its keep twice: it queried pestRisk 5 and careLevel 4 as
-  possibly un-converted 0-5 ratings. Both are correct on the 0-20 scale (1.25/5 and
-  1/5, i.e. trouble-free and very easy) and match the prose, so they stand. Atlas
-  and VERIFY-QUEUE updated; Choisya moves to a Closed section rather than vanishing.
-  Build r22.
+brick: Photograph the next tranche of the 52 held cards that peak in August —
+  `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
+  command. The other 46 want a May / March / November / June visit.
+since: 2026-08-11  sessions-unchanged: 1
+progress: 2026-08-13 (later) — **`tools/photo-run.js` — the shooting sheet is a
+  command now.** The 08-11 sheet was a chat: it could not be re-run and its
+  numbers rotted immediately.
+  **THREE BUCKETS, NOT TWO, and Corylus 'Contorta' is why.** A sheet that splits
+  on "does peak cover this month" would have said skip it in August; the shot
+  reads perfectly and it is dealt. Peak is the peak of INTEREST, not the only
+  month worth a photograph. So SHOOT (52) / LOOK (16, off-peak but still
+  physically there) / WAIT (30, flowers, named month). LOOK only ever promotes
+  out of WAIT, so a wrong guess costs one glance on a lap already being walked.
+  **TWO BUGS FOUND BY READING THE OUTPUT RATHER THAN TRUSTING IT.** Promoting on
+  "foliage" and "form" put *Dicentra spectabilis* on the August list — it is
+  fully dormant by August, there is nothing above ground — and Delphinium, tatty
+  the moment the spike is over. Narrowed to bark / stem / berries / evergreen:
+  30 -> 22. Then "stem" turned out to be grammar more often than subject —
+  "arching stems hung with pink lockets", "bare stems buried under golden
+  flowers" — where the stem is how the FLOWER is held. Forsythia, Kerria,
+  Weigela and Kolkwitzia all arrived in August that way. A carrier verb beside
+  the stem is the tell and it separates cleanly: the cards that genuinely sell a
+  stem never use one. 22 -> 16, all sixteen defensible.
+  **MY OWN BRIEF WAS WRONG ABOUT THE GROUPING.** It proposed grouping by `type`.
+  `type` is empty on 95 of 98 held cards — it carries the Schedule 9 banner and
+  nothing else, and `root`, `bench`, `pots` are empty too. There is no category
+  field at all. Grouping now comes from the height in `size` with climber /
+  hedging / rose lifted out of `uses` prose, unparseable sizes under their own
+  heading, and `--rules` printing the lot so it can be argued with.
+  Every peak string in the file must parse before any counting happens.
+  `--html` writes a phone sheet, ticks persisted per month; gitignored, because a
+  committed generated sheet is the stale document this replaces. 14/14.
+progress: 2026-08-13 — **hold-to-rewind shipped and IS LIVE (r41, run #27).**
+  Oscar asked to hold the undo button to reset the deck; I built a 2s
+  hold-to-commit with a filling progress bar, and he corrected the design before
+  it ever went out: hold should *rewind*, fast but slow enough to stop partway,
+  "in case someone's only trying to go back that far", with the cards animating
+  back in.
+  **HIS VERSION IS STRICTLY BETTER AND IT IS WORTH KNOWING WHY.** A threshold has
+  two outcomes and needs a confirmation affordance to be safe. A scrub has no
+  outcome to confirm at all, because every frame of the gesture is a state you
+  could have reached by tapping — so letting go is the whole safety mechanism and
+  the progress bar became meaningless. I had designed the guard rail before
+  asking whether the cliff needed to exist. The readout is now the glyph spinning
+  anticlockwise, which says "running backwards" rather than "about to commit".
+  PACING is the feature: 340ms before anything repeats so a tap stays a tap, then
+  190ms decaying x0.82 to a 40ms floor — ~10 cards in the first second with
+  enough separation to stop on the one you meant, ~25/s after, ~6s for the whole
+  deck. The step counter resets on every press, so release-and-re-press gives the
+  slow zone back for fine-tuning.
+  Cards re-enter from the side they were flung to — asserted at +523.6px and
+  -523.6px rather than assumed. Fly-in duration is DERIVED from the gap (gap x2.4,
+  clamped 90-300ms) because `markHot()` only promotes three live cards: a fixed
+  300ms flight at full tilt would leave cards stacked mid-air below the hot
+  window and losing their layer, which is the white-flash failure the compositing
+  comments already describe. perf-test green.
+  Reduced motion deliberately departs from the "card animations are locked as-is"
+  note: that note governs the existing swipe, and 25 cards a second flying across
+  the screen is the exact thing the preference asks us not to do. Cards cut
+  straight to place; the rewind still works, and there is a test for it.
+  **THE AUGUST SPLIT WAS ALREADY YOURS — I re-derived it, I did not find it.**
+  Wrote `SUPERCHARGE-BRIEF.md` off the pre-08-11 tree and led it with "the brick
+  is not 105 photos, it is 57 and a diary". Rebasing surfaced that the 08-11
+  session had reached the same conclusion two days earlier and it is sitting in
+  the brick line above. Independent agreement is worth something as corroboration
+  and nothing as news; the brief now says so.
+  What the re-derivation did add is that **the counts rot and the months do not**.
+  Computed twice a few hours apart across ten new photographs: 57/48 became
+  52/46, same four months in the same order (May 22, Mar 14, Nov 8, Jun 2, zero
+  uncovered). **And the shooting sheet exists only as a chat — grep finds it
+  nowhere but this ledger.** A number that moves daily, held in a document nobody
+  regenerates, is the argument for committing `tools/photo-run.js`.
+  `deal-plant.js` also rescoped the brief's intake tool down to a front end over
+  logic that already works, rather than a reimplementation of it.
+  Build r41. Full gate 14/14 against the rebased tree. csv 242 rows (144 + 98).
+progress: 2026-08-11 — **the first photos arrived and the brick moved for real:
+  deck 134 -> 136.** Oscar sent three from the centre. Two dealt, one refused.
+  **NEW TOOL, `tools/deal-plant.js`** — the missing half of the toolchain.
+  `add-plant.js` creates a new card from JSON; nothing existed to attach a
+  photograph to a card already written and sitting in hold, which is the state
+  105 cards are in. One command now stages the photo at 1200px, lifts the row out
+  of `PLANTS_ON_HOLD` into `PLANTS`, and records provenance. The row is moved as
+  matched TEXT rather than re-serialised, so a dealt card is byte-identical apart
+  from where it sits; photo and html roll back together if the result does not
+  re-parse.
+  FOUND BY USING IT: `photo-credits.js --set` could only ever UPDATE an existing
+  entry, so a newly staged photo could not be recorded at all without hand-editing
+  CREDITS.json — and the whole point of that file is that it is not hand-edited.
+  It now creates the entry when the file is genuinely on disk, and still refuses
+  when it is not, so a typo'd filename is still an error rather than a phantom
+  record.
+  DEALT: *Corylus avellana* 'Contorta' (2198x3586 -> 736x1200) and *Eucalyptus
+  gunnii* Azura (2498x4000 -> 749x1200). Both render clean — checked, not assumed.
+  The hazel is interesting: August is a "wait" month for it on the shooting sheet,
+  but the shot shows the corkscrew stem legibly, so it earns its card now. The
+  sheet's advice is a default, not a rule.
+  REFUSED: the third, a Sarcococca. Oscar could not remember the species and the
+  deck's only Sarcococca card is *S. confusa* — so filing it would put it there.
+  The leaves are narrow and lanceolate on reddish stems, which reads as
+  *S. hookeriana* var. *digyna* rather than confusa. Separately, ~60% of the frame
+  is bare soil and roof tile, so the card's portrait crop would show mostly soil.
+  Written up as VERIFY-QUEUE item 21 with what would settle it. **A photo on the
+  wrong card is worse than no photo** — the deck's value is that it can be
+  trusted.
+  Build r34. Full gate 14/14. csv 239 rows (136 dealt + 103 held).
+progress: 2026-08-10 (night, later) — **Oscar checked the 50 and corrected 26 of
+  them. Two were legal facts I had backwards.** Sent him a published worksheet
+  laying the batch out for verification — prose quiet, my invented numbers on
+  parchment strips — and he came back the same evening with a correction list.
+  All 26 applied; deck still 134 dealt / 105 held, 239 total, no duplicates.
+  **THE TWO THAT MATTER: I asserted a reassuring legal negative twice and was
+  wrong twice.** *Cotoneaster horizontalis* — I wrote "carries no Schedule 9
+  restriction in England and Wales". *Rosa rugosa* — I wrote "No UK legal
+  restriction". **Both ARE on Schedule 9.** They are now compliance cards on the
+  Gunnera pattern, both stating what Schedule 9 actually means: not a sale ban,
+  an offence to plant or cause to grow in the wild. Deck now carries SEVEN
+  compliance cards. The lesson is narrower than "check the law" — nobody asked
+  me whether these were restricted. I volunteered the negative. A card silent on
+  legal status is honest; a card that says "no restriction" is a claim needing a
+  source, and I had none.
+  TEN ACCEPTED NAMES CHANGED, which matters because the photo filename derives
+  from `latin` — every one changed which file its card is waiting for. Nothing
+  had to be moved on disk, because all 50 are held with no photograph. That is
+  the reverse build paying for itself: a name correction that would have meant
+  renaming files and rewriting CREDITS entries cost nothing at all. Superseded
+  names all kept in `cvs` as `syn.` so old-name searches still land.
+  ONE RENAME REFUSED, on his instruction: *Hebe* 'Red Edge' stays *Hebe*, because
+  current RHS material uses both *Hebe* and *Veronica* treatments and a
+  destructive rename trades one right answer for another. Synonyms recorded.
+  SIZES: the deck means ULTIMATE size and several of mine were maintained size —
+  Box 1.5-2.5m -> 4-8m, Bay 4-8m -> 8-12m, Privet 2.5-4m -> 4-8m. Clipped
+  subjects invite exactly that error.
+  HARDINESS moved on seven cards and my bands were optimistic more often than
+  not (five downward, two up) — a bias worth remembering for any other
+  Claude-estimated card.
+  Six values he restated were already correct; the patch tool reported them as
+  confirmations rather than treating a no-op as an applied fix.
+  Build r33 — NOT r30. Rebuilding the rows meant restoring timber.html from the
+  batch-1 commit, which carried r29 and would have deployed r30 over a live r32:
+  a lower number on newer content, breaking the one signal that tells a phone
+  which version it has. Bumped past the high-water mark instead.
+  Still open on these 50: the four 0-20 ratings and the sun/aspect figures. His
+  pass did not cover them.
+progress: 2026-08-10 (night) — **r32 IS LIVE, and I got the reason wrong once on
+  the way.** Publishing is ONE command: fast-forward the live branch
+  `claude/timber-plant-pwa-j69h5e` and the push triggers the deploy itself.
+  Verified — run #21, push event, commit 2c6862a, success, and its last step
+  fetches the Pages URL and compares the served build stamp, so "green" means
+  live rather than probably-live. Today's 234 cards are on Oscar's link.
+  THE CORRECTION: I had already written into the README and a commit message
+  that **"a push made by a Claude session does not create a workflow run"**,
+  after pushing a feature branch produced no run while a dispatch on the same
+  commit produced one. Then my own push to the live branch created run #21 four
+  seconds before the dispatch I did not need. **The claim was false and is now
+  removed from both files.** What is actually established: pushing the live
+  branch deploys; pushing a feature branch produced no run (cause unknown); a
+  dispatch aimed at a feature branch died in 2s with no logs, which LOOKS like
+  the github-pages environment refusing a non-default branch but was never
+  confirmed. Both files now say that rather than a tidy theory.
+  Third time today that confident-and-specific-and-wrong is the failure mode
+  (the Avondale frame, the photo provenance, now this). Same shape every time:
+  a real observation, a plausible mechanism invented to explain it, and the
+  mechanism written down as fact before it was tested. The observation was
+  sound; the "because" was not.
+progress: 2026-08-10 (later still) — **the live app publishes itself now.** Oscar:
+  make the GitHub preview always update with new features. It wasn't updating,
+  and the reason was exact rather than vague.
+  **The workflow was pinned to two hard-coded branch names.** Every Claude
+  session works on a fresh `claude/<topic>-<id>` branch, and none of them was in
+  that list — so no session's work has ever published on its own. Checked
+  against the API rather than assumed: **all 19 Pages deploys came from
+  `claude/timber-plant-pwa-j69h5e`**, and the newest, run #19, is commit 5e2abc3
+  — precisely the commit this branch forked from. **Today's 100 cards were not
+  live and would not have gone live.** That is the same fact the ledger keeps
+  recording as "NOT yet live: sits on branch X pending fast-forward"; it was a
+  missing trigger, not forgetfulness.
+  Now `pages.yml` fires on `claude/**`, so a push publishes. Four things guard it:
+  (1) it REFUSES a commit that does not contain the current live commit, because
+  two sessions at once is not hypothetical here (2026-08-07) and the second to
+  push would otherwise silently roll the app back — force is available from the
+  Actions tab and says what it is about to replace; (2) the deploy gate is now
+  `run-all --fast`, all five data checks (~1s), up from the two it ran before —
+  plant-sense is in that set, and it caught two bad cards of mine this morning;
+  (3) the served-bytes verification was already there and stays; (4) only after
+  that does it fast-forward the default branch, so ONE branch still records what
+  is live. Plain push, so fast-forward-only; GITHUB_TOKEN pushes don't retrigger
+  workflows, so it cannot loop. `[skip ci]` opts a commit out.
+  The CLIENT half was already right and needed nothing: sw.js is
+  stale-while-revalidate and posts `timber-updated` when a fresher shell lands,
+  which raises the "Update ready · tap to refresh" pill. One load stale at worst,
+  and the pill closes even that.
+  NOT put in CI: the nine browser suites. They need Playwright and ~8 minutes,
+  which is too slow in front of every deploy — so the full gate stays a local
+  pre-push step. Worth revisiting if a bad push ever reaches the live app.
+  [Unverified] the first real run — the workflow change publishes itself, so the
+  proof is Actions run #20 going green and the live build reading r32.
+progress: 2026-08-10 (later) — **second batch of 50: UK garden favourites. Hold
+  block 55 -> 105; the deck itself is unchanged at 134.** Oscar asked for a list
+  of 50 favourites; built it straight through the same pipeline rather than
+  leaving a list in chat.
+  **The thing to know about this batch is whose data it is.** The morning's 50
+  came from Oscar's RHS-style JSON and I condensed it. **This 50 I chose and
+  wrote myself**, with no network and no RHS page — so every rating, size band,
+  hardiness value and hue is an editorial estimate. Written up as VERIFY-QUEUE
+  item 18 in exactly those terms. Nothing is dealt, so none of it can reach a
+  customer before he has looked at it. `origin` in the source file records it as
+  claude-generated, not customer-verified.
+  CHOSEN TO FILL REAL HOLES, not to pad a count. Before this the deck had **no
+  rose at all** — no box, no beech, no privet, no Lavandula angustifolia, no
+  hosta, no heuchera, no delphinium, no lupin. 40 of the 50 are genera the deck
+  did not have; the other 10 are distinct species in genera it did (Prunus
+  'Kanzan' and serrula, Acer 'Sango-kaku', Magnolia stellata, Viburnum opulus
+  and davidii, Mahonia 'Charity', Cotoneaster horizontalis, Clematis 'Jackmanii',
+  Lonicera nitida). Zero duplicates, checked against all 189 existing entries.
+  DELIBERATELY EXCLUDED: bulbs. Galanthus, Narcissus, Allium and Cyclamen are
+  unarguably favourites, but the card's prune / container / H×W fields fit them
+  badly and that is a schema decision for Oscar, not one to make silently.
+  **plant-sense earned its keep on new data.** It caught two of my own cards
+  contradicting themselves: Pyracantha's `visual` led with spring flowers against
+  a Sep-Jan peak (berries are what it is bought for — prose reordered, peak was
+  right), and Astilbe 'Fanal' read as drought-tolerant at thirst 18/20 because
+  `soilWarning` said "Dry soil crisps it within days" — a phrase that means the
+  opposite of what it pattern-matches to. Reworded. That second one matters: a
+  regex misread it, and a member of staff skimming the card would too.
+  0 validator errors across all 50; the 41 remaining warnings are the
+  0-5-vs-0-20 scale heuristic on genuinely low ratings.
+  Build r32. Full gate 14/14. csv 239 rows (134 dealt + 105 held).
+progress: 2026-08-10 — **reverse build: 50 cards created from data, 1 dealt, 49
+  held. Deck 133 -> 134.** Oscar supplied a 50-plant RHS-style JSON and asked for
+  the cards built first, photos to follow — with the standing rule that an empty
+  card never sits in the deck.
+  **The photo answer is 1 of 50, and it is worth knowing precisely.** Every latin
+  was slugged the way the app slugs it and matched against `photos/`: only
+  *Chamaerops humilis* has a file. Genus-level near-misses (three Rhododendrons,
+  five Acers, one Lonicera) are all different species and unusable. No photos
+  arrived in the chat either — the message was data only. So 49 cards go straight
+  to `PLANTS_ON_HOLD`, which is not a failure of the batch: it IS the batch. The
+  data is now in place so each card deals the moment a photograph lands.
+  The one dealt card closes a loop that was already open: CREDITS.json records
+  commit 799dc96 as *"Stage Oscar's own Chamaerops humilis photo (not wired into
+  the app yet)"*. The photo has been sitting at 1200x1600 since 09 Aug with no
+  card to hang it on. This batch supplied the card.
+  ZERO duplicates against the existing 133 — every one of the 50 is new to the
+  deck. `check-plant-json.js` passes all 50 with **0 errors**; the 49 remaining
+  warnings are all the 0-5-vs-0-20 scale heuristic firing on genuinely low
+  ratings (pestRisk 4/20 etc.), which the deck is full of already.
+  **The one real schema fight was `aspect`.** Oscar's JSON gives it as a light
+  level ("Full sun in a warm, sheltered position") and the validator rejects that
+  BY DESIGN — the card's aspect is a compass facing and light already lives in
+  sunNeed/sunMin. Rather than guess 50 times, one rule was applied across the
+  batch from the supplied sunNeed (90+ → South/West, 70-89 → East/South/West,
+  45-69 → Any aspect, 25-44 → North/East/West, under 25 → North/East), with two
+  deliberate overrides where the source explicitly warns off afternoon sun:
+  Dicksonia and Skimmia 'Rubella' go North/East, not North/East/West. Written up
+  as VERIFY-QUEUE item 15 and marked [Unverified] — editorial calls from a rubric,
+  same basis as the five climbers, not Oscar's portfolio.
+  **Fifth compliance card: *Rhododendron luteum*.** Schedule 9 Part II, WCA 1981
+  (England and Wales) — an offence to plant it or cause it to grow in the wild.
+  Deliberately NOT given knotweed's ⚠ NEVER STOCK banner: Schedule 9 is not a
+  sale ban, and a banner that over-reads the law costs Oscar sales of a plant he
+  is allowed to sell. Uses the Gunnera fields (`type` + `returnRisk`).
+  **One source claim was refused rather than repeated.** The JSON asserts
+  *Dicksonia antarctica* "is not currently listed under CITES for trade
+  restrictions". My recollection is the opposite and I could not check it from
+  this container, so the card carries the true-either-way wording ("check the
+  supplier's documentation") and VERIFY-QUEUE item 16 holds the real question.
+  Two sessions running, confident-and-specific-and-wrong has been the failure
+  mode here; this is the same trap declined.
+  Nothing from the source was thrown away: `foliage`, `container`,
+  `hardinessNote`, `toxicity` and the declared-`uncertain` lists have no home in
+  the card schema, so they are committed at `data/source-batch-2026-08-10.json`,
+  keyed by latin. Toxicity is folded into `resilience` (Lonicera precedent).
+  Build r29. Fast checks 5/5; csv re-exported at 189 rows (134 dealt + 55 held).
+progress: 2026-08-09 (night) — **two-photo cards and the Avondale blossom frame both
+  ship.** Oscar asked for Cercis 'Avondale' as a special card alternating two
+  photos every 3.5s with quick cuts through black, and supplied blossom frame art
+  plus a component breakdown sheet.
+  SHIPPED: `PHOTO_SWAP`, a new capability — a card can name a second photograph
+  and blink between the pair. Built as CSS keyframes, not JS timers, and gated on
+  `.hot`, so a 133-card deck never runs 133 animations and perf-test's compositing
+  budget still holds; it also stops under prefers-reduced-motion. Deliberately a
+  PAIR, not a carousel. Avondale is the case that earns it: peak Apr-May, "dense
+  rose-purple pea flowers wreathe the bare branches", and the deck's photo was
+  summer foliage — the card was showing none of what it sells. Leaf ↔ flower says
+  it in one card. Oscar asked for 1ms fades; **1ms is under one frame** (16.7ms at
+  60Hz) so it would render as a hard cut with no fade at all. Used ~105ms each way,
+  the fastest that still reads as a fade, with the hold exposed as `--holo-swap`.
+  Say the word and it becomes a true instant cut.
+  THE FRAME: shipped — but only after I got it wrong. Oscar sent two files, an
+  assembled frame and a component breakdown sheet. **I used the breakdown sheet as
+  the frame**, rendered the mess that produced, and wrote a detailed VERIFY-QUEUE
+  entry declaring HIS artwork off-spec on three counts: wrong canvas ratio, wrong
+  spine width, panels painted where the photo covers them. Every measurement was
+  accurate and every conclusion wrong, because they were taken against the wrong
+  file. The assembled frame is 1049x1499, ratio 0.6998 — the same artboard as
+  Eternal Flame, needing no rescale and no rebuild. It went straight on, and the
+  spine ornaments carry the HEIGHT and SPREAD values exactly as drawn. Item 12 is
+  retracted in full and rewritten. Second time today that confident, specific and
+  wrong has been the failure mode (see the photo-provenance correction); the common
+  cause is concluding from a derived artefact without checking it is the artefact I
+  think it is.
+  PANELS STAY PARCHMENT, on both special cards. Oscar on Eternal Flame: he could not
+  read the stats and they were all over the place. He is right — dark label ink on
+  orange flame, with the month strip and the n/5 values worst hit. The extracted
+  fire panels are out and standard parchment is back; Avondale never got its panels
+  swapped, for the same reason. **New rule for special cards: holo where it
+  decorates, parchment where it informs.** The plaque, soil box and band are the one
+  part of a card with a job, and a card whose numbers cannot be read has failed at
+  it however good the border looks. Extracted panels kept in art/holo/ for a future
+  frame drawn light enough behind the ink.
+  ITEM 13 SETTLED same session: Oscar confirms early spring is right, so `peak`
+  Apr-May stands and the blink stays on *C. chinensis* 'Avondale'. No change.
+  CLIMBERS: asked after the held climber photos — **there are none on disk.** That
+  is why all five are held, and their `size` fields still carry no H × W split
+  ("2-3m", "8-12m"), so both rails would render blank even with a photo. One
+  errand fixes both.
+  Build r27. Full gate 14/14 at --jobs 3.
+progress: 2026-08-09 (evening) — **Pink Kousa Dogwood: deck 131 -> 132. First card
+  added deliberately WITHOUT a cultivar name.** Oscar sent three benched Cornus
+  kousa photos with an AI-generated cultivar identification ('Milky Way',
+  'Satomi', 'Heart Throb', 'Scarlet Fire', 'Venus') and asked what I made of it.
+  Answer: confident and mostly unsupportable. Pink kousa bracts shift with
+  temperature, light, flower age and plant maturity, so the same tree a fortnight
+  apart reads as two cultivars — and the writeup's groupings were built on exactly
+  that. Two claims are contradicted by the photos themselves: bract length ≈ leaf
+  length **rules out 'Venus'** (bracts about double, and it is sold as C. ×
+  elwinortonii anyway), and the narrow finely-acuminate bracts **argue against
+  'Heart Throb'**, which is sold on broad rounded overlapping bracts. What the
+  photos DO establish, and what went on the card: this is a genuinely pink-bracted
+  selection, not a white form ageing pink — the colour is deep and even while the
+  central head is still tight and green. Also found: **the two cream-bracted
+  photos are different plants** (long-acuminate with gaps and pink tips vs rounded
+  overlapping with a pink base flush); bract shape is far more stable than colour,
+  so they must not be merged into one card.
+  Oscar wanted the pink one in the deck, so it went in as a SPECIES card with cvs
+  reading "unnamed pink form — the species is cream-white". Horticultural data is
+  inherited from the deck's existing Cornus kousa 'Zuilb1' card rather than
+  invented, and that is recorded in the JSON's uncertain list; only the size is
+  changed, to the species' spreading 4-8m rather than the columnar cultivar's.
+  This is the Sweet Cupcake lesson applied before the fact rather than after.
+  Photo focus 50% 52% — the default clipped the hero bloom's lower bracts behind
+  the stats plaque, and bract shape is the identifiable feature here.
+  Good news on the tooling: this was the first plant added through add-plant.js
+  since the trailing-comma fix, and it inserted cleanly — 131 -> 132 with the
+  derived count agreeing. The EXIF path is also fine: the source reads 4000x3000
+  landscape from its SOF header but carries an orientation tag, and the tool
+  staged it correctly as 1200x1600 portrait.
+  Build r24. Deck now has THREE Cornus kousa entries, two of which are the
+  duplicate 'Flower Tower' pair from item 8 — worth resolving together.
+progress: 2026-08-09 (later still) — **Jelena Witch Hazel + Mountain Hydrangea:
+  deck 129 -> 131. Two real bugs in the add-plant tooling found by using it.**
+  Both from Oscar's own photos, both first-of-kind in a small way: 'Jelena' is the
+  second Hamamelis × intermedia (pairs with 'Arnold Promise' like the two Acer
+  palmatums), Hydrangea serrata is the seventh hydrangea and the first species
+  rather than a named cultivar.
+  **THE TOOLING BUG THAT MATTERS: `add-plants-bulk.js` corrupted timber.html.**
+  The r18 csv round-trip writes the deck's last row with NO trailing comma; both
+  add-plant.js and add-plants-bulk.js append new rows straight before the `];`,
+  assuming there is one. Result: `sunMin:40}` immediately followed by `{common:` —
+  invalid JS, PLANTS unparseable, **the whole app dead**. This was armed the moment
+  r18 reformatted the file and would have hit whoever added the next plant; it hit
+  this one. The tools now insert the separator when the previous row needs it,
+  verified by simulating a comma-less tail and re-parsing. Worse, the run left the
+  broken file ON DISK — its count guard fired after the write, not before — so both
+  tools now re-parse what they wrote and **roll timber.html back** if it doesn't
+  come out clean, matching what r18 already did for plants-tool.js.
+  Second bug, same run: the bulk tool counted the deck as every `latin:` in the
+  file, so the 5 on-hold plants were included and 129+2 was reported as "136". It
+  now counts dealt rows only. The single-plant add-plant.js always got this right,
+  which is why it never showed up.
+  PHOTO: the hydrangea shot is unusually tall (1200×2768) and the default 50% 40%
+  crop showed only the red autumn foliage, clipping the flowers off the top edge —
+  fighting the card's own Jul-Sep bloom band. Focus set to 45% 16% so a white
+  lacecap sits in frame WITH the red leaves. Jelena needed no focus entry; the
+  default frames the backlit copper ribbons perfectly.
+  TWO THINGS FOR OSCAR, both in VERIFY-QUEUE rather than guessed at: the serrata
+  card's hue is 220 (blue, the species archetype) while **his photo shows a
+  white-flowered form** — and there is a nursery label in the shot, so this may
+  want to be a cultivar card like the deck's other six hydrangeas; and the two
+  Hamamelis × intermedia cards disagree on sunNeed (65 vs 80) and thirst (9 vs 11)
+  for cultivars of one hybrid, which now sit side by side in any "witch hazel"
+  search. Toxicity rides in `resilience` again (Lonicera precedent) — the fifth
+  card to borrow a field for something the schema does not have.
+  Build r23. Fast checks 5/5 throughout; full gate at the end.
+progress: 2026-08-09 (later) — **Choisya settled + Japanese Knotweed added: deck
+  128 -> 129. First plant work built on the r18 toolchain rather than the old
+  per-plant routine.** Started on the old system by mistake — the card was built,
+  the suites run card-by-card, and it cost minutes per gate at 129 cards. Redone
+  on top of r18: `run-all.js --fast` gates the data work in **0.3s** and the
+  browser suites run once, at the end. That is the whole difference; nothing about
+  the card changed. The fast checks earned it immediately — they caught a stale
+  `plants.csv` and a stale build stamp within a second of the row landing, both of
+  which the old routine would only have surfaced after a full browser run.
+  CHOISYA: the deck audit's last KNOWN_GAP, and VERIFY-QUEUE item 4. Filled from
+  Oscar's JSON — aspect is now the real facing East / South / West (compass and
+  light bar both render), growth 9 / thirst 6 / care 4 / sun 75 floor 40, plus
+  visual, water, soil warning, prune, uses. **KNOWN_GAPS is empty for the first
+  time.** Three calls went against the JSON and all are written up in VERIFY-QUEUE
+  item 4 rather than buried here: pestRisk 3 not 8 (PLANT-BRIEF uses Choisya as
+  its own "0–3 bulletproof" anchor — if 8 is right, the brief needs a new anchor
+  plant, so this is a rubric question, not a card question); hue stays 150 per
+  protocol v12.4, though the deck is genuinely split on white-flower hue and it is
+  worth settling once; peak Apr–May -> May-Jun, which moves the card in the "In
+  season now" filter. cvs merged, not replaced, so 'Sundance' and 'Aztec Pearl'
+  survive alongside the synonym.
+  KNOTWEED: the deck's **fourth compliance card and the first NEVER-STOCK one** —
+  it is here to be recognised and reported, not sold. Compliance borrows the
+  Gunnera fields again (v12.21). Deck records: growthSpeed 20 and careLevel 20 are
+  both firsts — careLevel is the containment and legal burden, not difficulty
+  keeping it alive — against pestRisk 2, genuinely pest-free. H7, hardiest card in
+  the deck. plant-sense passes it clean, which is worth noting: a card whose prose
+  says "rampant" and whose ratings say 20/20 is self-consistent.
+  Photo is Oscar's AI composite (fire and lightning, deliberately) — recorded in
+  CREDITS.json as his, `commercialUseCleared: false` because the generator's terms
+  are unrecorded. VERIFY-QUEUE item 5 covers both that and the ID weakness: the
+  red-flecked cane the card's own `visual` names is not visible in the shot.
+  THE REAL FIND — **app-test was never flaky; the menu is broken on a phone.**
+  It had been failing at a different line each run, which reads like timing, and
+  the earlier session wrote it off as container slowness. It is not: the menu
+  panel is `height:100%` with no overflow handling, and its filter chips are
+  GENERATED FROM THE DECK, so the panel grows every time a plant is added. At 390
+  × 844 the content is 1098px tall. **"Reset progress" sat 36px below the fold and
+  could not be tapped at all** — Playwright's retry loop sometimes shifted enough
+  to land the click and sometimes didn't, which is where the "flaky" impression
+  came from. Japanese Knotweed's ⚠ NEVER STOCK chip pushed it to 68px. Fixed at
+  the cheapest layer per CORRECTION-PROTOCOL §4.2 — `overflow-y:auto` +
+  `overscroll-behavior:contain` on `.sheet .panel` (contained so the deck behind
+  it can never pull-to-refresh, which perf/edge tests guard). Per §4.1 the defect
+  is now something the suite can SEE: app-test asserts every menu row is reachable
+  (95 checks, was 94), verified failing on an unfixed copy first. **This bug
+  reached a real phone and grows with every plant added** — anything else keyed to
+  deck size deserves the same look.
+  PROVENANCE CORRECTED — **Oscar took every photo himself; the r18 record said
+  otherwise.** CREDITS.json marked 146 of 152 photos "unrecorded / licence
+  unknown", reasoning that plant-images-tool.js had fetched them from Wikimedia
+  and written the paperwork into gitignored `plant-images/` where it was lost.
+  Oscar says he shot them all, and the evidence backs him, not the inference:
+  **the downloader has never been run** (the README says so in the same file that
+  drew the conclusion, and it needs network the container lacked), `plant-images/`
+  was never committed because nothing was ever downloaded, and the photo register
+  describes ~100 images in detail without once naming an external source. The
+  missing paperwork was read as lost; it never existed. All 150 photographs are now
+  recorded as his own and cleared. EXIF can't corroborate either way — add-plant.js
+  re-encodes through a canvas and strips metadata — so the record rests on the
+  owner's account plus those three checks, which is the right basis. Only the two
+  AI images stay uncleared: knotweed (**ChatGPT + Gemini**, per Oscar) and the
+  Ajuga v12.5 remake. That closes the VERIFY-QUEUE photo section entirely and
+  removes the "not fine for commercial use" warning the README carried.
+  Worth noting as a pattern: this was a confident, well-written, thoroughly
+  documented conclusion built on one unchecked assumption, and it had already been
+  propagated into three files. Ask the owner before inferring provenance.
+  ALSO: `photo-credits.js --init` re-derives every photo's origin commit from
+  `git log --all`, so running it in a container with more remote branches fetched
+  rewrote 56 unrelated provenance records. Backed out — the single new entry was
+  added surgically instead. **The tool's output depends on which refs happen to be
+  local**, which is worth a guard before anyone runs --init again.
+  Build r19. Fast checks 5/5.
 progress: 2026-08-09 (latest+) — **holo effects: panels, and a generic wisp layer.**
   Oscar asked to isolate the rainbow patterns and spiky shards from his frame and
   float them over the photo, to have a reusable animation he can hang any effect

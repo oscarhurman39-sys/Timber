@@ -119,6 +119,125 @@ function check(name, cond, extra) {
   check('undone card returns unflipped with correct counts', flipped === false && c.left === String(NPLANTS) && c.done === '0', JSON.stringify({ flipped, c }));
   await ctx.close();
 
+  /* ---- 7. hold-to-rewind on the undo button ----
+     The property that makes the gesture safe is that it is STOPPABLE — somebody
+     holding it is usually trying to reach a particular card, not to wipe the deck.
+     So the load-bearing assertion here is the middle one: a one-second hold must
+     rewind several cards and still stop a long way short of the top. */
+  ctx = await browser.newContext();
+  page = await ctx.newPage();
+  const errs7 = [];
+  page.on('pageerror', e => errs7.push(String(e)));
+  await page.goto(URL); await page.waitForTimeout(300);
+  const state = () => page.evaluate(() => ({
+    cards: document.querySelectorAll('.card:not([data-gone])').length,
+    left: document.getElementById('left').textContent,
+    done: document.getElementById('done').textContent,
+    history: Array.isArray(history) ? history.length : -1,   /* not window.history — the app's let-scoped array shadows it */
+    disabled: document.getElementById('back').disabled,
+    rewinding: document.getElementById('back').classList.contains('rewinding'),
+    /* flyIn puts an inline transition on the card it is animating and clears it
+       after; a card carrying one is a card currently sailing back into the deck */
+    flying: [...document.querySelectorAll('.card')].filter(c => /transform/.test(c.style.transition)).length,
+  }));
+  const pressBack = async ms => {
+    const b = await page.locator('#back').boundingBox();
+    await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+    await page.mouse.down();
+    await page.waitForTimeout(ms);
+    await page.mouse.up();
+    await page.waitForTimeout(200);
+  };
+  /* A card has to come back the side it was flung to, or the rewind reads as cards
+     appearing from nowhere rather than the swipe running backwards. flyIn clears the
+     inline transform synchronously, so the start position is only observable as the
+     computed matrix once the transition is under way. */
+  const reenterX = () => page.evaluate(() => new Promise(res => {
+    undo(500);
+    setTimeout(() => {
+      const c = [...document.querySelectorAll('.card:not([data-gone])')].pop();
+      const m = getComputedStyle(c).transform.match(/matrix(3d)?\(([^)]+)\)/);
+      if (!m) return res(0);
+      const v = m[2].split(',').map(Number);
+      res(m[1] ? v[12] : v[4]);
+    }, 50);
+  }));
+  await page.click('#learn'); await page.waitForTimeout(500);
+  const xLearned = await reenterX(); await page.waitForTimeout(700);
+  await page.click('#skip'); await page.waitForTimeout(500);
+  const xSkipped = await reenterX(); await page.waitForTimeout(700);
+  check('fly-in reverses the swipe: learned re-enters from the right, skip from the left',
+    xLearned > 100 && xSkipped < -100, JSON.stringify({ xLearned, xSkipped }));
+
+  const SWIPES = 24;
+  for (let i = 0; i < SWIPES; i++) { await page.click(i % 4 === 3 ? '#skip' : '#learn'); await page.waitForTimeout(120); }
+  await page.waitForTimeout(400);
+  s = await state();
+  check('rewind setup: 24 swipes recorded', s.history === SWIPES, JSON.stringify(s));
+
+  // a tap is still a tap — one card, no repeat
+  await page.click('#back'); await page.waitForTimeout(300);
+  s = await state();
+  check('tap: undoes exactly one card', s.history === SWIPES - 1, JSON.stringify(s));
+
+  // a press only just past the repeat threshold is still one card, and the click
+  // that follows the release must not sneak in a second
+  await pressBack(430);
+  s = await state();
+  check('press just past the threshold: one card, click swallowed', s.history === SWIPES - 2, JSON.stringify(s));
+
+  // THE ONE THAT MATTERS — mid-rewind cards are flying, and a 1s hold stops far short
+  const b7 = await page.locator('#back').boundingBox();
+  await page.mouse.move(b7.x + b7.width / 2, b7.y + b7.height / 2);
+  await page.mouse.down();
+  await page.waitForTimeout(520);
+  const mid = await state();
+  await page.waitForTimeout(500);
+  await page.mouse.up(); await page.waitForTimeout(300);
+  const stopped = await state();
+  const rewound = (SWIPES - 2) - stopped.history;
+  check('1s hold: rewinds several cards and stops well short of the top',
+    mid.rewinding === true && mid.flying >= 1 && stopped.rewinding === false &&
+    rewound >= 2 && stopped.history >= 5,
+    JSON.stringify({ mid, stopped, rewound }));
+
+  // held to the end it runs out at the top and stops cleanly rather than erroring
+  await pressBack(4000);
+  const top = await state();
+  check('held to the top: full deck restored, history empty, undo disabled, spin off',
+    top.cards === NPLANTS && top.left === String(NPLANTS) && top.done === '0' &&
+    top.history === 0 && top.disabled === true && top.rewinding === false && errs7.length === 0,
+    JSON.stringify({ top, errs7 }));
+
+  await page.reload(); await page.waitForTimeout(400);
+  const afterReload = await state();
+  check('rewind to the top persisted across reload',
+    afterReload.left === String(NPLANTS) && afterReload.done === '0' && afterReload.history === 0,
+    JSON.stringify(afterReload));
+  await ctx.close();
+
+  /* ---- 7b. reduced motion: the rewind still works, the flying does not ---- */
+  ctx = await browser.newContext({ reducedMotion: 'reduce' });
+  page = await ctx.newPage();
+  const errs7b = [];
+  page.on('pageerror', e => errs7b.push(String(e)));
+  await page.goto(URL); await page.waitForTimeout(300);
+  for (let i = 0; i < 8; i++) { await page.click('#learn'); await page.waitForTimeout(120); }
+  await page.waitForTimeout(300);
+  const bR = await page.locator('#back').boundingBox();
+  await page.mouse.move(bR.x + bR.width / 2, bR.y + bR.height / 2);
+  await page.mouse.down(); await page.waitForTimeout(700);
+  const midR = await page.evaluate(() => ({
+    history: history.length,
+    flying: [...document.querySelectorAll('.card')].filter(c => /transform/.test(c.style.transition)).length,
+  }));
+  await page.mouse.up(); await page.waitForTimeout(300);
+  const endR = await page.evaluate(() => history.length);
+  check('reduced motion: cards still rewind, none animate',
+    endR < 8 && endR >= 0 && midR.flying === 0 && errs7b.length === 0,
+    JSON.stringify({ midR, endR, errs7b }));
+  await ctx.close();
+
   console.log(`\n${passed} passed, ${failed} failed`);
   if (fails.length) fails.forEach(f => console.log(' FAIL:', f));
   await browser.close();

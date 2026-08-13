@@ -1,8 +1,23 @@
 name: Deploy to GitHub Pages
 
+# HOW TIMBER GETS LIVE
+#
+# `claude/timber-plant-pwa-j69h5e` is the live branch. Fast-forwarding it
+# publishes — the push triggers this workflow on its own (verified 2026-08-10,
+# run #21). One command, no dispatch, no button:
+#
+#   git push origin HEAD:refs/heads/claude/timber-plant-pwa-j69h5e
+#
+# Feature branches do NOT deploy. A push to claude/plant-card-database-oismvy on
+# 2026-08-10 created no run at all even with a claude/** trigger in the pushed
+# file, and a dispatch aimed at that branch died in 2s with no step logs — the
+# shape of the github-pages environment refusing a non-default branch. Neither
+# cause was pinned down, so this file does not encode a theory about them: it
+# deploys from the live branch, which is the part that is actually established.
+#
 on:
   push:
-    branches: [claude/timber-plant-pwa-j69h5e, claude/timber-plants-sync-3tdm7t]
+    branches: [claude/timber-plant-pwa-j69h5e, main, master]
   workflow_dispatch:
 
 permissions:
@@ -12,7 +27,10 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # NOT cancel-in-progress: a cancelled run can deploy and then die before the
+  # served-bytes check confirms it, leaving nobody sure what is live. Two quick
+  # publishes queue instead of racing.
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -23,17 +41,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # The build stamp is the only way to tell which version a phone is running,
-      # because the service worker serves the previous build once before swapping.
-      # Refuse to deploy a stamp that does not match the content it claims to
-      # describe — otherwise that one signal silently starts lying.
-      - name: Build stamp matches content
-        run: node tools/build-stamp.js --check
-
-      # The plant data lives in four places that can drift apart. A deploy is the
-      # worst time to discover they have.
-      - name: Plant data is consistent
-        run: node tools/data-audit.js
+      # Was two checks (build stamp + data audit). Now all five data checks, in
+      # about a second: build stamp matches content, deck/hold/csv/photos agree,
+      # no card contradicts itself (plant-sense — which caught two bad cards on
+      # 2026-08-10), overlay geometry has not drifted, every photo has
+      # provenance. The build stamp one matters most: it is the only way to tell
+      # which version a phone is running, because the service worker serves the
+      # previous build once before swapping, so a stamp that does not match its
+      # content makes that single signal start lying.
+      #
+      # The nine browser suites are NOT here. They need Playwright and about
+      # eight minutes, which is too slow in front of every deploy, so the full
+      # gate stays a local pre-push step (node tests/run-all.js --jobs 3).
+      - name: Data checks (build stamp, deck consistency, card sense, geometry, credits)
+        run: node tests/run-all.js --fast
 
       - uses: actions/configure-pages@v5
         with:

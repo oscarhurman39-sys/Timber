@@ -88,8 +88,24 @@ const count = dealt + 1;
    uses:${esc(p.uses)}, size:${esc(`${p.height || ''} H × ${p.spread || ''} W`)},
    seasonalImpact:"", growthSpeed:${num(p.growthSpeed)}, pestRisk:${num(p.pestRisk)}, thirst:${num(p.thirst)}, careLevel:${num(p.careLevel)}, sunNeed:${num(p.sunNeed)}, sunMin:${num(p.sunMin)}},
 `;
+  /* Same separator hazard as add-plants-bulk.js: after a plants-tool.js csv round-trip
+     the last row has no trailing comma, so appending before the `];` yields
+     `sunMin:40}` then `{common:` — invalid JS, whole app dead. Add it when needed. */
+  {
+    const at = html.indexOf(marker), head = html.slice(0, at);
+    if (/}\s*$/.test(head) && !/},\s*$/.test(head)) html = head.replace(/}(\s*)$/, '},$1') + html.slice(at);
+  }
+  const originalHtml = fs.readFileSync(HTML, 'utf8');
   html = html.replace(marker, row + marker);
   fs.writeFileSync(HTML, html);
+  /* Re-parse and roll back rather than leaving a corrupt timber.html on disk. */
+  try {
+    const derived = require('./plant-data.js').readDeck(fs.readFileSync(HTML, 'utf8')).length;
+    if (derived !== count) throw new Error(`deck parses to ${derived} plants, expected ${count}`);
+  } catch (e) {
+    fs.writeFileSync(HTML, originalHtml);
+    die(`insert produced an unusable PLANTS array (${e.message}) — timber.html rolled back, nothing changed`);
+  }
   console.log(`row inserted: deck now ${count} plants`);
 
   /* ---- 4. plant-count literals in the suites ----

@@ -21,13 +21,74 @@ and buys nothing.
 If you're using a plain chat rather than one attached to this repo, paste
 `CARD-STATS.md` and `PLANT-BRIEF.md` instead of the master doc.
 
-## Opening message that works
+## Two routes, and they use different tools
+
+Which one you are on depends on whether the card already exists.
+
+| You have | The card is | Route |
+|---|---|---|
+| A photo of a plant already written into `PLANTS_ON_HOLD` | written, waiting on a photograph | `tools/deal-plant.js` — **the common case**, 98 cards are in that state |
+| A plant with no card at all | does not exist | plant JSON first, then `tools/add-plant.js` / `add-plants-bulk.js` |
+
+`node tools/data-audit.js` prints the live held count; it moves every time a
+photo lands.
+
+## Opening message that works — photo for a card already on hold
+
+> New photo batch for Timber. Read README.md and NEW-SESSION.md first; the repo
+> carries the layout, rubric and protocol, so nothing needs pasting but the
+> photos. Most are named after the plant or species they show. Work out which
+> held card each belongs to using the slug rule in NEW-SESSION.md, **show me the
+> pairing before writing anything**, then deal each with
+> `node tools/deal-plant.js "<latin>" <photo>`. Anything you cannot place
+> confidently, stop and ask — a photo on the wrong card is worse than no photo.
+> Feature branch, not the deploy branch. `node tests/run-all.js --jobs 3` once
+> before pushing.
+
+## Opening message that works — a plant with no card yet
 
 > New plant for Timber. Read CARD-PROTOCOL.md, CARD-STATS.md and PLANT-BRIEF.md
 > for the rules, then add this plant to the deck from the JSON + photo below.
 > Work on a feature branch, not the deploy branch. Add with
 > `node tools/add-plants-bulk.js --quick`, then `node tests/run-all.js --jobs 3`
 > once before pushing.
+
+## Matching a photo filename to a held card
+
+The app derives a photo's filename from the card's `latin`, and this is the exact
+rule — use it rather than inventing one. It reproduces the filename of every one
+of the 144 dealt cards currently on disk:
+
+```js
+const slug = l => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+```
+
+So `Clematis montana var. rubens` → `clematis-montana-var-rubens`, and
+`Tamarix ramosissima 'Pink Cascade'` → `tamarix-ramosissima-pink-cascade`.
+Slug every held card's `latin`, slug each photo's filename stem, and match the
+two. Read the hold block with `tools/plant-data.js` — it is the one reader, and
+nothing else should parse `timber.html`.
+
+Genus-level near-misses are **not** matches. Five Acers and three Rhododendrons
+in the hold block are different species from each other; a filename that only
+matches a genus tells you nothing about which card it belongs to.
+
+## Which held cards are even worth photographing
+
+```sh
+node tools/photo-run.js            # this month
+node tools/photo-run.js --month may
+node tools/photo-run.js --html     # phone sheet, ticks saved as you walk
+```
+
+Splits the hold block into **SHOOT** (peak covers this month), **LOOK**
+(off-peak, but the card sells bark, stems, berries or evergreen — there whatever
+the month) and **WAIT** (flowers, not out, with the month to come back and the
+fewest visits that catch them all).
+
+Its advice is a default, not a rule. *Corylus avellana* 'Contorta' is a WAIT card
+in August; the corkscrew stem photographed fine and it is dealt.
 
 ### Which branch
 

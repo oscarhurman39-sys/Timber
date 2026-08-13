@@ -5,3 +5,6 @@ plant-images/
 dist/
 node_modules/
 .DS_Store
+
+# generated shooting sheet — regenerate with tools/photo-run.js --html, never commit
+photo-run.html

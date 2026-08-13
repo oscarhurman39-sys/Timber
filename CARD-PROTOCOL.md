@@ -264,9 +264,27 @@ Focal point recorded here when off-centre:
 | Lonicera × purpusii 'Winter Beauty' | (no photo — gradient fallback) | supplied photos were a water lily (wrong plant) + a cat blocking the Lonicera (label-confirmed ID); needs a winter shot of the scented cream flowers on bare stems |
 | Leycesteria 'Golden Lanterns' | leycesteria-formosa-golden-lanterns.jpg | 40% 55% — golden red-rimmed leaves + claret lantern bracts, species-confirming; the photo originally mis-sent with the Mahonia JSON |
 | Euonymus alatus | euonymus-alatus.jpg | ~50% 40% — summer macro. ID confirmed: corky wings visible as tan ridges on the green stems, leaves opposite + finely serrate. Shows none of the card's headline interest (autumn crimson, fruit); a September re-shoot would sell the plant better |
+| Cornus kousa | cornus-kousa.jpg | **50% 52%** — real photo, Oscar's; deep rose-pink bracts, gravel bed behind. Default 50% 40% clipped the hero bloom's lower bracts behind the stats plaque; raised so the whole four-bract shape and the green button clear it, since bract *shape* is the identifiable feature here. **The cultivar is NOT known and is deliberately not guessed** — the card is species-level with `cvs` reading "unnamed pink form". What the photo does establish: narrow finely-acuminate bracts, colour deep and uniform while the central head is still tight and green, so it is a genuinely pink selection rather than a white form ageing pink. Bract length ≈ leaf length rules out 'Venus'; the narrow points argue against 'Heart Throb'. See VERIFY-QUEUE item 9 |
+| Hamamelis × intermedia 'Jelena' | hamamelis-intermedia-jelena.jpg | 50% 40% (default) — real photo, Oscar's; backlit copper-orange ribbons on bare stems against blue winter sky, frost on the ground behind. Cultivar-confirming: the copper-orange colour with red bases is exactly what separates 'Jelena' from the deck's yellow 'Arnold Promise'. Second Hamamelis × intermedia, so the pair works like the two Acer palmatums |
+| Hydrangea serrata | hydrangea-serrata.jpg | **45% 16%** — real photo, Oscar's; nursery shot, unusually tall crop (1200×2768). The default 50% 40% showed only the red autumn foliage and clipped the flowers off the top edge, which fought the card's own Jul-Sep bloom band. Raised to 16% so a white lacecap head sits in frame WITH the red leaves — flower form and autumn colour both visible. ⚠ The lacecaps here are WHITE with pink-red fertile centres while the card's hue is 220 (blue, the species archetype) — see VERIFY-QUEUE item 6; there is a nursery label in the shot that may name the cultivar |
+| Reynoutria japonica | reynoutria-japonica.jpg | 50% — [special] **AI composite, not a field photo** (Ajuga v12.5 class): broad shovel leaves on a zig-zag stem over a fire/lightning treatment. The dramatic ground is deliberate — Oscar's call that a NEVER-STOCK invasive should read as dangerous on sight. Leaf shape and stem habit are ID-true; the red-flecked hollow cane the card's `visual` names is NOT visible, so this sells the danger better than it teaches the ID. A real cane-and-leaf shot would be the stronger teaching photo. ⚠ UK-INVASIVE plant — compliance carried the Gunnera way (v12.21) |
 
 ## 5. Decision changelog
 
+- **v14.1 (menu panel scrolls — a defect that grew with the deck)**: not a card
+  change, but a layout defect found by the plant work and logged here per
+  CORRECTION-PROTOCOL §4.5. `.sheet .panel` was `height:100%` with no overflow
+  handling while its filter chips are **generated from the deck**, so it grew with
+  every plant added. At 390×844 the content reached 1098px: "Reset progress" sat
+  36px below the fold and was untappable on a phone; adding Japanese Knotweed's
+  ⚠ NEVER STOCK chip took it to 68px. This is why `app-test` had been failing at a
+  varying line and being written off as container flakiness — Playwright's retry
+  loop occasionally landed the click. Fixed at the cheapest layer (§4.2):
+  `overflow-y:auto` + `overscroll-behavior:contain`, contained so the deck behind
+  the sheet can never pull-to-refresh. Per §4.1 the defect is now visible to the
+  suite — app-test asserts every menu row is reachable, and the assertion was
+  verified failing against an unfixed copy before the fix went in. 95 checks
+  (was 94); full gate 14/14.
 - **v14 (ELONGATED TEMPLATE — card is now 420×600)**: Oscar wanted the card
   longer without a reckless redesign (a ChatGPT frame regen drifted: restyled
   gold, redrawn ornaments, deleted the baked master strip — rejected). Instead
