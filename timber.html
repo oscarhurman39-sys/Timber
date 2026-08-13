@@ -505,15 +505,45 @@
          compositor and nothing triggers layout or paint,
        - layers exist only on hot cards, so a 129-card deck never carries 3x129
            animated elements,
-       - screen blending means the effect only ever ADDS light: it cannot muddy
-         the photograph underneath,
+       - the "only ever ADDS light" guarantee lives in the ASSETS, not a blend
+         mode: extract-wisps.js keys them bright-on-transparent, so plain
+         compositing can brighten but never darken. (A mix-blend-mode here would
+         silently do nothing — contain:strict isolates the stacking context, so
+         the blend never reaches the photograph. It shipped that way once: the
+         layer composited plain, structure and all, and read as an image slapped
+         on top rather than light.)
+       - z-index 1 keeps every wisp UNDER the title (.thead) and the growth rail
+         (both z2) — effects wash the photograph, never the type,
        - the whole thing is inert under prefers-reduced-motion.  */
-  .wisps{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;
+  .wisps{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
     border-radius:5px;contain:strict}
   .wisp{position:absolute;top:50%;left:50%;width:100%;height:100%;
     background-repeat:no-repeat;background-position:center;background-size:contain;
-    mix-blend-mode:screen;opacity:0;will-change:transform,opacity;
+    opacity:0;will-change:transform,opacity;
     transform:translate(-50%,-50%) scale(var(--ws,1.5))}
+  /* ---- edging: the frame's thorn-work reaching over the photograph ----
+     The frame art's sprays and flame-licks encroach well into the window, but
+     the photo sits on top and buries them, leaving a plain rounded rectangle.
+     This layer is the frame's border ring re-cut with a feathered inner edge
+     (extract-wisps.js --ring/--sides) and floated back over the photo, so the
+     edging owns the window edge again. It registers 1:1 with the frame because
+     it is cut at the .tinner rect and stretched 100%/100% across it. Static on
+     purpose: it is frame, not effect — and z1 after .wisps in the DOM, so
+     moving light passes BEHIND the thorns. */
+  .edging{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background-size:100% 100%;background-repeat:no-repeat}
+  /* ---- grove: stop-motion botanical overlay (see the ANIM config) ----
+     z1 like the wisps: over the photograph, under the title and growth rail
+     (both z2) and under every panel outside .tinner. Clipped at the window edge
+     by .tinner's overflow, which is the "branches slide under the frame" look.
+     The animation itself is attached per-pack by buildAnimCSS(); at rest and
+     under prefers-reduced-motion each layer holds its full-bloom cell via the
+     inline background-position, so a still card shows the best frame. */
+  .grove{position:absolute;inset:0;z-index:1;pointer-events:none;contain:strict}
+  .grove .sprig{position:absolute;background-repeat:no-repeat}
+  @media (prefers-reduced-motion:reduce){
+    .card.hot .grove .sprig{animation:none}
+  }
   /* nothing animates until the card is near the top of the deck */
   .card.hot .wisp{animation-duration:var(--wd,24s);animation-iteration-count:infinite;
     animation-timing-function:ease-in-out;animation-direction:alternate}
@@ -749,7 +779,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r51 · 2026-08-13 · 00d7d7c';
+const BUILD='r52 · 2026-08-13 · 37feb3a';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7404,20 +7434,36 @@ const HOLO={
   },
   'cercis-canadensis-eternal-flame':{
     frame:'art/frame-eternal-flame.png',
-    /* NO panel artwork, deliberately. The extracted fire panels were tried here
-       (plaque / soil / band / swatch, cut by tools/extract-frame-assets.js) and
-       taken back out on Oscar's read of the built card: "I can't read the stats
-       and they're all over the place". He is right — dark label ink over orange
-       flame is low contrast, and the month strip and n/5 values were the worst of
-       it. The panels are the one part of the card that has a JOB, and a plant
-       card whose numbers cannot be read has failed at it whatever the border
-       looks like. So the standard parchment renders here and the holo treatment
-       stays where it is decoration rather than obstruction: the frame and the
-       wisps. The extracted panels are kept in art/holo/ for a future frame drawn
-       light enough behind the ink. */
+    /* The panels have been through THREE states, and the history is the spec:
+       1. First flatten: parchment ink multiplied over full-strength artwork.
+          Oscar: "I can't read the stats and they're all over the place." Right —
+          and the frame's own painted plaque rules doubled the parchment's.
+       2. The live line removed the panels entirely — standard parchment, holo
+          only where it decorates. Correct call against state 1.
+       3. Rebuilt to answer the same complaint without giving up the surface:
+            tools/extract-frame-assets.js art/frame-eternal-flame.png \
+              eternal-flame --ground 30,10,48,44 --calm 0.5
+          --ground cuts the panel ground from a CLEAN streak region (no painted
+          furniture, so no doubled rules); --calm mixes it halfway to the
+          parchment's own tone before the ink lands, so the stats read like a
+          standard card while the surface still shimmers.
+       If the stats ever stop being the first thing you can read, delete the
+       four lines below and the card falls back to plain parchment — that is
+       the whole revert. */
+    plaque:'art/holo/eternal-flame-plaque.png',
+    soil:'art/holo/eternal-flame-soil.png',
+    band:'art/holo/eternal-flame-band.png',
+    swatch:'art/holo/eternal-flame-swatch.png',
+    /* the frame's thorn-work, re-cut as a ring and floated OVER the photo so the
+       edging encroaches instead of stopping dead at the window edge */
+    edging:'art/holo/eternal-flame-edging.png',
     /* wisps float over the photo. Each entry is one layer: any transparent PNG
        (tools/extract-wisps.js pulls them out of the frame art), one of the
-       generic animations, and how strongly it reads. */
+       generic animations, and how strongly it reads.
+       The layers are cut from STRUCTURE-FREE interior regions of the frame —
+       an early cut took the whole frame, and the plaque outlines rode along:
+       the sweep read as a ghost card gliding past. If a re-extract ever shows
+       straight lines or rounded rectangles, the region is wrong. */
     wisps:[
       {src:'art/holo/eternal-flame-wisp.png',   anim:'drift',   dur:34, delay:0,  opacity:0.55, scale:1.7},
       {src:'art/holo/eternal-flame-shards.png', anim:'sweep',   dur:17, delay:-6, opacity:0.30, scale:1.25},
@@ -7427,6 +7473,80 @@ const HOLO={
 };
 /* Accept either a bare frame path or the full config object, so an entry can start
    life as one line and grow. */
+
+/* ============ ANIM — stop-motion botanical overlays ("grove" packs) ============
+   A second kind of special card, independent of HOLO: the card keeps its whole
+   standard shell — frame, rails, plaque, soil, band, all text — and gains one
+   animated layer over the photograph, under every piece of type. The plant grows
+   through the card; the card does not melt around the plant.
+
+   Each pack is a set of sprite STRIPS (all frames side by side in one PNG, cut
+   by tools/extract-anim-strips.js). Playing a frame is background-position on an
+   already-decoded image, so a mid-swap flash is structurally impossible — no
+   preloader needed, which is also why these are strips and not ten files.
+
+   durations are PER FRAME in ms and deliberately uneven: a dormant pause, a
+   hang at full bloom. Even timing reads as someone swapping a JPEG; uneven
+   timing reads as stop-motion. phase offsets a layer by that many frames —
+   only ever phase layers whose art is DISCONNECTED (floating sprigs); pieces
+   that connect (the arch/trunk/stem ring here) must stay in one layer at one
+   phase or the artwork cracks at the join.
+
+   holdFrame is the cell shown when the card is not hot and under
+   prefers-reduced-motion: full bloom, so a static view is the best view.
+
+   Avondale strips rebuilt with:
+     node tools/extract-anim-strips.js <dir-of-frame_NN.png> avondale \
+       --layer 'ring:0,0,100,100:cuts=20,58,42,42+62,74,16,26' \
+       --layer 'sprigA:20,58,42,42' --layer 'sprigB:62,74,16,26' --scale 0.5
+   (source: Oscar's avondale_special_card_10_frames zip, 1024x1536, not in the
+   repo at 22 MB — the strips are the committed artefact) */
+const ANIM={
+  'cercis-chinensis-avondale':{
+    frames:10,
+    durations:[260,160,150,150,150,220,180,150,150,220],
+    holdFrame:5,
+    layers:[
+      {src:'art/anim/avondale-ring.png',   left:0,  top:0,  width:100, height:100, phase:0},
+      {src:'art/anim/avondale-sprigA.png', left:20, top:58, width:42,  height:42,  phase:5},
+      {src:'art/anim/avondale-sprigB.png', left:62, top:74, width:16,  height:26,  phase:2},
+    ],
+  },
+};
+/* One @keyframes per pack, generated from its durations so uneven timing lives
+   in data, not hand-written CSS. step-end holds each cell then jumps — the
+   browser must never interpolate background-position or cells would smear. */
+function buildAnimCSS(){
+  let css='';
+  for(const [slug,a] of Object.entries(ANIM)){
+    const total=a.durations.reduce((s,d)=>s+d,0);
+    if(a.durations.length!==a.frames)throw new Error(`ANIM ${slug}: ${a.durations.length} durations for ${a.frames} frames`);
+    const stops=[];let t=0;
+    for(let i=0;i<a.frames;i++){
+      stops.push(`${(t/total*100).toFixed(3)}%{background-position-x:${(i/(a.frames-1)*100).toFixed(3)}%}`);
+      t+=a.durations[i];
+    }
+    stops.push(`100%{background-position-x:0%}`);
+    css+=`@keyframes grove-${slug}{${stops.join('')}}\n`
+      +`.card.hot [data-grove="${slug}"] .sprig{animation:grove-${slug} ${total}ms step-end infinite}\n`;
+  }
+  const s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
+}
+buildAnimCSS();
+function groveHTML(slug){
+  const a=ANIM[slug];
+  if(!a)return '';
+  const hold=(a.holdFrame/(a.frames-1)*100).toFixed(3);
+  const L=a.layers.map(l=>{
+    /* phase = start this layer N frames into the cycle, expressed as a negative
+       delay of the real (uneven) time those frames take */
+    let ms=0;for(let i=0;i<l.phase;i++)ms+=a.durations[i];
+    return `<div class="sprig" style="left:${l.left}%;top:${l.top}%;width:${l.width}%;height:${l.height}%;`
+      +`background-image:url(${l.src});background-size:${a.frames*100}% 100%;`
+      +`background-position:${hold}% 0;animation-delay:-${ms}ms"></div>`;
+  }).join('');
+  return `<div class="grove" data-grove="${slug}" aria-hidden="true">${L}</div>`;
+}
 /* One <i> per configured wisp layer. Everything an effect needs is inline: the
    image, which generic animation drives it, how long it takes, and how strong it
    reads. Adding a new vibe to a card is one more entry in its wisps array — no
@@ -7515,7 +7635,7 @@ function renderCard(idx){
             <div class="bot">${p.latin}</div>
             <button class="say" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">&#9654; Listen</button>
           </div>
-          ${wispsHTML(ho)}
+          ${wispsHTML(ho)}${ho&&ho.edging?`<div class="edging" aria-hidden="true" style="background-image:url(${ho.edging})"></div>`:''}${groveHTML(slug)}
           <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
         </div>
         <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>

@@ -9,7 +9,17 @@
     --mode rainbow   keep saturated iridescent streaks (the holo shimmer)
     --mode shards    keep the brightest structural highlights (spiky lava/thorn edges)
     --mode bright    keep everything bright, whatever its hue
+    --mode edge      brightness x saturation — keeps glowing thorn/metal work,
+                     drops low-saturation haze that 'bright' would keep
     --region x,y,w,h  crop first, in PERCENT of the source (default whole image)
+    --ring in,out    keep only an edge ring of the crop: full alpha within `in`%
+                     of the nearest crop edge, cosine-fading to zero at `out`%
+                     (percent of the crop's min dimension). For edging overlays
+                     that sit over a photo: the border survives, the centre goes.
+    --sides trbl     which crop edges count for --ring (default all four).
+                     `--sides trl` skips the bottom — the zone a card's panels
+                     cover anyway, and where ring-keeping them would re-capture
+                     the very panel outlines the wisp layers had to drop.
     --out-w N        output width in px (height follows the crop's aspect; default 900)
     --gain N         multiply the resulting alpha (default 1)
 
@@ -46,6 +56,10 @@ const OUTW = Number(flag('--out-w', 900));
 const GAIN = Number(flag('--gain', 1));
 const REGION = (flag('--region', '0,0,100,100')).split(',').map(Number);
 if (REGION.length !== 4 || REGION.some(n => !Number.isFinite(n))) { console.error('--region must be x,y,w,h in percent'); process.exit(1); }
+const RING = flag('--ring', null) ? flag('--ring').split(',').map(Number) : null;
+if (RING && (RING.length !== 2 || RING.some(n => !Number.isFinite(n)) || RING[0] >= RING[1])) { console.error('--ring must be in,out percent with in < out'); process.exit(1); }
+const SIDES = flag('--sides', 'trbl').toLowerCase();
+if (!/^[trbl]+$/.test(SIDES)) { console.error('--sides must be a subset of trbl'); process.exit(1); }
 
 const srcPath = path.isAbsolute(srcArg) ? srcArg : path.join(ROOT, srcArg);
 if (!fs.existsSync(srcPath)) { console.error('source not found: ' + srcPath); process.exit(1); }
@@ -57,7 +71,7 @@ if (!fs.existsSync(srcPath)) { console.error('source not found: ' + srcPath); pr
   const page = await browser.newPage();
   await page.setContent('<canvas id=c></canvas>');
 
-  const res = await page.evaluate(async ({ uri, MODE, OUTW, GAIN, REGION }) => {
+  const res = await page.evaluate(async ({ uri, MODE, OUTW, GAIN, REGION, RING, SIDES }) => {
     const img = new Image(); img.src = uri; await img.decode();
     const W = img.naturalWidth, H = img.naturalHeight;
     const [rx, ry, rw, rh] = REGION;
@@ -85,8 +99,23 @@ if (!fs.existsSync(srcPath)) { console.error('source not found: ' + srcPath); pr
       } else if (MODE === 'shards') {
         /* the spiky highlights are the brightest thing in the frame */
         a = Math.max(0, Math.min(1, (l - 0.62) * 3.2));
+      } else if (MODE === 'edge') {
+        /* glowing metalwork is bright AND saturated; the interior haze is bright
+           but grey. Weighting brightness by saturation keeps thorns, drops haze. */
+        a = Math.max(0, Math.min(1, (l - 0.45) * 2.4)) * Math.max(0, Math.min(1, (s - 0.22) * 2.2));
       } else {
         a = Math.max(0, Math.min(1, (l - 0.45) * 2.2));
+      }
+      if (RING) {
+        const px = (i / 4) % outW, py = Math.floor(i / 4 / outW);
+        const ds = [];
+        if (SIDES.includes('l')) ds.push(px);
+        if (SIDES.includes('t')) ds.push(py);
+        if (SIDES.includes('r')) ds.push(outW - 1 - px);
+        if (SIDES.includes('b')) ds.push(outH - 1 - py);
+        const d = Math.min(...ds) / Math.min(outW, outH) * 100;
+        const [rin, rout] = RING;
+        a *= d <= rin ? 1 : d >= rout ? 0 : 0.5 + 0.5 * Math.cos((d - rin) / (rout - rin) * Math.PI);
       }
       a = Math.max(0, Math.min(1, a * GAIN));
       p[i + 3] = Math.round(a * 255);
@@ -94,7 +123,7 @@ if (!fs.existsSync(srcPath)) { console.error('source not found: ' + srcPath); pr
     }
     x.putImageData(d, 0, 0);
     return { png: c.toDataURL('image/png'), outW, outH, kept, total: outW * outH, src: `${sx},${sy} ${sw}x${sh}` };
-  }, { uri: `data:image/png;base64,${b64}`, MODE, OUTW, GAIN, REGION });
+  }, { uri: `data:image/png;base64,${b64}`, MODE, OUTW, GAIN, REGION, RING, SIDES });
 
   fs.mkdirSync(path.join(ROOT, 'art', 'holo'), { recursive: true });
   const out = path.join(ROOT, 'art', 'holo', outName + '.png');

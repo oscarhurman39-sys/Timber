@@ -1,0 +1,23 @@
+{
+ "common": "Mexican orange blossom",
+ "latin": "Choisya ternata",
+ "hue": 110,
+ "visual": "Rounded, bushy evergreen shrub with glossy dark green leaves divided into three broad aromatic leaflets. Clusters of strongly scented pure-white star-shaped flowers cover the plant in late spring, often followed by smaller repeat flushes later in summer or autumn.",
+ "water": "Water regularly while establishing. Reasonably drought resistant once established, but performs best if never left bone dry for long.",
+ "aspect": "Full sun to partial shade in a sheltered position. East-, south- and west-facing sites are suitable; flowering can become sparse in deeper shade.",
+ "soil": "Any well-drained soil",
+ "soilWarning": "Avoid winter wet and cold drying winds",
+ "prune": "Usually needs little pruning. After the main spring flowering, remove damaged, congested or badly placed shoots and lightly shorten growth if size control is needed. Older shrubs can tolerate renovation, but avoid unnecessary regular hard clipping if you want maximum flowering.",
+ "peak": "Apr-Jun",
+ "hardiness": "H4",
+ "resilience": "A reliable, low-maintenance evergreen shrub with useful drought tolerance once established. Generally trouble-free, although snails, glasshouse red spider mite and honey fungus may occasionally cause problems.",
+ "uses": "Evergreen structure, fragrant shrub borders, informal flowering hedges, cottage gardens, city gardens, courtyard planting, pollinator gardens and large containers.",
+ "height": "1.5-2.5m",
+ "spread": "1.5-2.5m",
+ "growthSpeed": 11,
+ "pestRisk": 5,
+ "thirst": 8,
+ "careLevel": 4,
+ "sunNeed": 70,
+ "sunMin": 35
+}
