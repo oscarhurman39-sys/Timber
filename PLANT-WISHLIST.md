@@ -87,7 +87,7 @@ these compound.
 | 34 | ***Nyssa sylvatica*** 'Wisley Bonfire' — tupelo | Autumn colour that stops traffic. Needs **moist, acid, non-limey** soil — say so, or it's a returned plant. |
 | 35 | ***Acer griseum*** — paperbark maple | Cinnamon bark peeling in translucent curls, best in winter sun. **Slow**, which is exactly why it's priced as it is. [2nd in genus] |
 | 36 | ***Corylus avellana*** 'Contorta' — corkscrew hazel | Twisted stems for winter structure and flower arranging, catkins in February. Usually **grafted** — remove straight suckers from the base or it reverts. |
-| 37 | ***Malus*** 'Evereste' — crab apple | AGM, brilliant blossom, orange-red fruit that hangs for months, and a **universal pollination partner for eating apples** — the sales angle most people miss. |
+| 37 | ***Malus*** 'John Downie' — crab apple | AGM, and **the** crab apple for jelly — larger conical orange-red fruit with real flavour, unlike most crabs that are only ornamental. White blossom from pink buds; narrow when young, broadening with age. Also a good pollination partner for eating apples, which is the sales angle most people miss. |
 | 38 | ***Koelreuteria paniculata*** — golden rain tree | Yellow panicles in high summer when nothing else flowers, then inflated papery lanterns. Loves a hot dry spot. |
 | 39 | ***Gleditsia triacanthos*** 'Sunburst' — honey locust | Golden ferny foliage casting **light dappled shade you can plant under**. Thornless form, tolerates urban air. |
 | 40 | ***Eucalyptus gunnii*** 'Azura' | Compact cider gum bred for gardens rather than forestry. Silver-blue, evergreen, cut-foliage crop. Coppice to keep juvenile leaves. |

@@ -9,6 +9,8 @@ Each batch matches the add pipeline: research 17, validate 17, add 17 with
 cleanup on every plant supplied so far: the soil pair has measured length limits
 (26 and 44 characters), and no field value may end in a citation number.
 
+Generated from `PLANT-WISHLIST.md`, so it cannot drift from the curated list.
+
 ---
 
 ## Batch 1 — plants 1-17
@@ -83,7 +85,7 @@ soil <= 26 characters, soilWarning <= 44. Ratings are 0-20 integers, higher = mo
 35. Nyssa sylvatica 'Wisley Bonfire'  (tupelo)
 36. Acer griseum  (paperbark maple)
 37. Corylus avellana 'Contorta'  (corkscrew hazel)
-38. Malus 'Evereste'  (crab apple)
+38. Malus 'John Downie'  (crab apple)
 39. Koelreuteria paniculata  (golden rain tree)
 40. Gleditsia triacanthos 'Sunburst'  (honey locust)
 41. Eucalyptus gunnii 'Azura'
@@ -141,7 +143,7 @@ Parrotia persica
 Nyssa sylvatica 'Wisley Bonfire'
 Acer griseum
 Corylus avellana 'Contorta'
-Malus 'Evereste'
+Malus 'John Downie'
 Koelreuteria paniculata
 Gleditsia triacanthos 'Sunburst'
 Eucalyptus gunnii 'Azura'
