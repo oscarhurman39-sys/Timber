@@ -124,6 +124,16 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
   acid/ericaceous · neutral · alkaline · any pH.
 - **`soilWarning`** — a real constraint, *not* a restatement of `soil`
   (e.g. "Avoid winter waterlogging", "Shelter from frost").
+- **LENGTH LIMITS on the soil pair — these are measured, not stylistic.**
+  `soil` must be **26 characters or fewer**; `soilWarning` **44 or fewer**. The
+  soil panel is a narrow painted parchment strip and text over those lengths
+  overflows into the warning triangle below it. Write the short version here and
+  put the detail in `uncertain` if it matters. Every plant supplied so far has
+  broken this — Choisya arrived at 114 and 160 characters.
+- **NO CITATION MARKERS ANYWHERE.** Do not append reference numbers, footnote
+  markers or source indices to any field value. A value ending
+  `"...later in summer or autumn. 0"` puts a stray digit on the printed card.
+  Sources belong in the `sources` array, nowhere else.
 - **`water` vs `thirst`** — `thirst` is the number (how much); `water` is the
   sentence (how and when). Don't repeat the same phrase in both.
 - **`peak`** — `"Mon-Mon"` format; the app parses it and wraps year-end correctly
@@ -141,7 +151,11 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
 ### Before you answer, check
 - [ ] Hardiness verified, not assumed
 - [ ] All five ratings are integers within their scale
+- [ ] Ratings are on the **0–20** scale, not 0–5. A `pestRisk` of 4 means 1/5 —
+      trouble-free. If you meant "quite prone", that is 14, not 4.
 - [ ] `aspect` contains a facing or "Any aspect", never a light level
+- [ ] `soil` is ≤26 characters and `soilWarning` ≤44
+- [ ] **No field value ends in a citation number**
 - [ ] `soil` and `soilWarning` don't repeat each other
 - [ ] `bloomMonths` matches `peak`
 - [ ] Everything unknown is blank **and** listed in `uncertain`
