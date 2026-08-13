@@ -1,10 +1,53 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Photograph the next tranche of the 53 held cards that peak in August —
+brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
-  command. The other 50 want a May / March / November / June visit.
-since: 2026-08-11  sessions-unchanged: 0
+  command. The other 46 want a May / March / November / June visit.
+since: 2026-08-11  sessions-unchanged: 1
+progress: 2026-08-13 — **hold-to-rewind shipped and IS LIVE (r41, run #27).**
+  Oscar asked to hold the undo button to reset the deck; I built a 2s
+  hold-to-commit with a filling progress bar, and he corrected the design before
+  it ever went out: hold should *rewind*, fast but slow enough to stop partway,
+  "in case someone's only trying to go back that far", with the cards animating
+  back in.
+  **HIS VERSION IS STRICTLY BETTER AND IT IS WORTH KNOWING WHY.** A threshold has
+  two outcomes and needs a confirmation affordance to be safe. A scrub has no
+  outcome to confirm at all, because every frame of the gesture is a state you
+  could have reached by tapping — so letting go is the whole safety mechanism and
+  the progress bar became meaningless. I had designed the guard rail before
+  asking whether the cliff needed to exist. The readout is now the glyph spinning
+  anticlockwise, which says "running backwards" rather than "about to commit".
+  PACING is the feature: 340ms before anything repeats so a tap stays a tap, then
+  190ms decaying x0.82 to a 40ms floor — ~10 cards in the first second with
+  enough separation to stop on the one you meant, ~25/s after, ~6s for the whole
+  deck. The step counter resets on every press, so release-and-re-press gives the
+  slow zone back for fine-tuning.
+  Cards re-enter from the side they were flung to — asserted at +523.6px and
+  -523.6px rather than assumed. Fly-in duration is DERIVED from the gap (gap x2.4,
+  clamped 90-300ms) because `markHot()` only promotes three live cards: a fixed
+  300ms flight at full tilt would leave cards stacked mid-air below the hot
+  window and losing their layer, which is the white-flash failure the compositing
+  comments already describe. perf-test green.
+  Reduced motion deliberately departs from the "card animations are locked as-is"
+  note: that note governs the existing swipe, and 25 cards a second flying across
+  the screen is the exact thing the preference asks us not to do. Cards cut
+  straight to place; the rewind still works, and there is a test for it.
+  **THE AUGUST SPLIT WAS ALREADY YOURS — I re-derived it, I did not find it.**
+  Wrote `SUPERCHARGE-BRIEF.md` off the pre-08-11 tree and led it with "the brick
+  is not 105 photos, it is 57 and a diary". Rebasing surfaced that the 08-11
+  session had reached the same conclusion two days earlier and it is sitting in
+  the brick line above. Independent agreement is worth something as corroboration
+  and nothing as news; the brief now says so.
+  What the re-derivation did add is that **the counts rot and the months do not**.
+  Computed twice a few hours apart across ten new photographs: 57/48 became
+  52/46, same four months in the same order (May 22, Mar 14, Nov 8, Jun 2, zero
+  uncovered). **And the shooting sheet exists only as a chat — grep finds it
+  nowhere but this ledger.** A number that moves daily, held in a document nobody
+  regenerates, is the argument for committing `tools/photo-run.js`.
+  `deal-plant.js` also rescoped the brief's intake tool down to a front end over
+  logic that already works, rather than a reimplementation of it.
+  Build r41. Full gate 14/14 against the rebased tree. csv 242 rows (144 + 98).
 progress: 2026-08-11 — **the first photos arrived and the brick moved for real:
   deck 134 -> 136.** Oscar sent three from the centre. Two dealt, one refused.
   **NEW TOOL, `tools/deal-plant.js`** — the missing half of the toolchain.

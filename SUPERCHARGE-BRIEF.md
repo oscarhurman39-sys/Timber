@@ -44,6 +44,14 @@ Anything that is only "more feature" is in Track 5, last, on purpose.
 
 ## 1. The finding that reshapes the brick
 
+**Credit where it is due: this was already in the ledger before I wrote it.** I
+computed it off the pre-2026-08-11 tree and led with it as news; rebasing showed
+the 08-11 session had reached the same conclusion two days earlier and set the
+brick from it. Two independent derivations agreeing is worth something as
+corroboration and nothing as discovery. What follows is kept because §1.1 depends
+on it and because the re-run added one thing the first pass could not — see the
+last paragraph.
+
 The ledger's brick is *"photograph the first tranche of the 99 held cards"*
 (98 now). Treated as one errand it is demoralising, and it has a hidden
 property nobody has checked: **most of those plants do not look like anything
@@ -78,8 +86,11 @@ is worse than a held card, because a held card is honest.
 full hold block when the real August job is a bit over half of it.
 
 The split survived the deck moving under it: recomputed a day later against ten
-new photographs it came out 52/46 against the same four months, rather than the
-earlier 57/48. **The four dates are the durable part; the counts are not.**
+new photographs it came out 52/46 against the same four months in the same order,
+rather than the earlier 57/48. **The four dates are the durable part; the counts
+are not** — and the shooting sheet the 08-11 session worked from exists only as a
+chat, since `grep` finds it nowhere in the repo but the ledger. A number that
+rots daily, held in a document nobody regenerates, is the whole case for §1.1.
 
 **Everything in Track 1 exists to make those 52 cost one lap of the centre.**
 
