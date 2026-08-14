@@ -53,6 +53,25 @@ The master strip sits at ~96% on a holo card rather than the baked ~98.2%,
 because the ornate border on the Eternal Flame frame swallows text at that
 height. If a future frame has a plain foot, move it back.
 
+**Those three pieces sit on the ARTWORK, not on a panel** — the parchment rail
+patch is hidden, so their contrast is whatever the frame gives them. The defaults
+are Eternal Flame's warm cream on a red-brown shadow, which is right on a fire
+card and illegible on a cool one. A frame that needs different ink says so in its
+own entry; unset keys keep the current values, so existing cards do not move:
+
+```js
+'some-cool-frame':{
+  frame:'art/frame-some-cool-frame.webp',
+  ink:'#f4efff',            /* spine values  (--holo-ink) */
+  labelInk:'#eee7ff',       /* HEIGHT / SPREAD  (--holo-label-ink) */
+  masterInk:'#f7f2ff',      /* DOUBLE TAP TO MASTER  (--holo-master-ink) */
+  shadow:'0 1px 3px rgba(26,18,40,.95),0 0 7px rgba(61,42,83,.8)',  /* all three */
+},
+```
+
+The frame art must still leave those five rectangles flat and dark enough to
+carry light type — no ink colour rescues lettering set on a pale silver spine.
+
 ### Effects: panels and wisps
 
 A holo entry is a config object, so a card can take its own panel artwork and any
@@ -120,8 +139,14 @@ Constraints the system holds to, and why:
   compositor. `perf-test` guards the layer budget and it does not move.
 - **Layers exist only on `.hot` cards** (`.card:not(.hot) .wisps{display:none}`),
   so a 129-card deck never carries three animated elements per card.
-- **`mix-blend-mode:screen`** means an effect can only ADD light — it cannot muddy
-  the photograph underneath.
+- **"Only ever adds light" lives in the ASSETS, not in a blend mode.** This line
+  used to promise `mix-blend-mode:screen`; there is no blend mode in the CSS and
+  there cannot usefully be one, because `contain:strict` isolates the stacking
+  context and the blend never reaches the photograph. It shipped that way once
+  and the layer composited plain, structure and all, reading as an image slapped
+  on top rather than as light. `extract-wisps.js` keys layers
+  bright-on-transparent instead, so plain source-over compositing can brighten
+  but never darken. **Author wisp art as light on full transparency.**
 - **`prefers-reduced-motion` holds a single frame** rather than hiding the layer,
   so the card keeps its character and simply stops moving.
 - `perf-test` pauses all animations before its pixel-parity assertion, because

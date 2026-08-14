@@ -596,14 +596,26 @@
     .card.hot .wisp{animation:none;opacity:calc(var(--wo)*.6)}
   }
   .tcard.holo .railval img{display:none}                 /* green parchment patch, wrong on a red spine */
-  .tcard.holo .railval .v{color:#ffe9a8;font-weight:600;
-    text-shadow:0 1px 3px rgba(60,6,0,.95),0 0 7px rgba(90,10,0,.8)}
+  /* ---- holo ink: the three CSS-supplied pieces are TOKENISED ----
+     The spine values, the spine labels and the master strip are set straight
+     onto the frame ARTWORK — the parchment patch is hidden above, so there is no
+     panel under them and their contrast is whatever the frame gives them. The
+     literals below are Eternal Flame's: warm cream with a red-brown shadow,
+     which is right on a fire card and wrong on a cool one. A frame that needs
+     different ink sets --holo-ink / --holo-label-ink / --holo-master-ink /
+     --holo-shadow from its HOLO entry (see holoStyle in renderCard).
+     Each var() keeps the original value as its FALLBACK, so a card that sets
+     nothing renders exactly as it did before — asserted by the perf-test pixel
+     comparison, which includes both existing holo cards. */
+  .tcard.holo .railval .v{color:var(--holo-ink,#ffe9a8);font-weight:600;
+    text-shadow:var(--holo-shadow,0 1px 3px rgba(60,6,0,.95),0 0 7px rgba(90,10,0,.8))}
   /* spine labels: each sits immediately above its value patch, reading upward */
   .tcard.holo .railval::before{content:attr(data-label);position:absolute;
     left:0;right:0;bottom:100%;height:9.2%;
     display:grid;place-items:center;writing-mode:vertical-rl;transform:rotate(180deg);
     font-family:Georgia,serif;font-size:7.5px;letter-spacing:2.2px;text-transform:uppercase;
-    color:#ffdf9a;text-shadow:0 1px 3px rgba(60,6,0,.95),0 0 6px rgba(90,10,0,.75);
+    color:var(--holo-label-ink,#ffdf9a);
+    text-shadow:var(--holo-shadow,0 1px 3px rgba(60,6,0,.95),0 0 6px rgba(90,10,0,.75));
     pointer-events:none}
   /* Master strip. The baked original sits at ~98.2%, but that lands on this
      frame's bright ornate border and the text disappears into it. The aspect band
@@ -613,7 +625,8 @@
     left:14%;right:4%;top:95.95%;height:1.5%;
     display:grid;place-items:center;
     font-family:Georgia,serif;font-size:7px;letter-spacing:2.6px;text-transform:uppercase;
-    color:#ffeec2;text-shadow:0 1px 2px rgba(50,4,0,1),0 0 5px rgba(70,6,0,.95);
+    color:var(--holo-master-ink,#ffeec2);
+    text-shadow:var(--holo-shadow,0 1px 2px rgba(50,4,0,1),0 0 5px rgba(70,6,0,.95));
     z-index:4;pointer-events:none}
   .patch{position:absolute;background:url(art/parch-swatch.png);background-size:72px 64px;
     mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
@@ -801,7 +814,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r57 · 2026-08-14 · ab81a62';
+const BUILD='r58 · 2026-08-14 · b794656';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7650,6 +7663,25 @@ function wispsHTML(ho){
   return `<div class="wisps" aria-hidden="true">${L}</div>`;
 }
 const holoOf=slug=>{const h=HOLO[slug];return !h?null:(typeof h==='string'?{frame:h}:h);};
+/* Everything a holo card sets on .tcard, in one string: its frame artwork, the
+   patch swatch, and any ink overrides for the three CSS-supplied pieces (spine
+   values, spine labels, master strip — see the holo ink block in <style>).
+   Colours ride the SAME lateBG deferral as the artwork deliberately. They are
+   only ever read against that artwork, so landing together means a card can
+   never show cool ink on the standard frame or warm ink on a cool one; and the
+   frame is the reason for the deferral in the first place — writing these as a
+   plain style attribute would fetch 2.3 MB of special-card art for cards a
+   hundred deep, which is exactly what lateBG exists to stop. */
+function holoStyle(ho){
+  return [
+    `background-image:url(${ho.frame})`,
+    ho.swatch     && `--holo-swatch:url(${ho.swatch})`,
+    ho.ink        && `--holo-ink:${ho.ink}`,
+    ho.labelInk   && `--holo-label-ink:${ho.labelInk}`,
+    ho.masterInk  && `--holo-master-ink:${ho.masterInk}`,
+    ho.shadow     && `--holo-shadow:${ho.shadow}`,
+  ].filter(Boolean).join(';');
+}
 /* PHOTO_SWAP — cards that blink between TWO photographs instead of showing one.
    Keyed by latin-slug; `alt` is the second image, `focus` its object-position,
    `hold` how long each photo stays before the cut. The cut itself is CSS (see
@@ -7713,7 +7745,7 @@ function renderCard(idx){
     <div class="face front">
      <div class="tscale">
       <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>
-      <div class="tcard${ho?' holo':''}"${ho?lateBG(`background-image:url(${ho.frame})${ho.swatch?`;--holo-swatch:url(${ho.swatch})`:''}`):''}>
+      <div class="tcard${ho?' holo':''}"${ho?lateBG(holoStyle(ho)):''}>
         <div class="tphoto${swap?' swap':''}"${swap&&swap.hold?` style="--holo-swap:${swap.hold}"`:''}>
           <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
           <img data-psrc="${photoSrc(slug)}" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">

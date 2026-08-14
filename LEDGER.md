@@ -5,6 +5,54 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (Pretty Lady Maria groundwork) — **the one piece of that
+  card that could be built without its artwork is built; the card itself is
+  blocked on three things that do not exist yet (r58).** Oscar brought a full
+  build brief for an Anemone 'Pretty Lady Maria' special card — cool silver-lilac
+  frame, one static edging overlay, two wisps (shimmer + sweep), no ANIM pack.
+  The architecture call in that brief is right and needs no new mechanism.
+  BLOCKED, and stated plainly rather than worked around: **the plant is not in
+  the deck** (only *Anemone x hybrida* 'Honorine Jobert' is, and 'Pretty Lady
+  Maria' has no card, no `latin` string and therefore no slug), **none of the
+  four assets are on disk**, and there is no photograph. The brief's own Step 1
+  says confirm the record exists first. It does not. Nothing was invented to
+  paper over that — a HOLO entry keyed to a guessed slug and pointing at four
+  missing files is worse than no entry, because check-boot would then be
+  asserting against fiction.
+  SHIPPED, because it is real work that is needed whichever way the frame lands:
+  the three CSS-supplied holo pieces are **tokenised**. The spine values, the
+  HEIGHT/SPREAD labels and the master strip are set straight onto the frame
+  ARTWORK — the parchment rail patch is hidden on a holo card, so there is no
+  panel under them and their contrast is whatever the frame gives them. The
+  literals were Eternal Flame's warm cream on a red-brown shadow, which is right
+  on a fire card and would be invisible on a cool one. Now `--holo-ink`,
+  `--holo-label-ink`, `--holo-master-ink` and `--holo-shadow`, each with the
+  original value as its var() FALLBACK, settable per card from its HOLO entry
+  (`ink` / `labelInk` / `masterInk` / `shadow`).
+  Verified in both directions in a real browser, not by reading the diff: unset
+  computes to exactly `rgb(255,233,168)` / `rgb(255,223,154)` / `rgb(255,238,194)`
+  with the original two-part shadows, and the Pretty Lady Maria values override
+  all four including the comma-carrying shadow. perf-test's pixel-parity check
+  covers both existing holo cards and is green.
+  The colours ride the SAME `lateBG` deferral as the frame artwork, deliberately:
+  they are only ever read against that artwork, so landing together means a card
+  can never flash cool ink on the standard frame. The build brief's own snippet
+  proposed a plain `style=` attribute here, which would have undone r57's
+  special-card deferral and re-fetched 2.3 MB for cards a hundred deep.
+  ALSO CORRECTED: CARD-PROTOCOL's wisp section promised `mix-blend-mode:screen`.
+  There is no blend mode in the CSS and there cannot usefully be one —
+  `contain:strict` isolates the stacking context, so it never reaches the
+  photograph. The "only ever adds light" guarantee is keyed into the ASSETS by
+  extract-wisps.js. That line would have had the next batch of wisp art authored
+  against a blend mode that does not run, which is exactly the mistake this
+  card's overlays are about to be drawn into.
+  A NOTE FOR THE FRAME ITSELF: no ink colour rescues lettering set on a pale
+  silver spine. The artwork must leave five rectangles flat and dark enough to
+  carry light type — the two rail-value slots (x 19.9-33.9, y 268-318 and
+  y 416-467), their two labels just above (y 221.5-262.6 and y 370-411), and the
+  master strip (x 58.8-403.2, y 575.7-584.7), all in 420x600 template px.
+  Gate 17/17 serially. `--jobs 3` flaked twice on this box (a timed rewind hold
+  and a features-test timeout); both pass alone and neither touches this change.
 progress: 2026-08-14 (link performance) — **the link did not open, and the
   cause was measured rather than guessed: 76 seconds of forced layout and 16.9 MB
   of images. Both fixed; a throttled phone now opens the deck in 4.4s instead of
