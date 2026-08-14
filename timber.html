@@ -7758,25 +7758,44 @@ function markHot(){
   });
 }
 
+/* Release tuning. A card commits when the drag passes SWIPE_DIST *or* the finger is
+   still moving fast toward the edge at release (a flick). Distance alone made short
+   fast swipes snap back — the "resistance" felt right at the peak of the gesture. */
+const SWIPE_DIST=88;   /* px of travel that always commits (was 95) */
+const FLICK_VX=0.6;    /* px/ms — finger speed that commits a shorter drag */
+const FLICK_MIN=65;    /* px — a flick still needs this much travel, so a nudge or a
+                          fast tap-wiggle can never throw a card */
 function attachGestures(card){
-  let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false;
+  let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false,lx=0,lt=0,vx=0;
   const learnStamp=card.querySelector('.stamp.learn'),skipStamp=card.querySelector('.stamp.skip');
-  const start=(x,y)=>{if(card.dataset.gone)return;drag=true;moved=false;sx=x;sy=y;card.style.transition='none';};
+  const start=(x,y)=>{if(card.dataset.gone)return;drag=true;moved=false;sx=x;sy=y;
+    lx=x;lt=performance.now();vx=0;card.style.transition='none';};
   const move=(x,y)=>{
     if(!drag)return;dx=x-sx;dy=y-sy;
+    const now=performance.now(),dt=now-lt;               /* smoothed finger velocity —
+        one raw sample is jittery on 120Hz touch streams */
+    if(dt>0){vx=0.7*((x-lx)/dt)+0.3*vx;lx=x;lt=now;}
     if(Math.hypot(dx,dy)>10)moved=true;
     if(card.classList.contains('flipped'))return;       /* no drag while flipped */
     card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/18}deg)`;
-    learnStamp.style.opacity=dx>0?Math.min(dx/90,1):0;
-    skipStamp.style.opacity=dx<0?Math.min(-dx/90,1):0;
+    learnStamp.style.opacity=dx>0?Math.min(dx/SWIPE_DIST,1):0;
+    skipStamp.style.opacity=dx<0?Math.min(-dx/SWIPE_DIST,1):0;
   };
   const end=()=>{
     if(!drag)return;drag=false;
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
     if(!moved){handleTap(card);dx=dy=0;return;}          /* a tap, not a drag */
     if(!card.classList.contains('flipped')){
-      if(dx>95){fling(card,1,true);}
-      else if(dx<-95){fling(card,-1,false);}
+      const v=performance.now()-lt>80?0:vx;              /* finger paused before lifting —
+          stale speed from earlier in the drag must not read as a flick */
+      const flick=Math.abs(v)>=FLICK_VX&&Math.abs(dx)>=FLICK_MIN&&(v>0)===(dx>0);
+      /* the throw animates at the speed the finger left it — a fixed 350ms after a
+         hard swipe visibly decelerates at the moment of release, which reads as the
+         card resisting. 420 ≈ px left to travel; clamped so slow releases keep the
+         stock ease and nothing ever snaps out faster than 200ms. */
+      const ms=Math.max(200,Math.min(350,Math.round(420/(Math.abs(v)||0.01))));
+      if(dx>SWIPE_DIST||(flick&&dx>0)){fling(card,1,true,ms);}
+      else if(dx<-SWIPE_DIST||(flick&&dx<0)){fling(card,-1,false,ms);}
       else{card.style.transform='';learnStamp.style.opacity=0;skipStamp.style.opacity=0;}
     }else{card.style.transform='';}
     dx=dy=0;
@@ -7811,18 +7830,19 @@ function handleTap(card){
   else{card._t=now;}
 }
 
-function fling(card,dir,learned){
+function fling(card,dir,learned,ms=350){
   if(card.dataset.gone)return;card.dataset.gone='1';  /* a card can only be swiped once —
-      guards double fab presses / second-finger taps during the 320ms fling animation */
+      guards double fab presses / second-finger taps during the fling animation */
   const idx=+card.dataset.idx;
   card.classList.remove('flipped');
+  card.style.transition=`transform ${ms}ms cubic-bezier(.2,.8,.2,1),opacity ${ms}ms`;
   card.style.transform=`translate(${dir*140}%,${learned?-40:60}px) rotate(${dir*24}deg)`;
-  card.style.opacity='0';setTimeout(()=>releaseCard(card),320);
+  card.style.opacity='0';setTimeout(()=>releaseCard(card),ms-30);
   order=order.filter(i=>i!==idx);history.push({idx,learned});
   if(learned)learnedCount++;
   const latin=PLANTS[idx].latin;                   /* SRS bookkeeping (storage I/O + menu text)
       lands after the fling settles so the animation frame carries zero extra work */
-  setTimeout(()=>{srsOnSwipe(latin,learned);updateReviewMenu();},360);
+  setTimeout(()=>{srsOnSwipe(latin,learned);updateReviewMenu();},ms+10);
   markHot();updateCounts();refreshEmpty();saveProgress();   /* promote the card being revealed */
   if(reviewMode&&!order.length)exitReview();       /* last due card swiped — drop back to the full deck */
   else if(activeFilter&&!order.length)clearFilter(); /* filtered deck exhausted — same */
