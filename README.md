@@ -161,7 +161,12 @@ state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
 
 - `timber.html` — the whole app: markup, styles, data, logic, inline PWA manifest. No frameworks.
   Needs `art/` and `photos/` alongside it, so it must be served rather than opened as a file.
-- `art/`, `photos/` — the card artwork and plant photography `timber.html` loads at runtime.
+- `art/`, `photos/` — the **masters**: the painted card artwork and the plant photography.
+  The design tools read these; the app does not.
+- `art/*.webp`, `photos/card/*.webp` — what `timber.html` actually loads, derived from the
+  masters by `tools/optimise-art.js` and `tools/optimise-photos.js`. Re-run the matching tool
+  after repainting artwork or adding a photo — `run-all --fast` fails if a derivative is
+  missing or older than its master.
 - `tools/build-standalone.js` — inlines those assets into `dist/timber-standalone.html`, the
   single-file build to publish. Not needed for local development.
 - `sw.js` — service worker (offline app-shell cache when hosted).
@@ -204,7 +209,7 @@ It also refuses to lose anything:
 ## Checking nothing has been lost or gone wrong
 
 ```
-node tests/run-all.js --fast     # the four data checks below, ~2s, no browser
+node tests/run-all.js --fast     # the data checks below, ~2s, no browser
 node tests/run-all.js            # the above plus all nine browser suites
 node tools/install-hooks.js      # run the fast checks automatically before every push
 ```
@@ -217,6 +222,8 @@ node tools/install-hooks.js      # run the fast checks automatically before ever
 | `tools/template-geometry.js` | Have the card's overlay anchors drifted? `--reflow <px>` recomputes them all for a new card height. |
 | `tools/deck-diff.js` | What plant data actually differs between two branches or commits? Semantic, not textual. |
 | `tools/photo-run.js` | Which held cards are worth photographing *this month*, what to point the camera at, and when to come back for the rest. `--html` writes a phone sheet with ticks. |
+| `tools/optimise-art.js` | Re-derives the WebP the app loads from each `art/` master. `--check` fails if one is missing or stale. |
+| `tools/optimise-photos.js` | Re-derives the card-sized WebP in `photos/card/` from each photo master. `--check` fails if one is missing, stale, or orphaned. |
 
 Open questions these turned up that need a horticultural call live in
 [VERIFY-QUEUE.md](VERIFY-QUEUE.md). Deliberate card renames are recorded in

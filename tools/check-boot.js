@@ -109,16 +109,27 @@ function localAsset(errors, owner, rel) {
   return abs;
 }
 
-function pngWidth(file, errors, owner) {
+/* Strip width, read straight out of the header. The app loads the WebP that
+   tools/optimise-art.js derives from each PNG master, so a strip can arrive in
+   either format and the frame-count check has to hold for both — a WebP strip
+   whose width no longer divides by its frame count smears exactly the same way. */
+function imageWidth(file, errors, owner) {
   let b;
   try { b = fs.readFileSync(file); }
-  catch (e) { fail(errors, `${owner}: could not read PNG: ${e.message}`); return null; }
-  if (b.length < 24 || !b.subarray(0, 8).equals(PNG_SIG) || b.toString('ascii', 12, 16) !== 'IHDR') {
-    fail(errors, `${owner}: not a valid PNG with an IHDR header`);
+  catch (e) { fail(errors, `${owner}: could not read image: ${e.message}`); return null; }
+  let w = null;
+  if (b.length >= 24 && b.subarray(0, 8).equals(PNG_SIG) && b.toString('ascii', 12, 16) === 'IHDR') {
+    w = b.readUInt32BE(16);
+  } else if (b.length >= 30 && b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+    const chunk = b.toString('ascii', 12, 16);
+    if (chunk === 'VP8X') w = (b.readUIntLE(24, 3) & 0xffffff) + 1;               /* extended: canvas width-1, 24-bit */
+    else if (chunk === 'VP8L') w = ((b.readUInt32LE(21) & 0x3fff)) + 1;           /* lossless: 14 bits after the 0x2f signature */
+    else if (chunk === 'VP8 ') w = b.readUInt16LE(26) & 0x3fff;                   /* lossy: 14 bits of the keyframe header */
+  } else {
+    fail(errors, `${owner}: not a valid PNG or WebP header`);
     return null;
   }
-  const w = b.readUInt32BE(16);
-  if (!w) { fail(errors, `${owner}: PNG width is zero`); return null; }
+  if (!w) { fail(errors, `${owner}: image width is zero`); return null; }
   return w;
 }
 
@@ -167,9 +178,9 @@ function checkAssets(registries, errors) {
       if (!layer || typeof layer !== 'object') { fail(errors, `ANIM ${slug}.layers[${i}]: expected an object`); continue; }
       const abs = localAsset(errors, `ANIM ${slug}.layers[${i}].src`, layer.src);
       if (abs && Number.isInteger(a.frames) && a.frames > 0) {
-        const w = pngWidth(abs, errors, `ANIM ${slug}.layers[${i}] ${layer.src}`);
+        const w = imageWidth(abs, errors, `ANIM ${slug}.layers[${i}] ${layer.src}`);
         if (w != null && w % a.frames !== 0)
-          fail(errors, `ANIM ${slug}.layers[${i}]: PNG width ${w}px is not divisible by ${a.frames} frames`);
+          fail(errors, `ANIM ${slug}.layers[${i}]: strip width ${w}px is not divisible by ${a.frames} frames`);
       }
     }
   }

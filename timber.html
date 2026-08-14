@@ -385,7 +385,7 @@
      assets (art/); plant-specific values render live from PLANTS data. The card
      is authored at 420x600 — the v12 420x543 template elongated by inserting
      150 art-px of plain spine/trim into the photo region of the frame
-     (art/frame-600.png, mirror-tiled seam at art rows 323..473; every visible
+     (art/frame-600.webp, mirror-tiled seam at art rows 323..473; every visible
      surface — trim, spine, bottom strip — is row-continuous). Top furniture
      (title, crest, growth rail) keeps its pixel position from the top edge;
      bottom furniture (ppp, plaque, soil, band) keeps its pixel position from
@@ -397,7 +397,7 @@
     transform:translate(-50%,-50%) scale(var(--csx,0.75),var(--csy,0.75))}
   .tscale .stamp{z-index:30}
   .tcard{width:420px;height:600px;position:relative;
-    background:url(art/frame-600.png);background-size:100% 100%;
+    background:url(art/frame-600.webp);background-size:100% 100%;
     border-radius:15px;
     font-family:Georgia,"Times New Roman",serif}
   /* Shadow on hot cards only. The old always-on shadow stacked ~57 deep: the
@@ -410,7 +410,7 @@
   .tinner{position:absolute;left:13.96%;top:1.90%;right:2.81%;bottom:4.44%;
     overflow:hidden;border-radius:5px;z-index:1}
   /* ---- the photo window is MEASURED FROM THE FRAME ARTWORK, not inherited ----
-     art/frame-600.png is a fully baked reference card: its painted opening sits
+     art/frame-600.webp is a fully baked reference card: its painted opening sits
      at top 1.332%, right inset 2.992%, bottom inset 4.378%, corner radius 11.4px
      (measured off the art 2026-08-14, art px / 2.6262 per css px).
      .tinner sat 3.4px lower and 0.8px wider than that opening, which did two
@@ -801,7 +801,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r56 · 2026-08-14 · 3395d08';
+const BUILD='r57 · 2026-08-14 · ab81a62';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7201,9 +7201,20 @@ function restoreDeck(d){
   /* saved bottom-to-top; re-sort into the canonical newest-first sequence so a
      save made under an older deal order still deals newest card on top */
   const stack=[...d.stack].sort((a,b)=>a-b);
-  stack.forEach(renderCard);
+  dealCards(stack);
   order=[...stack].reverse();history=d.history;learnedCount=d.learnedCount;
   markHot();updateCounts();refreshEmpty();
+}
+
+/* Every bulk deal goes through here so the ink is fitted ONCE for the whole stack
+   instead of once per card: one card at a time is one forced layout of the entire
+   deck per card, and the deck is the most expensive thing on the page to lay out.
+   A lone renderCard (undo) still fits inline — one card is not worth a batch. */
+let inkBatch=null;
+function dealCards(idxs){
+  inkBatch=[];
+  try{idxs.forEach(renderCard);}
+  finally{const b=inkBatch;inkBatch=null;fitInkAll(b);}  /* never leave a batch open — a stuck one silently stops all fitting */
 }
 
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
@@ -7216,7 +7227,7 @@ function buildDeck(){
   /* newest addition deals first — PLANTS appends chronologically, so reversing
      puts fresh cards on top instead of burying them behind the whole back-catalogue */
   order=PLANTS.map((_,i)=>i).reverse();history=[];learnedCount=0;
-  [...order].reverse().forEach(renderCard);
+  dealCards([...order].reverse());
   markHot();updateCounts();refreshEmpty();saveProgress();
 }
 
@@ -7286,7 +7297,7 @@ function enterReview(){
     order:[...order],history:[...history],learnedCount};
   deck.querySelectorAll('.card').forEach(releaseCard);
   order=[...due];history=[];
-  [...due].reverse().forEach(renderCard);     /* most overdue ends up on top */
+  dealCards([...due].reverse());              /* most overdue ends up on top */
   reviewMode=true;
   markHot();updateCounts();refreshEmpty();updateReviewMenu();
   closeSheet();
@@ -7295,7 +7306,7 @@ function exitReview(){
   if(!reviewMode)return;
   reviewMode=false;
   deck.querySelectorAll('.card').forEach(releaseCard);
-  reviewBackup.stack.forEach(renderCard);
+  dealCards(reviewBackup.stack);
   order=reviewBackup.order;history=reviewBackup.history;learnedCount=reviewBackup.learnedCount;
   reviewBackup=null;
   markHot();updateCounts();refreshEmpty();updateReviewMenu();
@@ -7335,7 +7346,7 @@ function applyFilter(id){
     order:[...order],history:[...history],learnedCount};
   deck.querySelectorAll('.card').forEach(releaseCard);
   order=[...match];history=[];
-  [...match].reverse().forEach(renderCard);
+  dealCards([...match].reverse());
   activeFilter=id;
   markHot();updateCounts();refreshEmpty();
 }
@@ -7343,7 +7354,7 @@ function clearFilter(){
   if(!activeFilter)return;
   activeFilter=null;
   deck.querySelectorAll('.card').forEach(releaseCard);
-  filterBackup.stack.forEach(renderCard);
+  dealCards(filterBackup.stack);
   order=filterBackup.order;history=filterBackup.history;learnedCount=filterBackup.learnedCount;
   filterBackup=null;
   markHot();updateCounts();refreshEmpty();
@@ -7438,10 +7449,17 @@ function splitSoil(str){                      /* value = soil type; warning = th
 }
 /* fold diacritics first (ō→o, ā→a…) so Japanese cultivar names slug sensibly */
 const slugLatin=l=>l.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+/* One place that knows where the app's photographs live: the card-sized WebP that
+   tools/optimise-photos.js derives, never the ~1200px master beside it. The card
+   draws a photo about 350 CSS px wide and the deck fetches ten of them as cards
+   near the top, so serving masters cost about 2.5 MB of opening the app to paint
+   a third of it. tools/build-standalone.js rewrites this one line to inline the
+   photographs as data URIs. */
+const photoSrc=slug=>`photos/card/${slug}.webp`;
 const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/widget-drop-out.png","widget-seca-fill":"art/widget-seca-fill.png","widget-seca-out":"art/widget-seca-out.png","widget-spray-fill":"art/widget-spray-fill.png","widget-spray-out":"art/widget-spray-out.png"};
 
 /* HOLO — special-edition frames, keyed by latin-slug. A card listed here swaps
-   art/frame-600.png for its own artwork and gains the .holo class, which supplies
+   art/frame-600.webp for its own artwork and gains the .holo class, which supplies
    the spine lettering and the master strip in CSS (see the holo block in <style>)
    because those are baked into the standard frame art and not into these.
    Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
@@ -7455,10 +7473,10 @@ const HOLO={
      legible. That is the rule for special cards now — holo where it decorates,
      parchment where it informs. */
   'cercis-chinensis-avondale':{
-    frame:'art/frame-avondale.png',
+    frame:'art/frame-avondale.webp',
   },
   'cercis-canadensis-eternal-flame':{
-    frame:'art/frame-eternal-flame.png',
+    frame:'art/frame-eternal-flame.webp',
     /* The panels have been through THREE states, and the history is the spec:
        1. First flatten: parchment ink multiplied over full-strength artwork.
           Oscar: "I can't read the stats and they're all over the place." Right —
@@ -7466,7 +7484,7 @@ const HOLO={
        2. The live line removed the panels entirely — standard parchment, holo
           only where it decorates. Correct call against state 1.
        3. Rebuilt to answer the same complaint without giving up the surface:
-            tools/extract-frame-assets.js art/frame-eternal-flame.png \
+            tools/extract-frame-assets.js art/frame-eternal-flame.webp \
               eternal-flame --ground 30,10,48,44 --calm 0.5
           --ground cuts the panel ground from a CLEAN streak region (no painted
           furniture, so no doubled rules); --calm mixes it halfway to the
@@ -7475,13 +7493,13 @@ const HOLO={
        If the stats ever stop being the first thing you can read, delete the
        four lines below and the card falls back to plain parchment — that is
        the whole revert. */
-    plaque:'art/holo/eternal-flame-plaque.png',
-    soil:'art/holo/eternal-flame-soil.png',
-    band:'art/holo/eternal-flame-band.png',
+    plaque:'art/holo/eternal-flame-plaque.webp',
+    soil:'art/holo/eternal-flame-soil.webp',
+    band:'art/holo/eternal-flame-band.webp',
     swatch:'art/holo/eternal-flame-swatch.png',
     /* the frame's thorn-work, re-cut as a ring and floated OVER the photo so the
        edging encroaches instead of stopping dead at the window edge */
-    edging:'art/holo/eternal-flame-edging.png',
+    edging:'art/holo/eternal-flame-edging.webp',
     /* wisps float over the photo. Each entry is one layer: any transparent PNG
        (tools/extract-wisps.js pulls them out of the frame art), one of the
        generic animations, and how strongly it reads.
@@ -7490,9 +7508,9 @@ const HOLO={
        the sweep read as a ghost card gliding past. If a re-extract ever shows
        straight lines or rounded rectangles, the region is wrong. */
     wisps:[
-      {src:'art/holo/eternal-flame-wisp.png',   anim:'drift',   dur:34, delay:0,  opacity:0.55, scale:1.7},
-      {src:'art/holo/eternal-flame-shards.png', anim:'sweep',   dur:17, delay:-6, opacity:0.30, scale:1.25},
-      {src:'art/holo/eternal-flame-wisp.png',   anim:'shimmer', dur:7,  delay:-3, opacity:0.28, scale:2.1},
+      {src:'art/holo/eternal-flame-wisp.webp',   anim:'drift',   dur:34, delay:0,  opacity:0.55, scale:1.7},
+      {src:'art/holo/eternal-flame-shards.webp', anim:'sweep',   dur:17, delay:-6, opacity:0.30, scale:1.25},
+      {src:'art/holo/eternal-flame-wisp.webp',   anim:'shimmer', dur:7,  delay:-3, opacity:0.28, scale:2.1},
     ],
   },
 };
@@ -7543,8 +7561,8 @@ const ANIM={
     durations:[260,160,150,150,220,180,150,150,220],
     holdFrame:4,
     layers:[
-      {src:'art/anim/avondale-trunk.png', left:74, top:-8, width:44, height:116, phase:0},
-      {src:'art/anim/avondale-stem.png',  left:-9, top:0,  width:24, height:108, phase:4},
+      {src:'art/anim/avondale-trunk.webp', left:74, top:-8, width:44, height:116, phase:0},
+      {src:'art/anim/avondale-stem.webp',  left:-9, top:0,  width:24, height:108, phase:4},
     ],
   },
 };
@@ -7593,6 +7611,19 @@ function buildAnimCSS(){
   const s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
 }
 buildAnimCSS();
+/* Special-card artwork is the heaviest thing the deck can ask for: the two
+   showcase cards carry about 2.3 MB of frame, sprite strips and edging between
+   them, and they sit roughly a hundred cards down. Written as an inline
+   background-image they were fetched the moment the deck was dealt — every phone
+   opening Timber paid for two cards it could not see.
+
+   Held on a data- attribute instead, markHot() promotes them to real style when
+   the card reaches the fetch window: the same ten-card lead the photographs get,
+   so a card is fully dressed long before it can surface. Wisps need none of this
+   — `.card:not(.hot) .wisps{display:none}` already stops the browser fetching
+   them — and the plain frame is in the stylesheet, where every card shares it. */
+const lateBG=css=>` data-bg="${css.replace(/"/g,'&quot;')}"`;
+
 function groveHTML(slug){
   const a=ANIM[slug];
   if(!a||!validAnimPack(slug,a))return '';
@@ -7601,8 +7632,8 @@ function groveHTML(slug){
     /* phase = start this layer N frames into the cycle, expressed as a negative
        delay of the real (uneven) time those frames take */
     let ms=0;for(let i=0;i<l.phase;i++)ms+=a.durations[i];
-    return `<div class="sprig" style="left:${l.left}%;top:${l.top}%;width:${l.width}%;height:${l.height}%;`
-      +`background-image:url(${l.src});background-size:${a.frames*100}% 100%;`
+    return `<div class="sprig"${lateBG(`background-image:url(${l.src})`)} style="left:${l.left}%;top:${l.top}%;width:${l.width}%;height:${l.height}%;`
+      +`background-size:${a.frames*100}% 100%;`
       +`background-position:${hold}% 0;animation-delay:-${ms}ms"></div>`;
   }).join('');
   return `<div class="grove" data-grove="${slug}" aria-hidden="true">${L}</div>`;
@@ -7633,7 +7664,7 @@ const holoOf=slug=>{const h=HOLO[slug];return !h?null:(typeof h==='string'?{fram
    card. Nothing else in the deck needs this; most plants are one photo honestly. */
 const PHOTO_SWAP={
   'cercis-chinensis-avondale':{
-    alt:'photos/cercis-chinensis-avondale-stem.jpg',
+    alt:'photos/card/cercis-chinensis-avondale-stem.webp',
     focus:'50% 45%',
     hold:'3.5s',
   },
@@ -7682,10 +7713,10 @@ function renderCard(idx){
     <div class="face front">
      <div class="tscale">
       <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>
-      <div class="tcard${ho?' holo':''}"${ho?` style="background-image:url(${ho.frame})${ho.swatch?`;--holo-swatch:url(${ho.swatch})`:''}"`:''}>
+      <div class="tcard${ho?' holo':''}"${ho?lateBG(`background-image:url(${ho.frame})${ho.swatch?`;--holo-swatch:url(${ho.swatch})`:''}`):''}>
         <div class="tphoto${swap?' swap':''}"${swap&&swap.hold?` style="--holo-swap:${swap.hold}"`:''}>
           <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
-          <img data-psrc="photos/${slug}.jpg" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
+          <img data-psrc="${photoSrc(slug)}" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
           ${swap?`<img class="alt" data-psrc="${swap.alt}" style="object-position:${swap.focus||PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
           <div class="pblack" aria-hidden="true"></div>`:''}
         </div>
@@ -7695,15 +7726,15 @@ function renderCard(idx){
             <div class="bot">${p.latin}</div>
             <button class="say" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">&#9654; Listen</button>
           </div>
-          ${wispsHTML(ho)}${ho&&ho.edging?`<div class="edging" aria-hidden="true" style="background-image:url(${ho.edging})"></div>`:''}${groveHTML(slug)}
+          ${wispsHTML(ho)}${ho&&ho.edging?`<div class="edging" aria-hidden="true"${lateBG(`background-image:url(${ho.edging})`)}></div>`:''}${groveHTML(slug)}
           <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
         </div>
         <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
         <div class="railval rail-s" data-label="Spread"><img src="art/rail-patch-s.png" alt=""><span class="v">${sz.s}</span></div>
-        <div class="crest"><img src="art/crest-blank.png" alt=""><span class="hnum">${p.hardiness}</span></div>
+        <div class="crest"><img src="art/crest-blank.webp" alt=""><span class="hnum">${p.hardiness}</span></div>
         <div class="ppp">Plant Power Points</div>
         <div class="plaque">
-          <img src="${ho&&ho.plaque?ho.plaque:'art/plaque-full.png'}" alt="">
+          <img src="${ho&&ho.plaque?ho.plaque:'art/plaque-full.webp'}" alt="">
           <div class="patch lbl p-bloom-val"></div><div class="val-ink pval t-bloom">${p.peak||''}</div>
           <div class="patch lbl p-pest-val"></div><div class="val-ink pval t-pest">${pest==null?'':fmt5(pest)}</div>
           <div class="patch lbl p-thirst-val"></div><div class="val-ink pval t-thirst">${thirst==null?'':fmt5(thirst)}</div>
@@ -7714,14 +7745,14 @@ function renderCard(idx){
           <div class="patch tightv p-care-w"></div><div class="val-ink p-care-w"><div class="wrow care">${wRow('seca',care)}</div></div>
         </div>
         <div class="soilp">
-          <img src="${ho&&ho.soil?ho.soil:'art/soil-full.png'}" alt="">
+          <img src="${ho&&ho.soil?ho.soil:'art/soil-full.webp'}" alt="">
           <div class="patch s-val"></div><div class="val-ink s-val s-val-ink">${soil.val}</div>
           ${soil.warn
             ?`<div class="patch s-warn"></div><div class="val-ink s-warn s-warn-ink">${soil.warn}</div>`
             :`<div class="patch s-tri-cover"></div><div class="patch s-warn"></div>`}
         </div>
         <div class="band">
-          <img src="${ho&&ho.band?ho.band:'art/band-full.png'}" alt="">
+          <img src="${ho&&ho.band?ho.band:'art/band-full.webp'}" alt="">
           <div class="patch b-aspect"></div><div class="patch b-sun-cover"></div>
           <div class="b-div"></div><img class="b-sun" src="art/sun-small.png" alt="">
           <div class="val-ink t-baspect b-aspect-ink">${extractFacing(p.aspect)}</div>
@@ -7739,7 +7770,7 @@ function renderCard(idx){
     </div></div>
    </div>`;
   deck.appendChild(c);
-  fitInk(c);
+  if(inkBatch)inkBatch.push(c);else fitInk(c);         /* a whole deal fits in one batch — see dealCards */
   attachGestures(c);
   const say=c.querySelector('.say');
   shieldButton(say);
@@ -7747,15 +7778,50 @@ function renderCard(idx){
 }
 
 /* shrink any live ink that overflows its measured zone — safety net for long
-   data the fixed card geometry can't hold; audited by design/audit-layout.js */
-function fitInk(root){
-  root.querySelectorAll('.val-ink').forEach(el=>{
+   data the fixed card geometry can't hold; audited by design/audit-layout.js
+
+   Fitted in BATCHES, and that is the whole point. The obvious shape — shrink one
+   zone a quarter-point, re-measure it, repeat — reads scrollWidth straight after
+   writing fontSize, so every single step forces a synchronous layout of the whole
+   deck. At 166 cards x ~14 ink zones x up to 18 steps that is tens of thousands of
+   full-document layouts: boot measured 76s of main-thread time on a throttled
+   phone, which is not "slow to open", it is a link that never opens.
+
+   Batched, a round is all the writes and then all the reads, so it costs ONE
+   layout however many zones are still converging — and a binary search over the
+   quarter-point grid needs about five rounds where the walk took eighteen steps.
+   Same answer: the search returns the largest quarter-point that fits, which is
+   exactly where the linear walk stopped. */
+const INK_MIN=6.5,INK_STEP=0.25;
+/* the walk subtracted a step at a time, so reproduce it by subtraction and not by
+   multiply — identical float, identical px string, identical audit result */
+function inkStepDown(fs,k){while(k-->0)fs-=INK_STEP;return fs;}
+function inkFits(el){return el.scrollWidth-el.clientWidth<=1&&el.scrollHeight-el.clientHeight<=1;}
+function fitInk(root){fitInkAll([root]);}
+function fitInkAll(roots){
+  /* the gathering pass writes nothing, so the browser lays out once and every
+     measurement taken in it is served from that single layout */
+  const all=[];
+  for(const root of roots)root.querySelectorAll('.val-ink').forEach(el=>{
     if(!el.clientWidth)return;                          /* not laid out — skip */
-    let fs=parseFloat(getComputedStyle(el).fontSize);
-    while((el.scrollWidth-el.clientWidth>1||el.scrollHeight-el.clientHeight>1)&&fs>6.5){
-      fs-=0.25;el.style.fontSize=fs+'px';
-    }
+    if(inkFits(el))return;                              /* the common case, and it costs no writes */
+    const fs0=parseFloat(getComputedStyle(el).fontSize);
+    const kmax=Math.ceil((fs0-INK_MIN)/INK_STEP);       /* where the walk gave up: first step at or below the floor */
+    if(kmax<1)return;
+    all.push({el,fs0,lo:1,hi:kmax,best:kmax});
   });
+  if(!all.length)return;
+  let live=all;
+  while(live.length){
+    for(const s of live){s.k=(s.lo+s.hi)>>1;s.el.style.fontSize=inkStepDown(s.fs0,s.k)+'px';}
+    const next=[];
+    for(const s of live){
+      if(inkFits(s.el)){s.best=s.k;s.hi=s.k-1;}else s.lo=s.k+1;
+      if(s.lo<=s.hi)next.push(s);
+    }
+    live=next;
+  }
+  for(const s of all)s.el.style.fontSize=inkStepDown(s.fs0,s.best)+'px';
 }
 
 function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].pop();}
@@ -7784,6 +7850,10 @@ function markHot(){
       exactly what the first ten swipes were fighting */
     const img=c.querySelector('.tphoto img');
     if(img&&!img.getAttribute('src')&&img.dataset.psrc)img.src=img.dataset.psrc;
+    /* and the special-card artwork with them — see lateBG */
+    c.querySelectorAll('[data-bg]').forEach(el=>{
+      el.style.cssText+=';'+el.dataset.bg;el.removeAttribute('data-bg');
+    });
   });
   live.slice(-PAINT_DEPTH).forEach(c=>{                 /* decode upcoming photos while occluded */
     const img=c.querySelector('.tphoto img');
@@ -8096,7 +8166,7 @@ function showPlant(i){
   const p=PLANTS[i];
   searchDetail.classList.remove('cust');
   searchDetail.innerHTML=`
-    <div class="d-photo"><img src="photos/${slugLatin(p.latin)}.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+    <div class="d-photo"><img src="${photoSrc(slugLatin(p.latin))}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     <div class="d-top"><button class="d-back" id="dBack">← Results</button>
       <button class="d-customer" id="dShare" hidden>↗ Share</button>
       <button class="d-customer" id="dGoCard" title="Close search and run the deck to this card">🎴 Go to card</button>
@@ -8134,7 +8204,7 @@ function showCustomer(i){
   const p=PLANTS[i];
   searchDetail.classList.add('cust');
   searchDetail.innerHTML=`
-    <div class="d-photo"><img src="photos/${slugLatin(p.latin)}.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+    <div class="d-photo"><img src="${photoSrc(slugLatin(p.latin))}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     <div class="d-top"><button class="d-back" id="dStaff">← Staff view</button></div>
     <h3 class="c-name">${p.common}</h3>
     <div class="c-latin">${p.latin}</div>

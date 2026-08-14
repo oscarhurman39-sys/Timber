@@ -42,6 +42,14 @@ const CHECKS = [
     why: 'every photo has a provenance entry' },
   { name: 'check-boot', cmd: ['node', 'tools/check-boot.js'], browser: false,
     why: 'app syntax and special-card assets/config cannot brick boot' },
+  /* The app loads derived WebP, not the masters beside them. Nothing else notices
+     if a master is repainted and its derivative is not re-run, so the deployed
+     card would quietly keep showing the old artwork. Both checks no-op with a
+     note where sharp is not installed, which includes the Pages runner. */
+  { name: 'optimise-art', cmd: ['node', 'tools/optimise-art.js', '--check'], browser: false,
+    why: 'every art master has a current .webp derivative' },
+  { name: 'optimise-photos', cmd: ['node', 'tools/optimise-photos.js', '--check'], browser: false,
+    why: 'every photo master has a current card-sized derivative' },
   { name: 'app-test', cmd: ['node', 'tests/app-test.js'], browser: true,
     why: 'gestures, flip, search, quiz, persistence, a11y' },
   { name: 'edge-test', cmd: ['node', 'tests/edge-test.js'], browser: true,

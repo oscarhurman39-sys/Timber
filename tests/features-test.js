@@ -258,8 +258,10 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     const img = document.querySelector('#searchDetail .d-photo img');
     return img ? { src: img.getAttribute('src') } : null;
   });
+  /* the sheet resolves its photo through photoSrc(), which points at the
+     card-sized derivative tools/optimise-photos.js builds — not the master */
   check('search detail carries a photo slot with slugged src',
-    photo && /^photos\/[a-z0-9-]+\.jpg$/.test(photo.src), JSON.stringify(photo));
+    photo && /^photos\/card\/[a-z0-9-]+\.webp$/.test(photo.src), JSON.stringify(photo));
   await page.evaluate(() => {  // a missing photo file must hide the whole strip
     document.querySelector('#searchDetail .d-photo img').dispatchEvent(new Event('error'));
   });

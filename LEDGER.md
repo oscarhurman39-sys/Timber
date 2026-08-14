@@ -5,6 +5,40 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (link performance) — **the link did not open, and the
+  cause was measured rather than guessed: 76 seconds of forced layout and 16.9 MB
+  of images. Both fixed; a throttled phone now opens the deck in 4.4s instead of
+  81s, on 1.77 MB instead of 16.9 MB (r57).** Reproduced first: a 390x844 Chromium
+  at 4x CPU throttle on a 9 Mbps link took 81s to `load`, and on a 1.6 Mbps link
+  never finished at all — past a 120s timeout, which is exactly what "won't open"
+  looks like from a phone.
+  1. **`fitInk` was the 76 seconds**, confirmed by V8 CPU profile: 76.6s of self
+     time in one closure. It shrank each ink zone by a quarter-point and re-read
+     `scrollWidth` between every write, so each step forced a synchronous layout
+     of a 166-card deck — ~1,325 zones actually shrink, up to 18 steps each. Now
+     batched: all writes then all reads, binary search over the same quarter-point
+     grid, so a round costs one layout instead of thousands. Proved equivalent,
+     not assumed — an A/B against pre-change bytes compared the final `fontSize`
+     of all **1,823** ink zones across every card: **identical, zero differences.**
+     All six bulk deals go through a new `dealCards()`; `undo` still fits inline.
+  2. **The artwork was the 16.9 MB.** `art/frame-600.png` alone was 3.6 MB, and
+     the two special cards pulled another 8.5 MB from ~100 cards down because
+     their frames, strips and edging were inline `background-image` on elements
+     that render at any depth. Now: `tools/optimise-art.js` derives WebP from each
+     master (20.3 MB -> 3.8 MB, q90 with `smartSubsample` — the default 4:2:0
+     visibly costs saturated gold on green, measured), `tools/optimise-photos.js`
+     derives card-sized photos (44.8 MB -> 19.1 MB at 1000px, the card window is
+     ~350 CSS px), and special-card art rides the same ten-card `data-bg` window
+     the photographs already use, so boot pays nothing for buried cards.
+  **Checked what could have broken.** Screenshot A/B of the rendered Avondale and
+  Eternal Flame cards, old build vs new: RMS 2.3 and 2.5 out of 255, under 0.04%
+  of subpixels off by more than 24 — both cards fully dressed, no missing art, no
+  page errors. Masters stay in the repo (design tools read them, and a returning
+  phone's cached shell still resolves the old paths). `check-boot` learned to read
+  WebP strip widths; `build-standalone` now keys on `photoSrc()`, which also fixes
+  two pre-existing gaps there — `art/holo/` and `art/anim/` were never inlined,
+  and only the first of the two detail sheets was rewired. Two new `--check`
+  gates fail if a derivative goes stale. Full gate 17/17.
 progress: 2026-08-14 (consolidation) — **three parallel sessions merged into one
   live line (r56).** Swipe-release feel, WS1 boot safety, and search Go-to-card
   were each written against r52 in separate sessions, each stamped itself "r53",

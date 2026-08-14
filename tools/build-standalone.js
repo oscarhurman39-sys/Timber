@@ -76,15 +76,22 @@ const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
   let artBytes = 0, photoBytes = 0;
 
   /* ---- 1. art: every art/<name>.png token, in CSS and JS alike ---- */
-  const artNames = [...new Set([...html.matchAll(/art\/([a-z0-9-]+)\.png/g)].map((m) => m[1]))];
-  if (!artNames.length) die('no art/ references found — is timber.html already built?');
-  for (const name of artNames) {
-    const file = path.join(ROOT, 'art', name + '.png');
-    if (!fs.existsSync(file)) die('missing asset: art/' + name + '.png');
-    const r = await encode(fs.readFileSync(file), 'image/png', ART_WIDTH[name] || ART_CAP, Q_ART);
+  /* The app loads art/<name>.webp wherever tools/optimise-art.js derived one and
+     art/<name>.png everywhere else, so match either — and always encode from the
+     PNG master, because WebP -> canvas -> WebP would stack a second generation of
+     loss on the artwork for no reason. The path class allows "/" so the holo and
+     anim subdirectories are inlined too; without it their assets stayed as
+     relative URLs that nothing can resolve inside the artifact frame. */
+  const artRefs = [...new Set([...html.matchAll(/art\/[a-z0-9/-]+\.(?:png|webp)/g)].map((m) => m[0]))];
+  if (!artRefs.length) die('no art/ references found — is timber.html already built?');
+  for (const ref of artRefs) {
+    const name = ref.replace(/^art\//, '').replace(/\.(png|webp)$/, '');
+    const master = path.join(ROOT, 'art', name + '.png');
+    if (!fs.existsSync(master)) die('missing asset master: art/' + name + '.png');
+    const r = await encode(fs.readFileSync(master), 'image/png', ART_WIDTH[name] || ART_CAP, Q_ART);
     const before = html.length;
-    html = html.split(`art/${name}.png`).join(r.out);
-    if (html.length === before) die('no substitution made for art/' + name + '.png');
+    html = html.split(ref).join(r.out);
+    if (html.length === before) die('no substitution made for ' + ref);
     artBytes += r.out.length;
     console.log(`  art  ${name.padEnd(20)} ${r.src.padStart(9)} -> ${r.W}x${r.H}  ${(r.out.length / 1024).toFixed(0)}KB`);
   }
@@ -108,9 +115,14 @@ const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
 
   const photoConst = 'const PHOTO_DATA={' +
     Object.entries(photoMap).map(([k, v]) => `${JSON.stringify(k)}:${JSON.stringify(v)}`).join(',') + '};\n';
-  const PHOTO_SRC = 'src="photos/${slug}.jpg"';
-  if (!html.includes(PHOTO_SRC)) die('photo <img> src not found in renderCard');
-  html = html.replace(PHOTO_SRC, 'src="${PHOTO_DATA[slug]||\'\'}"');
+  /* Every photograph in the app resolves through photoSrc(), so redirecting that
+     one line covers the card and both detail sheets at once. It used to match the
+     detail sheet's literal src= instead, which String.replace only substitutes
+     once — the second sheet and the card (which carries its path on data-psrc,
+     not src) kept relative URLs the artifact frame cannot resolve. */
+  const PHOTO_FN = 'const photoSrc=slug=>`photos/card/${slug}.webp`;';
+  if (!html.includes(PHOTO_FN)) die('photoSrc() not found — has the photo path helper moved?');
+  html = html.replace(PHOTO_FN, 'const photoSrc=slug=>PHOTO_DATA[slug]||"";');
   // declare the map just above the slug helper that keys it
   const anchor = '/* fold diacritics first';
   if (!html.includes(anchor)) die('slugLatin anchor comment not found');
