@@ -871,7 +871,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r67 · 2026-08-14 · 30a257a';
+const BUILD='r68 · 2026-08-14 · 5ee09d6';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -8164,10 +8164,34 @@ function fling(card,dir,learned,ms=350){
   const latin=PLANTS[idx].latin;                   /* SRS bookkeeping (storage I/O + menu text)
       lands after the fling settles so the animation frame carries zero extra work */
   setTimeout(()=>{srsOnSwipe(latin,learned);updateReviewMenu();},ms+10);
-  markHot();updateCounts();refreshEmpty();saveProgress();   /* promote the card being revealed */
-  if(reviewMode&&!order.length)exitReview();       /* last due card swiped — drop back to the full deck */
-  else if(activeFilter&&!order.length)clearFilter(); /* filtered deck exhausted — same */
+  /* NOTHING below this line may share the frame the throw starts on. markHot() promotes
+     the newly revealed card to its own layer and un-hides the card behind it — a layer
+     allocation plus a full paint of a whole card (photo, gradients, ~30 stacked shadows),
+     measured at 80-200ms of dropped frames. Landing that on the release frame is what
+     made a card hang at the finger for ~130ms after it was let go, which reads as the
+     swipe not being yours. The throw is transform+opacity on an already-promoted layer,
+     so once it is running the compositor carries it and this work is invisible. */
+  afterPresented(()=>{
+    markHot();updateCounts();refreshEmpty();saveProgress();   /* promote the card being revealed */
+    if(reviewMode&&!order.length)exitReview();       /* last due card swiped — drop back to the full deck */
+    else if(activeFilter&&!order.length)clearFilter(); /* filtered deck exhausted — same */
+  });
 }
+/* Run fn once the frame being built right now has been handed to the compositor: the
+   first rAF lands before that frame's style/layout/paint, the second after it. The
+   timeout is the backstop for a tab that stops firing rAF; the flush on the way out
+   is the one that matters, because saveProgress() rides in here and the app can be
+   killed the instant a card is thrown. Deferring it must not cost anyone a swipe. */
+const deferred=new Set();
+function afterPresented(fn){
+  const run=()=>{if(!deferred.delete(run))return;fn();};
+  deferred.add(run);
+  requestAnimationFrame(()=>requestAnimationFrame(run));
+  setTimeout(run,150);
+}
+function flushDeferred(){[...deferred].forEach(run=>run());}
+addEventListener('pagehide',flushDeferred);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)flushDeferred();});
 function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
 const REDUCED_MOTION=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 /* A card comes back the way it left — same offset, same tilt, reversed. fling()'s
