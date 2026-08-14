@@ -20,6 +20,21 @@
                       ground tone before the ink lands. 0 = raw artwork (vivid,
                       ink struggles), 1 = reproduces the standard panel almost
                       exactly. The readable-but-still-holo zone is the middle.
+    --ink-key LO,HI   transfer ONLY the parchment's ink, not its surface. The
+                      whole-panel multiply tints the ground with the parchment's
+                      cream (x0.87,0.71,0.45 per channel) — right when the target
+                      IS parchment-adjacent (Eternal Flame + --calm), wrong when
+                      the frame's own material must survive (a pearl frame goes
+                      tan, i.e. straight back to the paper look the special
+                      panels replaced). Per pixel: distance from the parchment's
+                      ground tone below LO transfers nothing, above HI transfers
+                      fully, cosine in between. LO exists because plain ink
+                      lifting was tried before and rejected — the parchment's
+                      vignette survived as a veil (see the flatten note below);
+                      LO is the veil threshold, and 30,90 clears it while keeping
+                      labels (dist 100+) and icons intact. A 3% feathered edge
+                      margin also drops the parchment's own outer border, which
+                      would otherwise double the frame box's border.
 
   WHY
   A commissioned frame usually draws its own stats plaque, soil panel and aspect
@@ -50,8 +65,12 @@ const GROUND = flagOf('--ground') ? flagOf('--ground').split(',').map(Number) : 
 if (GROUND && (GROUND.length !== 4 || GROUND.some(n => !Number.isFinite(n)))) { console.error('--ground must be x,y,w,h in percent'); process.exit(1); }
 const CALM = Number(flagOf('--calm', 0));
 if (!(CALM >= 0 && CALM <= 1)) { console.error('--calm must be 0..1'); process.exit(1); }
+const INKKEY = flagOf('--ink-key') ? flagOf('--ink-key').split(',').map(Number) : null;
+if (INKKEY && (INKKEY.length !== 2 || INKKEY.some(n => !Number.isFinite(n)) || INKKEY[0] >= INKKEY[1])) {
+  console.error('--ink-key must be LO,HI with LO < HI'); process.exit(1);
+}
 if (!frameArg || !nameArg) {
-  console.error('usage: node tools/extract-frame-assets.js <frame.png> <name> [--ground x,y,w,h] [--calm 0..1]');
+  console.error('usage: node tools/extract-frame-assets.js <frame.png> <name> [--ground x,y,w,h] [--calm 0..1] [--ink-key LO,HI]');
   process.exit(1);
 }
 const framePath = path.isAbsolute(frameArg) ? frameArg : path.join(ROOT, frameArg);
@@ -134,7 +153,7 @@ for (const s of slots) {
   for (const p of PANELS) standards[p.key] = fs.readFileSync(path.join(ROOT, p.art)).toString('base64');
   const swatchB64 = fs.readFileSync(path.join(ROOT, 'art', 'parch-swatch.png')).toString('base64');
 
-  const results = await page.evaluate(async ({ uri, slots, standards, swatchB64, GROUND, CALM }) => {
+  const results = await page.evaluate(async ({ uri, slots, standards, swatchB64, GROUND, CALM, INKKEY }) => {
     const img = new Image(); img.src = uri; await img.decode();
     const W = img.naturalWidth, H = img.naturalHeight;
     const out = [];
@@ -195,6 +214,43 @@ for (const s of slots) {
       return artCanvas;
     };
 
+    /* --ink-key: the multiply, gated per pixel by how far the parchment pixel
+       sits from the parchment's own ground tone. Ground-tone pixels (the cream,
+       the grain, most of the vignette) transfer nothing, so the frame's material
+       survives untinted; ink and icons (a long way from the ground tone)
+       transfer as a normal multiply. The 3% feathered edge margin stops the
+       parchment's outer border re-drawing itself on top of the frame box's own
+       border. */
+    const flattenKeyed = async (artCanvas, overlayB64, LO, HI) => {
+      const tone = /(\d+),(\d+),(\d+)/.exec(await groundTone(overlayB64)).slice(1, 4).map(Number);
+      const im = new Image(); im.src = 'data:image/png;base64,' + overlayB64; await im.decode();
+      const W2 = artCanvas.width, H2 = artCanvas.height;
+      const oc = document.createElement('canvas'); oc.width = W2; oc.height = H2;
+      const ox = oc.getContext('2d'); ox.imageSmoothingQuality = 'high';
+      ox.drawImage(im, 0, 0, W2, H2);
+      const o = ox.getImageData(0, 0, W2, H2).data;
+      const x = artCanvas.getContext('2d');
+      const gd = x.getImageData(0, 0, W2, H2);
+      const g = gd.data;
+      const mx = Math.max(2, Math.round(W2 * 0.03)), my = Math.max(2, Math.round(H2 * 0.03));
+      for (let py = 0; py < H2; py++) for (let px = 0; px < W2; px++) {
+        const i = (py * W2 + px) * 4;
+        const dist = Math.max(Math.abs(o[i] - tone[0]), Math.abs(o[i + 1] - tone[1]), Math.abs(o[i + 2] - tone[2]));
+        let a = (dist - LO) / (HI - LO);
+        if (a <= 0) continue;
+        if (a > 1) a = 1;
+        a = (1 - Math.cos(a * Math.PI)) / 2;                       // cosine ramp, no hard key edge
+        const e = Math.min(Math.min(px, W2 - 1 - px) / mx, Math.min(py, H2 - 1 - py) / my);
+        if (e < 1) a *= Math.max(0, e);
+        if (a <= 0) continue;
+        g[i]     = g[i]     * (1 - a) + (g[i]     * o[i]     / 255) * a;
+        g[i + 1] = g[i + 1] * (1 - a) + (g[i + 1] * o[i + 1] / 255) * a;
+        g[i + 2] = g[i + 2] * (1 - a) + (g[i + 2] * o[i + 2] / 255) * a;
+      }
+      x.putImageData(gd, 0, 0);
+      return artCanvas;
+    };
+
     for (const s of slots) {
       const slotRect = {
         sx: Math.round(s.left / 100 * W), sy: Math.round(s.top / 100 * H),
@@ -211,7 +267,8 @@ for (const s of slots) {
         x.globalAlpha = CALM; x.fillStyle = await groundTone(standards[s.key]);
         x.fillRect(0, 0, c.width, c.height); x.globalAlpha = 1;
       }
-      await flatten(c, standards[s.key]);                                  // x parchment
+      if (INKKEY) await flattenKeyed(c, standards[s.key], INKKEY[0], INKKEY[1]);
+      else await flatten(c, standards[s.key]);                             // x parchment
       out.push({ key: s.key, src, w: c.width, h: c.height, png: c.toDataURL('image/png') });
     }
 
@@ -233,11 +290,12 @@ for (const s of slots) {
         x.globalAlpha = CALM; x.fillStyle = await groundTone(swatchB64);
         x.fillRect(0, 0, c.width, c.height); x.globalAlpha = 1;
       }
-      await flatten(c, swatchB64);
+      if (INKKEY) await flattenKeyed(c, swatchB64, INKKEY[0], INKKEY[1]);  // parch-swatch is pure surface: keyed, nothing transfers, the swatch is clean ground
+      else await flatten(c, swatchB64);
       out.push({ key: 'swatch', src, w: c.width, h: c.height, png: c.toDataURL('image/png') });
     }
     return out;
-  }, { uri: `data:image/png;base64,${b64}`, slots, standards, swatchB64, GROUND, CALM });
+  }, { uri: `data:image/png;base64,${b64}`, slots, standards, swatchB64, GROUND, CALM, INKKEY });
 
   for (const r of results) {
     const f = path.join(outDir, `${nameArg}-${r.key}.png`);

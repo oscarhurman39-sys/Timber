@@ -543,6 +543,22 @@
     background-repeat:no-repeat;background-position:center;background-size:contain;
     opacity:0;will-change:transform,opacity;
     transform:translate(-50%,-50%) scale(var(--ws,1.5))}
+  /* ---- overframe: frame artwork that sits ON TOP of the photograph ----
+     The standard stack paints the frame UNDER the photo, so a frame whose
+     borders are meant to overlap the photograph (Pretty Lady Maria's art
+     nouveau tracery, cut with a transparent photo window) had no slot: the
+     photo starts 8 CSS px from the top edge and buries any painted border
+     deeper than that, which is exactly the "photo runs over the edge" look
+     Oscar rejected on the first build of that card. This layer is the frame's
+     top surface put back: full-card, above the photo (z0), below everything
+     that informs — .tinner's title and growth rail (z1 later in DOM, so they
+     paint above), the rail values (z2), the crest and panels (z3+). Unlike the
+     wisps and edging it is NOT clipped to the photo window, because its whole
+     job is to own the card edge. Static, pointer-inert, and carried on lateBG
+     like every other special-card asset. */
+  .overframe{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background-size:100% 100%;background-repeat:no-repeat}
+
   /* ---- edging: the frame's thorn-work reaching over the photograph ----
      The frame art's sprays and flame-licks encroach well into the window, but
      the photo sits on top and buries them, leaving a plain rounded rectangle.
@@ -679,11 +695,17 @@
      mite on every side and still blends into the parchment.
      .pesticon sits exactly on the mite's own rect and uses object-fit:contain,
      so an icon that is not square (the slug is 1.16:1) centres in the slot
-     instead of stretching. */
+     instead of stretching.
      Selector note: `.plaque>img` already sets width:100% for the panel's own
      artwork, and that is class+type, which outranks a bare .pesticon class — the
      icon rendered 266px wide, letterboxed to nothing, and vanished into the row.
-     Matching the same shape here wins it back without touching the shared rule. */
+     Matching the same shape here wins it back without touching the shared rule.
+     (This note once sat OUTSIDE the comment as bare text, which is invalid CSS:
+     the parser swallowed the prose AND the .p-pest-icon rule after it as one
+     garbage rule, the patch rendered 0x0, and the mite showed straight through
+     under the slug on two shipped builds. Oscar saw it on his phone twice and
+     was told the first time that it was fine. An early comment-close inside
+     prose kills the rule below it — keep notes INSIDE the block comment.) */
   .p-pest-icon{left:0.98%;top:24.86%;width:14.61%;height:23.16%}
   .plaque>img.pesticon{position:absolute;left:2.86%;top:27.80%;width:10.86%;height:17.27%;
     object-fit:contain;pointer-events:none}
@@ -849,7 +871,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r63 · 2026-08-14 · 03bdbd1';
+const BUILD='r67 · 2026-08-14 · 30a257a';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7566,8 +7588,34 @@ const HOLO={
      masterText replaces DOUBLE TAP TO MASTER on this one card only. */
   'anemone-hybrida-pretty-lady-maria-aneplaria':{
     frame:'art/frame-pretty-lady-maria.webp',
-    edging:'art/holo/pretty-lady-maria-edging.webp',
+    /* v2, rebuilt to Oscar's notes on the shipped v1: the photo buried the
+       frame's painted top border ("goes over the edge — sloppy"), the slug sat
+       visibly on the baked mite, the parchment panels fought the pearl frame
+       ("no paper card crap"), and the shimmer was invisible.
+       - overframe: the pack's cut art-nouveau layer (alpha-gained 2.2x) OVER
+         the photo, so the tracery owns the card edge again. Its left spine is
+         erased (Oscar: it would sit on HEIGHT/SPREAD), plus the growth-rail
+         strip and the master-strip line, which both need dark ground under
+         light ink. Replaces the old hair-line edging layer outright.
+       - panels: pearl boxes cut from the pack's ornate frame with the new
+         --ink-key transfer — parchment ink and icons only, no parchment
+         surface, so the boxes stay pearl instead of going tan. Plaque is the
+         slot crop (it keeps the drawn filigree border); soil and band are
+         re-grounded from the clean window pearl because their drawn boxes are
+         PLUM, and every patch on the card shares the one pearl swatch — a
+         pearl patch on a plum band would glow. This card is the deliberate,
+         Oscar-ordered exception to "holo where it decorates, parchment where
+         it informs": the principle underneath is that ink needs a light quiet
+         ground, and the pearl IS one.
+       - foil: the pack's diagonal foil-light layer, breathing slowly — the
+         shimmer you can actually see. The two faint keyed wisps stay under it. */
+    overframe:'art/holo/pretty-lady-maria-overframe.webp',
+    plaque:'art/holo/pretty-lady-maria-plaque.webp',
+    soil:'art/holo/pretty-lady-maria-soil.webp',
+    band:'art/holo/pretty-lady-maria-band.webp',
+    swatch:'art/holo/pretty-lady-maria-swatch.png',
     wisps:[
+      {src:'art/holo/pretty-lady-maria-foil.webp',  anim:'shimmer', dur:9,  delay:-2, opacity:0.55, scale:1.2},
       {src:'art/holo/pretty-lady-maria-wisp.webp',  anim:'shimmer', dur:11, delay:-3, opacity:1.0,  scale:1.45},
       {src:'art/holo/pretty-lady-maria-sweep.webp', anim:'sweep',   dur:19, delay:-8, opacity:1.0,  scale:1.18},
     ],
@@ -7887,6 +7935,7 @@ function renderCard(idx){
           ${swap?`<img class="alt" data-psrc="${swap.alt}" style="object-position:${swap.focus||PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
           <div class="pblack" aria-hidden="true"></div>`:''}
         </div>
+        ${ho&&ho.overframe?`<div class="overframe" aria-hidden="true"${lateBG(`background-image:url(${ho.overframe})`)}></div>`:''}
         <div class="tinner">
           <div class="thead">
             <h2>${p.common}</h2>

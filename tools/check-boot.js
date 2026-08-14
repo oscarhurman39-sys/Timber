@@ -158,7 +158,7 @@ function checkAssets(registries, errors) {
   const holo = registries.HOLO || {};
   for (const [slug, h] of Object.entries(holo)) {
     if (!h || typeof h !== 'object') { fail(errors, `HOLO ${slug}: config is not an object`); continue; }
-    for (const key of ['frame', 'plaque', 'soil', 'band', 'swatch', 'edging']) {
+    for (const key of ['frame', 'plaque', 'soil', 'band', 'swatch', 'edging', 'overframe']) {
       if (h[key] != null) localAsset(errors, `HOLO ${slug}.${key}`, h[key]);
     }
     if (h.wisps != null && !Array.isArray(h.wisps)) fail(errors, `HOLO ${slug}.wisps: expected an array`);

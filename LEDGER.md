@@ -5,6 +5,51 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (Maria v2, and the pest patch was never alive) — **Oscar's
+  rebuild notes on the shipped card are all in, and the biggest one was a bug I
+  argued with twice before finding: the slug really was pasted over the mite,
+  on every card, since r62 (r67).**
+  THE BUG, owned in full: the pest-icon cover patch rendered 0x0 from the moment
+  it shipped. While fixing the icon-width selector in r62 I left a prose note
+  OUTSIDE its CSS comment; the parser swallowed the bare text AND the
+  .p-pest-icon geometry rule after it as one garbage rule. The icon rule below
+  survived, so the slug drew and the dead patch was invisible. My verification
+  measured the ICON and never the PATCH. Oscar said "the slug is on top of the
+  mite" looking at his phone; I zoomed the render, decided the mite's legs were
+  the slug's tentacles, and told him it stood alone. He said it again; the
+  hide-the-slug test then showed the mite sitting there whole. He read the card
+  right from a phone screenshot twice; I read it wrong from a 4x zoom, because I
+  tested the half I had just fixed and assumed the half that had passed before.
+  The audit passed r62 because a 0x0 patch collides with nothing.
+  A rule change fell out, measured not loosened: audit rule B2 then FLAGGED the
+  living patch, claiming it overlaps the "Pests & diseases" label. Its x-guard
+  (12%) was really the live value zones' left edge; the baked label TEXT starts
+  at 16.86% at the earliest (first-ink column scan of all four rows). The pest
+  patch's feather ends at 15.59% and cannot wash a letter. Guard tightened to
+  16.4% with the measurements in the comment — value patches, the defect the
+  rule exists for, are still checked.
+  MARIA v2, per Oscar's notes on v1: the pack's cut art-nouveau layer now sits
+  OVER the photo as a new `overframe` HOLO slot (z1: above the photo, below
+  title, rails, crest and panels), alpha-gained 2.2x, with his requested left
+  spine erased plus the growth-rail, master-strip and PPP strips, which all
+  need dark ground under light ink. The photo no longer runs over the top
+  border. Panels are pearl boxes cut from the pack's ornate frame with a new
+  --ink-key LO,HI mode in extract-frame-assets: the whole-panel multiply tints
+  any light ground with parchment cream, so ink-key transfers only pixels that
+  depart from the parchment's own ground tone — labels, icons and values land,
+  the paper does not. Plaque keeps its slot-crop filigree border; soil, band
+  and the patch swatch are re-grounded from the plaque-interior pearl so every
+  patch tone-matches every ground it covers (first cut used window-white and
+  read as pale blocks). This card is the deliberate, Oscar-ordered exception to
+  "holo where it decorates, parchment where it informs" — the principle under
+  that rule is that ink needs a light quiet ground, and the pearl is one.
+  The pack's diagonal foil layer rides as a third wisp (shimmer, 0.55) — the
+  effect you can actually see; the two keyed wisps stay under it. The old
+  hair-line edging is superseded by the overframe and dropped.
+  Two frames in the pack were unusable and the reason is geometry, not taste:
+  1024x1536 is ratio 0.667 against the card's 0.700, a ~5% squash of every
+  anchor. The one at 0.6998 was already the shipped base frame.
+  Gate 17/17.
 progress: 2026-08-14 (Pretty Lady Maria ships) — **deck 167 -> 168. The special
   card is finished: real frame, real overlays, slug icon, and "Happy Birthday" on
   the master strip instead of the interaction hint (r63).**
