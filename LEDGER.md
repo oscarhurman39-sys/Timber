@@ -5,6 +5,42 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (Pretty Lady Maria: master-strip text, and the overlays
+  measured) — **the strip's wording is a token now, and the three shimmer assets
+  arrived and are ~10x too faint for the config that ships with them (r61).**
+  MASTER TEXT: `.tcard.holo::after` took its wording from a CSS literal. It is
+  `content:var(--holo-master-text,"DOUBLE TAP TO MASTER.")` now, set per card as
+  `masterText` in the HOLO entry, single-quoted in the value because the whole
+  style string rides a data- attribute whose double quotes are escaped. Oscar's
+  case is a dedication — the Anemone is a birthday present for his mum and reads
+  "Happy Birthday" instead. Worth being clear about the cost: this strip is the
+  only place the app teaches double-tap-to-master, so a card that overrides it
+  teaches nothing. Fine once, wrong as a habit; the comment says so.
+  THE OVERLAYS: edging, sweep and wisp arrived, all RGBA at exactly 1103x1576
+  (the FRAME-BRIEF canvas, ratio 0.700). The brief's warning that they look blank
+  in a gallery is CORRECT and the keying is right — 83-98% fully transparent, not
+  one fully opaque pixel. But measured peak alpha is 112/255 on the edging, 33 on
+  the sweep and 23 on the wisp, and the config in the brief then multiplies the
+  last two by 0.18 and 0.22. That lands the shimmer at an effective **2% peak
+  opacity**, which is not subtle, it is absent. Even at opacity 1.0 the wisp
+  peaks at 9% and the sweep at 12.9%, which is the intended restrained register.
+  Rendered both: brief-vs-tuned is mean delta 0.48/255, and the tuned shimmer
+  moves frame-to-frame by mean 0.93 / max 28. So opacity 1.0 on both, and if it
+  still wants more the ASSETS need a gain pass, not more layers.
+  Also: the edging is authored at FULL-CARD coordinates (0.700) but `.edging`
+  maps to the photo window (0.6221), so it is stretched ~12% and its outermost
+  curls land inside the window rather than at the card edge. It reads well as
+  drawn, so this is recorded rather than fixed — the alternative is re-cutting it
+  at the .tinner rect, which throws away the curls that fall on the spine.
+  STILL BLOCKED: no frame artwork, no plant record, and the photo's provenance is
+  unresolved (C2PA says Galaxy S24 + Photo assist +
+  compositeWithTrainedAlgorithmicMedia, with an AI-generated-content watermark in
+  the pixels — the Primula vialii case). The preview used a placeholder frame
+  recoloured from Avondale, which is not committed and is not the design.
+  ONE THING THE PREVIEW SETTLED: rendering the placeholder both dark-plum and
+  pale-silver shows the spine text failing completely on pale metal. The frame
+  must keep those five rectangles dark. Colour tokens cannot save it.
+  Gate 17/17 serially.
 progress: 2026-08-14 (Star Jasmine dealt; photo-swap sweep) — **deck 166 -> 167,
   and a survey of the spare photographs that ended with one swap added and one
   withdrawn after seeing it rendered (r60).**

@@ -620,8 +620,16 @@
   /* Master strip. The baked original sits at ~98.2%, but that lands on this
      frame's bright ornate border and the text disappears into it. The aspect band
      ends at 95.82% and the frame's inner bottom box ends at ~97.1%, so the strip
-     goes in that darker 8px gap instead — same reading order, legible ground. */
-  .tcard.holo::after{content:"DOUBLE TAP TO MASTER.";position:absolute;
+     goes in that darker 8px gap instead — same reading order, legible ground.
+
+     The WORDING is a token too (`masterText` in the HOLO entry). This strip is
+     the only place the app teaches its core interaction, so overriding it costs
+     that card its instruction — fine on a one-off (a dedication, a gift card),
+     never as a habit, because a deck where the strip says something different on
+     every card teaches nothing. Single quotes in the value: the whole style
+     string is carried on a data- attribute whose double quotes are escaped, and
+     a single-quoted CSS string sidesteps that entirely. */
+  .tcard.holo::after{content:var(--holo-master-text,"DOUBLE TAP TO MASTER.");position:absolute;
     left:14%;right:4%;top:95.95%;height:1.5%;
     display:grid;place-items:center;
     font-family:Georgia,serif;font-size:7px;letter-spacing:2.6px;text-transform:uppercase;
@@ -814,7 +822,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r60 · 2026-08-14 · 958ddba';
+const BUILD='r61 · 2026-08-14 · 91689e6';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7680,6 +7688,9 @@ function holoStyle(ho){
     ho.labelInk   && `--holo-label-ink:${ho.labelInk}`,
     ho.masterInk  && `--holo-master-ink:${ho.masterInk}`,
     ho.shadow     && `--holo-shadow:${ho.shadow}`,
+    /* single-quoted, and any apostrophe in the text escaped for CSS — a stray
+       quote here would terminate the string and silently blank the strip */
+    ho.masterText && `--holo-master-text:'${String(ho.masterText).replace(/\\/g,'\\\\').replace(/'/g,"\\'")}'`,
   ].filter(Boolean).join(';');
 }
 /* PHOTO_SWAP — cards that blink between TWO photographs instead of showing one.
