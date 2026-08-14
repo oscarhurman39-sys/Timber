@@ -5,6 +5,42 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (Star Jasmine dealt; photo-swap sweep) — **deck 166 -> 167,
+  and a survey of the spare photographs that ended with one swap added and one
+  withdrawn after seeing it rendered (r60).**
+  STAR JASMINE was sitting in PLANTS_ON_HOLD with its photograph already on disk,
+  already staged at the 1200px cap, already recorded in CREDITS.json as Oscar's
+  own — everything `deal-plant.js` does except the row move. The audit had been
+  saying so quietly for a while: 87 held, 86 awaiting a photo. `deal-plant.js`
+  refuses this case by design (`photos/<slug>.jpg already exists — this card is
+  not waiting for a photo`) and that guard is right, so the row move and focus
+  were done with the tool's own mechanics rather than by relaxing it, leaving the
+  JPEG byte-identical (md5 checked before and after). Re-running the tool would
+  have re-encoded an already-staged photo at q0.85 for nothing. Focus 40% 45%:
+  the source is 0.83 against a 0.617 window, so the sides crop and centring
+  clipped the flower truss on the left.
+  PHOTO-SWAP SWEEP — the useful result is a rejection. Eleven spare photographs
+  sit on disk for cards that are already dealt; seven looked like candidate pairs.
+  TWO WERE THE SAME FILE: agastache-summerlong-coral-flowers.jpg and
+  cercis-canadensis-eternal-flame-wide.jpg are byte-identical to their cards' own
+  photographs (same md5). Configured as swaps they would have blinked between an
+  image and itself. Nothing checks for this; the pairs were hashed before they
+  were trusted, which is the only reason it was caught.
+  ONE SHIPPED: Cercis 'Eternal Flame'. The card photo is a single leaf filling the
+  frame — right for the colour, silent about the plant, which carries deep red,
+  orange and gold at once and is named for exactly that. The wider shot says it.
+  ONE WITHDRAWN AFTER RENDERING: Spiraea 'Double Play Doozie'. It was configured,
+  screenshotted, and taken back out. Read as two files the pair is obvious — buds
+  in one, an open magenta corymb in the other, on a shrub sold for reblooming.
+  Read as two CARDS they are the same picture, because the window keeps only 64%
+  of that nearly-square source's width and the open bloom crops out; panning to it
+  instead fills the photo with an out-of-focus blob. Recorded in the config so it
+  is not re-tried. **Judge a swap on the two cards, not the two files** — the
+  same class of error as reading the Avondale panel sheet as a frame.
+  I had told Oscar there were "four real leaf-flower pairs" before looking at the
+  images. Two were duplicates and one was a second take. That estimate was wrong
+  and the correction is the entry.
+  Gate 17/17 serially, twice.
 progress: 2026-08-14 (Pretty Lady Maria groundwork) — **the one piece of that
   card that could be built without its artwork is built; the card itself is
   blocked on three things that do not exist yet (r58).** Oscar brought a full

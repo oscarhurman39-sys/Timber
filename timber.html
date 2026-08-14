@@ -814,7 +814,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r58 · 2026-08-14 · b794656';
+const BUILD='r60 · 2026-08-14 · 958ddba';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4996,7 +4996,31 @@ const PLANTS = [
    uses:"walls · pergolas · large trees · trained standards",
    size:"12–15 m H × 8–12 m W",
    seasonalImpact:"", growthSpeed:16, pestRisk:11, thirst:9, careLevel:13, sunNeed:90, sunMin:50},
- ];
+   {common:"Star Jasmine", latin:"Trachelospermum jasminoides", hue:115,
+   visual:"Glossy evergreen leaves bronzing in cold · intensely fragrant white pinwheels",
+   water:"Water regularly; keep containers damp in heat",
+   aspect:"South / West",
+   soil:"Fertile, free-draining; Needs a warm wall · winter wet is fatal",
+   prune:"Trim after flowering · tie young shoots to the support",
+   source:"",
+   peak:"Jun-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"",
+   hardiness:"H4",
+   resilience:"dependable on warm walls · exposure is its limit · milky sap irritates",
+   uses:"evergreen climber · scented walls · courtyards · containers",
+   size:"8-12m H × 4-8m W",
+   seasonalImpact:"", growthSpeed:11, pestRisk:5, thirst:12, careLevel:8, sunNeed:90, sunMin:65},
+];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -5955,30 +5979,6 @@ const PLANTS_ON_HOLD=[
    size:"4-8m+ H × 1.5-4m+ W",
    seasonalImpact:"", growthSpeed:16, pestRisk:8, thirst:12, careLevel:14, sunNeed:95, sunMin:65},
 
-  {common:"Star Jasmine", latin:"Trachelospermum jasminoides", hue:115,
-   visual:"Glossy evergreen leaves bronzing in cold · intensely fragrant white pinwheels",
-   water:"Water regularly; keep containers damp in heat",
-   aspect:"South / West",
-   soil:"Fertile, free-draining; Needs a warm wall · winter wet is fatal",
-   prune:"Trim after flowering · tie young shoots to the support",
-   source:"",
-   peak:"Jun-Sep",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"",
-   hardiness:"H4",
-   resilience:"dependable on warm walls · exposure is its limit · milky sap irritates",
-   uses:"evergreen climber · scented walls · courtyards · containers",
-   size:"8-12m H × 4-8m W",
-   seasonalImpact:"", growthSpeed:11, pestRisk:5, thirst:12, careLevel:8, sunNeed:90, sunMin:65},
 
   {common:"Persian Ivy 'Sulphur Heart'", latin:"Hedera colchica 'Sulphur Heart'", hue:70,
    visual:"Very large leathery leaves splashed yellow and lime through the centre",
@@ -7693,15 +7693,46 @@ function holoStyle(ho){
    bare wood before a leaf shows, so the deck's summer-foliage photo said nothing
    about what the card is actually selling (peak Apr-May, "dense rose-purple pea
    flowers wreathe the bare branches"). Leaf and flower alternating say it in one
-   card. Nothing else in the deck needs this; most plants are one photo honestly. */
+   card. Nothing else in the deck needs this; most plants are one photo honestly.
+
+   That last sentence is the bar, and it is why the deck has two of these and not
+   seven. A sweep of the spare shots on disk found seven cards carrying a second
+   photograph; exactly one joined Avondale. Two of the "spares" were
+   byte-identical copies of the card's own photo (agastache -flowers,
+   eternal-flame -wide — same md5, so the card would have blinked between one
+   image and itself); the rest were a second take of the same subject rather than
+   a second story. A swap that shows the same thing twice reads as a glitch, not
+   as a feature. */
 const PHOTO_SWAP={
   'cercis-chinensis-avondale':{
     alt:'photos/card/cercis-chinensis-avondale-stem.webp',
     focus:'50% 45%',
     hold:'3.5s',
   },
+  /* The cultivar IS the gradient, and a close-up cannot hold it. The card's own
+     photo is one leaf filling the frame — right for the colour, silent about the
+     plant, which carries deep red, orange and gold at the same time and is named
+     for exactly that. The wider shot says it and loses the leaf detail. Neither
+     is the whole card on its own, which is the test. */
+  'cercis-canadensis-eternal-flame':{
+    alt:'photos/card/cercis-canadensis-eternal-flame-leaf.webp',
+    focus:'50% 50%',
+    hold:'3.5s',
+  },
 };
+/* Spiraea 'Double Play Doozie' was configured here and then removed, which is
+   worth recording so it is not re-tried. Reading the two files, the pair looked
+   obvious: the card photo is nearly all tight buds, the spare has an open
+   magenta corymb, and Doozie is sold on reblooming. RENDERED AT CARD SIZE they
+   are the same picture — a bud cluster left-of-centre against gold foliage in
+   both — because the window keeps only 64% of that source's width (it is almost
+   square, 0.961) and the open bloom that justified the swap crops out to the
+   right. Panning to it instead lands a heavily out-of-focus blob across the
+   whole photo. Neither crop is a second story, so the card stays single-photo.
+   The lesson is the general one: judge a swap on the two CARDS, not the two
+   files. */
 const PHOTO_FOCUS={
+  'trachelospermum-jasminoides':'40% 45%',
   'chaenomeles-speciosa-kinshiden':'8% 50%',
   'cornus-sanguinea-midwinter-fire':'50% 25%','kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%','hydrangea-serrata':'45% 16%','cornus-kousa':'50% 52%'};
 
