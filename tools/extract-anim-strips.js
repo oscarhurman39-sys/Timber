@@ -42,6 +42,7 @@ const positional = argv.filter((a, i) => !a.startsWith('--') && !(i > 0 && argv[
 const [dirArg, nameArg] = positional;
 const SCALE = Number((argv[argv.indexOf('--scale') + 1] || 1));
 const layerSpecs = argv.flatMap((a, i) => a === '--layer' ? [argv[i + 1]] : []);
+const SKIP = new Set((argv[argv.indexOf('--skip') + 1] || '').split(',').filter(s => argv.includes('--skip')).map(Number));
 
 if (!dirArg || !nameArg || !layerSpecs.length) {
   console.error("usage: node tools/extract-anim-strips.js <framesDir> <name> --layer 'name:x,y,w,h[:cuts=x,y,w,h+...]' [--layer ...] [--scale N]");
@@ -58,7 +59,9 @@ const LAYERS = layerSpecs.map(s => {
 });
 
 const dir = path.isAbsolute(dirArg) ? dirArg : path.join(ROOT, dirArg);
-const frames = fs.readdirSync(dir).filter(f => /^frame_\d+\.png$/.test(f)).sort();
+const frames = fs.readdirSync(dir).filter(f => /^frame_(\d+)\.png$/.test(f))
+  .filter(f => !SKIP.has(Number(/(\d+)/.exec(f)[1]))).sort();
+if (SKIP.size) console.log('skipping frame(s): ' + [...SKIP].join(', '));
 if (frames.length < 2) { console.error(`found ${frames.length} frame_NN.png files in ${dir} — need at least 2`); process.exit(1); }
 
 (async () => {
