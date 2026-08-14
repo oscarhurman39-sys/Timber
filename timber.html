@@ -7542,12 +7542,37 @@ const ANIM={
 };
 /* One @keyframes per pack, generated from its durations so uneven timing lives
    in data, not hand-written CSS. step-end holds each cell then jumps — the
-   browser must never interpolate background-position or cells would smear. */
+   browser must never interpolate background-position or cells would smear.
+
+   A bad special-card pack must never brick the whole deck. Validation is kept in
+   one helper and cached: buildAnimCSS skips a bad pack, and groveHTML then omits
+   only that card's overlay while the rest of Timber carries on normally. */
+const ANIM_VALID=new Map();
+function validAnimPack(slug,a){
+  if(ANIM_VALID.has(slug))return ANIM_VALID.get(slug);
+  const bad=msg=>{console.error(`ANIM ${slug}: ${msg}`);ANIM_VALID.set(slug,false);return false;};
+  if(!a||typeof a!=='object')return bad('pack is not an object');
+  if(!Number.isInteger(a.frames)||a.frames<2)return bad('frames must be an integer >= 2');
+  if(!Array.isArray(a.durations))return bad('durations must be an array');
+  if(a.durations.length!==a.frames)return bad(`${a.durations.length} durations for ${a.frames} frames`);
+  if(a.durations.some(d=>!Number.isFinite(d)||d<=0))return bad('every duration must be a positive number');
+  if(!Number.isInteger(a.holdFrame)||a.holdFrame<0||a.holdFrame>=a.frames)return bad(`holdFrame ${a.holdFrame} is outside 0..${a.frames-1}`);
+  if(!Array.isArray(a.layers))return bad('layers must be an array');
+  for(let i=0;i<a.layers.length;i++){
+    const l=a.layers[i];
+    if(!l||typeof l!=='object')return bad(`layer ${i} is not an object`);
+    if(typeof l.src!=='string'||!l.src)return bad(`layer ${i} has no src`);
+    if(![l.left,l.top,l.width,l.height].every(Number.isFinite)||l.width<=0||l.height<=0)return bad(`layer ${i} has invalid geometry`);
+    if(!Number.isInteger(l.phase)||l.phase<0||l.phase>=a.frames)return bad(`layer ${i} phase ${l.phase} is outside 0..${a.frames-1}`);
+  }
+  ANIM_VALID.set(slug,true);
+  return true;
+}
 function buildAnimCSS(){
   let css='';
   for(const [slug,a] of Object.entries(ANIM)){
+    if(!validAnimPack(slug,a))continue;
     const total=a.durations.reduce((s,d)=>s+d,0);
-    if(a.durations.length!==a.frames)throw new Error(`ANIM ${slug}: ${a.durations.length} durations for ${a.frames} frames`);
     const stops=[];let t=0;
     for(let i=0;i<a.frames;i++){
       stops.push(`${(t/total*100).toFixed(3)}%{background-position-x:${(i/(a.frames-1)*100).toFixed(3)}%}`);
@@ -7562,7 +7587,7 @@ function buildAnimCSS(){
 buildAnimCSS();
 function groveHTML(slug){
   const a=ANIM[slug];
-  if(!a)return '';
+  if(!a||!validAnimPack(slug,a))return '';
   const hold=(a.holdFrame/(a.frames-1)*100).toFixed(3);
   const L=a.layers.map(l=>{
     /* phase = start this layer N frames into the cycle, expressed as a negative
