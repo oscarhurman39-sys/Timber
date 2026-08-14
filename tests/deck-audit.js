@@ -49,6 +49,9 @@ const errors = [], warnings = [], known = [];
       const txt = (sel) => (c.querySelector(sel) || {}).textContent || '';
       const photo = c.querySelector('.tphoto img');
       return {
+        /* a FULLART front is one supplied image — the data zones this audit
+           reads are painted pixels there, so zone-echo rules cannot apply */
+        fullart: !!c.querySelector('.tcard.fullart'),
         common: p.common, latin: p.latin, hue: p.hue, hardiness: p.hardiness,
         aspectData: p.aspect || '', aspectShown: txt('.b-aspect-ink').trim(),
         sunNeed: p.sunNeed, sunMin: p.sunMin, peak: p.peak || '',
@@ -95,8 +98,12 @@ const errors = [], warnings = [], known = [];
     /* crest must echo the data */
     if (c.crest && c.crest !== c.hardiness) err(c, 'crest-mismatch', `crest "${c.crest}" != hardiness "${c.hardiness}"`);
 
-    /* bloom text present but timeline empty = unparseable peak */
-    if (c.peak && c.months === 0) err(c, 'peak-unparseable', `peak "${c.peak}" lights no months`);
+    /* bloom text present but timeline empty = unparseable peak (a fullart card
+       has no rendered timeline — its months are painted into the artwork) */
+    if (c.peak && c.months === 0 && !c.fullart) err(c, 'peak-unparseable', `peak "${c.peak}" lights no months`);
+
+    /* a fullart card that loses its artwork is a blank card, not an honest gap */
+    if (c.fullart && !c.photoOk) err(c, 'fullart-art-missing', 'the supplied card artwork did not load');
 
     /* light floor cannot exceed the preferred level */
     if (c.sunMin !== '' && c.sunNeed !== '' && c.sunMin != null && c.sunNeed != null && Number(c.sunMin) > Number(c.sunNeed))
@@ -109,9 +116,9 @@ const errors = [], warnings = [], known = [];
       err(c, 'orphan-trade-cells', `${c.orphanCells.length} caption(s) with no value: ${c.orphanCells.join(', ')}`);
 
     /* soft: honest gaps, reported not enforced */
-    if (!c.photoOk) warn(c, 'photo-missing', 'card falls back to its leaf gradient');
+    if (!c.photoOk && !c.fullart) warn(c, 'photo-missing', 'card falls back to its leaf gradient');
     if (c.blankRatings >= 4) warn(c, 'near-empty', `${c.blankRatings} of 6 ratings blank — stat rows render empty`);
-    if (!c.sizeH || !c.sizeS) warn(c, 'size-rail-blank', `H "${c.sizeH}" S "${c.sizeS}"`);
+    if ((!c.sizeH || !c.sizeS) && !c.fullart) warn(c, 'size-rail-blank', `H "${c.sizeH}" S "${c.sizeS}"`);
   }
 
   if (pageErrors.length) errors.push('page errors: ' + pageErrors.join(' | '));

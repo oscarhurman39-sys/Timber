@@ -61,8 +61,10 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
          eye on a phone; the tolerance here is 0.6px so the next drift does not
          need his eye. */
       {
+        /* a fullart card has no frame opening — the artwork IS the whole face,
+           so its .tphoto fills the card and rule F does not apply */
         const tc = card.querySelector('.tcard'), ph = card.querySelector('.tphoto');
-        if (tc && ph) {
+        if (tc && ph && !tc.classList.contains('fullart')) {
           const cb = tc.getBoundingClientRect(), pb = ph.getBoundingClientRect();
           if (cb.width > 1 && cb.height > 1) {
             /* .tscale scales x and y INDEPENDENTLY (--csx/--csy), so the two

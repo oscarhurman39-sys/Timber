@@ -559,6 +559,20 @@
   .overframe{position:absolute;inset:0;z-index:1;pointer-events:none;
     background-size:100% 100%;background-repeat:no-repeat}
 
+  /* ============ FULLART (see the FULLART map) ============
+     The whole front is one supplied artwork: the photo window becomes the whole
+     card face and the vignette is dropped (the art carries its own grading).
+     The .say button is a transparent hotspot laid over the pill PAINTED in the
+     artwork — no chrome of its own, just a soft tint while speaking so a tap
+     visibly landed. Its rect comes inline from the FULLART entry. */
+  .tcard.fullart{background:#08070c;overflow:hidden}
+  .tcard.fullart .tphoto{left:0;top:0;right:0;bottom:0;border-radius:15px}
+  .tcard.fullart .tphoto::after{content:none}
+  .tcard.fullart .say{position:absolute;z-index:5;margin:0;padding:0;display:block;
+    background:transparent;border:0;box-shadow:none;font-size:0;letter-spacing:0;
+    border-radius:14px}
+  .tcard.fullart .say:active,.tcard.fullart .say.speaking{background:rgba(122,180,255,.28)}
+
   /* ---- edging: the frame's thorn-work reaching over the photograph ----
      The frame art's sprays and flame-licks encroach well into the window, but
      the photo sits on top and buries them, leaving a plain rounded rectangle.
@@ -871,7 +885,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r68 · 2026-08-14 · 5ee09d6';
+const BUILD='r69 · 2026-08-14 · bc1cc4a';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7568,63 +7582,12 @@ const PEST={
    Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
    card goes through the same layout audit as any other. */
 const HOLO={
-  /* Oscar's mum's birthday card. Everything here was measured before it was
-     trusted, because the pack arrived with three candidate frames:
-       - the two "fantasy/opaline" frames are 1024x1536 = ratio 0.667. The card is
-         0.700 and the art is stretched to it, so those would squash ~5% and drag
-         the spine, window and bottom strip off their anchors. Unusable, not a
-         taste call.
-       - this one is 1049x1499 = 0.6998, the same artboard as Avondale and Eternal
-         Flame, and its drawn plaque / soil / band boxes land within about half a
-         percent of the real overlay slots, so the parchment covers them.
-     The load-bearing question for a SILVER frame was whether the CSS-supplied
-     spine text survives, since .holo hides the parchment rail patch and sets the
-     value straight onto the artwork. Measured mean luminance in those rectangles:
-     79, 71, 67, 70 out of 255 — the spine is deep plum under the silver tracery,
-     so light ink reads. A pale-silver spine would have failed outright.
-     Wisps at opacity 1.0, and that is not a loud setting: the assets peak at
-     alpha 23/255 (wisp) and 33/255 (sweep), so 1.0 lands them at 9% and 12.9%
-     effective. The 0.22/0.18 first-pass config would have been 2%, i.e. nothing.
-     masterText replaces DOUBLE TAP TO MASTER on this one card only. */
-  'anemone-hybrida-pretty-lady-maria-aneplaria':{
-    frame:'art/frame-pretty-lady-maria.webp',
-    /* v2, rebuilt to Oscar's notes on the shipped v1: the photo buried the
-       frame's painted top border ("goes over the edge — sloppy"), the slug sat
-       visibly on the baked mite, the parchment panels fought the pearl frame
-       ("no paper card crap"), and the shimmer was invisible.
-       - overframe: the pack's cut art-nouveau layer (alpha-gained 2.2x) OVER
-         the photo, so the tracery owns the card edge again. Its left spine is
-         erased (Oscar: it would sit on HEIGHT/SPREAD), plus the growth-rail
-         strip and the master-strip line, which both need dark ground under
-         light ink. Replaces the old hair-line edging layer outright.
-       - panels: pearl boxes cut from the pack's ornate frame with the new
-         --ink-key transfer — parchment ink and icons only, no parchment
-         surface, so the boxes stay pearl instead of going tan. Plaque is the
-         slot crop (it keeps the drawn filigree border); soil and band are
-         re-grounded from the clean window pearl because their drawn boxes are
-         PLUM, and every patch on the card shares the one pearl swatch — a
-         pearl patch on a plum band would glow. This card is the deliberate,
-         Oscar-ordered exception to "holo where it decorates, parchment where
-         it informs": the principle underneath is that ink needs a light quiet
-         ground, and the pearl IS one.
-       - foil: the pack's diagonal foil-light layer, breathing slowly — the
-         shimmer you can actually see. The two faint keyed wisps stay under it. */
-    overframe:'art/holo/pretty-lady-maria-overframe.webp',
-    plaque:'art/holo/pretty-lady-maria-plaque.webp',
-    soil:'art/holo/pretty-lady-maria-soil.webp',
-    band:'art/holo/pretty-lady-maria-band.webp',
-    swatch:'art/holo/pretty-lady-maria-swatch.png',
-    wisps:[
-      {src:'art/holo/pretty-lady-maria-foil.webp',  anim:'shimmer', dur:9,  delay:-2, opacity:0.55, scale:1.2},
-      {src:'art/holo/pretty-lady-maria-wisp.webp',  anim:'shimmer', dur:11, delay:-3, opacity:1.0,  scale:1.45},
-      {src:'art/holo/pretty-lady-maria-sweep.webp', anim:'sweep',   dur:19, delay:-8, opacity:1.0,  scale:1.18},
-    ],
-    /* cool ink: the defaults are Eternal Flame's warm cream on a red-brown
-       shadow and read as a stain on plum-silver */
-    ink:'#f4efff', labelInk:'#eee7ff', masterInk:'#f7f2ff',
-    shadow:'0 1px 3px rgba(26,18,40,.95),0 0 7px rgba(61,42,83,.8)',
-    masterText:'Happy Birthday',
-  },
+  /* Pretty Lady Maria (Oscar's mum's birthday card) is no longer here: v1 and
+     the v2 rebuild both composited the pack's layers around live data zones,
+     and Oscar rejected the result and supplied the finished card as ONE
+     artwork instead. It now ships through FULLART below — the whole front is
+     his image, nothing composited. The v2 layer set stays in art/holo/ as
+     masters if a composited build is ever wanted again. */
   /* Avondale's blossom frame, Oscar's artwork, delivered at 1049×1499 — the same
      artboard as Eternal Flame. Panels are deliberately NOT swapped here, for the
      reason they were taken back off Eternal Flame: the plaque, soil box and band
@@ -7672,6 +7635,39 @@ const HOLO={
       {src:'art/holo/eternal-flame-shards.webp', anim:'sweep',   dur:17, delay:-6, opacity:0.30, scale:1.25},
       {src:'art/holo/eternal-flame-wisp.webp',   anim:'shimmer', dur:7,  delay:-3, opacity:0.28, scale:2.1},
     ],
+  },
+};
+
+/* FULLART — cards whose entire FRONT is one finished artwork Oscar supplies,
+   with no live data zones composited over it. This exists because the third
+   build of Pretty Lady Maria was the artwork itself: after v1 and the v2 layer
+   rebuild, Oscar painted the complete card — frame, photo, name, plaque rows,
+   soil box, aspect band, growth rail, HAPPY BIRTHDAY strip — as one image and
+   said use it as-is. So the app does exactly that: the image fills the card
+   face and nothing is drawn on top except one invisible hotspot.
+
+   art:    fills the whole 420x600 face. The master is the supplied 1024x1536
+           padded with black to 1076x1536 (ratio 0.7005 vs the card's 0.7000)
+           so nothing is stretched — the ~5% squash that disqualified the
+           1024x1536 frames in the old HOLO notes came from forcing 0.667 art
+           onto the 0.700 card; padding the artwork's own black rim instead
+           costs nothing visible. It rides `.tphoto img` + data-psrc, so the
+           standard lazy fetch/decode pipeline applies unchanged.
+   listen: the artwork PAINTS a Listen pill, so the real .say button sits over
+           it transparent — his pixels, our tap. Rect is the pill's measured
+           bbox (x 210-385, y 248-295 in the padded master) grown for a
+           finger-sized target; nothing else interactive lives on the front.
+
+   The plant's DATA is untouched — the back face, quiz, search and trade sheet
+   all still read the fields; only the front's rendering is his image. The
+   audits know: deck-audit skips rendered-zone echo rules for .fullart (the
+   values are painted pixels it cannot read) and instead errors if the artwork
+   itself fails to load; audit-layout skips photo-frame registration (the
+   window IS the card). */
+const FULLART={
+  'anemone-hybrida-pretty-lady-maria-aneplaria':{
+    art:'art/card-pretty-lady-maria.webp',
+    listen:{left:'17.5%',top:'14.9%',width:'20.5%',height:'5.6%'},
   },
 };
 /* Accept either a bare frame path or the full config object, so an entry can start
@@ -7916,18 +7912,25 @@ function renderCard(idx){
   const c=document.createElement('div');c.className='card deep';c.dataset.idx=idx;
   const bg=`linear-gradient(160deg,hsl(${p.hue} 45% 22%),hsl(${p.hue+20} 55% 12%))`;
   const slug=slugLatin(p.latin);
-  const ho=holoOf(slug);
-  const swap=PHOTO_SWAP[slug]||null;
+  const fa=FULLART[slug]||null;
+  const ho=fa?null:holoOf(slug);
+  const swap=fa?null:(PHOTO_SWAP[slug]||null);
   const sz=parseSize(p.size), soil=splitSoil(p.soil), months=parseMonths(p.peak);
   const pestIcon=p.pest?PEST[p.pest]||null:null;   /* unknown key => baked mite, see PEST */
   const pest=num(p.pestRisk), thirst=num(p.thirst), care=num(p.careLevel),
         growth=num(p.growthSpeed), sun=num(p.sunNeed), sunMin=num(p.sunMin);
   const tline=[...'JFMAMJJASOND'].map((m,i)=>`<span class="${months.includes(i+1)?'on':''}">${m}</span>`).join('');
-  c.innerHTML=`
-   <div class="card-inner">
-    <div class="face front">
-     <div class="tscale">
-      <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>
+  /* a FULLART front is the supplied image and one transparent tap target over
+     its painted Listen pill — everything the standard front renders is already
+     painted into the artwork's pixels */
+  const front=fa?`
+      <div class="tcard fullart">
+        <div class="tphoto">
+          <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
+          <img data-psrc="${fa.art}" alt="${p.common} (${p.latin}) — hand-finished card" onerror="this.style.display='none'">
+        </div>
+        <button class="say" ${TTS?'':'hidden'} style="left:${fa.listen.left};top:${fa.listen.top};width:${fa.listen.width};height:${fa.listen.height}" aria-label="Play latin pronunciation"></button>
+      </div>`:`
       <div class="tcard${ho?' holo':''}"${ho?lateBG(holoStyle(ho)):''}>
         <div class="tphoto${swap?' swap':''}"${swap&&swap.hold?` style="--holo-swap:${swap.hold}"`:''}>
           <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
@@ -7977,7 +7980,12 @@ function renderCard(idx){
           ${sunMin!=null?`<span class="b-wiggle${lightX(sunMin)<51?' flip':''}" style="left:${lightX(sunMin)}%">wiggle room</span><div class="b-leader" style="left:${lightX(sunMin)}%"></div>`:''}
           ${sun!=null?`<div class="b-tri" style="left:calc(${lightX(sun)}% - 5px)"></div>`:''}
         </div>
-      </div>
+      </div>`;
+  c.innerHTML=`
+   <div class="card-inner">
+    <div class="face front">
+     <div class="tscale">
+      <div class="stamp learn" aria-hidden="true">LEARNED</div><div class="stamp skip" aria-hidden="true">SKIP</div>${front}
      </div>
     </div>
     <div class="face back"><div class="backfit">

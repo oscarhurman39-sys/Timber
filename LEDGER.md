@@ -5,7 +5,25 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
-progress: 2026-08-14 (Maria v2, and the pest patch was never alive) — **Oscar's
+progress: 2026-08-14 (later) — **Maria v3: Oscar supplied the whole card as one
+  image, and the app now just shows it (r69).** His verdict on the v2 composite
+  was blunt ("how you edited the card was shit — literally just use this card"),
+  and v3 obliges: a new FULLART mechanism renders the entire front from a single
+  artwork with zero live zones — no frame/overframe/panels/wisps, no ink fitter,
+  nothing composited. His 1024x1536 image is padded (not stretched) with black
+  to 1076x1536 = the card's 0.700 ratio, riding the standard .tphoto lazy
+  fetch/decode pipeline as art/card-pretty-lady-maria.{png,webp}. The one live
+  element kept, per his "maybe still the listen button": a transparent .say
+  hotspot sits exactly over the pill PAINTED in his artwork (bbox measured in
+  the master, grown to a finger target) — tap it and the latin speaks, verified
+  in-browser along with no-flip. Card data untouched (back face, quiz, search
+  all still live). deck-audit learned fullart (skips zone-echo rules it cannot
+  read off painted pixels, errors if the artwork fails to load); audit-layout
+  skips photo-frame registration for it. The v2 HOLO entry is gone; its layer
+  set stays in art/holo/ as masters. All 17 suites green (perf-test's release-
+  latency check flakes under --jobs 3 CPU contention; green serial). Deployed:
+  the pwa branch was already sitting on the card line's tip (the rejected v2
+  was live), so this fast-forwards it to r69.
   rebuild notes on the shipped card are all in, and the biggest one was a bug I
   argued with twice before finding: the slug really was pasted over the mite,
   on every card, since r62 (r67).**
