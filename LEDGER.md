@@ -5,6 +5,40 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (later) — **WS1 boot safety landed from ChatGPT, r53.
+  Reviewed, applied, and the bug it fixes was CONFIRMED REAL by control test
+  rather than taken on faith.** `tools/check-boot.js` (new, 205 lines) +
+  non-fatal ANIM validation in the app + `check-boot` as the 6th fast check,
+  so the Pages gate now compiles the app's script before deploying.
+  **THE CONTROL IS THE POINT.** Loaded pre-patch r52 with one deliberately
+  broken ANIM duration array: **0 cards, blank app, pageerror**. Same
+  breakage on r53: 167 cards, no error, only that one overlay dropped. The
+  premise in the brief was an inference; it is now measured both ways.
+  VERIFIED BEYOND WHAT ITS OWN TEST COVERS. `tests/check-boot-test.js` ships
+  three negative cases (syntax, missing asset, duration mismatch) and all
+  three pass — but ChatGPT wrote the checker with **no image binaries in its
+  copy of the repo** (the zip I sent strips 110MB of art/photos and carries
+  an ASSET-LISTING instead), so every asset and PNG-header path in it was
+  written blind. Tested those separately against the real files: strip width
+  not divisible by frame count is caught reading real IHDR bytes (5120px /
+  9 frames), missing wisp asset caught, registry key that is not a current
+  plant caught, and **the historical r18 "whole app dead" trailing-comma
+  class is caught** — which was the entire justification for WS1.
+  The build stamp it shipped (r53 · 34f5880) verifies clean, so it ran
+  build-stamp properly rather than hand-typing a number.
+  Full gate **15/15** (~760s at --jobs 3). Zero geometry drift.
+  MY OWN FIRST TEST WAS THE THING THAT WAS WRONG: I asserted `cards>200` from
+  the ledger's "144 dealt" and got three red lines against a healthy app. The
+  deck is **167 dealt / 86 held**; the 144/98 figure has been stale in this
+  file since r41. Fixed the assertion, not the app — and the ledger's counts
+  are not to be trusted over `tools/plant-data.js`.
+  TWO THINGS LEFT ALONE, both flagged rather than silently changed:
+  `check-boot-test.js` is deliberately NOT in `run-all.js` (it rewrites
+  timber.html, and `sw-update-test` already does that *inside* the parallel
+  pool — a latent race in the existing harness, not one to double); and
+  check-boot's `<script>` regex would truncate if a future edit ever put the
+  literal `</script>` inside a JS string, which would silently shrink the
+  region being syntax-checked.
 progress: 2026-08-14 — **architecture audit → `CHATGPT-BRIEF.md`. No code
   changed; Oscar asked for the audit and a prompt, not edits.** The audit's
   honest headline: the mega-prompt's wishlist (config-driven special cards,

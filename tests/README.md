@@ -13,15 +13,15 @@ Measured on a 4-core box at 128 cards: `--jobs 3` does 472s of work in **2m41s**
 wall clock. Each suite launches its own Chromium against the shared static server
 with its own browser context, so they don't interfere; budget ~500MB per job.
 
-The data checks always run **first** and stop the run if they fail, so a bad batch
-costs 0.3s instead of seven minutes.
+The six fast data/boot checks always run **first** and stop the run if they fail,
+so a bad batch or a boot-bricking config error is caught before the browser suites.
 
 `run-all.js` is the one to use. It starts a static server on :8477 if nothing is
 already serving, runs each check, prints one line each, and dumps the tail of
 anything that failed. Non-zero exit if any check fails, so hooks and CI can gate
 on it. `node tools/install-hooks.js` wires the `--fast` set into a pre-push hook.
 
-Four of the checks need no browser and run in about two seconds:
+Six checks need no browser and run in about two seconds:
 
 | Check | Guards |
 |---|---|
@@ -29,6 +29,8 @@ Four of the checks need no browser and run in about two seconds:
 | `tools/plant-sense.js` | no card contradicts its own prose or arithmetic |
 | `tools/build-stamp.js` | the menu-foot build number matches the app's content |
 | `tools/template-geometry.js` | card overlay anchors have not drifted |
+| `tools/photo-credits.js` | every committed photo has a provenance entry |
+| `tools/check-boot.js` | inline JS compiles; special-card registries/assets/ANIM strips are boot-safe |
 
 ## Running a single suite by hand
 
@@ -67,3 +69,10 @@ incoming plant) and `verify-cards.js` (the 2-card design mock). It judges what t
 *renders*, not the raw fields, because the stored format differs from the incoming JSON.
 Pre-existing defects live in its `KNOWN_GAPS` map so the suite is green today while still
 printing them; fix a card and delete its line. Never add a line to silence a new defect.
+
+### Boot-check negative test
+
+`node tests/check-boot-test.js` deliberately makes three temporary broken copies
+of `timber.html` (bad syntax, missing special-card asset, wrong ANIM duration count)
+and proves `tools/check-boot.js` exits non-zero for each. It restores the app in a
+`finally` block. Run it from a complete checkout containing the committed assets.

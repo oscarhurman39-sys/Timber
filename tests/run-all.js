@@ -40,6 +40,8 @@ const CHECKS = [
     why: 'card overlay anchors have not drifted' },
   { name: 'photo-credits', cmd: ['node', 'tools/photo-credits.js', '--check'], browser: false,
     why: 'every photo has a provenance entry' },
+  { name: 'check-boot', cmd: ['node', 'tools/check-boot.js'], browser: false,
+    why: 'app syntax and special-card assets/config cannot brick boot' },
   { name: 'app-test', cmd: ['node', 'tests/app-test.js'], browser: true,
     why: 'gestures, flip, search, quiz, persistence, a11y' },
   { name: 'edge-test', cmd: ['node', 'tests/edge-test.js'], browser: true,

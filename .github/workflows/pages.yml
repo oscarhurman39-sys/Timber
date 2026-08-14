@@ -41,11 +41,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Was two checks (build stamp + data audit). Now all five data checks, in
+      # Was two checks (build stamp + data audit). Now all six fast checks, in
       # about a second: build stamp matches content, deck/hold/csv/photos agree,
       # no card contradicts itself (plant-sense — which caught two bad cards on
       # 2026-08-10), overlay geometry has not drifted, every photo has
-      # provenance. The build stamp one matters most: it is the only way to tell
+      # provenance, and the app's own script compiles with every special-card
+      # asset present (check-boot — the gate never opens a browser, so this is
+      # the only thing standing between a config typo and a blank deployed app).
+      # The build stamp one matters most: it is the only way to tell
       # which version a phone is running, because the service worker serves the
       # previous build once before swapping, so a stamp that does not match its
       # content makes that single signal start lying.
@@ -53,7 +56,7 @@ jobs:
       # The nine browser suites are NOT here. They need Playwright and about
       # eight minutes, which is too slow in front of every deploy, so the full
       # gate stays a local pre-push step (node tests/run-all.js --jobs 3).
-      - name: Data checks (build stamp, deck consistency, card sense, geometry, credits)
+      - name: Fast checks (build stamp, data, sense, geometry, credits, boot safety)
         run: node tests/run-all.js --fast
 
       - uses: actions/configure-pages@v5
