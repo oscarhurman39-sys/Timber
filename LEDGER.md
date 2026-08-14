@@ -5,6 +5,48 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (Pretty Lady Maria ships) — **deck 167 -> 168. The special
+  card is finished: real frame, real overlays, slug icon, and "Happy Birthday" on
+  the master strip instead of the interaction hint (r63).**
+  It was blocked on four things all session and all four arrived at once — the
+  asset pack, the plant JSON, the photograph and the pest art.
+  THE FRAME: the pack held THREE candidates and only one was usable. The two
+  "fantasy/opaline" frames are 1024x1536 = ratio 0.667; the card is 0.700 and the
+  art is stretched to it, so they would squash ~5% and drag the spine, window and
+  bottom strip off their anchors. Not a taste call, a geometry one. The
+  opalescent art-nouveau template is 1049x1499 = 0.6998, the same artboard as
+  Avondale and Eternal Flame, and its drawn plaque/soil/band boxes land within
+  about half a percent of the real slots.
+  THE TEST THAT MATTERED: a silver frame was the first real risk to the .holo
+  spine text, which is set straight onto the artwork with the parchment patch
+  hidden. Measured mean luminance in those five rectangles: 79, 71, 67, 70 and 93
+  out of 255. The tracery is silver but the GROUND is deep plum, so light ink
+  reads. A pale-silver spine would have failed outright — rendered and shown
+  earlier in the session, which is what made the frame brief specific about it.
+  THE ID CORRECTION IS MINE TO OWN: I flagged twice that white singles with a
+  yellow boss looked more like 'Honorine Jobert' than a "Pretty Lady" cultivar,
+  and suggested the photo might be on the wrong plant. Checked properly instead
+  of guessing: 'Pretty Lady Maria' IS a white single with golden stamens, 40-60cm,
+  Aug-Oct, PBR 'Aneplaria'. Oscar was right and the caution was misplaced. Worth
+  recording because the caution was expensive — it held the card up twice.
+  PHOTO PROVENANCE, recorded rather than hidden: the source PNG carried a C2PA
+  manifest — Galaxy S24, c2pa.edited, softwareAgent "Photo assist",
+  digitalSourceType compositeWithTrainedAlgorithmicMedia — plus an
+  "AI-generated content" watermark in the pixels. The watermark lands under the
+  aspect band so it is invisible on the card, and staging strips the manifest, so
+  CREDITS.json is now the only record: commercialUseCleared FALSE, with the full
+  finding in a note. Same class as the Primula vialii held on 2026-08-09; dealt
+  rather than held because this card is a one-off gift, not stock imagery.
+  WISPS AT OPACITY 1.0, which is not loud. The assets peak at alpha 23/255 (wisp)
+  and 33/255 (sweep), so 1.0 lands them at 9% and 12.9% effective. The 0.22/0.18
+  the brief shipped with would have been 2% — measurably nothing.
+  ONE PROCESS NOTE: add-plant.js aborted on the CREDITS check after inserting the
+  row, which is the tool working correctly — but the card then rendered on the
+  fallback gradient until optimise-photos.js had run, because the app loads
+  photos/card/<slug>.webp and only the master had been staged. Caught by eye in a
+  screenshot, not by a test. Worth a rule: after any add, run BOTH optimise tools
+  before looking at the card.
+  Gate 17/17 serially.
 progress: 2026-08-14 (pest icons ship, one pest deep) — **the plaque's red spider
   mite can be swapped per card now; the slug is in and the other thirteen are a
   drawing and one registry line each (r62).**

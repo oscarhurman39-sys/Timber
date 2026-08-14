@@ -849,7 +849,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r62 · 2026-08-14 · 1e6bb67';
+const BUILD='r63 · 2026-08-14 · 03bdbd1';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -5056,6 +5056,19 @@ const PLANTS = [
    uses:"evergreen climber · scented walls · courtyards · containers",
    size:"8-12m H × 4-8m W",
    seasonalImpact:"", growthSpeed:11, pestRisk:5, thirst:12, careLevel:8, sunNeed:90, sunMin:65},
+  {common:"Japanese Anemone 'Pretty Lady Maria'", latin:"Anemone × hybrida Pretty Lady Maria ('Aneplaria')", hue:150,
+   visual:"Compact clumps with single white flowers and bright yellow stamens in late summer.",
+   water:"Water while establishing and during dry spells.",
+   aspect:"Any aspect",
+   soil:"Moist, well-drained; Avoid excessive winter wet",
+   prune:"Cut back in late autumn after flowering.",
+   source:"", peak:"Aug-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"Pretty Lady Series; cultivar code 'Aneplaria'",
+   hardiness:"H7", resilience:"Very hardy; reliable once established in moisture-retentive, well-drained soil.",
+   uses:"Borders, cottage gardens, city and courtyard gardens, wildlife gardens and containers.", size:"40–60 cm H × 40–60 cm W",
+   pest:"slugs",
+   seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:12, careLevel:6, sunNeed:55, sunMin:25},
 ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
@@ -7533,6 +7546,37 @@ const PEST={
    Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
    card goes through the same layout audit as any other. */
 const HOLO={
+  /* Oscar's mum's birthday card. Everything here was measured before it was
+     trusted, because the pack arrived with three candidate frames:
+       - the two "fantasy/opaline" frames are 1024x1536 = ratio 0.667. The card is
+         0.700 and the art is stretched to it, so those would squash ~5% and drag
+         the spine, window and bottom strip off their anchors. Unusable, not a
+         taste call.
+       - this one is 1049x1499 = 0.6998, the same artboard as Avondale and Eternal
+         Flame, and its drawn plaque / soil / band boxes land within about half a
+         percent of the real overlay slots, so the parchment covers them.
+     The load-bearing question for a SILVER frame was whether the CSS-supplied
+     spine text survives, since .holo hides the parchment rail patch and sets the
+     value straight onto the artwork. Measured mean luminance in those rectangles:
+     79, 71, 67, 70 out of 255 — the spine is deep plum under the silver tracery,
+     so light ink reads. A pale-silver spine would have failed outright.
+     Wisps at opacity 1.0, and that is not a loud setting: the assets peak at
+     alpha 23/255 (wisp) and 33/255 (sweep), so 1.0 lands them at 9% and 12.9%
+     effective. The 0.22/0.18 first-pass config would have been 2%, i.e. nothing.
+     masterText replaces DOUBLE TAP TO MASTER on this one card only. */
+  'anemone-hybrida-pretty-lady-maria-aneplaria':{
+    frame:'art/frame-pretty-lady-maria.webp',
+    edging:'art/holo/pretty-lady-maria-edging.webp',
+    wisps:[
+      {src:'art/holo/pretty-lady-maria-wisp.webp',  anim:'shimmer', dur:11, delay:-3, opacity:1.0,  scale:1.45},
+      {src:'art/holo/pretty-lady-maria-sweep.webp', anim:'sweep',   dur:19, delay:-8, opacity:1.0,  scale:1.18},
+    ],
+    /* cool ink: the defaults are Eternal Flame's warm cream on a red-brown
+       shadow and read as a stain on plum-silver */
+    ink:'#f4efff', labelInk:'#eee7ff', masterInk:'#f7f2ff',
+    shadow:'0 1px 3px rgba(26,18,40,.95),0 0 7px rgba(61,42,83,.8)',
+    masterText:'Happy Birthday',
+  },
   /* Avondale's blossom frame, Oscar's artwork, delivered at 1049×1499 — the same
      artboard as Eternal Flame. Panels are deliberately NOT swapped here, for the
      reason they were taken back off Eternal Flame: the plaque, soil box and band
@@ -7790,6 +7834,7 @@ const PHOTO_SWAP={
    The lesson is the general one: judge a swap on the two CARDS, not the two
    files. */
 const PHOTO_FOCUS={
+  'anemone-hybrida-pretty-lady-maria-aneplaria':'52% 40%',
   'trachelospermum-jasminoides':'40% 45%',
   'chaenomeles-speciosa-kinshiden':'8% 50%',
   'cornus-sanguinea-midwinter-fire':'50% 25%','kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%','hydrangea-serrata':'45% 16%','cornus-kousa':'50% 52%'};
