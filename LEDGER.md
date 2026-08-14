@@ -4,7 +4,30 @@
 brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
-since: 2026-08-11  sessions-unchanged: 1
+since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 — **architecture audit → `CHATGPT-BRIEF.md`. No code
+  changed; Oscar asked for the audit and a prompt, not edits.** The audit's
+  honest headline: the mega-prompt's wishlist (config-driven special cards,
+  stop-motion animation runtime, reduced-motion, offscreen pausing, asset
+  extraction tooling, geometry locks) is ALREADY BUILT and tested — the brief
+  refuses to rebuild any of it. What it does ask for, ranked: (1) the Pages
+  deploy gate never executes or syntax-checks the app's JS, and
+  `buildAnimCSS()` throws at boot on a bad ANIM entry — one config typo on
+  the live branch deploys a blank app, the trailing-comma failure class with
+  no gate in front of it → new fast check `tools/check-boot.js` + non-fatal
+  pack validation; (2) small tool bugs found by reading, not running:
+  `plant-data.js` out-of-scope `decl` in an error path, `deal-plant.js`
+  hardcoded `/opt/node22` playwright path, `check-plant-json.js` carrying two
+  different soil budgets 20 lines apart, slug function duplicated 8× with
+  `plant-images-tool.js` divergent (no NFD fold); (3) boot does O(deck)
+  forced layouts — `fitInk` per card × 242 — defer to first promotion +
+  idle trickle; (4) "Reset progress" wipes history on one tap, unrecoverable
+  by design of the reset itself → two-tap confirm. Deliberately REJECTED
+  after costing: moving PLANTS_ON_HOLD out of the file (~90KB dead payload,
+  but gzip makes it ~15KB and the §0b tool contract depends on it), deck
+  virtualization at 242 cards (spec'd as WS6, parked until ~400+), visual
+  regression infra. Brief follows the DEEPSEEK-BRIEF format because that one
+  verifiably completed all seven workstreams.
 progress: 2026-08-13 (later) — **`tools/photo-run.js` — the shooting sheet is a
   command now.** The 08-11 sheet was a chat: it could not be re-run and its
   numbers rotted immediately.
