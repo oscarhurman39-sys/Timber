@@ -655,11 +655,38 @@
                linear-gradient(180deg,transparent,#000 3px,#000 calc(100% - 3px),transparent);
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 3px,#000 calc(100% - 3px),transparent)}
+  .patch.tiny{                                  /* 3px all round — see .p-pest-icon */
+    mask-image:linear-gradient(90deg,transparent,#000 3px,#000 calc(100% - 3px),transparent),
+               linear-gradient(180deg,transparent,#000 3px,#000 calc(100% - 3px),transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 3px,#000 calc(100% - 3px),transparent),
+               linear-gradient(180deg,transparent,#000 3px,#000 calc(100% - 3px),transparent)}
   .patch.sharpb{
     mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 6px,#000 100%);
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 7px,#000 calc(100% - 7px),transparent),
                linear-gradient(180deg,transparent,#000 6px,#000 100%)}
+  /* ---- the pest icon slot ----
+     The red spider mite is PAINTED INTO art/plaque-full.png; it is not an
+     overlay, so a card that wants a different pest has to cover it and draw over
+     the top — the same move the value patches already make against the baked
+     sample numbers.
+     The mask is the reason this is its own class. The mite's ink measures
+     76 x 77 in the 700 x 446 plaque art, which is 28.9 x 29.3 CSS px on the card,
+     and the standard .patch ramps its first 7px in from each edge. On a box this
+     small that feather is half the box: it would start going transparent 3px
+     INSIDE the mite and leave the leg tips showing through. So: 5px of margin
+     around the ink, and a 3px feather, which puts full opacity 2px clear of the
+     mite on every side and still blends into the parchment.
+     .pesticon sits exactly on the mite's own rect and uses object-fit:contain,
+     so an icon that is not square (the slug is 1.16:1) centres in the slot
+     instead of stretching. */
+     Selector note: `.plaque>img` already sets width:100% for the panel's own
+     artwork, and that is class+type, which outranks a bare .pesticon class — the
+     icon rendered 266px wide, letterboxed to nothing, and vanished into the row.
+     Matching the same shape here wins it back without touching the shared rule. */
+  .p-pest-icon{left:0.98%;top:24.86%;width:14.61%;height:23.16%}
+  .plaque>img.pesticon{position:absolute;left:2.86%;top:27.80%;width:10.86%;height:17.27%;
+    object-fit:contain;pointer-events:none}
   .val-ink{position:absolute;color:#4d4131;font-family:Georgia,serif}
   /* value patches start BELOW their baked labels (label rows luminance-measured
      in plaque-full.png: Bloom 9.0-12.3%, diseases ends 38.8%, Thirst ends 59.2%,
@@ -822,7 +849,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r61 · 2026-08-14 · 91689e6';
+const BUILD='r62 · 2026-08-14 · 1e6bb67';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4403,6 +4430,7 @@ const PLANTS = [
    resilience:"fast and free-flowering · bred for resistance to Erwinia crown rot · slugs, gall midge and winter wet are still the risks",
    uses:"patio containers · sunny borders · coastal · cutting · pollinators",
    size:"0.5-1m H × 0.1-0.5m W",
+   pest:"slugs",
    seasonalImpact:"", growthSpeed:13, pestRisk:7, thirst:9, careLevel:6, sunNeed:95, sunMin:70},
 
   {common:"Black Bamboo", latin:"Phyllostachys nigra", hue:115,
@@ -7479,6 +7507,25 @@ const slugLatin=l=>l.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().repla
 const photoSrc=slug=>`photos/card/${slug}.webp`;
 const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/widget-drop-out.png","widget-seca-fill":"art/widget-seca-fill.png","widget-seca-out":"art/widget-seca-out.png","widget-spray-fill":"art/widget-spray-fill.png","widget-spray-out":"art/widget-spray-out.png"};
 
+/* PEST — the icon on the "Pests & diseases" row, when the baked one is wrong.
+   The plaque art paints a red spider mite, which is a fair default and flatly
+   wrong for a hosta. A card sets `pest:"slugs"` and the row shows a slug.
+
+   Deliberately opt-in and deliberately small:
+     - a card with no `pest` gets NO patch and NO extra image, so 166 of the 167
+       cards are byte-identical to before and the deck gains no requests,
+     - an unknown key falls back the same way rather than punching a parchment
+       hole and drawing nothing — a typo costs you the icon, not the row,
+     - the art is sized by tools/fit-pest-icon.js, not by hand, so the family
+       stays at one optical weight (see that tool for why the crop rule matters).
+   Icons load with the deck rather than through lateBG: at ~17 KB of WebP each
+   they are not what makes a phone wait, and the plaque they sit on is already
+   fetched by every card. If this ever grows past a handful in active use,
+   revisit that before adding a twentieth key. */
+const PEST={
+  slugs:'art/pest/slugs.webp',
+};
+
 /* HOLO — special-edition frames, keyed by latin-slug. A card listed here swaps
    art/frame-600.webp for its own artwork and gains the .holo class, which supplies
    the spine lettering and the master strip in CSS (see the holo block in <style>)
@@ -7779,6 +7826,7 @@ function renderCard(idx){
   const ho=holoOf(slug);
   const swap=PHOTO_SWAP[slug]||null;
   const sz=parseSize(p.size), soil=splitSoil(p.soil), months=parseMonths(p.peak);
+  const pestIcon=p.pest?PEST[p.pest]||null:null;   /* unknown key => baked mite, see PEST */
   const pest=num(p.pestRisk), thirst=num(p.thirst), care=num(p.careLevel),
         growth=num(p.growthSpeed), sun=num(p.sunNeed), sunMin=num(p.sunMin);
   const tline=[...'JFMAMJJASOND'].map((m,i)=>`<span class="${months.includes(i+1)?'on':''}">${m}</span>`).join('');
@@ -7809,6 +7857,7 @@ function renderCard(idx){
         <div class="ppp">Plant Power Points</div>
         <div class="plaque">
           <img src="${ho&&ho.plaque?ho.plaque:'art/plaque-full.webp'}" alt="">
+          ${pestIcon?`<div class="patch tiny p-pest-icon"></div><img class="pesticon" src="${pestIcon}" alt="">`:''}
           <div class="patch lbl p-bloom-val"></div><div class="val-ink pval t-bloom">${p.peak||''}</div>
           <div class="patch lbl p-pest-val"></div><div class="val-ink pval t-pest">${pest==null?'':fmt5(pest)}</div>
           <div class="patch lbl p-thirst-val"></div><div class="val-ink pval t-thirst">${thirst==null?'':fmt5(thirst)}</div>

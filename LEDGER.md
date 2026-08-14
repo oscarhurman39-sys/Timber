@@ -5,6 +5,45 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (pest icons ship, one pest deep) — **the plaque's red spider
+  mite can be swapped per card now; the slug is in and the other thirteen are a
+  drawing and one registry line each (r62).**
+  The mite is PAINTED INTO art/plaque-full.png, so the mechanism is the one the
+  card already uses against baked sample values: cover it with a parchment patch,
+  draw the new icon on top. Opt-in — a card with no `pest` gets no patch and no
+  image, so 166 of 167 cards are untouched and the deck gains no requests.
+  THE PATCH NEEDED ITS OWN MASK, and the arithmetic is why. The mite's ink is
+  76 x 77 in the plaque art = 28.9 x 29.3 CSS px, and the standard .patch ramps
+  7px in from each edge — half the box. It would have gone transparent 3px INSIDE
+  the mite and left the leg tips showing. `.patch.tiny` is 3px all round, with 5px
+  of margin, which puts full opacity 2px clear on every side.
+  TWO REAL TRAPS, both found by trying it rather than by reading it:
+  (1) `.plaque>img` sets width:100% and is class+type, which outranks a bare
+  .pesticon class. The icon rendered 266px wide, letterboxed to 29px tall, and
+  disappeared into the row. Matching the selector shape wins it back without
+  touching the shared rule.
+  (2) A key on a card that is not in plant-data.js's FIELDS list is SILENTLY
+  DROPPED by a csv round-trip. `pest` is in that list now; the export went 33
+  columns to 34.
+  VALIDATION: check-boot carries PEST, asserts every icon is on disk, and asserts
+  every `pest` a card claims is a registry key — the app falls back to the mite on
+  an unknown key, so a typo is invisible in the browser and has to be caught here.
+  Its first version blamed the wrong plant (the regex reached back over a card
+  boundary to an earlier latin); negative-tested both before and after.
+  SIZING IS A TOOL, NOT A HABIT: tools/fit-pest-icon.js crops to the drawing's own
+  alpha bounds, squares by the longer edge, pads and resamples once. The slug
+  arrived 1254x1254 with the animal filling 64% x 55% and off-centre; dropped in
+  raw it would have rendered as a smudge with air around it, and every future icon
+  a different size. Now the family holds one optical weight by construction.
+  THE ART IS GOOD. It meets the mite's discipline — compact, thick outline, one
+  body shape, reads at 26px. The first pack Oscar binned did not. Direction
+  confirmed for the remaining thirteen.
+  `pest:"slugs"` is set on ONE card: Agapanthus POPPIN' PURPLE, whose own
+  resilience line names slugs first. That is a horticultural claim on Oscar's
+  deck, so it is one card and one line, not a sweep — his to move.
+  Documented in PLANT-BRIEF.md: the key, the valid list, the not-yet-valid list,
+  the three-step add, and the 26px art direction.
+  Gate 17/17 serially.
 progress: 2026-08-14 (Pretty Lady Maria: master-strip text, and the overlays
   measured) — **the strip's wording is a token now, and the three shimmer assets
   arrived and are ~10x too faint for the config that ships with them (r61).**

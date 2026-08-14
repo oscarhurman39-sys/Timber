@@ -77,6 +77,7 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
   "visual": "one line, max ~90 chars: what it looks like and when",
 
   "pestRisk": 3,
+  "pest": "",
   "thirst": 4,
   "careLevel": 6,
   "growthSpeed": 12,
@@ -116,6 +117,48 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
 
 ### Field rules that matter
 
+- **`pest`** — the plant's **single biggest** pest or disease, as one of the keys
+  below, or `""`. It picks the icon on the card's "Pests & diseases" row. It is a
+  KEY, not prose: the pests a plant actually gets are described in `resilience`
+  and always were, and this does not replace that.
+
+  Leave it blank unless one problem clearly dominates. Blank means the card keeps
+  the default red spider mite, which is a fair generic and is what 166 of the 167
+  cards show. Do not reach for a key just because the field exists — a hosta is
+  slugs, a box is box tree caterpillar, and most plants are honestly nothing in
+  particular.
+
+  | Available now | |
+  |---|---|
+  | `slugs` | slugs and snails |
+
+  Planned, and **not yet valid** — using one fails `node tools/check-boot.js`
+  rather than silently showing the wrong icon: `aphid`, `vine-weevil`,
+  `caterpillar`, `scale`, `mildew`, `blight`, `whitefly`, `sawfly`,
+  `lily-beetle`, `rust`, `black-spot`, `honey-fungus`, `browsing`.
+
+  Adding a new one is three steps and no code:
+
+  ```sh
+  NODE_PATH=/opt/node22/lib/node_modules node tools/fit-pest-icon.js <drawing.png> aphid --margin 2
+  NODE_PATH=/opt/node22/lib/node_modules node tools/optimise-art.js
+  # then add   aphid:'art/pest/aphid.webp'   to the PEST registry in timber.html
+  ```
+
+  `fit-pest-icon.js` does the sizing so the family holds one optical weight —
+  it crops to the drawing's own alpha bounds and squares it by the longer edge,
+  because generated art arrives at whatever size and offset the model felt like.
+  It also warns if the art is too soft or was scaled up too far.
+
+  The art direction, which the slug meets and a first pack did not: the slot is
+  **76 x 77 px in the plaque art, about 29 CSS px on the card, about 26 px on a
+  phone.** At that size only the silhouette survives. Match the baked red spider
+  mite — compact, one dominant body shape, thick dark outline, glossy painted
+  finish, two or three tones, no fine detail, no text, no faces, specimen plate
+  rather than mascot. Diseases are drawn as an **affected leaf** (powdery bloom,
+  dark blotch, orange pustules) so they stay distinguishable from insects at that
+  size. Deliver square, centred, transparent PNG; 1000px+ is plenty.
+
 - **`aspect`** — a **compass facing only**: `"South / West"`, `"East"`,
   `"Any aspect"`. Never put light levels here — "full sun" is a `sunNeed` value,
   not an aspect. If nothing states a facing, use `"Any aspect"`.
@@ -151,6 +194,8 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
 ### Before you answer, check
 - [ ] Hardiness verified, not assumed
 - [ ] All five ratings are integers within their scale
+- [ ] `pest` is blank, or one of the keys listed under Field rules. It is the
+      single biggest problem, not a list — the list belongs in `resilience`.
 - [ ] Ratings are on the **0–20** scale, not 0–5. A `pestRisk` of 4 means 1/5 —
       trouble-free. If you meant "quite prone", that is 14, not 4.
 - [ ] `aspect` contains a facing or "Any aspect", never a light level

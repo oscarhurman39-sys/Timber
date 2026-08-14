@@ -19,6 +19,10 @@ const HOLD = { begin: '/* HOLD:BEGIN', end: '/* HOLD:END */', decl: 'const PLANT
 const FIELDS = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', 'prune',
   'source', 'peak', 'order', 'bench', 'root', 'trade', 'retail', 'margin', 'type', 'shrink',
   'returnRisk', 'pots', 'cvs', 'hardiness', 'resilience', 'uses', 'size',
+  // `pest` picks the icon on the Pests & diseases row (see the PEST registry in
+  // timber.html); blank means the baked red spider mite. It is a KEY, not prose —
+  // the pest a card actually names lives in `resilience` and always did.
+  'pest',
   // Card stats (CARD-STATS.md). Editorial ratings, not measurements — blank = not
   // yet rated. 0-20 rows map 1:1 to the 5-icon quarter-fill widgets; sunNeed 0-100.
   'seasonalImpact', 'growthSpeed', 'pestRisk', 'thirst', 'careLevel', 'sunNeed',

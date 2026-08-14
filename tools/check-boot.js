@@ -22,7 +22,7 @@ const ROOT = path.join(__dirname, '..');
 const HTML = path.join(ROOT, 'timber.html');
 const { readDeck, readHold } = require('./plant-data.js');
 
-const REGISTRIES = ['HOLO', 'ANIM', 'PHOTO_SWAP', 'PHOTO_FOCUS'];
+const REGISTRIES = ['HOLO', 'ANIM', 'PHOTO_SWAP', 'PHOTO_FOCUS', 'PEST'];
 const PNG_SIG = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
 function fail(errors, msg) { errors.push(msg); }
@@ -143,7 +143,9 @@ function checkRegistryKeys(registries, html, errors) {
   try { plants = readDeck(html).concat(readHold(html)); }
   catch (e) { fail(errors, `plant blocks: ${e.message}`); return; }
   const slugs = new Set(plants.map(p => slugLatin(p.latin)));
-  for (const name of REGISTRIES) {
+  /* PEST is the one registry NOT keyed by latin-slug — its keys are pest names
+     shared across cards, checked against the cards by checkPestKeys instead. */
+  for (const name of REGISTRIES.filter(n => n !== 'PEST')) {
     const reg = registries[name];
     if (!reg) continue;
     for (const key of Object.keys(reg)) {
@@ -190,6 +192,25 @@ function checkAssets(registries, errors) {
     if (!s || typeof s !== 'object') { fail(errors, `PHOTO_SWAP ${slug}: config is not an object`); continue; }
     if (s.alt != null) localAsset(errors, `PHOTO_SWAP ${slug}.alt`, s.alt);
   }
+
+  /* Every pest icon must be on disk, and every `pest` a card claims must be a key
+     in the registry. The app deliberately falls back to the baked mite on an
+     unknown key rather than punching a parchment hole and drawing nothing, so a
+     typo is invisible in the browser — which is exactly why it is caught here. */
+  const pests = registries.PEST || {};
+  for (const [key, rel] of Object.entries(pests)) localAsset(errors, `PEST ${key}`, rel);
+}
+
+function checkPestKeys(registries, errors) {
+  const pests = registries.PEST || {};
+  const html = fs.readFileSync(HTML, 'utf8');
+  /* the latin IMMEDIATELY before each pest — (?!latin:") stops the match reaching
+     back over a card boundary and blaming the wrong plant, which it did once */
+  for (const m of html.matchAll(/latin:"([^"]+)"(?:(?!latin:")[\s\S])*?pest:"([^"]*)"/g)) {
+    const [, latin, key] = m;
+    if (!key) fail(errors, `card ${latin}: pest is empty — omit the field instead`);
+    else if (!(key in pests)) fail(errors, `card ${latin}: pest "${key}" is not in the PEST registry`);
+  }
 }
 
 function main() {
@@ -203,6 +224,7 @@ function main() {
   for (const name of REGISTRIES) registries[name] = extractRegistry(html, name, errors);
   checkRegistryKeys(registries, html, errors);
   checkAssets(registries, errors);
+  checkPestKeys(registries, errors);
 
   if (errors.length) {
     console.error(`check-boot FAIL: ${errors.length} problem(s)`);
