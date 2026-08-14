@@ -759,6 +759,59 @@ worth checking directly on a machine that can reach it.
 
 ---
 
+### 32. Galaxy AI edit watermarks found on deck photos — provenance question, OPEN
+2026-08-14, found while swapping the Photinia photo. The **old**
+`photinia-fraseri-pink-marble-cassini.jpg` carried a small four-pointed sparkle
+glyph in the lower right — the watermark **Samsung Galaxy AI stamps onto a
+photo that has been through its generative edit / object-eraser tools**. Its
+CREDITS entry read "Oscar's own photograph — owned outright ... 
+commercialUseCleared: true".
+
+That combination is the problem, and it is a **different question from the two
+known AI images** (knotweed, Ajuga — README, both already
+`commercialUseCleared: false`). Those are AI *generated*. These are Oscar's own
+photographs of his own plants that have had a *generative edit* applied. The
+photograph is still his; what is unsettled is whether a generatively edited
+region carries the same clean commercial-use position, which depends on
+Samsung's terms and has not been checked.
+
+**Confirmed by eye on a standardised crop, then verified individually — four
+still in the deck:**
+
+- `agapanthus-poppin-purple-pm003.jpg`
+- `edgeworthia-chrysantha.jpg`
+- `hibiscus-syriacus-oiseau-bleu.jpg`
+- `scabiosa-columbaria-flutter-pure-white-balflutturite.jpg`
+
+The Photinia was the fifth and is **already resolved** — replaced 2026-08-14
+with a clean reshoot Oscar supplied (2026-07-27, no watermark, no C2PA/EXIF AI
+markers), so that card needs nothing further.
+
+**The sweep is NOT complete, and should not be reported as one.** Two automated
+detectors were written and both proved unreliable on this glyph: a
+bright/desaturated blob detector returned five candidates that were *all* false
+positives (gravel, leaf highlights) and found none of the real ones; normalised
+cross-correlation against a confirmed glyph scored the two cleanest cases at
+0.93–1.00 but missed the other two entirely, i.e. roughly 50% recall. What
+actually worked was a contact sheet cropping the same relative corner from every
+photo so the glyph appears in a consistent place — but a faint glyph over busy
+foliage is genuinely easy to miss at thumbnail size, so **there may be more than
+four.**
+
+**What would settle it:** the glyph is alpha-blended at a fixed relative
+position, so a reliable detector is possible with more care than was spent here
+(match at several scales, and search a tighter window derived from the four
+confirmed positions). Until then, treat the count as "at least four".
+
+**Two decisions for Oscar, neither of which a tool can make:**
+1. Should a generatively edited photo keep `commercialUseCleared: true`? If not,
+   the four above need flipping to `false` like the knotweed and Ajuga.
+2. Are these worth reshooting anyway? All four are plants he has to hand, and a
+   clean frame removes the question entirely — which is exactly what the
+   Photinia swap just did.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
