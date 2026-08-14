@@ -1123,7 +1123,7 @@
   {
    "file": "jasminum-officinale-devon-cream.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": "5213b09",
@@ -1879,6 +1879,16 @@
    "sourceUrl": null,
    "commit": "a00d797",
    "commitSubject": "Add Fastigiata Robusta Yew to deck: 90 -> 91",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "trachelospermum-jasminoides.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
