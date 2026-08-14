@@ -122,9 +122,17 @@ const check = (name, ok, detail = '') => {
     const { metrics } = await cdp.send('Performance.getMetrics');
     return (metrics.find(m => m.name === n) || {}).value || 0;
   };
+  /* Measured in two windows, not one. Oscar's call: a swipe is a swipe now — any real
+     drag commits on release, no snap-back — so a released drag legitimately updates
+     counts, the learn bar and #actions visibility, which legitimately costs layout.
+     That is correct work, not thrashing, and asserting 0 across it would fail on
+     purpose. What must still cost nothing is the drag ITSELF — the 30 touchmoves
+     while the finger is down, before anything commits — so that window is measured
+     alone, release excluded. */
   const layoutsBefore = await metric('LayoutCount');
   await page.evaluate(async () => {
     const card = [...document.querySelectorAll('.deck .card:not([data-gone])')].pop();
+    window.__dragTestCard = card;
     const fire = (type, x, y) => {
       const t = new Touch({ identifier: 1, target: card, clientX: x, clientY: y });
       card.dispatchEvent(new TouchEvent(type, { touches: type === 'touchend' ? [] : [t], changedTouches: [t], bubbles: true, cancelable: true }));
@@ -132,11 +140,15 @@ const check = (name, ok, detail = '') => {
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     fire('touchstart', 190, 420);
     for (let i = 1; i <= 30; i++) { fire('touchmove', 190 + i * 2, 420 - i); await sleep(8); }
-    fire('touchend', 250, 390);
-    await sleep(120);
   });
   const layouts = (await metric('LayoutCount')) - layoutsBefore;
   check(`dragging a card forces no layout (${layouts})`, layouts === 0, `${layouts} layout passes during the drag`);
+  await page.evaluate(async () => {
+    const card = window.__dragTestCard;
+    const t = new Touch({ identifier: 1, target: card, clientX: 250, clientY: 390 });
+    card.dispatchEvent(new TouchEvent('touchend', { touches: [], changedTouches: [t], bubbles: true, cancelable: true }));
+    await new Promise(r => setTimeout(r, 120));
+  });
 
   /* ---- 5. the promotion must follow the deck, not go stale ---- */
   await page.reload({ waitUntil: 'networkidle' });

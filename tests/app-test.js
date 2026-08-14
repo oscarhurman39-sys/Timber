@@ -150,17 +150,14 @@ function topFlipped(page) {
   c = await counts(page);
   check('rapid double star: undo x2 restores clean state', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
 
-  /* ---- 6. sub-threshold drag snaps back ---- */
+  /* ---- 6. any real drag commits — no snap-back to centre ---- */
   await page.waitForTimeout(400);
-  await dragCard(page, 60);
+  await dragCard(page, 20);  // well short of the old 88px threshold
   c = await counts(page);
-  const stampReset = await page.evaluate(() => {
-    const cards = document.querySelectorAll('.card');
-    const top = cards[cards.length - 1];
-    return top.querySelector('.stamp.learn').style.opacity;
-  });
-  check('sub-threshold drag: card stays, counts unchanged', c.cards === NPLANTS && c.done === 0, JSON.stringify(c));
-  check('sub-threshold drag: stamp fades back out', stampReset === '0' || stampReset === '', 'opacity=' + stampReset);
+  check('short drag still commits: card swiped, counts changed', c.cards === NPLANTS-1 && c.left === NPLANTS-1 && c.done === 1, JSON.stringify(c));
+  await page.click('#back'); await page.waitForTimeout(150);
+  c = await counts(page);
+  check('undo restores after a short drag', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
 
   /* ---- 7. double-tap flip + swipe lock ---- */
   await page.waitForTimeout(400);
