@@ -50,6 +50,44 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
       const plant = name(card).trim();
       const bad = (rule, detail) => out.push({ plant, rule, detail });
 
+      /* F. photo-frame registration — the photo window must land on the opening
+         painted into the frame artwork. Measured off art/frame-600.png on
+         2026-08-14 (art px / 2.6262 per css px): top 1.332%, right inset 2.992%,
+         bottom inset 4.378%, left 13.96%, corner radius 11.4px.
+         Nothing measured this before, which is how a 3.4px misregistration
+         shipped on all 167 cards: the photo sat low and wide, lapping the gold
+         trim on the right and leaving a strip along the top where the frame's
+         OWN baked reference photo showed above the real one. Oscar caught it by
+         eye on a phone; the tolerance here is 0.6px so the next drift does not
+         need his eye. */
+      {
+        const tc = card.querySelector('.tcard'), ph = card.querySelector('.tphoto');
+        if (tc && ph) {
+          const cb = tc.getBoundingClientRect(), pb = ph.getBoundingClientRect();
+          if (cb.width > 1 && cb.height > 1) {
+            /* .tscale scales x and y INDEPENDENTLY (--csx/--csy), so the two
+               axes need their own factor back to template px — one shared
+               factor reads every bottom edge as ~69px out. */
+            const kx = 420 / cb.width, ky = 600 / cb.height;
+            const want = { left: 58.63, top: 7.99, right: 407.43, bottom: 573.73 };
+            const got = { left: (pb.left - cb.left) * kx, top: (pb.top - cb.top) * ky,
+                          right: (pb.right - cb.left) * kx, bottom: (pb.bottom - cb.top) * ky };
+            for (const side of ['left', 'top', 'right', 'bottom']) {
+              const off = got[side] - want[side];
+              if (Math.abs(off) > 0.6)
+                bad('photo-frame-registration',
+                  `photo ${side} edge is ${off > 0 ? '+' : ''}${off.toFixed(2)}px off the frame's painted opening`);
+            }
+            /* computed border-radius is unaffected by the transform, so it is
+               already in template px — scaling it here was the second bug. */
+            const r = parseFloat(getComputedStyle(ph).borderTopLeftRadius);
+            if (Math.abs(r - 11.4) > 0.6)
+              bad('photo-frame-registration',
+                `photo corner radius ${r.toFixed(2)}px does not match the frame's 11.4px opening`);
+          }
+        }
+      }
+
       /* A. ink fits box */
       for (const el of card.querySelectorAll('.val-ink, .thead h2, .thead .bot')) {
         const oW = el.scrollWidth - el.clientWidth, oH = el.scrollHeight - el.clientHeight;
