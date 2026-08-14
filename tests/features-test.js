@@ -325,6 +325,48 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     document.getElementById('stats').contains(document.activeElement)));
   await page.keyboard.press('Escape'); await page.waitForTimeout(200);
 
+  /* ================= go to card (search → deck) ================= */
+
+  /* ---- riffle path: deepest live card in the stack, via the search detail button ---- */
+  const g1 = await page.evaluate(() => {
+    const live = [...document.querySelectorAll('#deck .card:not([data-gone])')];
+    const bottom = +live[0].dataset.idx;
+    const before = { order: order.length, history: history.length, learned: learnedCount };
+    openSearch(); showPlant(bottom);
+    const btn = !!document.getElementById('dGoCard');
+    if (btn) document.getElementById('dGoCard').click();
+    return { bottom, before, btn, searchOpen: search.classList.contains('open') };
+  });
+  check('search detail has a Go to card button', g1.btn);
+  check('go-to-card closes the search sheet', !g1.searchOpen);
+  await page.waitForFunction(() => gotoTimer === null, null, { timeout: 30000 });
+  await page.waitForTimeout(450); // let the last tuck land
+  const g2 = await page.evaluate(() => ({
+    top: +[...document.querySelectorAll('#deck .card:not([data-gone])')].pop().dataset.idx,
+    order: order.length, history: history.length, learned: learnedCount,
+  }));
+  check('riffle surfaces the searched card', g2.top === g1.bottom, `top ${g2.top} want ${g1.bottom}`);
+  check('riffle is a cut, not a swipe — nothing recorded',
+    g2.order === g1.before.order && g2.history === g1.before.history && g2.learned === g1.before.learned,
+    JSON.stringify({ before: g1.before, after: { order: g2.order, history: g2.history, learned: g2.learned } }));
+
+  /* ---- rewind path: skip the surfaced card, then go-to-card must undo it back ---- */
+  const g3 = await page.evaluate(() => {
+    const t = +[...document.querySelectorAll('#deck .card:not([data-gone])')].pop().dataset.idx;
+    act(false);
+    return t;
+  });
+  await page.waitForTimeout(500);
+  await page.evaluate(t => { openSearch(); showPlant(t); document.getElementById('dGoCard').click(); }, g3);
+  await page.waitForFunction(() => gotoTimer === null, null, { timeout: 30000 });
+  await page.waitForTimeout(450);
+  const g4 = await page.evaluate(() => {
+    const top = +[...document.querySelectorAll('#deck .card:not([data-gone])')].pop().dataset.idx;
+    return { top, stillInHistory: history.some(h => h.idx === top) };
+  });
+  check('go-to-card rewinds a swiped card back on top', g4.top === g3 && !g4.stillInHistory,
+    `top ${g4.top} want ${g3} inHistory ${g4.stillInHistory}`);
+
   /* ---- no JS errors anywhere ---- */
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 
