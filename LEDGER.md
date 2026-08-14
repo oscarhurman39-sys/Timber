@@ -4,7 +4,19 @@
 brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
-since: 2026-08-11  sessions-unchanged: 1
+since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 — **swipe release feel fixed (r53).** Oscar: too much
+  resistance / glitch right before a card goes. Cause was threefold: commit was
+  distance-only (95px — a fast flick released at 90px snapped back), and every
+  fling ran a fixed 350ms ease-out, so a hard swipe visibly decelerated at the
+  moment of release. Now: threshold 88px (~7% easier, inside his 5–9% ask),
+  a flick ≥0.6px/ms commits from 65px (smoothed velocity; an 80ms finger-pause
+  before lifting voids stale speed), and the throw duration matches finger
+  speed (200–350ms). Verified with a 10-check synthetic-touch script — flick
+  paths, snap-backs, tap/flip untouched — plus the full suite; the one failure
+  (app-test reload timeout) reproduces identically on unmodified HEAD in this
+  sandbox, so it is environmental, not the change. NOTE: that reload hang
+  aborts app-test at line 344, so its own touch checks (§15) don't run here.
 progress: 2026-08-13 (later) — **`tools/photo-run.js` — the shooting sheet is a
   command now.** The 08-11 sheet was a chat: it could not be re-run and its
   numbers rotted immediately.
