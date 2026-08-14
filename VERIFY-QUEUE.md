@@ -25,7 +25,51 @@ node tools/plant-sense.js --strict   # exit 1 on contradictions (used by tests/r
 
 ---
 
+## Closed
+
+**Choisya (*Choisya ternata*) — closed 2026-08-11.** Was the last `KNOWN_GAPS` entry
+in `tests/deck-audit.js`: all seven ratings blank and its aspect reduced to "Any
+aspect", losing the information the data actually held. Oscar supplied researched
+values; the card now carries all six ratings plus `sunMin`, and an aspect naming
+E/S/W facings, so the compass renders properly. `KNOWN_GAPS` is now empty.
+
+Two things were preserved rather than overwritten during that update, and are worth
+knowing if it is ever redone: the incoming JSON carried research citation markers
+(`"... in summer or autumn. 0"`) which would have rendered as stray digits, and it
+supplied no commercial block — Choisya is one of only three cards in the deck that
+HAS a trade price, retail price and margin, so the update was merged rather than
+applied wholesale.
+
 ## Needs a horticultural call (Oscar)
+
+### 0. Wishlist batch 1 — 49 cards built and held, three loose ends
+Ingested 2026-08-13 from `data/incoming/wishlist-batch-01.json` (50 researched
+entries) via `tools/fit-incoming.js` → `tools/ingest-batch.js`. All 49 are in
+`PLANTS_ON_HOLD` because none has a photograph. Set `held` to 0 in `plants.csv`
+and re-import as photos land.
+
+**a. `Malus 'John Downie'` was not researched.** The batch supplied
+`Malus 'Evereste'` instead. Deliberately **not** built: the research is
+Evereste-specific (yellow-orange fruit, pitched on pollination) and 'John Downie'
+carries larger conical orange-red fruit pitched on jelly, so relabelling would
+have put wrong facts on a card. Wishlist entry 37 needs a re-research. The
+exclusion and its reason are in `EXCLUDE` in `tools/fit-incoming.js`.
+
+**b. `Hypericum × inodorum` MAGICAL series never arrived.** Wishlist entry 31 is
+absent from the batch entirely — 50 supplied against 51 asked for.
+
+**c. 2 legal and 26 safety notes have nowhere to live on a card.** The incoming
+schema carries `toxicity` and `compliance`; the card schema carries neither. Both
+are preserved in the batch file, and `node tools/unmapped-report.js
+data/incoming/wishlist-batch-01.json` lists them. Two matter commercially:
+*Rhododendron luteum* is **Schedule 9 Part II, Wildlife and Countryside Act 1981**
+(England and Wales) — illegal to plant or cause to grow in the wild — and
+*Dicksonia antarctica* may carry source-country harvesting and tagging controls.
+Twenty-six carry real toxicity (Daphne berries, Kalmia, Wisteria seed). Adding the
+two fields is a schema change, not a field append: CSV columns, `data-audit`, a
+rendered card slot and `template-geometry` anchors all move with it. **Decide
+whether the deck should show toxicity and legal status at all** — if it is ever
+used on a sales bench, it probably should.
 
 ### 1. Five held climbers have no H × W split — size rails render blank
 `Clematis 'Nelly Moser'`, `Clematis 'Purpurea Plena Elegans'`,

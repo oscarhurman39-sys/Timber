@@ -114,9 +114,26 @@ for (const c of cards) {
   if (has(sun) && has(sunMin) && sunMin > sun)
     flag(c, 'sun-band-inverted', `sunMin ${sunMin} > sunNeed ${sun}`);
 
+  /* peak must resolve to at least one month. The card's month parser only reads
+     3-letter month names, so a plausible-looking value with no month in it —
+     "year-round", "all year", "spring" — silently yields an empty list and the
+     season row renders BLANK rather than erroring. Eight cards shipped that way
+     from the first research batch. PLANT-BRIEF.md already gives the right answer
+     for a plant with no single season: Jan-Dec. */
+  const MONTHS = { jan: 1, feb: 1, mar: 1, apr: 1, may: 1, jun: 1, jul: 1, aug: 1, sep: 1, oct: 1, nov: 1, dec: 1 };
+  const peakMonths = (String(c.peak || '').toLowerCase().match(/[a-z]{3,}/g) || [])
+    .filter(w => MONTHS[w.slice(0, 3)]);
+  if (String(c.peak || '').trim() && !peakMonths.length)
+    flag(c, 'peak-unparseable', `peak "${c.peak}" names no month, so the season row renders blank — use Jan-Dec for year-round interest`);
+
   /* 4. maintenance prose vs careLevel. CARD-STATS.md §2c: HIGHER = more work. */
   const easy = /\b(no (?:regular )?prun|needs no prun|prune only to|low maintenance|virtually maintenance[- ]free|little attention)\b/.test(t);
-  const fussy = /\b(requires (?:regular|careful)|needs winter protection|fleece in winter|lift(?: and store)? (?:before|over) winter|demanding|exacting|move (?:indoors|under glass))\b/.test(t);
+  /* "demanding" and "exacting" are bare adjectives with no polarity of their own,
+     so they need a negation guard: "few demanding requirements" means the
+     opposite of "demanding" and flagged Kolkwitzia 'Pink Cloud' as a
+     contradiction when careLevel 5 was correct. The other alternatives here are
+     whole phrases that cannot be negated into their own opposite. */
+  const fussy = /\b(requires (?:regular|careful)|needs winter protection|fleece in winter|lift(?: and store)? (?:before|over) winter|(?<!\b(?:few|no|not|without|little|hardly any)\s)(?:demanding|exacting)|move (?:indoors|under glass))\b/.test(t);
   if (easy && has(care) && care >= 14)
     flag(c, 'care-vs-prose', `prose says low maintenance but careLevel is ${care}/20 (higher = more work)`);
   if (fussy && has(care) && care <= 5)

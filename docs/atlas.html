@@ -1,0 +1,465 @@
+<title>Timber Atlas</title>
+<style>
+  /* Single-theme by choice. Timber is a deck that lives in the dark &mdash; the app's
+     own ground is #0c1810 and its cards glow against it. A light inversion would
+     be a different product. Every colour is painted explicitly from a token so
+     the page holds on either host ground. Tokens are the app's own. */
+  :root{
+    --bg:#0c1810; --bg2:#0f2117; --bg3:#132a1c;
+    --gold:#f5c451; --gold-deep:#e0a52f;
+    --leaf1:#4cd787; --leaf2:#159a52;
+    --parch:#ecd7a0; --parch-dim:#c8b489;
+    --ink:#f6ecd2; --muted:rgba(246,236,210,.60); --faint:rgba(246,236,210,.34);
+    --rule:rgba(245,196,81,.20); --rule-soft:rgba(246,236,210,.10);
+    --danger:#ff6b6b; --danger-dim:rgba(255,107,107,.16);
+    --panel:rgba(255,255,255,.035);
+
+    --f-disp:Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
+    --f-body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --f-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--bg)}
+  body{
+    margin:0;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+    background:radial-gradient(130% 90% at 50% -10%,var(--bg2),var(--bg)) fixed;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:60rem;margin:0 auto;padding:0 1.15rem 6rem}
+
+  /* ============ HERO ============ */
+  .hero{position:relative;min-height:min(88vh,44rem);display:flex;flex-direction:column;
+    justify-content:flex-end;padding:4rem 0 2.4rem;overflow:hidden}
+  #fan{position:absolute;inset:0;width:100%;height:100%;opacity:1;pointer-events:none}
+  /* Scrim between the rays and the type. The fan is the boldest thing on the page
+     and it has to stay bold, but the headline has to win where they overlap -- so
+     the ground returns as the eye travels down into the copy. */
+  .hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(12,24,16,0) 0%,rgba(12,24,16,.30) 34%,
+      rgba(12,24,16,.78) 66%,rgba(12,24,16,.94) 88%,var(--bg) 100%)}
+  .hero-inner{position:relative;z-index:1}
+  .eyebrow{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gold);margin:0 0 .9rem}
+  h1{font-family:var(--f-disp);font-weight:400;font-size:clamp(2.4rem,9vw,4.6rem);
+    line-height:.98;margin:0;letter-spacing:-.01em;text-wrap:balance}
+  h1 em{font-style:italic;color:var(--gold)}
+  .lede{margin:1.1rem 0 0;max-width:34rem;color:var(--muted);font-size:1.02rem}
+  .keys{display:flex;flex-wrap:wrap;gap:1.6rem 2.6rem;margin:2rem 0 0}
+  .key b{display:block;font-family:var(--f-mono);font-size:clamp(1.5rem,4.4vw,2.1rem);
+    color:var(--leaf1);font-variant-numeric:tabular-nums;line-height:1}
+  .key span{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--faint);display:block;margin-top:.35rem}
+
+  /* ============ sections ============ */
+  section{margin-top:4.4rem;scroll-margin-top:1rem}
+  .plate{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.4rem;
+    padding-bottom:.5rem;border-bottom:1px solid var(--rule)}
+  .plate .no{font-family:var(--f-mono);font-size:.66rem;color:var(--gold);
+    letter-spacing:.15em;flex:none}
+  .plate h2{font-family:var(--f-disp);font-weight:400;font-size:clamp(1.4rem,4vw,1.9rem);
+    margin:0;flex:1;text-wrap:balance}
+  .plate .meta{font-family:var(--f-mono);font-size:.62rem;color:var(--faint);
+    letter-spacing:.1em;text-transform:uppercase;flex:none;text-align:right}
+  .say{color:var(--muted);max-width:38rem;margin:0 0 1.5rem}
+  .say strong{color:var(--ink);font-weight:600}
+  .say em{color:var(--gold);font-style:normal}
+
+  /* spectrum */
+  .spectrum{display:flex;gap:1px;height:7.5rem;border-radius:3px;overflow:hidden;
+    background:var(--bg3);margin-bottom:.6rem}
+  .spectrum i{flex:1 1 0;min-width:0;display:block;border-radius:1px 1px 0 0;
+    transition:transform .18s ease}
+  .spectrum i:hover{transform:scaleY(1.06)}
+  .caption{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between;gap:1rem}
+
+  /* generic grid of panels */
+  .grid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+  .panel{background:var(--panel);border:1px solid var(--rule-soft);border-radius:3px;
+    padding:1.05rem 1.1rem}
+  .panel h3{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint);margin:0 0 .8rem;font-weight:400}
+  .panel p{margin:.6rem 0 0;font-size:.9rem;color:var(--muted)}
+
+  /* bars */
+  .bars{display:flex;flex-direction:column;gap:.5rem}
+  .bar{display:grid;grid-template-columns:6.6rem 1fr 3.1rem;align-items:center;gap:.7rem}
+  .bar .lab{font-family:var(--f-mono);font-size:.68rem;color:var(--parch-dim);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bar .track{height:.62rem;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--leaf2),var(--leaf1));
+    border-radius:2px;display:block}
+  .bar .fill.gold{background:linear-gradient(90deg,var(--gold-deep),var(--gold))}
+  .bar .fill.thin{background:linear-gradient(90deg,rgba(255,107,107,.55),var(--danger))}
+  .bar .val{font-family:var(--f-mono);font-size:.68rem;color:var(--ink);
+    font-variant-numeric:tabular-nums;text-align:right}
+
+  /* hardiness columns */
+  .cols{display:flex;align-items:flex-end;gap:.55rem;height:9rem;margin-bottom:.55rem}
+  .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;
+    align-items:center;gap:.4rem;height:100%}
+  .col .stack{width:100%;background:linear-gradient(180deg,var(--leaf1),var(--leaf2));
+    border-radius:2px 2px 0 0;min-height:3px}
+  .col .n{font-family:var(--f-mono);font-size:.62rem;color:var(--ink);font-variant-numeric:tabular-nums}
+  .col .h{font-family:var(--f-mono);font-size:.62rem;color:var(--gold);letter-spacing:.05em}
+
+  /* pipeline */
+  .pipe{display:flex;flex-direction:column;gap:0}
+  .step{display:grid;grid-template-columns:1.9rem 1fr;gap:.9rem;position:relative;
+    padding:.85rem 0}
+  .step:not(:last-child)::after{content:"";position:absolute;left:.92rem;top:2.3rem;
+    bottom:-.2rem;width:1px;background:var(--rule)}
+  .step .dot{width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;
+    background:var(--bg3);border:1px solid var(--rule);font-family:var(--f-mono);
+    font-size:.64rem;color:var(--gold);z-index:1}
+  .step .body h4{margin:0;font-family:var(--f-disp);font-size:1.02rem;font-weight:400}
+  .step .body p{margin:.25rem 0 0;font-size:.88rem;color:var(--muted)}
+  .step code{font-family:var(--f-mono);font-size:.8em;color:var(--parch);
+    background:rgba(245,196,81,.09);padding:.1rem .32rem;border-radius:2px}
+  .step.gate .dot{border-color:var(--leaf2);color:var(--leaf1)}
+
+  /* checks table */
+  .tbl{width:100%;border-collapse:collapse;font-size:.86rem}
+  .tbl th{text-align:left;font-family:var(--f-mono);font-size:.58rem;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--faint);font-weight:400;
+    padding:0 .6rem .5rem 0;border-bottom:1px solid var(--rule)}
+  .tbl td{padding:.5rem .6rem .5rem 0;border-bottom:1px solid var(--rule-soft);
+    vertical-align:top;color:var(--muted)}
+  .tbl td:first-child{font-family:var(--f-mono);font-size:.78rem;color:var(--ink);white-space:nowrap}
+  .tbl td.t{font-family:var(--f-mono);color:var(--parch-dim);text-align:right;
+    font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tag{font-family:var(--f-mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:.14rem .4rem;border-radius:2px;white-space:nowrap}
+  .tag.fast{background:rgba(76,215,135,.14);color:var(--leaf1)}
+  .tag.slow{background:rgba(245,196,81,.13);color:var(--gold)}
+  .scroller{overflow-x:auto}
+
+  /* stones */
+  .stone{display:grid;grid-template-columns:auto 1fr;gap:.9rem;padding:1rem 0;
+    border-bottom:1px solid var(--rule-soft)}
+  .stone:last-child{border-bottom:0}
+  .stone .sev{font-family:var(--f-mono);font-size:.55rem;letter-spacing:.1em;
+    text-transform:uppercase;padding:.2rem .45rem;border-radius:2px;height:fit-content;white-space:nowrap}
+  .sev.open{background:var(--danger-dim);color:var(--danger)}
+  .sev.known{background:rgba(245,196,81,.13);color:var(--gold)}
+  .sev.note{background:rgba(246,236,210,.08);color:var(--muted)}
+  .sev.closed{background:rgba(76,215,135,.14);color:var(--leaf1)}
+  .stone h4{margin:0;font-family:var(--f-disp);font-size:1.04rem;font-weight:400}
+  .stone p{margin:.3rem 0 0;font-size:.9rem;color:var(--muted)}
+
+  footer{margin-top:5rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+    font-family:var(--f-mono);font-size:.62rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--faint);display:flex;flex-wrap:wrap;
+    gap:.6rem 1.6rem;justify-content:space-between}
+
+  @media (prefers-reduced-motion:reduce){
+    #fan{animation:none!important}
+    .spectrum i{transition:none}
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="hero">
+    <canvas id="fan" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="eyebrow">Timber &middot; repository atlas &middot; 11 Aug 2026</p>
+      <h1>129 cards, one file,<br>and every <em>unturned stone</em></h1>
+      <p class="lede">A complete read of the repository behind the plant deck &mdash; what
+        it holds, what verifies it, where its weight sits, and precisely what is
+        still missing. Every figure below was measured from the repo, not estimated.</p>
+      <div class="keys">
+        <div class="key"><b>129</b><span>cards dealt</span></div>
+        <div class="key"><b>6</b><span>held</span></div>
+        <div class="key"><b>100</b><span>genera</span></div>
+        <div class="key"><b>14</b><span>checks</span></div>
+        <div class="key"><b>164</b><span>commits</span></div>
+        <div class="key"><b>21</b><span>builds</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="plate"><span class="no">Plate 01</span><h2>The deck as light</h2>
+      <span class="meta">129 hue values</span></div>
+    <p class="say">Every card stores a <em>hue</em>, 0&ndash;360, which drives its colour
+      throughout the app. Read end to end, the deck has a signature: it is
+      overwhelmingly a <strong>pink-to-magenta and green</strong> collection, because
+      that is what a UK garden centre actually sells. The gaps are as informative as
+      the clusters &mdash; almost nothing sits in the blues.</p>
+    <div class="spectrum" id="spec"></div>
+    <p class="caption"><span>0&deg; red</span><span>120&deg; green</span><span>240&deg; blue</span><span>360&deg;</span></p>
+  </section>
+
+  <section>
+    <div class="plate"><span class="no">Plate 02</span><h2>Hardiness, and the long tail of genera</h2>
+      <span class="meta">135 cards</span></div>
+    <p class="say">The deck sits where British gardening sits: <strong>H5 and H6 carry
+      87 of 135 cards</strong> &mdash; hardy through most of the UK. Only five cards are H2 or
+      below, which is honest for a range built around what survives outdoors here.</p>
+    <div class="grid">
+      <div class="panel">
+        <h3>Hardiness distribution</h3>
+        <div class="cols" id="hard"></div>
+        <p>H1b&ndash;H7. The single H1b is the moth orchid &mdash; the only true houseplant in the deck.</p>
+      </div>
+      <div class="panel">
+        <h3>Deepest genera</h3>
+        <div class="bars" id="genera"></div>
+        <p><strong>82 of 100 genera hold a single card.</strong> A very wide, very
+          shallow collection &mdash; which is right for learning breadth, and worth knowing
+          before anyone tries to teach a genus in depth.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="plate"><span class="no">Plate 03</span><h2>What is actually filled in</h2>
+      <span class="meta">the finding</span></div>
+    <p class="say">This is the plate that matters. The <strong>learning layer is
+      essentially complete</strong> &mdash; every card carries its ratings. The
+      <strong>trade layer is all but empty</strong>: the card back sells itself on
+      "buyer data is your own portfolio", and <em>3 of 135 cards</em> have a trade
+      price, a retail price or a margin. The feature works; the data was never entered.</p>
+    <div class="grid">
+      <div class="panel">
+        <h3>Learning layer &middot; ratings</h3>
+        <div class="bars" id="cov"></div>
+        <p><code>seasonalImpact</code> is the one blank column &mdash; defined, validated,
+          rendered as nothing, rated on no card at all.</p>
+      </div>
+      <div class="panel">
+        <h3>Trade layer &middot; commercial fields</h3>
+        <div class="bars" id="comm"></div>
+        <p>Peak season and cultivars are populated because the learning side needs
+          them. Everything a buyer would use sits at 3.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="plate"><span class="no">Plate 04</span><h2>How a plant becomes a card</h2>
+      <span class="meta">the pipeline</span></div>
+    <p class="say">Seven steps, four of them refusals. The design principle running
+      through it: <strong>a tool that cannot be sure stops rather than guesses</strong>.</p>
+    <div class="pipe">
+      <div class="step"><span class="dot">1</span><div class="body">
+        <h4>Research into the locked schema</h4>
+        <p><code>PLANT-BRIEF.md</code> produces a JSON in the exact incoming shape.
+          Sources and uncertainties are recorded with it, not discarded.</p></div></div>
+      <div class="step gate"><span class="dot">2</span><div class="body">
+        <h4>Validate &mdash; refuses bad data</h4>
+        <p><code>check-plant-json.js</code> rejects a light level given as a compass
+          facing, soil text over the measured panel width, a rating out of range. It
+          never fills a blank in.</p></div></div>
+      <div class="step"><span class="dot">3</span><div class="body">
+        <h4>Photo staged, row inserted</h4>
+        <p>Processed to 1200px under <code>photos/&lt;latin-slug&gt;.jpg</code>, then a
+          row appended before the <code>PLANTS:END</code> marker.</p></div></div>
+      <div class="step gate"><span class="dot">4</span><div class="body">
+        <h4>Data gate &mdash; 17 seconds</h4>
+        <p>Consistency, self-contradiction, provenance, then the whole deck audited as
+          rendered. <code>--quick</code> stops here, which is what makes a 20-plant
+          batch practical.</p></div></div>
+      <div class="step"><span class="dot">5</span><div class="body">
+        <h4>plants.csv re-exported</h4>
+        <p>Both blocks, dealt and held. It used to drift on every insert because
+          nothing wrote it back.</p></div></div>
+      <div class="step gate"><span class="dot">6</span><div class="body">
+        <h4>Full suite &mdash; 2m41s</h4>
+        <p>Nine browser suites, three at a time. <code>run-all.js --jobs 3</code>.</p></div></div>
+      <div class="step gate"><span class="dot">7</span><div class="body">
+        <h4>Deploy, then verify the served bytes</h4>
+        <p>Pages gates on the build stamp and the data audit, publishes, then
+          <em>fetches the live page and compares it to the commit</em>. The stamp
+          carries a hash of the file's own content, so it cannot lie about which
+          build a phone is running.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="plate"><span class="no">Plate 05</span><h2>The fourteen checks</h2>
+      <span class="meta">503s of work &middot; 2m41s wall</span></div>
+    <p class="say">Five cost a third of a second between them and run first, so a bad
+      batch fails before any browser starts. Nine drive real headless Chromium.</p>
+    <div class="scroller">
+      <table class="tbl">
+        <thead><tr><th>Check</th><th>Guards</th><th></th><th style="text-align:right">Time</th></tr></thead>
+        <tbody id="checks"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="plate"><span class="no">Plate 06</span><h2>Where the weight is</h2>
+      <span class="meta">250 files &middot; 91.1 MB</span></div>
+    <p class="say">The app is <strong>one file of 5,149 lines</strong> &mdash; deliberately,
+      because it ships as an installable page and an offline artifact. Almost all the
+      repository's mass is photographs.</p>
+    <div class="grid">
+      <div class="panel">
+        <h3>Bytes by directory</h3>
+        <div class="bars" id="mass"></div>
+        <p><strong>78% of the repo is photos.</strong> Worth knowing before anyone
+          worries about the size of the code.</p>
+      </div>
+      <div class="panel">
+        <h3>Code and prose</h3>
+        <div class="bars" id="code"></div>
+        <p>14 tools, 8 test suites, 15 markdown documents. The documentation is
+          load-bearing: the protocol files are what stop a fix being undone later.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="plate"><span class="no">Plate 07</span><h2>Every unturned stone</h2>
+      <span class="meta">nothing hidden</span></div>
+    <p class="say">Everything currently known to be incomplete, wrong or unverified,
+      worst first. All of it is tracked in the repo &mdash; none of it is a surprise, which
+      is the point.</p>
+    <div id="stones"></div>
+  </section>
+
+  <footer>
+    <span>Timber &middot; build r21 &middot; 129 dealt &middot; 6 held</span>
+    <span>measured 11 Aug 2026 &middot; figures from the repo</span>
+  </footer>
+</div>
+
+<script>
+const HUES=[5,150,335,28,330,330,340,150,340,335,330,315,150,250,55,60,315,130,215,50,330,120,120,120,8,120,95,330,320,330,30,275,45,120,120,55,48,18,120,85,75,350,0,48,220,50,0,50,330,275,55,335,335,350,345,5,0,330,55,85,350,355,55,25,150,5,345,225,55,350,120,350,335,335,335,0,85,0,335,335,90,105,210,25,350,35,340,85,120,220,120,275,25,335,275,350,105,55,15,350,335,220,335,55,345,5,0,335,20,55,55,220,335,275,335,95,75,50,5,0,120,120,50,345,335,335,55,110,350];
+
+/* ---- spectrum: one strip per card, its own hue ---- */
+document.getElementById('spec').innerHTML=HUES.map((h,i)=>{
+  const l=42+((i*37)%22);                      /* vary lightness so neighbours separate */
+  return `<i style="background:hsl(${h} 62% ${l}%)" title="hue ${h}&deg;"></i>`;
+}).join('');
+
+/* ---- hardiness ---- */
+const HARD=[['H1b',1],['H2',4],['H3',8],['H4',26],['H5',51],['H6',36],['H7',9]];
+const hmax=Math.max(...HARD.map(d=>d[1]));
+document.getElementById('hard').innerHTML=HARD.map(([k,v])=>
+  `<div class="col"><span class="n">${v}</span>`+
+  `<span class="stack" style="height:${(v/hmax*100).toFixed(1)}%"></span>`+
+  `<span class="h">${k}</span></div>`).join('');
+
+/* ---- bar helper ----
+   Colour follows the NUMBER, not the panel it sits in: a fully populated row reads
+   green wherever it appears, a sparse one reads red. Colouring a whole panel red
+   because most of it is sparse mislabels the rows that are fine -- `peak` is on
+   135 of 135 cards and should not look like a problem.
+   A zero renders as zero width. A minimum-width sliver on an empty row is a small
+   lie, and this page is about not telling those. */
+const bars=(el,rows,max,force)=>{
+  document.getElementById(el).innerHTML=rows.map(([lab,v,txt])=>{
+    const r=max?v/max:0;
+    const cls=force||(r>=0.9?'':r>=0.35?'gold':'thin');
+    const w=v<=0?0:Math.max(0.8,r*100);
+    return `<div class="bar"><span class="lab" title="${lab}">${lab}</span>`+
+      `<span class="track"><span class="fill ${cls}" style="width:${w.toFixed(1)}%"></span></span>`+
+      `<span class="val">${txt!=null?txt:v}</span></div>`;
+  }).join('');
+};
+
+bars('genera',[['Hydrangea',6],['Euonymus',6],['Prunus',4],['Acer',4],['Clematis',4],
+  ['Cornus',3],['Viburnum',3],['Euphorbia',3],['82 others',1,'1 ea']],6,'gold');
+
+bars('cov',[['growthSpeed',129],['pestRisk',129],['thirst',129],['careLevel',129],
+  ['sunNeed',134],['sunMin',128],['seasonalImpact',0]],135);
+
+bars('comm',[['peak',135],['cvs',103],['pots',8],['type',5],['returnRisk',5],
+  ['trade',3],['retail',3],['margin',3],['source',3]],135);
+
+bars('mass',[['photos',71.3,'71.3 MB'],['art',15.0,'15.0 MB'],['design',2.6,'2.6 MB'],
+  ['tools',1.6,'1.6 MB'],['root docs',0.6,'0.6 MB'],['tests',0.1,'0.1 MB']],71.3,'gold');
+
+bars('code',[['timber.html',5149,'5,149 L'],['tools &times;14',3400,'~3,400 L'],
+  ['tests &times;8',2600,'~2,600 L'],['docs &times;15',2900,'~2,900 L']],5149);
+
+/* ---- checks ---- */
+const CHECKS=[
+  ['data-audit','deck, hold block, csv and photos all agree','fast','0.1s'],
+  ['plant-sense','no card contradicts its own prose or arithmetic','fast','0.1s'],
+  ['build-stamp','the build number matches the file it describes','fast','0.1s'],
+  ['template-geom','card overlay anchors have not drifted','fast','0.0s'],
+  ['photo-credits','every photo has a provenance entry','fast','0.1s'],
+  ['deck-audit','every card audited as rendered, not as data','slow','16s'],
+  ['audit-layout','ink fits its zones, no collisions, rails aligned','slow','13s'],
+  ['verify-cards','card builder rating maths against the data','slow','2s'],
+  ['sw-update-test','the service-worker update path','slow','29s'],
+  ['perf-test','photo window, compositing budget, pixel parity','slow','39s'],
+  ['srs-test','spaced repetition boxes and review mode','slow','40s'],
+  ['features-test','quiz, filters, fuzzy search, stats, focus trap','slow','46s'],
+  ['app-test','gestures, flip, search, persistence, a11y','slow','149s'],
+  ['edge-test','corrupt storage, empty deck, undo edges','slow','167s'],
+];
+document.getElementById('checks').innerHTML=CHECKS.map(([n,w,k,t])=>
+  `<tr><td>${n}</td><td>${w}</td><td><span class="tag ${k}">${k==='fast'?'no browser':'chromium'}</span></td><td class="t">${t}</td></tr>`).join('');
+
+/* ---- stones ---- */
+const STONES=[
+  ['open','The trade layer is 2% populated',
+   '3 of 135 cards carry trade price, retail price or margin. The card back is built, validated and rendering &mdash; it simply has almost no data in it. The single largest gap in the repository.'],
+  ['open','146 of 152 photos have no licence record',
+   'The photo tool always recorded licence, author and source URL &mdash; into a gitignored directory, so the paperwork was lost while the images stayed in git. Fine for private learning; not fine the day a card is shown commercially.'],
+  ['open','One card in the deck is a generated image',
+   'The waterlily is dealt on Oscar&rsquo;s own identification of his own pond, but the image file carries an OpenAI C2PA manifest &mdash; synthetic, not a photograph. Recorded as not cleared for commercial use.'],
+  ['known','Five held climbers have no H &times; W split',
+   'Their size fields read "2-3m" with no spread, so both size rails render blank. Not auto-fixed because inventing a spread would be inventing data.'],
+  ['closed','Choisya now has its ratings &mdash; the last KNOWN_GAPS entry, closed',
+   'Was the only card with all seven ratings blank and its aspect flattened to &ldquo;Any aspect&rdquo;. Researched values supplied 11 Aug; the compass now reads E/S/W and every stat row is populated. tests/deck-audit.js KNOWN_GAPS is empty.'],
+  ['known','seasonalImpact is rated on no card',
+   'A defined, validated, rendered column with zero values in it across the whole deck.'],
+  ['note','Two "compact" plants sit in the 2.5&ndash;4 m band',
+   'Meyer&rsquo;s Lemon and Kinme holly may each be one size band too high. Unverified &mdash; no source reachable from the session that flagged them.'],
+  ['note','Two margin bands sit below their own arithmetic',
+   'Choisya and Weigela state 55&ndash;60% where the quoted prices yield 61%+. Only wrong if the column is meant to be gross; one decision settles it for the whole deck.'],
+  ['note','82 of 100 genera hold one card',
+   'Wide and shallow by construction. Good for breadth, a limit on teaching any genus in depth.'],
+  ['note','An unidentified photograph is parked',
+   'Real camera capture, no AI markers, matches neither plant it arrived with. Probably white Phlox paniculata; kept in photos/unidentified/ rather than given a guessed name.'],
+];
+document.getElementById('stones').innerHTML=STONES.map(([s,t,d])=>
+  `<div class="stone"><span class="sev ${s}">${s==='open'?'open':s==='known'?'tracked':s==='closed'?'closed':'note'}</span>`+
+  `<div><h4>${t}</h4><p>${d}</p></div></div>`).join('');
+
+/* ---- hero: the deck fanned into light ----
+   129 tapered rays, one per card, at its own hue. Drawn on canvas rather than as
+   SVG paths because it is generative and needs to redraw on resize; the slow drift
+   is a single rotation applied to the whole fan, so it costs one transform. */
+(function(){
+  const c=document.getElementById('fan'), x=c.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let W=0,H=0,t=0,raf=null;
+  function size(){
+    const r=c.getBoundingClientRect(), d=Math.min(devicePixelRatio||1,2);
+    W=Math.max(1,Math.round(r.width*d)); H=Math.max(1,Math.round(r.height*d));
+    c.width=W; c.height=H;
+  }
+  function draw(){
+    x.clearRect(0,0,W,H);
+    const cx=W/2, cy=H*1.06, R=H*1.35;
+    const n=HUES.length, spread=Math.PI*0.92, start=-Math.PI/2-spread/2;
+    x.globalCompositeOperation='lighter';
+    for(let i=0;i<n;i++){
+      const a=start+(i/(n-1))*spread+Math.sin(t/1400+i*0.11)*0.012;
+      const len=R*(0.58+0.42*(0.55+0.45*Math.sin(i*0.7+t/2600)));
+      const w=(spread/n)*0.70;
+      const grad=x.createRadialGradient(cx,cy,R*0.08,cx,cy,len);
+      const h=HUES[i];
+      grad.addColorStop(0,`hsla(${h},78%,60%,0.24)`);
+      grad.addColorStop(0.34,`hsla(${h},80%,56%,0.21)`);
+      grad.addColorStop(1,`hsla(${h},84%,52%,0)`);
+      x.fillStyle=grad;
+      x.beginPath(); x.moveTo(cx,cy);
+      x.arc(cx,cy,len,a-w/2,a+w/2); x.closePath(); x.fill();
+    }
+    x.globalCompositeOperation='source-over';
+  }
+  function loop(){ t+=16; draw(); raf=requestAnimationFrame(loop); }
+  function boot(){ size(); draw(); if(!reduce&&!raf) loop(); }
+  addEventListener('resize',()=>{ size(); draw(); },{passive:true});
+  boot();
+})();
+</script>
