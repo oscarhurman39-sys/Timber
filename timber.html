@@ -796,7 +796,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r54 · 2026-08-14 · e4bf6dc';
+const BUILD='r55 · 2026-08-14 · 23ab852';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7514,19 +7514,29 @@ const HOLO={
 
    Avondale strips rebuilt with:
      node tools/extract-anim-strips.js <dir-of-frame_NN.png> avondale \
-       --layer 'ring:0,0,100,100:cuts=20,58,42,42+62,74,16,26' \
-       --layer 'sprigA:20,58,42,42' --layer 'sprigB:62,74,16,26' --scale 0.5
-   (source: Oscar's avondale_special_card_10_frames zip, 1024x1536, not in the
-   repo at 22 MB — the strips are the committed artefact) */
+       --skip 6 --layer 'trunk:70,0,30,100' --layer 'stem:0,6,19,94' --scale 0.5
+   (source: Oscar's avondale_special_card_10_frames zip, 1024x1536; not in the
+   repo at 22 MB — the strips are the committed artefact)
+
+   --skip 6 is load-bearing: frame_06 of that zip is NOT an animation frame, it
+   is the card-redesign PANEL PACK (blossom plaque, soil box, aspect band —
+   rescued to design/avondale-panel-pack.png). Shipped once by mistake: the
+   resting card showed a UI asset sheet and the cycle flashed it mid-bloom.
+
+   The composition deliberately breaks the wreath. The first cut framed the
+   window on all four sides plus centre sprigs, and read as a second little
+   floral frame that shrank the photograph. Now: one big trunk entering from
+   beyond the right edge (about a third of it clipped away), one delicate stem
+   entering from the left, phased apart, and an empty centre. The eye imagines
+   a plant larger than the card; the photograph keeps the room. */
 const ANIM={
   'cercis-chinensis-avondale':{
-    frames:10,
-    durations:[260,160,150,150,150,220,180,150,150,220],
-    holdFrame:5,
+    frames:9,
+    durations:[260,160,150,150,220,180,150,150,220],
+    holdFrame:4,
     layers:[
-      {src:'art/anim/avondale-ring.png',   left:0,  top:0,  width:100, height:100, phase:0},
-      {src:'art/anim/avondale-sprigA.png', left:20, top:58, width:42,  height:42,  phase:5},
-      {src:'art/anim/avondale-sprigB.png', left:62, top:74, width:16,  height:26,  phase:2},
+      {src:'art/anim/avondale-trunk.png', left:74, top:-8, width:44, height:116, phase:0},
+      {src:'art/anim/avondale-stem.png',  left:-9, top:0,  width:24, height:108, phase:4},
     ],
   },
 };
