@@ -5,6 +5,20 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-14 (consolidation) — **three parallel sessions merged into one
+  live line (r56).** Swipe-release feel, WS1 boot safety, and search Go-to-card
+  were each written against r52 in separate sessions, each stamped itself "r53",
+  and none could see the others — so their entries below overlap in numbering
+  and all three collided in `timber.html`. Two collisions were the BUILD stamp;
+  the real one was `attachGestures`/`fling`, where the swipe line's velocity
+  tracking and the search line's `stopGoto()` touch the same lines — combined so
+  a touch or real swipe cancels an auto-run AND carries the velocity-matched
+  throw. Checked before trusting it: the goto run advances via `tuckUnder`/
+  `undo`, never `fling`, so the added `stopGoto()` in `fling` cannot cancel the
+  run that scheduled it. Re-stamped r56, full gate 15/15 (727s, --jobs 3) on the
+  merged build — including app-test's gesture checks and features-test's new
+  Go-to-card cases. The three branch entries below record the sessions as they
+  happened; their "r53/r54" stamps were branch-local and are superseded by r56.
 progress: 2026-08-14 (later) — **WS1 boot safety landed from ChatGPT, r53.
   Reviewed, applied, and the bug it fixes was CONFIRMED REAL by control test
   rather than taken on faith.** `tools/check-boot.js` (new, 205 lines) +
