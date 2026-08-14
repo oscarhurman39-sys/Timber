@@ -206,6 +206,51 @@ progress: 2026-08-14 (Pretty Lady Maria groundwork) — **the one piece of that
   master strip (x 58.8-403.2, y 575.7-584.7), all in 420x600 template px.
   Gate 17/17 serially. `--jobs 3` flaked twice on this box (a timed rewind hold
   and a features-test timeout); both pass alone and neither touches this change.
+progress: 2026-08-14 (swipe release) — **a thrown card hung at the finger for
+  ~130ms after it was let go. Measured off Oscar's screen recording frame by
+  frame, not guessed. Now ~19ms (r64).** The complaint was that letting go of a
+  card "hovers for a few milliseconds — feels like you're not in control", and
+  the recording carried enough to time it: 720x1560 at 60fps, VFR, with Android's
+  show-taps indicator on, so both the finger and the card are visible.
+  1. **What the recording actually shows.** Tracking the touch indicator (a 60%
+     white disc, found by a matched filter on its desaturation signature) against
+     the card gives, for all four swipes: finger down -> card follows within 1-2
+     frames -> finger lifts -> **nothing moves for 117 / 149 / 152 / 117 ms** ->
+     card flies. The lift is unambiguous because the indicator starts its fade-out
+     on release, and inter-frame pixel deltas during the freeze are 2-25 pixels,
+     i.e. the screen is dead, not merely slow. The frame before the card finally
+     moves changes only `x[65-217] y[197-214]` — the "to learn" counter — so the
+     whole release handler landed in one late frame, `updateCounts()` included.
+     The drag itself is fine: the card trails the finger by 1-2 frames throughout,
+     which is the touch pipeline, not us.
+  2. **The cause was rendering, not script.** The `touchend` handler returns in
+     3ms; it was the work it queued. Bisected in headless Chromium by stubbing one
+     call at a time and reading the worst frame gap after release: with everything
+     live 83-200ms, with `markHot()` stubbed 16.8ms. Inside `markHot()`, the
+     `deep` toggle costs 166-200ms (un-hiding the card at PAINT_DEPTH forces a
+     full paint of a whole card — photo, gradients, ~30 stacked shadows) and the
+     `hot` toggle 66-100ms (a compositing layer for the newly revealed card).
+     Both landed on the exact frame the throw had to start on.
+  3. **The fix is scheduling.** `fling()` now sets only the flung card's
+     transform/opacity, and hands `markHot` / `updateCounts` / `refreshEmpty` /
+     `saveProgress` to a new `afterPresented()` — double-rAF, so the work runs
+     after the frame that starts the throw has gone to the compositor. The throw
+     is transform+opacity on an already-promoted layer, so the compositor carries
+     it and the deferred paint is invisible: screencast shows 11-13 changed frames
+     on a steady ~15ms cadence all the way out, where before the first one did not
+     arrive until 145-257ms. Release -> first presented moved frame, by CDP
+     screencast: **median 243ms -> 19ms.**
+  4. **Deferring must not cost a swipe.** `saveProgress()` rides in the deferred
+     block, so `afterPresented` also flushes on `pagehide` and on
+     `visibilitychange`-to-hidden, with a 150ms timeout backstop for a tab that
+     has stopped firing rAF. Verified: fire `pagehide` in the same task as the
+     release and the swipe is already in localStorage. `undo()` deliberately keeps
+     `markHot()` synchronous — a `deep` card paints nothing, so the fly-in needs
+     it first — and is untouched.
+  New in `tests/perf-test.js` (3 checks, 14 total): the release does no layer or
+  paint work on the frame the throw starts, `touchend` returns inside a frame, and
+  the card has visibly moved two frames after release. All three fail on the old
+  bytes (236.5ms) and pass on the new (18-34ms). Full gate 17/17.
 progress: 2026-08-14 (link performance) — **the link did not open, and the
   cause was measured rather than guessed: 76 seconds of forced layout and 16.9 MB
   of images. Both fixed; a throttled phone now opens the deck in 4.4s instead of

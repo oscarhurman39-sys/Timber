@@ -157,6 +157,61 @@ const check = (name, ok, detail = '') => {
   check(`after swiping, the budget still holds (${after.layers} layers / ${after.painted} painted)`,
     after.layers <= MAX_LAYERS && after.painted <= MAX_PAINTED, JSON.stringify(after));
 
+  /* ---- 6. letting go of a card must not cost a frame ----
+     markHot() allocates a layer for the newly revealed card and un-hides the one behind
+     it — a full paint of a whole card. Called straight from fling(), that lands on the
+     very frame the throw starts, and the card hangs where the finger left it: 145-257ms
+     of dead screen measured by screencast, ~130ms on a real phone. It reads as the swipe
+     not being yours.
+     Movement is sampled in a rAF registered before the release, so it reads the card's
+     position ahead of the deferred bookkeeping in the same frame — what the compositor
+     is showing, not how long the main thread is busy afterwards. Main-thread frame gaps
+     are the wrong metric here: the throw is transform+opacity on a promoted layer, so it
+     keeps running while the deferred work blocks rAF, which it does by design. */
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForTimeout(900);
+  const release = await page.evaluate(async () => {
+    const real = window.markHot;
+    let duringRelease = false, calledSync = false;
+    window.markHot = (...a) => { if (duringRelease) calledSync = true; return real(...a); };
+    const card = [...document.querySelectorAll('.deck .card:not([data-gone])')].pop();
+    const fire = (type, x, y) => {
+      const t = new Touch({ identifier: 1, target: card, clientX: x, clientY: y });
+      card.dispatchEvent(new TouchEvent(type, {
+        touches: type === 'touchend' ? [] : [t], changedTouches: [t], bubbles: true, cancelable: true }));
+    };
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    fire('touchstart', 190, 420);
+    for (let i = 1; i <= 30; i++) { fire('touchmove', 190 + i * 4, 420 - i); await sleep(8); }
+    await sleep(60);                                   /* a finger rests before it lifts */
+    const held = card.getBoundingClientRect().left;
+    const t0 = performance.now(); let movedAt = null;
+    const tick = () => {
+      const now = performance.now() - t0;
+      if (movedAt === null && card.getBoundingClientRect().left > held + 4) movedAt = now;
+      if (now < 500) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    duringRelease = true; fire('touchend', 310, 390); duringRelease = false;
+    const handler = performance.now() - t0;
+    await sleep(600);
+    window.markHot = real;
+    return { calledSync, handler: +handler.toFixed(1),
+             movedAt: movedAt === null ? null : +movedAt.toFixed(1) };
+  });
+  check('releasing a card does no layer or paint work on the frame the throw starts',
+    release.calledSync === false, 'markHot() ran inside the touchend handler');
+  check(`the touchend that commits a swipe returns promptly (${release.handler}ms)`,
+    release.handler <= 16, `${release.handler}ms of script on the release`);
+  check(`the card is already moving two frames after the release (${release.movedAt}ms)`,
+    release.movedAt !== null && release.movedAt <= 50, `moved at ${release.movedAt}ms`);
+  const settled = await page.evaluate(() => {
+    const cards = [...document.querySelectorAll('.deck .card')];
+    const top = cards.filter(c => !c.dataset.gone).pop();
+    return { hot: top ? top.classList.contains('hot') : false, deep: top ? top.classList.contains('deep') : true };
+  });
+  check('the deferred promotion still lands', settled.hot && !settled.deep, JSON.stringify(settled));
+
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 
   console.log(`\n${passed} passed, ${failed} failed`);
