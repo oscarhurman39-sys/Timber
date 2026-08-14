@@ -190,7 +190,12 @@
      the glyph holds still. The rewind itself still works. */
   @media (prefers-reduced-motion:reduce){
     .fab.back-btn.rewinding .rw{animation:none}
+    .card.found .tcard{animation:none}
   }
+  /* go-to-card arrival: one gold pulse so the eye lands on the found card the moment
+     the deck stops moving — same gold as the rewind glyph, because it's the same journey */
+  .card.found .tcard{animation:found-pulse 1s ease-out 1}
+  @keyframes found-pulse{from{box-shadow:0 0 0 4px rgba(245,196,81,.85)}to{box-shadow:0 0 0 4px rgba(245,196,81,0)}}
   .fab.learn{flex:1.25 1 0;font-size:11px;color:#1a120a;border-color:rgba(245,196,81,.6);
     background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 5px 14px rgba(245,196,81,.28)}
 
@@ -779,7 +784,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r52 · 2026-08-13 · 37feb3a';
+const BUILD='r54 · 2026-08-14 · 109a8fb';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -3562,31 +3567,6 @@ const PLANTS = [
    size:"12–15 m H × 10–15 m W",
    seasonalImpact:"", growthSpeed:16, pestRisk:13, thirst:15, careLevel:8, sunNeed:95, sunMin:80},
 
-  {common:"Early Stachyurus", latin:"Stachyurus praecox", hue:55,
-   visual:"Drooping chains of pale yellow-green bells hang from bare red-purple shoots",
-   water:"Moderate; water during dry spells",
-   aspect:"East / South / West",
-   soil:"Moist, well-drained; Shelter from cold drying winds",
-   prune:"Prune minimally after flowering if required",
-   source:"",
-   peak:"Feb-Apr",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"syn. Stachyurus japonicus",
-   hardiness:"H5",
-   resilience:"generally pest free · woodland-edge suitable",
-   uses:"woodland gardens · winter interest · shrub borders",
-   size:"2.5–4 m H × 1.5–2.5 m W",
-   seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:10, careLevel:5, sunNeed:55, sunMin:30},
-
   {common:"French Cancan Bleu Hydrangea", latin:"Hydrangea macrophylla RENDEZ-VOUS FRENCH CANCAN BLEU", hue:220,
    visual:"Compact lacecap hydrangea · blue blooms on sturdy stems through summer",
    water:"Keep evenly moist",
@@ -4995,6 +4975,31 @@ const PLANTS = [
    the entry into the PLANTS block by hand). csv export/import round-trips this
    block as well as the deck — held rows carry held=1 and are never dropped. */
 const PLANTS_ON_HOLD=[
+  {common:"Early Stachyurus", latin:"Stachyurus praecox", hue:55,
+   visual:"Drooping chains of pale yellow-green bells hang from bare red-purple shoots",
+   water:"Moderate; water during dry spells",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Shelter from cold drying winds",
+   prune:"Prune minimally after flowering if required",
+   source:"",
+   peak:"Feb-Apr",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"syn. Stachyurus japonicus",
+   hardiness:"H5",
+   resilience:"generally pest free · woodland-edge suitable",
+   uses:"woodland gardens · winter interest · shrub borders",
+   size:"2.5–4 m H × 1.5–2.5 m W",
+   seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:10, careLevel:5, sunNeed:55, sunMin:30},
+
   {common:"Clematis 'Nelly Moser'", latin:"Clematis 'Nelly Moser'", hue:310,
    visual:"Large pale pink flowers with deep pink bars · late spring/summer",
    water:"Moist, well-drained",
@@ -7187,6 +7192,7 @@ function restoreDeck(d){
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
 
 function buildDeck(){
+  stopGoto();                                    /* a reset overrules an auto-run to a card */
   if(reviewMode){reviewMode=false;reviewBackup=null;}  /* a reset always lands on the full deck */
   if(activeFilter){activeFilter=null;filterBackup=null;}
   deck.querySelectorAll('.card').forEach(releaseCard);
@@ -7249,6 +7255,7 @@ function updateReviewMenu(){
   reviewDueMenu.textContent=reviewMode?'exit review':String(srsDueIdx().length);
 }
 function enterReview(){
+  stopGoto();                                  /* swapping views overrules an auto-run to a card */
   if(activeFilter)clearFilter();               /* one ephemeral view at a time */
   const due=srsDueIdx();
   if(!due.length){
@@ -7302,6 +7309,7 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
 })();
 function applyFilter(id){
   const def=FILTER_DEFS.find(d=>d.id===id);if(!def)return;
+  stopGoto();                                  /* swapping views overrules an auto-run to a card */
   if(reviewMode)exitReview();                  /* one ephemeral view at a time */
   const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0);
   if(!match.length)return;                     /* zero-match chips are disabled in the menu anyway */
@@ -7734,7 +7742,7 @@ function markHot(){
 function attachGestures(card){
   let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false;
   const learnStamp=card.querySelector('.stamp.learn'),skipStamp=card.querySelector('.stamp.skip');
-  const start=(x,y)=>{if(card.dataset.gone)return;drag=true;moved=false;sx=x;sy=y;card.style.transition='none';};
+  const start=(x,y)=>{if(card.dataset.gone)return;stopGoto();drag=true;moved=false;sx=x;sy=y;card.style.transition='none';};
   const move=(x,y)=>{
     if(!drag)return;dx=x-sx;dy=y-sy;
     if(Math.hypot(dx,dy)>10)moved=true;
@@ -7787,6 +7795,7 @@ function handleTap(card){
 function fling(card,dir,learned){
   if(card.dataset.gone)return;card.dataset.gone='1';  /* a card can only be swiped once —
       guards double fab presses / second-finger taps during the 320ms fling animation */
+  stopGoto();                                     /* a real swipe overrules an auto-run to a card */
   const idx=+card.dataset.idx;
   card.classList.remove('flipped');
   card.style.transform=`translate(${dir*140}%,${learned?-40:60}px) rotate(${dir*24}deg)`;
@@ -7866,7 +7875,7 @@ backBtn.addEventListener('pointerdown',e=>{
      and would leave a touch hold with no way out but lifting off. Hand the pointer
      back so sliding a finger off stops the rewind the way it does with a mouse. */
   if(backBtn.hasPointerCapture&&backBtn.hasPointerCapture(e.pointerId))backBtn.releasePointerCapture(e.pointerId);
-  stopRewind();
+  stopRewind();stopGoto();
   rwDidRewind=false;rwStep=0;   /* also clears a flag left set by a rewind whose click never arrived */
   rwTimer=setTimeout(()=>{backBtn.classList.add('rewinding');rewindTick();},REWIND_DELAY);
 });
@@ -7893,7 +7902,7 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='ArrowLeft')act(false);
   /* held Backspace repeats at the OS rate — shorten the fly-in to match, or cards
      pile up mid-air past markHot()'s three-hot budget */
-  else if(e.key==='Backspace')undo(e.repeat?100:240);
+  else if(e.key==='Backspace'){stopGoto();undo(e.repeat?100:240);}
   else return;
   e.preventDefault();   /* Backspace would otherwise trigger browser back-navigation */
 });
@@ -7910,6 +7919,7 @@ const searchResults=document.getElementById('searchResults');
 const searchDetail=document.getElementById('searchDetail');
 
 function openSearch(){
+  stopGoto();                                    /* reopening search mid-run cancels the run */
   search.classList.add('open');
   customerMode=false;
   showResultsList();
@@ -8017,6 +8027,7 @@ function showPlant(i){
     <div class="d-photo"><img src="photos/${slugLatin(p.latin)}.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     <div class="d-top"><button class="d-back" id="dBack">← Results</button>
       <button class="d-customer" id="dShare" hidden>↗ Share</button>
+      <button class="d-customer" id="dGoCard" title="Close search and run the deck to this card">🎴 Go to card</button>
       <button class="d-customer" id="dCustomer">👥 Show customer</button></div>
     <div class="d-head"><h3>${p.common}</h3><em>${p.latin}</em><button class="say" id="dSay" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">🔊</button><span class="h">${p.hardiness}</span></div>
     <div class="d-eyebrow">${p.visual}</div>
@@ -8032,6 +8043,7 @@ function showPlant(i){
   const dBack=document.getElementById('dBack');
   dBack.onclick=backToResults;
   document.getElementById('dCustomer').onclick=()=>showCustomer(i);
+  document.getElementById('dGoCard').onclick=()=>goToCard(i);
   const dSay=document.getElementById('dSay');
   dSay.onclick=()=>speakLatin(p.latin,dSay);
   const dShare=document.getElementById('dShare');
@@ -8072,6 +8084,65 @@ function showCustomer(i){
   const back=document.getElementById('dStaff');
   back.onclick=()=>{showPlant(i);};
   back.focus();
+}
+
+/* ---------- go to card: from a search hit straight to the physical card ----------
+   The search sheet is a reference; the deck is where the knowledge lives. This is the
+   bridge between them: close the search and run the deck to the card, cards flashing
+   past at the hold-to-rewind tempo. Two situations, one journey:
+   - still in the deck → riffle: each covering card flings out and tucks back UNDER
+     the deck. A cut, not a swipe — no history entry, no SRS write, nothing scored;
+   - already swiped → the real rewind: undo() card by card until it is back on top,
+     exactly as if the ↺ button had been held down.
+   Any hand on the deck stops it — same contract as letting go of ↺. */
+const GOTO_FROM=190,GOTO_TO=40,GOTO_DECAY=.82;   /* the rewind's tempo curve — it should feel like the same machine */
+let gotoTimer=null;
+function stopGoto(){if(gotoTimer){clearTimeout(gotoTimer);gotoTimer=null;}}
+function tuckUnder(card,ms){
+  card.dataset.gone='1';                          /* airborne: out of topCard()'s sight, kept painted by markHot */
+  card.classList.remove('flipped');
+  if(REDUCED_MOTION){                             /* cut straight to the bottom of the stack */
+    deck.insertBefore(card,deck.firstChild);delete card.dataset.gone;markHot();return;
+  }
+  card.style.transition=`transform ${ms}ms cubic-bezier(.2,.8,.2,1),opacity ${ms}ms`;
+  card.style.transform='translate(-140%,60px) rotate(-24deg)';
+  card.style.opacity='0';
+  markHot();
+  setTimeout(()=>{
+    card.style.transition='none';
+    deck.insertBefore(card,deck.firstChild);      /* back under the deck — membership and counts untouched */
+    card.style.transform='';card.style.opacity='';
+    void card.offsetWidth;card.style.transition='';
+    delete card.dataset.gone;
+    markHot();
+  },ms);
+}
+function gotoTick(idx,step){
+  gotoTimer=null;
+  const top=topCard();
+  if(top&&+top.dataset.idx===idx){                /* arrived */
+    top.classList.remove('flipped');
+    top.classList.add('found');setTimeout(()=>top.classList.remove('found'),1000);
+    saveProgress();                               /* a riffle re-cut the deck — keep the cut */
+    return;
+  }
+  if(step>PLANTS.length*2)return;                 /* can't-happen backstop: never run forever */
+  const gap=Math.max(GOTO_TO,GOTO_FROM*Math.pow(GOTO_DECAY,step));
+  const ms=Math.min(300,Math.max(90,Math.round(gap*2.4)));
+  if(order.includes(idx)){if(top)tuckUnder(top,ms);}
+  else if(history.some(h=>h.idx===idx)){if(!undo(ms))return;}
+  else return;                                    /* vanished mid-run (deck rebuilt) — stop quietly */
+  gotoTimer=setTimeout(()=>gotoTick(idx,step+1),gap);
+}
+function goToCard(idx){
+  closeSearch();stopRewind();stopGoto();
+  const present=()=>order.includes(idx)||history.some(h=>h.idx===idx);
+  /* review and filter are ephemeral views — if the card isn't in this one, it lives
+     in the full deck underneath, so drop back to that first */
+  if(reviewMode&&!present())exitReview();
+  if(activeFilter&&!present())clearFilter();
+  if(!present())return;
+  gotoTick(idx,0);
 }
 
 document.getElementById('searchBtn').onclick=openSearch;
