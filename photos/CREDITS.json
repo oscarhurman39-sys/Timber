@@ -71,6 +71,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acer-palmatum-sango-kaku.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-rubrum-october-glory.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1394,7 +1404,7 @@
   {
    "file": "nerium-oleander.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": "ab63bf1",
@@ -1790,6 +1800,16 @@
    "sourceUrl": null,
    "commit": "ee6acfd",
    "commitSubject": "Add Hot Lips Sage (first JSON with new toxicity + compliance fields)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "salvia-rosmarinus-miss-jessopp-s-upright.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

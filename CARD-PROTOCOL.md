@@ -294,8 +294,32 @@ Focal point recorded here when off-centre:
 | Hydrangea serrata | hydrangea-serrata.jpg | **45% 16%** — real photo, Oscar's; nursery shot, unusually tall crop (1200×2768). The default 50% 40% showed only the red autumn foliage and clipped the flowers off the top edge, which fought the card's own Jul-Sep bloom band. Raised to 16% so a white lacecap head sits in frame WITH the red leaves — flower form and autumn colour both visible. ⚠ The lacecaps here are WHITE with pink-red fertile centres while the card's hue is 220 (blue, the species archetype) — see VERIFY-QUEUE item 6; there is a nursery label in the shot that may name the cultivar |
 | Reynoutria japonica | reynoutria-japonica.jpg | 50% — [special] **AI composite, not a field photo** (Ajuga v12.5 class): broad shovel leaves on a zig-zag stem over a fire/lightning treatment. The dramatic ground is deliberate — Oscar's call that a NEVER-STOCK invasive should read as dangerous on sight. Leaf shape and stem habit are ID-true; the red-flecked hollow cane the card's `visual` names is NOT visible, so this sells the danger better than it teaches the ID. A real cane-and-leaf shot would be the stronger teaching photo. ⚠ UK-INVASIVE plant — compliance carried the Gunnera way (v12.21) |
 
+| Rosemary 'Miss Jessopp's Upright' | salvia-rosmarinus-miss-jessopp-s-upright.jpg | 50% 45% — real photo, Oscar's; whorled needle leaves with rolled margins on a woody grey stem, genus/species-confirming. **The cultivar is not verifiable from a foliage macro** — 'Miss Jessopp's Upright' is told from other rosemaries by HABIT, and a close-up shows no habit. Filed on Oscar's own statement that it is the same variety as the held card, not on the photograph. Source is portrait once EXIF rotation is applied (the raw file reads landscape), so only the vertical position bites; a fingertip at the far left edge falls under the stats plaque |
+| Acer palmatum 'Sango-kaku' | acer-palmatum-sango-kaku.jpg | 52% 45% — real photo, Oscar's; coral-red stems behind butter-yellow and orange palmate leaves. Cultivar-confirming rather than species-only: the coral bark IS the cultivar, and it is in the same frame as the foliage. Third Acer palmatum in the deck (with Ōsakazuki and Bloodgood), distinct slug |
+| Nerium oleander | nerium-oleander.jpg (**replaced 2026-08-15**) | 50% 40% default — swapped for a photo Oscar sent to replace the previous image. Pink five-lobed flowers with narrow leathery leaves in whorls against sky; species-confirming, and it now matches the plain phone-camera character of the rest of the deck rather than reading as a stock bokeh plate. Old file not kept |
+| Corylus avellana 'Contorta' | corylus-avellana-contorta.jpg (**replaced 2026-08-15**) | 50% 22% — swapped on Oscar's instruction. The old frame showed one twisted stem behind a lot of leaf; this one has several corkscrew stems reading at once, which is the whole point of the plant. Focus raised from the 50% 40% default because the source is unusually tall (810×1200 after staging) and the default pushed the best stems off the top; 22% keeps them in the band above the plaque. Crumpled rounded hazel leaves confirm it |
+
 ## 5. Decision changelog
 
+- **v14.2 (five photos in, one refused: 170 dealt)**: Oscar sent five phone
+  photographs against cards that already existed — three held, two dealt and
+  wanting a better frame. **Dealt: Rosemary 'Miss Jessopp's Upright' and Coral
+  Bark Maple** (deck 168 → 170, hold 86 → 84). **Replaced: Oleander and
+  Corkscrew Hazel** masters, with `photos/card/*.webp` re-derived — the app
+  loads ONLY the WebP (`photoSrc`), so a swapped master with a stale derivative
+  changes nothing on the phone and does not fail a test. **Refused: the Stag's
+  Horn Sumach**, which is the one Oscar himself asked about. It is *Rhus
+  typhina* — the shoot in frame is densely hairy, and the leaf has far more
+  leaflet pairs than an elder — but the leaflets are deeply cut, i.e. a
+  **cut-leaf cultivar** ('Dissecta' / 'Laciniata', and much of what is sold
+  under that name is now *R.* × *pulvinata* Autumn Lace Group). The held card is
+  the plain species and its own `visual` line promises simple pinnate leaflets,
+  so the photograph would teach the wrong leaf. Card stays held; see
+  VERIFY-QUEUE item 33 — it is a naming call for Oscar, not one for me.
+  All five files scanned first: Galaxy S24 captures, no C2PA or
+  `trainedAlgorithmicMedia` markers, and no Galaxy AI sparkle glyph in the
+  corner crops (VERIFY-QUEUE item 32's concern), so provenance is recorded as
+  his own work with commercial use cleared.
 - **v14.1 (menu panel scrolls — a defect that grew with the deck)**: not a card
   change, but a layout defect found by the plant work and logged here per
   CORRECTION-PROTOCOL §4.5. `.sheet .panel` was `height:100%` with no overflow

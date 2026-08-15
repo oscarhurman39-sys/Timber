@@ -5,6 +5,18 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-15 (photo batch) — **deck 168 -> 170, hold 86 -> 84.** Five
+  photographs, all against cards that already existed. Dealt Rosemary 'Miss
+  Jessopp's Upright' and Coral Bark Maple (*Acer palmatum* 'Sango-kaku' — coral
+  stems and butter-yellow leaves in one frame, so the photo confirms the cultivar
+  and not just the species). Replaced the Oleander and Corkscrew Hazel masters and
+  re-derived their `photos/card/*.webp` — the app loads only the WebP, so a
+  replacement without that step is invisible on the phone and silent in the tests.
+  Refused the fifth: the Stag's Horn Sumach photo is *Rhus typhina* but a
+  **cut-leaf cultivar**, and the held card is the plain species whose own text
+  promises simple pinnate leaflets — VERIFY-QUEUE item 33, needs Oscar's call
+  (recommend a separate card for the cut-leaf form). This is the brick above,
+  still the brick: 84 cards remain held for want of a photograph.
 progress: 2026-08-15 (crash report) — **boot no longer blocks the main thread — the
   iOS "A problem repeatedly occurred" fix (r78).**
   Oscar's mum's iPhone could not open the live app at all: Safari's crash

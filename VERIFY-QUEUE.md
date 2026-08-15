@@ -812,6 +812,47 @@ confirmed positions). Until then, treat the count as "at least four".
 
 ---
 
+### 33. Stag's Horn Sumach photo is a CUT-LEAF form — card stays held, OPEN
+2026-08-15. Oscar sent a photograph with the note *"not sure if the [Rhus]
+typhina 2nd photo is the same species"*. It is the right species and still the
+wrong photograph for the card that exists, which is why nothing was staged.
+
+**What the photograph shows.** Pinnate leaves with many leaflet pairs on a long
+pale rachis, every leaflet cut almost to its midrib into narrow lobes — fern-like
+rather than merely toothed. A zoom on the shoot at top-left shows dense fine hairs
+on a pink-tan stem.
+
+**What that rules in and out.** The leaflet count rules out elder (*Sambucus
+nigra* 'Laciniata', the obvious cut-leaf lookalike, carries about five leaflets to
+a leaf); the hairy shoot argues for *typhina* over the glabrous *R. glabra*
+'Laciniata'. So: ***Rhus typhina*, a cut-leaf cultivar** — 'Dissecta' (syn.
+'Laciniata'). `[Inference]` from foliage and one shoot, not from a label.
+
+**Why it was not dealt anyway.** The held card is the **plain species**, and its
+own `visual` line reads *"Velvety antler-like stems · pinnate leaves firing
+scarlet · crimson fruit cones"*. A staff member learning the species from this
+card would come away expecting fern-like foliage on any *Rhus typhina*, which is
+wrong for the plant the card describes. That is the same class of error as the
+Sarcococca in item 21 — right genus, wrong thing taught — and the deck's value is
+that it can be trusted.
+
+**One further wrinkle worth knowing before it is settled:** much of what UK
+nurseries sell as *R. typhina* 'Dissecta' is now referred to ***R.* ×
+*pulvinata* Autumn Lace Group**. `[Unverified]` which of the two this plant is —
+that cannot be read off a leaf.
+
+**Three ways to close it, Oscar's call:**
+1. **New card** for the cut-leaf form, and this photo goes on it. Cleanest, and
+   it is a genuinely different plant on the bench.
+2. **Deal it onto the species card anyway** — acceptable only if the `visual`
+   line is amended to say the shot is a cut-leaf selection.
+3. **Reshoot** the plain species (simple toothed leaflets, and ideally the
+   velvety antler stems or a crimson fruit cone) and leave this photo unused.
+
+Recommend 1. The card that exists is fine; it just isn't this plant's card.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
