@@ -5,6 +5,9 @@ const NPLANTS = require('../tools/plant-data.js')
    hardcoded copy of this number; a deck change that updated only some of
    them made the rest fail for the wrong reason. */
 const URL = 'http://localhost:8477/timber.html';
+/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
+   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 let passed = 0, failed = 0;
 const fails = [];
 function check(name, cond, extra) {
@@ -24,7 +27,7 @@ function check(name, cond, extra) {
     localStorage.setItem('timber-progress-v1', '{{{{not json!!');
     localStorage.setItem('timber-quiz-v1', 'banana');
   });
-  await page.goto(URL); await page.waitForTimeout(300);
+  await page.goto(URL); await page.waitForTimeout(300); await deckSettled(page);
   let c = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, left: document.getElementById('left').textContent }));
   check('corrupted storage -> fresh deck, no crash', c.cards === NPLANTS && c.left === String(NPLANTS) && errs.length === 0, JSON.stringify({ c, errs }));
   await ctx.close();
@@ -46,7 +49,7 @@ function check(name, cond, extra) {
   check('persisted empty deck -> empty state + hidden actions + count kept', s.empty && s.actionsHidden && s.done === String(NPLANTS) && s.cards === 0, JSON.stringify(s));
   // undo out of restored empty state (history persisted)
   // actions bar hidden -> undo not clickable by user; but reset must work:
-  await page.click('#reset2'); await page.waitForTimeout(300);
+  await page.click('#reset2'); await page.waitForTimeout(300); await deckSettled(page);
   s = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, done: document.getElementById('done').textContent }));
   check('reset from restored empty state works', s.cards === NPLANTS && s.done === '0', JSON.stringify(s));
   await ctx.close();
@@ -62,7 +65,7 @@ function check(name, cond, extra) {
   const backDisabled = await page.evaluate(() => document.getElementById('back').disabled);
   check('undo button disabled on a fresh deck', backDisabled === true, JSON.stringify({ backDisabled }));
   await page.keyboard.press('Backspace'); await page.keyboard.press('Backspace');
-  await page.waitForTimeout(150);
+  await page.waitForTimeout(150); await deckSettled(page);
   c = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, left: document.getElementById('left').textContent }));
   check('undo on fresh deck is a safe no-op', c.cards === NPLANTS && c.left === String(NPLANTS) && errs3.length === 0, JSON.stringify({ c, errs3 }));
   await ctx.close();

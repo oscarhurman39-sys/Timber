@@ -6,6 +6,9 @@ const NPLANTS = require('../tools/plant-data.js')
    them made the rest fail for the wrong reason. */
 
 const URL = 'http://localhost:8477/timber.html';
+/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
+   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 let passed = 0, failed = 0;
 const failures = [];
 function check(name, cond, extra) {
@@ -156,6 +159,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   const progressSnap = await page.evaluate(() => localStorage.getItem('timber-progress-v1'));
   if (typeChip) {
     await page.click(`#filterChips .chip[data-f="${typeChip.id}"]`); await page.waitForTimeout(350);
+    await deckSettled(page);
     const st = await page.evaluate(() => ({
       cards: document.querySelectorAll('.card').length,
       sheetOpen: document.getElementById('sheet').classList.contains('open'),
@@ -183,6 +187,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     check('active chip is marked on in menu',
       await page.evaluate(id => document.querySelector(`#filterChips .chip[data-f="${id}"]`).classList.contains('on'), typeChip.id));
     await page.click(`#filterChips .chip[data-f="${typeChip.id}"]`); await page.waitForTimeout(350);
+    await deckSettled(page);
     const restored = await page.evaluate(() => ({
       cards: document.querySelectorAll('.card').length,
       done: +document.getElementById('done').textContent,
@@ -211,6 +216,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     check('entering review clears an active filter', cross.review && cross.filter === null && cross.cards === 2, JSON.stringify(cross));
     await page.click('#menuBtn'); await page.waitForTimeout(350);
     await page.click('#reviewRow'); await page.waitForTimeout(350); // exit review (also closes the sheet)
+    await deckSettled(page);
     check('exiting review lands on the full deck',
       await page.evaluate(() => document.querySelectorAll('.card').length) === NPLANTS);
   }

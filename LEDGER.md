@@ -5,6 +5,38 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-15 (crash report) — **boot no longer blocks the main thread — the
+  iOS "A problem repeatedly occurred" fix (r77).**
+  Oscar's mum's iPhone could not open the live app at all: Safari's crash
+  screen, every attempt. Diagnosis by measurement, not guess: boot built all
+  168 cards (~31k DOM nodes) inside the opening script run — one unbroken
+  main-thread task, measured at 12.5s under 8x CPU throttle (roughly an older
+  iPhone's single-core deficit). iOS kills a page whose main thread never
+  yields, auto-reloads it, kills it again, and lands on exactly that screen.
+  [Inference] her exact device/iOS is unknown, but the mechanism fits the
+  symptom precisely and nothing else measured does — transfer is 3.1MB, heap
+  10MB, zero JS errors.
+  THE FIX: dealCards is now STAGED. The top DEAL_SYNC=16 cards (more than
+  markHot's FETCH_DEPTH=10) deal synchronously so the opening paint and first
+  swipes see a finished deck; the buried rest lands underneath in
+  DEAL_CHUNK=24 timer slices. Worst single task at the same 8x throttle:
+  1.3s (was 12.5s). The DOM-order-is-stack-order invariant holds mid-deal
+  because chunks splice off the pending list top-first and insert BELOW the
+  cards already standing. Everything that needs the whole deck was audited
+  and routed: saves and view backups go through liveStack() (pending cards
+  cannot have been swiped, so pending-then-DOM is exact — a save fired
+  mid-deal captures all 168), the goto riffle calls flushDeal() (it walks
+  the DOM), tricklePhotos keeps ticking while a deal is in flight. The deck
+  carries data-dealing until the last chunk lands — the deterministic settle
+  signal the suites now wait on before counting DOM cards (deckSettled in
+  five suites + audit-layout), because a fixed 300ms wait would race the
+  staged deal on a loaded test box. Verified: DOM order byte-identical to
+  the old deal, mid-deal save exact, swipe-during-deal works, all 17 suites
+  green run solo. KNOWN FLAKES, pre-existing on main before this change
+  (identical failures at baseline): under --jobs 3 CPU contention the
+  edge-test hold-to-top rewind and the features-test goto-riffle 30s wait
+  can time out; both pass solo. Not fixed here — separate brick if they
+  start biting.
 progress: 2026-08-15 (later) — **his actual reference images, finally (r75).**
   Twice this session I told Oscar his chat-attached images "never reached the
   repo filesystem." WRONG both times — owning it in full. They were sitting

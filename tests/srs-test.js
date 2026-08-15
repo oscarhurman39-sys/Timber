@@ -6,6 +6,9 @@ const NPLANTS = require('../tools/plant-data.js')
    them made the rest fail for the wrong reason. */
 
 const URL = 'http://localhost:8477/timber.html';
+/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
+   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 let passed = 0, failed = 0;
 const failures = [];
 function check(name, cond, extra) {
@@ -144,6 +147,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 9. exit review restores the full deck exactly ---- */
   await openReview(page); // row now toggles review off
+  await deckSettled(page);
   const restored = await page.evaluate(() => ({
     cards: document.querySelectorAll('.card').length,
     left: +document.getElementById('left').textContent,
@@ -160,6 +164,7 @@ const seedDue = (page, n) => page.evaluate(count => {
   await openReview(page);
   await dragCard(page, 160);
   await page.waitForTimeout(200);
+  await deckSettled(page);
   check('last due swipe drops back to the full deck',
     await page.evaluate(() => document.querySelectorAll('.card').length) === NPLANTS);
 
@@ -167,6 +172,7 @@ const seedDue = (page, n) => page.evaluate(count => {
   await seedDue(page, 0); // everything due 2099
   await page.reload(); await page.waitForTimeout(400);
   await openReview(page);
+  await deckSettled(page);
   const caught = await page.evaluate(() => ({
     label: document.getElementById('reviewDueMenu').textContent,
     cards: document.querySelectorAll('.card').length,

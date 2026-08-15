@@ -18,6 +18,9 @@
 const { chromium } = require('playwright');
 
 const URL = 'http://localhost:8477/timber.html';
+/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
+   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 
 /* latin name -> why it is knowingly broken. Delete a line once the card is fixed. */
 /* Empty, and the aim is to keep it that way. Choisya ternata was the last entry —
@@ -35,6 +38,7 @@ const errors = [], warnings = [], known = [];
   page.on('pageerror', (e) => pageErrors.push(e.message));
   await page.goto(URL);
   await page.waitForTimeout(1000);
+  await deckSettled(page);
 
   /* photos fetch in a sliding window in the live app — reveal them all for the audit */
   await page.evaluate(() =>

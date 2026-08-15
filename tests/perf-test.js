@@ -15,6 +15,9 @@
 const { chromium } = require('playwright');
 
 const URL = 'http://localhost:8477/timber.html';
+/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
+   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 const MAX_LAYERS = 4;       /* mid-fling card + top three live — one deeper than visible motion,
                                so a swipe never promotes a card the user can see (phone tearing) */
 const MAX_PAINTED = 4;      /* PAINT_DEPTH in timber.html */
@@ -35,6 +38,7 @@ const check = (name, ok, detail = '') => {
   page.on('request', (r) => { if (r.url().includes('/photos/')) photoReqs++; });
   await page.goto(URL);
   await page.waitForTimeout(1200);
+  await deckSettled(page);
 
   const total = await page.evaluate(() => document.querySelectorAll('.deck .card').length);
 

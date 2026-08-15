@@ -40,6 +40,8 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await page.goto('http://localhost:8477/timber.html');
   await page.waitForTimeout(800);
+  /* the staged deal lands buried cards in timer chunks — the audit measures every card */
+  await page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 
   const violations = await page.evaluate(({ SPRITE_BIAS, BAR }) => {
     const out = [];

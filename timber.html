@@ -909,7 +909,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r75 · 2026-08-15 · ee97e27';
+const BUILD='r77 · 2026-08-15 · 5b1db33';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7303,7 +7303,7 @@ const FINGERPRINT=PLANTS.map(p=>p.latin).join('|');  /* deck layout invalidates 
 function saveProgress(){
   if(reviewMode||activeFilter)return;  /* review/filter are ephemeral views — never persist over the full deck */
   try{
-    const stack=[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx);
+    const stack=liveStack();           /* pending-aware: a save mid staged deal must not drop the buried cards */
     localStorage.setItem(STORE_KEY,JSON.stringify({fp:FINGERPRINT,stack,history,learnedCount}));
   }catch(e){/* private mode / storage full — app still works, just won't persist */}
 }
@@ -7331,12 +7331,58 @@ function restoreDeck(d){
 /* Every bulk deal goes through here so the ink is fitted ONCE for the whole stack
    instead of once per card: one card at a time is one forced layout of the entire
    deck per card, and the deck is the most expensive thing on the page to lay out.
-   A lone renderCard (undo) still fits inline — one card is not worth a batch. */
+   A lone renderCard (undo) still fits inline — one card is not worth a batch.
+
+   STAGED, because boot used to build all 168 cards inside the opening script run —
+   one unbroken main-thread task (12.5s measured at 8x CPU throttle, ~1 old-iPhone
+   of slowdown), and iOS kills a page whose main thread never yields, reloads it,
+   kills it again, and settles on "A problem repeatedly occurred". Only the top
+   DEAL_SYNC cards are dealt synchronously — more than markHot's FETCH_DEPTH, so
+   the opening swipes see a finished deck — and the buried rest lands underneath
+   in DEAL_CHUNK timer slices the watchdog can breathe between. Everything that
+   needs the WHOLE deck goes through liveStack() (membership: saves and view
+   backups) or flushDeal() (DOM: the goto riffle); the DOM-order invariant —
+   document order IS stack order — holds mid-deal because chunks are spliced off
+   the pending list top-first and inserted below the cards already standing. */
 let inkBatch=null;
+let dealPending=null,dealTimer=null;   /* bottom of the deck, not yet in the DOM (bottom→top) */
+const DEAL_SYNC=16,DEAL_CHUNK=24;
 function dealCards(idxs){
+  if(dealTimer){clearTimeout(dealTimer);dealTimer=null;}   /* a new deal owns the deck outright */
+  dealPending=null;
+  dealChunk(idxs.slice(-DEAL_SYNC),null);
+  const rest=idxs.slice(0,-DEAL_SYNC);
+  if(rest.length){dealPending=rest;dealTimer=setTimeout(dealStep,16);}
+  /* data-dealing marks the deck while buried chunks are still landing — the
+     deterministic "deck settled" signal for the test suites, which count DOM
+     cards and must not race a staged deal */
+  deck.toggleAttribute('data-dealing',!!dealPending);
+}
+function dealChunk(idxs,before){
   inkBatch=[];
-  try{idxs.forEach(renderCard);}
+  try{idxs.forEach(i=>renderCard(i,before));}
   finally{const b=inkBatch;inkBatch=null;fitInkAll(b);}  /* never leave a batch open — a stuck one silently stops all fitting */
+}
+function dealStep(){
+  dealTimer=null;
+  if(!dealPending)return;
+  const take=dealPending.splice(-DEAL_CHUNK);
+  if(!dealPending.length)dealPending=null;
+  dealChunk(take,deck.querySelector('.card'));           /* under everything already dealt */
+  if(dealPending)dealTimer=setTimeout(dealStep,16);
+  else deck.removeAttribute('data-dealing');
+}
+function flushDeal(){                  /* synchronous finish, for consumers that walk the DOM deck */
+  if(!dealPending)return;
+  if(dealTimer){clearTimeout(dealTimer);dealTimer=null;}
+  const rest=dealPending;dealPending=null;
+  dealChunk(rest,deck.querySelector('.card'));
+  deck.removeAttribute('data-dealing');
+}
+/* the deck's true membership while a staged deal is in flight: pending cards are all
+   below any dealt card and cannot have been swiped, so pending-then-DOM is exact */
+function liveStack(){
+  return[...(dealPending||[]),...[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx)];
 }
 
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
@@ -7415,7 +7461,7 @@ function enterReview(){
     return;
   }
   reviewBackup={
-    stack:[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx),
+    stack:liveStack(),
     order:[...order],history:[...history],learnedCount};
   deck.querySelectorAll('.card').forEach(releaseCard);
   order=[...due];history=[];
@@ -7464,7 +7510,7 @@ function applyFilter(id){
   const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0);
   if(!match.length)return;                     /* zero-match chips are disabled in the menu anyway */
   if(!activeFilter)filterBackup={
-    stack:[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx),
+    stack:liveStack(),
     order:[...order],history:[...history],learnedCount};
   deck.querySelectorAll('.card').forEach(releaseCard);
   order=[...match];history=[];
@@ -7967,7 +8013,9 @@ function growthRailHTML(growthSpeed){          /* scale = capped segment, inner 
 }
 const lightX=v=>40.4+(v/100)*(93.2-40.4);     /* bar spans 40.4%..93.2% of the band */
 
-function renderCard(idx){
+/* `before` places a card UNDER already-dealt cards (staged deal chunks); omitted, the
+   card lands on top — document order is stack order, and undo deals on top. */
+function renderCard(idx,before){
   const p=PLANTS[idx];
   /* born buried: markHot() reveals the few cards that are actually on top. Cards are
      created hidden so a freshly dealt deck never paints — and so never decodes the
@@ -8059,7 +8107,7 @@ function renderCard(idx){
       <div class="fliphint">⇅ Tap to flip back</div>
     </div></div>
    </div>`;
-  deck.appendChild(c);
+  deck.insertBefore(c,before||null);                   /* null ref appends — the top of the deck */
   if(inkBatch)inkBatch.push(c);else fitInk(c);         /* a whole deal fits in one batch — see dealCards */
   attachGestures(c);
   const say=c.querySelector('.say');
@@ -8598,6 +8646,7 @@ function goToCard(idx){
   if(reviewMode&&!present())exitReview();
   if(activeFilter&&!present())clearFilter();
   if(!present())return;
+  flushDeal();                                 /* the riffle walks the DOM deck — the target card must be standing in it */
   gotoTick(idx,0);
 }
 
@@ -8885,7 +8934,7 @@ document.getElementById('buildTag').textContent='build '+BUILD;
    still ends up with the whole deck cached — without the load-time stampede */
 function tricklePhotos(){
   const pending=[...deck.querySelectorAll('.card .tphoto img')].filter(i=>!i.getAttribute('src')&&i.dataset.psrc);
-  if(!pending.length)return;
+  if(!pending.length&&!dealPending)return;     /* mid staged deal, undealt cards' imgs don't exist yet — keep ticking */
   pending.slice(0,2).forEach(i=>i.src=i.dataset.psrc);
   setTimeout(tricklePhotos,900);
 }

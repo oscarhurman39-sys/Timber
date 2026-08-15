@@ -13,7 +13,12 @@ function check(name, cond, extra) {
   else { failed++; failures.push(name + (extra ? ' — ' + extra : '')); console.log('FAIL', name, extra || ''); }
 }
 
+/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
+   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
+
 async function counts(page) {
+  await deckSettled(page);
   return page.evaluate(() => ({
     left: +document.getElementById('left').textContent,
     done: +document.getElementById('done').textContent,
