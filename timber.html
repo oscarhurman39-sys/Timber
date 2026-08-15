@@ -909,7 +909,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r77 · 2026-08-15 · 5b1db33';
+const BUILD='r78 · 2026-08-15 · e54f19b';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7766,9 +7766,25 @@ const FULLART={
        background AND its own flat navy pill fill (sampled directly from the
        upload), by colour distance with a soft smoothstep edge, keeping only
        the silver/gold ring and its halo — his actual painted Listen pill
-       shows through the centre, nothing is stacked over it. Rect is the
-       Listen button's own centre, sized to the ring's true 900x528 crop. */
-    aura:{src:'art/holo/maria-listen-aura.webp', left:'11.75%', top:'11.15%', width:'32%', height:'13.14%'},
+       shows through the centre, nothing is stacked over it.
+       r75's rect was hand-picked by eye and shipped wrong ("didn't shrink it
+       to fit, cut the effect on either side" — his report, correct): the
+       trim was too tight against the halo's own soft falloff, AND the rect
+       was guessed rather than measured, so the transparent pill-hole in the
+       ring didn't actually land on the button. WIDTH here is SOLVED, not
+       guessed — the script measures the hole's own bbox in the final image
+       and computes the box that makes hole and button coincide exactly on
+       that axis, which is the actual fix for "cut off either side".
+       HEIGHT is deliberately NOT taken to the same exact fit: the source
+       ring reaches ~3.6x the pill's own height (its scrollwork sweeping
+       well above and below), and at that height on Maria's specific card it
+       oversat the ring's top curls onto her painted name, right above the
+       button. Scaled to 0.66x and centred on the button instead of edge-
+       matched — the ring may show a sliver of frame gap above/below the
+       pill rather than a knife-edge fit, which is a far smaller cost than
+       obscuring her name. All figures computed by the script's tail; rerun
+       it (VSCALE is the one knob) rather than hand-editing if this changes. */
+    aura:{src:'art/holo/maria-listen-aura.webp', left:'13.874%', top:'10.438%', width:'27.989%', height:'14.582%'},
   },
 };
 /* Accept either a bare frame path or the full config object, so an entry can start

@@ -6,7 +6,7 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
 progress: 2026-08-15 (crash report) — **boot no longer blocks the main thread — the
-  iOS "A problem repeatedly occurred" fix (r77).**
+  iOS "A problem repeatedly occurred" fix (r78).**
   Oscar's mum's iPhone could not open the live app at all: Safari's crash
   screen, every attempt. Diagnosis by measurement, not guess: boot built all
   168 cards (~31k DOM nodes) inside the opening script run — one unbroken
@@ -36,7 +36,34 @@ progress: 2026-08-15 (crash report) — **boot no longer blocks the main thread 
   (identical failures at baseline): under --jobs 3 CPU contention the
   edge-test hold-to-top rewind and the features-test goto-riffle 30s wait
   can time out; both pass solo. Not fixed here — separate brick if they
-  start biting.
+  start biting. Merged with the live line's own r77 (the Listen-aura fit
+  below) on the way out — both had claimed r77 independently; the merge
+  restamped to r78, which is what ships. Only the BUILD line actually
+  conflicted: that fix lives in the FULLART aura rect, this one in the
+  deal path. Full suite re-run green on the merged tree.
+progress: 2026-08-15 (r75 hotfix, r77) — **aura fit fixed on the actual phone.**
+  Oscar merged r75 himself and reported it straight off the live site: "didn't
+  shrink it to fit, cut the effect on either side" — correct on both counts,
+  root-caused to two compounding mistakes in tools/key-maria-listen-aura.py:
+  (1) the trim bbox used a >0.02 alpha floor with only 6px padding, cutting
+  into the halo's own soft glow before it reached the card — the glow fades,
+  it doesn't end at a hard edge, so a tight floor reads as a clipped edge; (2)
+  the on-card rect was hand-picked by eye, so the transparent pill-hole in
+  the ring never actually lined up with the button under it — the ring read
+  small/cramped because it was scaled to an arbitrary box, not the one box
+  that makes hole and button coincide.
+  Fixed both: looser trim (0.008 floor, 36px pad) so the ring's real reach
+  survives; the on-card WIDTH is now SOLVED, not guessed — the script
+  measures the hole's own bbox and computes the exact box that overlaps it
+  with the button (script prints ready-to-paste numbers). HEIGHT hit a
+  second, genuine design collision on the way: the source ring is ~3.6x the
+  pill's own height, and at that faithful height its top scrollwork oversat
+  Maria's painted name right above the button — visually confirmed in a
+  full-card screenshot before shipping (title fully obscured, not a maybe).
+  Added a VSCALE knob (0.66), centred on the button rather than edge-matched
+  — a sliver of frame gap above/below the pill is a real but minor cost
+  against obscuring her name. Re-verified: full oval, no chopped ends, title
+  completely clear, pill centred. All 17 suites green (r77).
 progress: 2026-08-15 (later) — **his actual reference images, finally (r75).**
   Twice this session I told Oscar his chat-attached images "never reached the
   repo filesystem." WRONG both times — owning it in full. They were sitting
