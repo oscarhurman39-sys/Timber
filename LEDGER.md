@@ -5,7 +5,34 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
-progress: 2026-08-14 (later still) — **Maria gets her shine (r70).** Oscar: the v3
+progress: 2026-08-15 — **Maria's shine done right, plus the Listen aura (r74).**
+  Oscar merged r72 and saw NO shine on the live card — correct report, and the
+  bug hunt earned a deck rule. The r70/r72 gloss keyed its light-on-black
+  stand-ins with mix-blend-mode:screen; probing WHY it wasn't landing ended at
+  a control test on a bare two-div page: the audit Chromium does not render
+  blend modes AT ALL (screen-blended black over white left the ground black),
+  so the effect was structurally unverifiable and the textures' black painted
+  as a faint grey veil that muddied rather than shone. NEW RULE, in wispsHTML's
+  comment: mix-blend-mode is banned in the deck; effect art must carry TRUE
+  ALPHA and composite plainly, which renders identically everywhere and is how
+  Eternal Flame always worked. The gloss now uses Oscar's own v2 pack foil
+  (art/holo/pretty-lady-maria-foil.webp, real alpha, cut for this card): a 26s
+  sweep at 0.60 + an 8s shimmer at 0.42 — visibly pearl, stats still first-read.
+  The blend option and the r70 procedural gloss textures are deleted.
+  LISTEN AURA: the flat blue tap-flash he rejected is gone; while speaking (and
+  on press) a "magical white" filigree ring now fades in around his painted
+  pill and breathes — new `aura` slot on FULLART, pure CSS trigger off
+  .say:active/.speaking sibling state. His attached ornament never reached the
+  filesystem (chat images don't), so the shipped ring is a procedural RGBA
+  stand-in (tools/gen-maria-listen-aura.py); his real one drops in at
+  art/holo/maria-listen-aura.webp AFTER being keyed to alpha — raw black
+  ground would paint literally under the blending ban.
+  check-boot now validates FULLART (unvalidated r69-r72: art/wisp/aura paths
+  could 404 silently). Verified in-browser: 2 foil wisps render and move,
+  gloss clearly visible on/off, aura opacity 1 + breathing while speaking,
+  every painted stat legible. All 17 suites green. NOTE for Oscar's phone:
+  the SW serves the previous build once — if r74 doesn't show, use the
+  update pill or reload twice. Oscar: the v3
   card has no shiny effect — he wants gloss moving SLOWLY over it, super faded,
   and sent two reference textures (pearl diagonal streaks; a sparkling border
   glow with ribbon curves). The fullart contract grew one clause for it: a
