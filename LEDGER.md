@@ -5,7 +5,22 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
-progress: 2026-08-14 (later) — **Maria v3: Oscar supplied the whole card as one
+progress: 2026-08-14 (later still) — **Maria gets her shine (r70).** Oscar: the v3
+  card has no shiny effect — he wants gloss moving SLOWLY over it, super faded,
+  and sent two reference textures (pearl diagonal streaks; a sparkling border
+  glow with ribbon curves). The fullart contract grew one clause for it: a
+  fullart entry may now carry the standard `wisps` array — moving LIGHT over
+  his pixels, never composited furniture. New per-wisp `blend` option
+  ('screen') lets light-on-BLACK textures act as pure added light, so shine
+  art needs no alpha channel. Maria runs a 28s sweep at 0.30 + a 9s border
+  shimmer at 0.22 — raise those opacities first if he wants more. CAVEAT,
+  labelled honestly: his two attached textures never reached the container's
+  filesystem (chat images don't land on disk), so the shipped files are
+  procedural stand-ins built to his references (tools/gen-maria-gloss.py,
+  43KB the pair); his originals replace art/holo/maria-gloss-{streaks,frame}
+  .webp 1:1, no code change. Verified in-browser: 2 wisps render screen-
+  blended on the fullart card, frames 3s apart differ (the gloss moves), and
+  every painted stat stays readable under the sweep. All 17 suites green.
   image, and the app now just shows it (r69).** His verdict on the v2 composite
   was blunt ("how you edited the card was shit — literally just use this card"),
   and v3 obliges: a new FULLART mechanism renders the entire front from a single

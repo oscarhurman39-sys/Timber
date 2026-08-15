@@ -572,6 +572,12 @@
     background:transparent;border:0;box-shadow:none;font-size:0;letter-spacing:0;
     border-radius:14px}
   .tcard.fullart .say:active,.tcard.fullart .say.speaking{background:rgba(122,180,255,.28)}
+  /* fullart gloss: a fullart card CAN carry wisps (Oscar asked for shine on
+     Maria) — the light plays over his painted pixels, it composites nothing.
+     The container spans the whole face here, not the .tinner window, so it
+     takes the card's own 15px radius; the say hotspot stays above at z5 and
+     the wisps are pointer-inert anyway. */
+  .tcard.fullart .wisps{border-radius:15px}
 
   /* ---- edging: the frame's thorn-work reaching over the photograph ----
      The frame art's sprays and flame-licks encroach well into the window, but
@@ -885,7 +891,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r71 · 2026-08-14 · e23d256';
+const BUILD='r72 · 2026-08-14 · a35548b';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7644,7 +7650,10 @@ const HOLO={
    rebuild, Oscar painted the complete card — frame, photo, name, plaque rows,
    soil box, aspect band, growth rail, HAPPY BIRTHDAY strip — as one image and
    said use it as-is. So the app does exactly that: the image fills the card
-   face and nothing is drawn on top except one invisible hotspot.
+   face and nothing is drawn on top except one invisible hotspot — and, since
+   r70, an optional `wisps` array: pure moving LIGHT over the artwork (the
+   gloss he asked for), never composited furniture. That line is the fullart
+   contract: effects may play over his pixels, data zones may not.
 
    art:    fills the whole 420x600 face. The master is the supplied 1024x1536
            padded with black to 1076x1536 (ratio 0.7005 vs the card's 0.7000)
@@ -7668,6 +7677,20 @@ const FULLART={
   'anemone-hybrida-pretty-lady-maria-aneplaria':{
     art:'art/card-pretty-lady-maria.webp',
     listen:{left:'17.5%',top:'14.9%',width:'20.5%',height:'5.6%'},
+    /* Oscar, 2026-08-14: the shipped v3 card had no shine at all — he wants a
+       shiny effect, glossing SLOWLY over the card and kept super faded, and
+       sent two reference gloss textures (pearl streaks + a sparkling border).
+       These wisps ride the standard generic animations; blend:'screen' lets
+       light-on-black textures act as pure added light over his artwork.
+       The two files are procedural stand-ins built to his references
+       (tools/gen-maria-gloss.py — the originals never reached the repo);
+       replacing them with his real textures is a file swap, no code change.
+       "Slow" is the 28s sweep; "super faded" is the low opacities — raise
+       opacity before reaching for anything else if he wants more shine. */
+    wisps:[
+      {src:'art/holo/maria-gloss-streaks.webp', anim:'sweep',   dur:28, delay:-6, opacity:0.30, scale:1.35, blend:'screen'},
+      {src:'art/holo/maria-gloss-frame.webp',   anim:'shimmer', dur:9,  delay:-2, opacity:0.22, scale:1.0,  blend:'screen'},
+    ],
   },
 };
 /* Accept either a bare frame path or the full config object, so an entry can start
@@ -7800,9 +7823,13 @@ function groveHTML(slug){
    new CSS, because the animations are generic. */
 function wispsHTML(ho){
   if(!ho||!ho.wisps||!ho.wisps.length)return '';
+  /* blend is per-wisp because the two asset kinds differ at the pixel level:
+     the Eternal Flame cuts are transparent PNGs (no blend needed), while
+     Maria's gloss textures are light-on-BLACK — blend:'screen' makes black
+     contribute nothing, so any shine art works without an alpha channel. */
   const L=ho.wisps.map(w=>`<i class="wisp w-${w.anim||'drift'}" style="background-image:url(${w.src});`
     +`--wd:${w.dur||24}s;--wo:${w.opacity==null?0.5:w.opacity};--ws:${w.scale||1.5};`
-    +`animation-delay:${w.delay||0}s"></i>`).join('');
+    +`animation-delay:${w.delay||0}s${w.blend?`;mix-blend-mode:${w.blend}`:''}"></i>`).join('');
   return `<div class="wisps" aria-hidden="true">${L}</div>`;
 }
 const holoOf=slug=>{const h=HOLO[slug];return !h?null:(typeof h==='string'?{frame:h}:h);};
@@ -7929,6 +7956,7 @@ function renderCard(idx){
           <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
           <img data-psrc="${fa.art}" alt="${p.common} (${p.latin}) — hand-finished card" onerror="this.style.display='none'">
         </div>
+        ${wispsHTML(fa)}
         <button class="say" ${TTS?'':'hidden'} style="left:${fa.listen.left};top:${fa.listen.top};width:${fa.listen.width};height:${fa.listen.height}" aria-label="Play latin pronunciation"></button>
       </div>`:`
       <div class="tcard${ho?' holo':''}"${ho?lateBG(holoStyle(ho)):''}>
