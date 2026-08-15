@@ -5,7 +5,68 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
-progress: 2026-08-14 (later still) — **Maria gets her shine (r70).** Oscar: the v3
+progress: 2026-08-15 (later) — **his actual reference images, finally (r75).**
+  Twice this session I told Oscar his chat-attached images "never reached the
+  repo filesystem." WRONG both times — owning it in full. They were sitting
+  at /root/.claude/uploads/<session>/ the entire time; my very first search
+  used `find -maxdepth 4`, and that directory is five path components deep,
+  one past the limit. I never widened the search until he asked "why's that
+  everything's always uploaded before" — a fair question I should have
+  answered by checking, not by repeating the same claim a third time. All
+  three of his images were real: two gloss/shine references (rainbow prism
+  streaks + star glints over a soft pastel field with an incidental dark
+  silhouette) and the art-nouveau ring for the Listen button.
+  Both are now literally on the card. tools/key-maria-gloss.py keys the two
+  gloss uploads to true alpha via local CONTRAST against two blur radii
+  (narrow for sparkle cores, wide for streak shafts) — plain saturation or
+  luminance keying both failed first: the source photos' own pastel field is
+  bright and mildly colourful too, so either trick pulled the WHOLE
+  background in at ~30% alpha instead of just the streaks; contrast against
+  each pixel's own local blur cancels a slowly-varying field to near zero
+  regardless of its base brightness. tools/key-maria-listen-aura.py keys the
+  ring upload by colour distance from two sampled references (the source's
+  own pure-black bg and its own flat navy pill fill, smoothstep-soft edges)
+  — his real painted Listen pill shows through the ring now, nothing doubled
+  on top of it. FULLART wisps swapped from the r74 v2-pack-foil stand-in to
+  these two real crops (26s sweep + 9s shimmer); the foil masters are left
+  in art/holo/ untouched, per the standing policy of keeping the v2 pack as
+  a fallback. New PNG masters + .webp derivatives follow the existing
+  art-master convention (optimise-art.js derives them; both scripts document
+  the exact source upload paths for reproducibility). Also fixed in passing:
+  optimise-photos flagged 20-odd card derivatives as stale purely from the
+  r71 merge resetting working-tree mtimes — zero content drift confirmed
+  (regenerating produced an identical git diff), regenerated to clear it.
+  Verified in-browser: both real wisps render and move, gloss visibly on vs
+  off, aura hits opacity 1 and breathes on speak, wrapping his ACTUAL pill
+  with his ACTUAL ring art. All 17 suites green.
+progress: 2026-08-15 (earlier) — **Maria's shine done right, plus the Listen aura (r74).**
+  Oscar merged r72 and saw NO shine on the live card — correct report, and the
+  bug hunt earned a deck rule. The r70/r72 gloss keyed its light-on-black
+  stand-ins with mix-blend-mode:screen; probing WHY it wasn't landing ended at
+  a control test on a bare two-div page: the audit Chromium does not render
+  blend modes AT ALL (screen-blended black over white left the ground black),
+  so the effect was structurally unverifiable and the textures' black painted
+  as a faint grey veil that muddied rather than shone. NEW RULE, in wispsHTML's
+  comment: mix-blend-mode is banned in the deck; effect art must carry TRUE
+  ALPHA and composite plainly, which renders identically everywhere and is how
+  Eternal Flame always worked. The gloss now uses Oscar's own v2 pack foil
+  (art/holo/pretty-lady-maria-foil.webp, real alpha, cut for this card): a 26s
+  sweep at 0.60 + an 8s shimmer at 0.42 — visibly pearl, stats still first-read.
+  The blend option and the r70 procedural gloss textures are deleted.
+  LISTEN AURA: the flat blue tap-flash he rejected is gone; while speaking (and
+  on press) a "magical white" filigree ring now fades in around his painted
+  pill and breathes — new `aura` slot on FULLART, pure CSS trigger off
+  .say:active/.speaking sibling state. His attached ornament never reached the
+  filesystem (chat images don't), so the shipped ring is a procedural RGBA
+  stand-in (tools/gen-maria-listen-aura.py); his real one drops in at
+  art/holo/maria-listen-aura.webp AFTER being keyed to alpha — raw black
+  ground would paint literally under the blending ban.
+  check-boot now validates FULLART (unvalidated r69-r72: art/wisp/aura paths
+  could 404 silently). Verified in-browser: 2 foil wisps render and move,
+  gloss clearly visible on/off, aura opacity 1 + breathing while speaking,
+  every painted stat legible. All 17 suites green. NOTE for Oscar's phone:
+  the SW serves the previous build once — if r74 doesn't show, use the
+  update pill or reload twice. Oscar: the v3
   card has no shiny effect — he wants gloss moving SLOWLY over it, super faded,
   and sent two reference textures (pearl diagonal streaks; a sparkling border
   glow with ribbon curves). The fullart contract grew one clause for it: a

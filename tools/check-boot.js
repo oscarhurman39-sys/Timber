@@ -22,7 +22,7 @@ const ROOT = path.join(__dirname, '..');
 const HTML = path.join(ROOT, 'timber.html');
 const { readDeck, readHold } = require('./plant-data.js');
 
-const REGISTRIES = ['HOLO', 'ANIM', 'PHOTO_SWAP', 'PHOTO_FOCUS', 'PEST'];
+const REGISTRIES = ['HOLO', 'FULLART', 'ANIM', 'PHOTO_SWAP', 'PHOTO_FOCUS', 'PEST'];
 const PNG_SIG = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
 function fail(errors, msg) { errors.push(msg); }
@@ -165,6 +165,25 @@ function checkAssets(registries, errors) {
     for (const [i, w] of (Array.isArray(h.wisps) ? h.wisps : []).entries()) {
       if (!w || typeof w !== 'object') fail(errors, `HOLO ${slug}.wisps[${i}]: expected an object`);
       else localAsset(errors, `HOLO ${slug}.wisps[${i}].src`, w.src);
+    }
+  }
+
+  /* FULLART was unvalidated from r69 to r72: a typo'd art, wisp or aura path
+     shipped silently and only deck-audit (a browser suite) would notice — and
+     only for the main artwork. Same shape as the HOLO checks: every asset the
+     entry names must exist on disk before anything is allowed to deploy. */
+  const fullart = registries.FULLART || {};
+  for (const [slug, f] of Object.entries(fullart)) {
+    if (!f || typeof f !== 'object') { fail(errors, `FULLART ${slug}: config is not an object`); continue; }
+    localAsset(errors, `FULLART ${slug}.art`, f.art);
+    if (f.aura != null) {
+      if (typeof f.aura !== 'object') fail(errors, `FULLART ${slug}.aura: expected an object`);
+      else localAsset(errors, `FULLART ${slug}.aura.src`, f.aura.src);
+    }
+    if (f.wisps != null && !Array.isArray(f.wisps)) fail(errors, `FULLART ${slug}.wisps: expected an array`);
+    for (const [i, w] of (Array.isArray(f.wisps) ? f.wisps : []).entries()) {
+      if (!w || typeof w !== 'object') fail(errors, `FULLART ${slug}.wisps[${i}]: expected an object`);
+      else localAsset(errors, `FULLART ${slug}.wisps[${i}].src`, w.src);
     }
   }
 

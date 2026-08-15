@@ -571,12 +571,30 @@
   .tcard.fullart .say{position:absolute;z-index:5;margin:0;padding:0;display:block;
     background:transparent;border:0;box-shadow:none;font-size:0;letter-spacing:0;
     border-radius:14px}
-  .tcard.fullart .say:active,.tcard.fullart .say.speaking{background:rgba(122,180,255,.28)}
+  /* Tap feedback is the AURA, not a tint: Oscar rejected the flat blue flash
+     ("this blue outer ring appears") and supplied a filigree ornament to wrap
+     the painted pill instead. The ornament is a TRUE-ALPHA glow (blending is
+     banned — see wispsHTML); it sits AFTER .say in the DOM (so `+` can see
+     the button's :active/.speaking states) but under it at z4, pointer-inert.
+     Appear = fade + settle from a slightly loose scale; while speaking it
+     breathes via filter so the opacity transition still owns entry and exit. */
+  .tcard.fullart .say:active,.tcard.fullart .say.speaking{background:transparent}
+  .say-aura{position:absolute;z-index:4;pointer-events:none;
+    background-size:100% 100%;background-repeat:no-repeat;
+    opacity:0;transform:scale(.86);will-change:opacity,transform;
+    transition:opacity .45s ease,transform .55s ease}
+  .say:active+.say-aura,.say.speaking+.say-aura{opacity:1;transform:scale(1)}
+  .say.speaking+.say-aura{animation:auraBreathe 2.4s ease-in-out infinite alternate}
+  @keyframes auraBreathe{from{filter:brightness(.72)}to{filter:brightness(1.12)}}
+  @media (prefers-reduced-motion:reduce){
+    .say.speaking+.say-aura{animation:none}
+  }
   /* fullart gloss: a fullart card CAN carry wisps (Oscar asked for shine on
      Maria) — the light plays over his painted pixels, it composites nothing.
      The container spans the whole face here, not the .tinner window, so it
      takes the card's own 15px radius; the say hotspot stays above at z5 and
-     the wisps are pointer-inert anyway. */
+     the wisps are pointer-inert anyway. Wisp art must be true-alpha — see
+     the mix-blend-mode note at wispsHTML for why blending is banned. */
   .tcard.fullart .wisps{border-radius:15px}
 
   /* ---- edging: the frame's thorn-work reaching over the photograph ----
@@ -891,7 +909,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r72 · 2026-08-14 · a35548b';
+const BUILD='r75 · 2026-08-15 · ee97e27';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7677,20 +7695,34 @@ const FULLART={
   'anemone-hybrida-pretty-lady-maria-aneplaria':{
     art:'art/card-pretty-lady-maria.webp',
     listen:{left:'17.5%',top:'14.9%',width:'20.5%',height:'5.6%'},
-    /* Oscar, 2026-08-14: the shipped v3 card had no shine at all — he wants a
-       shiny effect, glossing SLOWLY over the card and kept super faded, and
-       sent two reference gloss textures (pearl streaks + a sparkling border).
-       These wisps ride the standard generic animations; blend:'screen' lets
-       light-on-black textures act as pure added light over his artwork.
-       The two files are procedural stand-ins built to his references
-       (tools/gen-maria-gloss.py — the originals never reached the repo);
-       replacing them with his real textures is a file swap, no code change.
-       "Slow" is the 28s sweep; "super faded" is the low opacities — raise
-       opacity before reaching for anything else if he wants more shine. */
+    /* Oscar, 2026-08-14: he wants a shiny effect glossing SLOWLY over the
+       card, kept faded, and attached two reference images of it directly.
+       r70/r72/r74 never actually used them — I told him twice they "never
+       reached the repo filesystem," which was WRONG: they were sitting the
+       whole time at /root/.claude/uploads/<session>/, five directories deep,
+       one level past the search depth I happened to use. Found on the third
+       pass with a wider search. tools/key-maria-gloss.py keys his real
+       uploads to true alpha (local CONTRAST against two blur radii, not raw
+       saturation — the source photos' own soft pastel field is bright and
+       mildly colourful too, so naive keying pulled it in solid; only what
+       stands off its own neighbourhood, streak or sparkle, survives). Two
+       different real crops, Eternal Flame style: a travelling sweep and a
+       tighter breathing shimmer. If he wants more or less shine, the two
+       opacities are the only dial. */
     wisps:[
-      {src:'art/holo/maria-gloss-streaks.webp', anim:'sweep',   dur:28, delay:-6, opacity:0.30, scale:1.35, blend:'screen'},
-      {src:'art/holo/maria-gloss-frame.webp',   anim:'shimmer', dur:9,  delay:-2, opacity:0.22, scale:1.0,  blend:'screen'},
+      {src:'art/holo/maria-gloss-2.webp', anim:'sweep',   dur:26, delay:-8, opacity:0.55, scale:1.25},
+      {src:'art/holo/maria-gloss-1.webp', anim:'shimmer', dur:9,  delay:-3, opacity:0.40, scale:1.15},
     ],
+    /* Oscar, 2026-08-15: replace the Listen tap-flash with his "magical
+       white" filigree ornament wrapped around the painted pill — also a real
+       upload, found and keyed the same late pass as the gloss above.
+       tools/key-maria-listen-aura.py masks out both the source's black
+       background AND its own flat navy pill fill (sampled directly from the
+       upload), by colour distance with a soft smoothstep edge, keeping only
+       the silver/gold ring and its halo — his actual painted Listen pill
+       shows through the centre, nothing is stacked over it. Rect is the
+       Listen button's own centre, sized to the ring's true 900x528 crop. */
+    aura:{src:'art/holo/maria-listen-aura.webp', left:'11.75%', top:'11.15%', width:'32%', height:'13.14%'},
   },
 };
 /* Accept either a bare frame path or the full config object, so an entry can start
@@ -7823,13 +7855,17 @@ function groveHTML(slug){
    new CSS, because the animations are generic. */
 function wispsHTML(ho){
   if(!ho||!ho.wisps||!ho.wisps.length)return '';
-  /* blend is per-wisp because the two asset kinds differ at the pixel level:
-     the Eternal Flame cuts are transparent PNGs (no blend needed), while
-     Maria's gloss textures are light-on-BLACK — blend:'screen' makes black
-     contribute nothing, so any shine art works without an alpha channel. */
+  /* Wisp art must carry REAL ALPHA — mix-blend-mode is banned in the deck.
+     r72 tried blend:'screen' to key light-on-black gloss textures, and the
+     audit browser turned out not to render blend modes AT ALL (measured on a
+     bare two-div page: screen-blended black over white left the ground at 0,
+     not 255), so a blended effect ships unverified and paints its black as a
+     veil wherever blending is unsupported. A texture keyed to alpha offline
+     composites identically everywhere instead — which is how the Eternal
+     Flame cuts and Maria's foil already work. */
   const L=ho.wisps.map(w=>`<i class="wisp w-${w.anim||'drift'}" style="background-image:url(${w.src});`
     +`--wd:${w.dur||24}s;--wo:${w.opacity==null?0.5:w.opacity};--ws:${w.scale||1.5};`
-    +`animation-delay:${w.delay||0}s${w.blend?`;mix-blend-mode:${w.blend}`:''}"></i>`).join('');
+    +`animation-delay:${w.delay||0}s"></i>`).join('');
   return `<div class="wisps" aria-hidden="true">${L}</div>`;
 }
 const holoOf=slug=>{const h=HOLO[slug];return !h?null:(typeof h==='string'?{frame:h}:h);};
@@ -7958,6 +7994,7 @@ function renderCard(idx){
         </div>
         ${wispsHTML(fa)}
         <button class="say" ${TTS?'':'hidden'} style="left:${fa.listen.left};top:${fa.listen.top};width:${fa.listen.width};height:${fa.listen.height}" aria-label="Play latin pronunciation"></button>
+        ${fa.aura?`<i class="say-aura"${lateBG(`background-image:url(${fa.aura.src})`)} style="left:${fa.aura.left};top:${fa.aura.top};width:${fa.aura.width};height:${fa.aura.height}" aria-hidden="true"></i>`:''}
       </div>`:`
       <div class="tcard${ho?' holo':''}"${ho?lateBG(holoStyle(ho)):''}>
         <div class="tphoto${swap?' swap':''}"${swap&&swap.hold?` style="--holo-swap:${swap.hold}"`:''}>
