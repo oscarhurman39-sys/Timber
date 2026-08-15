@@ -909,7 +909,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r74 · 2026-08-15 · 93d152e';
+const BUILD='r75 · 2026-08-15 · ee97e27';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7696,27 +7696,33 @@ const FULLART={
     art:'art/card-pretty-lady-maria.webp',
     listen:{left:'17.5%',top:'14.9%',width:'20.5%',height:'5.6%'},
     /* Oscar, 2026-08-14: he wants a shiny effect glossing SLOWLY over the
-       card, kept faded. The texture is his OWN v2 pack's pearl foil — true
-       alpha, cut for this exact card, so it composites plainly everywhere
-       and reads as the card's native iridescence. Used twice, Eternal Flame
-       style: a slow travelling sweep and a tighter breathing shimmer.
-       r70/r72 shipped procedural light-on-black stand-ins keyed by
-       mix-blend-mode instead; blending proved unverifiable (see wispsHTML)
-       and the shine never reliably landed — this foil swap is the fix.
-       If he wants more or less shine, the two opacities are the only dial. */
+       card, kept faded, and attached two reference images of it directly.
+       r70/r72/r74 never actually used them — I told him twice they "never
+       reached the repo filesystem," which was WRONG: they were sitting the
+       whole time at /root/.claude/uploads/<session>/, five directories deep,
+       one level past the search depth I happened to use. Found on the third
+       pass with a wider search. tools/key-maria-gloss.py keys his real
+       uploads to true alpha (local CONTRAST against two blur radii, not raw
+       saturation — the source photos' own soft pastel field is bright and
+       mildly colourful too, so naive keying pulled it in solid; only what
+       stands off its own neighbourhood, streak or sparkle, survives). Two
+       different real crops, Eternal Flame style: a travelling sweep and a
+       tighter breathing shimmer. If he wants more or less shine, the two
+       opacities are the only dial. */
     wisps:[
-      {src:'art/holo/pretty-lady-maria-foil.webp', anim:'sweep',   dur:26, delay:-8, opacity:0.60, scale:1.35},
-      {src:'art/holo/pretty-lady-maria-foil.webp', anim:'shimmer', dur:8,  delay:-3, opacity:0.42, scale:1.9},
+      {src:'art/holo/maria-gloss-2.webp', anim:'sweep',   dur:26, delay:-8, opacity:0.55, scale:1.25},
+      {src:'art/holo/maria-gloss-1.webp', anim:'shimmer', dur:9,  delay:-3, opacity:0.40, scale:1.15},
     ],
     /* Oscar, 2026-08-15: replace the Listen tap-flash with his "magical
-       white" filigree ornament wrapped around the painted pill. The rect is
-       the pill's centre grown to the ornament's 3:2 canvas; the shipped
-       image is a procedural stand-in (tools/gen-maria-listen-aura.py — his
-       chat attachment never reached the repo filesystem). His real ornament
-       replaces art/holo/maria-listen-aura.webp 1:1, no code change — but it
-       must be keyed to TRUE ALPHA first (same blending ban as the wisps);
-       the black ground of the chat original would paint literally. */
-    aura:{src:'art/holo/maria-listen-aura.webp', left:'11.7%', top:'10.2%', width:'32%', height:'15%'},
+       white" filigree ornament wrapped around the painted pill — also a real
+       upload, found and keyed the same late pass as the gloss above.
+       tools/key-maria-listen-aura.py masks out both the source's black
+       background AND its own flat navy pill fill (sampled directly from the
+       upload), by colour distance with a soft smoothstep edge, keeping only
+       the silver/gold ring and its halo — his actual painted Listen pill
+       shows through the centre, nothing is stacked over it. Rect is the
+       Listen button's own centre, sized to the ring's true 900x528 crop. */
+    aura:{src:'art/holo/maria-listen-aura.webp', left:'11.75%', top:'11.15%', width:'32%', height:'13.14%'},
   },
 };
 /* Accept either a bare frame path or the full config object, so an entry can start

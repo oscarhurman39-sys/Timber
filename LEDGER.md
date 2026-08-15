@@ -5,7 +5,41 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
-progress: 2026-08-15 — **Maria's shine done right, plus the Listen aura (r74).**
+progress: 2026-08-15 (later) — **his actual reference images, finally (r75).**
+  Twice this session I told Oscar his chat-attached images "never reached the
+  repo filesystem." WRONG both times — owning it in full. They were sitting
+  at /root/.claude/uploads/<session>/ the entire time; my very first search
+  used `find -maxdepth 4`, and that directory is five path components deep,
+  one past the limit. I never widened the search until he asked "why's that
+  everything's always uploaded before" — a fair question I should have
+  answered by checking, not by repeating the same claim a third time. All
+  three of his images were real: two gloss/shine references (rainbow prism
+  streaks + star glints over a soft pastel field with an incidental dark
+  silhouette) and the art-nouveau ring for the Listen button.
+  Both are now literally on the card. tools/key-maria-gloss.py keys the two
+  gloss uploads to true alpha via local CONTRAST against two blur radii
+  (narrow for sparkle cores, wide for streak shafts) — plain saturation or
+  luminance keying both failed first: the source photos' own pastel field is
+  bright and mildly colourful too, so either trick pulled the WHOLE
+  background in at ~30% alpha instead of just the streaks; contrast against
+  each pixel's own local blur cancels a slowly-varying field to near zero
+  regardless of its base brightness. tools/key-maria-listen-aura.py keys the
+  ring upload by colour distance from two sampled references (the source's
+  own pure-black bg and its own flat navy pill fill, smoothstep-soft edges)
+  — his real painted Listen pill shows through the ring now, nothing doubled
+  on top of it. FULLART wisps swapped from the r74 v2-pack-foil stand-in to
+  these two real crops (26s sweep + 9s shimmer); the foil masters are left
+  in art/holo/ untouched, per the standing policy of keeping the v2 pack as
+  a fallback. New PNG masters + .webp derivatives follow the existing
+  art-master convention (optimise-art.js derives them; both scripts document
+  the exact source upload paths for reproducibility). Also fixed in passing:
+  optimise-photos flagged 20-odd card derivatives as stale purely from the
+  r71 merge resetting working-tree mtimes — zero content drift confirmed
+  (regenerating produced an identical git diff), regenerated to clear it.
+  Verified in-browser: both real wisps render and move, gloss visibly on vs
+  off, aura hits opacity 1 and breathes on speak, wrapping his ACTUAL pill
+  with his ACTUAL ring art. All 17 suites green.
+progress: 2026-08-15 (earlier) — **Maria's shine done right, plus the Listen aura (r74).**
   Oscar merged r72 and saw NO shine on the live card — correct report, and the
   bug hunt earned a deck rule. The r70/r72 gloss keyed its light-on-black
   stand-ins with mix-blend-mode:screen; probing WHY it wasn't landing ended at
