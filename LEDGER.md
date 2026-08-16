@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (two new cards) — **deck 173.** Oscar wrote the research
+  JSON for *Rhus typhina* 'Dissecta' and *Catalpa* × *erubescens* 'Purpurea' and
+  shot both plants; cards built and dealt. The sumach settles VERIFY-QUEUE 33 as
+  recommended — the cut-leaf form gets its own card and the plain species stays
+  held rather than carrying a photo of the wrong leaf. His declared `uncertain`
+  notes are recorded as VERIFY-QUEUE 35, not quietly accepted.
 progress: 2026-08-16 (verbena, part two) — **deck 171.** Oscar pushed back on the
   refusal below and was right: he took both photographs, the AI only merged them.
   He sent the originals; the bee-and-crab-spider frame has no C2PA manifest at

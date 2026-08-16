@@ -909,7 +909,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r82 · 2026-08-16 · 8bd109a';
+const BUILD='r84 · 2026-08-16 · 259d36a';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -5201,6 +5201,30 @@ const PLANTS = [
    uses:"gravel gardens · prairie planting · pollinators · see-through screening",
    size:"1.5-2.5m H × 0.5-1m W",
    seasonalImpact:"", growthSpeed:16, pestRisk:4, thirst:8, careLevel:4, sunNeed:95, sunMin:70},
+  {common:"Cut-leaved Stag's Horn Sumach", latin:"Rhus typhina 'Dissecta'", hue:20,
+   visual:"Fern-like cut foliage · brilliant orange-red autumn colour · crimson fruit cones",
+   water:"Moderate; water while establishing",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Full sun for strongest autumn colour",
+   prune:"Remove unwanted suckers in winter; prune only if needed",
+   source:"", peak:"Sep-Nov", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Rhus typhina f. laciniata; 'Laciniata'",
+   hardiness:"H6", resilience:"cold hardy · exposed-site tolerant · generally pest free",
+   uses:"specimen · autumn colour · architectural planting", size:"2.5–4 m H × 4–8 m W",
+   seasonalImpact:"", growthSpeed:11, pestRisk:6, thirst:8, careLevel:7, sunNeed:95, sunMin:80},
+  {common:"Purple Hybrid Catalpa", latin:"Catalpa × erubescens 'Purpurea'", hue:275,
+   visual:"Black-purple young leaves fade dark green · white orchid-like summer flowers",
+   water:"Moderate; water during prolonged dry spells",
+   aspect:"Any aspect",
+   soil:"Moist, well-drained; Shelter from wind · late-frost risk",
+   prune:"Prune minimally; stool in spring for larger foliage",
+   source:"", peak:"Apr-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Catalpa bignonioides 'Purpurea'",
+   hardiness:"H6", resilience:"generally pest free · honey fungus resistant",
+   uses:"specimen · architectural · foliage contrast", size:"10–15 m H × 6–10 m W",
+   seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:9, careLevel:6, sunNeed:95, sunMin:60},
 ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
@@ -8003,6 +8027,8 @@ const PHOTO_SWAP={
    The lesson is the general one: judge a swap on the two CARDS, not the two
    files. */
 const PHOTO_FOCUS={
+  'rhus-typhina-dissecta':'50% 50%',
+  'catalpa-erubescens-purpurea':'45% 50%',
   'verbena-bonariensis':'50% 10%',
   'corylus-avellana-contorta':'50% 22%',
   'acer-palmatum-sango-kaku':'52% 45%',

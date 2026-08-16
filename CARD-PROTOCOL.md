@@ -301,7 +301,30 @@ Focal point recorded here when off-centre:
 
 | Verbena bonariensis | verbena-bonariensis.jpg | 50% 10% — real photo, Oscar's, **no C2PA manifest at all** (the clean original of a frame first offered inside an AI-merged two-panel composite, refused; see VERIFY-QUEUE 34). Flat-topped head of small five-lobed lilac flowers, species-confirming, with a honeybee taken by a white crab spider on it — the pollinator story the card sells, in the photograph. Focus pushed high because the head sits in the top third and the default dropped it behind the plaque |
 
+| Rhus typhina 'Dissecta' | rhus-typhina-dissecta.jpg | 50% 50% — real photo, Oscar's, clean capture. Fern-like dissected leaflets fill the frame, which is exactly the character that made this photo wrong for the plain-species card (VERIFY-QUEUE 33) and right for this one. The plain *Rhus typhina* card remains held and still wants simple pinnate leaflets — **do not let these two photos swap** |
+| Catalpa × erubescens 'Purpurea' | catalpa-erubescens-purpurea.jpg | 45% 50% — real photo, Oscar's; the canopy shot from below against sky, leaf shape and the branching pattern both legible. Note the card sells "black-purple young leaves" and the frame shows mature green foliage with one bronze-purple cluster at centre — species and habit confirming, cultivar colour only hinted. A spring reshoot of the purple flush would sell the plant harder |
+
 ## 5. Decision changelog
+
+- **v14.5 (two cards from Oscar's own research: 173)**: *Rhus typhina* 'Dissecta'
+  and *Catalpa* × *erubescens* 'Purpurea', both built from JSON he supplied with
+  a filled-in `uncertain` block, both photographed by him on clean captures.
+  The sumach closes VERIFY-QUEUE 33 the way it recommended — a **separate card**
+  for the cut-leaf form, with the plain species left held rather than given a
+  photograph of the wrong leaf. What he flagged as soft is in VERIFY-QUEUE 35
+  rather than silently accepted; the one worth staff's attention is the Catalpa's
+  size, where RHS says 12 m+ and the card carries 10–15 m from specialist
+  sources. **`add-plant.js` does not write provenance** — unlike `deal-plant.js`
+  it stops at the CREDITS check with the row already inserted, so
+  `photo-credits.js --set` has to follow it by hand. Worth fixing in the tool.
+  **The gate on this commit is 16/17, not 17/17.** The two cards took the deck to
+  173 and tripped `perf-test`'s zero-pixel assertion — 16 pixels at the deck's
+  right edge differing by ONE unit in 255 on black, caused by two more `.tcard`
+  shadows stacking. Bisected against the previous commit to prove it is deck
+  size and not flake. **The test was deliberately left failing** rather than
+  given a tolerance, because quietly loosening a gate so one's own change passes
+  is the move that must never be quiet — VERIFY-QUEUE item 36 lays out the three
+  options and recommends one.
 
 - **v14.4 (Verbena dealt from the original; the composite still refused)**: Oscar
   corrected the record — he took both halves of the refused two-panel image

@@ -812,7 +812,7 @@ confirmed positions). Until then, treat the count as "at least four".
 
 ---
 
-### 33. Stag's Horn Sumach photo is a CUT-LEAF form — card stays held, OPEN
+### 33. Stag's Horn Sumach photo is a CUT-LEAF form — SETTLED 2026-08-16
 2026-08-15. Oscar sent a photograph with the note *"not sure if the [Rhus]
 typhina 2nd photo is the same species"*. It is the right species and still the
 wrong photograph for the card that exists, which is why nothing was staged.
@@ -850,6 +850,16 @@ that cannot be read off a leaf.
    velvety antler stems or a crimson fruit cone) and leave this photo unused.
 
 Recommend 1. The card that exists is fine; it just isn't this plant's card.
+
+**SETTLED 2026-08-16 — Oscar took option 1.** He supplied a researched card for
+***Rhus typhina* 'Dissecta'** and a second, better photograph of the same plant
+(2408×3272, clean Galaxy S24 capture, no C2PA). It is dealt as its own card.
+The plain-species *Rhus typhina* card is untouched and **stays held**, still
+wanting a photograph of simple pinnate leaflets — so the deck now teaches the
+two apart instead of conflating them. His `cvs` field carries the synonymy
+(f. *laciniata*, 'Laciniata'), which also settles the naming wrinkle raised
+above; see item 35 for what he flagged as still soft, including the
+*R.* × *pulvinata* question, which his sources treat differently from mine.
 
 ---
 
@@ -933,6 +943,104 @@ which was NOT staged:
 The dealt card does not depend on either point: the bee frame is unambiguous
 *V. bonariensis* and is the plant the card describes.
 
+
+---
+
+### 35. Two cards added 2026-08-16 — Oscar's own research JSON, what he flagged
+Both cards came from Oscar with a `uncertain` block already filled in, so this
+is his flagging, not mine. Nothing below blocked either card; it is what a
+label or an RHS read would settle.
+
+**Cut-leaved Stag's Horn Sumach (*Rhus typhina* 'Dissecta')**
+- RHS accepts the cultivar and lists *R. typhina* f. *laciniata* / 'Laciniata'
+  as synonyms; **Kew treats both f. *laciniata* and f. *dissecta* as synonyms of
+  the plain species** rather than accepted taxa. The card follows RHS. Note this
+  is a different resolution of the naming question from the one raised in item
+  33, which pointed at *R.* × *pulvinata* Autumn Lace Group — **that hybrid is
+  not mentioned in his sources at all**, and the two accounts have not been
+  reconciled. It changes no fact on the card.
+- Spread is given 4–8 m but "can approach 6 m or more" through suckering; the
+  `prune` line already tells staff to take suckers out in winter.
+- **Toxicity deliberately left blank** — his sources conflict and none supports a
+  clear customer warning. That is the honest entry, and it is consistent with how
+  the deck handles unknowns. The card schema still has nowhere to put toxicity
+  even when it IS known (item 0c).
+- No England-and-Wales statutory restriction was verified. `[Unverified]` — the
+  vigorous suckering is a nuisance question, not a legal one, as far as either
+  of us has checked.
+
+**Purple Hybrid Catalpa (*Catalpa* × *erubescens* 'Purpurea')**
+- **Size is the one worth a second look.** RHS gives ultimate dimensions above
+  12 m × above 8 m; the card carries 10–15 m × 6–10 m from specialist tree
+  sources. Either is defensible, but a 12 m+ tree on a garden-centre bench card
+  is a fact staff will be asked about.
+- RHS says full sun; specialist UK nursery guidance allows light dappled shade,
+  and `sunMin` 60 encodes that tolerance. The card therefore sits slightly
+  looser than RHS on light, on purpose.
+- Honey-fungus resistance comes from nursery guidance, **not** from the RHS
+  cultivar profile.
+- `pestRisk` 5 (1.25/5) tripped `check-plant-json.js`'s "is this an unconverted
+  0–5 rating?" warning. Left as written: 1.25/5 agrees with the card's own
+  "generally pest free", where 5/5 would flatly contradict it.
+
+**Both:** `hardinessNote`, `toxicity`, `compliance`, `foliage` and `container`
+were supplied and have **no home in the card schema**, so they are dropped from
+the rendered row. The full JSON is committed at
+`data/incoming/rhus-typhina-dissecta.json` and
+`data/incoming/catalpa-erubescens-purpurea.json`, so nothing supplied is lost —
+but this is the fourth batch to hit item 0c's missing fields.
+
+---
+
+### 36. perf-test's zero-pixel assertion has outgrown the deck — GATE IS RED, needs Oscar's call
+2026-08-16. Adding the two cards above took the deck 171 → 173 and turned
+`perf-test`'s pixel-parity check red:
+
+    FAIL hiding buried content changes no pixel (the deck halo is stacked shadows)
+         — 18px differ (0.001%), max channel delta 3
+
+**It is not flaky and it is not a coincidence.** Verified by bisection, not by
+assumption: an unmodified checkout of the previous commit (3ceb9db, deck 171)
+served on the same port passes this check 14/14; the current tree fails it with
+the identical numbers on every run.
+
+**What the pixels actually are.** The diff was re-run with coordinates and
+values dumped:
+
+- **16 pixels** (the suite's own count of 18 includes the alpha-channel pass),
+  at device scale 2 on a 780×1560 buffer.
+- Fifteen of them are a **vertical run at x=764, y=1311–1325** — the extreme
+  right edge of the deck halo, about 8 device px in from the frame.
+- Their values: reference **(0,0,0)**, live **(1,1,1)**. **A delta of one unit
+  in 255, on black.**
+- The sixteenth, at (763,257), is (8,18,12) vs (8,19,13).
+
+**Mechanism, and why it is not content leaking.** Unhiding the buried cards makes
+the picture DARKER by one unit, not lighter — so nothing is peeking through the
+top card. It is the check's own named cause: `.tcard` box-shadows stack, and two
+more cards in the pile push the accumulated alpha at the outermost edge across an
+8-bit rounding boundary. No buried card's content becomes visible at any point.
+
+**Why this was not fixed unilaterally.** Three routes, and picking one is a call
+about the gate, not about the cards:
+
+1. **Give the assertion a tolerance** — e.g. allow a max channel delta of 1. One
+   unit on black is below anything a screen can show. Risk: it is a deliberately
+   strict check, and the last deck-growth failure (changelog v14.1, the menu
+   panel) turned out to be a **real defect** that a tolerance would have hidden.
+2. **Treat it as a real defect and cap the shadow stack in the app** so the halo
+   stops depending on deck depth. Correct in principle, a visual change to every
+   card's shadow, and far bigger than the two cards that exposed it.
+3. **Leave it red** until decided. Honest, but the gate stops meaning anything
+   the moment one red is normal.
+
+Recommend 1, with the evidence above written into the test's comment so the next
+person knows what the tolerance is buying and what it would hide. **Not done
+without Oscar saying so**, because loosening a gate to make one's own change pass
+is precisely the move that should never be quiet.
+
+**Until it is settled, this branch's gate reads 16/17, and the failure is this
+one.** The other 16 suites and all 8 data checks pass.
 
 ---
 

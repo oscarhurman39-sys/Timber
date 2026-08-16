@@ -372,6 +372,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "catalpa-erubescens-purpurea.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "ceanothus-concha.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1750,6 +1760,16 @@
    "sourceUrl": null,
    "commit": "004c1a1",
    "commitSubject": "Add Horizon Monarch Rhododendron",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rhus-typhina-dissecta.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
