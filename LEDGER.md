@@ -5,6 +5,14 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (batch of ten) — **deck 188, hold 84.** The largest single
+  batch the deck has taken: ten researched cards from Oscar, each with his own
+  photograph. Geranium 'Bob’s Blunder' also CLOSES the unidentified bronze
+  cranesbill from VERIFY-QUEUE 37 — same file, resent with its card. Two more
+  photographs parked (a red-stemmed variegated Cornus, and a Calycanthus he
+  could not name). Four cards are dealt on foliage-only frames because their
+  flowers are out of season — Syringa vulgaris is the one to reshoot in May.
+  VERIFY-QUEUE 39.
 progress: 2026-08-16 (photo pass) — **deck 178, hold 84.** 'Pretty Lady Emily'
   dealt one batch after being held. New masters for Euphorbia 'Silver Edge',
   Coprosma 'Inferno' and Chamaerops humilis — the Inferno one a correction of

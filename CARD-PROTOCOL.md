@@ -314,7 +314,38 @@ Focal point recorded here when off-centre:
 | Coprosma 'Inferno' | coprosma-inferno.jpg (**replaced 2026-08-16**) | 50% 45% — the card sells "leaves deepen purple-brown with vivid red margins **in cold**", and the outgoing frame showed the green-yellow summer state instead. The new one is the cold colouring, i.e. the thing the card is actually about. **The old frame was kept** as `coprosma-inferno-summer.jpg` rather than discarded — same plant, other season, and the card describes both |
 | Chamaerops humilis | chamaerops-humilis.jpg (**replaced 2026-08-16**) | 50% 35% — Oscar's call, and he was right: the outgoing frame was a whole plant in a white pot on gravel, most of the card being decking, gravel and a stuck-on label. The new one is a single fan frond filling the window |
 
+| Hypericum × inodorum MIRACLE NIGHT ('Allmadne') | hypericum-inodorum-miracle-night-allmadne.jpg | 50% 40% default — real photo, Oscar's; the orange-yellow flower against the purple-flushed foliage, which is exactly what separates NIGHT from GRANDEUR. **The deck now holds three Hypericums** (also × *hidcoteense* 'Hidcote', held) — check the slug, not the genus |
+| Hedera helix 'Oro di Bogliasco' | hedera-helix-oro-di-bogliasco.jpg | 50% 40% default — small three-lobed leaves with the gold centre. **The deck's other gold ivy is *Hedera colchica* 'Sulphur Heart'**, whose leaves are large and unlobed — the two photographs must never swap, and leaf shape is what tells them apart |
+| Lonicera henryi 'Copper Beauty' | lonicera-henryi-copper-beauty.jpg | 50% 40% default — the bronze-maroon new foliage the cultivar is named for. Foliage only; the card leads on scented orange-yellow tubes (Jun-Aug), so a flower frame would sell it harder |
+| Solanum laxum 'Album' | solanum-laxum-album.jpg | 50% 40% default — white stars with the yellow beak, species-confirming |
+| Clematis × cartmanii AVALANCHE ('Blaaval') | clematis-cartmanii-avalanche-blaaval.jpg | 50% 40% default — the glossy dissected evergreen foliage, which is half the plant's selling point and the half that is there in August. Card peak is Mar-Apr, so the white flowers want a spring return |
+| Weigela PRISM MAGIC CARPET ('VPWG18-06') | weigela-prism-magic-carpet-vpwg18-06.jpg | 50% 100% — pushed to the bottom of its range deliberately: the pink bells sit low in the frame and the default dropped them behind the stats plaque, leaving a card of foliage on a card whose text leads with the flower |
+| Geranium 'Bob’s Blunder' | geranium-bob-s-blunder.jpg | 50% 40% default — bronze foliage, red stems, the pale lilac-pink flower. **This is the same file that was parked unidentified in VERIFY-QUEUE 37**, resent with its card; that question is closed. Note the deck's other cranesbill, Rozanne, is still held and looks nothing like this |
+| Dahlia ELECTRO PINK ('71853-09') | dahlia-electro-pink-71853-09.jpg | 50% 40% default — neon cactus bloom over the mahogany foliage, both halves of the card in one frame |
+| Hypericum × inodorum MIRACLE GRANDEUR ('Allgrandeur') | hypericum-inodorum-miracle-grandeur-allgrandeur.jpg | 50% 40% default — red autumn berries on green foliage. Reads as the deliberate opposite of MIRACLE NIGHT above, which is the useful thing for staff |
+| Syringa vulgaris | syringa-vulgaris.jpg | 50% 30% — the weakest frame of the batch and known to be: **foliage only, on a card whose text leads with "fragrant lilac-purple panicles"**. Lilac flowers May-Jun, so it cannot be fixed until spring. Dealt rather than held because a real leaf beats an empty card, but it is first in the queue for a reshoot |
+
 ## 5. Decision changelog
+
+- **v14.8 (ten cards from Oscar's research: 188 dealt / 84 held)** — the largest
+  single batch the deck has taken. All ten came with his own JSON and his own
+  photographs, all clean captures.
+  **One validator catch worth keeping:** `Geranium 'Bob's Blunder'` failed
+  `check-plant-json` on unbalanced quotes — three straight apostrophes, because
+  the possessive sits inside the cultivar epithet. Fixed to the deck's existing
+  convention (straight quotes delimit the cultivar, a curly ’ for the internal
+  possessive) which is what `'Wim’s Red'`, `'Baggesen’s Gold'` and
+  `'Miss Jessopp’s Upright'` already do. The slug is unchanged either way.
+  **Near-miss genus checks done before staging, not after:** three Hypericums,
+  two gold-variegated ivies in different species, three Weigelas and four
+  Loniceras now live in the deck. Every one of these was confirmed distinct.
+  **Four cards are dealt on foliage-only frames** — Lonicera 'Copper Beauty',
+  Clematis AVALANCHE, Weigela (partly) and *Syringa vulgaris* — because their
+  flowers are out of season. That is a real gap between a card's text and its
+  picture, of the same kind the Coprosma swap fixed, and it is logged rather
+  than left to be rediscovered. Two further photographs were **parked**: a
+  variegated red-stemmed *Cornus* and the shrub Oscar could not name, which
+  reads as a *Calycanthus*. VERIFY-QUEUE 39.
 
 - **v14.7 (one deal, three photo replacements, three parked: 178 dealt / 84 held)**:
   **'Pretty Lady Emily' is dealt** one batch after being held for want of a

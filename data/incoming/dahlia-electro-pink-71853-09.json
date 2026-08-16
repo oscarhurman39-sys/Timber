@@ -1,0 +1,33 @@
+{
+  "common": "Dahlia 'Electro Pink'",
+  "latin": "Dahlia ELECTRO PINK ('71853-09')",
+  "hue": 335,
+  "visual": "Hot neon-pink cactus blooms · glossy mahogany-black foliage · compact habit",
+  "water": "Keep evenly moist in active growth",
+  "aspect": "South / East / West",
+  "soil": "Rich, well-drained",
+  "soilWarning": "Avoid winter wet · protect tubers from frost",
+  "prune": "Deadhead regularly; cut down after first frost",
+  "toxicity": "Mildly toxic to dogs and cats if eaten · may cause dermatitis",
+  "compliance": "PBR protected · commercial propagation restricted",
+  "peak": "Jul-Oct",
+  "cvs": "trade name ELECTRO PINK; RHS cultivar code '71853-09'; EU PBR denomination 'EP7185309'",
+  "hardiness": "H4",
+  "hardinessNote": "Breeder minimum about -6°C maps to H4; protect tubers in UK winter",
+  "resilience": "",
+  "uses": "containers · borders · cut flowers · pollinators",
+  "height": "50–80 cm",
+  "spread": "40–60 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 14,
+  "pestRisk": 12,
+  "thirst": 13,
+  "careLevel": 13,
+  "sunNeed": 92,
+  "sunMin": 68,
+  "uncertain": [
+    "RHS uses cultivar code '71853-09' while EU PBR material uses 'EP7185309' for the same plant",
+    "Exact mature-size sources range from about 50 cm to roughly 80 cm tall"
+  ]
+}

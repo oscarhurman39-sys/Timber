@@ -1,0 +1,32 @@
+{
+  "common": "Cranesbill 'Bob’s Blunder'",
+  "latin": "Geranium 'Bob’s Blunder'",
+  "hue": 338,
+  "visual": "Small bright-pink flowers · bronze-purple foliage reddening in autumn",
+  "water": "Moderate; water in dry spells",
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Avoid waterlogging",
+  "prune": "Remove spent stems; cut back old leaves for fresh growth",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Sep",
+  "cvs": "syn. Geranium biuncinatum 'Bob’s Blunder'",
+  "hardiness": "H7",
+  "hardinessNote": "",
+  "resilience": "cold hardy · shade tolerant",
+  "uses": "ground cover · border edging · underplanting · containers",
+  "height": "30 cm",
+  "spread": "60 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 9,
+  "pestRisk": 9,
+  "thirst": 9,
+  "careLevel": 5,
+  "sunNeed": 72,
+  "sunMin": 45,
+  "uncertain": [
+    "RHS gives a 10–50 cm spread band; UK nursery measurements commonly place mature spread around 60–70 cm"
+  ]
+}

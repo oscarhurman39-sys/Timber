@@ -1065,12 +1065,14 @@ item 33. All three files are clean captures, no C2PA, no AI markers.
    woody reddish stems read at least as well for ***Sorbaria sorbifolia***
    (false spiraea), which has no card at all. Needs a name before it can go
    anywhere.
-3. **Bronze-leaved Geranium.** Deeply cut bronze-brown foliage, vivid red-pink
-   stems, one small pale-lilac flower with darker veining. The deck's held
-   cranesbill is **Rozanne ('Gerwat')**, whose flowers are large, deep violet-blue
-   with a white eye, over plain green leaves. `[Inference]` this is not Rozanne.
-   The colouring could be a stressed or autumn-turning plant of something else
-   entirely; the label would settle it in a second.
+3. ~~**Bronze-leaved Geranium.**~~ **CLOSED 2026-08-16.** It is
+   ***Geranium* 'Bob’s Blunder'**. Oscar resent the identical file with a
+   researched card for it, and it is now dealt — so the reasoning below was
+   right that it is not Rozanne, and the plant is simply one the deck did not
+   yet have. Kept here for the record: deeply cut bronze-brown foliage, vivid
+   red-pink stems, one small pale-lilac flower with darker veining, against
+   Rozanne's large deep violet-blue flowers with a white eye over plain green
+   leaves.
 
 **B. Two cards went to the hold block for want of a photograph** — *Anemone* ×
 *hybrida* 'Pretty Lady Emily' and *Loropetalum chinense* var. *rubrum* 'Fede'.
@@ -1139,6 +1141,86 @@ card picking them up by accident. All clean captures, no C2PA, no AI markers.
   whether a card should ever carry two seasonal frames** — `PHOTO_SWAP` already
   exists in the app for a related purpose, and this is the first card where the
   text plainly covers two looks and both photographs exist.
+
+---
+
+### 39. Batch of ten, 2026-08-16 — two parked photographs, four out-of-season cards, and what Oscar flagged
+The deck's biggest single batch: ten researched cards, ten photographs, all
+dealt. What follows is everything that did NOT resolve cleanly.
+
+**A. Two photographs were parked** — staged under `*-unidentified*` names that no
+card slug can resolve, credited, claiming nothing:
+- `cornus-variegated-unidentified.jpg` — cream-margined leaves with a purple
+  flush, **dark red stems** and purple-black berries. The deck already holds
+  three Cornus (*sanguinea* 'Midwinter Fire', *kousa*, *controversa*
+  'Variegata') and this matches none of them. Red stems plus white-margined
+  leaves reads like ***C. alba*** 'Elegantissima' or 'Ivory Halo'
+  `[Inference]`, which would be a new card.
+- `calycanthus-unidentified.jpg` — the one Oscar described as *"fuck I forgot
+  what thats called"*. Deep maroon-red flower with many strap-shaped petals over
+  glossy opposite leaves: that is ***Calycanthus*** (sweetshrub) `[Inference]`,
+  most likely one of the modern hybrids such as 'Aphrodite'. **No Calycanthus
+  card exists.** A label would settle both of these in seconds.
+
+**B. Four cards are dealt on foliage-only frames**, because the flowers are out
+of season. Not defects, but a real gap between a card's text and its picture —
+the same class the Coprosma 'Inferno' swap corrected:
+- ***Syringa vulgaris*** — the worst of the four. Card text leads with "fragrant
+  lilac-purple panicles"; the photograph is leaves. **Flowers May-Jun**, so this
+  is a spring reshoot and is first in that queue. The leaves also carry a
+  yellow-green mottling; `[Unverified]` whether that is light, natural variation
+  or something like lilac mosaic virus — worth Oscar's eye on the actual plant.
+- **Clematis AVALANCHE** — peak Mar-Apr; the glossy dissected evergreen foliage
+  is genuinely half the plant, so this one is the least wrong.
+- **Lonicera 'Copper Beauty'** — the bronze new growth is the cultivar's name,
+  but the scented tubes (Jun-Aug) are what sells it.
+- **Weigela PRISM MAGIC CARPET** — flowers present but low in the frame; focus
+  was pushed to 50% 100% to keep them above the plaque.
+
+**C. What Oscar declared uncertain**, carried across rather than accepted
+silently:
+- ***Geranium* 'Bob’s Blunder' synonymy.** His `cvs` reads "syn. *Geranium
+  biuncinatum* 'Bob’s Blunder'". `[Unverified]` — *G. biuncinatum* is an African
+  annual and 'Bob’s Blunder' is usually placed with the New Zealand
+  *G.* × *antipodeum* group, so the two do not obviously belong together. **No
+  fact on the card depends on it** (the `cvs` line is a synonym note), and it was
+  left exactly as supplied. Worth one check.
+- **Dahlia ELECTRO PINK** carries two codes for one plant — RHS `'71853-09'`,
+  EU PBR `'EP7185309'`. Both are on the card's `cvs`. Height sources range
+  50–80 cm; the card gives the full band.
+- **Weigela PRISM MAGIC CARPET**: breeder material uses *Weigela* × *hybrida*,
+  RHS records it at genus level, and RHS's height band (50–100 cm) is twice the
+  breeder's (50–60 cm). The card follows the breeder.
+- **Both Hypericums** are recorded semi-evergreen by RHS and deciduous by some
+  specialists.
+- **Clematis AVALANCHE**: RHS herbarium material records PBR but **current UK
+  protection status was not confirmed** — and the card's `compliance` field has
+  nowhere to render anyway (item 0c, now the sixth batch).
+- **PBR restrictions on five cards in this batch** (both Hypericums, the Dahlia,
+  Lonicera 'Copper Beauty', and AVALANCHE's unconfirmed status). Same missing
+  field. If this deck reaches a sales bench, propagation restrictions are the
+  single most commercially loaded thing it currently cannot show.
+
+**D. `--jobs 2` is no longer a reliable gate at this deck size.** This batch's
+first parallel run reported 15/17, failing `edge-test` on *"held to the top"*
+and *"rewind to the top persisted across reload"*. Run on its own, `edge-test`
+passes 17/17, and a **fully sequential `node tests/run-all.js` also passes
+everything except the known perf pixel check**. So those two were contention,
+not a defect.
+
+The mechanism is worth knowing rather than shrugging at: that check holds the
+back button for a fixed **4000 ms of wall clock** and expects the rewind to
+reach the top of a 24-card history. Each rewind step calls `markHot()`, which
+walks **every card in the deck** — so the per-step cost rises with deck size
+while the budget stays fixed. At 188 cards, two Chromiums sharing the box is
+enough to miss it. `[Inference]` the unexplained 15/17 recorded one batch
+earlier was the same suite for the same reason; that run's summary was lost to
+a truncated pipe, so it cannot be confirmed.
+
+**Practical effect: run the gate sequentially before pushing a large batch**, or
+treat a parallel `edge-test`/`features-test` timeout as needing an isolated
+re-run before it is believed. Both suites that have failed this way are
+animation-timing ones with fixed wall-clock budgets.
 
 ---
 

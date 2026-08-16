@@ -1,0 +1,32 @@
+{
+  "common": "St John's wort 'Miracle Night'",
+  "latin": "Hypericum × inodorum MIRACLE NIGHT ('Allmadne')",
+  "hue": 345,
+  "visual": "Yellow flowers · purple-flushed foliage · mahogany-purple autumn berries",
+  "water": "Moderate; water in dry spells",
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Avoid waterlogging",
+  "prune": "Light prune in spring; renovate hard if needed",
+  "toxicity": "Fruit ornamental · not to be eaten",
+  "compliance": "PBR protected · commercial propagation restricted",
+  "peak": "Aug-Oct",
+  "cvs": "Miracle Series; trade name MIRACLE NIGHT; cultivar code 'Allmadne'",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "drought tolerant once established",
+  "uses": "containers · borders · cut stems · autumn berries",
+  "height": "70–80 cm",
+  "spread": "60–75 cm",
+  "foliage": "semi-evergreen",
+  "container": "yes",
+  "growthSpeed": 10,
+  "pestRisk": 6,
+  "thirst": 8,
+  "careLevel": 5,
+  "sunNeed": 75,
+  "sunMin": 42,
+  "uncertain": [
+    "RHS lists the foliage as semi-evergreen; specialist sources may describe it as deciduous in colder conditions"
+  ]
+}
