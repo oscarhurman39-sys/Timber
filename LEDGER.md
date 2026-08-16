@@ -5,6 +5,17 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (six more cards) — **deck 177, hold 85.** Oscar's research
+  JSON for six plants plus eight photographs. Dealt Muehlenbeckia complexa,
+  Astrantia 'Star of Love', Salvia guaranitica 'Black and Blue' and Hosta
+  'Broadband'; held Anemone 'Pretty Lady Emily' and Loropetalum 'Fede' for want
+  of a photograph. Three photographs went nowhere — a Physocarpus, a white-plumed
+  Astilbe-or-Sorbaria and a bronze Geranium — each landing near a held card whose
+  cultivar it does not match (VERIFY-QUEUE 37). **Found and fixed a real bug:
+  plants-tool.js import wrote pest:"" onto 260 cards, which check-boot rejects,
+  so the documented csv round-trip was broken deck-wide.** Verified the fixed
+  round-trip lossless field-by-field against the previous commit. NOT deployed —
+  live is still r84 at 173.
 progress: 2026-08-16 (SHIPPED) — **the whole day's work is live.** Fast-forwarded
   the live branch to e7a33c7 on Oscar's say-so; *Deploy to GitHub Pages* run #51
   went green, and green means live (the workflow verifies the served bytes against

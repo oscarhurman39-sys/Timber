@@ -304,7 +304,32 @@ Focal point recorded here when off-centre:
 | Rhus typhina 'Dissecta' | rhus-typhina-dissecta.jpg | 50% 50% — real photo, Oscar's, clean capture. Fern-like dissected leaflets fill the frame, which is exactly the character that made this photo wrong for the plain-species card (VERIFY-QUEUE 33) and right for this one. The plain *Rhus typhina* card remains held and still wants simple pinnate leaflets — **do not let these two photos swap** |
 | Catalpa × erubescens 'Purpurea' | catalpa-erubescens-purpurea.jpg | 45% 50% — real photo, Oscar's; the canopy shot from below against sky, leaf shape and the branching pattern both legible. Note the card sells "black-purple young leaves" and the frame shows mature green foliage with one bronze-purple cluster at centre — species and habit confirming, cultivar colour only hinted. A spring reshoot of the purple flush would sell the plant harder |
 
+| Muehlenbeckia complexa | muehlenbeckia-complexa.jpg | 50% 45% — real photo, Oscar's; wiry red-brown stems with tiny rounded leaves, the whole character of the plant in one frame. Deck's first Muehlenbeckia |
+| Astrantia major 'Star of Love' | astrantia-major-star-of-love.jpg | 62% 35% — real photo, Oscar's; wine-red pincushions with the pointed bracts legible. A nursery label is in the lower left of the source, pushed out of the card window by the focus — **check it stays out if the focus is ever retuned** |
+| Salvia guaranitica 'Black and Blue' | salvia-guaranitica-black-and-blue.jpg | 50% 100% — real photo, Oscar's, and the one composition to look at before reusing. The source carries a **cut-out leaf sticker with a white outline** pasted over the top-left (his own edit, no AI markers in the file — this is a phone sticker tool, not generative). The card window cannot lose it: the source is 3000×4000 into a 0.84 frame, so the width fits exactly and only ~11% of the height can be cropped away. Focus is set to the bottom of that range, which makes the inset read as a deliberate inset rather than a cut-off smear. A plain flower frame would beat it |
+| Hosta 'Broadband' | hosta-broadband.jpg | 35% 45% — real photo, Oscar's; the broad yellow margin against dark green, which IS the cultivar. `check-plant-json` warned its 28-char soil string would overflow the soil panel; it wraps to two lines and does not, so the data was left as he wrote it |
+
 ## 5. Decision changelog
+
+- **v14.6 (six cards from Oscar's research, four photographed: 177 dealt / 85 held)**:
+  *Muehlenbeckia complexa*, *Astrantia major* 'Star of Love', *Salvia guaranitica*
+  'Black and Blue' and *Hosta* 'Broadband' are dealt; **Anemone × hybrida 'Pretty
+  Lady Emily' and *Loropetalum chinense* var. *rubrum* 'Fede' went to the hold
+  block** because no photograph came with them — an empty card never sits in the
+  deck. Three of the photographs sent have **no card in this batch** (a
+  *Physocarpus*, a white-plumed *Astilbe*-or-*Sorbaria*, and a bronze-leaved
+  *Geranium*); each one lands near a HELD card whose cultivar it does not
+  obviously match, so none was staged — VERIFY-QUEUE 37.
+- **A real bug was found and fixed on the way through: `plants-tool.js import`
+  wrote `pest:""` onto every card that had never carried the key** — 260 of
+  them — because `csvParse` gives every column a value and `'' !== undefined`.
+  `check-boot.js` rejects an empty `pest` outright (it would fall through to the
+  baked mite icon), so **the documented "edit plants.csv, then import" path was
+  broken for the whole deck**, not just for this batch. Fixed at source with the
+  reason in a comment, then verified the round-trip is lossless: all 256
+  pre-existing cards compared field-by-field against the previous commit, zero
+  differences. Anyone who ran an import since the `pest` field was introduced
+  would have hit this.
 
 - **v14.5 (two cards from Oscar's own research: 173)**: *Rhus typhina* 'Dissecta'
   and *Catalpa* × *erubescens* 'Purpurea', both built from JSON he supplied with

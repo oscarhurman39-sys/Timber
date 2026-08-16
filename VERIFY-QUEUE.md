@@ -1044,6 +1044,71 @@ one.** The other 16 suites and all 8 data checks pass.
 
 ---
 
+### 37. Batch of 2026-08-16 — three photographs with no card, two cards with no photograph
+Six researched cards and eight photographs arrived together. Four matched cleanly
+and are dealt. This is what did not match, plus what Oscar himself flagged.
+
+**A. Three photographs were NOT staged.** Each one sits next to a card already in
+the hold block, and in each case the cultivar is the problem — the same trap as
+item 33. All three files are clean captures, no C2PA, no AI markers.
+
+1. **Physocarpus** (two near-identical frames). Oscar named the genus only. The
+   deck's only Physocarpus is ***P. opulifolius* 'Diabolo'**, held. The photo
+   shows the dark purple-red foliage 'Diabolo' is grown for — but so are
+   'Summer Wine', 'Lady in Red' and 'Little Devil', and a leaf cannot separate
+   them. **Genus-level is not a match** (CARD-PROTOCOL says so explicitly). One
+   word from Oscar deals it.
+2. **White-plumed shrub.** Loose creamy-white panicles over pinnate, sharply
+   serrated leaflets on reddish stems. The deck's held *Astilbe* is **'Fanal',
+   which is blood-red with bronze foliage** — this is not that plant. `[Inference]`
+   from the photograph: it could be a white Astilbe, but the pinnate leaflets and
+   woody reddish stems read at least as well for ***Sorbaria sorbifolia***
+   (false spiraea), which has no card at all. Needs a name before it can go
+   anywhere.
+3. **Bronze-leaved Geranium.** Deeply cut bronze-brown foliage, vivid red-pink
+   stems, one small pale-lilac flower with darker veining. The deck's held
+   cranesbill is **Rozanne ('Gerwat')**, whose flowers are large, deep violet-blue
+   with a white eye, over plain green leaves. `[Inference]` this is not Rozanne.
+   The colouring could be a stressed or autumn-turning plant of something else
+   entirely; the label would settle it in a second.
+
+**B. Two cards went to the hold block for want of a photograph** — *Anemone* ×
+*hybrida* 'Pretty Lady Emily' and *Loropetalum chinense* var. *rubrum* 'Fede'.
+Both are fully researched and will deal the moment a frame arrives. Note the
+deck already carries **Pretty Lady Maria** as its fullart special, so the two
+Pretty Ladies will sit side by side — worth keeping their photographs visibly
+different.
+
+**C. What Oscar declared uncertain**, carried over from his `uncertain` blocks
+rather than accepted silently:
+- **Hosta 'Broadband'** and **Loropetalum 'Fede'** both have an **unresolved RHS
+  name status** despite having exact cultivar records. Neither card claims
+  otherwise.
+- **Loropetalum 'Fede' hardiness (H4) is INFERRED**, not read off the cultivar
+  record — from RHS var. *rubrum* guidance plus UK cold-tolerance sources. That
+  is the single softest number in the batch, and hardiness is the field this repo
+  has always found most error-prone. Mature size also disputed, 1–1.5 m against
+  ~1.8 m.
+- **Salvia 'Black and Blue' is H3** — tender, needs winter protection outside mild
+  areas. Its card says so; staff should not sell it as hardy.
+- **'Pretty Lady Emily' and 'Star of Love' are both PBR protected**, and the
+  `compliance` field carrying that has **nowhere to live on the card** (item 0c
+  again — fifth batch running). Propagation restrictions are exactly the sort of
+  thing a garden centre needs on screen.
+- Several `peak` values are practical UK interpretations of "summer" or "late
+  summer", not month ranges any source states. Loropetalum's Jan-Dec encodes
+  year-round foliage rather than flowering.
+- `careLevel` 5 and `pestRisk` 2–3 tripped `check-plant-json`'s "unconverted 0–5
+  rating?" warning on four cards. All are coherent with their own `resilience`
+  text ("pest and disease free"), so all were left as written.
+
+**D. The Salvia photograph carries a pasted cut-out leaf** with a white outline —
+his own sticker edit, not generative, no markers in the file. The card window
+cannot crop it out. See the photo register for the geometry; a plain flower frame
+would be better if he has one.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
