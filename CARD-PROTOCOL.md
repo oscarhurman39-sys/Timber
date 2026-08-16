@@ -336,6 +336,17 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.11 (the perf pixel assertion is settled: gate 17/17)**: `perf-test`'s
+  zero-pixel check has been given a measured tolerance — 64 px and a max
+  per-pixel channel-sum of 8, against an observed 17 px / Δ5 — closing
+  VERIFY-QUEUE 36 on Oscar's decision. **The bound was measured rather than
+  picked:** a staged leak (one buried card un-hidden and nudged 12 px so it
+  genuinely showed) diffs at 46,882 px / Δ443, so there are three orders of
+  magnitude between the residual being tolerated and the defect being guarded
+  against. The evidence, the bisection and that measurement all live in the
+  test's own comment, and the observed numbers now appear in the check's name on
+  every run so the drift stays visible instead of hiding under the threshold.
+
 - **v14.10 (Oscar names the parked ones: 194 dealt / 83 held)** — five new cards
   and one long-refused card dealt, all on his identifications rather than mine.
   **The correction worth reading: *Syringa vulgaris* has been sent back to the

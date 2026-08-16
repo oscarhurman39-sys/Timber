@@ -105,8 +105,44 @@ const check = (name, ok, detail = '') => {
     }
     return { px: n, max, pct: +(100 * n / (da.length / 4)).toFixed(3) };
   }, [refShot, liveShot]);
-  check('hiding buried content changes no pixel (the deck halo is stacked shadows)',
-    diff.px === 0, `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max}`);
+  /* This asserted diff.px === 0 until 2026-08-16, when it went red at deck 173
+     and stayed red. It was NOT a defect, and the evidence is worth keeping so
+     nobody re-tightens it blind:
+
+       - Bisected, not assumed. The previous commit (deck 171) passed 14/14 on
+         the same port; the next one failed with identical numbers every run.
+       - The differing pixels were dumped with coordinates. Fifteen of the first
+         sixteen were a vertical run at x=764, y=1311-1325 — the outermost edge
+         of the deck halo — reading (0,0,0) against (1,1,1). One unit in 255.
+       - Unhiding the buried cards makes that edge DARKER, not lighter. Nothing
+         is peeking past the top card; it is more `.tcard` box-shadows stacking
+         across an 8-bit rounding boundary, which is the cause this check has
+         been named after since it was written.
+       - It scales with the pile: max delta was 3 at deck 173 and 5 at 194.
+
+     So the intent is unchanged — buried content must not become visible — but
+     it is now expressed as "nothing a screen could show" rather than "not one
+     bit". The real failure this must still catch is a buried card's CONTENT
+     appearing, which means card colours: deltas in the tens or hundreds across
+     a region of pixels, orders of magnitude past these bounds.
+
+     The bounds below were not guessed. A leak was staged and measured: one
+     buried card un-hidden and nudged 12px so part of it genuinely showed past
+     the top card came out at **46882 px, max delta 443** — against a residual of
+     17 px at max delta 5. Three orders of magnitude on both axes, so the budget
+     is nowhere near being able to swallow a real one. Re-run that measurement
+     (scratch script, same procedure as this block) before ever widening it.
+
+     The observed numbers are in the check's own name on every run, passing or
+     failing, so the drift stays visible instead of hiding under a threshold. If
+     px climbs into the hundreds, or max into the tens, that is a different
+     phenomenon and wants looking at rather than another loosening. */
+  const HALO_MAX_PX = 64;      /* 17 at deck 194, in a 780x1560 buffer */
+  const HALO_MAX_DELTA = 8;    /* sum across r+g+b; 5 at deck 194, i.e. ~2/channel */
+  check(`hiding buried content shows nothing (${diff.px}px, max Δ${diff.max}; halo shadows round at the edge)`,
+    diff.px <= HALO_MAX_PX && diff.max <= HALO_MAX_DELTA,
+    `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max} ` +
+    `— budget ${HALO_MAX_PX}px / Δ${HALO_MAX_DELTA}`);
 
   /* ---- 4. a drag must not force layout ---- */
   /* settle the photo pipeline first: the background trickle loader (tricklePhotos)

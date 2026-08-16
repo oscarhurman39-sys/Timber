@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (gate green) — **17/17 sequential for the first time since
+  the deck passed 171.** VERIFY-QUEUE 36 settled on Oscar's call: the perf
+  zero-pixel assertion now carries a measured tolerance (64px / Δ8 against an
+  observed 17px / Δ5), with a staged leak measured at 46,882px / Δ443 to prove
+  the budget cannot swallow a real defect. Numbers now print in the check's name
+  every run so the drift stays visible.
 progress: 2026-08-16 (Oscar names the parked) — **deck 194, hold 83.** Five new
   cards plus Ninebark 'Diabolo', all on his identifications: Cornus sericea
   'Variegata' and Calycanthus 'Aphrodite' from the parked files, Lonicera

@@ -992,7 +992,7 @@ but this is the fourth batch to hit item 0c's missing fields.
 
 ---
 
-### 36. perf-test's zero-pixel assertion has outgrown the deck — GATE IS RED, needs Oscar's call
+### 36. perf-test's zero-pixel assertion outgrew the deck — SETTLED 2026-08-16, gate green
 2026-08-16. Adding the two cards above took the deck 171 → 173 and turned
 `perf-test`'s pixel-parity check red:
 
@@ -1039,8 +1039,27 @@ person knows what the tolerance is buying and what it would hide. **Not done
 without Oscar saying so**, because loosening a gate to make one's own change pass
 is precisely the move that should never be quiet.
 
-**Until it is settled, this branch's gate reads 16/17, and the failure is this
-one.** The other 16 suites and all 8 data checks pass.
+**SETTLED 2026-08-16 — Oscar chose option 1, and it is done.** The assertion now
+reads *"hiding buried content shows nothing"* with a budget of **64 px and a max
+per-pixel channel-sum of 8**, against an observed 17 px / Δ5 at deck 194. The
+full evidence above is written into the test's own comment so the next person to
+find it does not re-tighten it blind.
+
+**The budget was measured, not guessed.** A leak was staged and put through the
+same diff: one buried card un-hidden and nudged 12 px so part of it genuinely
+showed past the top card came out at **46,882 px, max delta 443**. Against a
+residual of 17 px at Δ5 that is three orders of magnitude on both axes, so the
+tolerance cannot swallow a real defect — which was the whole worry, given the
+v14.1 menu-panel precedent where a deck-growth failure turned out to be real.
+
+**Two things keep it honest.** The observed numbers are now in the check's name
+on **every run, passing or failing**, so the drift stays in the suite output
+instead of disappearing under a threshold — it has already moved from Δ3 at deck
+173 to Δ5 at 194. And the comment says plainly that px in the hundreds or max in
+the tens is a different phenomenon and wants investigating, not another
+loosening.
+
+**The gate is now green apart from nothing: 17/17 sequential.**
 
 ---
 
