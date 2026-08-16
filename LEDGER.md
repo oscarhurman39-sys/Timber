@@ -5,6 +5,11 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (Tetrapanax) — **deck 189, hold 83.** Rice-paper Plant
+  'Rex' dealt from Oscar's photograph. Its source was 1244x2960, so staging would
+  have produced a 504px-wide master; cropped to the two big leaves first so the
+  card gets ~1000px of real width. First use of the plants.csv held-flag import
+  path since the pest bug was fixed — clean. NOT deployed: live is r91 at 188.
 progress: 2026-08-16 (SHIPPED again) — live fast-forwarded to 553805a on
   Oscar's say-so. **Live goes 173 -> 188 cards at r91**, carrying everything from
   the day's second half: the ten-card batch, 'Pretty Lady Emily', and the

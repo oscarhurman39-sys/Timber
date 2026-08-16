@@ -325,7 +325,17 @@ Focal point recorded here when off-centre:
 | Hypericum × inodorum MIRACLE GRANDEUR ('Allgrandeur') | hypericum-inodorum-miracle-grandeur-allgrandeur.jpg | 50% 40% default — red autumn berries on green foliage. Reads as the deliberate opposite of MIRACLE NIGHT above, which is the useful thing for staff |
 | Syringa vulgaris | syringa-vulgaris.jpg | 50% 30% — the weakest frame of the batch and known to be: **foliage only, on a card whose text leads with "fragrant lilac-purple panicles"**. Lilac flowers May-Jun, so it cannot be fixed until spring. Dealt rather than held because a real leaf beats an empty card, but it is first in the queue for a reshoot |
 
+| Tetrapanax papyrifer 'Rex' | tetrapanax-papyrifer-rex.jpg | 50% 40% default — real photo, Oscar's; two enormous palmate leaves filling the frame, which is the entire point of this plant. **The one photo in the deck whose SOURCE was cropped before staging, and the reason is arithmetic, not taste:** the file arrived 1244×2960, a ratio of 0.42 against the card window's 0.84. Staging caps the LONG edge at 1200, so the master would have come out **504 px wide** — half the ~1000 px the card renders at, i.e. visibly soft — and object-fit would have thrown away half the height anyway. Cropping to the lower 1244×1500 (the two big leaves, above the tarmac) makes the long edge the *height*, so the master lands at **995×1200** and the card gets its full width of real pixels. Uncropped source kept out of the repo; if it is ever restaged, redo the crop or accept the softness |
+
 ## 5. Decision changelog
+
+- **v14.9 (Rice-paper Plant dealt: 189 / 83)**: *Tetrapanax papyrifer* 'Rex',
+  held since the wishlist batch, photographed and dealt. Moved via the
+  `plants.csv` `held` flag and `plants-tool.js import` — **the first use of that
+  documented path since the `pest:""` bug was fixed in v14.6**, and it round-
+  tripped clean. The photograph needed a source crop for a resolution reason
+  set out in the register above; that is the only cropped source in the deck and
+  it should stay rare.
 
 - **v14.8 (ten cards from Oscar's research: 188 dealt / 84 held)** — the largest
   single batch the deck has taken. All ten came with his own JSON and his own
