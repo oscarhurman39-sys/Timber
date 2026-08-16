@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (SHIPPED again) — live fast-forwarded to 553805a on
+  Oscar's say-so. **Live goes 173 -> 188 cards at r91**, carrying everything from
+  the day's second half: the ten-card batch, 'Pretty Lady Emily', and the
+  Euphorbia / Coprosma / Chamaerops photo replacements. Deployed knowingly with
+  the 16/17 gate (VERIFY-QUEUE 36, still one unit in 255 on seventeen edge
+  pixels) and with the sequential-gate caveat from 39D recorded.
 progress: 2026-08-16 (batch of ten) — **deck 188, hold 84.** The largest single
   batch the deck has taken: ten researched cards from Oscar, each with his own
   photograph. Geranium 'Bob’s Blunder' also CLOSES the unidentified bronze
