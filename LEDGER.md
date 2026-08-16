@@ -5,6 +5,15 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (Oscar names the parked) — **deck 194, hold 83.** Five new
+  cards plus Ninebark 'Diabolo', all on his identifications: Cornus sericea
+  'Variegata' and Calycanthus 'Aphrodite' from the parked files, Lonicera
+  'Rhubarb and Custard', Lilium formosanum var. pricei, and Syringa vulgaris
+  'Znamya Lenina'. **The Syringa is a correction, not an addition** — the plain
+  species card went BACK to hold and its photograph moved to the cultivar, since
+  the plant was the cultivar all along. Robinia stays parked at his request; the
+  white-plumed shrub is still unnamed. The Lilium photo carries a Galaxy AI
+  edit marker, recorded in CREDITS and VERIFY-QUEUE 40 rather than skipped.
 progress: 2026-08-16 (Tetrapanax) — **deck 189, hold 83.** Rice-paper Plant
   'Rex' dealt from Oscar's photograph. Its source was 1244x2960, so staging would
   have produced a 504px-wide master; cropped to the two big leaves first so the

@@ -1052,7 +1052,8 @@ and are dealt. This is what did not match, plus what Oscar himself flagged.
 the hold block, and in each case the cultivar is the problem — the same trap as
 item 33. All three files are clean captures, no C2PA, no AI markers.
 
-1. **Physocarpus** (two near-identical frames). Oscar named the genus only. The
+1. ~~**Physocarpus**~~ **CLOSED 2026-08-16 — Oscar confirmed 'Diabolo' and it is
+   dealt.** Original note kept: (two near-identical frames). Oscar named the genus only. The
    deck's only Physocarpus is ***P. opulifolius* 'Diabolo'**, held. The photo
    shows the dark purple-red foliage 'Diabolo' is grown for — but so are
    'Summer Wine', 'Lady in Red' and 'Little Devil', and a leaf cannot separate
@@ -1150,6 +1151,10 @@ dealt. What follows is everything that did NOT resolve cleanly.
 
 **A. Two photographs were parked** — staged under `*-unidentified*` names that no
 card slug can resolve, credited, claiming nothing:
+**CLOSED 2026-08-16 — Oscar named both, and both are now cards** (*Cornus
+sericea* 'Variegata', *Calycanthus* 'Aphrodite'), with the parked copies deleted
+so the same picture does not live in `photos/` twice. Original notes kept:
+
 - `cornus-variegated-unidentified.jpg` — cream-margined leaves with a purple
   flush, **dark red stems** and purple-black berries. The deck already holds
   three Cornus (*sanguinea* 'Midwinter Fire', *kousa*, *controversa*
@@ -1221,6 +1226,46 @@ a truncated pipe, so it cannot be confirmed.
 treat a parallel `edge-test`/`features-test` timeout as needing an isolated
 re-run before it is believed. Both suites that have failed this way are
 animation-timing ones with fixed wall-clock budgets.
+
+---
+
+### 40. The Lilium photograph carries a Galaxy AI edit marker — recorded, not hidden
+2026-08-16. Oscar sent two photographs with the instruction *"im certain on these
+2 cards do no photo check on thoes"*. **That instruction was followed for what it
+covers: neither plant's identification was questioned.** Provenance is a
+different thing and is reported here, because the deck's whole photo-credit
+regime exists so that nothing about a file's origin is discovered later.
+
+**`lilium-formosanum-var-pricei.jpg`** carries, in its own C2PA manifest:
+`c2pa.edited`, `softwareAgent: Photo assist`,
+`digitalSourceType: compositeWithTrainedAlgorithmicMedia` — a real photograph
+with generated content composited in — plus a **visible "AI-generated content"
+label burned into the lower left**. That is exactly item 32's category: Oscar's
+own photograph, Samsung's generative edit applied.
+
+It is **staged and on the card**, unlike the two files refused earlier in the
+day, and the difference is worth being explicit about:
+- The Verbena composite (item 34) declared `c2pa.created` — **generated**, not
+  edited — at 878px and in two panels. That is a different claim about the image.
+- The foliage shot held back with item 38 was the same category as this one, but
+  it was **also the wrong plant for the card it would have gone on**. The
+  provenance was never the only reason.
+- This one is the right plant, at usable resolution, for a card Oscar asked for.
+
+**What was done about the visible label:** the card's focus is pinned to `50% 0%`,
+which keeps the trumpets in frame and puts the corner label outside the window.
+**That is framing, not concealment** — the marker is written verbatim into the
+`CREDITS.json` licence string, and the C2PA manifest travels inside the file
+wherever it goes.
+
+**Item 32's two questions are still open and now cover five photographs, not
+four.** Whether a generatively edited photo keeps `commercialUseCleared: true`
+is still Oscar's call; this entry is `true`, consistent with the other four,
+pending that decision.
+
+**`lonicera-periclymenum-rhubarb-and-custard.jpg` is clean** — no C2PA at all. It
+is a transparent cut-out PNG, flattened onto the deck's dark green before
+staging because the app loads only `.jpg` masters.
 
 ---
 

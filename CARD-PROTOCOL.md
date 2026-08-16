@@ -327,7 +327,35 @@ Focal point recorded here when off-centre:
 
 | Tetrapanax papyrifer 'Rex' | tetrapanax-papyrifer-rex.jpg | 50% 40% default — real photo, Oscar's; two enormous palmate leaves filling the frame, which is the entire point of this plant. **The one photo in the deck whose SOURCE was cropped before staging, and the reason is arithmetic, not taste:** the file arrived 1244×2960, a ratio of 0.42 against the card window's 0.84. Staging caps the LONG edge at 1200, so the master would have come out **504 px wide** — half the ~1000 px the card renders at, i.e. visibly soft — and object-fit would have thrown away half the height anyway. Cropping to the lower 1244×1500 (the two big leaves, above the tarmac) makes the long edge the *height*, so the master lands at **995×1200** and the card gets its full width of real pixels. Uncropped source kept out of the repo; if it is ever restaged, redo the crop or accept the softness |
 
+| Cornus sericea 'Variegata' | cornus-sericea-variegata.jpg | 50% 40% default — real photo, Oscar's, and **the file that sat parked as `cornus-variegated-unidentified.jpg` until he named it**; the parked copy was deleted once this card existed. Cream-edged leaves with the purple flush and the red stems, which is the whole card. Fourth Cornus in the deck — check the slug |
+| Calycanthus 'Aphrodite' | calycanthus-aphrodite.jpg | 50% 40% default — the one Oscar sent as *"fuck I forgot what thats called"*, parked as `calycanthus-unidentified.jpg`, then named by him. Large magnolia-like purple-red flower with the yellow-tipped centre, cultivar-confirming. Parked copy deleted |
+| Syringa vulgaris 'Znamya Lenina' | syringa-vulgaris-znamya-lenina.jpg | 50% 40% default — **this photograph moved here from the plain-species card.** See the changelog: the plant was the cultivar all along. Still foliage only, and the card's text still leads with the flowers, so a May reshoot remains the fix |
+| Lonicera periclymenum 'Rhubarb and Custard' | lonicera-periclymenum-rhubarb-and-custard.jpg | 50% 40% default — **a transparent cut-out PNG, not a photograph in the usual sense.** Flattened onto the deck's own dark green (`#0d1408`) before staging, because the app only loads `.jpg` masters and a transparent PNG would have gone black at an arbitrary edge. The white sticker outline reads as deliberate against the frame. The pink-to-custard flower ageing is all in one head, which is exactly what the name promises |
+| Lilium formosanum var. pricei | lilium-formosanum-var-pricei.jpg | 50% 0% — pinned to the top for **two** reasons. The trumpets sit in the top third and the default buried them behind the plaque; and the source carries a **visible "AI-generated content" label burned into its lower left**, which the top-anchored window excludes. **That is framing, not concealment** — the marker is recorded verbatim in `CREDITS.json` and the C2PA manifest travels inside the file. Its credentials read `c2pa.edited`, `softwareAgent: Photo assist`, `digitalSourceType: compositeWithTrainedAlgorithmicMedia`, i.e. VERIFY-QUEUE 32's category |
+| Physocarpus opulifolius 'Diabolo' | physocarpus-opulifolius-diabolo.jpg | 50% 40% default — **dealt on Oscar's direct confirmation of the cultivar**, which is the whole reason it was refused twice before: the deck's only ninebark is 'Diabolo' and a dark leaf cannot separate it from 'Summer Wine', 'Lady in Red' or 'Little Devil'. One word from him settled what no amount of looking could |
+
 ## 5. Decision changelog
+
+- **v14.10 (Oscar names the parked ones: 194 dealt / 83 held)** — five new cards
+  and one long-refused card dealt, all on his identifications rather than mine.
+  **The correction worth reading: *Syringa vulgaris* has been sent back to the
+  hold block and its photograph moved to a new card.** The species card was
+  built from his JSON one batch ago and dealt with a leaf photograph; he has
+  since supplied the actual plant, ***S. vulgaris* 'Znamya Lenina'**. So the
+  photograph was never the species' — it was the cultivar's. Rather than delete
+  the species card, it goes back to hold with its research intact and no
+  photograph, which is exactly what the hold block is for. `photos/
+  syringa-vulgaris.jpg` and its derivative were removed and the CREDITS entry
+  pruned.
+  **Two parked files became cards** (`cornus-variegated-unidentified.jpg`,
+  `calycanthus-unidentified.jpg`) and their parked copies were deleted so the
+  same picture does not sit in `photos/` twice. **Robinia stays parked** at
+  Oscar's request. **The white-plumed shrub from VERIFY-QUEUE 37 is still open.**
+  **One provenance flag, stated rather than buried:** the Lilium photograph
+  carries a Galaxy AI generative-edit marker and a visible AI label. Oscar asked
+  for no photo checks on that card and its identification was not questioned;
+  the provenance is a separate matter and is recorded in full in `CREDITS.json`
+  rather than skipped. See VERIFY-QUEUE 40.
 
 - **v14.9 (Rice-paper Plant dealt: 189 / 83)**: *Tetrapanax papyrifer* 'Rex',
   held since the wishlist batch, photographed and dealt. Moved via the
