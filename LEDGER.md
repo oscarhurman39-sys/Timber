@@ -5,6 +5,11 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (verbena) — an image for the held Purple Top Verbena was
+  **refused**: its own Google C2PA manifest declares it created by generative AI
+  (`trainedAlgorithmicMedia`), with SynthID and a visible sparkle watermark. Also
+  878px wide and a two-panel composite. Nothing staged, card still held, wanting
+  the original camera JPEG — VERIFY-QUEUE item 34. Deck unchanged at 170.
 progress: 2026-08-15 (photo batch) — **deck 168 -> 170, hold 86 -> 84.** Five
   photographs, all against cards that already existed. Dealt Rosemary 'Miss
   Jessopp's Upright' and Coral Bark Maple (*Acer palmatum* 'Sango-kaku' — coral

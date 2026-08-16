@@ -301,6 +301,18 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.3 (an image was offered for Purple Top Verbena and refused)**: the file
+  carries a signed Google C2PA chain declaring `c2pa.created` — "Created by
+  Google Generative AI", `digitalSourceType: trainedAlgorithmicMedia` — plus a
+  SynthID watermark and the visible sparkle glyph added as a `composite` edit.
+  That is the exact marker this protocol says to refuse on sight, so
+  *Verbena bonariensis* stays held and nothing was staged. Two further faults
+  would each have stopped it anyway: 878×1216 px is under the 1200px floor, and
+  it is a two-panel composite that a single portrait card window cannot crop
+  without showing the seam. **The scan is the reason this was caught before it
+  landed, not after** — read the credentials before staging, every time.
+  VERIFY-QUEUE item 34.
+
 - **v14.2 (five photos in, one refused: 170 dealt)**: Oscar sent five phone
   photographs against cards that already existed — three held, two dealt and
   wanting a better frame. **Dealt: Rosemary 'Miss Jessopp's Upright' and Coral
