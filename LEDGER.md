@@ -5,6 +5,13 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (SHIPPED) — **the whole day's work is live.** Fast-forwarded
+  the live branch to e7a33c7 on Oscar's say-so; *Deploy to GitHub Pages* run #51
+  went green, and green means live (the workflow verifies the served bytes against
+  the build stamp before it passes). Live went 168 -> 173 cards at r84, carrying
+  five new cards and two replaced photos. Deployed knowingly with a 16/17 gate —
+  VERIFY-QUEUE 36, one unit in 255 on sixteen edge pixels — which is recorded
+  rather than glossed.
 progress: 2026-08-16 (two new cards) — **deck 173.** Oscar wrote the research
   JSON for *Rhus typhina* 'Dissecta' and *Catalpa* × *erubescens* 'Purpurea' and
   shot both plants; cards built and dealt. The sumach settles VERIFY-QUEUE 33 as
