@@ -1109,6 +1109,39 @@ would be better if he has one.
 
 ---
 
+### 38. Three photographs parked 2026-08-16 — carried, credited, claiming nothing
+Oscar sent these with "store on temporary photos" / "store the hebe unless we did
+that hebe already". They are staged in `photos/` under names **no card slug can
+ever resolve**, so `data-audit` lists them as unclaimed spares rather than any
+card picking them up by accident. All clean captures, no C2PA, no AI markers.
+
+- `robinia-unidentified-leaf.jpg` and `robinia-unidentified-thorn.jpg` — pinnate
+  leaves of rounded leaflets, and a close-up of the **paired purple-black
+  stipular spines at a node**, which is the giveaway for *Robinia*. `[Inference]`
+  the genus; the **species and cultivar are open**, and the deck has no Robinia
+  card at all. If it is *R. pseudoacacia* 'Frisia' the foliage would be gold, and
+  this is plain green — so either the straight species or something else in the
+  genus. The thorn shot is a genuinely good detail frame for whatever card it
+  ends up on.
+- `hebe-variegated-unidentified.jpg` — cream-margined leaves with deep purple
+  buds. **It is not the deck's held Hebe 'Red Edge'**, which carries grey-green
+  leaves with a thin red rim and no cream variegation, so "unless we did that
+  hebe already" resolves to: we have not, and this is a different plant. Reads
+  like one of the variegated *H.* × *franciscana* selections. `[Unverified]`.
+
+**Two smaller notes from the same batch:**
+- The 'Pretty Lady Emily' photograph has an **`Achillea` Sassy Summer label** from
+  a neighbouring pot in the bottom of the frame. The focus is pinned to 0% so it
+  hides behind the stats plaque — see the photo register before retuning it.
+- The old Coprosma 'Inferno' master is kept as `coprosma-inferno-summer.jpg`. It
+  shows the green-yellow summer state; the card's `visual` describes the cold
+  purple-brown-and-red state, which the new master shows. **Worth deciding
+  whether a card should ever carry two seasonal frames** — `PHOTO_SWAP` already
+  exists in the app for a related purpose, and this is the first card where the
+  text plainly covers two looks and both photographs exist.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

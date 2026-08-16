@@ -309,7 +309,25 @@ Focal point recorded here when off-centre:
 | Salvia guaranitica 'Black and Blue' | salvia-guaranitica-black-and-blue.jpg | 50% 100% — real photo, Oscar's, and the one composition to look at before reusing. The source carries a **cut-out leaf sticker with a white outline** pasted over the top-left (his own edit, no AI markers in the file — this is a phone sticker tool, not generative). The card window cannot lose it: the source is 3000×4000 into a 0.84 frame, so the width fits exactly and only ~11% of the height can be cropped away. Focus is set to the bottom of that range, which makes the inset read as a deliberate inset rather than a cut-off smear. A plain flower frame would beat it |
 | Hosta 'Broadband' | hosta-broadband.jpg | 35% 45% — real photo, Oscar's; the broad yellow margin against dark green, which IS the cultivar. `check-plant-json` warned its 28-char soil string would overflow the soil panel; it wraps to two lines and does not, so the data was left as he wrote it |
 
+| Anemone × hybrida 'Pretty Lady Emily' | anemone-hybrida-pretty-lady-emily.jpg | 50% 0% — real photo, Oscar's; pale-pink semi-double with the yellow boss, which is the card's own description. Focus pinned to the TOP for a specific reason: **a nursery label for `Achillea` Sassy Summer sits in the bottom of the frame**, belonging to a neighbouring pot. At 0% it falls behind the stats plaque. If this focus is ever retuned downward, that label comes back and the card starts naming the wrong plant |
+| Euphorbia characias 'Silver Edge' | euphorbia-characias-silver-edge.jpg (**replaced 2026-08-16**) | 50% 40% default — like-for-like upgrade. **The deck holds three Euphorbias and two of them are variegated**, so this was matched against the cards' own photographs before staging, not by eye alone: the new frame's narrow blue-grey leaves with soft cream margins track the outgoing 'Silver Edge' photo closely, where 'Ascot Rainbow' is unmistakably yellow with an orange-pink flush. Do not let these two swap |
+| Coprosma 'Inferno' | coprosma-inferno.jpg (**replaced 2026-08-16**) | 50% 45% — the card sells "leaves deepen purple-brown with vivid red margins **in cold**", and the outgoing frame showed the green-yellow summer state instead. The new one is the cold colouring, i.e. the thing the card is actually about. **The old frame was kept** as `coprosma-inferno-summer.jpg` rather than discarded — same plant, other season, and the card describes both |
+| Chamaerops humilis | chamaerops-humilis.jpg (**replaced 2026-08-16**) | 50% 35% — Oscar's call, and he was right: the outgoing frame was a whole plant in a white pot on gravel, most of the card being decking, gravel and a stuck-on label. The new one is a single fan frond filling the window |
+
 ## 5. Decision changelog
+
+- **v14.7 (one deal, three photo replacements, three parked: 178 dealt / 84 held)**:
+  **'Pretty Lady Emily' is dealt** one batch after being held for want of a
+  photograph — the fastest a held card has turned around. **Silver Edge, Inferno
+  and Chamaerops humilis got new masters**, each with its `photos/card/*.webp`
+  re-derived. The Inferno swap is worth reading as more than an upgrade: its old
+  frame showed the summer state while the card text sells the winter colouring,
+  so the card and its picture were describing different seasons.
+  **Three photographs were parked rather than filed** — two of a spined,
+  pinnate-leaved tree (Robinia, cultivar unknown) and one of a cream-variegated
+  Hebe that is plainly not the deck's held 'Red Edge'. They sit in `photos/` under
+  `*-unidentified-*` names, which no card slug can resolve, so they are carried
+  and credited without claiming anything. VERIFY-QUEUE 38.
 
 - **v14.6 (six cards from Oscar's research, four photographed: 177 dealt / 85 held)**:
   *Muehlenbeckia complexa*, *Astrantia major* 'Star of Love', *Salvia guaranitica*

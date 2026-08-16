@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (photo pass) — **deck 178, hold 84.** 'Pretty Lady Emily'
+  dealt one batch after being held. New masters for Euphorbia 'Silver Edge',
+  Coprosma 'Inferno' and Chamaerops humilis — the Inferno one a correction of
+  season rather than a mere upgrade, since the card sells the winter colouring
+  and its old photo showed summer. Three photographs parked unclaimed (Robinia
+  x2, a variegated Hebe) under names no card slug resolves: VERIFY-QUEUE 38.
 progress: 2026-08-16 (six more cards) — **deck 177, hold 85.** Oscar's research
   JSON for six plants plus eight photographs. Dealt Muehlenbeckia complexa,
   Astrantia 'Star of Love', Salvia guaranitica 'Black and Blue' and Hosta

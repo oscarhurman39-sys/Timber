@@ -211,6 +211,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "anemone-hybrida-pretty-lady-emily.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "anemone-hybrida-pretty-lady-maria-aneplaria.jpg",
    "source": "oscar (AI-edited on device) — unknown synthetic content",
    "licence": "Oscar's own capture, AI-edited — commercial use UNKNOWN, not cleared",
@@ -529,6 +539,16 @@
    "sourceUrl": null,
    "commit": "4cd816c",
    "commitSubject": "Add Meyer's Lemon (first edible/citrus card)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "coprosma-inferno-summer.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1019,6 +1039,16 @@
    "sourceUrl": null,
    "commit": null,
    "commitSubject": null,
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hebe-variegated-unidentified.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1794,6 +1824,26 @@
   },
   {
    "file": "rhus-typhina-dissecta.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "robinia-unidentified-leaf.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "robinia-unidentified-thorn.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
