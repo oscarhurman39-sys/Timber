@@ -299,7 +299,25 @@ Focal point recorded here when off-centre:
 | Nerium oleander | nerium-oleander.jpg (**replaced 2026-08-15**) | 50% 40% default — swapped for a photo Oscar sent to replace the previous image. Pink five-lobed flowers with narrow leathery leaves in whorls against sky; species-confirming, and it now matches the plain phone-camera character of the rest of the deck rather than reading as a stock bokeh plate. Old file not kept |
 | Corylus avellana 'Contorta' | corylus-avellana-contorta.jpg (**replaced 2026-08-15**) | 50% 22% — swapped on Oscar's instruction. The old frame showed one twisted stem behind a lot of leaf; this one has several corkscrew stems reading at once, which is the whole point of the plant. Focus raised from the 50% 40% default because the source is unusually tall (810×1200 after staging) and the default pushed the best stems off the top; 22% keeps them in the band above the plaque. Crumpled rounded hazel leaves confirm it |
 
+| Verbena bonariensis | verbena-bonariensis.jpg | 50% 10% — real photo, Oscar's, **no C2PA manifest at all** (the clean original of a frame first offered inside an AI-merged two-panel composite, refused; see VERIFY-QUEUE 34). Flat-topped head of small five-lobed lilac flowers, species-confirming, with a honeybee taken by a white crab spider on it — the pollinator story the card sells, in the photograph. Focus pushed high because the head sits in the top third and the default dropped it behind the plaque |
+
 ## 5. Decision changelog
+
+- **v14.4 (Verbena dealt from the original; the composite still refused)**: Oscar
+  corrected the record — he took both halves of the refused two-panel image
+  himself, and the AI merged them. The refusal of *that file* stands (declared
+  generated, 878px, a seam a portrait crop cannot avoid), but "AI-generated" was
+  the wrong description of his underlying work and the ownership concern raised
+  with it was overstated. He then sent the originals: the bee frame carries no
+  C2PA manifest at all and is now on the card. Deck 170 → 171.
+  **The foliage original was still not staged** — `softwareAgent: Photo assist`,
+  `compositeWithTrainedAlgorithmicMedia`, and a visible "AI-generated content"
+  label, i.e. VERIFY-QUEUE item 32's category caught before landing instead of
+  after; and its leaves read as a different vervain from the card's plant.
+  **The lesson worth keeping: read the credentials, then say what they say and
+  no more.** They establish how a file was made. They do not establish who owns
+  the work that went into it, and the first version of this refusal blurred the
+  two.
 
 - **v14.3 (an image was offered for Purple Top Verbena and refused)**: the file
   carries a signed Google C2PA chain declaring `c2pa.created` — "Created by

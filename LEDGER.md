@@ -5,6 +5,13 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-16 (verbena, part two) — **deck 171.** Oscar pushed back on the
+  refusal below and was right: he took both photographs, the AI only merged them.
+  He sent the originals; the bee-and-crab-spider frame has no C2PA manifest at
+  all and is now on the Purple Top Verbena card. The foliage original was still
+  held back — Galaxy "Photo assist" edit marker plus a visible AI label, and its
+  leaves read as a different vervain (V. hastata or V. officinalis) from the
+  card's plant. VERIFY-QUEUE 34.
 progress: 2026-08-16 (verbena) — an image for the held Purple Top Verbena was
   **refused**: its own Google C2PA manifest declares it created by generative AI
   (`trainedAlgorithmicMedia`), with SynthID and a visible sparkle watermark. Also

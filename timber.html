@@ -909,7 +909,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r80 · 2026-08-15 · 33c673a';
+const BUILD='r82 · 2026-08-16 · 8bd109a';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -5177,6 +5177,30 @@ const PLANTS = [
    uses:"winter stems · Japanese-style gardens · containers · small gardens",
    size:"4-8m H × 2.5-4m W",
    seasonalImpact:"", growthSpeed:7, pestRisk:7, thirst:13, careLevel:9, sunNeed:60, sunMin:30},
+  {common:"Purple Top Verbena", latin:"Verbena bonariensis", hue:290,
+   visual:"Tiny lilac-purple flower clusters floating on tall airy wiry stems you see straight through",
+   water:"Water while establishing; drought tolerant after",
+   aspect:"South / West",
+   soil:"Any free-draining soil; Self-seeds freely in gravel",
+   prune:"Leave stems standing for winter · cut down in early spring",
+   source:"",
+   peak:"Jul-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"'Lollipop' — compact",
+   hardiness:"H4",
+   resilience:"short-lived but seeds itself onward · butterflies swarm it",
+   uses:"gravel gardens · prairie planting · pollinators · see-through screening",
+   size:"1.5-2.5m H × 0.5-1m W",
+   seasonalImpact:"", growthSpeed:16, pestRisk:4, thirst:8, careLevel:4, sunNeed:95, sunMin:70},
 ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
@@ -7189,30 +7213,6 @@ const PLANTS_ON_HOLD=[
    size:"1.5-2.5m H × 0.1-0.5m W",
    seasonalImpact:"", growthSpeed:15, pestRisk:6, thirst:12, careLevel:6, sunNeed:80, sunMin:40},
 
-  {common:"Purple Top Verbena", latin:"Verbena bonariensis", hue:290,
-   visual:"Tiny lilac-purple flower clusters floating on tall airy wiry stems you see straight through",
-   water:"Water while establishing; drought tolerant after",
-   aspect:"South / West",
-   soil:"Any free-draining soil; Self-seeds freely in gravel",
-   prune:"Leave stems standing for winter · cut down in early spring",
-   source:"",
-   peak:"Jul-Oct",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"'Lollipop' — compact",
-   hardiness:"H4",
-   resilience:"short-lived but seeds itself onward · butterflies swarm it",
-   uses:"gravel gardens · prairie planting · pollinators · see-through screening",
-   size:"1.5-2.5m H × 0.5-1m W",
-   seasonalImpact:"", growthSpeed:16, pestRisk:4, thirst:8, careLevel:4, sunNeed:95, sunMin:70},
 
   {common:"Rudbeckia 'Goldsturm'", latin:"Rudbeckia fulgida var. sullivantii 'Goldsturm'", hue:45,
    visual:"Sheets of golden-yellow daisies with near-black cones, from midsummer to the frosts",
@@ -8003,6 +8003,7 @@ const PHOTO_SWAP={
    The lesson is the general one: judge a swap on the two CARDS, not the two
    files. */
 const PHOTO_FOCUS={
+  'verbena-bonariensis':'50% 10%',
   'corylus-avellana-contorta':'50% 22%',
   'acer-palmatum-sango-kaku':'52% 45%',
   'salvia-rosmarinus-miss-jessopp-s-upright':'50% 45%',
