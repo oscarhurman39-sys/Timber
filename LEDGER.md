@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (SHIPPED, after the outage) — **live is r108 at 202 cards.**
+  Run #55 went green on every step including the byte-verify, about 40 minutes
+  after the Pages API was returning 503 to three consecutive attempts. Nothing
+  in the repo was changed to fix it; the outage cleared. The live branch was
+  fast-forwarded to 3b6c12f rather than 9dc1e40 so the deploy also carried the
+  README's new Publishing warnings.
 progress: 2026-08-17 (deploy #53) — live fast-forwarded to 9dc1e40, taking the
   site from 188 to **202 cards at r107**. **The first attempt FAILED and it was
   not our code**: actions/deploy-pages returned HTTP 503, "No server is
