@@ -1433,6 +1433,45 @@ pair to check a photo against.
 
 ---
 
+### 44. A summer-flowering Daphne that is not the deck's Daphne — and a Forsythia photo its own card denies
+2026-08-17.
+
+**A. The Daphne is parked, not dealt.** Oscar sent it for *"the only daphne in
+deck"*, which is *D. bholua* 'Jacqueline Postill' — **held**, not dealt. It is
+almost certainly a different plant, and the evidence is the calendar rather than
+my eye:
+- **'Jacqueline Postill' flowers January to March.** The card's own `peak` says
+  `Jan-Mar` and its `visual` says *"in the depths of winter"*. This photograph
+  was taken in **mid-August**, in full flower.
+- The leaves are small, narrow and closely set on a low bushy plant.
+  *D. bholua* is tall and upright with long leathery leaves.
+- `[Inference]`: the ***D.* × *transatlantica*** group — ETERNAL FRAGRANCE
+  ('Blafra') or PINK FRAGRANCE — which is compact, small-leaved, and flowers
+  right through summer. Exactly what is in the frame.
+
+Parked as `daphne-unidentified-summer.jpg`. If it is a transatlantica it wants
+its **own card** — and it is arguably the better garden-centre plant of the two,
+since it flowers when customers are actually in the shop.
+
+**B. The Forsythia IS dealt, and its card now contradicts its own picture.**
+Oscar named it and the leaf is consistent with *F.* × *intermedia*, so it was
+dealt. But the card reads *"Bare stems buried under brilliant golden-yellow
+flowers **before a single leaf appears**"* with peak Mar-Apr, and the photograph
+is **nothing but leaves**.
+
+This is a harder version of the *Syringa* case. There, the card led with flowers
+and got foliage — a gap. Here the card's wording **explicitly denies** what the
+picture shows: it promises no leaves, and the picture is all leaf. A member of
+staff reading the card and looking at the card sees a contradiction on one
+screen. **It is first in the reshoot queue and March is the month.**
+
+**C. Also from this batch:** *Ophiopogon planiscapus* 'Kokuryū' is built and held
+for want of a photograph — the black mondo grass is an easy one to shoot any time
+of year, being evergreen. And the *Sempervivum* frame carries two nursery labels;
+the plant is unmistakable so it was dealt, but a tidier shot would be better.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

@@ -355,7 +355,27 @@ Focal point recorded here when off-centre:
 
 | Buddleja davidii LITTLE RUBY ('Botex 006') | buddleja-davidii-little-ruby-botex-006.jpg | 50% 40% default — real photo, Oscar's, clean. Spikes at every stage in one frame: open ruby-pink, spent brown, and the tight buds behind, which is what a compact Buddleja actually looks like on a bench in August. **Third Buddleja** (with 'White Profusion' and 'Pugster Orchid') and the only ruby-pink of the three, so no confusion risk |
 
+| Clematis JOSEPHINE ('Evijohill') | clematis-josephine-evijohill.jpg | 50% 40% default — real photo, Oscar's, clean; the layered rosette centre that is the whole reason for this cultivar. **Sixth Clematis** in the deck and the only double — the others are AVALANCHE (dealt) plus four held |
+| Sempervivum arachnoideum | sempervivum-arachnoideum.jpg | 50% 40% default — the cobweb hairs are legible, which is the species' one identifying feature. Two nursery labels are in frame; a tidier shot would be better but the plant is unmistakable and it is a real bench photograph |
+| Forsythia × intermedia 'Lynwood Variety' | forsythia-intermedia-lynwood-variety.jpg | 50% 40% default — **and read this before reusing it.** The card's `visual` says *"Bare stems buried under brilliant golden-yellow flowers **before a single leaf appears**"*, peak Mar-Apr, and this photograph is nothing but leaves. That is the sharpest text-vs-picture gap in the deck — sharper than the *Syringa*, because this card's wording explicitly denies what its picture shows. Dealt rather than held on the principle that a real leaf beats an empty card, but **it wants a March reshoot before anything else on the list** |
+| Euphorbia × martini MINER'S MERLOT ('Km-mm024') | euphorbia-martini-miner-s-merlot-km-mm024.jpg (**replaced 2026-08-17**) | 50% 40% default — a proper rosette from directly above, wine-red midribs against the blue-green, which is the cultivar. **Third Euphorbia photo swapped or checked in two days** — the deck holds three and two are variegated, so every Euphorbia photo now gets matched against the other cards before staging |
+| Gunnera manicata (swap frame) | gunnera-manicata-underside.jpg | **PHOTO_SWAP alt at 50% 30%, not a replacement.** The card's own photo is the plant from above — the scale, which is the point. This is the UNDERSIDE, shot from below against sky: leaf ribs and a stem armed with spines, the other half of why people either want this plant or back away from it. Source rotated to its EXIF-correct portrait and cropped so the long edge became the height, which took the master from 675 px wide to 1008 |
+
 ## 5. Decision changelog
+
+- **v14.20 (209 dealt / 82 held)**: *Clematis* JOSEPHINE and *Sempervivum
+  arachnoideum* built; *Forsythia* 'Lynwood Variety' dealt out of hold;
+  MINER'S MERLOT re-photographed; **Gunnera gets the deck's third PHOTO_SWAP
+  pair**, and the first where the two frames show opposite sides of the same
+  leaf. ***Ophiopogon planiscapus* 'Kokuryū' was built and HELD** — no
+  photograph came with it.
+  **Two identifications were refused, both on seasonal evidence rather than
+  taste.** The Daphne photograph is **not** the deck's held *D. bholua*
+  'Jacqueline Postill': that card's own peak is Jan-Mar and its text says "in
+  the depths of winter", and this plant is in full flower in mid-August with
+  small narrow leaves — the *D.* × *transatlantica* summer-flowering group.
+  Parked as `daphne-unidentified-summer.jpg`. And the Forsythia, though dealt on
+  Oscar's naming, carries a picture its own card text contradicts. VERIFY-QUEUE 44.
 
 - **v14.19 (206 dealt / 82 held)**: *Buddleja davidii* LITTLE RUBY. **PBR
   protected, and the card cannot say so** — its `compliance` field reads "PBR

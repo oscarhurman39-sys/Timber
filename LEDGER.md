@@ -5,6 +5,13 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (batch of six photos) — **deck 209, hold 82.** Clematis
+  JOSEPHINE and Sempervivum arachnoideum built; Forsythia 'Lynwood Variety'
+  dealt; MINER'S MERLOT re-shot; Gunnera gains the deck's third PHOTO_SWAP pair
+  (top vs spiny underside). Ophiopogon 'Kokuryū' built but HELD, no photo.
+  **The Daphne was refused on calendar evidence** — the deck's only Daphne is
+  bholua 'Jacqueline Postill', peak Jan-Mar, and this one is in full flower in
+  August, so it reads as the D. x transatlantica summer group. VERIFY-QUEUE 44.
 progress: 2026-08-17 (Hosta + Buddleja) — **deck 206, hold 82.** Hosta 'Emerald
   Charger' (third Hosta, near-inverse variegation to 'Broadband') and Buddleja
   LITTLE RUBY (third Buddleja, the only ruby-pink). Between them they hit both
