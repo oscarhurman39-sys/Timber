@@ -173,6 +173,8 @@ state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
 - `index.html` — redirect so the site root opens the app.
 - `IDEAS.md` — the parked bench: ideas worth keeping that are deliberately **not**
   being built. Nothing in it is committed to; each entry records what would kill it.
+- `CONCEPT-BRIEF.md` — what Timber is, what it is for, and the long-form case for and
+  against the scan-to-collect version. Measured against the repo, not asserted.
 
 ## Adding plants
 

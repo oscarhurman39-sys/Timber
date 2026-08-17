@@ -21,6 +21,9 @@ Rules:
 
 **Oscar, 2026-08-17. Status: PARKED.**
 
+> Long form: **`CONCEPT-BRIEF.md`** — the app as built vs. the collection game,
+> side by side, with the recommendation. This block is the summary.
+
 > "What if, just like you collect Pokémon cards — rather than Learned / whatever
 > buttons in the middle, we had a *scan to collect* feature. You capture the plant
 > through the camera with a basic AI agent that identifies them, or pay to use a
