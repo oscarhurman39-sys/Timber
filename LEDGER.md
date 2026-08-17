@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (Listen button) — voice selection now scores the device's
+  voices instead of taking the first en-GB one, preferring Edge Natural / Apple
+  Premium / Enhanced over the flat "compact" ones. The bigger win was the script:
+  41 cards were speaking their breeder code aloud ("Jurmag five", "Florgaucomro")
+  and 38 an all-caps trade name. New sayable() strips them; verified over all 284
+  cards. NOT yet deployed.
 progress: 2026-08-17 (SHIPPED, after the outage) — **live is r108 at 202 cards.**
   Run #55 went green on every step including the byte-verify, about 40 minutes
   after the Pages API was returning 503 to three consecutive attempts. Nothing

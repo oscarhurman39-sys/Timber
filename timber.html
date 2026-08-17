@@ -909,7 +909,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r108 · 2026-08-17 · 8bfdbf3';
+const BUILD='r112 · 2026-08-17 · 421c279';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -917,19 +917,83 @@ const BUILD='r108 · 2026-08-17 · 8bfdbf3';
    doesn't match the content fails tests/run-all.js and the Pages deploy, so the
    number can't quietly start lying. */
 const TTS='speechSynthesis' in window;
-if(TTS){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();}
+let VOICES=[],VOICE=null;   /* VOICE is declared HERE, not below: loadVoices() clears it and
+                               runs at boot, so a `let` further down puts it in the temporal
+                               dead zone and every page load throws. Caught by a smoke test,
+                               2026-08-17. */
+const loadVoices=()=>{VOICES=speechSynthesis.getVoices()||[];VOICE=null;};
+if(TTS){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+
+/* ---- which voice, and why it is worth choosing rather than taking the first ----
+   This used to do `voices.find(en-GB)` and accept whatever came back first. On a
+   phone that is usually the OLDEST voice installed — Apple's "compact" Daniel, or
+   Android's legacy en-GB — which is exactly the flat robotic one. Every modern
+   platform ALSO exposes a good neural voice through this same API; the app just
+   has to ask for it by name:
+
+     Edge/Windows  "Microsoft Sonia Online (Natural) - English (United Kingdom)"
+                   and siblings Libby / Maisie / Ryan. These are server-side
+                   neural voices and are the best thing reachable from a web page
+                   without an API key.
+     iOS/macOS     Serena / Stephanie / Kate / Jamie, each of which may exist as
+                   Compact, Enhanced or Premium. Premium is a different recording,
+                   not a setting — see the note below.
+     Android       "Google UK English Female" / "Male".
+
+   NOTE FOR A PHONE THAT STILL SOUNDS FLAT: on iOS the Enhanced/Premium voices
+   are an optional download. Settings > Accessibility > Spoken Content > Voices >
+   English (UK) > pick one and download it. Until that download exists the OS
+   simply does not offer it here and there is nothing the page can do about it. */
+const VOICE_RANK=[/sonia/i,/libby/i,/maisie/i,/ryan/i,/serena/i,/stephanie/i,/kate/i,/jamie/i,/google uk english/i,/daniel/i];
+function pickVoice(){
+  if(VOICE)return VOICE;
+  const gb=VOICES.filter(v=>/^en[-_]GB/i.test(v.lang));
+  const pool=gb.length?gb:VOICES.filter(v=>/^en([-_]|$)/i.test(v.lang));
+  if(!pool.length)return null;
+  const score=v=>{
+    const n=v.name||'',uri=v.voiceURI||'';let s=0;
+    if(/natural|neural/i.test(n))s+=100;          /* Edge's online neural voices */
+    if(/premium/i.test(n))s+=80;                  /* Apple, downloaded */
+    if(/enhanced/i.test(n))s+=60;                 /* Apple, downloaded */
+    if(/siri/i.test(n))s+=50;
+    const i=VOICE_RANK.findIndex(re=>re.test(n));
+    if(i>=0)s+=40-i;
+    if(/compact/i.test(n+uri))s-=40;              /* the flat ones, explicitly demoted */
+    if(/^en[-_]GB/i.test(v.lang))s+=10;
+    return s;
+  };
+  VOICE=pool.slice().sort((a,b)=>score(b)-score(a))[0];
+  return VOICE;
+}
+
+/* ---- what it is actually told to say ----
+   Half of "it pronounces things badly" was never the voice. The button speaks the
+   card's `latin` verbatim, and 41 of these carry a breeder code in brackets, so
+   the deck was reading out "Magnolia Honey Tulip Jurmag five" and "Oenothera
+   lindheimeri Gaudi Rose Florgaucomro". Another 38 carry a trade name in capitals,
+   which some engines spell out letter by letter. None of that is the plant's name
+   as anyone says it aloud, so none of it is spoken. */
+function sayable(latin){
+  return String(latin)
+    .replace(/\s*\([^)]*\)/g,'')                 /* ('Jurmag5'), ('NCCC1'), ('71853-09') */
+    .replace(/\bsubsp\.\s*/gi,'subspecies ')
+    .replace(/\bvar\.\s*/gi,'variety ')
+    .replace(/\bf\.\s*/g,'forma ')
+    .replace(/\bsyn\.\s*/gi,'')
+    .replace(/×\s*/g,'')                          /* the hybrid sign is silent when spoken */
+    .replace(/[''\u2018\u2019]/g,'')              /* cultivar quotes are punctuation, not sound */
+    .replace(/\b([A-Z]{2,})\b/g,m=>m.charAt(0)+m.slice(1).toLowerCase())  /* ICEBERG -> Iceberg */
+    .replace(/\s+/g,' ').trim();
+}
+
 function speakLatin(text,btn){
   if(!TTS)return;
   speechSynthesis.cancel();
-  /* anglicised botanical latin — the trade pronunciation (RHS style), so customers can
-     parse it; "var." is spoken in full and the hybrid sign × is silent, as spoken aloud */
-  const spoken=text.replace(/\bvar\.\s*/g,'variety ').replace(/×\s*/g,'');
-  const u=new SpeechSynthesisUtterance(spoken);
-  const voices=speechSynthesis.getVoices();
-  const v=voices.find(x=>/^en[-_]GB/i.test(x.lang))||voices.find(x=>/^en([-_]|$)/i.test(x.lang));
+  const u=new SpeechSynthesisUtterance(sayable(text));
+  const v=pickVoice();
   if(v)u.voice=v;
   u.lang=v?v.lang:'en-GB';
-  u.rate=.9;
+  u.rate=.92;u.pitch=1;
   if(btn){u.onstart=()=>btn.classList.add('speaking');u.onend=u.onerror=()=>btn.classList.remove('speaking');}
   speechSynthesis.speak(u);
 }

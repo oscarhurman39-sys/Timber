@@ -350,6 +350,37 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.16 (the Listen button stops sounding like a robot)**: two separate faults
+  were making it sound bad, and only one of them was the voice.
+  **The voice.** `speakLatin` took `voices.find(en-GB)` — *the first* en-GB voice
+  the device offered, which on a phone is usually the oldest one installed
+  (Apple's "compact" Daniel, Android's legacy en-GB). Every modern platform also
+  exposes a good neural voice through the same API. It is now scored and chosen:
+  Edge's *Online (Natural)* voices (Sonia, Libby, Maisie, Ryan) rank highest,
+  then Apple *Premium* and *Enhanced* (Serena, Stephanie, Kate, Jamie), then
+  Google UK English, with anything named "compact" explicitly demoted.
+  **What it was told to say — the bigger fault.** The button spoke `latin`
+  verbatim, so **41 cards were reading their breeder code aloud**: "Magnolia
+  Honey Tulip **Jurmag five**", "Oenothera lindheimeri Gaudi Rose
+  **Florgaucomro**", "Cordyline australis Charlie Boy **Ric zero one**". A
+  further **38 carry an all-caps trade name**, which some engines spell out
+  letter by letter. A new `sayable()` drops bracketed codes and quotes, silences
+  the hybrid sign, title-cases trade names, and speaks `subsp.` / `var.` / `f.`
+  in full. Verified across all 284 cards: none still contains a bracket, a
+  capital run or a hybrid sign after the transform.
+  **Two things this cost, both worth recording.** A smoke test caught a
+  `ReferenceError` I introduced — `loadVoices()` runs at boot and clears `VOICE`,
+  which was declared with `let` further down, so every page load threw until the
+  declaration moved up. And `app-test` went red because it carried **its own copy
+  of the old transform**; it now asks the page for `sayable()` and asserts the
+  guarantees (no brackets, no capital runs, no hybrid sign, still opens with the
+  genus) instead of duplicating the rule. That is the same drift `NPLANTS` caused
+  in four suites.
+  **What this cannot do:** ChatGPT-style voices are server-side neural TTS behind
+  an API key. This app is a static offline PWA on Pages with no server to keep a
+  key in, so that route would mean publishing the key. The Edge *Natural* voices
+  are the best thing reachable without one.
+
 - **v14.15 (202 dealt / 82 held)**: *Houttuynia cordata* 'Pied Piper'. **Its
   `soilWarning` is doing real work** — *"Contain rhizomes · spreads
   aggressively"* — and it is worth noting that the deck now has a small set of
