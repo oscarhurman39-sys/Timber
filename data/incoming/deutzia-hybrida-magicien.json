@@ -1,0 +1,32 @@
+{
+  "common": "Deutzia 'Magicien'",
+  "latin": "Deutzia × hybrida 'Magicien'",
+  "hue": 335,
+  "visual": "Showy pink-and-white flowers · matt-green leaves · upright bushy habit",
+  "water": "Moderate; water in dry spells",
+  "aspect": "East / South / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "",
+  "prune": "Prune lightly after flowering if needed",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Jun",
+  "cvs": "syn. Deutzia 'Magicien'; Deutzia 'Magician'; Lemoine introduction",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "cold hardy · exposed-site tolerant",
+  "uses": "shrub borders · cottage gardens · banks · flowering specimen",
+  "height": "1–1.5 m",
+  "spread": "1–1.5 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 10,
+  "pestRisk": 5,
+  "thirst": 10,
+  "careLevel": 4,
+  "sunNeed": 88,
+  "sunMin": 65,
+  "uncertain": [
+    "The supplied correction was interpreted as Deutzia × hybrida 'Magicien'; RHS also lists the anglicised synonym 'Magician'"
+  ]
+}

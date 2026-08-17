@@ -94,7 +94,18 @@ if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !=
   catch (e) { die('needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)'); }
 
   const meta = await sharp(photoArg).metadata();
-  const SW = meta.width, SH = meta.height;
+  /* EXIF ORIENTATION. sharp reports the SENSOR dimensions, but a phone photo with
+     an orientation flag of 5-8 is displayed rotated, and that displayed frame is
+     the one a vision model saw and wrote its coordinates against. Reading raw
+     width/height here made every such photo fail with "wrong photo for this JSON"
+     and a nonsense aspect — orientation 6 is the common case on this project's
+     Galaxy captures, so it was roughly half of them. Swap the axes for the check
+     and the arithmetic, and bake the rotation in before extracting so the crop
+     box means what the model meant. Found 2026-08-17 on a Deutzia and a Magnolia. */
+  const swapped = meta.orientation >= 5 && meta.orientation <= 8;
+  const SW = swapped ? meta.height : meta.width;
+  const SH = swapped ? meta.width  : meta.height;
+  if (swapped) notes.push(`EXIF orientation ${meta.orientation} — sensor is ${meta.width}x${meta.height}, displayed ${SW}x${SH}; crop is applied to the displayed frame`);
 
   /* 4. if the model reported the source size, it must be the size we are holding —
         a mismatch means the coordinates describe a different file */
@@ -177,7 +188,9 @@ if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !=
   const out = REPL ? photoArg : photoArg.replace(/\.jpg$/i, '-reframed.jpg');
   if (DRY) { console.log(`  dry run — would write ${out}`); return; }
 
-  let pipe = sharp(photoArg).extract({ left, top, width, height });
+  /* .rotate() with no argument applies the EXIF orientation, so extract() below
+     operates on the displayed frame the crop box was measured against. */
+  let pipe = sharp(photoArg).rotate().extract({ left, top, width, height });
   let finalW = width, finalH = height;
   if (rot) {
     /* rotate the cropped tile, then take the largest same-aspect rect that

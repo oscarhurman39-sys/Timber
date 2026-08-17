@@ -5,6 +5,15 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (reframe tool adopted) — **deck 211, hold 82.** Deutzia
+  'Magicien' and Magnolia acuminata, the first two cards framed with
+  tools/reframe-photo.js rather than by hand. Ported the tool and
+  PHOTO-REFRAME-BRIEF.md from claude/plant-collection-scan-y2j7fp — that branch
+  is otherwise BEHIND this one and carries no cards this deck lacks. Fixed a
+  real bug in the tool: it ignored EXIF orientation, so ~half of Oscar's phone
+  photos failed validation. It also caught a crop-aspect arithmetic error of
+  mine, which is the point of it. Rhododendron and Hydrangea photos parked — no
+  cards came with them and both genera already have dealt cards.
 progress: 2026-08-17 (batch of six photos) — **deck 209, hold 82.** Clematis
   JOSEPHINE and Sempervivum arachnoideum built; Forsythia 'Lynwood Variety'
   dealt; MINER'S MERLOT re-shot; Gunnera gains the deck's third PHOTO_SWAP pair

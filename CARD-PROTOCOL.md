@@ -361,7 +361,28 @@ Focal point recorded here when off-centre:
 | Euphorbia × martini MINER'S MERLOT ('Km-mm024') | euphorbia-martini-miner-s-merlot-km-mm024.jpg (**replaced 2026-08-17**) | 50% 40% default — a proper rosette from directly above, wine-red midribs against the blue-green, which is the cultivar. **Third Euphorbia photo swapped or checked in two days** — the deck holds three and two are variegated, so every Euphorbia photo now gets matched against the other cards before staging |
 | Gunnera manicata (swap frame) | gunnera-manicata-underside.jpg | **PHOTO_SWAP alt at 50% 30%, not a replacement.** The card's own photo is the plant from above — the scale, which is the point. This is the UNDERSIDE, shot from below against sky: leaf ribs and a stem armed with spines, the other half of why people either want this plant or back away from it. Source rotated to its EXIF-correct portrait and cropped so the long edge became the height, which took the master from 675 px wide to 1008 |
 
+| Deutzia × hybrida 'Magicien' | deutzia-hybrida-magicien.jpg | 50% 40% default — **first photo in the deck reframed through `tools/reframe-photo.js`** rather than by hand: crop coordinates written against the card geometry, executed by sharp on the original pixels, no generated content. Second Deutzia (with held *D. gracilis* 'Nikko') and the only pink one |
+| Magnolia acuminata | magnolia-acuminata.jpg | 50% 40% default — the cucumber-like aggregate fruit, green flushing red, which is the whole reason for the common name and what the card's `visual` leads on. Also reframed through the tool. **Third Magnolia** (HONEY TULIP, *stellata*) and the only one carrying fruit rather than flower |
+
 ## 5. Decision changelog
+
+- **v14.21 (211 dealt / 82 held)**: *Deutzia* 'Magicien' and *Magnolia
+  acuminata* — **the first two cards framed with `tools/reframe-photo.js`**,
+  ported onto this branch from `claude/plant-collection-scan-y2j7fp` along with
+  `PHOTO-REFRAME-BRIEF.md`. Worth knowing what it changed:
+  **It caught an arithmetic error of mine.** My first Magnolia crop box claimed
+  `cropAspect 0.795` while its width and height actually multiplied out to
+  **1.023** — outside the allowed 0.75–1.0. The tool refused to write and said
+  so. Every hand-crop before this (Tetrapanax, Crinodendron, the Cercis panel,
+  the Gunnera underside) happened to land inside the band, but nothing was
+  checking.
+  **And it needed a fix before it worked at all here: it ignored EXIF
+  orientation.** `sharp` reports sensor dimensions, so a phone photo flagged
+  `orientation 6` — roughly half of this project's Galaxy captures — failed with
+  "wrong photo for this JSON" and a nonsense aspect, because the vision model's
+  coordinates describe the *displayed* frame. It now swaps the axes for the
+  checks and calls `.rotate()` before `extract()`. Fixed here rather than
+  reported, since both branches share the tool.
 
 - **v14.20 (209 dealt / 82 held)**: *Clematis* JOSEPHINE and *Sempervivum
   arachnoideum* built; *Forsythia* 'Lynwood Variety' dealt out of hold;

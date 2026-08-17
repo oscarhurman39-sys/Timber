@@ -1,0 +1,33 @@
+{
+  "common": "Cucumber tree",
+  "latin": "Magnolia acuminata",
+  "hue": 55,
+  "visual": "Green-yellow flowers · cucumber-like fruit turning red · yellow autumn foliage",
+  "water": "Moderate; water in prolonged dry spells",
+  "aspect": "East / South / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Sheltered · avoid prolonged drought",
+  "prune": "Minimal; prune only if needed in midsummer",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Oct",
+  "cvs": "",
+  "hardiness": "H6",
+  "hardinessNote": "",
+  "resilience": "cold hardy · part-shade tolerant",
+  "uses": "specimen · parkland · shade tree · wildlife gardens",
+  "height": "15–30 m",
+  "spread": "10–18 m",
+  "foliage": "deciduous",
+  "container": "no",
+  "growthSpeed": 10,
+  "pestRisk": 9,
+  "thirst": 11,
+  "careLevel": 5,
+  "sunNeed": 82,
+  "sunMin": 52,
+  "uncertain": [
+    "RHS describes plants reaching up to 30 m, while North American horticultural sources more commonly give about 15–24 m; 15–30 m retains the useful cultivated-to-ultimate range",
+    "RHS lists several potential magnolia pests and diseases, while North Carolina Extension reports no serious routine problems apart from possible magnolia scale"
+  ]
+}

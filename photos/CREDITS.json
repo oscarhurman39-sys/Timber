@@ -822,6 +822,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "deutzia-hybrida-magicien.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "dicksonia-antarctica.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1302,6 +1312,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hydrangea-lacecap-unidentified.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "hydrangea-macrophylla-rendez-vous-french-cancan-bleu.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1605,6 +1625,16 @@
    "file": "lotus-hirsutus-little-boy-blue-lisbob.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "magnolia-acuminata.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -2100,6 +2130,16 @@
    "sourceUrl": null,
    "commit": "004c1a1",
    "commitSubject": "Add Horizon Monarch Rhododendron",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rhododendron-purple-unidentified.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
