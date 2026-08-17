@@ -5,6 +5,13 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (Crinodendron) — photo replaced. The old frame had NO
+  flowers on a card whose text leads with "crimson lantern-shaped flowers";
+  the new one is all lanterns. Second source crop in the deck, same arithmetic
+  as the Tetrapanax — which surfaced a real inconsistency worth fixing:
+  deal-plant.js caps the LONG edge at 1200 while add-plant.js caps WIDTH, so a
+  tall phone frame comes out ~776px wide through one path and 1200px through
+  the other. Noted in CARD-PROTOCOL v14.13, not yet fixed.
 progress: 2026-08-17 (Hibiscus, Viburnum, a held Pittosporum) — **deck 195,
   hold 84.** Hibiscus syriacus LAVENDER CHIFFON dealt; 'Charles Lamont' reshot
   and replaced, Oscar having framed it for the card's photo window rather than

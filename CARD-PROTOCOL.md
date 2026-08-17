@@ -337,7 +337,20 @@ Focal point recorded here when off-centre:
 | Hibiscus syriacus LAVENDER CHIFFON ('Notwoodone') | hibiscus-syriacus-lavender-chiffon-notwoodone.jpg | 50% 100% — real photo, Oscar's, clean. Pushed to the bottom of its range because the flower sits low in the frame; the master is 1200×1600 so only ~11% of height is available to move, and the bloom still shares the window with a leaf. **Second Hibiscus syriacus in the deck** — 'Oiseau Bleu' is the single blue-violet one, this is the lilac semi-double. Also worth knowing: the 'Oiseau Bleu' photograph is one of VERIFY-QUEUE 32's four Galaxy-glyph files, this one is not |
 | Viburnum × bodnantense 'Charles Lamont' | viburnum-bodnantense-charles-lamont.jpg (**replaced 2026-08-17**) | 50% 40% default — Oscar reshot it deliberately with the shoot **lower in the frame so it lands in the card's photo window instead of behind the stats plaque**, which is the clearest statement yet that the window's geometry is worth shooting for. The new frame also drops the roofline the old one had in the background. The `-leaf.jpg` spare is untouched. Note the deck holds the species *V.* × *bodnantense* as well — different slug, different card |
 
+| Crinodendron hookerianum | crinodendron-hookerianum.jpg (**replaced 2026-08-17**) | 50% 40% default — **this one closes a text-vs-picture gap rather than just upgrading a frame.** The card's `visual` reads *"Crimson lantern-shaped flowers hang beneath narrow glossy evergreen leaves"* and the outgoing photograph had **no flowers in it at all** — a flash-lit night shot of spotted foliage on a black ground. The lanterns ARE the plant. **Second source crop in the deck** (after Tetrapanax) and for the same arithmetic: at 1423×2202 the long-edge cap would have produced a 776 px-wide master against the ~1000 px the card renders. Cropping to the upper 1423×1694 — lanterns and foliage, above the bark mulch and pot rim — makes the long edge the height, so the master lands at 1008×1200 |
+
 ## 5. Decision changelog
+
+- **v14.13 (Chile Lantern Tree gets its lanterns)**: photo replaced. The old
+  frame carried no flowers on a card whose text leads with them, which is the
+  same class of fault the Coprosma 'Inferno' swap fixed and the *Syringa* card
+  still has. **Note the crop count: this is the second source crop in the deck,
+  and both were forced by the same arithmetic** — a tall narrow phone frame plus
+  a long-edge cap of 1200 yields a master far narrower than the card renders.
+  Worth considering whether `deal-plant.js` should cap the SHORT edge instead
+  when a source is unusually tall; `add-plant.js` already caps width, which is
+  why its masters come out 1200×1600. The two tools disagree, and that
+  disagreement is what makes the crop necessary in one path and not the other.
 
 - **v14.12 (195 dealt / 84 held)**: *Hibiscus syriacus* LAVENDER CHIFFON added;
   *Viburnum* × *bodnantense* 'Charles Lamont' reshot and replaced — Oscar framed
