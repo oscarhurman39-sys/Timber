@@ -339,7 +339,30 @@ Focal point recorded here when off-centre:
 
 | Crinodendron hookerianum | crinodendron-hookerianum.jpg (**replaced 2026-08-17**) | 50% 40% default — **this one closes a text-vs-picture gap rather than just upgrading a frame.** The card's `visual` reads *"Crimson lantern-shaped flowers hang beneath narrow glossy evergreen leaves"* and the outgoing photograph had **no flowers in it at all** — a flash-lit night shot of spotted foliage on a black ground. The lanterns ARE the plant. **Second source crop in the deck** (after Tetrapanax) and for the same arithmetic: at 1423×2202 the long-edge cap would have produced a 776 px-wide master against the ~1000 px the card renders. Cropping to the upper 1423×1694 — lanterns and foliage, above the bark mulch and pot rim — makes the long edge the height, so the master lands at 1008×1200 |
 
+| Cercis canadensis CAROLINA SWEETHEART ('NCCC1') | cercis-canadensis-carolina-sweetheart-nccc1.jpg | 50% 40% default — **staged from ONE panel of a three-panel Google collage**, whose C2PA declares `digitalSourceType: trainedAlgorithmicMedia`. The panel crop is not a preference: a card window cannot render a three-panel collage without showing a seam, which is the same objection that stopped the Verbena file (VERIFY-QUEUE 34). The marker is recorded verbatim in `CREDITS.json`. Third Cercis in the deck, after 'Avondale' and 'Eternal Flame' |
+| Elaeagnus × submacrophylla 'Limelight' | elaeagnus-submacrophylla-limelight.jpg | 50% 40% default — real photo, Oscar's, clean. Gold-centred leaves with the dark margin. **The deck's other Elaeagnus is the plain × submacrophylla**, whose card sells silver-scaled leaves — the two photographs must not swap, and the gold centre is what separates them at a glance |
+| Acer palmatum 'Oridono-nishiki' | acer-palmatum-oridono-nishiki.jpg | 50% 40% default — real photo, Oscar's, clean. The half-green half-shocking-pink leaf is the cultivar's whole party trick and it is dead centre. **Fourth Acer palmatum** (Ōsakazuki, Bloodgood, Sango-kaku) |
+| Epimedium × perralchicum 'Fröhnleiten' | epimedium-perralchicum-frohnleiten.jpg | 50% 40% default — bronze-red veined young foliage against the green. **Carries a Galaxy AI generative-edit marker** (`Photo assist`, `compositeWithTrainedAlgorithmicMedia`) and a visible "AI-generated content" label in the lower left, recorded verbatim in `CREDITS.json`. VERIFY-QUEUE 32's category, fifth and sixth files now |
+| Pittosporum tenuifolium 'Tom Thumb' | pittosporum-tenuifolium-tom-thumb.jpg | 50% 40% default — **dealt on Oscar's explicit confirmation after being held once.** Read the card and the photograph together before reusing either: the `visual` line says *"deep purple-black wavy leaves · lime-green new growth"* and the photograph is magenta and cream variegation. He has confirmed the plant twice; **the card's text is what now needs his eye**, not the picture. VERIFY-QUEUE 41 |
+| Rhododendron 'Homebush' | rhododendron-homebush.jpg | 50% 40% default — real photo, Oscar's, clean; the dense rose-pink truss the card is sold on. **The card's own data was left exactly as it was**, not replaced by the JSON supplied alongside the photograph — see the changelog, and VERIFY-QUEUE 42 |
+
 ## 5. Decision changelog
+
+- **v14.14 (201 dealt / 82 held)**: four new cards — *Cercis* CAROLINA
+  SWEETHEART, *Elaeagnus* 'Limelight', *Acer palmatum* 'Oridono-nishiki',
+  *Epimedium* 'Fröhnleiten' — plus **two held cards dealt on Oscar's word**:
+  'Tom Thumb' and 'Homebush'.
+  **'Homebush' is the one to read.** A researched card for it already existed in
+  the hold block, and the JSON supplied with the photograph differs from it in
+  **sixteen fields** — size (1.5–2.5 m against 1–1.5 m), five of the six ratings,
+  aspect, soil, and the flower description itself. **The existing card was kept
+  and only the photograph added.** The deciding reason is not seniority: the held
+  card carries *"all parts harmful if eaten"* inside `resilience`, where the card
+  can actually render it, while the new JSON moves that fact into `toxicity` —
+  **a field the card schema drops** (item 0c). Applying the new version verbatim
+  would have silently deleted a safety warning from a card describing a toxic
+  plant. That is not a merge a tool should make quietly, so it is Oscar's call:
+  VERIFY-QUEUE 42 lists every difference.
 
 - **v14.13 (Chile Lantern Tree gets its lanterns)**: photo replaced. The old
   frame carried no flowers on a card whose text leads with them, which is the

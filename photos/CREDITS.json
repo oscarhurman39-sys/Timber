@@ -61,6 +61,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acer-palmatum-oridono-nishiki.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-palmatum-osakazuki.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -442,6 +452,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cercis-canadensis-carolina-sweetheart-nccc1.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Source file was a 3-panel Google collage whose C2PA declares digitalSourceType trainedAlgorithmicMedia; staged from its main panel only. See VERIFY-QUEUE 32/34.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "cercis-canadensis-eternal-flame-leaf.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -812,6 +832,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "elaeagnus-submacrophylla-limelight.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "elaeagnus-submacrophylla.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -825,6 +855,16 @@
    "file": "enkianthus-campanulatus.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "epimedium-perralchicum-frohnleiten.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label lower left. See VERIFY-QUEUE 32.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -1793,6 +1833,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "pittosporum-tenuifolium-tom-thumb.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "pittosporum-variegated-unidentified.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1940,6 +1990,16 @@
    "sourceUrl": null,
    "commit": "ff494ba",
    "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rhododendron-homebush.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

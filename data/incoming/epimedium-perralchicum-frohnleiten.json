@@ -1,0 +1,33 @@
+{
+  "common": "Barrenwort 'Fröhnleiten'",
+  "latin": "Epimedium × perralchicum 'Fröhnleiten'",
+  "hue": 55,
+  "visual": "Bright yellow flowers · leathery leaves flushed bronze-red when young",
+  "water": "Moderate; tolerates drier soil once established",
+  "aspect": "North / East / West",
+  "soil": "Humus-rich, well-drained",
+  "soilWarning": "Shelter from cold, dry winds",
+  "prune": "No routine pruning; remove damaged old foliage if needed",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Mar-May",
+  "cvs": "syn. Epimedium grandiflorum 'Frohnleiten'; Epimedium perralderianum 'Frohnleiten'",
+  "hardiness": "H6",
+  "hardinessNote": "",
+  "resilience": "cold hardy · dry-shade tolerant · shade tolerant",
+  "uses": "ground cover · woodland gardens · underplanting · containers",
+  "height": "30–40 cm",
+  "spread": "60–80 cm",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 10,
+  "pestRisk": 7,
+  "thirst": 8,
+  "careLevel": 4,
+  "sunNeed": 48,
+  "sunMin": 28,
+  "uncertain": [
+    "Spread sources vary from about 30 cm to 90 cm; 60–80 cm reflects mature UK nursery observations",
+    "Flowering sources range from March–April to mid/late spring, so Mar-May was used for the principal display period"
+  ]
+}

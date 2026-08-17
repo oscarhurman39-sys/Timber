@@ -1288,7 +1288,7 @@ staging because the app loads only `.jpg` masters.
 
 ---
 
-### 41. A variegated Pittosporum arrived with the 'Tom Thumb' card — it is neither, OPEN
+### 41. A variegated Pittosporum arrived with the 'Tom Thumb' card — DEALT on Oscar's word; the CARD TEXT is now the open half
 2026-08-17. Oscar sent *Pittosporum tenuifolium* 'Tom Thumb' as researched JSON
 with a photograph. **The card is built and sitting in the hold block; the
 photograph is parked.** They do not go together.
@@ -1314,6 +1314,73 @@ land on a card that already exists.
 **What is needed:** the name. If it turns out to be a third cultivar it wants its
 own card; if it IS 'Tom Thumb' then the card's `visual` line is wrong and needs
 rewriting, which is a bigger correction than a photo swap.
+
+**Resolved 2026-08-17 — Oscar resent the photograph with the card and stated
+plainly: *"all photos are correct true to type"*.** It is dealt. His call, and
+he is the one standing in front of the plant.
+
+**The second half of the objection is still live, and it is now the card's text
+rather than its picture.** The `visual` line reads *"Deep purple-black wavy
+leaves · lime-green new growth · compact rounded mound"* and the photograph on
+that card shows magenta and cream variegation with no purple-black and no lime
+new growth. A card whose words and picture disagree teaches a member of staff
+two different plants. **One of them needs changing, and it is no longer a
+question I can answer** — if the plant is 'Tom Thumb' then the research behind
+that `visual` line does not describe the plant Oscar has, and the line wants
+rewriting from what is actually on the bench.
+
+---
+
+### 42. 'Homebush' arrived with a second, conflicting research set — the existing card was KEPT
+2026-08-17. A researched *Rhododendron* 'Homebush' card has been in the hold
+block since the wishlist batch. Oscar's photograph arrived with a **new JSON for
+the same plant**, and the two disagree in sixteen fields. **The photograph was
+added and the card's data was left alone.** This is the reason, and the decision
+is his to reverse.
+
+**Why the existing card was kept, and it is not "it got there first":** the held
+card carries **"all parts harmful if eaten"** inside `resilience`, which the card
+renders. The new JSON moves that fact into `toxicity` — **a field the card schema
+does not have** (item 0c, now the seventh batch). Applying it verbatim would have
+**silently removed a safety warning from a card describing a toxic plant**. No
+tool should make that swap quietly.
+
+**Every difference, so the choice is his and not mine:**
+
+| field | held card (kept) | supplied JSON |
+|---|---|---|
+| `visual` | Rounded trusses of rose-pink **hose-in-hose** flowers · good autumn leaf colour | Dense clusters of **semi-double** rose-pink trumpets · fresh green foliage |
+| `size` | **1.5–2.5 m** H × 1.5–2.5 m W | **1–1.5 m** H × 1–1.5 m W |
+| `soil` | Humus-rich, acidic; **Ericaceous — chalk causes chlorosis** | Acid, moist, well-drained; Acid soil · sheltered |
+| `aspect` | Any aspect | East / South / West |
+| `water` | Even moisture; **rainwater where the tap runs hard** | Keep evenly moist; water in dry spells |
+| `resilience` | very hardy in acid ground · **all parts harmful if eaten** | cold hardy · part-shade tolerant |
+| `cvs` | Homebush | Knap Hill / Exbury deciduous azalea |
+| ratings | pestRisk 10, thirst 14, careLevel 9, sunNeed 50, sunMin 30 | 12, 11, 8, 65, 42 |
+
+**Three of these are worth his eye specifically:**
+1. **Size.** 1.5–2.5 m against 1–1.5 m is a whole band, and it changes where the
+   plant gets sold and planted. 'Homebush' is a Knap Hill azalea; `[Unverified]`
+   from here which figure is right.
+2. **The chalk warning.** "Ericaceous — chalk causes chlorosis" is the single
+   most useful sentence on that card for a garden centre, and the new soil line
+   does not carry it.
+3. **hose-in-hose vs semi-double.** Both are used of 'Homebush' in the trade;
+   they describe the same flower differently rather than contradicting.
+
+The supplied JSON is **better on `cvs`** — "Knap Hill / Exbury deciduous azalea"
+places the plant properly where the held card just repeats its own name. That one
+is worth taking whatever else is decided.
+
+**Also from this batch — two more files for item 32's count, both recorded in
+`CREDITS.json` rather than skipped:**
+- `cercis-canadensis-carolina-sweetheart-nccc1.jpg` — arrived as a **three-panel
+  Google collage** declaring `trainedAlgorithmicMedia`. Staged from its main
+  panel only, because a card window cannot show a three-panel collage without a
+  seam — the same practical objection that stopped the Verbena file in item 34,
+  solved here by cropping rather than refusing.
+- `epimedium-perralchicum-frohnleiten.jpg` — `Photo assist`,
+  `compositeWithTrainedAlgorithmicMedia`, visible AI label.
 
 ---
 

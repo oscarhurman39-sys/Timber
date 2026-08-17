@@ -5,6 +5,14 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (batch of six) — **deck 201, hold 82.** Cercis CAROLINA
+  SWEETHEART, Elaeagnus 'Limelight', Acer 'Oridono-nishiki' and Epimedium
+  'Fröhnleiten' built; 'Tom Thumb' and 'Homebush' dealt out of hold on Oscar's
+  word. Two calls recorded rather than made quietly: 'Tom Thumb' is dealt as he
+  instructed but its `visual` line still describes a purple-black plant against
+  a magenta photograph (VQ 41), and 'Homebush' KEPT its existing card data
+  because the JSON supplied with the photo would have dropped "all parts harmful
+  if eaten" into a field the schema does not render (VQ 42).
 progress: 2026-08-17 (Crinodendron) — photo replaced. The old frame had NO
   flowers on a card whose text leads with "crimson lantern-shaped flowers";
   the new one is all lanterns. Second source crop in the deck, same arithmetic

@@ -1,0 +1,33 @@
+{
+  "common": "Oleaster 'Limelight'",
+  "latin": "Elaeagnus × submacrophylla 'Limelight'",
+  "hue": 55,
+  "visual": "Lime-gold centred leaves · dark-green margins · silvery young growth",
+  "water": "Low once established",
+  "aspect": "East / South / West",
+  "soil": "Fertile, well-drained",
+  "soilWarning": "May yellow on shallow chalk",
+  "prune": "Trim to shape; remove reverted green shoots",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jan-Dec",
+  "cvs": "syn. Elaeagnus × ebbingei 'Limelight'",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "drought tolerant · coastal tolerant · pollution tolerant",
+  "uses": "hedging · screening · coastal gardens · foliage contrast",
+  "height": "2.5–4 m",
+  "spread": "2.5–4 m",
+  "foliage": "evergreen",
+  "container": "with care",
+  "growthSpeed": 12,
+  "pestRisk": 8,
+  "thirst": 6,
+  "careLevel": 4,
+  "sunNeed": 78,
+  "sunMin": 42,
+  "uncertain": [
+    "The supplied name Elaeagnus × ebbingei is the long-used horticultural synonym; RHS and Kew now accept Elaeagnus × submacrophylla",
+    "Mature-size sources vary from about 1.8–2 m to 4 m; the RHS 2.5–4 m range was prioritised"
+  ]
+}
