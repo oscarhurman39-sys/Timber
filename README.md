@@ -171,6 +171,8 @@ state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
   single-file build to publish. Not needed for local development.
 - `sw.js` — service worker (offline app-shell cache when hosted).
 - `index.html` — redirect so the site root opens the app.
+- `IDEAS.md` — the parked bench: ideas worth keeping that are deliberately **not**
+  being built. Nothing in it is committed to; each entry records what would kill it.
 
 ## Adding plants
 
