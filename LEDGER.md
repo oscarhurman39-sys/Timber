@@ -5,6 +5,13 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (Hibiscus, Viburnum, a held Pittosporum) — **deck 195,
+  hold 84.** Hibiscus syriacus LAVENDER CHIFFON dealt; 'Charles Lamont' reshot
+  and replaced, Oscar having framed it for the card's photo window rather than
+  for the photograph. Pittosporum 'Tom Thumb' built but HELD — the photo that
+  came with it is a magenta-and-cream variegated pittosporum, which 'Tom Thumb'
+  (purple-black) is not, and it is not the deck's 'Elizabeth' either.
+  VERIFY-QUEUE 41.
 progress: 2026-08-16 (gate green) — **17/17 sequential for the first time since
   the deck passed 171.** VERIFY-QUEUE 36 settled on Oscar's call: the perf
   zero-pixel assertion now carries a measured tolerance (64px / Δ8 against an

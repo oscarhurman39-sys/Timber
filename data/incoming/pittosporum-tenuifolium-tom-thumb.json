@@ -1,0 +1,32 @@
+{
+  "common": "Tawhiwhi 'Tom Thumb'",
+  "latin": "Pittosporum tenuifolium 'Tom Thumb'",
+  "hue": 285,
+  "visual": "Deep purple-black wavy leaves · lime-green new growth · compact rounded mound",
+  "water": "Moderate; water in dry spells",
+  "aspect": "East / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Shelter from cold, drying winds",
+  "prune": "No routine pruning; lightly shape in summer if needed",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jan-Dec",
+  "cvs": "syn. Pittosporum 'Tom Thumb'",
+  "hardiness": "H4",
+  "hardinessNote": "RHS H4; protection may be needed in colder exposed sites",
+  "resilience": "coastal tolerant · urban suitable · drought tolerant once established",
+  "uses": "containers · border fronts · foliage contrast · low hedging",
+  "height": "50–100 cm",
+  "spread": "50–100 cm",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 6,
+  "pestRisk": 10,
+  "thirst": 8,
+  "careLevel": 5,
+  "sunNeed": 82,
+  "sunMin": 48,
+  "uncertain": [
+    "Specialist UK sources often give a narrower mature spread around 60 cm; RHS gives 50–100 cm and was prioritised for garden planning"
+  ]
+}

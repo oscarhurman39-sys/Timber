@@ -334,7 +334,21 @@ Focal point recorded here when off-centre:
 | Lilium formosanum var. pricei | lilium-formosanum-var-pricei.jpg | 50% 0% — pinned to the top for **two** reasons. The trumpets sit in the top third and the default buried them behind the plaque; and the source carries a **visible "AI-generated content" label burned into its lower left**, which the top-anchored window excludes. **That is framing, not concealment** — the marker is recorded verbatim in `CREDITS.json` and the C2PA manifest travels inside the file. Its credentials read `c2pa.edited`, `softwareAgent: Photo assist`, `digitalSourceType: compositeWithTrainedAlgorithmicMedia`, i.e. VERIFY-QUEUE 32's category |
 | Physocarpus opulifolius 'Diabolo' | physocarpus-opulifolius-diabolo.jpg | 50% 40% default — **dealt on Oscar's direct confirmation of the cultivar**, which is the whole reason it was refused twice before: the deck's only ninebark is 'Diabolo' and a dark leaf cannot separate it from 'Summer Wine', 'Lady in Red' or 'Little Devil'. One word from him settled what no amount of looking could |
 
+| Hibiscus syriacus LAVENDER CHIFFON ('Notwoodone') | hibiscus-syriacus-lavender-chiffon-notwoodone.jpg | 50% 100% — real photo, Oscar's, clean. Pushed to the bottom of its range because the flower sits low in the frame; the master is 1200×1600 so only ~11% of height is available to move, and the bloom still shares the window with a leaf. **Second Hibiscus syriacus in the deck** — 'Oiseau Bleu' is the single blue-violet one, this is the lilac semi-double. Also worth knowing: the 'Oiseau Bleu' photograph is one of VERIFY-QUEUE 32's four Galaxy-glyph files, this one is not |
+| Viburnum × bodnantense 'Charles Lamont' | viburnum-bodnantense-charles-lamont.jpg (**replaced 2026-08-17**) | 50% 40% default — Oscar reshot it deliberately with the shoot **lower in the frame so it lands in the card's photo window instead of behind the stats plaque**, which is the clearest statement yet that the window's geometry is worth shooting for. The new frame also drops the roofline the old one had in the background. The `-leaf.jpg` spare is untouched. Note the deck holds the species *V.* × *bodnantense* as well — different slug, different card |
+
 ## 5. Decision changelog
+
+- **v14.12 (195 dealt / 84 held)**: *Hibiscus syriacus* LAVENDER CHIFFON added;
+  *Viburnum* × *bodnantense* 'Charles Lamont' reshot and replaced — Oscar framed
+  the new one **for the card's photo window rather than for the photograph**,
+  which is the first time a shot has been composed around the template.
+  ***Pittosporum tenuifolium* 'Tom Thumb' was built and HELD**, not dealt: the
+  photograph that arrived with it is a small-leaved pittosporum in vivid magenta
+  and cream, and 'Tom Thumb' is solid purple-black with lime-green new growth. It
+  is also **not** the deck's existing 'Elizabeth', whose leaves are markedly
+  larger with cream margins. Photo parked as
+  `pittosporum-variegated-unidentified.jpg`; VERIFY-QUEUE 41.
 
 - **v14.11 (the perf pixel assertion is settled: gate 17/17)**: `perf-test`'s
   zero-pixel check has been given a measured tolerance — 64 px and a max

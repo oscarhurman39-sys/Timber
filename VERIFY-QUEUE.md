@@ -1288,6 +1288,35 @@ staging because the app loads only `.jpg` masters.
 
 ---
 
+### 41. A variegated Pittosporum arrived with the 'Tom Thumb' card — it is neither, OPEN
+2026-08-17. Oscar sent *Pittosporum tenuifolium* 'Tom Thumb' as researched JSON
+with a photograph. **The card is built and sitting in the hold block; the
+photograph is parked.** They do not go together.
+
+- **The card:** 'Tom Thumb' is *"deep purple-black wavy leaves · lime-green new
+  growth"* — his own `visual` line, and it matches RHS.
+- **The photograph:** small rounded leaves, densely packed, in vivid magenta-pink
+  marbled with cream and white. No purple-black anywhere, no lime-green new
+  growth.
+- **It is not the deck's 'Elizabeth' either**, which was the obvious first guess:
+  compared side by side against that card's own photograph, 'Elizabeth' has
+  markedly larger leaves with clean cream margins and only a pink edge-flush in
+  cold. These leaves are half the size and pink right through.
+
+`[Inference]`, and no further: genus *Pittosporum*, almost certainly
+*P. tenuifolium*, a compact variegated cultivar showing hard cold colouring. A
+name is not guessable from the frame — the small-leaved variegated selections
+('Victoria', 'Pixie', the Golf Ball sports and others) are close enough in leaf
+that the label is the only honest source. **The deck already holds two
+Pittosporums** ('Elizabeth' dealt, 'Tom Thumb' now held), so a wrong guess would
+land on a card that already exists.
+
+**What is needed:** the name. If it turns out to be a third cultivar it wants its
+own card; if it IS 'Tom Thumb' then the card's `visual` line is wrong and needs
+rewriting, which is a bigger correction than a photo swap.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
