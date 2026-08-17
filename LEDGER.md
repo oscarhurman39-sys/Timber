@@ -5,6 +5,15 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (deploy #53) — live fast-forwarded to 9dc1e40, taking the
+  site from 188 to **202 cards at r107**. **The first attempt FAILED and it was
+  not our code**: actions/deploy-pages returned HTTP 503, "No server is
+  currently available to service your request... is githubstatus.com reporting a
+  Pages outage?". The five fast checks passed and the artifact uploaded fine;
+  only the Pages deployment API was down, and the workflow's own byte-verify
+  step was skipped rather than run. Re-running the failed job was the fix.
+  **Worth remembering: a red deploy is not automatically a red build.** Read
+  which STEP failed before touching anything.
 progress: 2026-08-17 (Houttuynia) — **deck 202, hold 82.** Houttuynia cordata
   'Pied Piper' dealt. Photo carries the Galaxy AI edit marker and a visible AI
   label; recorded in CREDITS and framed out of the card window by focus. Its
