@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 /* reframe-photo.js — apply a crop decision from PHOTO-REFRAME-BRIEF.md to a master.
-   Run: NODE_PATH=/opt/node22/lib/node_modules node tools/reframe-photo.js <photo> <crop.json>
-        ... --replace   overwrite the master in place (default writes *-reframed.jpg)
-        ... --dry-run   validate and report, write nothing
+
+     node tools/reframe-photo.js <photo> <crop.json> [--replace] [--dry-run]
+     node tools/reframe-photo.js --audit <photo>      does this photo fit the card?
+     node tools/reframe-photo.js --audit-all          the same over every master
+     node tools/reframe-photo.js --selftest           the refusals still refuse
+
+   Needs sharp:  NODE_PATH=/opt/node22/lib/node_modules
 
    WHY THIS EXISTS
 
@@ -17,13 +21,20 @@
    crop JSON that does not hold up: a verdict of reshoot/ask, a box outside the
    frame, an aspect that would starve the search detail sheet, a label the model
    claimed the stats plaque would hide when the arithmetic says otherwise. A
-   refusal here is the point of the tool, not a failure of it. */
+   refusal here is the point of the tool, not a failure of it.
 
+   --audit needs no model and no JSON. It answers the one question worth asking
+   of every photograph before it is dealt: does this shape survive both crops? */
+
+'use strict';
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 /* ---- card geometry, from timber.html. See PHOTO-REFRAME-BRIEF.md §2. ---- */
 const CARD_ASPECT   = 0.6165;  /* .tphoto 348.8x565.7 on a 420x600 card */
+const SHEET_ASPECT  = 1.6;     /* .d-photo img, aspect-ratio 16/10, centred */
 const PLAQUE_TOP    = 0.622;   /* below this fraction of the photo, furniture covers it */
 const ASPECT_MIN    = 0.75;    /* 3:4 portrait — narrower starves the 16:10 detail sheet */
 const ASPECT_MAX    = 1.00;    /* square — wider loses too much width to the card crop */
@@ -33,91 +44,124 @@ const EV_LIMIT      = 0.7;
 const ROT_LIMIT     = 15;
 const EPS           = 0.005;
 
-const args  = process.argv.slice(2);
-const flag  = f => { const i = args.indexOf(f); if (i >= 0) args.splice(i, 1); return i >= 0; };
-const DRY   = flag('--dry-run');
-const REPL  = flag('--replace');
-const [photoArg, jsonArg] = args;
+const ROOT   = path.resolve(__dirname, '..');
+const PHOTOS = path.join(ROOT, 'photos');
 
-const die  = (...m) => { console.error('FAIL reframe-photo:', ...m); process.exit(1); };
-const usage = () => die('usage: reframe-photo.js <photo.jpg> <crop.json> [--replace] [--dry-run]');
+const args = process.argv.slice(2);
+const flag = f => { const i = args.indexOf(f); if (i >= 0) args.splice(i, 1); return i >= 0; };
+const DRY  = flag('--dry-run');
+const REPL = flag('--replace');
+const AUDIT     = flag('--audit');
+const AUDIT_ALL = flag('--audit-all');
+const SELFTEST  = flag('--selftest');
 
-if (!photoArg || !jsonArg) usage();
-if (!fs.existsSync(photoArg)) die(`no such photo: ${photoArg}`);
-if (!fs.existsSync(jsonArg))  die(`no such crop json: ${jsonArg}`);
-
-let crop;
-try { crop = JSON.parse(fs.readFileSync(jsonArg, 'utf8')); }
-catch (e) { die(`${jsonArg} is not valid JSON — ${e.message}`); }
-
-/* ------------------------------------------------------------------ checks */
-const problems = [], notes = [];
+const die = (...m) => { console.error('FAIL reframe-photo:', ...m); process.exit(1); };
 const num = v => typeof v === 'number' && Number.isFinite(v);
 const box = b => b && ['x','y','w','h'].every(k => num(b[k]));
 
-/* 1. the model's own verdict outranks every measurement below */
-const verdict = crop.verdict;
-if (!['crop','as-is','reshoot','ask'].includes(verdict))
-  problems.push(`verdict must be crop|as-is|reshoot|ask, got ${JSON.stringify(verdict)}`);
-if (verdict === 'reshoot' || verdict === 'ask') {
-  console.error(`reframe-photo: verdict "${verdict}" — not cropping.`);
-  console.error(`  reason: ${crop.reason || '(none given)'}`);
-  (crop.concerns || []).forEach(c => console.error(`  concern: ${c}`));
-  console.error('  This belongs in VERIFY-QUEUE.md, not in a crop.');
-  process.exit(2);
-}
-if (crop.featureVisible === false)
-  problems.push('featureVisible is false — a crop cannot recover a feature that is not in the frame');
-
-/* 2. the crop box must be a real box inside the original */
-if (!box(crop.crop)) problems.push('crop must be {x,y,w,h} numbers, fractions of the original');
-else {
-  const c = crop.crop;
-  if (c.w <= 0 || c.h <= 0) problems.push('crop width and height must be positive');
-  if (c.x < -EPS || c.y < -EPS) problems.push(`crop starts outside the frame (x ${c.x}, y ${c.y})`);
-  if (c.x + c.w > 1 + EPS || c.y + c.h > 1 + EPS)
-    problems.push(`crop extends past the frame (x+w ${(c.x+c.w).toFixed(3)}, y+h ${(c.y+c.h).toFixed(3)}) — no outpainting`);
+function loadSharp() {
+  try { return require('sharp'); }
+  catch { die('needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)'); }
 }
 
-/* 3. rotation and exposure stay inside what counts as correction, not alteration */
-const rot = num(crop.rotateDeg) ? crop.rotateDeg : 0;
-if (Math.abs(rot) > ROT_LIMIT) problems.push(`rotateDeg ${rot} exceeds ±${ROT_LIMIT}° — that is a reshoot, not a straighten`);
-const ev = crop.exposure && num(crop.exposure.evAdjust) ? crop.exposure.evAdjust : 0;
-if (Math.abs(ev) > EV_LIMIT) problems.push(`exposure.evAdjust ${ev} exceeds ±${EV_LIMIT} EV`);
-if (ev !== 0) notes.push(`exposure: ${ev > 0 ? '+' : ''}${ev} EV requested — NOT applied by this tool, see §7`);
-if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !== 'none')
-  notes.push(`white balance: ${crop.exposure.whiteBalance} reported — NOT applied by this tool, see §7`);
+/* -------------------------------------------------------------- audit mode */
+/* How much of a master each surface actually shows, given its aspect ratio.
+   Both surfaces use object-fit:cover, so the narrower dimension is the one cut. */
+function fit(aspect) {
+  const cardWidthShown  = Math.min(1, CARD_ASPECT / aspect);
+  const sheetHeightShown = Math.min(1, aspect / SHEET_ASPECT);
+  let verdict = 'ok', why = '';
+  if (aspect < ASPECT_MIN - 0.01) {
+    verdict = 'tall';
+    why = `detail sheet shows only ${(sheetHeightShown*100).toFixed(0)}% of the height`;
+  } else if (aspect > ASPECT_MAX + 0.01) {
+    verdict = 'wide';
+    why = `card shows only ${(cardWidthShown*100).toFixed(0)}% of the width`;
+  }
+  return { cardWidthShown, sheetHeightShown, verdict, why };
+}
 
-(async () => {
-  let sharp;
-  try { sharp = require('sharp'); }
-  catch (e) { die('needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)'); }
+async function auditOne(sharp, file, quiet) {
+  const m = await sharp(file).metadata();
+  const a = m.width / m.height;
+  const f = fit(a);
+  if (!quiet) {
+    console.log(`${path.basename(file)}  ${m.width}x${m.height}  aspect ${a.toFixed(3)}  [${f.verdict}]`);
+    console.log(`  card shows ${(f.cardWidthShown*100).toFixed(0)}% of the width · ` +
+                `detail sheet shows ${(f.sheetHeightShown*100).toFixed(0)}% of the height`);
+    if (f.why) console.log(`  ${f.why} — safe band is ${ASPECT_MIN}–${ASPECT_MAX}`);
+  }
+  return { file: path.basename(file), w: m.width, h: m.height, aspect: a, ...f };
+}
 
-  const meta = await sharp(photoArg).metadata();
-  const SW = meta.width, SH = meta.height;
+async function auditAll(sharp) {
+  const files = fs.readdirSync(PHOTOS).filter(f => /\.jpg$/i.test(f)).sort();
+  if (!files.length) die('no masters in photos/');
+  const rows = [];
+  for (const f of files) rows.push(await auditOne(sharp, path.join(PHOTOS, f), true));
+  const ok   = rows.filter(r => r.verdict === 'ok');
+  const tall = rows.filter(r => r.verdict === 'tall').sort((a, b) => a.aspect - b.aspect);
+  const wide = rows.filter(r => r.verdict === 'wide').sort((a, b) => b.aspect - a.aspect);
+  const pc = n => `${n} (${(n / rows.length * 100).toFixed(1)}%)`;
+  console.log(`reframe-photo --audit-all: ${rows.length} masters`);
+  console.log(`  in the ${ASPECT_MIN}–${ASPECT_MAX} safe band : ${pc(ok.length)}`);
+  console.log(`  too tall  (detail sheet loses height): ${pc(tall.length)}`);
+  console.log(`  too wide  (card loses width)         : ${pc(wide.length)}`);
+  const show = (label, list) => {
+    if (!list.length) return;
+    console.log(`\n  ${label}`);
+    for (const r of list.slice(0, 12))
+      console.log(`    ${r.file.padEnd(46)} ${r.aspect.toFixed(2)}  ${r.why}`);
+    if (list.length > 12) console.log(`    ... and ${list.length - 12} more`);
+  };
+  show('widest — the card sees least of these:', wide);
+  show('tallest — the detail sheet sees least of these:', tall);
+  console.log('\nThis is information, not a gate: every one of these already ships.');
+  console.log('It tells you which masters are worth re-cropping when you next touch them.');
+}
 
-  /* 4. if the model reported the source size, it must be the size we are holding —
-        a mismatch means the coordinates describe a different file */
+/* ------------------------------------------------------------ crop mode */
+function validate(crop, SW, SH, fileLabel) {
+  const problems = [], notes = [];
+
+  if (!['crop','as-is','reshoot','ask'].includes(crop.verdict))
+    problems.push(`verdict must be crop|as-is|reshoot|ask, got ${JSON.stringify(crop.verdict)}`);
+  if (crop.featureVisible === false)
+    problems.push('featureVisible is false — a crop cannot recover a feature that is not in the frame');
+
+  if (!box(crop.crop)) problems.push('crop must be {x,y,w,h} numbers, fractions of the original');
+  else {
+    const c = crop.crop;
+    if (c.w <= 0 || c.h <= 0) problems.push('crop width and height must be positive');
+    if (c.x < -EPS || c.y < -EPS) problems.push(`crop starts outside the frame (x ${c.x}, y ${c.y})`);
+    if (c.x + c.w > 1 + EPS || c.y + c.h > 1 + EPS)
+      problems.push(`crop extends past the frame (x+w ${(c.x+c.w).toFixed(3)}, y+h ${(c.y+c.h).toFixed(3)}) — no outpainting`);
+  }
+
+  const rot = num(crop.rotateDeg) ? crop.rotateDeg : 0;
+  if (Math.abs(rot) > ROT_LIMIT) problems.push(`rotateDeg ${rot} exceeds ±${ROT_LIMIT}° — that is a reshoot, not a straighten`);
+  const ev = crop.exposure && num(crop.exposure.evAdjust) ? crop.exposure.evAdjust : 0;
+  if (Math.abs(ev) > EV_LIMIT) problems.push(`exposure.evAdjust ${ev} exceeds ±${EV_LIMIT} EV`);
+  if (ev !== 0) notes.push(`exposure: ${ev > 0 ? '+' : ''}${ev} EV requested — NOT applied by this tool, see §7`);
+  if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !== 'none')
+    notes.push(`white balance: ${crop.exposure.whiteBalance} reported — NOT applied by this tool, see §7`);
+
   if (crop.sourcePx && num(crop.sourcePx.w) && num(crop.sourcePx.h)) {
     if (crop.sourcePx.w !== SW || crop.sourcePx.h !== SH)
-      problems.push(`sourcePx ${crop.sourcePx.w}x${crop.sourcePx.h} but ${path.basename(photoArg)} is ${SW}x${SH} — wrong photo for this JSON`);
+      problems.push(`sourcePx ${crop.sourcePx.w}x${crop.sourcePx.h} but ${fileLabel} is ${SW}x${SH} — wrong photo for this JSON`);
   } else notes.push('sourcePx not reported — could not confirm the JSON describes this file');
 
-  /* 5. output aspect: must serve BOTH the card (0.6165) and the detail sheet (16:10) */
   let outAspect = null;
   if (box(crop.crop)) {
     outAspect = (crop.crop.w * SW) / (crop.crop.h * SH);
-    if (outAspect < ASPECT_MIN - 0.01 || outAspect > ASPECT_MAX + 0.01)
-      problems.push(`crop aspect ${outAspect.toFixed(3)} is outside ${ASPECT_MIN}–${ASPECT_MAX}` +
-        (outAspect < ASPECT_MIN
-          ? ` — too tall; at ${outAspect.toFixed(2)} the 16:10 detail sheet shows only ${(outAspect/1.6*100).toFixed(0)}% of the height`
-          : ` — too wide; the card would show only ${(CARD_ASPECT/outAspect*100).toFixed(0)}% of the width`));
+    const f = fit(outAspect);
+    if (f.verdict !== 'ok')
+      problems.push(`crop aspect ${outAspect.toFixed(3)} is outside ${ASPECT_MIN}–${ASPECT_MAX} — ` +
+        `too ${f.verdict}; ${f.why}`);
     if (num(crop.cropAspect) && Math.abs(crop.cropAspect - outAspect) > 0.02)
       problems.push(`cropAspect says ${crop.cropAspect} but the box computes to ${outAspect.toFixed(3)} — the model's numbers disagree with each other`);
   }
 
-  /* 6. does the identifying feature actually land in the zone both surfaces show?
-        featureBox is in ORIGINAL coordinates, so map it into the crop first. */
   if (box(crop.featureBox) && box(crop.crop)) {
     const c = crop.crop, f = crop.featureBox;
     const fx = (f.x + f.w / 2 - c.x) / c.w, fy = (f.y + f.h / 2 - c.y) / c.h;
@@ -134,7 +178,6 @@ if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !=
       problems.push('featureInSafeBox claims true but the arithmetic says otherwise');
   } else notes.push('featureBox not reported — could not verify the feature survives the crop');
 
-  /* 7. labels. "furniture" is a claim the stats plaque will hide it — check that. */
   for (const l of (crop.labels || [])) {
     const reads = l.reads ? `"${l.reads}"` : 'unnamed label';
     if (l.resolution === 'reshoot') problems.push(`label ${reads} resolved as "reshoot" — this photo is not croppable, it is re-shootable`);
@@ -143,7 +186,6 @@ if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !=
     if (!box(l.box)) { notes.push(`label ${reads}: no box given, could not verify`); continue; }
     const c = crop.crop;
     if (!box(c)) continue;
-    /* where does the label sit once the crop is applied? */
     const lx0 = (l.box.x - c.x) / c.w, lx1 = (l.box.x + l.box.w - c.x) / c.w;
     const ly0 = (l.box.y - c.y) / c.h, ly1 = (l.box.y + l.box.h - c.y) / c.h;
     const gone = lx1 <= 0 || lx0 >= 1 || ly1 <= 0 || ly0 >= 1;
@@ -159,8 +201,27 @@ if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !=
       else notes.push(`label ${reads}: sits at ${(ly0*100).toFixed(0)}% down, below the plaque — hidden`);
     }
   }
+  return { problems, notes, outAspect, rot };
+}
 
-  /* ---------------------------------------------------------------- report */
+async function doCrop(sharp, photoArg, jsonArg) {
+  let crop;
+  try { crop = JSON.parse(fs.readFileSync(jsonArg, 'utf8')); }
+  catch (e) { die(`${jsonArg} is not valid JSON — ${e.message}`); }
+
+  /* the model's own verdict outranks every measurement below */
+  if (crop.verdict === 'reshoot' || crop.verdict === 'ask') {
+    console.error(`reframe-photo: verdict "${crop.verdict}" — not cropping.`);
+    console.error(`  reason: ${crop.reason || '(none given)'}`);
+    (crop.concerns || []).forEach(c => console.error(`  concern: ${c}`));
+    console.error('  This belongs in VERIFY-QUEUE.md, not in a crop.');
+    process.exit(2);
+  }
+
+  const meta = await sharp(photoArg).metadata();
+  const SW = meta.width, SH = meta.height;
+  const { problems, notes, outAspect, rot } = validate(crop, SW, SH, path.basename(photoArg));
+
   console.log(`reframe-photo: ${path.basename(photoArg)}  ${SW}x${SH}`);
   notes.forEach(n => console.log('  note: ' + n));
   if (problems.length) {
@@ -178,7 +239,6 @@ if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !=
   if (DRY) { console.log(`  dry run — would write ${out}`); return; }
 
   let pipe = sharp(photoArg).extract({ left, top, width, height });
-  let finalW = width, finalH = height;
   if (rot) {
     /* rotate the cropped tile, then take the largest same-aspect rect that
        contains no transparent wedge, so the file never carries invented edges */
@@ -189,13 +249,13 @@ if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !=
     else { iw = (width * co - height * s) / denom; ih = (height * co - width * s) / denom; }
     const k = Math.min(iw / width, ih / height, 1);
     if (!(k > 0)) die(`a ${rot}° rotation leaves nothing of this crop — reduce the angle or the box`);
-    finalW = Math.max(1, Math.floor(width * k)); finalH = Math.max(1, Math.floor(height * k));
+    const fw = Math.max(1, Math.floor(width * k)), fh = Math.max(1, Math.floor(height * k));
     const buf = await pipe.rotate(rot, { background: { r: 0, g: 0, b: 0, alpha: 0 } }).toBuffer();
     const rm = await sharp(buf).metadata();
     pipe = sharp(buf).extract({
-      left: Math.round((rm.width - finalW) / 2), top: Math.round((rm.height - finalH) / 2),
-      width: finalW, height: finalH });
-    console.log(`  after straightening: ${finalW}x${finalH} (${(100 - k * 100).toFixed(1)}% trimmed to remove the wedges)`);
+      left: Math.round((rm.width - fw) / 2), top: Math.round((rm.height - fh) / 2),
+      width: fw, height: fh });
+    console.log(`  after straightening: ${fw}x${fh} (${(100 - k * 100).toFixed(1)}% trimmed to remove the wedges)`);
   }
 
   const buf = await pipe.jpeg({ quality: 92, chromaSubsampling: '4:4:4' }).toBuffer();
@@ -205,4 +265,90 @@ if (crop.exposure && crop.exposure.whiteBalance && crop.exposure.whiteBalance !=
   console.log('  NEXT: node tools/optimise-photos.js   (the app loads photos/card/*.webp, not the master)');
   if (crop.objectPosition && crop.objectPosition !== '50% 40%')
     console.log(`  NEXT: add PHOTO_FOCUS['<slug>']='${crop.objectPosition}' in timber.html`);
+}
+
+/* ----------------------------------------------------------- selftest mode */
+/* Spawns the real CLI against synthetic fixtures, so the refusals are tested
+   through the same path a session uses — not through an internal shortcut. */
+async function selftest(sharp) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'reframe-selftest-'));
+  const img = path.join(dir, 'plant.jpg');
+  await sharp({ create: { width: 900, height: 1200, channels: 3, background: { r: 90, g: 120, b: 70 } } })
+    .jpeg().toFile(img);
+
+  const good = {
+    sourcePx: { w: 900, h: 1200 }, featureVisible: true,
+    featureBox: { x: 0.35, y: 0.28, w: 0.20, h: 0.18 },
+    crop: { x: 0.05, y: 0.10, w: 0.80, h: 0.60 }, cropAspect: 1.0, rotateDeg: 0,
+    featureInSafeBox: true, objectPosition: '50% 40%',
+    labels: [{ box: { x: 0.60, y: 0.85, w: 0.18, h: 0.08 }, reads: 'BENCH TICKET', resolution: 'crop' }],
+    exposure: { evAdjust: 0, whiteBalance: 'none' }, verdict: 'crop', concerns: [], reason: 'test'
+  };
+  const at = (over) => { const d = JSON.parse(JSON.stringify(good)); Object.assign(d, over); return d; };
+
+  const cases = [
+    ['happy path crops',            good,                                                          0, /crop: 720x720/],
+    ['verdict reshoot refuses',     at({ verdict: 'reshoot' }),                                    2, /VERIFY-QUEUE/],
+    ['verdict ask refuses',         at({ verdict: 'ask' }),                                        2, /VERIFY-QUEUE/],
+    ['outpainting refuses',         at({ crop: { x: 0.30, y: 0.10, w: 0.80, h: 0.60 } }),          1, /no outpainting/],
+    ['too-tall aspect refuses',     at({ crop: { x: 0.10, y: 0.05, w: 0.55, h: 0.67 }, cropAspect: 0.554 }), 1, /detail sheet/],
+    ['too-wide aspect refuses',     at({ crop: { x: 0.02, y: 0.30, w: 0.96, h: 0.40 }, cropAspect: 1.8 }),   1, /card shows only/],
+    ['aspect self-contradiction',   at({ cropAspect: 0.62 }),                                      1, /disagree with each other/],
+    ['wrong source size refuses',   at({ sourcePx: { w: 3024, h: 4032 } }),                        1, /wrong photo for this JSON/],
+    ['feature cropped out refuses', at({ featureBox: { x: 0.05, y: 0.80, w: 0.15, h: 0.12 } }),    1, /cuts the identifying feature out/],
+    ['inpaint rung refuses',        at({ labels: [{ box: { x: 0.4, y: 0.3, w: 0.1, h: 0.05 }, reads: 't', resolution: 'inpaint' }] }), 1, /no inpainting rung/],
+    ['false furniture claim refuses', at({ labels: [{ box: { x: 0.40, y: 0.25, w: 0.12, h: 0.06 }, reads: 't', resolution: 'furniture' }] }), 1, /would be visible on the card/],
+    ['uncropped label refuses',     at({ labels: [{ box: { x: 0.40, y: 0.30, w: 0.12, h: 0.06 }, reads: 't', resolution: 'crop' }] }), 1, /still contains it/],
+    ['over-rotation refuses',       at({ rotateDeg: 30 }),                                         1, /reshoot, not a straighten/],
+    ['over-exposure refuses',       at({ exposure: { evAdjust: 1.5, whiteBalance: 'none' } }),     1, /exceeds ±0\.7 EV/],
+  ];
+
+  let pass = 0, fail = 0;
+  for (const [name, json, wantCode, wantRe] of cases) {
+    const jf = path.join(dir, 'c.json');
+    fs.writeFileSync(jf, JSON.stringify(json));
+    let code = 0, output = '';
+    try {
+      output = execFileSync(process.execPath, [__filename, img, jf, '--dry-run'],
+        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: process.env });
+    } catch (e) { code = e.status; output = (e.stdout || '') + (e.stderr || ''); }
+    const ok = code === wantCode && wantRe.test(output);
+    if (ok) { pass++; console.log(`  ok    ${name}`); }
+    else {
+      fail++;
+      console.error(`  FAIL  ${name} — exit ${code} (wanted ${wantCode})` +
+        (wantRe.test(output) ? '' : `, message did not match ${wantRe}`));
+      console.error('        ' + output.trim().split('\n').slice(-2).join(' | '));
+    }
+  }
+  fs.rmSync(dir, { recursive: true, force: true });
+  console.log(`reframe-photo --selftest: ${pass}/${pass + fail} refusals behave`);
+  if (fail) process.exit(1);
+}
+
+/* ------------------------------------------------------------------- main */
+(async () => {
+  if (SELFTEST || AUDIT_ALL) {
+    /* these two run inside tests/run-all.js --fast, which must stay green on a
+       checkout without sharp — same contract as optimise-photos --check */
+    let s; try { s = require('sharp'); }
+    catch { console.log('reframe-photo: sharp not installed — skipping'); return; }
+    return SELFTEST ? selftest(s) : auditAll(s);
+  }
+  const sharp = loadSharp();
+  if (AUDIT) {
+    const [p] = args;
+    if (!p) die('usage: reframe-photo.js --audit <photo.jpg>');
+    if (!fs.existsSync(p)) die(`no such photo: ${p}`);
+    return void await auditOne(sharp, p, false);
+  }
+  const [photoArg, jsonArg] = args;
+  if (!photoArg || !jsonArg) die(
+    'usage: reframe-photo.js <photo.jpg> <crop.json> [--replace] [--dry-run]\n' +
+    '       reframe-photo.js --audit <photo.jpg>\n' +
+    '       reframe-photo.js --audit-all\n' +
+    '       reframe-photo.js --selftest');
+  if (!fs.existsSync(photoArg)) die(`no such photo: ${photoArg}`);
+  if (!fs.existsSync(jsonArg))  die(`no such crop json: ${jsonArg}`);
+  await doCrop(sharp, photoArg, jsonArg);
 })();

@@ -23,14 +23,42 @@ const HTML = path.join(ROOT, 'timber.html');
 
 const argv = process.argv.slice(2);
 const flag = f => { const i = argv.indexOf(f); return i === -1 ? null : argv[i + 1]; };
-const focus = flag('--focus');
-const [latinArg, photoArg] = argv.filter((a, i) =>
-  !a.startsWith('--') && argv[i - 1] !== '--focus');
-if (!latinArg || !photoArg) {
-  console.error('usage: node tools/deal-plant.js "<latin>" <photo> [--focus "50% 30%"]');
+let focus = flag('--focus');
+const cropJson = flag('--crop');
+const [latinArg, photoArgIn] = argv.filter((a, i) =>
+  !a.startsWith('--') && argv[i - 1] !== '--focus' && argv[i - 1] !== '--crop');
+if (!latinArg || !photoArgIn) {
+  console.error('usage: node tools/deal-plant.js "<latin>" <photo> [--crop crop.json] [--focus "50% 30%"]');
+  console.error('  --crop  reframe the photo first, per PHOTO-REFRAME-BRIEF.md, before staging it.');
+  console.error('          A crop the gate refuses aborts the deal — the card stays held.');
   process.exit(1);
 }
 const die = m => { console.error('ABORT: ' + m); process.exit(1); };
+
+/* ---- optional reframe, BEFORE anything is staged ----
+   The crop runs first so a refused crop costs nothing: no photo written, no row
+   moved, the card simply stays on hold. reframe-photo.js exits 2 on a model
+   verdict of reshoot/ask and 1 on a crop JSON that does not hold up; both are
+   reasons not to deal this card, not reasons to deal it uncropped. */
+let photoArg = photoArgIn;
+if (cropJson) {
+  if (!fs.existsSync(cropJson)) die('crop json not found: ' + cropJson);
+  const staged = path.join(require('os').tmpdir(), 'deal-' + Date.now() + '.jpg');
+  fs.copyFileSync(photoArgIn, staged);
+  try {
+    execFileSync(process.execPath, [path.join(__dirname, 'reframe-photo.js'), staged, cropJson, '--replace'],
+      { stdio: 'inherit' });
+  } catch (e) {
+    die(e.status === 2
+      ? 'the crop was refused at the source — this photo needs a reshoot, not a deal'
+      : 'the crop JSON did not pass the gate — nothing was staged, the card is still held');
+  }
+  photoArg = staged;
+  if (!focus) {
+    const op = (JSON.parse(fs.readFileSync(cropJson, 'utf8')) || {}).objectPosition;
+    if (op && op !== '50% 40%') { focus = op; console.log(`focus taken from the crop JSON: ${op}`); }
+  }
+}
 
 const slugLatin = l => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
   .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');

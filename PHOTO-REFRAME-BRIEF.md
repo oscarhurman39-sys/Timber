@@ -281,6 +281,30 @@ node tools/optimise-photos.js                                        # the app l
 It never touches the master unless you pass `--replace`, so the normal loop is
 crop → look at it → replace.
 
+**In the routine, it is one flag.** `deal-plant.js` and `add-plant.js` both take
+`--crop crop.json` and run the reframe *before anything is staged*, so a refused
+crop costs nothing — no photo written, no row moved, the card stays held. An
+`objectPosition` override in the JSON is picked up as the focus automatically.
+`add-plants-bulk.js` deliberately has no `--crop`; reframe those files first.
+
+**Two modes need no model and no JSON:**
+
+```sh
+node tools/reframe-photo.js --audit photos/<slug>.jpg   # does this shape fit?
+node tools/reframe-photo.js --audit-all                 # every master, summarised
+```
+
+`--audit` answers the one question worth asking of every photograph before it is
+dealt: does this aspect ratio survive both the card crop and the detail sheet?
+Measured across the 205 masters today — **73.7% sit in the 0.75–1.0 safe band**,
+22.4% are too tall for the detail sheet, and 3.9% too wide for the card, the worst
+showing only 33% of its width. It is information, not a gate; every one of those
+already ships.
+
+`--selftest` runs in `tests/run-all.js` (18 checks now, 9 of them fast), so the
+refusals below cannot rot silently. It skips with a note where sharp is absent,
+the same contract as `optimise-photos --check`.
+
 **It is the gate as much as the cropper**, and refusing is the point. Exit 2 is a
 model verdict of `reshoot` or `ask`, which goes to `VERIFY-QUEUE.md`. Exit 1 is a
 crop JSON that does not hold up, and it names which check failed:

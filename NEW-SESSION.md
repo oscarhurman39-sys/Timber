@@ -124,6 +124,7 @@ local.
 ```sh
 node tools/add-plants-bulk.js --quick a.json a.jpg b.json b.jpg ...   # 2+ plants
 node tools/add-plant.js plant.json photo.jpg                          # a single plant
+node tools/deal-plant.js "<latin>" photo.jpg                          # a held card
 ```
 
 That one command does the whole routine:
@@ -132,6 +133,40 @@ That one command does the whole routine:
 2. JSON → converted into a `PLANTS` row in `timber.html`
 3. Data checks + the whole-deck audit run green (~15s with `--quick`)
 4. Screenshot written to `tools/last-added-card.png` — **look at it**
+
+### Cropping and de-labelling — `--crop`
+
+Photographs with a bench label in them, or framed so the plant fights the card
+window, go through `PHOTO-REFRAME-BRIEF.md` first: paste that prompt into a
+vision model with the photo, get crop JSON back, then hand it to the same
+command.
+
+```sh
+node tools/deal-plant.js "<latin>" photo.jpg --crop crop.json
+node tools/add-plant.js  plant.json photo.jpg --crop crop.json
+```
+
+The crop runs **before anything is staged**, so a crop the gate refuses costs
+nothing: no photo written, no row moved, the card simply stays held. A verdict of
+`reshoot` or `ask` means exactly that — reshoot it, or put it in `VERIFY-QUEUE.md`;
+it is never a reason to deal the photo uncropped. If the JSON carries an
+`objectPosition` override, `deal-plant.js` picks it up as the focus automatically.
+
+`add-plants-bulk.js` has no `--crop`: a third file per plant would make the
+pair-wise argument list ambiguous. Crop those photos with `reframe-photo.js`
+first, then hand the reframed files to the bulk tool.
+
+Before dealing anything, this is free and needs no model:
+
+```sh
+node tools/reframe-photo.js --audit photo.jpg     # does this shape fit the card?
+node tools/reframe-photo.js --audit-all           # the same over every master
+```
+
+The card window is a tall 0.6165 crop and the search detail sheet is a centred
+16:10 crop of the *same file*, so a photograph has to survive both. Masters
+between **3:4 and 1:1 portrait** clear both; today 73.7% of them do. The audit
+names the ones that do not and says what each surface loses.
 
 `NPLANTS` is no longer bumped anywhere: all four counting suites derive it from
 `timber.html`. It used to be hand-typed in four places, and a deck change that
@@ -147,8 +182,8 @@ per-batch gate that matters is the data gate:
 |---|---|---|
 | `--quick` | data audit, plant-sense, photo credits, whole-deck render audit | **17s** |
 | default | the above plus app-test and edge-test | ~5 min |
-| `run-all.js --jobs 3` | all 14 checks, 3 at a time | **2m41s** |
-| `run-all.js` | all 14 checks, one at a time | ~7 min |
+| `run-all.js --jobs 3` | all 18 checks, 3 at a time | **2m41s** |
+| `run-all.js` | all 18 checks, one at a time | ~7 min |
 
 `app-test` and `edge-test` are the expensive pair because both walk the entire
 deck — the learn-every-card loop alone is 128 × 400ms. That cost grows with the

@@ -50,6 +50,8 @@ const CHECKS = [
     why: 'every art master has a current .webp derivative' },
   { name: 'optimise-photos', cmd: ['node', 'tools/optimise-photos.js', '--check'], browser: false,
     why: 'every photo master has a current card-sized derivative' },
+  { name: 'reframe-photo', cmd: ['node', 'tools/reframe-photo.js', '--selftest'], browser: false,
+    why: 'the crop gate still refuses outpainting, false label claims and inpainting' },
   { name: 'app-test', cmd: ['node', 'tests/app-test.js'], browser: true,
     why: 'gestures, flip, search, quiz, persistence, a11y' },
   { name: 'edge-test', cmd: ['node', 'tests/edge-test.js'], browser: true,

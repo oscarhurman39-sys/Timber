@@ -22,14 +22,35 @@ const { execFileSync, spawn } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 
 const QUICK = process.argv.includes('--quick');
-const [jsonPath, photoPath] = process.argv.slice(2).filter(a => !a.startsWith('--'));
-if (!jsonPath || !photoPath) {
-  console.error('usage: node tools/add-plant.js [--quick] <plant.json> <photo.jpg>');
+const argv = process.argv.slice(2);
+const cropJson = (i => i === -1 ? null : argv[i + 1])(argv.indexOf('--crop'));
+const [jsonPath, photoPathIn] = argv.filter((a, i) => !a.startsWith('--') && argv[i - 1] !== '--crop');
+if (!jsonPath || !photoPathIn) {
+  console.error('usage: node tools/add-plant.js [--quick] [--crop crop.json] <plant.json> <photo.jpg>');
   console.error('  --quick  data checks + whole-deck audit only (~17s instead of ~5min).');
   console.error('           Then run: node tests/run-all.js --jobs 3   before pushing.');
+  console.error('  --crop   reframe the photo first, per PHOTO-REFRAME-BRIEF.md. A crop the');
+  console.error('           gate refuses aborts the add — nothing is written.');
   process.exit(1);
 }
 const die = (msg) => { console.error('ABORT: ' + msg); process.exit(1); };
+
+/* ---- optional reframe, before validation so a refused crop costs nothing ---- */
+let photoPath = photoPathIn;
+if (cropJson) {
+  if (!fs.existsSync(cropJson)) die('crop json not found: ' + cropJson);
+  const staged = path.join(require('os').tmpdir(), 'add-' + Date.now() + '.jpg');
+  fs.copyFileSync(photoPathIn, staged);
+  try {
+    execFileSync(process.execPath, [path.join(__dirname, 'reframe-photo.js'), staged, cropJson, '--replace'],
+      { stdio: 'inherit' });
+  } catch (e) {
+    die(e.status === 2
+      ? 'the crop was refused at the source — this photo needs a reshoot, not an add'
+      : 'the crop JSON did not pass the gate — nothing was written');
+  }
+  photoPath = staged;
+}
 
 /* ---- 1. validate ---- */
 try {
