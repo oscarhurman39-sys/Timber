@@ -263,14 +263,66 @@ worked around.
 
 ---
 
-## 7. What this brief does not do
+## 7. Running it — `tools/reframe-photo.js`
 
-It does not balance a photograph *aesthetically* beyond framing and exposure —
-no dodging, burning, or local contrast, because each of those is a per-pixel
-change to plant material and the line has to sit somewhere defensible.
+The executing half. It reads the JSON, checks it against the geometry above, and
+crops the original pixels with `sharp`.
 
-It also does not build the executing tool. The prompt returns coordinates; a
-`tools/reframe-photo.js` that reads the JSON, calls `sharp().extract().rotate()`
-and writes the master is roughly thirty lines and has not been written. Until it
-exists, apply the numbers by hand in any editor that crops without re-encoding
-the whole frame.
+```sh
+NODE_PATH=/opt/node22/lib/node_modules \
+  node tools/reframe-photo.js photos/<slug>.jpg crop.json --dry-run
+NODE_PATH=/opt/node22/lib/node_modules \
+  node tools/reframe-photo.js photos/<slug>.jpg crop.json            # writes <slug>-reframed.jpg
+NODE_PATH=/opt/node22/lib/node_modules \
+  node tools/reframe-photo.js photos/<slug>.jpg crop.json --replace  # overwrite the master
+node tools/optimise-photos.js                                        # the app loads the WebP, not the master
+```
+
+It never touches the master unless you pass `--replace`, so the normal loop is
+crop → look at it → replace.
+
+**It is the gate as much as the cropper**, and refusing is the point. Exit 2 is a
+model verdict of `reshoot` or `ask`, which goes to `VERIFY-QUEUE.md`. Exit 1 is a
+crop JSON that does not hold up, and it names which check failed:
+
+| Check | Refused because |
+|---|---|
+| Frame bounds | `crop` extends past the original — no outpainting |
+| Output aspect | outside 0.75–1.0, with the cost quoted ("at 0.62 the detail sheet shows only 38% of the height") |
+| Internal consistency | `cropAspect` disagrees with the box it describes |
+| Wrong file | `sourcePx` does not match the photo it was handed |
+| Feature survival | the feature centre falls outside the crop, or outside the safe box with no `objectPosition` override |
+| Self-report | `featureInSafeBox: true` when the arithmetic says otherwise |
+| Label: `crop`/`reframe` | the crop still contains the label it claimed to remove |
+| Label: `furniture` | the label sits above 62.2%, so the stats plaque would not hide it |
+| Label: anything else | there is no inpainting rung |
+
+`rotateDeg` is applied *after* the crop, then the tile is trimmed inward to the
+largest same-aspect rectangle containing no rotation wedge — so the file never
+carries an invented edge. The trim is reported (a 3.5° straighten costs 5.6%).
+
+**Exposure and white balance are read, checked against the ±0.7 EV limit, and
+deliberately not applied.** They are reported as notes for you to do in an editor
+where you can see the result. Framing is arithmetic; tone is a judgement, and a
+CLI silently regrading a photograph is the wrong shape for this project.
+
+### What "no invented pixels" means, measured
+
+Cropping via `extract()` and re-encoding at JPEG q92 4:4:4, compared against the
+identical region extracted straight from the source:
+
+- **mean absolute difference 0.937 / 255, max 18**, with 0.02% of channels
+  differing by more than 8. That is JPEG re-encode noise on a 518,400-pixel
+  region; the structure is bit-for-bit the same photograph.
+- The rotation path was checked for wedge residue: **zero near-black pixels**,
+  three channels out (no alpha survived), four corners carrying real content.
+
+## 8. What this brief does not do
+
+It does not balance a photograph *aesthetically* beyond framing — no dodging,
+burning or local contrast, because each is a per-pixel change to plant material
+and the line has to sit somewhere defensible.
+
+It does not check that the plant is the right plant. The prompt asks the model to
+raise a concern at cultivar level and the tool refuses on `verdict: "ask"`, but
+neither can settle it. That is still Oscar's call and `VERIFY-QUEUE.md`'s job.

@@ -51,6 +51,7 @@ node tools/deal-plant.js "<latin>" photo.jpg   # a photo arrived -> deal that ca
 | `CARD-PROTOCOL.md` | Layout authority + full decision changelog |
 | `VERIFY-QUEUE.md` | Card facts that need a horticultural call, and why |
 | `PHOTO-REFRAME-BRIEF.md` | Prompt for cropping/de-labelling a photo with a vision model — returns crop coordinates, never a generated image |
+| `tools/reframe-photo.js` | Applies that crop JSON to the master with sharp — validates it first, refuses rather than guesses, invents no pixels |
 | `tests/run-all.js` | One command for every check — run it green before pushing |
 
 ```sh
