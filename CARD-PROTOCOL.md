@@ -364,7 +364,23 @@ Focal point recorded here when off-centre:
 | Deutzia × hybrida 'Magicien' | deutzia-hybrida-magicien.jpg | 50% 40% default — **first photo in the deck reframed through `tools/reframe-photo.js`** rather than by hand: crop coordinates written against the card geometry, executed by sharp on the original pixels, no generated content. Second Deutzia (with held *D. gracilis* 'Nikko') and the only pink one |
 | Magnolia acuminata | magnolia-acuminata.jpg | 50% 40% default — the cucumber-like aggregate fruit, green flushing red, which is the whole reason for the common name and what the card's `visual` leads on. Also reframed through the tool. **Third Magnolia** (HONEY TULIP, *stellata*) and the only one carrying fruit rather than flower |
 
+| Veronica 'Rhubarb Crumble' | veronica-rhubarb-crumble.jpg | 50% 40% default — **the clearest case yet for reframing.** As shot, the plant is a spray in the top-right corner of a concrete slab: roughly two thirds of the frame is paving. Cropped through `reframe-photo.js` to a 1:1 on the shoot, which puts the cream variegation AND the burgundy buds — both halves of what the card promises — into the band both surfaces show. **Third Veronica/Hebe in the deck**, and it is the same photograph that was parked as `hebe-variegated-unidentified.jpg` in VERIFY-QUEUE 38; that file is retired now the plant has a name |
+
 ## 5. Decision changelog
+
+- **v14.23 (212 dealt / 82 held)**: *Veronica* 'Rhubarb Crumble', and it closes
+  the unidentified variegated Hebe from VERIFY-QUEUE 38 — same frame, now named.
+  The parked file and its CREDITS entry were removed rather than left as a
+  duplicate of a dealt card's photo.
+  **The naming split from VERIFY-QUEUE 43 is now 2:1 and worth settling.** The
+  deck files 'Emerald Gem' and 'Rhubarb Crumble' under *Veronica* and 'Red Edge'
+  under *Hebe*. Every one carries "Hebe" in its `common`, so nothing is unfindable
+  — but the botanical column now disagrees with itself three times over, and the
+  next Hebe makes it four.
+  **Worth flagging on this card specifically: H3.** Oscar's own note says the
+  rating comes from trade material because the cultivar is too new for an
+  exact-name RHS profile. H3 means it needs frost protection — a real
+  sales-counter fact on a plant being sold as a patio container shrub.
 
 - **v14.22 (EDITION: one-off themed cards, and the Magnolia recrop)**: Oscar
   asked for four things on *Magnolia acuminata* and all four are in.

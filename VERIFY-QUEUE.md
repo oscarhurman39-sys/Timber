@@ -1145,7 +1145,10 @@ card picking them up by accident. All clean captures, no C2PA, no AI markers.
   this is plain green — so either the straight species or something else in the
   genus. The thorn shot is a genuinely good detail frame for whatever card it
   ends up on.
-- `hebe-variegated-unidentified.jpg` — cream-margined leaves with deep purple
+- ~~`hebe-variegated-unidentified.jpg`~~ **CLOSED 2026-08-17 — it is *Veronica*
+  'Rhubarb Crumble'** (Bella Bloom collection), named by Oscar when he sent the
+  same frame again with a researched card. Dealt; the parked duplicate and its
+  CREDITS entry are removed. Original note kept: cream-margined leaves with deep purple
   buds. **It is not the deck's held Hebe 'Red Edge'**, which carries grey-green
   leaves with a thin red rim and no cream variegation, so "unless we did that
   hebe already" resolves to: we have not, and this is a different plant. Reads
