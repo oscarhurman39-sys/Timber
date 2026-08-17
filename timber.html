@@ -492,6 +492,44 @@
   .soilp{position:absolute;left:80.33%;top:66.55%;width:15.59%;z-index:3}
   .band{position:absolute;left:14.32%;top:88.33%;width:81.60%;z-index:3}
 
+
+  /* ============ EDITION (one-off themed cards) ============
+     A per-card colour treatment keyed by slug in EDITION below. Everything here
+     is scoped to .tcard.edition, so no other card in the deck can be reached by
+     it — the locked template stays exactly as it was.
+
+     Three things it does, and one it deliberately does NOT do:
+       - re-colours the card edge and outlines the data panels;
+       - blurs the OUTER photo only, through a radial mask, so the subject stays
+         sharp. This is a RENDER effect: the master on disk is an untouched
+         camera original. PHOTO-REFRAME-BRIEF.md forbids baking a background blur
+         into a photograph — it is an edit to evidence — and this honours that by
+         never touching the file;
+       - covers the band's baked "DOUBLE TAP TO MASTER." and prints its own text.
+         That strip is the only place the app teaches its core interaction, so
+         overriding it costs THIS card that instruction. Fine as a one-off, and
+         the reason EDITION is keyed per slug rather than applied by category. */
+  /* outline, not box-shadow: `.card.hot .tcard` sets box-shadow further down and
+     would win on specificity, which is how the first attempt lost its edge. */
+  .tcard.edition{outline:2px solid var(--ed-ink,#ff9000);outline-offset:-2px;
+    filter:drop-shadow(0 0 6px rgba(255,144,0,.45))}
+  .tcard.edition .tphoto::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+    backdrop-filter:blur(var(--ed-blur,6px));-webkit-backdrop-filter:blur(var(--ed-blur,6px));
+    -webkit-mask-image:radial-gradient(ellipse 60% 44% at 50% 40%,transparent 52%,#000 100%);
+    mask-image:radial-gradient(ellipse 60% 44% at 50% 40%,transparent 52%,#000 100%)}
+  .tcard.edition .plaque,.tcard.edition .soilp{
+    filter:drop-shadow(0 0 0 var(--ed-ink,#ff9000)) drop-shadow(0 0 3px rgba(255,144,0,.55))}
+  /* the strip's text is baked into art/band-full.webp, so it has to be covered
+     before a replacement can be printed over it. Positioned in CARD coordinates,
+     matching the ::after below — the first attempt placed it inside .band and
+     covered the aspect rail instead. */
+  .tcard.edition::before{content:'';position:absolute;left:13%;right:3%;top:95.4%;height:2.6%;
+    background:var(--ed-dark,#0b0b0b);z-index:4;pointer-events:none}
+  .tcard.edition::after{content:var(--ed-master-text,"DOUBLE TAP TO MASTER.");position:absolute;
+    left:14%;right:4%;top:95.95%;height:1.5%;
+    display:grid;place-items:center;
+    font-family:Georgia,serif;font-size:7px;letter-spacing:2.6px;text-transform:uppercase;
+    color:var(--ed-ink,#ff9000);z-index:5;pointer-events:none}
   /* ============ HOLO (special-edition frames) ============
      A holo card supplies its own frame art via an inline background-image and
      gains .holo. The standard frame bakes three things into its pixels that the
@@ -909,7 +947,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r124 · 2026-08-17 · 3e05279';
+const BUILD='r128 · 2026-08-17 · dbefe5c';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -8677,6 +8715,24 @@ const PEST={
    because those are baked into the standard frame art and not into these.
    Everything else — crest, plaque, soil, band, overlays — is unchanged, so a holo
    card goes through the same layout audit as any other. */
+/* ---------- EDITION: one-off themed cards, keyed by slug ----------
+   Oscar's call, per card, and deliberately hard to apply by accident: a deck
+   where every card is themed is a deck with no template. See the CSS above for
+   what each field reaches. `masterText` replaces the bottom strip, which means
+   that card no longer teaches the double-tap gesture — acceptable on a one-off. */
+const EDITION={
+  'magnolia-acuminata':{
+    ink:'#ff9000',            /* orange on black, Oscar's request */
+    dark:'#0b0b0b',
+    blur:'6px',              /* ~25% of the photo's shorter edge feathered, outer only */
+    /* CSS needs a quoted string, and the literal quotation marks are the joke.
+       The whole style string rides in a double-quoted HTML attribute, so the
+       inner double quotes MUST be entity-escaped or the attribute ends early —
+       which is exactly what happened first time: the value arrived as a lone
+       apostrophe. editionStyle() does the escaping. */
+    masterText:'"about average"',
+  },
+};
 const HOLO={
   /* Pretty Lady Maria (Oscar's mum's birthday card) is no longer here: v1 and
      the v2 rebuild both composited the pack's layers around live data zones,
@@ -9086,6 +9142,14 @@ const lightX=v=>40.4+(v/100)*(93.2-40.4);     /* bar spans 40.4%..93.2% of the b
 
 /* `before` places a card UNDER already-dealt cards (staged deal chunks); omitted, the
    card lands on top — document order is stack order, and undo deals on top. */
+function editionStyle(e){
+  /* the CSS value is a quoted string; its own double quotes are entity-escaped
+     so they cannot terminate the style="" attribute carrying them */
+  const q=t=>"'"+String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;')+"'";
+  return [e.ink?`--ed-ink:${e.ink}`:'',e.dark?`--ed-dark:${e.dark}`:'',
+          e.blur?`--ed-blur:${e.blur}`:'',e.masterText?`--ed-master-text:${q(e.masterText)}`:'']
+    .filter(Boolean).join(';');
+}
 function renderCard(idx,before){
   const p=PLANTS[idx];
   /* born buried: markHot() reveals the few cards that are actually on top. Cards are
@@ -9097,6 +9161,7 @@ function renderCard(idx,before){
   const fa=FULLART[slug]||null;
   const ho=fa?null:holoOf(slug);
   const swap=fa?null:(PHOTO_SWAP[slug]||null);
+  const ed=fa?null:(EDITION[slug]||null);
   const sz=parseSize(p.size), soil=splitSoil(p.soil), months=parseMonths(p.peak);
   const pestIcon=p.pest?PEST[p.pest]||null:null;   /* unknown key => baked mite, see PEST */
   const pest=num(p.pestRisk), thirst=num(p.thirst), care=num(p.careLevel),
@@ -9115,7 +9180,7 @@ function renderCard(idx,before){
         <button class="say" ${TTS?'':'hidden'} style="left:${fa.listen.left};top:${fa.listen.top};width:${fa.listen.width};height:${fa.listen.height}" aria-label="Play latin pronunciation"></button>
         ${fa.aura?`<i class="say-aura"${lateBG(`background-image:url(${fa.aura.src})`)} style="left:${fa.aura.left};top:${fa.aura.top};width:${fa.aura.width};height:${fa.aura.height}" aria-hidden="true"></i>`:''}
       </div>`:`
-      <div class="tcard${ho?' holo':''}"${ho?lateBG(holoStyle(ho)):''}>
+      <div class="tcard${ho?' holo':''}${ed?' edition':''}"${ed?` style="${editionStyle(ed)}"`:''}${ho?lateBG(holoStyle(ho)):''}>
         <div class="tphoto${swap?' swap':''}"${swap&&swap.hold?` style="--holo-swap:${swap.hold}"`:''}>
           <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
           <img data-psrc="${photoSrc(slug)}" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">

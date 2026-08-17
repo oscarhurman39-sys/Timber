@@ -366,6 +366,38 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.22 (EDITION: one-off themed cards, and the Magnolia recrop)**: Oscar
+  asked for four things on *Magnolia acuminata* and all four are in.
+  **The recrop.** The first crop cut the seed pod off, which he disliked and was
+  right to — the pod is the whole reason for the common name. Recut through
+  `reframe-photo.js` trimming ONLY from the top, which lifts the entire pod clear
+  of the stats plaque while keeping the branch, stalk and full leaf structure.
+  **A new `EDITION` registry**, keyed by slug like `HOLO` and `FULLART`, giving
+  one card an orange-and-black treatment: a coloured edge, outlined data panels,
+  a feathered background blur, and a replacement for the bottom strip's text.
+  **The blur is a RENDER effect, not a photo edit — deliberately.**
+  `PHOTO-REFRAME-BRIEF.md` forbids baking a background blur into a master,
+  because that edits the evidence. So the file on disk stays an untouched camera
+  original and the blur lives in CSS: a `backdrop-filter` behind a radial mask,
+  sharp in the middle, soft at the edges. Same look, provenance intact.
+  **What it costs, and why it is per-slug:** the bottom strip is the only place
+  the app teaches its own core gesture, so an EDITION card no longer says
+  "double tap to master". Fine once; a deck where every card is themed is a deck
+  with no template.
+  **Three bugs found while building it, all worth keeping:**
+  1. `box-shadow` for the edge was silently beaten by `.card.hot .tcard`, which
+     sets box-shadow further down the sheet. Now an `outline`, which nothing else
+     touches.
+  2. The replacement strip text arrived as a lone apostrophe. The value is a
+     CSS string carried inside a **double-quoted HTML attribute**, and the
+     literal quotation marks in it ended the attribute early. `editionStyle()`
+     entity-escapes them. The HOLO block's own comment warns about exactly this;
+     it was still walked into.
+  3. The first cover strip was positioned inside `.band` and covered the aspect
+     rail instead of the baked text, which sits in CARD coordinates.
+  Verified no other card is reached: `Sango-kaku` and `Avondale` both render with
+  no outline and their normal strip, and the registry holds exactly one slug.
+
 - **v14.21 (211 dealt / 82 held)**: *Deutzia* 'Magicien' and *Magnolia
   acuminata* — **the first two cards framed with `tools/reframe-photo.js`**,
   ported onto this branch from `claude/plant-collection-scan-y2j7fp` along with
