@@ -346,7 +346,18 @@ Focal point recorded here when off-centre:
 | Pittosporum tenuifolium 'Tom Thumb' | pittosporum-tenuifolium-tom-thumb.jpg | 50% 40% default — **dealt on Oscar's explicit confirmation after being held once.** Read the card and the photograph together before reusing either: the `visual` line says *"deep purple-black wavy leaves · lime-green new growth"* and the photograph is magenta and cream variegation. He has confirmed the plant twice; **the card's text is what now needs his eye**, not the picture. VERIFY-QUEUE 41 |
 | Rhododendron 'Homebush' | rhododendron-homebush.jpg | 50% 40% default — real photo, Oscar's, clean; the dense rose-pink truss the card is sold on. **The card's own data was left exactly as it was**, not replaced by the JSON supplied alongside the photograph — see the changelog, and VERIFY-QUEUE 42 |
 
+| Houttuynia cordata 'Pied Piper' | houttuynia-cordata-pied-piper.jpg | 50% 0% — pinned to the top so the frame's **visible "AI-generated content" label**, bottom-left of the source, falls outside the window; the master is 1200×1529 so ~6.5% of height is available and the label sits inside it. Framing, not concealment — the marker is written verbatim into `CREDITS.json` and the manifest stays in the file. Credentials: `Photo assist`, `compositeWithTrainedAlgorithmicMedia`, i.e. VERIFY-QUEUE 32's category again. The leaves carry the full red-orange-yellow splash **and** a white flower spike, which is the whole card in one frame |
+
 ## 5. Decision changelog
+
+- **v14.15 (202 dealt / 82 held)**: *Houttuynia cordata* 'Pied Piper'. **Its
+  `soilWarning` is doing real work** — *"Contain rhizomes · spreads
+  aggressively"* — and it is worth noting that the deck now has a small set of
+  cards whose warning field carries a containment or legal message (Gunnera,
+  Virginia Creeper, *Rhododendron luteum*, the knotweed, and now this). That is
+  the closest the schema gets to the `compliance` field it still does not have
+  (item 0c, eighth batch). Houttuynia is not scheduled in the UK, but it is a
+  plant that escapes, and the card says so where staff will read it.
 
 - **v14.14 (201 dealt / 82 held)**: four new cards — *Cercis* CAROLINA
   SWEETHEART, *Elaeagnus* 'Limelight', *Acer palmatum* 'Oridono-nishiki',

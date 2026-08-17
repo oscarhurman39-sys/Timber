@@ -5,6 +5,11 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (Houttuynia) — **deck 202, hold 82.** Houttuynia cordata
+  'Pied Piper' dealt. Photo carries the Galaxy AI edit marker and a visible AI
+  label; recorded in CREDITS and framed out of the card window by focus. Its
+  soilWarning carries the containment message, which is the nearest the schema
+  gets to the compliance field it still lacks.
 progress: 2026-08-17 (batch of six) — **deck 201, hold 82.** Cercis CAROLINA
   SWEETHEART, Elaeagnus 'Limelight', Acer 'Oridono-nishiki' and Epimedium
   'Fröhnleiten' built; 'Tom Thumb' and 'Homebush' dealt out of hold on Oscar's
