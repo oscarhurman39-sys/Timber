@@ -368,6 +368,21 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.24 (MIRRORED effect; five cards held, one duplicate refused)**: the
+  kaleidoscope Oscar spotted in a contact sheet is now a real effect. The card's
+  own `<img>` becomes the left half pulled to `object-position:100%`, a mirrored
+  copy forms the right half, and a masked backdrop-blur strip smudges the seam,
+  so the two halves meet as a reflection rather than a cut. **Rendering only —
+  the master is untouched**, for the same reason as the edition blur: a mirrored
+  plant is not evidence of a plant that grew symmetrically.
+  **One bug worth keeping:** the first build gave Rhubarb Crumble the Magnolia's
+  orange treatment, because the `edition` class was applied whenever an EDITION
+  entry existed. Theme and effect are now separate — `edition` needs
+  `ink`/`dark`/`masterText`, `mirrored` needs `mirror` — so a card can take an
+  effect without inheriting someone else's colours.
+  Five new cards are **held** pending photographs, and `Lupinus` 'The Governor'
+  was refused as a duplicate of a card already in the hold block (VERIFY-QUEUE 45).
+
 - **v14.23 (212 dealt / 82 held)**: *Veronica* 'Rhubarb Crumble', and it closes
   the unidentified variegated Hebe from VERIFY-QUEUE 38 — same frame, now named.
   The parked file and its CREDITS entry were removed rather than left as a

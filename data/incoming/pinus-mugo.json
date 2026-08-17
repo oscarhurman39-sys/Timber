@@ -1,0 +1,33 @@
+{
+  "common": "Dwarf mountain pine",
+  "latin": "Pinus mugo",
+  "hue": 120,
+  "visual": "Dense dark-green paired needles · spreading bushy habit · brown ovoid cones",
+  "water": "Low once established",
+  "aspect": "Any aspect",
+  "soil": "Well-drained",
+  "soilWarning": "Avoid waterlogging",
+  "prune": "No routine pruning",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jan-Dec",
+  "cvs": "syn. Pinus montana",
+  "hardiness": "H7",
+  "hardinessNote": "",
+  "resilience": "very cold hardy · drought tolerant · coastal tolerant · wind tolerant",
+  "uses": "specimen · slopes · coastal gardens · large rock gardens",
+  "height": "2.5–4 m",
+  "spread": "4–8 m",
+  "foliage": "evergreen",
+  "container": "no",
+  "growthSpeed": 6,
+  "pestRisk": 9,
+  "thirst": 5,
+  "careLevel": 3,
+  "sunNeed": 95,
+  "sunMin": 75,
+  "uncertain": [
+    "The supplied spelling 'Pinus mungo' was corrected to the accepted species Pinus mugo",
+    "Nursery plants labelled simply Pinus mugo are sometimes compact forms or unnamed selections substantially smaller than the species; this record represents the species itself"
+  ]
+}

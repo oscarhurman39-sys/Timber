@@ -1475,6 +1475,45 @@ the plant is unmistakable so it was dealt, but a tidier shot would be better.
 
 ---
 
+### 45. Five cards built and held, one duplicate refused: the Lupin
+2026-08-17. Six researched cards arrived with "photos incoming", so all of them
+are built and sitting in the hold block. Five went in. The sixth did not, and
+one arrived twice.
+
+**A. `Lupinus` 'The Governor' already exists** as
+`Lupinus 'The Governor' (Band of Nobles Series)`, researched and held since the
+wishlist batch. The new JSON is the same plant under a shorter latin, so adding
+it would have put **two cards for one lupin** in the deck. The existing card was
+kept — same call as 'Homebush' (item 42) — and the differences are here for
+Oscar to reverse.
+
+**Fifteen fields differ. Three are worth his eye:**
+1. **`aspect` contradicts.** Held card says **South / West**; the new one says
+   **North / East / South**. A lupin wants sun. `[Inference]` the held card is
+   right and "North" is the odd one out, but it is his data either way.
+2. **The held card carries trade knowledge the new one loses** —
+   *"hardy but short-lived · lupin aphid and slugs are the standard problem"* in
+   `resilience`, and *"Dislikes chalk"* in the soil warning. Both are the kind of
+   thing a customer asks about; neither survives in the new version.
+3. **Neither card can show that a lupin is toxic.** The new JSON records
+   `toxicity: "Harmful if eaten · toxic to pets if eaten"` — correct, lupin seed
+   carries quinolizidine alkaloids — and the schema has nowhere to put it. Unlike
+   'Homebush', the held card does **not** smuggle it into `resilience` either, so
+   **this plant currently warns nobody by either route.** Item 0c again.
+
+**B. `Acer palmatum` 'Firecracker' was sent twice**, with two wordings of
+`visual` ("finely dissected" vs "feathery") and only one copy carrying the
+uncertainty notes. The version WITH the notes was used, and the fact of the
+duplicate is recorded in its `uncertain` block so the wording is not silently
+attributed.
+
+**C. What went in, all held pending photographs:** *Parrotia persica* 'Bella'
+(second Parrotia — the species is also held), *Acer palmatum* 'Firecracker'
+(**fifth** Acer palmatum), *Rhododendron* 'Hoppy' (sixth Rhododendron),
+*Allium karataviense* 'Red Giant', *Pinus mugo* — the deck's first pine.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

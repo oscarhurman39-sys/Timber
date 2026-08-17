@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (five held, one refused) — **deck 212, hold 87.** Parrotia
+  'Bella', Acer 'Firecracker', Rhododendron 'Hoppy', Allium karataviense 'Red
+  Giant' and Pinus mugo (the deck's first pine) built and held for photographs.
+  Lupinus 'The Governor' REFUSED as a duplicate — the deck already holds it under
+  a longer latin, and the existing card carries trade knowledge the new one drops.
+  VERIFY-QUEUE 45. Also added the MIRRORED photo effect to Rhubarb Crumble.
 progress: 2026-08-17 (Rhubarb Crumble) — **deck 212, hold 82.** Veronica
   'Rhubarb Crumble' dealt, and it CLOSES the unidentified variegated Hebe parked
   in VERIFY-QUEUE 38 — same photograph, now named, parked duplicate retired. Best
