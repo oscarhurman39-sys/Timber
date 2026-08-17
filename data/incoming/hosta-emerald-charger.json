@@ -1,0 +1,33 @@
+{
+  "common": "Plantain lily 'Emerald Charger'",
+  "latin": "Hosta 'Emerald Charger'",
+  "hue": 55,
+  "visual": "Golden-yellow leaves · broad dark-green margins · fragrant lavender flowers",
+  "water": "Keep evenly moist",
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Sheltered · avoid dry soil",
+  "prune": "Remove dead foliage in autumn or early spring",
+  "toxicity": "Toxic to dogs and cats if eaten",
+  "compliance": "",
+  "peak": "May-Oct",
+  "cvs": "registered by Mark Zilis in 2010; sport of Hosta 'Stained Glass'",
+  "hardiness": "H7",
+  "hardinessNote": "",
+  "resilience": "deep-shade tolerant · very cold hardy",
+  "uses": "shade borders · woodland gardens · containers · foliage contrast",
+  "height": "50–60 cm",
+  "spread": "80–100 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 11,
+  "pestRisk": 15,
+  "thirst": 13,
+  "careLevel": 7,
+  "sunNeed": 40,
+  "sunMin": 20,
+  "uncertain": [
+    "The supplied name 'Emerald Changer' was corrected to the accepted cultivar Hosta 'Emerald Charger'",
+    "RHS gives a broad 10–50 cm height and 50–100 cm spread, while specialist cultivar records give about 50–60 cm tall and 80–115 cm wide; specialist exact-cultivar dimensions were prioritised"
+  ]
+}

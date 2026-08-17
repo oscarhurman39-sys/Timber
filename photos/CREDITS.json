@@ -342,6 +342,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "buddleja-davidii-little-ruby-botex-006.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "buddleja-davidii-white-profusion.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1195,6 +1205,16 @@
    "file": "hosta-broadband.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hosta-emerald-charger.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label lower left. See VERIFY-QUEUE 32.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,

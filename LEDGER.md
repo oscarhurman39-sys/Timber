@@ -5,6 +5,16 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (Hosta + Buddleja) — **deck 206, hold 82.** Hosta 'Emerald
+  Charger' (third Hosta, near-inverse variegation to 'Broadband') and Buddleja
+  LITTLE RUBY (third Buddleja, the only ruby-pink). Between them they hit both
+  halves of item 0c in one sitting: the Hosta's "toxic to dogs and cats" and the
+  Buddleja's PBR propagation restriction, neither of which any card can render.
+progress: 2026-08-17 (Hosta 'Emerald Charger') — **deck 205, hold 82.** Third
+  Hosta; near-inverse variegation to 'Broadband', which the text separates but
+  the photographs barely do. Tenth batch to lose a toxicity line to the missing
+  schema field. Photo carries the Galaxy AI edit marker; focus 50% 45% keeps the
+  visible AI label out while still showing leaf.
 progress: 2026-08-17 (Agapanthus + Veronica) — **deck 204, hold 82.** Two cards.
   Surfaced two things worth a decision: the deck now straddles the Hebe ->
   Veronica rename ('Emerald Gem' is a Veronica, held 'Red Edge' is a Hebe), and

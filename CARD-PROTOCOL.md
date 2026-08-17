@@ -351,7 +351,26 @@ Focal point recorded here when off-centre:
 | Agapanthus 'Ovatus' | agapanthus-ovatus.jpg | 50% 40% default — real photo, Oscar's, clean. Buds and open trumpets together, which is how the plant is actually sold. **Second Agapanthus** — POPPIN' PURPLE ('PM003') is the other, and note *that* one is a VERIFY-QUEUE 32 sparkle-glyph file while this is not. Small text-vs-picture wrinkle: the card says *"pale-mid blue"* and the photograph reads deep violet-blue. Arguable — agapanthus colour shifts hard with light and phone camera — so his wording was left alone |
 | Veronica 'Emerald Gem' | veronica-emerald-gem.jpg | 50% 40% default — real photo, Oscar's, clean. Tiny scale-like leaves packed into the dense mound, which is the whole plant. **Filed under *Veronica*, following RHS's move of Hebe into it** — the deck's other one is still `Hebe 'Red Edge'`, so the two now sit under different genera. The `common` field carries "Hebe 'Emerald Gem'" so a staff search for Hebe still finds it |
 
+| Hosta 'Emerald Charger' | hosta-emerald-charger.jpg | 50% 45% — a two-sided compromise worth understanding before retuning. The source is unusually tall (1654×3074) so 36% of its height can be excluded, and the bottom carries a **visible "AI-generated content" label**; 0% hid the label but pushed the foliage behind the plaque, 45% keeps the label out AND brings leaf into the window. Credentials (`Photo assist`, `compositeWithTrainedAlgorithmicMedia`) are in `CREDITS.json`. **Third Hosta, and the risky one:** 'Broadband' is green-centred with YELLOW MARGINS, this is GOLD-CENTRED with green margins — visual inverses. In this frame the gold centre reads only faintly, so the two cards are harder to tell apart by photograph than by text |
+
+| Buddleja davidii LITTLE RUBY ('Botex 006') | buddleja-davidii-little-ruby-botex-006.jpg | 50% 40% default — real photo, Oscar's, clean. Spikes at every stage in one frame: open ruby-pink, spent brown, and the tight buds behind, which is what a compact Buddleja actually looks like on a bench in August. **Third Buddleja** (with 'White Profusion' and 'Pugster Orchid') and the only ruby-pink of the three, so no confusion risk |
+
 ## 5. Decision changelog
+
+- **v14.19 (206 dealt / 82 held)**: *Buddleja davidii* LITTLE RUBY. **PBR
+  protected, and the card cannot say so** — its `compliance` field reads "PBR
+  protected · commercial propagation restricted" and there is nowhere to render
+  it. Item 0c again, and this is the *other* half of that gap: not a safety
+  warning this time but a **commercial** one, on a plant a garden centre might
+  otherwise propagate from its own stock. Six cards now carry PBR wording that
+  no one can see.
+
+- **v14.18 (205 dealt / 82 held)**: *Hosta* 'Emerald Charger'. Oscar's own note
+  records that the supplied name 'Emerald Changer' was corrected to the accepted
+  'Emerald Charger' — worth keeping, because the deck now holds three Hostas and
+  two of them are near-inverse variegations. **Its `toxicity` — "Toxic to dogs
+  and cats if eaten" — has nowhere to render: the tenth batch to hit item 0c**,
+  and the thirteenth affected card.
 
 - **v14.17 (204 dealt / 82 held)**: *Agapanthus* 'Ovatus' and *Veronica*
   'Emerald Gem'.

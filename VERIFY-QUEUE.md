@@ -1422,6 +1422,15 @@ include Japanese Knotweed, *Rhododendron luteum*, Gunnera, Virginia Creeper,
 Houttuynia, 'Homebush', the Dahlia, Clematis AVALANCHE, Lonicera 'Copper
 Beauty', the Formosa lily (highly toxic to cats), Ivy 'Goldheart' and now this.
 
+**Update 2026-08-17 (same day): +1 more.** *Hosta* 'Emerald Charger' arrived
+carrying `toxicity: "Toxic to dogs and cats if eaten"` and it too renders
+nowhere. **Tenth batch, thirteenth card.** Also worth noting from that card: the
+deck now holds three Hostas, and 'Broadband' (green centre, yellow margin) and
+'Emerald Charger' (gold centre, green margin) are near-inverse variegations. The
+text tells them apart cleanly; the photographs, less so — the gold centre reads
+only faintly in this frame. If a third gold-and-green Hosta arrives, that is the
+pair to check a photo against.
+
 ---
 
 ## Accepted, not defects
