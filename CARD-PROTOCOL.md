@@ -348,7 +348,26 @@ Focal point recorded here when off-centre:
 
 | Houttuynia cordata 'Pied Piper' | houttuynia-cordata-pied-piper.jpg | 50% 0% — pinned to the top so the frame's **visible "AI-generated content" label**, bottom-left of the source, falls outside the window; the master is 1200×1529 so ~6.5% of height is available and the label sits inside it. Framing, not concealment — the marker is written verbatim into `CREDITS.json` and the manifest stays in the file. Credentials: `Photo assist`, `compositeWithTrainedAlgorithmicMedia`, i.e. VERIFY-QUEUE 32's category again. The leaves carry the full red-orange-yellow splash **and** a white flower spike, which is the whole card in one frame |
 
+| Agapanthus 'Ovatus' | agapanthus-ovatus.jpg | 50% 40% default — real photo, Oscar's, clean. Buds and open trumpets together, which is how the plant is actually sold. **Second Agapanthus** — POPPIN' PURPLE ('PM003') is the other, and note *that* one is a VERIFY-QUEUE 32 sparkle-glyph file while this is not. Small text-vs-picture wrinkle: the card says *"pale-mid blue"* and the photograph reads deep violet-blue. Arguable — agapanthus colour shifts hard with light and phone camera — so his wording was left alone |
+| Veronica 'Emerald Gem' | veronica-emerald-gem.jpg | 50% 40% default — real photo, Oscar's, clean. Tiny scale-like leaves packed into the dense mound, which is the whole plant. **Filed under *Veronica*, following RHS's move of Hebe into it** — the deck's other one is still `Hebe 'Red Edge'`, so the two now sit under different genera. The `common` field carries "Hebe 'Emerald Gem'" so a staff search for Hebe still finds it |
+
 ## 5. Decision changelog
+
+- **v14.17 (204 dealt / 82 held)**: *Agapanthus* 'Ovatus' and *Veronica*
+  'Emerald Gem'.
+  **The deck now straddles a genus rename.** RHS has moved *Hebe* into
+  *Veronica*; 'Emerald Gem' is filed as Oscar supplied it, under *Veronica*,
+  while the held 'Red Edge' is still a *Hebe*. Both are defensible and the
+  common names keep them findable, but **the deck should pick one convention**
+  before it has six of them. VERIFY-QUEUE 43.
+  **And a safety fact was dropped again, on a toxic plant.** The Agapanthus JSON
+  carries `toxicity: "Harmful if eaten by humans, dogs and cats"` and the card
+  schema has nowhere to put it, so **that card currently warns nobody**. This is
+  the ninth batch to hit item 0c and the second time in two days it has cost a
+  real toxicity warning — 'Homebush' only kept its because the older card had
+  smuggled the wording into `resilience`. That workaround is available here too
+  and was NOT applied unasked, because editing his researched data to route round
+  a schema gap is his call, not a tool's.
 
 - **v14.16 (the Listen button stops sounding like a robot)**: two separate faults
   were making it sound bad, and only one of them was the voice.

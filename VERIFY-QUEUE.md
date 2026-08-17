@@ -1384,6 +1384,46 @@ is worth taking whatever else is decided.
 
 ---
 
+### 43. The deck now straddles the Hebe → Veronica rename, and lost another toxicity warning
+2026-08-17, from the Agapanthus / Veronica pair.
+
+**A. One group, two genera.** RHS has sunk *Hebe* into *Veronica*. Oscar supplied
+'Emerald Gem' as ***Veronica* 'Emerald Gem'** and it is filed that way; the deck's
+other one is still ***Hebe* 'Red Edge'** (held). Nothing is wrong with either
+card — the `common` fields ("Hebe 'Emerald Gem'", "Hebe 'Red Edge'") keep both
+findable by the name staff actually use — but the deck has no convention and will
+accumulate more. **Three options, all his:**
+1. **Follow RHS** and rename 'Red Edge' to *Veronica*. Correct, and makes the
+   deck consistent with the source it cites everywhere else.
+2. **Stay with *Hebe*** for the whole group, since that is what every label,
+   invoice and customer in the UK trade still says. Also defensible, and arguably
+   better for a bench.
+3. Leave it mixed. Costs nothing today, costs more the more Hebes arrive.
+Recommend 2 for a garden-centre deck, with the *Veronica* name in `cvs` — but
+this is a naming judgement, not a fact, and it is worth one decision rather than
+a per-card coin toss.
+
+**B. `Agapanthus` 'Ovatus' carries a toxicity warning that the card cannot show.**
+His JSON has `toxicity: "Harmful if eaten by humans, dogs and cats"`. The card
+schema has no such field, so **the dealt card warns nobody** — and agapanthus is
+a plant people grow in pots on patios, around dogs.
+
+This is **the ninth batch to hit item 0c** and the second time in two days that
+the gap has cost a real safety line. 'Homebush' kept its only because the older
+card had put the wording inside `resilience`. The same workaround would work
+here — `resilience` currently reads *"drought tolerant once established · coastal
+tolerant"* and could carry "· harmful if eaten" — but **it was not applied
+unasked.** Editing Oscar's researched data to route around a schema gap is his
+call, and doing it quietly would hide the gap rather than fix it.
+
+**The real fix is still item 0c: give the schema a `toxicity` field.** Nine
+batches of evidence now say it is not a nice-to-have. Cards affected so far
+include Japanese Knotweed, *Rhododendron luteum*, Gunnera, Virginia Creeper,
+Houttuynia, 'Homebush', the Dahlia, Clematis AVALANCHE, Lonicera 'Copper
+Beauty', the Formosa lily (highly toxic to cats), Ivy 'Goldheart' and now this.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

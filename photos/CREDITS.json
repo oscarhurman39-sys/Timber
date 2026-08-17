@@ -131,6 +131,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "agapanthus-ovatus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "agapanthus-poppin-purple-pm003.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2274,6 +2284,16 @@
   },
   {
    "file": "verbena-bonariensis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "veronica-emerald-gem.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",

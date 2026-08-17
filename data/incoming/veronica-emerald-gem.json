@@ -1,0 +1,33 @@
+{
+  "common": "Hebe 'Emerald Gem'",
+  "latin": "Veronica 'Emerald Gem'",
+  "hue": 120,
+  "visual": "Tiny glossy green leaves · dense rounded mound · sparse white summer flowers",
+  "water": "Low once established",
+  "aspect": "Any aspect",
+  "soil": "Well-drained",
+  "soilWarning": "Shelter from cold, drying winds",
+  "prune": "No routine pruning; trim lightly after flowering if needed",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jan-Dec",
+  "cvs": "syn. Hebe 'Emerald Gem'; 'Green Globe'; 'Emerald Green'; 'Emerald Dome'; 'McKean'; 'Milmont Emerald'",
+  "hardiness": "H4",
+  "hardinessNote": "RHS H4; shelter improves winter reliability",
+  "resilience": "drought tolerant · coastal tolerant · pollution tolerant",
+  "uses": "containers · edging · rock gardens · low hedging",
+  "height": "30 cm",
+  "spread": "30–50 cm",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 6,
+  "pestRisk": 10,
+  "thirst": 5,
+  "careLevel": 5,
+  "sunNeed": 75,
+  "sunMin": 45,
+  "uncertain": [
+    "The supplied name 'Green Globe' is treated by RHS as a synonym of the accepted cultivar 'Emerald Gem'",
+    "RHS gives broad 10–50 cm size bands but describes the plant specifically as reaching about 30 cm tall"
+  ]
+}

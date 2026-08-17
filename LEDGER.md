@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-17 (Agapanthus + Veronica) — **deck 204, hold 82.** Two cards.
+  Surfaced two things worth a decision: the deck now straddles the Hebe ->
+  Veronica rename ('Emerald Gem' is a Veronica, held 'Red Edge' is a Hebe), and
+  the Agapanthus's "harmful if eaten" line has nowhere to render, so that card
+  warns nobody. Ninth batch to hit item 0c, second in two days to cost a real
+  safety warning. VERIFY-QUEUE 43.
 progress: 2026-08-17 (Listen button) — voice selection now scores the device's
   voices instead of taking the first en-GB one, preferring Edge Natural / Apple
   Premium / Enhanced over the flat "compact" ones. The bigger win was the script:
