@@ -1514,7 +1514,7 @@ attributed.
 
 ---
 
-### 46. The pine photograph is a GOLD cultivar, and the card is the plain species
+### 46. The pine photograph is a GOLD cultivar — DEALT on Oscar's call; the card TEXT is now the open half
 2026-08-18. Five of six photographs landed. The *Pinus mugo* one did not, and
 Oscar's own research predicted the reason.
 
@@ -1534,6 +1534,24 @@ a gold dwarf on a card describing a dark-green shrub reaching 2.5–4 m.
 Parked as `pinus-mugo-gold-unidentified.jpg`. **The card stays held.** Two ways
 out, both Oscar's: name the cultivar and give it its own card — a gold mugo is a
 better retail plant than the species anyway — or photograph a plain green one.
+
+**Overruled 2026-08-18.** Oscar resent the same photograph with the same
+unchanged JSON, which is his answer: use it. It is dealt, the parked copy is
+retired, and the frame was reframed to drop the burned-in AI label and lift the
+master to 1200px.
+
+**The objection has moved rather than gone, and it is now the same shape as the
+Forsythia (item 44B): the card's own words contradict its picture.** `visual`
+reads *"Dense **dark-green** paired needles · spreading bushy habit · brown ovoid
+cones"* and the photograph is a vivid gold plant. Two of those three clauses are
+fine; one is not.
+
+**The cheapest honest fix is one clause, and it is Oscar's to make** — something
+like *"Paired needles, gold in the selections widely sold · spreading bushy habit
+· brown ovoid cones"* keeps the card true to both the species and the plant in
+the frame. Alternatively the card becomes the named gold cultivar. What should
+not happen is leaving a card that says dark-green above a photograph that is
+not.
 
 **Provenance across this batch, because the balance has shifted:** four of the six
 carry `compositeWithTrainedAlgorithmicMedia` with `softwareAgent: Photo assist`

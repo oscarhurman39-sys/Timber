@@ -5,6 +5,11 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-18 (the pine, on Oscar's call) — **deck 218, hold 81.** He
+  resent the gold pine unchanged, which is his answer; dealt, parked copy
+  retired, reframed to drop the AI label and reach 1200px. The card's "dense
+  dark-green paired needles" now contradicts its own photograph — same shape as
+  the Forsythia, and one clause fixes it. VQ 46.
 progress: 2026-08-18 (five dealt, the pine refused) — **deck 217, hold 82.**
   Rhododendron 'Hoppy', Lupin 'The Governor', Parrotia 'Bella', Allium 'Red
   Giant' and Acer 'Firecracker' all dealt. The Pinus mugo photo is a GOLD
