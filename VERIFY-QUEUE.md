@@ -1514,6 +1514,50 @@ attributed.
 
 ---
 
+### 46. The pine photograph is a GOLD cultivar, and the card is the plain species
+2026-08-18. Five of six photographs landed. The *Pinus mugo* one did not, and
+Oscar's own research predicted the reason.
+
+**The card says** *"Dense **dark-green** paired needles · spreading bushy habit ·
+brown ovoid cones"*, and it is filed as the straight species. **The photograph is
+a small, tight, container-grown plant with brilliant yellow-gold needles** — one
+of the gold mugo selections ('Winter Gold', 'Carsten's Wintergold', 'Ophir' and
+several others are all in the trade) `[Inference]`, or at minimum a named compact
+form rather than the species.
+
+His own `uncertain` block on that card says exactly this risk out loud: *"Nursery
+plants labelled simply Pinus mugo are sometimes compact forms or unnamed
+selections substantially smaller than the species; this record represents the
+species itself."* This photograph is that footnote made real. Filing it would put
+a gold dwarf on a card describing a dark-green shrub reaching 2.5–4 m.
+
+Parked as `pinus-mugo-gold-unidentified.jpg`. **The card stays held.** Two ways
+out, both Oscar's: name the cultivar and give it its own card — a gold mugo is a
+better retail plant than the species anyway — or photograph a plain green one.
+
+**Provenance across this batch, because the balance has shifted:** four of the six
+carry `compositeWithTrainedAlgorithmicMedia` with `softwareAgent: Photo assist`
+and a visible "AI-generated content" label — the Lupin, the Rhododendron, the
+Allium and this pine. Only two are clean: *Parrotia* 'Bella' carries **no C2PA at
+all**, and *Acer* 'Firecracker' carries a plain Galaxy S24 capture manifest
+(`c2pa.ingredient.v2`, `relationship: parentOf`, no `digitalSourceType`) — which
+is what an untouched camera original looks like, and the first time in this deck
+one has been positively identified as such rather than merely lacking markers.
+
+**Item 32's tally is now well past "at least four".** The Galaxy edit is no
+longer the exception in this deck's intake; it is the default, and the open
+question — whether a generatively edited photograph keeps
+`commercialUseCleared: true` — now governs the majority of new photographs
+rather than a handful.
+
+**One thing the reframing did that is worth noting:** cropping the Rhododendron,
+Lupin and Allium to fix their resolution also **physically removed** the burned-in
+AI labels, which had previously been hidden behind card furniture with a focus
+override. The marker is still recorded verbatim in `CREDITS.json` for all three;
+the file simply no longer displays it.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

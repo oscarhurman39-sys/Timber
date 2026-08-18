@@ -5,6 +5,13 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-18 (five dealt, the pine refused) — **deck 217, hold 82.**
+  Rhododendron 'Hoppy', Lupin 'The Governor', Parrotia 'Bella', Allium 'Red
+  Giant' and Acer 'Firecracker' all dealt. The Pinus mugo photo is a GOLD
+  cultivar against a card describing the dark-green species — his own uncertain
+  note predicted exactly this — so it is parked and the card stays held (VQ 46).
+  Reframed three of the five: they staged at 587-764px against a ~1000px card,
+  and cropping to fix that also physically removed their burned-in AI labels.
 progress: 2026-08-17 (five held, one refused) — **deck 212, hold 87.** Parrotia
   'Bella', Acer 'Firecracker', Rhododendron 'Hoppy', Allium karataviense 'Red
   Giant' and Pinus mugo (the deck's first pine) built and held for photographs.

@@ -137,8 +137,30 @@ const check = (name, ok, detail = '') => {
      failing, so the drift stays visible instead of hiding under a threshold. If
      px climbs into the hundreds, or max into the tens, that is a different
      phenomenon and wants looking at rather than another loosening. */
-  const HALO_MAX_PX = 64;      /* 17 at deck 194, in a 780x1560 buffer */
-  const HALO_MAX_DELTA = 8;    /* sum across r+g+b; 5 at deck 194, i.e. ~2/channel */
+  /* RAISED 2026-08-18, second time, and the two reasons are separate — measured,
+     not assumed, by emptying the EDITION registry and re-running the same diff:
+
+       deck 217, no themed cards ....... 17 px, max delta 9
+       deck 217, with the two themed ... 98 px, max delta 13
+
+     1. THE BASELINE DRIFTED ON ITS OWN. Same 17 pixels as at deck 194, but the
+        max delta went 5 -> 9 purely because 23 more cards stack 23 more shadows
+        at that edge. That is the growth this comment predicted.
+     2. THE TWO THEMED CARDS ADD ~81 px. Their `backdrop-filter` samples what is
+        painted behind, so a themed card's pixels depend on whether buried cards
+        are hidden. Confined to cards that opt in; empty EDITION and it returns
+        to the 17 px baseline exactly.
+
+     A `filter:` on the card was a THIRD cause and was removed rather than
+     tolerated: drop-shadow rendered the whole card to its own buffer and moved
+     22510 px by up to 39. This check caught it before it shipped, which is the
+     entire argument for having kept the assertion tight.
+
+     The margin is re-measured, not inherited: a staged leak — one buried card
+     un-hidden and nudged 12px so it genuinely showed — diffs at 47173 px, max
+     delta 443 on this same deck. That is 480x the pixel budget below. */
+  const HALO_MAX_PX = 256;     /* 98 at deck 217 with two themed cards */
+  const HALO_MAX_DELTA = 24;   /* sum across r+g+b; 13 observed */
   check(`hiding buried content shows nothing (${diff.px}px, max Δ${diff.max}; halo shadows round at the edge)`,
     diff.px <= HALO_MAX_PX && diff.max <= HALO_MAX_DELTA,
     `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max} ` +
