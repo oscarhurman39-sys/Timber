@@ -1576,6 +1576,46 @@ the file simply no longer displays it.
 
 ---
 
+### 47. The Butia label carries a name from a different genus — DEALT; the species half stays open
+2026-08-18. A new card, not a replacement: the deck had no *Butia* at all. Oscar's
+research block flagged the conflict itself before the photograph was looked at.
+
+**The label read** *"Butia capitata (Cocos australis)"*, and those two names do
+not describe the same plant. Kew treats **Cocos australis as a synonym of
+Syagrus romanzoffiana** — the queen palm — while *Butia capitata*'s historical
+synonym is *Cocos capitata*. One label, two genera.
+
+**The photograph settles that half.** The plant Oscar shot has **armed
+petioles** — the leaf bases are lined with stiff teeth along both margins, plain
+in the frame at card size — and stiff, single-plane, strongly recurved
+**glaucous blue-grey** leaflets. *Syagrus romanzoffiana* is unarmed, glossy
+mid-green, and plumose, with leaflets leaving the rachis in several planes.
+**This is a Butia, not a Syagrus** `[Inference]` — so the "Cocos australis" on
+the label is a trade-label error, not a description of this plant.
+
+**The species half cannot be settled and is not being settled here.** Nursery
+stock sold as *Butia capitata* in the UK very largely belongs to the older, wider
+concept that also covered ***Butia odorata***, and the two are not separable from
+a photograph of the crown `[Unverified]`. Fruit and seed characters would be
+needed, and this plant is not carrying ripe fruit in the frame.
+
+**Dealt as `Butia capitata`** on the same footing as the rest of the deck: that
+is the name RHS still keeps a horticultural profile under, it is the name Oscar's
+own JSON carries, and its `cvs` line already prints *"syn. Butia bonnetii; Cocos
+capitata"* on the card. What is NOT on the card is *Cocos australis* — I did not
+copy the erroneous half of the label onto it.
+
+**For Oscar, if he wants it closed:** the nursery's own label or delivery
+paperwork would say which of the two the batch was bought as, and ripe fruit in
+autumn would decide it properly. Neither is needed for the card to be right.
+
+**Third palm concept in the deck** — *Chamaerops humilis* dealt, *Trachycarpus
+fortunei* still held — and the only pinnate (feather) one of the three.
+
+---
+
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

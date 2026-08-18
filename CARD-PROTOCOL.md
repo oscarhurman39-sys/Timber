@@ -366,7 +366,49 @@ Focal point recorded here when off-centre:
 
 | Veronica 'Rhubarb Crumble' | veronica-rhubarb-crumble.jpg | 50% 40% default — **the clearest case yet for reframing.** As shot, the plant is a spray in the top-right corner of a concrete slab: roughly two thirds of the frame is paving. Cropped through `reframe-photo.js` to a 1:1 on the shoot, which puts the cream variegation AND the burgundy buds — both halves of what the card promises — into the band both surfaces show. **Third Veronica/Hebe in the deck**, and it is the same photograph that was parked as `hebe-variegated-unidentified.jpg` in VERIFY-QUEUE 38; that file is retired now the plant has a name |
 
+| Butia capitata | butia-capitata.jpg | 50% 40% default — shot from below into a white sky, so the crown reads as a silhouette: arching glaucous fronds sweeping out of frame, the stout trunk with its old leaf-base collar, and the **armed petioles** that place it in *Butia* rather than the *Syagrus* its label also named (VQ 47). Reframed through `reframe-photo.js` from 0.561 to 0.780 — the phone frame was far too tall, and half of it was empty sky. A 1:1 crop was tried first and rejected: it read as trunk-and-spines with the arching fronds cut off, which is the half of the plant the card's `visual` leads on. **First palm with pinnate (feather) fronds** — *Chamaerops* is fan-leaved, *Trachycarpus* is held |
+
 ## 5. Decision changelog
+
+- **v14.26 (219 dealt / 81 held — the Jelly palm)**: *Butia capitata*, a NEW
+  card rather than a replacement; the deck held no *Butia*. Oscar's own
+  `uncertain` block flagged the taxonomic conflict before the photograph was
+  opened, and the conflict is real: the label read *"Butia capitata (Cocos
+  australis)"*, and **Cocos australis is a synonym of Syagrus romanzoffiana**,
+  a different genus.
+  - **The photograph settles the genus and not the species.** Armed petioles
+    and stiff, single-plane, glaucous recurved leaflets are *Butia*; *Syagrus*
+    is unarmed, glossy green and plumose. So the "Cocos australis" half of the
+    label is a trade-label error `[Inference]`. *B. capitata* vs *B. odorata*
+    is NOT separable from a crown photograph and has not been guessed at —
+    VQ 47 carries it.
+  - Dealt under the name Oscar's JSON carries and RHS still profiles. The
+    card's `cvs` prints *"syn. Butia bonnetii; Cocos capitata"*; the erroneous
+    *Cocos australis* was deliberately not copied onto it.
+  - Photo: plain Galaxy S24 C2PA capture manifest — `c2pa.ingredient.v2`,
+    `relationship parentOf`, no `digitalSourceType` and no *Photo assist*
+    marker. An untouched original, recorded as such.
+  - **A focus override was tried and then removed rather than left in.** At a
+    0.780 master against the card's 0.6165 slot the photo is width-constrained,
+    so `object-position`'s Y term changes nothing — two screenshots at `50% 40%`
+    and `50% 50%` were pixel-identical. An entry that does nothing is worse than
+    no entry, because the next person reads it as a decision.
+  - **Fifth card to lose data at the schema, and the loss is a real one here**:
+    `hardinessNote` ("H3; established plants may tolerate about -10°C in ideal
+    sheltered sites"), `foliage`, `container`, `toxicity` and `compliance` all
+    have nowhere to render. For a borderline-hardy palm being sold in the UK,
+    the hardiness qualifier is the single most useful sentence on the card and
+    it is the one that does not survive. Item 0c.
+  - **A perf-test check was measuring the container, not the app.** "The card is
+    already moving two frames after the release" asserted a 50ms wall-clock
+    budget, but the sampler can only see movement on a frame it is given: traced
+    here, the card had moved 60px by the sampler's SECOND frame, and that frame
+    landed anywhere from 23ms to 63ms depending on machine load. It failed 4 runs
+    out of 4 at deck 218 — the commit already pushed and green an hour earlier —
+    so it was neither the new card nor the riffle change. It now asserts frame
+    INDEX, which is what its own name always claimed, with a loose 250ms ceiling
+    underneath to catch a genuine stall. Not a loosening: a stalled throw still
+    fails, and the ms figure is still printed every run.
 
 - **v14.25 (the riffle stops being O(deck), and a gate claim corrected)**: the
   previous commit's message said *"Gate: 17/17 sequential"*. It was not — that

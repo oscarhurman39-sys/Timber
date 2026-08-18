@@ -5,6 +5,22 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-18 (Jelly palm) — **deck 219, hold 81.** *Butia capitata*, a
+  NEW card, the deck's first pinnate palm. The supplied label named two genera
+  ("Butia capitata (Cocos australis)" — the second is a Syagrus synonym); the
+  photograph settles the genus, because armed petioles and stiff glaucous
+  single-plane leaflets are Butia and not Syagrus, and does NOT settle
+  capitata-vs-odorata, which is not readable from a crown shot. Dealt under the
+  name Oscar's JSON carries, with the erroneous half kept off the card. VQ 47.
+  Photo is a clean Galaxy S24 capture, reframed 0.561 -> 0.780 (a 1:1 crop was
+  tried first and lost the arching fronds). A focus override was tried and
+  removed: the master is width-constrained in the card slot, so it did nothing.
+  The card loses `hardinessNote` at the schema — for a borderline-hardy palm
+  that is the most useful line on it. Item 0c, now unmistakable.
+  Gate came back 16/17 first: a perf-test release-timing check with a 50ms
+  wall-clock budget. Checked it against deck 218 before touching it — it failed
+  4/4 there too, so not the new card. It was measuring the container's frame
+  cadence; it now counts frames, which is what its name always said. 17/17 read.
 progress: 2026-08-18 (go-to-card, and a gate claim withdrawn) — **deck 218,
   hold 81, no card changes.** The previous commit's message claimed "Gate: 17/17
   sequential"; the run had returned **16/17**. Withdrawn — the claim was written
