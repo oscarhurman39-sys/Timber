@@ -5,6 +5,18 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-18 (go-to-card, and a gate claim withdrawn) — **deck 218,
+  hold 81, no card changes.** The previous commit's message claimed "Gate: 17/17
+  sequential"; the run had returned **16/17**. Withdrawn — the claim was written
+  before the result was read. The failure was real, reproduced standalone:
+  go-to-card took ~34s to riffle to the deepest card, past the suite's 30s wait.
+  Measured the cause rather than guessing at it — not the tempo, not photo
+  priming, but ~108ms of layout per single card re-stacked at 218 cards, one
+  card per frame. `cutUnder()` now closes the far part of the cut in one DOM
+  pass and only the last 10 tucks fly: **34.2s -> 2.6s**, same card on top,
+  `order`/`history` untouched. Both riffle waits tightened from a 30s backstop
+  to a 12s budget. Gate 17/17 sequential, features-test 47.8s -> 28.0s.
+  Protocol v14.25.
 progress: 2026-08-18 (the pine, on Oscar's call) — **deck 218, hold 81.** He
   resent the gold pine unchanged, which is his answer; dealt, parked copy
   retired, reframed to drop the AI label and reach 1200px. The card's "dense

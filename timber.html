@@ -987,7 +987,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r143 · 2026-08-18 · ac7f5d5';
+const BUILD='r145 · 2026-08-18 · 83879dc';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -9963,6 +9963,13 @@ function showCustomer(i){
      exactly as if the ↺ button had been held down.
    Any hand on the deck stops it — same contract as letting go of ↺. */
 const GOTO_FROM=190,GOTO_TO=40,GOTO_DECAY=.82;   /* the rewind's tempo curve — it should feel like the same machine */
+/* A riffle to the bottom of the deck used to fly EVERY tuck, one card per frame.
+   Re-stacking a card costs ~100ms of layout once the deck is a couple of hundred
+   cards deep (measured, 218 cards), so reaching the deepest card took over half a
+   minute of watching cards you did not ask for. Only the last few tucks read as
+   motion at all: everything above them is closed in one DOM pass, and the riffle
+   proper plays out over the last GOTO_SHOW cards. */
+const GOTO_SHOW=10;                              /* tucks still flown, at the end of the riffle */
 let gotoTimer=null;
 function stopGoto(){if(gotoTimer){clearTimeout(gotoTimer);gotoTimer=null;}}
 function tuckUnder(card,ms){
@@ -9984,6 +9991,14 @@ function tuckUnder(card,ms){
     markHot();
   },ms);
 }
+function cutUnder(n){                             /* move the top n cards under the deck in ONE pass */
+  const live=[...deck.querySelectorAll('.card:not([data-gone])')];
+  const moving=live.slice(-n);                    /* bottom-to-top; tucking them one by one lands them in exactly this order */
+  const frag=document.createDocumentFragment();
+  moving.forEach(c=>{c.classList.remove('flipped');frag.appendChild(c);});
+  deck.insertBefore(frag,deck.firstChild);        /* one reflow, not n */
+  markHot();
+}
 function gotoTick(idx,step){
   gotoTimer=null;
   const top=topCard();
@@ -9994,6 +10009,14 @@ function gotoTick(idx,step){
     return;
   }
   if(step>PLANTS.length*2)return;                 /* can't-happen backstop: never run forever */
+  const live=[...deck.querySelectorAll('.card:not([data-gone])')];
+  const pos=live.findIndex(c=>+c.dataset.idx===idx);
+  const buried=pos>=0?live.length-1-pos:0;        /* cards still lying between the top and the one asked for */
+  if(order.includes(idx)&&buried>GOTO_SHOW){      /* close the gap in one pass, then riffle the last few */
+    cutUnder(buried-GOTO_SHOW);
+    gotoTimer=setTimeout(()=>gotoTick(idx,step+1),0);   /* step keeps climbing: the backstop above stays reachable */
+    return;
+  }
   const gap=Math.max(GOTO_TO,GOTO_FROM*Math.pow(GOTO_DECAY,step));
   const ms=Math.min(300,Math.max(90,Math.round(gap*2.4)));
   if(order.includes(idx)){if(top)tuckUnder(top,ms);}

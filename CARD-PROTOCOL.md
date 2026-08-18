@@ -368,6 +368,30 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.25 (the riffle stops being O(deck), and a gate claim corrected)**: the
+  previous commit's message said *"Gate: 17/17 sequential"*. It was not — that
+  run came back **16/17**, `features-test` failing, and the message was written
+  before the result was read. The failure was real and reproduced on its own,
+  outside any parallel-run contention: **go-to-card took ~34s to reach the
+  deepest card in a 218-card deck**, past the suite's 30s wait.
+  - The cause is not the animation tempo and not photo priming — both were
+    measured and neither dominates. **Re-stacking a single card costs ~108ms of
+    layout at 218 cards** (idle frame 16ms), and the riffle moved one card per
+    frame, so the cost of reaching the bottom card grew with the deck and had
+    been growing quietly for weeks. One card tipped it over the cap; the slide
+    started long before.
+  - Fix: `cutUnder(n)` moves the far portion of the cut in **one DOM pass**
+    through a fragment, and only the last `GOTO_SHOW` (10) tucks still fly. The
+    landing order is identical to tucking one at a time, `order`/`history` are
+    untouched exactly as before, and the visible flourish is unchanged.
+    **34.2s → 2.6s**, same card on top.
+  - The suite's 30s wait was a backstop that silently absorbed the whole slide.
+    Both riffle waits are now a **12s budget** (~4x headroom) with the measured
+    numbers written in, so the next regression fails loudly instead of creeping.
+  - Standing lesson, and it is the second time this session: **a gate result is
+    not a gate result until it has been read.** No commit message may state a
+    gate outcome the run has not actually returned.
+
 - **v14.24 (MIRRORED effect; five cards held, one duplicate refused)**: the
   kaleidoscope Oscar spotted in a contact sheet is now a real effect. The card's
   own `<img>` becomes the left half pulled to `object-position:100%`, a mirrored
