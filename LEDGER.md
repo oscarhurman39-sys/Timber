@@ -5,6 +5,21 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-18 (Lithodora + Rhodanthemum) — **deck 222, hold 81.** Two new
+  genera, both dealt on August foliage, both cards written for a flower.
+  **Rhodanthemum 'Zagora Yellow' is the one that needs Oscar**: the supplied file
+  is a collage, and the flower in its pasted inset is CREAM-WHITE where the card
+  is named for bright yellow. Either it is 'Zagora Yellow' shot late (the yellows
+  fade to cream) or it is the straight white species and the label is wrong — the
+  foliage cannot tell them apart. Dealt on the foliage frame with the inset
+  cropped out, so the card asserts no flower colour at all. One fresh bloom
+  settles it: VQ 49. Lithodora is the mild version — no flowers in August, new
+  flush brighter than its own "dark-green": VQ 50, April–July reshoot.
+  Crop lesson: when the master is wider than the 0.6165 slot the card band is
+  fixed to the master's own 12–62%, so a focus override cannot move it — the
+  sharp region has to be placed by the crop box. First Rhodanthemum crop read as
+  a green blur; re-cut 0.09 lower and it came up legible. Protocol v14.28.
+  Gate 17/17 sequential.
 progress: 2026-08-18 (Mexican fleabane) — **deck 220, hold 81.** *Erigeron
   karvinskianus* 'Profusion', a NEW card; the deck had no Erigeron. Cropped away
   from the photograph's own subject: the lower 40% is one huge out-of-focus

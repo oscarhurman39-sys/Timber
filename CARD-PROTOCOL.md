@@ -370,7 +370,38 @@ Focal point recorded here when off-centre:
 
 | Erigeron karvinskianus 'Profusion' | erigeron-karvinskianus-profusion.jpg | 50% 40% default — a wet macro: the sharp daisy with rain still on its rays, a fresher flower opening beside it, and the green buds behind. **Cropped away from the photograph's own subject.** As shot, the lower 40% of the frame is one enormous out-of-focus bloom shot from inches away; the crop takes the upper half, where everything is actually in focus, and leaves the bokeh below the plaque line. Also the first photo in the register where the CHAT preview and the file disagreed — EXIF orientation 6 means the file displays portrait 3000x4000 while the preview showed the un-rotated sensor frame, so the crop coordinates had to be written against the rotated frame that `reframe-photo.js` (and the app) actually use |
 
+| Lithodora diffusa 'Heavenly Blue' | lithodora-diffusa-heavenly-blue.jpg | 50% 40% default — an August plant in its pot on gravel: dense bristly narrow leaves, the lax habit legible, the grey pot rim cropped off the bottom. **No flowers, and the flush showing is bright mid-green where the card's text says dark-green** — both true of the plant in August, both recorded in VQ 50. Wants an April–July reshoot for the gentian-blue the card leads on |
+| Rhodanthemum hosmariense 'Zagora Yellow' | rhodanthemum-hosmariense-zagora-yellow.jpg | 50% 40% default — **the supplied file was a COLLAGE**, an inset flower panel pasted over the top-right of a foliage frame, and a card cannot show a picture-in-picture. Cropped to the foliage frame only, inset excluded. First crop put the soft upper corner in the visible band and was redone lower, onto the sharp divided rosette — the card band is fixed to the master's own 12–62%, so the sharp region has to be placed there by the CROP, not by a focus override. **The inset flower is cream-white, not the yellow the card names: VQ 49.** |
+
 ## 5. Decision changelog
+
+- **v14.28 (222 dealt / 81 held — Lithodora and Rhodanthemum)**: two new cards,
+  neither genus previously in the deck. Both photographs are August foliage; both
+  cards lead on a flower.
+  - **The Rhodanthemum is the one to read.** Its supplied file is a two-frame
+    collage, and the flower in the pasted inset has **cream-white rays**, where
+    the card is named and written for **bright yellow** daisies. Either it is
+    'Zagora Yellow' photographed late — the yellows fade to cream with age
+    `[Unverified]` — or the plant is the straight white species and the label is
+    wrong. The foliage cannot separate them; they differ only in ray colour.
+    Dealt on the foliage frame with the inset cropped out, so **the card asserts
+    no flower colour at all** rather than asserting one the picture denies.
+    VQ 49, and one fresh bloom in the garden settles it.
+  - The Lithodora is the mild version of the same shape: no flowers in August,
+    and the new flush is brighter than the "dark-green" its text names. Dealt;
+    VQ 50; an April–July reshoot is a straight upgrade.
+  - **A crop lesson worth keeping.** The Rhodanthemum's first crop looked right
+    as a picture and read as a green blur on the card. When the master is WIDER
+    than the card's 0.6165 slot, cover crops the sides and shows the master's
+    full height, so the visible band is always the master's own 12–62% — an
+    `object-position` Y override cannot move it. **The sharp region has to be
+    put there by the crop box.** Re-cropped 0.09 lower and the leaves came up
+    legible. Same geometry that made the Butia's focus override a no-op (v14.26),
+    seen from the other side.
+  - Both photos: EXIF Samsung Galaxy S24, Ultra HDR with a gain map, **no C2PA
+    manifest at all** and no AI or generative marker — the same profile as the
+    Erigeron, and recorded as that rather than as "clean C2PA". The collage is
+    recorded as a collage in CREDITS.
 
 - **v14.27 (220 dealt / 81 held — Mexican fleabane)**: *Erigeron karvinskianus*
   'Profusion', a NEW card; the deck held no *Erigeron* and no small daisy of any

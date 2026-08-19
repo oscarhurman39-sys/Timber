@@ -1642,6 +1642,62 @@ the species is on the delivery note, not in the plant.
 ---
 
 
+### 49. 'Zagora Yellow' — the only flower supplied for it is CREAM-WHITE, not yellow
+2026-08-18. Dealt on foliage, because the flower half of this card is not
+settled and I am not going to settle it by picking a reading.
+
+**The card says** *"**Bright yellow** daisies · dark centres · finely divided
+silvery-grey foliage"*. The photograph Oscar supplied is a **collage**: a large
+foliage frame with a small inset panel pasted over the top-right corner, and the
+flower in that inset has **cream-white rays around an orange-yellow disc**.
+
+**Two readings, and I cannot separate them from this frame:**
+1. **It is 'Zagora Yellow', photographed late.** The Zagora yellows are widely
+   described as fading to cream as the flower ages `[Unverified]` — so a spent
+   bloom in mid-August, four months into a May–Sep season, could look exactly
+   like this.
+2. **It is the straight species.** *Rhodanthemum hosmariense* is white-rayed with
+   a yellow disc as standard, and it is the commonest form in the trade. If the
+   plant in the pot is the species, the card's name is wrong.
+
+The foliage does not decide it — finely divided, silvery, densely hairy fits both,
+because they are the same plant apart from ray colour.
+
+**What was dealt:** the foliage frame only, cropped away from the inset (a card
+cannot show a picture-in-picture), so nothing on the card asserts a flower colour
+that the photograph contradicts. This is the **Forsythia principle** — a real leaf
+beats an empty card — with the same condition attached: **it wants a flower shot
+in season.**
+
+**What would settle it in ten seconds, in the garden:** a fresh, just-opened
+bloom. If the newest flowers on the plant open yellow, it is 'Zagora Yellow' and
+the inset was simply an old one. If the newest flowers open white, the label is
+wrong and this card should be re-cut as *Rhodanthemum hosmariense*.
+
+**Reshoot list:** May–Sep, fresh bloom, alongside the Forsythia (March), Syringa
+'Znamya Lenina' (May) and Allium 'Red Giant' (June).
+
+---
+
+### 50. Lithodora dealt on foliage — no flower, and the leaves are the wrong green for its own text
+2026-08-18. Much milder than 49, and recorded so it is not rediscovered as a
+defect.
+
+The card's `visual` opens on *"Intense gentian-blue flowers · narrow
+**dark-green** evergreen leaves"*. The photograph is an August plant in a pot:
+**no flowers at all** — its peak is Apr–Jul and it is well past — and the fresh
+growth is a **bright mid-green**, not the dark green the text names. Older
+foliage lower in the frame is darker, so the text is not wrong about the plant,
+only about the flush that is showing.
+
+Dealt because the bristly narrow leaves and the lax habit are legible and true
+`[Inference]`, and because a real August photograph beats a gradient. **A
+flowering shot in April–July would be a straight upgrade** and would put the
+gentian-blue the card leads on into the picture.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
