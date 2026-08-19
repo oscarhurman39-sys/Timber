@@ -1616,6 +1616,32 @@ fortunei* still held — and the only pinnate (feather) one of the three.
 
 
 
+### 48. 'Profusion' is a trade name RHS treats as a synonym — kept as supplied, low stakes
+2026-08-18. Oscar's own research block on the Mexican fleabane says it: **RHS
+treats *Erigeron karvinskianus* 'Profusion' as a synonym of the straight species
+rather than as a currently accepted cultivar name.**
+
+**Kept as supplied**, because it is the name the plant is sold under in the UK
+and the name on his label, and because the card already prints the alternatives
+in `cvs` — *"syn. Erigeron 'Profusion'; Erigeron karvinskianus 'Bluetenmeer'"*.
+Nothing on the card claims cultivar status that the plant does not have.
+
+**Two smaller notes, neither blocking:**
+- His block also flags that RHS gives a broad 10–50 cm height for the species
+  while its cultivar description says a 15–30 cm mat. The card carries the
+  narrower 15–30 cm, which matches what 'Profusion' actually does.
+- The identification rests on Oscar's label plus habit — small daisies with
+  yellow discs on wiry lax stems. The photograph shows one flower already
+  flushing pink at the rays in the wider frame, which is the species' own tell.
+  *Erigeron annuus*, the weedy lookalike, is stiffly erect with much narrower,
+  thread-like rays `[Inference]`.
+
+**If Oscar wants it exact:** whether the batch was bought as 'Profusion' or as
+the species is on the delivery note, not in the plant.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

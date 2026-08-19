@@ -5,6 +5,19 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-18 (Mexican fleabane) — **deck 220, hold 81.** *Erigeron
+  karvinskianus* 'Profusion', a NEW card; the deck had no Erigeron. Cropped away
+  from the photograph's own subject: the lower 40% is one huge out-of-focus
+  bloom, so the crop takes the upper half where everything is sharp and leaves
+  the bokeh under the plaque. Two things worth keeping: the JSON's low ratings
+  tripped the "un-converted 0–5 scale" warning and `growthSpeed 12` disproves it
+  outright (12 cannot exist on a 0–5 scale) — that is the cheapest check next
+  time; and the chat preview was landscape while the FILE is EXIF orientation 6
+  and displays portrait, so crop coordinates have to be written against the
+  rotated frame the app renders. Photo has no C2PA manifest at all — Samsung
+  Ultra HDR with a gain map, EXIF Galaxy S24, no AI marker — recorded as that
+  rather than as "clean C2PA". 'Profusion' is an RHS synonym, kept as supplied:
+  VQ 48. Protocol v14.27. Gate 17/17 sequential.
 progress: 2026-08-18 (Jelly palm) — **deck 219, hold 81.** *Butia capitata*, a
   NEW card, the deck's first pinnate palm. The supplied label named two genera
   ("Butia capitata (Cocos australis)" — the second is a Syagrus synonym); the

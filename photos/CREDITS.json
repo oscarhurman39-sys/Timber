@@ -952,6 +952,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "erigeron-karvinskianus-profusion.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. EXIF Samsung Galaxy S24, Ultra HDR capture with a gain map; no C2PA manifest in the file (no JUMBF box) and no AI or generative marker of any kind",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "eriobotrya-japonica.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",

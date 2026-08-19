@@ -368,7 +368,34 @@ Focal point recorded here when off-centre:
 
 | Butia capitata | butia-capitata.jpg | 50% 40% default — shot from below into a white sky, so the crown reads as a silhouette: arching glaucous fronds sweeping out of frame, the stout trunk with its old leaf-base collar, and the **armed petioles** that place it in *Butia* rather than the *Syagrus* its label also named (VQ 47). Reframed through `reframe-photo.js` from 0.561 to 0.780 — the phone frame was far too tall, and half of it was empty sky. A 1:1 crop was tried first and rejected: it read as trunk-and-spines with the arching fronds cut off, which is the half of the plant the card's `visual` leads on. **First palm with pinnate (feather) fronds** — *Chamaerops* is fan-leaved, *Trachycarpus* is held |
 
+| Erigeron karvinskianus 'Profusion' | erigeron-karvinskianus-profusion.jpg | 50% 40% default — a wet macro: the sharp daisy with rain still on its rays, a fresher flower opening beside it, and the green buds behind. **Cropped away from the photograph's own subject.** As shot, the lower 40% of the frame is one enormous out-of-focus bloom shot from inches away; the crop takes the upper half, where everything is actually in focus, and leaves the bokeh below the plaque line. Also the first photo in the register where the CHAT preview and the file disagreed — EXIF orientation 6 means the file displays portrait 3000x4000 while the preview showed the un-rotated sensor frame, so the crop coordinates had to be written against the rotated frame that `reframe-photo.js` (and the app) actually use |
+
 ## 5. Decision changelog
+
+- **v14.27 (220 dealt / 81 held — Mexican fleabane)**: *Erigeron karvinskianus*
+  'Profusion', a NEW card; the deck held no *Erigeron* and no small daisy of any
+  kind.
+  - **The rating scale warning was a false alarm, and there is a way to prove
+    it.** `check-plant-json` flags `pestRisk 3`, `thirst 4`, `careLevel 3` as
+    possibly un-converted 0–5 ratings. `growthSpeed 12` settles it: 12 cannot
+    exist on a 0–5 scale, so the whole set is on the app's 0–20 scale and the
+    card reads *Easy 0.75/5, Thirst 1/5, Pests 0.75/5* — which is what a
+    self-seeding wall daisy should say, and consistent with its own *"Low once
+    established"* and *"drought tolerant"*. **Whenever that warning fires, check
+    `growthSpeed` first**: it is the field most likely to exceed 5 and therefore
+    the cheapest proof of which scale the JSON is on.
+  - **EXIF orientation caught a second way.** The preview in chat was landscape;
+    the file is orientation 6 and displays portrait. Crop coordinates read off
+    the preview would have been rotated 90° from the frame the app renders.
+    `reframe-photo.js` already handles the rotation (v14.21 fix) — but it
+    handles it by trusting that the coordinates describe the DISPLAYED frame, so
+    the frame has to be looked at before the numbers are written, not after.
+  - Photo carries no C2PA manifest at all — no JUMBF box — unlike the Galaxy
+    captures that do. It is a Samsung Ultra HDR capture (gain map in the XMP)
+    with EXIF naming the Galaxy S24, and no AI or generative marker anywhere in
+    the file. Recorded exactly that way rather than as "clean C2PA".
+  - Oscar's own `uncertain` block notes RHS treats 'Profusion' as a synonym
+    rather than an accepted cultivar. Kept on the card as supplied — VQ 48.
 
 - **v14.26 (219 dealt / 81 held — the Jelly palm)**: *Butia capitata*, a NEW
   card rather than a replacement; the deck held no *Butia*. Oscar's own
