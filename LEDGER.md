@@ -5,6 +5,19 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-19 (revenue + deck sizing) — no cards. Revised
+  MONETISATION-BRIEF.md against the 217/82 deck; the 2026-08-06 numbers were
+  written at 72 cards and had gone stale. **The finding: the Buyer Trade Sheet is
+  populated on 3 of 299 rows** (`trade`, `retail`, `margin`, `order`, `bench`,
+  `shrink` all 3/299; `returnRisk` 10/299). Everything else the app does is
+  replicable by a generic flashcard app with a plant CSV — the trade fields are
+  not, because they need someone who works the floor. So card count is no longer
+  the binding constraint and the deck is big enough to release at ~250 dealt.
+  Also: "Plant Deck" beats "Timber" as a product name, but display-name only —
+  renaming the four `timber-*-v1` localStorage keys would wipe every pilot user's
+  progress and SRS schedule, and moving the repo breaks the live URL and every
+  installed PWA. A custom domain is the moment to do the full rename, and it also
+  clears the Digital Asset Links blocker §1 flagged for Google Play.
 progress: 2026-08-18 (five dealt, the pine refused) — **deck 217, hold 82.**
   Rhododendron 'Hoppy', Lupin 'The Governor', Parrotia 'Bella', Allium 'Red
   Giant' and Acer 'Firecracker' all dealt. The Pinus mugo photo is a GOLD
