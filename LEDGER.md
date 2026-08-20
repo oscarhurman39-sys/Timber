@@ -5,6 +5,22 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-20 (the SAFETY plaque) — **item 0c closed for toxicity.**
+  `toxicity` is a card field, a CSV column and a rendered plaque on the trade
+  back, and the **44 researched notes that had been unreadable in
+  data/incoming/ are now on their cards** (5 highly toxic, 29 toxic, 3 handle
+  with care, 6 edible, 1 no-known-hazard). Reading the corpus before designing
+  changed the design: the field is not only hazards — six entries are EDIBILITY
+  notes and one is a sourced all-clear, so the plaque carries five tiers rather
+  than three. Every rule was checked note by note; the ordering that matters is
+  that "should not be treated as edible" reads as a hazard, so negations are
+  tested before the word "edible". Prose always prints verbatim — the tier only
+  picks ink and glyph. A blank prints NOTHING, because blank means not
+  researched and a shop reads "no toxicity recorded" as "safe to eat".
+  First piece of the back-of-card redesign: it is in the front's language
+  (paper, ink, Georgia small-caps, hazard rule) and sits above the buyer
+  figures. `compliance` is the same problem and the rail is now there for it.
+  Protocol v14.30. Gate 17/17 sequential.
 progress: 2026-08-18 (Monstera + Aloe) — **deck 224, hold 81.** The run's first
   houseplants, both H1b. Monstera is the best photograph of the day — one mature
   fenestrated leaf straight across the card band, unmistakable. The Aloe is the

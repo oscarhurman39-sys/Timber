@@ -149,6 +149,44 @@
   .grid .g .l{font-size:9px;letter-spacing:1.1px;text-transform:uppercase;color:var(--leaf1);opacity:.85}
   .grid .g .n{font-size:12.5px;line-height:1.4;color:#eafff2;margin-top:3px}
   .nodata{font-size:11.5px;font-style:italic;color:var(--muted);padding:2px 2px 4px}
+
+  /* TOXICITY PLAQUE — the first piece of the back written in the FRONT's language.
+     Aged paper, ink, small-caps Georgia, a hazard rule along the top. It sits above
+     the buyer figures because a safety line outranks a margin. Three tiers, colour
+     only: the prose underneath is always the researched text, printed verbatim. */
+  .tox{position:relative;border-radius:12px;overflow:hidden;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.06),rgba(0,0,0,.16)),
+      var(--tox-paper,#2a1d10);
+    border:1px solid var(--tox-edge,rgba(216,189,120,.34));
+    box-shadow:0 6px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.07)}
+  /* the hazard rule: painted, not fetched — two colours of the tier's own ink */
+  .tox-rule{height:5px;
+    background:repeating-linear-gradient(115deg,
+      var(--tox-ink) 0 7px,transparent 7px 14px),rgba(0,0,0,.42)}
+  .tox-body{display:flex;gap:10px;align-items:flex-start;padding:9px 11px 10px}
+  .tox-glyph{flex:0 0 auto;width:19px;height:19px;margin-top:1px;fill:var(--tox-ink);
+    filter:drop-shadow(0 1px 0 rgba(0,0,0,.5))}
+  .tox-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .tox-l{font-family:Georgia,"Times New Roman",serif;font-size:9.5px;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;color:var(--tox-ink)}
+  .tox-tier{font-family:Georgia,"Times New Roman",serif;font-size:9px;font-weight:700;
+    letter-spacing:1.2px;text-transform:uppercase;color:var(--tox-paper,#2a1d10);
+    background:var(--tox-ink);border-radius:20px;padding:2px 7px;line-height:1.25;
+    box-shadow:0 1px 0 rgba(0,0,0,.35)}
+  .tox-text{min-width:0}                            /* flex child must be allowed to wrap */
+  .tox-n{font-size:12.5px;line-height:1.42;color:#f6ead6;margin-top:4px}
+  .tox.caution{--tox-ink:#f5c451;--tox-paper:#2b2110;--tox-edge:rgba(245,196,81,.38)}
+  .tox.harmful{--tox-ink:#f08a3c;--tox-paper:#2d1a0e;--tox-edge:rgba(240,138,60,.40)}
+  .tox.severe {--tox-ink:#ef5f5f;--tox-paper:#2e1211;--tox-edge:rgba(239,95,95,.46)}
+  .tox.severe .tox-n{color:#ffe9e4}
+  /* the field is not only hazards — see the ladder. These two are the other halves. */
+  .tox.edible {--tox-ink:#bcd94f;--tox-paper:#1d2611;--tox-edge:rgba(188,217,79,.34)}
+  .tox.clear  {--tox-ink:#6fdca0;--tox-paper:#122318;--tox-edge:rgba(111,220,160,.30)}
+  .tox.edible .tox-n,.tox.clear .tox-n{color:#e9f6df}
+  /* a hazard shouts, an all-clear does not: the striped rule is for the hazard tiers */
+  .tox.edible .tox-rule,.tox.clear .tox-rule{height:3px;background:var(--tox-ink);opacity:.55}
+
   .back .fliphint{margin-top:auto;padding-top:6px}
 
   /* actions — three slim bars in the card's own language (Georgia small-caps,
@@ -987,7 +1025,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r154 · 2026-08-20 · f94e50e';
+const BUILD='r156 · 2026-08-20 · 713ad8b';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -4407,6 +4445,7 @@ const PLANTS = [
    resilience:"wind, drought and coastal tolerant · leaf spines can injure",
    uses:"containers · gravel gardens · coastal and exotic planting",
    size:"1.5-2.5m H × 1-1.5m W",
+   toxicity:"Leaf stalks can carry sharp spines capable of causing physical injury; site away from narrow paths and children's play areas.",
    seasonalImpact:"", growthSpeed:4, pestRisk:4, thirst:6, careLevel:8, sunNeed:70, sunMin:40},
 
   {common:"Corkscrew Hazel", latin:"Corylus avellana 'Contorta'", hue:40,
@@ -4432,6 +4471,7 @@ const PLANTS = [
    resilience:"robust and adaptable · grafted plants throw straight suckers",
    uses:"winter structure · cut stems · containers · wildlife gardens",
    size:"2.5-4m H × 2.5-4m W",
+   toxicity:"Nuts, when produced and fully mature, are edible.",
    seasonalImpact:"", growthSpeed:7, pestRisk:7, thirst:8, careLevel:6, sunNeed:70, sunMin:35},
 
   {common:"Cider Gum 'Azura'", latin:"Eucalyptus gunnii Azura ('Cagire')", hue:190,
@@ -4457,6 +4497,7 @@ const PLANTS = [
    resilience:"fast and regenerates hard after pruning · foliage harmful if eaten",
    uses:"silver foliage · cut foliage · containers with regular pruning",
    size:"4-8m H × 2.5-4m W",
+   toxicity:"Eucalyptus foliage and concentrated eucalyptus oils are harmful if ingested in quantity and should be kept away from pets and children.",
    seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:9, careLevel:10, sunNeed:100, sunMin:85},
 
   {common:"Japanese Cherry 'Kanzan'", latin:"Prunus 'Kanzan'", hue:330,
@@ -4557,6 +4598,7 @@ const PLANTS = [
    resilience:"reliable and very hardy · berries edible and taken by birds",
    uses:"small gardens · multi-stem trees · blossom and autumn colour",
    size:"4-8m H × 2.5-4m W",
+   toxicity:"Ripe berries are edible and are also readily taken by birds.",
    seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:12, careLevel:5, sunNeed:70, sunMin:35},
 
   {common:"Crab Apple 'John Downie'", latin:"Malus 'John Downie'", hue:18,
@@ -4758,6 +4800,7 @@ const PLANTS = [
    resilience:"superb in deep shade and towns · very low upkeep · berries not edible",
    uses:"deep shade · evergreen screening · dry borders · containers",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   toxicity:"Berries are ornamental and should not be eaten.",
    seasonalImpact:"", growthSpeed:7, pestRisk:5, thirst:7, careLevel:4, sunNeed:20, sunMin:5},
 
   {common:"Darwin's Barberry", latin:"Berberis darwinii", hue:30,
@@ -4933,6 +4976,7 @@ const PLANTS = [
    resilience:"evergreen · drought and coastal tolerant · fruit edible",
    uses:"coastal gardens · evergreen specimens · wildlife planting",
    size:"4-8m H × 4-8m W",
+   toxicity:"Ripe fruits are edible but are generally valued more as an ornamental feature than as a high-quality dessert fruit.",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:7, careLevel:6, sunNeed:90, sunMin:70},
 
   {common:"Soft Tree Fern", latin:"Dicksonia antarctica", hue:115,
@@ -5258,6 +5302,7 @@ const PLANTS = [
    resilience:"dependable on warm walls · exposure is its limit · milky sap irritates",
    uses:"evergreen climber · scented walls · courtyards · containers",
    size:"8-12m H × 4-8m W",
+   toxicity:"Milky sap can irritate skin and the plant should not be eaten.",
    seasonalImpact:"", growthSpeed:11, pestRisk:5, thirst:12, careLevel:8, sunNeed:90, sunMin:65},
 
   {common:"Japanese Anemone 'Pretty Lady Maria'", latin:"Anemone × hybrida Pretty Lady Maria ('Aneplaria')", hue:150,
@@ -5559,6 +5604,7 @@ const PLANTS = [
    resilience:"drought tolerant once established",
    uses:"containers · borders · cut stems · autumn berries",
    size:"70–80 cm H × 60–75 cm W",
+   toxicity:"Fruit ornamental · not to be eaten",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:42},
 
   {common:"Ivy 'Goldheart'", latin:"Hedera helix 'Oro di Bogliasco'", hue:55,
@@ -5584,6 +5630,7 @@ const PLANTS = [
    resilience:"shade tolerant · coastal tolerant",
    uses:"walls · fences · wildlife cover · containers",
    size:"4–8 m H × 1–1.5 m W",
+   toxicity:"Harmful if eaten · skin irritant/allergen",
    seasonalImpact:"", growthSpeed:14, pestRisk:10, thirst:7, careLevel:6, sunNeed:65, sunMin:35},
 
   {common:"Henry's honeysuckle 'Copper Beauty'", latin:"Lonicera henryi 'Copper Beauty'", hue:38,
@@ -5609,6 +5656,7 @@ const PLANTS = [
    resilience:"shade tolerant",
    uses:"screening · walls · wildlife gardens · cottage gardens",
    size:"8–12 m H × 1.5–2.5 m W",
+   toxicity:"Fruit ornamental · not to be eaten",
    seasonalImpact:"", growthSpeed:14, pestRisk:12, thirst:12, careLevel:9, sunNeed:55, sunMin:35},
 
   {common:"White potato vine", latin:"Solanum laxum 'Album'", hue:0,
@@ -5634,6 +5682,7 @@ const PLANTS = [
    resilience:"",
    uses:"sunny walls · pergolas · courtyards · conservatories",
    size:"8–12 m H × 1.5–2.5 m W",
+   toxicity:"Fruit ornamental · not to be eaten",
    seasonalImpact:"", growthSpeed:16, pestRisk:8, thirst:10, careLevel:10, sunNeed:92, sunMin:78},
 
   {common:"Clematis 'Avalanche'", latin:"Clematis × cartmanii AVALANCHE ('Blaaval')", hue:0,
@@ -5659,6 +5708,7 @@ const PLANTS = [
    resilience:"shade tolerant",
    uses:"walls · trellis · containers · spring display",
    size:"2.5–4 m H × 1.5–2.5 m W",
+   toxicity:"Skin irritant · harmful if eaten by rabbits",
    seasonalImpact:"", growthSpeed:12, pestRisk:10, thirst:11, careLevel:10, sunNeed:72, sunMin:45},
 
   {common:"Weigela 'Prism Magic Carpet'", latin:"Weigela PRISM MAGIC CARPET ('VPWG18-06')", hue:335,
@@ -5734,6 +5784,7 @@ const PLANTS = [
    resilience:"",
    uses:"containers · borders · cut flowers · pollinators",
    size:"50–80 cm H × 40–60 cm W",
+   toxicity:"Mildly toxic to dogs and cats if eaten · may cause dermatitis",
    seasonalImpact:"", growthSpeed:14, pestRisk:12, thirst:13, careLevel:13, sunNeed:92, sunMin:68},
 
   {common:"St John's wort 'Miracle Grandeur'", latin:"Hypericum × inodorum MIRACLE GRANDEUR ('Allgrandeur')", hue:0,
@@ -5759,6 +5810,7 @@ const PLANTS = [
    resilience:"drought tolerant once established",
    uses:"containers · borders · cut stems · autumn berries",
    size:"70–80 cm H × 60–75 cm W",
+   toxicity:"Fruit ornamental · not to be eaten",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:42},
 
   {common:"Rice-paper Plant 'Rex'", latin:"Tetrapanax papyrifer 'Rex'", hue:105,
@@ -5784,6 +5836,7 @@ const PLANTS = [
    resilience:"vigorous · frost may cut it to the ground · young hairs irritate skin",
    uses:"exotic borders · architectural foliage · sheltered courtyards",
    size:"4-5m H × 2.5-4m+ W",
+   toxicity:"Fine hairs on young growth may irritate skin, eyes or airways in sensitive people; gloves are sensible when handling or cutting.",
    seasonalImpact:"", growthSpeed:19, pestRisk:5, thirst:11, careLevel:11, sunNeed:90, sunMin:65},
 
   {common:"Variegated red-osier dogwood", latin:"Cornus sericea 'Variegata'", hue:0,
@@ -5834,6 +5887,7 @@ const PLANTS = [
    resilience:"cold hardy · part-shade tolerant",
    uses:"specimen · borders · cottage gardens · pollinators",
    size:"2.5–4 m H × 2.5–4 m W",
+   toxicity:"Harmful if eaten",
    seasonalImpact:"", growthSpeed:15, pestRisk:4, thirst:10, careLevel:5, sunNeed:82, sunMin:48},
 
   {common:"Lilac 'Znamya Lenina'", latin:"Syringa vulgaris 'Znamya Lenina'", hue:315,
@@ -5884,6 +5938,7 @@ const PLANTS = [
    resilience:"shade tolerant · coastal tolerant · cold hardy",
    uses:"walls · trellis · containers · wildlife gardens",
    size:"1.5–2.5 m H × 1–1.5 m W",
+   toxicity:"Fruit ornamental · not to be eaten",
    seasonalImpact:"", growthSpeed:15, pestRisk:12, thirst:11, careLevel:6, sunNeed:72, sunMin:42},
 
   {common:"Dwarf Formosa lily", latin:"Lilium formosanum var. pricei", hue:0,
@@ -5909,6 +5964,7 @@ const PLANTS = [
    resilience:"compact alpine habit · cold tolerant",
    uses:"rock gardens · containers · border fronts · cut flowers",
    size:"10–30 cm H × 10–30 cm W",
+   toxicity:"Bulbs not to be eaten · highly toxic to cats if eaten",
    seasonalImpact:"", growthSpeed:10, pestRisk:14, thirst:10, careLevel:10, sunNeed:92, sunMin:75},
 
   {common:"Ninebark 'Diabolo'", latin:"Physocarpus opulifolius 'Diabolo'", hue:280,
@@ -6109,6 +6165,7 @@ const PLANTS = [
    resilience:"very hardy in acid ground · all parts harmful if eaten",
    uses:"woodland gardens · acid borders · spring displays",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   toxicity:"All parts are harmful if eaten and can be toxic to people, pets and livestock.",
    seasonalImpact:"", growthSpeed:9, pestRisk:10, thirst:14, careLevel:9, sunNeed:50, sunMin:30},
 
   {common:"Heart-leaved houttuynia 'Pied Piper'", latin:"Houttuynia cordata 'Pied Piper'", hue:30,
@@ -6159,6 +6216,7 @@ const PLANTS = [
    resilience:"drought tolerant once established · coastal tolerant",
    uses:"containers · borders · cut flowers · architectural planting",
    size:"1–1.5 m H × 10–50 cm W",
+   toxicity:"Harmful if eaten by humans, dogs and cats",
    seasonalImpact:"", growthSpeed:10, pestRisk:12, thirst:10, careLevel:9, sunNeed:92, sunMin:72},
 
   {common:"Hebe 'Emerald Gem'", latin:"Veronica 'Emerald Gem'", hue:120,
@@ -6209,6 +6267,7 @@ const PLANTS = [
    resilience:"deep-shade tolerant · very cold hardy",
    uses:"shade borders · woodland gardens · containers · foliage contrast",
    size:"50–60 cm H × 80–100 cm W",
+   toxicity:"Toxic to dogs and cats if eaten",
    seasonalImpact:"", growthSpeed:11, pestRisk:15, thirst:13, careLevel:7, sunNeed:40, sunMin:20},
 
   {common:"Butterfly bush 'Little Ruby'", latin:"Buddleja davidii LITTLE RUBY ('Botex 006')", hue:345,
@@ -6259,6 +6318,7 @@ const PLANTS = [
    resilience:"cold hardy",
    uses:"walls · trellis · containers · flowering screens",
    size:"1.5–2.5 m H × 1–1.5 m W",
+   toxicity:"Skin irritant · harmful to rabbits if eaten",
    seasonalImpact:"", growthSpeed:14, pestRisk:13, thirst:12, careLevel:10, sunNeed:90, sunMin:60},
 
   {common:"Cobweb houseleek", latin:"Sempervivum arachnoideum", hue:0,
@@ -6385,7 +6445,8 @@ const PLANTS = [
    uses:"containers · border fronts · coastal gardens · pollinators",
    size:"60–70 cm H × 60–70 cm W",
    seasonalImpact:"", growthSpeed:9, pestRisk:9, thirst:7, careLevel:6, sunNeed:82, sunMin:50},
-   {common:"Rhododendron 'Hoppy'", latin:"Rhododendron 'Hoppy'", hue:285,
+
+  {common:"Rhododendron 'Hoppy'", latin:"Rhododendron 'Hoppy'", hue:285,
    visual:"Frilled pale-lilac flowers fading white · yellow spotting · compact dark foliage",
    water:"Keep evenly moist",
    aspect:"North / East / West",
@@ -6408,7 +6469,9 @@ const PLANTS = [
    resilience:"part-shade tolerant · cold hardy",
    uses:"containers · small gardens · shrub borders · edging",
    size:"10–50 cm H × 50–100 cm W",
+   toxicity:"Harmful if eaten",
    seasonalImpact:"", growthSpeed:8, pestRisk:13, thirst:11, careLevel:8, sunNeed:50, sunMin:32},
+
   {common:"Lupin 'The Governor'", latin:"Lupinus 'The Governor' (Band of Nobles Series)", hue:230,
    visual:"Dense spires of bicoloured blue and white pea flowers over palmate fingered leaves",
    water:"Water while establishing; dislikes waterlogging",
@@ -6433,6 +6496,7 @@ const PLANTS = [
    uses:"cottage gardens · herbaceous borders · cutting · pollinators",
    size:"0.5-1m H × 0.1-0.5m W",
    seasonalImpact:"", growthSpeed:14, pestRisk:14, thirst:11, careLevel:10, sunNeed:90, sunMin:60},
+
   {common:"Persian ironwood 'Bella'", latin:"Parrotia persica 'Bella'", hue:0,
    visual:"Red-purple spring flush · glossy green leaves · wine-red-purple autumn colour",
    water:"Moderate; water while establishing",
@@ -6457,6 +6521,7 @@ const PLANTS = [
    uses:"specimen · autumn colour · woodland gardens · architectural planting",
    size:"6–10 m H × 4–6 m W",
    seasonalImpact:"", growthSpeed:9, pestRisk:4, thirst:7, careLevel:3, sunNeed:82, sunMin:50},
+
   {common:"Kara Tau garlic 'Red Giant'", latin:"Allium karataviense 'Red Giant'", hue:345,
    visual:"Purplish-red flower globes · broad glaucous leaves flushed purple-red",
    water:"Low; water during prolonged dry spells",
@@ -6480,7 +6545,9 @@ const PLANTS = [
    resilience:"drought tolerant once established",
    uses:"containers · gravel gardens · border fronts · pollinators",
    size:"20–25 cm H × 20–30 cm W",
+   toxicity:"Toxic to pets if eaten",
    seasonalImpact:"", growthSpeed:8, pestRisk:10, thirst:6, careLevel:4, sunNeed:94, sunMin:78},
+
   {common:"Japanese maple 'Firecracker'", latin:"Acer palmatum 'Firecracker'", hue:350,
    visual:"Finely dissected purple-red leaves · vivid scarlet-orange autumn colour",
    water:"Moderate; water in dry spells",
@@ -6505,6 +6572,7 @@ const PLANTS = [
    uses:"specimen · containers · courtyards · autumn colour",
    size:"2.5–4 m H × 2.5–4 m W",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:10, careLevel:7, sunNeed:58, sunMin:40},
+
   {common:"Dwarf mountain pine", latin:"Pinus mugo", hue:120,
    visual:"Dense dark-green paired needles · spreading bushy habit · brown ovoid cones",
    water:"Low once established",
@@ -6529,79 +6597,159 @@ const PLANTS = [
    uses:"specimen · slopes · coastal gardens · large rock gardens",
    size:"2.5–4 m H × 4–8 m W",
    seasonalImpact:"", growthSpeed:6, pestRisk:9, thirst:5, careLevel:3, sunNeed:95, sunMin:75},
+
   {common:"Jelly palm", latin:"Butia capitata", hue:180,
    visual:"Arching blue-grey feathered fronds · stout trunk · edible orange-yellow fruit",
    water:"Moderate; water freely in summer",
    aspect:"East / South / West",
    soil:"Moist, well-drained; Sheltered · avoid waterlogging",
    prune:"No routine pruning; remove dead lower fronds only",
-   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jan-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"syn. Butia bonnetii; Cocos capitata",
-   hardiness:"H3", resilience:"drought tolerant · coastal suitable",
-   uses:"specimen · architectural planting · coastal gardens · large containers", size:"4–8 m H × 1.5–2.5 m W",
+   hardiness:"H3",
+   resilience:"drought tolerant · coastal suitable",
+   uses:"specimen · architectural planting · coastal gardens · large containers",
+   size:"4–8 m H × 1.5–2.5 m W",
    seasonalImpact:"", growthSpeed:6, pestRisk:6, thirst:8, careLevel:10, sunNeed:95, sunMin:78},
+
   {common:"Mexican fleabane 'Profusion'", latin:"Erigeron karvinskianus 'Profusion'", hue:345,
    visual:"White daisies ageing pink-purple · yellow centres · wiry spreading stems",
    water:"Low once established",
    aspect:"East / South / West",
    soil:"Poor, well-drained; Avoid winter wet",
    prune:"Cut back to new basal shoots in early spring",
-   source:"", peak:"May-Nov", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"May-Nov",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"syn. Erigeron 'Profusion'; Erigeron karvinskianus 'Bluetenmeer'",
-   hardiness:"H5", resilience:"drought tolerant · coastal tolerant · urban suitable",
-   uses:"rock gardens · walls · edging · containers", size:"15–30 cm H × 50–100 cm W",
+   hardiness:"H5",
+   resilience:"drought tolerant · coastal tolerant · urban suitable",
+   uses:"rock gardens · walls · edging · containers",
+   size:"15–30 cm H × 50–100 cm W",
    seasonalImpact:"", growthSpeed:12, pestRisk:3, thirst:4, careLevel:3, sunNeed:92, sunMin:58},
+
   {common:"Heavenly Blue", latin:"Lithodora diffusa 'Heavenly Blue'", hue:215,
    visual:"Intense gentian-blue flowers · narrow dark-green evergreen leaves · trailing habit",
    water:"Moderate; water in dry spells",
    aspect:"South / West",
    soil:"Acid, sharply drained; Avoid alkaline soil · avoid winter wet",
    prune:"Trim lightly after flowering to maintain shape",
-   source:"", peak:"Apr-Jul", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Apr-Jul",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"",
-   hardiness:"H5", resilience:"drought tolerant once established · coastal tolerant",
-   uses:"rock gardens · containers · edging · walls", size:"10–15 cm H × 30–50 cm W",
+   hardiness:"H5",
+   resilience:"drought tolerant once established · coastal tolerant",
+   uses:"rock gardens · containers · edging · walls",
+   size:"10–15 cm H × 30–50 cm W",
    seasonalImpact:"", growthSpeed:8, pestRisk:5, thirst:6, careLevel:6, sunNeed:90, sunMin:68},
+
   {common:"Moroccan daisy 'Zagora Yellow'", latin:"Rhodanthemum hosmariense 'Zagora Yellow'", hue:55,
    visual:"Bright yellow daisies · dark centres · finely divided silvery-grey foliage",
    water:"Low once established",
    aspect:"South / West",
    soil:"Poor, sharply drained; Avoid winter wet",
    prune:"Deadhead regularly; cut back lightly after flowering",
-   source:"", peak:"May-Sep", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"May-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"Zagora Series; Zagora® Yellow",
-   hardiness:"H4", resilience:"drought tolerant · coastal tolerant · heat tolerant",
-   uses:"rock gardens · containers · borders · pollinators", size:"20–30 cm H × 30–40 cm W",
+   hardiness:"H4",
+   resilience:"drought tolerant · coastal tolerant · heat tolerant",
+   uses:"rock gardens · containers · borders · pollinators",
+   size:"20–30 cm H × 30–40 cm W",
    seasonalImpact:"", growthSpeed:10, pestRisk:3, thirst:4, careLevel:4, sunNeed:95, sunMin:72},
+
   {common:"Swiss cheese plant", latin:"Monstera deliciosa", hue:120,
    visual:"Large glossy green leaves · deep splits and holes · aerial-rooted climbing habit",
    water:"Water when compost begins to dry",
    aspect:"South",
    soil:"Moist, well-drained; Avoid direct summer sun · avoid waterlogging",
    prune:"Prune to control size; remove damaged leaves",
-   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jan-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"syn. Philodendron pertusum",
-   hardiness:"H1b", resilience:"shade tolerant · humidity tolerant",
-   uses:"houseplants · conservatories · indoor specimens · tropical displays", size:"4–8 m H × 1.5–2.5 m W",
+   hardiness:"H1b",
+   resilience:"shade tolerant · humidity tolerant",
+   uses:"houseplants · conservatories · indoor specimens · tropical displays",
+   size:"4–8 m H × 1.5–2.5 m W",
+   toxicity:"Harmful if eaten · skin and eye irritant",
    seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:11, careLevel:6, sunNeed:55, sunMin:30},
+
   {common:"Aloe vera", latin:"Aloe vera", hue:120,
    visual:"Fleshy grey-green rosettes · pale spots on young leaves · toothed margins",
    water:"Water when compost dries",
    aspect:"South / West",
    soil:"Poor, sharply drained; Avoid wet compost · protect from frost",
    prune:"Remove dead or damaged leaves at the base",
-   source:"", peak:"Jun-Sep", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jun-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"syn. Aloe vera var. chinensis; Aloe chinensis; Aloe barbadensis var. chinensis",
-   hardiness:"H1b", resilience:"drought tolerant · heat tolerant",
-   uses:"houseplants · conservatories · sunny windowsills · containers", size:"50–100 cm H × 50–100 cm W",
+   hardiness:"H1b",
+   resilience:"drought tolerant · heat tolerant",
+   uses:"houseplants · conservatories · sunny windowsills · containers",
+   size:"50–100 cm H × 50–100 cm W",
+   toxicity:"Harmful if eaten",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:2, careLevel:3, sunNeed:90, sunMin:60},
-];
+ ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -6808,6 +6956,7 @@ const PLANTS_ON_HOLD=[
    resilience:"Cold-hardy but somewhat less persistent than its hardiness rating suggests. Often relatively short-lived in cultivation and performs best where summers remain cool and the soil stays moist without becoming waterlogged in winter. It may self-seed where conditions suit it.",
    uses:"Excellent for damp woodland borders, shady herbaceous borders, pond and stream margins, moist rock gardens and mass planting.",
    size:"0.4-0.6m H × 0.2-0.3m W",
+   toxicity:"No known hazard to humans is reported by Kew.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:16, careLevel:10, sunNeed:45, sunMin:25},
 
   {common:"Stag's Horn Sumach", latin:"Rhus typhina", hue:15,
@@ -6833,6 +6982,7 @@ const PLANTS_ON_HOLD=[
    resilience:"extremely tough · suckers freely · sap may irritate skin",
    uses:"autumn colour · large borders · banks · wildlife planting",
    size:"4-8m H × 4-8m+ W",
+   toxicity:"Sap may irritate sensitive skin. Wear gloves when pruning or handling cut stems.",
    seasonalImpact:"", growthSpeed:17, pestRisk:4, thirst:8, careLevel:12, sunNeed:95, sunMin:75},
 
   {common:"Rodgersia 'Bronze Peacock'", latin:"Rodgersia 'Bronze Peacock'", hue:20,
@@ -6883,6 +7033,7 @@ const PLANTS_ON_HOLD=[
    resilience:"⚠ Schedule 9 — must not be planted or grown in the wild",
    uses:"contained acid borders · woodland gardens · spring fragrance",
    size:"2.5-4m H × 2.5-4m W",
+   toxicity:"All parts are poisonous if eaten and are potentially dangerous to people, pets and livestock.",
    seasonalImpact:"", growthSpeed:12, pestRisk:9, thirst:13, careLevel:11, sunNeed:65, sunMin:35},
 
   {common:"Chusan Palm", latin:"Trachycarpus fortunei", hue:110,
@@ -6933,6 +7084,7 @@ const PLANTS_ON_HOLD=[
    resilience:"fast in warmth · top growth frost-tender · not edible",
    uses:"exotic borders · gravel gardens · large containers",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   toxicity:"Do not eat. Melianthus contains potentially toxic compounds and should be treated as an ornamental plant rather than an edible one.",
    seasonalImpact:"", growthSpeed:13, pestRisk:5, thirst:12, careLevel:11, sunNeed:95, sunMin:75},
 
   {common:"Silver Spear", latin:"Astelia chathamica", hue:170,
@@ -7033,6 +7185,7 @@ const PLANTS_ON_HOLD=[
    resilience:"hardy in acid ground · lacebug and chlorosis are the risks · harmful if eaten",
    uses:"ericaceous borders · woodland gardens · containers",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   toxicity:"All parts are harmful if eaten and potentially toxic to people and animals.",
    seasonalImpact:"", growthSpeed:6, pestRisk:11, thirst:12, careLevel:10, sunNeed:55, sunMin:35},
 
   {common:"Skimmia 'Rubella'", latin:"Skimmia japonica 'Rubella'", hue:350,
@@ -7058,6 +7211,7 @@ const PLANTS_ON_HOLD=[
    resilience:"reliable in shade and containers · male clone, so no berries",
    uses:"winter containers · shaded borders · entrance planting",
    size:"1-1.5m H × 1-1.5m W",
+   toxicity:"Ornamental plant; do not eat any plant material.",
    seasonalImpact:"", growthSpeed:5, pestRisk:7, thirst:13, careLevel:7, sunNeed:35, sunMin:15},
 
   {common:"Black Elder 'Black Lace'", latin:"Sambucus nigra f. porphyrophylla 'Eva'", hue:300,
@@ -7083,6 +7237,7 @@ const PLANTS_ON_HOLD=[
    resilience:"fast and adaptable · leaves, stems and unripe fruit are harmful",
    uses:"dark foliage contrast · mixed borders · wildlife planting",
    size:"2.5-4m H × 2.5-4m W",
+   toxicity:"Leaves, stems and unripe fruit contain potentially harmful cyanogenic compounds. Flowers and properly prepared ripe berries are the traditionally used edible parts.",
    seasonalImpact:"", growthSpeed:18, pestRisk:5, thirst:10, careLevel:7, sunNeed:80, sunMin:40},
 
   {common:"Dwarf Lilac 'Palibin'", latin:"Syringa meyeri 'Palibin'", hue:285,
@@ -7133,6 +7288,7 @@ const PLANTS_ON_HOLD=[
    resilience:"long-lived if left alone · all parts harmful, berries worst",
    uses:"winter scent · entrances and paths · sheltered borders",
    size:"1.5-2.5m H × 1-1.5m W",
+   toxicity:"All parts are harmful if eaten, with the berries particularly dangerous. Sap may also irritate skin.",
    seasonalImpact:"", growthSpeed:5, pestRisk:5, thirst:11, careLevel:10, sunNeed:65, sunMin:35},
 
   {common:"Christmas Box", latin:"Sarcococca confusa", hue:105,
@@ -7158,6 +7314,7 @@ const PLANTS_ON_HOLD=[
    resilience:"outstanding in dry shade · very low maintenance · berries not edible",
    uses:"dry shade · winter fragrance · shaded containers · doorways",
    size:"1-1.5m H × 1-1.5m W",
+   toxicity:"Berries are ornamental and should not be treated as edible.",
    seasonalImpact:"", growthSpeed:6, pestRisk:4, thirst:8, careLevel:4, sunNeed:25, sunMin:5},
 
   {common:"Flowering Quince 'Crimson and Gold'", latin:"Chaenomeles × superba 'Crimson and Gold'", hue:355,
@@ -7183,6 +7340,7 @@ const PLANTS_ON_HOLD=[
    resilience:"extremely tough · takes pruning · fruit cooks for preserves",
    uses:"wall training · hedging · thorny boundaries · preserves",
    size:"1-1.5m H × 1.5-2.5m W",
+   toxicity:"The hard aromatic fruit is commonly cooked for preserves; avoid eating the seeds.",
    seasonalImpact:"", growthSpeed:11, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:35},
 
   {common:"Beauty Bush 'Pink Cloud'", latin:"Kolkwitzia amabilis 'Pink Cloud'", hue:335,
@@ -7283,6 +7441,7 @@ const PLANTS_ON_HOLD=[
    resilience:"hardy and long-lived but slow · all parts highly poisonous",
    uses:"ericaceous borders · woodland gardens · containers",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   toxicity:"All parts are highly poisonous if eaten and can be dangerous to people, pets and livestock.",
    seasonalImpact:"", growthSpeed:4, pestRisk:6, thirst:14, careLevel:10, sunNeed:50, sunMin:25},
 
   {common:"Witch Alder", latin:"Fothergilla major", hue:20,
@@ -7433,6 +7592,7 @@ const PLANTS_ON_HOLD=[
    resilience:"dependable · the usual apple scab, canker and aphid risks apply",
    uses:"small trees · blossom · winter fruit · apple pollination",
    size:"4-8m H × 4-8m W",
+   toxicity:"Crab apples can be cooked for jelly and preserves. As with other apples, avoid eating substantial quantities of crushed seeds.",
    seasonalImpact:"", growthSpeed:10, pestRisk:11, thirst:10, careLevel:7, sunNeed:90, sunMin:70},
 
   {common:"Golden Rain Tree", latin:"Koelreuteria paniculata", hue:50,
@@ -7508,6 +7668,7 @@ const PLANTS_ON_HOLD=[
    resilience:"vigorous and long-lived · seeds and pods are poisonous",
    uses:"pergolas · arches · large walls · trained climbers",
    size:"4-8m+ H × 1.5-4m+ W",
+   toxicity:"All parts are harmful if eaten, with the seeds and pods particularly poisonous.",
    seasonalImpact:"", growthSpeed:16, pestRisk:8, thirst:12, careLevel:14, sunNeed:95, sunMin:65},
 
   {common:"Persian Ivy 'Sulphur Heart'", latin:"Hedera colchica 'Sulphur Heart'", hue:70,
@@ -7533,6 +7694,7 @@ const PLANTS_ON_HOLD=[
    resilience:"robust, shade and drought tolerant · harmful if eaten · sap irritates",
    uses:"wall cover · shade · screening · wildlife and late nectar",
    size:"4-8m+ H × 2.5-4m+ W",
+   toxicity:"Harmful if eaten and sap may cause skin irritation or allergic dermatitis. Also potentially harmful to pets.",
    seasonalImpact:"", growthSpeed:16, pestRisk:9, thirst:8, careLevel:8, sunNeed:45, sunMin:15},
 
   {common:"Chocolate Vine", latin:"Akebia quinata", hue:330,
@@ -7558,6 +7720,7 @@ const PLANTS_ON_HOLD=[
    resilience:"fast, vigorous and adaptable · ripe fruit pulp is edible",
    uses:"pergolas · fences · scented climbers · unusual fruit",
    size:"8-12m H × 8m+ W",
+   toxicity:"The soft pulp of fully ripe fruit is edible, though the plant is primarily ornamental and the seeds are not normally eaten.",
    seasonalImpact:"", growthSpeed:17, pestRisk:5, thirst:10, careLevel:9, sunNeed:70, sunMin:35},
 
   {common:"Late Dutch Honeysuckle", latin:"Lonicera periclymenum 'Serotina'", hue:330,
@@ -7583,6 +7746,7 @@ const PLANTS_ON_HOLD=[
    resilience:"strong and hardy · mildew and aphids when dry · berries harmful",
    uses:"wildlife gardens · pergolas · fences · evening scent",
    size:"4-8m H × 1-1.5m W",
+   toxicity:"Berries are harmful if eaten.",
    seasonalImpact:"", growthSpeed:14, pestRisk:10, thirst:11, careLevel:8, sunNeed:65, sunMin:30},
 
   {common:"Cranesbill 'Rozanne'", latin:"Geranium Rozanne ('Gerwat')", hue:245,
@@ -7633,6 +7797,7 @@ const PLANTS_ON_HOLD=[
    resilience:"immensely floriferous but short-lived · take cuttings to replace it",
    uses:"pollinators · gravel gardens · sunny borders · containers",
    size:"0.5-1m H × 0.5-1m W",
+   toxicity:"Potentially harmful if eaten; grow as an ornamental rather than an edible plant.",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:6, careLevel:7, sunNeed:100, sunMin:85},
 
   {common:"Catmint 'Walker's Low'", latin:"Nepeta racemosa 'Walker’s Low'", hue:255,
@@ -7683,6 +7848,7 @@ const PLANTS_ON_HOLD=[
    resilience:"long-lived, hardy and shade tolerant · all parts harmful · sap irritates",
    uses:"winter containers · shaded borders · woodland edge",
    size:"0.5-1m H × 0.5-1m W",
+   toxicity:"All parts are harmful if eaten and sap may irritate skin; wear gloves when cutting foliage.",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:12, careLevel:6, sunNeed:50, sunMin:20},
 
   {common:"Japanese Forest Grass 'Aureola'", latin:"Hakonechloa macra 'Aureola'", hue:65,
@@ -8585,7 +8751,6 @@ const PLANTS_ON_HOLD=[
    size:"1.5-2.5m H × 0.5-1m W",
    seasonalImpact:"", growthSpeed:14, pestRisk:15, thirst:15, careLevel:14, sunNeed:90, sunMin:60},
 
-
   {common:"Fede Chinese Fringe Flower", latin:"Loropetalum chinense var. rubrum 'Fede'", hue:345,
    visual:"Deep purple evergreen foliage · bright-pink tasselled spring flowers · rounded habit",
    water:"Moderate; water during summer dry spells",
@@ -8635,11 +8800,6 @@ const PLANTS_ON_HOLD=[
    uses:"ground cover · edging · containers · foliage contrast",
    size:"15–20 cm H × 30–50 cm W",
    seasonalImpact:"", growthSpeed:7, pestRisk:5, thirst:9, careLevel:4, sunNeed:62, sunMin:40},
-
-
-
-
-
  ];
 /* HOLD:END */
 
@@ -8909,6 +9069,75 @@ const dots=(...v)=>v.filter(has).join(' · ');
 
 /* the trade sheet is rendered in two places — the card back and the search detail —
    so it is built once here rather than kept in sync by hand */
+/* ---------- the toxicity plaque ----------
+   The back was a data sheet in system type while the front is Georgia small-caps
+   on parchment, so a safety note dropped into the grid would have read as one more
+   cell of trade data. It is not trade data: it is the line somebody repeats to a
+   customer who is buying a plant for a kitchen windowsill. So it gets a plaque of
+   its own, in the FRONT's language — aged paper, ink, a hazard rule — sitting above
+   the buyer figures because it outranks them.
+
+   TIER IS A RENDERING DECISION, NOT A CLAIM. The prose is always printed verbatim;
+   the tier only chooses ink colour and glyph, the same way careLabel() turns 11 into
+   "Moderate" without changing the number. Nothing is inferred about a plant that
+   does not say it about itself, and the strongest word in the text wins so a card
+   reading "Harmful if eaten · skin and eye irritant" cannot be softened to "irritant"
+   by word order.
+
+   A BLANK PRINTS NOTHING. Blank means not researched, which is not the same as safe,
+   and a card that says "no toxicity recorded" in a shop is read as "safe to eat". */
+/* Tiering rules, written against the 44 researched notes actually in the deck and
+   checked one by one — not against a guess at what the field might say. The field
+   turned out to be mixed: most entries are hazards, but several are EDIBILITY notes
+   ("Ripe berries are edible"), and one is a sourced all-clear from Kew. Printing
+   "Ripe berries are edible" under a red hazard rule would be worse than printing
+   nothing, so the ladder handles all three and the cautious reading always wins:
+     - a sourced all-clear reads as an all-clear
+     - anything with a hazard word is a hazard, even when the same sentence
+       mentions edible parts (Sambucus: cyanogenic leaves, edible flowers)
+     - "not to be treated as edible" is a hazard, not an edibility note, which is
+       why the negations are tested BEFORE the word "edible" is looked for
+     - an unrecognised note falls to "handle with care", never to "toxic" */
+const TOX_LADDER=[
+  ['clear'  ,/\bno (?:known )?hazard/i],
+  ['severe' ,/highly (?:toxic|poison)|particularly (?:dangerous|poisonous)|potentially dangerous|fatal|deadly/i],
+  ['harmful',/toxic|poison|harmful|cyanogenic/i],
+  ['harmful',/not (?:be )?(?:treated as |considered )?edible|should not be eaten|not to be eaten|do not eat/i],
+  ['edible' ,/\bedible\b|cooked for|for preserves/i],
+  ['caution',/irritant|irritat|sap\b|allerg|spine|sharp|glove|hairs/i],
+];
+function toxTier(t){for(const[k,re]of TOX_LADDER)if(re.test(t))return k;return'caution';}
+const TOX_GLYPH={
+  /* drawn, not fetched: the back stays printable offline like the rest of the card */
+  hazard :'<path d="M12 2 1.5 20.5h21L12 2Zm0 6.2 5.9 10.3H6.1L12 8.2Z"/><path d="M11.1 10.6h1.8v4.1h-1.8zm0 5.1h1.8v1.8h-1.8z"/>',
+  ring   :'<path d="M12 2.6a9.4 9.4 0 1 0 0 18.8 9.4 9.4 0 0 0 0-18.8Zm0 1.8a7.6 7.6 0 1 1 0 15.2 7.6 7.6 0 0 1 0-15.2Z"/><path d="M11.1 7.2h1.8v5.6h-1.8zm0 6.9h1.8v1.8h-1.8z"/>',
+  leaf   :'<path d="M20 3.4c-7.8-.9-13.6 1.7-15.6 6.6-1.3 3.2-.5 6.6 1.7 8.6l-2 2.6 1.4 1.1 2-2.6c2.6 1.3 5.9.7 8.2-1.6C19.4 15 20.8 9.6 20 3.4ZM7.6 17.2c-1.4-1.5-1.8-3.8-.9-6 1.4-3.4 5.4-5.5 11.1-5.4-4.2 1.4-7.7 4.2-10.2 8.2Z"/>',
+  tick   :'<path d="M12 2.6a9.4 9.4 0 1 0 0 18.8 9.4 9.4 0 0 0 0-18.8Zm0 1.8a7.6 7.6 0 1 1 0 15.2 7.6 7.6 0 0 1 0-15.2Z"/><path d="m10.9 14.3-2.3-2.3-1.3 1.3 3.6 3.6 6.1-6.1-1.3-1.3-4.8 4.8Z"/>',
+};
+/* pill wording, glyph and ink per tier. The heading above them is always SAFETY —
+   the plaque is a safety plaque, and the pill is what it actually concluded. */
+const TOX_TIER={
+  severe :{word:'Highly toxic'   ,glyph:'hazard'},
+  harmful:{word:'Toxic'          ,glyph:'hazard'},
+  caution:{word:'Handle with care',glyph:'ring'},
+  edible :{word:'Edible parts'   ,glyph:'leaf'},
+  clear  :{word:'No known hazard',glyph:'tick'},
+};
+function toxPlaque(p){
+  const t=String(p.toxicity||'').trim();
+  if(!t)return'';                                   /* not recorded is not "safe" — say nothing */
+  const k=toxTier(t),tier=TOX_TIER[k];
+  return `<div class="tox ${k}">
+    <div class="tox-rule" aria-hidden="true"></div>
+    <div class="tox-body">
+      <svg class="tox-glyph" viewBox="0 0 24 24" aria-hidden="true">${TOX_GLYPH[tier.glyph]}</svg>
+      <div class="tox-text">
+        <div class="tox-head"><span class="tox-l">Safety</span><span class="tox-tier">${tier.word}</span></div>
+        <div class="tox-n">${t}</div>
+      </div>
+    </div>
+  </div>`;
+}
 function tradeBlocks(p){
   const price=cellIf('cell','Trade',p.trade)+cellIf('cell','Retail',p.retail)+cellIf('cell m','Margin',p.margin);
   const grid=cellIf('g','Source',p.source)+cellIf('g','Peak',p.peak,monthDots(p.peak))
@@ -8918,7 +9147,8 @@ function tradeBlocks(p){
     +cellIf('g','Size',p.size)+cellIf('g full','Cultivars',p.cvs)
     +cellIf('g','Resilience',p.resilience)+cellIf('g','Uses',p.uses);
   const buyer=[p.trade,p.retail,p.margin,p.source,p.order,p.bench,p.root,p.type,p.shrink,p.returnRisk,p.pots];
-  return (price?`<div class="price">${price}</div>`:'')
+  return toxPlaque(p)
+    +(price?`<div class="price">${price}</div>`:'')
     +(buyer.some(has)?'':'<div class="nodata">Buyer data not entered for this plant yet</div>')
     +(grid?`<div class="grid">${grid}</div>`:'');
 }

@@ -378,6 +378,42 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.30 (the SAFETY plaque — `toxicity` finally has somewhere to go)**: item
+  0c is closed for toxicity. `toxicity` is now a card field, a CSV column and a
+  rendered block on the trade back, and **44 researched notes that had been
+  sitting unreadable in `data/incoming/` are on their cards.**
+  - **The plaque is written in the FRONT's language, not the back's.** Aged
+    paper, ink, Georgia small-caps, a painted hazard rule along the top. It sits
+    ABOVE the buyer figures, because a safety line outranks a margin. This is
+    also the first piece of the "make the back cool" work — the back is still a
+    plain data sheet everywhere else, and now has one thing on it that looks
+    like the card it belongs to.
+  - **The field turned out not to be only hazards, and that changed the design.**
+    Reading all 44 notes before writing the tiering: most are hazards, six are
+    EDIBILITY notes (*"Ripe berries are edible and are also readily taken by
+    birds"*), and one is a sourced all-clear from Kew. Printing "ripe berries are
+    edible" under a red hazard rule would be worse than printing nothing, so the
+    ladder carries five tiers — **Highly toxic / Toxic / Handle with care /
+    Edible parts / No known hazard** — with their own inks and glyphs.
+  - **Every rule was checked against the real corpus, one note at a time.** The
+    ordering matters and was found by doing it: *"should not be treated as
+    edible"* (Sarcococca) must be read as a hazard, so the negations are tested
+    BEFORE the word "edible" is looked for; and a hazard word anywhere beats an
+    edible mention in the same sentence, so Sambucus — cyanogenic leaves, edible
+    flowers — lands on Toxic. Final split: 5 severe, 29 harmful, 3 caution,
+    6 edible, 1 clear. An unrecognised note falls to *Handle with care*, never to
+    *Toxic*.
+  - **TIER IS A RENDERING DECISION, NOT A CLAIM.** The researched prose is always
+    printed verbatim underneath; the tier only picks ink and glyph, exactly as
+    `careLabel()` turns 11 into "Moderate" without altering the number.
+  - **A blank prints nothing at all.** Blank means not researched, which is not
+    the same as safe. A card that said "no toxicity recorded" would be read in a
+    shop as "safe to eat", so the plaque simply does not appear.
+  - Still open: **`compliance`** — the LEGAL half — has the same problem and the
+    same rail is now there for it (Gunnera's ban, the Olive's Xylella note, six
+    PBR cards). One block away, and Oscar's call whether it looks like this
+    plaque or reads differently.
+
 - **v14.29 (224 dealt / 81 held — the first two houseplants of this run)**:
   *Monstera deliciosa* and *Aloe vera*, both new, both indoor (H1b).
   - **`hardiness` was supplied as `H1B` and the schema refused it.** The rating

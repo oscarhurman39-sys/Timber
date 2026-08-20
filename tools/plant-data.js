@@ -29,7 +29,14 @@ const FIELDS = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', '
   // sunMin is the lower end of the sun band drawn on the aspect dial. It lives on
   // cards but was missing from this list until the 2026-08-09 audit; an import
   // before that date would have erased it from every card that had one.
-  'sunMin'];
+  'sunMin',
+  // SAFETY. Free prose, exactly as researched — "Harmful if eaten · skin and eye
+  // irritant". Rendered as its own plaque on the trade back; the card never
+  // paraphrases it and never infers it. Blank means NOT RECORDED, which is not
+  // the same as "safe", so a blank prints nothing rather than a reassurance.
+  // Added 2026-08-20 after 15 cards had carried researched toxicity text with
+  // nowhere on the card to put it (VERIFY-QUEUE item 0c).
+  'toxicity'];
 /* Nothing speculative belongs in this list. It is exactly the set of fields that
    exist on cards today, which is what makes the "unknown field" guard meaningful:
    a key not listed here is a mistake worth stopping for, not a column nobody
