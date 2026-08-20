@@ -1731,6 +1731,42 @@ flat-topped `[Inference]`. Peak Jun–Sep.
 ---
 
 
+### 52. The Rubber plant card was written by CLAUDE, not by the research pipeline
+2026-08-20. Oscar asked for a *Ficus elastica* card and to push it with no
+photograph, so it is **held**, like the other 81 cards waiting on a picture.
+One thing about it is different from every other card in the deck and needs to
+stay visible.
+
+**Its data did not come from the research pipeline.** Every other card in 306 was
+written from Oscar's researched JSON, checked against RHS/Kew, with an
+`uncertain` block from that research. This one I wrote from general horticultural
+knowledge because that is what was asked for. It is **not wrong as far as I know,
+and it is also not checked.**
+
+What that means in practice, all recorded in the card's own incoming JSON:
+- **Height and spread are INDOOR container figures** (2–3 m × 1–1.5 m). RHS
+  quotes a far larger ultimate size for the species; a rubber plant in a pot in a
+  British sitting room does not do that, and the card is for the pot.
+- **No cultivar is named.** Almost every rubber plant in UK retail is a named
+  selection — 'Robusta', 'Tineke', 'Abidjan', 'Melany' — and which one this card
+  stands for is simply not recorded. `cvs` is left blank rather than guessed.
+- **The 0–20 ratings are my editorial judgement, not Oscar's.** `pestRisk 8`
+  reflects scale insect being the usual trouble on this plant.
+- **`resilience` is deliberately blank.** Rubber plants are often sold as
+  low-light tolerant; I am not confident enough in that to print it as a claim.
+- The toxicity line — *"Milky sap is harmful if eaten and may irritate skin and
+  eyes"* — is the latex sap, and it is the first card to reach the new SAFETY
+  plaque without coming through the research files.
+
+**Recommended:** run it through the normal research pass when convenient and
+overwrite this card wholesale. Nothing here is load-bearing.
+
+**Fourth houseplant in the deck** — with *Phalaenopsis*, *Monstera* and *Aloe
+vera* — and the third H1b.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

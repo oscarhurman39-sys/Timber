@@ -5,6 +5,18 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-20 (Rubber plant, held) — **deck 224, hold 82.** *Ficus
+  elastica*, added with no photograph at Oscar's request, so it sits in the hold
+  block with the other 81 awaiting pictures. **Its data is mine, not the research
+  pipeline's** — written from general horticultural knowledge because that is
+  what was asked for, unchecked against RHS or Kew, with the differences recorded
+  on the card itself: indoor container sizes not species ultimates, no cultivar
+  named (blank rather than guessed), ratings my editorial call, `resilience` left
+  blank rather than print a low-light claim I am not sure of. VQ 52 says to
+  overwrite it wholesale when it goes through a normal research pass. Its
+  toxicity line is the latex sap, so it is the first card to reach the new SAFETY
+  plaque without coming through the research files. Fourth houseplant in the
+  deck. Gate 17/17 sequential.
 progress: 2026-08-20 (the SAFETY plaque) — **item 0c closed for toxicity.**
   `toxicity` is a card field, a CSV column and a rendered plaque on the trade
   back, and the **44 researched notes that had been unreadable in
