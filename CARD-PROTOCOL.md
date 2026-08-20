@@ -373,7 +373,35 @@ Focal point recorded here when off-centre:
 | Lithodora diffusa 'Heavenly Blue' | lithodora-diffusa-heavenly-blue.jpg | 50% 40% default — an August plant in its pot on gravel: dense bristly narrow leaves, the lax habit legible, the grey pot rim cropped off the bottom. **No flowers, and the flush showing is bright mid-green where the card's text says dark-green** — both true of the plant in August, both recorded in VQ 50. Wants an April–July reshoot for the gentian-blue the card leads on |
 | Rhodanthemum hosmariense 'Zagora Yellow' | rhodanthemum-hosmariense-zagora-yellow.jpg | 50% 40% default — **the supplied file was a COLLAGE**, an inset flower panel pasted over the top-right of a foliage frame, and a card cannot show a picture-in-picture. Cropped to the foliage frame only, inset excluded. First crop put the soft upper corner in the visible band and was redone lower, onto the sharp divided rosette — the card band is fixed to the master's own 12–62%, so the sharp region has to be placed there by the CROP, not by a focus override. **The inset flower is cream-white, not the yellow the card names: VQ 49.** |
 
+| Monstera deliciosa | monstera-deliciosa.jpg | 50% 40% default — one mature fenestrated leaf across the whole card band, splits and oval holes both legible, the second leaf and the aerial-rooted stem behind it. The best photograph in this batch and one of the plainest reads in the deck: nothing else in 224 cards looks like it |
+| Aloe vera | aloe-vera.jpg | 50% 40% default — **shot into the window**, so the blades read olive-and-dark rather than the "fleshy grey-green" the card names, and the pot fills the lower half of the frame. **Three crops.** The first two put sky and pot in the card band and it read as grass behind glass; the third pulls in to the blades, where the white spotting and the toothed margins are both legible, and drops the pot below the plaque. That is as far as cropping takes this frame — a front-lit shot would be a straight upgrade. VQ 51 |
+
 ## 5. Decision changelog
+
+- **v14.29 (224 dealt / 81 held — the first two houseplants of this run)**:
+  *Monstera deliciosa* and *Aloe vera*, both new, both indoor (H1b).
+  - **`hardiness` was supplied as `H1B` and the schema refused it.** The rating
+    is written `H1a`/`H1b`/`H1c` in the RHS scale, so the capital was normalised
+    to `H1b` — same rating, same meaning, no data changed. Worth knowing that
+    `check-plant-json` catches the casing rather than silently accepting a value
+    the card renderer would then print inconsistently against every other H1b.
+  - **Toxicity again, and this time it is the sharpest case yet.** Both cards
+    carry populated `toxicity` — Monstera *"Harmful if eaten · skin and eye
+    irritant"*, Aloe *"Harmful if eaten"* — and neither has anywhere to render.
+    These are **houseplants**: handled indoors, pruned over a kitchen worktop,
+    within reach of children and cats in a way a border shrub is not. The deck
+    now has 15+ cards carrying safety text that no surface shows. **Item 0c is
+    no longer a schema tidiness question.**
+  - The Aloe took three crops and is still the weakest photograph of the batch —
+    backlit, pot-heavy. Recorded in VQ 51 along with two identity notes: the
+    unconfirmed *"Aloe massawana hybrid"* wording Oscar's own research correctly
+    discarded, and the fact that heavy leaf spotting fits juvenile *A. vera* but
+    fits several other spotted aloes just as well.
+  - Both files: EXIF orientation 6 — landscape in a preview, portrait in the
+    app — Galaxy S24, no C2PA manifest, no AI marker. **Second batch running
+    where the preview orientation and the file orientation disagree**; reading
+    the displayed frame before writing crop coordinates is now routine, not a
+    catch.
 
 - **v14.28 (222 dealt / 81 held — Lithodora and Rhodanthemum)**: two new cards,
   neither genus previously in the deck. Both photographs are August foliage; both

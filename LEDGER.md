@@ -5,6 +5,18 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-18 (Monstera + Aloe) — **deck 224, hold 81.** The run's first
+  houseplants, both H1b. Monstera is the best photograph of the day — one mature
+  fenestrated leaf straight across the card band, unmistakable. The Aloe is the
+  weakest: shot into the window, pot filling half the frame; three crops before
+  the spotted toothed blades read properly, and a front-lit reshoot is still
+  worth two minutes (VQ 51, with the identity notes — the unconfirmed "Aloe
+  massawana hybrid" label wording Oscar's own research correctly dropped, and
+  that heavy spotting fits juvenile A. vera but fits other spotted aloes too).
+  `hardiness` came in as "H1B" and the schema refused it — normalised to the RHS
+  spelling H1b, same rating. **Both cards carry toxicity text with nowhere to
+  render it**, and on houseplants handled indoors that is the sharpest form of
+  item 0c yet. Protocol v14.29. Gate 17/17 sequential.
 progress: 2026-08-18 (Lithodora + Rhodanthemum) — **deck 222, hold 81.** Two new
   genera, both dealt on August foliage, both cards written for a flower.
   **Rhodanthemum 'Zagora Yellow' is the one that needs Oscar**: the supplied file

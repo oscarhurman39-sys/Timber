@@ -231,6 +231,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "aloe-vera.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. EXIF Samsung Galaxy S24, orientation 6 (displays portrait); no C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "alstroemeria-indian-summer-tesronto.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1749,6 +1759,16 @@
    "sourceUrl": null,
    "commit": "bdb3eb4",
    "commitSubject": "Add Bubblegum Blast Bee Balm; fix soil-value overflow + tighten checker threshold",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "monstera-deliciosa.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. EXIF Samsung Galaxy S24, orientation 6 (displays portrait); no C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

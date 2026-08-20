@@ -1698,6 +1698,39 @@ gentian-blue the card leads on into the picture.
 ---
 
 
+### 51. The Aloe: a label phrase dropped, spots that do not prove the species, and a backlit frame
+2026-08-18. Dealt as supplied. Three things recorded so they are not rediscovered.
+
+**1. Oscar's own research dropped part of the label, and was right to.** His
+`uncertain` block says the supplied wording was *"Aloe vera var. chinensis (Aloe
+massawana hybrid)"* and that **no authoritative source confirms any *A.
+massawana* parentage**, so it was left out of the botanical identity. Kew treats
+*A. vera* var. *chinensis*, *A. chinensis* and *A. barbadensis* var. *chinensis*
+all as synonyms of plain *Aloe vera*, which is what the card carries. The
+synonyms print in `cvs`; the unconfirmed hybrid claim does not appear anywhere.
+
+**2. The photograph does not confirm the species, and does not contradict it.**
+The plant has narrow blades with **strong white spotting and toothed margins**.
+Juvenile *Aloe vera* is spotted and loses the spots with age, so this fits — but
+so do several spotted aloes in the houseplant trade (*A. maculata* and its
+hybrids among them) `[Inference]`. Nothing here is wrong; it is simply not
+evidence. The name rests on Oscar's label, as it does for most of the deck.
+
+**3. It is shot into the window.** Backlit, so the blades read olive-and-dark
+rather than the *"fleshy grey-green"* the card names, and the pot fills the lower
+half. Three crops were tried; the third puts the spotted, toothed blades across
+the card band and the pot below it, which is as far as cropping can take this
+frame. **A front-lit shot — light behind the photographer, rosette from slightly
+above — would be a straight upgrade** and is worth two minutes on any sunny day,
+since this one lives on a windowsill.
+
+**If it ever matters which aloe it is:** a flower spike settles it. *A. vera*
+throws a tall yellow raceme; the spotted *maculata* group is orange-red and
+flat-topped `[Inference]`. Peak Jun–Sep.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
