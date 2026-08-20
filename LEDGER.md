@@ -5,6 +5,22 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-20 (Zorro + blood grass) — **deck 226, hold 82.** First two
+  cards to land after the SAFETY plaque, and between them they show what is built
+  and what is not: *Zorro*'s toxicity line is on the card, its `compliance` line
+  ("PBR protected · commercial propagation restricted") still has nowhere to go —
+  seven cards now carry a legal note the app cannot show. VQ 53; the rail is
+  built, one block would carry it, and it is the obvious next brick.
+  **Zorro also found a real bug in plant-sense**: it read "Avoid dry soil" as a
+  drought-tolerance claim and flagged the card as contradicting itself. The
+  pattern was matching inside a negation. Fixed by stripping negated phrases
+  first — and three other moisture-lovers turned out to carry the same latent
+  mis-signal, saved only by sitting below the thirst threshold. Third negation
+  bug in two days; same lesson each time. Both photographs are Galaxy S21
+  ARCHIVE shots (May 2024, July 2024) where the rest of this run is August 2026
+  on the S24 — which is the whole reason the hydrangea is in bud not flower, so
+  the register now says so (VQ 54). The blood grass is the best photograph of the
+  day. Protocol v14.31. Gate 17/17 sequential.
 progress: 2026-08-20 (Rubber plant, held) — **deck 224, hold 82.** *Ficus
   elastica*, added with no photograph at Oscar's request, so it sits in the hold
   block with the other 81 awaiting pictures. **Its data is mine, not the research

@@ -376,7 +376,37 @@ Focal point recorded here when off-centre:
 | Monstera deliciosa | monstera-deliciosa.jpg | 50% 40% default — one mature fenestrated leaf across the whole card band, splits and oval holes both legible, the second leaf and the aerial-rooted stem behind it. The best photograph in this batch and one of the plainest reads in the deck: nothing else in 224 cards looks like it |
 | Aloe vera | aloe-vera.jpg | 50% 40% default — **shot into the window**, so the blades read olive-and-dark rather than the "fleshy grey-green" the card names, and the pot fills the lower half of the frame. **Three crops.** The first two put sky and pot in the card band and it read as grass behind glass; the third pulls in to the blades, where the white spotting and the toothed margins are both legible, and drops the pot below the plaque. That is as far as cropping takes this frame — a front-lit shot would be a straight upgrade. VQ 51 |
 
+| Hydrangea macrophylla 'Zorro' | hydrangea-macrophylla-zorro.jpg | 50% 40% default — a plant in tight green bud, not the ultramarine lacecap the card leads on, and **the EXIF says why**: shot 22 May 2024, before the Jun–Sep peak. What it does carry is the cultivar's signature, the **deep purple-black stems**, which is what separates 'Zorro' from every other lacecap. A black nursery label along the bottom-left was cropped out, verified by the tool. **Ninth Hydrangea**, second *macrophylla* lacecap — check against FRENCH CANCAN BLEU before reusing either. VQ 53 |
+| Imperata cylindrica 'Rubra' | imperata-cylindrica-rubra.jpg | 50% 40% default — **the best photograph of the day**: backlit crimson-over-green blades filling the frame, which is the entire reason anyone buys this grass. Frame arrived already at 0.75 and inside the gate; the crop only trims the bottom fifth of pots, compost and a white plastic label. Archive shot, 19 July 2024. **Sixth grass in the deck, and one letter from *Pennisetum* 'Rubrum'** — VQ 54 |
+
 ## 5. Decision changelog
+
+- **v14.31 (226 dealt / 82 held — Zorro and the blood grass)**: two new cards,
+  the first to arrive after the SAFETY plaque shipped, and between them they show
+  both halves of what is now built and what is not.
+  - ***Zorro*** carries **both** a toxicity line and a `compliance` line. The
+    toxicity is on the card, on the new plaque. The compliance — *"PBR protected ·
+    commercial propagation restricted"* — **still has nowhere to go**, and that is
+    now seven cards with a legal note the app cannot show. VQ 53; the rail is
+    built and one block would carry it.
+  - **A real bug in `plant-sense`, found by the Zorro card.** It flagged
+    *"prose says drought tolerant but thirst is 14/20"* on a hydrangea whose card
+    says *"Avoid dry soil · Keep evenly moist"* — the dry-side pattern was matching
+    the words "dry soil" **inside a negation**. Fixed by stripping negated phrases
+    before the test rather than widening the pattern. It turns out **three other
+    moisture-loving cards** carried the same latent mis-signal (*H. paniculata*
+    'Wim's Red', *Sorbaria* 'Sem', *Hosta* 'Emerald Charger') and only escaped the
+    flag by sitting below thirst 14. This is the **third negation bug in two days**
+    — after "should not be treated as edible" in the toxicity ladder — and the
+    lesson is the same one both times: **test the negation before the keyword.**
+  - **The photo register now records which shots are current-season.** Both of
+    these are Galaxy S21 archive frames — Hydrangea 22 May 2024, Imperata 19 July
+    2024 — where every other photo this run is an August 2026 S24 capture. That is
+    not a fault, and it is the whole explanation for the Hydrangea being in bud
+    rather than in flower, so it belongs in the register rather than being
+    rediscovered later. VQ 54.
+  - The Imperata is one letter from *Pennisetum* **'Rubrum'**, already dealt.
+    Different genus, both red grasses, six grasses in the deck now.
 
 - **v14.30 (the SAFETY plaque — `toxicity` finally has somewhere to go)**: item
   0c is closed for toxicity. `toxicity` is now a card field, a CSV column and a

@@ -1767,6 +1767,57 @@ vera* — and the third H1b.
 ---
 
 
+### 53. 'Zorro' is PBR protected and the card cannot say so — the LEGAL half of item 0c
+2026-08-20. The SAFETY plaque shipped this morning, so *Zorro*'s toxicity line
+(*"Skin allergen · harmful if eaten by dogs and cats"*) is on the card. Its
+**`compliance` line is not, because compliance still has nowhere to render**:
+
+> `"compliance": "PBR protected · commercial propagation restricted"`
+
+That is now **seven** cards carrying a legal note the app cannot show — Gunnera's
+UK ban, the Olive's Xylella note, the Eryngium PBR and the other PBR cultivars,
+and this one. The rail built for the SAFETY plaque would carry it with one more
+block; whether it should look like that plaque or read differently is Oscar's
+call, and it is the obvious next brick on the back of the card.
+
+**Also on this card, and mild:** the photograph is a plant in tight green bud,
+while the card leads on *"Ultramarine-blue lacecaps"*. The reason is in the EXIF
+and is not a fault — **the shot is dated 22 May 2024**, before the Jun–Sep peak.
+What the photograph does carry is the cultivar's own signature: the **deep
+purple-black stems**, which are visible and are what separates 'Zorro' from every
+other lacecap. A June–September shot of the same plant would put the blue in.
+
+**Ninth Hydrangea in the deck** and the second *macrophylla* lacecap after
+RENDEZ-VOUS FRENCH CANCAN BLEU — worth a glance before either photo is reused.
+The pink double lacecap still parked as `hydrangea-lacecap-unidentified.jpg` is
+**not** this plant; it stays parked.
+
+---
+
+### 54. Two archive photographs, and a name one letter from a different plant
+2026-08-20. Recorded because both are easy to misread later.
+
+**Both of today's photographs are archive shots from a different phone.** EXIF
+says Samsung Galaxy S21 (SM-G991B): the Hydrangea 22 May 2024, the Imperata
+19 July 2024. Every other photograph in this run is a Galaxy S24 capture from
+August 2026. Nothing is wrong with either file — no C2PA manifest, no AI marker,
+Oscar's own pictures — but the register now says which are current-season and
+which are not, because "why are the hydrangea flowers not out" has a clean answer
+and it should not have to be rediscovered.
+
+**The Imperata is one letter from another card.** The deck already holds
+*Pennisetum* **'Rubrum'**; this is *Imperata cylindrica* **'Rubra'**. Different
+genus, different plant, near-identical epithet, and both are red-leaved grasses
+in a deck that now has six grasses. Any future photo swap between them would look
+plausible and be wrong.
+
+Oscar's research also corrected the supplied *"Imparata"* to **Imperata** before
+it reached me, and RHS accepts 'Rubra' with 'Red Baron' as the synonym — which is
+how the card is written, common name on the trade name, latin on the accepted one.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

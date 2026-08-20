@@ -83,7 +83,14 @@ for (const c of cards) {
   const sun = num(c.sunNeed), sunMin = num(c.sunMin), speed = num(c.growthSpeed);
 
   /* 1. water prose vs thirst rating (0-20; 20 = thirstiest) */
-  const dry = /\b(drought[- ]tolerant|drought resistant|low once established|once established[,.]? *(?:low|drought)|water sparingly|dry soil|xeric|low water)\b/.test(t);
+  /* NEGATION FIRST. "Avoid dry soil" is an instruction to keep a plant WET, and the
+     dry-side pattern below matches "dry soil" inside it — which flagged Hydrangea
+     'Zorro' (thirst 14, soilWarning "Avoid dry soil") as claiming to be drought
+     tolerant when the card says the exact opposite. Found 2026-08-20. Strip the
+     negated phrases before testing rather than widening the pattern, so a card that
+     warns AGAINST drought is never read as boasting of it. */
+  const td = t.replace(/\b(?:avoid|avoids|never|not|dislikes|hates|intolerant of|will not tolerate|protect from)\s+(?:\w+\s+){0,2}?(?:dry soil|drought|dryness|drying out)/g, ' ');
+  const dry = /\b(drought[- ]tolerant|drought resistant|low once established|once established[,.]? *(?:low|drought)|water sparingly|dry soil|xeric|low water)\b/.test(td);
   /* "water freely" is deliberately NOT here: it is a growing-season instruction
      ("water freely in growth; sparingly in winter") and sits perfectly happily on
      a drought-tolerant Mediterranean container plant. Including it flagged
