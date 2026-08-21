@@ -1891,7 +1891,7 @@ can show the flower without ambiguity.
 ---
 
 
-### 58. Which Vitex is which? — both cards HELD, both photos parked
+### 58. Which Vitex is which? — RESOLVED by Oscar; the leaves were right
 2026-08-21. Three cards, three photographs, and for two of them **the order they
 arrived in and the leaves in them disagree.** Rather than guess, both Vitex cards
 are written and held, and both photographs are parked under descriptive names.
@@ -1924,9 +1924,24 @@ would be invisible on the card and wrong on both.
 both photographs sit in `photos/` claimed by nothing, which `data-audit` reports
 as unclaimed rather than missing.
 
-**One line from Oscar closes it:** *"the narrow-leaved one is X"*. He was standing
-in front of both plants ninety seconds apart. If the answer is that the order was
-right and the leaves are misleading me, say so and they get dealt as sent.
+**RESOLVED 2026-08-21.** Oscar: *"correct"* — the leaf reading stands, and the
+send order was the misleading half. **Both dealt on that basis:**
+
+| card | photograph |
+|---|---|
+| *Vitex agnus-castus* 'Piivac-I' — **Delta Blues** | the NARROW-leaflet plant |
+| *Vitex* × 'Bailtexone' — **Flip Side** | the BROAD-leaflet plant |
+
+Both masters restaged at 1200x1600 from the originals rather than the 900x1200
+`deal-plant.js` produces, since the parked files already had the rotation baked
+in and nothing needed cropping. The two parked filenames are retired and their
+CREDITS entries removed; the assignment and the reason for it are recorded on
+each photo's licence line, so the next person to touch these two does not have to
+re-derive it.
+
+**Kept for the record, because it is the useful part:** the send order and the
+leaves disagreed, and the leaves won. A card's own `cvs` line — *"hybrid of Vitex
+trifolia 'Purpurea' × V. agnus-castus"* — was the evidence that settled it.
 
 ---
 

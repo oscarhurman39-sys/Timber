@@ -45,6 +45,19 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-21 (Vitex pair settled) — **deck 231, hold 82.** Oscar: one
+  word, "correct" — the leaves were right and the send order was the misleading
+  half. Narrow leaflets = **'Delta Blues'** (*agnus-castus*), broad leaflets =
+  **'Flip Side'** (the *trifolia* hybrid), which is the OPPOSITE of the order
+  they arrived in. The evidence was already on his own card: 'Flip Side's `cvs`
+  line says it is a *V. trifolia* 'Purpurea' hybrid, and *trifolia* is that broad
+  purple-backed leaf. Nothing external was needed. Masters restaged at 1200×1600
+  rather than the 900×1200 `deal-plant.js` writes — it caps the LONG edge where
+  `add-plant.js` caps the width, so a portrait dealt through it loses a quarter
+  of its width for nothing. Parked filenames retired, credits entries removed,
+  the assignment recorded on each licence line. VQ 58 closed. Protocol v14.36.
+  Gate 17/17 sequential (a first run died at exit 137 — a stale :8477 server left
+  by a screenshot step, not the change).
 progress: 2026-08-21 (three arrived, one dealt) — **deck 229, hold 84.**
   *Cephalanthus* 'Fiber Optics' dealt; **both Vitex cards HELD and both their
   photographs parked**, because the order they arrived in and the leaves in them

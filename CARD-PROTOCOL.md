@@ -385,7 +385,32 @@ Focal point recorded here when off-centre:
 
 | Cephalanthus occidentalis 'Bailoptics' | cephalanthus-occidentalis-bailoptics.jpg | 50% 40% default — large glossy opposite leaves with impressed veins on red stems, filling the frame. Already 0.75 with no label and no dead space, so it went through at `verdict: as-is` and nothing was cropped (protocol v14.34, second card running under the new rule). **The one card of three whose photograph was never in doubt** — the only non-*Vitex* plant of the batch, and both possible orderings put this picture with this card. VQ 58 |
 
+| Vitex agnus-castus 'Piivac-I' (Delta Blues) | vitex-agnus-castus-piivac-i.jpg | 50% 40% default — the NARROW-leaflet plant: 5–7 slim leaflets radiating from one point, the *agnus-castus* leaf. Assigned on the LEAVES after the send order and the foliage disagreed; Oscar confirmed (VQ 58). Uncropped, rotation baked in, master 1200x1600 |
+| Vitex × 'Bailtexone' (Flip Side) | vitex-bailtexone.jpg | 50% 40% default — the BROAD-leaflet plant: wider leaflets in threes on purple-flushed petioles, the *V. trifolia* leaf this hybrid is bred for. Same resolution as its sibling above and the same reason. **These two cards are otherwise near-identical** — same genus, same First Editions series, both blue, same aspect, soil and pruning — so check the LEAF, not the file order, before ever swapping either photo |
+
 ## 5. Decision changelog
+
+- **v14.36 (231 dealt / 82 held — the Vitex pair, settled by the leaves)**:
+  Oscar confirmed the reading in one word. The narrow-leaflet plant is
+  **'Delta Blues'**, the broad-leaflet plant is **'Flip Side'** — the opposite of
+  the order they arrived in.
+  - **The evidence that settled it was already on the card.** 'Flip Side's own
+    `cvs` line reads *"hybrid of Vitex trifolia 'Purpurea' × V. agnus-castus"*,
+    and *trifolia* is exactly the broad, purple-backed leaf in the second
+    photograph. Nothing external was needed; the research Oscar had already done
+    contained the answer, and reading it beat trusting the send order.
+  - **Masters restaged at 1200×1600, not the 900×1200 `deal-plant.js` writes.**
+    That tool caps the LONG edge at 1200 while `add-plant.js` caps the WIDTH — a
+    portrait photo dealt through the former loses a quarter of its width for no
+    reason. Worth remembering whenever a held card is dealt from an already-
+    prepared master: deal it, then restage the master from the original.
+  - Parked filenames retired and their CREDITS entries removed. The assignment
+    and the reason for it now live on each photo's licence line, so the next
+    person to touch these two does not re-derive it.
+  - **A stale static server on :8477 killed a gate run mid-flight** (exit 137
+    after app-test). It was left behind by a screenshot step whose `kill` did not
+    take. If a gate dies for no visible reason, check the port before suspecting
+    the change.
 
 - **v14.35 (229 dealt / 84 held — one dealt, two held on a mapping question)**:
   three cards and three photographs arrived together, and for two of them the
