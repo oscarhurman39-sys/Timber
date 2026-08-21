@@ -1818,6 +1818,51 @@ how the card is written, common name on the trade name, latin on the accepted on
 ---
 
 
+### 55. 'Rosy Jane' breaks the deck's own trade-name convention — a one-line fix, Oscar's call
+2026-08-21. Dealt as supplied. The card is right about the plant; it is written
+differently from the card sitting next to it.
+
+**The deck already holds the other one.** *Oenothera lindheimeri* **GAUDI ROSE
+('Florgaucomro')**, dealt, and its `latin` follows the deck's convention for a
+trade-named cultivar: **TRADE NAME in caps, breeder denomination in quotes.**
+
+This card arrived as `Oenothera lindheimeri 'Rosy Jane'` — the trade name in the
+denomination's slot — with the breeder code pushed into `cvs` instead. Oscar's own
+research block says why that is awkward: *"RHS now places the cultivar under
+Oenothera lindheimeri **'Harrosy'** and lists 'Rosy Jane' and 'Rosyjane' as
+synonyms"*. On the deck's convention it would read:
+
+> `Oenothera lindheimeri ROSY JANE ('Harrosy')`
+
+**Not changed here**, because renaming a plant is not mine to do and both forms
+name the same cultivar. It is a one-line edit whenever Oscar wants the two Gauras
+to match, and it would also change the photo's slug, so it is worth doing
+deliberately rather than in passing.
+
+**Confusion risk between the two is LOW despite the shared species**: GAUDI ROSE
+is a 30 cm plant with deep rose-pink flowers over dark burgundy-flushed leaves;
+'Rosy Jane' is 50–100 cm with white flowers edged vivid pink over green foliage.
+They do not look alike, and the photographs do not either.
+
+---
+
+### 56. Eighth card carrying a legal note the app cannot show
+2026-08-21. `"compliance": "PBR protected · commercial propagation restricted"`
+on 'Rosy Jane', and its own research block records the denomination 'Harrosy' as
+the PBR-protected name.
+
+That is **eight** cards now — Gunnera's UK ban, the Olive's Xylella note, the
+Eryngium, the PBR cultivars, Hydrangea 'Zorro' yesterday, and this one. The
+SAFETY plaque built on 2026-08-20 proved the rail works and this is the second
+card since to arrive wanting the legal half of it.
+
+Nothing new to decide beyond what item 0c and VQ 53 already say: the block is
+built, `compliance` needs the same treatment `toxicity` got, and whether it wears
+the same plaque or reads differently is Oscar's call.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

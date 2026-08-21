@@ -1873,6 +1873,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "oenothera-lindheimeri-rosy-jane.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Supplied as a two-frame side-by-side COMPOSITE (soft foliage macro left, flowers right, hard seam at x=0.630); reframed by tools/reframe-photo.js to the RIGHT frame only, clear of the seam, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-21 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "olea-europaea-cutout.png",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",

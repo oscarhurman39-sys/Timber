@@ -381,7 +381,30 @@ Focal point recorded here when off-centre:
 
 | Artemisia 'Powis Castle' | artemisia-powis-castle.jpg | 50% 40% default — **the first photograph this run that needed no crop at all.** The EXIF-rotated frame is already portrait 3000x4000 at exactly 0.75, and already composed: one silvery filigree shoot against sky sitting in the card's own band, the dense mound beneath it. Run through `reframe-photo.js` at `verdict: as-is` purely to bake the orientation into the pixels, so the master is the full 1200x1600 — the largest in the deck this week. Current-season capture, Galaxy S24, 21 Aug 2026 |
 
+| Oenothera lindheimeri 'Rosy Jane' | oenothera-lindheimeri-rosy-jane.jpg | 50% 40% default — **second side-by-side COMPOSITE this week**, seam measured at x=0.630 rather than eyeballed. Left frame is a soft foliage macro, right frame is sharp and carries the card's entire headline: white flowers edged vivid pink, dark-pink buds, long red stamens. Cropped to the right frame only, clear of the seam. **Master is 1098 px, under the 1200 standard**, because the flower frame is only 37% of the composite's width — no visible loss, since the card derivative is capped at 1000 px anyway, but the unmerged original would give a full-size master. **Second *Oenothera lindheimeri*** after GAUDI ROSE; they look nothing alike (30 cm rose-pink over burgundy vs 50–100 cm white picotee over green). VQ 55 |
+
 ## 5. Decision changelog
+
+- **v14.33 (228 dealt / 82 held — Gaura 'Rosy Jane')**: a second composite, a
+  naming inconsistency left for Oscar, and the eighth homeless compliance line.
+  - **The seam was measured, not guessed.** A column-to-column difference scan
+    put the join at x=0.630 with a clear spike above every other edge in the
+    frame, and the crop starts at 0.634 — clear of it. Worth doing that way every
+    time: a crop that clips a composite seam puts a hard vertical line down the
+    middle of a card and it is the kind of thing nobody notices until it ships.
+  - **The right frame was the whole card.** Left panel soft foliage, right panel
+    sharp flowers showing exactly what the `visual` promises. Taking the flowers
+    costs resolution — 1098 px master against a 1200 standard — and that is the
+    correct trade, because the card derivative is capped at 1000 px so nothing
+    visible is lost, while a soft foliage macro would have lost the plant.
+  - **It breaks the deck's own trade-name convention and was NOT corrected.** The
+    deck writes trade-named cultivars as `TRADE NAME ('code')` — the sibling card
+    is *Oenothera lindheimeri* **GAUDI ROSE ('Florgaucomro')**. This one arrived
+    as `'Rosy Jane'` with the code in `cvs`, where the convention would give
+    `ROSY JANE ('Harrosy')`. Renaming a plant is not mine to do; VQ 55 has the
+    one-line fix, including that it moves the photo slug.
+  - **Eighth card with a `compliance` line and nowhere to put it.** VQ 56. The
+    rail built for the SAFETY plaque is still waiting for its legal half.
 
 - **v14.32 (227 dealt / 82 held — Artemisia 'Powis Castle')**: the deck's first
   *Artemisia*, and the first photograph in this whole run that wanted **no crop**.

@@ -5,6 +5,18 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-21 (Gaura 'Rosy Jane') — **deck 228, hold 82.** Second
+  side-by-side composite of the week, and this time the seam was MEASURED — a
+  column-difference scan put it at x=0.630, the crop starts at 0.634. Right frame
+  only: it carries the card's whole headline (white flowers edged vivid pink,
+  dark-pink buds, long red stamens) where the left was a soft foliage macro.
+  Master is 1098 px against the 1200 standard because the flower frame is 37% of
+  the composite's width — the right trade, since the card derivative caps at
+  1000 px anyway. **Two things left for Oscar**: the card breaks the deck's own
+  trade-name convention (the sibling reads GAUDI ROSE ('Florgaucomro'), this one
+  should read ROSY JANE ('Harrosy')) — not corrected, VQ 55, one line and a slug
+  change; and it is the **eighth** card carrying a compliance line with nowhere
+  to render, VQ 56. Protocol v14.33. Gate 17/17 sequential.
 progress: 2026-08-21 (Powis Castle) — **deck 227, hold 82.** The deck's first
   *Artemisia*, and the first photograph of the run that needed **no crop**: the
   EXIF-rotated frame was already 0.75 with the silvery shoot sitting in the card
