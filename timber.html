@@ -1025,7 +1025,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r167 · 2026-08-21 · 94d69f8';
+const BUILD='r168 · 2026-08-21 · c164375';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -8952,6 +8952,7 @@ const STORE_KEY='timber-progress-v1';
 const FINGERPRINT=PLANTS.map(p=>p.latin).join('|');  /* deck layout invalidates if the plant list changes */
 function saveProgress(){
   if(reviewMode||activeFilter)return;  /* review/filter are ephemeral views — never persist over the full deck */
+  if(DECK_CAP)return;                  /* ?cards=N is a diagnostic deck — it must not overwrite the real one */
   try{
     const stack=liveStack();           /* pending-aware: a save mid staged deal must not drop the buried cards */
     localStorage.setItem(STORE_KEY,JSON.stringify({fp:FINGERPRINT,stack,history,learnedCount}));
@@ -9037,6 +9038,25 @@ function liveStack(){
 
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
 
+/* ?cards=N — deal only the newest N plants instead of the whole deck.
+   This is a DIAGNOSTIC, not a feature, and it exists because two different iPhones
+   hit Safari's "A problem repeatedly occurred" on the full deck while the developer's
+   own phone opens it fine. That message is a repeated tab kill, and the two things
+   that cause it — a main thread that never yields, and memory — cannot be told apart
+   from the outside. The full deck costs ~326MB of renderer memory with 168 cards,
+   31k nodes and 6.3k <img> elements (measured); a 16-card deal costs ~100MB less.
+   No iOS browser engine exists in the dev environment, so the only way to learn which
+   ceiling a real phone is hitting is to hand that phone a smaller deck and see.
+   If ?cards=24 opens on a phone the full deck kills, the cause is size, and windowing
+   the deck permanently is worth what it costs (it reverses an invariant the test suite
+   asserts in a dozen places, so it should not be done on a hunch).
+   Deliberately NOT persisted and NOT in the menu: a saved 168-card stack would restore
+   straight over the cap, so a capped boot ignores saved progress and never writes any. */
+const DECK_CAP=(()=>{
+  const m=/[?&#]cards=(\d+)/.exec(location.search+location.hash);
+  if(!m)return 0;
+  return Math.max(1,Math.min(+m[1],PLANTS.length));
+})();
 function buildDeck(){
   stopGoto();                                    /* a reset overrules an auto-run to a card */
   if(reviewMode){reviewMode=false;reviewBackup=null;}  /* a reset always lands on the full deck */
@@ -9045,8 +9065,10 @@ function buildDeck(){
   /* newest addition deals first — PLANTS appends chronologically, so reversing
      puts fresh cards on top instead of burying them behind the whole back-catalogue */
   order=PLANTS.map((_,i)=>i).reverse();history=[];learnedCount=0;
+  if(DECK_CAP)order=order.slice(0,DECK_CAP);     /* newest N; the top card is unchanged */
   dealCards([...order].reverse());
-  markHot();updateCounts();refreshEmpty();saveProgress();
+  markHot();updateCounts();refreshEmpty();
+  if(!DECK_CAP)saveProgress();                   /* a capped run never overwrites the real deck's progress */
 }
 
 /* ---------- spaced repetition (Leitner boxes) — an overlay on the deck, keyed by latin name
@@ -10751,19 +10773,38 @@ window.addEventListener('resize',updateCardScale);
 window.addEventListener('orientationchange',updateCardScale);
 updateCardScale();
 
-const savedProgress=loadProgress();
+const savedProgress=DECK_CAP?null:loadProgress();   /* a capped diagnostic boot always deals fresh */
 if(savedProgress)restoreDeck(savedProgress);else buildDeck();
 updateQuizStats();
 updateReviewMenu();
 document.getElementById('buildTag').textContent='build '+BUILD;
-/* trickle the remaining photos in after the opening swipes are clear, so offline
-   still ends up with the whole deck cached — without the load-time stampede */
+/* Trickle the rest of the deck's photographs into the offline cache after the opening
+   swipes are clear.
+
+   This used to warm the cache by setting src on each buried card's <img>, which got
+   the bytes but also handed the browser 168 LIVE DECODE TARGETS: 1000x1333 each, so
+   881MB of bitmap if a browser chooses to keep them (measured — that figure is the
+   deck's own pixels, not a guess). Chromium happens to discard decodes for images it
+   never paints, so a desktop profile shows a flat ~326MB and hides this completely;
+   WebKit is not obliged to make the same choice, and iOS is where the app died.
+   fetch() puts the identical bytes in the identical Cache Storage entry — the service
+   worker caches any ok same-origin GET, whoever asked for it — while decoding nothing
+   and holding nothing. Offline still ends up with the whole deck; the buried cards
+   keep their data-psrc and decode only if they ever reach the top. */
 function tricklePhotos(){
-  const pending=[...deck.querySelectorAll('.card .tphoto img')].filter(i=>!i.getAttribute('src')&&i.dataset.psrc);
-  if(!pending.length&&!dealPending)return;     /* mid staged deal, undealt cards' imgs don't exist yet — keep ticking */
-  pending.slice(0,2).forEach(i=>i.src=i.dataset.psrc);
+  const pend=[...deck.querySelectorAll('.card .tphoto img')].filter(i=>!i.getAttribute('src')&&i.dataset.psrc)
+    .map(i=>i.dataset.psrc);
+  /* undealt cards have no <img> yet, so ask the deal backlog for its photos too */
+  const backlog=(dealPending||[]).map(idx=>photoSrc(slugLatin(PLANTS[idx].latin)));
+  const want=[...new Set([...pend,...backlog])].filter(u=>!trickled.has(u));
+  if(!want.length)return;                      /* every photo is in the cache — stop the timer for good */
+  want.slice(0,2).forEach(u=>{
+    trickled.add(u);
+    fetch(u,{cache:'force-cache'}).catch(()=>trickled.delete(u));   /* a failed warm may retry later */
+  });
   setTimeout(tricklePhotos,900);
 }
+const trickled=new Set();
 setTimeout(tricklePhotos,9000);
 </script>
 </body>
