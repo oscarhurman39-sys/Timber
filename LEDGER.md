@@ -5,6 +5,18 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-21 (three arrived, one dealt) — **deck 229, hold 84.**
+  *Cephalanthus* 'Fiber Optics' dealt; **both Vitex cards HELD and both their
+  photographs parked**, because the order they arrived in and the leaves in them
+  disagree. By order the narrow-leaflet shot is 'Flip Side'; by the leaves it is
+  'Delta Blues' — 'Flip Side' is the *V. trifolia* × *agnus-castus* hybrid (his
+  own `cvs` line says so) and is sold for broad purple-backed foliage, while
+  'Delta Blues' is straight *agnus-castus* with narrow palmate leaflets. The two
+  cards are otherwise near-identical, so a swap would be invisible on the card
+  and wrong on both. One line from Oscar closes it: VQ 58. Also worth knowing:
+  EXIF shows the upload order was NOT the capture order (16:17:26 narrow,
+  16:17:33 broad, 16:19:05 buttonbush), so "he sent them in this order" is a
+  weaker signal than it looks. Protocol v14.35. Gate 17/17 sequential.
 progress: 2026-08-21 (crop less — Oscar's correction) — the Gaura composite is
   **restaged WHOLE**. I had cropped it to the flower frame; Oscar reversed it:
   "don't change the image so much... this shows off both parts of the plant which

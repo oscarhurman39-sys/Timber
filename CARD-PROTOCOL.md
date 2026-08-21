@@ -383,7 +383,31 @@ Focal point recorded here when off-centre:
 
 | Oenothera lindheimeri 'Rosy Jane' | oenothera-lindheimeri-rosy-jane.jpg | 50% 40% default — **kept WHOLE as a two-frame composite, on Oscar's call.** Foliage left, flowers right, seam at x=0.630. It was first cropped to the flower frame alone; Oscar's correction: *"this shows off both parts of the plant which is helpful for ident"* — and he is right, a garden-centre card is an identification aid before it is a photograph. Restaged at `verdict: as-is`, master back up to the full 1200x1600. **Second *Oenothera lindheimeri*** after GAUDI ROSE; they look nothing alike (30 cm rose-pink over burgundy vs 50–100 cm white picotee over green). VQ 55 |
 
+| Cephalanthus occidentalis 'Bailoptics' | cephalanthus-occidentalis-bailoptics.jpg | 50% 40% default — large glossy opposite leaves with impressed veins on red stems, filling the frame. Already 0.75 with no label and no dead space, so it went through at `verdict: as-is` and nothing was cropped (protocol v14.34, second card running under the new rule). **The one card of three whose photograph was never in doubt** — the only non-*Vitex* plant of the batch, and both possible orderings put this picture with this card. VQ 58 |
+
 ## 5. Decision changelog
+
+- **v14.35 (229 dealt / 84 held — one dealt, two held on a mapping question)**:
+  three cards and three photographs arrived together, and for two of them the
+  order they came in and the leaves inside them disagree.
+  - ***Cephalanthus* 'Fiber Optics' dealt.** Its photograph is unmistakable and
+    both readings agree on it.
+  - **Both *Vitex* cards HELD, both photographs parked.** By arrival order the
+    narrow-leaflet photo is 'Flip Side'; by the leaves it is 'Delta Blues'.
+    **'Flip Side' is a *V. trifolia* 'Purpurea' × *V. agnus-castus* hybrid** —
+    Oscar's own `cvs` line says so — sold for broad, purple-backed foliage, while
+    'Delta Blues' is a straight *V. agnus-castus* with narrow palmate leaflets
+    `[Inference]`. The two cards are otherwise near-identical: same genus, same
+    First Editions series, both blue, same aspect, soil and pruning. **A swap
+    would be invisible on the card and wrong on both**, which is exactly the
+    condition for parking rather than guessing. VQ 58.
+  - **EXIF settled the arrival order and did NOT settle the question.** Capture
+    times are 16:17:26 (narrow), 16:17:33 (broad), 16:19:05 (buttonbush) — so the
+    upload order was not the capture order, which is worth knowing when reasoning
+    from "he sent them in this order" ever feels safe. It tells us which was shot
+    first; it cannot tell us which card either belongs to.
+  - Parked names describe the LEAF, not a guess at the plant:
+    `vitex-unidentified-narrow-leaflets.jpg`, `vitex-unidentified-broad-leaflets.jpg`.
 
 - **v14.34 (crop less — a standing correction from Oscar)**: the Gaura composite
   was cropped to its flower frame and Oscar reversed it: *"don't change the image

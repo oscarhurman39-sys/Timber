@@ -1891,6 +1891,46 @@ can show the flower without ambiguity.
 ---
 
 
+### 58. Which Vitex is which? — both cards HELD, both photos parked
+2026-08-21. Three cards, three photographs, and for two of them **the order they
+arrived in and the leaves in them disagree.** Rather than guess, both Vitex cards
+are written and held, and both photographs are parked under descriptive names.
+
+**The buttonbush was never in doubt** — it is the only non-*Vitex* plant of the
+three, its photograph is unmistakably *Cephalanthus* (large glossy opposite ovate
+leaves, impressed veins, red stems), and both readings put it with the same card.
+**Dealt.**
+
+**The two Vitex are the problem.**
+
+| photograph | what the leaves say | EXIF |
+|---|---|---|
+| `vitex-unidentified-narrow-leaflets.jpg` | 5–7 **narrow** lanceolate leaflets radiating from one point — the classic *V. agnus-castus* leaf | 16:17:26 |
+| `vitex-unidentified-broad-leaflets.jpg` | **broader** leaflets in threes on purple-flushed petioles — the *V. trifolia* leaf | 16:17:33 |
+
+- **By the order they were sent**, the narrow one is 'Flip Side' and the broad one
+  is 'Delta Blues'.
+- **By the leaves**, it is the other way round `[Inference]`. **'Flip Side' is a
+  hybrid of *V. trifolia* 'Purpurea' × *V. agnus-castus*** — Oscar's own `cvs`
+  line says so — and it is sold for exactly that broader, purple-backed foliage.
+  **'Delta Blues' is a straight *V. agnus-castus* cultivar**, so narrow palmate
+  leaflets.
+
+Those two cards are otherwise near-identical — same genus, same First Editions
+series, both blue-flowered, same aspect, same soil, same pruning — so a swap here
+would be invisible on the card and wrong on both.
+
+**Neither is guessed.** Both cards are in the hold block with their full data;
+both photographs sit in `photos/` claimed by nothing, which `data-audit` reports
+as unclaimed rather than missing.
+
+**One line from Oscar closes it:** *"the narrow-leaved one is X"*. He was standing
+in front of both plants ninety seconds apart. If the answer is that the order was
+right and the leaves are misleading me, say so and they get dealt as sent.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

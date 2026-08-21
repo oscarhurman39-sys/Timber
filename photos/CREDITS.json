@@ -502,6 +502,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cephalanthus-occidentalis-bailoptics.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, 2026-08-21 16:19 (current season); orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "ceratostigma-willmottianum-sapphire-ring-lissbrill.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2620,6 +2630,26 @@
    "sourceUrl": null,
    "commit": "3c88449",
    "commitSubject": "Add Laurustinus 'Eve Price' — deck reaches 30 plants",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "vitex-unidentified-broad-leaflets.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. PARKED, not claimed by any card: broader leaflets in threes on purple-flushed petioles, the Vitex trifolia leaf type. Which of the two Vitex cards it belongs to is unresolved (VERIFY-QUEUE 58). EXIF Samsung Galaxy S24, 2026-08-21 16:17:33; rotation baked in, no crop. No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "vitex-unidentified-narrow-leaflets.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. PARKED, not claimed by any card: narrow palmate leaflets, the Vitex agnus-castus leaf type. Which of the two Vitex cards it belongs to is unresolved (VERIFY-QUEUE 58). EXIF Samsung Galaxy S24, 2026-08-21 16:17:26; rotation baked in, no crop. No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

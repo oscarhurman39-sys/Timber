@@ -1,0 +1,33 @@
+{
+  "common": "Button bush 'Fiber Optics'",
+  "latin": "Cephalanthus occidentalis 'Bailoptics'",
+  "hue": 0,
+  "visual": "Creamy-white spherical flowers · glossy green leaves · coppery autumn colour",
+  "water": "Keep evenly moist; tolerates flooding",
+  "aspect": "East / South / West",
+  "soil": "Moist to wet",
+  "soilWarning": "Avoid prolonged dry soil",
+  "prune": "Cut back hard in early spring if required",
+  "toxicity": "",
+  "compliance": "PBR protected · commercial propagation restricted",
+  "peak": "Jul-Sep",
+  "cvs": "trade name Fiber Optics; First Editions Series; cultivar code 'Bailoptics'",
+  "hardiness": "H5",
+  "hardinessNote": "USDA zone 4; UK hardiness is inferred from cold tolerance",
+  "resilience": "wet-soil tolerant · flood tolerant · pollinator friendly",
+  "uses": "pond margins · rain gardens · wet borders · wildlife gardens",
+  "height": "1.5–2 m",
+  "spread": "1.5–2 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 10,
+  "pestRisk": 3,
+  "thirst": 15,
+  "careLevel": 5,
+  "sunNeed": 82,
+  "sunMin": 48,
+  "uncertain": [
+    "The supplied text was interpreted as First Editions Fiber Optics; RHS treats Fiber Optics as a trade name and 'Bailoptics' as the cultivar denomination",
+    "UK exact-cultivar hardiness is not given by RHS; H5 is an editorial conversion from the cultivar's USDA zone 4 rating"
+  ]
+}
