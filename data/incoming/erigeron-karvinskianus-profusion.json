@@ -1,0 +1,33 @@
+{
+  "common": "Mexican fleabane 'Profusion'",
+  "latin": "Erigeron karvinskianus 'Profusion'",
+  "hue": 345,
+  "visual": "White daisies ageing pink-purple · yellow centres · wiry spreading stems",
+  "water": "Low once established",
+  "aspect": "East / South / West",
+  "soil": "Poor, well-drained",
+  "soilWarning": "Avoid winter wet",
+  "prune": "Cut back to new basal shoots in early spring",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Nov",
+  "cvs": "syn. Erigeron 'Profusion'; Erigeron karvinskianus 'Bluetenmeer'",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "drought tolerant · coastal tolerant · urban suitable",
+  "uses": "rock gardens · walls · edging · containers",
+  "height": "15–30 cm",
+  "spread": "50–100 cm",
+  "foliage": "semi-evergreen",
+  "container": "yes",
+  "growthSpeed": 12,
+  "pestRisk": 3,
+  "thirst": 4,
+  "careLevel": 3,
+  "sunNeed": 92,
+  "sunMin": 58,
+  "uncertain": [
+    "RHS gives a broad ultimate height of 10–50 cm and spread of 50–100 cm; its cultivar description specifies a mat around 15–30 cm tall",
+    "The RHS profile treats 'Profusion' as a synonym of Erigeron karvinskianus rather than a currently accepted cultivar name"
+  ]
+}

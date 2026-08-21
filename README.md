@@ -50,6 +50,8 @@ node tools/deal-plant.js "<latin>" photo.jpg   # a photo arrived -> deal that ca
 | `CARD-BACK.md` | Card-back spec + per-plant question checklist |
 | `CARD-PROTOCOL.md` | Layout authority + full decision changelog |
 | `VERIFY-QUEUE.md` | Card facts that need a horticultural call, and why |
+| `PHOTO-REFRAME-BRIEF.md` | Prompt for cropping/de-labelling a photo with a vision model — returns crop coordinates, never a generated image |
+| `tools/reframe-photo.js` | Applies that crop JSON to the master with sharp — validates it first, refuses rather than guesses, invents no pixels |
 | `tests/run-all.js` | One command for every check — run it green before pushing |
 
 ```sh
@@ -92,6 +94,24 @@ refusing a non-default branch. Neither cause was pinned down, so **do not build 
 theory of why**. The one thing established by evidence is the line above: fast-forwarding the
 live branch publishes. If you need the deploy re-run without a new commit, dispatch
 *Deploy to GitHub Pages* on the live branch from the Actions tab.
+
+**Never "re-run failed jobs" on this workflow — dispatch a fresh run instead.**
+Learned the hard way on 2026-08-17. Re-running the failed job uploads a SECOND
+artifact named `github-pages` into the same run, and `deploy-pages` then refuses
+outright: *"Multiple artifacts named github-pages were unexpectedly found for
+this workflow run. Artifact count is 2."* So a re-run cannot succeed after the
+upload step has already run — it turns one failure into a different, more
+confusing one. A fresh dispatch (or a new commit) is the only recovery.
+
+**And read WHICH STEP failed before touching anything.** A red deploy is not
+automatically a red build. The steps run in order: checkout → the five fast
+checks → configure-pages → upload artifact → **deploy-pages** → verify the
+served bytes. A failure at `deploy-pages` with a **503** and the text *"is
+githubstatus.com reporting a Pages outage?"* is GitHub being down, not this
+repo: on 2026-08-17 the fast checks passed and the artifact uploaded on all
+three attempts, and only the Pages deployment API was unavailable. In that case
+the branch is already updated and correct — wait for the outage to clear and
+dispatch again. Nothing needs fixing here.
 
 Once dispatched, the workflow runs the five data checks, deploys, and then **verifies the bytes
 actually served** match this commit's build stamp before going green — so a green run means live,

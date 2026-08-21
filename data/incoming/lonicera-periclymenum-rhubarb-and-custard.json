@@ -1,0 +1,33 @@
+{
+  "common": "Honeysuckle 'Rhubarb and Custard'",
+  "latin": "Lonicera periclymenum 'Rhubarb and Custard'",
+  "hue": 335,
+  "visual": "Deep-purple buds · fragrant pink flowers ageing custard-yellow · red berries",
+  "water": "Moderate; avoid prolonged dryness",
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Avoid very dry root conditions",
+  "prune": "Prune after flowering; shorten overlong shoots as needed",
+  "toxicity": "Fruit ornamental · not to be eaten",
+  "compliance": "",
+  "peak": "Jun-Sep",
+  "cvs": "",
+  "hardiness": "H6",
+  "hardinessNote": "",
+  "resilience": "shade tolerant · coastal tolerant · cold hardy",
+  "uses": "walls · trellis · containers · wildlife gardens",
+  "height": "1.5–2.5 m",
+  "spread": "1–1.5 m",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 15,
+  "pestRisk": 12,
+  "thirst": 11,
+  "careLevel": 6,
+  "sunNeed": 72,
+  "sunMin": 42,
+  "uncertain": [
+    "RHS currently lists the cultivar name status as unresolved",
+    "Retail sources sometimes style the name with a registered-trademark symbol, but no separate breeder denomination was confirmed"
+  ]
+}

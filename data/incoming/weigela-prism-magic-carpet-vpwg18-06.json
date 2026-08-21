@@ -1,0 +1,33 @@
+{
+  "common": "Weigela 'Prism Magic Carpet'",
+  "latin": "Weigela PRISM MAGIC CARPET ('VPWG18-06')",
+  "hue": 335,
+  "visual": "Pink bells · green-apricot foliage warming orange · compact rounded mound",
+  "water": "Moderate; water while establishing",
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Avoid waterlogging",
+  "prune": "Prune lightly after flowering if needed",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Jun",
+  "cvs": "Prism Series; trade name MAGIC CARPET; cultivar code 'VPWG18-06'",
+  "hardiness": "H6",
+  "hardinessNote": "",
+  "resilience": "cold hardy",
+  "uses": "containers · border edging · small gardens · pollinators",
+  "height": "50–60 cm",
+  "spread": "40–50 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 11,
+  "pestRisk": 8,
+  "thirst": 8,
+  "careLevel": 4,
+  "sunNeed": 82,
+  "sunMin": 50,
+  "uncertain": [
+    "Breeder material uses Weigela × hybrida, while RHS records the cultivar at genus level",
+    "RHS gives a broader 50–100 cm height band; breeder-linked trade data describes a compact plant around 50–60 cm"
+  ]
+}

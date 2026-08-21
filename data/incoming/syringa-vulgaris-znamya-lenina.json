@@ -1,0 +1,33 @@
+{
+  "common": "Lilac 'Znamya Lenina'",
+  "latin": "Syringa vulgaris 'Znamya Lenina'",
+  "hue": 315,
+  "visual": "Fragrant single red-purple flowers · dense upright panicles · heart-shaped leaves",
+  "water": "Moderate; water in dry spells",
+  "aspect": "Any aspect",
+  "soil": "Fertile, well-drained",
+  "soilWarning": "Neutral–alkaline preferred",
+  "prune": "Prune immediately after flowering if needed",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Jun",
+  "cvs": "Russian name Знамя Ленина; translated 'Banner of Lenin'",
+  "hardiness": "H7",
+  "hardinessNote": "Exact-cultivar Zone 5a hardiness supports H7; RHS species rating is H6",
+  "resilience": "very cold hardy · drought tolerant once established",
+  "uses": "specimen · flowering hedges · cut flowers · pollinators",
+  "height": "3–4 m",
+  "spread": "2–3 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 10,
+  "pestRisk": 12,
+  "thirst": 8,
+  "careLevel": 6,
+  "sunNeed": 90,
+  "sunMin": 62,
+  "uncertain": [
+    "Mature-size sources conflict: several specialist sources give about 3–4 m tall, while one UK nursery reports up to 7 m; 3–4 m was prioritised for normal garden planning",
+    "RHS accepts the exact cultivar name but does not publish a cultivar-specific hardiness rating; H7 is inferred from exact-cultivar cold-hardiness data"
+  ]
+}

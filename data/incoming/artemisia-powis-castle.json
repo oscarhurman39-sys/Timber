@@ -1,0 +1,33 @@
+{
+  "common": "Wormwood 'Powis Castle'",
+  "latin": "Artemisia 'Powis Castle'",
+  "hue": 0,
+  "visual": "Finely divided silvery-grey foliage · dense rounded habit · aromatic leaves",
+  "water": "Low once established",
+  "aspect": "East / South / West",
+  "soil": "Poor, well-drained",
+  "soilWarning": "Avoid winter wet",
+  "prune": "Cut back to lowest new shoots in mid to late spring",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jan-Dec",
+  "cvs": "syn. Artemisia arborescens 'Powis Castle'; Artemisia arborescens 'Brass Band'",
+  "hardiness": "H3",
+  "hardinessNote": "RHS H3; some UK growers rate established plants H4 in sheltered sites",
+  "resilience": "drought tolerant · exposed-site tolerant · heat tolerant",
+  "uses": "gravel gardens · borders · containers · foliage contrast",
+  "height": "50–60 cm",
+  "spread": "60–90 cm",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 9,
+  "pestRisk": 5,
+  "thirst": 3,
+  "careLevel": 4,
+  "sunNeed": 95,
+  "sunMin": 75,
+  "uncertain": [
+    "RHS accepts Artemisia 'Powis Castle' and lists Artemisia arborescens 'Brass Band' as a synonym; some horticultural sources retain A. arborescens in the name",
+    "RHS currently rates it H3, while RHS advice and UK nursery sources also report approximately 60 cm × 90 cm and H4; the current exact RHS profile was prioritised for hardiness"
+  ]
+}

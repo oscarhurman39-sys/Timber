@@ -1,0 +1,33 @@
+{
+  "common": "Pretty Lady Emily Japanese Anemone",
+  "latin": "Anemone × hybrida 'Pretty Lady Emily'",
+  "hue": 335,
+  "visual": "Large semi-double pale-pink flowers · yellow centres · compact leafy clump",
+  "water": "Keep evenly moist; water in dry spells",
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Avoid excessive winter wet",
+  "prune": "Cut old stems back after flowering",
+  "toxicity": "",
+  "compliance": "PBR protected · commercial propagation restricted",
+  "peak": "Jul-Oct",
+  "cvs": "Pretty Lady Series",
+  "hardiness": "H7",
+  "hardinessNote": "",
+  "resilience": "very cold hardy · coastal tolerant",
+  "uses": "borders · containers · pollinators",
+  "height": "50–60 cm",
+  "spread": "30–50 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 9,
+  "pestRisk": 10,
+  "thirst": 11,
+  "careLevel": 5,
+  "sunNeed": 65,
+  "sunMin": 35,
+  "uncertain": [
+    "RHS gives a structured height range of 0.5–1 m but describes the exact cultivar as about 60 cm tall",
+    "flowering is described as summer to late autumn; Jul-Oct is used as the principal UK display window"
+  ]
+}

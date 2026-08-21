@@ -105,8 +105,66 @@ const check = (name, ok, detail = '') => {
     }
     return { px: n, max, pct: +(100 * n / (da.length / 4)).toFixed(3) };
   }, [refShot, liveShot]);
-  check('hiding buried content changes no pixel (the deck halo is stacked shadows)',
-    diff.px === 0, `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max}`);
+  /* This asserted diff.px === 0 until 2026-08-16, when it went red at deck 173
+     and stayed red. It was NOT a defect, and the evidence is worth keeping so
+     nobody re-tightens it blind:
+
+       - Bisected, not assumed. The previous commit (deck 171) passed 14/14 on
+         the same port; the next one failed with identical numbers every run.
+       - The differing pixels were dumped with coordinates. Fifteen of the first
+         sixteen were a vertical run at x=764, y=1311-1325 — the outermost edge
+         of the deck halo — reading (0,0,0) against (1,1,1). One unit in 255.
+       - Unhiding the buried cards makes that edge DARKER, not lighter. Nothing
+         is peeking past the top card; it is more `.tcard` box-shadows stacking
+         across an 8-bit rounding boundary, which is the cause this check has
+         been named after since it was written.
+       - It scales with the pile: max delta was 3 at deck 173 and 5 at 194.
+
+     So the intent is unchanged — buried content must not become visible — but
+     it is now expressed as "nothing a screen could show" rather than "not one
+     bit". The real failure this must still catch is a buried card's CONTENT
+     appearing, which means card colours: deltas in the tens or hundreds across
+     a region of pixels, orders of magnitude past these bounds.
+
+     The bounds below were not guessed. A leak was staged and measured: one
+     buried card un-hidden and nudged 12px so part of it genuinely showed past
+     the top card came out at **46882 px, max delta 443** — against a residual of
+     17 px at max delta 5. Three orders of magnitude on both axes, so the budget
+     is nowhere near being able to swallow a real one. Re-run that measurement
+     (scratch script, same procedure as this block) before ever widening it.
+
+     The observed numbers are in the check's own name on every run, passing or
+     failing, so the drift stays visible instead of hiding under a threshold. If
+     px climbs into the hundreds, or max into the tens, that is a different
+     phenomenon and wants looking at rather than another loosening. */
+  /* RAISED 2026-08-18, second time, and the two reasons are separate — measured,
+     not assumed, by emptying the EDITION registry and re-running the same diff:
+
+       deck 217, no themed cards ....... 17 px, max delta 9
+       deck 217, with the two themed ... 98 px, max delta 13
+
+     1. THE BASELINE DRIFTED ON ITS OWN. Same 17 pixels as at deck 194, but the
+        max delta went 5 -> 9 purely because 23 more cards stack 23 more shadows
+        at that edge. That is the growth this comment predicted.
+     2. THE TWO THEMED CARDS ADD ~81 px. Their `backdrop-filter` samples what is
+        painted behind, so a themed card's pixels depend on whether buried cards
+        are hidden. Confined to cards that opt in; empty EDITION and it returns
+        to the 17 px baseline exactly.
+
+     A `filter:` on the card was a THIRD cause and was removed rather than
+     tolerated: drop-shadow rendered the whole card to its own buffer and moved
+     22510 px by up to 39. This check caught it before it shipped, which is the
+     entire argument for having kept the assertion tight.
+
+     The margin is re-measured, not inherited: a staged leak — one buried card
+     un-hidden and nudged 12px so it genuinely showed — diffs at 47173 px, max
+     delta 443 on this same deck. That is 480x the pixel budget below. */
+  const HALO_MAX_PX = 256;     /* 98 at deck 217 with two themed cards */
+  const HALO_MAX_DELTA = 24;   /* sum across r+g+b; 13 observed */
+  check(`hiding buried content shows nothing (${diff.px}px, max Δ${diff.max}; halo shadows round at the edge)`,
+    diff.px <= HALO_MAX_PX && diff.max <= HALO_MAX_DELTA,
+    `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max} ` +
+    `— budget ${HALO_MAX_PX}px / Δ${HALO_MAX_DELTA}`);
 
   /* ---- 4. a drag must not force layout ---- */
   /* settle the photo pipeline first: the background trickle loader (tricklePhotos)
@@ -201,10 +259,11 @@ const check = (name, ok, detail = '') => {
     for (let i = 1; i <= 30; i++) { fire('touchmove', 190 + i * 4, 420 - i); await sleep(8); }
     await sleep(60);                                   /* a finger rests before it lifts */
     const held = card.getBoundingClientRect().left;
-    const t0 = performance.now(); let movedAt = null;
+    const t0 = performance.now(); let movedAt = null, movedFrame = null, frames = 0;
     const tick = () => {
       const now = performance.now() - t0;
-      if (movedAt === null && card.getBoundingClientRect().left > held + 4) movedAt = now;
+      if (movedAt === null && card.getBoundingClientRect().left > held + 4) { movedAt = now; movedFrame = frames; }
+      frames++;
       if (now < 500) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -212,15 +271,26 @@ const check = (name, ok, detail = '') => {
     const handler = performance.now() - t0;
     await sleep(600);
     window.markHot = real;
-    return { calledSync, handler: +handler.toFixed(1),
-             movedAt: movedAt === null ? null : +movedAt.toFixed(1) };
+    return { calledSync, handler: +handler.toFixed(1), frames,
+             movedFrame, movedAt: movedAt === null ? null : +movedAt.toFixed(1) };
   });
   check('releasing a card does no layer or paint work on the frame the throw starts',
     release.calledSync === false, 'markHot() ran inside the touchend handler');
   check(`the touchend that commits a swipe returns promptly (${release.handler}ms)`,
     release.handler <= 16, `${release.handler}ms of script on the release`);
-  check(`the card is already moving two frames after the release (${release.movedAt}ms)`,
-    release.movedAt !== null && release.movedAt <= 50, `moved at ${release.movedAt}ms`);
+  /* COUNT FRAMES, NOT MILLISECONDS. This asks whether the throw starts immediately or
+     waits on main-thread work, and the sampler can only see movement when it gets a
+     frame — so a wall-clock budget measures the container's frame cadence as much as
+     the app. Traced 2026-08-18: the card had moved 60px by the sampler's second frame,
+     but that frame landed anywhere between 23ms and 63ms depending on machine load, and
+     the old 50ms cap failed 4 runs out of 4 on a deck size that had passed the same
+     check an hour earlier. Frame INDEX is what the check's own name always claimed to
+     measure and it is cadence-proof; the ms figure stays in the label as information,
+     with a loose absolute ceiling underneath it to catch a genuine stall. */
+  check(`the card is already moving two frames after the release ` +
+        `(frame ${release.movedFrame}, ${release.movedAt}ms)`,
+    release.movedFrame !== null && release.movedFrame <= 2 && release.movedAt <= 250,
+    `moved at frame ${release.movedFrame}, ${release.movedAt}ms (sampler saw ${release.frames} frames)`);
   const settled = await page.evaluate(() => {
     const cards = [...document.querySelectorAll('.deck .card')];
     const top = cards.filter(c => !c.dataset.gone).pop();

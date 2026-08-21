@@ -1,0 +1,33 @@
+{
+  "common": "Star of Love Masterwort",
+  "latin": "Astrantia major 'Star of Love'",
+  "hue": 350,
+  "visual": "Dark wine-red pincushion flowers · deep-red pointed bracts · leafy compact clump",
+  "water": "Keep evenly moist",
+  "aspect": "Any aspect",
+  "soil": "Humus-rich, moist",
+  "soilWarning": "Avoid prolonged drought",
+  "prune": "Cut faded flowers back to encourage fresh growth",
+  "toxicity": "",
+  "compliance": "PBR protected · commercial propagation restricted",
+  "peak": "Jun-Aug",
+  "cvs": "",
+  "hardiness": "H4",
+  "hardinessNote": "",
+  "resilience": "exposed-site tolerant · pollinator friendly",
+  "uses": "borders · cut flowers · wildlife gardens",
+  "height": "50–100 cm",
+  "spread": "50–100 cm",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 8,
+  "pestRisk": 10,
+  "thirst": 12,
+  "careLevel": 5,
+  "sunNeed": 60,
+  "sunMin": 35,
+  "uncertain": [
+    "RHS gives broad 0.5–1 m height and spread categories rather than narrower exact-cultivar dimensions",
+    "RHS records summer flowering without exact months; Jun-Aug is the practical UK interpretation"
+  ]
+}

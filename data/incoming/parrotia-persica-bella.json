@@ -1,0 +1,32 @@
+{
+  "common": "Persian ironwood 'Bella'",
+  "latin": "Parrotia persica 'Bella'",
+  "hue": 0,
+  "visual": "Red-purple spring flush · glossy green leaves · wine-red-purple autumn colour",
+  "water": "Moderate; water while establishing",
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "",
+  "prune": "No routine pruning; remove damaged growth when dormant",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Sep-Nov",
+  "cvs": "",
+  "hardiness": "H6",
+  "hardinessNote": "",
+  "resilience": "cold hardy · drought tolerant · wind tolerant · urban suitable",
+  "uses": "specimen · autumn colour · woodland gardens · architectural planting",
+  "height": "6–10 m",
+  "spread": "4–6 m",
+  "foliage": "deciduous",
+  "container": "no",
+  "growthSpeed": 9,
+  "pestRisk": 4,
+  "thirst": 7,
+  "careLevel": 3,
+  "sunNeed": 82,
+  "sunMin": 50,
+  "uncertain": [
+    "Mature dimensions vary materially: RHS gives 8–12 m tall and 4–8 m wide, while specialist UK sources commonly give about 6 × 4 m after 20 years and European tree specialists give 8–10 m tall; 6–10 × 4–6 m was used as a practical planning range"
+  ]
+}

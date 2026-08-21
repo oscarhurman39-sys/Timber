@@ -1,0 +1,32 @@
+{
+  "common": "Clematis 'Avalanche'",
+  "latin": "Clematis × cartmanii AVALANCHE ('Blaaval')",
+  "hue": 0,
+  "visual": "Masses of pure-white spring flowers · glossy dissected evergreen foliage",
+  "water": "Moderate; keep moist in dry spells",
+  "aspect": "North / East / South",
+  "soil": "Moist, sharply drained",
+  "soilWarning": "Shelter · avoid winter wet",
+  "prune": "Group 1; tidy lightly after flowering if needed",
+  "toxicity": "Skin irritant · harmful if eaten by rabbits",
+  "compliance": "",
+  "peak": "Mar-Apr",
+  "cvs": "trade name AVALANCHE; cultivar 'Blaaval'; RHS accepts 'Avalanche' and lists 'Blaaval' as a synonym",
+  "hardiness": "H4",
+  "hardinessNote": "RHS H4; shelter and gritty drainage improve winter reliability",
+  "resilience": "shade tolerant",
+  "uses": "walls · trellis · containers · spring display",
+  "height": "2.5–4 m",
+  "spread": "1.5–2.5 m",
+  "foliage": "evergreen",
+  "container": "with care",
+  "growthSpeed": 12,
+  "pestRisk": 10,
+  "thirst": 11,
+  "careLevel": 10,
+  "sunNeed": 72,
+  "sunMin": 45,
+  "uncertain": [
+    "RHS herbarium material records PBR, but current UK protection status was not confirmed"
+  ]
+}

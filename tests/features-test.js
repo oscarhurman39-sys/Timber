@@ -347,7 +347,11 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   });
   check('search detail has a Go to card button', g1.btn);
   check('go-to-card closes the search sheet', !g1.searchOpen);
-  await page.waitForFunction(() => gotoTimer === null, null, { timeout: 30000 });
+  /* Budget, not just a backstop. A riffle to the deepest card takes ~2.6s at 218
+     cards; it took 34s before the far half of the cut was batched in one DOM pass,
+     and this wait silently absorbed the whole slide from one to the other until it
+     finally blew the old 30s cap. 12s is ~4x headroom and fails loudly next time. */
+  await page.waitForFunction(() => gotoTimer === null, null, { timeout: 12000 });
   await page.waitForTimeout(450); // let the last tuck land
   const g2 = await page.evaluate(() => ({
     top: +[...document.querySelectorAll('#deck .card:not([data-gone])')].pop().dataset.idx,
@@ -366,7 +370,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   });
   await page.waitForTimeout(500);
   await page.evaluate(t => { openSearch(); showPlant(t); document.getElementById('dGoCard').click(); }, g3);
-  await page.waitForFunction(() => gotoTimer === null, null, { timeout: 30000 });
+  await page.waitForFunction(() => gotoTimer === null, null, { timeout: 12000 });
   await page.waitForTimeout(450);
   const g4 = await page.evaluate(() => {
     const top = +[...document.querySelectorAll('#deck .card:not([data-gone])')].pop().dataset.idx;

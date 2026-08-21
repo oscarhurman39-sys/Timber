@@ -61,6 +61,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acer-palmatum-firecracker.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright — Galaxy S24 capture manifest, c2pa.ingredient parentOf, no AI markers",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "acer-palmatum-oridono-nishiki.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-palmatum-osakazuki.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -68,6 +88,16 @@
    "sourceUrl": null,
    "commit": "ca5684f",
    "commitSubject": "Add Ōsakazuki Japanese Maple; fold diacritics in slug fn (macron ō→o)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "acer-palmatum-sango-kaku.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -108,6 +138,16 @@
    "sourceUrl": null,
    "commit": "8ad4233",
    "commitSubject": "Add Fanal Yarrow to deck: 69 -> 70",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "agapanthus-ovatus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -181,6 +221,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "allium-karataviense-red-giant.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label burned in. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "aloe-vera.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. EXIF Samsung Galaxy S24, orientation 6 (displays portrait); no C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "alstroemeria-indian-summer-tesronto.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -192,6 +252,16 @@
   },
   {
    "file": "amelanchier-lamarckii.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "anemone-hybrida-pretty-lady-emily.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -233,6 +303,26 @@
   },
   {
    "file": "aronia-melanocarpa.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "artemisia-powis-castle.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, dated 2026-08-21 (current season); orientation 6, rotation baked in by tools/reframe-photo.js with no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "astrantia-major-star-of-love.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -292,6 +382,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "buddleja-davidii-little-ruby-botex-006.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "buddleja-davidii-white-profusion.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -322,6 +422,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "butia-capitata.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. C2PA: plain Galaxy S24 capture manifest (c2pa.ingredient.v2, relationship parentOf) — no digitalSourceType, no Photo assist marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "callistemon-citrinus-splendens.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -329,6 +439,16 @@
    "sourceUrl": null,
    "commit": "ff494ba",
    "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "calycanthus-aphrodite.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -362,6 +482,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "catalpa-erubescens-purpurea.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "ceanothus-concha.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -389,6 +519,16 @@
    "sourceUrl": null,
    "commit": "b9c9e25",
    "commitSubject": "Add Katsura Tree to deck: 85 -> 86",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cercis-canadensis-carolina-sweetheart-nccc1.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Source file was a 3-panel Google collage whose C2PA declares digitalSourceType trainedAlgorithmicMedia; staged from its main panel only. See VERIFY-QUEUE 32/34.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -502,6 +642,36 @@
    "commercialUseCleared": true
   },
   {
+   "file": "clematis-cartmanii-avalanche-blaaval.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "clematis-josephine-evijohill.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "coprosma-inferno-summer.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "coprosma-inferno.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -572,6 +742,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cornus-sericea-variegata.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "corylus-avellana-contorta.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -624,7 +804,7 @@
   {
    "file": "crinodendron-hookerianum.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": "d9b814b",
@@ -662,6 +842,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "dahlia-electro-pink-71853-09.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "daphne-unidentified-summer.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "davidia-involucrata.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -669,6 +869,16 @@
    "sourceUrl": null,
    "commit": "24466b6",
    "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "deutzia-hybrida-magicien.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -722,6 +932,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "elaeagnus-submacrophylla-limelight.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "elaeagnus-submacrophylla.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -735,6 +955,26 @@
    "file": "enkianthus-campanulatus.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "epimedium-perralchicum-frohnleiten.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label lower left. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "erigeron-karvinskianus-profusion.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. EXIF Samsung Galaxy S24, Ultra HDR capture with a gain map; no C2PA manifest in the file (no JUMBF box) and no AI or generative marker of any kind",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -874,7 +1114,7 @@
   {
    "file": "euphorbia-martini-miner-s-merlot-km-mm024.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": "bc51e3e",
@@ -922,6 +1162,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "forsythia-intermedia-lynwood-variety.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "geranium-bob-s-blunder.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "ginkgo-biloba.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -962,6 +1222,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "gunnera-manicata-underside.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "gunnera-manicata.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -992,7 +1262,27 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hedera-helix-oro-di-bogliasco.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "heuchera-villosa-timeless-night.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hibiscus-syriacus-lavender-chiffon-notwoodone.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -1009,6 +1299,36 @@
    "sourceUrl": null,
    "commit": "24466b6",
    "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hosta-broadband.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hosta-emerald-charger.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label lower left. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "houttuynia-cordata-pied-piper.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label lower left. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1042,6 +1362,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hydrangea-lacecap-unidentified.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "hydrangea-macrophylla-rendez-vous-french-cancan-bleu.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1059,6 +1389,16 @@
    "sourceUrl": null,
    "commit": "83f6de9",
    "commitSubject": "Add Sweet Cupcake Hydrangea; fix aspect and soil parsers it exposed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hydrangea-macrophylla-zorro.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. ARCHIVE SHOT: EXIF Samsung Galaxy S21 (SM-G991B), dated 2024-05-22 — an older phone and an older season than this run's Galaxy S24 captures. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1102,6 +1442,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hypericum-inodorum-miracle-grandeur-allgrandeur.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hypericum-inodorum-miracle-night-allmadne.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "ilex-crenata-jenny.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1119,6 +1479,16 @@
    "sourceUrl": null,
    "commit": "5213b09",
    "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "imperata-cylindrica-rubra.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. ARCHIVE SHOT: EXIF Samsung Galaxy S21 (SM-G991B), dated 2024-07-19. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1232,6 +1602,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "lilium-formosanum-var-pricei.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label burned into the lower left. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "liquidambar-styraciflua-slender-silhouette.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1262,6 +1642,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "lithodora-diffusa-heavenly-blue.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. EXIF Samsung Galaxy S24 (firmware S921BXXSGDZG1), 2026-08-18; Ultra HDR capture with a gain map, no C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "lobelia-speciosa-starship-deep-rose-pas905518.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1282,6 +1672,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "lonicera-henryi-copper-beauty.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "lonicera-periclymenum-rhubarb-and-custard.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "lonicera-purpusii-winter-beauty.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1295,6 +1705,26 @@
    "file": "lotus-hirsutus-little-boy-blue-lisbob.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "lupinus-the-governor-band-of-nobles-series.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label burned in. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "magnolia-acuminata.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -1362,6 +1792,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "monstera-deliciosa.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. EXIF Samsung Galaxy S24, orientation 6 (displays portrait); no C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "muehlenbeckia-complexa.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "musa-basjoo-cutout.png",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1394,7 +1844,7 @@
   {
    "file": "nerium-oleander.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": "ab63bf1",
@@ -1420,6 +1870,16 @@
    "sourceUrl": null,
    "commit": "ff494ba",
    "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "oenothera-lindheimeri-rosy-jane.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. A two-frame side-by-side composite, KEPT WHOLE on Oscar's call (2026-08-21): foliage left, flowers right, which is what identification needs. Passed through tools/reframe-photo.js at verdict as-is — no crop, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-21. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1460,6 +1920,16 @@
    "sourceUrl": null,
    "commit": "ad55190",
    "commitSubject": "Add Orange Victory Itoh Peony",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "parrotia-persica-bella.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright — no C2PA manifest present",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1573,6 +2043,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "physocarpus-opulifolius-diabolo.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "pinus-mugo.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); the visible AI label was cropped out by tools/reframe-photo.js, the marker stands. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "pittosporum-tenuifolium-elizabeth.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1580,6 +2070,26 @@
    "sourceUrl": null,
    "commit": "2356e25",
    "commitSubject": "Add Pittosporum 'Elizabeth' from Oscar's photo (new plant)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "pittosporum-tenuifolium-tom-thumb.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "pittosporum-variegated-unidentified.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1713,6 +2223,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "rhodanthemum-hosmariense-zagora-yellow.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Supplied as a two-frame COLLAGE (an inset flower panel pasted over a foliage frame); reframed by tools/reframe-photo.js to the foliage frame only, inset excluded, no pixels generated. EXIF Samsung Galaxy S24 (firmware S921BXXSGDZG1), 2026-08-18; Ultra HDR capture with a gain map, no C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "rhododendron-gartendirektor-glocker.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1720,6 +2240,26 @@
    "sourceUrl": null,
    "commit": "ff494ba",
    "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rhododendron-homebush.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rhododendron-hoppy.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label burned in. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1740,6 +2280,46 @@
    "sourceUrl": null,
    "commit": "004c1a1",
    "commitSubject": "Add Horizon Monarch Rhododendron",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rhododendron-purple-unidentified.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rhus-typhina-dissecta.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "robinia-unidentified-leaf.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "robinia-unidentified-thorn.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1783,6 +2363,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "salvia-guaranitica-black-and-blue.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "salvia-hot-lips.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1790,6 +2380,16 @@
    "sourceUrl": null,
    "commit": "ee6acfd",
    "commitSubject": "Add Hot Lips Sage (first JSON with new toxicity + compliance fields)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "salvia-rosmarinus-miss-jessopp-s-upright.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1813,7 +2413,27 @@
    "commercialUseCleared": true
   },
   {
+   "file": "sempervivum-arachnoideum.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "skimmia-japonica-obsession-obsbolwi.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "solanum-laxum-album.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -1873,6 +2493,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "syringa-vulgaris-znamya-lenina.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "taxus-baccata-fastigiata-robusta.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1880,6 +2510,16 @@
    "sourceUrl": null,
    "commit": "a00d797",
    "commitSubject": "Add Fastigiata Robusta Yew to deck: 90 -> 91",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "tetrapanax-papyrifer-rex.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1903,6 +2543,36 @@
    "commercialUseCleared": true
   },
   {
+   "file": "verbena-bonariensis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "veronica-emerald-gem.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "veronica-rhubarb-crumble.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "viburnum-bodnantense-charles-lamont-leaf.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1915,7 +2585,7 @@
   {
    "file": "viburnum-bodnantense-charles-lamont.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": "24466b6",
@@ -1960,6 +2630,16 @@
    "sourceUrl": null,
    "commit": "5ac8d8c",
    "commitSubject": "Enrich Variegated Dwarf Weigela: add photo, ratings, clean aspect/soil; keep trade data",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "weigela-prism-magic-carpet-vpwg18-06.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

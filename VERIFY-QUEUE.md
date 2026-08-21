@@ -812,6 +812,1085 @@ confirmed positions). Until then, treat the count as "at least four".
 
 ---
 
+### 33. Stag's Horn Sumach photo is a CUT-LEAF form — SETTLED 2026-08-16
+2026-08-15. Oscar sent a photograph with the note *"not sure if the [Rhus]
+typhina 2nd photo is the same species"*. It is the right species and still the
+wrong photograph for the card that exists, which is why nothing was staged.
+
+**What the photograph shows.** Pinnate leaves with many leaflet pairs on a long
+pale rachis, every leaflet cut almost to its midrib into narrow lobes — fern-like
+rather than merely toothed. A zoom on the shoot at top-left shows dense fine hairs
+on a pink-tan stem.
+
+**What that rules in and out.** The leaflet count rules out elder (*Sambucus
+nigra* 'Laciniata', the obvious cut-leaf lookalike, carries about five leaflets to
+a leaf); the hairy shoot argues for *typhina* over the glabrous *R. glabra*
+'Laciniata'. So: ***Rhus typhina*, a cut-leaf cultivar** — 'Dissecta' (syn.
+'Laciniata'). `[Inference]` from foliage and one shoot, not from a label.
+
+**Why it was not dealt anyway.** The held card is the **plain species**, and its
+own `visual` line reads *"Velvety antler-like stems · pinnate leaves firing
+scarlet · crimson fruit cones"*. A staff member learning the species from this
+card would come away expecting fern-like foliage on any *Rhus typhina*, which is
+wrong for the plant the card describes. That is the same class of error as the
+Sarcococca in item 21 — right genus, wrong thing taught — and the deck's value is
+that it can be trusted.
+
+**One further wrinkle worth knowing before it is settled:** much of what UK
+nurseries sell as *R. typhina* 'Dissecta' is now referred to ***R.* ×
+*pulvinata* Autumn Lace Group**. `[Unverified]` which of the two this plant is —
+that cannot be read off a leaf.
+
+**Three ways to close it, Oscar's call:**
+1. **New card** for the cut-leaf form, and this photo goes on it. Cleanest, and
+   it is a genuinely different plant on the bench.
+2. **Deal it onto the species card anyway** — acceptable only if the `visual`
+   line is amended to say the shot is a cut-leaf selection.
+3. **Reshoot** the plain species (simple toothed leaflets, and ideally the
+   velvety antler stems or a crimson fruit cone) and leave this photo unused.
+
+Recommend 1. The card that exists is fine; it just isn't this plant's card.
+
+**SETTLED 2026-08-16 — Oscar took option 1.** He supplied a researched card for
+***Rhus typhina* 'Dissecta'** and a second, better photograph of the same plant
+(2408×3272, clean Galaxy S24 capture, no C2PA). It is dealt as its own card.
+The plain-species *Rhus typhina* card is untouched and **stays held**, still
+wanting a photograph of simple pinnate leaflets — so the deck now teaches the
+two apart instead of conflating them. His `cvs` field carries the synonymy
+(f. *laciniata*, 'Laciniata'), which also settles the naming wrinkle raised
+above; see item 35 for what he flagged as still soft, including the
+*R.* × *pulvinata* question, which his sources treat differently from mine.
+
+---
+
+### 34. Verbena bonariensis — card DEALT 2026-08-16 from the clean original; foliage shot still open
+2026-08-16. Oscar sent an image captioned "Verbena bonariensis" for the held
+**Purple Top Verbena** card: a two-panel picture, foliage on the left, a
+honeybee with a white crab spider on a verbena flowerhead on the right. It is
+**not staged, and this one is not a judgement call** — the file says what it is.
+
+**What the file carries.** A signed C2PA manifest chain from *Google C2PA Media
+Services*, 11 manifests deep. The actions, read straight out of the PNG:
+
+- `c2pa.created` — description **"Created by Google Generative AI"**,
+  `digitalSourceType: trainedAlgorithmicMedia` (twice, once per input panel)
+- `c2pa.edited` — **"Applied imperceptible SynthID watermark"**
+- `c2pa.edited` — **"Added visible watermark"**, `digitalSourceType: composite`
+  — that is the four-pointed sparkle in the bottom-right corner
+
+`trainedAlgorithmicMedia` is the exact IPTC code CARD-PROTOCOL tells this repo to
+refuse on sight. There is also a JPEG ingredient in the chain with relationship
+`inputTo`, so **a real photograph may well have gone in as an input** — but the
+output the file describes is generated, not captured, and the credentials do not
+say which pixels came from where.
+
+**Why this is a harder no than the sparkle-glyph cases.** Item 32 is about
+Oscar's own photographs that have had a generative *edit* applied, where the
+open question is a licensing one. This is a different thing: the manifest
+declares the image itself as created by generative AI. The deck already carries
+two AI images (knotweed, Ajuga) and both are logged as a liability with
+`commercialUseCleared: false`; adding a third knowingly, to a card meant to
+teach staff what a plant looks like, is the mistake those two are a warning
+about.
+
+**Two lesser problems, either of which would stop it on its own:**
+1. **878 × 1216 px** — below the 1200px floor the protocol flags.
+2. **It is a two-panel composite.** The card crops a single portrait window, so
+   it would show the seam or one arbitrary half. Even a clean photograph in this
+   layout wants splitting before it is staged.
+
+**What is actually wanted:** the original camera JPEG of the flowerhead — the
+bee-and-crab-spider frame is a genuinely good card photo if a real one exists.
+`Verbena bonariensis` stays held until it arrives.
+
+**Update 2026-08-16 — Oscar corrected the account, and he is right.** He took
+both source photographs himself; what the AI did was merge them into the
+two-panel picture. The refusal above still stands *for that file* — a generative
+merge of two real photographs is still an image whose credentials declare it
+generated, and it was 878px wide besides — but "AI-generated" as a description of
+the underlying work was wrong, and the ownership worry raised alongside it was
+overstated. He owns the photographs. There is no plausible legal exposure here;
+the reasons not to ship that file were resolution, the two-panel seam, and what
+a credential reader would say about it in front of a garden centre.
+
+**He then sent both originals, and the card is dealt.** The bee frame
+(`640c7f97`, 1972×2730) carries **no C2PA manifest at all** — a plain Galaxy S24
+capture — and is now `photos/verbena-bonariensis.jpg` at focus 50% 10%. Deck
+170 → 171.
+
+**Two things stay open, both about the FOLIAGE shot** (`e3abb92c`, 3000×4000),
+which was NOT staged:
+
+1. **It carries a Galaxy AI edit marker.** One C2PA manifest, action
+   `c2pa.edited`, `softwareAgent: Photo assist`, `digitalSourceType:
+   compositeWithTrainedAlgorithmicMedia` — a real photograph with generated
+   content composited in — plus the visible "✦ AI-generated content" label
+   burned into the lower left. That is **item 32's category exactly** (Oscar's
+   own photo, Galaxy AI generative edit applied), and it is the first one caught
+   *before* landing rather than after. The visible label is new: the four
+   already in the deck carry only the sparkle glyph, so Samsung's labelling has
+   changed at some point and **the older four may predate it**.
+2. **It looks like a different plant from the card.** `[Inference]` from the
+   photograph, not from a label: the leaves are deeply cut with lobed, almost
+   hastate bases on shaggy-hairy stems, and the flowers sit small and violet and
+   scattered rather than in a dense flat head. *V. bonariensis* has simple
+   lance-shaped toothed leaves clasping a near-smooth square stem. This reads as
+   another vervain — ***V. hastata*** (the lobed leaf bases) or
+   ***V. officinalis*** — growing near it. Worth Oscar's eye on the actual
+   plant; if it is a second species it may be worth its own card, and if it is
+   self-sown *V. officinalis* it is a weed in that bed.
+
+The dealt card does not depend on either point: the bee frame is unambiguous
+*V. bonariensis* and is the plant the card describes.
+
+
+---
+
+### 35. Two cards added 2026-08-16 — Oscar's own research JSON, what he flagged
+Both cards came from Oscar with a `uncertain` block already filled in, so this
+is his flagging, not mine. Nothing below blocked either card; it is what a
+label or an RHS read would settle.
+
+**Cut-leaved Stag's Horn Sumach (*Rhus typhina* 'Dissecta')**
+- RHS accepts the cultivar and lists *R. typhina* f. *laciniata* / 'Laciniata'
+  as synonyms; **Kew treats both f. *laciniata* and f. *dissecta* as synonyms of
+  the plain species** rather than accepted taxa. The card follows RHS. Note this
+  is a different resolution of the naming question from the one raised in item
+  33, which pointed at *R.* × *pulvinata* Autumn Lace Group — **that hybrid is
+  not mentioned in his sources at all**, and the two accounts have not been
+  reconciled. It changes no fact on the card.
+- Spread is given 4–8 m but "can approach 6 m or more" through suckering; the
+  `prune` line already tells staff to take suckers out in winter.
+- **Toxicity deliberately left blank** — his sources conflict and none supports a
+  clear customer warning. That is the honest entry, and it is consistent with how
+  the deck handles unknowns. The card schema still has nowhere to put toxicity
+  even when it IS known (item 0c).
+- No England-and-Wales statutory restriction was verified. `[Unverified]` — the
+  vigorous suckering is a nuisance question, not a legal one, as far as either
+  of us has checked.
+
+**Purple Hybrid Catalpa (*Catalpa* × *erubescens* 'Purpurea')**
+- **Size is the one worth a second look.** RHS gives ultimate dimensions above
+  12 m × above 8 m; the card carries 10–15 m × 6–10 m from specialist tree
+  sources. Either is defensible, but a 12 m+ tree on a garden-centre bench card
+  is a fact staff will be asked about.
+- RHS says full sun; specialist UK nursery guidance allows light dappled shade,
+  and `sunMin` 60 encodes that tolerance. The card therefore sits slightly
+  looser than RHS on light, on purpose.
+- Honey-fungus resistance comes from nursery guidance, **not** from the RHS
+  cultivar profile.
+- `pestRisk` 5 (1.25/5) tripped `check-plant-json.js`'s "is this an unconverted
+  0–5 rating?" warning. Left as written: 1.25/5 agrees with the card's own
+  "generally pest free", where 5/5 would flatly contradict it.
+
+**Both:** `hardinessNote`, `toxicity`, `compliance`, `foliage` and `container`
+were supplied and have **no home in the card schema**, so they are dropped from
+the rendered row. The full JSON is committed at
+`data/incoming/rhus-typhina-dissecta.json` and
+`data/incoming/catalpa-erubescens-purpurea.json`, so nothing supplied is lost —
+but this is the fourth batch to hit item 0c's missing fields.
+
+---
+
+### 36. perf-test's zero-pixel assertion outgrew the deck — SETTLED 2026-08-16, gate green
+2026-08-16. Adding the two cards above took the deck 171 → 173 and turned
+`perf-test`'s pixel-parity check red:
+
+    FAIL hiding buried content changes no pixel (the deck halo is stacked shadows)
+         — 18px differ (0.001%), max channel delta 3
+
+**It is not flaky and it is not a coincidence.** Verified by bisection, not by
+assumption: an unmodified checkout of the previous commit (3ceb9db, deck 171)
+served on the same port passes this check 14/14; the current tree fails it with
+the identical numbers on every run.
+
+**What the pixels actually are.** The diff was re-run with coordinates and
+values dumped:
+
+- **16 pixels** (the suite's own count of 18 includes the alpha-channel pass),
+  at device scale 2 on a 780×1560 buffer.
+- Fifteen of them are a **vertical run at x=764, y=1311–1325** — the extreme
+  right edge of the deck halo, about 8 device px in from the frame.
+- Their values: reference **(0,0,0)**, live **(1,1,1)**. **A delta of one unit
+  in 255, on black.**
+- The sixteenth, at (763,257), is (8,18,12) vs (8,19,13).
+
+**Mechanism, and why it is not content leaking.** Unhiding the buried cards makes
+the picture DARKER by one unit, not lighter — so nothing is peeking through the
+top card. It is the check's own named cause: `.tcard` box-shadows stack, and two
+more cards in the pile push the accumulated alpha at the outermost edge across an
+8-bit rounding boundary. No buried card's content becomes visible at any point.
+
+**Why this was not fixed unilaterally.** Three routes, and picking one is a call
+about the gate, not about the cards:
+
+1. **Give the assertion a tolerance** — e.g. allow a max channel delta of 1. One
+   unit on black is below anything a screen can show. Risk: it is a deliberately
+   strict check, and the last deck-growth failure (changelog v14.1, the menu
+   panel) turned out to be a **real defect** that a tolerance would have hidden.
+2. **Treat it as a real defect and cap the shadow stack in the app** so the halo
+   stops depending on deck depth. Correct in principle, a visual change to every
+   card's shadow, and far bigger than the two cards that exposed it.
+3. **Leave it red** until decided. Honest, but the gate stops meaning anything
+   the moment one red is normal.
+
+Recommend 1, with the evidence above written into the test's comment so the next
+person knows what the tolerance is buying and what it would hide. **Not done
+without Oscar saying so**, because loosening a gate to make one's own change pass
+is precisely the move that should never be quiet.
+
+**SETTLED 2026-08-16 — Oscar chose option 1, and it is done.** The assertion now
+reads *"hiding buried content shows nothing"* with a budget of **64 px and a max
+per-pixel channel-sum of 8**, against an observed 17 px / Δ5 at deck 194. The
+full evidence above is written into the test's own comment so the next person to
+find it does not re-tighten it blind.
+
+**The budget was measured, not guessed.** A leak was staged and put through the
+same diff: one buried card un-hidden and nudged 12 px so part of it genuinely
+showed past the top card came out at **46,882 px, max delta 443**. Against a
+residual of 17 px at Δ5 that is three orders of magnitude on both axes, so the
+tolerance cannot swallow a real defect — which was the whole worry, given the
+v14.1 menu-panel precedent where a deck-growth failure turned out to be real.
+
+**Two things keep it honest.** The observed numbers are now in the check's name
+on **every run, passing or failing**, so the drift stays in the suite output
+instead of disappearing under a threshold — it has already moved from Δ3 at deck
+173 to Δ5 at 194. And the comment says plainly that px in the hundreds or max in
+the tens is a different phenomenon and wants investigating, not another
+loosening.
+
+**The gate is now green apart from nothing: 17/17 sequential.**
+
+---
+
+### 37. Batch of 2026-08-16 — three photographs with no card, two cards with no photograph
+Six researched cards and eight photographs arrived together. Four matched cleanly
+and are dealt. This is what did not match, plus what Oscar himself flagged.
+
+**A. Three photographs were NOT staged.** Each one sits next to a card already in
+the hold block, and in each case the cultivar is the problem — the same trap as
+item 33. All three files are clean captures, no C2PA, no AI markers.
+
+1. ~~**Physocarpus**~~ **CLOSED 2026-08-16 — Oscar confirmed 'Diabolo' and it is
+   dealt.** Original note kept: (two near-identical frames). Oscar named the genus only. The
+   deck's only Physocarpus is ***P. opulifolius* 'Diabolo'**, held. The photo
+   shows the dark purple-red foliage 'Diabolo' is grown for — but so are
+   'Summer Wine', 'Lady in Red' and 'Little Devil', and a leaf cannot separate
+   them. **Genus-level is not a match** (CARD-PROTOCOL says so explicitly). One
+   word from Oscar deals it.
+2. **White-plumed shrub.** Loose creamy-white panicles over pinnate, sharply
+   serrated leaflets on reddish stems. The deck's held *Astilbe* is **'Fanal',
+   which is blood-red with bronze foliage** — this is not that plant. `[Inference]`
+   from the photograph: it could be a white Astilbe, but the pinnate leaflets and
+   woody reddish stems read at least as well for ***Sorbaria sorbifolia***
+   (false spiraea), which has no card at all. Needs a name before it can go
+   anywhere.
+3. ~~**Bronze-leaved Geranium.**~~ **CLOSED 2026-08-16.** It is
+   ***Geranium* 'Bob’s Blunder'**. Oscar resent the identical file with a
+   researched card for it, and it is now dealt — so the reasoning below was
+   right that it is not Rozanne, and the plant is simply one the deck did not
+   yet have. Kept here for the record: deeply cut bronze-brown foliage, vivid
+   red-pink stems, one small pale-lilac flower with darker veining, against
+   Rozanne's large deep violet-blue flowers with a white eye over plain green
+   leaves.
+
+**B. Two cards went to the hold block for want of a photograph** — *Anemone* ×
+*hybrida* 'Pretty Lady Emily' and *Loropetalum chinense* var. *rubrum* 'Fede'.
+Both are fully researched and will deal the moment a frame arrives. Note the
+deck already carries **Pretty Lady Maria** as its fullart special, so the two
+Pretty Ladies will sit side by side — worth keeping their photographs visibly
+different.
+
+**C. What Oscar declared uncertain**, carried over from his `uncertain` blocks
+rather than accepted silently:
+- **Hosta 'Broadband'** and **Loropetalum 'Fede'** both have an **unresolved RHS
+  name status** despite having exact cultivar records. Neither card claims
+  otherwise.
+- **Loropetalum 'Fede' hardiness (H4) is INFERRED**, not read off the cultivar
+  record — from RHS var. *rubrum* guidance plus UK cold-tolerance sources. That
+  is the single softest number in the batch, and hardiness is the field this repo
+  has always found most error-prone. Mature size also disputed, 1–1.5 m against
+  ~1.8 m.
+- **Salvia 'Black and Blue' is H3** — tender, needs winter protection outside mild
+  areas. Its card says so; staff should not sell it as hardy.
+- **'Pretty Lady Emily' and 'Star of Love' are both PBR protected**, and the
+  `compliance` field carrying that has **nowhere to live on the card** (item 0c
+  again — fifth batch running). Propagation restrictions are exactly the sort of
+  thing a garden centre needs on screen.
+- Several `peak` values are practical UK interpretations of "summer" or "late
+  summer", not month ranges any source states. Loropetalum's Jan-Dec encodes
+  year-round foliage rather than flowering.
+- `careLevel` 5 and `pestRisk` 2–3 tripped `check-plant-json`'s "unconverted 0–5
+  rating?" warning on four cards. All are coherent with their own `resilience`
+  text ("pest and disease free"), so all were left as written.
+
+**D. The Salvia photograph carries a pasted cut-out leaf** with a white outline —
+his own sticker edit, not generative, no markers in the file. The card window
+cannot crop it out. See the photo register for the geometry; a plain flower frame
+would be better if he has one.
+
+---
+
+### 38. Three photographs parked 2026-08-16 — carried, credited, claiming nothing
+Oscar sent these with "store on temporary photos" / "store the hebe unless we did
+that hebe already". They are staged in `photos/` under names **no card slug can
+ever resolve**, so `data-audit` lists them as unclaimed spares rather than any
+card picking them up by accident. All clean captures, no C2PA, no AI markers.
+
+- `robinia-unidentified-leaf.jpg` and `robinia-unidentified-thorn.jpg` — pinnate
+  leaves of rounded leaflets, and a close-up of the **paired purple-black
+  stipular spines at a node**, which is the giveaway for *Robinia*. `[Inference]`
+  the genus; the **species and cultivar are open**, and the deck has no Robinia
+  card at all. If it is *R. pseudoacacia* 'Frisia' the foliage would be gold, and
+  this is plain green — so either the straight species or something else in the
+  genus. The thorn shot is a genuinely good detail frame for whatever card it
+  ends up on.
+- ~~`hebe-variegated-unidentified.jpg`~~ **CLOSED 2026-08-17 — it is *Veronica*
+  'Rhubarb Crumble'** (Bella Bloom collection), named by Oscar when he sent the
+  same frame again with a researched card. Dealt; the parked duplicate and its
+  CREDITS entry are removed. Original note kept: cream-margined leaves with deep purple
+  buds. **It is not the deck's held Hebe 'Red Edge'**, which carries grey-green
+  leaves with a thin red rim and no cream variegation, so "unless we did that
+  hebe already" resolves to: we have not, and this is a different plant. Reads
+  like one of the variegated *H.* × *franciscana* selections. `[Unverified]`.
+
+**Two smaller notes from the same batch:**
+- The 'Pretty Lady Emily' photograph has an **`Achillea` Sassy Summer label** from
+  a neighbouring pot in the bottom of the frame. The focus is pinned to 0% so it
+  hides behind the stats plaque — see the photo register before retuning it.
+- The old Coprosma 'Inferno' master is kept as `coprosma-inferno-summer.jpg`. It
+  shows the green-yellow summer state; the card's `visual` describes the cold
+  purple-brown-and-red state, which the new master shows. **Worth deciding
+  whether a card should ever carry two seasonal frames** — `PHOTO_SWAP` already
+  exists in the app for a related purpose, and this is the first card where the
+  text plainly covers two looks and both photographs exist.
+
+---
+
+### 39. Batch of ten, 2026-08-16 — two parked photographs, four out-of-season cards, and what Oscar flagged
+The deck's biggest single batch: ten researched cards, ten photographs, all
+dealt. What follows is everything that did NOT resolve cleanly.
+
+**A. Two photographs were parked** — staged under `*-unidentified*` names that no
+card slug can resolve, credited, claiming nothing:
+**CLOSED 2026-08-16 — Oscar named both, and both are now cards** (*Cornus
+sericea* 'Variegata', *Calycanthus* 'Aphrodite'), with the parked copies deleted
+so the same picture does not live in `photos/` twice. Original notes kept:
+
+- `cornus-variegated-unidentified.jpg` — cream-margined leaves with a purple
+  flush, **dark red stems** and purple-black berries. The deck already holds
+  three Cornus (*sanguinea* 'Midwinter Fire', *kousa*, *controversa*
+  'Variegata') and this matches none of them. Red stems plus white-margined
+  leaves reads like ***C. alba*** 'Elegantissima' or 'Ivory Halo'
+  `[Inference]`, which would be a new card.
+- `calycanthus-unidentified.jpg` — the one Oscar described as *"fuck I forgot
+  what thats called"*. Deep maroon-red flower with many strap-shaped petals over
+  glossy opposite leaves: that is ***Calycanthus*** (sweetshrub) `[Inference]`,
+  most likely one of the modern hybrids such as 'Aphrodite'. **No Calycanthus
+  card exists.** A label would settle both of these in seconds.
+
+**B. Four cards are dealt on foliage-only frames**, because the flowers are out
+of season. Not defects, but a real gap between a card's text and its picture —
+the same class the Coprosma 'Inferno' swap corrected:
+- ***Syringa vulgaris*** — the worst of the four. Card text leads with "fragrant
+  lilac-purple panicles"; the photograph is leaves. **Flowers May-Jun**, so this
+  is a spring reshoot and is first in that queue. The leaves also carry a
+  yellow-green mottling; `[Unverified]` whether that is light, natural variation
+  or something like lilac mosaic virus — worth Oscar's eye on the actual plant.
+- **Clematis AVALANCHE** — peak Mar-Apr; the glossy dissected evergreen foliage
+  is genuinely half the plant, so this one is the least wrong.
+- **Lonicera 'Copper Beauty'** — the bronze new growth is the cultivar's name,
+  but the scented tubes (Jun-Aug) are what sells it.
+- **Weigela PRISM MAGIC CARPET** — flowers present but low in the frame; focus
+  was pushed to 50% 100% to keep them above the plaque.
+
+**C. What Oscar declared uncertain**, carried across rather than accepted
+silently:
+- ***Geranium* 'Bob’s Blunder' synonymy.** His `cvs` reads "syn. *Geranium
+  biuncinatum* 'Bob’s Blunder'". `[Unverified]` — *G. biuncinatum* is an African
+  annual and 'Bob’s Blunder' is usually placed with the New Zealand
+  *G.* × *antipodeum* group, so the two do not obviously belong together. **No
+  fact on the card depends on it** (the `cvs` line is a synonym note), and it was
+  left exactly as supplied. Worth one check.
+- **Dahlia ELECTRO PINK** carries two codes for one plant — RHS `'71853-09'`,
+  EU PBR `'EP7185309'`. Both are on the card's `cvs`. Height sources range
+  50–80 cm; the card gives the full band.
+- **Weigela PRISM MAGIC CARPET**: breeder material uses *Weigela* × *hybrida*,
+  RHS records it at genus level, and RHS's height band (50–100 cm) is twice the
+  breeder's (50–60 cm). The card follows the breeder.
+- **Both Hypericums** are recorded semi-evergreen by RHS and deciduous by some
+  specialists.
+- **Clematis AVALANCHE**: RHS herbarium material records PBR but **current UK
+  protection status was not confirmed** — and the card's `compliance` field has
+  nowhere to render anyway (item 0c, now the sixth batch).
+- **PBR restrictions on five cards in this batch** (both Hypericums, the Dahlia,
+  Lonicera 'Copper Beauty', and AVALANCHE's unconfirmed status). Same missing
+  field. If this deck reaches a sales bench, propagation restrictions are the
+  single most commercially loaded thing it currently cannot show.
+
+**D. `--jobs 2` is no longer a reliable gate at this deck size.** This batch's
+first parallel run reported 15/17, failing `edge-test` on *"held to the top"*
+and *"rewind to the top persisted across reload"*. Run on its own, `edge-test`
+passes 17/17, and a **fully sequential `node tests/run-all.js` also passes
+everything except the known perf pixel check**. So those two were contention,
+not a defect.
+
+The mechanism is worth knowing rather than shrugging at: that check holds the
+back button for a fixed **4000 ms of wall clock** and expects the rewind to
+reach the top of a 24-card history. Each rewind step calls `markHot()`, which
+walks **every card in the deck** — so the per-step cost rises with deck size
+while the budget stays fixed. At 188 cards, two Chromiums sharing the box is
+enough to miss it. `[Inference]` the unexplained 15/17 recorded one batch
+earlier was the same suite for the same reason; that run's summary was lost to
+a truncated pipe, so it cannot be confirmed.
+
+**Practical effect: run the gate sequentially before pushing a large batch**, or
+treat a parallel `edge-test`/`features-test` timeout as needing an isolated
+re-run before it is believed. Both suites that have failed this way are
+animation-timing ones with fixed wall-clock budgets.
+
+---
+
+### 40. The Lilium photograph carries a Galaxy AI edit marker — recorded, not hidden
+2026-08-16. Oscar sent two photographs with the instruction *"im certain on these
+2 cards do no photo check on thoes"*. **That instruction was followed for what it
+covers: neither plant's identification was questioned.** Provenance is a
+different thing and is reported here, because the deck's whole photo-credit
+regime exists so that nothing about a file's origin is discovered later.
+
+**`lilium-formosanum-var-pricei.jpg`** carries, in its own C2PA manifest:
+`c2pa.edited`, `softwareAgent: Photo assist`,
+`digitalSourceType: compositeWithTrainedAlgorithmicMedia` — a real photograph
+with generated content composited in — plus a **visible "AI-generated content"
+label burned into the lower left**. That is exactly item 32's category: Oscar's
+own photograph, Samsung's generative edit applied.
+
+It is **staged and on the card**, unlike the two files refused earlier in the
+day, and the difference is worth being explicit about:
+- The Verbena composite (item 34) declared `c2pa.created` — **generated**, not
+  edited — at 878px and in two panels. That is a different claim about the image.
+- The foliage shot held back with item 38 was the same category as this one, but
+  it was **also the wrong plant for the card it would have gone on**. The
+  provenance was never the only reason.
+- This one is the right plant, at usable resolution, for a card Oscar asked for.
+
+**What was done about the visible label:** the card's focus is pinned to `50% 0%`,
+which keeps the trumpets in frame and puts the corner label outside the window.
+**That is framing, not concealment** — the marker is written verbatim into the
+`CREDITS.json` licence string, and the C2PA manifest travels inside the file
+wherever it goes.
+
+**Item 32's two questions are still open and now cover five photographs, not
+four.** Whether a generatively edited photo keeps `commercialUseCleared: true`
+is still Oscar's call; this entry is `true`, consistent with the other four,
+pending that decision.
+
+**`lonicera-periclymenum-rhubarb-and-custard.jpg` is clean** — no C2PA at all. It
+is a transparent cut-out PNG, flattened onto the deck's dark green before
+staging because the app loads only `.jpg` masters.
+
+---
+
+### 41. A variegated Pittosporum arrived with the 'Tom Thumb' card — DEALT on Oscar's word; the CARD TEXT is now the open half
+2026-08-17. Oscar sent *Pittosporum tenuifolium* 'Tom Thumb' as researched JSON
+with a photograph. **The card is built and sitting in the hold block; the
+photograph is parked.** They do not go together.
+
+- **The card:** 'Tom Thumb' is *"deep purple-black wavy leaves · lime-green new
+  growth"* — his own `visual` line, and it matches RHS.
+- **The photograph:** small rounded leaves, densely packed, in vivid magenta-pink
+  marbled with cream and white. No purple-black anywhere, no lime-green new
+  growth.
+- **It is not the deck's 'Elizabeth' either**, which was the obvious first guess:
+  compared side by side against that card's own photograph, 'Elizabeth' has
+  markedly larger leaves with clean cream margins and only a pink edge-flush in
+  cold. These leaves are half the size and pink right through.
+
+`[Inference]`, and no further: genus *Pittosporum*, almost certainly
+*P. tenuifolium*, a compact variegated cultivar showing hard cold colouring. A
+name is not guessable from the frame — the small-leaved variegated selections
+('Victoria', 'Pixie', the Golf Ball sports and others) are close enough in leaf
+that the label is the only honest source. **The deck already holds two
+Pittosporums** ('Elizabeth' dealt, 'Tom Thumb' now held), so a wrong guess would
+land on a card that already exists.
+
+**What is needed:** the name. If it turns out to be a third cultivar it wants its
+own card; if it IS 'Tom Thumb' then the card's `visual` line is wrong and needs
+rewriting, which is a bigger correction than a photo swap.
+
+**Resolved 2026-08-17 — Oscar resent the photograph with the card and stated
+plainly: *"all photos are correct true to type"*.** It is dealt. His call, and
+he is the one standing in front of the plant.
+
+**The second half of the objection is still live, and it is now the card's text
+rather than its picture.** The `visual` line reads *"Deep purple-black wavy
+leaves · lime-green new growth · compact rounded mound"* and the photograph on
+that card shows magenta and cream variegation with no purple-black and no lime
+new growth. A card whose words and picture disagree teaches a member of staff
+two different plants. **One of them needs changing, and it is no longer a
+question I can answer** — if the plant is 'Tom Thumb' then the research behind
+that `visual` line does not describe the plant Oscar has, and the line wants
+rewriting from what is actually on the bench.
+
+---
+
+### 42. 'Homebush' arrived with a second, conflicting research set — the existing card was KEPT
+2026-08-17. A researched *Rhododendron* 'Homebush' card has been in the hold
+block since the wishlist batch. Oscar's photograph arrived with a **new JSON for
+the same plant**, and the two disagree in sixteen fields. **The photograph was
+added and the card's data was left alone.** This is the reason, and the decision
+is his to reverse.
+
+**Why the existing card was kept, and it is not "it got there first":** the held
+card carries **"all parts harmful if eaten"** inside `resilience`, which the card
+renders. The new JSON moves that fact into `toxicity` — **a field the card schema
+does not have** (item 0c, now the seventh batch). Applying it verbatim would have
+**silently removed a safety warning from a card describing a toxic plant**. No
+tool should make that swap quietly.
+
+**Every difference, so the choice is his and not mine:**
+
+| field | held card (kept) | supplied JSON |
+|---|---|---|
+| `visual` | Rounded trusses of rose-pink **hose-in-hose** flowers · good autumn leaf colour | Dense clusters of **semi-double** rose-pink trumpets · fresh green foliage |
+| `size` | **1.5–2.5 m** H × 1.5–2.5 m W | **1–1.5 m** H × 1–1.5 m W |
+| `soil` | Humus-rich, acidic; **Ericaceous — chalk causes chlorosis** | Acid, moist, well-drained; Acid soil · sheltered |
+| `aspect` | Any aspect | East / South / West |
+| `water` | Even moisture; **rainwater where the tap runs hard** | Keep evenly moist; water in dry spells |
+| `resilience` | very hardy in acid ground · **all parts harmful if eaten** | cold hardy · part-shade tolerant |
+| `cvs` | Homebush | Knap Hill / Exbury deciduous azalea |
+| ratings | pestRisk 10, thirst 14, careLevel 9, sunNeed 50, sunMin 30 | 12, 11, 8, 65, 42 |
+
+**Three of these are worth his eye specifically:**
+1. **Size.** 1.5–2.5 m against 1–1.5 m is a whole band, and it changes where the
+   plant gets sold and planted. 'Homebush' is a Knap Hill azalea; `[Unverified]`
+   from here which figure is right.
+2. **The chalk warning.** "Ericaceous — chalk causes chlorosis" is the single
+   most useful sentence on that card for a garden centre, and the new soil line
+   does not carry it.
+3. **hose-in-hose vs semi-double.** Both are used of 'Homebush' in the trade;
+   they describe the same flower differently rather than contradicting.
+
+The supplied JSON is **better on `cvs`** — "Knap Hill / Exbury deciduous azalea"
+places the plant properly where the held card just repeats its own name. That one
+is worth taking whatever else is decided.
+
+**Also from this batch — two more files for item 32's count, both recorded in
+`CREDITS.json` rather than skipped:**
+- `cercis-canadensis-carolina-sweetheart-nccc1.jpg` — arrived as a **three-panel
+  Google collage** declaring `trainedAlgorithmicMedia`. Staged from its main
+  panel only, because a card window cannot show a three-panel collage without a
+  seam — the same practical objection that stopped the Verbena file in item 34,
+  solved here by cropping rather than refusing.
+- `epimedium-perralchicum-frohnleiten.jpg` — `Photo assist`,
+  `compositeWithTrainedAlgorithmicMedia`, visible AI label.
+
+---
+
+### 43. The deck now straddles the Hebe → Veronica rename, and lost another toxicity warning
+2026-08-17, from the Agapanthus / Veronica pair.
+
+**A. One group, two genera.** RHS has sunk *Hebe* into *Veronica*. Oscar supplied
+'Emerald Gem' as ***Veronica* 'Emerald Gem'** and it is filed that way; the deck's
+other one is still ***Hebe* 'Red Edge'** (held). Nothing is wrong with either
+card — the `common` fields ("Hebe 'Emerald Gem'", "Hebe 'Red Edge'") keep both
+findable by the name staff actually use — but the deck has no convention and will
+accumulate more. **Three options, all his:**
+1. **Follow RHS** and rename 'Red Edge' to *Veronica*. Correct, and makes the
+   deck consistent with the source it cites everywhere else.
+2. **Stay with *Hebe*** for the whole group, since that is what every label,
+   invoice and customer in the UK trade still says. Also defensible, and arguably
+   better for a bench.
+3. Leave it mixed. Costs nothing today, costs more the more Hebes arrive.
+Recommend 2 for a garden-centre deck, with the *Veronica* name in `cvs` — but
+this is a naming judgement, not a fact, and it is worth one decision rather than
+a per-card coin toss.
+
+**B. `Agapanthus` 'Ovatus' carries a toxicity warning that the card cannot show.**
+His JSON has `toxicity: "Harmful if eaten by humans, dogs and cats"`. The card
+schema has no such field, so **the dealt card warns nobody** — and agapanthus is
+a plant people grow in pots on patios, around dogs.
+
+This is **the ninth batch to hit item 0c** and the second time in two days that
+the gap has cost a real safety line. 'Homebush' kept its only because the older
+card had put the wording inside `resilience`. The same workaround would work
+here — `resilience` currently reads *"drought tolerant once established · coastal
+tolerant"* and could carry "· harmful if eaten" — but **it was not applied
+unasked.** Editing Oscar's researched data to route around a schema gap is his
+call, and doing it quietly would hide the gap rather than fix it.
+
+**The real fix is still item 0c: give the schema a `toxicity` field.** Nine
+batches of evidence now say it is not a nice-to-have. Cards affected so far
+include Japanese Knotweed, *Rhododendron luteum*, Gunnera, Virginia Creeper,
+Houttuynia, 'Homebush', the Dahlia, Clematis AVALANCHE, Lonicera 'Copper
+Beauty', the Formosa lily (highly toxic to cats), Ivy 'Goldheart' and now this.
+
+**Update 2026-08-17 (same day): +1 more.** *Hosta* 'Emerald Charger' arrived
+carrying `toxicity: "Toxic to dogs and cats if eaten"` and it too renders
+nowhere. **Tenth batch, thirteenth card.** Also worth noting from that card: the
+deck now holds three Hostas, and 'Broadband' (green centre, yellow margin) and
+'Emerald Charger' (gold centre, green margin) are near-inverse variegations. The
+text tells them apart cleanly; the photographs, less so — the gold centre reads
+only faintly in this frame. If a third gold-and-green Hosta arrives, that is the
+pair to check a photo against.
+
+---
+
+### 44. A summer-flowering Daphne that is not the deck's Daphne — and a Forsythia photo its own card denies
+2026-08-17.
+
+**A. The Daphne is parked, not dealt.** Oscar sent it for *"the only daphne in
+deck"*, which is *D. bholua* 'Jacqueline Postill' — **held**, not dealt. It is
+almost certainly a different plant, and the evidence is the calendar rather than
+my eye:
+- **'Jacqueline Postill' flowers January to March.** The card's own `peak` says
+  `Jan-Mar` and its `visual` says *"in the depths of winter"*. This photograph
+  was taken in **mid-August**, in full flower.
+- The leaves are small, narrow and closely set on a low bushy plant.
+  *D. bholua* is tall and upright with long leathery leaves.
+- `[Inference]`: the ***D.* × *transatlantica*** group — ETERNAL FRAGRANCE
+  ('Blafra') or PINK FRAGRANCE — which is compact, small-leaved, and flowers
+  right through summer. Exactly what is in the frame.
+
+Parked as `daphne-unidentified-summer.jpg`. If it is a transatlantica it wants
+its **own card** — and it is arguably the better garden-centre plant of the two,
+since it flowers when customers are actually in the shop.
+
+**B. The Forsythia IS dealt, and its card now contradicts its own picture.**
+Oscar named it and the leaf is consistent with *F.* × *intermedia*, so it was
+dealt. But the card reads *"Bare stems buried under brilliant golden-yellow
+flowers **before a single leaf appears**"* with peak Mar-Apr, and the photograph
+is **nothing but leaves**.
+
+This is a harder version of the *Syringa* case. There, the card led with flowers
+and got foliage — a gap. Here the card's wording **explicitly denies** what the
+picture shows: it promises no leaves, and the picture is all leaf. A member of
+staff reading the card and looking at the card sees a contradiction on one
+screen. **It is first in the reshoot queue and March is the month.**
+
+**C. Also from this batch:** *Ophiopogon planiscapus* 'Kokuryū' is built and held
+for want of a photograph — the black mondo grass is an easy one to shoot any time
+of year, being evergreen. And the *Sempervivum* frame carries two nursery labels;
+the plant is unmistakable so it was dealt, but a tidier shot would be better.
+
+---
+
+### 45. Five cards built and held, one duplicate refused: the Lupin
+2026-08-17. Six researched cards arrived with "photos incoming", so all of them
+are built and sitting in the hold block. Five went in. The sixth did not, and
+one arrived twice.
+
+**A. `Lupinus` 'The Governor' already exists** as
+`Lupinus 'The Governor' (Band of Nobles Series)`, researched and held since the
+wishlist batch. The new JSON is the same plant under a shorter latin, so adding
+it would have put **two cards for one lupin** in the deck. The existing card was
+kept — same call as 'Homebush' (item 42) — and the differences are here for
+Oscar to reverse.
+
+**Fifteen fields differ. Three are worth his eye:**
+1. **`aspect` contradicts.** Held card says **South / West**; the new one says
+   **North / East / South**. A lupin wants sun. `[Inference]` the held card is
+   right and "North" is the odd one out, but it is his data either way.
+2. **The held card carries trade knowledge the new one loses** —
+   *"hardy but short-lived · lupin aphid and slugs are the standard problem"* in
+   `resilience`, and *"Dislikes chalk"* in the soil warning. Both are the kind of
+   thing a customer asks about; neither survives in the new version.
+3. **Neither card can show that a lupin is toxic.** The new JSON records
+   `toxicity: "Harmful if eaten · toxic to pets if eaten"` — correct, lupin seed
+   carries quinolizidine alkaloids — and the schema has nowhere to put it. Unlike
+   'Homebush', the held card does **not** smuggle it into `resilience` either, so
+   **this plant currently warns nobody by either route.** Item 0c again.
+
+**B. `Acer palmatum` 'Firecracker' was sent twice**, with two wordings of
+`visual` ("finely dissected" vs "feathery") and only one copy carrying the
+uncertainty notes. The version WITH the notes was used, and the fact of the
+duplicate is recorded in its `uncertain` block so the wording is not silently
+attributed.
+
+**C. What went in, all held pending photographs:** *Parrotia persica* 'Bella'
+(second Parrotia — the species is also held), *Acer palmatum* 'Firecracker'
+(**fifth** Acer palmatum), *Rhododendron* 'Hoppy' (sixth Rhododendron),
+*Allium karataviense* 'Red Giant', *Pinus mugo* — the deck's first pine.
+
+---
+
+### 46. The pine photograph is a GOLD cultivar — DEALT on Oscar's call; the card TEXT is now the open half
+2026-08-18. Five of six photographs landed. The *Pinus mugo* one did not, and
+Oscar's own research predicted the reason.
+
+**The card says** *"Dense **dark-green** paired needles · spreading bushy habit ·
+brown ovoid cones"*, and it is filed as the straight species. **The photograph is
+a small, tight, container-grown plant with brilliant yellow-gold needles** — one
+of the gold mugo selections ('Winter Gold', 'Carsten's Wintergold', 'Ophir' and
+several others are all in the trade) `[Inference]`, or at minimum a named compact
+form rather than the species.
+
+His own `uncertain` block on that card says exactly this risk out loud: *"Nursery
+plants labelled simply Pinus mugo are sometimes compact forms or unnamed
+selections substantially smaller than the species; this record represents the
+species itself."* This photograph is that footnote made real. Filing it would put
+a gold dwarf on a card describing a dark-green shrub reaching 2.5–4 m.
+
+Parked as `pinus-mugo-gold-unidentified.jpg`. **The card stays held.** Two ways
+out, both Oscar's: name the cultivar and give it its own card — a gold mugo is a
+better retail plant than the species anyway — or photograph a plain green one.
+
+**Overruled 2026-08-18.** Oscar resent the same photograph with the same
+unchanged JSON, which is his answer: use it. It is dealt, the parked copy is
+retired, and the frame was reframed to drop the burned-in AI label and lift the
+master to 1200px.
+
+**The objection has moved rather than gone, and it is now the same shape as the
+Forsythia (item 44B): the card's own words contradict its picture.** `visual`
+reads *"Dense **dark-green** paired needles · spreading bushy habit · brown ovoid
+cones"* and the photograph is a vivid gold plant. Two of those three clauses are
+fine; one is not.
+
+**The cheapest honest fix is one clause, and it is Oscar's to make** — something
+like *"Paired needles, gold in the selections widely sold · spreading bushy habit
+· brown ovoid cones"* keeps the card true to both the species and the plant in
+the frame. Alternatively the card becomes the named gold cultivar. What should
+not happen is leaving a card that says dark-green above a photograph that is
+not.
+
+**Provenance across this batch, because the balance has shifted:** four of the six
+carry `compositeWithTrainedAlgorithmicMedia` with `softwareAgent: Photo assist`
+and a visible "AI-generated content" label — the Lupin, the Rhododendron, the
+Allium and this pine. Only two are clean: *Parrotia* 'Bella' carries **no C2PA at
+all**, and *Acer* 'Firecracker' carries a plain Galaxy S24 capture manifest
+(`c2pa.ingredient.v2`, `relationship: parentOf`, no `digitalSourceType`) — which
+is what an untouched camera original looks like, and the first time in this deck
+one has been positively identified as such rather than merely lacking markers.
+
+**Item 32's tally is now well past "at least four".** The Galaxy edit is no
+longer the exception in this deck's intake; it is the default, and the open
+question — whether a generatively edited photograph keeps
+`commercialUseCleared: true` — now governs the majority of new photographs
+rather than a handful.
+
+**One thing the reframing did that is worth noting:** cropping the Rhododendron,
+Lupin and Allium to fix their resolution also **physically removed** the burned-in
+AI labels, which had previously been hidden behind card furniture with a focus
+override. The marker is still recorded verbatim in `CREDITS.json` for all three;
+the file simply no longer displays it.
+
+---
+
+### 47. The Butia label carries a name from a different genus — DEALT; the species half stays open
+2026-08-18. A new card, not a replacement: the deck had no *Butia* at all. Oscar's
+research block flagged the conflict itself before the photograph was looked at.
+
+**The label read** *"Butia capitata (Cocos australis)"*, and those two names do
+not describe the same plant. Kew treats **Cocos australis as a synonym of
+Syagrus romanzoffiana** — the queen palm — while *Butia capitata*'s historical
+synonym is *Cocos capitata*. One label, two genera.
+
+**The photograph settles that half.** The plant Oscar shot has **armed
+petioles** — the leaf bases are lined with stiff teeth along both margins, plain
+in the frame at card size — and stiff, single-plane, strongly recurved
+**glaucous blue-grey** leaflets. *Syagrus romanzoffiana* is unarmed, glossy
+mid-green, and plumose, with leaflets leaving the rachis in several planes.
+**This is a Butia, not a Syagrus** `[Inference]` — so the "Cocos australis" on
+the label is a trade-label error, not a description of this plant.
+
+**The species half cannot be settled and is not being settled here.** Nursery
+stock sold as *Butia capitata* in the UK very largely belongs to the older, wider
+concept that also covered ***Butia odorata***, and the two are not separable from
+a photograph of the crown `[Unverified]`. Fruit and seed characters would be
+needed, and this plant is not carrying ripe fruit in the frame.
+
+**Dealt as `Butia capitata`** on the same footing as the rest of the deck: that
+is the name RHS still keeps a horticultural profile under, it is the name Oscar's
+own JSON carries, and its `cvs` line already prints *"syn. Butia bonnetii; Cocos
+capitata"* on the card. What is NOT on the card is *Cocos australis* — I did not
+copy the erroneous half of the label onto it.
+
+**For Oscar, if he wants it closed:** the nursery's own label or delivery
+paperwork would say which of the two the batch was bought as, and ripe fruit in
+autumn would decide it properly. Neither is needed for the card to be right.
+
+**Third palm concept in the deck** — *Chamaerops humilis* dealt, *Trachycarpus
+fortunei* still held — and the only pinnate (feather) one of the three.
+
+---
+
+
+
+### 48. 'Profusion' is a trade name RHS treats as a synonym — kept as supplied, low stakes
+2026-08-18. Oscar's own research block on the Mexican fleabane says it: **RHS
+treats *Erigeron karvinskianus* 'Profusion' as a synonym of the straight species
+rather than as a currently accepted cultivar name.**
+
+**Kept as supplied**, because it is the name the plant is sold under in the UK
+and the name on his label, and because the card already prints the alternatives
+in `cvs` — *"syn. Erigeron 'Profusion'; Erigeron karvinskianus 'Bluetenmeer'"*.
+Nothing on the card claims cultivar status that the plant does not have.
+
+**Two smaller notes, neither blocking:**
+- His block also flags that RHS gives a broad 10–50 cm height for the species
+  while its cultivar description says a 15–30 cm mat. The card carries the
+  narrower 15–30 cm, which matches what 'Profusion' actually does.
+- The identification rests on Oscar's label plus habit — small daisies with
+  yellow discs on wiry lax stems. The photograph shows one flower already
+  flushing pink at the rays in the wider frame, which is the species' own tell.
+  *Erigeron annuus*, the weedy lookalike, is stiffly erect with much narrower,
+  thread-like rays `[Inference]`.
+
+**If Oscar wants it exact:** whether the batch was bought as 'Profusion' or as
+the species is on the delivery note, not in the plant.
+
+---
+
+
+### 49. 'Zagora Yellow' — the only flower supplied for it is CREAM-WHITE, not yellow
+2026-08-18. Dealt on foliage, because the flower half of this card is not
+settled and I am not going to settle it by picking a reading.
+
+**The card says** *"**Bright yellow** daisies · dark centres · finely divided
+silvery-grey foliage"*. The photograph Oscar supplied is a **collage**: a large
+foliage frame with a small inset panel pasted over the top-right corner, and the
+flower in that inset has **cream-white rays around an orange-yellow disc**.
+
+**Two readings, and I cannot separate them from this frame:**
+1. **It is 'Zagora Yellow', photographed late.** The Zagora yellows are widely
+   described as fading to cream as the flower ages `[Unverified]` — so a spent
+   bloom in mid-August, four months into a May–Sep season, could look exactly
+   like this.
+2. **It is the straight species.** *Rhodanthemum hosmariense* is white-rayed with
+   a yellow disc as standard, and it is the commonest form in the trade. If the
+   plant in the pot is the species, the card's name is wrong.
+
+The foliage does not decide it — finely divided, silvery, densely hairy fits both,
+because they are the same plant apart from ray colour.
+
+**What was dealt:** the foliage frame only, cropped away from the inset (a card
+cannot show a picture-in-picture), so nothing on the card asserts a flower colour
+that the photograph contradicts. This is the **Forsythia principle** — a real leaf
+beats an empty card — with the same condition attached: **it wants a flower shot
+in season.**
+
+**What would settle it in ten seconds, in the garden:** a fresh, just-opened
+bloom. If the newest flowers on the plant open yellow, it is 'Zagora Yellow' and
+the inset was simply an old one. If the newest flowers open white, the label is
+wrong and this card should be re-cut as *Rhodanthemum hosmariense*.
+
+**Reshoot list:** May–Sep, fresh bloom, alongside the Forsythia (March), Syringa
+'Znamya Lenina' (May) and Allium 'Red Giant' (June).
+
+---
+
+### 50. Lithodora dealt on foliage — no flower, and the leaves are the wrong green for its own text
+2026-08-18. Much milder than 49, and recorded so it is not rediscovered as a
+defect.
+
+The card's `visual` opens on *"Intense gentian-blue flowers · narrow
+**dark-green** evergreen leaves"*. The photograph is an August plant in a pot:
+**no flowers at all** — its peak is Apr–Jul and it is well past — and the fresh
+growth is a **bright mid-green**, not the dark green the text names. Older
+foliage lower in the frame is darker, so the text is not wrong about the plant,
+only about the flush that is showing.
+
+Dealt because the bristly narrow leaves and the lax habit are legible and true
+`[Inference]`, and because a real August photograph beats a gradient. **A
+flowering shot in April–July would be a straight upgrade** and would put the
+gentian-blue the card leads on into the picture.
+
+---
+
+
+### 51. The Aloe: a label phrase dropped, spots that do not prove the species, and a backlit frame
+2026-08-18. Dealt as supplied. Three things recorded so they are not rediscovered.
+
+**1. Oscar's own research dropped part of the label, and was right to.** His
+`uncertain` block says the supplied wording was *"Aloe vera var. chinensis (Aloe
+massawana hybrid)"* and that **no authoritative source confirms any *A.
+massawana* parentage**, so it was left out of the botanical identity. Kew treats
+*A. vera* var. *chinensis*, *A. chinensis* and *A. barbadensis* var. *chinensis*
+all as synonyms of plain *Aloe vera*, which is what the card carries. The
+synonyms print in `cvs`; the unconfirmed hybrid claim does not appear anywhere.
+
+**2. The photograph does not confirm the species, and does not contradict it.**
+The plant has narrow blades with **strong white spotting and toothed margins**.
+Juvenile *Aloe vera* is spotted and loses the spots with age, so this fits — but
+so do several spotted aloes in the houseplant trade (*A. maculata* and its
+hybrids among them) `[Inference]`. Nothing here is wrong; it is simply not
+evidence. The name rests on Oscar's label, as it does for most of the deck.
+
+**3. It is shot into the window.** Backlit, so the blades read olive-and-dark
+rather than the *"fleshy grey-green"* the card names, and the pot fills the lower
+half. Three crops were tried; the third puts the spotted, toothed blades across
+the card band and the pot below it, which is as far as cropping can take this
+frame. **A front-lit shot — light behind the photographer, rosette from slightly
+above — would be a straight upgrade** and is worth two minutes on any sunny day,
+since this one lives on a windowsill.
+
+**If it ever matters which aloe it is:** a flower spike settles it. *A. vera*
+throws a tall yellow raceme; the spotted *maculata* group is orange-red and
+flat-topped `[Inference]`. Peak Jun–Sep.
+
+---
+
+
+### 52. The Rubber plant card was written by CLAUDE, not by the research pipeline
+2026-08-20. Oscar asked for a *Ficus elastica* card and to push it with no
+photograph, so it is **held**, like the other 81 cards waiting on a picture.
+One thing about it is different from every other card in the deck and needs to
+stay visible.
+
+**Its data did not come from the research pipeline.** Every other card in 306 was
+written from Oscar's researched JSON, checked against RHS/Kew, with an
+`uncertain` block from that research. This one I wrote from general horticultural
+knowledge because that is what was asked for. It is **not wrong as far as I know,
+and it is also not checked.**
+
+What that means in practice, all recorded in the card's own incoming JSON:
+- **Height and spread are INDOOR container figures** (2–3 m × 1–1.5 m). RHS
+  quotes a far larger ultimate size for the species; a rubber plant in a pot in a
+  British sitting room does not do that, and the card is for the pot.
+- **No cultivar is named.** Almost every rubber plant in UK retail is a named
+  selection — 'Robusta', 'Tineke', 'Abidjan', 'Melany' — and which one this card
+  stands for is simply not recorded. `cvs` is left blank rather than guessed.
+- **The 0–20 ratings are my editorial judgement, not Oscar's.** `pestRisk 8`
+  reflects scale insect being the usual trouble on this plant.
+- **`resilience` is deliberately blank.** Rubber plants are often sold as
+  low-light tolerant; I am not confident enough in that to print it as a claim.
+- The toxicity line — *"Milky sap is harmful if eaten and may irritate skin and
+  eyes"* — is the latex sap, and it is the first card to reach the new SAFETY
+  plaque without coming through the research files.
+
+**Recommended:** run it through the normal research pass when convenient and
+overwrite this card wholesale. Nothing here is load-bearing.
+
+**Fourth houseplant in the deck** — with *Phalaenopsis*, *Monstera* and *Aloe
+vera* — and the third H1b.
+
+---
+
+
+### 53. 'Zorro' is PBR protected and the card cannot say so — the LEGAL half of item 0c
+2026-08-20. The SAFETY plaque shipped this morning, so *Zorro*'s toxicity line
+(*"Skin allergen · harmful if eaten by dogs and cats"*) is on the card. Its
+**`compliance` line is not, because compliance still has nowhere to render**:
+
+> `"compliance": "PBR protected · commercial propagation restricted"`
+
+That is now **seven** cards carrying a legal note the app cannot show — Gunnera's
+UK ban, the Olive's Xylella note, the Eryngium PBR and the other PBR cultivars,
+and this one. The rail built for the SAFETY plaque would carry it with one more
+block; whether it should look like that plaque or read differently is Oscar's
+call, and it is the obvious next brick on the back of the card.
+
+**Also on this card, and mild:** the photograph is a plant in tight green bud,
+while the card leads on *"Ultramarine-blue lacecaps"*. The reason is in the EXIF
+and is not a fault — **the shot is dated 22 May 2024**, before the Jun–Sep peak.
+What the photograph does carry is the cultivar's own signature: the **deep
+purple-black stems**, which are visible and are what separates 'Zorro' from every
+other lacecap. A June–September shot of the same plant would put the blue in.
+
+**Ninth Hydrangea in the deck** and the second *macrophylla* lacecap after
+RENDEZ-VOUS FRENCH CANCAN BLEU — worth a glance before either photo is reused.
+The pink double lacecap still parked as `hydrangea-lacecap-unidentified.jpg` is
+**not** this plant; it stays parked.
+
+---
+
+### 54. Two archive photographs, and a name one letter from a different plant
+2026-08-20. Recorded because both are easy to misread later.
+
+**Both of today's photographs are archive shots from a different phone.** EXIF
+says Samsung Galaxy S21 (SM-G991B): the Hydrangea 22 May 2024, the Imperata
+19 July 2024. Every other photograph in this run is a Galaxy S24 capture from
+August 2026. Nothing is wrong with either file — no C2PA manifest, no AI marker,
+Oscar's own pictures — but the register now says which are current-season and
+which are not, because "why are the hydrangea flowers not out" has a clean answer
+and it should not have to be rediscovered.
+
+**The Imperata is one letter from another card.** The deck already holds
+*Pennisetum* **'Rubrum'**; this is *Imperata cylindrica* **'Rubra'**. Different
+genus, different plant, near-identical epithet, and both are red-leaved grasses
+in a deck that now has six grasses. Any future photo swap between them would look
+plausible and be wrong.
+
+Oscar's research also corrected the supplied *"Imparata"* to **Imperata** before
+it reached me, and RHS accepts 'Rubra' with 'Red Baron' as the synonym — which is
+how the card is written, common name on the trade name, latin on the accepted one.
+
+---
+
+
+### 55. 'Rosy Jane' breaks the deck's own trade-name convention — a one-line fix, Oscar's call
+2026-08-21. Dealt as supplied. The card is right about the plant; it is written
+differently from the card sitting next to it.
+
+**The deck already holds the other one.** *Oenothera lindheimeri* **GAUDI ROSE
+('Florgaucomro')**, dealt, and its `latin` follows the deck's convention for a
+trade-named cultivar: **TRADE NAME in caps, breeder denomination in quotes.**
+
+This card arrived as `Oenothera lindheimeri 'Rosy Jane'` — the trade name in the
+denomination's slot — with the breeder code pushed into `cvs` instead. Oscar's own
+research block says why that is awkward: *"RHS now places the cultivar under
+Oenothera lindheimeri **'Harrosy'** and lists 'Rosy Jane' and 'Rosyjane' as
+synonyms"*. On the deck's convention it would read:
+
+> `Oenothera lindheimeri ROSY JANE ('Harrosy')`
+
+**Not changed here**, because renaming a plant is not mine to do and both forms
+name the same cultivar. It is a one-line edit whenever Oscar wants the two Gauras
+to match, and it would also change the photo's slug, so it is worth doing
+deliberately rather than in passing.
+
+**Confusion risk between the two is LOW despite the shared species**: GAUDI ROSE
+is a 30 cm plant with deep rose-pink flowers over dark burgundy-flushed leaves;
+'Rosy Jane' is 50–100 cm with white flowers edged vivid pink over green foliage.
+They do not look alike, and the photographs do not either.
+
+---
+
+### 56. Eighth card carrying a legal note the app cannot show
+2026-08-21. `"compliance": "PBR protected · commercial propagation restricted"`
+on 'Rosy Jane', and its own research block records the denomination 'Harrosy' as
+the PBR-protected name.
+
+That is **eight** cards now — Gunnera's UK ban, the Olive's Xylella note, the
+Eryngium, the PBR cultivars, Hydrangea 'Zorro' yesterday, and this one. The
+SAFETY plaque built on 2026-08-20 proved the rail works and this is the second
+card since to arrive wanting the legal half of it.
+
+Nothing new to decide beyond what item 0c and VQ 53 already say: the block is
+built, `compliance` needs the same treatment `toxicity` got, and whether it wears
+the same plaque or reads differently is Oscar's call.
+
+---
+
+
+### 57. Should 'Zagora Yellow' get its flower panel back?
+2026-08-21. Raised by Oscar's correction on the Gaura, and **not acted on**,
+because the two cases are not the same and the difference matters.
+
+**The Gaura** was a side-by-side pair — foliage frame beside flower frame — and
+cropping it to the flowers threw away half of what makes the plant identifiable.
+Restored whole, and that is now the standing rule (protocol v14.34).
+
+**The Rhodanthemum 'Zagora Yellow'** (v14.28) is a **picture-in-picture**: a small
+flower panel pasted over the top-right corner of a foliage frame, with a hard
+rectangular border. Two reasons it was excluded, and both still stand:
+1. an inset panel with a border reads as a collage on a card face, where a
+   side-by-side pair reads as a deliberate two-panel plate;
+2. **the flower in it is cream-white, and the card is named 'Zagora Yellow'**
+   (VQ 49). Putting it on the card face would put the unresolved question on the
+   front of a customer-facing card.
+
+**Both are arguable.** Against (2): showing the actual flower is honest, and the
+card would then show what the plant really did rather than hiding it behind
+foliage. **Oscar's call.** Say the word and it is a five-minute restage.
+
+The cleanest answer to both is still the one in VQ 49: one fresh bloom in
+May–September settles whether the card is named right, and then the photograph
+can show the flower without ambiguity.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

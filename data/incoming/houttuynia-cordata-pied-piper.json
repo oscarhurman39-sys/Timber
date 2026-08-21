@@ -1,0 +1,33 @@
+{
+  "common": "Heart-leaved houttuynia 'Pied Piper'",
+  "latin": "Houttuynia cordata 'Pied Piper'",
+  "hue": 30,
+  "visual": "Green leaves splashed red, orange and yellow · small white flower spikes",
+  "water": "Moderate; tolerates wet soil",
+  "aspect": "South / West",
+  "soil": "Moist to poorly drained",
+  "soilWarning": "Contain rhizomes · spreads aggressively",
+  "prune": "Divide regularly to limit spread",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Oct",
+  "cvs": "",
+  "hardiness": "H6",
+  "hardinessNote": "",
+  "resilience": "cold hardy · wet-soil tolerant · shade tolerant",
+  "uses": "ground cover · bog gardens · pond margins · containers",
+  "height": "20–30 cm",
+  "spread": "50–100 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 16,
+  "pestRisk": 2,
+  "thirst": 11,
+  "careLevel": 7,
+  "sunNeed": 75,
+  "sunMin": 45,
+  "uncertain": [
+    "RHS lists the cultivar name status as unresolved",
+    "RHS gives a 10–50 cm height band but describes the plant as reaching about 30 cm; specialist UK nursery material gives about 20 cm"
+  ]
+}

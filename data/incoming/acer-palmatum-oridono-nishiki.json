@@ -1,0 +1,33 @@
+{
+  "common": "Japanese maple 'Oridono-nishiki'",
+  "latin": "Acer palmatum 'Oridono-nishiki'",
+  "hue": 340,
+  "visual": "Green, cream and vivid pink variegation · orange-red autumn colour",
+  "water": "Moderate; water in dry spells",
+  "aspect": "East / South / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Sheltered · avoid hot, dry exposure",
+  "prune": "Prune only if needed from late autumn to midwinter",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Apr-Nov",
+  "cvs": "also encountered as 'Orido-nishiki'",
+  "hardiness": "H6",
+  "hardinessNote": "",
+  "resilience": "cold hardy · part-shade tolerant · urban suitable",
+  "uses": "specimen · courtyards · containers · foliage colour",
+  "height": "4–6 m",
+  "spread": "2.5–4 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 7,
+  "pestRisk": 10,
+  "thirst": 10,
+  "careLevel": 7,
+  "sunNeed": 58,
+  "sunMin": 40,
+  "uncertain": [
+    "RHS accepts the spelling 'Oridono-nishiki'; the variant 'Orido-nishiki' also occurs on horticultural material",
+    "RHS places ultimate height in the 4–8 m band but describes the cultivar as reaching about 6 m; 4–6 m was used for practical garden planning"
+  ]
+}

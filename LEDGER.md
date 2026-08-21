@@ -15,19 +15,22 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   r78 measurements never could have caught this — every profile in that session
   stopped ~5s after load, and the actual bomb does not arm until t+9s.
   WHAT I MISSED: staging the deal changed WHEN the deck is built, not WHAT the
-  page ends up holding. Steady state was untouched — still 168 cards, 31,184 DOM
-  nodes, 6,357 <img> elements, ~326MB renderer RSS measured on desktop Chromium
-  with no memory pressure at all. And tricklePhotos, 9s after load, walked every
-  buried card and set src on its photo: 168 live 1000x1333 decode targets, 881MB
-  of bitmap if a browser chooses to keep them. Chromium discards decodes for
-  images it never paints, which is exactly why a desktop profile shows a flat
-  ~326MB and hides the whole problem — WebKit is under no obligation to make the
-  same choice, and iOS is where the app died.
+  page ends up holding. Steady state was untouched. And tricklePhotos, 9s after
+  load, walked every buried card and set src on its photo — turning the whole
+  deck into live decode targets. Measured on the DEPLOYED r165 tree (228 cards,
+  42,599 DOM nodes, 8,858 <img> elements): 231 photos with src, **1,172MB** of
+  bitmap if a browser chooses to keep them. Chromium discards decodes for images
+  it never paints, which is exactly why its RSS sits flat at ~323MB and hides the
+  whole problem — WebKit is under no obligation to make the same choice, and iOS
+  is where the app died. Note the figure grows with the deck: it was 881MB at the
+  168 cards this branch started from, and 1,172MB now at 228. Every card Oscar
+  deals makes the cliff taller, which is why this could not keep waiting.
   FIX: tricklePhotos now warms the cache with fetch() instead of img.src. The
   service worker caches any ok same-origin GET whoever asks for it, so offline
   gets the identical bytes in the identical Cache Storage entry — verified, 169
   photos and 9.1MB still fetched — while decoding nothing and holding nothing.
-  Live decode targets: 881MB -> 55MB. Buried cards keep their data-psrc and
+  Live decode targets on the deployed deck: **1,172MB -> 48MB**, with all 231
+  photos still fetched into the cache. Buried cards keep their data-psrc and
   decode only if they ever reach the top.
   AND A HARNESS, because two blind fixes is enough: ?cards=N deals only the
   newest N. There is no iOS engine in this environment, so "unyielding main
@@ -42,6 +45,351 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-21 (crop less — Oscar's correction) — the Gaura composite is
+  **restaged WHOLE**. I had cropped it to the flower frame; Oscar reversed it:
+  "don't change the image so much... this shows off both parts of the plant which
+  is helpful for ident." He is right, and it is a standing rule now, not a
+  one-card fix: **a garden-centre card is an identification aid before it is a
+  photograph**, so a frame carrying leaf AND flower is doing more work than a
+  prettier frame carrying one. Crop to fix a PROBLEM — aspect gate, a legible
+  label, a subject outside the card band, dead space — never to improve a
+  composition. Restaging at `verdict: as-is` also put the master back up from
+  1098 px to the full 1200×1600, so the tighter crop had been the lower-resolution
+  one too. **One open consequence flagged not acted on**: the Rhodanthemum
+  'Zagora Yellow' was cropped the same way, but its case differs (pasted inset,
+  not a side-by-side pair, and its cream flower contradicts the card's own name —
+  VQ 49), so restoring that one is Oscar's call. Protocol v14.34.
+progress: 2026-08-21 (Gaura 'Rosy Jane') — **deck 228, hold 82.** Second
+  side-by-side composite of the week, and this time the seam was MEASURED — a
+  column-difference scan put it at x=0.630, the crop starts at 0.634. Right frame
+  only: it carries the card's whole headline (white flowers edged vivid pink,
+  dark-pink buds, long red stamens) where the left was a soft foliage macro.
+  Master is 1098 px against the 1200 standard because the flower frame is 37% of
+  the composite's width — the right trade, since the card derivative caps at
+  1000 px anyway. **Two things left for Oscar**: the card breaks the deck's own
+  trade-name convention (the sibling reads GAUDI ROSE ('Florgaucomro'), this one
+  should read ROSY JANE ('Harrosy')) — not corrected, VQ 55, one line and a slug
+  change; and it is the **eighth** card carrying a compliance line with nowhere
+  to render, VQ 56. Protocol v14.33. Gate 17/17 sequential.
+progress: 2026-08-21 (Powis Castle) — **deck 227, hold 82.** The deck's first
+  *Artemisia*, and the first photograph of the run that needed **no crop**: the
+  EXIF-rotated frame was already 0.75 with the silvery shoot sitting in the card
+  band, so it went through `reframe-photo.js` at `verdict: as-is` purely to bake
+  the rotation in. Master 1200×1600, the largest staged this week, and a
+  current-season capture (S24, 21 Aug 2026) rather than the archive frames of the
+  last batch. `hue: 0` on a silver plant was checked rather than "corrected" — it
+  only drives the fallback gradient behind a photo that fails to load, and the
+  deck already has hue 0 on a white Scabiosa. Protocol v14.32. Gate 17/17
+  sequential.
+progress: 2026-08-20 (Zorro + blood grass) — **deck 226, hold 82.** First two
+  cards to land after the SAFETY plaque, and between them they show what is built
+  and what is not: *Zorro*'s toxicity line is on the card, its `compliance` line
+  ("PBR protected · commercial propagation restricted") still has nowhere to go —
+  seven cards now carry a legal note the app cannot show. VQ 53; the rail is
+  built, one block would carry it, and it is the obvious next brick.
+  **Zorro also found a real bug in plant-sense**: it read "Avoid dry soil" as a
+  drought-tolerance claim and flagged the card as contradicting itself. The
+  pattern was matching inside a negation. Fixed by stripping negated phrases
+  first — and three other moisture-lovers turned out to carry the same latent
+  mis-signal, saved only by sitting below the thirst threshold. Third negation
+  bug in two days; same lesson each time. Both photographs are Galaxy S21
+  ARCHIVE shots (May 2024, July 2024) where the rest of this run is August 2026
+  on the S24 — which is the whole reason the hydrangea is in bud not flower, so
+  the register now says so (VQ 54). The blood grass is the best photograph of the
+  day. Protocol v14.31. Gate 17/17 sequential.
+progress: 2026-08-20 (Rubber plant, held) — **deck 224, hold 82.** *Ficus
+  elastica*, added with no photograph at Oscar's request, so it sits in the hold
+  block with the other 81 awaiting pictures. **Its data is mine, not the research
+  pipeline's** — written from general horticultural knowledge because that is
+  what was asked for, unchecked against RHS or Kew, with the differences recorded
+  on the card itself: indoor container sizes not species ultimates, no cultivar
+  named (blank rather than guessed), ratings my editorial call, `resilience` left
+  blank rather than print a low-light claim I am not sure of. VQ 52 says to
+  overwrite it wholesale when it goes through a normal research pass. Its
+  toxicity line is the latex sap, so it is the first card to reach the new SAFETY
+  plaque without coming through the research files. Fourth houseplant in the
+  deck. Gate 17/17 sequential.
+progress: 2026-08-20 (the SAFETY plaque) — **item 0c closed for toxicity.**
+  `toxicity` is a card field, a CSV column and a rendered plaque on the trade
+  back, and the **44 researched notes that had been unreadable in
+  data/incoming/ are now on their cards** (5 highly toxic, 29 toxic, 3 handle
+  with care, 6 edible, 1 no-known-hazard). Reading the corpus before designing
+  changed the design: the field is not only hazards — six entries are EDIBILITY
+  notes and one is a sourced all-clear, so the plaque carries five tiers rather
+  than three. Every rule was checked note by note; the ordering that matters is
+  that "should not be treated as edible" reads as a hazard, so negations are
+  tested before the word "edible". Prose always prints verbatim — the tier only
+  picks ink and glyph. A blank prints NOTHING, because blank means not
+  researched and a shop reads "no toxicity recorded" as "safe to eat".
+  First piece of the back-of-card redesign: it is in the front's language
+  (paper, ink, Georgia small-caps, hazard rule) and sits above the buyer
+  figures. `compliance` is the same problem and the rail is now there for it.
+  Protocol v14.30. Gate 17/17 sequential.
+progress: 2026-08-18 (Monstera + Aloe) — **deck 224, hold 81.** The run's first
+  houseplants, both H1b. Monstera is the best photograph of the day — one mature
+  fenestrated leaf straight across the card band, unmistakable. The Aloe is the
+  weakest: shot into the window, pot filling half the frame; three crops before
+  the spotted toothed blades read properly, and a front-lit reshoot is still
+  worth two minutes (VQ 51, with the identity notes — the unconfirmed "Aloe
+  massawana hybrid" label wording Oscar's own research correctly dropped, and
+  that heavy spotting fits juvenile A. vera but fits other spotted aloes too).
+  `hardiness` came in as "H1B" and the schema refused it — normalised to the RHS
+  spelling H1b, same rating. **Both cards carry toxicity text with nowhere to
+  render it**, and on houseplants handled indoors that is the sharpest form of
+  item 0c yet. Protocol v14.29. Gate 17/17 sequential.
+progress: 2026-08-18 (Lithodora + Rhodanthemum) — **deck 222, hold 81.** Two new
+  genera, both dealt on August foliage, both cards written for a flower.
+  **Rhodanthemum 'Zagora Yellow' is the one that needs Oscar**: the supplied file
+  is a collage, and the flower in its pasted inset is CREAM-WHITE where the card
+  is named for bright yellow. Either it is 'Zagora Yellow' shot late (the yellows
+  fade to cream) or it is the straight white species and the label is wrong — the
+  foliage cannot tell them apart. Dealt on the foliage frame with the inset
+  cropped out, so the card asserts no flower colour at all. One fresh bloom
+  settles it: VQ 49. Lithodora is the mild version — no flowers in August, new
+  flush brighter than its own "dark-green": VQ 50, April–July reshoot.
+  Crop lesson: when the master is wider than the 0.6165 slot the card band is
+  fixed to the master's own 12–62%, so a focus override cannot move it — the
+  sharp region has to be placed by the crop box. First Rhodanthemum crop read as
+  a green blur; re-cut 0.09 lower and it came up legible. Protocol v14.28.
+  Gate 17/17 sequential.
+progress: 2026-08-18 (Mexican fleabane) — **deck 220, hold 81.** *Erigeron
+  karvinskianus* 'Profusion', a NEW card; the deck had no Erigeron. Cropped away
+  from the photograph's own subject: the lower 40% is one huge out-of-focus
+  bloom, so the crop takes the upper half where everything is sharp and leaves
+  the bokeh under the plaque. Two things worth keeping: the JSON's low ratings
+  tripped the "un-converted 0–5 scale" warning and `growthSpeed 12` disproves it
+  outright (12 cannot exist on a 0–5 scale) — that is the cheapest check next
+  time; and the chat preview was landscape while the FILE is EXIF orientation 6
+  and displays portrait, so crop coordinates have to be written against the
+  rotated frame the app renders. Photo has no C2PA manifest at all — Samsung
+  Ultra HDR with a gain map, EXIF Galaxy S24, no AI marker — recorded as that
+  rather than as "clean C2PA". 'Profusion' is an RHS synonym, kept as supplied:
+  VQ 48. Protocol v14.27. Gate 17/17 sequential.
+progress: 2026-08-18 (Jelly palm) — **deck 219, hold 81.** *Butia capitata*, a
+  NEW card, the deck's first pinnate palm. The supplied label named two genera
+  ("Butia capitata (Cocos australis)" — the second is a Syagrus synonym); the
+  photograph settles the genus, because armed petioles and stiff glaucous
+  single-plane leaflets are Butia and not Syagrus, and does NOT settle
+  capitata-vs-odorata, which is not readable from a crown shot. Dealt under the
+  name Oscar's JSON carries, with the erroneous half kept off the card. VQ 47.
+  Photo is a clean Galaxy S24 capture, reframed 0.561 -> 0.780 (a 1:1 crop was
+  tried first and lost the arching fronds). A focus override was tried and
+  removed: the master is width-constrained in the card slot, so it did nothing.
+  The card loses `hardinessNote` at the schema — for a borderline-hardy palm
+  that is the most useful line on it. Item 0c, now unmistakable.
+  Gate came back 16/17 first: a perf-test release-timing check with a 50ms
+  wall-clock budget. Checked it against deck 218 before touching it — it failed
+  4/4 there too, so not the new card. It was measuring the container's frame
+  cadence; it now counts frames, which is what its name always said. 17/17 read.
+progress: 2026-08-18 (go-to-card, and a gate claim withdrawn) — **deck 218,
+  hold 81, no card changes.** The previous commit's message claimed "Gate: 17/17
+  sequential"; the run had returned **16/17**. Withdrawn — the claim was written
+  before the result was read. The failure was real, reproduced standalone:
+  go-to-card took ~34s to riffle to the deepest card, past the suite's 30s wait.
+  Measured the cause rather than guessing at it — not the tempo, not photo
+  priming, but ~108ms of layout per single card re-stacked at 218 cards, one
+  card per frame. `cutUnder()` now closes the far part of the cut in one DOM
+  pass and only the last 10 tucks fly: **34.2s -> 2.6s**, same card on top,
+  `order`/`history` untouched. Both riffle waits tightened from a 30s backstop
+  to a 12s budget. Gate 17/17 sequential, features-test 47.8s -> 28.0s.
+  Protocol v14.25.
+progress: 2026-08-18 (the pine, on Oscar's call) — **deck 218, hold 81.** He
+  resent the gold pine unchanged, which is his answer; dealt, parked copy
+  retired, reframed to drop the AI label and reach 1200px. The card's "dense
+  dark-green paired needles" now contradicts its own photograph — same shape as
+  the Forsythia, and one clause fixes it. VQ 46.
+progress: 2026-08-18 (five dealt, the pine refused) — **deck 217, hold 82.**
+  Rhododendron 'Hoppy', Lupin 'The Governor', Parrotia 'Bella', Allium 'Red
+  Giant' and Acer 'Firecracker' all dealt. The Pinus mugo photo is a GOLD
+  cultivar against a card describing the dark-green species — his own uncertain
+  note predicted exactly this — so it is parked and the card stays held (VQ 46).
+  Reframed three of the five: they staged at 587-764px against a ~1000px card,
+  and cropping to fix that also physically removed their burned-in AI labels.
+progress: 2026-08-17 (five held, one refused) — **deck 212, hold 87.** Parrotia
+  'Bella', Acer 'Firecracker', Rhododendron 'Hoppy', Allium karataviense 'Red
+  Giant' and Pinus mugo (the deck's first pine) built and held for photographs.
+  Lupinus 'The Governor' REFUSED as a duplicate — the deck already holds it under
+  a longer latin, and the existing card carries trade knowledge the new one drops.
+  VERIFY-QUEUE 45. Also added the MIRRORED photo effect to Rhubarb Crumble.
+progress: 2026-08-17 (Rhubarb Crumble) — **deck 212, hold 82.** Veronica
+  'Rhubarb Crumble' dealt, and it CLOSES the unidentified variegated Hebe parked
+  in VERIFY-QUEUE 38 — same photograph, now named, parked duplicate retired. Best
+  demonstration yet of the reframe tool: as shot the plant was a corner of a
+  concrete slab, two thirds paving. The Hebe/Veronica naming split is now 2:1
+  and wants settling (VQ 43).
+progress: 2026-08-17 (EDITION cards) — Magnolia acuminata recropped so the whole
+  seed pod shows, and given the deck's first EDITION treatment: orange-and-black
+  edge, outlined panels, feathered background blur, and its bottom strip replaced
+  with Oscar's joke text. The blur is CSS, not a baked edit — the master stays a
+  camera original, which is what PHOTO-REFRAME-BRIEF requires. Gate 17/17.
+progress: 2026-08-17 (reframe tool adopted) — **deck 211, hold 82.** Deutzia
+  'Magicien' and Magnolia acuminata, the first two cards framed with
+  tools/reframe-photo.js rather than by hand. Ported the tool and
+  PHOTO-REFRAME-BRIEF.md from claude/plant-collection-scan-y2j7fp — that branch
+  is otherwise BEHIND this one and carries no cards this deck lacks. Fixed a
+  real bug in the tool: it ignored EXIF orientation, so ~half of Oscar's phone
+  photos failed validation. It also caught a crop-aspect arithmetic error of
+  mine, which is the point of it. Rhododendron and Hydrangea photos parked — no
+  cards came with them and both genera already have dealt cards.
+progress: 2026-08-17 (batch of six photos) — **deck 209, hold 82.** Clematis
+  JOSEPHINE and Sempervivum arachnoideum built; Forsythia 'Lynwood Variety'
+  dealt; MINER'S MERLOT re-shot; Gunnera gains the deck's third PHOTO_SWAP pair
+  (top vs spiny underside). Ophiopogon 'Kokuryū' built but HELD, no photo.
+  **The Daphne was refused on calendar evidence** — the deck's only Daphne is
+  bholua 'Jacqueline Postill', peak Jan-Mar, and this one is in full flower in
+  August, so it reads as the D. x transatlantica summer group. VERIFY-QUEUE 44.
+progress: 2026-08-17 (Hosta + Buddleja) — **deck 206, hold 82.** Hosta 'Emerald
+  Charger' (third Hosta, near-inverse variegation to 'Broadband') and Buddleja
+  LITTLE RUBY (third Buddleja, the only ruby-pink). Between them they hit both
+  halves of item 0c in one sitting: the Hosta's "toxic to dogs and cats" and the
+  Buddleja's PBR propagation restriction, neither of which any card can render.
+progress: 2026-08-17 (Hosta 'Emerald Charger') — **deck 205, hold 82.** Third
+  Hosta; near-inverse variegation to 'Broadband', which the text separates but
+  the photographs barely do. Tenth batch to lose a toxicity line to the missing
+  schema field. Photo carries the Galaxy AI edit marker; focus 50% 45% keeps the
+  visible AI label out while still showing leaf.
+progress: 2026-08-17 (Agapanthus + Veronica) — **deck 204, hold 82.** Two cards.
+  Surfaced two things worth a decision: the deck now straddles the Hebe ->
+  Veronica rename ('Emerald Gem' is a Veronica, held 'Red Edge' is a Hebe), and
+  the Agapanthus's "harmful if eaten" line has nowhere to render, so that card
+  warns nobody. Ninth batch to hit item 0c, second in two days to cost a real
+  safety warning. VERIFY-QUEUE 43.
+progress: 2026-08-17 (Listen button) — voice selection now scores the device's
+  voices instead of taking the first en-GB one, preferring Edge Natural / Apple
+  Premium / Enhanced over the flat "compact" ones. The bigger win was the script:
+  41 cards were speaking their breeder code aloud ("Jurmag five", "Florgaucomro")
+  and 38 an all-caps trade name. New sayable() strips them; verified over all 284
+  cards. NOT yet deployed.
+progress: 2026-08-17 (SHIPPED, after the outage) — **live is r108 at 202 cards.**
+  Run #55 went green on every step including the byte-verify, about 40 minutes
+  after the Pages API was returning 503 to three consecutive attempts. Nothing
+  in the repo was changed to fix it; the outage cleared. The live branch was
+  fast-forwarded to 3b6c12f rather than 9dc1e40 so the deploy also carried the
+  README's new Publishing warnings.
+progress: 2026-08-17 (deploy #53) — live fast-forwarded to 9dc1e40, taking the
+  site from 188 to **202 cards at r107**. **The first attempt FAILED and it was
+  not our code**: actions/deploy-pages returned HTTP 503, "No server is
+  currently available to service your request... is githubstatus.com reporting a
+  Pages outage?". The five fast checks passed and the artifact uploaded fine;
+  only the Pages deployment API was down, and the workflow's own byte-verify
+  step was skipped rather than run. Re-running the failed job was the fix.
+  **Worth remembering: a red deploy is not automatically a red build.** Read
+  which STEP failed before touching anything.
+progress: 2026-08-17 (Houttuynia) — **deck 202, hold 82.** Houttuynia cordata
+  'Pied Piper' dealt. Photo carries the Galaxy AI edit marker and a visible AI
+  label; recorded in CREDITS and framed out of the card window by focus. Its
+  soilWarning carries the containment message, which is the nearest the schema
+  gets to the compliance field it still lacks.
+progress: 2026-08-17 (batch of six) — **deck 201, hold 82.** Cercis CAROLINA
+  SWEETHEART, Elaeagnus 'Limelight', Acer 'Oridono-nishiki' and Epimedium
+  'Fröhnleiten' built; 'Tom Thumb' and 'Homebush' dealt out of hold on Oscar's
+  word. Two calls recorded rather than made quietly: 'Tom Thumb' is dealt as he
+  instructed but its `visual` line still describes a purple-black plant against
+  a magenta photograph (VQ 41), and 'Homebush' KEPT its existing card data
+  because the JSON supplied with the photo would have dropped "all parts harmful
+  if eaten" into a field the schema does not render (VQ 42).
+progress: 2026-08-17 (Crinodendron) — photo replaced. The old frame had NO
+  flowers on a card whose text leads with "crimson lantern-shaped flowers";
+  the new one is all lanterns. Second source crop in the deck, same arithmetic
+  as the Tetrapanax — which surfaced a real inconsistency worth fixing:
+  deal-plant.js caps the LONG edge at 1200 while add-plant.js caps WIDTH, so a
+  tall phone frame comes out ~776px wide through one path and 1200px through
+  the other. Noted in CARD-PROTOCOL v14.13, not yet fixed.
+progress: 2026-08-17 (Hibiscus, Viburnum, a held Pittosporum) — **deck 195,
+  hold 84.** Hibiscus syriacus LAVENDER CHIFFON dealt; 'Charles Lamont' reshot
+  and replaced, Oscar having framed it for the card's photo window rather than
+  for the photograph. Pittosporum 'Tom Thumb' built but HELD — the photo that
+  came with it is a magenta-and-cream variegated pittosporum, which 'Tom Thumb'
+  (purple-black) is not, and it is not the deck's 'Elizabeth' either.
+  VERIFY-QUEUE 41.
+progress: 2026-08-16 (gate green) — **17/17 sequential for the first time since
+  the deck passed 171.** VERIFY-QUEUE 36 settled on Oscar's call: the perf
+  zero-pixel assertion now carries a measured tolerance (64px / Δ8 against an
+  observed 17px / Δ5), with a staged leak measured at 46,882px / Δ443 to prove
+  the budget cannot swallow a real defect. Numbers now print in the check's name
+  every run so the drift stays visible.
+progress: 2026-08-16 (Oscar names the parked) — **deck 194, hold 83.** Five new
+  cards plus Ninebark 'Diabolo', all on his identifications: Cornus sericea
+  'Variegata' and Calycanthus 'Aphrodite' from the parked files, Lonicera
+  'Rhubarb and Custard', Lilium formosanum var. pricei, and Syringa vulgaris
+  'Znamya Lenina'. **The Syringa is a correction, not an addition** — the plain
+  species card went BACK to hold and its photograph moved to the cultivar, since
+  the plant was the cultivar all along. Robinia stays parked at his request; the
+  white-plumed shrub is still unnamed. The Lilium photo carries a Galaxy AI
+  edit marker, recorded in CREDITS and VERIFY-QUEUE 40 rather than skipped.
+progress: 2026-08-16 (Tetrapanax) — **deck 189, hold 83.** Rice-paper Plant
+  'Rex' dealt from Oscar's photograph. Its source was 1244x2960, so staging would
+  have produced a 504px-wide master; cropped to the two big leaves first so the
+  card gets ~1000px of real width. First use of the plants.csv held-flag import
+  path since the pest bug was fixed — clean. NOT deployed: live is r91 at 188.
+progress: 2026-08-16 (SHIPPED again) — live fast-forwarded to 553805a on
+  Oscar's say-so. **Live goes 173 -> 188 cards at r91**, carrying everything from
+  the day's second half: the ten-card batch, 'Pretty Lady Emily', and the
+  Euphorbia / Coprosma / Chamaerops photo replacements. Deployed knowingly with
+  the 16/17 gate (VERIFY-QUEUE 36, still one unit in 255 on seventeen edge
+  pixels) and with the sequential-gate caveat from 39D recorded.
+progress: 2026-08-16 (batch of ten) — **deck 188, hold 84.** The largest single
+  batch the deck has taken: ten researched cards from Oscar, each with his own
+  photograph. Geranium 'Bob’s Blunder' also CLOSES the unidentified bronze
+  cranesbill from VERIFY-QUEUE 37 — same file, resent with its card. Two more
+  photographs parked (a red-stemmed variegated Cornus, and a Calycanthus he
+  could not name). Four cards are dealt on foliage-only frames because their
+  flowers are out of season — Syringa vulgaris is the one to reshoot in May.
+  VERIFY-QUEUE 39.
+progress: 2026-08-16 (photo pass) — **deck 178, hold 84.** 'Pretty Lady Emily'
+  dealt one batch after being held. New masters for Euphorbia 'Silver Edge',
+  Coprosma 'Inferno' and Chamaerops humilis — the Inferno one a correction of
+  season rather than a mere upgrade, since the card sells the winter colouring
+  and its old photo showed summer. Three photographs parked unclaimed (Robinia
+  x2, a variegated Hebe) under names no card slug resolves: VERIFY-QUEUE 38.
+progress: 2026-08-16 (six more cards) — **deck 177, hold 85.** Oscar's research
+  JSON for six plants plus eight photographs. Dealt Muehlenbeckia complexa,
+  Astrantia 'Star of Love', Salvia guaranitica 'Black and Blue' and Hosta
+  'Broadband'; held Anemone 'Pretty Lady Emily' and Loropetalum 'Fede' for want
+  of a photograph. Three photographs went nowhere — a Physocarpus, a white-plumed
+  Astilbe-or-Sorbaria and a bronze Geranium — each landing near a held card whose
+  cultivar it does not match (VERIFY-QUEUE 37). **Found and fixed a real bug:
+  plants-tool.js import wrote pest:"" onto 260 cards, which check-boot rejects,
+  so the documented csv round-trip was broken deck-wide.** Verified the fixed
+  round-trip lossless field-by-field against the previous commit. NOT deployed —
+  live is still r84 at 173.
+progress: 2026-08-16 (SHIPPED) — **the whole day's work is live.** Fast-forwarded
+  the live branch to e7a33c7 on Oscar's say-so; *Deploy to GitHub Pages* run #51
+  went green, and green means live (the workflow verifies the served bytes against
+  the build stamp before it passes). Live went 168 -> 173 cards at r84, carrying
+  five new cards and two replaced photos. Deployed knowingly with a 16/17 gate —
+  VERIFY-QUEUE 36, one unit in 255 on sixteen edge pixels — which is recorded
+  rather than glossed.
+progress: 2026-08-16 (two new cards) — **deck 173.** Oscar wrote the research
+  JSON for *Rhus typhina* 'Dissecta' and *Catalpa* × *erubescens* 'Purpurea' and
+  shot both plants; cards built and dealt. The sumach settles VERIFY-QUEUE 33 as
+  recommended — the cut-leaf form gets its own card and the plain species stays
+  held rather than carrying a photo of the wrong leaf. His declared `uncertain`
+  notes are recorded as VERIFY-QUEUE 35, not quietly accepted.
+progress: 2026-08-16 (verbena, part two) — **deck 171.** Oscar pushed back on the
+  refusal below and was right: he took both photographs, the AI only merged them.
+  He sent the originals; the bee-and-crab-spider frame has no C2PA manifest at
+  all and is now on the Purple Top Verbena card. The foliage original was still
+  held back — Galaxy "Photo assist" edit marker plus a visible AI label, and its
+  leaves read as a different vervain (V. hastata or V. officinalis) from the
+  card's plant. VERIFY-QUEUE 34.
+progress: 2026-08-16 (verbena) — an image for the held Purple Top Verbena was
+  **refused**: its own Google C2PA manifest declares it created by generative AI
+  (`trainedAlgorithmicMedia`), with SynthID and a visible sparkle watermark. Also
+  878px wide and a two-panel composite. Nothing staged, card still held, wanting
+  the original camera JPEG — VERIFY-QUEUE item 34. Deck unchanged at 170.
+progress: 2026-08-15 (photo batch) — **deck 168 -> 170, hold 86 -> 84.** Five
+  photographs, all against cards that already existed. Dealt Rosemary 'Miss
+  Jessopp's Upright' and Coral Bark Maple (*Acer palmatum* 'Sango-kaku' — coral
+  stems and butter-yellow leaves in one frame, so the photo confirms the cultivar
+  and not just the species). Replaced the Oleander and Corkscrew Hazel masters and
+  re-derived their `photos/card/*.webp` — the app loads only the WebP, so a
+  replacement without that step is invisible on the phone and silent in the tests.
+  Refused the fifth: the Stag's Horn Sumach photo is *Rhus typhina* but a
+  **cut-leaf cultivar**, and the held card is the plain species whose own text
+  promises simple pinnate leaflets — VERIFY-QUEUE item 33, needs Oscar's call
+  (recommend a separate card for the cut-leaf form). This is the brick above,
+  still the brick: 84 cards remain held for want of a photograph.
 progress: 2026-08-15 (crash report) — **boot no longer blocks the main thread — the
   iOS "A problem repeatedly occurred" fix (r78).**
   Oscar's mum's iPhone could not open the live app at all: Safari's crash

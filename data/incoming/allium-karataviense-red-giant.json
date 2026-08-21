@@ -1,0 +1,33 @@
+{
+  "common": "Kara Tau garlic 'Red Giant'",
+  "latin": "Allium karataviense 'Red Giant'",
+  "hue": 345,
+  "visual": "Purplish-red flower globes · broad glaucous leaves flushed purple-red",
+  "water": "Low; water during prolonged dry spells",
+  "aspect": "South / West",
+  "soil": "Fertile, well-drained",
+  "soilWarning": "Avoid winter wet",
+  "prune": "Remove old flower stems and foliage after they die back",
+  "toxicity": "Toxic to pets if eaten",
+  "compliance": "",
+  "peak": "Jun-Jul",
+  "cvs": "syn. Allium 'Red Giant Star'",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "drought tolerant once established",
+  "uses": "containers · gravel gardens · border fronts · pollinators",
+  "height": "20–25 cm",
+  "spread": "20–30 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 8,
+  "pestRisk": 10,
+  "thirst": 6,
+  "careLevel": 4,
+  "sunNeed": 94,
+  "sunMin": 78,
+  "uncertain": [
+    "RHS gives broad 10–50 cm height and spread bands but describes the exact cultivar as about 25 cm tall; the narrower practical dimensions were used",
+    "RHS records 'Red Giant Star' as a synonym of the accepted cultivar 'Red Giant'"
+  ]
+}

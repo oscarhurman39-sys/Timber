@@ -1,0 +1,32 @@
+{
+  "common": "Heavenly Blue",
+  "latin": "Lithodora diffusa 'Heavenly Blue'",
+  "hue": 215,
+  "visual": "Intense gentian-blue flowers · narrow dark-green evergreen leaves · trailing habit",
+  "water": "Moderate; water in dry spells",
+  "aspect": "South / West",
+  "soil": "Acid, sharply drained",
+  "soilWarning": "Avoid alkaline soil · avoid winter wet",
+  "prune": "Trim lightly after flowering to maintain shape",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Apr-Jul",
+  "cvs": "",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "drought tolerant once established · coastal tolerant",
+  "uses": "rock gardens · containers · edging · walls",
+  "height": "10–15 cm",
+  "spread": "30–50 cm",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 8,
+  "pestRisk": 5,
+  "thirst": 6,
+  "careLevel": 6,
+  "sunNeed": 90,
+  "sunMin": 68,
+  "uncertain": [
+    "RHS treats 'Heavenly Blue' as a cultivar of Lithodora diffusa; some horticultural sources use Lithodora 'Heavenly Blue' without the species epithet"
+  ]
+}

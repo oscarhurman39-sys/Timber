@@ -1,0 +1,33 @@
+{
+  "common": "Sweetshrub 'Aphrodite'",
+  "latin": "Calycanthus 'Aphrodite'",
+  "hue": 345,
+  "visual": "Large magnolia-like purple-red flowers · yellow-tipped centres · glossy foliage",
+  "water": "Moderate; water in dry spells",
+  "aspect": "East / South / West",
+  "soil": "Humus-rich, well-drained",
+  "soilWarning": "Shelter from cold, drying winds",
+  "prune": "No routine pruning; shape after flowering if needed",
+  "toxicity": "Harmful if eaten",
+  "compliance": "",
+  "peak": "May-Aug",
+  "cvs": "Calycanthus chinensis × C. occidentalis hybrid; USPP 24,014",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "cold hardy · part-shade tolerant",
+  "uses": "specimen · borders · cottage gardens · pollinators",
+  "height": "2.5–4 m",
+  "spread": "2.5–4 m",
+  "foliage": "deciduous",
+  "container": "no",
+  "growthSpeed": 15,
+  "pestRisk": 4,
+  "thirst": 10,
+  "careLevel": 5,
+  "sunNeed": 82,
+  "sunMin": 48,
+  "uncertain": [
+    "Mature-size sources vary from about 1.8–3.7 m to 3–4 m; the RHS 2.5–4 m planning range was prioritised",
+    "Flower fragrance is genetically characteristic but reported intensity varies from weak to clearly fruity"
+  ]
+}

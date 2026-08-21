@@ -1,0 +1,33 @@
+{
+  "common": "Rhododendron 'Hoppy'",
+  "latin": "Rhododendron 'Hoppy'",
+  "hue": 285,
+  "visual": "Frilled pale-lilac flowers fading white · yellow spotting · compact dark foliage",
+  "water": "Keep evenly moist",
+  "aspect": "North / East / West",
+  "soil": "Acid, moist, well-drained",
+  "soilWarning": "Acid soil · shelter from cold winds",
+  "prune": "No routine pruning; lightly shape after flowering if needed",
+  "toxicity": "Harmful if eaten",
+  "compliance": "",
+  "peak": "May-Jun",
+  "cvs": "yakushimanum hybrid; parentage (R. yakushimanum × 'Doncaster') selfed",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "part-shade tolerant · cold hardy",
+  "uses": "containers · small gardens · shrub borders · edging",
+  "height": "10–50 cm",
+  "spread": "50–100 cm",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 8,
+  "pestRisk": 13,
+  "thirst": 11,
+  "careLevel": 8,
+  "sunNeed": 50,
+  "sunMin": 32,
+  "uncertain": [
+    "Exact-cultivar size sources conflict materially: RHS gives 10–50 cm tall and 50–100 cm wide, while specialist rhododendron sources report about 100–140 cm tall after 10 years; RHS exact-cultivar dimensions were prioritised",
+    "Specialist nursery sources describe Hoppy as H6, while the current RHS exact-cultivar profile rates it H5; RHS H5 was prioritised"
+  ]
+}

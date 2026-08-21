@@ -157,7 +157,19 @@ function parseCsv() {
       else seen[k].set(key, rowNo);
     }
 
-    const card = D.FIELDS.reduce((o, f) => { if (p[f] !== undefined) o[f] = p[f]; return o; }, {});
+    /* `pest` is the one field where blank and absent are NOT the same thing.
+       check-boot.js rejects `pest:""` outright — an empty key would look up the
+       PEST registry and fall through to the baked mite icon — so a card with no
+       pest must carry no pest field at all. Every other blank round-trips as "".
+       Found 2026-08-16: a csv round-trip that added two held cards wrote
+       `pest:""` onto all 260 cards that had never had the key, because csvParse
+       gives every column a value and `'' !== undefined`. The whole documented
+       "edit plants.csv, then import" path failed check-boot until this line. */
+    const card = D.FIELDS.reduce((o, f) => {
+      if (p[f] === undefined) return o;
+      if (f === 'pest' && p[f] === '') return o;
+      o[f] = p[f]; return o;
+    }, {});
     (heldFlag === '1' ? held : dealt).push(card);
   });
   if (errors.length) fail(errors);

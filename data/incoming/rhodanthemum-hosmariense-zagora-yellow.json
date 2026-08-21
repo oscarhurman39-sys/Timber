@@ -1,0 +1,33 @@
+{
+  "common": "Moroccan daisy 'Zagora Yellow'",
+  "latin": "Rhodanthemum hosmariense 'Zagora Yellow'",
+  "hue": 55,
+  "visual": "Bright yellow daisies · dark centres · finely divided silvery-grey foliage",
+  "water": "Low once established",
+  "aspect": "South / West",
+  "soil": "Poor, sharply drained",
+  "soilWarning": "Avoid winter wet",
+  "prune": "Deadhead regularly; cut back lightly after flowering",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Sep",
+  "cvs": "Zagora Series; Zagora® Yellow",
+  "hardiness": "H4",
+  "hardinessNote": "RHS H4",
+  "resilience": "drought tolerant · coastal tolerant · heat tolerant",
+  "uses": "rock gardens · containers · borders · pollinators",
+  "height": "20–30 cm",
+  "spread": "30–40 cm",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 10,
+  "pestRisk": 3,
+  "thirst": 4,
+  "careLevel": 4,
+  "sunNeed": 95,
+  "sunMin": 72,
+  "uncertain": [
+    "RHS accepts the exact cultivar name but gives limited cultivar-specific dimensions; UK nursery sources range from 20–30 cm tall and 30–40 cm wide",
+    "Florensis markets the cultivar within the Zagora® series; no separate breeder denomination was identified"
+  ]
+}

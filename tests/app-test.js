@@ -367,8 +367,23 @@ function topFlipped(page) {
   /* compare against whatever card is on top so the check survives deal-order changes;
      spoken form anglicises the latin: "var." said in full, hybrid sign silent */
   const topLatin = await page.evaluate(() => PLANTS[+document.querySelector('.deck .card:last-child').dataset.idx].latin);
-  const topSpoken = topLatin.replace(/\bvar\.\s*/g, 'variety ').replace(/×\s*/g, '');
+  /* Ask the PAGE for the expected spoken form rather than reimplementing the rule
+     here. This check used to carry its own copy of the transform and went red the
+     moment the app's grew — the same drift that made NPLANTS a derived value in
+     these suites. The equality below proves the button is wired to sayable(); the
+     assertions after it are what actually pin the behaviour down. */
+  const topSpoken = await page.evaluate((l) => sayable(l), topLatin);
   check('say button triggers speech with latin name', speak1.calls >= 2 && speak1.text === topSpoken, JSON.stringify(speak1));
+  /* What the spoken form must never contain, whatever the transform grows into:
+     breeder codes in brackets ('Jurmag5'), the silent hybrid sign, cultivar quotes,
+     or a run of capitals that engines spell out letter by letter. 41 cards carry a
+     bracketed code and 38 an all-caps trade name, so this is not hypothetical. */
+  const spokenClean = !/[()×'\u2018\u2019]/.test(speak1.text) && !/\b[A-Z]{2,}\b/.test(speak1.text);
+  check('spoken latin drops breeder codes, capitals and the hybrid sign',
+    spokenClean && speak1.text.length > 0, JSON.stringify(speak1.text));
+  check('spoken latin still opens with the genus',
+    speak1.text.split(/\s+/)[0] === topLatin.replace(/^×\s*/, '').split(/\s+/)[0].replace(/^×/, ''),
+    JSON.stringify({ spoken: speak1.text, latin: topLatin }));
   check('rapid say taps do not flip the card', await topFlipped(page) === false);
   c = await counts(page);
   check('say taps do not swipe or count', c.cards === NPLANTS && c.left === NPLANTS && c.done === 0, JSON.stringify(c));
