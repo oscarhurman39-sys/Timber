@@ -5,6 +5,43 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trickle
+  was handing the browser 881MB of decode targets (r79).**
+  A colleague's iPhone hit the same "A problem repeatedly occurred" on the live
+  r78 link — a SECOND device, different from Oscar's mum's. That kills the r78
+  diagnosis as a complete answer and I am not going to dress it up: r78 fixed a
+  real thing (a 12.5s unyielding main-thread task at 8x throttle) but the crash
+  is still there, so that was not the thing that was killing the tab. Worse, the
+  r78 measurements never could have caught this — every profile in that session
+  stopped ~5s after load, and the actual bomb does not arm until t+9s.
+  WHAT I MISSED: staging the deal changed WHEN the deck is built, not WHAT the
+  page ends up holding. Steady state was untouched — still 168 cards, 31,184 DOM
+  nodes, 6,357 <img> elements, ~326MB renderer RSS measured on desktop Chromium
+  with no memory pressure at all. And tricklePhotos, 9s after load, walked every
+  buried card and set src on its photo: 168 live 1000x1333 decode targets, 881MB
+  of bitmap if a browser chooses to keep them. Chromium discards decodes for
+  images it never paints, which is exactly why a desktop profile shows a flat
+  ~326MB and hides the whole problem — WebKit is under no obligation to make the
+  same choice, and iOS is where the app died.
+  FIX: tricklePhotos now warms the cache with fetch() instead of img.src. The
+  service worker caches any ok same-origin GET whoever asks for it, so offline
+  gets the identical bytes in the identical Cache Storage entry — verified, 169
+  photos and 9.1MB still fetched — while decoding nothing and holding nothing.
+  Live decode targets: 881MB -> 55MB. Buried cards keep their data-psrc and
+  decode only if they ever reach the top.
+  AND A HARNESS, because two blind fixes is enough: ?cards=N deals only the
+  newest N. There is no iOS engine in this environment, so "unyielding main
+  thread" and "out of memory" cannot be told apart from here — but a real phone
+  can tell them apart in one tap. If ?cards=24 opens on a phone the full deck
+  kills, the cause is size, and windowing the deck permanently is worth what it
+  costs. That change reverses an invariant the suite asserts in about a dozen
+  places ("the deck holds every plant in the DOM at once"), which is precisely
+  why it should not be made on a hunch. Capped runs ignore and never write saved
+  progress, so a diagnostic cannot eat the real deck.
+  [Unverified] whether either phone is now fixed — I cannot load github.io from
+  this environment (egress blocked) and cannot run WebKit here. Oscar's report
+  from the actual devices is the test. All 17 suites green, including the two
+  that had been flaking under --jobs 3.
 progress: 2026-08-15 (crash report) — **boot no longer blocks the main thread — the
   iOS "A problem repeatedly occurred" fix (r78).**
   Oscar's mum's iPhone could not open the live app at all: Safari's crash
