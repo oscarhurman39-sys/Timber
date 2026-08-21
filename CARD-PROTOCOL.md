@@ -381,9 +381,33 @@ Focal point recorded here when off-centre:
 
 | Artemisia 'Powis Castle' | artemisia-powis-castle.jpg | 50% 40% default — **the first photograph this run that needed no crop at all.** The EXIF-rotated frame is already portrait 3000x4000 at exactly 0.75, and already composed: one silvery filigree shoot against sky sitting in the card's own band, the dense mound beneath it. Run through `reframe-photo.js` at `verdict: as-is` purely to bake the orientation into the pixels, so the master is the full 1200x1600 — the largest in the deck this week. Current-season capture, Galaxy S24, 21 Aug 2026 |
 
-| Oenothera lindheimeri 'Rosy Jane' | oenothera-lindheimeri-rosy-jane.jpg | 50% 40% default — **second side-by-side COMPOSITE this week**, seam measured at x=0.630 rather than eyeballed. Left frame is a soft foliage macro, right frame is sharp and carries the card's entire headline: white flowers edged vivid pink, dark-pink buds, long red stamens. Cropped to the right frame only, clear of the seam. **Master is 1098 px, under the 1200 standard**, because the flower frame is only 37% of the composite's width — no visible loss, since the card derivative is capped at 1000 px anyway, but the unmerged original would give a full-size master. **Second *Oenothera lindheimeri*** after GAUDI ROSE; they look nothing alike (30 cm rose-pink over burgundy vs 50–100 cm white picotee over green). VQ 55 |
+| Oenothera lindheimeri 'Rosy Jane' | oenothera-lindheimeri-rosy-jane.jpg | 50% 40% default — **kept WHOLE as a two-frame composite, on Oscar's call.** Foliage left, flowers right, seam at x=0.630. It was first cropped to the flower frame alone; Oscar's correction: *"this shows off both parts of the plant which is helpful for ident"* — and he is right, a garden-centre card is an identification aid before it is a photograph. Restaged at `verdict: as-is`, master back up to the full 1200x1600. **Second *Oenothera lindheimeri*** after GAUDI ROSE; they look nothing alike (30 cm rose-pink over burgundy vs 50–100 cm white picotee over green). VQ 55 |
 
 ## 5. Decision changelog
+
+- **v14.34 (crop less — a standing correction from Oscar)**: the Gaura composite
+  was cropped to its flower frame and Oscar reversed it: *"don't change the image
+  so much... this shows off both parts of the plant which is helpful for ident."*
+  He is right, and the principle is broader than one card.
+  - **A garden-centre card is an identification aid before it is a photograph.**
+    A frame carrying leaf AND flower together is doing MORE work than a prettier
+    frame carrying one of them. Two panels are a feature, not a defect to tidy
+    away.
+  - **The standing rule from here: crop to fix a PROBLEM, not to improve a
+    composition.** Real problems are the aspect gate (0.75–1.0), a legible label
+    or price ticket, a subject that would land outside the card band, and dead
+    space that pushes the plant out of the frame. "It would look better tighter"
+    is not on that list, and neither is symmetry.
+  - Restaged at `verdict: as-is`, which put the master back up from 1098 px to the
+    full **1200×1600** — so the tighter crop had also been the lower-resolution
+    one. On the card the seam now falls about two-thirds across: foliage left,
+    flowers right, both legible.
+  - **One open consequence.** The *Rhodanthemum* 'Zagora Yellow' (v14.28) was
+    cropped the same way — its pasted inset flower panel was excluded. That case
+    is not identical: the inset is a picture-in-picture overlay rather than a
+    side-by-side pair, and its flower is the cream one that contradicts the card's
+    own name (VQ 49), so restoring it would put the open question on the card
+    face. **Oscar's call, flagged not acted on.**
 
 - **v14.33 (228 dealt / 82 held — Gaura 'Rosy Jane')**: a second composite, a
   naming inconsistency left for Oscar, and the eighth homeless compliance line.

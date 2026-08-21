@@ -1863,6 +1863,34 @@ the same plaque or reads differently is Oscar's call.
 ---
 
 
+### 57. Should 'Zagora Yellow' get its flower panel back?
+2026-08-21. Raised by Oscar's correction on the Gaura, and **not acted on**,
+because the two cases are not the same and the difference matters.
+
+**The Gaura** was a side-by-side pair — foliage frame beside flower frame — and
+cropping it to the flowers threw away half of what makes the plant identifiable.
+Restored whole, and that is now the standing rule (protocol v14.34).
+
+**The Rhodanthemum 'Zagora Yellow'** (v14.28) is a **picture-in-picture**: a small
+flower panel pasted over the top-right corner of a foliage frame, with a hard
+rectangular border. Two reasons it was excluded, and both still stand:
+1. an inset panel with a border reads as a collage on a card face, where a
+   side-by-side pair reads as a deliberate two-panel plate;
+2. **the flower in it is cream-white, and the card is named 'Zagora Yellow'**
+   (VQ 49). Putting it on the card face would put the unresolved question on the
+   front of a customer-facing card.
+
+**Both are arguable.** Against (2): showing the actual flower is honest, and the
+card would then show what the plant really did rather than hiding it behind
+foliage. **Oscar's call.** Say the word and it is a five-minute restage.
+
+The cleanest answer to both is still the one in VQ 49: one fresh bloom in
+May–September settles whether the card is named right, and then the photograph
+can show the flower without ambiguity.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

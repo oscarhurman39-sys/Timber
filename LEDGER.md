@@ -5,6 +5,20 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-21 (crop less — Oscar's correction) — the Gaura composite is
+  **restaged WHOLE**. I had cropped it to the flower frame; Oscar reversed it:
+  "don't change the image so much... this shows off both parts of the plant which
+  is helpful for ident." He is right, and it is a standing rule now, not a
+  one-card fix: **a garden-centre card is an identification aid before it is a
+  photograph**, so a frame carrying leaf AND flower is doing more work than a
+  prettier frame carrying one. Crop to fix a PROBLEM — aspect gate, a legible
+  label, a subject outside the card band, dead space — never to improve a
+  composition. Restaging at `verdict: as-is` also put the master back up from
+  1098 px to the full 1200×1600, so the tighter crop had been the lower-resolution
+  one too. **One open consequence flagged not acted on**: the Rhodanthemum
+  'Zagora Yellow' was cropped the same way, but its case differs (pasted inset,
+  not a side-by-side pair, and its cream flower contradicts the card's own name —
+  VQ 49), so restoring that one is Oscar's call. Protocol v14.34.
 progress: 2026-08-21 (Gaura 'Rosy Jane') — **deck 228, hold 82.** Second
   side-by-side composite of the week, and this time the seam was MEASURED — a
   column-difference scan put it at x=0.630, the crop starts at 0.634. Right frame
