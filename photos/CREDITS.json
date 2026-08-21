@@ -312,6 +312,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "artemisia-powis-castle.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, dated 2026-08-21 (current season); orientation 6, rotation baked in by tools/reframe-photo.js with no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "astrantia-major-star-of-love.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",

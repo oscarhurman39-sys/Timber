@@ -5,6 +5,16 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-08-21 (Powis Castle) — **deck 227, hold 82.** The deck's first
+  *Artemisia*, and the first photograph of the run that needed **no crop**: the
+  EXIF-rotated frame was already 0.75 with the silvery shoot sitting in the card
+  band, so it went through `reframe-photo.js` at `verdict: as-is` purely to bake
+  the rotation in. Master 1200×1600, the largest staged this week, and a
+  current-season capture (S24, 21 Aug 2026) rather than the archive frames of the
+  last batch. `hue: 0` on a silver plant was checked rather than "corrected" — it
+  only drives the fallback gradient behind a photo that fails to load, and the
+  deck already has hue 0 on a white Scabiosa. Protocol v14.32. Gate 17/17
+  sequential.
 progress: 2026-08-20 (Zorro + blood grass) — **deck 226, hold 82.** First two
   cards to land after the SAFETY plaque, and between them they show what is built
   and what is not: *Zorro*'s toxicity line is on the card, its `compliance` line

@@ -379,7 +379,26 @@ Focal point recorded here when off-centre:
 | Hydrangea macrophylla 'Zorro' | hydrangea-macrophylla-zorro.jpg | 50% 40% default — a plant in tight green bud, not the ultramarine lacecap the card leads on, and **the EXIF says why**: shot 22 May 2024, before the Jun–Sep peak. What it does carry is the cultivar's signature, the **deep purple-black stems**, which is what separates 'Zorro' from every other lacecap. A black nursery label along the bottom-left was cropped out, verified by the tool. **Ninth Hydrangea**, second *macrophylla* lacecap — check against FRENCH CANCAN BLEU before reusing either. VQ 53 |
 | Imperata cylindrica 'Rubra' | imperata-cylindrica-rubra.jpg | 50% 40% default — **the best photograph of the day**: backlit crimson-over-green blades filling the frame, which is the entire reason anyone buys this grass. Frame arrived already at 0.75 and inside the gate; the crop only trims the bottom fifth of pots, compost and a white plastic label. Archive shot, 19 July 2024. **Sixth grass in the deck, and one letter from *Pennisetum* 'Rubrum'** — VQ 54 |
 
+| Artemisia 'Powis Castle' | artemisia-powis-castle.jpg | 50% 40% default — **the first photograph this run that needed no crop at all.** The EXIF-rotated frame is already portrait 3000x4000 at exactly 0.75, and already composed: one silvery filigree shoot against sky sitting in the card's own band, the dense mound beneath it. Run through `reframe-photo.js` at `verdict: as-is` purely to bake the orientation into the pixels, so the master is the full 1200x1600 — the largest in the deck this week. Current-season capture, Galaxy S24, 21 Aug 2026 |
+
 ## 5. Decision changelog
+
+- **v14.32 (227 dealt / 82 held — Artemisia 'Powis Castle')**: the deck's first
+  *Artemisia*, and the first photograph in this whole run that wanted **no crop**.
+  - The frame arrived at exactly 0.75 with the subject already in the card band,
+    so `reframe-photo.js` ran at `verdict: as-is` — a full-frame pass whose only
+    job is to bake the EXIF rotation into the pixels. Master 1200×1600, the
+    largest staged this week. **Worth remembering that "as-is" is a real verdict**:
+    the tool is a gate, not a cropper, and a good frame should be allowed through
+    intact rather than trimmed to look like it was worked on.
+  - `hue: 0` on a silver-leaved plant looks wrong and is not. `hue` drives ONLY
+    the fallback gradient behind a photo that fails to load, so on a card with a
+    working photograph it is never seen — and the deck already carries hue 0 on a
+    pure-white Scabiosa. Checked rather than "corrected".
+  - Ratings tripped the un-converted-scale warning again; `growthSpeed 9` settles
+    it, same as the Erigeron. That check has now fired on four cards in two days
+    and been a false alarm every time — the growthSpeed test resolves it in
+    seconds and is the reason it stays cheap to ignore.
 
 - **v14.31 (226 dealt / 82 held — Zorro and the blood grass)**: two new cards,
   the first to arrive after the SAFETY plaque shipped, and between them they show
