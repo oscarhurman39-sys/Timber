@@ -45,6 +45,19 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-23 (Styrax, Korean pine, Atlas cedar) — **deck 237, hold 81.**
+  Oscar named the photo mapping and it agreed with the leaves this time (the
+  opposite of the Vitex pair); both still checked before dealing. **The Cedrus is
+  a two-frame swap card** — the close-up of creamy-white new tips is the
+  cultivar, the wider blue foliage is the plant, and the EXIF puts them four
+  seconds apart, so the pair is honest in a way a swap built from two visits
+  would not be. An apostrophe collision on *Horstmann’s* was settled by the
+  deck's own precedent (U+2019 in `latin`, plain in `common`, exactly as
+  'Bowles’s Mauve' and 'Wim’s Red' already do) rather than inventing a third
+  convention. **Two of the three needed no crop at all** — the crop-less rule is
+  now the normal outcome, five of the last eight photos untouched or trimmed once
+  to fix a real problem. The Styrax is the first card to arrive after the LEGAL
+  plaque and light it up (PBR). Protocol v14.39. Gate 17/17 sequential.
 progress: 2026-08-23 (the back looks like a card) — `art/back-600.webp` is live
   on the flip side. **Composed, not generated whole**: the trim is the FRONT's
   own edge lifted from `frame-600.webp` pixel for pixel so the two faces match

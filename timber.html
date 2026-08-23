@@ -1062,7 +1062,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r176 · 2026-08-23 · c33ddb5';
+const BUILD='r178 · 2026-08-23 · 61fcb9d';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7057,7 +7057,43 @@ const PLANTS = [
    size:"50–60 cm H × 40–60 cm W",
    compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:10, careLevel:4, sunNeed:82, sunMin:55},
- ];
+   {common:"Japanese snowbell 'Evening Light'", latin:"Styrax japonicus 'Evening Light'", hue:275,
+   visual:"Deep purple young foliage · white bell-shaped flowers · dark red calyces",
+   water:"Keep evenly moist",
+   aspect:"South / West",
+   soil:"Moist, well-drained; Acid to neutral soil · shelter from cold winds",
+   prune:"Pruning Group 1; prune only if needed after flowering",
+   source:"", peak:"May-Jul", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H5", resilience:"part-shade tolerant · urban suitable",
+   uses:"specimen · city gardens · courtyards · cottage gardens", size:"2.5–4 m H × 2.5–4 m W",
+   seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:11, careLevel:5, sunNeed:82, sunMin:52},
+  {common:"Korean pine 'Jack Corbit'", latin:"Pinus koraiensis 'Jack Corbit'", hue:180,
+   visual:"Long soft blue-green needles · subtle yellow banding · compact pyramidal habit",
+   water:"Moderate; water while establishing",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Avoid prolonged waterlogging",
+   prune:"No routine pruning",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. 'Jack Korbit'; also 'Jack Corbett' and 'Jack Korbett'",
+   hardiness:"H7", resilience:"cold hardy · drought tolerant · part-shade tolerant",
+   uses:"specimen · containers · small gardens · conifer collections", size:"1.8–3 m H × 1–2 m W",
+   seasonalImpact:"", growthSpeed:6, pestRisk:9, thirst:8, careLevel:4, sunNeed:82, sunMin:50},
+  {common:"Atlas cedar 'Horstmann's Silberspitz'", latin:"Cedrus atlantica (Glauca Group) 'Horstmann’s Silberspitz'", hue:180,
+   visual:"Blue-green needles · creamy-white new tips · young shoots turn burnished yellow",
+   water:"Moderate; water while establishing",
+   aspect:"South / West",
+   soil:"Moist, well-drained; Shelter from strong winds · avoid waterlogging",
+   prune:"No routine pruning",
+   source:"", peak:"Jun-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Cedrus atlantica (Glauca Group) 'Silberspitz'; Cedrus atlantica 'Silberspitz'",
+   hardiness:"H6", resilience:"cold hardy · drought tolerant once established · urban suitable",
+   uses:"specimen · conifer gardens · large containers · architectural planting", size:"2.5–4 m H × 1.5 m W",
+   seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:7, careLevel:4, sunNeed:90, sunMin:65},
+];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -9973,6 +10009,16 @@ function holoStyle(ho){
    a second story. A swap that shows the same thing twice reads as a glitch, not
    as a feature. */
 const PHOTO_SWAP={
+  /* Two frames of the same plant, four seconds apart. The card's own photo is the
+     shoot with its creamy-white new tips — the cultivar, and the reason anyone
+     picks this cedar over a plain Glauca. What that close-up cannot show is the
+     blue: the older foliage massed on the branch, which is the OTHER half of the
+     card's visual line and what the plant looks like from two paces back. */
+  'cedrus-atlantica-glauca-group-horstmann-s-silberspitz':{
+    alt:'photos/card/cedrus-atlantica-horstmanns-silberspitz-blue.webp',
+    focus:'50% 40%',
+    hold:'3.5s',
+  },
   /* Gunnera's card photo is the plant from above — the scale, which is the point.
      What it cannot show is the UNDERSIDE: the leaf ribs and the stem armed with
      spines, which is the other half of why people either want this plant or back

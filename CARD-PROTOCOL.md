@@ -392,7 +392,32 @@ Focal point recorded here when off-centre:
 | Erysimum 'Bowles's Mauve' | erysimum-bowles-s-mauve.jpg | 50% 40% default — **a held card filled from the rebuilt hold list**, identified by Oscar. Grey-green foliage with the purple-maroon flush, in its pot. Cropped only to drop the lower quarter of bare gravel, which was pushing the plant up out of the card band. No flowers — the card leads on *"purple-mauve spires"*, and this cultivar flowers nearly year-round, so a spire shot is easy to get |
 | Cryptomeria japonica Serama ('FM5') | cryptomeria-japonica-serama-fm5.jpg | 50% 40% default — the fasciated, cockscombed shoots that are the entire point of this cultivar, in hard sun. Cropped by **3% off the bottom edge only**, to remove a fingertip holding the branch; nothing else touched. **Second *Cryptomeria*** after 'Globosa Nana', but no confusion risk — that one is a plain rounded dwarf, this one is visibly contorted |
 
+| Styrax japonicus 'Evening Light' | styrax-japonicus-evening-light.jpg | 50% 40% default — **uncropped**. The deep purple young foliage fills the card band at 0.877, already inside the gate, and the brick edging behind it is the setting rather than clutter to fix. No flowers: peak is May–Jul and this is August, so the white bells the card also names want a spring frame. **First card to arrive after the LEGAL plaque shipped and light it up** — PBR protected |
+| Pinus koraiensis 'Jack Corbit' | pinus-koraiensis-jack-corbit.jpg | 50% 40% default — **uncropped**, already 0.75. Long soft five-needle bundles filling the frame, which is exactly what separates a Korean pine from everything else in the deck. **Second *Pinus*** after *P. mugo*, and no confusion risk: mugo is short paired needles, this is long and soft |
+| Cedrus atlantica (Glauca Group) 'Horstmann’s Silberspitz' | cedrus-atlantica-glauca-group-horstmann-s-silberspitz.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card**. Primary is the shoot with its creamy-white new tips, the cultivar itself; the swap is the massed blue foliage from two paces back, the other half of the card's own visual line. Shot four seconds apart (EXIF 12:30:27 and 12:30:31), so the two frames are the same plant in the same light. Primary trimmed 7% of width only, to bring 1.075 inside the gate |
+
 ## 5. Decision changelog
+
+- **v14.39 (237 dealt / 81 held — Styrax, Korean pine, Atlas cedar)**: three
+  cards, two of them uncropped, and the deck's fourth photo swap.
+  - **Oscar named the mapping this time** — *"first plant is styrax, second the
+    pinus"* — and it agreed with the leaves, which is the opposite of the Vitex
+    pair two days ago. Named and checked beats named alone; both were still
+    verified against the foliage before dealing.
+  - **The Cedrus is a swap card.** Its `visual` promises two things a single
+    frame cannot hold: creamy-white new tips AND blue-green massed needles. The
+    close-up is the cultivar, the wider frame is the plant. **Four seconds apart
+    in the EXIF**, so the pair is honest in a way a swap assembled from two
+    visits would not be — same plant, same light, same minute.
+  - **An apostrophe collision, solved by the deck's own precedent.** *Horstmann's*
+    inside a single-quoted cultivar name failed the validator's balanced-quote
+    check. The deck already settled this: *Erysimum* `'Bowles’s Mauve'` and
+    *Hydrangea paniculata* `'Wim’s Red'` carry a typographic U+2019 in `latin`
+    and a plain apostrophe in `common`. Followed exactly, rather than inventing a
+    third convention or mangling the name.
+  - **Two of three needed no crop at all.** The crop-less rule (v14.34) is now
+    the normal outcome rather than the exception: five of the last eight
+    photographs have gone through untouched or with a single problem-fixing trim.
 
 - **v14.38 (the LEGAL plaque — item 0c closed)**: `compliance` is now a card
   field, a CSV column and a rendered block, and **20 cards carry one**. With the

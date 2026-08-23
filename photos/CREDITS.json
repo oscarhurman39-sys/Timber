@@ -502,6 +502,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cedrus-atlantica-glauca-group-horstmann-s-silberspitz.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. The CREAMY-TIP frame, primary of a two-photo swap. Cropped by tools/reframe-photo.js by 7% of width only, to bring 1.075 inside the 0.75-1.0 gate; background only, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 12:30:31. No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cedrus-atlantica-horstmanns-silberspitz-blue.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. The BLUE-FOLIAGE frame, the swap half of the same card: same plant, same minute (EXIF 2026-08-22 12:30:27, four seconds before the primary). Uncropped, rotation baked in. Samsung Galaxy S24. No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "cephalanthus-occidentalis-bailoptics.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, 2026-08-21 16:19 (current season); orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
@@ -2093,6 +2113,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "pinus-koraiensis-jack-corbit.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "pinus-mugo.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); the visible AI label was cropped out by tools/reframe-photo.js, the marker stands. See VERIFY-QUEUE 32.",
@@ -2530,6 +2560,16 @@
    "sourceUrl": null,
    "commit": "a627b42",
    "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "styrax-japonicus-evening-light.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: passed through tools/reframe-photo.js at verdict as-is, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
