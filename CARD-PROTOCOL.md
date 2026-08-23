@@ -396,7 +396,30 @@ Focal point recorded here when off-centre:
 | Pinus koraiensis 'Jack Corbit' | pinus-koraiensis-jack-corbit.jpg | 50% 40% default — **uncropped**, already 0.75. Long soft five-needle bundles filling the frame, which is exactly what separates a Korean pine from everything else in the deck. **Second *Pinus*** after *P. mugo*, and no confusion risk: mugo is short paired needles, this is long and soft |
 | Cedrus atlantica (Glauca Group) 'Horstmann’s Silberspitz' | cedrus-atlantica-glauca-group-horstmann-s-silberspitz.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card**. Primary is the shoot with its creamy-white new tips, the cultivar itself; the swap is the massed blue foliage from two paces back, the other half of the card's own visual line. Shot four seconds apart (EXIF 12:30:27 and 12:30:31), so the two frames are the same plant in the same light. Primary trimmed 7% of width only, to bring 1.075 inside the gate |
 
+| Sanguisorba 'Pink Brushes' | sanguisorba-pink-brushes.jpg | 50% 40% default — **Oscar's own two-frame split, kept whole**: cut foliage left, nodding pink bottlebrushes right. Already 3000x4000 at exactly 0.750, so nothing was cropped. The clearest case yet for the v14.34 rule — he assembled this one deliberately to show both halves, and both halves are what a person needs to recognise the plant on a bench |
+
 ## 5. Decision changelog
+
+- **v14.40 (238 dealt / 81 held — Sanguisorba, and a perf check that counted the
+  wrong thing)**: *Sanguisorba* 'Pink Brushes', a new genus, from a split Oscar
+  assembled himself. Kept whole and uncropped.
+  - **The gate went 16/17 and it was the TEST that was wrong, not the card.**
+    perf-test's *"buried photos are not painted"* counted visible `<img>`
+    elements as a proxy for painted cards. That held until the Cedrus swap card
+    from v14.39 reached the painted window: a swap card carries **two** images in
+    one `.tphoto` and cross-fades between them, so the proxy read 5 painted
+    photos across 4 painted cards and failed a card behaving exactly as designed.
+  - **Diagnosed before touching anything.** A probe printed every visible photo
+    with its card index and flags: four distinct cards, none of them `.deep`, and
+    the fifth image was the Cedrus's own `alt` frame on the same card. Only then
+    was the check changed.
+  - **The fix asserts the real invariant instead of loosening the number.** Two
+    checks now: *no `.deep` card paints a photo* (which is what the budget was
+    always about, and is asserted directly rather than inferred), and a count
+    ceiling of `MAX_PAINTED + swap frames in the window`, so a genuine leak still
+    fails. **Not a threshold bump** — the ceiling is derived from what the window
+    legitimately holds, and it would have caught this batch if anything really
+    had leaked.
 
 - **v14.39 (237 dealt / 81 held — Styrax, Korean pine, Atlas cedar)**: three
   cards, two of them uncropped, and the deck's fourth photo swap.

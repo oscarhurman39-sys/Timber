@@ -2473,6 +2473,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "sanguisorba-pink-brushes.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. A two-frame split HE assembled himself (cut foliage left, nodding pink bottlebrushes right) and KEPT WHOLE on the protocol v14.34 rule: a frame carrying leaf and flower together identifies the plant better than either half. Uncropped, passed through tools/reframe-photo.js at verdict as-is, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "scabiosa-columbaria-flutter-pure-white-balflutturite.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",

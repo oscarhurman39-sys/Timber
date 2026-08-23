@@ -45,6 +45,19 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-23 (Sanguisorba, and a perf check counting the wrong thing) —
+  **deck 238, hold 81.** *Sanguisorba* 'Pink Brushes' from a split Oscar
+  assembled himself, kept whole and uncropped — the clearest case yet for the
+  crop-less rule, since he built it deliberately to show both halves.
+  **The gate came back 16/17 and the TEST was wrong, not the card.** perf-test's
+  "buried photos are not painted" counted visible <img> elements as a proxy for
+  painted cards; yesterday's Cedrus swap card reached the painted window, and a
+  swap card carries TWO images in one .tphoto, so it read 5 photos across 4 cards
+  and failed a card behaving exactly as designed. Diagnosed with a probe that
+  printed every visible photo with its card index and flags before anything was
+  touched. Fixed by asserting the real invariant — no `.deep` card paints a photo
+  — plus a ceiling of MAX_PAINTED + swap frames in the window. Not a threshold
+  bump: a genuine leak still fails. Protocol v14.40. Gate 17/17 sequential.
 progress: 2026-08-23 (Styrax, Korean pine, Atlas cedar) — **deck 237, hold 81.**
   Oscar named the photo mapping and it agreed with the leaves this time (the
   opposite of the Vitex pair); both still checked before dealing. **The Cedrus is
