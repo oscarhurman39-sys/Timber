@@ -4,8 +4,10 @@ The **front** is the collectible: photo, identity, and at-a-glance ratings. The
 **back** is the working page — what staff need once the customer is actually
 interested, plus Oscar's trade data.
 
-Status: **SPEC — not yet built.** The back currently renders the original buyer
-trade sheet only. This file defines what it should become and what to collect per
+Status: **PART BUILT.** As of 2026-08-23 the back carries the card's own trim
+artwork, a SAFETY plaque (section B toxicity, 45 cards) and a LEGAL plaque
+(section E, 20 cards). The rest of the buyer trade sheet is unchanged and the
+remaining sections below are still spec. This file defines what it should become and what to collect per
 plant. Front spec lives in `CARD-STATS.md`; layout authority in `CARD-PROTOCOL.md`.
 
 ---
@@ -182,3 +184,35 @@ order it's useful to collect:
 - Whether **Remember** (the 🔖 bookmark approved back in v4) ships with this build.
 - Whether the **customer view** should gain a safe subset of the back (aftercare +
   toxicity + wildlife, no trade) — likely yes, it's the natural hand-over screen.
+
+
+---
+
+## 6. The back's artwork (built 2026-08-23)
+
+`art/back-600.webp`. Composed, not generated whole:
+
+- **The trim is the FRONT's own edge**, lifted from `art/frame-600.webp` pixel
+  for pixel, so the two faces of a card match exactly at the rim. Insets are
+  measured per edge against the front's baked content — top 20px, sides and
+  bottom 30px — because the front's photo window opens at 21px and its
+  "double tap to master" strip sits 69px off the bottom. A uniform inset leaked
+  a strip of somebody's photograph along the top edge of every card back.
+- **The field inside it is a crop of a Gemini image** — dark leather with faint
+  etched seedheads. A clean region was chosen that never contained Gemini's
+  corner sparkle badge, so nothing was painted out to hide it.
+- **The inner double rule and corner ticks are drawn**, not generated, in the
+  front's own gold (#a77629 / #d8bd78 sampled from the art).
+
+**Why generated art is acceptable here when it is refused for photographs:**
+there is no plant in it. It is a leather texture. The rule this project has held
+to all along is that a *photograph of a plant* must be a real photograph of that
+plant; decoration carries no such claim. Recorded plainly: the field is
+AI-generated, produced by Gemini on 2026-08-23 from a prompt in
+`design/CARD-BACK-PROMPT.md`, and SynthID may persist in those pixels.
+
+**What was tried first and rejected:** a Yu-Gi-Oh-style back radiating from a
+central medallion. It looked good and was unusable — that layout quarters the
+card into four small panels, and this face has to hold two plaques and a data
+grid. A Yu-Gi-Oh back works precisely because nothing is ever printed on it.
+The medallion is worth keeping for a real face-down/deck-stack image later.

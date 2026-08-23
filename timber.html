@@ -128,23 +128,34 @@
 
   /* BACK — the buyer trade sheet (content lives in .backfit, sized to the card) */
   .back{transform:rotateY(180deg)}
+  /* The back wears the card's own trim. art/back-600.webp is the FRONT's outer
+     gold edge (lifted from art/frame-600.webp, pixel for pixel, so the two faces
+     match at the rim) with a dark etched-botanical field inside it and an inner
+     double rule. Purely decorative — every warning and care line on this face is
+     live text over it, per CARD-BACK.md. Padding clears the inner rule, which
+     sits at 4.2% of the card width. */
   .backfit{position:absolute;left:50%;top:50%;width:calc(420px*var(--csx,0.75));height:calc(600px*var(--csy,0.75));
-    transform:translate(-50%,-50%);border-radius:16px;background:linear-gradient(180deg,#0d1c13,#0a160e);
-    padding:18px 18px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
+    transform:translate(-50%,-50%);border-radius:16px;
+    background:#0a160e url(art/back-600.webp) center/100% 100% no-repeat;
+    padding:26px 24px 22px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
     box-shadow:0 10px 24px rgba(0,0,0,.4)}
   .back-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;
-    border-bottom:1px solid rgba(255,255,255,.09);padding-bottom:10px}
+    border-bottom:1px solid rgba(216,189,120,.28);padding-bottom:10px}
   .back-head h3{margin:0;font-size:18px;font-weight:800;letter-spacing:-.3px}
   .back-head .h{font-size:11px;font-weight:800;color:#04120a;background:var(--leaf1);
     padding:3px 8px;border-radius:20px;letter-spacing:.3px}
   .price{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;
-    background:rgba(76,215,135,.08);border:1px solid rgba(76,215,135,.2);border-radius:12px;padding:10px 12px}
+    background:rgba(9,20,13,.66);border:1px solid rgba(216,189,120,.22);border-radius:12px;padding:10px 12px}
   .price .cell .l{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
   .price .cell .n{font-size:14px;font-weight:700;color:#eafff2;margin-top:2px}
   .price .cell.m .n{color:var(--gold)}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.07);
-    border-radius:12px;overflow:hidden}
-  .grid .g{background:#0d1c13;padding:9px 11px}
+  /* Panels sit ON the card now, not over it. Opaque cells read as patches pasted
+     onto the artwork; a translucent ground lets the etched field show through, so
+     the trade grid belongs to the same object as the trim around it. Gold-tinted
+     gutters instead of white ones, for the same reason. */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(216,189,120,.16);
+    border-radius:12px;overflow:hidden;border:1px solid rgba(216,189,120,.14)}
+  .grid .g{background:rgba(9,20,13,.74);padding:9px 11px}
   .grid .g.full{grid-column:1 / -1}
   .grid .g .l{font-size:9px;letter-spacing:1.1px;text-transform:uppercase;color:var(--leaf1);opacity:.85}
   .grid .g .n{font-size:12.5px;line-height:1.4;color:#eafff2;margin-top:3px}
@@ -1051,7 +1062,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r174 · 2026-08-23 · d7a3791';
+const BUILD='r176 · 2026-08-23 · c33ddb5';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of

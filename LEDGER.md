@@ -45,6 +45,21 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-23 (the back looks like a card) — `art/back-600.webp` is live
+  on the flip side. **Composed, not generated whole**: the trim is the FRONT's
+  own edge lifted from `frame-600.webp` pixel for pixel so the two faces match
+  at the rim, the field inside is a crop of Gemini's texture, and the inner
+  double rule and corner ticks are drawn in gold sampled from the art. Per-edge
+  insets (top 20, sides/bottom 30) because the front's photo window opens at
+  21px — a uniform inset leaked a strip of somebody's photograph along the top
+  of every card back. Panels softened to translucent with gold gutters so they
+  sit ON the card instead of reading as patches pasted over it. **Oscar's call
+  to scrap Gemini for the frame was right**: v1 asked for a Yu-Gi-Oh back, which
+  is decorative precisely because nothing is printed on it, and it quartered the
+  card into four panels that could not hold a data sheet. Its medallion is worth
+  keeping for a real face-down image. Provenance recorded in CARD-BACK.md §6:
+  the field is AI-generated and SynthID may persist — acceptable here because
+  there is no plant in it. Gate 17/17 sequential.
 progress: 2026-08-23 (the LEGAL plaque — item 0c CLOSED) — `compliance` is a
   card field and a rendered block; **20 cards carry one**, and with the SAFETY
   plaque item 0c is finished. Reading the notes first changed the design again:
