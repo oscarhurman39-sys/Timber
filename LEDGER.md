@@ -45,6 +45,20 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-22 (three in) — **deck 234, hold 81.** *Eupatorium* 'Pink
+  Frost' and *Cryptomeria* Serama ('FM5') new; ***Erysimum* 'Bowles's Mauve'
+  filled from the hold list** on Oscar's identification — the first card this run
+  to come off the held pile rather than in from outside. Three photographs and
+  three different crop answers, all settled by the v14.34 rule without argument:
+  the Eupatorium needed **nothing** (aspect already right, pot below the plaque
+  line); the Erysimum lost its lower quarter of bare gravel, which was pushing the
+  plant out of the card band; the Cryptomeria lost **3% off the bottom and not a
+  pixel more**, because a fingertip holding the branch was in shot — a finger is a
+  label. `deal-plant.js` shortchanged a master again (v14.36's note stands, twice
+  now). Ninth compliance line with nowhere to go. Both new cards lead on a flower
+  their photograph does not carry: the Eupatorium's pink heads (Jul–Sep) and the
+  Erysimum's mauve spires, which flower nearly year-round and are the easiest
+  reshoot on the list. Protocol v14.37. Gate 17/17 sequential.
 progress: 2026-08-21 (Vitex pair settled) — **deck 231, hold 82.** Oscar: one
   word, "correct" — the leaves were right and the send order was the misleading
   half. Narrow leaflets = **'Delta Blues'** (*agnus-castus*), broad leaflets =

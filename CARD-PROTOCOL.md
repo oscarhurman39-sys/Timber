@@ -388,7 +388,32 @@ Focal point recorded here when off-centre:
 | Vitex agnus-castus 'Piivac-I' (Delta Blues) | vitex-agnus-castus-piivac-i.jpg | 50% 40% default — the NARROW-leaflet plant: 5–7 slim leaflets radiating from one point, the *agnus-castus* leaf. Assigned on the LEAVES after the send order and the foliage disagreed; Oscar confirmed (VQ 58). Uncropped, rotation baked in, master 1200x1600 |
 | Vitex × 'Bailtexone' (Flip Side) | vitex-bailtexone.jpg | 50% 40% default — the BROAD-leaflet plant: wider leaflets in threes on purple-flushed petioles, the *V. trifolia* leaf this hybrid is bred for. Same resolution as its sibling above and the same reason. **These two cards are otherwise near-identical** — same genus, same First Editions series, both blue, same aspect, soil and pruning — so check the LEAF, not the file order, before ever swapping either photo |
 
+| Eupatorium japonicum 'Pink Frost' | eupatorium-japonicum-pink-frost.jpg | 50% 40% default — cream-white variegation filling the card band, the nursery pot and its dead stems sitting below the plaque line, so **uncropped**. A young plant, not flowering: the card's *"flat pink flower heads"* are the half this photograph does not carry, and July–September is the window for that shot |
+| Erysimum 'Bowles's Mauve' | erysimum-bowles-s-mauve.jpg | 50% 40% default — **a held card filled from the rebuilt hold list**, identified by Oscar. Grey-green foliage with the purple-maroon flush, in its pot. Cropped only to drop the lower quarter of bare gravel, which was pushing the plant up out of the card band. No flowers — the card leads on *"purple-mauve spires"*, and this cultivar flowers nearly year-round, so a spire shot is easy to get |
+| Cryptomeria japonica Serama ('FM5') | cryptomeria-japonica-serama-fm5.jpg | 50% 40% default — the fasciated, cockscombed shoots that are the entire point of this cultivar, in hard sun. Cropped by **3% off the bottom edge only**, to remove a fingertip holding the branch; nothing else touched. **Second *Cryptomeria*** after 'Globosa Nana', but no confusion risk — that one is a plain rounded dwarf, this one is visibly contorted |
+
 ## 5. Decision changelog
+
+- **v14.37 (234 dealt / 81 held — three in, and the crop-less rule earning its
+  keep)**: *Eupatorium* 'Pink Frost' and *Cryptomeria* Serama new, *Erysimum*
+  'Bowles's Mauve' filled from the hold list on Oscar's identification.
+  - **Three photographs, three different answers to "should this be cropped?"**,
+    and the rule from v14.34 decided all three without argument. The Eupatorium:
+    nothing wrong with it, so **nothing done** — pot below the plaque line, aspect
+    already 0.75. The Erysimum: the lower quarter is bare gravel pushing the plant
+    out of the card band, which is on the list of real problems, so **trimmed**.
+    The Cryptomeria: **3% off the bottom** and not a pixel more, because a
+    fingertip holding the branch was showing along the edge. A finger is a label:
+    it is a thing in the frame that should not be on a customer-facing card.
+  - **`deal-plant.js` shortchanged a master again** — the Erysimum came out
+    1200x1200 only because its crop was square; the same tool would have cost a
+    portrait master a quarter of its width. Restaged from the crop as v14.36 says.
+    That is twice in two sessions; the note in v14.36 stands.
+  - **Ninth `compliance` line with nowhere to render** (Serama is PBR protected).
+  - Both new cards carry a `visual` whose flower half is missing from the
+    photograph — the Eupatorium's pink flower heads (Jul–Sep) and the Erysimum's
+    mauve spires (near year-round). Neither is a defect; both are one photograph
+    away, and the Erysimum's is the easiest reshoot on the whole list.
 
 - **v14.36 (231 dealt / 82 held — the Vitex pair, settled by the leaves)**:
   Oscar confirmed the reading in one word. The narrow-leaflet plant is

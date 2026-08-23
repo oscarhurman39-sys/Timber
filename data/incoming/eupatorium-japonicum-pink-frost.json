@@ -1,0 +1,33 @@
+{
+  "common": "Eupatorium 'Pink Frost'",
+  "latin": "Eupatorium japonicum 'Pink Frost'",
+  "hue": 335,
+  "visual": "Cream-white variegated leaves · pink-flushed young growth · flat pink flower heads",
+  "water": "Keep evenly moist",
+  "aspect": "East / South / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Do not allow soil to dry out",
+  "prune": "Cut back at the end of the season",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jul-Sep",
+  "cvs": "RHS: Eupatorium fortunei 'Pink Frost'; Kew synonymises E. fortunei with E. japonicum",
+  "hardiness": "H5",
+  "hardinessNote": "RHS H5",
+  "resilience": "part-shade tolerant · exposed-site tolerant",
+  "uses": "cottage gardens · prairie planting · wildlife gardens · containers",
+  "height": "1–1.5 m",
+  "spread": "0.5–1 m",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 11,
+  "pestRisk": 7,
+  "thirst": 13,
+  "careLevel": 5,
+  "sunNeed": 68,
+  "sunMin": 40,
+  "uncertain": [
+    "RHS accepts Eupatorium fortunei 'Pink Frost', but Kew POWO currently treats Eupatorium fortunei as a synonym of Eupatorium japonicum",
+    "RHS describes the plant as up to 120 cm high while its planning range is 1–1.5 m; the RHS range was prioritised"
+  ]
+}
