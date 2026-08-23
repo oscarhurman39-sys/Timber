@@ -36,7 +36,13 @@ const FIELDS = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', '
   // the same as "safe", so a blank prints nothing rather than a reassurance.
   // Added 2026-08-20 after 15 cards had carried researched toxicity text with
   // nowhere on the card to put it (VERIFY-QUEUE item 0c).
-  'toxicity'];
+  'toxicity',
+  // LEGAL. The other half of item 0c, added 2026-08-23. Free prose. Two very
+  // different things share this field and the card renders them differently:
+  // statutory duties (Schedule 9, sale bans, controlled waste, plant health)
+  // and breeder's rights (PBR — a trade restriction on propagation, not a duty
+  // on the customer). Blank means nothing is known to apply, and prints nothing.
+  'compliance'];
 /* Nothing speculative belongs in this list. It is exactly the set of fields that
    exist on cards today, which is what makes the "unknown field" guard meaningful:
    a key not listed here is a mistake worth stopping for, not a column nobody

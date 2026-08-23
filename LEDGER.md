@@ -45,6 +45,25 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-23 (the LEGAL plaque — item 0c CLOSED) — `compliance` is a
+  card field and a rendered block; **20 cards carry one**, and with the SAFETY
+  plaque item 0c is finished. Reading the notes first changed the design again:
+  there are not 13 reasons a plant fails to comply, there are **six**, and
+  breeder's rights accounts for 12 of the 20. So two weights, not one — a
+  statutory duty is engraved in slate, PBR is a quiet grey strip, because
+  dressing a licensing note as a legal warning devalues the real ones. The
+  information was never missing, it was **smuggled**: 11 cards already showed
+  warnings stuffed into `resilience`, `type`, `returnRisk` and `soil` — a
+  Schedule 9 offence was sitting in a field called "Return risk" next to pot
+  sizes. 20 edits moved them and cleared the duplicates, keeping the horticulture;
+  where the smuggled prose was better (knotweed's controlled-waste wording) it
+  won and became the plaque. **Third negation bug, caught pre-ship**: `banned`
+  matched inside "Sale is not banned, but…" and tiered Virginia creeper as
+  RESTRICTED — a red plaque on a plant that is legal to sell. Now a standing
+  rule: strip negations before a keyword ladder, and run it over the whole real
+  corpus before trusting it. Also wrote design/CARD-BACK-PROMPT.md — a Gemini
+  prompt for ornate Yu-Gi-Oh-style card-back art in the deck's own palette.
+  Protocol v14.38. Gate 17/17 sequential.
 progress: 2026-08-22 (three in) — **deck 234, hold 81.** *Eupatorium* 'Pink
   Frost' and *Cryptomeria* Serama ('FM5') new; ***Erysimum* 'Bowles's Mauve'
   filled from the hold list** on Oscar's identification — the first card this run

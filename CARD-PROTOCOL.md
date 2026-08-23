@@ -394,6 +394,44 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.38 (the LEGAL plaque — item 0c closed)**: `compliance` is now a card
+  field, a CSV column and a rendered block, and **20 cards carry one**. With the
+  SAFETY plaque from v14.30, item 0c is finished.
+  - **Reading the deck's own notes first changed the design again.** There are
+    not thirteen reasons a plant fails to comply, there are **six**, and one of
+    them accounts for most of the cards: **breeder's rights (12)**, Schedule 9
+    (4), an outright sale/propagation restriction (Gunnera), controlled waste
+    (knotweed), a plant-health host (the Olive), and wild-harvest controls
+    (*Dicksonia*). Final tiers: **2 restricted, 6 legal duty, 12 licence.**
+  - **So the plaque has two weights, and deliberately is NOT the safety plaque's
+    twin.** A statutory duty is engraved — slate ground, cut rule down the side,
+    small-caps. Breeder's rights gets a quiet grey strip, because **dressing a
+    licensing note as a legal warning devalues the warnings that are real**. PBR
+    is an invoice question about what the NURSERY may propagate; it is not a duty
+    on anyone holding the plant, and on a learning card it is close to noise.
+  - **The information was never missing — it was smuggled.** Eleven cards already
+    showed legal warnings, but only because someone had stuffed them into fields
+    meant for other things: `resilience`, `type`, `returnRisk`, `soil`. A
+    Schedule 9 offence was sitting in a field called *Return risk*, in the buyer
+    grid, in the same type as pot sizes. **20 field edits** moved those into
+    `compliance` and cleared the duplicates, keeping the horticulture (Cotoneaster
+    keeps *"otherwise superb for bees and birds"*; *Rosa rugosa* keeps *"salt,
+    sand and drought proof · suckers"*). Where the smuggled prose was BETTER than
+    the researched line — knotweed's, which spelled out the controlled-waste duty
+    — the better wording won and became the plaque.
+  - **The two `soil` warnings were left alone on purpose** (the Olive's Xylella
+    note, knotweed's). They render on the card FRONT, a different surface, so
+    they are not duplicates of the back plaque.
+  - **THIRD NEGATION BUG, caught before it shipped.** The ban tier matched
+    `\bbanned\b` inside *"Sale is not banned, but it must not be planted in the
+    wild"* and tiered **Virginia creeper as RESTRICTED** — a red plaque on a plant
+    that is perfectly legal to sell. After "should not be treated as edible"
+    (v14.30) and "avoid dry soil" (v14.31), this is now a standing rule, not an
+    anecdote: **when a classifier keys on a word, strip the negations before the
+    ladder runs, and test the classifier against every row of real data before
+    trusting it.** All three bugs were found the same way — by running the tiering
+    over the actual corpus and reading every line of the output.
+
 - **v14.37 (234 dealt / 81 held — three in, and the crop-less rule earning its
   keep)**: *Eupatorium* 'Pink Frost' and *Cryptomeria* Serama new, *Erysimum*
   'Bowles's Mauve' filled from the hold list on Oscar's identification.

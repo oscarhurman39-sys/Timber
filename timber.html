@@ -187,6 +187,32 @@
   /* a hazard shouts, an all-clear does not: the striped rule is for the hazard tiers */
   .tox.edible .tox-rule,.tox.clear .tox-rule{height:3px;background:var(--tox-ink);opacity:.55}
 
+  /* LEGAL PLAQUE — the safety plaque's sibling, deliberately NOT its twin.
+     A statutory duty is engraved: dark slate, a cut gold rule down the side,
+     small-caps. Breeder's rights is a quiet grey strip, because dressing a
+     licensing note as a warning devalues the warnings that are real. */
+  .lgl{position:relative;border-radius:12px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.18)),var(--lgl-paper);
+    border:1px solid var(--lgl-edge);border-left:4px solid var(--lgl-ink);
+    box-shadow:0 5px 14px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.05)}
+  .lgl-body{display:flex;gap:10px;align-items:flex-start;padding:9px 11px 10px}
+  .lgl-glyph{flex:0 0 auto;width:17px;height:17px;margin-top:2px;fill:var(--lgl-ink);opacity:.95}
+  .lgl-l{font-family:Georgia,"Times New Roman",serif;font-size:9.5px;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;color:var(--lgl-ink)}
+  .lgl-tier{font-family:Georgia,"Times New Roman",serif;font-size:9px;font-weight:700;
+    letter-spacing:1.1px;text-transform:uppercase;color:var(--lgl-ink);
+    border:1px solid var(--lgl-ink);border-radius:20px;padding:1px 7px;line-height:1.3;opacity:.9}
+  .lgl-n{font-size:12.5px;line-height:1.42;color:#e8eef2;margin-top:4px}
+  /* a duty on whoever holds the plant */
+  .lgl.statute{--lgl-ink:#cfe0ea;--lgl-paper:#151d24;--lgl-edge:rgba(207,224,234,.26)}
+  /* the plant may not move at all — the only tier that raises its voice */
+  .lgl.ban{--lgl-ink:#ef5f5f;--lgl-paper:#241416;--lgl-edge:rgba(239,95,95,.40)}
+  .lgl.ban .lgl-n{color:#ffe9e4}
+  /* a licensing matter for the nursery, not a duty on anyone: kept quiet */
+  .lgl.rights{--lgl-ink:#9aa6ad;--lgl-paper:#141a1d;--lgl-edge:rgba(154,166,173,.18);
+    border-left-width:3px}
+  .lgl.rights .lgl-n{color:#bcc7cd;font-size:12px}
+
   .back .fliphint{margin-top:auto;padding-top:6px}
 
   /* actions — three slim bars in the card's own language (Georgia small-caps,
@@ -1025,7 +1051,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r172 · 2026-08-23 · 877c5a3';
+const BUILD='r174 · 2026-08-23 · d7a3791';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -1711,15 +1737,16 @@ const PLANTS = [
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ UK RESTRICTED — verify ID before any sale",
+   type:"",
    shrink:"",
-   returnRisk:"Most plants sold as manicata are the banned Gunnera ×cryptica — do not sell, propagate or plant without authoritatively verified ID; do not compost unidentified material",
+   returnRisk:"",
    pots:"",
    cvs:"syn. G. brasiliensis",
    hardiness:"H4",
-   resilience:"⚠ UK RESTRICTED — most 'manicata' are the banned Gunnera ×cryptica; verify ID",
+   resilience:"",
    uses:"",
    size:"2.5–3 m H × 3–4.5 m W",
+   compliance:"UK RESTRICTED. Most plants sold as 'manicata' are the banned Gunnera ×cryptica — do not sell, propagate or plant without authoritatively verified ID; do not compost unidentified material.",
    seasonalImpact:"", growthSpeed:16, pestRisk:6, thirst:20, careLevel:16, sunNeed:58, sunMin:28},
 
   {common:"October Glory Red Maple", latin:"Acer rubrum 'October Glory'", hue:8,
@@ -2145,6 +2172,7 @@ const PLANTS = [
    resilience:"drought · coastal · urban tolerant",
    uses:"containers · Mediterranean gardens · fruit",
    size:"4–8 m H × 1.5–2.5 m W",
+   compliance:"Xylella fastidiosa high-risk host. Imported olives are subject to plant-health inspection; report suspected symptoms rather than moving affected material.",
    seasonalImpact:"", growthSpeed:5, pestRisk:9, thirst:4, careLevel:9, sunNeed:95, sunMin:80},
 
   {common:"Bloodgood Japanese Maple", latin:"Acer palmatum 'Bloodgood'", hue:350,
@@ -2236,15 +2264,16 @@ const PLANTS = [
    trade:"",
    retail:"",
    margin:"",
-   type:"PBR protected — propagation for sale restricted",
+   type:"",
    shrink:"",
-   returnRisk:"Plant Breeders' Rights apply: do not propagate 'Myersblue' for resale without a licence",
+   returnRisk:"",
    pots:"",
    cvs:"syn. Eryngium × zabelii 'Big Blue'; cultivar code 'Myersblue'",
    hardiness:"H5",
    resilience:"drought tolerant · coastal",
    uses:"pollinators · cut flowers · gravel gardens",
    size:"60–75 cm H × 30–50 cm W",
+   compliance:"Plant Breeders' Rights apply: do not propagate 'Myersblue' for resale without a licence.",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:3, careLevel:4, sunNeed:98, sunMin:85},
 
   {common:"Winter Beauty Honeysuckle", latin:"Lonicera × purpusii 'Winter Beauty'", hue:50,
@@ -4311,15 +4340,16 @@ const PLANTS = [
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ NEVER STOCK — invasive, ID only",
+   type:"",
    shrink:"",
-   returnRisk:"Must not be planted or caused to grow in the wild, and you must stop it spreading off your property; cut material and contaminated soil are controlled waste — registered carrier and authorised facility only. Use a specialist contractor",
+   returnRisk:"",
    pots:"",
    cvs:"syn. Fallopia japonica · Polygonum cuspidatum",
    hardiness:"H7",
-   resilience:"⚠ ILLEGAL TO SPREAD — rhizomes regrow after years dormant",
-   uses:"NOT for sale or planting · ID and report only",
+   resilience:"",
+   uses:"ID and report only",
    size:"1.5–2.5 m H × 2.5–4 m+ W",
+   compliance:"ILLEGAL TO SPREAD. Must not be planted or caused to grow in the wild, and you must stop it spreading off your property; cut material and contaminated soil are controlled waste — registered carrier and authorised facility only. A 1cm fragment of rhizome regrows after years dormant. Use a specialist contractor.",
    seasonalImpact:"", growthSpeed:20, pestRisk:2, thirst:8, careLevel:20, sunNeed:70, sunMin:40},
 
   {common:"Jelena Witch Hazel", latin:"Hamamelis × intermedia 'Jelena'", hue:28,
@@ -4892,15 +4922,16 @@ const PLANTS = [
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ Schedule 9 — do not plant in the wild",
+   type:"",
    shrink:"",
-   returnRisk:"Schedule 9 invasive non-native species. It is not banned from sale or ordinary garden ownership, but it must not be planted or otherwise caused to grow in the wild. Prevent escape into semi-natural habitats and never dump garden material in the countryside.",
+   returnRisk:"",
    pots:"",
    cvs:"",
    hardiness:"H7",
-   resilience:"⚠ Schedule 9 — never plant in the wild · otherwise superb for bees and birds",
+   resilience:"otherwise superb for bees and birds",
    uses:"north walls · low banks · ground cover · wildlife planting",
    size:"1-1.5m H × 1.5-2.5m W",
+   compliance:"Schedule 9 invasive non-native species. It is not banned from sale or ordinary garden ownership, but it must not be planted or otherwise caused to grow in the wild. Prevent escape into semi-natural habitats and never dump garden material in the countryside.",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:6, careLevel:4, sunNeed:60, sunMin:15},
 
   {common:"Californian Lilac 'Concha'", latin:"Ceanothus 'Concha'", hue:220,
@@ -5002,6 +5033,7 @@ const PLANTS = [
    resilience:"very slow to build trunk · pack the crown with straw before frost",
    uses:"woodland gardens · shaded courtyards · fern and exotic planting",
    size:"2.5-4m H × 2.5-4m W",
+   compliance:"Commercially harvested Australian tree ferns may be subject to source-country harvesting, tagging and trade controls. Dicksonia antarctica itself is not currently listed under CITES for trade restrictions.",
    seasonalImpact:"", growthSpeed:2, pestRisk:3, thirst:18, careLevel:16, sunNeed:25, sunMin:10},
 
   {common:"Golden Privet", latin:"Ligustrum ovalifolium 'Aureum'", hue:55,
@@ -5124,9 +5156,10 @@ const PLANTS = [
    pots:"",
    cvs:"'Engelmannii' · not to be confused with Boston Ivy, Parthenocissus tricuspidata",
    hardiness:"H6",
-   resilience:"⚠ Schedule 9 — must not be planted or grown in the wild · self-clinging · shade-tolerant",
+   resilience:"self-clinging · shade-tolerant",
    uses:"walls · fences · fast screening · autumn colour",
    size:"8–12 m H × 4–8 m W",
+   compliance:"Listed on Schedule 9 of the Wildlife and Countryside Act 1981. Sale is not banned, but it must not be planted or otherwise caused to grow in the wild.",
    seasonalImpact:"", growthSpeed:18, pestRisk:2, thirst:8, careLevel:12, sunNeed:60, sunMin:20},
 
   {common:"Flowering Quince 'Kinshiden'", latin:"Chaenomeles speciosa 'Kinshiden'", hue:50,
@@ -5504,6 +5537,7 @@ const PLANTS = [
    resilience:"exposed-site tolerant · pollinator friendly",
    uses:"borders · cut flowers · wildlife gardens",
    size:"50–100 cm H × 50–100 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:8, pestRisk:10, thirst:12, careLevel:5, sunNeed:60, sunMin:35},
 
   {common:"Black and Blue Anise-Scented Sage", latin:"Salvia guaranitica 'Black and Blue'", hue:225,
@@ -5579,6 +5613,7 @@ const PLANTS = [
    resilience:"very cold hardy · coastal tolerant",
    uses:"borders · containers · pollinators",
    size:"50–60 cm H × 30–50 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:9, pestRisk:10, thirst:11, careLevel:5, sunNeed:65, sunMin:35},
 
   {common:"St John's wort 'Miracle Night'", latin:"Hypericum × inodorum MIRACLE NIGHT ('Allmadne')", hue:345,
@@ -5605,6 +5640,7 @@ const PLANTS = [
    uses:"containers · borders · cut stems · autumn berries",
    size:"70–80 cm H × 60–75 cm W",
    toxicity:"Fruit ornamental · not to be eaten",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:42},
 
   {common:"Ivy 'Goldheart'", latin:"Hedera helix 'Oro di Bogliasco'", hue:55,
@@ -5657,6 +5693,7 @@ const PLANTS = [
    uses:"screening · walls · wildlife gardens · cottage gardens",
    size:"8–12 m H × 1.5–2.5 m W",
    toxicity:"Fruit ornamental · not to be eaten",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:14, pestRisk:12, thirst:12, careLevel:9, sunNeed:55, sunMin:35},
 
   {common:"White potato vine", latin:"Solanum laxum 'Album'", hue:0,
@@ -5785,6 +5822,7 @@ const PLANTS = [
    uses:"containers · borders · cut flowers · pollinators",
    size:"50–80 cm H × 40–60 cm W",
    toxicity:"Mildly toxic to dogs and cats if eaten · may cause dermatitis",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:14, pestRisk:12, thirst:13, careLevel:13, sunNeed:92, sunMin:68},
 
   {common:"St John's wort 'Miracle Grandeur'", latin:"Hypericum × inodorum MIRACLE GRANDEUR ('Allgrandeur')", hue:0,
@@ -5811,6 +5849,7 @@ const PLANTS = [
    uses:"containers · borders · cut stems · autumn berries",
    size:"70–80 cm H × 60–75 cm W",
    toxicity:"Fruit ornamental · not to be eaten",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:42},
 
   {common:"Rice-paper Plant 'Rex'", latin:"Tetrapanax papyrifer 'Rex'", hue:105,
@@ -6293,6 +6332,7 @@ const PLANTS = [
    resilience:"cold hardy · drought tolerant once established",
    uses:"containers · small gardens · borders · pollinators",
    size:"80 cm H × 80 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:14, pestRisk:12, thirst:8, careLevel:5, sunNeed:94, sunMin:68},
 
   {common:"Clematis 'Josephine'", latin:"Clematis JOSEPHINE ('Evijohill')", hue:325,
@@ -6749,66 +6789,135 @@ const PLANTS = [
    size:"50–100 cm H × 50–100 cm W",
    toxicity:"Harmful if eaten",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:2, careLevel:3, sunNeed:90, sunMin:60},
-   {common:"Lacecap hydrangea 'Zorro'", latin:"Hydrangea macrophylla 'Zorro'", hue:220,
+
+  {common:"Lacecap hydrangea 'Zorro'", latin:"Hydrangea macrophylla 'Zorro'", hue:220,
    visual:"Ultramarine-blue lacecaps · deep purple-black stems · dark-green leaves",
    water:"Keep evenly moist",
    aspect:"North / East / West",
    soil:"Moist, well-drained; Avoid dry soil · shelter from cold winds",
    prune:"Prune Group 4; remove faded flowers and oldest stems in spring",
-   source:"", peak:"Jun-Sep", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jun-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"branch sport of 'Blaumeise'; Royalty Collection",
-   hardiness:"H5", resilience:"part-shade tolerant · urban suitable",
-   uses:"containers · shrub borders · cut flowers · woodland gardens", size:"1–1.5 m H × 1–1.5 m W",
+   hardiness:"H5",
+   resilience:"part-shade tolerant · urban suitable",
+   uses:"containers · shrub borders · cut flowers · woodland gardens",
+   size:"1–1.5 m H × 1–1.5 m W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:12, pestRisk:11, thirst:14, careLevel:7, sunNeed:58, sunMin:35},
+
   {common:"Japanese blood grass 'Red Baron'", latin:"Imperata cylindrica 'Rubra'", hue:0,
    visual:"Green blades flushed deep crimson · silvery flower panicles in late summer",
    water:"Moderate; keep moist while establishing",
    aspect:"East / South / West",
    soil:"Moist, well-drained; Avoid winter waterlogging",
    prune:"Cut back dead foliage in spring",
-   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jun-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"syn. Imperata cylindrica 'Red Baron'; Imperata 'Red Baron'",
-   hardiness:"H4", resilience:"cold hardy · urban suitable",
-   uses:"borders · containers · ground cover · foliage contrast", size:"40–50 cm H × 30–50 cm W",
+   hardiness:"H4",
+   resilience:"cold hardy · urban suitable",
+   uses:"borders · containers · ground cover · foliage contrast",
+   size:"40–50 cm H × 30–50 cm W",
    seasonalImpact:"", growthSpeed:8, pestRisk:2, thirst:10, careLevel:4, sunNeed:90, sunMin:55},
+
   {common:"Wormwood 'Powis Castle'", latin:"Artemisia 'Powis Castle'", hue:0,
    visual:"Finely divided silvery-grey foliage · dense rounded habit · aromatic leaves",
    water:"Low once established",
    aspect:"East / South / West",
    soil:"Poor, well-drained; Avoid winter wet",
    prune:"Cut back to lowest new shoots in mid to late spring",
-   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jan-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"syn. Artemisia arborescens 'Powis Castle'; Artemisia arborescens 'Brass Band'",
-   hardiness:"H3", resilience:"drought tolerant · exposed-site tolerant · heat tolerant",
-   uses:"gravel gardens · borders · containers · foliage contrast", size:"50–60 cm H × 60–90 cm W",
+   hardiness:"H3",
+   resilience:"drought tolerant · exposed-site tolerant · heat tolerant",
+   uses:"gravel gardens · borders · containers · foliage contrast",
+   size:"50–60 cm H × 60–90 cm W",
    seasonalImpact:"", growthSpeed:9, pestRisk:5, thirst:3, careLevel:4, sunNeed:95, sunMin:75},
+
   {common:"Gaura 'Rosy Jane'", latin:"Oenothera lindheimeri 'Rosy Jane'", hue:335,
    visual:"White flowers with vivid pink picotee edges · dark-pink buds · purple-flecked foliage",
    water:"Moderate; water in dry spells",
    aspect:"East / South / West",
    soil:"Moist, well-drained; Avoid winter wet",
    prune:"Remove spent flowering stalks; cut back in early spring",
-   source:"", peak:"May-Oct", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"May-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"trade name Rosy Jane; cultivar code 'Harrosy'",
-   hardiness:"H4", resilience:"drought tolerant once established · wind tolerant · urban suitable",
-   uses:"borders · containers · prairie planting · wildlife gardens", size:"50–100 cm H × 40–60 cm W",
+   hardiness:"H4",
+   resilience:"drought tolerant once established · wind tolerant · urban suitable",
+   uses:"borders · containers · prairie planting · wildlife gardens",
+   size:"50–100 cm H × 40–60 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:13, pestRisk:3, thirst:9, careLevel:4, sunNeed:95, sunMin:68},
+
   {common:"Button bush 'Fiber Optics'", latin:"Cephalanthus occidentalis 'Bailoptics'", hue:0,
    visual:"Creamy-white spherical flowers · glossy green leaves · coppery autumn colour",
    water:"Keep evenly moist; tolerates flooding",
    aspect:"East / South / West",
    soil:"Moist to wet; Avoid prolonged dry soil",
    prune:"Cut back hard in early spring if required",
-   source:"", peak:"Jul-Sep", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jul-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"trade name Fiber Optics; First Editions Series; cultivar code 'Bailoptics'",
-   hardiness:"H5", resilience:"wet-soil tolerant · flood tolerant · pollinator friendly",
-   uses:"pond margins · rain gardens · wet borders · wildlife gardens", size:"1.5–2 m H × 1.5–2 m W",
+   hardiness:"H5",
+   resilience:"wet-soil tolerant · flood tolerant · pollinator friendly",
+   uses:"pond margins · rain gardens · wet borders · wildlife gardens",
+   size:"1.5–2 m H × 1.5–2 m W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:10, pestRisk:3, thirst:15, careLevel:5, sunNeed:82, sunMin:48},
+
   {common:"Chaste tree 'Delta Blues'", latin:"Vitex agnus-castus 'Piivac-I'", hue:225,
    visual:"Dense deep violet-blue flower panicles · aromatic blue-green foliage",
    water:"Low once established",
@@ -6834,6 +6943,7 @@ const PLANTS = [
    size:"2.5–3 m H × 2.5–3 m W",
    toxicity:"",
    seasonalImpact:"", growthSpeed:16, pestRisk:7, thirst:5, careLevel:5, sunNeed:96, sunMin:78},
+
   {common:"Chaste tree 'Flip Side'", latin:"Vitex × 'Bailtexone'", hue:225,
    visual:"Deep lavender-blue flower panicles · olive-green leaves with purple undersides",
    water:"Low once established",
@@ -6859,18 +6969,32 @@ const PLANTS = [
    size:"2–2.5 m H × 2–3 m W",
    toxicity:"",
    seasonalImpact:"", growthSpeed:15, pestRisk:7, thirst:5, careLevel:5, sunNeed:96, sunMin:78},
+
   {common:"Eupatorium 'Pink Frost'", latin:"Eupatorium japonicum 'Pink Frost'", hue:335,
    visual:"Cream-white variegated leaves · pink-flushed young growth · flat pink flower heads",
    water:"Keep evenly moist",
    aspect:"East / South / West",
    soil:"Moist, well-drained; Do not allow soil to dry out",
    prune:"Cut back at the end of the season",
-   source:"", peak:"Jul-Sep", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jul-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"RHS: Eupatorium fortunei 'Pink Frost'; Kew synonymises E. fortunei with E. japonicum",
-   hardiness:"H5", resilience:"part-shade tolerant · exposed-site tolerant",
-   uses:"cottage gardens · prairie planting · wildlife gardens · containers", size:"1–1.5 m H × 0.5–1 m W",
+   hardiness:"H5",
+   resilience:"part-shade tolerant · exposed-site tolerant",
+   uses:"cottage gardens · prairie planting · wildlife gardens · containers",
+   size:"1–1.5 m H × 0.5–1 m W",
    seasonalImpact:"", growthSpeed:11, pestRisk:7, thirst:13, careLevel:5, sunNeed:68, sunMin:40},
+
   {common:"Perennial Wallflower 'Bowles's Mauve'", latin:"Erysimum 'Bowles’s Mauve'", hue:285,
    visual:"Grey-green mound topped by purple-mauve spires from spring to late autumn",
    water:"Water while young, then keep it on the dry side",
@@ -6896,19 +7020,33 @@ const PLANTS = [
    size:"0.5-1m H × 0.5-1m W",
    toxicity:"Potentially harmful if eaten; grow as an ornamental rather than an edible plant.",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:6, careLevel:7, sunNeed:100, sunMin:85},
+
   {common:"Japanese cedar 'Serama'", latin:"Cryptomeria japonica Serama ('FM5')", hue:120,
    visual:"Compact green conifer · fasciated, contorted branches · dense pyramidal habit",
    water:"Moderate; keep moist while establishing",
    aspect:"East / South / West",
    soil:"Moist, well-drained; Sheltered · avoid waterlogging",
    prune:"No routine pruning",
-   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jan-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"trade name Serama; cultivar denomination 'FM5'",
-   hardiness:"H6", resilience:"cold hardy · urban suitable",
-   uses:"containers · small gardens · rock gardens · specimen", size:"50–60 cm H × 40–60 cm W",
+   hardiness:"H6",
+   resilience:"cold hardy · urban suitable",
+   uses:"containers · small gardens · rock gardens · specimen",
+   size:"50–60 cm H × 40–60 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:10, careLevel:4, sunNeed:82, sunMin:55},
-];
+ ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -7183,16 +7321,17 @@ const PLANTS_ON_HOLD=[
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ Schedule 9 — do not plant in the wild",
+   type:"",
    shrink:"",
-   returnRisk:"Listed in Schedule 9 Part II of the Wildlife and Countryside Act 1981 (England and Wales): it is an offence to plant it or cause it to grow in the wild. Sale is not banned — advise containment and never dump garden material in semi-natural habitat.",
+   returnRisk:"",
    pots:"",
    cvs:"",
    hardiness:"H6",
-   resilience:"⚠ Schedule 9 — must not be planted or grown in the wild",
+   resilience:"",
    uses:"contained acid borders · woodland gardens · spring fragrance",
    size:"2.5-4m H × 2.5-4m W",
    toxicity:"All parts are poisonous if eaten and are potentially dangerous to people, pets and livestock.",
+   compliance:"Listed in Schedule 9 Part II of the Wildlife and Countryside Act 1981 in England and Wales. Do not plant or otherwise cause this species to grow in the wild, and prevent garden material from escaping into natural habitats.",
    seasonalImpact:"", growthSpeed:12, pestRisk:9, thirst:13, careLevel:11, sunNeed:65, sunMin:35},
 
   {common:"Chusan Palm", latin:"Trachycarpus fortunei", hue:110,
@@ -7933,7 +8072,6 @@ const PLANTS_ON_HOLD=[
    size:"0.5-1m H × 0.5-1m W",
    seasonalImpact:"", growthSpeed:15, pestRisk:6, thirst:12, careLevel:4, sunNeed:75, sunMin:35},
 
-
   {common:"Catmint 'Walker's Low'", latin:"Nepeta racemosa 'Walker’s Low'", hue:255,
    visual:"Aromatic grey-green mound carrying masses of blue-violet flowers for months",
    water:"Water while young; drought tolerant once rooted",
@@ -8524,15 +8662,16 @@ const PLANTS_ON_HOLD=[
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ Schedule 9 — do not plant in the wild",
+   type:"",
    shrink:"",
-   returnRisk:"Rosa rugosa is listed on Schedule 9. It is not banned from sale, but it must not be planted or otherwise caused to grow in the wild. Prevent spread, particularly near dunes, shingle and other semi-natural coastal habitats.",
+   returnRisk:"",
    pots:"",
    cvs:"'Alba' — white · 'Rubra' — magenta",
    hardiness:"H7",
-   resilience:"⚠ Schedule 9 — never plant in the wild · salt, sand and drought proof · suckers",
+   resilience:"salt, sand and drought proof · suckers",
    uses:"coastal hedging · impenetrable boundaries · wildlife · hips for syrup",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   compliance:"Rosa rugosa is listed on Schedule 9. It is not banned from sale, but it must not be planted or otherwise caused to grow in the wild. Prevent spread, particularly near dunes, shingle and other semi-natural coastal habitats.",
    seasonalImpact:"", growthSpeed:15, pestRisk:3, thirst:6, careLevel:4, sunNeed:85, sunMin:40},
 
   {common:"English Lavender 'Hidcote'", latin:"Lavandula angustifolia 'Hidcote'", hue:275,
@@ -8960,8 +9099,6 @@ const PLANTS_ON_HOLD=[
    size:"2–3 m H × 1–1.5 m W",
    toxicity:"Milky sap is harmful if eaten and may irritate skin and eyes",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:8, careLevel:5, sunNeed:60, sunMin:35},
-
-
  ];
 /* HOLD:END */
 
@@ -9322,6 +9459,68 @@ function toxPlaque(p){
     </div>
   </div>`;
 }
+/* ---------- the LEGAL plaque ----------
+   The other half of the safety block, and it needed a different shape rather
+   than a second copy of the same one. Reading the deck's own legal notes first
+   (as with toxicity) showed SIX distinct reasons across ~21 cards, and they are
+   not the same kind of thing at all:
+
+     - Schedule 9 of the Wildlife and Countryside Act: legal to sell, legal to
+       grow, a CRIMINAL OFFENCE to plant in the wild or let escape (4 cards)
+     - a sale/propagation ban outright (Gunnera — most plants sold as manicata
+       are the banned G. x cryptica)
+     - illegal to spread, and the soil with it (Japanese knotweed)
+     - plant-health host of note (the Olive, Xylella)
+     - wild-harvest controls in the source country (Dicksonia)
+     - PLANT BREEDER'S RIGHTS on 14 cards, which is none of the above: it is an
+       invoice question about what the NURSERY may propagate, not a duty on
+       anyone holding the plant.
+
+   So the plaque has two weights. A statutory duty gets the full treatment, in
+   the same visual language as a hazard. Breeder's rights gets a quiet grey
+   strip, because dressing a licensing note as a legal warning devalues the
+   warnings that are real. Both print the researched prose verbatim; the tier
+   only chooses how loudly it is said. */
+const LEGAL_LADDER=[
+  ['ban'    ,/\bbanned\b(?!\s+from\s+sale)|must not be sold|UK RESTRICTED|do not sell|illegal to (?:sell|keep|spread|plant)/i],
+  ['statute',/schedule 9|wildlife and countryside|controlled waste|offence|notifiable|quarantine|xylella|cites|harvest/i],
+  ['rights' ,/\bPBR\b|breeder'?s? rights|propagation restricted|plant breeders/i],
+];
+function legalTier(t){
+  /* NEGATION FIRST, and this is the THIRD time this project has been bitten by a
+     keyword sitting inside a negation — "should not be treated as edible" in the
+     toxicity ladder, "avoid dry soil" in plant-sense, and now "Sale is not banned,
+     but it must not be planted in the wild", which tiered Virginia creeper as an
+     outright BAN and would have printed a red Restricted plaque on a plant that is
+     perfectly legal to sell. Strip the negated phrase, then run the ladder. */
+  const s=String(t).replace(/\b(?:is\s+|are\s+)?not\s+(?:currently\s+)?(?:banned|restricted|prohibited|listed)\b[^,.;]*/gi,' ');
+  for(const[k,re]of LEGAL_LADDER)if(re.test(s))return k;
+  return'statute';
+}
+const LEGAL_GLYPH={
+  /* a statute book for a duty, a small seal for a licence — drawn, not fetched */
+  book:'<path d="M4 3.2h6.2c1.1 0 2 .6 2.3 1.4V21c-.5-.7-1.3-1.1-2.3-1.1H4V3.2Zm16 0h-6.2c-1.1 0-2 .6-2.3 1.4V21c.5-.7 1.3-1.1 2.3-1.1H20V3.2Z"/>',
+  seal:'<path d="M12 2.4 14 5l3.3-.6.5 3.3 2.8 1.8-1.7 2.9 1.7 2.9-2.8 1.8-.5 3.3L14 19.8 12 22.4 10 19.8l-3.3.6-.5-3.3L3.4 15.3 5.1 12.4 3.4 9.5l2.8-1.8.5-3.3L10 5l2-2.6Zm0 5.4a4.6 4.6 0 1 0 0 9.2 4.6 4.6 0 0 0 0-9.2Z"/>',
+};
+const LEGAL_TIER={
+  ban    :{word:'Restricted'        ,label:'Legal'   ,glyph:'book'},
+  statute:{word:'Legal duty'        ,label:'Legal'   ,glyph:'book'},
+  rights :{word:"Breeder's rights"  ,label:'Licence' ,glyph:'seal'},
+};
+function legalPlaque(p){
+  const t=String(p.compliance||'').trim();
+  if(!t)return'';                                   /* nothing known to apply — say nothing */
+  const k=legalTier(t),tier=LEGAL_TIER[k];
+  return `<div class="lgl ${k}">
+    <div class="lgl-body">
+      <svg class="lgl-glyph" viewBox="0 0 24 24" aria-hidden="true">${LEGAL_GLYPH[tier.glyph]}</svg>
+      <div class="tox-text">
+        <div class="tox-head"><span class="lgl-l">${tier.label}</span><span class="lgl-tier">${tier.word}</span></div>
+        <div class="lgl-n">${t}</div>
+      </div>
+    </div>
+  </div>`;
+}
 function tradeBlocks(p){
   const price=cellIf('cell','Trade',p.trade)+cellIf('cell','Retail',p.retail)+cellIf('cell m','Margin',p.margin);
   const grid=cellIf('g','Source',p.source)+cellIf('g','Peak',p.peak,monthDots(p.peak))
@@ -9331,7 +9530,7 @@ function tradeBlocks(p){
     +cellIf('g','Size',p.size)+cellIf('g full','Cultivars',p.cvs)
     +cellIf('g','Resilience',p.resilience)+cellIf('g','Uses',p.uses);
   const buyer=[p.trade,p.retail,p.margin,p.source,p.order,p.bench,p.root,p.type,p.shrink,p.returnRisk,p.pots];
-  return toxPlaque(p)
+  return toxPlaque(p)+legalPlaque(p)
     +(price?`<div class="price">${price}</div>`:'')
     +(buyer.some(has)?'':'<div class="nodata">Buyer data not entered for this plant yet</div>')
     +(grid?`<div class="grid">${grid}</div>`:'');
