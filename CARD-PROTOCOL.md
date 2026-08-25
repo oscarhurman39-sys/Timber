@@ -398,7 +398,28 @@ Focal point recorded here when off-centre:
 
 | Sanguisorba 'Pink Brushes' | sanguisorba-pink-brushes.jpg | 50% 40% default — **Oscar's own two-frame split, kept whole**: cut foliage left, nodding pink bottlebrushes right. Already 3000x4000 at exactly 0.750, so nothing was cropped. The clearest case yet for the v14.34 rule — he assembled this one deliberately to show both halves, and both halves are what a person needs to recognise the plant on a bench |
 
+| Anisodontea capensis 'Ib201-7' (CARNIVAL LIGHTS CANDY APPLE) | anisodontea-capensis-ib201-7.jpg | 50% 40% default — **uncropped**, orientation already 1, portrait 3000x3444 at 0.871 (inside the gate, the Styrax precedent). One large deep-red flower with the crimson veining and dark stamens top-right, a lobed grey-green mallow leaf sharp at left — flower AND foliage in one frame, both halves of the card's own visual line. Current-season Galaxy S24 capture, shot the day it was staged. **First *Anisodontea* in the deck**, no confusion risk |
+
 ## 5. Decision changelog
+
+- **v14.41 (239 dealt / 81 held — Cape mallow, a new genus, and a card that
+  needed nothing fixed)**: *Anisodontea capensis* 'Ib201-7', sold as CARNIVAL
+  LIGHTS CANDY APPLE (Carnival Lights Series) — the deck's first *Anisodontea*.
+  - **Uncropped, as-is** (v14.34): orientation 1, 3000x3444 at 0.871, flower and
+    leaf both legible in the card band, no labels, no dead space. Clean Galaxy
+    S24 EXIF, no C2PA manifest, no AI marker.
+  - **The name arrived garbled and the correction travels with the card.** The
+    supplied working name was "Anisodonted Candy Apple Lights"; the JSON's own
+    `uncertain` block records the correction to *Anisodontea capensis* CARNIVAL
+    LIGHTS CANDY APPLE, RHS's treatment of CARNIVAL LIGHTS CANDY APPLE as a trade
+    name over the 'Ib201-7' denomination, and the semi-evergreen call (RHS says
+    semi-evergreen to evergreen; the representative UK behaviour was chosen).
+    All three sit in `data/incoming/anisodontea-capensis-ib201-7.json`, the
+    Sanguisorba precedent.
+  - **careLevel 5 tripped the validator's "unconverted 0-5?" warning** and is
+    correct as written: all four stats are on the 0-20 scale (growthSpeed 13,
+    pestRisk 7, thirst 8), so 5 renders as 1.25/5 — an easy-care plant, which a
+    tip-pruned mallow is.
 
 - **v14.40 (238 dealt / 81 held — Sanguisorba, and a perf check that counted the
   wrong thing)**: *Sanguisorba* 'Pink Brushes', a new genus, from a split Oscar

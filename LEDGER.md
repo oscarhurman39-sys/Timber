@@ -45,6 +45,15 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-25 (Cape mallow — a new genus, nothing needed fixing) —
+  **deck 239, hold 81.** *Anisodontea capensis* 'Ib201-7' (CARNIVAL LIGHTS CANDY
+  APPLE), the deck's first *Anisodontea*. Photo uncropped at verdict as-is
+  (orientation 1, 3000x3444 at 0.871, flower + leaf both in the card band; clean
+  Galaxy S24 EXIF, no C2PA/AI marker, shot same day). The supplied name
+  "Anisodonted Candy Apple Lights" arrived garbled; the correction and the RHS
+  trade-name/denomination reading travel in the JSON's `uncertain` block at
+  data/incoming/. careLevel 5 tripped the validator's 0-5 warning and is correct
+  on the 0-20 scale (1.25/5, easy care). Protocol v14.41. Full gate before push.
 progress: 2026-08-23 (Sanguisorba, and a perf check counting the wrong thing) —
   **deck 238, hold 81.** *Sanguisorba* 'Pink Brushes' from a split Oscar
   assembled himself, kept whole and uncropped — the clearest case yet for the
