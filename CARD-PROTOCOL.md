@@ -406,9 +406,27 @@ Focal point recorded here when off-centre:
 | Phygelius aequalis 'Trewidden Pink' | phygelius-aequalis-trewidden-pink.jpg | 50% 40% default — **uncropped**, EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked in at `verdict: as-is`, the Erigeron/Vitex precedent. Pendent tubular flowers upper-left, the serrate opposite hero leaf upper-right — genus-confirming. **Assigned against the send order**: the JSON array led with the Dahlia but this frame is unmistakably the Phygelius; matched on the plant, the Vitex rule. ⚠ [flag] **The card says "dusky-pink" and the photograph reads coral-RED in hard sun** — the tubes have pale throats and red-rimmed lobes. Consistent with a phone camera saturating a coral-pink cultivar in full August light (the Agapanthus precedent), but the cultivar is not verifiable from this frame; if a softer-light frame ever shows true red, the ID wants Oscar's eye. **First *Phygelius* in the deck** |
 | Dahlia 'Kelvin Floodlight' | dahlia-kelvin-floodlight.jpg | 50% 40% default — **uncropped**, orientation 1, portrait 3000x4000 at exactly 0.750. The huge butter-yellow decorative bloom fills the right of the frame with the dark pinnate foliage left — cultivar-consistent: 'Kelvin Floodlight' is THE giant yellow decorative, and nothing else in the deck looks like it. Leaves show pale mottled spotting, true to a bench dahlia in late August. **Second *Dahlia*** — ELECTRO PINK is a neon cactus type, no confusion risk |
 
+| Disporum sessile 'Variegatum' | disporum-sessile-variegatum.jpg | 50% 40% default — **uncropped**, EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked at `verdict: as-is`. A young plant held in its 9cm pot, tilted so the white-striped arching foliage spans the top half of the frame — the card band — with the black pot and Oscar's hand in the lower half under the stats plaque; a thumb sliver shows at the left edge above it, the Salvia-inset class of acceptable. Variegation pattern (fine white striping following the veins on pointed sessile leaves) is cultivar-consistent; **no flowers** — peak is May–Jun, so the hanging green-white bells the card names want a spring frame. **First *Disporum* in the deck** |
+
 | Solanum pyracanthos | solanum-pyracanthos.jpg | 50% 40% default — **uncropped by us** (2482x3024 at 0.821, orientation 1), but **the file carries Oscar's own sticker edit, the Salvia 'Black and Blue' class, and this time the C2PA manifest says so precisely**: a Samsung PhotoEditor deco re-edit declaring a crop to 91% height, a filter, and ONE non-text sticker at centre (0.215, 0.235), ~23% wide, rotated -10° — which is exactly where the purple flower sits. **No generative action**: no `Photo assist` agent, no trained-media source type, `isScaleAI:false`, AI filter false, no visible label. The pasted flower is species-correct (purple 5-lobed star, yellow poricidal anther cone) and every other ID feature — grey-green lobed leaves, vivid orange spines on stems, midribs AND calyx, a developing fruit — is the camera's own capture. Two blurred nursery labels lower-left (one reads "SOL…", the right genus) fall below the card band, the Sempervivum precedent. **Second *Solanum*** — *S. laxum* 'Album' is a white-flowered climber, no confusion risk. No red fruits in frame: an autumn reshoot would complete the card's own visual line |
 
 ## 5. Decision changelog
+
+- **v14.45 (245 dealt / 81 held — fairy bells, the day's fourth new genus)**:
+  *Disporum sessile* 'Variegatum', a woodland shade card (sunNeed 42) among a
+  day of sun-lovers.
+  - **Another orientation-6 file staged correctly because the tool, not the
+    preview, is the authority**: the chat preview showed the un-rotated
+    landscape sensor frame; the displayed portrait puts the foliage in the card
+    band and the pot and hand under the plaque. Baked at as-is, uncropped.
+  - The reframe gate earned its keep in a small way: the first featureBox
+    computed the foliage centre at 29.5% down, half a percent above the safe
+    band, and the tool refused it. The box was corrected to cover the lower
+    arching stems it genuinely missed — the fix was a more honest box, not an
+    override.
+  - Kew-vs-RHS naming nuance kept in the `uncertain` block (f. *variegatum* as
+    a synonym vs the horticultural cultivar name). No flowers in frame; May–Jun
+    reshoot joins the spring queue.
 
 - **v14.44 (244 dealt / 81 held — porcupine tomato, and a C2PA manifest that
   finally says exactly what happened)**: *Solanum pyracanthos*, a new species

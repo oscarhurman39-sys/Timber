@@ -962,6 +962,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "disporum-sessile-variegatum.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. The white-striped arching foliage spans the top half of the displayed frame; the black pot and Oscar's hand sit in the lower half, under the stats plaque. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "dryopteris-erythrosora.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",

@@ -45,6 +45,13 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-25 (fairy bells — fourth new genus of the day) — **deck 245,
+  hold 81.** *Disporum sessile* 'Variegatum', woodland shade card. Another
+  orientation-6 preview trap staged correctly (foliage in the card band, pot
+  and hand under the plaque; baked at as-is, uncropped 0.750). The reframe gate
+  refused the first featureBox by half a percent and the fix was a more honest
+  box covering the lower arching stems, not an override. No flowers (May-Jun)
+  — spring reshoot queue. Protocol v14.45.
 progress: 2026-08-25 (porcupine tomato — a manifest that says what happened) —
   **deck 244, hold 81.** *Solanum pyracanthos*, new species, H2 tender exotic.
   The photo is Oscar's frame with his own PhotoEditor sticker edit and the C2PA
