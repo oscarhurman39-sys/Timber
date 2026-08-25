@@ -400,7 +400,63 @@ Focal point recorded here when off-centre:
 
 | Anisodontea capensis 'Ib201-7' (CARNIVAL LIGHTS CANDY APPLE) | anisodontea-capensis-ib201-7.jpg | 50% 40% default — **uncropped**, orientation already 1, portrait 3000x3444 at 0.871 (inside the gate, the Styrax precedent). One large deep-red flower with the crimson veining and dark stamens top-right, a lobed grey-green mallow leaf sharp at left — flower AND foliage in one frame, both halves of the card's own visual line. Current-season Galaxy S24 capture, shot the day it was staged. **First *Anisodontea* in the deck**, no confusion risk |
 
+| Cyclamen hederifolium var. hederifolium f. albiflorum | cyclamen-hederifolium-var-hederifolium-f-albiflorum.jpg | 50% 40% default — **cropped for arithmetic, not taste**: source 1960x3732 at 0.525, far below the 0.75 gate, with the bottom ~30% being the plastic tray rim and its sandy face. Full-width crop of the top 70% through `reframe-photo.js` lands at 1960x2612, exactly 0.750; the white reflexed flower on its coral stem and the silver-marbled ivy-shaped hero leaf — both halves of the card's visual line — sit in the card band. Clean Galaxy S24 EXIF, no C2PA/AI marker. **First *Cyclamen* in the deck.** Peak Sep–Nov and shot in late August with the first flowers just opening, so the frame matches the card's own season |
+| Helleborus × ericsmithii 'Winter Moonbeam' | helleborus-ericsmithii-winter-moonbeam.jpg | 50% 40% default — **uncropped**, 3000x3928 at 0.764, inside the gate; the marbled silver-veined trifoliate foliage fills the frame, which is the cultivar's second selling point and the one that is there in August. **Carries a C2PA `Photo assist` / `compositeWithTrainedAlgorithmicMedia` manifest AND a visible "AI-generated content" label lower-left** (VERIFY-QUEUE 32's category) — the label sits at y 0.95+, verified by `reframe-photo.js` arithmetic to fall under the stats plaque at any focus, so no focus pin was needed; recorded verbatim in `CREDITS.json`. Framing, not concealment. No flowers: peak is Dec–Apr, so the white outward-facing flowers the card leads on want a winter reshoot. **First dealt *Helleborus*** — 'Anna's Red' (Rodney Davey Marbled Group) is still held; both have marbled foliage, so check the slug before ever swapping |
+
+| Phygelius aequalis 'Trewidden Pink' | phygelius-aequalis-trewidden-pink.jpg | 50% 40% default — **uncropped**, EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked in at `verdict: as-is`, the Erigeron/Vitex precedent. Pendent tubular flowers upper-left, the serrate opposite hero leaf upper-right — genus-confirming. **Assigned against the send order**: the JSON array led with the Dahlia but this frame is unmistakably the Phygelius; matched on the plant, the Vitex rule. ⚠ [flag] **The card says "dusky-pink" and the photograph reads coral-RED in hard sun** — the tubes have pale throats and red-rimmed lobes. Consistent with a phone camera saturating a coral-pink cultivar in full August light (the Agapanthus precedent), but the cultivar is not verifiable from this frame; if a softer-light frame ever shows true red, the ID wants Oscar's eye. **First *Phygelius* in the deck** |
+| Dahlia 'Kelvin Floodlight' | dahlia-kelvin-floodlight.jpg | 50% 40% default — **uncropped**, orientation 1, portrait 3000x4000 at exactly 0.750. The huge butter-yellow decorative bloom fills the right of the frame with the dark pinnate foliage left — cultivar-consistent: 'Kelvin Floodlight' is THE giant yellow decorative, and nothing else in the deck looks like it. Leaves show pale mottled spotting, true to a bench dahlia in late August. **Second *Dahlia*** — ELECTRO PINK is a neon cactus type, no confusion risk |
+
 ## 5. Decision changelog
+
+- **v14.43 (243 dealt / 81 held — dahlia and Cape figwort, and the send order
+  was wrong again)**: *Dahlia* 'Kelvin Floodlight' and *Phygelius aequalis*
+  'Trewidden Pink'. **The JSON array led with the Dahlia but the first
+  photograph was the Phygelius** — red tubular flowers on a serrate-leaved
+  shrub against a giant yellow decorative bloom is not a close call, so both
+  were assigned on the plant per the Vitex rule, and the assignment is recorded
+  on the Phygelius photo's own CREDITS line.
+  - Both uncropped at 0.750: the Dahlia orientation 1 as-is; the Phygelius
+    orientation 6 with the rotation baked in through `reframe-photo.js`
+    (sensor landscape, displays portrait — the Erigeron preview trap again).
+  - **One [flag]:** the Phygelius card promises "dusky-pink" and the photograph
+    reads coral-red in hard midday sun. Register carries it; cultivar not
+    verifiable from the frame.
+  - **perf-test's halo delta ceiling was raised 24 → 48, third raise, same
+    discipline**: differing pixels dumped with coordinates first (all on the
+    card silhouette in single-digit shadow tones — the tracked x=764 run
+    included), then the staged-leak margin re-measured on this deck: baseline
+    25px/Δ27 against a leak at 36505px/Δ375. The new ceiling is 2x observed and
+    8x under the leak; the px budget is untouched. Evidence in the test's own
+    comment block, dated.
+  - The cyclamen's height rail also overran its patch by 9.7px ("Up to 10 cm",
+    11 chars) — shortened to "To 10 cm" on the card, same meaning, and
+    audit-layout came back clean.
+
+- **v14.42 (241 dealt / 81 held — cyclamen and hellebore, two new genera in one
+  batch)**: *Cyclamen hederifolium* var. *hederifolium* f. *albiflorum* and
+  *Helleborus* × *ericsmithii* 'Winter Moonbeam', Oscar confirming the
+  photo-to-JSON pairing in the send ("first image is the hedrafolia and second
+  is the hellebore") — and the foliage agrees: silver-marbled ivy-shaped leaves
+  with reflexed white flowers on the first, serrate silver-veined trifoliate
+  leaves on the second.
+  - **The cyclamen is a crop with a reason**: 0.525 source, tray rim and dead
+    space below; full-width top-70% crop through the tool to exactly 0.750.
+  - **The hellebore is the seventh VERIFY-QUEUE-32-class file** — C2PA
+    `Photo assist` generative-edit manifest plus the visible label. The label's
+    own coordinates were run through `reframe-photo.js`'s furniture arithmetic:
+    at y 0.95+ it sits under the stats plaque at any focus, so the file is dealt
+    uncropped with no focus pin, marker recorded verbatim in `CREDITS.json`,
+    `commercialUseCleared` left `true` per the Epimedium/Houttuynia precedent
+    (VQ 32 decision 1 remains Oscar's).
+  - **Both names arrived informal and were reconciled, not guessed**:
+    "Cyclamen hederifolium White" → the RHS white-flowered form f. *albiflorum*;
+    "Moonbeam" → the RHS-accepted 'Winter Moonbeam'. Both corrections travel in
+    the JSONs' own `uncertain` blocks at `data/incoming/`.
+  - The hellebore populates `toxicity` (harmful if eaten · skin irritant) and
+    `compliance` (PBR) — the second PBR card since the LEGAL plaque shipped.
+  - Text-vs-picture gaps both recorded in the register: the hellebore has no
+    flowers (Dec–Apr peak, August shot); the cyclamen frame actually MATCHES its
+    Sep–Nov peak, with the first autumn flowers open.
 
 - **v14.41 (239 dealt / 81 held — Cape mallow, a new genus, and a card that
   needed nothing fixed)**: *Anisodontea capensis* 'Ib201-7', sold as CARNIVAL

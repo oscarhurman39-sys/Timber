@@ -45,6 +45,33 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-25 (dahlia + Cape figwort — and the send order was wrong
+  again) — **deck 243, hold 81.** *Dahlia* 'Kelvin Floodlight' (second Dahlia,
+  the giant yellow decorative; uncropped 0.750) and *Phygelius aequalis*
+  'Trewidden Pink' (first Phygelius; orientation-6 rotation baked at as-is).
+  The JSON array and the photo order disagreed — assigned on the plants, Vitex
+  rule, recorded in CREDITS. One [flag]: the Phygelius card says dusky-pink,
+  the photo reads coral-red in hard sun; register carries it. Two test fixes
+  with evidence: cyclamen height rail "Up to 10 cm" overran its patch 9.7px →
+  "To 10 cm"; perf-test halo delta ceiling 24 → 48 after dumping the differing
+  pixels (all card-silhouette shadow tones, the tracked x=764 run included) and
+  re-measuring the staged leak at deck 243 (baseline 25px/Δ27 vs leak
+  36505px/Δ375). Protocol v14.43. Full gate before push.
+progress: 2026-08-25 (cyclamen + hellebore — two new genera, same day) —
+  **deck 241, hold 81.** *Cyclamen hederifolium* f. *albiflorum* (first
+  Cyclamen; source 0.525 with a tray filling the bottom third, full-width
+  top-70% crop through reframe-photo.js to exactly 0.750, clean EXIF) and
+  *Helleborus* × *ericsmithii* 'Winter Moonbeam' (first dealt hellebore —
+  'Anna's Red' still held; uncropped 0.764, but the file is VQ-32-class: C2PA
+  Photo assist generative-edit manifest + visible "AI-generated content" label,
+  which the reframe tool's furniture arithmetic puts under the stats plaque at
+  any focus — dealt with marker recorded verbatim in CREDITS, cleared flag left
+  true per the Epimedium/Houttuynia precedent). Oscar confirmed the
+  photo-to-JSON pairing in the send and the foliage agrees with it. Both names
+  reconciled from informal supplied forms; corrections in the uncertain blocks
+  at data/incoming/. Hellebore populates toxicity + PBR compliance. Hellebore
+  flowerless (Dec-Apr peak) — winter reshoot queued behind Forsythia and
+  Syringa. Protocol v14.42.
 progress: 2026-08-25 (Cape mallow — a new genus, nothing needed fixing) —
   **deck 239, hold 81.** *Anisodontea capensis* 'Ib201-7' (CARNIVAL LIGHTS CANDY
   APPLE), the deck's first *Anisodontea*. Photo uncropped at verdict as-is

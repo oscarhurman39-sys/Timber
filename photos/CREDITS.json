@@ -892,9 +892,29 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cyclamen-hederifolium-var-hederifolium-f-albiflorum.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Cropped through tools/reframe-photo.js: source 1960x3732 (0.525, outside the gate), full-width crop of the top 70% to 1960x2612 at exactly 0.750, dropping the tray rim and its face; no pixels generated. EXIF Samsung Galaxy S24, 2026-08-25 (current season). No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "dahlia-electro-pink-71853-09.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "dahlia-kelvin-floodlight.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: orientation 1, portrait 3000x4000 at exactly 0.750, staged as-is, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-24 (current season). No C2PA manifest and no AI or generative marker",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -1335,6 +1355,16 @@
    "file": "hedera-helix-oro-di-bogliasco.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "helleborus-ericsmithii-winter-moonbeam.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA: softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label lower left at y 0.95+, verified by reframe-photo.js to sit under the stats plaque at any focus — framing, not concealment. See VERIFY-QUEUE 32. Uncropped, 3000x3928 at 0.764, orientation 1. EXIF Samsung Galaxy S24, 2026-08-25",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -2100,6 +2130,16 @@
    "sourceUrl": null,
    "commit": "5213b09",
    "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "phygelius-aequalis-trewidden-pink.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: EXIF orientation 6 (sensor 4000x3000, displayed 3000x4000 at 0.750), rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest and no AI or generative marker. Photo assigned against the send order: the JSON array led with the Dahlia but this frame is the Phygelius — matched on the plant, Vitex precedent",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

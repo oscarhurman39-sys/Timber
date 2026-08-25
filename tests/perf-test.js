@@ -177,8 +177,23 @@ const check = (name, ok, detail = '') => {
      The margin is re-measured, not inherited: a staged leak — one buried card
      un-hidden and nudged 12px so it genuinely showed — diffs at 47173 px, max
      delta 443 on this same deck. That is 480x the pixel budget below. */
-  const HALO_MAX_PX = 256;     /* 98 at deck 217 with two themed cards */
-  const HALO_MAX_DELTA = 24;   /* sum across r+g+b; 13 observed */
+  /* RAISED 2026-08-25, third time, delta only. At deck 243 the check went red at
+     31 px / max delta 26 — px comfortably inside the budget, delta 2 over. The
+     differing pixels were dumped with coordinates before anything was touched:
+     every one sits on the card SILHOUETTE — both top corners (y≈235-257), the
+     same x=764 vertical halo run this comment has tracked since deck 173
+     (reading (0,0,0) vs (1,1,0)), and the bottom edge — in single-digit shadow
+     tones like [17,10,0] vs [1,0,0]. The same phenomenon, deeper: the delta
+     trajectory 5 (deck 194) -> 9-13 (217) -> 26-27 (243) is the shadow-stack
+     growth predicted above, now past the old ceiling.
+     The margin was re-measured on this deck before widening, same procedure:
+     baseline 25 px / max delta 27; staged leak (one buried card un-hidden,
+     nudged 12px) 36505 px / max delta 375. The new delta ceiling of 48 is ~2x
+     the observed 27 and still ~8x below the staged leak's 375; the px budget is
+     untouched at 256, 10x the observed 25. A real leak remains unmistakable on
+     both axes. */
+  const HALO_MAX_PX = 256;     /* 98 at deck 217 with two themed cards; 25 at 243 */
+  const HALO_MAX_DELTA = 48;   /* sum across r+g+b; 27 observed at deck 243, leak measures 375 */
   check(`hiding buried content shows nothing (${diff.px}px, max Δ${diff.max}; halo shadows round at the edge)`,
     diff.px <= HALO_MAX_PX && diff.max <= HALO_MAX_DELTA,
     `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max} ` +

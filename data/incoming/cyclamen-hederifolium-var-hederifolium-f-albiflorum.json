@@ -1,0 +1,33 @@
+{
+  "common": "White-flowered ivy-leaved cyclamen",
+  "latin": "Cyclamen hederifolium var. hederifolium f. albiflorum",
+  "hue": 0,
+  "visual": "Pure white reflexed flowers · ivy-shaped silver-marbled leaves · autumn flowering",
+  "water": "Moderate; allow soil to dry slightly",
+  "aspect": "North / East / West",
+  "soil": "Well-drained",
+  "soilWarning": "Avoid summer waterlogging",
+  "prune": "Remove old foliage as it dies back in summer",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Sep-Nov",
+  "cvs": "syn. Cyclamen hederifolium 'Album'; Cyclamen hederifolium alba; Cyclamen hederifolium f. album",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "drought tolerant once established · cold hardy · shade tolerant",
+  "uses": "woodland gardens · underplanting · rock gardens · naturalising",
+  "height": "Up to 10 cm",
+  "spread": "15–30 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 7,
+  "pestRisk": 6,
+  "thirst": 5,
+  "careLevel": 4,
+  "sunNeed": 38,
+  "sunMin": 18,
+  "uncertain": [
+    "The supplied 'Cyclamen hederifolium White' was reconciled to the RHS white-flowered form f. albiflorum; 'White' alone is not a formal cultivar denomination",
+    "RHS gives a broad 10–50 cm spread range; 15–30 cm is based on typical established garden clumps and RHS general cyclamen guidance"
+  ]
+}
