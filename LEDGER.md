@@ -45,6 +45,15 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-25 (porcupine tomato — a manifest that says what happened) —
+  **deck 244, hold 81.** *Solanum pyracanthos*, new species, H2 tender exotic.
+  The photo is Oscar's frame with his own PhotoEditor sticker edit and the C2PA
+  manifest declares it precisely: one non-text sticker whose box lands exactly
+  on the purple flower, isScaleAI false, no generative agent — the Salvia
+  'Black and Blue' class with better paperwork, recorded in CREDITS. Flower
+  species-correct; spines, lobed leaves and spiny fruit are the camera's own.
+  Uncropped at 0.821. Toxicity populated. Red fruits absent — autumn reshoot
+  noted. Protocol v14.44.
 progress: 2026-08-25 (dahlia + Cape figwort — and the send order was wrong
   again) — **deck 243, hold 81.** *Dahlia* 'Kelvin Floodlight' (second Dahlia,
   the giant yellow decorative; uncropped 0.750) and *Phygelius aequalis*

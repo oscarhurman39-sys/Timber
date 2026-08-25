@@ -2573,6 +2573,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "solanum-pyracanthos.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright, WITH his own sticker edit, the Salvia 'Black and Blue' class. C2PA claim from the Galaxy S24 on-device editor (c2pa-rs, ingredient.v2 + hash.data): a Samsung PhotoEditor deco re-edit declaring a crop to 91% height, a filter, and ONE non-text sticker pasted upper-left at centre (0.215,0.235), ~23% wide, rotated -10 deg — the purple flower, which is species-correct for S. pyracanthos. NO generative action: no Photo assist agent, no trained-media digitalSourceType, isScaleAI false, AI filter false, no visible AI label. Uncropped by us: 2482x3024 at 0.821, orientation 1. EXIF Samsung Galaxy S24, 2026-08-22 (current season). Two blurred nursery labels in frame lower-left, one reading 'SOL...'",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "sorbaria-sorbifolia-sem.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
