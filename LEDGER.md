@@ -45,6 +45,20 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-24 (the LENS) — press-and-hold the power points plaque (or
+  soil panel, or aspect band) for half a second and a readable copy opens above
+  the finger; release closes it. Oscar's spec. Measuring first rewrote the brief:
+  every value on those panels renders at **5.8 real px** on a 390px phone (the
+  6.5px ink floor x 0.89 card scale) against a ~11px readable minimum — so
+  magnifying the artwork could never get there (full-width scale = 9.2px, still
+  blurry), and the lens RE-TYPESETS the same values from the plant row at 17px
+  using the card's own helpers, so it can never disagree with the card. Gesture
+  safety exercised case by case in a real browser: drag-from-plaque still
+  swipes, the closing release neither taps nor arms the flip, finger drift while
+  holding is ignored, touchcancel closes, reduced-motion skips the animation.
+  One probe lesson: the first check pressed coordinates measured before the
+  staged deal settled and reported the feature dead — wait for data-dealing to
+  clear before measuring a card. Protocol v14.41. Gate 17/17 sequential.
 progress: 2026-08-23 (Sanguisorba, and a perf check counting the wrong thing) —
   **deck 238, hold 81.** *Sanguisorba* 'Pink Brushes' from a split Oscar
   assembled himself, kept whole and uncropped — the clearest case yet for the

@@ -400,6 +400,36 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.41 (the LENS — press-and-hold makes the power points readable)**: hold a
+  finger on the plant power points plaque (or the soil panel, or the aspect band)
+  for half a second and a readable copy opens **above the finger**; let go and it
+  disappears. Oscar's spec, built to his shape: hold-to-release, no button, no
+  state to get stuck in.
+  - **Measured before designing, and the measurement rewrote the brief.** Every
+    value on those panels renders at **5.8 real pixels** on a 390px phone — the
+    ink fitter's 6.5px floor times the 0.89 card scale, on every row, not just
+    the long ones. The readable minimum is ~11px. So this was never "some people
+    struggle"; nothing on that plaque has ever been readable on a phone without
+    pinch-zooming the OS.
+  - **That ruled out magnifying.** Scaling the panel to full screen width gives
+    9.2px — still under the floor, and blurry. The lens instead **re-typesets the
+    same values from the plant row at 17px**: same Georgia, same parchment, the
+    card's own widget icons one size up, `fmt5`/`careLabel`/`splitSoil`/
+    `parseMonths`/`extractFacing` reused so the lens can never disagree with the
+    card. Blank stays blank, same as everywhere.
+  - **Gesture safety, each case exercised in a browser before the gate**: a drag
+    that starts on the plaque still swipes (movement past the same 10px threshold
+    that separates tap from swipe disarms the hold); the release that closes the
+    lens is swallowed so it neither taps nor arms the double-tap flip; while the
+    lens is up the card ignores finger drift entirely; `touchcancel` closes it;
+    reduced-motion drops the scale animation. Front panels only — the selector
+    simply never matches a FULLART front or the back.
+  - **A test lesson for free**: the first browser check reported the feature dead
+    because it measured the plaque's position before the staged deal had settled,
+    then pressed stale coordinates that landed on the photograph. The feature was
+    fine; the probe pressed the wrong place. Wait for `data-dealing` to clear
+    before measuring anything on a card.
+
 - **v14.40 (238 dealt / 81 held — Sanguisorba, and a perf check that counted the
   wrong thing)**: *Sanguisorba* 'Pink Brushes', a new genus, from a split Oscar
   assembled himself. Kept whole and uncropped.

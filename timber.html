@@ -919,6 +919,49 @@
   .pval{font-size:11px;line-height:1;display:flex;align-items:center}
   .pval.two{flex-direction:column;align-items:flex-start;justify-content:center;gap:0px;font-size:10.5px;line-height:1.15}
   .wrow{display:flex;align-items:center;justify-content:space-between;padding:0 4px;height:100%}
+  /* THE LENS — press-and-hold any bottom panel (power points, soil, aspect) and a
+     readable copy opens above the finger; release and it goes. The card's ink
+     bottoms out at the fitter's 6.5px floor, which is ~5.8 real px at phone card
+     scale — half the readable minimum — so the lens RE-TYPESETS the same values
+     from PLANTS data at 17px instead of magnifying a picture of tiny type into a
+     blurry picture of small type. Same parchment, same Georgia, same widget icons. */
+  .lens{position:fixed;left:50%;z-index:60;width:min(88vw,360px);
+    transform:translateX(-50%) scale(.92);transform-origin:50% 100%;
+    opacity:0;visibility:hidden;pointer-events:none;   /* never a tap target — it lives under a held finger */
+    transition:opacity .16s ease,transform .16s ease,visibility 0s .16s;
+    background:linear-gradient(175deg,#f2e4c0,#e2cd9c);
+    border:1px solid #8a6a2a;border-radius:14px;padding:13px 15px 12px;
+    box-shadow:0 0 0 3px rgba(216,189,120,.35),0 18px 44px rgba(0,0,0,.55);
+    font-family:Georgia,"Times New Roman",serif;color:#2b2412;
+    max-height:calc(100vh - 100px);overflow:hidden}
+  .lens.show{opacity:1;visibility:visible;transform:translateX(-50%) scale(1);
+    transition:opacity .16s ease,transform .16s ease}
+  @media (prefers-reduced-motion:reduce){.lens,.lens.show{transition:none}}
+  .lens-head{font-size:10.5px;font-weight:700;letter-spacing:2.6px;text-transform:uppercase;
+    text-align:center;color:#7a5b22;border-bottom:1px solid rgba(122,91,34,.35);
+    padding-bottom:7px;margin-bottom:4px}
+  .lens-row{display:flex;align-items:center;gap:10px;padding:6.5px 0;
+    border-bottom:1px solid rgba(122,91,34,.16)}
+  .lens-row:last-child{border-bottom:none;padding-bottom:2px}
+  .lens-l{flex:0 0 84px;font-size:9.5px;font-weight:700;letter-spacing:1.4px;
+    text-transform:uppercase;color:#7a5b22;line-height:1.35}
+  .lens-v{flex:1;display:flex;align-items:center;gap:9px;font-size:17px;line-height:1.3;
+    flex-wrap:wrap;row-gap:3px}
+  .lens-v b{font-weight:700}
+  .lens-row.warn .lens-l{color:#8c3a1c}
+  .lens-row.warn .lens-v{color:#6e2c13;font-size:15px}
+  .lens-months{display:inline-flex;gap:2.5px}
+  .lens-months b{font-weight:700;font-size:11px;width:16px;height:19px;border-radius:4px;
+    display:inline-flex;align-items:center;justify-content:center;color:rgba(43,36,18,.42)}
+  .lens-months b.on{background:#1d5c38;color:#eafff2}
+  /* the card's own widget icons, one size up; the card rules are .wrow.x .ricon so
+     these need the extra class to outweigh them */
+  .lens .wrow{padding:0;height:auto;gap:3px;justify-content:flex-start}
+  .lens .wrow.pest .ricon{height:24px}
+  .lens .wrow.thirst .ricon{height:19px}
+  .lens .wrow.care .ricon{height:28px}
+  /* a held finger must never start a text selection or the browser's own callout */
+  .face.front{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
   .ricon{position:relative}
   .ricon>img{height:100%;width:auto}
   .ricon .fillwrap{position:absolute;left:0;top:0;height:100%;overflow:hidden;width:calc(var(--fill)*100%)}
@@ -1062,7 +1105,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r181 · 2026-08-23 · 792c92e';
+const BUILD='r183 · 2026-08-25 · 527dbfb';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10325,17 +10368,68 @@ function markHot(){
    dragging — cut 40% (was 88) so the stamp reads fully committed sooner, matching
    the lighter feel everywhere else. */
 const SWIPE_DIST=53;   /* px of travel before the stamp reads fully committed (was 88, -40%) */
+/* ---------- the lens (see .lens CSS for why it re-typesets) ---------- */
+const LENS_HOLD=500;                               /* Oscar's spec: about half a second */
+let lensEl=null;
+function lensRow(label,value,cls){
+  return value?`<div class="lens-row${cls?' '+cls:''}"><span class="lens-l">${label}</span><div class="lens-v">${value}</div></div>`:'';
+}
+function buildLens(p){
+  const pest=num(p.pestRisk),thirst=num(p.thirst),care=num(p.careLevel);
+  const months=parseMonths(p.peak),soil=splitSoil(p.soil);
+  const strip=months.length?`<span class="lens-months">${[...'JFMAMJJASOND'].map((m,i)=>`<b class="${months.includes(i+1)?'on':''}">${m}</b>`).join('')}</span>`:'';
+  /* the same fields, the same helpers, the same blank-stays-blank rule as the card */
+  return `<div class="lens-head">Plant power points</div>`
+    +lensRow('Bloom',p.peak?`<b>${p.peak}</b>${strip}`:'')
+    +lensRow('Pests & diseases',pest==null?'':`<span class="wrow pest">${wRow('spray',pest)}</span><b>${fmt5(pest)}</b>`)
+    +lensRow('Thirst',thirst==null?'':`<span class="wrow thirst">${wRow('drop',thirst)}</span><b>${fmt5(thirst)}</b>`)
+    +lensRow('Care level',care==null?'':`<span class="wrow care">${wRow('seca',care)}</span><b>${careLabel(care)} · ${fmt5(care)}</b>`)
+    +lensRow('Soil',soil.val)
+    +lensRow('Take care',soil.warn,'warn')
+    +lensRow('Aspect',extractFacing(p.aspect));
+}
+function openLens(idx,y){
+  const p=PLANTS[idx];if(!p)return;
+  if(!lensEl){lensEl=document.createElement('div');lensEl.className='lens';document.body.appendChild(lensEl);}
+  lensEl.innerHTML=buildLens(p);
+  lensEl.style.bottom=Math.max(12,innerHeight-y+14)+'px';  /* above the finger, per Oscar */
+  void lensEl.offsetWidth;                                 /* commit the hidden frame so .show transitions */
+  lensEl.classList.add('show');
+  const r=lensEl.getBoundingClientRect();                  /* pressed high on the plaque of a short
+      screen: re-anchor down rather than run off the top */
+  if(r.top<8)lensEl.style.bottom=Math.max(12,innerHeight-8-r.height)+'px';
+  if(navigator.vibrate)navigator.vibrate(8);               /* the hold has fired — a tap of confirmation */
+}
+function closeLens(){if(lensEl)lensEl.classList.remove('show');}
+
 function attachGestures(card){
   let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false,lx=0,lt=0,vx=0;
+  let lensTimer=null,lensOn=false;
   const learnStamp=card.querySelector('.stamp.learn'),skipStamp=card.querySelector('.stamp.skip');
-  const start=(x,y)=>{if(card.dataset.gone)return;stopGoto();drag=true;moved=false;sx=x;sy=y;
-    lx=x;lt=performance.now();vx=0;card.style.transition='none';};
+  /* Press-and-hold on a front panel opens the lens. Armed only when the touch
+     STARTS on the plaque/soil/band; a real drag (>10px, the same threshold that
+     separates tap from swipe) disarms it, so the two gestures cannot collide —
+     and while the lens is up the card ignores movement entirely, so a resting
+     finger's drift never drags the card around underneath it. */
+  const lensDisarm=()=>{if(lensTimer){clearTimeout(lensTimer);lensTimer=null;}};
+  const lensArm=(target)=>{
+    if(card.dataset.gone||card.classList.contains('flipped'))return;
+    if(!(target&&target.closest&&target.closest('.face.front .plaque,.face.front .soilp,.face.front .band')))return;
+    lensTimer=setTimeout(()=>{lensTimer=null;
+      if(!drag||moved||card.dataset.gone)return;         /* lifted, swiping, or flung meanwhile */
+      lensOn=true;openLens(+card.dataset.idx,sy);
+    },LENS_HOLD);
+  };
+  const start=(x,y,target)=>{if(card.dataset.gone)return;stopGoto();drag=true;moved=false;sx=x;sy=y;
+    lx=x;lt=performance.now();vx=0;card.style.transition='none';lensArm(target);};
   const move=(x,y)=>{
-    if(!drag)return;dx=x-sx;dy=y-sy;
+    if(!drag)return;
+    if(lensOn)return;                                    /* holding the lens is not a drag */
+    dx=x-sx;dy=y-sy;
     const now=performance.now(),dt=now-lt;               /* smoothed finger velocity —
         one raw sample is jittery on 120Hz touch streams */
     if(dt>0){vx=0.7*((x-lx)/dt)+0.3*vx;lx=x;lt=now;}
-    if(Math.hypot(dx,dy)>10)moved=true;
+    if(Math.hypot(dx,dy)>10){moved=true;lensDisarm();}
     if(card.classList.contains('flipped'))return;       /* no drag while flipped */
     card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/18}deg)`;
     learnStamp.style.opacity=dx>0?Math.min(dx/SWIPE_DIST,1):0;
@@ -10343,7 +10437,11 @@ function attachGestures(card){
   };
   const end=()=>{
     if(!drag)return;drag=false;
+    lensDisarm();
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
+    if(lensOn){lensOn=false;closeLens();card._t=0;dx=dy=0;  /* release closes the lens; the hold
+        was never a tap, so it must not arm the double-tap flip either */
+      learnStamp.style.opacity=0;skipStamp.style.opacity=0;return;}
     if(!moved){handleTap(card);dx=dy=0;return;}          /* a tap, not a drag */
     if(!card.classList.contains('flipped')){
       /* every real drag commits — no snap-back to centre, whatever the distance.
@@ -10358,7 +10456,7 @@ function attachGestures(card){
     }else{card.style.transform='';}
     dx=dy=0;
   };
-  card.addEventListener('touchstart',e=>start(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+  card.addEventListener('touchstart',e=>start(e.touches[0].clientX,e.touches[0].clientY,e.target),{passive:true});
   card.addEventListener('touchmove',e=>move(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
   card.addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();end();});  /* preventDefault stops the browser
       synthesising a mouse tap after every touch tap, which would turn single taps into double-taps */
@@ -10366,12 +10464,13 @@ function attachGestures(card){
      notification shade, app switch. Without this the card is stranded mid-drag with its
      transition off, ghosting over the next card until the deck is touched again */
   card.addEventListener('touchcancel',()=>{
+    lensDisarm();if(lensOn){lensOn=false;closeLens();}
     if(!drag)return;drag=false;
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
     card.style.transform='';learnStamp.style.opacity=0;skipStamp.style.opacity=0;
     dx=dy=0;
   });
-  card.addEventListener('mousedown',e=>start(e.clientX,e.clientY));
+  card.addEventListener('mousedown',e=>start(e.clientX,e.clientY,e.target));
   /* the drag listeners have to live on window so a fast pointer that leaves the card
      still finishes the gesture; scope them to the card's lifetime so a rebuilt or
      swiped-away deck doesn't leave one pair behind per card it ever rendered */
