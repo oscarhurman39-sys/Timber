@@ -400,6 +400,35 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.42 (aftercare, the hardiness lens, and a drought chip)**: three features
+  in one pass, all of them data the deck already owned finally becoming visible.
+  - **Aftercare leads the back.** `water` and `prune` are on every card and
+    rendered nowhere on the card itself — only in the search view. They are now
+    the first two rows of the trade sheet (CARD-BACK.md section A), above the
+    commerce.
+  - **`hardinessNote` is a card field**, backfilled onto **87 cards** from the
+    research files, and the lens now opens on the hardiness crest too: hold the
+    H shield and it says what the rating means (the RHS band in plain terms plus
+    the temperature range) and prints the card's own note verbatim. The Butia —
+    whose *"may tolerate about −10°C in ideal sheltered sites"* was the sentence
+    that made this field worth building — is the proof card.
+  - **A 🌵 Drought tolerant filter chip**, per Oscar. It matches the card's own
+    CLAIM (water/soil/resilience/uses text), not a guess from the thirst number,
+    using the same dry-side regex as `tools/plant-sense.js` **with negations
+    stripped first** — so Hydrangea 'Zorro' ("avoid dry soil") does not show up
+    in a drought list. 62 cards match; the two regexes are marked keep-in-sync.
+  - **Two bugs found on the way, both worth their entries:**
+    1. **The invisible LEARNED stamp was eating presses on the crest.** It sits
+       at z-index 3 exactly over the shield, opacity 0, and took the hit. Pure
+       drag feedback now carries `pointer-events:none`. Found by hit-testing the
+       crest centre and getting `DIV.stamp` back.
+    2. **A backfill ran before its field was in FIELDS and silently wrote
+       nothing.** `formatCard` serialises only keys in FIELDS, so the script
+       reported 87 cards updated in memory while the file gained zero — the
+       exact silent-loss path `plants-tool.js`'s own comments warn about, from
+       the inside. The order is now a rule: **schema first, then backfill**, and
+       verify with a grep of the written file, not the script's own count.
+
 - **v14.41 (the LENS — press-and-hold makes the power points readable)**: hold a
   finger on the plant power points plaque (or the soil panel, or the aspect band)
   for half a second and a readable copy opens **above the finger**; let go and it

@@ -45,6 +45,18 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-25 (aftercare + hardiness lens + drought chip) — three
+  features, all data the deck already owned becoming visible. Watering and
+  pruning now LEAD the back (they rendered nowhere on the card before);
+  `hardinessNote` is a schema field backfilled onto 87 cards and the lens opens
+  on the H crest — hold it and the rating explains itself plus the card's own
+  note, with the Butia as the proof card; and a 🌵 Drought tolerant chip that
+  matches the card's own claim with negations stripped (Zorro's "avoid dry soil"
+  stays out), 62 matches. Two bugs en route: the invisible LEARNED stamp was
+  eating crest presses (pointer-events:none now), and a backfill ran before its
+  field was in FIELDS — formatCard silently dropped it, 87 updates in memory,
+  zero on disk. New rule: schema first, then backfill, verify by grepping the
+  written file. Protocol v14.42. Gate 17/17 sequential.
 progress: 2026-08-24 (the LENS) — press-and-hold the power points plaque (or
   soil panel, or aspect band) for half a second and a readable copy opens above
   the finger; release closes it. Oscar's spec. Measuring first rewrote the brief:
