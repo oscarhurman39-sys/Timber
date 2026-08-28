@@ -45,6 +45,14 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-28 (Android long-press fixed) — holding anywhere on a card
+  popped Android's own "Copy image / Download image" sheet, because every piece
+  of card furniture is an <img> and -webkit-touch-callout only covers iOS. The
+  Android half is the contextmenu event: suppressed app-wide EXCEPT on editable
+  fields, where that same menu is how a phone pastes into the search box —
+  verified all three cases in a browser (crest suppressed, photo suppressed,
+  search input still allowed). Also -webkit-user-drag:none on every img.
+  Gate 17/17 sequential.
 progress: 2026-08-25 (aftercare + hardiness lens + drought chip) — three
   features, all data the deck already owned becoming visible. Watering and
   pruning now LEAD the back (they rendered nowhere on the card before);

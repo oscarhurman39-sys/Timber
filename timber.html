@@ -964,8 +964,11 @@
   .lens .wrow.pest .ricon{height:24px}
   .lens .wrow.thirst .ricon{height:19px}
   .lens .wrow.care .ricon{height:28px}
-  /* a held finger must never start a text selection or the browser's own callout */
+  /* a held finger must never start a text selection, an image drag, or the
+     browser's own callout — and on Android the image sheet targets any <img>,
+     so the drag block has to cover every one the app renders */
   .face.front{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+  img{-webkit-user-drag:none;-webkit-touch-callout:none}
   .ricon{position:relative}
   .ricon>img{height:100%;width:auto}
   .ricon .fillwrap{position:absolute;left:0;top:0;height:100%;overflow:hidden;width:calc(var(--fill)*100%)}
@@ -1109,7 +1112,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r185 · 2026-08-28 · 7f19b82';
+const BUILD='r187 · 2026-08-28 · dcf2443';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10782,6 +10785,17 @@ backBtn.addEventListener('pointerdown',e=>{
 /* pointerleave is the escape hatch: slide off the button mid-rewind and it stops */
 ['pointerup','pointercancel','pointerleave'].forEach(t=>backBtn.addEventListener(t,stopRewind));
 backBtn.addEventListener('contextmenu',e=>e.preventDefault());  /* long-press callout on touch */
+/* Android's long-press fires contextmenu, and every piece of card furniture is an
+   <img> — so holding ANYWHERE on a card popped the browser's "Copy image /
+   Download image" sheet (Oscar's screenshot, 2026-08-28: crest-blank.webp offered
+   for download over the Atlas cedar, and it also fires ahead of the 500ms lens).
+   -webkit-touch-callout only covers iOS; this is the Android half. Suppressed
+   app-wide EXCEPT on editable fields, where the same menu is how a phone pastes
+   into the search box. */
+document.addEventListener('contextmenu',e=>{
+  if(e.target.closest('input,textarea,[contenteditable="true"]'))return;
+  e.preventDefault();
+});
 /* the rewind's own pointerup still fires a click — swallow that one so a rewind
    isn't followed by one extra card nobody asked for */
 backBtn.onclick=()=>{if(rwDidRewind){rwDidRewind=false;return;}undo();};
