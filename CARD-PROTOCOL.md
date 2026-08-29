@@ -400,6 +400,38 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.43 (spine rails: one convention, one anchor, one ink)**: Oscar's call —
+  "the height and size have never been uniformly neat across the whole plant
+  deck." Reproduced by measurement first (CORRECTION-PROTOCOL rule 1): a new
+  audit rule C3 in `design/audit-layout.js` against the unfixed deck logged
+  **388 violations** — raw `size` fields mixing `0.5-1m` / `0.5–1 m` / `12m+`
+  printed verbatim, and the centred values starting anywhere from **1.7px above
+  to 14.5px below** their patch top depending on their own length.
+  - **Format**: `normSizeSpan()` canonicalises at render inside `parseSize` —
+    en-dash range, one space before the unit (`1.5–2.5 m`, `40–60 cm`,
+    `12 m+`); sub-metre spans read in cm, metre-and-up in m, so the same
+    magnitude is never written two ways on two cards. Display-only: the data
+    keeps its sourced values, and an unparseable shape passes through for C3
+    to flag rather than shipping mangled.
+  - **Anchor**: every value now starts exactly 7px under its HEIGHT/SPREAD
+    lettering. NOT done with grid alignment — `place-items:center end` pins a
+    fitting value at the label end but an overflowing one falls back to start,
+    so 8-char cm values flipped to the patch bottom (measured: gapBot exactly
+    0 on every long value). The `.v` element instead shrinks to its text and
+    sits at `top:7px`; `rotate(180deg)` maps the box onto itself, so the
+    anchor holds at any length and spill runs down the plain spine.
+  - **Ink**: was flat cool cream `#e7ddb9` with no shadow — outside the
+    spine's antique-gold family (baked lettering ≈ `#c2a05c`, sampled off
+    `frame-600.png`). Now warm parchment gold `#eed9a4` with a soft olive
+    lift, letter-spacing 1.2px. Holo ink tokens (`--holo-ink`) still override
+    colour; the anchor is shared, and both holo cards were shot to confirm.
+  - **C3 stays in the audit** (format + 7px anchor, per-rail template heights
+    10.16%/10.28%), so the next off-convention batch fails the gate instead of
+    reaching a phone. Post-fix audit: zero violations; full gate 17/17.
+  - Known gap unchanged: the held climbers' missing spreads (VERIFY-QUEUE §1,
+    Russian Vine now in-deck with height only) still render a blank spread
+    rail — a spread figure has to come from Oscar or a label, not a tool.
+
 - **v14.42 (aftercare, the hardiness lens, and a drought chip)**: three features
   in one pass, all of them data the deck already owned finally becoming visible.
   - **Aftercare leads the back.** `water` and `prune` are on every card and

@@ -196,7 +196,44 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
         if (tb.height === 0 || bb.height === 0) continue;
         const over = (tb.height - bb.height) / (bb.height / 60.8);   // normalise to display px
         if (over > 2)
-          bad('rail-overflow', `${cls} value "${v.textContent.trim()}" overruns its patch by ${over.toFixed(1)}px and crosses the baked label — shorten the ${cls === 'rail-h' ? 'height' : 'spread'} value`);
+          bad('rail-overflow', `${cls} value "${v.textContent.trim()}" overruns its patch by ${over.toFixed(1)}px — since the C3 anchor the spill runs DOWN the spine toward the baked ornament, not over the label; still: shorten the ${cls === 'rail-h' ? 'height' : 'spread'} value`);
+      }
+
+      /* C3. size-rail values: one convention, one anchor (Oscar, 2026-08-29:
+         "the height and size have never been uniformly neat across the whole
+         plant deck"). Two measured guarantees:
+         a) FORMAT — the rendered value must read `1.5–2.5 m` / `40–60 cm` /
+            `12 m+`: en-dash range, one space before the unit, no other shape.
+            The deck's raw `size` fields mix `0.5-1m`, `0.5–1 m` and `12m+`;
+            parseSize canonicalises at render, and this rule is what notices if
+            a new data shape slips past the normaliser. Empty is allowed here —
+            a missing spread is an honest data gap (VERIFY-QUEUE §1, the held
+            climbers), reported by deck-audit as size-rail-blank, not a layout
+            defect.
+         b) ANCHOR — the value must start GAP_PX below the patch top (i.e. a
+            fixed gap under the baked HEIGHT/SPREAD lettering). Centred values
+            drifted with their own length: "1–2 m" floated mid-patch while
+            "50–100 cm" crowded the label. Normalised to template px via each
+            patch's own template height (rail-h 10.16%, rail-s 10.28% of 600). */
+      {
+        const GAP_PX = 7, CANON = /^\d+(\.\d+)?(–\d+(\.\d+)?)? (m|cm)\+?$/;
+        const TPL_H = { 'rail-h': 60.96, 'rail-s': 61.68 };
+        for (const cls of ['rail-h', 'rail-s']) {
+          const box = card.querySelector('.' + cls);
+          const v = box && box.querySelector('.v');
+          if (!v || !v.firstChild) continue;
+          const text = v.textContent.trim();
+          if (text && !CANON.test(text))
+            bad('rail-format', `${cls} value "${text}" is off-convention — expected like "1.5–2.5 m" / "40–60 cm" / "12 m+"`);
+          const rg = document.createRange();
+          rg.selectNodeContents(v);
+          const tb = rg.getBoundingClientRect(), bb = box.getBoundingClientRect();
+          if (!text || tb.height === 0 || bb.height === 0) continue;
+          const scale = bb.height / TPL_H[cls];
+          const gap = (tb.top - bb.top) / scale;
+          if (Math.abs(gap - GAP_PX) > 1.5)
+            bad('rail-anchor', `${cls} value "${text}" starts ${gap.toFixed(1)}px below its patch top — expected ${GAP_PX}px, the fixed gap under the spine lettering`);
+        }
       }
 
       /* D. ink stays within the card face */

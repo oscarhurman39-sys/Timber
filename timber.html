@@ -557,9 +557,27 @@
     text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
   .railval{position:absolute;z-index:2}
   .railval img{position:absolute;inset:0;width:100%;height:100%}
-  .railval .v{position:absolute;inset:0;display:grid;place-items:center;
-    writing-mode:vertical-rl;transform:rotate(180deg);
-    font-size:12px;letter-spacing:1px;color:#e7ddb9;white-space:nowrap}
+  /* ---- spine values: one anchor, one ink (v14.43) ----
+     Centred values drifted with their own length — "1–2 m" floated mid-patch,
+     "50–100 cm" crowded the baked lettering; measured across the deck the gap
+     under HEIGHT/SPREAD ranged -1.7..+14.5px (audit C3 baseline, 388
+     violations). NOT fixed with grid alignment: `place-items:center end` pins
+     a FITTING value at the label end but an overflowing one falls back to
+     start, so 8-char cm values flipped to the patch bottom (measured: gapBot
+     exactly 0 on every long value). Pinned by geometry instead — the element
+     shrinks to its text (height:auto in vertical writing), sits at top:7px,
+     and rotate(180deg) maps the box onto itself, so the value's end letter
+     ALWAYS starts 7px under the lettering whatever its length, and any spill
+     runs down the plain spine where nothing is baked for ~18px. Ink was a
+     flat cool cream (#e7ddb9, no shadow) outside the spine's antique-gold
+     family (baked lettering ≈ #c2a05c sampled off frame-600.png); now warm
+     parchment gold with a soft olive lift. Values are canonicalised at render
+     by parseSize/normSizeSpan; audit-layout.js C3 measures format and anchor
+     on every card. */
+  .railval .v{position:absolute;left:50%;top:7px;
+    writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);
+    font-size:12px;letter-spacing:1.2px;color:#eed9a4;white-space:nowrap;
+    text-shadow:0 1px 2px rgba(12,18,4,.85),0 0 6px rgba(12,18,4,.4)}
   .rail-h{left:2.72%;top:43.77%;width:7.62%;height:10.16%}
   .rail-s{left:2.72%;top:68.52%;width:7.62%;height:10.28%}
   .ppp{position:absolute;left:15.14%;width:63.46%;top:58.28%;z-index:4;text-align:center;
@@ -1112,7 +1130,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r187 · 2026-08-28 · dcf2443';
+const BUILD='r188 · 2026-08-29 · ef69e98';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -9810,8 +9828,31 @@ function parseMonths(str){                    /* "Jul-Oct" -> [7,8,9,10]; wraps 
 }
 function parseSize(str){                      /* "60–90 cm H × 45–60 cm W" -> {h,s} */
   if(!str)return{h:'',s:''};
-  const parts=str.split(/[x×]/i).map(t=>t.replace(/\b[HW]\b\.?/g,'').trim());
+  const parts=str.split(/[x×]/i).map(t=>normSizeSpan(t.replace(/\b[HW]\b\.?/g,'').trim()));
   return{h:parts[0]||'',s:parts[1]||''};
+}
+/* normSizeSpan — one convention for the spine rails (v14.43). The raw `size`
+   fields mix authoring styles ("0.5-1m", "0.5–1 m", "12m+", "50–100 cm"), and
+   the rails printed them verbatim, so no two cards read alike. Canonical form:
+   en-dash range, one space before the unit, `+` after it ("1.5–2.5 m",
+   "40–60 cm", "12 m+"). Sub-metre spans read in cm (0.1–0.5 m -> 10–50 cm) and
+   metre-and-up spans in m (50–100 cm -> 0.5–1 m), so the same magnitude is
+   never written two ways on two cards. DISPLAY-ONLY: the data keeps its
+   sourced values; a shape this can't parse passes through untouched and
+   audit-layout.js C3 flags it rather than letting a mangled value ship. */
+function normSizeSpan(t){
+  if(!t)return'';
+  const m=t.match(/^(\d+(?:\.\d+)?)\s*(?:[-–—]\s*(\d+(?:\.\d+)?))?\s*(m|cm)\s*(\+?)$/i);
+  if(!m)return t;
+  const unit=m[3].toLowerCase();
+  let lo=parseFloat(m[1]),hi=m[2]?parseFloat(m[2]):null;
+  if(unit==='cm'){lo/=100;if(hi!=null)hi/=100;}
+  if((hi!=null?hi:lo)<1){                     /* sub-metre: whole cm */
+    const c=v=>String(Math.round(v*100));
+    return(hi!=null?c(lo)+'–'+c(hi):c(lo))+' cm'+m[4];
+  }
+  const f=v=>String(parseFloat(v.toFixed(2)));
+  return(hi!=null?f(lo)+'–'+f(hi):f(lo))+' m'+m[4];
 }
 function extractFacing(aspect){               /* compass rule: facing ONLY if data names one */
   if(!aspect)return'Any aspect';
