@@ -759,7 +759,7 @@ Before calling the template complete:
 - [ ] Care numeric score matches secateur fills
 - [ ] Partial icons use geometric clipping
 - [ ] Growth speed is transparent and right-aligned
-- [ ] Stature remains centred on left rail
+- [ ] Stature values sit 7px under their HEIGHT/SPREAD lettering on the left rail, in the one deck convention (`1.5–2.5 m` / `40–60 cm` / `12 m+`)
 - [ ] Light runs shade to full sun
 - [ ] Brightest end corresponds to full sun
 - [ ] Tolerated and optimal light ranges are distinct

@@ -60,9 +60,15 @@
   /* left rail values: HEIGHT zone abs (30,540,84,160); SPREAD zone abs (30,930,84,162) */
   .railval{position:absolute;z-index:2}
   .railval img{position:absolute;inset:0;width:100%;height:100%}
-  .railval .v{position:absolute;inset:0;display:grid;place-items:center;
-    writing-mode:vertical-rl;transform:rotate(180deg);
-    font-size:12px;letter-spacing:1px;color:#e7ddb9;white-space:nowrap}
+  /* synced with timber.html v14.43: value pinned 7px under the baked lettering
+     (geometry, not grid alignment — an overflowing grid item flips ends), ink
+     in the spine's antique-gold family. Sample values here are already in the
+     canonical shape the deck's normSizeSpan produces ("60–90 cm", "1.5–2.5 m",
+     "12 m+"). */
+  .railval .v{position:absolute;left:50%;top:7px;
+    writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);
+    font-size:12px;letter-spacing:1.2px;color:#eed9a4;white-space:nowrap;
+    text-shadow:0 1px 2px rgba(12,18,4,.85),0 0 6px rgba(12,18,4,.4)}
   .rail-h{left:2.72%;top:43.77%;width:7.62%;height:10.16%}
   .rail-s{left:2.72%;top:68.52%;width:7.62%;height:10.28%}
 

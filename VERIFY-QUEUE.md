@@ -71,19 +71,21 @@ rendered card slot and `template-geometry` anchors all move with it. **Decide
 whether the deck should show toxicity and legal status at all** — if it is ever
 used on a sales bench, it probably should.
 
-### 1. Five held climbers have no H × W split — size rails render blank
+### 1. Five climbers have no H × W split — the SPREAD rail renders blank
 `Clematis 'Nelly Moser'`, `Clematis 'Purpurea Plena Elegans'`,
 `Clematis montana var. rubens`, `Evergreen Clematis` (*C. armandii*),
 `Russian Vine` (*Fallopia baldschuanica*).
 
-Their `size` fields read `"2-3m"`, `"8-12m"` etc. Every other card uses
-`"<height> H × <spread> W"`, which is what the two side rails read. As written,
-both rails are blank on these cards.
+*(Updated 2026-08-31 — these five are now IN the deck, no longer held.)* Their
+`size` fields read `"2-3m"`, `"8-12m"` etc. with no spread half. Since v14.43
+the HEIGHT rail renders fine (normalised to `2–3 m`, `8–12 m`, `10–15 m`), but
+the SPREAD rail is blank on all five — `tests/deck-audit.js` reports each as a
+`size-rail-blank` warning.
 
 **Not auto-fixed on purpose:** the height is there but the spread is not, and
-inventing a spread would be making up data. These are all on hold pending photos
-anyway, so the fix can ride along with the photo work — but the spread figure has
-to come from you or a label, not from the tool.
+inventing a spread would be making up data. The spread figure has to come from
+you or a label, not from a tool — add it as `"<height> H × <spread> W"` and
+the rail fills in on its own.
 
 ### 2. Two "compact" plants sit in the 2.5–4 m size band
 - **Meyer's Lemon** (*Citrus × meyeri 'Meyer'*) — `2.5–4 m H × 1.5–2.5 m W`, and the
