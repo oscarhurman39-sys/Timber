@@ -400,6 +400,32 @@ Focal point recorded here when off-centre:
 
 ## 5. Decision changelog
 
+- **v14.44 (two light chips, and a spine guard for phone fonts)**: per Oscar.
+  - **🌥️ Shade tolerant** and **🌑 Full shade** filter chips. Unlike drought
+    (a prose claim), these run on the card's own light DATA: `sunMin` is the
+    tolerated floor of the light range — exactly the question a shade filter
+    asks — with `sunNeed` standing in on the 6 cards that lack it (a plant
+    *preferring* that little light tolerates it by definition). Thresholds are
+    bands from Oscar's own 0–100 scale (CARD-STATS.md §3d): **≤50** (top of
+    "part shade / dappled") for shade tolerant — his "six hours of direct sun
+    a day or less" spec — and **≤20** ("deep / full shade") for full shade.
+    At ship: 144 and 20 matches. The full-shade list is the sanity check —
+    ferns, Fatsia, Aucuba, Mahonia, Skimmia, Hosta, Liriope, cherry laurel.
+    features-test asserts both chips exist, match, and that full shade stays
+    a strict subset of shade tolerant.
+  - **Spine value overrun guard** (`fitRails`). Oscar reported values
+    overlapping the HEIGHT/SPREAD lettering on his phone. Measured on this
+    branch: impossible — the C3 anchor starts every value 7px BELOW the patch
+    top, baked lettering ends ~8.8px above it, and pixel-diffs of both holo
+    cards show 6.6–7.3px clear; what he is seeing is the pre-v14.43 build
+    still on the default branch, where CENTRED values drifted up to the
+    lettering. The residual real risk is fonts: Georgia ships on neither
+    Android nor Linux, and the stand-in serif's advance widths are not the
+    audit's. The guard scales a value down in one write only when its length
+    would pass the patch plus the ~14px of plain spine before the baked
+    ornament (budget 68px) — in this container nothing triggers it, which the
+    audit's clean C2/C3 pass asserts.
+
 - **v14.43 (spine rails: one convention, one anchor, one ink)**: Oscar's call —
   "the height and size have never been uniformly neat across the whole plant
   deck." Reproduced by measurement first (CORRECTION-PROTOCOL rule 1): a new

@@ -1130,7 +1130,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r188 · 2026-08-29 · ef69e98';
+const BUILD='r189 · 2026-09-01 · 62c135e';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -9590,6 +9590,10 @@ function isoWeek(){                            /* ISO-8601 week number, local ti
 }
 function parseOrderWeek(str){const m=(str||'').match(/wk\s*(\d{1,2})/i);return m?+m[1]:null;}
 const typeCategory=p=>(p.type||'').split('·')[0].trim();   /* "Planned · winter colour" → "Planned" */
+const minLight=p=>{                            /* tolerated light floor: sunMin, else sunNeed, else null */
+  for(const v of [p.sunMin,p.sunNeed])if(v!==''&&v!=null&&!isNaN(+v))return +v;
+  return null;
+};
 const FILTER_DEFS=(()=>{                       /* chip values discovered from PLANTS — never hardcoded */
   const defs=[
     {id:'season',label:'🌿 In season now',test:p=>parseMonths(p.peak).includes(new Date().getMonth()+1)},
@@ -9602,6 +9606,16 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
       const t=[p.water,p.soil,p.resilience,p.uses].filter(Boolean).join(' ').toLowerCase()
         .replace(/\b(?:avoid|avoids|never|not|dislikes|hates|intolerant of|will not tolerate|protect from)\s+(?:\w+\s+){0,2}?(?:dry soil|drought|dryness|drying out)/g,' ');
       return /\b(drought[- ]tolerant|drought resistant|low once established|once established[,.]? *(?:low|drought)|water sparingly|dry soil|xeric|low water)\b/.test(t);}},
+    /* Light chips run on the card's own light DATA, unlike drought (a prose
+       claim): sunMin IS the tolerated floor of the light range, which is the
+       question a shade filter asks. sunNeed (the preferred spot) stands in on
+       the 6 cards without sunMin — a plant PREFERRING that little light
+       tolerates it by definition. Bands are Oscar's own 0–100 scale
+       (CARD-STATS.md §3d): ≤50 = the top of "part shade / dappled", his
+       "six hours of direct sun a day or less" spec; ≤20 = "deep / full
+       shade". Cards with neither number honestly match nothing. */
+    {id:'shade',label:'🌥️ Shade tolerant',test:p=>{const v=minLight(p);return v!==null&&v<=50;}},
+    {id:'fullshade',label:'🌑 Full shade',test:p=>{const v=minLight(p);return v!==null&&v<=20;}},
     {id:'order',label:'📦 Order in next 4 wks',test:p=>{const wk=parseOrderWeek(p.order),now=isoWeek();
       return wk!==null&&wk>=now&&wk<=now+4;}},  /* unparseable order strings simply don't match */
   ];
@@ -10508,6 +10522,7 @@ function fitInkAll(roots){
     if(kmax<1)return;
     all.push({el,fs0,lo:1,hi:kmax,best:kmax});
   });
+  fitRails(roots);                                       /* before the early-out: rails are guarded even when every .val-ink fits */
   if(!all.length)return;
   let live=all;
   while(live.length){
@@ -10520,6 +10535,26 @@ function fitInkAll(roots){
     live=next;
   }
   for(const s of all)s.el.style.fontSize=inkStepDown(s.fs0,s.best)+'px';
+}
+/* ---- spine value overrun guard (v14.44) ----
+   The rail value is anchored 7px under its lettering and any excess length
+   runs DOWN the spine (see .railval .v). In this container the longest
+   canonical value ("1.5–2.5 m") measures ~59px, but neither Georgia nor
+   Times ships on Android or Linux, and the serif that stands in has its own
+   advance widths — audit-layout.js cannot see a customer's phone. The budget
+   is what the artwork actually allows: the patch (61px) minus the 7px anchor
+   plus the ~14px of plain spine before the baked ornament. A value inside it
+   is untouched (one read, no writes — the audited case); a longer one is
+   scaled down in ONE write so its tail never reaches the ornament. offsetHeight
+   is layout px, so the card's --csx/--csy transform never skews the maths. */
+const RAIL_BUDGET=68;
+function fitRails(roots){
+  for(const root of roots)root.querySelectorAll('.railval .v').forEach(el=>{
+    if(!el.firstChild)return;
+    const len=el.offsetHeight;                           /* vertical text: height = text length */
+    if(len<=RAIL_BUDGET)return;
+    el.style.fontSize=(12*RAIL_BUDGET/len).toFixed(2)+'px';
+  });
 }
 
 function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].pop();}

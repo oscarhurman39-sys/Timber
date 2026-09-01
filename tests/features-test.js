@@ -153,6 +153,23 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   check('zero-match chips are disabled, others enabled',
     chips.every(c => c.disabled === (c.n === 0)), JSON.stringify(chips));
 
+  /* light chips (v14.44): both present, and full shade (≤20 on the 0–100 light
+     scale) must be a strict subset of shade tolerant (≤50) — same data, nested
+     thresholds, so a card in the dark set but not the light one means the two
+     tests have drifted apart */
+  const lightChips = await page.evaluate(() => {
+    const ids = Object.fromEntries(FILTER_DEFS.map(d => [d.id, d]));
+    if (!ids.shade || !ids.fullshade) return null;
+    const shade = new Set(PLANTS.filter(ids.shade.test).map(p => p.latin));
+    const full = PLANTS.filter(ids.fullshade.test).map(p => p.latin);
+    return { nShade: shade.size, nFull: full.length, subset: full.every(l => shade.has(l)) };
+  });
+  check('shade + full-shade chips exist', !!lightChips);
+  if (lightChips) {
+    check('both light chips match at least one card', lightChips.nShade > 0 && lightChips.nFull > 0, JSON.stringify(lightChips));
+    check('full shade is a subset of shade tolerant', lightChips.subset && lightChips.nFull < lightChips.nShade, JSON.stringify(lightChips));
+  }
+
   /* need n >= 2: swiping a 1-card filtered view empties it, which auto-clears the
      filter — the toggle-off steps below assume the filter is still active */
   const typeChip = chips.find(c => (c.id.startsWith('type:') || c.id.startsWith('hard:')) && c.n > 1 && c.n < NPLANTS);
