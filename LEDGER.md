@@ -4,7 +4,37 @@
 brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
-since: 2026-08-11  sessions-unchanged: 2
+since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-01 (launch hardening: crash-loop light mode + problem report) —
+  Oscar: "heading towards launch, improve the app, then plan roll-out". Baseline
+  measured first: 17/17 green, boot clean (first paint ~340ms, deck dealt <1s,
+  zero console errors), but the page holds 45,925 DOM nodes and 9,249 <img> at
+  238 cards, and the iOS crash is still [Unverified] fixed on either phone. So the
+  two things built are the two a stranger's phone needs and this environment
+  cannot supply: (1) BOOT SENTINEL — bootPending written before the deal,
+  cleared only on a demonstrably good end (deck settled + alive 20s after load,
+  or a clean pagehide/hidden). Two opens in a row that never cleared it => LIGHT
+  MODE: the ?cards=N diagnostic switched on by evidence (newest 24), a pill above
+  the deck that returns the full deck, sticks until tapped, never reads or writes
+  the saved full-deck progress. A phone that opens in light mode has answered the
+  size-vs-hang question the 08-21 entry could not. (2) REPORT A PROBLEM (menu):
+  build, installed-or-tab, deck+mode, failed-opens count, last uncaught error
+  with line (window.error + unhandledrejection captured to timber-diag-v1 as
+  the first thing the script does, so the 08-17 class of "every load throws"
+  leaves a trace), device/screen/memory, storage sizes, quota — Copy + Share.
+  Nothing leaves the phone unsent; no email or endpoint baked in.
+  Three bugs caught by measuring, not by reading: diagEl referenced from
+  trapFocus before its const (the exact TDZ bug class from 08-17 — check-boot
+  cannot see it, only a boot can); the pill sat ABOVE the open menu because body
+  is a flex box and a flex item's z-index stacks even when static; then with
+  position:relative it inherited the update pill's left:50% and rendered half
+  off-screen — elementFromPoint at its centre returned null. Edge suite +11
+  checks (28). [Unverified] on a real iPhone — Chromium exercises the whole
+  path, WebKit is the phone's to confirm. Launch checks I could NOT verify here
+  and Oscar can in one tap each: does "Install app" appear in the menu on Android
+  Chrome (the manifest is a data: URL — Chrome's documented criteria do not say
+  whether that counts); does the home-screen icon show the Timber logo on iOS
+  (apple-touch-icon is also a data: URL; Apple's documented route is a PNG file).
 progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trickle
   was handing the browser 881MB of decode targets (r79).**
   A colleague's iPhone hit the same "A problem repeatedly occurred" on the live
