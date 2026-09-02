@@ -1,0 +1,33 @@
+{
+  "common": "Decorative dahlia 'Kelvin Floodlight'",
+  "latin": "Dahlia 'Kelvin Floodlight'",
+  "hue": 55,
+  "visual": "Very large bright-yellow double blooms · dark-green foliage · upright stems",
+  "water": "Keep evenly moist; water in dry spells",
+  "aspect": "South / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Sheltered · avoid waterlogging",
+  "prune": "Deadhead regularly; cut back after frost and lift tubers",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jun-Oct",
+  "cvs": "",
+  "hardiness": "H3",
+  "hardinessNote": "RHS H3; lift and store tubers in colder areas",
+  "resilience": "urban suitable · heat tolerant",
+  "uses": "cut flowers · borders · containers · cottage gardens",
+  "height": "70–100 cm",
+  "spread": "30–50 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 15,
+  "pestRisk": 12,
+  "thirst": 12,
+  "careLevel": 8,
+  "sunNeed": 95,
+  "sunMin": 70,
+  "uncertain": [
+    "RHS gives 0.5–1 m height and 0.1–0.5 m spread; UK specialist sources commonly give about 70–100 cm tall and 30–50 cm wide",
+    "Flowering windows vary between June–September, July–October and midsummer to frost; Jun-Oct represents the practical UK ornamental period"
+  ]
+}
