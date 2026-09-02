@@ -2103,6 +2103,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "phygelius-aequalis-trewidden-pink.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "phyllostachys-nigra.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",

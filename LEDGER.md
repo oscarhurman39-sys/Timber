@@ -5,6 +5,22 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-02 (two new cards: 240 / 81) — Dahlia 'Kelvin Floodlight'
+  (r193) and Phygelius aequalis 'Trewidden Pink' (r194), both new plants from
+  Oscar's JSON + photo via add-plant.js --quick; neither existed anywhere in the
+  deck, hold, csv or incoming. Environment note: sharp is not installed on this
+  box, so optimise-photos cannot derive the card WebP — installed sharp 0.33.5
+  into the scratchpad and pointed NODE_PATH at it; only the two new derivatives
+  changed. Two things for Oscar's eye, not mine: the Kelvin Floodlight leaves in
+  the photo carry yellow mottling — [Speculation] virus or scorch, or nothing —
+  and the Trewidden Pink photo reads coral-red on the card while the JSON says
+  dusky-pink; both are his label's call, the photos are staged as sent.
+  perf-test's pixel-parity check went red at deck 240 (31 px, max Δ26 vs Δ24),
+  deterministic. Followed the check's own procedure rather than loosening
+  blind: all 31 pixels dumped with coordinates sit on the top card's outline
+  (four corners + right edge), the corner pixels are the pile's halo shadows
+  rounding one card darker, and the staged leak re-measured at 19434 px / Δ420.
+  Delta budget 24 -> 48, pixel budget untouched, numbers in the test comment.
 progress: 2026-09-01 (launch hardening: crash-loop light mode + problem report) —
   Oscar: "heading towards launch, improve the app, then plan roll-out". Baseline
   measured first: 17/17 green, boot clean (first paint ~340ms, deck dealt <1s,
