@@ -5,6 +5,16 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (Robinia 'Lace Lady' + Copper beech, both held) — **deck
+  238, hold 83.** Two researched cards, both validated, both in the hold block.
+  **Neither photograph was staged, because neither shows its plant:** the
+  Robinia frame is a crimson mallow-family flower with palmate leaves (genus not
+  identified, not guessed), and the copper beech frame is a GREEN beech with no
+  purple in it. Both parked under names no slug can resolve
+  (`malvaceae-crimson-unidentified.jpg`, `fagus-sylvatica-green-summer.jpg`),
+  credited as Oscar's, and written up in VQ 59 with the deal commands for when
+  the right shots arrive. Robinia growthSpeed 5 flagged by the checker and kept
+  as sent — its own research note says slow-growing.
 progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trickle
   was handing the browser 881MB of decode targets (r79).**
   A colleague's iPhone hit the same "A problem repeatedly occurred" on the live

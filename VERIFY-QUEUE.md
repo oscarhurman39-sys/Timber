@@ -1946,6 +1946,60 @@ trifolia 'Purpurea' × V. agnus-castus"* — was the evidence that settled it.
 ---
 
 
+### 59. Robinia 'Lace Lady' and Copper beech: both cards held, because neither photograph shows its plant
+2026-09-02. Two researched cards arrived with two photographs. **Both JSONs pass
+`check-plant-json.js`** and both are in the hold block with their full data.
+**Neither photograph was staged on its card**, for the same reason as Winter
+Beauty (v12.42): the photo must be the plant it claims to be, and these are not.
+
+**A. The photograph sent with *Robinia pseudoacacia* 'Lace Lady' is not a
+Robinia.** It shows a single deep crimson five-petalled flower with darker
+veining, a staminal column of purple-black anthers with yellow stigma lobes,
+palmately lobed crinkled hairy leaves and purple-black buds, in a nursery pot.
+A Robinia carries pinnate leaves of rounded leaflets and white pea flowers —
+the deck's own parked `robinia-unidentified-leaf.jpg` (item 38) shows exactly
+that, and this frame shares nothing with it. `[Inference]` the flower and leaf
+read as **mallow family (Malvaceae)**; the genus is **not identified** from this
+frame and is not guessed. No mallow-family card exists in the deck or the hold
+block (every latin was checked for *Malva, Anisodontea, Lavatera, Malope, Alcea,
+Abutilon, Sidalcea, Sphaeralcea, Althaea, Pavonia*), and the two dealt
+*Hibiscus syriacus* cards have their own photographs and a different leaf, so it
+matches nothing waiting either. EXIF: Galaxy S24, 2026-08-25 14:29.
+**Parked as `photos/malvaceae-crimson-unidentified.jpg`**, a name no card slug
+can resolve, so `data-audit` lists it as an unclaimed spare.
+
+**B. The photograph sent with *Fagus sylvatica* (Atropurpurea Group) is a
+beech, but a GREEN one.** Glossy green wavy-edged leaves, slender red-brown
+twigs, long pointed buds — *Fagus sylvatica*, no doubt. But the card is the
+**Copper beech**, its `visual` opens *"Deep purple foliage"*, and there is no
+purple anywhere in this frame. Staging it would put green leaves on a card sold
+for purple ones — the Sweet Cupcake mistake again (NEW-SESSION.md, standing
+gotcha 2). `[Unverified]` whether the photographed plant is a greened-out
+Atropurpurea Group seedling or a plain common beech; from this frame it cannot
+be told apart from the dealt *Fagus sylvatica* card, which already has its
+photograph (`fagus-sylvatica.jpg`). EXIF: Galaxy S24, 2026-08-26 09:43.
+**Parked as `photos/fagus-sylvatica-green-summer.jpg`.** If Oscar confirms the
+plant on that bench IS labelled copper beech, that is his call to deal it — the
+photograph does not make the case on its own.
+
+**C. One validator warning, accepted as sent.** Robinia `growthSpeed` is 5,
+which the checker flags as looking like an unconverted 0–5 rating. The JSON's
+own `uncertain` block says RHS describes the cultivar as slow-growing, so 5/20
+is consistent with the research and was **left exactly as supplied**.
+
+**Both photographs are credited as Oscar's own** in `photos/CREDITS.json`, and
+both original JSONs are kept verbatim in `data/incoming/`.
+
+**To deal, once the right photographs exist:**
+```sh
+node tools/deal-plant.js "Robinia pseudoacacia 'Lace Lady'" <zig-zag stems photo>
+node tools/deal-plant.js "Fagus sylvatica (Atropurpurea Group)" <purple foliage photo>
+```
+Held **81 → 83**; deck unchanged at 238.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

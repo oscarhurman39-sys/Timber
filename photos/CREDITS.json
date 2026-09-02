@@ -1182,6 +1182,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "fagus-sylvatica-green-summer.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "fagus-sylvatica.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1823,6 +1833,16 @@
   },
   {
    "file": "malus-john-downie.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "malvaceae-crimson-unidentified.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
