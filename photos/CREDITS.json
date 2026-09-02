@@ -1432,6 +1432,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hydrangea-groundbreaker-foliage-unconfirmed.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "hydrangea-lacecap-unidentified.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2063,6 +2073,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "persicaria-affinis-darjeeling-red.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "phalaenopsis-hybrid-group-cutout.png",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2676,6 +2696,16 @@
    "file": "veronica-rhubarb-crumble.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "veronicastrum-red-arrows.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. C2PA manifest present (claim generator Galaxy S24 c2pa-rs/0.62.0, c2pa.ingredient.v2, source title 20260829_113205(1).jpg); camera EXIF absent and frame 2948×3852, i.e. an edited export; visible 'AI-generated content' label lower left, kept outside the card window by PHOTO_FOCUS 50% 0%. See VERIFY-QUEUE 32 and 60.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,

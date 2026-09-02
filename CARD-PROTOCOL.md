@@ -397,8 +397,37 @@ Focal point recorded here when off-centre:
 | Cedrus atlantica (Glauca Group) 'Horstmann’s Silberspitz' | cedrus-atlantica-glauca-group-horstmann-s-silberspitz.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card**. Primary is the shoot with its creamy-white new tips, the cultivar itself; the swap is the massed blue foliage from two paces back, the other half of the card's own visual line. Shot four seconds apart (EXIF 12:30:27 and 12:30:31), so the two frames are the same plant in the same light. Primary trimmed 7% of width only, to bring 1.075 inside the gate |
 
 | Sanguisorba 'Pink Brushes' | sanguisorba-pink-brushes.jpg | 50% 40% default — **Oscar's own two-frame split, kept whole**: cut foliage left, nodding pink bottlebrushes right. Already 3000x4000 at exactly 0.750, so nothing was cropped. The clearest case yet for the v14.34 rule — he assembled this one deliberately to show both halves, and both halves are what a person needs to recognise the plant on a bench |
+| Persicaria affinis 'Darjeeling Red' | persicaria-affinis-darjeeling-red.jpg | 50% 40% default — **uncropped**, a clean Galaxy S24 capture (EXIF 2026-08-29 11:32:14, no C2PA), 3000×4000 staged at 1200×1600. One dense pink-white spike going over, browning at the base, above the mat of lanceolate leaves with the ochrea visible at the stem node — *Persicaria affinis* by the spike, the mat and the sheath. Late-season, so the "maturing deep red" the card promises is not in this frame; the cultivar is Oscar's label, not the photograph's. **New genus** for the deck. Its 39-character soil value renders at three lines of shrunk type in the soil panel; kept as researched (VERIFY-QUEUE 60) |
+| Veronicastrum 'Red Arrows' | veronicastrum-red-arrows.jpg | **50% 0%** — pinned to the top so the frame's **visible "AI-generated content" label**, bottom-left of the source, falls outside the window; the master is 1200×1568 (0.765), so ~9% of height is available and the label sits inside it. Verified on the rendered card. Framing, not concealment: the marker is written verbatim into `CREDITS.json`. Credentials differ from the Houttuynia pattern — a C2PA manifest with `c2pa.ingredient.v2` and claim generator `Galaxy S24 c2pa-rs/0.62.0`, **no** `digitalSourceType` string found, but no camera EXIF, a non-native 2948×3852 frame and the burned-in label, i.e. an edited export of a capture titled `20260829_113205(1).jpg`. Whorled red-edged lanceolate leaves under a violet spike — the plant on the card. **New genus** |
 
 ## 5. Decision changelog
+
+- **v14.43 (240 dealt / 84 held — Persicaria, Veronicastrum; Hydrangea
+  'Groundbreaker Blush' held)**: three researched cards from one bench visit,
+  three photographs, and the send order disagreed with the plants again.
+  - **The order was Veronicastrum, Hydrangea, Persicaria; the photographs were
+    a woody prostrate shrub, the Veronicastrum, the Persicaria.** Capture times
+    (11:31:17, 11:32:05, 11:32:14) say all three were shot in a single minute.
+    The two that identify themselves were dealt; the one that does not is held.
+  - **Photo 1 shows no flower and is not confirmed.** Brown horizontal woody
+    stems with lenticels and paired-to-whorled serrate leaves — a shrub, so
+    not the herbaceous Veronicastrum, and `[Inference]` the low *Hydrangea
+    paniculata* by elimination. Not dealt on elimination: parked as
+    `hydrangea-groundbreaker-foliage-unconfirmed.jpg`, card held, Oscar to
+    confirm (VERIFY-QUEUE 60), same posture as the Vitex pair (item 58).
+  - **The Veronicastrum photograph carries the burned-in AI label** and is
+    dealt the Houttuynia way: focus 50% 0%, label outside the window, marker
+    recorded verbatim. Its C2PA manifest is the plain-capture shape (item 44
+    batch note) yet the visible label is there — so the manifest alone is not
+    a clean-capture proof; recorded as observed, not resolved.
+  - Persicaria's soil value is the first to trip the validator's 36-character
+    measured limit and ship anyway: it shrinks to three lines and stays legible.
+    Kept as researched rather than paraphrased; flagged for Oscar.
+  - **perf-test's halo budget raised a third time, delta only, 24 → 32.** The
+    stacked-shadow rounding at the deck edge read Δ24 at 238 cards, exactly on
+    the budget, and Δ25–26 at 240. Re-measured per the check's own rule: a
+    staged leak on this deck diffs at 18288 px / Δ420, so the raised budget
+    is still 16x under a real leak. Pixel budget untouched at 256 (31 seen).
 
 - **v14.42 (aftercare, the hardiness lens, and a drought chip)**: three features
   in one pass, all of them data the deck already owned finally becoming visible.

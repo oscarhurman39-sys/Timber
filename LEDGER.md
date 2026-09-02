@@ -5,6 +5,17 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (Persicaria + Veronicastrum dealt, Groundbreaker Blush
+  held) — **deck 240, hold 84.** Three cards from one bench minute; the send
+  order disagreed with the plants again. The two that identify themselves are
+  dealt: *Persicaria affinis* 'Darjeeling Red' (clean capture, new genus) and
+  *Veronicastrum* 'Red Arrows' (burned-in AI label, dealt the Houttuynia way:
+  focus 50% 0%, label outside the window, marker verbatim in CREDITS). Photo 1
+  is a woody prostrate shrub with no flower — a hydrangea by elimination, not by
+  evidence — so the Hydrangea card is held and the frame parked as
+  `hydrangea-groundbreaker-foliage-unconfirmed.jpg` for Oscar to confirm.
+  Persicaria's 39-char soil value ships shrunk to three lines, kept verbatim.
+  VQ 60, protocol v14.43.
 progress: 2026-09-02 (Robinia 'Lace Lady' + Copper beech, both held) — **deck
   238, hold 83.** Two researched cards, both validated, both in the hold block.
   **Neither photograph was staged, because neither shows its plant:** the

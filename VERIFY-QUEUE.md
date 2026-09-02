@@ -2000,6 +2000,61 @@ Held **81 → 83**; deck unchanged at 238.
 ---
 
 
+### 60. Persicaria and Veronicastrum dealt; Groundbreaker Blush hydrangea held — photo 1 is a shrub with no flower
+2026-09-02. Three researched cards and three photographs from one bench visit
+(EXIF 11:31:17, 11:32:05, 11:32:14 on 2026-08-29). All three JSONs pass
+`check-plant-json.js` and are kept verbatim in `data/incoming/`.
+
+**The send order and the plants disagree, the Vitex way (item 58).** JSON order
+was Veronicastrum, Hydrangea, Persicaria. Photograph 2 is unmistakably the
+Veronicastrum (violet spike over whorled red-edged leaves) and photograph 3 the
+Persicaria (dense pink spike, mat of lanceolate leaves, ochrea at the node), so
+those two were dealt against their cards regardless of order.
+
+**A. Photograph 1 is not confirmed and the Hydrangea card is HELD.** The frame
+shows brown horizontal woody stems with pale lenticels, a cut end, and new
+shoots carrying paired-to-whorled glossy serrate lanceolate leaves on red
+petioles. That is a shrub, so it is **not** the herbaceous Veronicastrum, and it
+is not the Persicaria. `[Inference]` by elimination and by the prostrate woody
+habit it is the low *Hydrangea paniculata* 'LC NO21' — but there is no panicle
+in the frame, and the card's `visual` sells *"white panicles ageing through soft
+blush to pink-red"*. A foliage-only frame identified by elimination is not a
+confident placement, so it is parked as
+`photos/hydrangea-groundbreaker-foliage-unconfirmed.jpg` (a name no slug can
+resolve) and the card sits in the hold block. **Oscar's call**: if that bench
+was the Groundbreaker Blush, deal it —
+`node tools/deal-plant.js "Hydrangea paniculata 'LC NO21'" photos/hydrangea-groundbreaker-foliage-unconfirmed.jpg` —
+and retire the parked copy; a frame with the panicle would be the better card.
+
+**B. The Veronicastrum photograph carries the burned-in "AI-generated content"
+label**, bottom-left, and is dealt the Houttuynia way: `PHOTO_FOCUS` 50% 0%,
+label verified outside the rendered window, marker recorded verbatim in
+`CREDITS.json`. What its file says is worth writing down because it does not
+match the pattern item 44's batch note relied on: the C2PA manifest is the
+**plain-capture shape** (`c2pa.ingredient.v2`, claim generator `Galaxy S24
+c2pa-rs/0.62.0`, no `digitalSourceType` string anywhere in the file), yet the
+camera EXIF is gone, the frame is a non-native 2948×3852, the embedded title is
+`20260829_113205(1).jpg`, and the label is there. So a plain-shape manifest is
+**not** proof of an untouched capture. Recorded as observed; the provenance
+question is still item 32's.
+
+**C. Three validator warnings, all accepted as sent.** Hydrangea `careLevel` 5,
+Persicaria `pestRisk` 3 and `careLevel` 4 read as possible unconverted 0–5
+ratings; a groundcover knotweed at 0.75/5 pests and 1/5 care, and a dwarf
+hydrangea at 1.25/5 care, are plausible on the 0–20 scale, and they are Oscar's
+numbers. **Persicaria's `soil` is 39 characters** — the first card past the
+36-character measured limit to ship: on the rendered card it shrinks to three
+lines in the soil panel and stays legible. Not paraphrased. If Oscar wants it
+shorter, *"Moist, well-drained"* loses nothing the warning line does not carry.
+
+**D. What went where:** *Persicaria affinis* 'Darjeeling Red' **dealt** (new
+genus; late-season spike, the deep-red stage the card promises is not in this
+frame). *Veronicastrum* 'Red Arrows' **dealt** (new genus). *Hydrangea
+paniculata* 'LC NO21' **held**. Deck 238 → 240, hold 83 → 84.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
