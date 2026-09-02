@@ -2130,6 +2130,77 @@ JSON.
 ---
 
 
+### 62. Viburnum opulus dealt, Caryopteris 'Dark Knight' held, Sapphire Ring gets its flower — and two prose fields converted
+2026-09-02. Two JSONs and three photographs. Oscar named two of the frames:
+*"1st image is the viburnum"* and *"3rd image is a Ceratostigma Sapphire Ring
+but I wanted it to flash between the current card photo in the deck and this
+photo as it has a flower."*
+
+**A. Viburnum opulus — DEALT.** Photo 1 is the plant Oscar says it is: lobed
+toothed leaves, glossy red berries. Card latin is the species as supplied with
+`'Compactum'` in `cvs`. Not a duplicate: the deck's other guelder rose is the
+sterile snowball 'Roseum' (held), which never carries berries.
+
+**B. Sapphire Ring — now a SWAP CARD.** Photo 3 is the same gold, red-edged,
+hairy foliage as the card's existing photo, this time with the cobalt flowers.
+Registered in `PHOTO_SWAP` (alt `ceratostigma-…-flowers.webp`, 50% 50%, 3.5 s);
+both frames verified on the rendered card. Clean Galaxy S24 capture, 2026-08-31
+15:54.
+
+**C. Caryopteris 'Dark Knight' — HELD, and its photograph is not 'Dark
+Knight'.** The JSON says *"aromatic grey-green foliage"*, which is right for
+'Dark Knight'. Photo 2 shows **bright gold foliage** under deep blue flowers,
+with a second flower close-up inset top-right (Oscar's own two-frame assembly,
+no camera EXIF, no C2PA). Gold foliage on a Caryopteris is a different cultivar
+— and the deck already deals one: *Caryopteris × clandonensis* 'Worcester
+Gold', whose card photo is the same gold foliage without flowers. `[Inference]`
+photo 2 is that plant in bloom. It was not staged on 'Dark Knight' (the card's
+own words would contradict its picture — the Forsythia / Pinus mugo shape) and
+is parked as `photos/caryopteris-gold-flowering-unconfirmed.jpg`.
+**Question for Oscar:** is this the Worcester Gold in flower? If so, it is the
+same case as the Sapphire Ring — a flowering frame for a foliage-only card —
+and the one-line answer makes it a swap card too. 'Dark Knight' then waits for
+a grey-green frame.
+
+**D. Two prose fields converted per card, labelled.** Both JSONs arrived with
+`hue` and `peak` as words. Unlike the Hakonechloa (item 61), these are new
+cards, so the values were set from the supplied text and the conversion is
+recorded in each card's `uncertain` block and here:
+
+| card | supplied | set | note |
+|---|---|---|---|
+| Viburnum | hue "White and red" | **0** | red, for the berries; the two named colours point at different numbers, so this one is Oscar's to move |
+| Viburnum | peak "Late spring to early summer" | **May-Jun** | UK convention |
+| Caryopteris | hue "Deep blue-purple" | **265** | |
+| Caryopteris | peak "Late summer to early autumn" | **Aug-Sep** | |
+
+Both as-sent JSONs are kept verbatim beside the fitted ones in `data/incoming/`
+(`*-as-sent.json`).
+
+**E. Soil fitted to the panel.** Both soil strings were far over the measured
+26/44-character budgets (52/117 and 56/113) and the first Viburnum screenshot
+showed the warning text running out of the bottom of the soil panel. Short
+forms were written, the way `tools/fit-incoming.js` does for every wishlist
+card, and the originals kept:
+
+| card | soil (≤26) | warning (≤44) |
+|---|---|---|
+| Viburnum | Chalk, clay, loam or sand | Any pH · avoid very dry or waterlogged soil |
+| Caryopteris | Chalk, loam or sand | Drained; avoid winter wet; warm shelter |
+
+What each drops: the Viburnum's *"moist, humus-rich ground produces the
+strongest growth and fruiting"* and the Caryopteris's *"moderately fertile"*.
+Both survive in the as-sent files if Oscar wants them elsewhere on the card.
+
+**F. Validator warnings accepted as sent:** Caryopteris `pestRisk` 5 (reads as
+a possible 0–5 rating; kept). `foliage` and `container` are prose on both
+cards; those fields do not reach the card and were left alone.
+
+Deck 240 → 241, hold 84 → 85. Swap cards 4 → 5.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

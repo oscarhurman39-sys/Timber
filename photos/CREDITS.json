@@ -482,6 +482,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "caryopteris-gold-flowering-unconfirmed.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own two-frame assembly (inset top right), no camera EXIF, no C2PA. Sent 2026-09-02 with a Caryopteris 'Dark Knight' JSON but shows GOLD foliage, i.e. not 'Dark Knight'; parked unclaimed, see VERIFY-QUEUE 62.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "catalpa-erubescens-purpurea.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -525,6 +535,16 @@
    "file": "cephalanthus-occidentalis-bailoptics.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, 2026-08-21 16:19 (current season); orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "ceratostigma-willmottianum-sapphire-ring-lissbrill-flowers.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Sapphire Ring card (PHOTO_SWAP alt): the blue flowers the card photo lacks. Galaxy S24, 2026-08-31 15:54, no C2PA.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -2750,6 +2770,16 @@
    "sourceUrl": null,
    "commit": "04badbf",
    "commitSubject": "Add Bodnant Viburnum to deck: 100 -> 101",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "viburnum-opulus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Named by Oscar as the Viburnum (2026-09-02); lobed leaves and red berries agree. Cropped export, no camera EXIF, no C2PA.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

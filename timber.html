@@ -1112,7 +1112,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r189 · 2026-09-02 · 7df8dd0';
+const BUILD='r192 · 2026-09-02 · 8d48e31';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7280,6 +7280,18 @@ const PLANTS = [
    hardiness:"H7", resilience:"cold hardy",
    uses:"herbaceous borders · cottage gardens · architectural planting · pollinator gardens", size:"1–1.5 m H × 0.5–1 m W",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:12, careLevel:6, sunNeed:82, sunMin:45},
+  {common:"Compact Guelder Rose", latin:"Viburnum opulus", hue:0,
+   visual:"Dense, compact deciduous shrub with dark green palmately lobed leaves, flat heads of small fertile flowers surrounded by creamy-white sterile flowers, followed by bright red berries.",
+   water:"Moist but well-drained",
+   aspect:"North, East, South, West",
+   soil:"Chalk, clay, loam or sand; Any pH · avoid very dry or waterlogged soil",
+   prune:"Pruning group 1; prune after flowering if required, but avoid heavy pruning if the ornamental berries are wanted.",
+   source:"", peak:"May-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Compactum'",
+   hardiness:"H6", resilience:"Robust and adaptable shrub that tolerates exposed positions and a range of soils when moisture is adequate.",
+   uses:"Shrub borders, woodland gardens, cottage gardens, wildlife gardens, hedging, informal screening and specimen planting.", size:"1-1.5m H × 1-1.5m W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:7, thirst:14, careLevel:7, sunNeed:65, sunMin:35},
 ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
@@ -9455,6 +9467,34 @@ const PLANTS_ON_HOLD=[
    compliance:"PBR protected",
    hardinessNote:"Breeder reports hardy to -30°C",
    seasonalImpact:"", growthSpeed:12, pestRisk:7, thirst:12, careLevel:5, sunNeed:80, sunMin:45},
+
+  {common:"Bluebeard 'Dark Knight'", latin:"Caryopteris × clandonensis", hue:265,
+   visual:"Compact deciduous shrub with aromatic grey-green foliage and dark reddish stems, producing dense clusters of rich deep blue-purple flowers in late summer and early autumn.",
+   water:"Moist but well-drained",
+   aspect:"South, West",
+   soil:"Chalk, loam or sand; Drained; avoid winter wet; warm shelter",
+   prune:"Pruning group 6; cut back hard in spring to a low woody framework to encourage strong new flowering growth.",
+   source:"",
+   peak:"Aug-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"'Dark Knight'",
+   hardiness:"H6",
+   resilience:"Drought tolerant once established and well suited to hot, sunny positions; dislikes winter waterlogging.",
+   uses:"Flower borders, wildlife gardens, cottage gardens, Mediterranean-style planting, gravel gardens and containers.",
+   size:"1-1.5m H × 1-1.5m W",
+   toxicity:"",
+   compliance:"",
+   hardinessNote:"Fully hardy in much of the UK, though a warm sheltered position is preferable in colder areas.",
+   seasonalImpact:"", growthSpeed:13, pestRisk:5, thirst:7, careLevel:7, sunNeed:95, sunMin:75},
  ];
 /* HOLD:END */
 
@@ -10331,6 +10371,16 @@ function holoStyle(ho){
    a second story. A swap that shows the same thing twice reads as a glitch, not
    as a feature. */
 const PHOTO_SWAP={
+  /* Oscar's ask, 2026-09-02: "flash between the current card photo and this one,
+     as it has a flower". The card photo is the plant's gold, red-edged foliage
+     with no bloom; the second frame is the same foliage with the cobalt flowers
+     the card is named for (SAPPHIRE RING, peak Jul-Oct). Different day from the
+     card photo, same plant on the same bench by the leaves. */
+  'ceratostigma-willmottianum-sapphire-ring-lissbrill':{
+    alt:'photos/card/ceratostigma-willmottianum-sapphire-ring-lissbrill-flowers.webp',
+    focus:'50% 50%',
+    hold:'3.5s',
+  },
   /* Two frames of the same plant, four seconds apart. The card's own photo is the
      shoot with its creamy-white new tips — the cultivar, and the reason anyone
      picks this cedar over a plain Glauca. What that close-up cannot show is the

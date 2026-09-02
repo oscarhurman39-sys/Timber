@@ -399,8 +399,40 @@ Focal point recorded here when off-centre:
 | Sanguisorba 'Pink Brushes' | sanguisorba-pink-brushes.jpg | 50% 40% default — **Oscar's own two-frame split, kept whole**: cut foliage left, nodding pink bottlebrushes right. Already 3000x4000 at exactly 0.750, so nothing was cropped. The clearest case yet for the v14.34 rule — he assembled this one deliberately to show both halves, and both halves are what a person needs to recognise the plant on a bench |
 | Persicaria affinis 'Darjeeling Red' | persicaria-affinis-darjeeling-red.jpg | 50% 40% default — **uncropped**, a clean Galaxy S24 capture (EXIF 2026-08-29 11:32:14, no C2PA), 3000×4000 staged at 1200×1600. One dense pink-white spike going over, browning at the base, above the mat of lanceolate leaves with the ochrea visible at the stem node — *Persicaria affinis* by the spike, the mat and the sheath. Late-season, so the "maturing deep red" the card promises is not in this frame; the cultivar is Oscar's label, not the photograph's. **New genus** for the deck. Its 39-character soil value renders at three lines of shrunk type in the soil panel; kept as researched (VERIFY-QUEUE 60) |
 | Veronicastrum 'Red Arrows' | veronicastrum-red-arrows.jpg | **50% 0%** — pinned to the top so the frame's **visible "AI-generated content" label**, bottom-left of the source, falls outside the window; the master is 1200×1568 (0.765), so ~9% of height is available and the label sits inside it. Verified on the rendered card. Framing, not concealment: the marker is written verbatim into `CREDITS.json`. Credentials differ from the Houttuynia pattern — a C2PA manifest with `c2pa.ingredient.v2` and claim generator `Galaxy S24 c2pa-rs/0.62.0`, **no** `digitalSourceType` string found, but no camera EXIF, a non-native 2948×3852 frame and the burned-in label, i.e. an edited export of a capture titled `20260829_113205(1).jpg`. Whorled red-edged lanceolate leaves under a violet spike — the plant on the card. **New genus** |
+| Viburnum opulus ('Compactum') | viburnum-opulus.jpg | 50% 40% default — **named by Oscar** (*"1st image is the viburnum"*) and the frame agrees: palmately lobed, toothed leaves with a cluster of glossy red berries top-of-frame, the card's own visual line. Cropped export at 3000×2626 (landscape, no camera EXIF, no C2PA), so the window keeps only part of the width; the berries sit in the top band under the title. **Card latin is the species as supplied**, with 'Compactum' in `cvs`; the deck's other guelder rose is the sterile 'Roseum' (held), a different plant. `hue` and `peak` were prose as sent and were converted with a labelled note (VERIFY-QUEUE 62) |
+| Ceratostigma willmottianum SAPPHIRE RING ('Lissbrill') | ceratostigma-willmottianum-sapphire-ring-lissbrill.jpg **+ PHOTO_SWAP** (added 2026-09-02) | swap alt `-flowers.jpg`, 50% 50%, 3.5s hold — **Oscar's ask**: *"flash between the current card photo and this photo as it has a flower"*. The card photo is the gold, red-edged hairy foliage with no bloom; the new frame (Galaxy S24, 2026-08-31 15:54, clean) is the same foliage with the cobalt flowers the card is named for. Fifth swap card; the deck's first added at the owner's request rather than from a spare sweep. Verified rendering both frames |
 
 ## 5. Decision changelog
+
+- **v14.44 (241 dealt / 85 held — Viburnum opulus dealt, Caryopteris 'Dark
+  Knight' held, Sapphire Ring becomes a swap card)**: two JSONs, three
+  photographs, and Oscar named two of the three.
+  - **Sapphire Ring swap, at Oscar's request.** The card photo has never shown
+    a flower; the new frame does. Registered in `PHOTO_SWAP`, both frames
+    verified on the rendered card. The swap bar ("nothing else in the deck
+    needs this") is unchanged: this one passes it because the owner asked
+    for the second story, and the flower is the name.
+  - **The Caryopteris photograph is gold-leaved, so it is not 'Dark Knight'.**
+    'Dark Knight' is grey-green; the frame is bright gold foliage under
+    blue flowers, which is what the deck's dealt *Caryopteris* 'Worcester
+    Gold' looks like (its own card photo is the same gold foliage, no
+    flowers). Card held, frame parked as
+    `caryopteris-gold-flowering-unconfirmed.jpg`; VERIFY-QUEUE 62 puts the
+    obvious question to Oscar — is this a flowering frame for Worcester
+    Gold, and should IT become a swap card too?
+  - **Two schema conversions, labelled, not silent.** Both JSONs arrived
+    with `hue` and `peak` as prose ("White and red", "Late spring to early
+    summer"). The Hakonechloa the same morning was refused for the same
+    fields, but it was a duplicate anyway; these are new cards with (for the
+    Viburnum) an owner-confirmed photograph, so the numbers were set from
+    the text and every conversion is recorded in the card's own `uncertain`
+    block and in VQ 62, with the as-sent JSON kept beside the fitted one.
+  - **Soil fitted to the panel, the fit-incoming way.** Both soil strings
+    (52 and 56 chars, warnings 117 and 113) rendered as ink spilling out of
+    the soil panel on the first screenshot. Short forms were written to the
+    26/44 budgets and the originals kept; this is the rule
+    `tools/fit-incoming.js` has applied to every wishlist card, now applied
+    to a pasted one.
 
 - **v14.43 (240 dealt / 84 held — Persicaria, Veronicastrum; Hydrangea
   'Groundbreaker Blush' held)**: three researched cards from one bench visit,

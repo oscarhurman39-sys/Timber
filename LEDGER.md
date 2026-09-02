@@ -5,6 +5,16 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (Viburnum dealt, Dark Knight held, Sapphire Ring swap) —
+  **deck 241, hold 85, swap cards 5.** Oscar named two frames and both agreed
+  with the plants: *Viburnum opulus* dealt on his word plus the berries; the
+  Sapphire Ring card now flashes to its flower frame at his request. The
+  Caryopteris frame is gold-leaved under blue flowers, which is Worcester Gold
+  (dealt, foliage-only photo), not the grey-green 'Dark Knight' its JSON
+  describes — card held, frame parked, one question in VQ 62: make Worcester
+  Gold a swap card too? Two prose fields per card (hue, peak) converted with
+  labels; both soils fitted to the 26/44 panel after the first screenshot
+  showed the overflow. Protocol v14.44.
 progress: 2026-09-02 (Golden Hakonechloa refused) — **deck 240, hold 84,
   unchanged.** A *Hakonechloa macra* JSON + cutout arrived; the deck already
   holds the same plant as 'Aureola' (cvs on the new JSON says so), so it was
