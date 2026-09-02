@@ -70,6 +70,44 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-09-02, later (Exochorda, and the swap had been broken for 12 days) —
+  Oscar sent the Pearl Bush as a pair and asked for the flash-between, warning
+  it had "had some bugs in the past". Read the loading path before building on
+  it: markHot() set src on `.tphoto img` -- querySelector, first image only --
+  so a swap card's alt never got a src from the app itself. It had been getting
+  one as a side effect of the old tricklePhotos, which set src on every buried
+  image; r79 replaced that with fetch() (correctly) and the swap's second frame
+  went with it. Every two-photo card since 2026-08-21 has been cutting to black
+  and back to the same photograph. Fix is one querySelectorAll in markHot; the
+  CSS cut was never the problem and is left alone. features-test now asserts
+  both frames carry a src in the fetch window and the alt decodes to pixels,
+  because the reason this lasted twelve days is that nothing asserted it.
+  Deck 242 dealt / 81 held / 323 total. Five photo-swap cards.
+progress: 2026-09-02 (three cards; the arithmetic lost to the render) — Disporum
+  sessile 'Variegatum', Helleborus x ericsmithii 'Winter Moonbeam' and Oenothera
+  stricta 'Sulphurea' dealt. Deck 241 dealt / 81 held / 322 total.
+  The Oenothera is the one worth writing down. Oscar sent a composite: the open
+  flower filling the frame with a labelled `foliage` inset he added across the
+  top-right. I worked out from the card geometry that the top furniture cuts at
+  12% of the master, that the inset ends at 17.5%, and therefore that the card
+  would show a sliced yellow label bar hanging under the furniture with nothing
+  attached to it -- a real defect, and grounds to crop the panel out under the
+  "crop to fix a problem" half of v14.34. Then I rendered it. Half the foliage
+  strip and the whole word `foliage` land inside the band and read as an inset.
+  The arithmetic was not wrong about where 12% falls; it was wrong about what
+  that looks like, which is not something arithmetic was ever going to tell me.
+  Cost of checking: one screenshot. Cost of not checking: Oscar's deliberate
+  two-part ident photo thrown away on my say-so, which is precisely the mistake
+  he corrected me for on the Gaura.
+  That leaves a real inconsistency, logged as VQ 59 rather than smoothed over:
+  VQ 57 excluded the Rhodanthemum's inset partly because "an inset reads as a
+  collage on a card face", and the deck now ships an inset. My read is that it
+  is one rule -- deliberate two-part photos are kept whole -- and the
+  Rhodanthemum is held back by the flower-colour question in VQ 49 alone, but
+  that is Oscar's call to make, not mine to quietly assume.
+  Also carried in this push: perf-test's halo delta budget raised 24 -> 30, with
+  the staged-leak re-measurement written into the comment so the next person can
+  see it was a re-measured ceiling and not a moved goalpost.
 progress: 2026-08-28 (Android long-press fixed) — holding anywhere on a card
   popped Android's own "Copy image / Download image" sheet, because every piece
   of card furniture is an <img> and -webkit-touch-callout only covers iOS. The
