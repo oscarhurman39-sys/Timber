@@ -2079,7 +2079,7 @@ and hue changed before it is dealt. Left as supplied.
 ---
 
 
-### 63. Juniper 'Blue Arrow' and the Robinia — what the trailing note meant
+### 63. Juniper 'Blue Arrow' and the Robinia — RESOLVED, reading (1) was right
 2026-09-02. After the numbered photo list Oscar wrote: *"junipers robbina photos
 commingnsoon hold off on jason creation."* Two readings:
 1. photo 9 IS the Blue Arrow (he numbered it so — dealt on that basis), and
@@ -2091,6 +2091,24 @@ the deck or the hold** — its JSON is saved at
 `data/incoming/robinia-pseudoacacia-lace-lady.json` so it does not have to be
 resent, and goes in the moment the photo arrives. If (2) was meant, the juniper
 is a one-command restage.
+
+**Resolved 2026-09-02, same day.** Oscar sent "robinas photo plus junipers photo". The juniper file is byte-identical (md5) to photo 9, so the Blue Arrow card already carries it and nothing changed. The Robinia photo arrived with it and the card is dealt from the saved JSON.
+
+---
+
+
+### 64. Robinia 'Lace Lady' — the leaflets in the photo are not curly
+2026-09-02. The card (Oscar's JSON, RHS-checked) leads on *"Twisted zig-zag stems ·
+curly green leaflets"*, which is what 'Lace Lady' / TWISTY BABY is sold for. The
+photograph he sent for it shows a brown stem that does zig-zag, a labelled
+`thorned stem` inset with the paired spines of the species — and leaflets that
+lie flat and oval, like the plain *R. pseudoacacia*. Two earlier unclaimed
+frames (`robinia-unidentified-leaf.jpg`, `-thorn.jpg`, 16 Aug) show the same.
+
+Dealt as Oscar identified it — he is the one who has seen the label — but if the
+plant on the bench is the plain species or a different cultivar, the card is
+right and the photo is wrong, and it wants a frame of contorted leaflets. Worth
+one look next time he passes it.
 
 ---
 

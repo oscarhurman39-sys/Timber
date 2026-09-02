@@ -83,6 +83,20 @@ progress: 2026-09-02, later (Exochorda, and the swap had been broken for 12 days
   both frames carry a src in the fetch window and the alt decodes to pixels,
   because the reason this lasted twelve days is that nothing asserted it.
   Deck 242 dealt / 81 held / 323 total. Five photo-swap cards.
+progress: 2026-09-02 (Robinia photo arrived; juniper re-send was the same file) —
+  Robinia pseudoacacia 'Lace Lady' dealt from the JSON saved an hour earlier;
+  Oscar's composite trimmed 4.6% off the bottom to clear the 0.75 gate with the
+  thorn inset left where it was. The juniper photo he sent alongside is
+  byte-identical to the one already on the Blue Arrow card, which settles VQ 63
+  the cheap way. Deck 252 dealt / 84 held / 336 total. One doubt logged, not
+  acted on (VQ 64): the card says curly leaflets, the photo's leaflets are flat.
+  The gate then failed on the swap-frame check I added last round — "0 in
+  window": ten cards dealt since had pushed the nearest two-photo card from 5th
+  to 10th from the top, one past FETCH_DEPTH, so the check had nothing to look
+  at and failed on its own precondition with nothing wrong in the app. A test
+  whose precondition depends on deck order was always going to rot; it now
+  skips forward until a swap card is inside the window, asserts, and resets the
+  deck. features-test 55/55 standalone; the rest of the gate was already green.
 progress: 2026-09-02 (batch of twelve: eight dealt, three held, one waiting) —
   Monstera 'Thai Constellation', Coronilla emerus, Malus 'Veitch's Scarlet',
   Cupressus 'Goldcrest', Cedrus deodara, Nemesia 'Confetti', Modiolastrum

@@ -2513,6 +2513,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "robinia-pseudoacacia-lace-lady.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. A composite he assembled himself: pinnate leaves over a zig-zag stem with a labelled 'thorned stem' inset pasted top-right. Cropped by tools/reframe-photo.js 4.6% off the bottom edge only, because 2594x3624 is 0.716 and under the 0.75 gate; the inset is untouched. No pixels generated. EXIF Samsung Galaxy S24, 2026-08-26 (current season). No C2PA/JUMBF manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "robinia-unidentified-leaf.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
