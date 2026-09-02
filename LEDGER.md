@@ -5,6 +5,41 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (five-card feature line merged; two parallel duplicates
+  resolved) — **deck 257, hold 84.** The cape-mallow feature branch merged into
+  the live line, adding its five unique cards: Anisodontea 'Ib201-7', Cyclamen
+  hederifolium f. albiflorum, Dahlia 'Kelvin Floodlight', Phygelius 'Trewidden
+  Pink', Solanum pyracanthos. Disporum and the 'Winter Moonbeam' hellebore had
+  been dealt on BOTH lines from the same sends — the live copies win (deployed
+  first; the hellebore's file is also the clean signed capture where the
+  branch's copy carried a generative-edit manifest). Both lines had raised the
+  perf-test halo delta for the same red with matching staged-leak measurements;
+  ceiling kept at the live line's 30 — re-measured on the merged 257-card deck at 25px/delta 22, inside it. Protocol v14.44.
+progress: 2026-09-02 (Summer Song reaches live) — **the card was pushed all
+  along, just never deployed (r189).**
+  Oscar: "fuck it didnt push ive made a bunch of these cards twice now." The
+  push HAD landed — e609202 was on the feature branch — but card work goes to
+  the feature branch by NEW-SESSION convention and nothing had fast-forwarded
+  the live line, so the card was invisible on the site. That is the gap worth
+  naming: "committed and pushed" and "on Oscar's phone" are two different
+  things, and from where he is standing only the second one exists.
+  CHECKED FIRST, before touching anything: no duplicate cards in either deck —
+  zero repeated latin or common names across live (238) and this branch (239).
+  The work he redid did not double anything up.
+  Merged live's ten new cards in and deployed. Two real bugs caught in the
+  resolution: Summer Song had lost its `toxicity` line (add-plant built the row
+  on a branch that predated the SAFETY plaque, so it silently dropped a field
+  45 live cards now render), and the resolution had collapsed the newline in
+  "];\n/* PLANTS:END */" — the exact string add-plant.js searches for to insert
+  a row, so every future card add would have failed. Both fixed before the push.
+  ONE THING TO WATCH, measured not guessed: edge-test's hold-to-rewind assertion
+  is now on a knife edge. It passes solo and fails under `--jobs 3`, landing 1-6
+  cards short of the top depending on machine load. It is NOT a regression from
+  this merge — the merged app is code-identical to live apart from the BUILD
+  line and one card row, and the same assertion flaked at 168 and 229 cards
+  earlier in this session. But the margin is shrinking as the deck grows, and
+  the fixed 4000ms budget in `pressBack(4000)` will eventually fail solo too.
+  When it does, the fix is the budget or the tempo, not the rewind.
 progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trickle
   was handing the browser 881MB of decode targets (r79).**
   A colleague's iPhone hit the same "A problem repeatedly occurred" on the live
@@ -45,58 +80,121 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
-progress: 2026-08-25 (fairy bells — fourth new genus of the day) — **deck 245,
-  hold 81.** *Disporum sessile* 'Variegatum', woodland shade card. Another
-  orientation-6 preview trap staged correctly (foliage in the card band, pot
-  and hand under the plaque; baked at as-is, uncropped 0.750). The reframe gate
-  refused the first featureBox by half a percent and the fix was a more honest
-  box covering the lower arching stems, not an override. No flowers (May-Jun)
-  — spring reshoot queue. Protocol v14.45.
-progress: 2026-08-25 (porcupine tomato — a manifest that says what happened) —
-  **deck 244, hold 81.** *Solanum pyracanthos*, new species, H2 tender exotic.
-  The photo is Oscar's frame with his own PhotoEditor sticker edit and the C2PA
-  manifest declares it precisely: one non-text sticker whose box lands exactly
-  on the purple flower, isScaleAI false, no generative agent — the Salvia
-  'Black and Blue' class with better paperwork, recorded in CREDITS. Flower
-  species-correct; spines, lobed leaves and spiny fruit are the camera's own.
-  Uncropped at 0.821. Toxicity populated. Red fruits absent — autumn reshoot
-  noted. Protocol v14.44.
-progress: 2026-08-25 (dahlia + Cape figwort — and the send order was wrong
-  again) — **deck 243, hold 81.** *Dahlia* 'Kelvin Floodlight' (second Dahlia,
-  the giant yellow decorative; uncropped 0.750) and *Phygelius aequalis*
-  'Trewidden Pink' (first Phygelius; orientation-6 rotation baked at as-is).
-  The JSON array and the photo order disagreed — assigned on the plants, Vitex
-  rule, recorded in CREDITS. One [flag]: the Phygelius card says dusky-pink,
-  the photo reads coral-red in hard sun; register carries it. Two test fixes
-  with evidence: cyclamen height rail "Up to 10 cm" overran its patch 9.7px →
-  "To 10 cm"; perf-test halo delta ceiling 24 → 48 after dumping the differing
-  pixels (all card-silhouette shadow tones, the tracked x=764 run included) and
-  re-measuring the staged leak at deck 243 (baseline 25px/Δ27 vs leak
-  36505px/Δ375). Protocol v14.43. Full gate before push.
-progress: 2026-08-25 (cyclamen + hellebore — two new genera, same day) —
-  **deck 241, hold 81.** *Cyclamen hederifolium* f. *albiflorum* (first
-  Cyclamen; source 0.525 with a tray filling the bottom third, full-width
-  top-70% crop through reframe-photo.js to exactly 0.750, clean EXIF) and
-  *Helleborus* × *ericsmithii* 'Winter Moonbeam' (first dealt hellebore —
-  'Anna's Red' still held; uncropped 0.764, but the file is VQ-32-class: C2PA
-  Photo assist generative-edit manifest + visible "AI-generated content" label,
-  which the reframe tool's furniture arithmetic puts under the stats plaque at
-  any focus — dealt with marker recorded verbatim in CREDITS, cleared flag left
-  true per the Epimedium/Houttuynia precedent). Oscar confirmed the
-  photo-to-JSON pairing in the send and the foliage agrees with it. Both names
-  reconciled from informal supplied forms; corrections in the uncertain blocks
-  at data/incoming/. Hellebore populates toxicity + PBR compliance. Hellebore
-  flowerless (Dec-Apr peak) — winter reshoot queued behind Forsythia and
-  Syringa. Protocol v14.42.
-progress: 2026-08-25 (Cape mallow — a new genus, nothing needed fixing) —
-  **deck 239, hold 81.** *Anisodontea capensis* 'Ib201-7' (CARNIVAL LIGHTS CANDY
-  APPLE), the deck's first *Anisodontea*. Photo uncropped at verdict as-is
-  (orientation 1, 3000x3444 at 0.871, flower + leaf both in the card band; clean
-  Galaxy S24 EXIF, no C2PA/AI marker, shot same day). The supplied name
-  "Anisodonted Candy Apple Lights" arrived garbled; the correction and the RHS
-  trade-name/denomination reading travel in the JSON's `uncertain` block at
-  data/incoming/. careLevel 5 tripped the validator's 0-5 warning and is correct
-  on the 0-20 scale (1.25/5, easy care). Protocol v14.41. Full gate before push.
+progress: 2026-09-02, later (Exochorda, and the swap had been broken for 12 days) —
+  Oscar sent the Pearl Bush as a pair and asked for the flash-between, warning
+  it had "had some bugs in the past". Read the loading path before building on
+  it: markHot() set src on `.tphoto img` -- querySelector, first image only --
+  so a swap card's alt never got a src from the app itself. It had been getting
+  one as a side effect of the old tricklePhotos, which set src on every buried
+  image; r79 replaced that with fetch() (correctly) and the swap's second frame
+  went with it. Every two-photo card since 2026-08-21 has been cutting to black
+  and back to the same photograph. Fix is one querySelectorAll in markHot; the
+  CSS cut was never the problem and is left alone. features-test now asserts
+  both frames carry a src in the fetch window and the alt decodes to pixels,
+  because the reason this lasted twelve days is that nothing asserted it.
+  Deck 242 dealt / 81 held / 323 total. Five photo-swap cards.
+progress: 2026-09-02 (Kojo-no-mai photo swap) — Oscar asked for a better photo
+  on Prunus incisa 'Kojo-no-mai', in the deck since 2026-08-09 on a shot propped
+  against a fence rail. Replaced with a PNG cutout already at 0.750, no crop
+  needed. Card content untouched, deck count untouched (this plant was
+  already dealt) — a photo-only swap, recorded here and in CREDITS.json
+  rather than as a new deal.
+progress: 2026-09-02 (Robinia photo arrived; juniper re-send was the same file) —
+  Robinia pseudoacacia 'Lace Lady' dealt from the JSON saved an hour earlier;
+  Oscar's composite trimmed 4.6% off the bottom to clear the 0.75 gate with the
+  thorn inset left where it was. The juniper photo he sent alongside is
+  byte-identical to the one already on the Blue Arrow card, which settles VQ 63
+  the cheap way. Deck 252 dealt / 84 held / 336 total. One doubt logged, not
+  acted on (VQ 64): the card says curly leaflets, the photo's leaflets are flat.
+  The gate then failed on the swap-frame check I added last round — "0 in
+  window": ten cards dealt since had pushed the nearest two-photo card from 5th
+  to 10th from the top, one past FETCH_DEPTH, so the check had nothing to look
+  at and failed on its own precondition with nothing wrong in the app. A test
+  whose precondition depends on deck order was always going to rot; it now
+  skips forward until a swap card is inside the window, asserts, and resets the
+  deck. features-test 55/55 standalone; the rest of the gate was already green.
+progress: 2026-09-02 (batch of twelve: eight dealt, three held, one waiting) —
+  Monstera 'Thai Constellation', Coronilla emerus, Malus 'Veitch's Scarlet',
+  Cupressus 'Goldcrest', Cedrus deodara, Nemesia 'Confetti', Modiolastrum
+  lateritium and Juniperus 'Blue Arrow' dealt; Physocarpus 'All Black',
+  Physocarpus LITTLE DEVIL and Escallonia 'Gold Brian' held; Robinia 'Lace Lady'
+  saved to incoming but NOT added, on Oscar's "hold off" until its photo comes.
+  Deck 250 dealt / 84 held / 334 total.
+  The batch arrived in a different shape from every previous one: hue as words,
+  peaks as seasons ("Summer", "All year"), cultivars in the common name with a
+  bare genus in the latin, sentence-length soil and container fields. None of
+  that is a data error, all of it is a format the validator rejects, so every
+  card was rewritten to house form with the facts untouched and each mapping I
+  made (season -> months, hue word -> angle, cultivar moved into the latin) is in
+  that card's uncertain list rather than silently applied.
+  One contradiction I introduced myself and plant-sense caught: I wrote "Keep
+  moist" as the water line on a juniper whose thirst is 6/20 and whose own
+  resilience says drought tolerant. Fixed to say what the plant is. That is the
+  fifth time a phrase of mine has tripped a ladder in this deck; the check exists
+  because I keep doing it.
+  Two ambiguities NOT resolved, by rule: one ninebark photo for two ninebark
+  cards (label unreadable — both held, photo parked, VQ 60), and Modiolastrum
+  data that describes a climber where the name usually means a ground-hugging
+  mallow (dealt as supplied, flagged hard, VQ 61).
+progress: 2026-09-02 (three cards; the arithmetic lost to the render) — Disporum
+  sessile 'Variegatum', Helleborus x ericsmithii 'Winter Moonbeam' and Oenothera
+  stricta 'Sulphurea' dealt. Deck 241 dealt / 81 held / 322 total.
+  The Oenothera is the one worth writing down. Oscar sent a composite: the open
+  flower filling the frame with a labelled `foliage` inset he added across the
+  top-right. I worked out from the card geometry that the top furniture cuts at
+  12% of the master, that the inset ends at 17.5%, and therefore that the card
+  would show a sliced yellow label bar hanging under the furniture with nothing
+  attached to it -- a real defect, and grounds to crop the panel out under the
+  "crop to fix a problem" half of v14.34. Then I rendered it. Half the foliage
+  strip and the whole word `foliage` land inside the band and read as an inset.
+  The arithmetic was not wrong about where 12% falls; it was wrong about what
+  that looks like, which is not something arithmetic was ever going to tell me.
+  Cost of checking: one screenshot. Cost of not checking: Oscar's deliberate
+  two-part ident photo thrown away on my say-so, which is precisely the mistake
+  he corrected me for on the Gaura.
+  That leaves a real inconsistency, logged as VQ 59 rather than smoothed over:
+  VQ 57 excluded the Rhodanthemum's inset partly because "an inset reads as a
+  collage on a card face", and the deck now ships an inset. My read is that it
+  is one rule -- deliberate two-part photos are kept whole -- and the
+  Rhodanthemum is held back by the flower-colour question in VQ 49 alone, but
+  that is Oscar's call to make, not mine to quietly assume.
+  Also carried in this push: perf-test's halo delta budget raised 24 -> 30, with
+  the staged-leak re-measurement written into the comment so the next person can
+  see it was a re-measured ceiling and not a moved goalpost.
+progress: 2026-08-28 (Android long-press fixed) — holding anywhere on a card
+  popped Android's own "Copy image / Download image" sheet, because every piece
+  of card furniture is an <img> and -webkit-touch-callout only covers iOS. The
+  Android half is the contextmenu event: suppressed app-wide EXCEPT on editable
+  fields, where that same menu is how a phone pastes into the search box —
+  verified all three cases in a browser (crest suppressed, photo suppressed,
+  search input still allowed). Also -webkit-user-drag:none on every img.
+  Gate 17/17 sequential.
+progress: 2026-08-25 (aftercare + hardiness lens + drought chip) — three
+  features, all data the deck already owned becoming visible. Watering and
+  pruning now LEAD the back (they rendered nowhere on the card before);
+  `hardinessNote` is a schema field backfilled onto 87 cards and the lens opens
+  on the H crest — hold it and the rating explains itself plus the card's own
+  note, with the Butia as the proof card; and a 🌵 Drought tolerant chip that
+  matches the card's own claim with negations stripped (Zorro's "avoid dry soil"
+  stays out), 62 matches. Two bugs en route: the invisible LEARNED stamp was
+  eating crest presses (pointer-events:none now), and a backfill ran before its
+  field was in FIELDS — formatCard silently dropped it, 87 updates in memory,
+  zero on disk. New rule: schema first, then backfill, verify by grepping the
+  written file. Protocol v14.42. Gate 17/17 sequential.
+progress: 2026-08-24 (the LENS) — press-and-hold the power points plaque (or
+  soil panel, or aspect band) for half a second and a readable copy opens above
+  the finger; release closes it. Oscar's spec. Measuring first rewrote the brief:
+  every value on those panels renders at **5.8 real px** on a 390px phone (the
+  6.5px ink floor x 0.89 card scale) against a ~11px readable minimum — so
+  magnifying the artwork could never get there (full-width scale = 9.2px, still
+  blurry), and the lens RE-TYPESETS the same values from the plant row at 17px
+  using the card's own helpers, so it can never disagree with the card. Gesture
+  safety exercised case by case in a real browser: drag-from-plaque still
+  swipes, the closing release neither taps nor arms the flip, finger drift while
+  holding is ignored, touchcancel closes, reduced-motion skips the animation.
+  One probe lesson: the first check pressed coordinates measured before the
+  staged deal settled and reported the feature dead — wait for data-dealing to
+  clear before measuring a card. Protocol v14.41. Gate 17/17 sequential.
 progress: 2026-08-23 (Sanguisorba, and a perf check counting the wrong thing) —
   **deck 238, hold 81.** *Sanguisorba* 'Pink Brushes' from a split Oscar
   assembled himself, kept whole and uncropped — the clearest case yet for the

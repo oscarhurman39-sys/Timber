@@ -1890,6 +1890,44 @@ can show the flower without ambiguity.
 
 ---
 
+### 58. Summer Song — dealt on Oscar's call with a pasted inset, and a colour the card does not declare
+2026-08-23. The deck's first Rosa. Three things logged, none of them blocking —
+Oscar was shown all of this and said deal it.
+
+**a. The photograph carries a picture-in-picture.** A cutout of a second bloom
+(and a hand holding it) is pasted over the lower-left with a thick white sticker
+outline. Measured: the white halo occupies x 0.000-0.484, y 0.344-0.658 of the
+frame, and the card's furniture only covers below y=0.622, **so it is visible on
+the card face**, not hidden by the plaque.
+This is the same shape as VQ 57 / 'Zagora Yellow', which was excluded precisely
+because "an inset panel with a border reads as a collage on a card face, where a
+side-by-side pair reads as a deliberate two-panel plate". Oscar chose to deal it
+anyway, which is his call and reversible — but the two cards now disagree with
+each other, and that is the thing to settle, not this card on its own. Either
+'Zagora Yellow' gets its panel back (VQ 57) or this one loses its sticker.
+The original un-stickered pixels are NOT recoverable from what was supplied: the
+image arrived flattened. A clean version needs a re-send, not a tool.
+
+**b. The bloom measures pink; the card declares orange.** Sampling the main
+(un-stickered) bloom with foliage and gravel excluded: **63% of petal pixels fall
+in hue 330-359 deg (pink/magenta), only ~20% in 0-39 deg (orange/coral)**. The
+card carries `hue:20` and the visual line reads "vibrant coppery orange-red".
+Oscar's answer: it fades pink, and the data stays as researched. Left exactly as
+he supplied it — nothing was silently retuned. Worth knowing what `hue` actually
+drives: the `.pfall` gradient BEHIND the photograph, so it is only ever seen if
+the photo fails to load. Low stakes, one-line change to ~345 if he wants the
+placeholder to match the flower.
+
+**c. Two source disagreements Oscar flagged in his own research, carried over:**
+1. David Austin gives ~125 x 125 cm for an established three-year-old plant;
+   RHS gives 1-1.5 m height and 0.5-1 m spread. **RHS was prioritised** for the
+   spread range, and the card ships RHS figures.
+2. RHS calls the cultivar reasonably disease resistant, but black spot, rust and
+   powdery mildew all remain possible. `pestRisk:12` is the middling value that
+   encodes exactly that, not a claim of immunity.
+
+---
+
 
 ### 58. Which Vitex is which? — RESOLVED by Oscar; the leaves were right
 2026-08-21. Three cards, three photographs, and for two of them **the order they
@@ -1942,6 +1980,135 @@ re-derive it.
 **Kept for the record, because it is the useful part:** the send order and the
 leaves disagreed, and the leaves won. A card's own `cvs` line — *"hybrid of Vitex
 trifolia 'Purpurea' × V. agnus-castus"* — was the evidence that settled it.
+
+---
+
+
+### 59. An inset panel DID go on a card face — does that reopen VQ 57?
+2026-09-02. Item 57 excluded the Rhodanthemum 'Zagora Yellow' flower inset partly
+on the grounds that **"an inset panel with a border reads as a collage on a card
+face, where a side-by-side pair reads as a deliberate two-panel plate."** The
+Oenothera 'Sulphurea' card shipped today with exactly that: a labelled `foliage`
+inset across the top-right corner. So the stated reason no longer describes what
+the deck does.
+
+**Why this one was kept, honestly stated.** Not because the rule changed — because
+I measured instead of reasoning. The arithmetic predicted the card's top furniture
+would cut the panel at 12% and leave a sliced yellow label bar hanging under it,
+which would have been a real defect and grounds for a crop. The render disagreed:
+half the foliage strip and the whole `foliage` word land inside the readable band,
+so it reads as an inset rather than as damage. Reason (2) for the Rhodanthemum —
+the cream-white flower under a card named 'Zagora Yellow' — is untouched by any of
+this and still stands on its own.
+
+**What is actually unresolved.** Whether the deck now has one rule or two:
+- *one rule* — a deliberate two-part identification photo is kept whole, inset or
+  side-by-side, and the Rhodanthemum's exclusion rests only on the flower-colour
+  question in VQ 49; or
+- *two rules* — side-by-side plates are kept, insets are judged case by case on
+  whether they survive the furniture, and this one passed where the Rhodanthemum's
+  (higher in the frame, hard-bordered, no label) would not.
+
+**Oscar's call.** It costs nothing to leave as it is; it matters the next time an
+inset arrives. My read is that it is one rule and the Rhodanthemum is held back by
+VQ 49 alone, but I have not acted on that.
+
+---
+
+
+### 60. Exochorda: the latin names the hybrid, the card names 'The Bride'
+2026-09-02. The supplied JSON has `latin: "Exochorda × macrantha"` — the bare
+hybrid — while `common` is "Pearl Bush 'The Bride'" and `cvs` is "'The Bride'".
+The RHS-accepted name for the plant sold under that label is *Exochorda ×
+macrantha* 'The Bride', and the two photographs (whorled oblong leaves, ribbed
+russet capsule) are consistent with it but cannot separate the cultivar from the
+hybrid. **Kept exactly as supplied**, per the standing rule that a plant is never
+renamed on my say-so. The only practical consequence is the slug
+(`exochorda-macrantha`) and the dedupe key: if a second Exochorda card ever arrives
+as the full cultivar name, the two would not collide and the deck would carry the
+same plant twice. **Oscar's call** whether to move 'The Bride' into the latin.
+
+---
+
+
+### 60. One Physocarpus photograph, two Physocarpus cards — which is it?
+2026-09-02. Oscar's batch had cards for **'All Black'** and **LITTLE DEVIL ('Minall2')**
+and one ninebark photograph, listed first as "phycoaroubs". Both cultivars are
+dark-leaved; the photo shows purple leaves with a grey bloom on red stems and a
+pot label in the top-right corner that is out of focus past reading (checked at
+6x). Nothing in the frame separates the two — 'Minall2' is the smaller-leaved,
+more compact of the pair, but there is no scale reference.
+
+**Done:** both cards written and held; photo parked as
+`photos/physocarpus-opulifolius-dark-unidentified.jpg` with a CREDITS entry that
+says exactly this. Same handling as the two Vitex (VQ 58).
+
+**Oscar's call:** say which it is and it is dealt in one command:
+`node tools/deal-plant.js "<latin>" photos/physocarpus-opulifolius-dark-unidentified.jpg`.
+If the other one has a photo coming too, both go in the same run.
+
+---
+
+
+### 61. Modiolastrum lateritium — the supplied habit does not match the name
+2026-09-02. Oscar read the label as "m-something" and settled on *Modiolastrum
+lateritium*. The photograph (lobed, scalloped, red-rimmed leaves) is consistent
+with that. **The card data is not.** As supplied it is a "tender evergreen
+CLIMBER", 1.5–2.5 m tall, H3, for the conservatory. The plant that carries this
+name (syn. *Malvastrum lateritium*) is normally described as a low, spreading,
+ground-hugging perennial mallow a hand-span high, hardier than H3, with brick-red
+flowers — a very different thing to sell.
+
+**Dealt as supplied**, because the rule is that I do not overwrite Oscar's data
+with my recollection; all four doubts are in the card's `uncertain` list. But
+this one is customer-facing and wrong in kind if I am right, so it wants a look
+at the actual label before it stays in the deck. [Inference] — my description of
+the plant is from memory, not checked against RHS in this session.
+
+---
+
+
+### 62. Escallonia 'Gold Brian' — the visual line does not mention gold
+2026-09-02. Held (no photo). Oscar's own uncertain note already says the cultivar
+name should be checked. Adding to it: the plant sold as 'Gold Brian' is a
+golden-yellow-leaved *Escallonia laevis*, and that is its entire selling point,
+yet the supplied visual line says only "glossy foliage" and the hue is the pink of
+the flowers. If the plant on the bench is gold, the card needs its visual line
+and hue changed before it is dealt. Left as supplied.
+
+---
+
+
+### 63. Juniper 'Blue Arrow' and the Robinia — RESOLVED, reading (1) was right
+2026-09-02. After the numbered photo list Oscar wrote: *"junipers robbina photos
+commingnsoon hold off on jason creation."* Two readings:
+1. photo 9 IS the Blue Arrow (he numbered it so — dealt on that basis), and
+   Robinia photos are coming, so the Robinia card should not be created yet;
+2. juniper photos are ALSO still coming, and photo 9 is provisional.
+
+Acted on (1): Blue Arrow dealt from photo 9; **Robinia 'Lace Lady' NOT added to
+the deck or the hold** — its JSON is saved at
+`data/incoming/robinia-pseudoacacia-lace-lady.json` so it does not have to be
+resent, and goes in the moment the photo arrives. If (2) was meant, the juniper
+is a one-command restage.
+
+**Resolved 2026-09-02, same day.** Oscar sent "robinas photo plus junipers photo". The juniper file is byte-identical (md5) to photo 9, so the Blue Arrow card already carries it and nothing changed. The Robinia photo arrived with it and the card is dealt from the saved JSON.
+
+---
+
+
+### 64. Robinia 'Lace Lady' — the leaflets in the photo are not curly
+2026-09-02. The card (Oscar's JSON, RHS-checked) leads on *"Twisted zig-zag stems ·
+curly green leaflets"*, which is what 'Lace Lady' / TWISTY BABY is sold for. The
+photograph he sent for it shows a brown stem that does zig-zag, a labelled
+`thorned stem` inset with the paired spines of the species — and leaflets that
+lie flat and oval, like the plain *R. pseudoacacia*. Two earlier unclaimed
+frames (`robinia-unidentified-leaf.jpg`, `-thorn.jpg`, 16 Aug) show the same.
+
+Dealt as Oscar identified it — he is the one who has seen the label — but if the
+plant on the bench is the plain species or a different cultivar, the card is
+right and the photo is wrong, and it wants a frame of contorted leaflets. Worth
+one look next time he passes it.
 
 ---
 

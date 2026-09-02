@@ -42,7 +42,12 @@ const FIELDS = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', '
   // statutory duties (Schedule 9, sale bans, controlled waste, plant health)
   // and breeder's rights (PBR — a trade restriction on propagation, not a duty
   // on the customer). Blank means nothing is known to apply, and prints nothing.
-  'compliance'];
+  'compliance',
+  // The qualifier behind the H rating — "RHS H3; established plants may tolerate
+  // about -10°C in ideal sheltered sites". Rendered in the hardiness lens
+  // (press-and-hold the crest), never inferred. Added 2026-08-25; before that it
+  // was researched on 87 cards and thrown away at the schema.
+  'hardinessNote'];
 /* Nothing speculative belongs in this list. It is exactly the set of fields that
    exist on cards today, which is what makes the "unknown field" guard meaningful:
    a key not listed here is a mistake worth stopping for, not a column nobody
