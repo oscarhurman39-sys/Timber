@@ -1,0 +1,33 @@
+{
+  "common": "Hybrid Christmas rose 'Winter Moonbeam'",
+  "latin": "Helleborus × ericsmithii 'Winter Moonbeam'",
+  "hue": 0,
+  "visual": "White outward-facing flowers ageing pink-red · silver-veined dark foliage",
+  "water": "Keep evenly moist",
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Shelter from strong cold winds",
+  "prune": "Remove faded or damaged foliage as flowers appear",
+  "toxicity": "Harmful if eaten · skin irritant",
+  "compliance": "PBR protected · commercial propagation restricted",
+  "peak": "Dec-Apr",
+  "cvs": "syn. Helleborus 'Winter Moonbeam'",
+  "hardiness": "H5",
+  "hardinessNote": "",
+  "resilience": "cold hardy · shade tolerant · exposed-site tolerant",
+  "uses": "woodland gardens · containers · winter borders · wildlife gardens",
+  "height": "25–35 cm",
+  "spread": "40–45 cm",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 7,
+  "pestRisk": 11,
+  "thirst": 12,
+  "careLevel": 5,
+  "sunNeed": 48,
+  "sunMin": 28,
+  "uncertain": [
+    "The supplied 'Helleborus × ericsmithii Moonbeam' was corrected to the RHS-accepted 'Winter Moonbeam'",
+    "RHS gives an ultimate height and spread of 0.1–0.5 m, while specialist UK sources give approximately 25–35 cm tall and 40–45 cm wide; the more useful cultivar-specific dimensions were prioritised"
+  ]
+}

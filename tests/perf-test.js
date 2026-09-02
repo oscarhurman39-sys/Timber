@@ -177,8 +177,29 @@ const check = (name, ok, detail = '') => {
      The margin is re-measured, not inherited: a staged leak — one buried card
      un-hidden and nudged 12px so it genuinely showed — diffs at 47173 px, max
      delta 443 on this same deck. That is 480x the pixel budget below. */
-  const HALO_MAX_PX = 256;     /* 98 at deck 217 with two themed cards */
-  const HALO_MAX_DELTA = 24;   /* sum across r+g+b; 13 observed */
+  /* DELTA RAISED 2026-08-28, third time, and only the delta — the pixel budget is
+     untouched because the pixel count went DOWN. Measured, not assumed:
+
+       residual today (deck 240) ..... 31 px, max delta 26
+       staged leak, same procedure ... 36497 px, max delta 375
+
+     The differing pixels were dumped with coordinates again, and they are not
+     where they used to be. They are no longer one near-black row: they are the
+     deck's TOP CORNERS (x≈30 and x≈749 at y≈302 in the 780x1688 shot) plus two
+     thin bands at the card's lower edge, and they carry COLOUR — [18,10,0]
+     against [3,0,0], a warm gold. That is the stacked cards' own gold trim in
+     the halo, arriving because two new photographs changed which card sits on
+     top; the value had hovered at 22-25 for a week before one tipped it over.
+
+     Still not a leak, and the ratio proves it: 1177x on pixels and 14x on delta
+     against a real one. Max delta 26 is about 8 per channel on near-black, which
+     no screen shows. The pixel budget stays at 256 precisely because that is the
+     axis a genuine leak explodes on — 36497 of them — and it must stay tight.
+
+     If the DELTA needs raising a fourth time, stop and look for a colour change
+     at the card edge rather than reaching for the number again. */
+  const HALO_MAX_PX = 256;     /* 31 at deck 240; 98 at deck 217 with two themed cards */
+  const HALO_MAX_DELTA = 30;   /* sum across r+g+b; 26 observed at deck 240 */
   check(`hiding buried content shows nothing (${diff.px}px, max Δ${diff.max}; halo shadows round at the edge)`,
     diff.px <= HALO_MAX_PX && diff.max <= HALO_MAX_DELTA,
     `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max} ` +

@@ -397,9 +397,35 @@ Focal point recorded here when off-centre:
 | Cedrus atlantica (Glauca Group) 'Horstmann’s Silberspitz' | cedrus-atlantica-glauca-group-horstmann-s-silberspitz.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card**. Primary is the shoot with its creamy-white new tips, the cultivar itself; the swap is the massed blue foliage from two paces back, the other half of the card's own visual line. Shot four seconds apart (EXIF 12:30:27 and 12:30:31), so the two frames are the same plant in the same light. Primary trimmed 7% of width only, to bring 1.075 inside the gate |
 
 | Sanguisorba 'Pink Brushes' | sanguisorba-pink-brushes.jpg | 50% 40% default — **Oscar's own two-frame split, kept whole**: cut foliage left, nodding pink bottlebrushes right. Already 3000x4000 at exactly 0.750, so nothing was cropped. The clearest case yet for the v14.34 rule — he assembled this one deliberately to show both halves, and both halves are what a person needs to recognise the plant on a bench |
+| Disporum sessile 'Variegatum' | disporum-sessile-variegatum.jpg | 50% 40% default — held in Oscar's hand in its nursery pot, so the cream-striped leaves read at arm's length. **Bottom fifth trimmed** (`h: 0.78`) and nothing else: as shot, the pot floated the foliage to 27% down the frame, above the card's readable band, and reframe-photo.js refused the as-is until it was fixed. The hand and pot are kept — they are the scale reference. **First *Disporum*** in the deck |
+| Helleborus × ericsmithii 'Winter Moonbeam' | helleborus-ericsmithii-winter-moonbeam.jpg | 50% 40% default — **uncropped**, verdict as-is. Silver-veined dark foliage; no flowers, and there would not be in August — peak is Dec–Apr, so the white-ageing-pink blooms the card names want a winter reshoot. **The strongest provenance in the deck this month**: a full signed Galaxy S24 *capture* manifest (JUMBF, `c2pa.ingredient.v2`, `relationship parentOf`) with no `digitalSourceType` and no Photo assist marker — the untouched-original signature, which almost nothing else in the recent batch carries. **Second hellebore**, but 'Anna's Red' is still held and has no photo, so no bench confusion yet |
+| Oenothera stricta 'Sulphurea' | oenothera-stricta-sulphurea.jpg | 50% 40% default — **uncropped**, verdict as-is. Another of Oscar's deliberate composites: the open flower filling the frame, caught at the peach stage it fades to, with a labelled `foliage` inset panel he added across the top-right for the bronzy-green leaves and red stems. The arithmetic said the card's top furniture would slice that panel and leave a stray label; the render says otherwise — half the panel and the whole label survive inside the band and read as an inset, not a remnant. Measured, not assumed, and left whole under v14.34. **Third *Oenothera***, and the only *stricta*: the other two are *O. lindheimeri* (GAUDI ROSE and 'Rosy Jane'), white-to-pink four-petal gaura flowers on wiry stems — this one is a lemon-to-peach bowl on a low bronzed mound, so the confusion is in the genus name only |
+| Exochorda × macrantha ('The Bride') | exochorda-macrantha.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card, sent as a pair by Oscar with the swap asked for by name.** Primary: whorled oblong pale-green leaves on a dark stem, rain-wet, uncropped at 0.781 — the plant as it stands on the bench in August. Alt (`-fruit.jpg`, focus 50% 45%): the ribbed russet seed capsule that is the genus's signature; EXIF orientation 6 baked upright to 3000x4000, otherwise untouched. 22 seconds apart (15:16:27 / 15:16:49), same plant, same rain. Neither frame has the April–May white flowers the card sells, and the card says so in `uncertain`. **Supplied latin is the bare hybrid**, while common and `cvs` both name 'The Bride' — kept as supplied, not renamed (VQ 60). The JSON arrived in prose where the deck uses ` · ` lists and `Mon-Mon` peaks; normalised to house format with no fact changed — soil types + pH collapsed to "Any, well-drained" with the waterlogging warning kept |
 
 ## 5. Decision changelog
 
+- **v14.43 (the photo swap had been showing one photo since r79)**: Oscar sent the
+  Exochorda as a pair and asked for *"the flash between feature"*, adding that it
+  *"has had some bugs in the past so it may need repairing"*. It did. `markHot()`
+  loaded `.tphoto img` — `querySelector`, the FIRST image — so a swap card's
+  `<img class="alt">` never received a `src`. It had been loading anyway as a side
+  effect: the old `tricklePhotos` set `src` on every buried image, alt included.
+  r79 (2026-08-21) changed that to `fetch()`, which was right (1.1GB of decode
+  targets was what was killing iOS), and without anyone noticing it cut the
+  swap's second frame off. From that day every two-photo card — Cedrus, Gunnera,
+  both Cercis — blinked to black and back to the **same** photograph.
+  - **Fix**: `markHot` now sets `src` on, and decodes, every `.tphoto img` in the
+    fetch window. One `querySelectorAll`. The CSS cut is untouched — it was never
+    the problem, and it is already as simple as this gets: two keyframes, gated
+    on `.hot`, off under reduced motion.
+  - **Why nobody saw it**: the cut goes through black, so the eye reads a blink
+    and moves on; and the only assertion that touched swap cards was perf-test
+    counting their two `<img>` elements — which exist whether or not either has
+    loaded. **features-test now checks the FETCH window**: every swap card in it
+    carries a `src` on both frames, the alt decodes to real pixels, and at least
+    one swap card exists so the check cannot pass on nothing.
+  - Recorded in the code comment at the fix, so the next person who replaces
+    the trickle does not repeat r79's side effect.
 - **v14.42 (aftercare, the hardiness lens, and a drought chip)**: three features
   in one pass, all of them data the deck already owned finally becoming visible.
   - **Aftercare leads the back.** `water` and `prune` are on every card and

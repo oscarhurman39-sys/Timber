@@ -1946,6 +1946,53 @@ trifolia 'Purpurea' × V. agnus-castus"* — was the evidence that settled it.
 ---
 
 
+### 59. An inset panel DID go on a card face — does that reopen VQ 57?
+2026-09-02. Item 57 excluded the Rhodanthemum 'Zagora Yellow' flower inset partly
+on the grounds that **"an inset panel with a border reads as a collage on a card
+face, where a side-by-side pair reads as a deliberate two-panel plate."** The
+Oenothera 'Sulphurea' card shipped today with exactly that: a labelled `foliage`
+inset across the top-right corner. So the stated reason no longer describes what
+the deck does.
+
+**Why this one was kept, honestly stated.** Not because the rule changed — because
+I measured instead of reasoning. The arithmetic predicted the card's top furniture
+would cut the panel at 12% and leave a sliced yellow label bar hanging under it,
+which would have been a real defect and grounds for a crop. The render disagreed:
+half the foliage strip and the whole `foliage` word land inside the readable band,
+so it reads as an inset rather than as damage. Reason (2) for the Rhodanthemum —
+the cream-white flower under a card named 'Zagora Yellow' — is untouched by any of
+this and still stands on its own.
+
+**What is actually unresolved.** Whether the deck now has one rule or two:
+- *one rule* — a deliberate two-part identification photo is kept whole, inset or
+  side-by-side, and the Rhodanthemum's exclusion rests only on the flower-colour
+  question in VQ 49; or
+- *two rules* — side-by-side plates are kept, insets are judged case by case on
+  whether they survive the furniture, and this one passed where the Rhodanthemum's
+  (higher in the frame, hard-bordered, no label) would not.
+
+**Oscar's call.** It costs nothing to leave as it is; it matters the next time an
+inset arrives. My read is that it is one rule and the Rhodanthemum is held back by
+VQ 49 alone, but I have not acted on that.
+
+---
+
+
+### 60. Exochorda: the latin names the hybrid, the card names 'The Bride'
+2026-09-02. The supplied JSON has `latin: "Exochorda × macrantha"` — the bare
+hybrid — while `common` is "Pearl Bush 'The Bride'" and `cvs` is "'The Bride'".
+The RHS-accepted name for the plant sold under that label is *Exochorda ×
+macrantha* 'The Bride', and the two photographs (whorled oblong leaves, ribbed
+russet capsule) are consistent with it but cannot separate the cultivar from the
+hybrid. **Kept exactly as supplied**, per the standing rule that a plant is never
+renamed on my say-so. The only practical consequence is the slug
+(`exochorda-macrantha`) and the dedupe key: if a second Exochorda card ever arrives
+as the full cultivar name, the two would not collide and the deck would carry the
+same plant twice. **Oscar's call** whether to move 'The Bride' into the latin.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
