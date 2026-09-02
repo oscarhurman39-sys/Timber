@@ -41,6 +41,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acanthus-hungaricus-cutout.png",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright (raw cutout; the card uses the hero-on-self composite)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "acanthus-hungaricus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-palmatum-bloodgood-cutout.png",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -469,6 +489,16 @@
    "sourceUrl": null,
    "commit": "5c4681e",
    "commitSubject": "Add Doctor King Camellia to deck: 66 -> 67",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "campsis-grandiflora.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
