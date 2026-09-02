@@ -2613,6 +2613,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "striped-grass-unidentified-cutout.png",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Transparent-background cutout sent 2026-09-02 with a Hakonechloa macra JSON; identity NOT confirmed (see VERIFY-QUEUE 61), so parked under a name no card slug resolves. Downscaled from 2998×3998 to 1200×1600, alpha kept, no C2PA markers.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "styrax-japonicus-evening-light.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Uncropped: passed through tools/reframe-photo.js at verdict as-is, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest in the file and no AI or generative marker",

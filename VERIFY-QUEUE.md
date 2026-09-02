@@ -2055,6 +2055,81 @@ paniculata* 'LC NO21' **held**. Deck 238 → 240, hold 83 → 84.
 ---
 
 
+### 61. "Golden Hakonechloa" refused as a duplicate of the held 'Aureola'; its cutout is not confidently a Hakonechloa
+2026-09-02. A JSON for *Hakonechloa macra* arrived with a transparent-background
+cutout PNG. **Nothing was added to the deck**, for two separate reasons, and
+both are Oscar's to reverse.
+
+**A. The deck already holds this plant.** `Hakonechloa macra 'Aureola'`
+(Japanese Forest Grass 'Aureola') has sat in the hold block since the wishlist
+batch, with a FIT entry in `tools/fit-incoming.js`. The new JSON is the same
+plant under the species-level latin: `cvs` says `'Aureola'`, `visual` describes
+yellow-and-green striped arching leaves, and there is no other golden
+Hakonechloa in UK retail that this could be instead. Adding it would have put
+**two cards for one grass** in the deck — same call as the Lupin (item 45) and
+'Homebush' (item 42). The held card was kept.
+
+**B. The JSON does not pass the validator as sent**, so it could not have gone
+in even on its own:
+- `hue` is `"Yellow and green"` — the schema wants a whole number 0–360 (the
+  held card carries 65).
+- `peak` is `"Summer to autumn"` — the app cannot parse it; it wants
+  `"Mon-Mon"` (the held card carries `Apr-Nov`).
+- `foliage` and `container` are prose where the vocabularies are
+  evergreen / semi-evergreen / deciduous and yes / with care / no.
+- `soil` + `soilWarning` come to 52 and 149 characters against measured limits
+  of 26 and 44.
+None of it was rewritten: the reality filter says the numbers are his to
+supply, not mine to infer from prose.
+
+**C. Nineteen fields differ between the held card and the new JSON.** The ones
+that change what a customer is told:
+
+| field | held 'Aureola' card | new JSON |
+|---|---|---|
+| `water` | Keep consistently damp in growth; pots need regular water | Moist but well-drained |
+| `soil` | Fertile, humus-rich; **Emerges very late — do not dig it up** | Chalk, clay, loam or sand; acid, neutral or alkaline; Avoid very dry or excessively heavy soil… |
+| `peak` | Apr-Nov | Summer to autumn |
+| `size` | 0.1-0.5m H × **0.5-1m** W | 0.1-0.5m H × **0.1-0.5m** W |
+| `sunNeed` / `sunMin` | 45 / 20 | 60 / 30 |
+| `pestRisk` | 6 | 2 |
+| `growthSpeed` | 8 | 10 |
+| `thirst` | 14 | 13 |
+
+The held card's *"emerges very late — do not dig it up"* is the one line on
+either version that stops a real mistake on a bench in April, and the new JSON
+drops it. The spread disagreement (0.5–1 m held vs 0.1–0.5 m new) is a factual
+one to settle against the RHS entry, not a wording choice. The remaining
+differences are prose length and phrasing (`visual`, `prune`, `resilience`,
+`uses`, `hardinessNote`, `common`, `aspect` — "North, East, South, West" renders
+as all four facings, which is what "Any aspect" already means).
+
+**D. The cutout is not confidently the plant.** It shows stiff, fairly broad
+(2–3 cm) leaves striped in variable bands of yellow, green and cream, borne in
+fans at the tips of **purple stems with distinct nodes and sheaths**, on an
+upright plant. *Hakonechloa macra* 'Aureola' is a lax, cascading grass with
+narrow mostly-yellow leaves on thin arching stems. `[Inference]` the culm,
+the nodes, the sheath and the leaf width read more like a dwarf variegated
+bamboo — *Pleioblastus viridistriatus* is the obvious candidate in UK retail —
+than like a Hakonechloa, but the frame is a cutout with no scale and no base,
+and **I cannot verify the identity either way**. It was therefore not staged
+on the held card. Parked as `photos/striped-grass-unidentified-cutout.png`
+(alpha kept, 1200×1600 from 2998×3998, no C2PA markers, credited as Oscar's).
+The deck has no *Pleioblastus* card; if that is what it is, it wants its own
+JSON.
+
+**What resolves it, all Oscar's:**
+1. Say which plant the cutout is. If it IS the Hakonechloa on his bench:
+   `node tools/deal-plant.js "Hakonechloa macra 'Aureola'" photos/striped-grass-unidentified-cutout.png`
+   deals the held card (the cutout will want the hero-on-self composite the
+   other twelve cutout cards use — see the photo register rows marked
+   `[special]`), then retire the parked copy.
+2. If any of the new JSON's values should replace the held card's, say which;
+   the table above is the shortlist.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

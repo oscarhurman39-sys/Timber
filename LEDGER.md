@@ -5,6 +5,16 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (Golden Hakonechloa refused) — **deck 240, hold 84,
+  unchanged.** A *Hakonechloa macra* JSON + cutout arrived; the deck already
+  holds the same plant as 'Aureola' (cvs on the new JSON says so), so it was
+  refused as a duplicate, Lupin-style, with the 19 differing fields tabulated in
+  VQ 61. The JSON also fails the validator as sent (hue is prose, peak is
+  prose) and was not rewritten. The cutout shows purple noded culms with fans
+  of broad striped leaves — [Inference] more dwarf bamboo than Hakonechloa —
+  so it is parked as `striped-grass-unidentified-cutout.png`, not staged.
+  Two questions for Oscar in VQ 61: which plant is the cutout, and should any
+  new values replace the held card's.
 progress: 2026-09-02 (Persicaria + Veronicastrum dealt, Groundbreaker Blush
   held) — **deck 240, hold 84.** Three cards from one bench minute; the send
   order disagreed with the plants again. The two that identify themselves are
