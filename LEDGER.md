@@ -5,6 +5,16 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (five-card feature line merged; two parallel duplicates
+  resolved) — **deck 257, hold 84.** The cape-mallow feature branch merged into
+  the live line, adding its five unique cards: Anisodontea 'Ib201-7', Cyclamen
+  hederifolium f. albiflorum, Dahlia 'Kelvin Floodlight', Phygelius 'Trewidden
+  Pink', Solanum pyracanthos. Disporum and the 'Winter Moonbeam' hellebore had
+  been dealt on BOTH lines from the same sends — the live copies win (deployed
+  first; the hellebore's file is also the clean signed capture where the
+  branch's copy carried a generative-edit manifest). Both lines had raised the
+  perf-test halo delta for the same red with matching staged-leak measurements;
+  ceiling kept at the live line's 30 — re-measured on the merged 257-card deck at 25px/delta 22, inside it. Protocol v14.44.
 progress: 2026-09-02 (Summer Song reaches live) — **the card was pushed all
   along, just never deployed (r189).**
   Oscar: "fuck it didnt push ive made a bunch of these cards twice now." The

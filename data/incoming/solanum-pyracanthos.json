@@ -1,0 +1,33 @@
+{
+  "common": "Porcupine tomato",
+  "latin": "Solanum pyracanthos",
+  "hue": 0,
+  "visual": "Grey-green lobed leaves · vivid orange spines · purple star-shaped flowers · red fruits",
+  "water": "Moderate; water freely during growth",
+  "aspect": "South / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Sheltered · protect from frost",
+  "prune": "Restrictive pruning if grown under glass",
+  "toxicity": "Inedible fruits · harmful if eaten",
+  "compliance": "",
+  "peak": "Jun-Oct",
+  "cvs": "",
+  "hardiness": "H2",
+  "hardinessNote": "RHS H2; grow outdoors only during summer and overwinter frost-free",
+  "resilience": "drought tolerant · heat tolerant",
+  "uses": "containers · conservatories · subtropical planting · summer bedding",
+  "height": "1–1.5 m",
+  "spread": "0.5–1 m",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 14,
+  "pestRisk": 8,
+  "thirst": 10,
+  "careLevel": 8,
+  "sunNeed": 95,
+  "sunMin": 72,
+  "uncertain": [
+    "Kew accepts Solanum pyracanthos Lam. as the species name; the similarly spelled Solanum pyracanthos Bojer ex Dunal is instead a synonym of Solanum richardii",
+    "RHS describes the plant as a tender evergreen shrub to 1.2 m and recommends summer outdoor cultivation with frost-free overwintering; its planning dimensions of 1–1.5 m × 0.5–1 m were prioritised"
+  ]
+}
