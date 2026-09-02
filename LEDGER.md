@@ -5,6 +5,21 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-02, later (eight new cards today: 246 / 81) — Acanthus
+  hungaricus and Campsis grandiflora (r199) and Galium odoratum (r200) came in
+  a LOOSER JSON shape than PLANT-BRIEF produces (hue as a colour word, peak as a
+  season phrase, comma aspects, soil strings over the panel width) and the
+  validator refused all three. Converted format-only, every conversion
+  declared in each file's "uncertain" list — hue 275/25/120, peak from the
+  season words, deck aspect vocabulary, soil display trimmed with detail kept
+  in the warning. foliage/container prose left as sent: the card does not
+  store those fields. Campsis photo had a hand and a scribbled label: cropped
+  through tools/reframe-photo.js with a crop JSON (labels cropped out, feature
+  65%/51%, aspect 0.957). Acanthus arrived as a transparent cutout: the
+  register names composite-hero.js for a dozen cards but it was never
+  committed — rebuilt as tools/composite-hero.js from the register's own
+  description and the raw cutout kept as -cutout.png. Worth a word to whoever
+  generates the JSON: PLANT-BRIEF.md's shape saves a conversion pass.
 progress: 2026-09-02 (five new cards: 243 / 81) — Dahlia 'Kelvin Floodlight'
   (r193), Phygelius aequalis 'Trewidden Pink' (r194), Solanum pyracanthos
   (r195, Oscar's composite photo, toxicity field populated), Cyclamen
