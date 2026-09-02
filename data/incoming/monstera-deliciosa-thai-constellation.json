@@ -1,0 +1,32 @@
+{
+  "common": "Swiss cheese plant 'Thai Constellation'",
+  "latin": "Monstera deliciosa 'Thai Constellation'",
+  "hue": 120,
+  "visual": "Large glossy split leaves · irregular cream and yellow-white variegation · speckled like stars",
+  "water": "Keep moist, not waterlogged",
+  "aspect": "East / West",
+  "soil": "Houseplant compost",
+  "soilWarning": "No cold or harsh sun · needs good light",
+  "prune": "Remove damaged leaves at the base; cut aerial roots only where necessary",
+  "toxicity": "Harmful if eaten · calcium oxalate irritates mouth and gut",
+  "compliance": "",
+  "peak": "Jan-Dec",
+  "cvs": "",
+  "hardiness": "H1c",
+  "hardinessNote": "Tender tropical; indoors or heated protection in the UK",
+  "resilience": "easy indoors when warm, humid and well lit · intolerant of frost",
+  "uses": "houseplant · conservatory · heated greenhouse · tropical indoor displays",
+  "height": "1.5–2.5 m",
+  "spread": "1–1.5 m",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 13,
+  "pestRisk": 9,
+  "thirst": 13,
+  "careLevel": 11,
+  "sunNeed": 55,
+  "sunMin": 30,
+  "uncertain": [
+    "Second Monstera after the plain species; the variegation is the only difference a customer will see"
+  ]
+}

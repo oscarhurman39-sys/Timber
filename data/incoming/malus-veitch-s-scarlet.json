@@ -1,0 +1,33 @@
+{
+  "common": "Crab Apple 'Veitch’s Scarlet'",
+  "latin": "Malus 'Veitch’s Scarlet'",
+  "hue": 5,
+  "visual": "Spring blossom · small scarlet-red crab apples · bronze-flushed young leaves",
+  "water": "Keep moist, not waterlogged",
+  "aspect": "East / South / West",
+  "soil": "Any, moderately fertile",
+  "soilWarning": "Avoid very dry and waterlogged ground",
+  "prune": "Pruning group 1; remove dead, damaged or crossing branches after flowering",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Apr-Oct",
+  "cvs": "",
+  "hardiness": "H6",
+  "hardinessNote": "Hardy throughout most of the UK",
+  "resilience": "robust · adaptable · tolerates urban conditions",
+  "uses": "specimen tree · wildlife garden · cottage garden · small garden · ornamental fruit",
+  "height": "2.5–4 m",
+  "spread": "2.5–4 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 12,
+  "pestRisk": 9,
+  "thirst": 10,
+  "careLevel": 7,
+  "sunNeed": 85,
+  "sunMin": 55,
+  "uncertain": [
+    "peak 'Spring to autumn' written as Apr-Oct — blossom in spring, fruit through to autumn",
+    "Third Malus after 'John Downie' (dealt) and 'Evereste' (held)"
+  ]
+}

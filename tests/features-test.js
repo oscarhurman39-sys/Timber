@@ -43,6 +43,56 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   page.on('pageerror', e => pageErrors.push(String(e)));
   await page.goto(URL); await page.waitForTimeout(400);
 
+  /* ---- PHOTO_SWAP: both frames of a two-photo card must actually load ----
+     markHot() used to set src on `.tphoto img` — the FIRST image only — so a swap
+     card's <img class="alt"> never got a src. It had been loading anyway as a side
+     effect of tricklePhotos setting src on every buried image; r79 turned that into
+     fetch() (correctly — 1.1GB of decode targets) and the swap silently lost its
+     second frame: every two-photo card blinked to black and back to the SAME photo
+     for twelve days. Nothing asserted the alt was loaded, so nothing noticed.
+     This does. It checks the FETCH window, where the alt must already carry a src,
+     and that at least one swap card exists so the check cannot pass on nothing. */
+  await deckSettled(page);
+  /* The nearest two-photo card drifts DOWN the deck as new cards are dealt on top
+     of it — on 2026-09-02 it sat 10 from the top, one past FETCH_DEPTH, and this
+     check failed on "0 in window" with nothing wrong in the app. So skip forward
+     until one is inside the window instead of letting the check rot with the
+     deck; the deck is reset to fresh afterwards so nothing below sees the skips. */
+  const toSkip = await page.evaluate(() => {
+    const live = [...document.querySelectorAll('#deck .card:not([data-gone])')];
+    const fromTop = live.map((c, i) => c.querySelector('.tphoto.swap') ? live.length - 1 - i : Infinity);
+    const nearest = Math.min(...fromTop);
+    return Number.isFinite(nearest) ? Math.max(0, nearest - FETCH_DEPTH + 1) : 0;
+  });
+  for (let i = 0; i < toSkip; i++) {
+    await page.evaluate(() => document.getElementById('skip').click());
+    await page.waitForTimeout(500);
+  }
+  if (toSkip) await page.waitForTimeout(1200);
+  const swapLoad = await page.evaluate(() => {
+    const live = [...document.querySelectorAll('#deck .card:not([data-gone])')];
+    const near = live.slice(-FETCH_DEPTH);
+    const swaps = near.filter(c => c.querySelector('.tphoto.swap'));
+    const bad = swaps.filter(c => [...c.querySelectorAll('.tphoto img')].some(i => !i.getAttribute('src')));
+    return { total: document.querySelectorAll('.tphoto.swap').length, near: swaps.length,
+             bad: bad.map(c => c.querySelector('h2')?.textContent) };
+  });
+  check('deck has at least one two-photo card to test', swapLoad.total >= 1, JSON.stringify(swapLoad));
+  check(`every swap card in the fetch window carries a src on BOTH frames (${swapLoad.near} in window)`,
+    swapLoad.near >= 1 && swapLoad.bad.length === 0, JSON.stringify(swapLoad));
+  if (swapLoad.near >= 1) {
+    const altOk = await page.waitForFunction(() => {
+      const live = [...document.querySelectorAll('#deck .card:not([data-gone])')];
+      const top = live.slice(-FETCH_DEPTH).filter(c => c.querySelector('.tphoto.swap'));
+      return top.every(c => { const a = c.querySelector('.tphoto img.alt'); return a && a.complete && a.naturalWidth > 0; });
+    }, null, { timeout: 15000 }).then(() => true).catch(() => false);
+    check('the alt frame decodes to real pixels (not a broken or empty image)', altOk);
+  }
+  if (toSkip) {   /* back to a fresh deck for everything below */
+    await page.evaluate(() => localStorage.clear());
+    await page.reload(); await page.waitForTimeout(400); await deckSettled(page);
+  }
+
   /* ================= WS2: quiz v2 ================= */
 
   /* ---- round variety + reverse options ---- */
