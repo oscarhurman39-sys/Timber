@@ -2543,6 +2543,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "solanum-pyracanthos.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright (composite of his own shots)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "sorbaria-sorbifolia-sem.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",

@@ -5,8 +5,9 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
-progress: 2026-09-02 (two new cards: 240 / 81) — Dahlia 'Kelvin Floodlight'
-  (r193) and Phygelius aequalis 'Trewidden Pink' (r194), both new plants from
+progress: 2026-09-02 (three new cards: 241 / 81) — Dahlia 'Kelvin Floodlight'
+  (r193), Phygelius aequalis 'Trewidden Pink' (r194) and Solanum pyracanthos
+  (r195, Oscar's composite photo, toxicity field populated), all new plants from
   Oscar's JSON + photo via add-plant.js --quick; neither existed anywhere in the
   deck, hold, csv or incoming. Environment note: sharp is not installed on this
   box, so optimise-photos cannot derive the card WebP — installed sharp 0.33.5
