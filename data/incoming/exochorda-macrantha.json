@@ -1,0 +1,33 @@
+{
+  "common": "Pearl Bush 'The Bride'",
+  "latin": "Exochorda × macrantha",
+  "hue": 0,
+  "visual": "Arching branches · pale green oblong leaves · masses of pure white papery five-petalled flowers in short racemes",
+  "water": "Keep moist, never waterlogged",
+  "aspect": "Any aspect",
+  "soil": "Any, well-drained",
+  "soilWarning": "Avoid waterlogged ground",
+  "prune": "Group 2: prune after flowering, removing older flowered wood",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Apr-May",
+  "cvs": "'The Bride'",
+  "hardiness": "H6",
+  "hardinessNote": "Fully hardy in the UK; RHS H6, to about -20 to -15°C",
+  "resilience": "robust once established · generally pest-free · low maintenance",
+  "uses": "spring borders · mixed borders · cottage gardens · specimen planting · large containers",
+  "height": "1.5–2.5 m",
+  "spread": "1.5–2.5 m",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 13,
+  "pestRisk": 3,
+  "thirst": 11,
+  "careLevel": 6,
+  "sunNeed": 75,
+  "sunMin": 45,
+  "uncertain": [
+    "Supplied latin is the bare hybrid 'Exochorda × macrantha' while common and cvs both name 'The Bride' — the RHS-accepted name is Exochorda × macrantha 'The Bride'; kept as supplied, not renamed",
+    "Both photographs are August foliage and a seed capsule; the white April–May flowers the card sells are not in either frame"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "common": "Juniper 'Blue Arrow'",
+  "latin": "Juniperus virginiana 'Blue Arrow'",
+  "hue": 190,
+  "visual": "Very narrow upright column · dense blue-green scale-like foliage · architectural habit",
+  "water": "Water until established; then little",
+  "aspect": "South / West",
+  "soil": "Any, well-drained",
+  "soilWarning": "Avoid wet soil · best colour in full sun",
+  "prune": "Little needed; remove damaged or unwanted shoots in late winter",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jan-Dec",
+  "cvs": "",
+  "hardiness": "H7",
+  "hardinessNote": "Very hardy; suits exposed UK sites once established",
+  "resilience": "drought tolerant once established · exposed-site tolerant · very hardy",
+  "uses": "formal gardens · narrow borders · screening · architectural planting · containers · specimen",
+  "height": "2.5–4 m",
+  "spread": "0.5–1 m",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 11,
+  "pestRisk": 4,
+  "thirst": 6,
+  "careLevel": 4,
+  "sunNeed": 90,
+  "sunMin": 60,
+  "uncertain": [
+    "Oscar's note after the photo list reads 'junipers robinia photos coming soon' — if a better juniper frame is coming, photo 9 is a one-command restage"
+  ]
+}

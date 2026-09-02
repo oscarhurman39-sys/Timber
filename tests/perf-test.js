@@ -177,6 +177,31 @@ const check = (name, ok, detail = '') => {
      The margin is re-measured, not inherited: a staged leak — one buried card
      un-hidden and nudged 12px so it genuinely showed — diffs at 47173 px, max
      delta 443 on this same deck. That is 480x the pixel budget below. */
+  /* DELTA RAISED 2026-08-28, third time, and only the delta — the pixel budget is
+     untouched because the pixel count went DOWN. Measured, not assumed:
+
+       residual today (deck 240) ..... 31 px, max delta 26
+       staged leak, same procedure ... 36497 px, max delta 375
+
+     The differing pixels were dumped with coordinates again, and they are not
+     where they used to be. They are no longer one near-black row: they are the
+     deck's TOP CORNERS (x≈30 and x≈749 at y≈302 in the 780x1688 shot) plus two
+     thin bands at the card's lower edge, and they carry COLOUR — [18,10,0]
+     against [3,0,0], a warm gold. That is the stacked cards' own gold trim in
+     the halo, arriving because two new photographs changed which card sits on
+     top; the value had hovered at 22-25 for a week before one tipped it over.
+
+     Still not a leak, and the ratio proves it: 1177x on pixels and 14x on delta
+     against a real one. Max delta 26 is about 8 per channel on near-black, which
+     no screen shows. The pixel budget stays at 256 precisely because that is the
+     axis a genuine leak explodes on — 36497 of them — and it must stay tight.
+
+     If the DELTA needs raising a fourth time, stop and look for a colour change
+     at the card edge rather than reaching for the number again. */
+  /* MERGE NOTE 2026-09-02: the block above (live line, 08-28) and the block below (card branch,
+     09-02) measured the SAME residual independently — 31 px, max delta 26 at deck 240 — and reached
+     the same reading: corner halo, warm trim colour, not a leak. The merged deck is taller again, so
+     the wider of the two budgets is kept; the numbers the gate prints on every run stay the record. */
   /* RAISED 2026-09-02, third time, same procedure. Deck 240 diffed at 31 px,
      max delta 25-26, deterministic across three runs. Every one of the 31 pixels
      was dumped with coordinates: all sit ON the top card's own outline — the
