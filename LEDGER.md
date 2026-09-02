@@ -83,6 +83,12 @@ progress: 2026-09-02, later (Exochorda, and the swap had been broken for 12 days
   both frames carry a src in the fetch window and the alt decodes to pixels,
   because the reason this lasted twelve days is that nothing asserted it.
   Deck 242 dealt / 81 held / 323 total. Five photo-swap cards.
+progress: 2026-09-02 (Kojo-no-mai photo swap) — Oscar asked for a better photo
+  on Prunus incisa 'Kojo-no-mai', in the deck since 2026-08-09 on a shot propped
+  against a fence rail. Replaced with a PNG cutout already at 0.750, no crop
+  needed. Card content untouched, deck count untouched (this plant was
+  already dealt) — a photo-only swap, recorded here and in CREDITS.json
+  rather than as a new deal.
 progress: 2026-09-02 (Robinia photo arrived; juniper re-send was the same file) —
   Robinia pseudoacacia 'Lace Lady' dealt from the JSON saved an hour earlier;
   Oscar's composite trimmed 4.6% off the bottom to clear the 0.75 gate with the
