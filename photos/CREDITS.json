@@ -1574,7 +1574,7 @@
   {
    "file": "ilex-crenata-kinme.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "licence": "Oscar's own photograph — owned outright. REPLACED 2026-09-02 at Oscar's request: the earlier master was a black-background cutout of this same sprig; this is the uncut frame. 1440×2216, no camera EXIF, no C2PA.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": "5213b09",
@@ -2685,7 +2685,7 @@
   {
    "file": "trachelospermum-jasminoides.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright",
+   "licence": "Oscar's own photograph — owned outright. REPLACED 2026-09-02 at Oscar's request with the wider frame of the same shot (the earlier crop sat badly in the window); 2612×2562, no camera EXIF, no C2PA.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -2725,7 +2725,7 @@
   {
    "file": "veronica-rhubarb-crumble.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated",
+   "licence": "Oscar's own photograph — owned outright. REPLACED 2026-09-02 at Oscar's request with a clean full frame of the same plant (the mirrored double-up read badly on the card); 3000×4000, no camera EXIF, no C2PA.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,

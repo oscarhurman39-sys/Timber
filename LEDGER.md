@@ -5,6 +5,13 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (three photos replaced) — **deck 241, hold 85,
+  unchanged.** Oscar sent better frames for three dealt cards and named all
+  three: Hebe 'Rhubarb Crumble' (the mirrored double-up "came out shit" — full
+  frame in, EDITION mirror retired), Star Jasmine (wider original of the same
+  shot, focus moved to 30% 45%), Kinme holly (uncut frame replaces the
+  black-background cutout of the same sprig). Replacements recorded on each
+  CREDITS line and in the photo register. Protocol v14.45.
 progress: 2026-09-02 (Viburnum dealt, Dark Knight held, Sapphire Ring swap) —
   **deck 241, hold 85, swap cards 5.** Oscar named two frames and both agreed
   with the plants: *Viburnum opulus* dealt on his word plus the berries; the

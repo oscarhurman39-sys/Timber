@@ -364,7 +364,7 @@ Focal point recorded here when off-centre:
 | Deutzia × hybrida 'Magicien' | deutzia-hybrida-magicien.jpg | 50% 40% default — **first photo in the deck reframed through `tools/reframe-photo.js`** rather than by hand: crop coordinates written against the card geometry, executed by sharp on the original pixels, no generated content. Second Deutzia (with held *D. gracilis* 'Nikko') and the only pink one |
 | Magnolia acuminata | magnolia-acuminata.jpg | 50% 40% default — the cucumber-like aggregate fruit, green flushing red, which is the whole reason for the common name and what the card's `visual` leads on. Also reframed through the tool. **Third Magnolia** (HONEY TULIP, *stellata*) and the only one carrying fruit rather than flower |
 
-| Veronica 'Rhubarb Crumble' | veronica-rhubarb-crumble.jpg | 50% 40% default — **the clearest case yet for reframing.** As shot, the plant is a spray in the top-right corner of a concrete slab: roughly two thirds of the frame is paving. Cropped through `reframe-photo.js` to a 1:1 on the shoot, which puts the cream variegation AND the burgundy buds — both halves of what the card promises — into the band both surfaces show. **Third Veronica/Hebe in the deck**, and it is the same photograph that was parked as `hebe-variegated-unidentified.jpg` in VERIFY-QUEUE 38; that file is retired now the plant has a name |
+| Veronica 'Rhubarb Crumble' | veronica-rhubarb-crumble.jpg | 50% 40% default — **REPLACED 2026-09-02** at Oscar's request: *"we tried to double up the image of the hebe and it came out shit on the card"*. The new master is a clean 3000×4000 frame of the same plant, cream-margined leaves and burgundy buds filling the top two thirds over a concrete slab; no crop needed. The EDITION `mirror` entry is retired with it (the mechanism stays, unused). Previous entry, kept for the record: 50% 40% default — **the clearest case yet for reframing.** As shot, the plant is a spray in the top-right corner of a concrete slab: roughly two thirds of the frame is paving. Cropped through `reframe-photo.js` to a 1:1 on the shoot, which puts the cream variegation AND the burgundy buds — both halves of what the card promises — into the band both surfaces show. **Third Veronica/Hebe in the deck**, and it is the same photograph that was parked as `hebe-variegated-unidentified.jpg` in VERIFY-QUEUE 38; that file is retired now the plant has a name |
 
 | Butia capitata | butia-capitata.jpg | 50% 40% default — shot from below into a white sky, so the crown reads as a silhouette: arching glaucous fronds sweeping out of frame, the stout trunk with its old leaf-base collar, and the **armed petioles** that place it in *Butia* rather than the *Syagrus* its label also named (VQ 47). Reframed through `reframe-photo.js` from 0.561 to 0.780 — the phone frame was far too tall, and half of it was empty sky. A 1:1 crop was tried first and rejected: it read as trunk-and-spines with the arching fronds cut off, which is the half of the plant the card's `visual` leads on. **First palm with pinnate (feather) fronds** — *Chamaerops* is fan-leaved, *Trachycarpus* is held |
 
@@ -401,8 +401,28 @@ Focal point recorded here when off-centre:
 | Veronicastrum 'Red Arrows' | veronicastrum-red-arrows.jpg | **50% 0%** — pinned to the top so the frame's **visible "AI-generated content" label**, bottom-left of the source, falls outside the window; the master is 1200×1568 (0.765), so ~9% of height is available and the label sits inside it. Verified on the rendered card. Framing, not concealment: the marker is written verbatim into `CREDITS.json`. Credentials differ from the Houttuynia pattern — a C2PA manifest with `c2pa.ingredient.v2` and claim generator `Galaxy S24 c2pa-rs/0.62.0`, **no** `digitalSourceType` string found, but no camera EXIF, a non-native 2948×3852 frame and the burned-in label, i.e. an edited export of a capture titled `20260829_113205(1).jpg`. Whorled red-edged lanceolate leaves under a violet spike — the plant on the card. **New genus** |
 | Viburnum opulus ('Compactum') | viburnum-opulus.jpg | 50% 40% default — **named by Oscar** (*"1st image is the viburnum"*) and the frame agrees: palmately lobed, toothed leaves with a cluster of glossy red berries top-of-frame, the card's own visual line. Cropped export at 3000×2626 (landscape, no camera EXIF, no C2PA), so the window keeps only part of the width; the berries sit in the top band under the title. **Card latin is the species as supplied**, with 'Compactum' in `cvs`; the deck's other guelder rose is the sterile 'Roseum' (held), a different plant. `hue` and `peak` were prose as sent and were converted with a labelled note (VERIFY-QUEUE 62) |
 | Ceratostigma willmottianum SAPPHIRE RING ('Lissbrill') | ceratostigma-willmottianum-sapphire-ring-lissbrill.jpg **+ PHOTO_SWAP** (added 2026-09-02) | swap alt `-flowers.jpg`, 50% 50%, 3.5s hold — **Oscar's ask**: *"flash between the current card photo and this photo as it has a flower"*. The card photo is the gold, red-edged hairy foliage with no bloom; the new frame (Galaxy S24, 2026-08-31 15:54, clean) is the same foliage with the cobalt flowers the card is named for. Fifth swap card; the deck's first added at the owner's request rather than from a spare sweep. Verified rendering both frames |
+| Ilex crenata 'Kinme' | ilex-crenata-kinme.jpg | 50% 40% default — **REPLACED 2026-09-02** at Oscar's request: *"we tried to cut out, the cut out version I uploaded sucked, this is much better"*. The earlier master was a black-background cutout of this exact sprig (same leaves, same green fruit); the new one is the uncut frame, 1440×2216, sprig top-left over blurred concrete. No camera EXIF, no C2PA |
+| Trachelospermum jasminoides | trachelospermum-jasminoides.jpg | **30% 45%** (was 40% 45%) — **REPLACED 2026-09-02** at Oscar's request: *"it was not aligned correctly"*. Same shot, wider frame: the earlier master was a tight portrait crop of this 2612×2562 near-square. At 1.02 the window keeps ~82% of the width, so the focus moved left to hold the flower truss (x ≈ 10–55%) with the glossy leaves top-right. No camera EXIF, no C2PA |
 
 ## 5. Decision changelog
+
+- **v14.45 (three photographs replaced at Oscar's request — Hebe, Star
+  Jasmine, Kinme)**: no data changed; three cards look different.
+  - **Rhubarb Crumble loses the mirror.** The kaleidoscope (v-2026-08-17) was
+    built from a photo that was two thirds paving; Oscar's verdict on the
+    result was blunt, and the fix is the one the mirror was standing in for
+    — a full frame of the plant. The EDITION entry is retired in place with a
+    comment; the CSS and the `mirror` field stay for a card that earns it.
+    perf-test's halo comment counted "two themed cards"; there is one now.
+  - **Star Jasmine re-aimed.** The card had a tight crop of this frame at
+    40% 45%; the wider original at 30% 45% keeps the whole truss and the
+    leaves.
+  - **Kinme: the cutout goes.** The black-background cutout was the card's
+    master, not a composite source; the uncut frame of the same sprig
+    replaces it. The old files are in git history, nothing is parked.
+  - All three replacements are written into `CREDITS.json` on the file's
+    own licence line, the Photinia way (item 32), so the swap is on the
+    record without a parked copy.
 
 - **v14.44 (241 dealt / 85 held — Viburnum opulus dealt, Caryopteris 'Dark
   Knight' held, Sapphire Ring becomes a swap card)**: two JSONs, three
