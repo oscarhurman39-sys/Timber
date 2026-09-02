@@ -1890,6 +1890,44 @@ can show the flower without ambiguity.
 
 ---
 
+### 58. Summer Song — dealt on Oscar's call with a pasted inset, and a colour the card does not declare
+2026-08-23. The deck's first Rosa. Three things logged, none of them blocking —
+Oscar was shown all of this and said deal it.
+
+**a. The photograph carries a picture-in-picture.** A cutout of a second bloom
+(and a hand holding it) is pasted over the lower-left with a thick white sticker
+outline. Measured: the white halo occupies x 0.000-0.484, y 0.344-0.658 of the
+frame, and the card's furniture only covers below y=0.622, **so it is visible on
+the card face**, not hidden by the plaque.
+This is the same shape as VQ 57 / 'Zagora Yellow', which was excluded precisely
+because "an inset panel with a border reads as a collage on a card face, where a
+side-by-side pair reads as a deliberate two-panel plate". Oscar chose to deal it
+anyway, which is his call and reversible — but the two cards now disagree with
+each other, and that is the thing to settle, not this card on its own. Either
+'Zagora Yellow' gets its panel back (VQ 57) or this one loses its sticker.
+The original un-stickered pixels are NOT recoverable from what was supplied: the
+image arrived flattened. A clean version needs a re-send, not a tool.
+
+**b. The bloom measures pink; the card declares orange.** Sampling the main
+(un-stickered) bloom with foliage and gravel excluded: **63% of petal pixels fall
+in hue 330-359 deg (pink/magenta), only ~20% in 0-39 deg (orange/coral)**. The
+card carries `hue:20` and the visual line reads "vibrant coppery orange-red".
+Oscar's answer: it fades pink, and the data stays as researched. Left exactly as
+he supplied it — nothing was silently retuned. Worth knowing what `hue` actually
+drives: the `.pfall` gradient BEHIND the photograph, so it is only ever seen if
+the photo fails to load. Low stakes, one-line change to ~345 if he wants the
+placeholder to match the flower.
+
+**c. Two source disagreements Oscar flagged in his own research, carried over:**
+1. David Austin gives ~125 x 125 cm for an established three-year-old plant;
+   RHS gives 1-1.5 m height and 0.5-1 m spread. **RHS was prioritised** for the
+   spread range, and the card ships RHS figures.
+2. RHS calls the cultivar reasonably disease resistant, but black spot, rust and
+   powdery mildew all remain possible. `pestRisk:12` is the middling value that
+   encodes exactly that, not a claim of immunity.
+
+---
+
 
 ### 58. Which Vitex is which? — RESOLVED by Oscar; the leaves were right
 2026-08-21. Three cards, three photographs, and for two of them **the order they

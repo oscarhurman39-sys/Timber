@@ -5,6 +5,31 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (Summer Song reaches live) — **the card was pushed all
+  along, just never deployed (r189).**
+  Oscar: "fuck it didnt push ive made a bunch of these cards twice now." The
+  push HAD landed — e609202 was on the feature branch — but card work goes to
+  the feature branch by NEW-SESSION convention and nothing had fast-forwarded
+  the live line, so the card was invisible on the site. That is the gap worth
+  naming: "committed and pushed" and "on Oscar's phone" are two different
+  things, and from where he is standing only the second one exists.
+  CHECKED FIRST, before touching anything: no duplicate cards in either deck —
+  zero repeated latin or common names across live (238) and this branch (239).
+  The work he redid did not double anything up.
+  Merged live's ten new cards in and deployed. Two real bugs caught in the
+  resolution: Summer Song had lost its `toxicity` line (add-plant built the row
+  on a branch that predated the SAFETY plaque, so it silently dropped a field
+  45 live cards now render), and the resolution had collapsed the newline in
+  "];\n/* PLANTS:END */" — the exact string add-plant.js searches for to insert
+  a row, so every future card add would have failed. Both fixed before the push.
+  ONE THING TO WATCH, measured not guessed: edge-test's hold-to-rewind assertion
+  is now on a knife edge. It passes solo and fails under `--jobs 3`, landing 1-6
+  cards short of the top depending on machine load. It is NOT a regression from
+  this merge — the merged app is code-identical to live apart from the BUILD
+  line and one card row, and the same assertion flaked at 168 and 229 cards
+  earlier in this session. But the margin is shrinking as the deck grows, and
+  the fixed 4000ms budget in `pressBack(4000)` will eventually fail solo too.
+  When it does, the fix is the budget or the tempo, not the rewind.
 progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trickle
   was handing the browser 881MB of decode targets (r79).**
   A colleague's iPhone hit the same "A problem repeatedly occurred" on the live
