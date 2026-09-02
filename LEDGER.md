@@ -5,6 +5,54 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 2
+progress: 2026-09-02 (three photos replaced) — **deck 241, hold 85,
+  unchanged.** Oscar sent better frames for three dealt cards and named all
+  three: Hebe 'Rhubarb Crumble' (the mirrored double-up "came out shit" — full
+  frame in, EDITION mirror retired), Star Jasmine (wider original of the same
+  shot, focus moved to 30% 45%), Kinme holly (uncut frame replaces the
+  black-background cutout of the same sprig). Replacements recorded on each
+  CREDITS line and in the photo register. Protocol v14.46.
+progress: 2026-09-02 (Viburnum dealt, Dark Knight held, Sapphire Ring swap) —
+  **deck 241, hold 85, swap cards 5.** Oscar named two frames and both agreed
+  with the plants: *Viburnum opulus* dealt on his word plus the berries; the
+  Sapphire Ring card now flashes to its flower frame at his request. The
+  Caryopteris frame is gold-leaved under blue flowers, which is Worcester Gold
+  (dealt, foliage-only photo), not the grey-green 'Dark Knight' its JSON
+  describes — card held, frame parked, one question in VQ 68: make Worcester
+  Gold a swap card too? Two prose fields per card (hue, peak) converted with
+  labels; both soils fitted to the 26/44 panel after the first screenshot
+  showed the overflow. Protocol v14.45.
+progress: 2026-09-02 (Golden Hakonechloa refused) — **deck 240, hold 84,
+  unchanged.** A *Hakonechloa macra* JSON + cutout arrived; the deck already
+  holds the same plant as 'Aureola' (cvs on the new JSON says so), so it was
+  refused as a duplicate, Lupin-style, with the 19 differing fields tabulated in
+  VQ 67. The JSON also fails the validator as sent (hue is prose, peak is
+  prose) and was not rewritten. The cutout shows purple noded culms with fans
+  of broad striped leaves — [Inference] more dwarf bamboo than Hakonechloa —
+  so it is parked as `striped-grass-unidentified-cutout.png`, not staged.
+  Two questions for Oscar in VQ 67: which plant is the cutout, and should any
+  new values replace the held card's.
+progress: 2026-09-02 (Persicaria + Veronicastrum dealt, Groundbreaker Blush
+  held) — **deck 240, hold 84.** Three cards from one bench minute; the send
+  order disagreed with the plants again. The two that identify themselves are
+  dealt: *Persicaria affinis* 'Darjeeling Red' (clean capture, new genus) and
+  *Veronicastrum* 'Red Arrows' (burned-in AI label, dealt the Houttuynia way:
+  focus 50% 0%, label outside the window, marker verbatim in CREDITS). Photo 1
+  is a woody prostrate shrub with no flower — a hydrangea by elimination, not by
+  evidence — so the Hydrangea card is held and the frame parked as
+  `hydrangea-groundbreaker-foliage-unconfirmed.jpg` for Oscar to confirm.
+  Persicaria's 39-char soil value ships shrunk to three lines, kept verbatim.
+  VQ 66, protocol v14.44.
+progress: 2026-09-02 (Robinia 'Lace Lady' + Copper beech, both held) — **deck
+  238, hold 83.** Two researched cards, both validated, both in the hold block.
+  **Neither photograph was staged, because neither shows its plant:** the
+  Robinia frame is a crimson mallow-family flower with palmate leaves (genus not
+  identified, not guessed), and the copper beech frame is a GREEN beech with no
+  purple in it. Both parked under names no slug can resolve
+  (`malvaceae-crimson-unidentified.jpg`, `fagus-sylvatica-green-summer.jpg`),
+  credited as Oscar's, and written up in VQ 65 with the deal commands for when
+  the right shots arrive. Robinia growthSpeed 5 flagged by the checker and kept
+  as sent — its own research note says slow-growing.
 progress: 2026-09-02 (Summer Song reaches live) — **the card was pushed all
   along, just never deployed (r189).**
   Oscar: "fuck it didnt push ive made a bunch of these cards twice now." The

@@ -364,7 +364,7 @@ Focal point recorded here when off-centre:
 | Deutzia × hybrida 'Magicien' | deutzia-hybrida-magicien.jpg | 50% 40% default — **first photo in the deck reframed through `tools/reframe-photo.js`** rather than by hand: crop coordinates written against the card geometry, executed by sharp on the original pixels, no generated content. Second Deutzia (with held *D. gracilis* 'Nikko') and the only pink one |
 | Magnolia acuminata | magnolia-acuminata.jpg | 50% 40% default — the cucumber-like aggregate fruit, green flushing red, which is the whole reason for the common name and what the card's `visual` leads on. Also reframed through the tool. **Third Magnolia** (HONEY TULIP, *stellata*) and the only one carrying fruit rather than flower |
 
-| Veronica 'Rhubarb Crumble' | veronica-rhubarb-crumble.jpg | 50% 40% default — **the clearest case yet for reframing.** As shot, the plant is a spray in the top-right corner of a concrete slab: roughly two thirds of the frame is paving. Cropped through `reframe-photo.js` to a 1:1 on the shoot, which puts the cream variegation AND the burgundy buds — both halves of what the card promises — into the band both surfaces show. **Third Veronica/Hebe in the deck**, and it is the same photograph that was parked as `hebe-variegated-unidentified.jpg` in VERIFY-QUEUE 38; that file is retired now the plant has a name |
+| Veronica 'Rhubarb Crumble' | veronica-rhubarb-crumble.jpg | 50% 40% default — **REPLACED 2026-09-02** at Oscar's request: *"we tried to double up the image of the hebe and it came out shit on the card"*. The new master is a clean 3000×4000 frame of the same plant, cream-margined leaves and burgundy buds filling the top two thirds over a concrete slab; no crop needed. The EDITION `mirror` entry is retired with it (the mechanism stays, unused). Previous entry, kept for the record: 50% 40% default — **the clearest case yet for reframing.** As shot, the plant is a spray in the top-right corner of a concrete slab: roughly two thirds of the frame is paving. Cropped through `reframe-photo.js` to a 1:1 on the shoot, which puts the cream variegation AND the burgundy buds — both halves of what the card promises — into the band both surfaces show. **Third Veronica/Hebe in the deck**, and it is the same photograph that was parked as `hebe-variegated-unidentified.jpg` in VERIFY-QUEUE 38; that file is retired now the plant has a name |
 
 | Butia capitata | butia-capitata.jpg | 50% 40% default — shot from below into a white sky, so the crown reads as a silhouette: arching glaucous fronds sweeping out of frame, the stout trunk with its old leaf-base collar, and the **armed petioles** that place it in *Butia* rather than the *Syagrus* its label also named (VQ 47). Reframed through `reframe-photo.js` from 0.561 to 0.780 — the phone frame was far too tall, and half of it was empty sky. A 1:1 crop was tried first and rejected: it read as trunk-and-spines with the arching fronds cut off, which is the half of the plant the card's `visual` leads on. **First palm with pinnate (feather) fronds** — *Chamaerops* is fan-leaved, *Trachycarpus* is held |
 
@@ -412,8 +412,89 @@ Focal point recorded here when off-centre:
 | Robinia pseudoacacia 'Lace Lady' | robinia-pseudoacacia-lace-lady.jpg | 50% 40% default — **Oscar's labelled composite, kept whole**: pinnate leaves over a zig-zagging brown stem, with a `thorned stem` inset panel top-right showing the paired purple spines. 2594x3624 is 0.716, under the gate, so **4.6% trimmed off the bottom edge only** — trimming the top would have pushed the inset up into the furniture. EXIF 2026-08-26. Photo assigned by Oscar ("robinas photo"). One thing to look at on the bench: the card's own visual line leads on *curly* leaflets, and the leaflets in this frame lie flat — see VQ 64 |
 | Prunus incisa 'Kojo-no-mai' | prunus-incisa-kojo-no-mai.jpg — **REPLACED 2026-09-02** | 50% 40% default — **swapped at Oscar's request** ("better photo"). Old photo (Aug 2026 original add) showed the shoot propped against a weathered fence rail, half the frame taken up by wood grain. New photo is another of Oscar's PNG cutouts on flat black, 2998x3998, exactly 0.750, no crop needed — denser foliage, sharper serration detail, his hand and secateurs at the base for scale. Old master kept nowhere else; the file was overwritten in place, so the swap is provenance-only, recorded here and in CREDITS |
 | Exochorda × macrantha ('The Bride') | exochorda-macrantha.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card, sent as a pair by Oscar with the swap asked for by name.** Primary: whorled oblong pale-green leaves on a dark stem, rain-wet, uncropped at 0.781 — the plant as it stands on the bench in August. Alt (`-fruit.jpg`, focus 50% 45%): the ribbed russet seed capsule that is the genus's signature; EXIF orientation 6 baked upright to 3000x4000, otherwise untouched. 22 seconds apart (15:16:27 / 15:16:49), same plant, same rain. Neither frame has the April–May white flowers the card sells, and the card says so in `uncertain`. **Supplied latin is the bare hybrid**, while common and `cvs` both name 'The Bride' — kept as supplied, not renamed (VQ 60). The JSON arrived in prose where the deck uses ` · ` lists and `Mon-Mon` peaks; normalised to house format with no fact changed — soil types + pH collapsed to "Any, well-drained" with the waterlogging warning kept |
+| Persicaria affinis 'Darjeeling Red' | persicaria-affinis-darjeeling-red.jpg | 50% 40% default — **uncropped**, a clean Galaxy S24 capture (EXIF 2026-08-29 11:32:14, no C2PA), 3000×4000 staged at 1200×1600. One dense pink-white spike going over, browning at the base, above the mat of lanceolate leaves with the ochrea visible at the stem node — *Persicaria affinis* by the spike, the mat and the sheath. Late-season, so the "maturing deep red" the card promises is not in this frame; the cultivar is Oscar's label, not the photograph's. **New genus** for the deck. Its 39-character soil value renders at three lines of shrunk type in the soil panel; kept as researched (VERIFY-QUEUE 66) |
+| Veronicastrum 'Red Arrows' | veronicastrum-red-arrows.jpg | **50% 0%** — pinned to the top so the frame's **visible "AI-generated content" label**, bottom-left of the source, falls outside the window; the master is 1200×1568 (0.765), so ~9% of height is available and the label sits inside it. Verified on the rendered card. Framing, not concealment: the marker is written verbatim into `CREDITS.json`. Credentials differ from the Houttuynia pattern — a C2PA manifest with `c2pa.ingredient.v2` and claim generator `Galaxy S24 c2pa-rs/0.62.0`, **no** `digitalSourceType` string found, but no camera EXIF, a non-native 2948×3852 frame and the burned-in label, i.e. an edited export of a capture titled `20260829_113205(1).jpg`. Whorled red-edged lanceolate leaves under a violet spike — the plant on the card. **New genus** |
+| Viburnum opulus ('Compactum') | viburnum-opulus.jpg | 50% 40% default — **named by Oscar** (*"1st image is the viburnum"*) and the frame agrees: palmately lobed, toothed leaves with a cluster of glossy red berries top-of-frame, the card's own visual line. Cropped export at 3000×2626 (landscape, no camera EXIF, no C2PA), so the window keeps only part of the width; the berries sit in the top band under the title. **Card latin is the species as supplied**, with 'Compactum' in `cvs`; the deck's other guelder rose is the sterile 'Roseum' (held), a different plant. `hue` and `peak` were prose as sent and were converted with a labelled note (VERIFY-QUEUE 68) |
+| Ceratostigma willmottianum SAPPHIRE RING ('Lissbrill') | ceratostigma-willmottianum-sapphire-ring-lissbrill.jpg **+ PHOTO_SWAP** (added 2026-09-02) | swap alt `-flowers.jpg`, 50% 50%, 3.5s hold — **Oscar's ask**: *"flash between the current card photo and this photo as it has a flower"*. The card photo is the gold, red-edged hairy foliage with no bloom; the new frame (Galaxy S24, 2026-08-31 15:54, clean) is the same foliage with the cobalt flowers the card is named for. Fifth swap card; the deck's first added at the owner's request rather than from a spare sweep. Verified rendering both frames |
+| Ilex crenata 'Kinme' | ilex-crenata-kinme.jpg | 50% 40% default — **REPLACED 2026-09-02** at Oscar's request: *"we tried to cut out, the cut out version I uploaded sucked, this is much better"*. The earlier master was a black-background cutout of this exact sprig (same leaves, same green fruit); the new one is the uncut frame, 1440×2216, sprig top-left over blurred concrete. No camera EXIF, no C2PA |
+| Trachelospermum jasminoides | trachelospermum-jasminoides.jpg | **30% 45%** (was 40% 45%) — **REPLACED 2026-09-02** at Oscar's request: *"it was not aligned correctly"*. Same shot, wider frame: the earlier master was a tight portrait crop of this 2612×2562 near-square. At 1.02 the window keeps ~82% of the width, so the focus moved left to hold the flower truss (x ≈ 10–55%) with the glossy leaves top-right. No camera EXIF, no C2PA |
 
 ## 5. Decision changelog
+
+- **v14.46 (three photographs replaced at Oscar's request — Hebe, Star
+  Jasmine, Kinme)**: no data changed; three cards look different.
+  - **Rhubarb Crumble loses the mirror.** The kaleidoscope (v-2026-08-17) was
+    built from a photo that was two thirds paving; Oscar's verdict on the
+    result was blunt, and the fix is the one the mirror was standing in for
+    — a full frame of the plant. The EDITION entry is retired in place with a
+    comment; the CSS and the `mirror` field stay for a card that earns it.
+    perf-test's halo comment counted "two themed cards"; there is one now.
+  - **Star Jasmine re-aimed.** The card had a tight crop of this frame at
+    40% 45%; the wider original at 30% 45% keeps the whole truss and the
+    leaves.
+  - **Kinme: the cutout goes.** The black-background cutout was the card's
+    master, not a composite source; the uncut frame of the same sprig
+    replaces it. The old files are in git history, nothing is parked.
+  - All three replacements are written into `CREDITS.json` on the file's
+    own licence line, the Photinia way (item 32), so the swap is on the
+    record without a parked copy.
+
+- **v14.45 (241 dealt / 85 held — Viburnum opulus dealt, Caryopteris 'Dark
+  Knight' held, Sapphire Ring becomes a swap card)**: two JSONs, three
+  photographs, and Oscar named two of the three.
+  - **Sapphire Ring swap, at Oscar's request.** The card photo has never shown
+    a flower; the new frame does. Registered in `PHOTO_SWAP`, both frames
+    verified on the rendered card. The swap bar ("nothing else in the deck
+    needs this") is unchanged: this one passes it because the owner asked
+    for the second story, and the flower is the name.
+  - **The Caryopteris photograph is gold-leaved, so it is not 'Dark Knight'.**
+    'Dark Knight' is grey-green; the frame is bright gold foliage under
+    blue flowers, which is what the deck's dealt *Caryopteris* 'Worcester
+    Gold' looks like (its own card photo is the same gold foliage, no
+    flowers). Card held, frame parked as
+    `caryopteris-gold-flowering-unconfirmed.jpg`; VERIFY-QUEUE 68 puts the
+    obvious question to Oscar — is this a flowering frame for Worcester
+    Gold, and should IT become a swap card too?
+  - **Two schema conversions, labelled, not silent.** Both JSONs arrived
+    with `hue` and `peak` as prose ("White and red", "Late spring to early
+    summer"). The Hakonechloa the same morning was refused for the same
+    fields, but it was a duplicate anyway; these are new cards with (for the
+    Viburnum) an owner-confirmed photograph, so the numbers were set from
+    the text and every conversion is recorded in the card's own `uncertain`
+    block and in VQ 62, with the as-sent JSON kept beside the fitted one.
+  - **Soil fitted to the panel, the fit-incoming way.** Both soil strings
+    (52 and 56 chars, warnings 117 and 113) rendered as ink spilling out of
+    the soil panel on the first screenshot. Short forms were written to the
+    26/44 budgets and the originals kept; this is the rule
+    `tools/fit-incoming.js` has applied to every wishlist card, now applied
+    to a pasted one.
+
+- **v14.44 (240 dealt / 84 held — Persicaria, Veronicastrum; Hydrangea
+  'Groundbreaker Blush' held)**: three researched cards from one bench visit,
+  three photographs, and the send order disagreed with the plants again.
+  - **The order was Veronicastrum, Hydrangea, Persicaria; the photographs were
+    a woody prostrate shrub, the Veronicastrum, the Persicaria.** Capture times
+    (11:31:17, 11:32:05, 11:32:14) say all three were shot in a single minute.
+    The two that identify themselves were dealt; the one that does not is held.
+  - **Photo 1 shows no flower and is not confirmed.** Brown horizontal woody
+    stems with lenticels and paired-to-whorled serrate leaves — a shrub, so
+    not the herbaceous Veronicastrum, and `[Inference]` the low *Hydrangea
+    paniculata* by elimination. Not dealt on elimination: parked as
+    `hydrangea-groundbreaker-foliage-unconfirmed.jpg`, card held, Oscar to
+    confirm (VERIFY-QUEUE 66), same posture as the Vitex pair (item 58).
+  - **The Veronicastrum photograph carries the burned-in AI label** and is
+    dealt the Houttuynia way: focus 50% 0%, label outside the window, marker
+    recorded verbatim. Its C2PA manifest is the plain-capture shape (item 44
+    batch note) yet the visible label is there — so the manifest alone is not
+    a clean-capture proof; recorded as observed, not resolved.
+  - Persicaria's soil value is the first to trip the validator's 36-character
+    measured limit and ship anyway: it shrinks to three lines and stays legible.
+    Kept as researched rather than paraphrased; flagged for Oscar.
+  - **perf-test's halo budget raised a third time, delta only, 24 → 32.** The
+    stacked-shadow rounding at the deck edge read Δ24 at 238 cards, exactly on
+    the budget, and Δ25–26 at 240. Re-measured per the check's own rule: a
+    staged leak on this deck diffs at 18288 px / Δ420, so the raised budget
+    is still 16x under a real leak. Pixel budget untouched at 256 (31 seen).
 
 - **v14.43 (the photo swap had been showing one photo since r79)**: Oscar sent the
   Exochorda as a pair and asked for *"the flash between feature"*, adding that it

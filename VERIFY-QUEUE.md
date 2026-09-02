@@ -2113,6 +2113,268 @@ one look next time he passes it.
 ---
 
 
+### 65. Robinia 'Lace Lady' and Copper beech: both cards held, because neither photograph shows its plant
+2026-09-02. Two researched cards arrived with two photographs. **Both JSONs pass
+`check-plant-json.js`** and both are in the hold block with their full data.
+**Neither photograph was staged on its card**, for the same reason as Winter
+Beauty (v12.42): the photo must be the plant it claims to be, and these are not.
+
+**A. The photograph sent with *Robinia pseudoacacia* 'Lace Lady' is not a
+Robinia.** It shows a single deep crimson five-petalled flower with darker
+veining, a staminal column of purple-black anthers with yellow stigma lobes,
+palmately lobed crinkled hairy leaves and purple-black buds, in a nursery pot.
+A Robinia carries pinnate leaves of rounded leaflets and white pea flowers —
+the deck's own parked `robinia-unidentified-leaf.jpg` (item 38) shows exactly
+that, and this frame shares nothing with it. `[Inference]` the flower and leaf
+read as **mallow family (Malvaceae)**; the genus is **not identified** from this
+frame and is not guessed. No mallow-family card exists in the deck or the hold
+block (every latin was checked for *Malva, Anisodontea, Lavatera, Malope, Alcea,
+Abutilon, Sidalcea, Sphaeralcea, Althaea, Pavonia*), and the two dealt
+*Hibiscus syriacus* cards have their own photographs and a different leaf, so it
+matches nothing waiting either. EXIF: Galaxy S24, 2026-08-25 14:29.
+**Parked as `photos/malvaceae-crimson-unidentified.jpg`**, a name no card slug
+can resolve, so `data-audit` lists it as an unclaimed spare.
+
+**B. The photograph sent with *Fagus sylvatica* (Atropurpurea Group) is a
+beech, but a GREEN one.** Glossy green wavy-edged leaves, slender red-brown
+twigs, long pointed buds — *Fagus sylvatica*, no doubt. But the card is the
+**Copper beech**, its `visual` opens *"Deep purple foliage"*, and there is no
+purple anywhere in this frame. Staging it would put green leaves on a card sold
+for purple ones — the Sweet Cupcake mistake again (NEW-SESSION.md, standing
+gotcha 2). `[Unverified]` whether the photographed plant is a greened-out
+Atropurpurea Group seedling or a plain common beech; from this frame it cannot
+be told apart from the dealt *Fagus sylvatica* card, which already has its
+photograph (`fagus-sylvatica.jpg`). EXIF: Galaxy S24, 2026-08-26 09:43.
+**Parked as `photos/fagus-sylvatica-green-summer.jpg`.** If Oscar confirms the
+plant on that bench IS labelled copper beech, that is his call to deal it — the
+photograph does not make the case on its own.
+
+**C. One validator warning, accepted as sent.** Robinia `growthSpeed` is 5,
+which the checker flags as looking like an unconverted 0–5 rating. The JSON's
+own `uncertain` block says RHS describes the cultivar as slow-growing, so 5/20
+is consistent with the research and was **left exactly as supplied**.
+
+**Both photographs are credited as Oscar's own** in `photos/CREDITS.json`, and
+both original JSONs are kept verbatim in `data/incoming/`.
+
+**To deal, once the right photographs exist:**
+```sh
+node tools/deal-plant.js "Robinia pseudoacacia 'Lace Lady'" <zig-zag stems photo>
+node tools/deal-plant.js "Fagus sylvatica (Atropurpurea Group)" <purple foliage photo>
+```
+Held **81 → 83**; deck unchanged at 238.
+
+**Superseded for the Robinia, 2026-09-02, at the merge with the live line.**
+The live branch dealt *Robinia pseudoacacia* 'Lace Lady' the same day with a
+photograph of the plant itself (its item 64 records a reading of the leaflets),
+so the held copy on this branch was dropped in the merge rather than carried
+as a second card. The crimson mallow-family frame above stays parked and
+unclaimed; the copper beech position is unchanged.
+
+---
+
+
+### 66. Persicaria and Veronicastrum dealt; Groundbreaker Blush hydrangea held — photo 1 is a shrub with no flower
+2026-09-02. Three researched cards and three photographs from one bench visit
+(EXIF 11:31:17, 11:32:05, 11:32:14 on 2026-08-29). All three JSONs pass
+`check-plant-json.js` and are kept verbatim in `data/incoming/`.
+
+**The send order and the plants disagree, the Vitex way (item 58).** JSON order
+was Veronicastrum, Hydrangea, Persicaria. Photograph 2 is unmistakably the
+Veronicastrum (violet spike over whorled red-edged leaves) and photograph 3 the
+Persicaria (dense pink spike, mat of lanceolate leaves, ochrea at the node), so
+those two were dealt against their cards regardless of order.
+
+**A. Photograph 1 is not confirmed and the Hydrangea card is HELD.** The frame
+shows brown horizontal woody stems with pale lenticels, a cut end, and new
+shoots carrying paired-to-whorled glossy serrate lanceolate leaves on red
+petioles. That is a shrub, so it is **not** the herbaceous Veronicastrum, and it
+is not the Persicaria. `[Inference]` by elimination and by the prostrate woody
+habit it is the low *Hydrangea paniculata* 'LC NO21' — but there is no panicle
+in the frame, and the card's `visual` sells *"white panicles ageing through soft
+blush to pink-red"*. A foliage-only frame identified by elimination is not a
+confident placement, so it is parked as
+`photos/hydrangea-groundbreaker-foliage-unconfirmed.jpg` (a name no slug can
+resolve) and the card sits in the hold block. **Oscar's call**: if that bench
+was the Groundbreaker Blush, deal it —
+`node tools/deal-plant.js "Hydrangea paniculata 'LC NO21'" photos/hydrangea-groundbreaker-foliage-unconfirmed.jpg` —
+and retire the parked copy; a frame with the panicle would be the better card.
+
+**B. The Veronicastrum photograph carries the burned-in "AI-generated content"
+label**, bottom-left, and is dealt the Houttuynia way: `PHOTO_FOCUS` 50% 0%,
+label verified outside the rendered window, marker recorded verbatim in
+`CREDITS.json`. What its file says is worth writing down because it does not
+match the pattern item 44's batch note relied on: the C2PA manifest is the
+**plain-capture shape** (`c2pa.ingredient.v2`, claim generator `Galaxy S24
+c2pa-rs/0.62.0`, no `digitalSourceType` string anywhere in the file), yet the
+camera EXIF is gone, the frame is a non-native 2948×3852, the embedded title is
+`20260829_113205(1).jpg`, and the label is there. So a plain-shape manifest is
+**not** proof of an untouched capture. Recorded as observed; the provenance
+question is still item 32's.
+
+**C. Three validator warnings, all accepted as sent.** Hydrangea `careLevel` 5,
+Persicaria `pestRisk` 3 and `careLevel` 4 read as possible unconverted 0–5
+ratings; a groundcover knotweed at 0.75/5 pests and 1/5 care, and a dwarf
+hydrangea at 1.25/5 care, are plausible on the 0–20 scale, and they are Oscar's
+numbers. **Persicaria's `soil` is 39 characters** — the first card past the
+36-character measured limit to ship: on the rendered card it shrinks to three
+lines in the soil panel and stays legible. Not paraphrased. If Oscar wants it
+shorter, *"Moist, well-drained"* loses nothing the warning line does not carry.
+
+**D. What went where:** *Persicaria affinis* 'Darjeeling Red' **dealt** (new
+genus; late-season spike, the deep-red stage the card promises is not in this
+frame). *Veronicastrum* 'Red Arrows' **dealt** (new genus). *Hydrangea
+paniculata* 'LC NO21' **held**. Deck 238 → 240, hold 83 → 84.
+
+---
+
+
+### 67. "Golden Hakonechloa" refused as a duplicate of the held 'Aureola'; its cutout is not confidently a Hakonechloa
+2026-09-02. A JSON for *Hakonechloa macra* arrived with a transparent-background
+cutout PNG. **Nothing was added to the deck**, for two separate reasons, and
+both are Oscar's to reverse.
+
+**A. The deck already holds this plant.** `Hakonechloa macra 'Aureola'`
+(Japanese Forest Grass 'Aureola') has sat in the hold block since the wishlist
+batch, with a FIT entry in `tools/fit-incoming.js`. The new JSON is the same
+plant under the species-level latin: `cvs` says `'Aureola'`, `visual` describes
+yellow-and-green striped arching leaves, and there is no other golden
+Hakonechloa in UK retail that this could be instead. Adding it would have put
+**two cards for one grass** in the deck — same call as the Lupin (item 45) and
+'Homebush' (item 42). The held card was kept.
+
+**B. The JSON does not pass the validator as sent**, so it could not have gone
+in even on its own:
+- `hue` is `"Yellow and green"` — the schema wants a whole number 0–360 (the
+  held card carries 65).
+- `peak` is `"Summer to autumn"` — the app cannot parse it; it wants
+  `"Mon-Mon"` (the held card carries `Apr-Nov`).
+- `foliage` and `container` are prose where the vocabularies are
+  evergreen / semi-evergreen / deciduous and yes / with care / no.
+- `soil` + `soilWarning` come to 52 and 149 characters against measured limits
+  of 26 and 44.
+None of it was rewritten: the reality filter says the numbers are his to
+supply, not mine to infer from prose.
+
+**C. Nineteen fields differ between the held card and the new JSON.** The ones
+that change what a customer is told:
+
+| field | held 'Aureola' card | new JSON |
+|---|---|---|
+| `water` | Keep consistently damp in growth; pots need regular water | Moist but well-drained |
+| `soil` | Fertile, humus-rich; **Emerges very late — do not dig it up** | Chalk, clay, loam or sand; acid, neutral or alkaline; Avoid very dry or excessively heavy soil… |
+| `peak` | Apr-Nov | Summer to autumn |
+| `size` | 0.1-0.5m H × **0.5-1m** W | 0.1-0.5m H × **0.1-0.5m** W |
+| `sunNeed` / `sunMin` | 45 / 20 | 60 / 30 |
+| `pestRisk` | 6 | 2 |
+| `growthSpeed` | 8 | 10 |
+| `thirst` | 14 | 13 |
+
+The held card's *"emerges very late — do not dig it up"* is the one line on
+either version that stops a real mistake on a bench in April, and the new JSON
+drops it. The spread disagreement (0.5–1 m held vs 0.1–0.5 m new) is a factual
+one to settle against the RHS entry, not a wording choice. The remaining
+differences are prose length and phrasing (`visual`, `prune`, `resilience`,
+`uses`, `hardinessNote`, `common`, `aspect` — "North, East, South, West" renders
+as all four facings, which is what "Any aspect" already means).
+
+**D. The cutout is not confidently the plant.** It shows stiff, fairly broad
+(2–3 cm) leaves striped in variable bands of yellow, green and cream, borne in
+fans at the tips of **purple stems with distinct nodes and sheaths**, on an
+upright plant. *Hakonechloa macra* 'Aureola' is a lax, cascading grass with
+narrow mostly-yellow leaves on thin arching stems. `[Inference]` the culm,
+the nodes, the sheath and the leaf width read more like a dwarf variegated
+bamboo — *Pleioblastus viridistriatus* is the obvious candidate in UK retail —
+than like a Hakonechloa, but the frame is a cutout with no scale and no base,
+and **I cannot verify the identity either way**. It was therefore not staged
+on the held card. Parked as `photos/striped-grass-unidentified-cutout.png`
+(alpha kept, 1200×1600 from 2998×3998, no C2PA markers, credited as Oscar's).
+The deck has no *Pleioblastus* card; if that is what it is, it wants its own
+JSON.
+
+**What resolves it, all Oscar's:**
+1. Say which plant the cutout is. If it IS the Hakonechloa on his bench:
+   `node tools/deal-plant.js "Hakonechloa macra 'Aureola'" photos/striped-grass-unidentified-cutout.png`
+   deals the held card (the cutout will want the hero-on-self composite the
+   other twelve cutout cards use — see the photo register rows marked
+   `[special]`), then retire the parked copy.
+2. If any of the new JSON's values should replace the held card's, say which;
+   the table above is the shortlist.
+
+---
+
+
+### 68. Viburnum opulus dealt, Caryopteris 'Dark Knight' held, Sapphire Ring gets its flower — and two prose fields converted
+2026-09-02. Two JSONs and three photographs. Oscar named two of the frames:
+*"1st image is the viburnum"* and *"3rd image is a Ceratostigma Sapphire Ring
+but I wanted it to flash between the current card photo in the deck and this
+photo as it has a flower."*
+
+**A. Viburnum opulus — DEALT.** Photo 1 is the plant Oscar says it is: lobed
+toothed leaves, glossy red berries. Card latin is the species as supplied with
+`'Compactum'` in `cvs`. Not a duplicate: the deck's other guelder rose is the
+sterile snowball 'Roseum' (held), which never carries berries.
+
+**B. Sapphire Ring — now a SWAP CARD.** Photo 3 is the same gold, red-edged,
+hairy foliage as the card's existing photo, this time with the cobalt flowers.
+Registered in `PHOTO_SWAP` (alt `ceratostigma-…-flowers.webp`, 50% 50%, 3.5 s);
+both frames verified on the rendered card. Clean Galaxy S24 capture, 2026-08-31
+15:54.
+
+**C. Caryopteris 'Dark Knight' — HELD, and its photograph is not 'Dark
+Knight'.** The JSON says *"aromatic grey-green foliage"*, which is right for
+'Dark Knight'. Photo 2 shows **bright gold foliage** under deep blue flowers,
+with a second flower close-up inset top-right (Oscar's own two-frame assembly,
+no camera EXIF, no C2PA). Gold foliage on a Caryopteris is a different cultivar
+— and the deck already deals one: *Caryopteris × clandonensis* 'Worcester
+Gold', whose card photo is the same gold foliage without flowers. `[Inference]`
+photo 2 is that plant in bloom. It was not staged on 'Dark Knight' (the card's
+own words would contradict its picture — the Forsythia / Pinus mugo shape) and
+is parked as `photos/caryopteris-gold-flowering-unconfirmed.jpg`.
+**Question for Oscar:** is this the Worcester Gold in flower? If so, it is the
+same case as the Sapphire Ring — a flowering frame for a foliage-only card —
+and the one-line answer makes it a swap card too. 'Dark Knight' then waits for
+a grey-green frame.
+
+**D. Two prose fields converted per card, labelled.** Both JSONs arrived with
+`hue` and `peak` as words. Unlike the Hakonechloa (item 67), these are new
+cards, so the values were set from the supplied text and the conversion is
+recorded in each card's `uncertain` block and here:
+
+| card | supplied | set | note |
+|---|---|---|---|
+| Viburnum | hue "White and red" | **0** | red, for the berries; the two named colours point at different numbers, so this one is Oscar's to move |
+| Viburnum | peak "Late spring to early summer" | **May-Jun** | UK convention |
+| Caryopteris | hue "Deep blue-purple" | **265** | |
+| Caryopteris | peak "Late summer to early autumn" | **Aug-Sep** | |
+
+Both as-sent JSONs are kept verbatim beside the fitted ones in `data/incoming/`
+(`*-as-sent.json`).
+
+**E. Soil fitted to the panel.** Both soil strings were far over the measured
+26/44-character budgets (52/117 and 56/113) and the first Viburnum screenshot
+showed the warning text running out of the bottom of the soil panel. Short
+forms were written, the way `tools/fit-incoming.js` does for every wishlist
+card, and the originals kept:
+
+| card | soil (≤26) | warning (≤44) |
+|---|---|---|
+| Viburnum | Chalk, clay, loam or sand | Any pH · avoid very dry or waterlogged soil |
+| Caryopteris | Chalk, loam or sand | Drained; avoid winter wet; warm shelter |
+
+What each drops: the Viburnum's *"moist, humus-rich ground produces the
+strongest growth and fruiting"* and the Caryopteris's *"moderately fertile"*.
+Both survive in the as-sent files if Oscar wants them elsewhere on the card.
+
+**F. Validator warnings accepted as sent:** Caryopteris `pestRisk` 5 (reads as
+a possible 0–5 rating; kept). `foliage` and `container` are prose on both
+cards; those fields do not reach the card and were left alone.
+
+Deck 240 → 241, hold 84 → 85. Swap cards 4 → 5.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
