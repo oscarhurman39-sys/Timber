@@ -1993,6 +1993,70 @@ same plant twice. **Oscar's call** whether to move 'The Bride' into the latin.
 ---
 
 
+### 60. One Physocarpus photograph, two Physocarpus cards — which is it?
+2026-09-02. Oscar's batch had cards for **'All Black'** and **LITTLE DEVIL ('Minall2')**
+and one ninebark photograph, listed first as "phycoaroubs". Both cultivars are
+dark-leaved; the photo shows purple leaves with a grey bloom on red stems and a
+pot label in the top-right corner that is out of focus past reading (checked at
+6x). Nothing in the frame separates the two — 'Minall2' is the smaller-leaved,
+more compact of the pair, but there is no scale reference.
+
+**Done:** both cards written and held; photo parked as
+`photos/physocarpus-opulifolius-dark-unidentified.jpg` with a CREDITS entry that
+says exactly this. Same handling as the two Vitex (VQ 58).
+
+**Oscar's call:** say which it is and it is dealt in one command:
+`node tools/deal-plant.js "<latin>" photos/physocarpus-opulifolius-dark-unidentified.jpg`.
+If the other one has a photo coming too, both go in the same run.
+
+---
+
+
+### 61. Modiolastrum lateritium — the supplied habit does not match the name
+2026-09-02. Oscar read the label as "m-something" and settled on *Modiolastrum
+lateritium*. The photograph (lobed, scalloped, red-rimmed leaves) is consistent
+with that. **The card data is not.** As supplied it is a "tender evergreen
+CLIMBER", 1.5–2.5 m tall, H3, for the conservatory. The plant that carries this
+name (syn. *Malvastrum lateritium*) is normally described as a low, spreading,
+ground-hugging perennial mallow a hand-span high, hardier than H3, with brick-red
+flowers — a very different thing to sell.
+
+**Dealt as supplied**, because the rule is that I do not overwrite Oscar's data
+with my recollection; all four doubts are in the card's `uncertain` list. But
+this one is customer-facing and wrong in kind if I am right, so it wants a look
+at the actual label before it stays in the deck. [Inference] — my description of
+the plant is from memory, not checked against RHS in this session.
+
+---
+
+
+### 62. Escallonia 'Gold Brian' — the visual line does not mention gold
+2026-09-02. Held (no photo). Oscar's own uncertain note already says the cultivar
+name should be checked. Adding to it: the plant sold as 'Gold Brian' is a
+golden-yellow-leaved *Escallonia laevis*, and that is its entire selling point,
+yet the supplied visual line says only "glossy foliage" and the hue is the pink of
+the flowers. If the plant on the bench is gold, the card needs its visual line
+and hue changed before it is dealt. Left as supplied.
+
+---
+
+
+### 63. Juniper 'Blue Arrow' and the Robinia — what the trailing note meant
+2026-09-02. After the numbered photo list Oscar wrote: *"junipers robbina photos
+commingnsoon hold off on jason creation."* Two readings:
+1. photo 9 IS the Blue Arrow (he numbered it so — dealt on that basis), and
+   Robinia photos are coming, so the Robinia card should not be created yet;
+2. juniper photos are ALSO still coming, and photo 9 is provisional.
+
+Acted on (1): Blue Arrow dealt from photo 9; **Robinia 'Lace Lady' NOT added to
+the deck or the hold** — its JSON is saved at
+`data/incoming/robinia-pseudoacacia-lace-lady.json` so it does not have to be
+resent, and goes in the moment the photo arrives. If (2) was meant, the juniper
+is a one-command restage.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

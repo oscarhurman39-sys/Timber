@@ -58,6 +58,29 @@ progress: 2026-09-02, later (Exochorda, and the swap had been broken for 12 days
   both frames carry a src in the fetch window and the alt decodes to pixels,
   because the reason this lasted twelve days is that nothing asserted it.
   Deck 242 dealt / 81 held / 323 total. Five photo-swap cards.
+progress: 2026-09-02 (batch of twelve: eight dealt, three held, one waiting) —
+  Monstera 'Thai Constellation', Coronilla emerus, Malus 'Veitch's Scarlet',
+  Cupressus 'Goldcrest', Cedrus deodara, Nemesia 'Confetti', Modiolastrum
+  lateritium and Juniperus 'Blue Arrow' dealt; Physocarpus 'All Black',
+  Physocarpus LITTLE DEVIL and Escallonia 'Gold Brian' held; Robinia 'Lace Lady'
+  saved to incoming but NOT added, on Oscar's "hold off" until its photo comes.
+  Deck 250 dealt / 84 held / 334 total.
+  The batch arrived in a different shape from every previous one: hue as words,
+  peaks as seasons ("Summer", "All year"), cultivars in the common name with a
+  bare genus in the latin, sentence-length soil and container fields. None of
+  that is a data error, all of it is a format the validator rejects, so every
+  card was rewritten to house form with the facts untouched and each mapping I
+  made (season -> months, hue word -> angle, cultivar moved into the latin) is in
+  that card's uncertain list rather than silently applied.
+  One contradiction I introduced myself and plant-sense caught: I wrote "Keep
+  moist" as the water line on a juniper whose thirst is 6/20 and whose own
+  resilience says drought tolerant. Fixed to say what the plant is. That is the
+  fifth time a phrase of mine has tripped a ladder in this deck; the check exists
+  because I keep doing it.
+  Two ambiguities NOT resolved, by rule: one ninebark photo for two ninebark
+  cards (label unreadable — both held, photo parked, VQ 60), and Modiolastrum
+  data that describes a climber where the name usually means a ground-hugging
+  mallow (dealt as supplied, flagged hard, VQ 61).
 progress: 2026-09-02 (three cards; the arithmetic lost to the render) — Disporum
   sessile 'Variegatum', Helleborus x ericsmithii 'Winter Moonbeam' and Oenothera
   stricta 'Sulphurea' dealt. Deck 241 dealt / 81 held / 322 total.

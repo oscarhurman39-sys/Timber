@@ -522,6 +522,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cedrus-deodara.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped, verdict as-is, 3000x4000 at 0.750. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-09-01)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "cephalanthus-occidentalis-bailoptics.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, 2026-08-21 16:19 (current season); orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
@@ -782,6 +792,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "coronilla-emerus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped, verdict as-is, 3000x4000 at 0.750. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-09-01)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "corylus-avellana-contorta.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -855,6 +875,16 @@
    "file": "cryptomeria-japonica-serama-fm5.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Cropped by tools/reframe-photo.js by 3% off the bottom edge to remove a fingertip holding the branch, nothing else, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season); orientation 6. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cupressus-macrocarpa-goldcrest.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Oscar's own tall crop (1560x3698, 0.422) cut to a 0.75 window from 20% to 76% down by tools/reframe-photo.js — the 16:10 detail sheet would otherwise show a quarter of it. Uniform golden foliage, nothing identifying lost. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-09-01)",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -1612,6 +1642,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "juniperus-virginiana-blue-arrow.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped, verdict as-is, 3000x4000 at 0.750. Assigned by Oscar as photo 9 = 'blue arrow junipers'; his same note says juniper photos are coming, so this may be superseded. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-09-01)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "kniphofia-pyromania-orange-blaze.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1872,6 +1912,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "malus-veitch-s-scarlet.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Cropped by tools/reframe-photo.js: 7% off the top edge only, because 2790x4000 is 0.698 and under the 0.75 aspect gate; the fruit cluster lands at 56% down. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-09-01)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "miscanthus-sinensis-morning-light.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1882,6 +1932,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "modiolastrum-lateritium.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped, verdict as-is, 3000x4000 at 0.750. Foliage only, no flower. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-08-31)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "monarda-didyma-bubblegum-blast.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1889,6 +1949,16 @@
    "sourceUrl": null,
    "commit": "bdb3eb4",
    "commitSubject": "Add Bubblegum Blast Bee Balm; fix soil-value overflow + tighten checker threshold",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "monstera-deliciosa-thai-constellation.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. A PNG cutout Oscar made himself: the plant isolated on a flat black background, 1502x2002, so it carries no EXIF at all. No C2PA/JUMBF manifest and no AI or generative marker found in the file; the background removal is a Samsung/phone cutout, not a re-render, and no pixel of the plant was invented",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1939,6 +2009,16 @@
    "sourceUrl": null,
    "commit": "a627b42",
    "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "nemesia-confetti.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. A composite Oscar assembled himself: massed lilac flowers with a white-outlined, labelled 'foliage' cutout pasted mid-right. Kept whole under the two-part-identification rule. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-08-31)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -2146,6 +2226,16 @@
    "file": "phyllostachys-nigra.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "physocarpus-opulifolius-dark-unidentified.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. PARKED, NOT ON A CARD: Oscar sent one Physocarpus photograph and two Physocarpus cards ('All Black' and LITTLE DEVIL 'Minall2'); the pot label in the frame is blurred beyond reading, so the photo is staged under a descriptive name until he says which it is. Uncropped, 3000x4000 at 0.750. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-09-01)",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
