@@ -414,7 +414,44 @@ Focal point recorded here when off-centre:
 | Impatiens omeiana | impatiens-omeiana.jpg | 50% 40% default — **uncropped**, 3000x4000 at 0.750. **Flagged before dealing, dealt anyway on Oscar's direct confirmation.** The card's own text describes a soft herbaceous woodland balsam — elongated leaves, silver veins, yellow flowers. The photograph shows glossy, spine-toothed, leathery leaves on woody red stems, closer to an *Osmanthus* or holly than anything herbaceous, and nothing in the frame is a flower. I asked Oscar directly, against this photo, whether the identification was right; he confirmed it. Dealt as supplied, both my doubt and his confirmation on record in the card's `uncertain` list and here — this is his call, made after seeing exactly what I saw |
 | Exochorda × macrantha ('The Bride') | exochorda-macrantha.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card, sent as a pair by Oscar with the swap asked for by name.** Primary: whorled oblong pale-green leaves on a dark stem, rain-wet, uncropped at 0.781 — the plant as it stands on the bench in August. Alt (`-fruit.jpg`, focus 50% 45%): the ribbed russet seed capsule that is the genus's signature; EXIF orientation 6 baked upright to 3000x4000, otherwise untouched. 22 seconds apart (15:16:27 / 15:16:49), same plant, same rain. Neither frame has the April–May white flowers the card sells, and the card says so in `uncertain`. **Supplied latin is the bare hybrid**, while common and `cvs` both name 'The Bride' — kept as supplied, not renamed (VQ 60). The JSON arrived in prose where the deck uses ` · ` lists and `Mon-Mon` peaks; normalised to house format with no fact changed — soil types + pH collapsed to "Any, well-drained" with the waterlogging warning kept |
 
+| Anisodontea capensis 'Ib201-7' (CARNIVAL LIGHTS CANDY APPLE) | anisodontea-capensis-ib201-7.jpg | 50% 40% default — **uncropped**, orientation already 1, portrait 3000x3444 at 0.871 (inside the gate, the Styrax precedent). One large deep-red flower with the crimson veining and dark stamens top-right, a lobed grey-green mallow leaf sharp at left — flower AND foliage in one frame, both halves of the card's own visual line. Current-season Galaxy S24 capture, shot the day it was staged. **First *Anisodontea* in the deck**, no confusion risk |
+
+| Cyclamen hederifolium var. hederifolium f. albiflorum | cyclamen-hederifolium-var-hederifolium-f-albiflorum.jpg | 50% 40% default — **cropped for arithmetic, not taste**: source 1960x3732 at 0.525, far below the 0.75 gate, with the bottom ~30% being the plastic tray rim and its sandy face. Full-width crop of the top 70% through `reframe-photo.js` lands at 1960x2612, exactly 0.750; the white reflexed flower on its coral stem and the silver-marbled ivy-shaped hero leaf — both halves of the card's visual line — sit in the card band. Clean Galaxy S24 EXIF, no C2PA/AI marker. **First *Cyclamen* in the deck.** Peak Sep–Nov and shot in late August with the first flowers just opening, so the frame matches the card's own season |
+
+| Phygelius aequalis 'Trewidden Pink' | phygelius-aequalis-trewidden-pink.jpg | 50% 40% default — **uncropped**, EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked in at `verdict: as-is`, the Erigeron/Vitex precedent. Pendent tubular flowers upper-left, the serrate opposite hero leaf upper-right — genus-confirming. **Assigned against the send order**: the JSON array led with the Dahlia but this frame is unmistakably the Phygelius; matched on the plant, the Vitex rule. ⚠ [flag] **The card says "dusky-pink" and the photograph reads coral-RED in hard sun** — the tubes have pale throats and red-rimmed lobes. Consistent with a phone camera saturating a coral-pink cultivar in full August light (the Agapanthus precedent), but the cultivar is not verifiable from this frame; if a softer-light frame ever shows true red, the ID wants Oscar's eye. **First *Phygelius* in the deck** |
+| Dahlia 'Kelvin Floodlight' | dahlia-kelvin-floodlight.jpg | 50% 40% default — **uncropped**, orientation 1, portrait 3000x4000 at exactly 0.750. The huge butter-yellow decorative bloom fills the right of the frame with the dark pinnate foliage left — cultivar-consistent: 'Kelvin Floodlight' is THE giant yellow decorative, and nothing else in the deck looks like it. Leaves show pale mottled spotting, true to a bench dahlia in late August. **Second *Dahlia*** — ELECTRO PINK is a neon cactus type, no confusion risk |
+
+| Solanum pyracanthos | solanum-pyracanthos.jpg | 50% 40% default — **uncropped by us** (2482x3024 at 0.821, orientation 1), but **the file carries Oscar's own sticker edit, the Salvia 'Black and Blue' class, and this time the C2PA manifest says so precisely**: a Samsung PhotoEditor deco re-edit declaring a crop to 91% height, a filter, and ONE non-text sticker at centre (0.215, 0.235), ~23% wide, rotated -10° — which is exactly where the purple flower sits. **No generative action**: no `Photo assist` agent, no trained-media source type, `isScaleAI:false`, AI filter false, no visible label. The pasted flower is species-correct (purple 5-lobed star, yellow poricidal anther cone) and every other ID feature — grey-green lobed leaves, vivid orange spines on stems, midribs AND calyx, a developing fruit — is the camera's own capture. Two blurred nursery labels lower-left (one reads "SOL…", the right genus) fall below the card band, the Sempervivum precedent. **Second *Solanum*** — *S. laxum* 'Album' is a white-flowered climber, no confusion risk. No red fruits in frame: an autumn reshoot would complete the card's own visual line |
+
 ## 5. Decision changelog
+
+- **v14.44 (257 dealt / 84 held — a five-card line merges in, and two parallel
+  duplicates resolve to the live copies)**: a second session had been dealing
+  cards on a feature branch while this line advanced; the merge brought in its
+  five unique cards — *Anisodontea capensis* 'Ib201-7' (CARNIVAL LIGHTS CANDY
+  APPLE), *Cyclamen hederifolium* f. *albiflorum*, *Dahlia* 'Kelvin
+  Floodlight', *Phygelius aequalis* 'Trewidden Pink' and *Solanum pyracanthos*
+  — each with its register row above, incoming JSON, CREDITS entry and photo.
+  - **Two plants had been dealt on BOTH lines from the same sends**: the
+    Disporum and the 'Winter Moonbeam' hellebore. The live line's copies win —
+    they deployed first, and for the hellebore its file is also the better one
+    (a full signed capture manifest, where the feature branch's copy of the
+    same plant carried a Galaxy `Photo assist` generative-edit manifest and a
+    visible label). The feature branch's register rows, rows and photos for
+    those two were dropped in the merge; its CREDITS entries did not survive
+    either, so no record contradicts the files on disk.
+  - **Both lines had also independently raised perf-test's halo delta ceiling
+    for the same red**, each with its own staged-leak measurement (36.5k px /
+    Δ375 both times). The live line's note and its warning against a fourth
+    blind raise are kept; the ceiling stays at the live line's 30 — a fresh
+    measurement on the merged 257-card deck reads 25 px / max delta 22 (staged
+    leak 36505 / 375), inside it with headroom, so no fourth raise was needed.
+  - Notable from the five: the Solanum's C2PA manifest precisely declares
+    Oscar's own PhotoEditor sticker edit (the flower; `isScaleAI:false`, no
+    generative agent) — the Salvia 'Black and Blue' class with better
+    paperwork; the Phygelius arrived order-swapped against its JSON and was
+    assigned on the plant (Vitex rule), and its card says "dusky-pink" while
+    the frame reads coral-red in hard sun — [flag] in its register row.
 
 - **v14.43 (the photo swap had been showing one photo since r79)**: Oscar sent the
   Exochorda as a pair and asked for *"the flash between feature"*, adding that it
