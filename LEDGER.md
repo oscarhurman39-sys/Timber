@@ -21,6 +21,12 @@ progress: 2026-09-02 (two new cards: 240 / 81) — Dahlia 'Kelvin Floodlight'
   (four corners + right edge), the corner pixels are the pile's halo shadows
   rounding one card darker, and the staged leak re-measured at 19434 px / Δ420.
   Delta budget 24 -> 48, pixel budget untouched, numbers in the test comment.
+  And the r194 commit message says "Gate 17/17" — at that moment it was 16/17
+  under --jobs 3: the two hold-to-rewind checks (the pair the 08-21 entry called
+  flaky) failed under load and passed 28/28 standalone. Not a flake, a clock:
+  the test held the button a fixed 4s and assumed the frame-paced rewind
+  reached the top in time. It now holds until history is empty (20s cap), so
+  it asserts the property rather than the CPU. Gate 17/17 under --jobs 3 after.
 progress: 2026-09-01 (launch hardening: crash-loop light mode + problem report) —
   Oscar: "heading towards launch, improve the app, then plan roll-out". Baseline
   measured first: 17/17 green, boot clean (first paint ~340ms, deck dealt <1s,

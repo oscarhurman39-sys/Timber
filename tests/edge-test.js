@@ -204,8 +204,21 @@ function check(name, cond, extra) {
     rewound >= 2 && stopped.history >= 5,
     JSON.stringify({ mid, stopped, rewound }));
 
-  // held to the end it runs out at the top and stops cleanly rather than erroring
-  await pressBack(4000);
+  // held to the end it runs out at the top and stops cleanly rather than erroring.
+  // Hold until the history is actually empty rather than for a fixed 4s: the rewind
+  // cadence is frame-paced, and under run-all --jobs 3 (three Chromiums plus the
+  // app-test deck walk) 4s was not always enough to reach the top — the pair went
+  // red at deck 240 with 28/28 green standalone. The property is "reaches the top
+  // and stops cleanly", not "does so within one wall-clock budget".
+  {
+    const b = await page.locator('#back').boundingBox();
+    await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+    await page.mouse.down();
+    await page.waitForFunction(() => Array.isArray(history) && history.length === 0, null, { timeout: 20000 }).catch(() => {});
+    await page.waitForTimeout(300);          /* let the last fly-in land before releasing */
+    await page.mouse.up();
+    await page.waitForTimeout(300);
+  }
   const top = await state();
   check('held to the top: full deck restored, history empty, undo disabled, spin off',
     top.cards === NPLANTS && top.left === String(NPLANTS) && top.done === '0' &&
