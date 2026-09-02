@@ -2113,6 +2113,21 @@ one look next time he passes it.
 ---
 
 
+### 65. Impatiens omeiana — photo confirmed by Oscar despite disagreeing with the card text
+2026-09-02. Card data (his JSON) describes a soft herbaceous perennial: elongated
+dark green leaves, prominent pale silver veins, small pale yellow flowers,
+spreading by rhizomes in woodland shade. The photograph he sent for it shows
+glossy, spine-toothed, leathery leaves on woody red stems in hard sun — no
+flower, no silver vein pattern, and spined margins Impatiens does not have. I
+asked directly rather than guessing or silently swapping either side; Oscar
+confirmed the identification is correct against this photo. **Dealt as
+supplied.** Recorded, not resolved further — if the plant on the bench turns
+out to be something else (an *Osmanthus* is the closest visual match in the
+deck), the photo is the one to replace, not the data.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

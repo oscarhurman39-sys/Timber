@@ -83,6 +83,15 @@ progress: 2026-09-02, later (Exochorda, and the swap had been broken for 12 days
   both frames carry a src in the fetch window and the alt decodes to pixels,
   because the reason this lasted twelve days is that nothing asserted it.
   Deck 242 dealt / 81 held / 323 total. Five photo-swap cards.
+progress: 2026-09-02 (Impatiens omeiana, dealt against my own doubt) — Oscar
+  sent a card for a soft herbaceous woodland balsam with a photo of a
+  spine-toothed leathery-leaved shrub in hard sun. I did not deal it on my own
+  judgement either way: asked him directly whether the photo really matched the
+  name, he confirmed it did, and the card went in on that answer. Both the
+  doubt and the confirmation are on record in the card's own uncertain list and
+  in VQ 65 — this is the shape "report ambiguity rather than resolving it" is
+  supposed to take: raise it, let him decide, then act on the decision without
+  re-litigating it. Deck 253 dealt / 84 held / 337 total.
 progress: 2026-09-02 (Kojo-no-mai photo swap) — Oscar asked for a better photo
   on Prunus incisa 'Kojo-no-mai', in the deck since 2026-08-09 on a shot propped
   against a fence rail. Replaced with a PNG cutout already at 0.750, no crop
