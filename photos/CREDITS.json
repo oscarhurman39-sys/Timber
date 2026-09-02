@@ -502,6 +502,36 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cedrus-atlantica-glauca-group-horstmann-s-silberspitz.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. The CREAMY-TIP frame, primary of a two-photo swap. Cropped by tools/reframe-photo.js by 7% of width only, to bring 1.075 inside the 0.75-1.0 gate; background only, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 12:30:31. No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cedrus-atlantica-horstmanns-silberspitz-blue.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. The BLUE-FOLIAGE frame, the swap half of the same card: same plant, same minute (EXIF 2026-08-22 12:30:27, four seconds before the primary). Uncropped, rotation baked in. Samsung Galaxy S24. No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cephalanthus-occidentalis-bailoptics.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, 2026-08-21 16:19 (current season); orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "ceratostigma-willmottianum-sapphire-ring-lissbrill.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -822,6 +852,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cryptomeria-japonica-serama-fm5.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Cropped by tools/reframe-photo.js by 3% off the bottom edge to remove a fingertip holding the branch, nothing else, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season); orientation 6. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "cuprocyparis-leylandii-gold-rider-cutout.png",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1002,6 +1042,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "erysimum-bowles-s-mauve.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright; identified by Oscar against the rebuilt hold cards. Cropped by tools/reframe-photo.js to drop the lower quarter of bare gravel, nothing else, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season); orientation 6. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "escallonia-laevis-pink-elle-lades.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1089,6 +1139,16 @@
    "sourceUrl": null,
    "commit": "0e7f3a2",
    "commitSubject": "Add Green Spire Japanese Spindle (second Euonymus japonicus cultivar)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "eupatorium-japonicum-pink-frost.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, 2026-08-22 (current season); orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -2053,6 +2113,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "pinus-koraiensis-jack-corbit.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "pinus-mugo.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); the visible AI label was cropped out by tools/reframe-photo.js, the marker stands. See VERIFY-QUEUE 32.",
@@ -2413,6 +2483,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "sanguisorba-pink-brushes.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. A two-frame split HE assembled himself (cut foliage left, nodding pink bottlebrushes right) and KEPT WHOLE on the protocol v14.34 rule: a frame carrying leaf and flower together identifies the plant better than either half. Uncropped, passed through tools/reframe-photo.js at verdict as-is, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "scabiosa-columbaria-flutter-pure-white-balflutturite.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2500,6 +2580,16 @@
    "sourceUrl": null,
    "commit": "a627b42",
    "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "styrax-japonicus-evening-light.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: passed through tools/reframe-photo.js at verdict as-is, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -2630,6 +2720,26 @@
    "sourceUrl": null,
    "commit": "3c88449",
    "commitSubject": "Add Laurustinus 'Eve Price' — deck reaches 30 plants",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "vitex-agnus-castus-piivac-i.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. The NARROW-leaflet plant: 5-7 slim leaflets from one point, the Vitex agnus-castus leaf. Card assignment confirmed by Oscar 2026-08-21 against the leaves rather than the send order (VERIFY-QUEUE 58). EXIF Samsung Galaxy S24, 2026-08-21 16:17:26; rotation baked in, no crop. No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "vitex-bailtexone.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. The BROAD-leaflet plant: broader leaflets in threes on purple-flushed petioles, the Vitex trifolia leaf that 'Flip Side' is bred for. Card assignment confirmed by Oscar 2026-08-21 against the leaves rather than the send order (VERIFY-QUEUE 58). EXIF Samsung Galaxy S24, 2026-08-21 16:17:33; rotation baked in, no crop. No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

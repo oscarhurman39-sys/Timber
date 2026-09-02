@@ -383,7 +383,226 @@ Focal point recorded here when off-centre:
 
 | Oenothera lindheimeri 'Rosy Jane' | oenothera-lindheimeri-rosy-jane.jpg | 50% 40% default — **kept WHOLE as a two-frame composite, on Oscar's call.** Foliage left, flowers right, seam at x=0.630. It was first cropped to the flower frame alone; Oscar's correction: *"this shows off both parts of the plant which is helpful for ident"* — and he is right, a garden-centre card is an identification aid before it is a photograph. Restaged at `verdict: as-is`, master back up to the full 1200x1600. **Second *Oenothera lindheimeri*** after GAUDI ROSE; they look nothing alike (30 cm rose-pink over burgundy vs 50–100 cm white picotee over green). VQ 55 |
 
+| Cephalanthus occidentalis 'Bailoptics' | cephalanthus-occidentalis-bailoptics.jpg | 50% 40% default — large glossy opposite leaves with impressed veins on red stems, filling the frame. Already 0.75 with no label and no dead space, so it went through at `verdict: as-is` and nothing was cropped (protocol v14.34, second card running under the new rule). **The one card of three whose photograph was never in doubt** — the only non-*Vitex* plant of the batch, and both possible orderings put this picture with this card. VQ 58 |
+
+| Vitex agnus-castus 'Piivac-I' (Delta Blues) | vitex-agnus-castus-piivac-i.jpg | 50% 40% default — the NARROW-leaflet plant: 5–7 slim leaflets radiating from one point, the *agnus-castus* leaf. Assigned on the LEAVES after the send order and the foliage disagreed; Oscar confirmed (VQ 58). Uncropped, rotation baked in, master 1200x1600 |
+| Vitex × 'Bailtexone' (Flip Side) | vitex-bailtexone.jpg | 50% 40% default — the BROAD-leaflet plant: wider leaflets in threes on purple-flushed petioles, the *V. trifolia* leaf this hybrid is bred for. Same resolution as its sibling above and the same reason. **These two cards are otherwise near-identical** — same genus, same First Editions series, both blue, same aspect, soil and pruning — so check the LEAF, not the file order, before ever swapping either photo |
+
+| Eupatorium japonicum 'Pink Frost' | eupatorium-japonicum-pink-frost.jpg | 50% 40% default — cream-white variegation filling the card band, the nursery pot and its dead stems sitting below the plaque line, so **uncropped**. A young plant, not flowering: the card's *"flat pink flower heads"* are the half this photograph does not carry, and July–September is the window for that shot |
+| Erysimum 'Bowles's Mauve' | erysimum-bowles-s-mauve.jpg | 50% 40% default — **a held card filled from the rebuilt hold list**, identified by Oscar. Grey-green foliage with the purple-maroon flush, in its pot. Cropped only to drop the lower quarter of bare gravel, which was pushing the plant up out of the card band. No flowers — the card leads on *"purple-mauve spires"*, and this cultivar flowers nearly year-round, so a spire shot is easy to get |
+| Cryptomeria japonica Serama ('FM5') | cryptomeria-japonica-serama-fm5.jpg | 50% 40% default — the fasciated, cockscombed shoots that are the entire point of this cultivar, in hard sun. Cropped by **3% off the bottom edge only**, to remove a fingertip holding the branch; nothing else touched. **Second *Cryptomeria*** after 'Globosa Nana', but no confusion risk — that one is a plain rounded dwarf, this one is visibly contorted |
+
+| Styrax japonicus 'Evening Light' | styrax-japonicus-evening-light.jpg | 50% 40% default — **uncropped**. The deep purple young foliage fills the card band at 0.877, already inside the gate, and the brick edging behind it is the setting rather than clutter to fix. No flowers: peak is May–Jul and this is August, so the white bells the card also names want a spring frame. **First card to arrive after the LEGAL plaque shipped and light it up** — PBR protected |
+| Pinus koraiensis 'Jack Corbit' | pinus-koraiensis-jack-corbit.jpg | 50% 40% default — **uncropped**, already 0.75. Long soft five-needle bundles filling the frame, which is exactly what separates a Korean pine from everything else in the deck. **Second *Pinus*** after *P. mugo*, and no confusion risk: mugo is short paired needles, this is long and soft |
+| Cedrus atlantica (Glauca Group) 'Horstmann’s Silberspitz' | cedrus-atlantica-glauca-group-horstmann-s-silberspitz.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card**. Primary is the shoot with its creamy-white new tips, the cultivar itself; the swap is the massed blue foliage from two paces back, the other half of the card's own visual line. Shot four seconds apart (EXIF 12:30:27 and 12:30:31), so the two frames are the same plant in the same light. Primary trimmed 7% of width only, to bring 1.075 inside the gate |
+
+| Sanguisorba 'Pink Brushes' | sanguisorba-pink-brushes.jpg | 50% 40% default — **Oscar's own two-frame split, kept whole**: cut foliage left, nodding pink bottlebrushes right. Already 3000x4000 at exactly 0.750, so nothing was cropped. The clearest case yet for the v14.34 rule — he assembled this one deliberately to show both halves, and both halves are what a person needs to recognise the plant on a bench |
+
 ## 5. Decision changelog
+
+- **v14.42 (aftercare, the hardiness lens, and a drought chip)**: three features
+  in one pass, all of them data the deck already owned finally becoming visible.
+  - **Aftercare leads the back.** `water` and `prune` are on every card and
+    rendered nowhere on the card itself — only in the search view. They are now
+    the first two rows of the trade sheet (CARD-BACK.md section A), above the
+    commerce.
+  - **`hardinessNote` is a card field**, backfilled onto **87 cards** from the
+    research files, and the lens now opens on the hardiness crest too: hold the
+    H shield and it says what the rating means (the RHS band in plain terms plus
+    the temperature range) and prints the card's own note verbatim. The Butia —
+    whose *"may tolerate about −10°C in ideal sheltered sites"* was the sentence
+    that made this field worth building — is the proof card.
+  - **A 🌵 Drought tolerant filter chip**, per Oscar. It matches the card's own
+    CLAIM (water/soil/resilience/uses text), not a guess from the thirst number,
+    using the same dry-side regex as `tools/plant-sense.js` **with negations
+    stripped first** — so Hydrangea 'Zorro' ("avoid dry soil") does not show up
+    in a drought list. 62 cards match; the two regexes are marked keep-in-sync.
+  - **Two bugs found on the way, both worth their entries:**
+    1. **The invisible LEARNED stamp was eating presses on the crest.** It sits
+       at z-index 3 exactly over the shield, opacity 0, and took the hit. Pure
+       drag feedback now carries `pointer-events:none`. Found by hit-testing the
+       crest centre and getting `DIV.stamp` back.
+    2. **A backfill ran before its field was in FIELDS and silently wrote
+       nothing.** `formatCard` serialises only keys in FIELDS, so the script
+       reported 87 cards updated in memory while the file gained zero — the
+       exact silent-loss path `plants-tool.js`'s own comments warn about, from
+       the inside. The order is now a rule: **schema first, then backfill**, and
+       verify with a grep of the written file, not the script's own count.
+
+- **v14.41 (the LENS — press-and-hold makes the power points readable)**: hold a
+  finger on the plant power points plaque (or the soil panel, or the aspect band)
+  for half a second and a readable copy opens **above the finger**; let go and it
+  disappears. Oscar's spec, built to his shape: hold-to-release, no button, no
+  state to get stuck in.
+  - **Measured before designing, and the measurement rewrote the brief.** Every
+    value on those panels renders at **5.8 real pixels** on a 390px phone — the
+    ink fitter's 6.5px floor times the 0.89 card scale, on every row, not just
+    the long ones. The readable minimum is ~11px. So this was never "some people
+    struggle"; nothing on that plaque has ever been readable on a phone without
+    pinch-zooming the OS.
+  - **That ruled out magnifying.** Scaling the panel to full screen width gives
+    9.2px — still under the floor, and blurry. The lens instead **re-typesets the
+    same values from the plant row at 17px**: same Georgia, same parchment, the
+    card's own widget icons one size up, `fmt5`/`careLabel`/`splitSoil`/
+    `parseMonths`/`extractFacing` reused so the lens can never disagree with the
+    card. Blank stays blank, same as everywhere.
+  - **Gesture safety, each case exercised in a browser before the gate**: a drag
+    that starts on the plaque still swipes (movement past the same 10px threshold
+    that separates tap from swipe disarms the hold); the release that closes the
+    lens is swallowed so it neither taps nor arms the double-tap flip; while the
+    lens is up the card ignores finger drift entirely; `touchcancel` closes it;
+    reduced-motion drops the scale animation. Front panels only — the selector
+    simply never matches a FULLART front or the back.
+  - **A test lesson for free**: the first browser check reported the feature dead
+    because it measured the plaque's position before the staged deal had settled,
+    then pressed stale coordinates that landed on the photograph. The feature was
+    fine; the probe pressed the wrong place. Wait for `data-dealing` to clear
+    before measuring anything on a card.
+
+- **v14.40 (238 dealt / 81 held — Sanguisorba, and a perf check that counted the
+  wrong thing)**: *Sanguisorba* 'Pink Brushes', a new genus, from a split Oscar
+  assembled himself. Kept whole and uncropped.
+  - **The gate went 16/17 and it was the TEST that was wrong, not the card.**
+    perf-test's *"buried photos are not painted"* counted visible `<img>`
+    elements as a proxy for painted cards. That held until the Cedrus swap card
+    from v14.39 reached the painted window: a swap card carries **two** images in
+    one `.tphoto` and cross-fades between them, so the proxy read 5 painted
+    photos across 4 painted cards and failed a card behaving exactly as designed.
+  - **Diagnosed before touching anything.** A probe printed every visible photo
+    with its card index and flags: four distinct cards, none of them `.deep`, and
+    the fifth image was the Cedrus's own `alt` frame on the same card. Only then
+    was the check changed.
+  - **The fix asserts the real invariant instead of loosening the number.** Two
+    checks now: *no `.deep` card paints a photo* (which is what the budget was
+    always about, and is asserted directly rather than inferred), and a count
+    ceiling of `MAX_PAINTED + swap frames in the window`, so a genuine leak still
+    fails. **Not a threshold bump** — the ceiling is derived from what the window
+    legitimately holds, and it would have caught this batch if anything really
+    had leaked.
+
+- **v14.39 (237 dealt / 81 held — Styrax, Korean pine, Atlas cedar)**: three
+  cards, two of them uncropped, and the deck's fourth photo swap.
+  - **Oscar named the mapping this time** — *"first plant is styrax, second the
+    pinus"* — and it agreed with the leaves, which is the opposite of the Vitex
+    pair two days ago. Named and checked beats named alone; both were still
+    verified against the foliage before dealing.
+  - **The Cedrus is a swap card.** Its `visual` promises two things a single
+    frame cannot hold: creamy-white new tips AND blue-green massed needles. The
+    close-up is the cultivar, the wider frame is the plant. **Four seconds apart
+    in the EXIF**, so the pair is honest in a way a swap assembled from two
+    visits would not be — same plant, same light, same minute.
+  - **An apostrophe collision, solved by the deck's own precedent.** *Horstmann's*
+    inside a single-quoted cultivar name failed the validator's balanced-quote
+    check. The deck already settled this: *Erysimum* `'Bowles’s Mauve'` and
+    *Hydrangea paniculata* `'Wim’s Red'` carry a typographic U+2019 in `latin`
+    and a plain apostrophe in `common`. Followed exactly, rather than inventing a
+    third convention or mangling the name.
+  - **Two of three needed no crop at all.** The crop-less rule (v14.34) is now
+    the normal outcome rather than the exception: five of the last eight
+    photographs have gone through untouched or with a single problem-fixing trim.
+
+- **v14.38 (the LEGAL plaque — item 0c closed)**: `compliance` is now a card
+  field, a CSV column and a rendered block, and **20 cards carry one**. With the
+  SAFETY plaque from v14.30, item 0c is finished.
+  - **Reading the deck's own notes first changed the design again.** There are
+    not thirteen reasons a plant fails to comply, there are **six**, and one of
+    them accounts for most of the cards: **breeder's rights (12)**, Schedule 9
+    (4), an outright sale/propagation restriction (Gunnera), controlled waste
+    (knotweed), a plant-health host (the Olive), and wild-harvest controls
+    (*Dicksonia*). Final tiers: **2 restricted, 6 legal duty, 12 licence.**
+  - **So the plaque has two weights, and deliberately is NOT the safety plaque's
+    twin.** A statutory duty is engraved — slate ground, cut rule down the side,
+    small-caps. Breeder's rights gets a quiet grey strip, because **dressing a
+    licensing note as a legal warning devalues the warnings that are real**. PBR
+    is an invoice question about what the NURSERY may propagate; it is not a duty
+    on anyone holding the plant, and on a learning card it is close to noise.
+  - **The information was never missing — it was smuggled.** Eleven cards already
+    showed legal warnings, but only because someone had stuffed them into fields
+    meant for other things: `resilience`, `type`, `returnRisk`, `soil`. A
+    Schedule 9 offence was sitting in a field called *Return risk*, in the buyer
+    grid, in the same type as pot sizes. **20 field edits** moved those into
+    `compliance` and cleared the duplicates, keeping the horticulture (Cotoneaster
+    keeps *"otherwise superb for bees and birds"*; *Rosa rugosa* keeps *"salt,
+    sand and drought proof · suckers"*). Where the smuggled prose was BETTER than
+    the researched line — knotweed's, which spelled out the controlled-waste duty
+    — the better wording won and became the plaque.
+  - **The two `soil` warnings were left alone on purpose** (the Olive's Xylella
+    note, knotweed's). They render on the card FRONT, a different surface, so
+    they are not duplicates of the back plaque.
+  - **THIRD NEGATION BUG, caught before it shipped.** The ban tier matched
+    `\bbanned\b` inside *"Sale is not banned, but it must not be planted in the
+    wild"* and tiered **Virginia creeper as RESTRICTED** — a red plaque on a plant
+    that is perfectly legal to sell. After "should not be treated as edible"
+    (v14.30) and "avoid dry soil" (v14.31), this is now a standing rule, not an
+    anecdote: **when a classifier keys on a word, strip the negations before the
+    ladder runs, and test the classifier against every row of real data before
+    trusting it.** All three bugs were found the same way — by running the tiering
+    over the actual corpus and reading every line of the output.
+
+- **v14.37 (234 dealt / 81 held — three in, and the crop-less rule earning its
+  keep)**: *Eupatorium* 'Pink Frost' and *Cryptomeria* Serama new, *Erysimum*
+  'Bowles's Mauve' filled from the hold list on Oscar's identification.
+  - **Three photographs, three different answers to "should this be cropped?"**,
+    and the rule from v14.34 decided all three without argument. The Eupatorium:
+    nothing wrong with it, so **nothing done** — pot below the plaque line, aspect
+    already 0.75. The Erysimum: the lower quarter is bare gravel pushing the plant
+    out of the card band, which is on the list of real problems, so **trimmed**.
+    The Cryptomeria: **3% off the bottom** and not a pixel more, because a
+    fingertip holding the branch was showing along the edge. A finger is a label:
+    it is a thing in the frame that should not be on a customer-facing card.
+  - **`deal-plant.js` shortchanged a master again** — the Erysimum came out
+    1200x1200 only because its crop was square; the same tool would have cost a
+    portrait master a quarter of its width. Restaged from the crop as v14.36 says.
+    That is twice in two sessions; the note in v14.36 stands.
+  - **Ninth `compliance` line with nowhere to render** (Serama is PBR protected).
+  - Both new cards carry a `visual` whose flower half is missing from the
+    photograph — the Eupatorium's pink flower heads (Jul–Sep) and the Erysimum's
+    mauve spires (near year-round). Neither is a defect; both are one photograph
+    away, and the Erysimum's is the easiest reshoot on the whole list.
+
+- **v14.36 (231 dealt / 82 held — the Vitex pair, settled by the leaves)**:
+  Oscar confirmed the reading in one word. The narrow-leaflet plant is
+  **'Delta Blues'**, the broad-leaflet plant is **'Flip Side'** — the opposite of
+  the order they arrived in.
+  - **The evidence that settled it was already on the card.** 'Flip Side's own
+    `cvs` line reads *"hybrid of Vitex trifolia 'Purpurea' × V. agnus-castus"*,
+    and *trifolia* is exactly the broad, purple-backed leaf in the second
+    photograph. Nothing external was needed; the research Oscar had already done
+    contained the answer, and reading it beat trusting the send order.
+  - **Masters restaged at 1200×1600, not the 900×1200 `deal-plant.js` writes.**
+    That tool caps the LONG edge at 1200 while `add-plant.js` caps the WIDTH — a
+    portrait photo dealt through the former loses a quarter of its width for no
+    reason. Worth remembering whenever a held card is dealt from an already-
+    prepared master: deal it, then restage the master from the original.
+  - Parked filenames retired and their CREDITS entries removed. The assignment
+    and the reason for it now live on each photo's licence line, so the next
+    person to touch these two does not re-derive it.
+  - **A stale static server on :8477 killed a gate run mid-flight** (exit 137
+    after app-test). It was left behind by a screenshot step whose `kill` did not
+    take. If a gate dies for no visible reason, check the port before suspecting
+    the change.
+
+- **v14.35 (229 dealt / 84 held — one dealt, two held on a mapping question)**:
+  three cards and three photographs arrived together, and for two of them the
+  order they came in and the leaves inside them disagree.
+  - ***Cephalanthus* 'Fiber Optics' dealt.** Its photograph is unmistakable and
+    both readings agree on it.
+  - **Both *Vitex* cards HELD, both photographs parked.** By arrival order the
+    narrow-leaflet photo is 'Flip Side'; by the leaves it is 'Delta Blues'.
+    **'Flip Side' is a *V. trifolia* 'Purpurea' × *V. agnus-castus* hybrid** —
+    Oscar's own `cvs` line says so — sold for broad, purple-backed foliage, while
+    'Delta Blues' is a straight *V. agnus-castus* with narrow palmate leaflets
+    `[Inference]`. The two cards are otherwise near-identical: same genus, same
+    First Editions series, both blue, same aspect, soil and pruning. **A swap
+    would be invisible on the card and wrong on both**, which is exactly the
+    condition for parking rather than guessing. VQ 58.
+  - **EXIF settled the arrival order and did NOT settle the question.** Capture
+    times are 16:17:26 (narrow), 16:17:33 (broad), 16:19:05 (buttonbush) — so the
+    upload order was not the capture order, which is worth knowing when reasoning
+    from "he sent them in this order" ever feels safe. It tells us which was shot
+    first; it cannot tell us which card either belongs to.
+  - Parked names describe the LEAF, not a guess at the plant:
+    `vitex-unidentified-narrow-leaflets.jpg`, `vitex-unidentified-broad-leaflets.jpg`.
 
 - **v14.34 (crop less — a standing correction from Oscar)**: the Gaura composite
   was cropped to its flower frame and Oscar reversed it: *"don't change the image

@@ -1929,6 +1929,61 @@ placeholder to match the flower.
 ---
 
 
+### 58. Which Vitex is which? — RESOLVED by Oscar; the leaves were right
+2026-08-21. Three cards, three photographs, and for two of them **the order they
+arrived in and the leaves in them disagree.** Rather than guess, both Vitex cards
+are written and held, and both photographs are parked under descriptive names.
+
+**The buttonbush was never in doubt** — it is the only non-*Vitex* plant of the
+three, its photograph is unmistakably *Cephalanthus* (large glossy opposite ovate
+leaves, impressed veins, red stems), and both readings put it with the same card.
+**Dealt.**
+
+**The two Vitex are the problem.**
+
+| photograph | what the leaves say | EXIF |
+|---|---|---|
+| `vitex-unidentified-narrow-leaflets.jpg` | 5–7 **narrow** lanceolate leaflets radiating from one point — the classic *V. agnus-castus* leaf | 16:17:26 |
+| `vitex-unidentified-broad-leaflets.jpg` | **broader** leaflets in threes on purple-flushed petioles — the *V. trifolia* leaf | 16:17:33 |
+
+- **By the order they were sent**, the narrow one is 'Flip Side' and the broad one
+  is 'Delta Blues'.
+- **By the leaves**, it is the other way round `[Inference]`. **'Flip Side' is a
+  hybrid of *V. trifolia* 'Purpurea' × *V. agnus-castus*** — Oscar's own `cvs`
+  line says so — and it is sold for exactly that broader, purple-backed foliage.
+  **'Delta Blues' is a straight *V. agnus-castus* cultivar**, so narrow palmate
+  leaflets.
+
+Those two cards are otherwise near-identical — same genus, same First Editions
+series, both blue-flowered, same aspect, same soil, same pruning — so a swap here
+would be invisible on the card and wrong on both.
+
+**Neither is guessed.** Both cards are in the hold block with their full data;
+both photographs sit in `photos/` claimed by nothing, which `data-audit` reports
+as unclaimed rather than missing.
+
+**RESOLVED 2026-08-21.** Oscar: *"correct"* — the leaf reading stands, and the
+send order was the misleading half. **Both dealt on that basis:**
+
+| card | photograph |
+|---|---|
+| *Vitex agnus-castus* 'Piivac-I' — **Delta Blues** | the NARROW-leaflet plant |
+| *Vitex* × 'Bailtexone' — **Flip Side** | the BROAD-leaflet plant |
+
+Both masters restaged at 1200x1600 from the originals rather than the 900x1200
+`deal-plant.js` produces, since the parked files already had the rotation baked
+in and nothing needed cropping. The two parked filenames are retired and their
+CREDITS entries removed; the assignment and the reason for it are recorded on
+each photo's licence line, so the next person to touch these two does not have to
+re-derive it.
+
+**Kept for the record, because it is the useful part:** the send order and the
+leaves disagreed, and the leaves won. A card's own `cvs` line — *"hybrid of Vitex
+trifolia 'Purpurea' × V. agnus-castus"* — was the evidence that settled it.
+
+---
+
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

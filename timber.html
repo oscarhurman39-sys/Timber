@@ -105,8 +105,12 @@
     background:linear-gradient(180deg,rgba(4,12,7,.12) 0%,rgba(4,12,7,.35) 42%,rgba(4,10,6,.94) 100%)}
   .leafmark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.16}
   .leafmark svg{width:70%;height:70%}
+  /* pointer-events:none — the stamps are drag feedback, not targets, and the
+     invisible LEARNED stamp sits exactly over the hardiness crest: it was eating
+     the press that opens the hardiness lens (found 2026-08-25 by hit-testing the
+     crest centre and getting DIV.stamp back). */
   .stamp{position:absolute;top:26px;padding:6px 14px;border:3px solid;border-radius:10px;
-    font-weight:900;font-size:20px;letter-spacing:1px;opacity:0;z-index:3}
+    font-weight:900;font-size:20px;letter-spacing:1px;opacity:0;z-index:3;pointer-events:none}
   .stamp.learn{right:20px;color:var(--gold);border-color:var(--gold);transform:rotate(12deg)}
   .stamp.skip{left:20px;color:#ff6b6b;border-color:#ff6b6b;transform:rotate(-12deg)}
   .fbody{position:relative;padding:20px 20px 18px;z-index:2}
@@ -128,23 +132,34 @@
 
   /* BACK — the buyer trade sheet (content lives in .backfit, sized to the card) */
   .back{transform:rotateY(180deg)}
+  /* The back wears the card's own trim. art/back-600.webp is the FRONT's outer
+     gold edge (lifted from art/frame-600.webp, pixel for pixel, so the two faces
+     match at the rim) with a dark etched-botanical field inside it and an inner
+     double rule. Purely decorative — every warning and care line on this face is
+     live text over it, per CARD-BACK.md. Padding clears the inner rule, which
+     sits at 4.2% of the card width. */
   .backfit{position:absolute;left:50%;top:50%;width:calc(420px*var(--csx,0.75));height:calc(600px*var(--csy,0.75));
-    transform:translate(-50%,-50%);border-radius:16px;background:linear-gradient(180deg,#0d1c13,#0a160e);
-    padding:18px 18px 16px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
+    transform:translate(-50%,-50%);border-radius:16px;
+    background:#0a160e url(art/back-600.webp) center/100% 100% no-repeat;
+    padding:26px 24px 22px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
     box-shadow:0 10px 24px rgba(0,0,0,.4)}
   .back-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;
-    border-bottom:1px solid rgba(255,255,255,.09);padding-bottom:10px}
+    border-bottom:1px solid rgba(216,189,120,.28);padding-bottom:10px}
   .back-head h3{margin:0;font-size:18px;font-weight:800;letter-spacing:-.3px}
   .back-head .h{font-size:11px;font-weight:800;color:#04120a;background:var(--leaf1);
     padding:3px 8px;border-radius:20px;letter-spacing:.3px}
   .price{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;
-    background:rgba(76,215,135,.08);border:1px solid rgba(76,215,135,.2);border-radius:12px;padding:10px 12px}
+    background:rgba(9,20,13,.66);border:1px solid rgba(216,189,120,.22);border-radius:12px;padding:10px 12px}
   .price .cell .l{font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
   .price .cell .n{font-size:14px;font-weight:700;color:#eafff2;margin-top:2px}
   .price .cell.m .n{color:var(--gold)}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.07);
-    border-radius:12px;overflow:hidden}
-  .grid .g{background:#0d1c13;padding:9px 11px}
+  /* Panels sit ON the card now, not over it. Opaque cells read as patches pasted
+     onto the artwork; a translucent ground lets the etched field show through, so
+     the trade grid belongs to the same object as the trim around it. Gold-tinted
+     gutters instead of white ones, for the same reason. */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(216,189,120,.16);
+    border-radius:12px;overflow:hidden;border:1px solid rgba(216,189,120,.14)}
+  .grid .g{background:rgba(9,20,13,.74);padding:9px 11px}
   .grid .g.full{grid-column:1 / -1}
   .grid .g .l{font-size:9px;letter-spacing:1.1px;text-transform:uppercase;color:var(--leaf1);opacity:.85}
   .grid .g .n{font-size:12.5px;line-height:1.4;color:#eafff2;margin-top:3px}
@@ -186,6 +201,32 @@
   .tox.edible .tox-n,.tox.clear .tox-n{color:#e9f6df}
   /* a hazard shouts, an all-clear does not: the striped rule is for the hazard tiers */
   .tox.edible .tox-rule,.tox.clear .tox-rule{height:3px;background:var(--tox-ink);opacity:.55}
+
+  /* LEGAL PLAQUE — the safety plaque's sibling, deliberately NOT its twin.
+     A statutory duty is engraved: dark slate, a cut gold rule down the side,
+     small-caps. Breeder's rights is a quiet grey strip, because dressing a
+     licensing note as a warning devalues the warnings that are real. */
+  .lgl{position:relative;border-radius:12px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.18)),var(--lgl-paper);
+    border:1px solid var(--lgl-edge);border-left:4px solid var(--lgl-ink);
+    box-shadow:0 5px 14px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.05)}
+  .lgl-body{display:flex;gap:10px;align-items:flex-start;padding:9px 11px 10px}
+  .lgl-glyph{flex:0 0 auto;width:17px;height:17px;margin-top:2px;fill:var(--lgl-ink);opacity:.95}
+  .lgl-l{font-family:Georgia,"Times New Roman",serif;font-size:9.5px;font-weight:700;
+    letter-spacing:2px;text-transform:uppercase;color:var(--lgl-ink)}
+  .lgl-tier{font-family:Georgia,"Times New Roman",serif;font-size:9px;font-weight:700;
+    letter-spacing:1.1px;text-transform:uppercase;color:var(--lgl-ink);
+    border:1px solid var(--lgl-ink);border-radius:20px;padding:1px 7px;line-height:1.3;opacity:.9}
+  .lgl-n{font-size:12.5px;line-height:1.42;color:#e8eef2;margin-top:4px}
+  /* a duty on whoever holds the plant */
+  .lgl.statute{--lgl-ink:#cfe0ea;--lgl-paper:#151d24;--lgl-edge:rgba(207,224,234,.26)}
+  /* the plant may not move at all — the only tier that raises its voice */
+  .lgl.ban{--lgl-ink:#ef5f5f;--lgl-paper:#241416;--lgl-edge:rgba(239,95,95,.40)}
+  .lgl.ban .lgl-n{color:#ffe9e4}
+  /* a licensing matter for the nursery, not a duty on anyone: kept quiet */
+  .lgl.rights{--lgl-ink:#9aa6ad;--lgl-paper:#141a1d;--lgl-edge:rgba(154,166,173,.18);
+    border-left-width:3px}
+  .lgl.rights .lgl-n{color:#bcc7cd;font-size:12px}
 
   .back .fliphint{margin-top:auto;padding-top:6px}
 
@@ -882,6 +923,52 @@
   .pval{font-size:11px;line-height:1;display:flex;align-items:center}
   .pval.two{flex-direction:column;align-items:flex-start;justify-content:center;gap:0px;font-size:10.5px;line-height:1.15}
   .wrow{display:flex;align-items:center;justify-content:space-between;padding:0 4px;height:100%}
+  /* THE LENS — press-and-hold any bottom panel (power points, soil, aspect) and a
+     readable copy opens above the finger; release and it goes. The card's ink
+     bottoms out at the fitter's 6.5px floor, which is ~5.8 real px at phone card
+     scale — half the readable minimum — so the lens RE-TYPESETS the same values
+     from PLANTS data at 17px instead of magnifying a picture of tiny type into a
+     blurry picture of small type. Same parchment, same Georgia, same widget icons. */
+  .lens{position:fixed;left:50%;z-index:60;width:min(88vw,360px);
+    transform:translateX(-50%) scale(.92);transform-origin:50% 100%;
+    opacity:0;visibility:hidden;pointer-events:none;   /* never a tap target — it lives under a held finger */
+    transition:opacity .16s ease,transform .16s ease,visibility 0s .16s;
+    background:linear-gradient(175deg,#f2e4c0,#e2cd9c);
+    border:1px solid #8a6a2a;border-radius:14px;padding:13px 15px 12px;
+    box-shadow:0 0 0 3px rgba(216,189,120,.35),0 18px 44px rgba(0,0,0,.55);
+    font-family:Georgia,"Times New Roman",serif;color:#2b2412;
+    max-height:calc(100vh - 100px);overflow:hidden}
+  .lens.show{opacity:1;visibility:visible;transform:translateX(-50%) scale(1);
+    transition:opacity .16s ease,transform .16s ease}
+  @media (prefers-reduced-motion:reduce){.lens,.lens.show{transition:none}}
+  .lens-head{font-size:10.5px;font-weight:700;letter-spacing:2.6px;text-transform:uppercase;
+    text-align:center;color:#7a5b22;border-bottom:1px solid rgba(122,91,34,.35);
+    padding-bottom:7px;margin-bottom:4px}
+  .lens-row{display:flex;align-items:center;gap:10px;padding:6.5px 0;
+    border-bottom:1px solid rgba(122,91,34,.16)}
+  .lens-row:last-child{border-bottom:none;padding-bottom:2px}
+  .lens-l{flex:0 0 84px;font-size:9.5px;font-weight:700;letter-spacing:1.4px;
+    text-transform:uppercase;color:#7a5b22;line-height:1.35}
+  .lens-v{flex:1;display:flex;align-items:center;gap:9px;font-size:17px;line-height:1.3;
+    flex-wrap:wrap;row-gap:3px}
+  .lens-v b{font-weight:700}
+  .lens-row.warn .lens-l{color:#8c3a1c}
+  .lens-row.warn .lens-v{color:#6e2c13;font-size:15px}
+  .lens-months{display:inline-flex;gap:2.5px}
+  .lens-months b{font-weight:700;font-size:11px;width:16px;height:19px;border-radius:4px;
+    display:inline-flex;align-items:center;justify-content:center;color:rgba(43,36,18,.42)}
+  .lens-months b.on{background:#1d5c38;color:#eafff2}
+  /* the card's own widget icons, one size up; the card rules are .wrow.x .ricon so
+     these need the extra class to outweigh them */
+  .lens .wrow{padding:0;height:auto;gap:3px;justify-content:flex-start}
+  .lens .wrow.pest .ricon{height:24px}
+  .lens .wrow.thirst .ricon{height:19px}
+  .lens .wrow.care .ricon{height:28px}
+  /* a held finger must never start a text selection, an image drag, or the
+     browser's own callout — and on Android the image sheet targets any <img>,
+     so the drag block has to cover every one the app renders */
+  .face.front{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+  img{-webkit-user-drag:none;-webkit-touch-callout:none}
   .ricon{position:relative}
   .ricon>img{height:100%;width:auto}
   .ricon .fillwrap{position:absolute;left:0;top:0;height:100%;overflow:hidden;width:calc(var(--fill)*100%)}
@@ -1025,7 +1112,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r168 · 2026-08-23 · 0c1ba3f';
+const BUILD='r188 · 2026-09-02 · ddc8089';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -1711,15 +1798,16 @@ const PLANTS = [
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ UK RESTRICTED — verify ID before any sale",
+   type:"",
    shrink:"",
-   returnRisk:"Most plants sold as manicata are the banned Gunnera ×cryptica — do not sell, propagate or plant without authoritatively verified ID; do not compost unidentified material",
+   returnRisk:"",
    pots:"",
    cvs:"syn. G. brasiliensis",
    hardiness:"H4",
-   resilience:"⚠ UK RESTRICTED — most 'manicata' are the banned Gunnera ×cryptica; verify ID",
+   resilience:"",
    uses:"",
    size:"2.5–3 m H × 3–4.5 m W",
+   compliance:"UK RESTRICTED. Most plants sold as 'manicata' are the banned Gunnera ×cryptica — do not sell, propagate or plant without authoritatively verified ID; do not compost unidentified material.",
    seasonalImpact:"", growthSpeed:16, pestRisk:6, thirst:20, careLevel:16, sunNeed:58, sunMin:28},
 
   {common:"October Glory Red Maple", latin:"Acer rubrum 'October Glory'", hue:8,
@@ -2145,6 +2233,7 @@ const PLANTS = [
    resilience:"drought · coastal · urban tolerant",
    uses:"containers · Mediterranean gardens · fruit",
    size:"4–8 m H × 1.5–2.5 m W",
+   compliance:"Xylella fastidiosa high-risk host. Imported olives are subject to plant-health inspection; report suspected symptoms rather than moving affected material.",
    seasonalImpact:"", growthSpeed:5, pestRisk:9, thirst:4, careLevel:9, sunNeed:95, sunMin:80},
 
   {common:"Bloodgood Japanese Maple", latin:"Acer palmatum 'Bloodgood'", hue:350,
@@ -2236,15 +2325,16 @@ const PLANTS = [
    trade:"",
    retail:"",
    margin:"",
-   type:"PBR protected — propagation for sale restricted",
+   type:"",
    shrink:"",
-   returnRisk:"Plant Breeders' Rights apply: do not propagate 'Myersblue' for resale without a licence",
+   returnRisk:"",
    pots:"",
    cvs:"syn. Eryngium × zabelii 'Big Blue'; cultivar code 'Myersblue'",
    hardiness:"H5",
    resilience:"drought tolerant · coastal",
    uses:"pollinators · cut flowers · gravel gardens",
    size:"60–75 cm H × 30–50 cm W",
+   compliance:"Plant Breeders' Rights apply: do not propagate 'Myersblue' for resale without a licence.",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:3, careLevel:4, sunNeed:98, sunMin:85},
 
   {common:"Winter Beauty Honeysuckle", latin:"Lonicera × purpusii 'Winter Beauty'", hue:50,
@@ -4311,15 +4401,16 @@ const PLANTS = [
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ NEVER STOCK — invasive, ID only",
+   type:"",
    shrink:"",
-   returnRisk:"Must not be planted or caused to grow in the wild, and you must stop it spreading off your property; cut material and contaminated soil are controlled waste — registered carrier and authorised facility only. Use a specialist contractor",
+   returnRisk:"",
    pots:"",
    cvs:"syn. Fallopia japonica · Polygonum cuspidatum",
    hardiness:"H7",
-   resilience:"⚠ ILLEGAL TO SPREAD — rhizomes regrow after years dormant",
-   uses:"NOT for sale or planting · ID and report only",
+   resilience:"",
+   uses:"ID and report only",
    size:"1.5–2.5 m H × 2.5–4 m+ W",
+   compliance:"ILLEGAL TO SPREAD. Must not be planted or caused to grow in the wild, and you must stop it spreading off your property; cut material and contaminated soil are controlled waste — registered carrier and authorised facility only. A 1cm fragment of rhizome regrows after years dormant. Use a specialist contractor.",
    seasonalImpact:"", growthSpeed:20, pestRisk:2, thirst:8, careLevel:20, sunNeed:70, sunMin:40},
 
   {common:"Jelena Witch Hazel", latin:"Hamamelis × intermedia 'Jelena'", hue:28,
@@ -4420,6 +4511,7 @@ const PLANTS = [
    resilience:"Hardy, vigorous and long-lived in stable still water; generally low maintenance once established but dislikes constant splashing and overcrowding.",
    uses:"Medium to large ponds, wildlife ponds, ornamental aquatic planting, water-surface cover and summer flowering.",
    size:"0.1–0.15m H × 1–1.5m W",
+   hardinessNote:"Hardy through most of the UK when the rhizome remains submerged; foliage dies back for winter and regrows in spring.",
    seasonalImpact:"", growthSpeed:14, pestRisk:9, thirst:20, careLevel:6, sunNeed:95, sunMin:80},
 
   {common:"Dwarf Fan Palm", latin:"Chamaerops humilis", hue:105,
@@ -4446,6 +4538,7 @@ const PLANTS = [
    uses:"containers · gravel gardens · coastal and exotic planting",
    size:"1.5-2.5m H × 1-1.5m W",
    toxicity:"Leaf stalks can carry sharp spines capable of causing physical injury; site away from narrow paths and children's play areas.",
+   hardinessNote:"Hardier than its Mediterranean appearance suggests but less cold tolerant than Trachycarpus fortunei; severe UK winters can damage leaves or stems.",
    seasonalImpact:"", growthSpeed:4, pestRisk:4, thirst:6, careLevel:8, sunNeed:70, sunMin:40},
 
   {common:"Corkscrew Hazel", latin:"Corylus avellana 'Contorta'", hue:40,
@@ -4472,6 +4565,7 @@ const PLANTS = [
    uses:"winter structure · cut stems · containers · wildlife gardens",
    size:"2.5-4m H × 2.5-4m W",
    toxicity:"Nuts, when produced and fully mature, are edible.",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:7, pestRisk:7, thirst:8, careLevel:6, sunNeed:70, sunMin:35},
 
   {common:"Cider Gum 'Azura'", latin:"Eucalyptus gunnii Azura ('Cagire')", hue:190,
@@ -4498,6 +4592,7 @@ const PLANTS = [
    uses:"silver foliage · cut foliage · containers with regular pruning",
    size:"4-8m H × 2.5-4m W",
    toxicity:"Eucalyptus foliage and concentrated eucalyptus oils are harmful if ingested in quantity and should be kept away from pets and children.",
+   hardinessNote:"Selected for improved hardiness and compact growth; established plants are hardy through most UK gardens, though young shoots can be damaged by severe frost.",
    seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:9, careLevel:10, sunNeed:100, sunMin:85},
 
   {common:"Japanese Cherry 'Kanzan'", latin:"Prunus 'Kanzan'", hue:330,
@@ -4599,6 +4694,7 @@ const PLANTS = [
    uses:"small gardens · multi-stem trees · blossom and autumn colour",
    size:"4-8m H × 2.5-4m W",
    toxicity:"Ripe berries are edible and are also readily taken by birds.",
+   hardinessNote:"Exceptionally hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:12, careLevel:5, sunNeed:70, sunMin:35},
 
   {common:"Crab Apple 'John Downie'", latin:"Malus 'John Downie'", hue:18,
@@ -4700,6 +4796,7 @@ const PLANTS = [
    resilience:"hardy and strong-growing · rhizomes escape without a barrier",
    uses:"screening · Japanese-style gardens · large containers",
    size:"4-8m H × 2.5-4m+ W",
+   hardinessNote:"Hardy through most UK gardens once established.",
    seasonalImpact:"", growthSpeed:17, pestRisk:7, thirst:13, careLevel:14, sunNeed:70, sunMin:40},
 
   {common:"Cherry Laurel 'Rotundifolia'", latin:"Prunus laurocerasus 'Rotundifolia'", hue:115,
@@ -4801,6 +4898,7 @@ const PLANTS = [
    uses:"deep shade · evergreen screening · dry borders · containers",
    size:"1.5-2.5m H × 1.5-2.5m W",
    toxicity:"Berries are ornamental and should not be eaten.",
+   hardinessNote:"Hardy throughout most UK gardens.",
    seasonalImpact:"", growthSpeed:7, pestRisk:5, thirst:7, careLevel:4, sunNeed:20, sunMin:5},
 
   {common:"Darwin's Barberry", latin:"Berberis darwinii", hue:30,
@@ -4892,15 +4990,16 @@ const PLANTS = [
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ Schedule 9 — do not plant in the wild",
+   type:"",
    shrink:"",
-   returnRisk:"Schedule 9 invasive non-native species. It is not banned from sale or ordinary garden ownership, but it must not be planted or otherwise caused to grow in the wild. Prevent escape into semi-natural habitats and never dump garden material in the countryside.",
+   returnRisk:"",
    pots:"",
    cvs:"",
    hardiness:"H7",
-   resilience:"⚠ Schedule 9 — never plant in the wild · otherwise superb for bees and birds",
+   resilience:"otherwise superb for bees and birds",
    uses:"north walls · low banks · ground cover · wildlife planting",
    size:"1-1.5m H × 1.5-2.5m W",
+   compliance:"Schedule 9 invasive non-native species. It is not banned from sale or ordinary garden ownership, but it must not be planted or otherwise caused to grow in the wild. Prevent escape into semi-natural habitats and never dump garden material in the countryside.",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:6, careLevel:4, sunNeed:60, sunMin:15},
 
   {common:"Californian Lilac 'Concha'", latin:"Ceanothus 'Concha'", hue:220,
@@ -4926,6 +5025,7 @@ const PLANTS = [
    resilience:"fast and drought-proof · short-lived · resents hard pruning",
    uses:"sunny walls · Mediterranean borders · pollinators",
    size:"2.5-4m H × 2.5-4m W",
+   hardinessNote:"Hardy in many UK gardens but vulnerable to severe frost, cold winds and wet winters; a warm sheltered site markedly improves reliability.",
    seasonalImpact:"", growthSpeed:14, pestRisk:5, thirst:6, careLevel:10, sunNeed:100, sunMin:85},
 
   {common:"Redvein Enkianthus", latin:"Enkianthus campanulatus", hue:15,
@@ -4951,6 +5051,7 @@ const PLANTS = [
    resilience:"long-lived and cold hardy · dislikes lime and drying wind",
    uses:"woodland gardens · autumn colour · Japanese-style planting",
    size:"2.5-4m H × 2.5-4m W",
+   hardinessNote:"Very hardy in suitable soil throughout the UK.",
    seasonalImpact:"", growthSpeed:6, pestRisk:4, thirst:14, careLevel:7, sunNeed:60, sunMin:30},
 
   {common:"Strawberry Tree", latin:"Arbutus unedo", hue:10,
@@ -4977,6 +5078,7 @@ const PLANTS = [
    uses:"coastal gardens · evergreen specimens · wildlife planting",
    size:"4-8m H × 4-8m W",
    toxicity:"Ripe fruits are edible but are generally valued more as an ornamental feature than as a high-quality dessert fruit.",
+   hardinessNote:"Hardy in many UK gardens, particularly in mild, sheltered and coastal areas; young growth can be damaged by severe frost.",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:7, careLevel:6, sunNeed:90, sunMin:70},
 
   {common:"Soft Tree Fern", latin:"Dicksonia antarctica", hue:115,
@@ -5002,6 +5104,8 @@ const PLANTS = [
    resilience:"very slow to build trunk · pack the crown with straw before frost",
    uses:"woodland gardens · shaded courtyards · fern and exotic planting",
    size:"2.5-4m H × 2.5-4m W",
+   compliance:"Commercially harvested Australian tree ferns may be subject to source-country harvesting, tagging and trade controls. Dicksonia antarctica itself is not currently listed under CITES for trade restrictions.",
+   hardinessNote:"The crown is vulnerable below roughly -5°C. In much of the UK the crown should be packed with dry straw, fleece or similar insulation before significant frost, with extra protection around the upper trunk in colder areas.",
    seasonalImpact:"", growthSpeed:2, pestRisk:3, thirst:18, careLevel:16, sunNeed:25, sunMin:10},
 
   {common:"Golden Privet", latin:"Ligustrum ovalifolium 'Aureum'", hue:55,
@@ -5124,9 +5228,10 @@ const PLANTS = [
    pots:"",
    cvs:"'Engelmannii' · not to be confused with Boston Ivy, Parthenocissus tricuspidata",
    hardiness:"H6",
-   resilience:"⚠ Schedule 9 — must not be planted or grown in the wild · self-clinging · shade-tolerant",
+   resilience:"self-clinging · shade-tolerant",
    uses:"walls · fences · fast screening · autumn colour",
    size:"8–12 m H × 4–8 m W",
+   compliance:"Listed on Schedule 9 of the Wildlife and Countryside Act 1981. Sale is not banned, but it must not be planted or otherwise caused to grow in the wild.",
    seasonalImpact:"", growthSpeed:18, pestRisk:2, thirst:8, careLevel:12, sunNeed:60, sunMin:20},
 
   {common:"Flowering Quince 'Kinshiden'", latin:"Chaenomeles speciosa 'Kinshiden'", hue:50,
@@ -5303,6 +5408,7 @@ const PLANTS = [
    uses:"evergreen climber · scented walls · courtyards · containers",
    size:"8-12m H × 4-8m W",
    toxicity:"Milky sap can irritate skin and the plant should not be eaten.",
+   hardinessNote:"Hardy in many sheltered UK gardens but vulnerable to severe frost and cold drying winds, particularly when young.",
    seasonalImpact:"", growthSpeed:11, pestRisk:5, thirst:12, careLevel:8, sunNeed:90, sunMin:65},
 
   {common:"Japanese Anemone 'Pretty Lady Maria'", latin:"Anemone × hybrida Pretty Lady Maria ('Aneplaria')", hue:150,
@@ -5429,6 +5535,7 @@ const PLANTS = [
    resilience:"cold hardy · exposed-site tolerant · generally pest free",
    uses:"specimen · autumn colour · architectural planting",
    size:"2.5–4 m H × 4–8 m W",
+   hardinessNote:"RHS H6 for the exact cultivar",
    seasonalImpact:"", growthSpeed:11, pestRisk:6, thirst:8, careLevel:7, sunNeed:95, sunMin:80},
 
   {common:"Purple Hybrid Catalpa", latin:"Catalpa × erubescens 'Purpurea'", hue:275,
@@ -5454,6 +5561,7 @@ const PLANTS = [
    resilience:"generally pest free · honey fungus resistant",
    uses:"specimen · architectural · foliage contrast",
    size:"10–15 m H × 6–10 m W",
+   hardinessNote:"H6; young growth can be damaged by late frost",
    seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:9, careLevel:6, sunNeed:95, sunMin:60},
 
   {common:"Necklace Vine", latin:"Muehlenbeckia complexa", hue:120,
@@ -5479,6 +5587,7 @@ const PLANTS = [
    resilience:"coastal tolerant · pest and disease free",
    uses:"walls · banks · containers · trailing displays",
    size:"2.5–4 m H × 1.5–2.5 m W",
+   hardinessNote:"RHS H3; best outdoors in sheltered mild UK gardens",
    seasonalImpact:"", growthSpeed:14, pestRisk:2, thirst:8, careLevel:6, sunNeed:70, sunMin:40},
 
   {common:"Star of Love Masterwort", latin:"Astrantia major 'Star of Love'", hue:350,
@@ -5504,6 +5613,7 @@ const PLANTS = [
    resilience:"exposed-site tolerant · pollinator friendly",
    uses:"borders · cut flowers · wildlife gardens",
    size:"50–100 cm H × 50–100 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:8, pestRisk:10, thirst:12, careLevel:5, sunNeed:60, sunMin:35},
 
   {common:"Black and Blue Anise-Scented Sage", latin:"Salvia guaranitica 'Black and Blue'", hue:225,
@@ -5529,6 +5639,7 @@ const PLANTS = [
    resilience:"vigorous · coastal suitable · pollinator friendly",
    uses:"borders · containers · pollinators",
    size:"1.5–2.5 m H × 1–1.5 m W",
+   hardinessNote:"RHS H3; winter protection is advisable away from mild areas",
    seasonalImpact:"", growthSpeed:14, pestRisk:11, thirst:9, careLevel:10, sunNeed:95, sunMin:80},
 
   {common:"Broadband Hosta", latin:"Hosta 'Broadband'", hue:85,
@@ -5579,6 +5690,7 @@ const PLANTS = [
    resilience:"very cold hardy · coastal tolerant",
    uses:"borders · containers · pollinators",
    size:"50–60 cm H × 30–50 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:9, pestRisk:10, thirst:11, careLevel:5, sunNeed:65, sunMin:35},
 
   {common:"St John's wort 'Miracle Night'", latin:"Hypericum × inodorum MIRACLE NIGHT ('Allmadne')", hue:345,
@@ -5605,6 +5717,7 @@ const PLANTS = [
    uses:"containers · borders · cut stems · autumn berries",
    size:"70–80 cm H × 60–75 cm W",
    toxicity:"Fruit ornamental · not to be eaten",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:42},
 
   {common:"Ivy 'Goldheart'", latin:"Hedera helix 'Oro di Bogliasco'", hue:55,
@@ -5657,6 +5770,8 @@ const PLANTS = [
    uses:"screening · walls · wildlife gardens · cottage gardens",
    size:"8–12 m H × 1.5–2.5 m W",
    toxicity:"Fruit ornamental · not to be eaten",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"RHS H4; evergreen foliage benefits from shelter",
    seasonalImpact:"", growthSpeed:14, pestRisk:12, thirst:12, careLevel:9, sunNeed:55, sunMin:35},
 
   {common:"White potato vine", latin:"Solanum laxum 'Album'", hue:0,
@@ -5683,6 +5798,7 @@ const PLANTS = [
    uses:"sunny walls · pergolas · courtyards · conservatories",
    size:"8–12 m H × 1.5–2.5 m W",
    toxicity:"Fruit ornamental · not to be eaten",
+   hardinessNote:"RHS H4; best on a warm sheltered wall",
    seasonalImpact:"", growthSpeed:16, pestRisk:8, thirst:10, careLevel:10, sunNeed:92, sunMin:78},
 
   {common:"Clematis 'Avalanche'", latin:"Clematis × cartmanii AVALANCHE ('Blaaval')", hue:0,
@@ -5709,6 +5825,7 @@ const PLANTS = [
    uses:"walls · trellis · containers · spring display",
    size:"2.5–4 m H × 1.5–2.5 m W",
    toxicity:"Skin irritant · harmful if eaten by rabbits",
+   hardinessNote:"RHS H4; shelter and gritty drainage improve winter reliability",
    seasonalImpact:"", growthSpeed:12, pestRisk:10, thirst:11, careLevel:10, sunNeed:72, sunMin:45},
 
   {common:"Weigela 'Prism Magic Carpet'", latin:"Weigela PRISM MAGIC CARPET ('VPWG18-06')", hue:335,
@@ -5785,6 +5902,8 @@ const PLANTS = [
    uses:"containers · borders · cut flowers · pollinators",
    size:"50–80 cm H × 40–60 cm W",
    toxicity:"Mildly toxic to dogs and cats if eaten · may cause dermatitis",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"Breeder minimum about -6°C maps to H4; protect tubers in UK winter",
    seasonalImpact:"", growthSpeed:14, pestRisk:12, thirst:13, careLevel:13, sunNeed:92, sunMin:68},
 
   {common:"St John's wort 'Miracle Grandeur'", latin:"Hypericum × inodorum MIRACLE GRANDEUR ('Allgrandeur')", hue:0,
@@ -5811,6 +5930,7 @@ const PLANTS = [
    uses:"containers · borders · cut stems · autumn berries",
    size:"70–80 cm H × 60–75 cm W",
    toxicity:"Fruit ornamental · not to be eaten",
+   compliance:"PBR protected · commercial propagation restricted",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:42},
 
   {common:"Rice-paper Plant 'Rex'", latin:"Tetrapanax papyrifer 'Rex'", hue:105,
@@ -5837,6 +5957,7 @@ const PLANTS = [
    uses:"exotic borders · architectural foliage · sheltered courtyards",
    size:"4-5m H × 2.5-4m+ W",
    toxicity:"Fine hairs on young growth may irritate skin, eyes or airways in sensitive people; gloves are sensible when handling or cutting.",
+   hardinessNote:"Suitable for mild and sheltered UK gardens. Frost commonly removes the foliage and may kill stems back to ground level, but an established mulched root system can reshoot in spring.",
    seasonalImpact:"", growthSpeed:19, pestRisk:5, thirst:11, careLevel:11, sunNeed:90, sunMin:65},
 
   {common:"Variegated red-osier dogwood", latin:"Cornus sericea 'Variegata'", hue:0,
@@ -5913,6 +6034,7 @@ const PLANTS = [
    resilience:"very cold hardy · drought tolerant once established",
    uses:"specimen · flowering hedges · cut flowers · pollinators",
    size:"3–4 m H × 2–3 m W",
+   hardinessNote:"Exact-cultivar Zone 5a hardiness supports H7; RHS species rating is H6",
    seasonalImpact:"", growthSpeed:10, pestRisk:12, thirst:8, careLevel:6, sunNeed:90, sunMin:62},
 
   {common:"Honeysuckle 'Rhubarb and Custard'", latin:"Lonicera periclymenum 'Rhubarb and Custard'", hue:335,
@@ -5965,6 +6087,7 @@ const PLANTS = [
    uses:"rock gardens · containers · border fronts · cut flowers",
    size:"10–30 cm H × 10–30 cm W",
    toxicity:"Bulbs not to be eaten · highly toxic to cats if eaten",
+   hardinessNote:"RHS H4; shelter and good drainage are important",
    seasonalImpact:"", growthSpeed:10, pestRisk:14, thirst:10, careLevel:10, sunNeed:92, sunMin:75},
 
   {common:"Ninebark 'Diabolo'", latin:"Physocarpus opulifolius 'Diabolo'", hue:280,
@@ -5990,6 +6113,7 @@ const PLANTS = [
    resilience:"one of the toughest dark-leaved shrubs · takes hard renovation",
    uses:"mixed borders · hedging · dark foliage contrast",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   hardinessNote:"Exceptionally hardy and suitable for even very cold UK gardens.",
    seasonalImpact:"", growthSpeed:13, pestRisk:3, thirst:9, careLevel:5, sunNeed:80, sunMin:45},
 
   {common:"Rose of Sharon 'Lavender Chiffon'", latin:"Hibiscus syriacus LAVENDER CHIFFON ('Notwoodone')", hue:290,
@@ -6015,6 +6139,7 @@ const PLANTS = [
    resilience:"heat tolerant · drought tolerant once established · coastal tolerant",
    uses:"specimen · shrub borders · screening · informal hedging",
    size:"1.5–2.5 m H × 1–1.5 m W",
+   hardinessNote:"RHS H5; breeder sources claim tolerance to about -20 to -25°C",
    seasonalImpact:"", growthSpeed:10, pestRisk:9, thirst:9, careLevel:6, sunNeed:90, sunMin:68},
 
   {common:"Eastern redbud 'Carolina Sweetheart'", latin:"Cercis canadensis CAROLINA SWEETHEART ('NCCC1')", hue:340,
@@ -6140,6 +6265,7 @@ const PLANTS = [
    resilience:"coastal tolerant · urban suitable · drought tolerant once established",
    uses:"containers · border fronts · foliage contrast · low hedging",
    size:"50–100 cm H × 50–100 cm W",
+   hardinessNote:"RHS H4; protection may be needed in colder exposed sites",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:8, careLevel:5, sunNeed:82, sunMin:48},
 
   {common:"Deciduous Azalea 'Homebush'", latin:"Rhododendron 'Homebush'", hue:335,
@@ -6166,6 +6292,7 @@ const PLANTS = [
    uses:"woodland gardens · acid borders · spring displays",
    size:"1.5-2.5m H × 1.5-2.5m W",
    toxicity:"All parts are harmful if eaten and can be toxic to people, pets and livestock.",
+   hardinessNote:"Very hardy in UK gardens, although an exposed position can damage flowers or developing buds.",
    seasonalImpact:"", growthSpeed:9, pestRisk:10, thirst:14, careLevel:9, sunNeed:50, sunMin:30},
 
   {common:"Heart-leaved houttuynia 'Pied Piper'", latin:"Houttuynia cordata 'Pied Piper'", hue:30,
@@ -6217,6 +6344,7 @@ const PLANTS = [
    uses:"containers · borders · cut flowers · architectural planting",
    size:"1–1.5 m H × 10–50 cm W",
    toxicity:"Harmful if eaten by humans, dogs and cats",
+   hardinessNote:"RHS H4; mulch outdoors and overwinter containers under cover in cold areas",
    seasonalImpact:"", growthSpeed:10, pestRisk:12, thirst:10, careLevel:9, sunNeed:92, sunMin:72},
 
   {common:"Hebe 'Emerald Gem'", latin:"Veronica 'Emerald Gem'", hue:120,
@@ -6242,6 +6370,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal tolerant · pollution tolerant",
    uses:"containers · edging · rock gardens · low hedging",
    size:"30 cm H × 30–50 cm W",
+   hardinessNote:"RHS H4; shelter improves winter reliability",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:5, careLevel:5, sunNeed:75, sunMin:45},
 
   {common:"Plantain lily 'Emerald Charger'", latin:"Hosta 'Emerald Charger'", hue:55,
@@ -6293,6 +6422,8 @@ const PLANTS = [
    resilience:"cold hardy · drought tolerant once established",
    uses:"containers · small gardens · borders · pollinators",
    size:"80 cm H × 80 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"RHS H6; breeder reports hardiness to about -18°C",
    seasonalImpact:"", growthSpeed:14, pestRisk:12, thirst:8, careLevel:5, sunNeed:94, sunMin:68},
 
   {common:"Clematis 'Josephine'", latin:"Clematis JOSEPHINE ('Evijohill')", hue:325,
@@ -6444,6 +6575,7 @@ const PLANTS = [
    resilience:"coastal tolerant · drought tolerant once established",
    uses:"containers · border fronts · coastal gardens · pollinators",
    size:"60–70 cm H × 60–70 cm W",
+   hardinessNote:"Exact trade material rates it H3; protect from severe frost",
    seasonalImpact:"", growthSpeed:9, pestRisk:9, thirst:7, careLevel:6, sunNeed:82, sunMin:50},
 
   {common:"Rhododendron 'Hoppy'", latin:"Rhododendron 'Hoppy'", hue:285,
@@ -6621,6 +6753,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal suitable",
    uses:"specimen · architectural planting · coastal gardens · large containers",
    size:"4–8 m H × 1.5–2.5 m W",
+   hardinessNote:"RHS H3; established plants may tolerate about -10°C in ideal sheltered sites",
    seasonalImpact:"", growthSpeed:6, pestRisk:6, thirst:8, careLevel:10, sunNeed:95, sunMin:78},
 
   {common:"Mexican fleabane 'Profusion'", latin:"Erigeron karvinskianus 'Profusion'", hue:345,
@@ -6696,6 +6829,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal tolerant · heat tolerant",
    uses:"rock gardens · containers · borders · pollinators",
    size:"20–30 cm H × 30–40 cm W",
+   hardinessNote:"RHS H4",
    seasonalImpact:"", growthSpeed:10, pestRisk:3, thirst:4, careLevel:4, sunNeed:95, sunMin:72},
 
   {common:"Swiss cheese plant", latin:"Monstera deliciosa", hue:120,
@@ -6722,6 +6856,7 @@ const PLANTS = [
    uses:"houseplants · conservatories · indoor specimens · tropical displays",
    size:"4–8 m H × 1.5–2.5 m W",
    toxicity:"Harmful if eaten · skin and eye irritant",
+   hardinessNote:"RHS H1B; grow indoors or under glass at 10–15°C minimum",
    seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:11, careLevel:6, sunNeed:55, sunMin:30},
 
   {common:"Aloe vera", latin:"Aloe vera", hue:120,
@@ -6748,55 +6883,380 @@ const PLANTS = [
    uses:"houseplants · conservatories · sunny windowsills · containers",
    size:"50–100 cm H × 50–100 cm W",
    toxicity:"Harmful if eaten",
+   hardinessNote:"RHS H1b; cannot tolerate freezing temperatures",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:2, careLevel:3, sunNeed:90, sunMin:60},
-   {common:"Lacecap hydrangea 'Zorro'", latin:"Hydrangea macrophylla 'Zorro'", hue:220,
+
+  {common:"Lacecap hydrangea 'Zorro'", latin:"Hydrangea macrophylla 'Zorro'", hue:220,
    visual:"Ultramarine-blue lacecaps · deep purple-black stems · dark-green leaves",
    water:"Keep evenly moist",
    aspect:"North / East / West",
    soil:"Moist, well-drained; Avoid dry soil · shelter from cold winds",
    prune:"Prune Group 4; remove faded flowers and oldest stems in spring",
-   source:"", peak:"Jun-Sep", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jun-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"branch sport of 'Blaumeise'; Royalty Collection",
-   hardiness:"H5", resilience:"part-shade tolerant · urban suitable",
-   uses:"containers · shrub borders · cut flowers · woodland gardens", size:"1–1.5 m H × 1–1.5 m W",
+   hardiness:"H5",
+   resilience:"part-shade tolerant · urban suitable",
+   uses:"containers · shrub borders · cut flowers · woodland gardens",
+   size:"1–1.5 m H × 1–1.5 m W",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"RHS H5; flowers can be affected by late frosts",
    seasonalImpact:"", growthSpeed:12, pestRisk:11, thirst:14, careLevel:7, sunNeed:58, sunMin:35},
+
   {common:"Japanese blood grass 'Red Baron'", latin:"Imperata cylindrica 'Rubra'", hue:0,
    visual:"Green blades flushed deep crimson · silvery flower panicles in late summer",
    water:"Moderate; keep moist while establishing",
    aspect:"East / South / West",
    soil:"Moist, well-drained; Avoid winter waterlogging",
    prune:"Cut back dead foliage in spring",
-   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jun-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"syn. Imperata cylindrica 'Red Baron'; Imperata 'Red Baron'",
-   hardiness:"H4", resilience:"cold hardy · urban suitable",
-   uses:"borders · containers · ground cover · foliage contrast", size:"40–50 cm H × 30–50 cm W",
+   hardiness:"H4",
+   resilience:"cold hardy · urban suitable",
+   uses:"borders · containers · ground cover · foliage contrast",
+   size:"40–50 cm H × 30–50 cm W",
+   hardinessNote:"May need winter protection in colder areas",
    seasonalImpact:"", growthSpeed:8, pestRisk:2, thirst:10, careLevel:4, sunNeed:90, sunMin:55},
+
   {common:"Wormwood 'Powis Castle'", latin:"Artemisia 'Powis Castle'", hue:0,
    visual:"Finely divided silvery-grey foliage · dense rounded habit · aromatic leaves",
    water:"Low once established",
    aspect:"East / South / West",
    soil:"Poor, well-drained; Avoid winter wet",
    prune:"Cut back to lowest new shoots in mid to late spring",
-   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"Jan-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"syn. Artemisia arborescens 'Powis Castle'; Artemisia arborescens 'Brass Band'",
-   hardiness:"H3", resilience:"drought tolerant · exposed-site tolerant · heat tolerant",
-   uses:"gravel gardens · borders · containers · foliage contrast", size:"50–60 cm H × 60–90 cm W",
+   hardiness:"H3",
+   resilience:"drought tolerant · exposed-site tolerant · heat tolerant",
+   uses:"gravel gardens · borders · containers · foliage contrast",
+   size:"50–60 cm H × 60–90 cm W",
+   hardinessNote:"RHS H3; some UK growers rate established plants H4 in sheltered sites",
    seasonalImpact:"", growthSpeed:9, pestRisk:5, thirst:3, careLevel:4, sunNeed:95, sunMin:75},
+
   {common:"Gaura 'Rosy Jane'", latin:"Oenothera lindheimeri 'Rosy Jane'", hue:335,
    visual:"White flowers with vivid pink picotee edges · dark-pink buds · purple-flecked foliage",
    water:"Moderate; water in dry spells",
    aspect:"East / South / West",
    soil:"Moist, well-drained; Avoid winter wet",
    prune:"Remove spent flowering stalks; cut back in early spring",
-   source:"", peak:"May-Oct", order:"", bench:"", root:"",
-   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   source:"",
+   peak:"May-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
    cvs:"trade name Rosy Jane; cultivar code 'Harrosy'",
-   hardiness:"H4", resilience:"drought tolerant once established · wind tolerant · urban suitable",
-   uses:"borders · containers · prairie planting · wildlife gardens", size:"50–100 cm H × 40–60 cm W",
+   hardiness:"H4",
+   resilience:"drought tolerant once established · wind tolerant · urban suitable",
+   uses:"borders · containers · prairie planting · wildlife gardens",
+   size:"50–100 cm H × 40–60 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"RHS H4; hardy through most of the UK",
    seasonalImpact:"", growthSpeed:13, pestRisk:3, thirst:9, careLevel:4, sunNeed:95, sunMin:68},
+
+  {common:"Button bush 'Fiber Optics'", latin:"Cephalanthus occidentalis 'Bailoptics'", hue:0,
+   visual:"Creamy-white spherical flowers · glossy green leaves · coppery autumn colour",
+   water:"Keep evenly moist; tolerates flooding",
+   aspect:"East / South / West",
+   soil:"Moist to wet; Avoid prolonged dry soil",
+   prune:"Cut back hard in early spring if required",
+   source:"",
+   peak:"Jul-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"trade name Fiber Optics; First Editions Series; cultivar code 'Bailoptics'",
+   hardiness:"H5",
+   resilience:"wet-soil tolerant · flood tolerant · pollinator friendly",
+   uses:"pond margins · rain gardens · wet borders · wildlife gardens",
+   size:"1.5–2 m H × 1.5–2 m W",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"USDA zone 4; UK hardiness is inferred from cold tolerance",
+   seasonalImpact:"", growthSpeed:10, pestRisk:3, thirst:15, careLevel:5, sunNeed:82, sunMin:48},
+
+  {common:"Chaste tree 'Delta Blues'", latin:"Vitex agnus-castus 'Piivac-I'", hue:225,
+   visual:"Dense deep violet-blue flower panicles · aromatic blue-green foliage",
+   water:"Low once established",
+   aspect:"South / West",
+   soil:"Poor, well-drained; Shelter from cold winds · avoid winter wet",
+   prune:"Prune hard in early spring; deadhead to encourage repeat flowering",
+   source:"",
+   peak:"Jun-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"trade name Delta Blues; First Editions Series; cultivar code 'Piivac-I'",
+   hardiness:"H5",
+   resilience:"drought tolerant · heat tolerant · coastal tolerant",
+   uses:"specimen · wildlife gardens · shrub borders · informal hedging",
+   size:"2.5–3 m H × 2.5–3 m W",
+   toxicity:"",
+   hardinessNote:"H5 inferred from reported USDA zone 6 tolerance",
+   seasonalImpact:"", growthSpeed:16, pestRisk:7, thirst:5, careLevel:5, sunNeed:96, sunMin:78},
+
+  {common:"Chaste tree 'Flip Side'", latin:"Vitex × 'Bailtexone'", hue:225,
+   visual:"Deep lavender-blue flower panicles · olive-green leaves with purple undersides",
+   water:"Low once established",
+   aspect:"South / West",
+   soil:"Poor, well-drained; Shelter from cold winds · avoid winter wet",
+   prune:"Prune in early spring; deadhead to encourage repeat flowering",
+   source:"",
+   peak:"Jul-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"trade name Flip Side; First Editions Series; cultivar code 'Bailtexone'; hybrid of Vitex trifolia 'Purpurea' × V. agnus-castus",
+   hardiness:"H5",
+   resilience:"drought tolerant · heat tolerant · coastal tolerant",
+   uses:"specimen · shrub borders · wildlife gardens · informal hedging",
+   size:"2–2.5 m H × 2–3 m W",
+   toxicity:"",
+   hardinessNote:"H5 inferred from reported USDA zone 7 tolerance",
+   seasonalImpact:"", growthSpeed:15, pestRisk:7, thirst:5, careLevel:5, sunNeed:96, sunMin:78},
+
+  {common:"Eupatorium 'Pink Frost'", latin:"Eupatorium japonicum 'Pink Frost'", hue:335,
+   visual:"Cream-white variegated leaves · pink-flushed young growth · flat pink flower heads",
+   water:"Keep evenly moist",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Do not allow soil to dry out",
+   prune:"Cut back at the end of the season",
+   source:"",
+   peak:"Jul-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"RHS: Eupatorium fortunei 'Pink Frost'; Kew synonymises E. fortunei with E. japonicum",
+   hardiness:"H5",
+   resilience:"part-shade tolerant · exposed-site tolerant",
+   uses:"cottage gardens · prairie planting · wildlife gardens · containers",
+   size:"1–1.5 m H × 0.5–1 m W",
+   hardinessNote:"RHS H5",
+   seasonalImpact:"", growthSpeed:11, pestRisk:7, thirst:13, careLevel:5, sunNeed:68, sunMin:40},
+
+  {common:"Perennial Wallflower 'Bowles's Mauve'", latin:"Erysimum 'Bowles’s Mauve'", hue:285,
+   visual:"Grey-green mound topped by purple-mauve spires from spring to late autumn",
+   water:"Water while young, then keep it on the dry side",
+   aspect:"South / West",
+   soil:"Well-drained chalk or sand; Wet winter ground shortens its life",
+   prune:"Trim lightly between flushes · never cut into old bare wood",
+   source:"",
+   peak:"Mar-Nov",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"Bowles’s Mauve",
+   hardiness:"H4",
+   resilience:"immensely floriferous but short-lived · take cuttings to replace it",
+   uses:"pollinators · gravel gardens · sunny borders · containers",
+   size:"0.5-1m H × 0.5-1m W",
+   toxicity:"Potentially harmful if eaten; grow as an ornamental rather than an edible plant.",
+   hardinessNote:"Generally hardy in well-drained UK gardens but severe cold and winter wet can shorten its life.",
+   seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:6, careLevel:7, sunNeed:100, sunMin:85},
+
+  {common:"Japanese cedar 'Serama'", latin:"Cryptomeria japonica Serama ('FM5')", hue:120,
+   visual:"Compact green conifer · fasciated, contorted branches · dense pyramidal habit",
+   water:"Moderate; keep moist while establishing",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Sheltered · avoid waterlogging",
+   prune:"No routine pruning",
+   source:"",
+   peak:"Jan-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"trade name Serama; cultivar denomination 'FM5'",
+   hardiness:"H6",
+   resilience:"cold hardy · urban suitable",
+   uses:"containers · small gardens · rock gardens · specimen",
+   size:"50–60 cm H × 40–60 cm W",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"RHS does not publish an individual hardiness rating; H6 inferred from the species and breeder's very frost-hardy description",
+   seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:10, careLevel:4, sunNeed:82, sunMin:55},
+
+  {common:"Japanese snowbell 'Evening Light'", latin:"Styrax japonicus 'Evening Light'", hue:275,
+   visual:"Deep purple young foliage · white bell-shaped flowers · dark red calyces",
+   water:"Keep evenly moist",
+   aspect:"South / West",
+   soil:"Moist, well-drained; Acid to neutral soil · shelter from cold winds",
+   prune:"Pruning Group 1; prune only if needed after flowering",
+   source:"",
+   peak:"May-Jul",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"",
+   hardiness:"H5",
+   resilience:"part-shade tolerant · urban suitable",
+   uses:"specimen · city gardens · courtyards · cottage gardens",
+   size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"RHS H5; foliage colour is strongest in full sun",
+   seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:11, careLevel:5, sunNeed:82, sunMin:52},
+
+  {common:"Korean pine 'Jack Corbit'", latin:"Pinus koraiensis 'Jack Corbit'", hue:180,
+   visual:"Long soft blue-green needles · subtle yellow banding · compact pyramidal habit",
+   water:"Moderate; water while establishing",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Avoid prolonged waterlogging",
+   prune:"No routine pruning",
+   source:"",
+   peak:"Jan-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"syn. 'Jack Korbit'; also 'Jack Corbett' and 'Jack Korbett'",
+   hardiness:"H7",
+   resilience:"cold hardy · drought tolerant · part-shade tolerant",
+   uses:"specimen · containers · small gardens · conifer collections",
+   size:"1.8–3 m H × 1–2 m W",
+   hardinessNote:"Very cold hardy; specialist sources report USDA zone 3",
+   seasonalImpact:"", growthSpeed:6, pestRisk:9, thirst:8, careLevel:4, sunNeed:82, sunMin:50},
+
+  {common:"Atlas cedar 'Horstmann's Silberspitz'", latin:"Cedrus atlantica (Glauca Group) 'Horstmann’s Silberspitz'", hue:180,
+   visual:"Blue-green needles · creamy-white new tips · young shoots turn burnished yellow",
+   water:"Moderate; water while establishing",
+   aspect:"South / West",
+   soil:"Moist, well-drained; Shelter from strong winds · avoid waterlogging",
+   prune:"No routine pruning",
+   source:"",
+   peak:"Jun-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"syn. Cedrus atlantica (Glauca Group) 'Silberspitz'; Cedrus atlantica 'Silberspitz'",
+   hardiness:"H6",
+   resilience:"cold hardy · drought tolerant once established · urban suitable",
+   uses:"specimen · conifer gardens · large containers · architectural planting",
+   size:"2.5–4 m H × 1.5 m W",
+   hardinessNote:"RHS H6",
+   seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:7, careLevel:4, sunNeed:90, sunMin:65},
+
+  {common:"Burnet 'Pink Brushes'", latin:"Sanguisorba 'Pink Brushes'", hue:335,
+   visual:"Powder-pink nodding bottlebrushes · finely cut green foliage · airy upright stems",
+   water:"Keep evenly moist",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Do not allow soil to dry out",
+   prune:"Cut back in late winter; remove faded flower stems",
+   source:"",
+   peak:"Jul-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"hybrid; sometimes listed as Sanguisorba × hakusanensis 'Pink Brushes'",
+   hardiness:"H7",
+   resilience:"cold hardy · wet-soil tolerant · pollinator friendly",
+   uses:"prairie planting · pond margins · wildlife gardens · cut flowers",
+   size:"1–1.2 m H × 50–60 cm W",
+   hardinessNote:"RHS H7; hardy in the severest European continental climates",
+   seasonalImpact:"", growthSpeed:13, pestRisk:2, thirst:14, careLevel:4, sunNeed:82, sunMin:48},
+ 
   {common:"English shrub rose 'Summer Song'", latin:"Rosa 'Summer Song' ('Austango')", hue:20,
    visual:"Vibrant coppery orange-red cups · densely petalled blooms · strong Tea fragrance",
    water:"Keep evenly moist; water in dry spells",
@@ -6808,6 +7268,7 @@ const PLANTS = [
    cvs:"trade name Summer Song; breeder denomination 'Austango'",
    hardiness:"H6", resilience:"cold hardy · urban suitable",
    uses:"shrub borders · cottage gardens · cut flowers · containers", size:"1.2–1.5 m H × 0.5–1 m W",
+   toxicity:"Rose hips ornamental · not to be eaten · wear gloves when handling",
    seasonalImpact:"", growthSpeed:10, pestRisk:12, thirst:11, careLevel:9, sunNeed:95, sunMin:72},
 ];
 /* PLANTS:END */
@@ -7017,6 +7478,7 @@ const PLANTS_ON_HOLD=[
    uses:"Excellent for damp woodland borders, shady herbaceous borders, pond and stream margins, moist rock gardens and mass planting.",
    size:"0.4-0.6m H × 0.2-0.3m W",
    toxicity:"No known hazard to humans is reported by Kew.",
+   hardinessNote:"RHS rates Primula vialii H5, hardy in most places throughout the UK even in severe winters, approximately -15 to -10C. The foliage dies back in autumn and fresh growth emerges from the crown in spring.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:16, careLevel:10, sunNeed:45, sunMin:25},
 
   {common:"Stag's Horn Sumach", latin:"Rhus typhina", hue:15,
@@ -7043,6 +7505,7 @@ const PLANTS_ON_HOLD=[
    uses:"autumn colour · large borders · banks · wildlife planting",
    size:"4-8m H × 4-8m+ W",
    toxicity:"Sap may irritate sensitive skin. Wear gloves when pruning or handling cut stems.",
+   hardinessNote:"Very hardy throughout the UK, tolerating severe winter cold once established.",
    seasonalImpact:"", growthSpeed:17, pestRisk:4, thirst:8, careLevel:12, sunNeed:95, sunMin:75},
 
   {common:"Rodgersia 'Bronze Peacock'", latin:"Rodgersia 'Bronze Peacock'", hue:20,
@@ -7068,6 +7531,7 @@ const PLANTS_ON_HOLD=[
    resilience:"long-lived where the ground stays wet · poor in drought",
    uses:"damp borders · pond margins · woodland edge · bog gardens",
    size:"0.5-1m H × 0.5-1m W",
+   hardinessNote:"Fully hardy through the UK once established; foliage dies down in winter while the crown remains dormant below ground.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:18, careLevel:8, sunNeed:55, sunMin:30},
 
   {common:"Yellow Azalea", latin:"Rhododendron luteum", hue:55,
@@ -7084,16 +7548,18 @@ const PLANTS_ON_HOLD=[
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ Schedule 9 — do not plant in the wild",
+   type:"",
    shrink:"",
-   returnRisk:"Listed in Schedule 9 Part II of the Wildlife and Countryside Act 1981 (England and Wales): it is an offence to plant it or cause it to grow in the wild. Sale is not banned — advise containment and never dump garden material in semi-natural habitat.",
+   returnRisk:"",
    pots:"",
    cvs:"",
    hardiness:"H6",
-   resilience:"⚠ Schedule 9 — must not be planted or grown in the wild",
+   resilience:"",
    uses:"contained acid borders · woodland gardens · spring fragrance",
    size:"2.5-4m H × 2.5-4m W",
    toxicity:"All parts are poisonous if eaten and are potentially dangerous to people, pets and livestock.",
+   compliance:"Listed in Schedule 9 Part II of the Wildlife and Countryside Act 1981 in England and Wales. Do not plant or otherwise cause this species to grow in the wild, and prevent garden material from escaping into natural habitats.",
+   hardinessNote:"Very hardy through the UK once established.",
    seasonalImpact:"", growthSpeed:12, pestRisk:9, thirst:13, careLevel:11, sunNeed:65, sunMin:35},
 
   {common:"Chusan Palm", latin:"Trachycarpus fortunei", hue:110,
@@ -7119,6 +7585,7 @@ const PLANTS_ON_HOLD=[
    resilience:"hardiest common palm · takes about -15°C once established",
    uses:"exotic gardens · architectural specimens · urban courtyards",
    size:"12m+ H × 1.5-2.5m W",
+   hardinessNote:"One of the most reliably hardy palms for UK gardens and capable of tolerating around -15°C or below in a sheltered position once established.",
    seasonalImpact:"", growthSpeed:7, pestRisk:4, thirst:9, careLevel:7, sunNeed:75, sunMin:40},
 
   {common:"Honey Bush", latin:"Melianthus major", hue:185,
@@ -7145,6 +7612,7 @@ const PLANTS_ON_HOLD=[
    uses:"exotic borders · gravel gardens · large containers",
    size:"1.5-2.5m H × 1.5-2.5m W",
    toxicity:"Do not eat. Melianthus contains potentially toxic compounds and should be treated as an ornamental plant rather than an edible one.",
+   hardinessNote:"Top growth is vulnerable in cold UK winters. Established crowns often reshoot after moderate frost in sheltered gardens but require protection in colder areas.",
    seasonalImpact:"", growthSpeed:13, pestRisk:5, thirst:12, careLevel:11, sunNeed:95, sunMin:75},
 
   {common:"Silver Spear", latin:"Astelia chathamica", hue:170,
@@ -7170,6 +7638,7 @@ const PLANTS_ON_HOLD=[
    resilience:"excellent on mild coasts · frost and cold wind damage it",
    uses:"coastal gardens · containers · silver-foliage schemes",
    size:"1-1.5m H × 0.5-1m W",
+   hardinessNote:"Best suited to mild or sheltered UK gardens. Severe frost and cold drying winds can damage or kill exposed foliage.",
    seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:14, careLevel:10, sunNeed:65, sunMin:35},
 
   {common:"Dragon Head Bamboo", latin:"Fargesia rufa", hue:105,
@@ -7195,6 +7664,7 @@ const PLANTS_ON_HOLD=[
    resilience:"hardy and non-running · leaves roll in drought and wind",
    uses:"screening · hedging · containers · evergreen structure",
    size:"2.5-4m H × 1-1.5m W",
+   hardinessNote:"Hardy across most UK gardens and substantially more cold tolerant than many ornamental bamboos.",
    seasonalImpact:"", growthSpeed:12, pestRisk:4, thirst:14, careLevel:6, sunNeed:60, sunMin:35},
 
   {common:"Tamarisk 'Pink Cascade'", latin:"Tamarix ramosissima 'Pink Cascade'", hue:335,
@@ -7220,6 +7690,7 @@ const PLANTS_ON_HOLD=[
    resilience:"outstanding wind, salt and drought tolerance",
    uses:"coastal planting · exposed sunny gardens · late-summer colour",
    size:"4-8m H × 4-8m W",
+   hardinessNote:"Hardy through most of the UK, though young growth benefits from some protection from very cold drying winds inland.",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:6, careLevel:7, sunNeed:100, sunMin:85},
 
   {common:"Pieris 'Forest Flame'", latin:"Pieris 'Forest Flame'", hue:5,
@@ -7246,6 +7717,7 @@ const PLANTS_ON_HOLD=[
    uses:"ericaceous borders · woodland gardens · containers",
    size:"1.5-2.5m H × 1.5-2.5m W",
    toxicity:"All parts are harmful if eaten and potentially toxic to people and animals.",
+   hardinessNote:"Hardy across most of the UK, although young plants and fresh spring growth can be damaged in exposed frosty positions.",
    seasonalImpact:"", growthSpeed:6, pestRisk:11, thirst:12, careLevel:10, sunNeed:55, sunMin:35},
 
   {common:"Skimmia 'Rubella'", latin:"Skimmia japonica 'Rubella'", hue:350,
@@ -7272,6 +7744,7 @@ const PLANTS_ON_HOLD=[
    uses:"winter containers · shaded borders · entrance planting",
    size:"1-1.5m H × 1-1.5m W",
    toxicity:"Ornamental plant; do not eat any plant material.",
+   hardinessNote:"Hardy throughout most of the UK in a sheltered garden position.",
    seasonalImpact:"", growthSpeed:5, pestRisk:7, thirst:13, careLevel:7, sunNeed:35, sunMin:15},
 
   {common:"Black Elder 'Black Lace'", latin:"Sambucus nigra f. porphyrophylla 'Eva'", hue:300,
@@ -7298,6 +7771,7 @@ const PLANTS_ON_HOLD=[
    uses:"dark foliage contrast · mixed borders · wildlife planting",
    size:"2.5-4m H × 2.5-4m W",
    toxicity:"Leaves, stems and unripe fruit contain potentially harmful cyanogenic compounds. Flowers and properly prepared ripe berries are the traditionally used edible parts.",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:18, pestRisk:5, thirst:10, careLevel:7, sunNeed:80, sunMin:40},
 
   {common:"Dwarf Lilac 'Palibin'", latin:"Syringa meyeri 'Palibin'", hue:285,
@@ -7323,6 +7797,7 @@ const PLANTS_ON_HOLD=[
    resilience:"compact, hardy and easy · good on chalk and in towns",
    uses:"containers · small gardens · scent · low informal hedges",
    size:"1-1.5m H × 1-1.5m W",
+   hardinessNote:"Hardy through most UK gardens.",
    seasonalImpact:"", growthSpeed:6, pestRisk:8, thirst:10, careLevel:5, sunNeed:95, sunMin:80},
 
   {common:"Daphne 'Jacqueline Postill'", latin:"Daphne bholua 'Jacqueline Postill'", hue:325,
@@ -7349,6 +7824,7 @@ const PLANTS_ON_HOLD=[
    uses:"winter scent · entrances and paths · sheltered borders",
    size:"1.5-2.5m H × 1-1.5m W",
    toxicity:"All parts are harmful if eaten, with the berries particularly dangerous. Sap may also irritate skin.",
+   hardinessNote:"Generally hardy in sheltered UK gardens but flower buds and evergreen foliage can be damaged by severe cold or exposure.",
    seasonalImpact:"", growthSpeed:5, pestRisk:5, thirst:11, careLevel:10, sunNeed:65, sunMin:35},
 
   {common:"Christmas Box", latin:"Sarcococca confusa", hue:105,
@@ -7375,6 +7851,7 @@ const PLANTS_ON_HOLD=[
    uses:"dry shade · winter fragrance · shaded containers · doorways",
    size:"1-1.5m H × 1-1.5m W",
    toxicity:"Berries are ornamental and should not be treated as edible.",
+   hardinessNote:"Hardy throughout most of the UK.",
    seasonalImpact:"", growthSpeed:6, pestRisk:4, thirst:8, careLevel:4, sunNeed:25, sunMin:5},
 
   {common:"Flowering Quince 'Crimson and Gold'", latin:"Chaenomeles × superba 'Crimson and Gold'", hue:355,
@@ -7401,6 +7878,7 @@ const PLANTS_ON_HOLD=[
    uses:"wall training · hedging · thorny boundaries · preserves",
    size:"1-1.5m H × 1.5-2.5m W",
    toxicity:"The hard aromatic fruit is commonly cooked for preserves; avoid eating the seeds.",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:11, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:35},
 
   {common:"Beauty Bush 'Pink Cloud'", latin:"Kolkwitzia amabilis 'Pink Cloud'", hue:335,
@@ -7426,6 +7904,7 @@ const PLANTS_ON_HOLD=[
    resilience:"robust and easy · few demands once established",
    uses:"large shrub borders · cottage gardens · informal screens",
    size:"1.5-2.5m H × 2.5-4m W",
+   hardinessNote:"Very hardy in UK gardens.",
    seasonalImpact:"", growthSpeed:12, pestRisk:4, thirst:9, careLevel:5, sunNeed:75, sunMin:40},
 
   {common:"Deutzia 'Nikko'", latin:"Deutzia gracilis 'Nikko'", hue:105,
@@ -7451,6 +7930,7 @@ const PLANTS_ON_HOLD=[
    resilience:"dependable, hardy and trouble-free",
    uses:"front of borders · small gardens · containers",
    size:"0.5-1m H × 1-1.5m W",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:9, pestRisk:4, thirst:9, careLevel:4, sunNeed:70, sunMin:35},
 
   {common:"Flowering Currant 'King Edward VII'", latin:"Ribes sanguineum 'King Edward VII'", hue:350,
@@ -7476,6 +7956,7 @@ const PLANTS_ON_HOLD=[
    resilience:"tough and adaptable · one of the most reliable early shrubs",
    uses:"early pollinators · mixed hedges · shrub borders",
    size:"1.5-2.5m H × 1-1.5m W",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:13, pestRisk:8, thirst:8, careLevel:5, sunNeed:95, sunMin:70},
 
   {common:"Calico Bush 'Ostbo Red'", latin:"Kalmia latifolia 'Ostbo Red'", hue:345,
@@ -7502,6 +7983,7 @@ const PLANTS_ON_HOLD=[
    uses:"ericaceous borders · woodland gardens · containers",
    size:"1.5-2.5m H × 1.5-2.5m W",
    toxicity:"All parts are highly poisonous if eaten and can be dangerous to people, pets and livestock.",
+   hardinessNote:"Hardy in most UK gardens provided roots are healthy and the plant is not exposed to severe drying winds.",
    seasonalImpact:"", growthSpeed:4, pestRisk:6, thirst:14, careLevel:10, sunNeed:50, sunMin:25},
 
   {common:"Witch Alder", latin:"Fothergilla major", hue:20,
@@ -7527,6 +8009,7 @@ const PLANTS_ON_HOLD=[
    resilience:"healthy and long-lived in acid ground · naturally slow",
    uses:"autumn colour · ericaceous borders · woodland edge",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   hardinessNote:"Hardy throughout most of the UK.",
    seasonalImpact:"", growthSpeed:5, pestRisk:5, thirst:14, careLevel:7, sunNeed:65, sunMin:35},
 
   {common:"Himalayan Birch 'Doorenbos'", latin:"Betula utilis subsp. jacquemontii 'Doorenbos'", hue:35,
@@ -7552,6 +8035,7 @@ const PLANTS_ON_HOLD=[
    resilience:"exceptionally hardy · young trees need reliable moisture",
    uses:"winter bark · multi-stems · avenues · contemporary gardens",
    size:"12m+ H × 4-8m W",
+   hardinessNote:"Exceptionally hardy and suitable throughout the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:10, careLevel:5, sunNeed:80, sunMin:45},
 
   {common:"Persian Ironwood", latin:"Parrotia persica", hue:15,
@@ -7577,6 +8061,7 @@ const PLANTS_ON_HOLD=[
    resilience:"long-lived, hardy and lime tolerant · low maintenance",
    uses:"autumn colour · multi-stems · chalk-tolerant specimen trees",
    size:"4-8m H × 4-8m W",
+   hardinessNote:"Very hardy throughout UK gardens.",
    seasonalImpact:"", growthSpeed:7, pestRisk:4, thirst:9, careLevel:4, sunNeed:75, sunMin:40},
 
   {common:"Tupelo 'Wisley Bonfire'", latin:"Nyssa sylvatica 'Wisley Bonfire'", hue:5,
@@ -7602,6 +8087,7 @@ const PLANTS_ON_HOLD=[
    resilience:"cold hardy and long-lived in acid soil · poor on chalk · male, no fruit",
    uses:"autumn specimen tree · lawns · waterside planting",
    size:"12m+ H × 4-8m W",
+   hardinessNote:"Hardy through most of the UK once established, provided soil and moisture requirements are met.",
    seasonalImpact:"", growthSpeed:6, pestRisk:5, thirst:15, careLevel:8, sunNeed:75, sunMin:40},
 
   {common:"Paperbark Maple", latin:"Acer griseum", hue:20,
@@ -7627,6 +8113,7 @@ const PLANTS_ON_HOLD=[
    resilience:"hardy and long-lived but slow — damage takes years to replace",
    uses:"winter bark · autumn colour · small gardens · specimens",
    size:"8-12m H × 4-8m W",
+   hardinessNote:"Hardy through most UK gardens.",
    seasonalImpact:"", growthSpeed:4, pestRisk:5, thirst:10, careLevel:5, sunNeed:70, sunMin:40},
 
   {common:"Crab Apple 'Evereste'", latin:"Malus 'Evereste'", hue:25,
@@ -7653,6 +8140,7 @@ const PLANTS_ON_HOLD=[
    uses:"small trees · blossom · winter fruit · apple pollination",
    size:"4-8m H × 4-8m W",
    toxicity:"Crab apples can be cooked for jelly and preserves. As with other apples, avoid eating substantial quantities of crushed seeds.",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:11, thirst:10, careLevel:7, sunNeed:90, sunMin:70},
 
   {common:"Golden Rain Tree", latin:"Koelreuteria paniculata", hue:50,
@@ -7678,6 +8166,7 @@ const PLANTS_ON_HOLD=[
    resilience:"heat, drought and urban tolerant once established",
    uses:"small specimen trees · urban gardens · dry planting",
    size:"8-12m H × 4-8m W",
+   hardinessNote:"Hardy through most of the UK but performs best with summer heat and shelter.",
    seasonalImpact:"", growthSpeed:9, pestRisk:5, thirst:7, careLevel:6, sunNeed:100, sunMin:85},
 
   {common:"Honey Locust 'Sunburst'", latin:"Gleditsia triacanthos f. inermis 'Sunburst'", hue:70,
@@ -7703,6 +8192,7 @@ const PLANTS_ON_HOLD=[
    resilience:"urban, heat and soil tolerant · thornless form · gall midge possible",
    uses:"urban trees · light shade · lawn specimens · gold foliage",
    size:"8-12m H × 8-12m W",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:12, pestRisk:7, thirst:8, careLevel:6, sunNeed:95, sunMin:80},
 
   {common:"Japanese Wisteria", latin:"Wisteria floribunda f. multijuga", hue:270,
@@ -7729,6 +8219,7 @@ const PLANTS_ON_HOLD=[
    uses:"pergolas · arches · large walls · trained climbers",
    size:"4-8m+ H × 1.5-4m+ W",
    toxicity:"All parts are harmful if eaten, with the seeds and pods particularly poisonous.",
+   hardinessNote:"Very hardy once established, though spring flowers can be damaged by late frost.",
    seasonalImpact:"", growthSpeed:16, pestRisk:8, thirst:12, careLevel:14, sunNeed:95, sunMin:65},
 
   {common:"Persian Ivy 'Sulphur Heart'", latin:"Hedera colchica 'Sulphur Heart'", hue:70,
@@ -7755,6 +8246,7 @@ const PLANTS_ON_HOLD=[
    uses:"wall cover · shade · screening · wildlife and late nectar",
    size:"4-8m+ H × 2.5-4m+ W",
    toxicity:"Harmful if eaten and sap may cause skin irritation or allergic dermatitis. Also potentially harmful to pets.",
+   hardinessNote:"Hardy throughout most UK gardens.",
    seasonalImpact:"", growthSpeed:16, pestRisk:9, thirst:8, careLevel:8, sunNeed:45, sunMin:15},
 
   {common:"Chocolate Vine", latin:"Akebia quinata", hue:330,
@@ -7781,6 +8273,7 @@ const PLANTS_ON_HOLD=[
    uses:"pergolas · fences · scented climbers · unusual fruit",
    size:"8-12m H × 8m+ W",
    toxicity:"The soft pulp of fully ripe fruit is edible, though the plant is primarily ornamental and the seeds are not normally eaten.",
+   hardinessNote:"Very hardy in UK gardens, although foliage may be more deciduous in colder conditions.",
    seasonalImpact:"", growthSpeed:17, pestRisk:5, thirst:10, careLevel:9, sunNeed:70, sunMin:35},
 
   {common:"Late Dutch Honeysuckle", latin:"Lonicera periclymenum 'Serotina'", hue:330,
@@ -7807,6 +8300,7 @@ const PLANTS_ON_HOLD=[
    uses:"wildlife gardens · pergolas · fences · evening scent",
    size:"4-8m H × 1-1.5m W",
    toxicity:"Berries are harmful if eaten.",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:14, pestRisk:10, thirst:11, careLevel:8, sunNeed:65, sunMin:30},
 
   {common:"Cranesbill 'Rozanne'", latin:"Geranium Rozanne ('Gerwat')", hue:245,
@@ -7832,33 +8326,8 @@ const PLANTS_ON_HOLD=[
    resilience:"exceptionally long-flowering, hardy and low maintenance · sterile",
    uses:"ground cover · borders · containers · pollinators",
    size:"0.5-1m H × 0.5-1m W",
+   hardinessNote:"Exceptionally hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:15, pestRisk:6, thirst:12, careLevel:4, sunNeed:75, sunMin:35},
-
-  {common:"Perennial Wallflower 'Bowles's Mauve'", latin:"Erysimum 'Bowles’s Mauve'", hue:285,
-   visual:"Grey-green mound topped by purple-mauve spires from spring to late autumn",
-   water:"Water while young, then keep it on the dry side",
-   aspect:"South / West",
-   soil:"Well-drained chalk or sand; Wet winter ground shortens its life",
-   prune:"Trim lightly between flushes · never cut into old bare wood",
-   source:"",
-   peak:"Mar-Nov",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"Bowles’s Mauve",
-   hardiness:"H4",
-   resilience:"immensely floriferous but short-lived · take cuttings to replace it",
-   uses:"pollinators · gravel gardens · sunny borders · containers",
-   size:"0.5-1m H × 0.5-1m W",
-   toxicity:"Potentially harmful if eaten; grow as an ornamental rather than an edible plant.",
-   seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:6, careLevel:7, sunNeed:100, sunMin:85},
 
   {common:"Catmint 'Walker's Low'", latin:"Nepeta racemosa 'Walker’s Low'", hue:255,
    visual:"Aromatic grey-green mound carrying masses of blue-violet flowers for months",
@@ -7883,6 +8352,7 @@ const PLANTS_ON_HOLD=[
    resilience:"hardy, drought tolerant and very easy · a magnet for pollinators",
    uses:"pollinator borders · path edging · gravel · with roses",
    size:"0.5-1m H × 0.5-1m W",
+   hardinessNote:"Exceptionally hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:6, careLevel:4, sunNeed:95, sunMin:70},
 
   {common:"Hellebore 'Anna's Red'", latin:"Helleborus (Rodney Davey Marbled Group) Anna’s Red ('Abcrd02')", hue:345,
@@ -7909,6 +8379,7 @@ const PLANTS_ON_HOLD=[
    uses:"winter containers · shaded borders · woodland edge",
    size:"0.5-1m H × 0.5-1m W",
    toxicity:"All parts are harmful if eaten and sap may irritate skin; wear gloves when cutting foliage.",
+   hardinessNote:"Very hardy throughout the UK.",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:12, careLevel:6, sunNeed:50, sunMin:20},
 
   {common:"Japanese Forest Grass 'Aureola'", latin:"Hakonechloa macra 'Aureola'", hue:65,
@@ -7934,6 +8405,7 @@ const PLANTS_ON_HOLD=[
    resilience:"long-lived and very hardy · naturally slow · emerges late in spring",
    uses:"shade gardens · containers · path edging · Japanese-style planting",
    size:"0.1-0.5m H × 0.5-1m W",
+   hardinessNote:"Exceptionally hardy while dormant and suitable throughout the UK.",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:14, careLevel:5, sunNeed:45, sunMin:20},
 
   {common:"Tibetan Cherry", latin:"Prunus serrula", hue:15,
@@ -8450,15 +8922,16 @@ const PLANTS_ON_HOLD=[
    trade:"",
    retail:"",
    margin:"",
-   type:"⚠ Schedule 9 — do not plant in the wild",
+   type:"",
    shrink:"",
-   returnRisk:"Rosa rugosa is listed on Schedule 9. It is not banned from sale, but it must not be planted or otherwise caused to grow in the wild. Prevent spread, particularly near dunes, shingle and other semi-natural coastal habitats.",
+   returnRisk:"",
    pots:"",
    cvs:"'Alba' — white · 'Rubra' — magenta",
    hardiness:"H7",
-   resilience:"⚠ Schedule 9 — never plant in the wild · salt, sand and drought proof · suckers",
+   resilience:"salt, sand and drought proof · suckers",
    uses:"coastal hedging · impenetrable boundaries · wildlife · hips for syrup",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   compliance:"Rosa rugosa is listed on Schedule 9. It is not banned from sale, but it must not be planted or otherwise caused to grow in the wild. Prevent spread, particularly near dunes, shingle and other semi-natural coastal habitats.",
    seasonalImpact:"", growthSpeed:15, pestRisk:3, thirst:6, careLevel:4, sunNeed:85, sunMin:40},
 
   {common:"English Lavender 'Hidcote'", latin:"Lavandula angustifolia 'Hidcote'", hue:275,
@@ -8834,6 +9307,7 @@ const PLANTS_ON_HOLD=[
    resilience:"generally pest free · evergreen",
    uses:"containers · shrub borders · specimen",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"H4 inferred from RHS var. rubrum guidance and UK cold-tolerance sources",
    seasonalImpact:"", growthSpeed:8, pestRisk:3, thirst:9, careLevel:8, sunNeed:75, sunMin:45},
 
   {common:"Black mondo grass", latin:"Ophiopogon planiscapus 'Kokuryū'", hue:285,
@@ -8885,6 +9359,7 @@ const PLANTS_ON_HOLD=[
    uses:"houseplants · conservatories · indoor specimens",
    size:"2–3 m H × 1–1.5 m W",
    toxicity:"Milky sap is harmful if eaten and may irritate skin and eyes",
+   hardinessNote:"RHS H1b; indoors or under glass, roughly 10-15°C minimum",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:8, careLevel:5, sunNeed:60, sunMin:35},
  ];
 /* HOLD:END */
@@ -9114,6 +9589,15 @@ const typeCategory=p=>(p.type||'').split('·')[0].trim();   /* "Planned · winte
 const FILTER_DEFS=(()=>{                       /* chip values discovered from PLANTS — never hardcoded */
   const defs=[
     {id:'season',label:'🌿 In season now',test:p=>parseMonths(p.peak).includes(new Date().getMonth()+1)},
+    /* Matches the card's own CLAIM of drought tolerance, not a guess from the
+       thirst number. Same two regexes as tools/plant-sense.js — negations are
+       stripped BEFORE the keyword test, because "avoid dry soil" is an
+       instruction to keep a plant WET (the third negation bug this project has
+       hit; keep the two copies in sync). */
+    {id:'drought',label:'🌵 Drought tolerant',test:p=>{
+      const t=[p.water,p.soil,p.resilience,p.uses].filter(Boolean).join(' ').toLowerCase()
+        .replace(/\b(?:avoid|avoids|never|not|dislikes|hates|intolerant of|will not tolerate|protect from)\s+(?:\w+\s+){0,2}?(?:dry soil|drought|dryness|drying out)/g,' ');
+      return /\b(drought[- ]tolerant|drought resistant|low once established|once established[,.]? *(?:low|drought)|water sparingly|dry soil|xeric|low water)\b/.test(t);}},
     {id:'order',label:'📦 Order in next 4 wks',test:p=>{const wk=parseOrderWeek(p.order),now=isoWeek();
       return wk!==null&&wk>=now&&wk<=now+4;}},  /* unparseable order strings simply don't match */
   ];
@@ -9246,16 +9730,82 @@ function toxPlaque(p){
     </div>
   </div>`;
 }
+/* ---------- the LEGAL plaque ----------
+   The other half of the safety block, and it needed a different shape rather
+   than a second copy of the same one. Reading the deck's own legal notes first
+   (as with toxicity) showed SIX distinct reasons across ~21 cards, and they are
+   not the same kind of thing at all:
+
+     - Schedule 9 of the Wildlife and Countryside Act: legal to sell, legal to
+       grow, a CRIMINAL OFFENCE to plant in the wild or let escape (4 cards)
+     - a sale/propagation ban outright (Gunnera — most plants sold as manicata
+       are the banned G. x cryptica)
+     - illegal to spread, and the soil with it (Japanese knotweed)
+     - plant-health host of note (the Olive, Xylella)
+     - wild-harvest controls in the source country (Dicksonia)
+     - PLANT BREEDER'S RIGHTS on 14 cards, which is none of the above: it is an
+       invoice question about what the NURSERY may propagate, not a duty on
+       anyone holding the plant.
+
+   So the plaque has two weights. A statutory duty gets the full treatment, in
+   the same visual language as a hazard. Breeder's rights gets a quiet grey
+   strip, because dressing a licensing note as a legal warning devalues the
+   warnings that are real. Both print the researched prose verbatim; the tier
+   only chooses how loudly it is said. */
+const LEGAL_LADDER=[
+  ['ban'    ,/\bbanned\b(?!\s+from\s+sale)|must not be sold|UK RESTRICTED|do not sell|illegal to (?:sell|keep|spread|plant)/i],
+  ['statute',/schedule 9|wildlife and countryside|controlled waste|offence|notifiable|quarantine|xylella|cites|harvest/i],
+  ['rights' ,/\bPBR\b|breeder'?s? rights|propagation restricted|plant breeders/i],
+];
+function legalTier(t){
+  /* NEGATION FIRST, and this is the THIRD time this project has been bitten by a
+     keyword sitting inside a negation — "should not be treated as edible" in the
+     toxicity ladder, "avoid dry soil" in plant-sense, and now "Sale is not banned,
+     but it must not be planted in the wild", which tiered Virginia creeper as an
+     outright BAN and would have printed a red Restricted plaque on a plant that is
+     perfectly legal to sell. Strip the negated phrase, then run the ladder. */
+  const s=String(t).replace(/\b(?:is\s+|are\s+)?not\s+(?:currently\s+)?(?:banned|restricted|prohibited|listed)\b[^,.;]*/gi,' ');
+  for(const[k,re]of LEGAL_LADDER)if(re.test(s))return k;
+  return'statute';
+}
+const LEGAL_GLYPH={
+  /* a statute book for a duty, a small seal for a licence — drawn, not fetched */
+  book:'<path d="M4 3.2h6.2c1.1 0 2 .6 2.3 1.4V21c-.5-.7-1.3-1.1-2.3-1.1H4V3.2Zm16 0h-6.2c-1.1 0-2 .6-2.3 1.4V21c.5-.7 1.3-1.1 2.3-1.1H20V3.2Z"/>',
+  seal:'<path d="M12 2.4 14 5l3.3-.6.5 3.3 2.8 1.8-1.7 2.9 1.7 2.9-2.8 1.8-.5 3.3L14 19.8 12 22.4 10 19.8l-3.3.6-.5-3.3L3.4 15.3 5.1 12.4 3.4 9.5l2.8-1.8.5-3.3L10 5l2-2.6Zm0 5.4a4.6 4.6 0 1 0 0 9.2 4.6 4.6 0 0 0 0-9.2Z"/>',
+};
+const LEGAL_TIER={
+  ban    :{word:'Restricted'        ,label:'Legal'   ,glyph:'book'},
+  statute:{word:'Legal duty'        ,label:'Legal'   ,glyph:'book'},
+  rights :{word:"Breeder's rights"  ,label:'Licence' ,glyph:'seal'},
+};
+function legalPlaque(p){
+  const t=String(p.compliance||'').trim();
+  if(!t)return'';                                   /* nothing known to apply — say nothing */
+  const k=legalTier(t),tier=LEGAL_TIER[k];
+  return `<div class="lgl ${k}">
+    <div class="lgl-body">
+      <svg class="lgl-glyph" viewBox="0 0 24 24" aria-hidden="true">${LEGAL_GLYPH[tier.glyph]}</svg>
+      <div class="tox-text">
+        <div class="tox-head"><span class="lgl-l">${tier.label}</span><span class="lgl-tier">${tier.word}</span></div>
+        <div class="lgl-n">${t}</div>
+      </div>
+    </div>
+  </div>`;
+}
 function tradeBlocks(p){
   const price=cellIf('cell','Trade',p.trade)+cellIf('cell','Retail',p.retail)+cellIf('cell m','Margin',p.margin);
-  const grid=cellIf('g','Source',p.source)+cellIf('g','Peak',p.peak,monthDots(p.peak))
+  /* Aftercare first — CARD-BACK.md section A. water and prune are on every card
+     and used to render nowhere on the card itself, only in the search view; the
+     two most-asked till questions belong at the top of the sheet. */
+  const grid=cellIf('g full','Watering',p.water)+cellIf('g full','Pruning',p.prune)
+    +cellIf('g','Source',p.source)+cellIf('g','Peak',p.peak,monthDots(p.peak))
     +cellIf('g','Order',p.order)+cellIf('g','Bench · Root',dots(p.bench,p.root))
     +cellIf('g full','Type',p.type)+cellIf('g full','Shrink',p.shrink)
     +cellIf('g full','Return risk',p.returnRisk)+cellIf('g','Pot sizes',p.pots)
     +cellIf('g','Size',p.size)+cellIf('g full','Cultivars',p.cvs)
     +cellIf('g','Resilience',p.resilience)+cellIf('g','Uses',p.uses);
   const buyer=[p.trade,p.retail,p.margin,p.source,p.order,p.bench,p.root,p.type,p.shrink,p.returnRisk,p.pots];
-  return toxPlaque(p)
+  return toxPlaque(p)+legalPlaque(p)
     +(price?`<div class="price">${price}</div>`:'')
     +(buyer.some(has)?'':'<div class="nodata">Buyer data not entered for this plant yet</div>')
     +(grid?`<div class="grid">${grid}</div>`:'');
@@ -9687,6 +10237,16 @@ function holoStyle(ho){
    a second story. A swap that shows the same thing twice reads as a glitch, not
    as a feature. */
 const PHOTO_SWAP={
+  /* Two frames of the same plant, four seconds apart. The card's own photo is the
+     shoot with its creamy-white new tips — the cultivar, and the reason anyone
+     picks this cedar over a plain Glauca. What that close-up cannot show is the
+     blue: the older foliage massed on the branch, which is the OTHER half of the
+     card's visual line and what the plant looks like from two paces back. */
+  'cedrus-atlantica-glauca-group-horstmann-s-silberspitz':{
+    alt:'photos/card/cedrus-atlantica-horstmanns-silberspitz-blue.webp',
+    focus:'50% 40%',
+    hold:'3.5s',
+  },
   /* Gunnera's card photo is the plant from above — the scale, which is the point.
      What it cannot show is the UNDERSIDE: the leaf ribs and the stem armed with
      spines, which is the other half of why people either want this plant or back
@@ -9981,17 +10541,92 @@ function markHot(){
    dragging — cut 40% (was 88) so the stamp reads fully committed sooner, matching
    the lighter feel everywhere else. */
 const SWIPE_DIST=53;   /* px of travel before the stamp reads fully committed (was 88, -40%) */
+/* ---------- the lens (see .lens CSS for why it re-typesets) ---------- */
+const LENS_HOLD=500;                               /* Oscar's spec: about half a second */
+let lensEl=null;
+function lensRow(label,value,cls){
+  return value?`<div class="lens-row${cls?' '+cls:''}"><span class="lens-l">${label}</span><div class="lens-v">${value}</div></div>`:'';
+}
+function buildLens(p){
+  const pest=num(p.pestRisk),thirst=num(p.thirst),care=num(p.careLevel);
+  const months=parseMonths(p.peak),soil=splitSoil(p.soil);
+  const strip=months.length?`<span class="lens-months">${[...'JFMAMJJASOND'].map((m,i)=>`<b class="${months.includes(i+1)?'on':''}">${m}</b>`).join('')}</span>`:'';
+  /* the same fields, the same helpers, the same blank-stays-blank rule as the card */
+  return `<div class="lens-head">Plant power points</div>`
+    +lensRow('Bloom',p.peak?`<b>${p.peak}</b>${strip}`:'')
+    +lensRow('Pests & diseases',pest==null?'':`<span class="wrow pest">${wRow('spray',pest)}</span><b>${fmt5(pest)}</b>`)
+    +lensRow('Thirst',thirst==null?'':`<span class="wrow thirst">${wRow('drop',thirst)}</span><b>${fmt5(thirst)}</b>`)
+    +lensRow('Care level',care==null?'':`<span class="wrow care">${wRow('seca',care)}</span><b>${careLabel(care)} · ${fmt5(care)}</b>`)
+    +lensRow('Soil',soil.val)
+    +lensRow('Take care',soil.warn,'warn')
+    +lensRow('Aspect',extractFacing(p.aspect));
+}
+/* The RHS hardiness bands, in plain terms. Facts of the rating system, not of any
+   plant — a card's own qualifier lives in its hardinessNote and prints verbatim. */
+const H_SCALE={
+  'H1a':['Heated glasshouse only','15°C and above'],
+  'H1b':['Indoors except high summer','10 to 15°C'],
+  'H1c':['Frost-free only — indoors or under glass','5 to 10°C'],
+  'H2':['Tender — no frost at all','1 to 5°C'],
+  'H3':['Half hardy — mild or sheltered UK spots','-5 to 1°C'],
+  'H4':['Hardy through most UK winters','-10 to -5°C'],
+  'H5':['Hardy through cold UK winters','-15 to -10°C'],
+  'H6':['Very hardy — severe UK winters and beyond','-20 to -15°C'],
+  'H7':['Extremely hardy — severest European winters','below -20°C'],
+};
+function buildLensHardy(p){
+  const h=(p.hardiness||'').trim(),sc=H_SCALE[h];
+  return `<div class="lens-head">Hardiness · ${h||'not rated'}</div>`
+    +lensRow('Meaning',sc?`<b>${sc[0]}</b>`:'')
+    +lensRow('Survives',sc?`winter lows of <b>${sc[1]}</b>`:'')
+    +lensRow('This plant',p.hardinessNote||'');
+}
+function openLens(idx,y,kind){
+  const p=PLANTS[idx];if(!p)return;
+  if(!lensEl){lensEl=document.createElement('div');lensEl.className='lens';document.body.appendChild(lensEl);}
+  lensEl.innerHTML=kind==='hardy'?buildLensHardy(p):buildLens(p);
+  lensEl.style.bottom=Math.max(12,innerHeight-y+14)+'px';  /* above the finger, per Oscar */
+  void lensEl.offsetWidth;                                 /* commit the hidden frame so .show transitions */
+  lensEl.classList.add('show');
+  const r=lensEl.getBoundingClientRect();                  /* pressed high on the plaque of a short
+      screen: re-anchor down rather than run off the top */
+  if(r.top<8)lensEl.style.bottom=Math.max(12,innerHeight-8-r.height)+'px';
+  if(navigator.vibrate)navigator.vibrate(8);               /* the hold has fired — a tap of confirmation */
+}
+function closeLens(){if(lensEl)lensEl.classList.remove('show');}
+
 function attachGestures(card){
   let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false,lx=0,lt=0,vx=0;
+  let lensTimer=null,lensOn=false;
   const learnStamp=card.querySelector('.stamp.learn'),skipStamp=card.querySelector('.stamp.skip');
-  const start=(x,y)=>{if(card.dataset.gone)return;stopGoto();drag=true;moved=false;sx=x;sy=y;
-    lx=x;lt=performance.now();vx=0;card.style.transition='none';};
+  /* Press-and-hold on a front panel opens the lens. Armed only when the touch
+     STARTS on the plaque/soil/band; a real drag (>10px, the same threshold that
+     separates tap from swipe) disarms it, so the two gestures cannot collide —
+     and while the lens is up the card ignores movement entirely, so a resting
+     finger's drift never drags the card around underneath it. */
+  const lensDisarm=()=>{if(lensTimer){clearTimeout(lensTimer);lensTimer=null;}};
+  const lensArm=(target)=>{
+    if(card.dataset.gone||card.classList.contains('flipped'))return;
+    const panel=target&&target.closest&&target.closest('.face.front .plaque,.face.front .soilp,.face.front .band,.face.front .crest');
+    if(!panel)return;
+    const kind=panel.classList.contains('crest')?'hardy':'ppp';
+    if(kind==='hardy'){const pl=PLANTS[+card.dataset.idx];
+      if(!pl||(!(pl.hardiness||'').trim()&&!(pl.hardinessNote||'').trim()))return;}  /* blank stays blank */
+    lensTimer=setTimeout(()=>{lensTimer=null;
+      if(!drag||moved||card.dataset.gone)return;         /* lifted, swiping, or flung meanwhile */
+      lensOn=true;openLens(+card.dataset.idx,sy,kind);
+    },LENS_HOLD);
+  };
+  const start=(x,y,target)=>{if(card.dataset.gone)return;stopGoto();drag=true;moved=false;sx=x;sy=y;
+    lx=x;lt=performance.now();vx=0;card.style.transition='none';lensArm(target);};
   const move=(x,y)=>{
-    if(!drag)return;dx=x-sx;dy=y-sy;
+    if(!drag)return;
+    if(lensOn)return;                                    /* holding the lens is not a drag */
+    dx=x-sx;dy=y-sy;
     const now=performance.now(),dt=now-lt;               /* smoothed finger velocity —
         one raw sample is jittery on 120Hz touch streams */
     if(dt>0){vx=0.7*((x-lx)/dt)+0.3*vx;lx=x;lt=now;}
-    if(Math.hypot(dx,dy)>10)moved=true;
+    if(Math.hypot(dx,dy)>10){moved=true;lensDisarm();}
     if(card.classList.contains('flipped'))return;       /* no drag while flipped */
     card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/18}deg)`;
     learnStamp.style.opacity=dx>0?Math.min(dx/SWIPE_DIST,1):0;
@@ -9999,7 +10634,11 @@ function attachGestures(card){
   };
   const end=()=>{
     if(!drag)return;drag=false;
+    lensDisarm();
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
+    if(lensOn){lensOn=false;closeLens();card._t=0;dx=dy=0;  /* release closes the lens; the hold
+        was never a tap, so it must not arm the double-tap flip either */
+      learnStamp.style.opacity=0;skipStamp.style.opacity=0;return;}
     if(!moved){handleTap(card);dx=dy=0;return;}          /* a tap, not a drag */
     if(!card.classList.contains('flipped')){
       /* every real drag commits — no snap-back to centre, whatever the distance.
@@ -10014,7 +10653,7 @@ function attachGestures(card){
     }else{card.style.transform='';}
     dx=dy=0;
   };
-  card.addEventListener('touchstart',e=>start(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+  card.addEventListener('touchstart',e=>start(e.touches[0].clientX,e.touches[0].clientY,e.target),{passive:true});
   card.addEventListener('touchmove',e=>move(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
   card.addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();end();});  /* preventDefault stops the browser
       synthesising a mouse tap after every touch tap, which would turn single taps into double-taps */
@@ -10022,12 +10661,13 @@ function attachGestures(card){
      notification shade, app switch. Without this the card is stranded mid-drag with its
      transition off, ghosting over the next card until the deck is touched again */
   card.addEventListener('touchcancel',()=>{
+    lensDisarm();if(lensOn){lensOn=false;closeLens();}
     if(!drag)return;drag=false;
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
     card.style.transform='';learnStamp.style.opacity=0;skipStamp.style.opacity=0;
     dx=dy=0;
   });
-  card.addEventListener('mousedown',e=>start(e.clientX,e.clientY));
+  card.addEventListener('mousedown',e=>start(e.clientX,e.clientY,e.target));
   /* the drag listeners have to live on window so a fast pointer that leaves the card
      still finishes the gesture; scope them to the card's lifetime so a rebuilt or
      swiped-away deck doesn't leave one pair behind per card it ever rendered */
@@ -10159,6 +10799,17 @@ backBtn.addEventListener('pointerdown',e=>{
 /* pointerleave is the escape hatch: slide off the button mid-rewind and it stops */
 ['pointerup','pointercancel','pointerleave'].forEach(t=>backBtn.addEventListener(t,stopRewind));
 backBtn.addEventListener('contextmenu',e=>e.preventDefault());  /* long-press callout on touch */
+/* Android's long-press fires contextmenu, and every piece of card furniture is an
+   <img> — so holding ANYWHERE on a card popped the browser's "Copy image /
+   Download image" sheet (Oscar's screenshot, 2026-08-28: crest-blank.webp offered
+   for download over the Atlas cedar, and it also fires ahead of the 500ms lens).
+   -webkit-touch-callout only covers iOS; this is the Android half. Suppressed
+   app-wide EXCEPT on editable fields, where the same menu is how a phone pastes
+   into the search box. */
+document.addEventListener('contextmenu',e=>{
+  if(e.target.closest('input,textarea,[contenteditable="true"]'))return;
+  e.preventDefault();
+});
 /* the rewind's own pointerup still fires a click — swallow that one so a rewind
    isn't followed by one extra card nobody asked for */
 backBtn.onclick=()=>{if(rwDidRewind){rwDidRewind=false;return;}undo();};

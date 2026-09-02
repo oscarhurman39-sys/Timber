@@ -70,9 +70,27 @@ const check = (name, ok, detail = '') => {
   const painted = await page.evaluate(() => document.querySelectorAll('.deck .card:not(.deep)').length);
   check(`only the top ${MAX_PAINTED} cards paint their content (${painted} of ${total})`, painted <= MAX_PAINTED, `${painted} > ${MAX_PAINTED}`);
 
-  const photos = await page.evaluate(() =>
-    [...document.querySelectorAll('.tphoto img')].filter(i => getComputedStyle(i).visibility !== 'hidden').length);
-  check(`buried photos are not painted (${photos} visible)`, photos <= MAX_PAINTED, `${photos} > ${MAX_PAINTED}`);
+  /* COUNT CARDS, NOT IMAGES. The budget is "a buried card must not paint its
+     photo", and this counted <img> elements as a proxy for it. That held until a
+     PHOTO_SWAP card reached the painted window: a swap card carries TWO images in
+     one .tphoto and cross-fades between them, so the proxy read 5 painted photos
+     across 4 painted cards and failed a card that was behaving exactly as
+     designed (Cedrus 'Horstmann's Silberspitz', 2026-08-23). The invariant is
+     asserted directly now — nothing on a .deep card may be visible — and the
+     count is still bounded, just with the swap frames the window legitimately
+     holds added to the ceiling, so a real leak still fails. */
+  const ph = await page.evaluate(() => {
+    const vis = [...document.querySelectorAll('.tphoto img')]
+      .filter(i => getComputedStyle(i).visibility !== 'hidden');
+    const onDeep = vis.filter(i => i.closest('.card')?.classList.contains('deep'));
+    const swapExtras = vis.filter(i => i.classList.contains('alt')).length;
+    return { visible: vis.length, onDeep: onDeep.length, swapExtras };
+  });
+  check(`no buried card paints its photo (${ph.onDeep} on .deep cards)`, ph.onDeep === 0,
+    `${ph.onDeep} photo(s) painted on cards marked deep`);
+  const photoCeiling = MAX_PAINTED + ph.swapExtras;
+  check(`painted photos stay inside the window (${ph.visible} visible, ceiling ${photoCeiling})`,
+    ph.visible <= photoCeiling, `${ph.visible} > ${photoCeiling}`);
 
   /* ---- 3. hiding buried content must be pixel-identical ----
      Freeze animations first. This assertion is about ONE thing: whether the deep

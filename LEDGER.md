@@ -45,6 +45,139 @@ progress: 2026-08-21 (second crash report) — **r78 did NOT fix it. Photo trick
   this environment (egress blocked) and cannot run WebKit here. Oscar's report
   from the actual devices is the test. All 17 suites green, including the two
   that had been flaking under --jobs 3.
+progress: 2026-08-28 (Android long-press fixed) — holding anywhere on a card
+  popped Android's own "Copy image / Download image" sheet, because every piece
+  of card furniture is an <img> and -webkit-touch-callout only covers iOS. The
+  Android half is the contextmenu event: suppressed app-wide EXCEPT on editable
+  fields, where that same menu is how a phone pastes into the search box —
+  verified all three cases in a browser (crest suppressed, photo suppressed,
+  search input still allowed). Also -webkit-user-drag:none on every img.
+  Gate 17/17 sequential.
+progress: 2026-08-25 (aftercare + hardiness lens + drought chip) — three
+  features, all data the deck already owned becoming visible. Watering and
+  pruning now LEAD the back (they rendered nowhere on the card before);
+  `hardinessNote` is a schema field backfilled onto 87 cards and the lens opens
+  on the H crest — hold it and the rating explains itself plus the card's own
+  note, with the Butia as the proof card; and a 🌵 Drought tolerant chip that
+  matches the card's own claim with negations stripped (Zorro's "avoid dry soil"
+  stays out), 62 matches. Two bugs en route: the invisible LEARNED stamp was
+  eating crest presses (pointer-events:none now), and a backfill ran before its
+  field was in FIELDS — formatCard silently dropped it, 87 updates in memory,
+  zero on disk. New rule: schema first, then backfill, verify by grepping the
+  written file. Protocol v14.42. Gate 17/17 sequential.
+progress: 2026-08-24 (the LENS) — press-and-hold the power points plaque (or
+  soil panel, or aspect band) for half a second and a readable copy opens above
+  the finger; release closes it. Oscar's spec. Measuring first rewrote the brief:
+  every value on those panels renders at **5.8 real px** on a 390px phone (the
+  6.5px ink floor x 0.89 card scale) against a ~11px readable minimum — so
+  magnifying the artwork could never get there (full-width scale = 9.2px, still
+  blurry), and the lens RE-TYPESETS the same values from the plant row at 17px
+  using the card's own helpers, so it can never disagree with the card. Gesture
+  safety exercised case by case in a real browser: drag-from-plaque still
+  swipes, the closing release neither taps nor arms the flip, finger drift while
+  holding is ignored, touchcancel closes, reduced-motion skips the animation.
+  One probe lesson: the first check pressed coordinates measured before the
+  staged deal settled and reported the feature dead — wait for data-dealing to
+  clear before measuring a card. Protocol v14.41. Gate 17/17 sequential.
+progress: 2026-08-23 (Sanguisorba, and a perf check counting the wrong thing) —
+  **deck 238, hold 81.** *Sanguisorba* 'Pink Brushes' from a split Oscar
+  assembled himself, kept whole and uncropped — the clearest case yet for the
+  crop-less rule, since he built it deliberately to show both halves.
+  **The gate came back 16/17 and the TEST was wrong, not the card.** perf-test's
+  "buried photos are not painted" counted visible <img> elements as a proxy for
+  painted cards; yesterday's Cedrus swap card reached the painted window, and a
+  swap card carries TWO images in one .tphoto, so it read 5 photos across 4 cards
+  and failed a card behaving exactly as designed. Diagnosed with a probe that
+  printed every visible photo with its card index and flags before anything was
+  touched. Fixed by asserting the real invariant — no `.deep` card paints a photo
+  — plus a ceiling of MAX_PAINTED + swap frames in the window. Not a threshold
+  bump: a genuine leak still fails. Protocol v14.40. Gate 17/17 sequential.
+progress: 2026-08-23 (Styrax, Korean pine, Atlas cedar) — **deck 237, hold 81.**
+  Oscar named the photo mapping and it agreed with the leaves this time (the
+  opposite of the Vitex pair); both still checked before dealing. **The Cedrus is
+  a two-frame swap card** — the close-up of creamy-white new tips is the
+  cultivar, the wider blue foliage is the plant, and the EXIF puts them four
+  seconds apart, so the pair is honest in a way a swap built from two visits
+  would not be. An apostrophe collision on *Horstmann’s* was settled by the
+  deck's own precedent (U+2019 in `latin`, plain in `common`, exactly as
+  'Bowles’s Mauve' and 'Wim’s Red' already do) rather than inventing a third
+  convention. **Two of the three needed no crop at all** — the crop-less rule is
+  now the normal outcome, five of the last eight photos untouched or trimmed once
+  to fix a real problem. The Styrax is the first card to arrive after the LEGAL
+  plaque and light it up (PBR). Protocol v14.39. Gate 17/17 sequential.
+progress: 2026-08-23 (the back looks like a card) — `art/back-600.webp` is live
+  on the flip side. **Composed, not generated whole**: the trim is the FRONT's
+  own edge lifted from `frame-600.webp` pixel for pixel so the two faces match
+  at the rim, the field inside is a crop of Gemini's texture, and the inner
+  double rule and corner ticks are drawn in gold sampled from the art. Per-edge
+  insets (top 20, sides/bottom 30) because the front's photo window opens at
+  21px — a uniform inset leaked a strip of somebody's photograph along the top
+  of every card back. Panels softened to translucent with gold gutters so they
+  sit ON the card instead of reading as patches pasted over it. **Oscar's call
+  to scrap Gemini for the frame was right**: v1 asked for a Yu-Gi-Oh back, which
+  is decorative precisely because nothing is printed on it, and it quartered the
+  card into four panels that could not hold a data sheet. Its medallion is worth
+  keeping for a real face-down image. Provenance recorded in CARD-BACK.md §6:
+  the field is AI-generated and SynthID may persist — acceptable here because
+  there is no plant in it. Gate 17/17 sequential.
+progress: 2026-08-23 (the LEGAL plaque — item 0c CLOSED) — `compliance` is a
+  card field and a rendered block; **20 cards carry one**, and with the SAFETY
+  plaque item 0c is finished. Reading the notes first changed the design again:
+  there are not 13 reasons a plant fails to comply, there are **six**, and
+  breeder's rights accounts for 12 of the 20. So two weights, not one — a
+  statutory duty is engraved in slate, PBR is a quiet grey strip, because
+  dressing a licensing note as a legal warning devalues the real ones. The
+  information was never missing, it was **smuggled**: 11 cards already showed
+  warnings stuffed into `resilience`, `type`, `returnRisk` and `soil` — a
+  Schedule 9 offence was sitting in a field called "Return risk" next to pot
+  sizes. 20 edits moved them and cleared the duplicates, keeping the horticulture;
+  where the smuggled prose was better (knotweed's controlled-waste wording) it
+  won and became the plaque. **Third negation bug, caught pre-ship**: `banned`
+  matched inside "Sale is not banned, but…" and tiered Virginia creeper as
+  RESTRICTED — a red plaque on a plant that is legal to sell. Now a standing
+  rule: strip negations before a keyword ladder, and run it over the whole real
+  corpus before trusting it. Also wrote design/CARD-BACK-PROMPT.md — a Gemini
+  prompt for ornate Yu-Gi-Oh-style card-back art in the deck's own palette.
+  Protocol v14.38. Gate 17/17 sequential.
+progress: 2026-08-22 (three in) — **deck 234, hold 81.** *Eupatorium* 'Pink
+  Frost' and *Cryptomeria* Serama ('FM5') new; ***Erysimum* 'Bowles's Mauve'
+  filled from the hold list** on Oscar's identification — the first card this run
+  to come off the held pile rather than in from outside. Three photographs and
+  three different crop answers, all settled by the v14.34 rule without argument:
+  the Eupatorium needed **nothing** (aspect already right, pot below the plaque
+  line); the Erysimum lost its lower quarter of bare gravel, which was pushing the
+  plant out of the card band; the Cryptomeria lost **3% off the bottom and not a
+  pixel more**, because a fingertip holding the branch was in shot — a finger is a
+  label. `deal-plant.js` shortchanged a master again (v14.36's note stands, twice
+  now). Ninth compliance line with nowhere to go. Both new cards lead on a flower
+  their photograph does not carry: the Eupatorium's pink heads (Jul–Sep) and the
+  Erysimum's mauve spires, which flower nearly year-round and are the easiest
+  reshoot on the list. Protocol v14.37. Gate 17/17 sequential.
+progress: 2026-08-21 (Vitex pair settled) — **deck 231, hold 82.** Oscar: one
+  word, "correct" — the leaves were right and the send order was the misleading
+  half. Narrow leaflets = **'Delta Blues'** (*agnus-castus*), broad leaflets =
+  **'Flip Side'** (the *trifolia* hybrid), which is the OPPOSITE of the order
+  they arrived in. The evidence was already on his own card: 'Flip Side's `cvs`
+  line says it is a *V. trifolia* 'Purpurea' hybrid, and *trifolia* is that broad
+  purple-backed leaf. Nothing external was needed. Masters restaged at 1200×1600
+  rather than the 900×1200 `deal-plant.js` writes — it caps the LONG edge where
+  `add-plant.js` caps the width, so a portrait dealt through it loses a quarter
+  of its width for nothing. Parked filenames retired, credits entries removed,
+  the assignment recorded on each licence line. VQ 58 closed. Protocol v14.36.
+  Gate 17/17 sequential (a first run died at exit 137 — a stale :8477 server left
+  by a screenshot step, not the change).
+progress: 2026-08-21 (three arrived, one dealt) — **deck 229, hold 84.**
+  *Cephalanthus* 'Fiber Optics' dealt; **both Vitex cards HELD and both their
+  photographs parked**, because the order they arrived in and the leaves in them
+  disagree. By order the narrow-leaflet shot is 'Flip Side'; by the leaves it is
+  'Delta Blues' — 'Flip Side' is the *V. trifolia* × *agnus-castus* hybrid (his
+  own `cvs` line says so) and is sold for broad purple-backed foliage, while
+  'Delta Blues' is straight *agnus-castus* with narrow palmate leaflets. The two
+  cards are otherwise near-identical, so a swap would be invisible on the card
+  and wrong on both. One line from Oscar closes it: VQ 58. Also worth knowing:
+  EXIF shows the upload order was NOT the capture order (16:17:26 narrow,
+  16:17:33 broad, 16:19:05 buttonbush), so "he sent them in this order" is a
+  weaker signal than it looks. Protocol v14.35. Gate 17/17 sequential.
 progress: 2026-08-21 (crop less — Oscar's correction) — the Gaura composite is
   **restaged WHOLE**. I had cropped it to the flower frame; Oscar reversed it:
   "don't change the image so much... this shows off both parts of the plant which
