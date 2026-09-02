@@ -128,14 +128,15 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
   slugs, a box is box tree caterpillar, and most plants are honestly nothing in
   particular.
 
-  | Available now | |
-  |---|---|
-  | `slugs` | slugs and snails |
+  **The canonical key list, the art direction and the paste-ready prompts live in
+  `PEST-BRIEF.md`.** Do not copy the list here — it will drift. In short: 20 keys,
+  `mite` is the baked default and `slugs` is drawn; the rest fail
+  `node tools/check-boot.js` until their icon exists, which is deliberate — a key
+  with no art must stop the build rather than silently show the wrong bug.
 
-  Planned, and **not yet valid** — using one fails `node tools/check-boot.js`
-  rather than silently showing the wrong icon: `aphid`, `vine-weevil`,
-  `caterpillar`, `scale`, `mildew`, `blight`, `whitefly`, `sawfly`,
-  `lily-beetle`, `rust`, `black-spot`, `honey-fungus`, `browsing`.
+  Assigning pests across the whole deck is a survey, not a per-card decision:
+  `data/pest-survey.csv` + the research prompt in PEST-BRIEF.md §6, then
+  `node tools/apply-pest-survey.js data/pest-survey.csv`.
 
   Adding a new one is three steps and no code:
 
