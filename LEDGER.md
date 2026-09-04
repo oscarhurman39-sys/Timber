@@ -5,6 +5,17 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-04, later (a refused photograph becomes its own card) —
+  **deck 262, hold 84.** *Daphne* × *transatlantica* PINK FRAGRANCE ('Blapink').
+  In August a Daphne photo was sent for the held *D. bholua* 'Jacqueline
+  Postill' and PARKED rather than dealt, because that plant flowers Jan-Mar and
+  the picture was in full bloom in August; VQ 44 inferred the transatlantica
+  group. Oscar has now confirmed PINK FRAGRANCE — the inference was right, the
+  refusal bought a correct card instead of a wrong one, and 'Jacqueline Postill'
+  stays held waiting for a winter shot. New frame supplied and dealt uncropped.
+  RHS's 'Blapink' page is unreachable from here (egress blocked) so H5 is
+  carried from the sibling ETERNAL FRAGRANCE and the hardinessNote says so —
+  wants a label check. Protocol v14.46.
 progress: 2026-09-04 (Campsis photo swap — a crop that threw the ID away) —
   **deck 260, hold 84.** Oscar: *"the way you cropped this photo sucks"*, and
   right for a reason: the outgoing Campsis master was zoomed into one soft

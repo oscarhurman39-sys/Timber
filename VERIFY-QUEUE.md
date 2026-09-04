@@ -1436,7 +1436,7 @@ pair to check a photo against.
 
 ---
 
-### 44. A summer-flowering Daphne that is not the deck's Daphne — and a Forsythia photo its own card denies
+### 44. A summer-flowering Daphne that is not the deck's Daphne — **A RESOLVED 2026-09-04** — and a Forsythia photo its own card denies
 2026-08-17.
 
 **A. The Daphne is parked, not dealt.** Oscar sent it for *"the only daphne in
@@ -1451,6 +1451,8 @@ my eye:
 - `[Inference]`: the ***D.* × *transatlantica*** group — ETERNAL FRAGRANCE
   ('Blafra') or PINK FRAGRANCE — which is compact, small-leaved, and flowers
   right through summer. Exactly what is in the frame.
+
+**RESOLVED 2026-09-04.** Oscar: *"it was pink fragrance"* — the inference was correct. *Daphne* × *transatlantica* PINK FRAGRANCE ('Blapink') now has its **own card**, dealt from a clearer frame he supplied; the parked file is kept as the earlier record of the same plant. *D. bholua* 'Jacqueline Postill' remains **held** and still needs a Jan-Mar shot.
 
 Parked as `daphne-unidentified-summer.jpg`. If it is a transatlantica it wants
 its **own card** — and it is arguably the better garden-centre plant of the two,
