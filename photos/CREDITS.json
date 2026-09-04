@@ -1682,6 +1682,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "impatiens-omeiana.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped, verdict as-is, 3000x4000 at 0.750. No pixels generated. EXIF Samsung Galaxy S24, 2026-08-22. No C2PA/JUMBF manifest and no AI or generative marker. FLAGGED: the frame shows glossy, spine-toothed leathery leaves on woody red stems — not the soft elongated silver-veined foliage the card describes. Oscar was asked directly whether this is really Impatiens omeiana against this photo and confirmed yes; dealt on that confirmation, not on my own reading of the leaves",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "imperata-cylindrica-rubra.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. ARCHIVE SHOT: EXIF Samsung Galaxy S21 (SM-G991B), dated 2024-07-19. No C2PA manifest in the file and no AI or generative marker",

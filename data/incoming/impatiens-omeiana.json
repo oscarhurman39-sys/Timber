@@ -1,0 +1,33 @@
+{
+  "common": "Omei Mountain Balsam",
+  "latin": "Impatiens omeiana",
+  "hue": 55,
+  "visual": "Large elongated dark green leaves with pale silver veins · upright stems · small pale yellow flowers",
+  "water": "Keep evenly damp",
+  "aspect": "North / East / West",
+  "soil": "Moist, fertile, humus-rich",
+  "soilWarning": "Never let it dry out · shelter from sun",
+  "prune": "Cut old stems to ground level after flowering or when foliage dies back",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Aug-Oct",
+  "cvs": "",
+  "hardiness": "H5",
+  "hardinessNote": "Hardy in much of the UK in a sheltered, moist position",
+  "resilience": "cold hardy · spreads by rhizomes · needs cool, moist shade",
+  "uses": "woodland gardens · shady borders · underplanting · damp shade",
+  "height": "0.5–1 m",
+  "spread": "0.5–1 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 13,
+  "pestRisk": 6,
+  "thirst": 17,
+  "careLevel": 8,
+  "sunNeed": 30,
+  "sunMin": 10,
+  "uncertain": [
+    "peak 'Late summer to autumn' written as Aug-Oct",
+    "[Unverified — flagged, dealt on Oscar's confirmation] The supplied photograph shows glossy, spine-toothed, leathery leaves on woody red stems — no soft elongated foliage, no visible silver midrib pattern, and spined margins that Impatiens does not have. Oscar confirmed the identification is correct against the photo; kept as supplied, not overridden."
+  ]
+}
