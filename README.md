@@ -21,7 +21,7 @@ developed here for a while and moved out on 2026-07-28.
 | Audience | Customers and floor staff learning plants | Employees running the centre |
 | Product | Swipe-card plant discovery app | Command-centre dashboard |
 | Entry point | `timber.html` | `index.html` |
-| Storage keys | `timber-progress-v1`, `timber-quiz-v1` | `plantatron.demo.*` |
+| Storage keys | `timber-progress-v1`, `timber-quiz-v1`, `timber-srs-v1`, `timber-recent-v1`, `timber-diag-v1` | `plantatron.demo.*` |
 
 The two may later share plant data or schemas, but they are separate applications with
 separate deployments. Neither imports the other, and neither is served from the other's
@@ -75,7 +75,7 @@ is the live branch** — whatever is on it is what the world sees.
 Publishing is **one command**, from a session or anywhere else:
 
 ```sh
-node tests/run-all.js --jobs 3                                    # full gate first, 14/14
+node tests/run-all.js --jobs 3                                    # full gate first, 17/17
 git push origin HEAD:refs/heads/claude/timber-plant-pwa-j69h5e    # this deploys
 ```
 
@@ -154,7 +154,7 @@ the repo fork. If they do drift, reconcile back into the repo first, then rebuil
 | 🔍 top right | **Search** — common/latin/cultivar/use, typo-tolerant ("choysia" finds Choisya); exact matches always rank above fuzzy ones. Arrow keys walk results; recently-viewed chips resurface till lookups; info sheets show the plant photo, a 12-month peak strip and a Share button (where supported) |
 | 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
 | 🔊 next to latin name | Speaks the latin name aloud (built-in speech engine, Italian phonology; no files, works for every plant you add). Hidden on devices without speech support |
-| ☰ menu | Learned count, Dictionary mode, **Quiz mode**, **Review due** (spaced repetition), **My progress** (stats), **Filter deck** chips, Install app, Reset progress |
+| ☰ menu | Learned count, Dictionary mode, **Quiz mode**, **Review due** (spaced repetition), **My progress** (stats), **Filter deck** chips, Install app, **Report a problem**, Reset progress |
 
 **Spaced repetition:** every swipe schedules the plant in a Leitner box (`timber-srs-v1`,
 keyed by latin name so it survives deck changes). Learn = box up, next review 1/3/7/16/35
@@ -168,12 +168,33 @@ Resetting the deck keeps review history.
 (lowest review box). Closing the quiz shows a session summary ("7/9 · weakest: X").
 A question is only asked when its shown value is unique to one plant — never ambiguous.
 
+**Report a problem** (menu): a plain-text report — build, whether it was opened as an
+installed app, deck size and mode, how many opens in a row failed, the last uncaught
+error with its line number, device/screen/memory, and what is in storage — with a Copy
+button and a Share button where the phone supports it. Nothing is sent anywhere until the
+person sends it. The last uncaught error is recorded in `timber-diag-v1` as it happens, so a
+report written after a blank screen still names the line that threw.
+
+**Light mode (crash-loop rescue):** the app writes a `bootPending` flag before it deals
+and clears it only when the open demonstrably ended well — the deck settled and the page
+was still alive 20s after load, or it was hidden or unloaded cleanly. An open that finds
+the flag still set was preceded by one that never got that far. Two of those in a row and
+the app deals only the newest 24 cards (the `?cards=N` diagnostic, switched on by evidence)
+and shows a pill above the deck saying so; tapping the pill returns the full deck and
+resets the count. Light mode sticks until tapped, never reads or writes the saved
+full-deck progress, and does nothing on a deck of 24 cards or fewer. It exists because two
+iPhones hit Safari's "A problem repeatedly occurred" on the full deck and no WebKit engine
+is available in the build environment: a phone that opens in light mode has answered the
+question the ledger could not — the ceiling is size. [Unverified] on a real iPhone; the
+edge suite exercises the whole path in Chromium.
+
 **Filter deck:** chips discovered from the data at runtime — "In season now" (peak months
 vs today), "Order in next 4 wks" (order week vs current ISO week), type category and
 hardiness. Filters are ephemeral views: swipes update review scheduling but your saved
 full-deck progress is untouched, and clearing the chip restores the deck exactly.
 
-Progress (learned/skipped/undo history) and your best quiz streak persist in the browser via
+Progress (learned/skipped/undo history), your best quiz streak, and the boot/report record
+(`timber-diag-v1`) persist in the browser via
 localStorage — closing the app doesn't lose them. "Reset progress" / "Reset deck" clears the deck
 state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
 

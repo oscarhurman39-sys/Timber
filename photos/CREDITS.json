@@ -41,6 +41,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acanthus-hungaricus-cutout.png",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright (raw cutout; the card uses the hero-on-self composite)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "acanthus-hungaricus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-palmatum-bloodgood-cutout.png",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -469,6 +489,16 @@
    "sourceUrl": null,
    "commit": "5c4681e",
    "commitSubject": "Add Doctor King Camellia to deck: 66 -> 67",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "campsis-grandiflora.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright, WITH his own red-marker redaction over two nursery labels (Samsung PhotoEditor drawing edit, the Salvia 'Black and Blue' / Solanum class). The manifest declares no generative action: isScaleAI false, isAIFilterReEditOnly false, no Photo assist agent, no digitalSourceType, no trained-media marker. REPLACED 2026-09-04: the previous master was a tight 1200x1253 macro of one soft bloom with the foliage cropped away; this is the supplied frame with only the bottom 15% removed (pot, hand, redacted labels) — measured, because the topmost label sits at y 0.560 and a 0.90 trim put it exactly on the plaque line at 0.622 and showed as a sliver on the rendered card. Master 1059x1200 at 0.882. EXIF Samsung Galaxy S24, 2026-08-29",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1313,6 +1343,16 @@
   },
   {
    "file": "forsythia-intermedia-lynwood-variety.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "galium-odoratum.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
