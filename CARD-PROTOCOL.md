@@ -398,6 +398,7 @@ Focal point recorded here when off-centre:
 
 | Sanguisorba 'Pink Brushes' | sanguisorba-pink-brushes.jpg | 50% 40% default — **Oscar's own two-frame split, kept whole**: cut foliage left, nodding pink bottlebrushes right. Already 3000x4000 at exactly 0.750, so nothing was cropped. The clearest case yet for the v14.34 rule — he assembled this one deliberately to show both halves, and both halves are what a person needs to recognise the plant on a bench |
 | Disporum sessile 'Variegatum' | disporum-sessile-variegatum.jpg | 50% 40% default — held in Oscar's hand in its nursery pot, so the cream-striped leaves read at arm's length. **Bottom fifth trimmed** (`h: 0.78`) and nothing else: as shot, the pot floated the foliage to 27% down the frame, above the card's readable band, and reframe-photo.js refused the as-is until it was fixed. The hand and pot are kept — they are the scale reference. **First *Disporum*** in the deck |
+| Campsis grandiflora (Tropical Summer Trumpet Creeper) | campsis-grandiflora.jpg (**replaced 2026-09-04**) | 50% 40% default — **the clearest crop-versus-frame lesson in the register.** The outgoing master was a 1200x1253 macro zoomed so far into a single bloom that the petal was soft and the foliage was gone entirely — on a card whose `visual` leads with *"pinnate dark-green foliage"*, and on a *Campsis*, where the pinnate serrate leaflets are the ID feature and a big orange trumpet is not (*Bignonia*, *Podranea* and *Tecoma* all read the same at that magnification). The replacement is Oscar's supplied frame with **only the bottom 15% removed** — pot, hand and two nursery labels he redacted himself in red marker. That trim is measured, not tasted: the topmost label sits at y 0.560, and a first pass at `h: 0.90` put it at exactly 0.622, the plaque line, which rendered as a visible sliver beside the soil panel; `h: 0.85` puts it at 0.659 and the band is clean. Leaflets fill the left and centre, trumpets upper-right, both in one frame. **First *Campsis*** in the deck |
 | Helleborus × ericsmithii 'Winter Moonbeam' | helleborus-ericsmithii-winter-moonbeam.jpg | 50% 40% default — **uncropped**, verdict as-is. Silver-veined dark foliage; no flowers, and there would not be in August — peak is Dec–Apr, so the white-ageing-pink blooms the card names want a winter reshoot. **The strongest provenance in the deck this month**: a full signed Galaxy S24 *capture* manifest (JUMBF, `c2pa.ingredient.v2`, `relationship parentOf`) with no `digitalSourceType` and no Photo assist marker — the untouched-original signature, which almost nothing else in the recent batch carries. **Second hellebore**, but 'Anna's Red' is still held and has no photo, so no bench confusion yet |
 | Oenothera stricta 'Sulphurea' | oenothera-stricta-sulphurea.jpg | 50% 40% default — **uncropped**, verdict as-is. Another of Oscar's deliberate composites: the open flower filling the frame, caught at the peach stage it fades to, with a labelled `foliage` inset panel he added across the top-right for the bronzy-green leaves and red stems. The arithmetic said the card's top furniture would slice that panel and leave a stray label; the render says otherwise — half the panel and the whole label survive inside the band and read as an inset, not a remnant. Measured, not assumed, and left whole under v14.34. **Third *Oenothera***, and the only *stricta*: the other two are *O. lindheimeri* (GAUDI ROSE and 'Rosy Jane'), white-to-pink four-petal gaura flowers on wiry stems — this one is a lemon-to-peach bowl on a low bronzed mound, so the confusion is in the genus name only |
 | Monstera deliciosa 'Thai Constellation' | monstera-deliciosa-thai-constellation.jpg | 50% 40% default — **Oscar's own PNG cutout on flat black**, 1502x2002, exactly 0.750, no EXIF because it is a PNG export. Kept as supplied: the black ground is his choice and the cream-splashed leaves are the whole identification. **Second *Monstera*** after the plain species — variegation is the only visible difference |
@@ -423,6 +424,30 @@ Focal point recorded here when off-centre:
 | Solanum pyracanthos | solanum-pyracanthos.jpg | 50% 40% default — **uncropped by us** (2482x3024 at 0.821, orientation 1), but **the file carries Oscar's own sticker edit, the Salvia 'Black and Blue' class, and this time the C2PA manifest says so precisely**: a Samsung PhotoEditor deco re-edit declaring a crop to 91% height, a filter, and ONE non-text sticker at centre (0.215, 0.235), ~23% wide, rotated -10° — which is exactly where the purple flower sits. **No generative action**: no `Photo assist` agent, no trained-media source type, `isScaleAI:false`, AI filter false, no visible label. The pasted flower is species-correct (purple 5-lobed star, yellow poricidal anther cone) and every other ID feature — grey-green lobed leaves, vivid orange spines on stems, midribs AND calyx, a developing fruit — is the camera's own capture. Two blurred nursery labels lower-left (one reads "SOL…", the right genus) fall below the card band, the Sempervivum precedent. **Second *Solanum*** — *S. laxum* 'Album' is a white-flowered climber, no confusion risk. No red fruits in frame: an autumn reshoot would complete the card's own visual line |
 
 ## 5. Decision changelog
+
+- **v14.45 (260 dealt / 84 held — the Campsis photo swap: a crop that threw the
+  identification away)**: Oscar's verdict on the *Campsis grandiflora* frame was
+  blunt — *"the way you cropped this photo sucks"* — and he was right for a
+  reason worth keeping. The outgoing master was zoomed so far into one trumpet
+  that the petal went soft and the pinnate foliage left the frame entirely. On
+  this genus that is not a taste call: the leaflets ARE the identification, and
+  a big orange trumpet at that magnification could be *Bignonia*, *Podranea* or
+  *Tecoma*. A card that cannot be told apart from three other plants is not
+  doing its job.
+  - **The replacement is his supplied frame, trimmed 15% off the bottom and
+    nothing else** — pot, hand, and two nursery labels he had redacted himself
+    in red marker.
+  - **The trim is measured twice, which is the transferable part.** Full height
+    was refused by `reframe-photo.js` outright. A first pass at `h: 0.90` passed
+    the tool, then rendered with a sliver of redacted label beside the soil
+    panel — because the topmost label sits at y 0.560 and 0.560/0.90 = 0.622,
+    exactly the plaque line the check compares against. Passing a boundary check
+    by landing ON the boundary is not passing it. `h: 0.85` puts the label at
+    0.659 and the band is clean, confirmed on the rendered card rather than in
+    the arithmetic alone.
+  - **This card lived on a third parallel branch**, not on the live line — it
+    was merged forward here with the rest of that line (Acanthus, Galium, and
+    the five duplicates already resolved to live).
 
 - **v14.44 (257 dealt / 84 held — a five-card line merges in, and two parallel
   duplicates resolve to the live copies)**: a second session had been dealing

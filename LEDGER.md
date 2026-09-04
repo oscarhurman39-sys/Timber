@@ -5,6 +5,17 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-04 (Campsis photo swap — a crop that threw the ID away) —
+  **deck 260, hold 84.** Oscar: *"the way you cropped this photo sucks"*, and
+  right for a reason: the outgoing Campsis master was zoomed into one soft
+  trumpet with the pinnate foliage cropped out, and on this genus the leaflets
+  ARE the ID (a lone orange trumpet could be Bignonia, Podranea or Tecoma).
+  Replaced with his supplied frame minus the bottom 15% (pot, hand, two labels
+  he redacted in red marker). Trim measured twice: full height refused by the
+  tool, h 0.90 passed it but landed the topmost label at exactly the 0.622
+  plaque line and rendered a sliver, h 0.85 is clean and verified on the card.
+  Card came from a third parallel branch, merged forward with Acanthus and
+  Galium. Protocol v14.45.
 progress: 2026-09-02 (five-card feature line merged; two parallel duplicates
   resolved) — **deck 257, hold 84.** The cape-mallow feature branch merged into
   the live line, adding its five unique cards: Anisodontea 'Ib201-7', Cyclamen
