@@ -2033,7 +2033,7 @@ same plant twice. **Oscar's call** whether to move 'The Bride' into the latin.
 ---
 
 
-### 60. One Physocarpus photograph, two Physocarpus cards — which is it?
+### 60. One Physocarpus photograph, two Physocarpus cards — **RESOLVED 2026-09-04 by the pot label**
 2026-09-02. Oscar's batch had cards for **'All Black'** and **LITTLE DEVIL ('Minall2')**
 and one ninebark photograph, listed first as "phycoaroubs". Both cultivars are
 dark-leaved; the photo shows purple leaves with a grey bloom on red stems and a
@@ -2045,7 +2045,7 @@ more compact of the pair, but there is no scale reference.
 `photos/physocarpus-opulifolius-dark-unidentified.jpg` with a CREDITS entry that
 says exactly this. Same handling as the two Vitex (VQ 58).
 
-**Oscar's call:** say which it is and it is dealt in one command:
+**RESOLVED 2026-09-04.** Oscar photographed the pot label — *PHYSOCARPUS OPULIFOLIUS ALL BLACK® 'Minall2' cov* — at 17:27:22, with a leaf frame at 17:27:33. Eleven seconds apart, so the label and the plant are the same plant in the same minute. **ALL BLACK dealt.** The label also proved the deck had the two cultivar codes crossed: LITTLE DEVIL was carrying 'Minall2', which belongs to ALL BLACK; Little Devil is 'Donna May' (PP22634). Both cards corrected. LITTLE DEVIL remains held with no photograph, and is separated from ALL BLACK by SIZE rather than leaf colour, so its photo will need a label or a scale reference too.\n\n**Oscar's call:** say which it is and it is dealt in one command:
 `node tools/deal-plant.js "<latin>" photos/physocarpus-opulifolius-dark-unidentified.jpg`.
 If the other one has a photo coming too, both go in the same run.
 

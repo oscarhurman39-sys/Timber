@@ -5,6 +5,17 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-04, later still (a pot label settles a photo and catches a
+  crossed cultivar code) — **deck 263, hold 83.** *Physocarpus opulifolius* ALL
+  BLACK ('Minall2') dealt. VQ 60's parked ninebark photo could not be told from
+  LITTLE DEVIL by eye; Oscar photographed the pot label (ALL BLACK 'Minall2')
+  eleven seconds before the leaf frame, so label and plant are the same plant in
+  the same minute — proof of identity, not just of lighting. The label also
+  caught a real error: the deck's LITTLE DEVIL card carried 'Minall2', which is
+  ALL BLACK's code; Little Devil is 'Donna May' (PP22634). Both latins and cvs
+  fields corrected. Parked file renamed to -all-black-bench rather than deleted.
+  LITTLE DEVIL stays held — told apart by SIZE, not leaf colour, so its photo
+  still needs a label or scale. Protocol v14.47.
 progress: 2026-09-04, later (a refused photograph becomes its own card) —
   **deck 262, hold 84.** *Daphne* × *transatlantica* PINK FRAGRANCE ('Blapink').
   In August a Daphne photo was sent for the held *D. bholua* 'Jacqueline
