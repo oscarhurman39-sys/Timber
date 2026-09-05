@@ -212,6 +212,9 @@ state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
   single-file build to publish. Not needed for local development.
 - `sw.js` — service worker (offline app-shell cache when hosted).
 - `index.html` — redirect so the site root opens the app.
+- `mission.html` — public mission / about / privacy page for store listings (Google Play developer
+  verification). Served at `/mission.html` on the live site; `#privacy` is the privacy-policy anchor.
+  Renders six real cards from the deck; the card data in it is a copy, so re-check it if those cards change.
 
 ## Adding plants
 
