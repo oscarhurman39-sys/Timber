@@ -1644,8 +1644,8 @@ the species is on the delivery note, not in the plant.
 ---
 
 
-### 49. 'Zagora Yellow' — the only flower supplied for it is CREAM-WHITE, not yellow
-**2026-09-06: this flower is now ON THE CARD FACE** (VQ 57 resolved by Oscar). The card still says bright yellow and shows cream-white. Unchanged ask: one fresh bloom in May–September.
+### 49. 'Zagora Yellow' — the only flower supplied for it is CREAM-WHITE, not yellow — **RESOLVED 2026-09-06 on Oscar's field observation**
+Oscar, later the same day: *"that rhodanthemum actually throws out yellow and white flowers, this is one of its white ones."* So the plant on the bench carries BOTH colours and the photograph shows a white one; the name stands. The card's `visual` now says *"Yellow daisies, some opening white"* so the face and the photograph agree. [Unverified] against RHS or the breeder — this rests on Oscar having watched the plant, which is better evidence than either reading below. Earlier note kept for the record: the flower went on the card face when VQ 57 was resolved.
 
 2026-08-18. Dealt on foliage, because the flower half of this card is not
 settled and I am not going to settle it by picking a reading.

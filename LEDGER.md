@@ -5,6 +5,9 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-06, night (VQ 49 closed) — Oscar: the Rhodanthemum throws
+  yellow AND white flowers, the photo is a white one. Name stands; card
+  `visual` now says "some opening white". Protocol v14.52.
 progress: 2026-09-06, evening (the six parked cards dealt) — **deck 274, hold
   82.** Picea 'Echiniformis', Araucaria, Drosera capensis, Ceanothus 'Cool
   Blue', Hydrangea quercifolia 'Ice Crystal', Acer 'Taylor' — photos arrived
