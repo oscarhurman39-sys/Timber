@@ -5,6 +5,14 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-06 (Common Box) — **deck 264, hold 82.** *Buxus sempervirens*
+  dealt from Oscar's 2026-09-05 frame: uncropped, orientation 6 baked, restaged
+  at 1200x1600. Identification rests on the OPPOSITE leaf pairs, which separate
+  it from the deck's two *Ilex crenata* substitutes; the cultivar is filed as the
+  species on Oscar's word, [Inference] on the foliage. Card values not re-derived.
+  `sharp` was missing from the global modules and had to be reinstalled — the
+  WebP check skips silently without it, and the app loads only the WebP.
+  Protocol v14.48.
 progress: 2026-09-04, later still (a pot label settles a photo and catches a
   crossed cultivar code) — **deck 263, hold 83.** *Physocarpus opulifolius* ALL
   BLACK ('Minall2') dealt. VQ 60's parked ninebark photo could not be told from
