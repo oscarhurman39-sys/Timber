@@ -9,24 +9,24 @@ progress: 2026-09-06, latest (duplicate Viburnum removed) — **deck 276, hold
   82.** The plain Viburnum × bodnantense card wore the same photo as 'Charles
   Lamont'; Oscar had it removed. Wide frame kept as a renamed spare. Buddleja
   LITTLE RUBY photo: Oscar saw both, "either is fine, leave it" — VQ 66 closed,
-  existing photo kept. Protocol v14.55.
+  existing photo kept. Protocol v14.59.
 progress: 2026-09-06, later (Albizia 'Summer Chocolate') — **deck 277, hold 82.**
   Dealt whole beside the green species card. Label read 'Albizia chocolate';
-  cultivar is Oscar's reading. Protocol v14.54.
+  cultivar is Oscar's reading. Protocol v14.58.
 progress: 2026-09-06, late (two cards + Cercis collage) — **deck 276, hold 82.**
   Hydrangea paniculata 'Pink & Rose' and Begonia soli-mutata dealt, both
   uncropped on Oscar's word. Carolina Sweetheart's three-panel collage
   restored whole (had been cut to one panel on 2026-08-16); old panel kept as
-  a spare. Protocol v14.53.
+  a spare. Protocol v14.57.
 progress: 2026-09-06, night (VQ 49 closed) — Oscar: the Rhodanthemum throws
   yellow AND white flowers, the photo is a white one. Name stands; card
-  `visual` now says "some opening white". Protocol v14.52.
+  `visual` now says "some opening white". Protocol v14.56.
 progress: 2026-09-06, evening (the six parked cards dealt) — **deck 274, hold
   82.** Picea 'Echiniformis', Araucaria, Drosera capensis, Ceanothus 'Cool
   Blue', Hydrangea quercifolia 'Ice Crystal', Acer 'Taylor' — photos arrived
   within the hour and deal-plant.js took each. Two collages kept whole. Genus
   proved by every frame, cultivar by none; all filed on Oscar's labels.
-  Protocol v14.51.
+  Protocol v14.55.
 progress: 2026-09-06, later still (ten-card batch) — **deck 268, hold 88.**
   Four dealt with photos (Lagerstroemia WITH LOVE BABE, Astilbe 'Chocolate
   Shogun', Cordyline 'Torbay Dazzler', Parthenocissus 'Lowii'), six parked
@@ -35,13 +35,13 @@ progress: 2026-09-06, later still (ten-card batch) — **deck 268, hold 88.**
   JSON converted to the card schema with every change logged in `uncertain`;
   ratings and hardiness are Oscar's, unverified. Buddleja LITTLE RUBY JSON was
   a duplicate of a dealt card; its new photo is not swapped in (VQ 66).
-  Protocol v14.50.
+  Protocol v14.54.
 progress: 2026-09-06, later (Rhodanthemum flower restored) — Oscar's call on
   VQ 57: the 'Zagora Yellow' collage is back on the card, inset untouched,
   bottom 5.7% trimmed for the aspect gate. PHOTO_FOCUS '100% 40%' moves the
   flower out from under the hardiness shield — measured on three renders. VQ 59
   closes as one rule (two-part ID photos stay whole). VQ 49 stays open and is
-  now visible on the face: cream flower, yellow name. Protocol v14.49.
+  now visible on the face: cream flower, yellow name. Protocol v14.53.
 progress: 2026-09-06 (Common Box) — **deck 264, hold 82.** *Buxus sempervirens*
   dealt from Oscar's 2026-09-05 frame: uncropped, orientation 6 baked, restaged
   at 1200x1600. Identification rests on the OPPOSITE leaf pairs, which separate
@@ -49,7 +49,60 @@ progress: 2026-09-06 (Common Box) — **deck 264, hold 82.** *Buxus sempervirens
   species on Oscar's word, [Inference] on the foliage. Card values not re-derived.
   `sharp` was missing from the global modules and had to be reinstalled — the
   WebP check skips silently without it, and the app loads only the WebP.
-  Protocol v14.48.
+  Protocol v14.52.
+progress: 2026-09-06 ('Dark Knight' dealt on the resend) — **deck 267, hold
+  85.** Oscar resent the gold-leaved Caryopteris frame as "that photo dark
+  knight"; the resend is the identification, so the held card is dealt and the
+  parked copy retired. Left for him: the card's "grey-green foliage" clause
+  under a gold photograph (VQ 69). Protocol v14.51.
+progress: 2026-09-02 (three photos replaced) — **deck 241, hold 85,
+  unchanged.** Oscar sent better frames for three dealt cards and named all
+  three: Hebe 'Rhubarb Crumble' (the mirrored double-up "came out shit" — full
+  frame in, EDITION mirror retired), Star Jasmine (wider original of the same
+  shot, focus moved to 30% 45%), Kinme holly (uncut frame replaces the
+  black-background cutout of the same sprig). Replacements recorded on each
+  CREDITS line and in the photo register. Protocol v14.50.
+progress: 2026-09-02 (Viburnum dealt, Dark Knight held, Sapphire Ring swap) —
+  **deck 241, hold 85, swap cards 5.** Oscar named two frames and both agreed
+  with the plants: *Viburnum opulus* dealt on his word plus the berries; the
+  Sapphire Ring card now flashes to its flower frame at his request. The
+  Caryopteris frame is gold-leaved under blue flowers, which is Worcester Gold
+  (dealt, foliage-only photo), not the grey-green 'Dark Knight' its JSON
+  describes — card held, frame parked, one question in VQ 69: make Worcester
+  Gold a swap card too? Two prose fields per card (hue, peak) converted with
+  labels; both soils fitted to the 26/44 panel after the first screenshot
+  showed the overflow. Protocol v14.49.
+progress: 2026-09-02 (Golden Hakonechloa refused) — **deck 240, hold 84,
+  unchanged.** A *Hakonechloa macra* JSON + cutout arrived; the deck already
+  holds the same plant as 'Aureola' (cvs on the new JSON says so), so it was
+  refused as a duplicate, Lupin-style, with the 19 differing fields tabulated in
+  VQ 68. The JSON also fails the validator as sent (hue is prose, peak is
+  prose) and was not rewritten. The cutout shows purple noded culms with fans
+  of broad striped leaves — [Inference] more dwarf bamboo than Hakonechloa —
+  so it is parked as `striped-grass-unidentified-cutout.png`, not staged.
+  Two questions for Oscar in VQ 68: which plant is the cutout, and should any
+  new values replace the held card's.
+progress: 2026-09-02 (Persicaria + Veronicastrum dealt, Groundbreaker Blush
+  held) — **deck 240, hold 84.** Three cards from one bench minute; the send
+  order disagreed with the plants again. The two that identify themselves are
+  dealt: *Persicaria affinis* 'Darjeeling Red' (clean capture, new genus) and
+  *Veronicastrum* 'Red Arrows' (burned-in AI label, dealt the Houttuynia way:
+  focus 50% 0%, label outside the window, marker verbatim in CREDITS). Photo 1
+  is a woody prostrate shrub with no flower — a hydrangea by elimination, not by
+  evidence — so the Hydrangea card is held and the frame parked as
+  `hydrangea-groundbreaker-foliage-unconfirmed.jpg` for Oscar to confirm.
+  Persicaria's 39-char soil value ships shrunk to three lines, kept verbatim.
+  VQ 67, protocol v14.48.
+progress: 2026-09-02 (Robinia 'Lace Lady' + Copper beech, both held) — **deck
+  238, hold 83.** Two researched cards, both validated, both in the hold block.
+  **Neither photograph was staged, because neither shows its plant:** the
+  Robinia frame is a crimson mallow-family flower with palmate leaves (genus not
+  identified, not guessed), and the copper beech frame is a GREEN beech with no
+  purple in it. Both parked under names no slug can resolve
+  (`malvaceae-crimson-unidentified.jpg`, `fagus-sylvatica-green-summer.jpg`),
+  credited as Oscar's, and written up in VQ 66 with the deal commands for when
+  the right shots arrive. Robinia growthSpeed 5 flagged by the checker and kept
+  as sent — its own research note says slow-growing.
 progress: 2026-09-04, later still (a pot label settles a photo and catches a
   crossed cultivar code) — **deck 263, hold 83.** *Physocarpus opulifolius* ALL
   BLACK ('Minall2') dealt. VQ 60's parked ninebark photo could not be told from

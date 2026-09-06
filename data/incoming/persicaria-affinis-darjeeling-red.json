@@ -1,0 +1,33 @@
+{
+  "common": "Knotweed 'Darjeeling Red'",
+  "latin": "Persicaria affinis 'Darjeeling Red'",
+  "hue": 350,
+  "visual": "Mat-forming foliage reddening in autumn · pink spikes maturing deep red",
+  "water": "Moderate; keep soil moisture-retentive",
+  "aspect": "Any aspect",
+  "soil": "Moist, moisture-retentive, well-drained",
+  "soilWarning": "Can spread quickly in persistently wet soil",
+  "prune": "No routine pruning; remove spent flowers and comb out old leaves",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jun-Oct",
+  "cvs": "syn. Polygonum affine 'Darjeeling Red'",
+  "hardiness": "H7",
+  "hardinessNote": "RHS H7",
+  "resilience": "cold hardy · coastal tolerant · drought tolerant once established",
+  "uses": "ground cover · garden edging · rock gardens · patio containers",
+  "height": "20–25 cm",
+  "spread": "45–50 cm",
+  "foliage": "semi-evergreen",
+  "container": "yes",
+  "growthSpeed": 12,
+  "pestRisk": 3,
+  "thirst": 9,
+  "careLevel": 4,
+  "sunNeed": 78,
+  "sunMin": 40,
+  "uncertain": [
+    "RHS gives maximum height and spread within the 0.1–0.5 m range; specialist UK nursery descriptions give approximately 25 cm × 50 cm",
+    "RHS name status is Synonym despite widespread horticultural use of Persicaria affinis 'Darjeeling Red'"
+  ]
+}

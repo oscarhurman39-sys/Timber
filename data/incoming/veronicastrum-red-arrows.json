@@ -1,0 +1,33 @@
+{
+  "common": "Culver's root 'Red Arrows'",
+  "latin": "Veronicastrum 'Red Arrows'",
+  "hue": 275,
+  "visual": "Red buds and stems · violet branched flower spikes · whorled foliage",
+  "water": "Moderate; keep soil moist in dry spells",
+  "aspect": "East/South/West",
+  "soil": "Moist, fertile, well-drained",
+  "soilWarning": "Avoid prolonged drying out",
+  "prune": "Deadhead as flowers fade; cut back to ground level in winter",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jun-Sep",
+  "cvs": "syn. Veronicastrum sibiricum 'Red Arrows'",
+  "hardiness": "H7",
+  "hardinessNote": "RHS H7",
+  "resilience": "cold hardy",
+  "uses": "herbaceous borders · cottage gardens · architectural planting · pollinator gardens",
+  "height": "1–1.5 m",
+  "spread": "0.5–1 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 10,
+  "pestRisk": 8,
+  "thirst": 12,
+  "careLevel": 6,
+  "sunNeed": 82,
+  "sunMin": 45,
+  "uncertain": [
+    "RHS lists Veronicastrum 'Red Arrows' as the current name status unresolved and Veronicastrum sibiricum 'Red Arrows' as a synonym",
+    "RHS gives an ultimate height of 1–1.5 m and spread of 0.5–1 m"
+  ]
+}
