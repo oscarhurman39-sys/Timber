@@ -1,0 +1,32 @@
+{
+ "common": "Crape Myrtle 'With Love Babe'",
+ "latin": "Lagerstroemia indica WITH LOVE BABE ('Milaperl')",
+ "hue": 330,
+ "visual": "Compact deciduous shrub with attractive smooth bark, glossy foliage and showy crinkled flowers produced in dense panicles in warm summer conditions.",
+ "water": "Moist but well-drained",
+ "aspect": "South / West",
+ "soil": "Acid to neutral, drained",
+ "soilWarning": "Needs a hot sunny spot; shelter from frost",
+ "prune": "Pruning group 1; can tolerate harder pruning if required.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Jul-Sep",
+ "cvs": "With Love series; trade name WITH LOVE BABE; cultivar code 'Milaperl'",
+ "hardiness": "H4",
+ "hardinessNote": "Hardy in milder UK areas but requires shelter and warmth.",
+ "resilience": "Best in warm sheltered sites; flowering can be poor after cool summers.",
+ "uses": "Patio, containers, Mediterranean-style gardens, wall-side borders and specimen planting.",
+ "height": "1-1.5m",
+ "spread": "1-1.5m",
+ "foliage": "deciduous",
+ "container": "yes",
+ "growthSpeed": 9,
+ "pestRisk": 5,
+ "thirst": 11,
+ "careLevel": 11,
+ "sunNeed": 95,
+ "sunMin": 75,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed in the deck's trade-name convention from species + cvs \"[With Love Babe] ('Milaperl')\"; hue 330 pink; aspect to compass format; peak 'Summer' read as Jul-Sep [Inference]; soil shortened (was 'Moderately fertile, acidic to neutral, well-drained soil.'); soilWarning shortened (was 'Needs a warm sunny position and hot summers for reliable flowering; protect from severe frost.'). Trade name and code are as supplied, not verified. Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

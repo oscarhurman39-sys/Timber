@@ -5,6 +5,15 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-06, later still (ten-card batch) — **deck 268, hold 88.**
+  Four dealt with photos (Lagerstroemia WITH LOVE BABE, Astilbe 'Chocolate
+  Shogun', Cordyline 'Torbay Dazzler', Parthenocissus 'Lowii'), six parked
+  without (Picea 'Echiniformis', Hydrangea quercifolia 'Ice Crystal',
+  Ceanothus 'Cool Blue', Araucaria, Drosera capensis, Acer 'Taylor'). Batch
+  JSON converted to the card schema with every change logged in `uncertain`;
+  ratings and hardiness are Oscar's, unverified. Buddleja LITTLE RUBY JSON was
+  a duplicate of a dealt card; its new photo is not swapped in (VQ 61).
+  Protocol v14.50.
 progress: 2026-09-06, later (Rhodanthemum flower restored) — Oscar's call on
   VQ 57: the 'Zagora Yellow' collage is back on the card, inset untouched,
   bottom 5.7% trimmed for the aspect gate. PHOTO_FOCUS '100% 40%' moves the

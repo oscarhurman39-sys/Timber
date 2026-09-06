@@ -1,0 +1,32 @@
+{
+ "common": "Japanese Maple 'Taylor'",
+ "latin": "Acer palmatum 'Taylor'",
+ "hue": 340,
+ "visual": "Small slow-growing deciduous tree with five-lobed leaves opening pale pink, becoming green with a distinctive white margin and turning lime green in autumn.",
+ "water": "Moist but well-drained",
+ "aspect": "East / West",
+ "soil": "Humus-rich, well-drained",
+ "soilWarning": "Shelter from wind, hot sun and late frost",
+ "prune": "Pruning group 1; little pruning required beyond removing damaged or crossing branches.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Apr-Oct",
+ "cvs": "'Taylor'",
+ "hardiness": "H6",
+ "hardinessNote": "Hardy throughout the UK when grown in a sheltered position.",
+ "resilience": "Reliable once established but foliage can scorch in drought, heat or exposed sites.",
+ "uses": "Patio containers, Japanese gardens, woodland planting, small gardens and specimen planting.",
+ "height": "1.5-2.5m",
+ "spread": "1.5-2.5m",
+ "foliage": "deciduous",
+ "container": "yes",
+ "growthSpeed": 6,
+ "pestRisk": 6,
+ "thirst": 13,
+ "careLevel": 8,
+ "sunNeed": 45,
+ "sunMin": 20,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from species + cvs; hue 340 for the pink spring leaves; aspect to compass format; peak 'Spring to autumn' read as Apr-Oct [Inference]; soil shortened (was 'Clay, loam or sand; humus-rich and well-drained.'); soilWarning shortened (was 'Protect from hot drying winds, harsh afternoon sun and late frosts; maintain consistent soil moisture.'). Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

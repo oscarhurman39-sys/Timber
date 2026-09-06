@@ -1,0 +1,32 @@
+{
+ "common": "Boston Ivy 'Lowii'",
+ "latin": "Parthenocissus tricuspidata 'Lowii'",
+ "hue": 0,
+ "visual": "Self-clinging deciduous climber with small deeply lobed bright-green leaves that turn orange-red and purple in autumn.",
+ "water": "Moist but well-drained",
+ "aspect": "Any aspect",
+ "soil": "Fertile, well-drained",
+ "soilWarning": "Self-clinging: check walls and masonry first",
+ "prune": "Pruning group 11; prune in early winter and trim in summer if necessary.",
+ "toxicity": "Harmful if eaten; sap can irritate skin.",
+ "compliance": "",
+ "peak": "Sep-Nov",
+ "cvs": "'Lowii'",
+ "hardiness": "H5",
+ "hardinessNote": "Hardy throughout most UK conditions.",
+ "resilience": "Robust climber with good tolerance of sun and shade.",
+ "uses": "Walls, fences, wildlife gardens, screening and autumn foliage displays.",
+ "height": "2.5-4m",
+ "spread": "1.5-2.5m",
+ "foliage": "deciduous",
+ "container": "with care",
+ "growthSpeed": 15,
+ "pestRisk": 5,
+ "thirst": 10,
+ "careLevel": 6,
+ "sunNeed": 60,
+ "sunMin": 20,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from species + cvs; hue 0 for the autumn red; aspect 'North, East, South, West' as Any aspect; peak 'Autumn' read as Sep-Nov [Inference]; soil shortened (was 'Chalk, clay, loam or sand; fertile and well-drained.'); soilWarning shortened (was 'Can attach strongly to walls; check supports and masonry before planting.'); container 'possible in a large container with support' read as with care. The deck already HOLDS the plain species Parthenocissus tricuspidata, which is a different card. Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "common": "White Spruce 'Echiniformis'",
+ "latin": "Picea glauca 'Echiniformis'",
+ "hue": 150,
+ "visual": "Very slow-growing dwarf evergreen conifer forming a dense, squat rounded mound with fine grey-green needles.",
+ "water": "Moist but well-drained",
+ "aspect": "East / South / West",
+ "soil": "Acid to neutral, drained",
+ "soilWarning": "Avoid drought and waterlogging",
+ "prune": "No regular pruning required.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Jan-Dec",
+ "cvs": "'Echiniformis'",
+ "hardiness": "H7",
+ "hardinessNote": "Extremely hardy and suitable for exposed UK conditions.",
+ "resilience": "Very hardy, compact and low maintenance once established.",
+ "uses": "Rock gardens, gravel gardens, containers, dwarf conifer collections and edging.",
+ "height": "0.1-0.5m",
+ "spread": "0.5-1m",
+ "foliage": "evergreen",
+ "container": "yes",
+ "growthSpeed": 4,
+ "pestRisk": 5,
+ "thirst": 9,
+ "careLevel": 3,
+ "sunNeed": 90,
+ "sunMin": 60,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from species + cvs; hue 150 blue-green; aspect to compass format; peak 'All year' as Jan-Dec; soil shortened (was 'Acidic to neutral clay, loam or sand.'); soilWarning shortened (was 'Avoid prolonged drought and waterlogging.'). Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

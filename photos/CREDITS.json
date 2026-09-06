@@ -352,6 +352,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "astilbe-chocolate-shogun.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Supplied as a two-frame side-by-side COMPOSITE (leaf close-up left, clump right) kept whole; no pixels generated",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "astrantia-major-star-of-love.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -779,6 +789,16 @@
    "sourceUrl": null,
    "commit": "ff494ba",
    "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cordyline-australis-torbay-dazzler.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Single frame looking down into the crown, EXIF orientation 6 baked by the staging decoder",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1762,6 +1782,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "lagerstroemia-indica-with-love-babe-milaperl.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Supplied as a four-panel COLLAGE (three small panels over one large frame: flowers, foliage, capsules) kept WHOLE under the one-rule of protocol v14.49; no pixels generated. No EXIF orientation tag in the file",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "laurus-nobilis.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2236,6 +2266,16 @@
    "file": "parthenocissus-quinquefolia.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "parthenocissus-tricuspidata-lowii.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Single frame, autumn-coloured leaves on the nursery bench",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,

@@ -2039,6 +2039,27 @@ same plant twice. **Oscar's call** whether to move 'The Bride' into the latin.
 ---
 
 
+### 61. A Buddleja LITTLE RUBY photograph arrived for a card that already has one
+2026-09-06. Oscar's batch carried a JSON and a photograph for *Buddleja davidii*
+LITTLE RUBY ('Botex 006'). The card was dealt on 2026-08-16 (v14.19) and its
+register entry calls that photo clean — spikes at every stage in one frame.
+The JSON was refused as a duplicate by the tool, which is the tool working.
+
+**The new frame is not swapped in.** It shows two open pink panicles with orange
+eyes over broad, wrinkled, mid-green ovate leaves. Two things to weigh before
+it replaces anything:
+1. the card's own text says *narrow grey-green leaves*, and these leaves are
+   neither narrow nor grey — a young pot-grown Buddleja can carry broader
+   leaves than the mature plant [Inference], but the photograph and the card
+   text disagree as they stand;
+2. the flowers are pink-magenta rather than the ruby the name promises, which
+   may be light and age rather than identity.
+The existing photo matches the existing text. The new frame was NOT staged
+anywhere in the repo — Oscar's copy is the original. **Oscar's call**: swap, keep, or hold both until a label frame
+settles it.
+
+---
+
 ### 60. One Physocarpus photograph, two Physocarpus cards — **RESOLVED 2026-09-04 by the pot label**
 2026-09-02. Oscar's batch had cards for **'All Black'** and **LITTLE DEVIL ('Minall2')**
 and one ninebark photograph, listed first as "phycoaroubs". Both cultivars are
