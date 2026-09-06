@@ -231,6 +231,16 @@
    "commercialUseCleared": false
   },
   {
+   "file": "albizia-julibrissin-summer-chocolate.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Single frame shot up into the canopy against sky, EXIF orientation 6 baked by the staging decoder; kept whole",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "albizia-julibrissin.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",

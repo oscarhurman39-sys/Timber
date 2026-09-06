@@ -5,6 +5,9 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-06, later (Albizia 'Summer Chocolate') — **deck 277, hold 82.**
+  Dealt whole beside the green species card. Label read 'Albizia chocolate';
+  cultivar is Oscar's reading. Protocol v14.54.
 progress: 2026-09-06, late (two cards + Cercis collage) — **deck 276, hold 82.**
   Hydrangea paniculata 'Pink & Rose' and Begonia soli-mutata dealt, both
   uncropped on Oscar's word. Carolina Sweetheart's three-panel collage

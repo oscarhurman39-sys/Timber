@@ -1,0 +1,33 @@
+{
+ "common": "Silk Tree 'Summer Chocolate'",
+ "latin": "Albizia julibrissin 'Summer Chocolate'",
+ "hue": 330,
+ "visual": "Small deciduous tree with an open spreading crown, finely divided chocolate-purple foliage and fluffy pink powder-puff flowers in summer.",
+ "water": "Moist but well-drained",
+ "aspect": "South / West",
+ "soil": "Fertile, well-drained",
+ "soilWarning": "Warm shelter; protect young trees from frost",
+ "prune": "Pruning group 1; little pruning required beyond removing dead, damaged or crossing branches.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Jul-Aug",
+ "cvs": "'Summer Chocolate'",
+ "hardiness": "H4",
+ "hardinessNote": "Borderline hardy in much of the UK; best grown against a warm sheltered wall or in a protected southern garden.",
+ "resilience": "Tolerates heat and some drought once established, but young plants need protection and reliable moisture.",
+ "uses": "Specimen tree, warm sheltered borders, courtyard gardens, patio planting and exotic-style gardens.",
+ "height": "2.5-4m",
+ "spread": "2.5-4m",
+ "foliage": "deciduous",
+ "container": "with care",
+ "growthSpeed": 10,
+ "pestRisk": 4,
+ "thirst": 9,
+ "careLevel": 10,
+ "sunNeed": 95,
+ "sunMin": 75,
+ "uncertain": [
+  "Supplied label says 'Albizia chocolate'; interpreted as Albizia julibrissin 'Summer Chocolate'.",
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from species + cvs; hue 330 for the pink flowers; aspect to compass format; peak 'Summer' read as Jul-Aug [Inference]; soil shortened (was 'Fertile, well-drained loam, sand or chalk.'); soilWarning shortened (was 'Needs a warm sheltered position in the UK. Protect young trees from hard frost and cold drying winds.'); container 'suitable when young in a large container' read as with care. Ratings, hardiness and text kept as supplied, not re-verified. The deck already has the green-leaved species as 'Persian Silk Tree'."
+ ]
+}
