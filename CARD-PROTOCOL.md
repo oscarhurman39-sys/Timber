@@ -423,7 +423,7 @@ Focal point recorded here when off-centre:
 | Cupressus macrocarpa 'Goldcrest' | cupressus-macrocarpa-goldcrest.jpg | 50% 40% default — Oscar's own tall crop at **0.422**, which would have shown a quarter of itself on the 16:10 detail sheet; cut to a 0.75 window from 20% to 76% down. Uniform sunlit golden foliage with the sky gap kept — nothing identifying was in the discarded strips |
 | Cedrus deodara | cedrus-deodara.jpg | 50% 40% default — **uncropped**, 0.750. Soft needle clusters on a long horizontal branch, new growth lit yellow-green. **Second *Cedrus***: the atlas 'Horstmann’s Silberspitz' is blue with cream tips, this is green with a drooping habit |
 | Nemesia 'Confetti' | nemesia-confetti.jpg | 50% 40% default — **another of Oscar's labelled composites**, kept whole: massed lilac flowers with a white-outlined `foliage` cutout pasted mid-right. Sits lower in the frame than the Oenothera's corner inset, so it lands well inside the card band |
-| Modiolastrum lateritium | modiolastrum-lateritium.jpg | 50% 40% default — **uncropped**, 0.750. Lobed, scalloped, red-rimmed leaves in hard sun; no flower. The name is Oscar's reading of an unclear label ('m-something') and the supplied habit data disagrees with what usually carries this name — see VQ 61 before trusting the card |
+| Modiolastrum lateritium | modiolastrum-lateritium.jpg | 50% 40% default — **uncropped**, 0.750. Lobed, scalloped, red-rimmed leaves in hard sun; no flower. The name is Oscar's reading of an unclear label ('m-something') and the supplied habit data disagrees with what usually carries this name — see VQ 66 before trusting the card |
 | Juniperus virginiana 'Blue Arrow' | juniperus-virginiana-blue-arrow.jpg | 50% 40% default — **uncropped**, 0.750. Blue-green scale foliage along brown side branches, sky behind. Oscar assigned it as photo 9; the same note says juniper photos are coming, so this may be replaced — a one-command restage if so |
 | *(parked)* Physocarpus, cultivar unknown | physocarpus-opulifolius-dark-unidentified.jpg | **NOT ON A CARD.** One Physocarpus photograph arrived with two Physocarpus cards ('All Black' and LITTLE DEVIL 'Minall2'); the pot label in the top-right corner is blurred beyond reading. Both cards are held and the photo is staged under a descriptive name — the Vitex precedent (VQ 58). VQ 60 |
 | Robinia pseudoacacia 'Lace Lady' | robinia-pseudoacacia-lace-lady.jpg | 50% 40% default — **Oscar's labelled composite, kept whole**: pinnate leaves over a zig-zagging brown stem, with a `thorned stem` inset panel top-right showing the paired purple spines. 2594x3624 is 0.716, under the gate, so **4.6% trimmed off the bottom edge only** — trimming the top would have pushed the inset up into the furniture. EXIF 2026-08-26. Photo assigned by Oscar ("robinas photo"). One thing to look at on the bench: the card's own visual line leads on *curly* leaflets, and the leaflets in this frame lie flat — see VQ 64 |
@@ -507,7 +507,7 @@ Focal point recorded here when off-centre:
     the moment a photo lands.
   - **One JSON refused as a duplicate**: *Buddleja davidii* LITTLE RUBY is
     already dealt (v14.19) with a photograph the register calls clean. Oscar's
-    new Buddleja frame is kept aside, not swapped in — VQ 61.
+    new Buddleja frame is kept aside, not swapped in — VQ 66.
   - **The batch JSON was not in the card schema**, and every conversion is
     written into each file's `uncertain` so it can be reversed: latin composed
     from genus + cultivar (the deck's trade-name convention for the

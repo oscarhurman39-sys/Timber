@@ -29,7 +29,7 @@ progress: 2026-09-06, later still (ten-card batch) — **deck 268, hold 88.**
   Ceanothus 'Cool Blue', Araucaria, Drosera capensis, Acer 'Taylor'). Batch
   JSON converted to the card schema with every change logged in `uncertain`;
   ratings and hardiness are Oscar's, unverified. Buddleja LITTLE RUBY JSON was
-  a duplicate of a dealt card; its new photo is not swapped in (VQ 61).
+  a duplicate of a dealt card; its new photo is not swapped in (VQ 66).
   Protocol v14.50.
 progress: 2026-09-06, later (Rhodanthemum flower restored) — Oscar's call on
   VQ 57: the 'Zagora Yellow' collage is back on the card, inset untouched,
@@ -290,7 +290,7 @@ progress: 2026-09-02 (batch of twelve: eight dealt, three held, one waiting) —
   Two ambiguities NOT resolved, by rule: one ninebark photo for two ninebark
   cards (label unreadable — both held, photo parked, VQ 60), and Modiolastrum
   data that describes a climber where the name usually means a ground-hugging
-  mallow (dealt as supplied, flagged hard, VQ 61).
+  mallow (dealt as supplied, flagged hard, VQ 66).
 progress: 2026-09-02 (three cards; the arithmetic lost to the render) — Disporum
   sessile 'Variegatum', Helleborus x ericsmithii 'Winter Moonbeam' and Oenothera
   stricta 'Sulphurea' dealt. Deck 241 dealt / 81 held / 322 total.
