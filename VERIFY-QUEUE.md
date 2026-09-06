@@ -2039,7 +2039,9 @@ same plant twice. **Oscar's call** whether to move 'The Bride' into the latin.
 ---
 
 
-### 66. A Buddleja LITTLE RUBY photograph arrived for a card that already has one
+### 66. A Buddleja LITTLE RUBY photograph arrived for a card that already has one — **RESOLVED 2026-09-06: keep the existing photo**
+Oscar, shown both side by side: *"either is fine, leave it."* The 16 August photo stays on the card; the new frame was never staged. Closed.
+
 2026-09-06. Oscar's batch carried a JSON and a photograph for *Buddleja davidii*
 LITTLE RUBY ('Botex 006'). The card was dealt on 2026-08-16 (v14.19) and its
 register entry calls that photo clean — spikes at every stage in one frame.

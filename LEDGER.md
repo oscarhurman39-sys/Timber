@@ -8,7 +8,8 @@ since: 2026-08-11  sessions-unchanged: 3
 progress: 2026-09-06, latest (duplicate Viburnum removed) — **deck 276, hold
   82.** The plain Viburnum × bodnantense card wore the same photo as 'Charles
   Lamont'; Oscar had it removed. Wide frame kept as a renamed spare. Buddleja
-  LITTLE RUBY photo choice (VQ 66) sent to Oscar as A/B. Protocol v14.55.
+  LITTLE RUBY photo: Oscar saw both, "either is fine, leave it" — VQ 66 closed,
+  existing photo kept. Protocol v14.55.
 progress: 2026-09-06, later (Albizia 'Summer Chocolate') — **deck 277, hold 82.**
   Dealt whole beside the green species card. Label read 'Albizia chocolate';
   cultivar is Oscar's reading. Protocol v14.54.
