@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-06, evening (the six parked cards dealt) — **deck 274, hold
+  82.** Picea 'Echiniformis', Araucaria, Drosera capensis, Ceanothus 'Cool
+  Blue', Hydrangea quercifolia 'Ice Crystal', Acer 'Taylor' — photos arrived
+  within the hour and deal-plant.js took each. Two collages kept whole. Genus
+  proved by every frame, cultivar by none; all filed on Oscar's labels.
+  Protocol v14.51.
 progress: 2026-09-06, later still (ten-card batch) — **deck 268, hold 88.**
   Four dealt with photos (Lagerstroemia WITH LOVE BABE, Astilbe 'Chocolate
   Shogun', Cordyline 'Torbay Dazzler', Parthenocissus 'Lowii'), six parked

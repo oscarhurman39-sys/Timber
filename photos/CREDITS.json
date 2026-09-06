@@ -121,6 +121,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acer-palmatum-taylor.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Supplied as a three-panel vertical COLLAGE (pink new growth over the pink-margined mature leaves) kept WHOLE under the one-rule of protocol v14.49; no pixels generated; no EXIF orientation tag",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-rubrum-october-glory.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -305,6 +315,16 @@
    "file": "anisodontea-capensis-ib201-7.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Uncropped: orientation 1, already portrait 3000x3444 (0.871, inside the gate), staged as-is through add-plant.js, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-25 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "araucaria-araucana.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Single frame, EXIF orientation 6 baked at restaging",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -555,6 +575,16 @@
    "file": "ceanothus-concha.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "ceanothus-thyrsiflorus-cool-blue.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Single frame, EXIF orientation 6 baked at restaging",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -1065,6 +1095,16 @@
    "file": "disporum-sessile-variegatum.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright, the plant held in his hand in its nursery pot. Cropped by tools/reframe-photo.js by trimming the bottom fifth only: the pot was floating the foliage above the card's readable band, which the tool refused until it was fixed. The hand and pot are kept. No pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "drosera-capensis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Supplied as a three-panel vertical COLLAGE (leaf close-ups with the glandular hairs) kept WHOLE under the one-rule of protocol v14.49; no pixels generated; no EXIF orientation tag",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -1655,6 +1695,16 @@
    "file": "hydrangea-petiolaris.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hydrangea-quercifolia-ice-crystal.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Single frame, EXIF orientation 6 baked at restaging",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -2406,6 +2456,16 @@
    "file": "physocarpus-opulifolius-diabolo.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "picea-glauca-echiniformis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Single frame, EXIF orientation 6 baked at restaging",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
