@@ -371,7 +371,7 @@ Focal point recorded here when off-centre:
 | Erigeron karvinskianus 'Profusion' | erigeron-karvinskianus-profusion.jpg | 50% 40% default — a wet macro: the sharp daisy with rain still on its rays, a fresher flower opening beside it, and the green buds behind. **Cropped away from the photograph's own subject.** As shot, the lower 40% of the frame is one enormous out-of-focus bloom shot from inches away; the crop takes the upper half, where everything is actually in focus, and leaves the bokeh below the plaque line. Also the first photo in the register where the CHAT preview and the file disagreed — EXIF orientation 6 means the file displays portrait 3000x4000 while the preview showed the un-rotated sensor frame, so the crop coordinates had to be written against the rotated frame that `reframe-photo.js` (and the app) actually use |
 
 | Lithodora diffusa 'Heavenly Blue' | lithodora-diffusa-heavenly-blue.jpg | 50% 40% default — an August plant in its pot on gravel: dense bristly narrow leaves, the lax habit legible, the grey pot rim cropped off the bottom. **No flowers, and the flush showing is bright mid-green where the card's text says dark-green** — both true of the plant in August, both recorded in VQ 50. Wants an April–July reshoot for the gentian-blue the card leads on |
-| Rhodanthemum hosmariense 'Zagora Yellow' | rhodanthemum-hosmariense-zagora-yellow.jpg | 50% 40% default — **the supplied file was a COLLAGE**, an inset flower panel pasted over the top-right of a foliage frame, and a card cannot show a picture-in-picture. Cropped to the foliage frame only, inset excluded. First crop put the soft upper corner in the visible band and was redone lower, onto the sharp divided rosette — the card band is fixed to the master's own 12–62%, so the sharp region has to be placed there by the CROP, not by a focus override. **The inset flower is cream-white, not the yellow the card names: VQ 49.** |
+| Rhodanthemum hosmariense 'Zagora Yellow' | rhodanthemum-hosmariense-zagora-yellow.jpg (**restored whole 2026-09-06**) | **`100% 40%`** — **the collage is back on the card, on Oscar's call** (VQ 57 closed): *"cropping ruined the rhodanthemum card, having the flower image in there is beneficial."* Master is now the supplied two-frame collage (2268x3206, orientation 1) with **only the bottom 5.7% trimmed** (182 px of foliage and a dead seedhead) to bring 0.707 up to the 0.75 aspect gate — the inset is untouched. Restaged 1200x1600. **The focus override is doing real work here**, unlike the Butia's: the master is wider than the 0.551 window so cover crops the SIDES, and X is the axis the override moves. At the default 50% the flower centre lands at 86% of the window width, under the hardiness shield; at 100% it sits at 67%, clear of the shield with the inset's right edge on the window edge, so it reads as a corner panel rather than a floating rectangle. Measured on the render, three candidates side by side. **The flower shown is cream-white and the card is named 'Zagora Yellow' — VQ 49 is now on the card face, unresolved.** The 2026-08-18 foliage-only crop is kept in the register history; original file re-sent by Oscar 2026-09-06 |
 
 | Monstera deliciosa | monstera-deliciosa.jpg | 50% 40% default — one mature fenestrated leaf across the whole card band, splits and oval holes both legible, the second leaf and the aerial-rooted stem behind it. The best photograph in this batch and one of the plainest reads in the deck: nothing else in 224 cards looks like it |
 | Aloe vera | aloe-vera.jpg | 50% 40% default — **shot into the window**, so the blades read olive-and-dark rather than the "fleshy grey-green" the card names, and the pot fills the lower half of the frame. **Three crops.** The first two put sky and pot in the card band and it read as grass behind glass; the third pulls in to the blades, where the white spotting and the toothed margins are both legible, and drops the pot below the plaque. That is as far as cropping takes this frame — a front-lit shot would be a straight upgrade. VQ 51 |
@@ -428,6 +428,30 @@ Focal point recorded here when off-centre:
 | Solanum pyracanthos | solanum-pyracanthos.jpg | 50% 40% default — **uncropped by us** (2482x3024 at 0.821, orientation 1), but **the file carries Oscar's own sticker edit, the Salvia 'Black and Blue' class, and this time the C2PA manifest says so precisely**: a Samsung PhotoEditor deco re-edit declaring a crop to 91% height, a filter, and ONE non-text sticker at centre (0.215, 0.235), ~23% wide, rotated -10° — which is exactly where the purple flower sits. **No generative action**: no `Photo assist` agent, no trained-media source type, `isScaleAI:false`, AI filter false, no visible label. The pasted flower is species-correct (purple 5-lobed star, yellow poricidal anther cone) and every other ID feature — grey-green lobed leaves, vivid orange spines on stems, midribs AND calyx, a developing fruit — is the camera's own capture. Two blurred nursery labels lower-left (one reads "SOL…", the right genus) fall below the card band, the Sempervivum precedent. **Second *Solanum*** — *S. laxum* 'Album' is a white-flowered climber, no confusion risk. No red fruits in frame: an autumn reshoot would complete the card's own visual line |
 
 ## 5. Decision changelog
+
+- **v14.49 (264 dealt / 82 held — the Rhodanthemum gets its flower back, and
+  the deck has one inset rule)**: Oscar's call on VQ 57, in his words: *"cropping
+  ruined the rhodanthemum card, having the flower image in there is beneficial."*
+  - **Restored whole.** The supplied picture-in-picture collage is the master
+    again, trimmed only at the bottom (5.7%) to meet the 0.75 aspect gate — a
+    real problem under v14.34, not a composition preference. The inset panel is
+    untouched.
+  - **The focus override earns its place for once.** The master is wider than
+    the card window, so cover crops the sides, and the flower at the default
+    50% X sat under the hardiness shield. `100% 40%` moves the window to the
+    master's right edge: flower clear of the shield, inset flush with the
+    corner. Measured on three rendered candidates, not reasoned — the Oenothera
+    lesson (v14.34 / VQ 59) applied.
+  - **VQ 59 resolves to ONE rule.** A deliberate two-part identification photo
+    is kept whole, inset or side-by-side; whether it survives the furniture is
+    settled by rendering it, and by a focus override where the master is wider
+    than the window. The Rosa 'Summer Song' sticker (VQ 58) and this card no
+    longer disagree.
+  - **VQ 49 is now on the card face.** The inset flower is cream-white under a
+    card named and written for bright yellow. That was the second reason the
+    inset was excluded, Oscar's call restores it knowing that, and the question
+    is unchanged: one fresh bloom May–September says whether the name is right.
+    Flagged to Oscar in the same reply, not smoothed over.
 
 - **v14.48 (264 dealt / 82 held — Common Box dealt on its opposite leaves)**:
   *Buxus sempervirens*, held since the UK-favourites batch of 2026-08-10, dealt

@@ -1645,6 +1645,8 @@ the species is on the delivery note, not in the plant.
 
 
 ### 49. 'Zagora Yellow' — the only flower supplied for it is CREAM-WHITE, not yellow
+**2026-09-06: this flower is now ON THE CARD FACE** (VQ 57 resolved by Oscar). The card still says bright yellow and shows cream-white. Unchanged ask: one fresh bloom in May–September.
+
 2026-08-18. Dealt on foliage, because the flower half of this card is not
 settled and I am not going to settle it by picking a reading.
 
@@ -1865,7 +1867,9 @@ the same plaque or reads differently is Oscar's call.
 ---
 
 
-### 57. Should 'Zagora Yellow' get its flower panel back?
+### 57. Should 'Zagora Yellow' get its flower panel back? — **RESOLVED 2026-09-06: yes, Oscar's call**
+**Restored whole, protocol v14.49.** Oscar: *"cropping ruined the rhodanthemum card, having the flower image in there is beneficial."* Reason (1) below had already fallen with VQ 59; reason (2) — the cream flower — is now on the card face and stays open as VQ 49.
+
 2026-08-21. Raised by Oscar's correction on the Gaura, and **not acted on**,
 because the two cases are not the same and the difference matters.
 
@@ -1986,7 +1990,9 @@ trifolia 'Purpurea' × V. agnus-castus"* — was the evidence that settled it.
 ---
 
 
-### 59. An inset panel DID go on a card face — does that reopen VQ 57?
+### 59. An inset panel DID go on a card face — does that reopen VQ 57? — **RESOLVED 2026-09-06: one rule**
+**One rule, per Oscar's call on 57.** A deliberate two-part identification photo is kept whole, inset or side-by-side; whether it survives the furniture is settled by rendering, and a focus override moves it where the master is wider than the window (protocol v14.49).
+
 2026-09-02. Item 57 excluded the Rhodanthemum 'Zagora Yellow' flower inset partly
 on the grounds that **"an inset panel with a border reads as a collage on a card
 face, where a side-by-side pair reads as a deliberate two-panel plate."** The

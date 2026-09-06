@@ -2555,7 +2555,7 @@
   {
    "file": "rhodanthemum-hosmariense-zagora-yellow.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright. Supplied as a two-frame COLLAGE (an inset flower panel pasted over a foliage frame); reframed by tools/reframe-photo.js to the foliage frame only, inset excluded, no pixels generated. EXIF Samsung Galaxy S24 (firmware S921BXXSGDZG1), 2026-08-18; Ultra HDR capture with a gain map, no C2PA manifest in the file and no AI or generative marker",
+   "licence": "Oscar's own photograph — owned outright. Supplied as a two-frame COLLAGE (an inset flower panel pasted over a foliage frame). Restored WHOLE on 2026-09-06 on Oscar's call (VQ 57): only the bottom 5.7% trimmed with sharp to meet the 0.75 aspect gate, inset untouched, no pixels generated. Earlier 2026-08-18 staging had reframed it to the foliage frame only. EXIF Samsung Galaxy S24 (firmware S921BXXSGDZG1), 2026-08-18; Ultra HDR capture with a gain map, no C2PA manifest in the file and no AI or generative marker",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,

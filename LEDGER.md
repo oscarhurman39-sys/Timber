@@ -5,6 +5,12 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-06, later (Rhodanthemum flower restored) — Oscar's call on
+  VQ 57: the 'Zagora Yellow' collage is back on the card, inset untouched,
+  bottom 5.7% trimmed for the aspect gate. PHOTO_FOCUS '100% 40%' moves the
+  flower out from under the hardiness shield — measured on three renders. VQ 59
+  closes as one rule (two-part ID photos stay whole). VQ 49 stays open and is
+  now visible on the face: cream flower, yellow name. Protocol v14.49.
 progress: 2026-09-06 (Common Box) — **deck 264, hold 82.** *Buxus sempervirens*
   dealt from Oscar's 2026-09-05 frame: uncropped, orientation 6 baked, restaged
   at 1200x1600. Identification rests on the OPPOSITE leaf pairs, which separate
