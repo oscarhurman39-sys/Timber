@@ -3103,6 +3103,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "viburnum-bodnantense-charles-lamont-wide.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09). SPARE: the wider frame of the same 'Charles Lamont' shoot that the card master is a tighter crop of. It carried the 'Bodnant Viburnum' species card until 2026-09-06, when Oscar had that card removed as a duplicate of 'Charles Lamont' (same plant, same photo). Not loaded by any card",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "viburnum-bodnantense-charles-lamont.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -3110,16 +3120,6 @@
    "sourceUrl": null,
    "commit": "24466b6",
    "commitSubject": "Add 6 plants to deck: 101 -> 107 (Hibiscus, Viburnum Charles Lamont, Hamamelis, Cotinus Royal Purple, Liquidambar, Davidia)",
-   "commercialUseCleared": true
-  },
-  {
-   "file": "viburnum-bodnantense.jpg",
-   "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
-   "author": "Oscar Hurman",
-   "sourceUrl": null,
-   "commit": "04badbf",
-   "commitSubject": "Add Bodnant Viburnum to deck: 100 -> 101",
    "commercialUseCleared": true
   },
   {
