@@ -2389,6 +2389,18 @@ cards; those fields do not reach the card and were left alone.
 
 Deck 240 → 241, hold 84 → 85. Swap cards 4 → 5.
 
+**C resolved 2026-09-06 — dealt on Oscar's word.** He sent a second frame of
+the same gold-leaved, blue-flowered plant with *"here is that photo dark
+knight"*, which is the Pinus mugo shape (item 44): the resend is the
+identification, and the card is dealt on it. Photo staged as
+`caryopteris-clandonensis.jpg`; the first parked frame is retired.
+**What stays open is the card's own wording:** `visual` and `foliage`
+both say *"aromatic grey-green foliage"* and the photograph is unmistakably
+gold. `[Unverified]` whether the bench plant is a mislabelled 'Worcester
+Gold' / 'Sunshine Blue' or a 'Dark Knight' that has yellowed; either way one
+clause on the card now contradicts its picture, and that clause is Oscar's
+to change — same call as the pine. Nothing else on the card is affected.
+
 ---
 
 

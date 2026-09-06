@@ -5,6 +5,11 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-06 ('Dark Knight' dealt on the resend) — **deck 267, hold
+  85.** Oscar resent the gold-leaved Caryopteris frame as "that photo dark
+  knight"; the resend is the identification, so the held card is dealt and the
+  parked copy retired. Left for him: the card's "grey-green foliage" clause
+  under a gold photograph (VQ 69). Protocol v14.51.
 progress: 2026-09-02 (three photos replaced) — **deck 241, hold 85,
   unchanged.** Oscar sent better frames for three dealt cards and named all
   three: Hebe 'Rhubarb Crumble' (the mirrored double-up "came out shit" — full

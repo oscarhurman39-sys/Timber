@@ -431,8 +431,16 @@ Focal point recorded here when off-centre:
 | Ceratostigma willmottianum SAPPHIRE RING ('Lissbrill') | ceratostigma-willmottianum-sapphire-ring-lissbrill.jpg **+ PHOTO_SWAP** (added 2026-09-02) | swap alt `-flowers.jpg`, 50% 50%, 3.5s hold — **Oscar's ask**: *"flash between the current card photo and this photo as it has a flower"*. The card photo is the gold, red-edged hairy foliage with no bloom; the new frame (Galaxy S24, 2026-08-31 15:54, clean) is the same foliage with the cobalt flowers the card is named for. Fifth swap card; the deck's first added at the owner's request rather than from a spare sweep. Verified rendering both frames |
 | Ilex crenata 'Kinme' | ilex-crenata-kinme.jpg | 50% 40% default — **REPLACED 2026-09-02** at Oscar's request: *"we tried to cut out, the cut out version I uploaded sucked, this is much better"*. The earlier master was a black-background cutout of this exact sprig (same leaves, same green fruit); the new one is the uncut frame, 1440×2216, sprig top-left over blurred concrete. No camera EXIF, no C2PA |
 | Trachelospermum jasminoides | trachelospermum-jasminoides.jpg | **30% 45%** (was 40% 45%) — **REPLACED 2026-09-02** at Oscar's request: *"it was not aligned correctly"*. Same shot, wider frame: the earlier master was a tight portrait crop of this 2612×2562 near-square. At 1.02 the window keeps ~82% of the width, so the focus moved left to hold the flower truss (x ≈ 10–55%) with the glossy leaves top-right. No camera EXIF, no C2PA |
+| Caryopteris × clandonensis ('Dark Knight') | caryopteris-clandonensis.jpg | 50% 40% default — **dealt 2026-09-06 on Oscar's resend** (*"here is that photo dark knight"*), the Pinus mugo route. Gold foliage, silver-grey stems, deep blue-violet flower clusters top-right and bottom, 3000×4000 clean. The first frame of the same plant, parked as `caryopteris-gold-flowering-unconfirmed.jpg`, is retired. **The card's visual line says grey-green and the picture is gold** — VERIFY-QUEUE 69 has the ask |
 
 ## 5. Decision changelog
+
+- **v14.51 (267 dealt / 85 held — 'Dark Knight' dealt on the resend)**: the
+  gold-leaved Caryopteris frame parked in v14.49 came back with the same
+  name attached, and a resend is the owner's answer (v12-era Pinus mugo
+  precedent). Dealt; parked copy retired. The one thing the deal does not
+  settle is the card's own *"grey-green foliage"* clause under a gold
+  photograph — flagged in VERIFY-QUEUE 69 for Oscar rather than rewritten.
 
 - **v14.50 (three photographs replaced at Oscar's request — Hebe, Star
   Jasmine, Kinme)**: no data changed; three cards look different.
