@@ -198,8 +198,26 @@ const check = (name, ok, detail = '') => {
 
      If the DELTA needs raising a fourth time, stop and look for a colour change
      at the card edge rather than reaching for the number again. */
-  const HALO_MAX_PX = 256;     /* 31 at deck 240; 98 at deck 217 with two themed cards */
-  const HALO_MAX_DELTA = 30;   /* sum across r+g+b; 26 observed at deck 240 */
+  /* MERGE NOTE 2026-09-02: the block above (live line, 08-28) and the block below (card branch,
+     09-02) measured the SAME residual independently — 31 px, max delta 26 at deck 240 — and reached
+     the same reading: corner halo, warm trim colour, not a leak. The merged deck is taller again, so
+     the wider of the two budgets is kept; the numbers the gate prints on every run stay the record. */
+  /* RAISED 2026-09-02, third time, same procedure. Deck 240 diffed at 31 px,
+     max delta 25-26, deterministic across three runs. Every one of the 31 pixels
+     was dumped with coordinates: all sit ON the top card's own outline — the
+     four rounded corners (x 30/749 at y 302 and x 32/747 at y 1494 in device
+     px, against a card box of 16..764 x 299..1495) and a 15-px run down the
+     right edge at x 764 — and the largest deltas are the corner pixels reading
+     (18,10,0) with buried cards shown against (2,0,0) with them hidden: the
+     warm halo shadows of the pile stacking at the corner rounding, darker with
+     more of them, exactly the phenomenon named above and one card taller than
+     last time. Nothing off the outline moved. The staged leak was re-run on the
+     same deck: **19434 px, max delta 420** — 600x the pixel count and 16x the
+     delta of this residual. The delta budget doubles to 48; the pixel budget is
+     untouched (31 of 256). If the count climbs into the hundreds, or the pixels
+     stop being on the card outline, that is a different phenomenon. */
+  const HALO_MAX_PX = 256;     /* 98 at deck 217 with two themed cards; 31 at deck 240 */
+  const HALO_MAX_DELTA = 48;   /* sum across r+g+b; 13 observed at 217, 26 at 240 — corner rounding only */
   check(`hiding buried content shows nothing (${diff.px}px, max Δ${diff.max}; halo shadows round at the edge)`,
     diff.px <= HALO_MAX_PX && diff.max <= HALO_MAX_DELTA,
     `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max} ` +

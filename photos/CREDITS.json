@@ -41,6 +41,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acanthus-hungaricus-cutout.png",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright (raw cutout; the card uses the hero-on-self composite)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "acanthus-hungaricus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-palmatum-bloodgood-cutout.png",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -282,6 +302,16 @@
    "note": "Samsung Galaxy S24 capture, AI-edited on device. The source PNG carried a C2PA manifest: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia, plus an 'AI-generated content' watermark burned into the pixels (it lands under the aspect band on the card). Staging re-encodes through a canvas, which strips the manifest, so this entry is the only surviving record. Same class as the Primula vialii held on 2026-08-09 — dealt rather than held because the card is a one-off gift, not stock imagery."
   },
   {
+   "file": "anisodontea-capensis-ib201-7.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: orientation 1, already portrait 3000x3444 (0.871, inside the gate), staged as-is through add-plant.js, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-25 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "arbutus-unedo.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -462,6 +492,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "campsis-grandiflora.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright, WITH his own red-marker redaction over two nursery labels (Samsung PhotoEditor drawing edit, the Salvia 'Black and Blue' / Solanum class). The manifest declares no generative action: isScaleAI false, isAIFilterReEditOnly false, no Photo assist agent, no digitalSourceType, no trained-media marker. REPLACED 2026-09-04: the previous master was a tight 1200x1253 macro of one soft bloom with the foliage cropped away; this is the supplied frame with only the bottom 15% removed (pot, hand, redacted labels) — measured, because the topmost label sits at y 0.560 and a 0.90 trim put it exactly on the plaque line at 0.622 and showed as a sliver on the rendered card. Master 1059x1200 at 0.882. EXIF Samsung Galaxy S24, 2026-08-29",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "carpinus-betulus.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -484,7 +524,7 @@
   {
    "file": "caryopteris-gold-flowering-unconfirmed.jpg",
    "source": "oscar",
-   "licence": "Oscar's own two-frame assembly (inset top right), no camera EXIF, no C2PA. Sent 2026-09-02 with a Caryopteris 'Dark Knight' JSON but shows GOLD foliage, i.e. not 'Dark Knight'; parked unclaimed, see VERIFY-QUEUE 68.",
+   "licence": "Oscar's own two-frame assembly (inset top right), no camera EXIF, no C2PA. Sent 2026-09-02 with a Caryopteris 'Dark Knight' JSON but shows GOLD foliage, i.e. not 'Dark Knight'; parked unclaimed, see VERIFY-QUEUE 69.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -932,9 +972,39 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cyclamen-hederifolium-var-hederifolium-f-albiflorum.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Cropped through tools/reframe-photo.js: source 1960x3732 (0.525, outside the gate), full-width crop of the top 70% to 1960x2612 at exactly 0.750, dropping the tray rim and its face; no pixels generated. EXIF Samsung Galaxy S24, 2026-08-25 (current season). No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "dahlia-electro-pink-71853-09.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "dahlia-kelvin-floodlight.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: orientation 1, portrait 3000x4000 at exactly 0.750, staged as-is, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-24 (current season). No C2PA manifest and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "daphne-transatlantica-pink-fragrance-blapink.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-03. No C2PA manifest and no AI or generative marker. This is the SECOND photograph of this plant: the first, daphne-unidentified-summer.jpg, was parked unidentified under VERIFY-QUEUE 44 because it could not be the deck's winter-flowering D. bholua; Oscar named the plant PINK FRAGRANCE and supplied this clearer frame for the card",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -1322,6 +1392,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "galium-odoratum.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "geranium-bob-s-blunder.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1649,6 +1729,16 @@
    "sourceUrl": null,
    "commit": "5213b09",
    "commitSubject": "Add 18 plants to deck: 107 -> 125; add bulk tool verifying once per batch",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "impatiens-omeiana.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped, verdict as-is, 3000x4000 at 0.750. No pixels generated. EXIF Samsung Galaxy S24, 2026-08-22. No C2PA/JUMBF manifest and no AI or generative marker. FLAGGED: the frame shows glossy, spine-toothed leathery leaves on woody red stems — not the soft elongated silver-veined foliage the card describes. Oscar was asked directly whether this is really Impatiens omeiana against this photo and confirmed yes; dealt on that confirmation, not on my own reading of the leaves",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -2283,6 +2373,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "phygelius-aequalis-trewidden-pink.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: EXIF orientation 6 (sensor 4000x3000, displayed 3000x4000 at 0.750), rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest and no AI or generative marker. Photo assigned against the send order: the JSON array led with the Dahlia but this frame is the Phygelius — matched on the plant, Vitex precedent",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "phyllostachys-nigra.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2293,9 +2393,19 @@
    "commercialUseCleared": true
   },
   {
-   "file": "physocarpus-opulifolius-dark-unidentified.jpg",
+   "file": "physocarpus-opulifolius-all-black-bench.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright. PARKED, NOT ON A CARD: Oscar sent one Physocarpus photograph and two Physocarpus cards ('All Black' and LITTLE DEVIL 'Minall2'); the pot label in the frame is blurred beyond reading, so the photo is staged under a descriptive name until he says which it is. Uncropped, 3000x4000 at 0.750. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-09-01)",
+   "licence": "Oscar's own photograph — owned outright. SPARE, not on a card: the earlier bench frame of the same plant, staged 2026-09-02 as physocarpus-opulifolius-dark-unidentified.jpg while it was unclear whether it was ALL BLACK or LITTLE DEVIL (VERIFY-QUEUE 60). Oscar identified it as ALL BLACK on 2026-09-04 and supplied a label photograph proving the code, so the file was renamed off the misleading 'unidentified' name. Kept as a habit/bench frame; the card carries the closer leaf shot",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "physocarpus-opulifolius-all-black-minall2.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Uncropped: EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked by tools/reframe-photo.js at verdict as-is, no pixels generated; restaged at the full 1200x1600 rather than deal-plant's 900x1200. EXIF Samsung Galaxy S24, 2026-09-01 17:27:33 — eleven seconds after the nursery-label photograph Oscar sent as proof, which reads PHYSOCARPUS OPULIFOLIUS ALL BLACK(R) 'Minall2' cov. That eleven seconds is the provenance: label and plant are the same plant in the same minute. Closes VERIFY-QUEUE 60. No C2PA manifest and no AI or generative marker",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -2743,6 +2853,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "solanum-pyracanthos.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright, WITH his own sticker edit, the Salvia 'Black and Blue' class. C2PA claim from the Galaxy S24 on-device editor (c2pa-rs, ingredient.v2 + hash.data): a Samsung PhotoEditor deco re-edit declaring a crop to 91% height, a filter, and ONE non-text sticker pasted upper-left at centre (0.215,0.235), ~23% wide, rotated -10 deg — the purple flower, which is species-correct for S. pyracanthos. NO generative action: no Photo assist agent, no trained-media digitalSourceType, isScaleAI false, AI filter false, no visible AI label. Uncropped by us: 2482x3024 at 0.821, orientation 1. EXIF Samsung Galaxy S24, 2026-08-22 (current season). Two blurred nursery labels in frame lower-left, one reading 'SOL...'",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "sorbaria-sorbifolia-sem.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2795,7 +2915,7 @@
   {
    "file": "striped-grass-unidentified-cutout.png",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright. Transparent-background cutout sent 2026-09-02 with a Hakonechloa macra JSON; identity NOT confirmed (see VERIFY-QUEUE 67), so parked under a name no card slug resolves. Downscaled from 2998×3998 to 1200×1600, alpha kept, no C2PA markers.",
+   "licence": "Oscar's own photograph — owned outright. Transparent-background cutout sent 2026-09-02 with a Hakonechloa macra JSON; identity NOT confirmed (see VERIFY-QUEUE 68), so parked under a name no card slug resolves. Downscaled from 2998×3998 to 1200×1600, alpha kept, no C2PA markers.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -2895,7 +3015,7 @@
   {
    "file": "veronicastrum-red-arrows.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright. C2PA manifest present (claim generator Galaxy S24 c2pa-rs/0.62.0, c2pa.ingredient.v2, source title 20260829_113205(1).jpg); camera EXIF absent and frame 2948×3852, i.e. an edited export; visible 'AI-generated content' label lower left, kept outside the card window by PHOTO_FOCUS 50% 0%. See VERIFY-QUEUE 32 and 66.",
+   "licence": "Oscar's own photograph — owned outright. C2PA manifest present (claim generator Galaxy S24 c2pa-rs/0.62.0, c2pa.ingredient.v2, source title 20260829_113205(1).jpg); camera EXIF absent and frame 2948×3852, i.e. an edited export; visible 'AI-generated content' label lower left, kept outside the card window by PHOTO_FOCUS 50% 0%. See VERIFY-QUEUE 32 and 67.",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,

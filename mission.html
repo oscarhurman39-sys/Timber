@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0c1810">
+<meta name="description" content="Timber is a swipe deck of plant cards. One person built it to help garden-centre staff and customers learn plants. No accounts, no ads, nothing leaves your phone.">
+<title>Timber — our mission</title>
+<link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="%230c1810"/><circle cx="12" cy="12" r="8.2" stroke="%23e0a52f" stroke-width="1.4"/><circle cx="12.4" cy="11.7" r="5.3" stroke="%23f5c451" stroke-width="1.2"/><circle cx="11.8" cy="12.2" r="2.6" stroke="%23e0a52f" stroke-width="1.1"/><circle cx="12" cy="12" r=".9" fill="%23f5c451"/></svg>'>
+<style>
+  :root{
+    --bg:#0c1810;--bg2:#0f2117;--panel:rgba(255,255,255,.045);--line:rgba(245,196,81,.22);
+    --leaf1:#4cd787;--leaf2:#159a52;--gold:#f5c451;--gold2:#e0a52f;
+    --ink:#fff;--muted:rgba(255,255,255,.66);--dim:rgba(255,255,255,.42);
+    --parch:#efdcb0;--parch2:#e3c89a;--parch-ink:#2b2416;--parch-dim:#6a5a3a;
+    --card-green:#1d3a22;--card-green2:#0f2416;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--bg);scroll-behavior:smooth}
+  body{margin:0;overflow-x:hidden;background:radial-gradient(120% 60% at 50% -10%,var(--bg2),var(--bg)) fixed;color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;line-height:1.55;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--gold)}
+  a:hover{color:#fff}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0 0 .4em}
+  h1{font-size:clamp(40px,7vw,68px)}
+  h2{font-size:clamp(26px,3.6vw,36px);color:var(--gold)}
+  h3{font-size:20px}
+  p{margin:0 0 1em;max-width:68ch}
+  .lead{font-size:clamp(18px,2.2vw,22px);color:var(--muted);max-width:60ch}
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  .eyebrow{display:inline-block;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--leaf1);margin-bottom:12px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:800px){.grid2,.grid3{grid-template-columns:1fr}}
+
+  /* header */
+  .top{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:14px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.5px;text-decoration:none;color:#fff}
+  .brand svg{width:28px;height:28px}
+  .brand span{background:linear-gradient(120deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:18px}
+  nav a:hover{color:var(--gold)}
+  @media(max-width:600px){nav a{margin-left:12px;font-size:13px}}
+
+  /* hero */
+  .hero{padding:36px 0 56px;display:grid;grid-template-columns:1.25fr .9fr;gap:36px;align-items:center}
+  .hero>*,.grid2>*,.grid3>*,.who>*{min-width:0}
+  @media(max-width:800px){.hero{grid-template-columns:1fr}}
+  .hero .logo{width:100%;max-width:360px;height:auto;aspect-ratio:1;border-radius:28px;object-fit:cover;justify-self:center;
+    box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 0 1px var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+  .chip{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--panel)}
+  .chip b{color:var(--leaf1);font-weight:600}
+  .cta{display:inline-block;margin-top:24px;padding:12px 20px;border-radius:14px;background:linear-gradient(120deg,var(--gold),var(--gold2));
+    color:#1b1400;font-weight:700;text-decoration:none}
+  .cta:hover{color:#000;filter:brightness(1.05)}
+
+  /* panels */
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 24px}
+  .panel h3{color:var(--gold);margin-bottom:8px}
+  .panel p:last-child{margin-bottom:0}
+  ul.plain{list-style:none;padding:0;margin:0}
+  ul.plain li{padding:8px 0 8px 28px;position:relative;border-top:1px solid rgba(255,255,255,.06)}
+  ul.plain li:first-child{border-top:none}
+  ul.plain li::before{content:"";position:absolute;left:4px;top:15px;width:12px;height:12px;border-radius:50%;
+    background:var(--leaf1);box-shadow:0 0 0 3px rgba(76,215,135,.18)}
+  ul.plain.no li::before{background:#e05a5a;box-shadow:0 0 0 3px rgba(224,90,90,.18)}
+  .stat{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0 0}
+  .stat div{min-width:120px}
+  .stat b{display:block;font-family:Georgia,serif;font-size:36px;color:var(--gold);line-height:1}
+  .stat span{font-size:13px;color:var(--dim)}
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+  @media(max-width:800px){.how{grid-template-columns:1fr}}
+  .how .panel{padding:18px 20px}
+  .how .k{font-family:Georgia,serif;font-size:30px;color:var(--gold);line-height:1;margin-bottom:8px}
+  .how p{font-size:14px;color:var(--muted)}
+
+  /* ------------------------------------------------------------------ cards */
+  .deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:26px;margin-top:22px}
+  .flip{perspective:1400px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .flip .faces{position:relative;transition:transform .6s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d;aspect-ratio:7/10.7}
+  .flip.on .faces{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;overflow:hidden;
+    background:linear-gradient(160deg,#25482b,var(--card-green) 40%,var(--card-green2));
+    box-shadow:0 18px 40px rgba(0,0,0,.5),inset 0 0 0 2px var(--gold2),inset 0 0 0 5px #142a18,inset 0 0 0 6px rgba(245,196,81,.35);
+    font-family:Georgia,"Times New Roman",serif;color:var(--parch-ink);display:flex;flex-direction:column;padding:9px}
+  .face.back{transform:rotateY(180deg)}
+  .photo{position:relative;flex:0 0 52%;border-radius:10px;overflow:hidden;background:#0a160e}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 45%,rgba(0,0,0,0) 70%,rgba(12,24,16,.6))}
+  .names{position:absolute;left:12px;right:64px;top:10px;z-index:2;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.6)}
+  .names b{display:block;font-size:19px;line-height:1.1}
+  .names i{display:block;font-size:12.5px;opacity:.92;margin-top:3px}
+  .crest{position:absolute;right:10px;top:8px;z-index:2;width:50px;height:58px;
+    background:linear-gradient(180deg,#2a5a2f,#123a1c);border:1.5px solid var(--gold);
+    border-radius:8px 8px 25px 25px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;
+    box-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .crest small{font-size:6.5px;letter-spacing:.14em;color:var(--gold);margin-top:2px}
+  .crest b{font-size:22px;line-height:1}
+  .peakstrip{position:absolute;left:10px;right:10px;bottom:8px;z-index:2;display:flex;gap:2px;justify-content:center}
+  .peakstrip s{text-decoration:none;font-size:9px;width:15px;height:15px;border-radius:3px;display:grid;place-items:center;
+    color:rgba(255,255,255,.55);background:rgba(0,0,0,.35);font-family:system-ui,sans-serif}
+  .peakstrip s.lit{background:#1e5c30;color:#fff;font-weight:700}
+  .plaque{flex:1 1 auto;margin-top:8px;border-radius:9px;padding:9px 10px 8px;
+    background:linear-gradient(180deg,var(--parch),var(--parch2));box-shadow:inset 0 0 0 1px rgba(90,60,20,.35),inset 0 0 18px rgba(120,80,20,.18);
+    display:flex;flex-direction:column;gap:4px;min-height:0}
+  .plaque .ppp{font-size:8.5px;letter-spacing:.24em;text-align:center;color:var(--parch-dim);text-transform:uppercase;margin-bottom:1px}
+  .row{display:grid;grid-template-columns:78px 1fr;align-items:center;gap:8px;font-size:12px}
+  .row .l{font-weight:700;color:#1f3a24;font-size:11.5px;line-height:1.15}
+  .row .l small{display:block;font-weight:400;color:var(--parch-dim);font-size:10px}
+  .pips{display:flex;gap:4px}
+  .pips i{width:15px;height:15px;border-radius:50%;border:1.5px solid #1f3a24;position:relative;overflow:hidden;background:#fff7e6}
+  .pips i::after{content:"";position:absolute;left:0;bottom:0;width:100%;background:var(--pipc,#2d7cc7);height:var(--f,0%)}
+  .sunbar{height:9px;border-radius:5px;position:relative;
+    background:linear-gradient(90deg,#2a2440,#7a3d5a 30%,#e2842f 60%,#f5e26a);box-shadow:inset 0 0 0 1px rgba(0,0,0,.35)}
+  .sunbar b{position:absolute;top:-3px;bottom:-3px;border:2px solid #1f3a24;border-radius:4px;background:rgba(255,255,255,.18)}
+  .txt{font-size:11.5px;line-height:1.3;color:var(--parch-ink);display:grid;grid-template-columns:auto 1fr;gap:2px 7px}
+  .txt em{font-style:normal;font-weight:700;color:#1f3a24;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;padding-top:1px}
+  .foot{margin-top:auto;padding-top:5px;text-align:center;font-size:8.5px;letter-spacing:.2em;color:#8a6a1e;text-transform:uppercase}
+
+  .back .plaque{margin-top:0;flex:1;gap:6px}
+  .back .plaque h4{margin:0 0 2px;font-size:17px;line-height:1.1;color:#1f3a24}
+  .back .plaque h4 i{display:block;font-weight:400;font-size:11.5px;color:var(--parch-dim);margin-top:2px}
+  .back .txt{font-size:11.5px}
+  .warn{margin-top:auto;border:1.5px solid #9b3b2a;border-radius:7px;padding:6px 8px;background:rgba(255,230,210,.7);font-size:11px;color:#5a1e12}
+  .warn em{display:block;font-style:normal;font-weight:700;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
+  .legal{margin-top:auto;border:1.5px solid #4a3d1c;border-radius:7px;padding:6px 8px;background:rgba(240,220,170,.6);font-size:10.5px;color:#3a2f12}
+  .legal em{display:block;font-style:normal;font-weight:700;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2px}
+  .hint{text-align:center;color:var(--dim);font-size:13px;margin-top:18px}
+
+  /* who / privacy */
+  .who{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+  @media(max-width:800px){.who{grid-template-columns:1fr}}
+  dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:15px}
+  dt{color:var(--dim)}
+  dd{margin:0}
+  footer{padding:36px 0 48px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+  footer a{color:var(--muted);text-decoration:none;margin-right:18px}
+  footer a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="timber.html" aria-label="Timber">
+      <svg viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="#0c1810"/><circle cx="12" cy="12" r="8.2" stroke="#e0a52f" stroke-width="1.4"/><circle cx="12.4" cy="11.7" r="5.3" stroke="#f5c451" stroke-width="1.2"/><circle cx="11.8" cy="12.2" r="2.6" stroke="#e0a52f" stroke-width="1.1"/><circle cx="12" cy="12" r=".9" fill="#f5c451"/></svg>
+      <span>Timber</span>
+    </a>
+    <nav>
+      <a href="#mission">Mission</a>
+      <a href="#app">The app</a>
+      <a href="#cards">Cards</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#who">Who I am</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Our mission</span>
+      <h1>Learn plants,<br>one swipe at a time.</h1>
+      <p class="lead">Timber teaches you the plants you see on a garden-centre bench: what each one looks like, where it grows, how much water it wants, and whether it is safe. It does that with a deck of cards you swipe through. That is the whole app.</p>
+      <div class="chips">
+        <span class="chip"><b>One person</b> built it</span>
+        <span class="chip"><b>No</b> accounts</span>
+        <span class="chip"><b>No</b> ads</span>
+        <span class="chip"><b>Nothing</b> leaves your phone</span>
+        <span class="chip"><b>Works</b> offline</span>
+      </div>
+      <a class="cta" href="timber.html">Open the deck →</a>
+    </div>
+    <img class="logo" src="art/app-logo.webp" alt="Timber app icon: a carved wooden leaf on a green disc, ringed with flowers and foliage" width="1254" height="1254">
+  </div>
+
+  <section id="mission">
+    <span class="eyebrow">Why it exists</span>
+    <h2>Plant knowledge should be easy to pick up and hard to lose.</h2>
+    <div class="grid2">
+      <div>
+        <p>I work on the floor of a garden centre in the UK. Every day customers ask the same kinds of questions: <em>Will this survive the winter? How much sun does it need? Is it safe with a dog? What is that one with the red stems?</em> The answers exist, but they live in books, on labels, and in other people's heads. Nobody has time to look them up while a customer is standing there.</p>
+        <p>Timber is my answer. Each plant is one card. Each card carries the handful of facts that actually matter at the point of sale, written to be read in ten seconds. Swiping through the deck a few minutes a day is how I learned the range myself, and it is how I want to help new staff, keen gardeners and anyone curious about plants do the same.</p>
+      </div>
+      <div class="panel">
+        <h3>What we are trying to do</h3>
+        <ul class="plain">
+          <li><b>Educate.</b> Give people accurate, plain-language plant information they can remember.</li>
+          <li><b>Respect the facts.</b> Hardiness uses the Royal Horticultural Society's H-rating scale. A blank field means "not researched yet", never a guess.</li>
+          <li><b>Keep safety visible.</b> Where a plant is harmful if eaten, a skin irritant, or subject to legal controls, the card says so on its own panel.</li>
+          <li><b>Stay simple.</b> No feeds, no gamified nagging, no upsells. A deck of cards, a quiz, and a search box.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="app">
+    <span class="eyebrow">What the app is</span>
+    <h2>A swipe deck of useful cards. Nothing more.</h2>
+    <p class="lead">If you have used a dating app you already know how Timber works. The difference is that every card is a plant, and swiping right means "I know this one now".</p>
+    <div class="how">
+      <div class="panel"><div class="k">→</div><h3>Swipe right</h3><p>Mark a plant as learned. It gets a gold stamp and joins your learned count.</p></div>
+      <div class="panel"><div class="k">←</div><h3>Swipe left</h3><p>Skip it for now. It comes back sooner in your review schedule.</p></div>
+      <div class="panel"><div class="k">↻</div><h3>Double-tap</h3><p>Flip the card over for the longer notes: pruning, uses, safety, and where the hardiness rating came from.</p></div>
+    </div>
+    <div class="grid2" style="margin-top:22px">
+      <div class="panel">
+        <h3>Also inside</h3>
+        <ul class="plain">
+          <li><b>Quiz mode.</b> Short rounds built from the cards you are weakest on.</li>
+          <li><b>Review due.</b> Simple spaced repetition: a plant you learned comes back for review after 1, 3, 7, 16 and 35 days.</li>
+          <li><b>Search.</b> Common name, botanical name or use, and it forgives typos.</li>
+          <li><b>Show customer.</b> A big plain-language view of one plant, safe to hand across the counter.</li>
+          <li><b>Listen.</b> Hear the botanical name spoken, so you can say it out loud with confidence.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>What it is not</h3>
+        <ul class="plain no">
+          <li>Not a social network. There are no profiles, followers, or messages.</li>
+          <li>Not a shop. Nothing is sold inside the app and there are no in-app purchases.</li>
+          <li>Not a plant identifier. It does not use your camera or upload photos anywhere.</li>
+          <li>Not a data business. There are no accounts, no analytics and no advertising SDKs.</li>
+        </ul>
+        <div class="stat">
+          <div><b>263</b><span>cards in the deck</span></div>
+          <div><b>83</b><span>written, awaiting a photo</span></div>
+          <div><b>0</b><span>servers holding your data</span></div>
+        </div>
+        <p style="font-size:12px;color:var(--dim);margin-top:12px">Counts as of 5 September 2026. The deck grows as plants come into season and get photographed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cards">
+    <span class="eyebrow">The cards</span>
+    <h2>Six cards straight from the deck.</h2>
+    <p class="lead">These are real cards, using the same data and the same photographs the app uses. Tap or click one to flip it, exactly as you would in Timber.</p>
+    <div class="deck" id="deck"></div>
+    <p class="hint">Photographs are of plants on the bench at work, taken by me. Card facts are checked against the RHS and the growers' own descriptions.</p>
+  </section>
+
+  <section id="privacy">
+    <span class="eyebrow">Privacy</span>
+    <h2>Nothing leaves your phone.</h2>
+    <div class="grid2">
+      <div>
+        <p>Timber has no user accounts and no server of its own. Your progress, your quiz streak and your review schedule are saved in your device's local browser storage and nowhere else. Delete the app and they are gone.</p>
+        <p>The only network requests the app makes are to download its own files (the deck, the artwork, the photographs) and to keep a copy of them on your device so it works offline. It does not contact any third party, does not load advertising, and does not run analytics.</p>
+        <p>The app never asks for your camera, your location, your contacts or your microphone. The "Listen" feature uses the speech engine already on your phone and sends nothing anywhere.</p>
+      </div>
+      <div class="panel">
+        <h3>In plain terms</h3>
+        <dl>
+          <dt>Data collected</dt><dd>None.</dd>
+          <dt>Data shared</dt><dd>None.</dd>
+          <dt>Stored on device</dt><dd>Learned / skipped cards, quiz best streak, review dates, and a crash-report log that is only ever seen by you unless you choose to copy or share it.</dd>
+          <dt>Permissions</dt><dd>None requested.</dd>
+          <dt>Age</dt><dd>Suitable for everyone. No user-generated content.</dd>
+          <dt>Questions</dt><dd><a href="mailto:oscarhurman39@gmail.com">oscarhurman39@gmail.com</a></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <span class="eyebrow">Who I am</span>
+    <h2>A one-man band.</h2>
+    <div class="who">
+      <div>
+        <p>My name is Oscar. I work at a garden centre in the UK, and Timber is something I built to learn the plants I sell. There is no company behind it, no investors and no team. I write the cards, take the photographs, and publish the app myself.</p>
+        <p>It started as a web page on my own phone so I could revise on the bus. Colleagues asked for it, so it became an installable app, and now it is heading to Google Play so it is easier to find and install. That is the whole story. Nothing crazy.</p>
+        <p>If you want to check anything on this page, the app's source code and every plant card in it are public on GitHub.</p>
+      </div>
+      <div class="panel">
+        <dl>
+          <dt>Developer</dt><dd>Oscar (sole developer, United Kingdom)</dd>
+          <dt>App</dt><dd>Timber: learn plants by swiping</dd>
+          <dt>Live app</dt><dd><a href="https://oscarhurman39-sys.github.io/Timber/">oscarhurman39-sys.github.io/Timber</a></dd>
+          <dt>Source</dt><dd><a href="https://github.com/oscarhurman39-sys/Timber">github.com/oscarhurman39-sys/Timber</a></dd>
+          <dt>Contact</dt><dd><a href="mailto:oscarhurman39@gmail.com">oscarhurman39@gmail.com</a></dd>
+          <dt>Price</dt><dd>Free. No in-app purchases, no subscriptions, no ads.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <a href="timber.html">Open Timber</a>
+    <a href="#privacy">Privacy</a>
+    <a href="mailto:oscarhurman39@gmail.com">Contact</a>
+    <div style="margin-top:12px">© 2026 Oscar. Plant facts are given in good faith for learning; always check a plant's own label before you buy or plant.</div>
+  </footer>
+</div>
+
+<script>
+/* Six cards copied verbatim from the PLANTS deck in timber.html (2026-09-05).
+   Ratings are the deck's editorial 0-20 scores; sunMin/sunNeed are 0-100. */
+const CARDS = [
+ {common:"Mexican Orange Blossom",latin:"Choisya ternata",hardiness:"H4",
+  visual:"Glossy aromatic evergreen leaves · fragrant white starry flowers in spring",
+  water:"Moderate; low once established",aspect:"East / South / West",
+  soil:"Any well-drained soil; Sheltered · avoid winter wet",
+  prune:"RHS 8 · Lightly shape after flowering if needed",size:"1.5–2.5m H × 1.5–2.5m W",
+  uses:"Sensory gardens · shrub borders · informal hedging",
+  resilience:"Pest-free, drought tolerant once established",peak:"May-Jun",
+  thirst:6,careLevel:4,sunNeed:75,sunMin:40,growthSpeed:9,pestRisk:3,
+  photo:"photos/card/choisya-ternata.webp"},
+ {common:"French Lavender 'Anouk Deluxe Purple'",latin:"Lavandula stoechas 'Anouk Deluxe Purple'",hardiness:"H4",
+  visual:"Fat dark-purple flower heads · bright ruffled bracts · aromatic grey-green foliage",
+  water:"Low once established",aspect:"South / West",
+  soil:"Poor, free-draining; No winter wet · shelter from frost",
+  prune:"Deadhead; trim after flowering",size:"40–60 cm H × 40–60 cm W",
+  uses:"containers · edging · pollinators",resilience:"drought tolerant · coastal · deer resistant",
+  peak:"May-Oct",thirst:4,careLevel:6,sunNeed:95,sunMin:80,growthSpeed:8,pestRisk:6,
+  photo:"photos/card/lavandula-stoechas-anouk-deluxe-purple.webp"},
+ {common:"Coral Bark Maple",latin:"Acer palmatum 'Sango-kaku'",hardiness:"H6",
+  visual:"Young stems glow coral-red through winter · leaves open lime, turning butter-yellow",
+  water:"Keep evenly damp; never let it dry out in wind",aspect:"Any aspect",
+  soil:"Fertile, humus-rich; Shelter from cold drying wind",
+  prune:"Prune in winter only · keep young stems, they carry the colour",size:"4-8m H × 2.5-4m W",
+  uses:"winter stems · Japanese-style gardens · containers · small gardens",
+  resilience:"hardy but wind-sensitive · leaf scorch is the usual complaint",
+  peak:"Oct-Mar",thirst:13,careLevel:9,sunNeed:60,sunMin:30,growthSpeed:7,pestRisk:7,
+  photo:"photos/card/acer-palmatum-sango-kaku.webp"},
+ {common:"Climbing Hydrangea",latin:"Hydrangea petiolaris",hardiness:"H5",
+  visual:"Self-clinging climber with flat white lacecaps · peeling cinnamon bark in winter",
+  water:"Keep evenly damp, especially against a wall base",aspect:"North / East / West",
+  soil:"Humus-rich, holds moisture; Sulks for two or three years",
+  prune:"Trim after flowering only · it needs almost none",size:"12m+ H × 4-8m W",
+  uses:"north and east walls · shaded fences · tree trunks · large expanses",
+  resilience:"very hardy and self-clinging · best flowering climber for a north wall · sap irritates skin",
+  peak:"Jun-Jul",thirst:14,careLevel:5,sunNeed:40,sunMin:10,growthSpeed:8,pestRisk:4,
+  photo:"photos/card/hydrangea-petiolaris.webp"},
+ {common:"Hot Lips Sage",latin:"Salvia 'Hot Lips'",hardiness:"H5",
+  visual:"Red-and-white lipped flowers shift with weather · aromatic green foliage",
+  water:"Low once established",aspect:"South / West",
+  soil:"Light, well-drained; No winter wet · shelter from frost",
+  prune:"Cut back in spring; deadhead",size:"0.5–1 m H × 0.5–1 m W",
+  uses:"pollinators · gravel gardens · containers",resilience:"drought tolerant · coastal",
+  peak:"Jun-Nov",thirst:6,careLevel:8,sunNeed:90,sunMin:65,growthSpeed:12,pestRisk:8,
+  photo:"photos/card/salvia-hot-lips.webp"},
+ {common:"Aloe vera",latin:"Aloe vera",hardiness:"H1b",
+  visual:"Fleshy grey-green rosettes · pale spots on young leaves · toothed margins",
+  water:"Water when compost dries",aspect:"South / West",
+  soil:"Poor, sharply drained; Avoid wet compost · protect from frost",
+  prune:"Remove dead or damaged leaves at the base",size:"50–100 cm H × 50–100 cm W",
+  uses:"houseplants · conservatories · sunny windowsills · containers",
+  resilience:"drought tolerant · heat tolerant",toxicity:"Harmful if eaten",
+  hardinessNote:"RHS H1b; cannot tolerate freezing temperatures",
+  peak:"Jun-Sep",thirst:2,careLevel:3,sunNeed:90,sunMin:60,growthSpeed:8,pestRisk:8,
+  photo:"photos/card/aloe-vera.webp"},
+];
+
+const MONTHS="JFMAMJJASOND".split("");
+const MI={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+function litMonths(peak){            // "Oct-Mar" wraps the year
+  const m=/^(\w{3})-(\w{3})$/.exec(peak||""); const on=new Array(12).fill(false);
+  if(!m) return on; let a=MI[m[1]], b=MI[m[2]]; if(a==null||b==null) return on;
+  for(let i=a;;i=(i+1)%12){on[i]=true; if(i===b) break;} return on;
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function pips(v,max,colour){          // 0-20 score -> five quarter-fill pips, as the app does
+  const per=max/5; let h="";
+  for(let i=0;i<5;i++){const f=Math.max(0,Math.min(1,(v-i*per)/per)); h+=`<i style="--f:${Math.round(f*100)}%;--pipc:${colour}"></i>`;}
+  return `<div class="pips">${h}</div>`;
+}
+const outOf5=v=>`${Math.round(v/4*10)/10}/5`.replace(".0/","/");
+function card(p){
+  const lit=litMonths(p.peak).map((on,i)=>`<s class="${on?"lit":""}">${MONTHS[i]}</s>`).join("");
+  const sun=`<div class="sunbar"><b style="left:${p.sunMin}%;width:${Math.max(4,p.sunNeed-p.sunMin)}%"></b></div>`;
+  const front=`
+    <div class="face front">
+      <div class="photo">
+        <img loading="lazy" src="${p.photo}" alt="${esc(p.common)} (${esc(p.latin)})">
+        <div class="names"><b>${esc(p.common)}</b><i>${esc(p.latin)}</i></div>
+        <div class="crest" title="RHS hardiness rating"><small>HARDINESS</small><b>${esc(p.hardiness)}</b></div>
+        <div class="peakstrip" title="Peak months: ${esc(p.peak)}">${lit}</div>
+      </div>
+      <div class="plaque">
+        <div class="ppp">Plant power points</div>
+        <div class="row"><div class="l">Thirst<small>${outOf5(p.thirst)}</small></div>${pips(p.thirst,20,"#2d7cc7")}</div>
+        <div class="row"><div class="l">Care level<small>${outOf5(p.careLevel)}</small></div>${pips(p.careLevel,20,"#c0392b")}</div>
+        <div class="row"><div class="l">Pests<small>${outOf5(p.pestRisk)}</small></div>${pips(p.pestRisk,20,"#2f8f4e")}</div>
+        <div class="row"><div class="l">Aspect<small>${esc(p.aspect)}</small></div>${sun}</div>
+        <div class="txt"><em>Soil</em><span>${esc(p.soil)}</span><em>Size</em><span>${esc(p.size)}</span></div>
+        <div class="foot">✦ Tap to flip ✦</div>
+      </div>
+    </div>`;
+  const back=`
+    <div class="face back">
+      <div class="plaque">
+        <h4>${esc(p.common)}<i>${esc(p.latin)}</i></h4>
+        <div class="txt">
+          <em>Look</em><span>${esc(p.visual)}</span>
+          <em>Water</em><span>${esc(p.water)}</span>
+          <em>Prune</em><span>${esc(p.prune)}</span>
+          <em>Uses</em><span>${esc(p.uses)}</span>
+          <em>Notes</em><span>${esc(p.resilience)}</span>
+          ${p.hardinessNote?`<em>Hardy</em><span>${esc(p.hardinessNote)}</span>`:""}
+        </div>
+        ${p.toxicity?`<div class="warn"><em>Safety</em>${esc(p.toxicity)}</div>`:""}
+        ${p.compliance?`<div class="legal"><em>Legal</em>${esc(p.compliance)}</div>`:""}
+        <div class="foot">✦ Tap to flip back ✦</div>
+      </div>
+    </div>`;
+  const el=document.createElement("div"); el.className="flip"; el.setAttribute("role","button"); el.tabIndex=0;
+  el.setAttribute("aria-label",`${p.common} card, tap to flip`);
+  el.innerHTML=`<div class="faces">${front}${back}</div>`;
+  const toggle=()=>el.classList.toggle("on");
+  el.addEventListener("click",toggle);
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle();}});
+  return el;
+}
+const deck=document.getElementById("deck");
+for(const p of CARDS) deck.appendChild(card(p));
+</script>
+</body>
+</html>

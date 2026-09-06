@@ -1436,7 +1436,7 @@ pair to check a photo against.
 
 ---
 
-### 44. A summer-flowering Daphne that is not the deck's Daphne — and a Forsythia photo its own card denies
+### 44. A summer-flowering Daphne that is not the deck's Daphne — **A RESOLVED 2026-09-04** — and a Forsythia photo its own card denies
 2026-08-17.
 
 **A. The Daphne is parked, not dealt.** Oscar sent it for *"the only daphne in
@@ -1451,6 +1451,8 @@ my eye:
 - `[Inference]`: the ***D.* × *transatlantica*** group — ETERNAL FRAGRANCE
   ('Blafra') or PINK FRAGRANCE — which is compact, small-leaved, and flowers
   right through summer. Exactly what is in the frame.
+
+**RESOLVED 2026-09-04.** Oscar: *"it was pink fragrance"* — the inference was correct. *Daphne* × *transatlantica* PINK FRAGRANCE ('Blapink') now has its **own card**, dealt from a clearer frame he supplied; the parked file is kept as the earlier record of the same plant. *D. bholua* 'Jacqueline Postill' remains **held** and still needs a Jan-Mar shot.
 
 Parked as `daphne-unidentified-summer.jpg`. If it is a transatlantica it wants
 its **own card** — and it is arguably the better garden-centre plant of the two,
@@ -2031,7 +2033,7 @@ same plant twice. **Oscar's call** whether to move 'The Bride' into the latin.
 ---
 
 
-### 60. One Physocarpus photograph, two Physocarpus cards — which is it?
+### 60. One Physocarpus photograph, two Physocarpus cards — **RESOLVED 2026-09-04 by the pot label**
 2026-09-02. Oscar's batch had cards for **'All Black'** and **LITTLE DEVIL ('Minall2')**
 and one ninebark photograph, listed first as "phycoaroubs". Both cultivars are
 dark-leaved; the photo shows purple leaves with a grey bloom on red stems and a
@@ -2043,7 +2045,7 @@ more compact of the pair, but there is no scale reference.
 `photos/physocarpus-opulifolius-dark-unidentified.jpg` with a CREDITS entry that
 says exactly this. Same handling as the two Vitex (VQ 58).
 
-**Oscar's call:** say which it is and it is dealt in one command:
+**RESOLVED 2026-09-04.** Oscar photographed the pot label — *PHYSOCARPUS OPULIFOLIUS ALL BLACK® 'Minall2' cov* — at 17:27:22, with a leaf frame at 17:27:33. Eleven seconds apart, so the label and the plant are the same plant in the same minute. **ALL BLACK dealt.** The label also proved the deck had the two cultivar codes crossed: LITTLE DEVIL was carrying 'Minall2', which belongs to ALL BLACK; Little Devil is 'Donna May' (PP22634). Both cards corrected. LITTLE DEVIL remains held with no photograph, and is separated from ALL BLACK by SIZE rather than leaf colour, so its photo will need a label or a scale reference too.\n\n**Oscar's call:** say which it is and it is dealt in one command:
 `node tools/deal-plant.js "<latin>" photos/physocarpus-opulifolius-dark-unidentified.jpg`.
 If the other one has a photo coming too, both go in the same run.
 
@@ -2113,7 +2115,22 @@ one look next time he passes it.
 ---
 
 
-### 65. Robinia 'Lace Lady' and Copper beech: both cards held, because neither photograph shows its plant
+### 65. Impatiens omeiana — photo confirmed by Oscar despite disagreeing with the card text
+2026-09-02. Card data (his JSON) describes a soft herbaceous perennial: elongated
+dark green leaves, prominent pale silver veins, small pale yellow flowers,
+spreading by rhizomes in woodland shade. The photograph he sent for it shows
+glossy, spine-toothed, leathery leaves on woody red stems in hard sun — no
+flower, no silver vein pattern, and spined margins Impatiens does not have. I
+asked directly rather than guessing or silently swapping either side; Oscar
+confirmed the identification is correct against this photo. **Dealt as
+supplied.** Recorded, not resolved further — if the plant on the bench turns
+out to be something else (an *Osmanthus* is the closest visual match in the
+deck), the photo is the one to replace, not the data.
+
+---
+
+
+### 66. Robinia 'Lace Lady' and Copper beech: both cards held, because neither photograph shows its plant
 2026-09-02. Two researched cards arrived with two photographs. **Both JSONs pass
 `check-plant-json.js`** and both are in the hold block with their full data.
 **Neither photograph was staged on its card**, for the same reason as Winter
@@ -2174,7 +2191,7 @@ unclaimed; the copper beech position is unchanged.
 ---
 
 
-### 66. Persicaria and Veronicastrum dealt; Groundbreaker Blush hydrangea held — photo 1 is a shrub with no flower
+### 67. Persicaria and Veronicastrum dealt; Groundbreaker Blush hydrangea held — photo 1 is a shrub with no flower
 2026-09-02. Three researched cards and three photographs from one bench visit
 (EXIF 11:31:17, 11:32:05, 11:32:14 on 2026-08-29). All three JSONs pass
 `check-plant-json.js` and are kept verbatim in `data/incoming/`.
@@ -2229,7 +2246,7 @@ paniculata* 'LC NO21' **held**. Deck 238 → 240, hold 83 → 84.
 ---
 
 
-### 67. "Golden Hakonechloa" refused as a duplicate of the held 'Aureola'; its cutout is not confidently a Hakonechloa
+### 68. "Golden Hakonechloa" refused as a duplicate of the held 'Aureola'; its cutout is not confidently a Hakonechloa
 2026-09-02. A JSON for *Hakonechloa macra* arrived with a transparent-background
 cutout PNG. **Nothing was added to the deck**, for two separate reasons, and
 both are Oscar's to reverse.
@@ -2304,7 +2321,7 @@ JSON.
 ---
 
 
-### 68. Viburnum opulus dealt, Caryopteris 'Dark Knight' held, Sapphire Ring gets its flower — and two prose fields converted
+### 69. Viburnum opulus dealt, Caryopteris 'Dark Knight' held, Sapphire Ring gets its flower — and two prose fields converted
 2026-09-02. Two JSONs and three photographs. Oscar named two of the frames:
 *"1st image is the viburnum"* and *"3rd image is a Ceratostigma Sapphire Ring
 but I wanted it to flash between the current card photo in the deck and this
@@ -2337,7 +2354,7 @@ and the one-line answer makes it a swap card too. 'Dark Knight' then waits for
 a grey-green frame.
 
 **D. Two prose fields converted per card, labelled.** Both JSONs arrived with
-`hue` and `peak` as words. Unlike the Hakonechloa (item 67), these are new
+`hue` and `peak` as words. Unlike the Hakonechloa (item 68), these are new
 cards, so the values were set from the supplied text and the conversion is
 recorded in each card's `uncertain` block and here:
 

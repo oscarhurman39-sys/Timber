@@ -398,6 +398,9 @@ Focal point recorded here when off-centre:
 
 | Sanguisorba 'Pink Brushes' | sanguisorba-pink-brushes.jpg | 50% 40% default — **Oscar's own two-frame split, kept whole**: cut foliage left, nodding pink bottlebrushes right. Already 3000x4000 at exactly 0.750, so nothing was cropped. The clearest case yet for the v14.34 rule — he assembled this one deliberately to show both halves, and both halves are what a person needs to recognise the plant on a bench |
 | Disporum sessile 'Variegatum' | disporum-sessile-variegatum.jpg | 50% 40% default — held in Oscar's hand in its nursery pot, so the cream-striped leaves read at arm's length. **Bottom fifth trimmed** (`h: 0.78`) and nothing else: as shot, the pot floated the foliage to 27% down the frame, above the card's readable band, and reframe-photo.js refused the as-is until it was fixed. The hand and pot are kept — they are the scale reference. **First *Disporum*** in the deck |
+| Campsis grandiflora (Tropical Summer Trumpet Creeper) | campsis-grandiflora.jpg (**replaced 2026-09-04**) | 50% 40% default — **the clearest crop-versus-frame lesson in the register.** The outgoing master was a 1200x1253 macro zoomed so far into a single bloom that the petal was soft and the foliage was gone entirely — on a card whose `visual` leads with *"pinnate dark-green foliage"*, and on a *Campsis*, where the pinnate serrate leaflets are the ID feature and a big orange trumpet is not (*Bignonia*, *Podranea* and *Tecoma* all read the same at that magnification). The replacement is Oscar's supplied frame with **only the bottom 15% removed** — pot, hand and two nursery labels he redacted himself in red marker. That trim is measured, not tasted: the topmost label sits at y 0.560, and a first pass at `h: 0.90` put it at exactly 0.622, the plaque line, which rendered as a visible sliver beside the soil panel; `h: 0.85` puts it at 0.659 and the band is clean. Leaflets fill the left and centre, trumpets upper-right, both in one frame. **First *Campsis*** in the deck |
+| Daphne × transatlantica PINK FRAGRANCE ('Blapink') | daphne-transatlantica-pink-fragrance-blapink.jpg | 50% 40% default — **uncropped**, EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked at `verdict: as-is`. Two open clusters of pink-flushed-white flowers with the narrow lance-shaped semi-evergreen leaves filling the frame. **This card exists because a photograph was refused rather than dealt**: `daphne-unidentified-summer.jpg` was sent in August 2026 for the deck's *D. bholua* 'Jacqueline Postill' and parked instead, because that plant flowers Jan–Mar and the picture was in full bloom in August (VERIFY-QUEUE 44). Oscar has now named it PINK FRAGRANCE and supplied this clearer frame. **'Jacqueline Postill' stays HELD** and still wants a winter shot — the two Daphne photographs must never swap, and the season in the frame is what tells them apart. The parked file is kept as the earlier record of the same plant |
+| Physocarpus opulifolius ALL BLACK ('Minall2') | physocarpus-opulifolius-all-black-minall2.jpg | 50% 40% default — **uncropped**, orientation 6 baked, 3000x4000 at 0.750, restaged at the full 1200x1600 rather than `deal-plant.js`'s 900x1200. Dark purple lobed leaves on bright red stems with a crimson new shoot at centre. **Dealt on a LABEL, not a leaf, and the eleven seconds matter**: Oscar sent a photograph of the pot label reading *PHYSOCARPUS OPULIFOLIUS ALL BLACK® 'Minall2' cov* at 17:27:22 and this frame at 17:27:33, so label and plant are the same plant in the same minute — the Cedrus swap-pair precedent used as proof of identity rather than of lighting. Closes VERIFY-QUEUE 60. The earlier bench frame is kept as the spare `physocarpus-opulifolius-all-black-bench.jpg`, renamed off its `-dark-unidentified` name now the plant is known. **Third *Physocarpus***, and read the changelog before touching the other two: this label is what proved the deck had ALL BLACK's and LITTLE DEVIL's cultivar codes crossed |
 | Helleborus × ericsmithii 'Winter Moonbeam' | helleborus-ericsmithii-winter-moonbeam.jpg | 50% 40% default — **uncropped**, verdict as-is. Silver-veined dark foliage; no flowers, and there would not be in August — peak is Dec–Apr, so the white-ageing-pink blooms the card names want a winter reshoot. **The strongest provenance in the deck this month**: a full signed Galaxy S24 *capture* manifest (JUMBF, `c2pa.ingredient.v2`, `relationship parentOf`) with no `digitalSourceType` and no Photo assist marker — the untouched-original signature, which almost nothing else in the recent batch carries. **Second hellebore**, but 'Anna's Red' is still held and has no photo, so no bench confusion yet |
 | Oenothera stricta 'Sulphurea' | oenothera-stricta-sulphurea.jpg | 50% 40% default — **uncropped**, verdict as-is. Another of Oscar's deliberate composites: the open flower filling the frame, caught at the peach stage it fades to, with a labelled `foliage` inset panel he added across the top-right for the bronzy-green leaves and red stems. The arithmetic said the card's top furniture would slice that panel and leave a stray label; the render says otherwise — half the panel and the whole label survive inside the band and read as an inset, not a remnant. Measured, not assumed, and left whole under v14.34. **Third *Oenothera***, and the only *stricta*: the other two are *O. lindheimeri* (GAUDI ROSE and 'Rosy Jane'), white-to-pink four-petal gaura flowers on wiry stems — this one is a lemon-to-peach bowl on a low bronzed mound, so the confusion is in the genus name only |
 | Monstera deliciosa 'Thai Constellation' | monstera-deliciosa-thai-constellation.jpg | 50% 40% default — **Oscar's own PNG cutout on flat black**, 1502x2002, exactly 0.750, no EXIF because it is a PNG export. Kept as supplied: the black ground is his choice and the cream-splashed leaves are the whole identification. **Second *Monstera*** after the plain species — variegation is the only visible difference |
@@ -411,17 +414,27 @@ Focal point recorded here when off-centre:
 | *(parked)* Physocarpus, cultivar unknown | physocarpus-opulifolius-dark-unidentified.jpg | **NOT ON A CARD.** One Physocarpus photograph arrived with two Physocarpus cards ('All Black' and LITTLE DEVIL 'Minall2'); the pot label in the top-right corner is blurred beyond reading. Both cards are held and the photo is staged under a descriptive name — the Vitex precedent (VQ 58). VQ 60 |
 | Robinia pseudoacacia 'Lace Lady' | robinia-pseudoacacia-lace-lady.jpg | 50% 40% default — **Oscar's labelled composite, kept whole**: pinnate leaves over a zig-zagging brown stem, with a `thorned stem` inset panel top-right showing the paired purple spines. 2594x3624 is 0.716, under the gate, so **4.6% trimmed off the bottom edge only** — trimming the top would have pushed the inset up into the furniture. EXIF 2026-08-26. Photo assigned by Oscar ("robinas photo"). One thing to look at on the bench: the card's own visual line leads on *curly* leaflets, and the leaflets in this frame lie flat — see VQ 64 |
 | Prunus incisa 'Kojo-no-mai' | prunus-incisa-kojo-no-mai.jpg — **REPLACED 2026-09-02** | 50% 40% default — **swapped at Oscar's request** ("better photo"). Old photo (Aug 2026 original add) showed the shoot propped against a weathered fence rail, half the frame taken up by wood grain. New photo is another of Oscar's PNG cutouts on flat black, 2998x3998, exactly 0.750, no crop needed — denser foliage, sharper serration detail, his hand and secateurs at the base for scale. Old master kept nowhere else; the file was overwritten in place, so the swap is provenance-only, recorded here and in CREDITS |
+| Impatiens omeiana | impatiens-omeiana.jpg | 50% 40% default — **uncropped**, 3000x4000 at 0.750. **Flagged before dealing, dealt anyway on Oscar's direct confirmation.** The card's own text describes a soft herbaceous woodland balsam — elongated leaves, silver veins, yellow flowers. The photograph shows glossy, spine-toothed, leathery leaves on woody red stems, closer to an *Osmanthus* or holly than anything herbaceous, and nothing in the frame is a flower. I asked Oscar directly, against this photo, whether the identification was right; he confirmed it. Dealt as supplied, both my doubt and his confirmation on record in the card's `uncertain` list and here — this is his call, made after seeing exactly what I saw |
 | Exochorda × macrantha ('The Bride') | exochorda-macrantha.jpg **+ PHOTO_SWAP** | 50% 40% default — **a two-frame card, sent as a pair by Oscar with the swap asked for by name.** Primary: whorled oblong pale-green leaves on a dark stem, rain-wet, uncropped at 0.781 — the plant as it stands on the bench in August. Alt (`-fruit.jpg`, focus 50% 45%): the ribbed russet seed capsule that is the genus's signature; EXIF orientation 6 baked upright to 3000x4000, otherwise untouched. 22 seconds apart (15:16:27 / 15:16:49), same plant, same rain. Neither frame has the April–May white flowers the card sells, and the card says so in `uncertain`. **Supplied latin is the bare hybrid**, while common and `cvs` both name 'The Bride' — kept as supplied, not renamed (VQ 60). The JSON arrived in prose where the deck uses ` · ` lists and `Mon-Mon` peaks; normalised to house format with no fact changed — soil types + pH collapsed to "Any, well-drained" with the waterlogging warning kept |
-| Persicaria affinis 'Darjeeling Red' | persicaria-affinis-darjeeling-red.jpg | 50% 40% default — **uncropped**, a clean Galaxy S24 capture (EXIF 2026-08-29 11:32:14, no C2PA), 3000×4000 staged at 1200×1600. One dense pink-white spike going over, browning at the base, above the mat of lanceolate leaves with the ochrea visible at the stem node — *Persicaria affinis* by the spike, the mat and the sheath. Late-season, so the "maturing deep red" the card promises is not in this frame; the cultivar is Oscar's label, not the photograph's. **New genus** for the deck. Its 39-character soil value renders at three lines of shrunk type in the soil panel; kept as researched (VERIFY-QUEUE 66) |
+
+| Anisodontea capensis 'Ib201-7' (CARNIVAL LIGHTS CANDY APPLE) | anisodontea-capensis-ib201-7.jpg | 50% 40% default — **uncropped**, orientation already 1, portrait 3000x3444 at 0.871 (inside the gate, the Styrax precedent). One large deep-red flower with the crimson veining and dark stamens top-right, a lobed grey-green mallow leaf sharp at left — flower AND foliage in one frame, both halves of the card's own visual line. Current-season Galaxy S24 capture, shot the day it was staged. **First *Anisodontea* in the deck**, no confusion risk |
+
+| Cyclamen hederifolium var. hederifolium f. albiflorum | cyclamen-hederifolium-var-hederifolium-f-albiflorum.jpg | 50% 40% default — **cropped for arithmetic, not taste**: source 1960x3732 at 0.525, far below the 0.75 gate, with the bottom ~30% being the plastic tray rim and its sandy face. Full-width crop of the top 70% through `reframe-photo.js` lands at 1960x2612, exactly 0.750; the white reflexed flower on its coral stem and the silver-marbled ivy-shaped hero leaf — both halves of the card's visual line — sit in the card band. Clean Galaxy S24 EXIF, no C2PA/AI marker. **First *Cyclamen* in the deck.** Peak Sep–Nov and shot in late August with the first flowers just opening, so the frame matches the card's own season |
+
+| Phygelius aequalis 'Trewidden Pink' | phygelius-aequalis-trewidden-pink.jpg | 50% 40% default — **uncropped**, EXIF orientation 6 (sensor 4000x3000, displays portrait 3000x4000 at exactly 0.750), rotation baked in at `verdict: as-is`, the Erigeron/Vitex precedent. Pendent tubular flowers upper-left, the serrate opposite hero leaf upper-right — genus-confirming. **Assigned against the send order**: the JSON array led with the Dahlia but this frame is unmistakably the Phygelius; matched on the plant, the Vitex rule. ⚠ [flag] **The card says "dusky-pink" and the photograph reads coral-RED in hard sun** — the tubes have pale throats and red-rimmed lobes. Consistent with a phone camera saturating a coral-pink cultivar in full August light (the Agapanthus precedent), but the cultivar is not verifiable from this frame; if a softer-light frame ever shows true red, the ID wants Oscar's eye. **First *Phygelius* in the deck** |
+| Dahlia 'Kelvin Floodlight' | dahlia-kelvin-floodlight.jpg | 50% 40% default — **uncropped**, orientation 1, portrait 3000x4000 at exactly 0.750. The huge butter-yellow decorative bloom fills the right of the frame with the dark pinnate foliage left — cultivar-consistent: 'Kelvin Floodlight' is THE giant yellow decorative, and nothing else in the deck looks like it. Leaves show pale mottled spotting, true to a bench dahlia in late August. **Second *Dahlia*** — ELECTRO PINK is a neon cactus type, no confusion risk |
+
+| Solanum pyracanthos | solanum-pyracanthos.jpg | 50% 40% default — **uncropped by us** (2482x3024 at 0.821, orientation 1), but **the file carries Oscar's own sticker edit, the Salvia 'Black and Blue' class, and this time the C2PA manifest says so precisely**: a Samsung PhotoEditor deco re-edit declaring a crop to 91% height, a filter, and ONE non-text sticker at centre (0.215, 0.235), ~23% wide, rotated -10° — which is exactly where the purple flower sits. **No generative action**: no `Photo assist` agent, no trained-media source type, `isScaleAI:false`, AI filter false, no visible label. The pasted flower is species-correct (purple 5-lobed star, yellow poricidal anther cone) and every other ID feature — grey-green lobed leaves, vivid orange spines on stems, midribs AND calyx, a developing fruit — is the camera's own capture. Two blurred nursery labels lower-left (one reads "SOL…", the right genus) fall below the card band, the Sempervivum precedent. **Second *Solanum*** — *S. laxum* 'Album' is a white-flowered climber, no confusion risk. No red fruits in frame: an autumn reshoot would complete the card's own visual line |
+| Persicaria affinis 'Darjeeling Red' | persicaria-affinis-darjeeling-red.jpg | 50% 40% default — **uncropped**, a clean Galaxy S24 capture (EXIF 2026-08-29 11:32:14, no C2PA), 3000×4000 staged at 1200×1600. One dense pink-white spike going over, browning at the base, above the mat of lanceolate leaves with the ochrea visible at the stem node — *Persicaria affinis* by the spike, the mat and the sheath. Late-season, so the "maturing deep red" the card promises is not in this frame; the cultivar is Oscar's label, not the photograph's. **New genus** for the deck. Its 39-character soil value renders at three lines of shrunk type in the soil panel; kept as researched (VERIFY-QUEUE 67) |
 | Veronicastrum 'Red Arrows' | veronicastrum-red-arrows.jpg | **50% 0%** — pinned to the top so the frame's **visible "AI-generated content" label**, bottom-left of the source, falls outside the window; the master is 1200×1568 (0.765), so ~9% of height is available and the label sits inside it. Verified on the rendered card. Framing, not concealment: the marker is written verbatim into `CREDITS.json`. Credentials differ from the Houttuynia pattern — a C2PA manifest with `c2pa.ingredient.v2` and claim generator `Galaxy S24 c2pa-rs/0.62.0`, **no** `digitalSourceType` string found, but no camera EXIF, a non-native 2948×3852 frame and the burned-in label, i.e. an edited export of a capture titled `20260829_113205(1).jpg`. Whorled red-edged lanceolate leaves under a violet spike — the plant on the card. **New genus** |
-| Viburnum opulus ('Compactum') | viburnum-opulus.jpg | 50% 40% default — **named by Oscar** (*"1st image is the viburnum"*) and the frame agrees: palmately lobed, toothed leaves with a cluster of glossy red berries top-of-frame, the card's own visual line. Cropped export at 3000×2626 (landscape, no camera EXIF, no C2PA), so the window keeps only part of the width; the berries sit in the top band under the title. **Card latin is the species as supplied**, with 'Compactum' in `cvs`; the deck's other guelder rose is the sterile 'Roseum' (held), a different plant. `hue` and `peak` were prose as sent and were converted with a labelled note (VERIFY-QUEUE 68) |
+| Viburnum opulus ('Compactum') | viburnum-opulus.jpg | 50% 40% default — **named by Oscar** (*"1st image is the viburnum"*) and the frame agrees: palmately lobed, toothed leaves with a cluster of glossy red berries top-of-frame, the card's own visual line. Cropped export at 3000×2626 (landscape, no camera EXIF, no C2PA), so the window keeps only part of the width; the berries sit in the top band under the title. **Card latin is the species as supplied**, with 'Compactum' in `cvs`; the deck's other guelder rose is the sterile 'Roseum' (held), a different plant. `hue` and `peak` were prose as sent and were converted with a labelled note (VERIFY-QUEUE 69) |
 | Ceratostigma willmottianum SAPPHIRE RING ('Lissbrill') | ceratostigma-willmottianum-sapphire-ring-lissbrill.jpg **+ PHOTO_SWAP** (added 2026-09-02) | swap alt `-flowers.jpg`, 50% 50%, 3.5s hold — **Oscar's ask**: *"flash between the current card photo and this photo as it has a flower"*. The card photo is the gold, red-edged hairy foliage with no bloom; the new frame (Galaxy S24, 2026-08-31 15:54, clean) is the same foliage with the cobalt flowers the card is named for. Fifth swap card; the deck's first added at the owner's request rather than from a spare sweep. Verified rendering both frames |
 | Ilex crenata 'Kinme' | ilex-crenata-kinme.jpg | 50% 40% default — **REPLACED 2026-09-02** at Oscar's request: *"we tried to cut out, the cut out version I uploaded sucked, this is much better"*. The earlier master was a black-background cutout of this exact sprig (same leaves, same green fruit); the new one is the uncut frame, 1440×2216, sprig top-left over blurred concrete. No camera EXIF, no C2PA |
 | Trachelospermum jasminoides | trachelospermum-jasminoides.jpg | **30% 45%** (was 40% 45%) — **REPLACED 2026-09-02** at Oscar's request: *"it was not aligned correctly"*. Same shot, wider frame: the earlier master was a tight portrait crop of this 2612×2562 near-square. At 1.02 the window keeps ~82% of the width, so the focus moved left to hold the flower truss (x ≈ 10–55%) with the glossy leaves top-right. No camera EXIF, no C2PA |
 
 ## 5. Decision changelog
 
-- **v14.46 (three photographs replaced at Oscar's request — Hebe, Star
+- **v14.50 (three photographs replaced at Oscar's request — Hebe, Star
   Jasmine, Kinme)**: no data changed; three cards look different.
   - **Rhubarb Crumble loses the mirror.** The kaleidoscope (v-2026-08-17) was
     built from a photo that was two thirds paving; Oscar's verdict on the
@@ -439,7 +452,7 @@ Focal point recorded here when off-centre:
     own licence line, the Photinia way (item 32), so the swap is on the
     record without a parked copy.
 
-- **v14.45 (241 dealt / 85 held — Viburnum opulus dealt, Caryopteris 'Dark
+- **v14.49 (241 dealt / 85 held — Viburnum opulus dealt, Caryopteris 'Dark
   Knight' held, Sapphire Ring becomes a swap card)**: two JSONs, three
   photographs, and Oscar named two of the three.
   - **Sapphire Ring swap, at Oscar's request.** The card photo has never shown
@@ -452,7 +465,7 @@ Focal point recorded here when off-centre:
     blue flowers, which is what the deck's dealt *Caryopteris* 'Worcester
     Gold' looks like (its own card photo is the same gold foliage, no
     flowers). Card held, frame parked as
-    `caryopteris-gold-flowering-unconfirmed.jpg`; VERIFY-QUEUE 68 puts the
+    `caryopteris-gold-flowering-unconfirmed.jpg`; VERIFY-QUEUE 69 puts the
     obvious question to Oscar — is this a flowering frame for Worcester
     Gold, and should IT become a swap card too?
   - **Two schema conversions, labelled, not silent.** Both JSONs arrived
@@ -469,7 +482,7 @@ Focal point recorded here when off-centre:
     `tools/fit-incoming.js` has applied to every wishlist card, now applied
     to a pasted one.
 
-- **v14.44 (240 dealt / 84 held — Persicaria, Veronicastrum; Hydrangea
+- **v14.48 (240 dealt / 84 held — Persicaria, Veronicastrum; Hydrangea
   'Groundbreaker Blush' held)**: three researched cards from one bench visit,
   three photographs, and the send order disagreed with the plants again.
   - **The order was Veronicastrum, Hydrangea, Persicaria; the photographs were
@@ -481,7 +494,7 @@ Focal point recorded here when off-centre:
     not the herbaceous Veronicastrum, and `[Inference]` the low *Hydrangea
     paniculata* by elimination. Not dealt on elimination: parked as
     `hydrangea-groundbreaker-foliage-unconfirmed.jpg`, card held, Oscar to
-    confirm (VERIFY-QUEUE 66), same posture as the Vitex pair (item 58).
+    confirm (VERIFY-QUEUE 67), same posture as the Vitex pair (item 58).
   - **The Veronicastrum photograph carries the burned-in AI label** and is
     dealt the Houttuynia way: focus 50% 0%, label outside the window, marker
     recorded verbatim. Its C2PA manifest is the plain-capture shape (item 44
@@ -495,6 +508,110 @@ Focal point recorded here when off-centre:
     the budget, and Δ25–26 at 240. Re-measured per the check's own rule: a
     staged leak on this deck diffs at 18288 px / Δ420, so the raised budget
     is still 16x under a real leak. Pixel budget untouched at 256 (31 seen).
+
+- **v14.47 (263 dealt / 83 held — a pot label settles a photo AND catches a
+  crossed cultivar code)**: *Physocarpus opulifolius* ALL BLACK ('Minall2')
+  dealt, and the deck's two dark ninebark cards corrected.
+  - **VQ 60 closes on evidence rather than on a guess.** One ninebark
+    photograph had been parked because two dark-leaved cards ('All Black' and
+    LITTLE DEVIL) both fitted and the pot label in frame was unreadable. Oscar
+    photographed the label: *PHYSOCARPUS OPULIFOLIUS ALL BLACK® 'Minall2' cov*,
+    at 17:27:22, with the leaf frame at 17:27:33. **Eleven seconds** — same
+    plant, same minute, which is the Cedrus swap-pair trick used as proof of
+    identity instead of proof of lighting. That is now the cheapest way to
+    settle any cultivar this deck cannot tell apart by eye.
+  - **The label also caught a real data error, and it is why this pair was
+    confusing in the first place.** The deck's LITTLE DEVIL card carried
+    `('Minall2')` — but 'Minall2' is ALL BLACK's cultivar code. LITTLE DEVIL is
+    `'Donna May'` (PP22634). Both cards corrected: `Physocarpus opulifolius ALL
+    BLACK ('Minall2')` and `Physocarpus opulifolius LITTLE DEVIL ('Donna May')`,
+    with the evidence and the old wrong code written into each `cvs` field so
+    nobody re-derives it. **A card carrying another cultivar's breeder code is
+    worse than a blank one** — it is wrong in the one field a nursery would
+    check.
+  - LITTLE DEVIL stays held; its photograph has never arrived. The two are told
+    apart by size (1–1.5 m against 1.5–2.5 m), not by leaf colour, so a photo
+    for it still needs a label or a scale reference.
+  - The parked file was **renamed, not deleted**: it is a real bench frame of a
+    now-identified plant, so it lives on as
+    `physocarpus-opulifolius-all-black-bench.jpg` rather than keeping a
+    `-dark-unidentified` name that is no longer true.
+
+- **v14.46 (262 dealt / 84 held — a refused photograph becomes its own card)**:
+  *Daphne* × *transatlantica* PINK FRAGRANCE ('Blapink'), and the sequence is the
+  point. In August 2026 a Daphne photograph arrived for *"the only daphne in
+  deck"* — *D. bholua* 'Jacqueline Postill', held. It was **parked rather than
+  dealt** on calendar evidence: 'Jacqueline Postill' flowers Jan–Mar, its own
+  card says *"in the depths of winter"*, and the picture was in full bloom in
+  August on a low bushy plant with small narrow leaves (VERIFY-QUEUE 44, whose
+  `[Inference]` named the *transatlantica* group).
+  - **Oscar has now confirmed it: PINK FRAGRANCE.** The inference was right, and
+    the card that photograph was originally sent for stays HELD, still waiting
+    for a winter shot. Refusing a photo bought a correct card instead of a
+    wrong one — VQ 44 closes as identified.
+  - He supplied a clearer frame for the new card, so the deck now holds two
+    photographs of this plant: the parked original and the dealt one.
+  - **What could NOT be verified is written on the card, not smoothed over.**
+    RHS's page for 'Blapink' is unreachable from this environment (egress
+    blocked), so the H5 rating is carried across from the sibling ETERNAL
+    FRAGRANCE ('Blafra') in the same hybrid group and the `hardinessNote` says
+    exactly that. Hardiness is the deck's most error-prone field; it wants a
+    label check before this card is trusted on a bench. Flowering (Apr–Oct) and
+    the 0.9–1.2 m dimensions carry the same kind of note.
+  - Populates `toxicity` (all parts harmful, sap irritant) and `compliance`
+    (PBR) — the third PBR card since the LEGAL plaque shipped.
+
+- **v14.45 (260 dealt / 84 held — the Campsis photo swap: a crop that threw the
+  identification away)**: Oscar's verdict on the *Campsis grandiflora* frame was
+  blunt — *"the way you cropped this photo sucks"* — and he was right for a
+  reason worth keeping. The outgoing master was zoomed so far into one trumpet
+  that the petal went soft and the pinnate foliage left the frame entirely. On
+  this genus that is not a taste call: the leaflets ARE the identification, and
+  a big orange trumpet at that magnification could be *Bignonia*, *Podranea* or
+  *Tecoma*. A card that cannot be told apart from three other plants is not
+  doing its job.
+  - **The replacement is his supplied frame, trimmed 15% off the bottom and
+    nothing else** — pot, hand, and two nursery labels he had redacted himself
+    in red marker.
+  - **The trim is measured twice, which is the transferable part.** Full height
+    was refused by `reframe-photo.js` outright. A first pass at `h: 0.90` passed
+    the tool, then rendered with a sliver of redacted label beside the soil
+    panel — because the topmost label sits at y 0.560 and 0.560/0.90 = 0.622,
+    exactly the plaque line the check compares against. Passing a boundary check
+    by landing ON the boundary is not passing it. `h: 0.85` puts the label at
+    0.659 and the band is clean, confirmed on the rendered card rather than in
+    the arithmetic alone.
+  - **This card lived on a third parallel branch**, not on the live line — it
+    was merged forward here with the rest of that line (Acanthus, Galium, and
+    the five duplicates already resolved to live).
+
+- **v14.44 (257 dealt / 84 held — a five-card line merges in, and two parallel
+  duplicates resolve to the live copies)**: a second session had been dealing
+  cards on a feature branch while this line advanced; the merge brought in its
+  five unique cards — *Anisodontea capensis* 'Ib201-7' (CARNIVAL LIGHTS CANDY
+  APPLE), *Cyclamen hederifolium* f. *albiflorum*, *Dahlia* 'Kelvin
+  Floodlight', *Phygelius aequalis* 'Trewidden Pink' and *Solanum pyracanthos*
+  — each with its register row above, incoming JSON, CREDITS entry and photo.
+  - **Two plants had been dealt on BOTH lines from the same sends**: the
+    Disporum and the 'Winter Moonbeam' hellebore. The live line's copies win —
+    they deployed first, and for the hellebore its file is also the better one
+    (a full signed capture manifest, where the feature branch's copy of the
+    same plant carried a Galaxy `Photo assist` generative-edit manifest and a
+    visible label). The feature branch's register rows, rows and photos for
+    those two were dropped in the merge; its CREDITS entries did not survive
+    either, so no record contradicts the files on disk.
+  - **Both lines had also independently raised perf-test's halo delta ceiling
+    for the same red**, each with its own staged-leak measurement (36.5k px /
+    Δ375 both times). The live line's note and its warning against a fourth
+    blind raise are kept; the ceiling stays at the live line's 30 — a fresh
+    measurement on the merged 257-card deck reads 25 px / max delta 22 (staged
+    leak 36505 / 375), inside it with headroom, so no fourth raise was needed.
+  - Notable from the five: the Solanum's C2PA manifest precisely declares
+    Oscar's own PhotoEditor sticker edit (the flower; `isScaleAI:false`, no
+    generative agent) — the Salvia 'Black and Blue' class with better
+    paperwork; the Phygelius arrived order-swapped against its JSON and was
+    assigned on the plant (Vitex rule), and its card says "dusky-pink" while
+    the frame reads coral-red in hard sun — [flag] in its register row.
 
 - **v14.43 (the photo swap had been showing one photo since r79)**: Oscar sent the
   Exochorda as a pair and asked for *"the flash between feature"*, adding that it

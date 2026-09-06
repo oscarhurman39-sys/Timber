@@ -204,8 +204,21 @@ function check(name, cond, extra) {
     rewound >= 2 && stopped.history >= 5,
     JSON.stringify({ mid, stopped, rewound }));
 
-  // held to the end it runs out at the top and stops cleanly rather than erroring
-  await pressBack(4000);
+  // held to the end it runs out at the top and stops cleanly rather than erroring.
+  // Hold until the history is actually empty rather than for a fixed 4s: the rewind
+  // cadence is frame-paced, and under run-all --jobs 3 (three Chromiums plus the
+  // app-test deck walk) 4s was not always enough to reach the top — the pair went
+  // red at deck 240 with 28/28 green standalone. The property is "reaches the top
+  // and stops cleanly", not "does so within one wall-clock budget".
+  {
+    const b = await page.locator('#back').boundingBox();
+    await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+    await page.mouse.down();
+    await page.waitForFunction(() => Array.isArray(history) && history.length === 0, null, { timeout: 20000 }).catch(() => {});
+    await page.waitForTimeout(300);          /* let the last fly-in land before releasing */
+    await page.mouse.up();
+    await page.waitForTimeout(300);
+  }
   const top = await state();
   check('held to the top: full deck restored, history empty, undo disabled, spin off',
     top.cards === NPLANTS && top.left === String(NPLANTS) && top.done === '0' &&
@@ -239,6 +252,90 @@ function check(name, cond, extra) {
   check('reduced motion: cards still rewind, none animate',
     endR < 8 && endR >= 0 && midR.flying === 0 && errs7b.length === 0,
     JSON.stringify({ midR, endR, errs7b }));
+  await ctx.close();
+
+  /* ---- 9. boot sentinel: a crash loop opens light, a clean open does not ----
+     Two iPhones died on the full deck with Safari's "A problem repeatedly occurred"
+     and no WebKit exists here to reproduce it, so the app itself keeps score:
+     bootPending is set before the deal and cleared on a clean end; two opens in a
+     row that never cleared it => deal only the newest LIGHT_CAP cards. The
+     simulated history below is exactly what a crashed open leaves behind. */
+  const LIGHT_CAP = 24, LIGHT_N = Math.min(LIGHT_CAP, NPLANTS);
+  const diagOf = page => page.evaluate(() => JSON.parse(localStorage.getItem('timber-diag-v1') || 'null'));
+  // 9a. a clean first open: pending is armed, nothing failed, no cap, no pill
+  ctx = await browser.newContext(); page = await ctx.newPage();
+  const errs9 = []; page.on('pageerror', e => errs9.push(String(e)));
+  await page.goto(URL); await deckSettled(page);
+  let dg = await diagOf(page);
+  let l = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, pill: document.getElementById('lightPill').hidden, tag: document.getElementById('modeTag').textContent }));
+  check('boot sentinel: clean open arms bootPending, zero fails, full deck, no pill',
+    dg && dg.bootPending === true && dg.bootFails === 0 && dg.lightMode === false && l.cards === NPLANTS && l.pill && l.tag === '' && errs9.length === 0,
+    JSON.stringify({ dg, l, errs9 }));
+  // a clean end (pagehide) clears the flag — closing the tab must never count as a crash
+  await page.evaluate(() => window.dispatchEvent(new Event('pagehide')));
+  dg = await diagOf(page);
+  check('boot sentinel: pagehide marks the open clean', dg.bootPending === false && dg.bootFails === 0, JSON.stringify(dg));
+  await ctx.close();
+  // 9b. ONE open that never ended cleanly: counted, but still the full deck
+  ctx = await browser.newContext(); page = await ctx.newPage();
+  await page.addInitScript(() => localStorage.setItem('timber-diag-v1', JSON.stringify({ bootPending: true, bootFails: 0 })));
+  await page.goto(URL); await deckSettled(page);
+  dg = await diagOf(page);
+  l = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, pill: document.getElementById('lightPill').hidden }));
+  check('boot sentinel: one failed open -> fails=1, full deck, no pill', dg.bootFails === 1 && dg.lightMode === false && l.cards === NPLANTS && l.pill, JSON.stringify({ dg, l }));
+  await ctx.close();
+  // 9c. TWO in a row: light mode — capped deck, pill, foot tag, saved progress untouched
+  ctx = await browser.newContext(); page = await ctx.newPage();
+  const errs9c = []; page.on('pageerror', e => errs9c.push(String(e)));
+  await page.addInitScript(() => {
+    if (localStorage.getItem('seeded')) return;           /* only the first load of this context is the crashed history */
+    localStorage.setItem('seeded', '1');
+    localStorage.setItem('timber-diag-v1', JSON.stringify({ bootPending: true, bootFails: 1 }));
+    localStorage.setItem('timber-progress-v1', '{"fp":"sentinel-probe"}');
+  });
+  await page.goto(URL); await deckSettled(page);
+  dg = await diagOf(page);
+  l = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, pill: document.getElementById('lightPill').hidden, left: document.getElementById('left').textContent, tag: document.getElementById('modeTag').textContent, progress: localStorage.getItem('timber-progress-v1') }));
+  check('boot sentinel: two failed opens -> light mode deals only the newest cards, pill + foot tag shown',
+    dg.lightMode === true && dg.bootFails === 2 && l.cards === LIGHT_N && l.left === String(LIGHT_N) && !l.pill && /light mode/.test(l.tag) && errs9c.length === 0,
+    JSON.stringify({ dg, l, errs9c }));
+  await page.click('#learn'); await page.waitForTimeout(450);
+  l = await page.evaluate(() => localStorage.getItem('timber-progress-v1'));
+  check('light mode: a swipe never writes over the saved full-deck progress', l === '{"fp":"sentinel-probe"}', String(l));
+  // a light open that survives must NOT reset the mode, or the app alternates crash/crash/light forever
+  await page.reload(); await deckSettled(page);
+  dg = await diagOf(page);
+  l = await page.evaluate(() => document.querySelectorAll('.card').length);
+  check('light mode sticks across a clean reload', dg.lightMode === true && dg.bootFails === 0 && l === LIGHT_N, JSON.stringify({ dg, l }));
+  // the pill is the way out: full deck, counter reset, diagnostic query dropped
+  await page.click('#lightPill'); await page.waitForLoadState('load'); await deckSettled(page);
+  dg = await diagOf(page);
+  l = await page.evaluate(() => ({ cards: document.querySelectorAll('.card').length, pill: document.getElementById('lightPill').hidden }));
+  check('light pill: tap returns the full deck and clears the mode', dg.lightMode === false && dg.bootFails === 0 && l.cards === NPLANTS && l.pill && errs9c.length === 0, JSON.stringify({ dg, l, errs9c }));
+  await ctx.close();
+
+  /* ---- 10. Report a problem: last error is captured, the report reads it back, copy works ---- */
+  ctx = await browser.newContext(); ctx.grantPermissions(['clipboard-read', 'clipboard-write']).catch(() => {});
+  page = await ctx.newPage();
+  await page.goto(URL); await page.waitForTimeout(300);
+  await page.evaluate(() => setTimeout(() => { throw new Error('edge-probe-error'); }, 0)); await page.waitForTimeout(200);
+  dg = await diagOf(page);
+  check('report: an uncaught error is recorded with build and time', dg.lastError && /edge-probe-error/.test(dg.lastError.msg) && dg.lastError.build && dg.lastError.at, JSON.stringify(dg.lastError));
+  await page.click('#menuBtn'); await page.waitForTimeout(350);
+  await page.click('#diagRow'); await page.waitForTimeout(400);
+  let rep = await page.evaluate(() => ({ open: document.getElementById('diag').classList.contains('open'), text: document.getElementById('diagText').textContent, focus: document.activeElement && document.activeElement.id }));
+  check('report: opens from the menu, names build, deck, device and the last error',
+    rep.open && rep.text.includes('build') && rep.text.includes(`of ${NPLANTS}`) && rep.text.includes('edge-probe-error') && rep.text.includes('HeadlessChrome') && rep.focus === 'diagClose',
+    JSON.stringify(rep));
+  await page.click('#diagCopy'); await page.waitForTimeout(150);
+  const copied = await page.evaluate(() => ({ label: document.getElementById('diagCopy').textContent, clip: navigator.clipboard.readText().catch(() => '') }));
+  const clipText = await page.evaluate(() => navigator.clipboard.readText().catch(() => ''));
+  check('report: Copy puts the report on the clipboard', copied.label === 'Copied ✓' && clipText.startsWith('Timber report'), JSON.stringify({ copied: copied.label, clip: clipText.slice(0, 40) }));
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(450);   // hotkeys must be inert behind the dialog
+  const untouched = await page.evaluate(() => document.getElementById('done').textContent === '0');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(250);
+  rep = await page.evaluate(() => ({ open: document.getElementById('diag').classList.contains('open'), focus: document.activeElement && document.activeElement.id }));
+  check('report: swipe keys inert while open, Escape closes and returns focus to the menu', untouched && !rep.open && rep.focus === 'menuBtn', JSON.stringify({ untouched, rep }));
   await ctx.close();
 
   console.log(`\n${passed} passed, ${failed} failed`);
