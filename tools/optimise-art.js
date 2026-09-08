@@ -60,12 +60,19 @@ function walk(dir) {
 }
 
 (async () => {
-  let sharp;
-  try { sharp = require('sharp'); }
-  catch (e) {
-    if (CHECK) { console.log('optimise-art: sharp not installed — skipping check'); process.exit(0); }
-    console.error('optimise-art needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)');
-    process.exit(2);
+  /* sharp BUILDS the .webp derivatives; it is never needed to CHECK that they
+     exist and are current — that is the pure filesystem test in the loop below.
+     Requiring it here unconditionally used to make `--check` exit 0, which
+     run-all.js grades as PASS, so a machine without sharp reported a green gate
+     having verified nothing. The app loads only the .webp, so that blindness
+     could ship a frame with no art. sharp is now loaded only for build runs. */
+  let sharp = null;
+  if (!CHECK) {
+    try { sharp = require('sharp'); }
+    catch (e) {
+      console.error('optimise-art needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)');
+      process.exit(2);
+    }
   }
 
   const pngs = walk(ART).sort();

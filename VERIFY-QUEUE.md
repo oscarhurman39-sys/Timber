@@ -1896,7 +1896,8 @@ can show the flower without ambiguity.
 
 ---
 
-### 58. Summer Song — dealt on Oscar's call with a pasted inset, and a colour the card does not declare
+### 70. Summer Song — dealt on Oscar's call with a pasted inset, and a colour the card does not declare
+*Renumbered from 58 on 2026-09-08: 58 was already the Vitex item, which five documents cite; this is the newer of the two (2026-08-23 against 2026-08-21). Prose written before that date may cite it as 58.*
 2026-08-23. The deck's first Rosa. Three things logged, none of them blocking —
 Oscar was shown all of this and said deal it.
 
@@ -2024,7 +2025,8 @@ VQ 49 alone, but I have not acted on that.
 ---
 
 
-### 60. Exochorda: the latin names the hybrid, the card names 'The Bride'
+### 71. Exochorda: the latin names the hybrid, the card names 'The Bride'
+*Renumbered from 60 on 2026-09-08: 60 was already the Physocarpus item, which three documents cite; this one had no inbound references. Prose written before that date may cite it as 60.*
 2026-09-02. The supplied JSON has `latin: "Exochorda × macrantha"` — the bare
 hybrid — while `common` is "Pearl Bush 'The Bride'" and `cvs` is "'The Bride'".
 The RHS-accepted name for the plant sold under that label is *Exochorda ×
@@ -2039,7 +2041,8 @@ same plant twice. **Oscar's call** whether to move 'The Bride' into the latin.
 ---
 
 
-### 66. A Buddleja LITTLE RUBY photograph arrived for a card that already has one — **RESOLVED 2026-09-06: keep the existing photo**
+### 72. A Buddleja LITTLE RUBY photograph arrived for a card that already has one — **RESOLVED 2026-09-06: keep the existing photo**
+*Renumbered from 66 on 2026-09-08: 66 was already the Robinia / Copper beech item on the live line, and this note landed on it in the 2026-09-06 merge. Prose written before that date may cite it as 66.*
 Oscar, shown both side by side: *"either is fine, leave it."* The 16 August photo stays on the card; the new frame was never staged. Closed.
 
 2026-09-06. Oscar's batch carried a JSON and a photograph for *Buddleja davidii*

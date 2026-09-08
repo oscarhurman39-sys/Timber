@@ -456,6 +456,73 @@ Focal point recorded here when off-centre:
   messages on the card-build branch still say the old numbers; this note is
   the key.
 
+- **v14.60 (two holes in the gate itself, and the queue made addressable
+  again)**: no cards changed. Both findings are in the machinery that is
+  supposed to catch mistakes, which is the worst place for a mistake to hide.
+  - **The gate could report a green run having verified nothing.**
+    `optimise-photos.js --check` and `optimise-art.js --check` both required
+    `sharp` at the top of the function and, when it was missing, printed
+    *"sharp not installed — skipping check"* and **exited 0** — which
+    `run-all.js` grades as PASS. Neither check needs `sharp`: both are pure
+    filesystem work (does the derivative exist, is it newer than its master).
+    The require has moved below the check, so `--check` always does real work
+    and `sharp` is loaded only to BUILD.
+    **Why this mattered more than it looks.** The app loads
+    `photos/card/<slug>.webp` and nothing else, so a master with no derivative
+    is a card with no photograph — and the gate would have said 17/17. It is
+    not hypothetical: `sharp` was missing from the global modules on
+    2026-09-06 and had to be reinstalled mid-session (v14.52 records it).
+    Verified both ways: with `sharp` unavailable the check now passes on a
+    clean tree and **fails** when a derivative is hidden.
+  - **Three queue numbers meant two plants each** — 58, 60 and 66. The queue is
+    addressed by number from every other document, but nothing assigned those
+    numbers: a session read the highest heading it could see and added one.
+    That is safe on one branch and broken on two, and the 2026-09-06 merge
+    brought two branches that had each been numbering from their own high-water
+    mark. One collision was created by a renumber that moved an item onto a
+    number the other line had already used — **the fix reproduced the bug**,
+    because nothing could see the clash.
+    Repaired by moving the newer or unreferenced copy of each pair, leaving a
+    pointer line at each so old citations still land: Summer Song 58 → **70**
+    (Vitex is cited by five documents, Summer Song by one), Exochorda 60 → **71**
+    (no inbound references at all; Physocarpus has three), Buddleja LITTLE RUBY
+    66 → **72** (the newest, and the one this repo created).
+    `tools/queue-check.js` is now the 18th gate check: one number per item, and
+    every `VQ n` reference resolves to an item that exists. `--next` prints the
+    number a new item should take, so nobody has to read the file and guess.
+  - **The gate had a flaky check, which is worse than a failing one.** `srs-test`
+    failed under `--jobs 3` on 2026-09-06 and again on 2026-09-08, both times
+    with `learn creates SRS record keyed by latin — {}`, and both times passed
+    alone. The 2026-09-06 note called it a race and moved on; that is how a
+    suite stops meaning anything, because the habit it teaches is to re-run
+    until green.
+    Diagnosed rather than re-run. **The app was never at fault.** `fling()`
+    defers its SRS write deliberately — `setTimeout(srsOnSwipe, ms + 10)`, ms =
+    350 — so the animation frame carries no storage I/O, and the comment there
+    says so. The suite's `dragCard()` then waited a flat 450ms: **90ms of
+    headroom over the app's own 360ms timer**, which parallel Chromium load
+    eats. Measured, not assumed — run three-up the old file failed 2 of 3 and
+    six-up 6 of 6; the reproduction was reliable enough to test a fix against.
+    `dragCard()` now waits for `releaseCard()` to take that exact card out of
+    the DOM — a real app event, so it stretches with load — and gives the
+    deferred bookkeeping 250ms against a 40ms nominal gap. Anchored to the
+    card, not to the count, because the last due swipe exits review and
+    re-deals the whole deck, so the deck's card count RISES on that one: a
+    count-based wait passed everywhere else and hung there, which the first
+    attempt did. Now 24/24 alone, 3 of 3 three-up, 6 of 6 six-up.
+    The five post-load waits also moved from a flat 400ms to the file's own
+    `deckSettled` helper, which was already defined and used in three later
+    places. **That was not the fix** — it was tried first, and the failure
+    reproduced unchanged — but it removes a second latent race: at 400ms the
+    deck holds about 136 of 280 cards and is still dealing, so the suite was
+    reading a top card that could still move.
+
+  - **One thing NOT fixed, because it needs a person.** `LEDGER.md` cites
+    "VQ 66" for the *Modiolastrum* habit question, but item 66 is the Robinia /
+    Copper beech pair and *Modiolastrum* is item 61. The reference resolves, so
+    no check can catch it; it just points at the wrong plant. Left for Oscar
+    rather than guessed at.
+
 - **v14.59 (276 dealt / 82 held — a duplicate Viburnum removed on Oscar's
   call)**: the deck carried *Viburnum* × *bodnantense* (the plain "Bodnant
   Viburnum") beside *V.* × *bodnantense* 'Charles Lamont', and both cards wore
@@ -538,7 +605,7 @@ Focal point recorded here when off-centre:
     the moment a photo lands.
   - **One JSON refused as a duplicate**: *Buddleja davidii* LITTLE RUBY is
     already dealt (v14.19) with a photograph the register calls clean. Oscar's
-    new Buddleja frame is kept aside, not swapped in — VQ 66.
+    new Buddleja frame is kept aside, not swapped in — VQ 72.
   - **The batch JSON was not in the card schema**, and every conversion is
     written into each file's `uncertain` so it can be reversed: latin composed
     from genus + cultivar (the deck's trade-name convention for the
@@ -564,7 +631,7 @@ Focal point recorded here when off-centre:
   - **VQ 59 resolves to ONE rule.** A deliberate two-part identification photo
     is kept whole, inset or side-by-side; whether it survives the furniture is
     settled by rendering it, and by a focus override where the master is wider
-    than the window. The Rosa 'Summer Song' sticker (VQ 58) and this card no
+    than the window. The Rosa 'Summer Song' sticker (VQ 70) and this card no
     longer disagree.
   - **VQ 49 is now on the card face.** The inset flower is cream-white under a
     card named and written for bright yellow. That was the second reason the

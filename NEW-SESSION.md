@@ -118,6 +118,7 @@ local.
 | `design/card-builder.html` | Standalone card builder — JSON in, card out |
 | `tests/` | 94 app checks + 8 edge checks + service-worker update + card verifier |
 | `CORRECTION-PROTOCOL.md` | Layout-defect audit (`design/audit-layout.js`), defect log, correction rules |
+| `tools/queue-check.js` | Guards VERIFY-QUEUE numbering. **Adding a queue item? `node tools/queue-check.js --next` gives you the number** — do not read the file and add one, that is what collided three times |
 
 ## The routine — ONE command
 
@@ -147,8 +148,8 @@ per-batch gate that matters is the data gate:
 |---|---|---|
 | `--quick` | data audit, plant-sense, photo credits, whole-deck render audit | **17s** |
 | default | the above plus app-test and edge-test | ~5 min |
-| `run-all.js --jobs 3` | all 17 checks, 3 at a time | **~3m** |
-| `run-all.js` | all 17 checks, one at a time | ~7 min |
+| `run-all.js --jobs 3` | all 18 checks, 3 at a time | **~3m** |
+| `run-all.js` | all 18 checks, one at a time | ~7 min |
 
 `app-test` and `edge-test` are the expensive pair because both walk the entire
 deck — the learn-every-card loop alone is 128 × 400ms. That cost grows with the

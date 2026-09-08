@@ -5,10 +5,22 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-08 (the gate's own blind spots) — no card changes. Two holes
+  closed in the machinery. (1) `optimise-photos --check` and `optimise-art
+  --check` exited 0 — a PASS — when `sharp` was missing, so the gate could
+  report green having checked nothing; the app loads only the derived .webp, so
+  that could ship a card with no photograph. Neither check ever needed sharp:
+  the require moved below the check. Proven by hiding a derivative and watching
+  it fail. (2) Three queue numbers (58, 60, 66) meant two plants each after the
+  2026-09-06 merge of two branches that both numbered from their own high-water
+  mark — one of them created by a renumber that landed on a taken number.
+  Repaired to 70 / 71 / 72 with pointer lines, and `tools/queue-check.js` is now
+  the 18th gate check (`--next` gives the number for a new item). Left alone for
+  Oscar: LEDGER cites VQ 66 for Modiolastrum, which is item 61. Protocol v14.60.
 progress: 2026-09-06, latest (duplicate Viburnum removed) — **deck 276, hold
   82.** The plain Viburnum × bodnantense card wore the same photo as 'Charles
   Lamont'; Oscar had it removed. Wide frame kept as a renamed spare. Buddleja
-  LITTLE RUBY photo: Oscar saw both, "either is fine, leave it" — VQ 66 closed,
+  LITTLE RUBY photo: Oscar saw both, "either is fine, leave it" — VQ 72 closed,
   existing photo kept. Protocol v14.59.
 progress: 2026-09-06, later (Albizia 'Summer Chocolate') — **deck 277, hold 82.**
   Dealt whole beside the green species card. Label read 'Albizia chocolate';
@@ -34,7 +46,7 @@ progress: 2026-09-06, later still (ten-card batch) — **deck 268, hold 88.**
   Ceanothus 'Cool Blue', Araucaria, Drosera capensis, Acer 'Taylor'). Batch
   JSON converted to the card schema with every change logged in `uncertain`;
   ratings and hardiness are Oscar's, unverified. Buddleja LITTLE RUBY JSON was
-  a duplicate of a dealt card; its new photo is not swapped in (VQ 66).
+  a duplicate of a dealt card; its new photo is not swapped in (VQ 72).
   Protocol v14.54.
 progress: 2026-09-06, later (Rhodanthemum flower restored) — Oscar's call on
   VQ 57: the 'Zagora Yellow' collage is back on the card, inset untouched,

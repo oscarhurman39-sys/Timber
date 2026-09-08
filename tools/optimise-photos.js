@@ -36,14 +36,6 @@ const QUALITY = 80;
 const isMaster = f => /\.jpg$/i.test(f) && !/-cutout\.png$/i.test(f);
 
 (async () => {
-  let sharp;
-  try { sharp = require('sharp'); }
-  catch (e) {
-    if (CHECK) { console.log('optimise-photos: sharp not installed — skipping check'); process.exit(0); }
-    console.error('optimise-photos needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)');
-    process.exit(2);
-  }
-
   const masters = fs.readdirSync(PHOTOS).filter(isMaster).sort();
   if (!masters.length) { console.error('no photo masters found in photos/'); process.exit(2); }
 
@@ -63,6 +55,20 @@ const isMaster = f => /\.jpg$/i.test(f) && !/-cutout\.png$/i.test(f);
     if (bad.length) { bad.forEach(b => console.error('FAIL optimise-photos: ' + b)); process.exit(1); }
     console.log(`optimise-photos: ${masters.length} masters, every card derivative current`);
     return;
+  }
+
+  /* sharp BUILDS the derivatives; it is never needed to CHECK that they exist.
+     It used to be required at the top of this function, and `--check` exited 0
+     — a PASS — when it was missing. That made the gate's own safety net blind
+     in exactly the case that matters: photos/card/<slug>.webp is the ONLY photo
+     file the app loads, so a master with no derivative is a card with no photo,
+     and 17/17 would still be reported. The check above is pure filesystem work
+     and now always runs; sharp is loaded here, where it is actually used. */
+  let sharp;
+  try { sharp = require('sharp'); }
+  catch (e) {
+    console.error('optimise-photos needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)');
+    process.exit(2);
   }
 
   fs.mkdirSync(OUT, { recursive: true });

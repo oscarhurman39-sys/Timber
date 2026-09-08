@@ -17,13 +17,34 @@ function check(name, cond, extra) {
 }
 
 async function dragCard(page, dxTotal) {
+  /* the exact card about to be thrown — not the deck's card COUNT, which rises
+     rather than falls on the last due swipe, because exiting review re-deals
+     the whole deck in the same breath */
+  const thrown = await page.evaluateHandle(() => {
+    const live = document.querySelectorAll('#deck .card:not([data-gone])');
+    return live[live.length - 1];
+  });
   const box = await page.locator('#deck').boundingBox();
   const x = box.x + box.width / 2, y = box.y + box.height / 2;
   await page.mouse.move(x, y);
   await page.mouse.down();
   for (let i = 1; i <= 8; i++) await page.mouse.move(x + (dxTotal * i) / 8, y);
   await page.mouse.up();
-  await page.waitForTimeout(450); // fling animation + removal
+  /* Wait for the app, don't guess at it.
+     fling() DEFERS the SRS write on purpose — `setTimeout(srsOnSwipe, ms + 10)`
+     with ms = 350 — so the animation frame carries no storage I/O. A flat
+     `waitForTimeout(450)` here left 90ms of headroom over that 360ms timer, and
+     under `run-all.js --jobs 3` the timer slips past it: the gate failed twice
+     (2026-09-06 and 2026-09-08) with `learn creates SRS record keyed by latin
+     — {}`, and running this file three-up reproduces it 2-3 times in 3 while it
+     passes alone every time. The swipe was fine; the suite was reading too soon.
+     So: wait for releaseCard() to actually take the card out of the DOM, which
+     is a real app event that stretches with load, and only then allow the
+     deferred bookkeeping its margin. The tail is 250ms against a 40ms nominal
+     gap, and it is anchored to the removal rather than to the mouse-up. */
+  await page.waitForFunction(el => !el.isConnected, thrown);
+  await thrown.dispose();
+  await page.waitForTimeout(250);
 }
 
 const getSRS = page => page.evaluate(() => {
@@ -51,7 +72,7 @@ const seedDue = (page, n) => page.evaluate(count => {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const pageErrors = [];
   page.on('pageerror', e => pageErrors.push(String(e)));
-  await page.goto(URL); await page.waitForTimeout(400);
+  await page.goto(URL); await deckSettled(page);
 
   /* ---- 1. fresh state ---- */
   check('menu shows 0 due on fresh state',
@@ -108,7 +129,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 6. corrupt / invalid storage tolerated ---- */
   await page.evaluate(() => localStorage.setItem('timber-srs-v1', '{"broken'));
-  await page.reload(); await page.waitForTimeout(400);
+  await page.reload(); await deckSettled(page);
   check('corrupt SRS JSON → treated as empty, app boots',
     await page.evaluate(() => document.getElementById('reviewDueMenu').textContent) === '0');
   const filtered = await page.evaluate(() => {
@@ -123,7 +144,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 7. due count + review filter ---- */
   await seedDue(page, 3);
-  await page.reload(); await page.waitForTimeout(400);
+  await page.reload(); await deckSettled(page);
   check('menu shows due count 3',
     await page.evaluate(() => document.getElementById('reviewDueMenu').textContent) === '3');
   const progressBefore = await page.evaluate(() => localStorage.getItem('timber-progress-v1'));
@@ -160,7 +181,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 10. review auto-exits when the last due card is swiped ---- */
   await seedDue(page, 1);
-  await page.reload(); await page.waitForTimeout(400);
+  await page.reload(); await deckSettled(page);
   await openReview(page);
   await dragCard(page, 160);
   await page.waitForTimeout(200);
@@ -170,7 +191,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 11. all caught up ---- */
   await seedDue(page, 0); // everything due 2099
-  await page.reload(); await page.waitForTimeout(400);
+  await page.reload(); await deckSettled(page);
   await openReview(page);
   await deckSettled(page);
   const caught = await page.evaluate(() => ({

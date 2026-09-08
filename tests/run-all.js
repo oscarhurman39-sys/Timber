@@ -42,6 +42,13 @@ const CHECKS = [
     why: 'every photo has a provenance entry' },
   { name: 'check-boot', cmd: ['node', 'tools/check-boot.js'], browser: false,
     why: 'app syntax and special-card assets/config cannot brick boot' },
+  /* The queue is addressed by number from every other document, and nothing
+     assigned those numbers but a session reading the highest one it could see.
+     Two branches appending at once produce silent duplicates on merge — three
+     of them existed on 2026-09-06 — and a duplicate number sends a reader
+     confidently to the wrong plant. Milliseconds, no browser. */
+  { name: 'queue-check', cmd: ['node', 'tools/queue-check.js'], browser: false,
+    why: 'queue item numbers are unique and every VQ reference resolves' },
   /* The app loads derived WebP, not the masters beside them. Nothing else notices
      if a master is repainted and its derivative is not re-run, so the deployed
      card would quietly keep showing the old artwork. Both checks no-op with a

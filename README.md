@@ -50,6 +50,7 @@ node tools/deal-plant.js "<latin>" photo.jpg   # a photo arrived -> deal that ca
 | `CARD-BACK.md` | Card-back spec + per-plant question checklist |
 | `CARD-PROTOCOL.md` | Layout authority + full decision changelog |
 | `VERIFY-QUEUE.md` | Card facts that need a horticultural call, and why |
+| `tools/queue-check.js` | Keeps that queue addressable — one number per item, every `VQ n` reference resolving. `--next` prints the number to use for a new item |
 | `PHOTO-REFRAME-BRIEF.md` | Prompt for cropping/de-labelling a photo with a vision model — returns crop coordinates, never a generated image |
 | `tools/reframe-photo.js` | Applies that crop JSON to the master with sharp — validates it first, refuses rather than guesses, invents no pixels |
 | `tests/run-all.js` | One command for every check — run it green before pushing |
@@ -75,7 +76,7 @@ is the live branch** — whatever is on it is what the world sees.
 Publishing is **one command**, from a session or anywhere else:
 
 ```sh
-node tests/run-all.js --jobs 3                                    # full gate first, 17/17
+node tests/run-all.js --jobs 3                                    # full gate first, 18/18
 git push origin HEAD:refs/heads/claude/timber-plant-pwa-j69h5e    # this deploys
 ```
 
