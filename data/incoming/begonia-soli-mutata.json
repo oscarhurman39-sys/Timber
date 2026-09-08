@@ -1,0 +1,32 @@
+{
+ "common": "Solimutata Begonia",
+ "latin": "Begonia soli-mutata",
+ "hue": 120,
+ "visual": "Tender rhizomatous begonia grown primarily for its striking foliage, with asymmetrical heart-shaped leaves marked in silvery green, dark green and reddish tones and contrasting red undersides.",
+ "water": "Moist but well-drained",
+ "aspect": "North / East / West",
+ "soil": "Humus-rich, well-drained",
+ "soilWarning": "No waterlogging, no harsh sun, never dry",
+ "prune": "Remove dead or damaged leaves and stems as required; pinch growing tips to maintain a compact shape.",
+ "toxicity": "Harmful if eaten; sap may irritate the skin.",
+ "compliance": "",
+ "peak": "Jan-Dec",
+ "cvs": "",
+ "hardiness": "H1c",
+ "hardinessNote": "Tender tropical plant; grow indoors or under heated protection in the UK.",
+ "resilience": "Good indoor foliage plant when humidity, warmth and consistent moisture are maintained.",
+ "uses": "Houseplant, terrarium, conservatory and heated greenhouse.",
+ "height": "0.1-0.5m",
+ "spread": "0.1-0.5m",
+ "foliage": "evergreen",
+ "container": "yes",
+ "growthSpeed": 12,
+ "pestRisk": 10,
+ "thirst": 15,
+ "careLevel": 12,
+ "sunNeed": 35,
+ "sunMin": 15,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: hue 120 for the foliage; aspect to compass format; peak 'All year' as Jan-Dec; soil shortened (was 'Fertile, humus-rich, moisture-retentive but well-drained soil or houseplant compost.'); soilWarning shortened (was 'Avoid waterlogging and direct harsh sunlight. Do not allow the compost to dry completely.'); foliage/container to the fixed vocabulary. cvs was supplied as \"'Soli-Mutata'\" but soli-mutata is the SPECIES epithet, not a cultivar, so the cvs field is left blank rather than printing the species as its own cultivar. Ratings, hardiness (H1c) and text kept as supplied, not re-verified."
+ ]
+}

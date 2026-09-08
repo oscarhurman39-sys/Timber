@@ -23,7 +23,7 @@ card against four rule classes, exiting 1 on any violation:
 | `rail-alignment` | growth diamond's **visual** centre on the axis centreline within 0.5px (sprite alpha-bias compensated — see §4) |
 | `rail-overflow` | spine H/S value text must fit its parchment patch (Range-measured; 2px tolerance for the feathered edge) |
 | `rail-format` | spine H/S value must read in the one deck convention: `1.5–2.5 m` / `40–60 cm` / `12 m+` (en-dash, one space before the unit) — catches a data shape `normSizeSpan` can't parse |
-| `rail-anchor` | spine H/S value must start exactly 7px under its baked HEIGHT/SPREAD lettering (±1.5px), whatever its length — the v14.43 fix for values drifting with their own centring |
+| `rail-anchor` | spine H/S value must start exactly 7px under its baked HEIGHT/SPREAD lettering (±1.5px), whatever its length — the v14.60 fix for values drifting with their own centring |
 | `within-card` | no live ink outside the card face |
 | `band-collisions` (plaque) | no value patch overlaps a baked label row (the "blurred words" defect) |
 | `focus-photo` | every PHOTO_FOCUS key is a current plant's **latin-slug** with a file on disk — catches staging a photo under the JSON `id` when the renderer keys off the latin name |
@@ -93,7 +93,7 @@ defects. The deck in `timber.html` is fixed and audited; syncing the builder
 for the design pipeline. Until then, treat builder output as mockup-only.
 
 The **spine rails** are the exception: the builder's `.railval .v` was synced
-with the v14.43 fix (7px anchor under the lettering, antique-gold ink), so
+with the v14.60 fix (7px anchor under the lettering, antique-gold ink), so
 rail styling no longer drifts between the two. Its sample values are hardcoded
 in the canonical shape; the deck's `normSizeSpan` is not ported because the
 builder renders no live data.

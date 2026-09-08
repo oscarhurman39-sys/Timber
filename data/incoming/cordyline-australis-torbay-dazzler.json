@@ -1,0 +1,32 @@
+{
+ "common": "Cabbage Palm 'Torbay Dazzler'",
+ "latin": "Cordyline australis 'Torbay Dazzler'",
+ "hue": 60,
+ "visual": "Architectural evergreen palm-like plant with a tall trunk and terminal crown of sword-shaped leaves heavily striped in creamy white.",
+ "water": "Moist but well-drained",
+ "aspect": "South / West / East",
+ "soil": "Well-drained, any type",
+ "soilWarning": "Avoid frost pockets and waterlogging",
+ "prune": "Usually requires no pruning; remove damaged leaves at the base if required.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Jan-Dec",
+ "cvs": "'Torbay Dazzler'",
+ "hardiness": "H5",
+ "hardinessNote": "Hardy in many UK gardens but best in a sheltered position.",
+ "resilience": "Tolerant of coastal conditions and reasonably drought tolerant once established.",
+ "uses": "Architectural planting, coastal gardens, containers, borders and Mediterranean-style planting.",
+ "height": "2.5-4m",
+ "spread": "1-1.5m",
+ "foliage": "evergreen",
+ "container": "with care",
+ "growthSpeed": 10,
+ "pestRisk": 6,
+ "thirst": 8,
+ "careLevel": 5,
+ "sunNeed": 85,
+ "sunMin": 45,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from species + cvs; hue 60 from the cream striping; aspect to compass format; peak 'All year' as Jan-Dec; soil shortened (was 'Chalk, clay, loam or sand; well-drained soil.'); soilWarning shortened (was 'Avoid frost pockets and waterlogged ground. Deep shade reduces vigour and colour.'); container 'suitable when young' read as with care. Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

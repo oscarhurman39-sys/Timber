@@ -455,6 +455,20 @@
   .update-pill{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
     z-index:80;padding:10px 18px;border:none;border-radius:24px;background:linear-gradient(120deg,var(--gold),#e0a52f);
     color:#1a120a;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  /* light-mode notice sits above the update pill so the two never stack on top of each other */
+  /* the light-mode notice sits IN the flow between the progress line and the deck (the
+     deck fits itself to whatever height is left), so it never covers a card or the buttons */
+  .light-pill{position:relative;left:auto;bottom:auto;z-index:1;transform:none;display:block;margin:6px auto 2px;padding:8px 14px;font-size:12px;line-height:1.3;   /* z-index 1, not the update pill's 80: above the card art (which can overhang the deck box on a wide screen and steal the tap) but under every overlay (menu 50, sheets 60) */
+    max-width:min(92vw,420px);text-align:center;background:linear-gradient(120deg,#e8e2c8,#cbbf98);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .light-pill[hidden]{display:none}
+  .diag-pre{font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word;
+    background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px;margin:0;color:rgba(255,255,255,.82);
+    user-select:text;-webkit-user-select:text;max-height:40vh;overflow:auto}
+  .diag-btns{display:flex;gap:8px;flex-wrap:wrap}
+  .diag-btn{flex:1 1 120px;padding:11px 12px;border:none;border-radius:12px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;
+    background:linear-gradient(120deg,var(--gold),#e0a52f);color:#1a120a}
+  .diag-btn.alt{background:rgba(255,255,255,.08);color:var(--text)}
+  .diag-note{font-size:12px;color:var(--muted);line-height:1.45;margin:0}
 
   @media (prefers-reduced-motion:reduce){  /* new overlays/chips only — card animations are locked as-is */
     .stats .st-panel,.stats .st-scrim,.chip{transition-duration:.01ms}
@@ -557,7 +571,7 @@
     text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
   .railval{position:absolute;z-index:2}
   .railval img{position:absolute;inset:0;width:100%;height:100%}
-  /* ---- spine values: one anchor, one ink (v14.43) ----
+  /* ---- spine values: one anchor, one ink (v14.60) ----
      Centred values drifted with their own length — "1–2 m" floated mid-patch,
      "50–100 cm" crowded the baked lettering; measured across the deck the gap
      under HEIGHT/SPREAD ranged -1.7..+14.5px (audit C3 baseline, 388
@@ -1048,6 +1062,7 @@
 
 <div class="progress" aria-live="polite"><b id="left">0</b> to learn · <span id="done">0</span> starred · double-tap a card for trade data</div>
 <div class="learnbar" aria-hidden="true"><i id="learnBar"></i></div>
+<button class="update-pill light-pill" id="lightPill" hidden>Light mode · fewer cards after the app failed to open twice · tap for the full deck</button>
 
 <div class="deck" id="deck">
   <div class="empty" id="empty">
@@ -1077,8 +1092,9 @@
     <div class="f-label" id="filterLabel">Filter deck</div>
     <div class="f-chips" id="filterChips" role="group" aria-labelledby="filterLabel"></div>
     <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v9"/><path d="M8 9.5l4 4 4-4"/><path d="M5 19h14"/></svg></span> Install app</div>
+    <div class="row" id="diagRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21 19.5H3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg></span> Report a problem</div>
     <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg></span> Reset progress</div>
-    <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.<br><span id="buildTag"></span></div>
+    <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.<br><span id="buildTag"></span><span id="modeTag"></span></div>
   </div>
 </div>
 
@@ -1126,17 +1142,82 @@
   </div>
 </div>
 
+<div class="stats" id="diag" role="dialog" aria-modal="true" aria-label="Report a problem">
+  <div class="st-scrim" data-dgclose></div>
+  <div class="st-panel">
+    <div class="q-head">
+      <span class="q-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21 19.5H3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>Report a problem</span>
+      <button class="s-close" id="diagClose" aria-label="Close report">✕</button>
+    </div>
+    <p class="diag-note">Something not working? Copy this report and send it to whoever gave you the app — it says which build, phone and deck you are on and what last went wrong. No personal data, nothing leaves the phone until you send it.</p>
+    <pre class="diag-pre" id="diagText" tabindex="0"></pre>
+    <div class="diag-btns">
+      <button class="diag-btn" id="diagCopy">Copy report</button>
+      <button class="diag-btn alt" id="diagShare" hidden>Share…</button>
+    </div>
+  </div>
+</div>
+
 <button class="update-pill" id="updatePill" hidden>Update ready · tap to refresh</button>
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r189 · 2026-09-01 · 62c135e';
+const BUILD='r210 · 2026-09-08 · 724bbe9';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
    this file's own content, written by tools/build-stamp.js --write. A stamp that
    doesn't match the content fails tests/run-all.js and the Pages deploy, so the
    number can't quietly start lying. */
+
+/* ---------- boot sentinel: notice when the app failed to open, and open lighter next time ----------
+   Two iPhones hit Safari's "A problem repeatedly occurred" on the full deck (LEDGER
+   2026-08-15, 2026-08-21) and nothing in this environment can run WebKit to see why.
+   That message is Safari killing the tab, reloading it, and giving up — so the page
+   itself can tell: it writes bootPending before doing anything heavy and clears it
+   only when the boot demonstrably ended well (deck settled and still alive after
+   BOOT_GRACE, or a clean pagehide / background). A boot that finds the flag still
+   set was preceded by an open that never got that far. After LIGHT_AFTER of those in
+   a row the app deals only the newest LIGHT_CAP cards — the ?cards=N diagnostic,
+   switched on by evidence instead of by hand — and says so in a pill that swaps
+   back to the full deck on demand. Light mode STICKS until that pill is tapped: a
+   surviving light boot must not reset the count, or the app would alternate
+   full-crash-crash-light forever. A capped deck never reads or writes the saved
+   full-deck progress (see DECK_CAP), so a rescue open cannot damage a real deck.
+   Being wrong here is cheap in one direction only: a false alarm costs 24 cards
+   instead of 238 for one session; a missed one costs the app. */
+const DIAG_KEY='timber-diag-v1',BOOT_GRACE=20000,LIGHT_AFTER=2,LIGHT_CAP=24;
+function loadDiag(){try{const d=JSON.parse(localStorage.getItem(DIAG_KEY));return d&&typeof d==='object'&&!Array.isArray(d)?d:{};}catch(e){return{};}}
+function saveDiag(patch){try{const d=Object.assign(loadDiag(),patch);localStorage.setItem(DIAG_KEY,JSON.stringify(d));return d;}catch(e){return null;}}
+const BOOT=(()=>{
+  const d=loadDiag();
+  const fails=d.bootPending?((d.bootFails|0)+1):0;         /* the previous open never reached a clean end */
+  const light=!!d.lightMode||fails>=LIGHT_AFTER;
+  saveDiag({bootPending:true,bootFails:fails,lightMode:light,lastBoot:new Date().toISOString(),bootBuild:BUILD});
+  return{fails,light,cleared:false};
+})();
+function bootSurvived(){                                    /* idempotent: whichever signal comes first wins */
+  if(BOOT.cleared)return;BOOT.cleared=true;
+  saveDiag({bootPending:false,bootFails:0});
+}
+window.addEventListener('pagehide',bootSurvived);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')bootSurvived();});
+/* the grace timer is armed from load, not from now: a slow network must not count as a crash */
+window.addEventListener('load',()=>setTimeout(()=>{
+  const deckEl=document.getElementById('deck');
+  if(deckEl&&deckEl.hasAttribute('data-dealing'))return;   /* still dealing at 20s — do not vouch for it; pagehide will */
+  bootSurvived();
+},BOOT_GRACE));
+
+/* last uncaught error, kept for the report — registered first so a throw anywhere
+   later in this script (the 2026-08-17 TDZ bug bricked every load) still leaves a trace */
+function noteError(msg,src,line,col){
+  saveDiag({lastError:{msg:String(msg==null?'?':msg).slice(0,300),src:String(src||'').replace(/^.*\//,'').slice(0,80),
+    line:line|0,col:col|0,at:new Date().toISOString(),build:BUILD}});
+}
+window.addEventListener('error',e=>noteError(e.message,e.filename,e.lineno,e.colno));
+window.addEventListener('unhandledrejection',e=>{const r=e.reason;noteError(r&&r.message||r,'promise',0,0);});
+
 const TTS='speechSynthesis' in window;
 let VOICES=[],VOICE=null;   /* VOICE is declared HERE, not below: loadVoices() clears it and
                                runs at boot, so a `let` further down puts it in the temporal
@@ -3730,30 +3811,6 @@ const PLANTS = [
    size:"8–12 m H × 8–10 m W",
    seasonalImpact:"", growthSpeed:10, pestRisk:12, thirst:7, careLevel:5, sunNeed:95, sunMin:80},
 
-  {common:"Bodnant Viburnum", latin:"Viburnum × bodnantense", hue:335,
-   visual:"Fragrant pink-white flowers crowd bare winter stems · bronze-flushed young leaves",
-   water:"Moderate; water during prolonged dry spells",
-   aspect:"Any aspect",
-   soil:"Moist, well-drained; Flowers may brown in hard frost or wet",
-   prune:"Minimal; prune or renovate after flowering if needed",
-   source:"",
-   peak:"Nov-Mar",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"'Charles Lamont' · 'Dawn' · 'Deben'",
-   hardiness:"H6",
-   resilience:"cold hardy · coastal · exposed-site tolerant",
-   uses:"winter scent · shrub borders · courtyards · pollinators",
-   size:"2.5–4 m H × 1.5–2.5 m W",
-   seasonalImpact:"", growthSpeed:9, pestRisk:10, thirst:9, careLevel:5, sunNeed:65, sunMin:35},
 
   {common:"Oiseau Bleu Rose of Sharon", latin:"Hibiscus syriacus 'Oiseau Bleu'", hue:220,
    visual:"Violet-blue flowers with maroon eyes · upright leafy deciduous shrub",
@@ -6825,7 +6882,7 @@ const PLANTS = [
    seasonalImpact:"", growthSpeed:8, pestRisk:5, thirst:6, careLevel:6, sunNeed:90, sunMin:68},
 
   {common:"Moroccan daisy 'Zagora Yellow'", latin:"Rhodanthemum hosmariense 'Zagora Yellow'", hue:55,
-   visual:"Bright yellow daisies · dark centres · finely divided silvery-grey foliage",
+   visual:"Yellow daisies, some opening white · dark centres · finely divided silvery-grey foliage",
    water:"Low once established",
    aspect:"South / West",
    soil:"Poor, sharply drained; Avoid winter wet",
@@ -7274,7 +7331,574 @@ const PLANTS = [
    size:"1–1.2 m H × 50–60 cm W",
    hardinessNote:"RHS H7; hardy in the severest European continental climates",
    seasonalImpact:"", growthSpeed:13, pestRisk:2, thirst:14, careLevel:4, sunNeed:82, sunMin:48},
- ];
+   {common:"Sessile fairy bells 'Variegatum'", latin:"Disporum sessile 'Variegatum'", hue:120,
+   visual:"Arching stems · pointed leaves with fine white stripes · hanging green-white bells",
+   water:"Keep evenly moist",
+   aspect:"North / East / West",
+   soil:"Moist, well-drained; Sheltered · avoid prolonged dry soil",
+   prune:"No pruning required",
+   source:"", peak:"May-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H6", resilience:"shade tolerant · cold hardy",
+   uses:"woodland gardens · ground cover · shrub underplanting · cottage gardens", size:"30–45 cm H × 50–100 cm W",
+   seasonalImpact:"", growthSpeed:8, pestRisk:7, thirst:12, careLevel:4, sunNeed:42, sunMin:20},
+  {common:"Hybrid Christmas rose 'Winter Moonbeam'", latin:"Helleborus × ericsmithii 'Winter Moonbeam'", hue:0,
+   visual:"White outward-facing flowers ageing pink-red · silver-veined dark foliage",
+   water:"Keep evenly moist",
+   aspect:"Any aspect",
+   soil:"Moist, well-drained; Shelter from strong cold winds",
+   prune:"Remove faded or damaged foliage as flowers appear",
+   source:"", peak:"Dec-Apr", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Helleborus 'Winter Moonbeam'",
+   hardiness:"H5", resilience:"cold hardy · shade tolerant · exposed-site tolerant",
+   uses:"woodland gardens · containers · winter borders · wildlife gardens", size:"25–35 cm H × 40–45 cm W",
+   seasonalImpact:"", growthSpeed:7, pestRisk:11, thirst:12, careLevel:5, sunNeed:48, sunMin:28},
+  {common:"Evening primrose 'Sulphurea'", latin:"Oenothera stricta 'Sulphurea'", hue:55,
+   visual:"Bronzy-green leaves · red buds and stems · lemon-yellow flowers fading peach",
+   water:"Low; water during prolonged dry spells",
+   aspect:"South/West",
+   soil:"Poor to moderate, well-drained; Avoid heavy, wet soils",
+   prune:"Cut back after flowering",
+   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Oenothera odorata 'Sulphurea'; Oenothera odorata 'Cream'",
+   hardiness:"H5", resilience:"drought tolerant · coastal tolerant · heat tolerant",
+   uses:"gravel gardens · cottage gardens · wildflower meadows · flower borders", size:"60–90 cm H × 30–45 cm W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:6, thirst:4, careLevel:5, sunNeed:95, sunMin:80},
+  {common:"Pearl Bush 'The Bride'", latin:"Exochorda × macrantha", hue:0,
+   visual:"Arching branches · pale green oblong leaves · masses of pure white papery five-petalled flowers in short racemes",
+   water:"Keep moist, never waterlogged",
+   aspect:"Any aspect",
+   soil:"Any, well-drained; Avoid waterlogged ground",
+   prune:"Group 2: prune after flowering, removing older flowered wood",
+   source:"", peak:"Apr-May", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'The Bride'",
+   hardiness:"H6", resilience:"robust once established · generally pest-free · low maintenance",
+   uses:"spring borders · mixed borders · cottage gardens · specimen planting · large containers", size:"1.5–2.5 m H × 1.5–2.5 m W",
+   seasonalImpact:"", growthSpeed:13, pestRisk:3, thirst:11, careLevel:6, sunNeed:75, sunMin:45},
+  {common:"Swiss cheese plant 'Thai Constellation'", latin:"Monstera deliciosa 'Thai Constellation'", hue:120,
+   visual:"Large glossy split leaves · irregular cream and yellow-white variegation · speckled like stars",
+   water:"Keep moist, not waterlogged",
+   aspect:"East / West",
+   soil:"Houseplant compost; No cold or harsh sun · needs good light",
+   prune:"Remove damaged leaves at the base; cut aerial roots only where necessary",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H1c", resilience:"easy indoors when warm, humid and well lit · intolerant of frost",
+   uses:"houseplant · conservatory · heated greenhouse · tropical indoor displays", size:"1.5–2.5 m H × 1–1.5 m W",
+   seasonalImpact:"", growthSpeed:13, pestRisk:9, thirst:13, careLevel:11, sunNeed:55, sunMin:30},
+  {common:"Shrubby scorpion vetch", latin:"Coronilla emerus", hue:55,
+   visual:"Rounded shrub · arching branches · small pinnate leaves · bright yellow pea flowers",
+   water:"Keep moist, not waterlogged",
+   aspect:"East / South / West",
+   soil:"Any, well-drained; Avoid permanently wet ground",
+   prune:"Prune after flowering to shape; remove old or damaged wood",
+   source:"", peak:"Apr-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Hippocrepis emerus",
+   hardiness:"H6", resilience:"adaptable · reasonable drought tolerance once established",
+   uses:"shrub borders · banks · wildlife planting · cottage gardens · informal hedging", size:"1–1.5 m H × 1–1.5 m W",
+   seasonalImpact:"", growthSpeed:13, pestRisk:4, thirst:8, careLevel:6, sunNeed:75, sunMin:45},
+  {common:"Crab Apple 'Veitch’s Scarlet'", latin:"Malus 'Veitch’s Scarlet'", hue:5,
+   visual:"Spring blossom · small scarlet-red crab apples · bronze-flushed young leaves",
+   water:"Keep moist, not waterlogged",
+   aspect:"East / South / West",
+   soil:"Any, moderately fertile; Avoid very dry and waterlogged ground",
+   prune:"Pruning group 1; remove dead, damaged or crossing branches after flowering",
+   source:"", peak:"Apr-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H6", resilience:"robust · adaptable · tolerates urban conditions",
+   uses:"specimen tree · wildlife garden · cottage garden · small garden · ornamental fruit", size:"2.5–4 m H × 2.5–4 m W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:9, thirst:10, careLevel:7, sunNeed:85, sunMin:55},
+  {common:"Monterey cypress 'Goldcrest'", latin:"Cupressus macrocarpa 'Goldcrest'", hue:55,
+   visual:"Narrow upright column · dense feathery golden-yellow foliage · lemon scent when crushed",
+   water:"Keep moist, not waterlogged",
+   aspect:"South / West",
+   soil:"Any, well-drained; Avoid waterlogging · huge if left unchecked",
+   prune:"Trim lightly in late spring or summer; never cut into old brown wood",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H5", resilience:"fast growing · coastal tolerant once established",
+   uses:"hedging · screening · specimen · containers · formal gardens", size:"2.5–4 m H × 1–1.5 m W",
+   seasonalImpact:"", growthSpeed:18, pestRisk:6, thirst:9, careLevel:7, sunNeed:90, sunMin:60},
+  {common:"Deodar cedar", latin:"Cedrus deodara", hue:120,
+   visual:"Soft blue-green to green needles in clusters · sweeping branches · drooping leader and tips",
+   water:"Keep moist, not waterlogged",
+   aspect:"South / West",
+   soil:"Any, well-drained; Needs space · avoid wet or exposed sites",
+   prune:"Little needed; remove dead, damaged or crossing branches in late summer",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H6", resilience:"robust once established · tolerates a range of well-drained soils",
+   uses:"large gardens · specimen · parks · large landscape schemes", size:"4 m+ H × 4 m+ W",
+   seasonalImpact:"", growthSpeed:14, pestRisk:5, thirst:9, careLevel:6, sunNeed:90, sunMin:60},
+  {common:"Nemesia 'Confetti'", latin:"Nemesia 'Confetti'", hue:270,
+   visual:"Masses of small snapdragon-like flowers · lilac with a yellow throat · fresh green mound",
+   water:"Keep moist, not waterlogged",
+   aspect:"East / South / West",
+   soil:"Fertile, humus-rich; Never let it dry out · avoid waterlogging",
+   prune:"Deadhead regularly; trim lightly if plants become untidy",
+   source:"", peak:"Apr-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H3", resilience:"fast flowering · frost sensitive · dislikes drought",
+   uses:"bedding · containers · window boxes · baskets · borders", size:"0.1–0.5 m H × 0.1–0.5 m W",
+   seasonalImpact:"", growthSpeed:18, pestRisk:7, thirst:15, careLevel:9, sunNeed:75, sunMin:45},
+  {common:"Modiolastrum lateritium", latin:"Modiolastrum lateritium", hue:15,
+   visual:"Lobed scalloped leaves · red-edged margins · brick-red mallow flowers",
+   water:"Keep moist, not waterlogged",
+   aspect:"South / West",
+   soil:"Fertile, well-drained; Protect from hard frost · avoid wet soil",
+   prune:"Prune lightly after flowering; remove weak or damaged growth",
+   source:"", peak:"Jun-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Malvastrum lateritium",
+   hardiness:"H3", resilience:"needs a warm sheltered spot · frost tender",
+   uses:"conservatory · greenhouse · sheltered patio · warm-climate containers", size:"1.5–2.5 m H × 1–1.5 m W",
+   seasonalImpact:"", growthSpeed:14, pestRisk:6, thirst:12, careLevel:14, sunNeed:80, sunMin:55},
+  {common:"Juniper 'Blue Arrow'", latin:"Juniperus virginiana 'Blue Arrow'", hue:190,
+   visual:"Very narrow upright column · dense blue-green scale-like foliage · architectural habit",
+   water:"Water until established; then little",
+   aspect:"South / West",
+   soil:"Any, well-drained; Avoid wet soil · best colour in full sun",
+   prune:"Little needed; remove damaged or unwanted shoots in late winter",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H7", resilience:"drought tolerant once established · exposed-site tolerant · very hardy",
+   uses:"formal gardens · narrow borders · screening · architectural planting · containers · specimen", size:"2.5–4 m H × 0.5–1 m W",
+   seasonalImpact:"", growthSpeed:11, pestRisk:4, thirst:6, careLevel:4, sunNeed:90, sunMin:60},
+  {common:"English shrub rose 'Summer Song'", latin:"Rosa 'Summer Song' ('Austango')", hue:20,
+   visual:"Vibrant coppery orange-red cups · densely petalled blooms · strong Tea fragrance",
+   water:"Keep evenly moist; water in dry spells",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Avoid prolonged drought or waterlogging",
+   prune:"Pruning Group 21; prune in late winter",
+   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"trade name Summer Song; breeder denomination 'Austango'",
+   hardiness:"H6", resilience:"cold hardy · urban suitable",
+   uses:"shrub borders · cottage gardens · cut flowers · containers", size:"1.2–1.5 m H × 0.5–1 m W",
+   toxicity:"Rose hips ornamental · not to be eaten · wear gloves when handling",
+   seasonalImpact:"", growthSpeed:10, pestRisk:12, thirst:11, careLevel:9, sunNeed:95, sunMin:72},
+  {common:"False acacia 'Lace Lady'", latin:"Robinia pseudoacacia 'Lace Lady'", hue:120,
+   visual:"Twisted zig-zag stems · curly green leaflets · yellow autumn colour",
+   water:"Moderate; water in dry spells",
+   aspect:"Any aspect",
+   soil:"Moist, well-drained; Avoid waterlogging",
+   prune:"Prune in late summer or early autumn; remove suckers",
+   source:"", peak:"May-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Robinia 'Twisty Baby'; Robinia pseudoacacia 'Twisty Baby'; trade name Twisty Baby",
+   hardiness:"H6", resilience:"drought tolerant · pollution tolerant · urban suitable",
+   uses:"specimen · patio containers · city gardens · architectural planting", size:"2.5–4 m H × 2.5–4 m W",
+   seasonalImpact:"", growthSpeed:5, pestRisk:6, thirst:6, careLevel:6, sunNeed:82, sunMin:50},
+  {common:"Omei Mountain Balsam", latin:"Impatiens omeiana", hue:55,
+   visual:"Large elongated dark green leaves with pale silver veins · upright stems · small pale yellow flowers",
+   water:"Keep evenly damp",
+   aspect:"North / East / West",
+   soil:"Moist, fertile, humus-rich; Never let it dry out · shelter from sun",
+   prune:"Cut old stems to ground level after flowering or when foliage dies back",
+   source:"", peak:"Aug-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H5", resilience:"cold hardy · spreads by rhizomes · needs cool, moist shade",
+   uses:"woodland gardens · shady borders · underplanting · damp shade", size:"0.5–1 m H × 0.5–1 m W",
+   seasonalImpact:"", growthSpeed:13, pestRisk:6, thirst:17, careLevel:8, sunNeed:30, sunMin:10},
+  {common:"Cape mallow 'Candy Apple'", latin:"Anisodontea capensis 'Ib201-7'", hue:0,
+   visual:"Large deep-red flowers · crimson veining · dark central eye · soft grey-green foliage",
+   water:"Moderate; water in dry spells",
+   aspect:"South / West",
+   soil:"Free-draining; Sheltered · avoid winter wet",
+   prune:"Tip-prune young plants to encourage bushiness",
+   source:"", peak:"May-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"trade name CARNIVAL LIGHTS CANDY APPLE; Carnival Lights Series; cultivar code 'Ib201-7'",
+   hardiness:"H3", resilience:"heat tolerant · drought tolerant once established",
+   uses:"containers · patios · borders · pollinators", size:"80–100 cm H × 40–60 cm W",
+   seasonalImpact:"", growthSpeed:13, pestRisk:7, thirst:8, careLevel:5, sunNeed:95, sunMin:65},
+  {common:"White-flowered ivy-leaved cyclamen", latin:"Cyclamen hederifolium var. hederifolium f. albiflorum", hue:0,
+   visual:"Pure white reflexed flowers · ivy-shaped silver-marbled leaves · autumn flowering",
+   water:"Moderate; allow soil to dry slightly",
+   aspect:"North / East / West",
+   soil:"Well-drained; Avoid summer waterlogging",
+   prune:"Remove old foliage as it dies back in summer",
+   source:"", peak:"Sep-Nov", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Cyclamen hederifolium 'Album'; Cyclamen hederifolium alba; Cyclamen hederifolium f. album",
+   hardiness:"H5", resilience:"drought tolerant once established · cold hardy · shade tolerant",
+   uses:"woodland gardens · underplanting · rock gardens · naturalising", size:"To 10 cm H × 15–30 cm W",
+   seasonalImpact:"", growthSpeed:7, pestRisk:6, thirst:5, careLevel:4, sunNeed:38, sunMin:18},
+  {common:"Decorative dahlia 'Kelvin Floodlight'", latin:"Dahlia 'Kelvin Floodlight'", hue:55,
+   visual:"Huge bright-yellow double blooms · broad petals · upright dark-green foliage",
+   water:"Keep evenly moist; water freely in dry spells",
+   aspect:"South / West",
+   soil:"Fertile, moist, well-drained; Avoid waterlogging · shelter from strong winds",
+   prune:"Deadhead regularly; cut back after frost and lift tubers",
+   source:"", peak:"Jul-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H3", resilience:"urban suitable · heat tolerant",
+   uses:"cut flowers · borders · containers · cottage gardens", size:"1–1.5 m H × 50–100 cm W",
+   seasonalImpact:"", growthSpeed:15, pestRisk:12, thirst:13, careLevel:9, sunNeed:95, sunMin:70},
+  {common:"Cape figwort 'Trewidden Pink'", latin:"Phygelius aequalis 'Trewidden Pink'", hue:335,
+   visual:"Dusky-pink tubular flowers · creamy-yellow throats · dark-green toothed leaves",
+   water:"Keep evenly moist",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Shelter from cold winds · protect in severe winters",
+   prune:"Cut back to the base in late spring",
+   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Phygelius × rectus 'Trewidden Pink'; Phygelius 'Trewidden Pink'",
+   hardiness:"H5", resilience:"cold hardy · coastal tolerant · pollinator friendly",
+   uses:"flower borders · containers · cottage gardens · wall-side borders", size:"50–100 cm H × 50–100 cm W",
+   seasonalImpact:"", growthSpeed:13, pestRisk:7, thirst:12, careLevel:5, sunNeed:82, sunMin:48},
+  {common:"Porcupine tomato", latin:"Solanum pyracanthos", hue:0,
+   visual:"Grey-green lobed leaves · vivid orange spines · purple star-shaped flowers · red fruits",
+   water:"Moderate; water freely during growth",
+   aspect:"South / West",
+   soil:"Moist, well-drained; Sheltered · protect from frost",
+   prune:"Restrictive pruning if grown under glass",
+   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H2", resilience:"drought tolerant · heat tolerant",
+   uses:"containers · conservatories · subtropical planting · summer bedding", size:"1–1.5 m H × 0.5–1 m W",
+   seasonalImpact:"", growthSpeed:14, pestRisk:8, thirst:10, careLevel:8, sunNeed:95, sunMin:72},
+  {common:"White Lips Bear's Breeches", latin:"Acanthus hungaricus", hue:275,
+   visual:"Clump-forming perennial with glossy, deeply cut dark-green leaves and tall spiny flower spikes bearing white flowers with purple hoods.",
+   water:"Moist but well-drained",
+   aspect:"Any aspect",
+   soil:"Fertile, well-drained; Avoid waterlogging · spreads, hard to remove",
+   prune:"Cut spent flower stems to the base after flowering; remove old foliage in spring.",
+   source:"", peak:"Jun-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'White Lips'",
+   hardiness:"H4", resilience:"Drought tolerant once established; robust perennial.",
+   uses:"Architectural border plant, cottage garden, specimen planting, pollinator planting and cut flower.", size:"0.5-1m H × 0.5-1m W",
+   seasonalImpact:"", growthSpeed:17, pestRisk:7, thirst:11, careLevel:8, sunNeed:65, sunMin:45},
+  {common:"Tropical Summer Trumpet Creeper", latin:"Campsis grandiflora", hue:25,
+   visual:"Deciduous climbing vine with pinnate dark-green foliage and terminal clusters of bright orange trumpet-shaped flowers.",
+   water:"Moist but well-drained",
+   aspect:"South / West",
+   soil:"Moist, well-drained; Warm sunny wall · poor in cold or shade",
+   prune:"Pruning group 12; prune in late winter or early spring.",
+   source:"", peak:"Aug-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Tropical Summer'",
+   hardiness:"H4", resilience:"Drought tolerant once established; reasonably hardy when given a warm sheltered position.",
+   uses:"Warm wall, climber, Mediterranean or sub-tropical planting and wildlife garden.", size:"1.5-2.5m H × 1-1.5m W",
+   seasonalImpact:"", growthSpeed:15, pestRisk:6, thirst:10, careLevel:10, sunNeed:90, sunMin:75},
+  {common:"Sweet Woodruff", latin:"Galium odoratum", hue:120,
+   visual:"Mat-forming perennial with whorls of bright green, lance-shaped leaves and clusters of small white star-shaped flowers; foliage develops a distinctive sweet hay-like scent when dried.",
+   water:"Moist but well-drained",
+   aspect:"North / East / West",
+   soil:"Any moist soil; Scorches in dry sun · spreads by rhizomes",
+   prune:"Cut back after flowering if required; remove untidy or damaged growth to maintain a neat groundcover.",
+   source:"", peak:"May-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H7", resilience:"Generally robust and disease-free; tolerates some drought once established but performs best in moist woodland-type conditions.",
+   uses:"Ground cover, woodland planting, underplanting, cottage gardens, wildlife gardens, banks and slopes.", size:"0.1-0.5m H × 1-1.5m W",
+   seasonalImpact:"", growthSpeed:17, pestRisk:2, thirst:14, careLevel:5, sunNeed:35, sunMin:15},
+  {common:"Daphne 'Pink Fragrance'", latin:"Daphne × transatlantica PINK FRAGRANCE ('Blapink')", hue:340,
+   visual:"Sweetly scented pink flowers flushed white · deep pink buds · repeats spring to autumn",
+   water:"Evenly damp; never let it dry out at the root",
+   aspect:"Any aspect",
+   soil:"Humus-rich, well-drained but not dry; Shelter from cold drying winds · resents root disturbance",
+   prune:"Barely prune · light tidy after a flush if it is needed at all",
+   source:"", peak:"Apr-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"trade name PINK FRAGRANCE; cultivar 'Blapink' PBR; also listed as Eternal Fragrance Pink",
+   hardiness:"H5", resilience:"long flowering season · compact · all parts harmful",
+   uses:"scented borders · entrances and paths · containers · small gardens", size:"0.9–1.2 m H × 0.9–1.2 m W",
+   seasonalImpact:"", growthSpeed:7, pestRisk:6, thirst:12, careLevel:8, sunNeed:60, sunMin:30},
+  {common:"Ninebark 'All Black'", latin:"Physocarpus opulifolius ALL BLACK ('Minall2')", hue:280,
+   visual:"Very dark purple to near-black leaves · pale pink-white flower clusters · peeling mature bark",
+   water:"Keep moist, not waterlogged",
+   aspect:"South / West",
+   soil:"Any, fertile; Best colour in sun · water while young",
+   prune:"Pruning group 1; remove older or congested stems after flowering",
+   source:"", peak:"May-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"trade name ALL BLACK; cultivar 'Minall2'; nursery label reads ALL BLACK® 'Minall2' cov",
+   hardiness:"H6", resilience:"very robust · tolerates a wide range of soils and conditions",
+   uses:"mixed borders · hedging · screening · wildlife gardens · foliage contrast", size:"1.5–2.5 m H × 1.5–2.5 m W",
+   toxicity:"", compliance:"", hardinessNote:"Hardy throughout the UK",
+   seasonalImpact:"", growthSpeed:15, pestRisk:4, thirst:10, careLevel:6, sunNeed:80, sunMin:45},
+  {common:"Knotweed 'Darjeeling Red'", latin:"Persicaria affinis 'Darjeeling Red'", hue:350,
+   visual:"Mat-forming foliage reddening in autumn · pink spikes maturing deep red",
+   water:"Moderate; keep soil moisture-retentive",
+   aspect:"Any aspect",
+   soil:"Moist, moisture-retentive, well-drained; Can spread quickly in persistently wet soil",
+   prune:"No routine pruning; remove spent flowers and comb out old leaves",
+   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Polygonum affine 'Darjeeling Red'",
+   hardiness:"H7", resilience:"cold hardy · coastal tolerant · drought tolerant once established",
+   uses:"ground cover · garden edging · rock gardens · patio containers", size:"20–25 cm H × 45–50 cm W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:3, thirst:9, careLevel:4, sunNeed:78, sunMin:40},
+
+  {common:"Culver's root 'Red Arrows'", latin:"Veronicastrum 'Red Arrows'", hue:275,
+   visual:"Red buds and stems · violet branched flower spikes · whorled foliage",
+   water:"Moderate; keep soil moist in dry spells",
+   aspect:"East/South/West",
+   soil:"Moist, fertile, well-drained; Avoid prolonged drying out",
+   prune:"Deadhead as flowers fade; cut back to ground level in winter",
+   source:"", peak:"Jun-Sep", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"syn. Veronicastrum sibiricum 'Red Arrows'",
+   hardiness:"H7", resilience:"cold hardy",
+   uses:"herbaceous borders · cottage gardens · architectural planting · pollinator gardens", size:"1–1.5 m H × 0.5–1 m W",
+   seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:12, careLevel:6, sunNeed:82, sunMin:45},
+
+  {common:"Compact Guelder Rose", latin:"Viburnum opulus", hue:0,
+   visual:"Dense, compact deciduous shrub with dark green palmately lobed leaves, flat heads of small fertile flowers surrounded by creamy-white sterile flowers, followed by bright red berries.",
+   water:"Moist but well-drained",
+   aspect:"North, East, South, West",
+   soil:"Chalk, clay, loam or sand; Any pH · avoid very dry or waterlogged soil",
+   prune:"Pruning group 1; prune after flowering if required, but avoid heavy pruning if the ornamental berries are wanted.",
+   source:"", peak:"May-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Compactum'",
+   hardiness:"H6", resilience:"Robust and adaptable shrub that tolerates exposed positions and a range of soils when moisture is adequate.",
+   uses:"Shrub borders, woodland gardens, cottage gardens, wildlife gardens, hedging, informal screening and specimen planting.", size:"1-1.5m H × 1-1.5m W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:7, thirst:14, careLevel:7, sunNeed:65, sunMin:35},
+  {common:"Bluebeard 'Dark Knight'", latin:"Caryopteris × clandonensis", hue:265,
+   visual:"Compact deciduous shrub with aromatic grey-green foliage and dark reddish stems, producing dense clusters of rich deep blue-purple flowers in late summer and early autumn.",
+   water:"Moist but well-drained",
+   aspect:"South, West",
+   soil:"Chalk, loam or sand; Drained; avoid winter wet; warm shelter",
+   prune:"Pruning group 6; cut back hard in spring to a low woody framework to encourage strong new flowering growth.",
+   source:"",
+   peak:"Aug-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"'Dark Knight'",
+   hardiness:"H6",
+   resilience:"Drought tolerant once established and well suited to hot, sunny positions; dislikes winter waterlogging.",
+   uses:"Flower borders, wildlife gardens, cottage gardens, Mediterranean-style planting, gravel gardens and containers.",
+   size:"1-1.5m H × 1-1.5m W",
+   toxicity:"",
+   compliance:"",
+   hardinessNote:"Fully hardy in much of the UK, though a warm sheltered position is preferable in colder areas.",
+   seasonalImpact:"", growthSpeed:13, pestRisk:5, thirst:7, careLevel:7, sunNeed:95, sunMin:75},
+
+  {common:"Common Box", latin:"Buxus sempervirens", hue:110,
+   visual:"Dense small glossy evergreen leaves that clip to a hard architectural edge",
+   water:"Water while establishing; keep pots evenly damp",
+   aspect:"Any aspect",
+   soil:"Any drained soil; Box blight and box tree moth",
+   prune:"Clip on a dry overcast day · clear clippings away from the base",
+   source:"",
+   peak:"Jan-Dec",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"'Suffruticosa' — dwarf edging",
+   hardiness:"H6",
+   resilience:"very hardy and long-lived · box blight and box tree caterpillar are real risks",
+   uses:"topiary · low hedging · parterres · formal containers",
+   size:"4-8m H × 4-8m W",
+   seasonalImpact:"", growthSpeed:4, pestRisk:16, thirst:9, careLevel:13, sunNeed:50, sunMin:20},
+
+  {common:"Crape Myrtle 'With Love Babe'", latin:"Lagerstroemia indica WITH LOVE BABE ('Milaperl')", hue:330,
+   visual:"Compact deciduous shrub with attractive smooth bark, glossy foliage and showy crinkled flowers produced in dense panicles in warm summer conditions.",
+   water:"Moist but well-drained",
+   aspect:"South / West",
+   soil:"Acid to neutral, drained; Needs a hot sunny spot; shelter from frost",
+   prune:"Pruning group 1; can tolerate harder pruning if required.",
+   source:"", peak:"Jul-Sep", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"With Love series; trade name WITH LOVE BABE; cultivar code 'Milaperl'",
+   hardiness:"H4", resilience:"Best in warm sheltered sites; flowering can be poor after cool summers.",
+   uses:"Patio, containers, Mediterranean-style gardens, wall-side borders and specimen planting.", size:"1-1.5m H × 1-1.5m W",
+   seasonalImpact:"", growthSpeed:9, pestRisk:5, thirst:11, careLevel:11, sunNeed:95, sunMin:75},
+
+  {common:"Astilbe 'Chocolate Shogun'", latin:"Astilbe 'Chocolate Shogun'", hue:340,
+   visual:"Compact clump-forming perennial with dramatic dark chocolate to bronze foliage and airy plumes of pale pink flowers.",
+   water:"Moist but well-drained",
+   aspect:"North / East / West",
+   soil:"Moist humus-rich loam; Never let it dry out; hates hot dry sites",
+   prune:"Cut back faded flower stems and old foliage after flowering or in late winter.",
+   source:"", peak:"Jun-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Chocolate Shogun'",
+   hardiness:"H7", resilience:"Reliable in moist shady borders; sensitive to drought.",
+   uses:"Shady borders, woodland gardens, waterside planting, containers and cottage gardens.", size:"0.5-1m H × 0.5-1m W",
+   seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:17, careLevel:7, sunNeed:40, sunMin:15},
+
+  {common:"Cabbage Palm 'Torbay Dazzler'", latin:"Cordyline australis 'Torbay Dazzler'", hue:60,
+   visual:"Architectural evergreen palm-like plant with a tall trunk and terminal crown of sword-shaped leaves heavily striped in creamy white.",
+   water:"Moist but well-drained",
+   aspect:"South / West / East",
+   soil:"Well-drained, any type; Avoid frost pockets and waterlogging",
+   prune:"Usually requires no pruning; remove damaged leaves at the base if required.",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Torbay Dazzler'",
+   hardiness:"H5", resilience:"Tolerant of coastal conditions and reasonably drought tolerant once established.",
+   uses:"Architectural planting, coastal gardens, containers, borders and Mediterranean-style planting.", size:"2.5-4m H × 1-1.5m W",
+   seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:85, sunMin:45},
+
+  {common:"Boston Ivy 'Lowii'", latin:"Parthenocissus tricuspidata 'Lowii'", hue:0,
+   visual:"Self-clinging deciduous climber with small deeply lobed bright-green leaves that turn orange-red and purple in autumn.",
+   water:"Moist but well-drained",
+   aspect:"Any aspect",
+   soil:"Fertile, well-drained; Self-clinging: check walls and masonry first",
+   prune:"Pruning group 11; prune in early winter and trim in summer if necessary.",
+   source:"", peak:"Sep-Nov", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Lowii'",
+   hardiness:"H5", resilience:"Robust climber with good tolerance of sun and shade.",
+   uses:"Walls, fences, wildlife gardens, screening and autumn foliage displays.", size:"2.5-4m H × 1.5-2.5m W",
+   seasonalImpact:"", growthSpeed:15, pestRisk:5, thirst:10, careLevel:6, sunNeed:60, sunMin:20},
+
+  {common:"White Spruce 'Echiniformis'", latin:"Picea glauca 'Echiniformis'", hue:150,
+   visual:"Very slow-growing dwarf evergreen conifer forming a dense, squat rounded mound with fine grey-green needles.",
+   water:"Moist but well-drained",
+   aspect:"East / South / West",
+   soil:"Acid to neutral, drained; Avoid drought and waterlogging",
+   prune:"No regular pruning required.",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Echiniformis'",
+   hardiness:"H7", resilience:"Very hardy, compact and low maintenance once established.",
+   uses:"Rock gardens, gravel gardens, containers, dwarf conifer collections and edging.", size:"0.1-0.5m H × 0.5-1m W",
+   toxicity:"", compliance:"", hardinessNote:"Extremely hardy and suitable for exposed UK conditions.",
+   seasonalImpact:"", growthSpeed:4, pestRisk:5, thirst:9, careLevel:3, sunNeed:90, sunMin:60},
+
+  {common:"Monkey Puzzle", latin:"Araucaria araucana", hue:120,
+   visual:"Stately evergreen architectural tree with tiered branches densely clothed in sharply pointed triangular dark-green leaves.",
+   water:"Moist but well-drained",
+   aspect:"East / South / West",
+   soil:"Well-drained, fertile; Needs space; shelter young from cold wind",
+   prune:"Pruning group 1; generally leave unpruned except for damaged branches.",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H7", resilience:"Very robust and generally pest-free; tolerant of a range of well-drained soils.",
+   uses:"Architectural specimen, large gardens and landscape planting.", size:"Over 12m H × Over 8m W",
+   toxicity:"", compliance:"", hardinessNote:"Extremely hardy once established.",
+   seasonalImpact:"", growthSpeed:8, pestRisk:2, thirst:9, careLevel:4, sunNeed:85, sunMin:55},
+
+  {common:"Cape Sundew", latin:"Drosera capensis", hue:340,
+   visual:"Small carnivorous perennial forming rosettes of long spoon-shaped leaves covered in sticky red or pink glandular hairs that trap insects, with delicate pink flowers.",
+   water:"Poorly drained / permanently moist",
+   aspect:"South",
+   soil:"Acid carnivorous compost; Rainwater only; never fertilised compost",
+   prune:"No pruning required; remove dead flower stems and foliage if necessary.",
+   source:"", peak:"Apr-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H3", resilience:"Easy carnivorous plant when kept permanently moist in acidic nutrient-poor conditions.",
+   uses:"Carnivorous plant collections, bog gardens, terrariums, conservatories and greenhouses.", size:"0.1-0.5m H × 0.1-0.5m W",
+   toxicity:"", compliance:"", hardinessNote:"Tender in much of the UK; grow under glass or indoors where frost is expected.",
+   seasonalImpact:"", growthSpeed:12, pestRisk:1, thirst:20, careLevel:12, sunNeed:90, sunMin:65},
+
+  {common:"Californian Lilac 'Cool Blue'", latin:"Ceanothus thyrsiflorus 'Cool Blue'", hue:210,
+   visual:"Evergreen variegated shrub with arching branches, glossy green leaves edged creamy white and clusters of small blue flowers in spring.",
+   water:"Well-drained",
+   aspect:"South / West",
+   soil:"Fertile, very well-drained; Avoid waterlogging, cold winds, thin chalk",
+   prune:"Pruning group 8; prune after flowering.",
+   source:"", peak:"Apr-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Cool Blue'",
+   hardiness:"H4", resilience:"Drought resistant once established and tolerant of coastal conditions.",
+   uses:"Wall-side borders, Mediterranean planting, coastal gardens, shrub borders and wildlife gardens.", size:"1.5-2.5m H × 1.5-2.5m W",
+   toxicity:"", compliance:"", hardinessNote:"Best in sheltered UK gardens.",
+   seasonalImpact:"", growthSpeed:15, pestRisk:5, thirst:6, careLevel:7, sunNeed:95, sunMin:75},
+
+  {common:"Oak-leaved Hydrangea 'Ice Crystal'", latin:"Hydrangea quercifolia 'Ice Crystal'", hue:0,
+   visual:"Compact rounded deciduous shrub with deeply lobed oak-like leaves and large dense upright white flower panicles that become pink tinged with age.",
+   water:"Moist but well-drained",
+   aspect:"Any aspect",
+   soil:"Moist but drained loam; Keep moist in sun; improve shallow chalk",
+   prune:"Pruning group 1; prune only lightly after flowering if required.",
+   source:"", peak:"Jul-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Ice Crystal'",
+   hardiness:"H5", resilience:"Reliable shrub provided soil does not dry excessively.",
+   uses:"Shrub borders, woodland gardens, containers, cottage gardens and cut flowers.", size:"1-1.5m H × 1-1.5m W",
+   toxicity:"Potential skin allergen; harmful if eaten by pets.", compliance:"", hardinessNote:"Hardy in most UK gardens.",
+   seasonalImpact:"", growthSpeed:10, pestRisk:7, thirst:15, careLevel:8, sunNeed:60, sunMin:30},
+
+  {common:"Japanese Maple 'Taylor'", latin:"Acer palmatum 'Taylor'", hue:340,
+   visual:"Small slow-growing deciduous tree with five-lobed leaves opening pale pink, becoming green with a distinctive white margin and turning lime green in autumn.",
+   water:"Moist but well-drained",
+   aspect:"East / West",
+   soil:"Humus-rich, well-drained; Shelter from wind, hot sun and late frost",
+   prune:"Pruning group 1; little pruning required beyond removing damaged or crossing branches.",
+   source:"", peak:"Apr-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Taylor'",
+   hardiness:"H6", resilience:"Reliable once established but foliage can scorch in drought, heat or exposed sites.",
+   uses:"Patio containers, Japanese gardens, woodland planting, small gardens and specimen planting.", size:"1.5-2.5m H × 1.5-2.5m W",
+   toxicity:"", compliance:"", hardinessNote:"Hardy throughout the UK when grown in a sheltered position.",
+   seasonalImpact:"", growthSpeed:6, pestRisk:6, thirst:13, careLevel:8, sunNeed:45, sunMin:20},
+
+  {common:"Panicle Hydrangea 'Pink & Rose'", latin:"Hydrangea paniculata 'Pink & Rose'", hue:340,
+   visual:"Deciduous flowering shrub producing large conical panicles of creamy-white flowers that mature through pink to deeper rosy tones.",
+   water:"Moist but well-drained",
+   aspect:"East / South / West",
+   soil:"Humus-rich, well-drained; Keep moist in sun; never waterlogged",
+   prune:"Pruning group 4; cut back hard in late winter or early spring to a framework of healthy buds.",
+   source:"", peak:"Jul-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Pink & Rose'",
+   hardiness:"H6", resilience:"Robust and reliable hydrangea; tolerates more sun than many other hydrangeas provided moisture is maintained.",
+   uses:"Shrub borders, cottage gardens, woodland-style planting, specimen planting, cut flowers and containers.", size:"1.5-2.5m H × 1.5-2.5m W",
+   seasonalImpact:"", growthSpeed:13, pestRisk:6, thirst:16, careLevel:8, sunNeed:65, sunMin:35},
+
+  {common:"Solimutata Begonia", latin:"Begonia soli-mutata", hue:120,
+   visual:"Tender rhizomatous begonia grown primarily for its striking foliage, with asymmetrical heart-shaped leaves marked in silvery green, dark green and reddish tones and contrasting red undersides.",
+   water:"Moist but well-drained",
+   aspect:"North / East / West",
+   soil:"Humus-rich, well-drained; No waterlogging, no harsh sun, never dry",
+   prune:"Remove dead or damaged leaves and stems as required; pinch growing tips to maintain a compact shape.",
+   source:"", peak:"Jan-Dec", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H1c", resilience:"Good indoor foliage plant when humidity, warmth and consistent moisture are maintained.",
+   uses:"Houseplant, terrarium, conservatory and heated greenhouse.", size:"0.1-0.5m H × 0.1-0.5m W",
+   seasonalImpact:"", growthSpeed:12, pestRisk:10, thirst:15, careLevel:12, sunNeed:35, sunMin:15},
+
+  {common:"Silk Tree 'Summer Chocolate'", latin:"Albizia julibrissin 'Summer Chocolate'", hue:330,
+   visual:"Small deciduous tree with an open spreading crown, finely divided chocolate-purple foliage and fluffy pink powder-puff flowers in summer.",
+   water:"Moist but well-drained",
+   aspect:"South / West",
+   soil:"Fertile, well-drained; Warm shelter; protect young trees from frost",
+   prune:"Pruning group 1; little pruning required beyond removing dead, damaged or crossing branches.",
+   source:"", peak:"Jul-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Summer Chocolate'",
+   hardiness:"H4", resilience:"Tolerates heat and some drought once established, but young plants need protection and reliable moisture.",
+   uses:"Specimen tree, warm sheltered borders, courtyard gardens, patio planting and exotic-style gardens.", size:"2.5-4m H × 2.5-4m W",
+   seasonalImpact:"", growthSpeed:10, pestRisk:4, thirst:9, careLevel:10, sunNeed:95, sunMin:75},
+];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -8487,30 +9111,6 @@ const PLANTS_ON_HOLD=[
    size:"4-8m H × 4-8m W",
    seasonalImpact:"", growthSpeed:12, pestRisk:6, thirst:8, careLevel:6, sunNeed:90, sunMin:60},
 
-  {common:"Common Box", latin:"Buxus sempervirens", hue:110,
-   visual:"Dense small glossy evergreen leaves that clip to a hard architectural edge",
-   water:"Water while establishing; keep pots evenly damp",
-   aspect:"Any aspect",
-   soil:"Any drained soil; Box blight and box tree moth",
-   prune:"Clip on a dry overcast day · clear clippings away from the base",
-   source:"",
-   peak:"Jan-Dec",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"'Suffruticosa' — dwarf edging",
-   hardiness:"H6",
-   resilience:"very hardy and long-lived · box blight and box tree caterpillar are real risks",
-   uses:"topiary · low hedging · parterres · formal containers",
-   size:"4-8m H × 4-8m W",
-   seasonalImpact:"", growthSpeed:4, pestRisk:16, thirst:9, careLevel:13, sunNeed:50, sunMin:20},
 
   {common:"Garden Privet", latin:"Ligustrum ovalifolium", hue:105,
    visual:"Dense semi-evergreen twiggy screen · cream flower heads if left unclipped",
@@ -9365,6 +9965,89 @@ const PLANTS_ON_HOLD=[
    toxicity:"Milky sap is harmful if eaten and may irritate skin and eyes",
    hardinessNote:"RHS H1b; indoors or under glass, roughly 10-15°C minimum",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:8, careLevel:5, sunNeed:60, sunMin:35},
+  {common:"Ninebark 'Little Devil'", latin:"Physocarpus opulifolius LITTLE DEVIL ('Donna May')", hue:280,
+   visual:"Compact rounded shrub · small dark purple leaves · clusters of pale flowers in summer",
+   water:"Keep moist, not waterlogged",
+   aspect:"East / South / West",
+   soil:"Any, fertile; Avoid drought and waterlogging while young",
+   prune:"Pruning group 1; remove older stems after flowering to keep it compact",
+   source:"", peak:"May-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"trade name LITTLE DEVIL; cultivar 'Donna May' (PP22634); the deck previously carried 'Minall2', which is ALL BLACK's code",
+   hardiness:"H6", resilience:"robust · adaptable · tolerates urban conditions",
+   uses:"shrub borders · mixed planting · hedging · screening · containers", size:"1–1.5 m H × 1–1.5 m W",
+   toxicity:"", compliance:"", hardinessNote:"Hardy throughout the UK",
+   seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:10, careLevel:6, sunNeed:75, sunMin:45},
+  {common:"Escallonia 'Gold Brian'", latin:"Escallonia 'Gold Brian'", hue:335,
+   visual:"Compact evergreen · glossy foliage · clusters of small tubular flowers",
+   water:"Keep moist, not waterlogged",
+   aspect:"South / West",
+   soil:"Any, fertile, well-drained; Shelter from cold winds · avoid wet soil",
+   prune:"Prune after flowering; remove overlong shoots and shape as required",
+   source:"", peak:"Jun-Aug", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"",
+   hardiness:"H5", resilience:"coastal tolerant once established · reasonably drought tolerant",
+   uses:"hedging · screening · shrub borders · coastal gardens · containers", size:"1–1.5 m H × 1–1.5 m W",
+   toxicity:"", compliance:"", hardinessNote:"Hardy in sheltered UK gardens; foliage damage in severe winters",
+   seasonalImpact:"", growthSpeed:15, pestRisk:5, thirst:8, careLevel:6, sunNeed:80, sunMin:55},
+
+  {common:"Copper beech", latin:"Fagus sylvatica (Atropurpurea Group)", hue:275,
+   visual:"Deep purple foliage · smooth grey bark · reddish-copper autumn colour",
+   water:"Moderate; water in dry spells",
+   aspect:"Any aspect",
+   soil:"Moist, well-drained; Avoid prolonged drought · avoid waterlogging",
+   prune:"Pruning Group 1; prune in late summer if required",
+   source:"",
+   peak:"Apr-Nov",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"syn. Fagus sylvatica Cuprea Group; Purple-leaved Group; Purpurea Group; 'Atropurpurea'; 'Cuprea'; 'Purpurea'",
+   hardiness:"H6",
+   resilience:"cold hardy · pollution tolerant · urban suitable",
+   uses:"specimen · hedging · screening · woodland gardens",
+   size:"20–30 m H × 8–15 m W",
+   toxicity:"Harmful if eaten by dogs",
+   compliance:"",
+   hardinessNote:"RHS H6",
+   seasonalImpact:"", growthSpeed:10, pestRisk:10, thirst:10, careLevel:7, sunNeed:88, sunMin:55},
+
+  {common:"Groundbreaker Blush hydrangea", latin:"Hydrangea paniculata 'LC NO21'", hue:345,
+   visual:"Low spreading habit · white panicles ageing through soft blush to pink-red",
+   water:"Moderate; water regularly during dry spells",
+   aspect:"Any aspect",
+   soil:"Moist, fertile, well-drained; Avoid prolonged drought and waterlogging",
+   prune:"Prune in spring if required; remove weak or damaged growth",
+   source:"",
+   peak:"Jul-Nov",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"trade name Groundbreaker® Blush™; Groundbreaker® series; breeder denomination 'LC NO21'",
+   hardiness:"H5",
+   resilience:"cold hardy",
+   uses:"ground cover · border edging · small gardens · patio containers",
+   size:"30–40 cm H × 60–100 cm W",
+   toxicity:"",
+   compliance:"PBR protected",
+   hardinessNote:"Breeder reports hardy to -30°C",
+   seasonalImpact:"", growthSpeed:12, pestRisk:7, thirst:12, careLevel:5, sunNeed:80, sunMin:45},
+
  ];
 /* HOLD:END */
 
@@ -9481,8 +10164,11 @@ function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d=
    straight over the cap, so a capped boot ignores saved progress and never writes any. */
 const DECK_CAP=(()=>{
   const m=/[?&#]cards=(\d+)/.exec(location.search+location.hash);
-  if(!m)return 0;
-  return Math.max(1,Math.min(+m[1],PLANTS.length));
+  if(m)return Math.max(1,Math.min(+m[1],PLANTS.length));
+  /* light mode (see BOOT): the same cap, switched on by two failed opens in a row.
+     Never a cap when the deck already fits under it — there is nothing to shed. */
+  if(BOOT.light&&PLANTS.length>LIGHT_CAP)return LIGHT_CAP;
+  return 0;
 })();
 function buildDeck(){
   stopGoto();                                    /* a reset overrules an auto-run to a card */
@@ -9845,7 +10531,7 @@ function parseSize(str){                      /* "60–90 cm H × 45–60 cm W" 
   const parts=str.split(/[x×]/i).map(t=>normSizeSpan(t.replace(/\b[HW]\b\.?/g,'').trim()));
   return{h:parts[0]||'',s:parts[1]||''};
 }
-/* normSizeSpan — one convention for the spine rails (v14.43). The raw `size`
+/* normSizeSpan — one convention for the spine rails (v14.60). The raw `size`
    fields mix authoring styles ("0.5-1m", "0.5–1 m", "12m+", "50–100 cm"), and
    the rails printed them verbatim, so no two cards read alike. Canonical form:
    en-dash range, one space before the unit, `+` after it ("1.5–2.5 m",
@@ -9853,10 +10539,30 @@ function parseSize(str){                      /* "60–90 cm H × 45–60 cm W" 
    metre-and-up spans in m (50–100 cm -> 0.5–1 m), so the same magnitude is
    never written two ways on two cards. DISPLAY-ONLY: the data keeps its
    sourced values; a shape this can't parse passes through untouched and
-   audit-layout.js C3 flags it rather than letting a mangled value ship. */
+   audit-layout.js C3 flags it rather than letting a mangled value ship.
+
+   Word qualifiers (added on the 2026-09-08 merge, when the audit caught two
+   of the 42 cards dealt while this branch was away): sourced data also writes
+   a bound in English — "Over 12m", "To 10 cm". "Over" is the `+` convention
+   in words, so it becomes one ("12 m+"); "To" is a ceiling, which the deck
+   already writes as a lone value ("10 cm", as on the existing Sedum card).
+   Neither invents a number. Anything else still passes through for C3 —
+   "under 10 cm" deliberately included, because rendering it as a lone
+   "10 cm" would overstate the plant and only a human should make that call. */
+const SIZE_QUAL=/^(over|above|at least|to|up to)\s+(.+)$/i;
+const SIZE_SHAPE=/^(\d+(?:\.\d+)?)\s*(?:[-–—]\s*(\d+(?:\.\d+)?))?\s*(m|cm)\s*(\+?)$/i;
 function normSizeSpan(t){
   if(!t)return'';
-  const m=t.match(/^(\d+(?:\.\d+)?)\s*(?:[-–—]\s*(\d+(?:\.\d+)?))?\s*(m|cm)\s*(\+?)$/i);
+  const q=t.match(SIZE_QUAL);
+  if(q){
+    /* parseability is tested on the SHAPE, not by comparing the recursion's
+       output to its input: an already-canonical value ("10 cm") comes back
+       unchanged, which an equality guard reads as a failure to parse. */
+    if(!SIZE_SHAPE.test(q[2]))return t;          /* the value itself is unparseable — hand the whole thing to C3 */
+    const inner=normSizeSpan(q[2]);
+    return /^(over|above|at least)$/i.test(q[1])?(inner.endsWith('+')?inner:inner+'+'):inner;
+  }
+  const m=t.match(SIZE_SHAPE);
   if(!m)return t;
   const unit=m[3].toLowerCase();
   let lo=parseFloat(m[1]),hi=m[2]?parseFloat(m[2]):null;
@@ -9938,10 +10644,10 @@ const PEST={
    what each field reaches. `masterText` replaces the bottom strip, which means
    that card no longer teaches the double-tap gesture — acceptable on a one-off. */
 const EDITION={
-  'veronica-rhubarb-crumble':{
-    mirror:true,      /* the kaleidoscope: left half real, right half its reflection */
-    smudge:'5px',     /* how hard the seam is blurred away */
-  },
+  /* 'veronica-rhubarb-crumble' carried mirror:true from 2026-08-17 to 2026-09-02.
+     Oscar: the doubled-up image "came out shit on the card". Its photograph is
+     now a clean full frame of the plant and the effect is unused; the mechanism
+     stays for the next card that genuinely wants it. */
   'magnolia-acuminata':{
     ink:'#ff9000',            /* orange on black, Oscar's request */
     dark:'#0b0b0b',
@@ -10278,6 +10984,16 @@ function holoStyle(ho){
    a second story. A swap that shows the same thing twice reads as a glitch, not
    as a feature. */
 const PHOTO_SWAP={
+  /* Oscar's ask, 2026-09-02: "flash between the current card photo and this one,
+     as it has a flower". The card photo is the plant's gold, red-edged foliage
+     with no bloom; the second frame is the same foliage with the cobalt flowers
+     the card is named for (SAPPHIRE RING, peak Jul-Oct). Different day from the
+     card photo, same plant on the same bench by the leaves. */
+  'ceratostigma-willmottianum-sapphire-ring-lissbrill':{
+    alt:'photos/card/ceratostigma-willmottianum-sapphire-ring-lissbrill-flowers.webp',
+    focus:'50% 50%',
+    hold:'3.5s',
+  },
   /* Two frames of the same plant, four seconds apart. The card's own photo is the
      shoot with its creamy-white new tips — the cultivar, and the reason anyone
      picks this cedar over a plain Glauca. What that close-up cannot show is the
@@ -10313,6 +11029,18 @@ const PHOTO_SWAP={
     focus:'50% 50%',
     hold:'3.5s',
   },
+  /* Oscar sent this one AS a pair and asked for the swap. The card's own photo is
+     the plant on the bench in August — whorled oblong leaves on a dark stem, which
+     is what a person walking past will see for ten months of the year. The alt is
+     the ribbed russet seed capsule, the one thing that says Exochorda and not any
+     other pale-leaved shrub. Neither frame has the April-May flowers the card
+     sells; both are honest about the season they were taken in. Frames 22 seconds
+     apart, same plant, same rain. */
+  'exochorda-macrantha':{
+    alt:'photos/card/exochorda-macrantha-fruit.webp',
+    focus:'50% 45%',
+    hold:'3.5s',
+  },
 };
 /* Spiraea 'Double Play Doozie' was configured here and then removed, which is
    worth recording so it is not re-tried. Reading the two files, the pair looked
@@ -10326,6 +11054,8 @@ const PHOTO_SWAP={
    The lesson is the general one: judge a swap on the two CARDS, not the two
    files. */
 const PHOTO_FOCUS={
+  'rhodanthemum-hosmariense-zagora-yellow':'100% 40%',
+  'veronicastrum-red-arrows':'50% 0%',
   'pinus-mugo':'50% 30%',
   'hosta-emerald-charger':'50% 45%',
   'houttuynia-cordata-pied-piper':'50% 0%',
@@ -10347,7 +11077,7 @@ const PHOTO_FOCUS={
   'acer-palmatum-sango-kaku':'52% 45%',
   'salvia-rosmarinus-miss-jessopp-s-upright':'50% 45%',
   'anemone-hybrida-pretty-lady-maria-aneplaria':'52% 40%',
-  'trachelospermum-jasminoides':'40% 45%',
+  'trachelospermum-jasminoides':'30% 45%',
   'chaenomeles-speciosa-kinshiden':'8% 50%',
   'cornus-sanguinea-midwinter-fire':'50% 25%','kniphofia-pyromania-orange-blaze':'42% 40%','pennisetum-rubrum':'50% 40%','ajuga-reptans-burgundy-glow':'57% 45%','spiraea-double-play-doozie':'55% 38%','potentilla-fruticosa-pink-beauty':'25% 32%','nandina-domestica':'45% 35%','cercis-chinensis-avondale':'45% 30%','prunus-lusitanica-angustifolia':'50% 35%','salvia-blue-spire':'55% 35%','leycesteria-formosa-golden-lanterns':'40% 55%','mahonia-japonica':'25% 50%','buddleja-pugster-orchid':'62% 30%','salix-integra-hakuro-nishiki':'50% 28%','plumbago-auriculata':'50% 30%','euonymus-japonicus-aureomarginatus':'30% 28%','monarda-didyma-bubblegum-blast':'78% 18%','carpinus-betulus':'55% 40%','elaeagnus-submacrophylla':'45% 48%','gunnera-manicata':'50% 35%','acer-rubrum-october-glory':'50% 62%','fatsia-japonica-tsumugi-shibori':'50% 30%','griselinia-littoralis':'55% 22%','indigofera-himalayensis-silk-road':'55% 15%','phalaenopsis-hybrid-group':'40% 25%','viburnum-tinus-eve-price':'50% 45%','paeonia-orange-victory':'50% 45%','lavandula-stoechas-anouk-deluxe-purple':'45% 25%','citrus-meyeri-meyer':'50% 30%','euonymus-japonicus-green-spire':'50% 45%','ilex-crenata-jenny':'30% 55%','cuprocyparis-leylandii-gold-rider':'50% 30%','rhododendron-horizon-monarch':'45% 20%','acer-palmatum-osakazuki':'50% 45%','musa-basjoo':'50% 20%','cornus-controversa-variegata':'42% 48%','olea-europaea':'45% 30%','acer-palmatum-bloodgood':'50% 22%','salvia-hot-lips':'40% 45%','magnolia-honey-tulip-jurmag5':'40% 48%','eryngium-olivierianum-big-blue-myersblue':'35% 50%','hydrangea-serrata':'45% 16%','cornus-kousa':'50% 52%'};
 
@@ -10536,7 +11266,7 @@ function fitInkAll(roots){
   }
   for(const s of all)s.el.style.fontSize=inkStepDown(s.fs0,s.best)+'px';
 }
-/* ---- spine value overrun guard (v14.44) ----
+/* ---- spine value overrun guard (v14.61) ----
    The rail value is anchored 7px under its lettering and any excess length
    runs DOWN the spine (see .railval .v). In this container the longest
    canonical value ("1.5–2.5 m") measures ~59px, but neither Georgia nor
@@ -10581,16 +11311,22 @@ function markHot(){
   live.slice(-FETCH_DEPTH).forEach(c=>{                 /* photos fetch as cards near the top —
       hidden imgs with src still hit the network, and a 57-photo stampede at load is
       exactly what the first ten swipes were fighting */
-    const img=c.querySelector('.tphoto img');
-    if(img&&!img.getAttribute('src')&&img.dataset.psrc)img.src=img.dataset.psrc;
+    /* ALL of them, not the first: a PHOTO_SWAP card carries a second <img class="alt">
+       in the same .tphoto, and querySelector only ever loaded the primary. The alt
+       used to get its src as a side effect of tricklePhotos setting src on every
+       buried image; r79 (2026-08-21) rightly changed that to fetch() and, without
+       meaning to, cut the swap's second frame off — every two-photo card has been
+       blinking to black and back to the SAME photo since. Found 2026-09-02. */
+    c.querySelectorAll('.tphoto img').forEach(img=>{
+      if(!img.getAttribute('src')&&img.dataset.psrc)img.src=img.dataset.psrc;
+    });
     /* and the special-card artwork with them — see lateBG */
     c.querySelectorAll('[data-bg]').forEach(el=>{
       el.style.cssText+=';'+el.dataset.bg;el.removeAttribute('data-bg');
     });
   });
   live.slice(-PAINT_DEPTH).forEach(c=>{                 /* decode upcoming photos while occluded */
-    const img=c.querySelector('.tphoto img');
-    if(img&&img.decode)img.decode().catch(()=>{});
+    c.querySelectorAll('.tphoto img').forEach(img=>{if(img.decode)img.decode().catch(()=>{});});
   });
 }
 
@@ -10881,7 +11617,7 @@ document.getElementById('resetRow').onclick=()=>{buildDeck();closeSheet();};
 /* deck keyboard shortcuts — inert while any overlay owns the screen, so arrow keys
    never swipe the card sitting underneath the menu, dictionary or quiz */
 function overlayOpen(){
-  return sheet.classList.contains('open')||search.classList.contains('open')||quizEl.classList.contains('open')||statsEl.classList.contains('open');
+  return sheet.classList.contains('open')||search.classList.contains('open')||quizEl.classList.contains('open')||statsEl.classList.contains('open')||diagEl.classList.contains('open');
 }
 document.addEventListener('keydown',e=>{
   if(e.metaKey||e.ctrlKey||e.altKey)return;
@@ -11185,6 +11921,7 @@ dictRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();dictRo
 document.getElementById('resetRow').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();buildDeck();closeSheet();}};
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape')return;
+  if(diagEl.classList.contains('open')){closeDiag();return;}
   if(statsEl.classList.contains('open')){closeStats();}
   else if(quizEl.classList.contains('open')){closeQuiz();}
   else if(search.classList.contains('open')){
@@ -11354,7 +12091,7 @@ function trapFocus(container){
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
   });
 }
-[sheet,search,quizEl,statsEl].forEach(trapFocus);
+[sheet,search,quizEl,statsEl].forEach(trapFocus);   /* diagEl is trapped where it is declared, below — a forward reference here is the TDZ bug of 2026-08-17 */
 
 /* ---------- PWA: manifest, service worker, install prompt ---------- */
 const ICON192="data:image/png;base64,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";
@@ -11439,6 +12176,70 @@ if(savedProgress)restoreDeck(savedProgress);else buildDeck();
 updateQuizStats();
 updateReviewMenu();
 document.getElementById('buildTag').textContent='build '+BUILD;
+
+/* ---------- light mode surface + the problem report (menu → Report a problem) ---------- */
+const lightPill=document.getElementById('lightPill');
+if(BOOT.light&&DECK_CAP){
+  lightPill.hidden=false;
+  document.getElementById('modeTag').textContent=` · light mode: ${DECK_CAP} of ${PLANTS.length} cards`;
+}
+lightPill.onclick=()=>{
+  /* the user's call overrides the evidence: full deck next open, count from zero.
+     bootPending is left true on purpose — if THIS reload dies, it counts. */
+  saveDiag({lightMode:false,bootFails:0});
+  location.replace(location.pathname);       /* also drops any ?cards= diagnostic */
+};
+const diagEl=document.getElementById('diag'),diagText=document.getElementById('diagText');
+function diagReport(){
+  const d=loadDiag(),e=d.lastError;
+  const standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+  const store=[];
+  try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);store.push(`${k} ${(localStorage.getItem(k)||'').length}ch`);}}catch(x){store.push('unreadable');}
+  const dealt=deck.querySelectorAll('.card').length+(dealPending?dealPending.length:0);
+  const lines=[
+    'Timber report',
+    `build      ${BUILD}`,
+    `time       ${new Date().toISOString()}`,
+    `page       ${location.href.slice(0,120)}`,
+    `opened as  ${standalone?'installed app':'browser tab'}${navigator.onLine===false?' · offline':''}${navigator.serviceWorker&&navigator.serviceWorker.controller?' · offline cache active':''}`,
+    `deck       ${dealt} in play of ${PLANTS.length}${DECK_CAP?` · ${BOOT.light?'LIGHT MODE':'capped'} to ${DECK_CAP}`:''}${reviewMode?' · review':''}${activeFilter?' · filtered':''}`,
+    `learned    ${learnedCount}`,
+    `boot       failed opens in a row: ${BOOT.fails}${d.lastBoot?` · this open ${d.lastBoot}`:''}`,
+    `last error ${e?`${e.msg} (${e.src||'?'}:${e.line}:${e.col}) at ${e.at} on ${e.build}`:'none recorded'}`,
+    `device     ${navigator.userAgent}`,
+    `screen     ${screen.width}x${screen.height} @${devicePixelRatio}x · viewport ${innerWidth}x${innerHeight}${navigator.deviceMemory?` · ${navigator.deviceMemory}GB`:''}${navigator.hardwareConcurrency?` · ${navigator.hardwareConcurrency} cores`:''} · ${navigator.language}`,
+    `storage    ${store.join(', ')||'empty'}`,
+  ];
+  return lines.join('\n');
+}
+function openDiag(){
+  diagText.textContent=diagReport();
+  document.getElementById('diagShare').hidden=!(navigator.share);
+  diagEl.classList.add('open');document.getElementById('diagClose').focus();
+  /* quota is async and optional — patch it in when it arrives */
+  if(navigator.storage&&navigator.storage.estimate)navigator.storage.estimate().then(q=>{
+    if(diagEl.classList.contains('open')&&q&&q.usage!=null)diagText.textContent+=`\nquota      ${(q.usage/1048576).toFixed(1)}MB used${q.quota?` of ${(q.quota/1048576).toFixed(0)}MB`:''}`;
+  }).catch(()=>{});
+}
+function closeDiag(){diagEl.classList.remove('open');document.getElementById('menuBtn').focus();}
+trapFocus(diagEl);
+const diagRow=document.getElementById('diagRow');
+diagRow.onclick=()=>{closeSheet();openDiag();};
+diagRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();diagRow.onclick();}};
+document.getElementById('diagClose').onclick=closeDiag;
+diagEl.querySelectorAll('[data-dgclose]').forEach(el=>el.onclick=closeDiag);
+const diagCopy=document.getElementById('diagCopy');
+function flashBtn(btn,label){const t=btn.textContent;btn.textContent=label;btn.disabled=true;setTimeout(()=>{btn.textContent=t;btn.disabled=false;},1600);}
+diagCopy.onclick=async()=>{
+  const txt=diagText.textContent;
+  let ok=false;
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(txt);ok=true;}}catch(x){}
+  if(!ok){                                   /* older WebKit / non-secure: select it so a long-press copies */
+    try{const r=document.createRange();r.selectNodeContents(diagText);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);ok=document.execCommand&&document.execCommand('copy');}catch(x){}
+  }
+  flashBtn(diagCopy,ok?'Copied ✓':'Select the text above and copy');
+};
+document.getElementById('diagShare').onclick=()=>{navigator.share({title:'Timber report',text:diagText.textContent}).catch(()=>{});};
 /* Trickle the rest of the deck's photographs into the offline cache after the opening
    swipes are clear.
 

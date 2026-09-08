@@ -1,0 +1,32 @@
+{
+ "common": "Monkey Puzzle",
+ "latin": "Araucaria araucana",
+ "hue": 120,
+ "visual": "Stately evergreen architectural tree with tiered branches densely clothed in sharply pointed triangular dark-green leaves.",
+ "water": "Moist but well-drained",
+ "aspect": "East / South / West",
+ "soil": "Well-drained, fertile",
+ "soilWarning": "Needs space; shelter young from cold wind",
+ "prune": "Pruning group 1; generally leave unpruned except for damaged branches.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Jan-Dec",
+ "cvs": "",
+ "hardiness": "H7",
+ "hardinessNote": "Extremely hardy once established.",
+ "resilience": "Very robust and generally pest-free; tolerant of a range of well-drained soils.",
+ "uses": "Architectural specimen, large gardens and landscape planting.",
+ "height": "Over 12m",
+ "spread": "Over 8m",
+ "foliage": "evergreen",
+ "container": "with care",
+ "growthSpeed": 8,
+ "pestRisk": 2,
+ "thirst": 9,
+ "careLevel": 4,
+ "sunNeed": 85,
+ "sunMin": 55,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: hue 120 dark green; aspect to compass format; peak 'All year' as Jan-Dec; soil shortened (was 'Chalk, loam or sand; moderately fertile and well-drained.'); soilWarning shortened (was 'Requires substantial space and shelter from cold drying winds when young.'); container 'only temporarily when young' read as with care. Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

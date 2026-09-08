@@ -1,0 +1,32 @@
+{
+ "common": "Cape Sundew",
+ "latin": "Drosera capensis",
+ "hue": 340,
+ "visual": "Small carnivorous perennial forming rosettes of long spoon-shaped leaves covered in sticky red or pink glandular hairs that trap insects, with delicate pink flowers.",
+ "water": "Poorly drained / permanently moist",
+ "aspect": "South",
+ "soil": "Acid carnivorous compost",
+ "soilWarning": "Rainwater only; never fertilised compost",
+ "prune": "No pruning required; remove dead flower stems and foliage if necessary.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Apr-Oct",
+ "cvs": "",
+ "hardiness": "H3",
+ "hardinessNote": "Tender in much of the UK; grow under glass or indoors where frost is expected.",
+ "resilience": "Easy carnivorous plant when kept permanently moist in acidic nutrient-poor conditions.",
+ "uses": "Carnivorous plant collections, bog gardens, terrariums, conservatories and greenhouses.",
+ "height": "0.1-0.5m",
+ "spread": "0.1-0.5m",
+ "foliage": "evergreen",
+ "container": "yes",
+ "growthSpeed": 12,
+ "pestRisk": 1,
+ "thirst": 20,
+ "careLevel": 12,
+ "sunNeed": 90,
+ "sunMin": 65,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: hue 340 for the red-pink glandular hairs and flowers; peak 'Spring to autumn' read as Apr-Oct [Inference]; soil shortened (was 'Acidic, nutrient-poor loam or specialist carnivorous plant compost.'); soilWarning shortened (was 'Never use ordinary fertilised compost or tap water; keep constantly moist using rainwater or suitable low-mineral water.'). Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

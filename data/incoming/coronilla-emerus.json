@@ -1,0 +1,33 @@
+{
+  "common": "Shrubby scorpion vetch",
+  "latin": "Coronilla emerus",
+  "hue": 55,
+  "visual": "Rounded shrub · arching branches · small pinnate leaves · bright yellow pea flowers",
+  "water": "Keep moist, not waterlogged",
+  "aspect": "East / South / West",
+  "soil": "Any, well-drained",
+  "soilWarning": "Avoid permanently wet ground",
+  "prune": "Prune after flowering to shape; remove old or damaged wood",
+  "toxicity": "All parts may be harmful if eaten",
+  "compliance": "",
+  "peak": "Apr-Aug",
+  "cvs": "syn. Hippocrepis emerus",
+  "hardiness": "H6",
+  "hardinessNote": "Hardy in most UK gardens",
+  "resilience": "adaptable · reasonable drought tolerance once established",
+  "uses": "shrub borders · banks · wildlife planting · cottage gardens · informal hedging",
+  "height": "1–1.5 m",
+  "spread": "1–1.5 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 13,
+  "pestRisk": 4,
+  "thirst": 8,
+  "careLevel": 6,
+  "sunNeed": 75,
+  "sunMin": 45,
+  "uncertain": [
+    "Label read as 'colitrna' by Oscar; Coronilla emerus is his reading. The accepted name is now Hippocrepis emerus, added as a synonym; the label name is kept as the card name",
+    "peak 'Spring to summer' written as Apr-Aug"
+  ]
+}

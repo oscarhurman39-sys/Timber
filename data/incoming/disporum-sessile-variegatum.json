@@ -1,0 +1,33 @@
+{
+  "common": "Sessile fairy bells 'Variegatum'",
+  "latin": "Disporum sessile 'Variegatum'",
+  "hue": 120,
+  "visual": "Arching stems · pointed leaves with fine white stripes · hanging green-white bells",
+  "water": "Keep evenly moist",
+  "aspect": "North / East / West",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Sheltered · avoid prolonged dry soil",
+  "prune": "No pruning required",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Jun",
+  "cvs": "",
+  "hardiness": "H6",
+  "hardinessNote": "",
+  "resilience": "shade tolerant · cold hardy",
+  "uses": "woodland gardens · ground cover · shrub underplanting · cottage gardens",
+  "height": "30–45 cm",
+  "spread": "50–100 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 8,
+  "pestRisk": 7,
+  "thirst": 12,
+  "careLevel": 4,
+  "sunNeed": 42,
+  "sunMin": 20,
+  "uncertain": [
+    "RHS accepts the exact cultivar as Disporum sessile 'Variegatum' and describes it as reaching about 45 cm with a 0.5–1 m spread",
+    "Kew treats Disporum sessile f. variegatum as a synonym within D. sessile var. sessile, while RHS maintains the horticultural cultivar name 'Variegatum'"
+  ]
+}

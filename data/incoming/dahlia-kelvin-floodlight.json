@@ -1,0 +1,32 @@
+{
+  "common": "Decorative dahlia 'Kelvin Floodlight'",
+  "latin": "Dahlia 'Kelvin Floodlight'",
+  "hue": 55,
+  "visual": "Huge bright-yellow double blooms · broad petals · upright dark-green foliage",
+  "water": "Keep evenly moist; water freely in dry spells",
+  "aspect": "South / West",
+  "soil": "Fertile, moist, well-drained",
+  "soilWarning": "Avoid waterlogging · shelter from strong winds",
+  "prune": "Deadhead regularly; cut back after frost and lift tubers",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jul-Oct",
+  "cvs": "",
+  "hardiness": "H3",
+  "hardinessNote": "RHS H3; lift and store tubers over winter",
+  "resilience": "urban suitable · heat tolerant",
+  "uses": "cut flowers · borders · containers · cottage gardens",
+  "height": "1–1.5 m",
+  "spread": "50–100 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 15,
+  "pestRisk": 12,
+  "thirst": 13,
+  "careLevel": 9,
+  "sunNeed": 95,
+  "sunMin": 70,
+  "uncertain": [
+    "RHS retail material confirms the exact cultivar name; cultivar-specific mature dimensions vary between sources, so the practical planning range was retained"
+  ]
+}

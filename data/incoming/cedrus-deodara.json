@@ -1,0 +1,33 @@
+{
+  "common": "Deodar cedar",
+  "latin": "Cedrus deodara",
+  "hue": 120,
+  "visual": "Soft blue-green to green needles in clusters · sweeping branches · drooping leader and tips",
+  "water": "Keep moist, not waterlogged",
+  "aspect": "South / West",
+  "soil": "Any, well-drained",
+  "soilWarning": "Needs space · avoid wet or exposed sites",
+  "prune": "Little needed; remove dead, damaged or crossing branches in late summer",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jan-Dec",
+  "cvs": "",
+  "hardiness": "H6",
+  "hardinessNote": "Hardy in much of the UK; young plants can be damaged in severe exposure",
+  "resilience": "robust once established · tolerates a range of well-drained soils",
+  "uses": "large gardens · specimen · parks · large landscape schemes",
+  "height": "4 m+",
+  "spread": "4 m+",
+  "foliage": "evergreen",
+  "container": "no",
+  "growthSpeed": 14,
+  "pestRisk": 5,
+  "thirst": 9,
+  "careLevel": 6,
+  "sunNeed": 90,
+  "sunMin": 60,
+  "uncertain": [
+    "Supplied height and spread were 'Over 4m'; written as 4 m+ rather than upgraded to the species' true ultimate size",
+    "Second Cedrus in the deck after the blue atlas 'Horstmann's Silberspitz'"
+  ]
+}

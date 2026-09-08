@@ -1,0 +1,32 @@
+{
+ "common": "Oak-leaved Hydrangea 'Ice Crystal'",
+ "latin": "Hydrangea quercifolia 'Ice Crystal'",
+ "hue": 0,
+ "visual": "Compact rounded deciduous shrub with deeply lobed oak-like leaves and large dense upright white flower panicles that become pink tinged with age.",
+ "water": "Moist but well-drained",
+ "aspect": "Any aspect",
+ "soil": "Moist but drained loam",
+ "soilWarning": "Keep moist in sun; improve shallow chalk",
+ "prune": "Pruning group 1; prune only lightly after flowering if required.",
+ "toxicity": "Potential skin allergen; harmful if eaten by pets.",
+ "compliance": "",
+ "peak": "Jul-Oct",
+ "cvs": "'Ice Crystal'",
+ "hardiness": "H5",
+ "hardinessNote": "Hardy in most UK gardens.",
+ "resilience": "Reliable shrub provided soil does not dry excessively.",
+ "uses": "Shrub borders, woodland gardens, containers, cottage gardens and cut flowers.",
+ "height": "1-1.5m",
+ "spread": "1-1.5m",
+ "foliage": "deciduous",
+ "container": "with care",
+ "growthSpeed": 10,
+ "pestRisk": 7,
+ "thirst": 15,
+ "careLevel": 8,
+ "sunNeed": 60,
+ "sunMin": 30,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from species + cvs; hue 0 for white flowers (deck convention, as 'White Profusion'); aspect 'North, East, West, South' as Any aspect; peak 'Summer to autumn' read as Jul-Oct [Inference]; soil shortened (was 'Moist but well-drained clay or loam; acid, neutral or alkaline.'); soilWarning shortened (was 'Requires reliable moisture in full sun; improve shallow chalky soils with organic matter.'). Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "common": "Astilbe 'Chocolate Shogun'",
+ "latin": "Astilbe 'Chocolate Shogun'",
+ "hue": 340,
+ "visual": "Compact clump-forming perennial with dramatic dark chocolate to bronze foliage and airy plumes of pale pink flowers.",
+ "water": "Moist but well-drained",
+ "aspect": "North / East / West",
+ "soil": "Moist humus-rich loam",
+ "soilWarning": "Never let it dry out; hates hot dry sites",
+ "prune": "Cut back faded flower stems and old foliage after flowering or in late winter.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Jun-Aug",
+ "cvs": "'Chocolate Shogun'",
+ "hardiness": "H7",
+ "hardinessNote": "Very hardy perennial suitable for UK conditions.",
+ "resilience": "Reliable in moist shady borders; sensitive to drought.",
+ "uses": "Shady borders, woodland gardens, waterside planting, containers and cottage gardens.",
+ "height": "0.5-1m",
+ "spread": "0.5-1m",
+ "foliage": "deciduous",
+ "container": "with care",
+ "growthSpeed": 10,
+ "pestRisk": 5,
+ "thirst": 17,
+ "careLevel": 7,
+ "sunNeed": 40,
+ "sunMin": 15,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from genus + cvs; hue 340 from the pink plumes; aspect to compass format; peak 'Summer' read as Jun-Aug [Inference]; soil and soilWarning shortened to the measured panel limits (were 'Moist, fertile, humus-rich loam or clay' / 'Do not allow the soil to dry out; performs poorly in hot, dry conditions.'); foliage/container to the fixed vocabulary. Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

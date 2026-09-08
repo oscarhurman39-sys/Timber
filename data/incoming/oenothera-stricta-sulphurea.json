@@ -1,0 +1,33 @@
+{
+  "common": "Evening primrose 'Sulphurea'",
+  "latin": "Oenothera stricta 'Sulphurea'",
+  "hue": 55,
+  "visual": "Bronzy-green leaves · red buds and stems · lemon-yellow flowers fading peach",
+  "water": "Low; water during prolonged dry spells",
+  "aspect": "South/West",
+  "soil": "Poor to moderate, well-drained",
+  "soilWarning": "Avoid heavy, wet soils",
+  "prune": "Cut back after flowering",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jun-Oct",
+  "cvs": "syn. Oenothera odorata 'Sulphurea'; Oenothera odorata 'Cream'",
+  "hardiness": "H5",
+  "hardinessNote": "RHS H5",
+  "resilience": "drought tolerant · coastal tolerant · heat tolerant",
+  "uses": "gravel gardens · cottage gardens · wildflower meadows · flower borders",
+  "height": "60–90 cm",
+  "spread": "30–45 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 12,
+  "pestRisk": 6,
+  "thirst": 4,
+  "careLevel": 5,
+  "sunNeed": 95,
+  "sunMin": 80,
+  "uncertain": [
+    "RHS gives ultimate height as 0.5–1 m and spread as 0.1–0.5 m; 60–90 cm × 30–45 cm reflects specialist nursery and horticultural descriptions",
+    "Short-lived perennial that can self-seed prolifically"
+  ]
+}

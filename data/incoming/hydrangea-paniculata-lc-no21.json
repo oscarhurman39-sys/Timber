@@ -1,0 +1,33 @@
+{
+  "common": "Groundbreaker Blush hydrangea",
+  "latin": "Hydrangea paniculata 'LC NO21'",
+  "hue": 345,
+  "visual": "Low spreading habit · white panicles ageing through soft blush to pink-red",
+  "water": "Moderate; water regularly during dry spells",
+  "aspect": "Any aspect",
+  "soil": "Moist, fertile, well-drained",
+  "soilWarning": "Avoid prolonged drought and waterlogging",
+  "prune": "Prune in spring if required; remove weak or damaged growth",
+  "toxicity": "",
+  "compliance": "PBR protected",
+  "peak": "Jul-Nov",
+  "cvs": "trade name Groundbreaker® Blush™; Groundbreaker® series; breeder denomination 'LC NO21'",
+  "hardiness": "H5",
+  "hardinessNote": "Breeder reports hardy to -30°C",
+  "resilience": "cold hardy",
+  "uses": "ground cover · border edging · small gardens · patio containers",
+  "height": "30–40 cm",
+  "spread": "60–100 cm",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 12,
+  "pestRisk": 7,
+  "thirst": 12,
+  "careLevel": 5,
+  "sunNeed": 80,
+  "sunMin": 45,
+  "uncertain": [
+    "Official breeder material gives 30 cm height × 60 cm width, while newer competition material gives 30–40 cm height",
+    "Breeder denomination is 'LC NO21'; Groundbreaker® Blush™ is the trade designation"
+  ]
+}

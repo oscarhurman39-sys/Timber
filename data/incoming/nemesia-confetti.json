@@ -1,0 +1,33 @@
+{
+  "common": "Nemesia 'Confetti'",
+  "latin": "Nemesia 'Confetti'",
+  "hue": 270,
+  "visual": "Masses of small snapdragon-like flowers · lilac with a yellow throat · fresh green mound",
+  "water": "Keep moist, not waterlogged",
+  "aspect": "East / South / West",
+  "soil": "Fertile, humus-rich",
+  "soilWarning": "Never let it dry out · avoid waterlogging",
+  "prune": "Deadhead regularly; trim lightly if plants become untidy",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Apr-Oct",
+  "cvs": "",
+  "hardiness": "H3",
+  "hardinessNote": "Grown as a tender annual in the UK",
+  "resilience": "fast flowering · frost sensitive · dislikes drought",
+  "uses": "bedding · containers · window boxes · baskets · borders",
+  "height": "0.1–0.5 m",
+  "spread": "0.1–0.5 m",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 18,
+  "pestRisk": 7,
+  "thirst": 15,
+  "careLevel": 9,
+  "sunNeed": 75,
+  "sunMin": 45,
+  "uncertain": [
+    "Supplied hue was 'Mixed'; the photograph shows lilac flowers with yellow throats, so hue 270 follows the photo",
+    "peak 'Spring to autumn' written as Apr-Oct"
+  ]
+}

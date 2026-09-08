@@ -1,0 +1,33 @@
+{
+  "common": "Ninebark 'All Black'",
+  "latin": "Physocarpus opulifolius 'All Black'",
+  "hue": 280,
+  "visual": "Very dark purple to near-black leaves · pale pink-white flower clusters · peeling mature bark",
+  "water": "Keep moist, not waterlogged",
+  "aspect": "South / West",
+  "soil": "Any, fertile",
+  "soilWarning": "Best colour in sun · water while young",
+  "prune": "Pruning group 1; remove older or congested stems after flowering",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Aug",
+  "cvs": "",
+  "hardiness": "H6",
+  "hardinessNote": "Hardy throughout the UK",
+  "resilience": "very robust · tolerates a wide range of soils and conditions",
+  "uses": "mixed borders · hedging · screening · wildlife gardens · foliage contrast",
+  "height": "1.5–2.5 m",
+  "spread": "1.5–2.5 m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 15,
+  "pestRisk": 4,
+  "thirst": 10,
+  "careLevel": 6,
+  "sunNeed": 80,
+  "sunMin": 45,
+  "uncertain": [
+    "Third ninebark after 'Diabolo' (dealt) and 'Minall2' (held) — all dark-leaved; the label is the only reliable way to tell them apart on a bench",
+    "peak 'Late spring to summer' written as May-Aug"
+  ]
+}

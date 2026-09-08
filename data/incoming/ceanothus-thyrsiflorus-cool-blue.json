@@ -1,0 +1,32 @@
+{
+ "common": "Californian Lilac 'Cool Blue'",
+ "latin": "Ceanothus thyrsiflorus 'Cool Blue'",
+ "hue": 210,
+ "visual": "Evergreen variegated shrub with arching branches, glossy green leaves edged creamy white and clusters of small blue flowers in spring.",
+ "water": "Well-drained",
+ "aspect": "South / West",
+ "soil": "Fertile, very well-drained",
+ "soilWarning": "Avoid waterlogging, cold winds, thin chalk",
+ "prune": "Pruning group 8; prune after flowering.",
+ "toxicity": "",
+ "compliance": "",
+ "peak": "Apr-Jun",
+ "cvs": "'Cool Blue'",
+ "hardiness": "H4",
+ "hardinessNote": "Best in sheltered UK gardens.",
+ "resilience": "Drought resistant once established and tolerant of coastal conditions.",
+ "uses": "Wall-side borders, Mediterranean planting, coastal gardens, shrub borders and wildlife gardens.",
+ "height": "1.5-2.5m",
+ "spread": "1.5-2.5m",
+ "foliage": "evergreen",
+ "container": "with care",
+ "growthSpeed": 15,
+ "pestRisk": 5,
+ "thirst": 6,
+ "careLevel": 7,
+ "sunNeed": 95,
+ "sunMin": 75,
+ "uncertain": [
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from species + cvs; hue 210 blue; aspect to compass format; peak 'Spring' read as Apr-Jun [Inference]; soil shortened (was 'Loam or sand; fertile and very well-drained.'); soilWarning shortened (was 'Avoid waterlogged soil and exposed cold winds. Shallow chalk can cause chlorosis.'). The deck already has Ceanothus 'Concha' (plain green, deep blue). Ratings, hardiness, sizes, text kept as supplied and not re-verified (RHS unreachable from the build environment)."
+ ]
+}

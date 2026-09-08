@@ -1,0 +1,33 @@
+{
+ "common": "Panicle Hydrangea 'Pink & Rose'",
+ "latin": "Hydrangea paniculata 'Pink & Rose'",
+ "hue": 340,
+ "visual": "Deciduous flowering shrub producing large conical panicles of creamy-white flowers that mature through pink to deeper rosy tones.",
+ "water": "Moist but well-drained",
+ "aspect": "East / South / West",
+ "soil": "Humus-rich, well-drained",
+ "soilWarning": "Keep moist in sun; never waterlogged",
+ "prune": "Pruning group 4; cut back hard in late winter or early spring to a framework of healthy buds.",
+ "toxicity": "Harmful if eaten.",
+ "compliance": "",
+ "peak": "Jul-Oct",
+ "cvs": "'Pink & Rose'",
+ "hardiness": "H6",
+ "hardinessNote": "Hardy throughout the UK.",
+ "resilience": "Robust and reliable hydrangea; tolerates more sun than many other hydrangeas provided moisture is maintained.",
+ "uses": "Shrub borders, cottage gardens, woodland-style planting, specimen planting, cut flowers and containers.",
+ "height": "1.5-2.5m",
+ "spread": "1.5-2.5m",
+ "foliage": "deciduous",
+ "container": "with care",
+ "growthSpeed": 13,
+ "pestRisk": 6,
+ "thirst": 16,
+ "careLevel": 8,
+ "sunNeed": 65,
+ "sunMin": 35,
+ "uncertain": [
+  "Supplied cultivar text reads 'Pink and Ros'; exact registered cultivar name should be checked against the nursery label.",
+  "Converted 2026-09-06 from Oscar's batch JSON into the card schema: latin composed from species + cvs; hue 340 for the pink the panicles age to; aspect to compass format; peak 'Summer to autumn' read as Jul-Oct [Inference]; soil shortened (was 'Chalk, clay, loam or sand; fertile, humus-rich and well-drained.'); soilWarning shortened (was 'Requires reliable moisture during the growing season, particularly in full sun. Avoid permanently waterlogged ground.'); container 'large container with consistent watering' read as with care. Ratings, hardiness and text kept as supplied, not re-verified. The deck already has H. paniculata 'Wim's Red'."
+ ]
+}
