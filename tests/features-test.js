@@ -477,6 +477,89 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   check('go-to-card rewinds a swiped card back on top', g4.top === g3 && !g4.stillInHistory,
     `top ${g4.top} want ${g3} inHistory ${g4.stillInHistory}`);
 
+  /* ================= blank stays blank, in the SEARCH SHEET =================
+     The card face has obeyed this rule for a long time; the search sheet did not,
+     and the search sheet is the screen with a customer standing in front of it.
+     Measured on the deck when this was found: type blank on 277 of 280 plants (so
+     277 result subtitles opened with an orphan " · "), water blank on 20, prune on
+     16, uses on 21, cvs on 62 — each printing a bold caption with nothing after it.
+     These check the RENDERED output, not the helper, because the helper was never
+     the thing that was wrong. */
+  const blanks = await page.evaluate(() => {
+    const orphanRow = () => [...document.querySelectorAll('#searchDetail .facts li')].filter(li => {
+      const v = li.querySelector('.v'); if (!v) return false;
+      const b = v.querySelector('b'); const label = b ? b.textContent.trim() : '';
+      return !v.textContent.replace(label, '').trim();
+    }).map(li => li.textContent.trim());
+
+    openSearch(); renderResults('');
+    const subs = [...document.querySelectorAll('#searchResults .s-sub')].map(t => t.textContent);
+    const badSubs = subs.filter(t => /^\s*·|·\s*$|·\s*·/.test(t));
+
+    const staff = [], cust = [];
+    for (let i = 0; i < PLANTS.length; i++) {
+      showPlant(i); orphanRow().forEach(t => staff.push({ latin: PLANTS[i].latin, row: t }));
+      showCustomer(i); orphanRow().forEach(t => cust.push({ latin: PLANTS[i].latin, row: t }));
+      if (staff.length + cust.length > 5) break;
+    }
+
+    /* the share text is built from the same fields and had the same shape. "false"
+       is checked explicitly: the parts are built as `has(x) && 'Label: ' + x`, which
+       yields the BOOLEAN false when x is blank, and String(false) is not empty — the
+       first fix for this shared "Flower Tower Dogwood — false · Position: ...". */
+    let shared = [];
+    const realShare = navigator.share;
+    navigator.share = o => { shared.push(o.text); return Promise.resolve(); };
+    PLANTS.map((pl, i) => ({ pl, i })).filter(x => !x.pl.water || !x.pl.uses).slice(0, 5)
+      .forEach(({ i }) => { showPlant(i); const btn = document.getElementById('dShare'); if (btn && !btn.hidden) btn.click(); });
+    navigator.share = realShare;
+    const badShare = shared.filter(t => /\bfalse\b|\bundefined\b|·\s*·|—\s*·|·\s*$/.test(t));
+
+    closeSearch();
+    return { subs: subs.length, badSubs, staff, cust, shareTried: shared.length, badShare };
+  });
+  check(`no search subtitle carries an orphan separator (${blanks.subs} rows)`,
+    blanks.badSubs.length === 0, JSON.stringify(blanks.badSubs.slice(0, 3)));
+  check('no staff fact row is a caption with no value',
+    blanks.staff.length === 0, JSON.stringify(blanks.staff.slice(0, 3)));
+  check('no customer fact row is a caption with no value',
+    blanks.cust.length === 0, JSON.stringify(blanks.cust.slice(0, 3)));
+  check(`share text stays clean for plants with blank fields (${blanks.shareTried} shared)`,
+    blanks.badShare.length === 0, JSON.stringify(blanks.badShare.slice(0, 2)));
+
+  /* ---- prefers-reduced-motion actually reaches the generated animation CSS ----
+     buildAnimCSS() appends its rules to <head> at runtime, so they sit LATER in the
+     document than the stylesheet's own reduced-motion guard and tie it on specificity
+     (four class-level selectors each) — the generated rule won, and the sprigs kept
+     animating for someone who had asked the OS for no animation. The guard is emitted
+     alongside each pack now. Checked in both media states, because a guard that stops
+     the animation for everybody would also pass a one-sided test. ---- */
+  const groveAnim = async (reducedMotion) => {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion });
+    const pg = await ctx.newPage();
+    await pg.goto(URL); await deckSettled(pg);
+    const names = await pg.evaluate(() => {
+      const slug = Object.keys(ANIM)[0];
+      if (!slug) return null;                       /* no animated card in the deck — nothing to assert */
+      const idx = PLANTS.findIndex(pl => slugLatin(pl.latin) === slug);
+      goToCard(idx); stopGoto();
+      const card = [...document.querySelectorAll('#deck .card')].find(c => +c.dataset.idx === idx);
+      return [...card.querySelectorAll('[data-grove] .sprig')].map(s => getComputedStyle(s).animationName);
+    });
+    await ctx.close();
+    return names;
+  };
+  const gReduce = await groveAnim('reduce');
+  const gNormal = await groveAnim('no-preference');
+  if (gReduce === null) {
+    check('grove animation guard (no animated card in this deck — skipped)', true);
+  } else {
+    check(`reduced motion stops the generated grove animation (${gReduce.length} sprigs)`,
+      gReduce.length > 0 && gReduce.every(n => n === 'none'), JSON.stringify(gReduce));
+    check('and it still runs when motion is not refused',
+      gNormal.length > 0 && gNormal.every(n => n.startsWith('grove-')), JSON.stringify(gNormal));
+  }
+
   /* ---- no JS errors anywhere ---- */
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 

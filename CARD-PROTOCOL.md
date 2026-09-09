@@ -456,6 +456,77 @@ Focal point recorded here when off-centre:
   messages on the card-build branch still say the old numbers; this note is
   the key.
 
+- **v14.61 (the follow-up sweep: blank stays blank in the search sheet, and a
+  fuzzer that judges the deck instead of a feature)**: v14.60 shipped with two gaps
+  admitted in writing — the card-rendering audit never ran, and the independent
+  verification of everything else died on a session limit. This is that pass.
+  - **The deck's DATA is clean, and that is a measured statement, not a shrug.**
+    A sweep over all 280 cards: `slugLatin` is unique across the deck (a collision
+    would silently swap two cards' photographs and special-card treatments); no
+    plant field carries a `"`, `<`, `` ` `` or backslash that could break the markup
+    or an attribute it is interpolated into; no card renders `undefined`, `NaN`,
+    `null` or `[object Object]`; every registry key matches a real plant; all 3,064
+    ink zones have layout and fit; no card image 404s. The parsers were stressed
+    against the real data and against synthetic junk: `parseMonths` handles
+    wrap-around (`Nov-Feb` → Nov Dec Jan Feb, `Jun-May` → all twelve), and all 44
+    distinct peak strings in the deck parse correctly.
+    **One latent trap, written down rather than fixed:** `parseMonths` matches on the
+    first three letters of any word, so a peak string containing *"Juniper"* would
+    light June and *"marginal"* would light March. No plant does today — every peak
+    is a disciplined `Mon-Mon` — so there is nothing to fix and everything to know.
+  - **Blank stays blank — in the SEARCH SHEET this time.** The card face has obeyed
+    that rule since the trade sheet was printing nine empty labels on 54 of 57 cards.
+    The search sheet never did, and the search sheet is the screen with a customer
+    standing in front of it. Measured on the live deck: `type` is blank on **277 of
+    280** plants, so 277 of 280 result subtitles opened with an orphan `" · "`; and
+    `water` is blank on 20, `prune` on 16, `uses` on 21, `cvs` on 62 — every one of
+    them printing a bold caption with nothing after it, in the customer-facing view
+    as well as the staff one. `factRow()` and `joinBits()` put the existing rule where
+    it was missing, including in the share text.
+    **The first fix for this was itself wrong and the check caught it:** the parts are
+    built as `has(x) && 'Label: ' + x`, which yields the BOOLEAN `false` when x is
+    blank — and `has(false)` is true, because `String(false)` is `"false"`. It shared
+    *"Flower Tower Dogwood — false · Position: ..."*. `joinBits` takes strings only.
+  - **prefers-reduced-motion could not stop the grove animation.** `buildAnimCSS()`
+    appends its rules to `<head>` at runtime, so they sit LATER in the document than
+    the stylesheet's own guard and tie it on specificity — four class-level selectors
+    each. The generated rule won, and the Avondale sprigs kept running for someone
+    who had asked their OS for no animation. Verified with the media state emulated,
+    both ways. The guard is emitted alongside each pack now, in the same sheet, after
+    the rule it has to beat.
+  - **`splitSoil` reads one card's qualifier as a warning — Oscar's call, not ours.**
+    *Nandina domestica* is the only plant whose `soil` uses the legacy `" · "` form
+    with no semicolon (`"Well-drained, any · Adaptable"`), so the split treats
+    *"Adaptable"* as the caveat and prints it under the warning triangle. The other
+    122 cards using `·` all have a `;` first and are unaffected. **Not changed:** the
+    code cannot tell a qualifier from a caveat, and the plant data is Oscar's.
+    VERIFY-QUEUE has the ask.
+  - **`tests/deck-fuzz.js` — new, and it judges the deck rather than a feature.**
+    Every other browser suite drives one feature and checks what that feature did.
+    This one interleaves go-to-card, swipes, undo, hold-to-rewind, filters, review
+    and reset in a seeded random order — cutting the go-to-card arrival off at every
+    phase of its arc — and after each step asks only whether the deck is still
+    coherent: no card in both the deck and the history, `order` matching the DOM,
+    every plant accounted for once, no half-finished arrival left on an idle deck,
+    and `liveStack()` agreeing with reality. 3 seeds x 120 actions.
+    **It was built against controls, and two of the three exposed it as toothless.**
+    Deliberately breaking `stopGoto` was caught. Corrupting `liveStack` outright was
+    NOT — the fuzzer flushed the staged deal before looking, so `dealPending` was
+    always null and the assertion was vacuous. Staging the rewind restore against the
+    wrong anchor was not caught either — the check compared membership, and a wrong
+    anchor is an ORDER error. Both are now covered: `liveStack()` is checked while a
+    deal is genuinely in flight, and treated as a PREDICTION that flushing must
+    confirm card for card. The staged-restore path is set up deterministically in a
+    prologue rather than left to chance, because the first three seeds never reached
+    it. **A test that cannot fail is worth less than no test, and the only way to know
+    which one you have is to break the code on purpose.**
+  - **One of the audit's findings was an artefact of the audit itself.** An agent
+    reported, at high severity, that `rewindTo` stages its restore against a null
+    anchor. It was reading `timber.html` during the ninety seconds it was deliberately
+    broken for exactly that control. The committed code is correct. Worth recording:
+    a reader looking at a working tree can see a state that never existed in it.
+  - Gate: **18/18** — `deck-fuzz` joins the run.
+
 - **v14.60 (go-to-card is dealt, not riffled — and twelve bugs behind it)**:
   Oscar, on the Go to card button: *"i dont want it to flip through the whole
   deck, it can take too long ... maybe like a card shuffle, you know how u could

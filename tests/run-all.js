@@ -62,6 +62,8 @@ const CHECKS = [
     why: 'whole-deck rendered-output audit' },
   { name: 'srs-test', cmd: ['node', 'tests/srs-test.js'], browser: true,
     why: 'spaced repetition boxes, review mode' },
+  { name: 'deck-fuzz', cmd: ['node', 'tests/deck-fuzz.js'], browser: true,
+    why: 'deck invariants hold under randomly interleaved actions' },
   { name: 'features-test', cmd: ['node', 'tests/features-test.js'], browser: true,
     why: 'quiz v2, filters, fuzzy search, stats, focus trap' },
   { name: 'verify-cards', cmd: ['node', 'design/verify-cards.js'], browser: true,

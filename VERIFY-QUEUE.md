@@ -2350,6 +2350,32 @@ JSON.
 ---
 
 
+### 70. Nandina's soil string prints "Adaptable" under the warning triangle
+2026-09-09. Found by a sweep over every card's rendered output, not by reading.
+
+`Nandina domestica` carries `soil: "Well-drained, any · Adaptable"`. `splitSoil()`
+splits on the first `;` or `·` — value before, caveat after — so this card renders
+**"Adaptable" as its soil WARNING**, under the triangle, where every other card
+carries something like *"avoid winter wet"* or *"harmful if eaten"*.
+
+**It is the only card in the deck shaped this way.** 123 cards use `·` in `soil`,
+but the other 122 all have a `;` first, so the split lands on the semicolon and the
+`·` sits harmlessly inside the caveat (e.g. *"Any well-drained soil; Sheltered ·
+avoid winter wet"*). Nandina's is the legacy form with no semicolon.
+
+**Deliberately not auto-corrected.** The code cannot tell a qualifier from a caveat
+— both are "text after a separator" — so any fix here is a data edit, and plant data
+is Oscar's call. Three options, cheapest first:
+
+- **`"Well-drained, any, adaptable"`** — keeps the word, renders no warning (the
+  comma rule only splits before an instruction word like *avoid* / *do not*, and
+  "adaptable" is not one). Verified against `splitSoil` as written.
+- **`"Well-drained, any"`** — drops the word entirely. Loses information.
+- **Leave it.** It is one card and the word is not wrong, just wearing a triangle.
+
+No horticultural claim is at stake either way — this is about which half of the
+sentence the card treats as a warning.
+
 ### 69. Viburnum opulus dealt, Caryopteris 'Dark Knight' held, Sapphire Ring gets its flower — and two prose fields converted
 2026-09-02. Two JSONs and three photographs. Oscar named two of the frames:
 *"1st image is the viburnum"* and *"3rd image is a Ceratostigma Sapphire Ring

@@ -1150,7 +1150,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r225 · 2026-09-09 · 418dcb1';
+const BUILD='r230 · 2026-09-09 · 4bf13ba';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10371,6 +10371,20 @@ const num=v=>{const n=Number(v);return v===''||v==null||!Number.isFinite(n)?null
    yet", and "Bench · Root" emitted a lone "·" when both halves were empty. Blank stays
    honest: it is simply not shown, and a card with no buyer data at all says so once. */
 const has=v=>v!=null&&String(v).trim()!=='';
+/* The card face has obeyed "blank stays blank" since the trade sheet was printing
+   nine empty labels on 54 of 57 cards; the SEARCH SHEET never did, and the search
+   sheet is the screen with a customer standing in front of it. These two put the
+   same rule where it was missing. Measured on the live deck: water is blank on 20
+   plants, prune on 16, uses on 21, cvs on 62 — every one of those printed a bold
+   label with nothing after it. */
+const factRow=(icon,label,value)=>has(value)
+  ? `<li><span class="k">${icon}</span><span class="v"><b>${label}</b>${value}</span></li>` : '';
+/* Join the parts that exist, so a separator can never lead, trail, or double up.
+   STRINGS ONLY, and that is not fussiness: callers build their parts with
+   `has(x) && 'Label: '+x`, which yields the BOOLEAN false when x is blank — and
+   has(false) is true, because String(false) is "false". The first version of this
+   filtered on has() alone and shared "Flower Tower Dogwood — false · Position: ...". */
+const joinBits=(sep,...bits)=>bits.filter(b=>typeof b==='string'&&has(b)).join(sep);
 const cellIf=(cls,label,val,extra='')=>has(val)?`<div class="${cls}"><div class="l">${label}</div><div class="n">${val}</div>${extra}</div>`:'';
 const dots=(...v)=>v.filter(has).join(' · ');
 
@@ -10856,7 +10870,16 @@ function buildAnimCSS(){
     }
     stops.push(`100%{background-position-x:0%}`);
     css+=`@keyframes grove-${slug}{${stops.join('')}}\n`
-      +`.card.hot [data-grove="${slug}"] .sprig{animation:grove-${slug} ${total}ms step-end infinite}\n`;
+      +`.card.hot [data-grove="${slug}"] .sprig{animation:grove-${slug} ${total}ms step-end infinite}\n`
+      /* The guard has to be emitted HERE, not left to the stylesheet at the top of
+         the file. That one says `.card.hot .grove .sprig{animation:none}` inside a
+         prefers-reduced-motion query — four class-level selectors, exactly the same
+         specificity as the rule above — and this sheet is appended to <head> at
+         runtime, so it comes later and wins the tie. Measured with reduced motion
+         emulated: the Avondale sprigs kept running `grove-cercis-chinensis-avondale`.
+         Same selector, same sheet, after the animation: now the tie breaks the other
+         way, which is the way the accessibility setting asked for. */
+      +`@media (prefers-reduced-motion:reduce){.card.hot [data-grove="${slug}"] .sprig{animation:none}}\n`;
   }
   const s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
 }
@@ -11752,7 +11775,7 @@ function renderResults(q){
       return `<button class="r-chip" data-i="${i}">${PLANTS[i].common}</button>`;}).join('')}</div>`:'';
   searchResults.innerHTML=recHtml+hits.map(({p,i})=>
     `<button class="s-row" data-i="${i}">
-       <span class="s-names"><b>${p.common}</b><em>${p.latin}</em><small class="s-sub">${typeCategory(p)}${p.peak?' · peak '+p.peak:''}</small></span>
+       <span class="s-names"><b>${p.common}</b><em>${p.latin}</em><small class="s-sub">${joinBits(' · ',typeCategory(p),p.peak&&'peak '+p.peak)}</small></span>
        <span class="h">${p.hardiness}</span>
      </button>`).join('');
   searchResults.querySelectorAll('.s-row,.r-chip').forEach(btn=>btn.onclick=()=>showPlant(+btn.dataset.i));
@@ -11778,10 +11801,10 @@ function showPlant(i){
     <div class="d-head"><h3>${p.common}</h3><em>${p.latin}</em><button class="say" id="dSay" ${TTS?'':'hidden'} aria-label="Play latin pronunciation">🔊</button><span class="h">${p.hardiness}</span></div>
     <div class="d-eyebrow">${p.visual}</div>
     <ul class="facts">
-      <li><span class="k">💧</span><span class="v"><b>Water</b>${p.water}</span></li>
-      <li><span class="k">☀️</span><span class="v"><b>Position</b>${p.aspect}</span></li>
-      <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
-      <li><span class="k">✂️</span><span class="v"><b>Prune</b>${p.prune}</span></li>
+      ${factRow('💧','Water',p.water)}
+      ${factRow('☀️','Position',p.aspect)}
+      ${factRow('🪴','Soil',p.soil)}
+      ${factRow('✂️','Prune',p.prune)}
     </ul>
     ${tradeBlocks(p)}`;
   searchResults.hidden=true;
@@ -11796,7 +11819,9 @@ function showPlant(i){
   if(navigator.share){                          /* feature-detected — hidden where unsupported */
     dShare.hidden=false;
     dShare.onclick=()=>navigator.share({title:p.common,
-      text:`${p.common} (${p.latin}) — Water: ${p.water} · Position: ${p.aspect} · Soil: ${p.soil} · Size: ${p.size}`,
+      text:`${p.common} (${p.latin}) — ${joinBits(' · ',
+        has(p.water)&&'Water: '+p.water, has(p.aspect)&&'Position: '+p.aspect,
+        has(p.soil)&&'Soil: '+p.soil, has(p.size)&&'Size: '+p.size)}`,
       url:location.href}).catch(()=>{});
   }
   dBack.focus();
@@ -11814,14 +11839,14 @@ function showCustomer(i){
     <div class="c-latin">${p.latin}</div>
     <div class="c-eyebrow">${p.visual}</div>
     <ul class="facts">
-      <li><span class="k">💧</span><span class="v"><b>Watering</b>${p.water}</span></li>
-      <li><span class="k">☀️</span><span class="v"><b>Where to plant</b>${p.aspect}</span></li>
-      <li><span class="k">🪴</span><span class="v"><b>Soil</b>${p.soil}</span></li>
-      <li><span class="k">✂️</span><span class="v"><b>Pruning</b>${p.prune}</span></li>
-      <li><span class="k">❄️</span><span class="v"><b>Hardiness</b>${p.hardiness}</span></li>
-      <li><span class="k">📏</span><span class="v"><b>Grows to</b>${p.size}</span></li>
-      <li><span class="k">🌿</span><span class="v"><b>Great for</b>${p.uses}</span></li>
-      <li><span class="k">✨</span><span class="v"><b>Varieties</b>${p.cvs}</span></li>
+      ${factRow('💧','Watering',p.water)}
+      ${factRow('☀️','Where to plant',p.aspect)}
+      ${factRow('🪴','Soil',p.soil)}
+      ${factRow('✂️','Pruning',p.prune)}
+      ${factRow('❄️','Hardiness',p.hardiness)}
+      ${factRow('📏','Grows to',p.size)}
+      ${factRow('🌿','Great for',p.uses)}
+      ${factRow('✨','Varieties',p.cvs)}
     </ul>
     ${has(p.retail)?`<div class="c-price"><span class="l">Price</span><span class="n">${p.retail}</span></div>`:''}`;
   /* an empty price box is the one thing here a customer actually sees — never show it */

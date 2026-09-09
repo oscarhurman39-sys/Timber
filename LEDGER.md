@@ -5,6 +5,29 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-09 (the follow-up sweep) — v14.60 shipped with two gaps stated
+  in writing: the card-rendering audit never ran, and the independent verification
+  died on a session limit. Closed both.
+  **The deck's data is clean, measured not assumed:** across 280 cards, slugLatin is
+  unique, no field carries a character that breaks markup, no card prints
+  undefined/NaN/null, every registry key matches a plant, all 3,064 ink zones fit,
+  no image 404s, and all 44 distinct peak strings parse (wrap-around included).
+  **Four real defects fixed.** `type` is blank on 277 of 280 plants, so 277 search
+  results opened with an orphan " · "; water/prune/uses/cvs are blank on 20/16/21/62
+  plants and each printed a bold caption with nothing after it — in the CUSTOMER view
+  as well as the staff one. The share text had the same shape. And
+  prefers-reduced-motion could not stop the grove animation: the generated CSS is
+  appended at runtime, so it tied the stylesheet's guard on specificity and won on
+  document order. All four verified by rendering, not by reading.
+  **One fix was wrong and the check caught it** — `has(false)` is true, so the first
+  version shared "Flower Tower Dogwood — false · Position: ...".
+  **New suite: `tests/deck-fuzz.js`**, which judges the deck's invariants under
+  randomly interleaved actions instead of driving one feature. Built against three
+  deliberate controls, two of which proved the first version toothless; both holes
+  closed. 3 seeds x 120 actions, seeded so a failure replays.
+  **Left for Oscar:** Nandina's soil string uses the legacy " · " form with no
+  semicolon, so "Adaptable" prints under the warning triangle. Data, not code.
+  Gate 18/18. Protocol v14.61.
 progress: 2026-09-08 (go-to-card dealt, not riffled; eleven bugs) — the Go to
   card button no longer runs the deck past you. Oscar: *"i dont want it to flip
   through the whole deck, it can take too long"*, and he described what he wanted

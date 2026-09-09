@@ -53,6 +53,7 @@ node tools/deal-plant.js "<latin>" photo.jpg   # a photo arrived -> deal that ca
 | `PHOTO-REFRAME-BRIEF.md` | Prompt for cropping/de-labelling a photo with a vision model — returns crop coordinates, never a generated image |
 | `tools/reframe-photo.js` | Applies that crop JSON to the master with sharp — validates it first, refuses rather than guesses, invents no pixels |
 | `tests/run-all.js` | One command for every check — run it green before pushing |
+| `tests/deck-fuzz.js` | Deck invariants under randomly interleaved actions — seeded, so a failure replays |
 
 ```sh
 node tools/check-plant-json.js my-plant.json    # errors out rather than guessing

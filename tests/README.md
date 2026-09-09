@@ -3,7 +3,7 @@
 ## Run everything
 
 ```sh
-node tests/run-all.js --jobs 3  # everything, 3 browser suites at a time — ~2m40s
+node tests/run-all.js --jobs 3  # everything, 3 browser suites at a time — ~3m30s
 node tests/run-all.js           # everything, one at a time — ~7m
 node tests/run-all.js --fast    # data checks only — 0.3s, no browser
 node tests/run-all.js --list    # what would run
@@ -34,7 +34,7 @@ Six checks need no browser and run in about two seconds:
 
 ## Running a single suite by hand
 
-All nine browser suites drive a real headless Chromium against a locally served
+All ten browser suites drive a real headless Chromium against a locally served
 `timber.html`. Start a server at the repo root first, then run from the repo root:
 
 ```sh
@@ -45,6 +45,7 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/sw-update-test.js#  service-wo
 NODE_PATH=/opt/node22/lib/node_modules node tests/perf-test.js     #  9 checks: photo-fetch window, compositing budget, pixel parity, no layout on drag
 NODE_PATH=/opt/node22/lib/node_modules node tests/deck-audit.js    #  whole-deck data audit (errors fail; honest gaps warn)
 NODE_PATH=/opt/node22/lib/node_modules node tests/srs-test.js      # 24 checks: spaced repetition boxes, review mode, storage safety
+NODE_PATH=/opt/node22/lib/node_modules node tests/deck-fuzz.js     #  deck invariants under randomly interleaved actions
 NODE_PATH=/opt/node22/lib/node_modules node tests/features-test.js # 47 checks: quiz v2, filters, fuzzy search, stats, photos, shell polish, focus trap
 NODE_PATH=/opt/node22/lib/node_modules node design/verify-cards.js # card builder: rating maths vs data, missing assets
 NODE_PATH=/opt/node22/lib/node_modules node design/audit-layout.js # layout audit: ink fits zones, band collisions, rail alignment
@@ -63,6 +64,28 @@ layout audit needs that), but only the top few cards may paint and only the ones
 move may get a GPU layer. It also asserts that hiding buried content changes **no pixel**
 — only hot cards carry the drop shadow (an always-on shadow stacked ~57 deep once built
 a heavy black halo), and the `deep` toggle must never touch what's visible.
+
+`deck-fuzz.js` is the odd one out and deliberately so: every other suite drives ONE
+feature and checks what that feature did, which cannot find the bugs that only exist
+in a COMBINATION nobody thought to write a test for. It interleaves go-to-card,
+swipes, undo, hold-to-rewind, filters, review and reset in a seeded random order —
+cutting the go-to-card arrival off at every phase of its arc — and after each step
+asks only whether the deck is still coherent. The invariants at the top of the file
+are the spec; read them before changing one, and note that two are scoped to the full
+deck on purpose (an ephemeral view legitimately breaks them).
+
+Seeded, so a failure replays exactly:
+
+```sh
+node tests/deck-fuzz.js --seed 987654321
+```
+
+**Add coverage here by breaking the app on purpose.** Two of the three controls used
+to build this suite showed the first version was toothless: it flushed the staged deal
+before looking, so its `liveStack()` assertion was vacuous, and it compared membership
+where a wrong deal anchor is an ORDER error. Neither was visible from reading the
+code. If a new invariant cannot be made to fail by a deliberate one-line break, it is
+not testing anything.
 
 `deck-audit.js` audits the deck as a set — the gap between `check-plant-json.js` (one
 incoming plant) and `verify-cards.js` (the 2-card design mock). It judges what the card
