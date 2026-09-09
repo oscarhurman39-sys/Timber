@@ -275,6 +275,12 @@
      the deck stops moving — same gold as the rewind glyph, because it's the same journey */
   .card.found .tcard{animation:found-pulse 1s ease-out 1}
   @keyframes found-pulse{from{box-shadow:0 0 0 4px rgba(245,196,81,.85)}to{box-shadow:0 0 0 4px rgba(245,196,81,0)}}
+  /* The second half of the go-to-card arc (see drawToTop). Every card in the deck
+     paints in document order at z-index auto, so a card that has been drawn OUT of
+     the stack needs exactly one thing to be slapped back on top of it: to paint
+     above its siblings without its DOM position moving. That is all this rule is.
+     Positive z-index, so overlays (sheets at 50, the update pill at 80) still win. */
+  .card.drawn{z-index:6}
   .fab.learn{flex:1.25 1 0;font-size:11px;color:#1a120a;border-color:rgba(245,196,81,.6);
     background:linear-gradient(135deg,var(--gold),#e0a52f);box-shadow:0 5px 14px rgba(245,196,81,.28)}
 
@@ -1144,7 +1150,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r209 · 2026-09-06 · 8d97144';
+const BUILD='r225 · 2026-09-09 · 418dcb1';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10042,6 +10048,19 @@ let order=[],history=[],learnedCount=0;
 /* ---------- progress persistence (survives closing the app) ---------- */
 const STORE_KEY='timber-progress-v1';
 const FINGERPRINT=PLANTS.map(p=>p.latin).join('|');  /* deck layout invalidates if the plant list changes */
+/* Progress is the WHOLE deck, serialised and stored synchronously — ~10KB a write.
+   That is nothing once, and it is the main thread's afternoon when it repeats: a
+   30-card hold-to-rewind pushed 296KB through localStorage in 30 writes (measured),
+   at up to 25 a second, competing with the very animation it is recording. undo()
+   asks for a save through here instead, and one lands once the run goes quiet.
+   fling() deliberately does NOT — a swipe is new information and is written at once
+   (see afterPresented) — and pagehide flushes, so a killed app loses nothing. */
+let saveTimer=null;
+function saveSoon(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{saveTimer=null;saveProgress();},120);
+}
+function flushSave(){if(saveTimer){clearTimeout(saveTimer);saveTimer=null;saveProgress();}}
 function saveProgress(){
   if(reviewMode||activeFilter)return;  /* review/filter are ephemeral views — never persist over the full deck */
   if(DECK_CAP)return;                  /* ?cards=N is a diagnostic deck — it must not overwrite the real one */
@@ -10088,44 +10107,64 @@ function restoreDeck(d){
    document order IS stack order — holds mid-deal because chunks are spliced off
    the pending list top-first and inserted below the cards already standing. */
 let inkBatch=null;
-let dealPending=null,dealTimer=null;   /* bottom of the deck, not yet in the DOM (bottom→top) */
+/* Cards not yet in the DOM (bottom→top), and the card they belong directly UNDER.
+   The anchor used to be re-derived as "the deck's first card", which is the same
+   thing for a fresh deal because its buried cards go to the very bottom. A rewind's
+   restored cards do not: they land in the MIDDLE of the stack — above the deck they
+   are being put back on, below the handful dealt in front of the arrival animation —
+   so the frontier has to be carried rather than guessed. */
+let dealPending=null,dealTimer=null,dealAnchor=null;
 const DEAL_SYNC=16,DEAL_CHUNK=24;
-function dealCards(idxs){
-  if(dealTimer){clearTimeout(dealTimer);dealTimer=null;}   /* a new deal owns the deck outright */
-  dealPending=null;
-  dealChunk(idxs.slice(-DEAL_SYNC),null);
-  const rest=idxs.slice(0,-DEAL_SYNC);
-  if(rest.length){dealPending=rest;dealTimer=setTimeout(dealStep,16);}
+/* hand the rest of a stack to the timer slices. anchor is the card the next slice
+   goes under; null means the bottom of the deck. */
+function stageDeal(rest,anchor){
+  if(dealTimer){clearTimeout(dealTimer);dealTimer=null;}
+  dealPending=rest&&rest.length?rest:null;
+  dealAnchor=dealPending?anchor:null;
+  if(dealPending)dealTimer=setTimeout(dealStep,16);
   /* data-dealing marks the deck while buried chunks are still landing — the
      deterministic "deck settled" signal for the test suites, which count DOM
      cards and must not race a staged deal */
   deck.toggleAttribute('data-dealing',!!dealPending);
 }
-function dealChunk(idxs,before){
+function dealCards(idxs){
+  if(dealTimer){clearTimeout(dealTimer);dealTimer=null;}   /* a new deal owns the deck outright */
+  dealPending=null;dealAnchor=null;
+  const first=dealChunk(idxs.slice(-DEAL_SYNC),null);
+  stageDeal(idxs.slice(0,-DEAL_SYNC),first);
+}
+function dealChunk(idxs,before){        /* returns the LOWEST card it stood up — the next slice's anchor */
   inkBatch=[];
-  try{idxs.forEach(i=>renderCard(i,before));}
+  let first=null;
+  try{idxs.forEach((i,n)=>{const c=renderCard(i,before);if(!n)first=c;});}
   finally{const b=inkBatch;inkBatch=null;fitInkAll(b);}  /* never leave a batch open — a stuck one silently stops all fitting */
+  return first;
 }
 function dealStep(){
   dealTimer=null;
   if(!dealPending)return;
   const take=dealPending.splice(-DEAL_CHUNK);
   if(!dealPending.length)dealPending=null;
-  dealChunk(take,deck.querySelector('.card'));           /* under everything already dealt */
+  dealAnchor=dealChunk(take,dealAnchor)||dealAnchor;      /* under everything already dealt */
   if(dealPending)dealTimer=setTimeout(dealStep,16);
-  else deck.removeAttribute('data-dealing');
+  else{dealAnchor=null;deck.removeAttribute('data-dealing');}
 }
 function flushDeal(){                  /* synchronous finish, for consumers that walk the DOM deck */
   if(!dealPending)return;
   if(dealTimer){clearTimeout(dealTimer);dealTimer=null;}
-  const rest=dealPending;dealPending=null;
-  dealChunk(rest,deck.querySelector('.card'));
+  const rest=dealPending,anchor=dealAnchor;
+  dealPending=null;dealAnchor=null;
+  dealChunk(rest,anchor);
   deck.removeAttribute('data-dealing');
 }
-/* the deck's true membership while a staged deal is in flight: pending cards are all
-   below any dealt card and cannot have been swiped, so pending-then-DOM is exact */
+/* The deck's true membership while a staged deal is in flight. Pending cards stand
+   directly under the anchor, which for a fresh deal is the bottom card — so this
+   still reads pending-then-DOM there, exactly as it did when that was hardcoded. */
 function liveStack(){
-  return[...(dealPending||[]),...[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx)];
+  const dom=[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx);
+  if(!dealPending)return dom;
+  const at=dealAnchor?dom.indexOf(+dealAnchor.dataset.idx):-1;
+  return at<0?[...dealPending,...dom]:[...dom.slice(0,at),...dealPending,...dom.slice(at)];
 }
 
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
@@ -10219,14 +10258,18 @@ function updateReviewMenu(){
 }
 function enterReview(){
   stopGoto();                                  /* swapping views overrules an auto-run to a card */
-  if(activeFilter)clearFilter();               /* one ephemeral view at a time */
-  const due=srsDueIdx();
+  const due=srsDueIdx();                       /* asked BEFORE the filter is spent: srsDueIdx reads the
+      SRS store, not the deck, so nothing about the answer depends on which view is up. It used to be
+      asked after, which meant tapping "Review due" with nothing due threw away a 194-card filtered
+      deck and then opened nothing at all — the filter gone, the review not entered, no way back but
+      re-picking the chip. */
   if(!due.length){
     const next=srsNextDue();
     reviewDueMenu.textContent=next?'all caught up · next '+next:'all caught up';
     clearTimeout(reviewMenuTimer);reviewMenuTimer=setTimeout(updateReviewMenu,2500);
-    return;
+    return;                                    /* nothing due: the view on screen is left exactly as it was */
   }
+  if(activeFilter)clearFilter();               /* one ephemeral view at a time */
   reviewBackup={
     stack:liveStack(),
     order:[...order],history:[...history],learnedCount};
@@ -11142,6 +11185,7 @@ function renderCard(idx,before){
   const say=c.querySelector('.say');
   shieldButton(say);
   say.onclick=()=>speakLatin(p.latin,say);
+  return c;                                            /* dealChunk anchors the next slice on it */
 }
 
 /* shrink any live ink that overflows its measured zone — safety net for long
@@ -11202,36 +11246,47 @@ const PAINT_DEPTH=4;   /* deep enough that a swipe never promotes or first-paint
                           occluded, and the newly promoted card sits two opaque cards down. Layer/
                           raster churn mid-animation on a real phone tears the moving card into
                           strips and flashes unpainted panels — churn must stay out of sight. */
+/* Everything a card needs before anyone can look at it. markHot runs this over the
+   window near the top of the deck; go-to-card runs it on one buried card that is
+   about to be pulled out of the middle of the stack, which is the only reason it is
+   a function rather than a loop body. */
+function primeCard(c){                                 /* photos fetch as cards near the top —
+      hidden imgs with src still hit the network, and a 57-photo stampede at load is
+      exactly what the first ten swipes were fighting */
+  /* ALL of them, not the first: a PHOTO_SWAP card carries a second <img class="alt">
+     in the same .tphoto, and querySelector only ever loaded the primary. The alt
+     used to get its src as a side effect of tricklePhotos setting src on every
+     buried image; r79 (2026-08-21) rightly changed that to fetch() and, without
+     meaning to, cut the swap's second frame off — every two-photo card has been
+     blinking to black and back to the SAME photo since. Found 2026-09-02. */
+  c.querySelectorAll('.tphoto img').forEach(img=>{
+    if(!img.getAttribute('src')&&img.dataset.psrc)img.src=img.dataset.psrc;
+  });
+  /* and the special-card artwork with them — see lateBG */
+  c.querySelectorAll('[data-bg]').forEach(el=>{
+    el.style.cssText+=';'+el.dataset.bg;el.removeAttribute('data-bg');
+  });
+}
+function decodeCard(c){                                /* decode upcoming photos while occluded */
+  c.querySelectorAll('.tphoto img').forEach(img=>{if(img.decode)img.decode().catch(()=>{});});
+}
 function markHot(){
   const cards=[...deck.querySelectorAll('.card')];
   const live=cards.filter(c=>!c.dataset.gone);
   const going=cards.filter(c=>c.dataset.gone);          /* still animating out */
-  const hot=new Set([...going,...live.slice(-3)]);      /* one deeper than visible motion */
-  const shown=new Set([...going,...live.slice(-PAINT_DEPTH)]);
+  /* A card being drawn out of the deck by go-to-card is moving too, and — unlike
+     every other moving card — it is moving while still buried. Without it in both
+     sets it would rise out of the stack as a blank frame and pop its photo in on
+     landing. Never non-empty at rest, so the compositing budget is unchanged. */
+  const drawn=cards.filter(c=>c.dataset.goto);
+  const hot=new Set([...going,...drawn,...live.slice(-3)]);      /* one deeper than visible motion */
+  const shown=new Set([...going,...drawn,...live.slice(-PAINT_DEPTH)]);
   cards.forEach(c=>{
     c.classList.toggle('hot',hot.has(c));
     c.classList.toggle('deep',!shown.has(c));
   });
-  live.slice(-FETCH_DEPTH).forEach(c=>{                 /* photos fetch as cards near the top —
-      hidden imgs with src still hit the network, and a 57-photo stampede at load is
-      exactly what the first ten swipes were fighting */
-    /* ALL of them, not the first: a PHOTO_SWAP card carries a second <img class="alt">
-       in the same .tphoto, and querySelector only ever loaded the primary. The alt
-       used to get its src as a side effect of tricklePhotos setting src on every
-       buried image; r79 (2026-08-21) rightly changed that to fetch() and, without
-       meaning to, cut the swap's second frame off — every two-photo card has been
-       blinking to black and back to the SAME photo since. Found 2026-09-02. */
-    c.querySelectorAll('.tphoto img').forEach(img=>{
-      if(!img.getAttribute('src')&&img.dataset.psrc)img.src=img.dataset.psrc;
-    });
-    /* and the special-card artwork with them — see lateBG */
-    c.querySelectorAll('[data-bg]').forEach(el=>{
-      el.style.cssText+=';'+el.dataset.bg;el.removeAttribute('data-bg');
-    });
-  });
-  live.slice(-PAINT_DEPTH).forEach(c=>{                 /* decode upcoming photos while occluded */
-    c.querySelectorAll('.tphoto img').forEach(img=>{if(img.decode)img.decode().catch(()=>{});});
-  });
+  live.slice(-FETCH_DEPTH).forEach(primeCard);
+  live.slice(-PAINT_DEPTH).forEach(decodeCard);
 }
 
 /* Release tuning. Oscar's call: a swipe is a swipe — any real drag (moved past the
@@ -11319,10 +11374,20 @@ function attachGestures(card){
       lensOn=true;openLens(+card.dataset.idx,sy,kind);
     },LENS_HOLD);
   };
-  const start=(x,y,target)=>{if(card.dataset.gone)return;stopGoto();drag=true;moved=false;sx=x;sy=y;
+  const start=(x,y,target)=>{
+    if(card.dataset.gone)return;
+    /* Any hand on the deck lands an arriving card — same contract as letting go of ↺ —
+       and that is the whole of what this touch does. It must not also become a drag:
+       during the arrival this card is the one UNDER the card being dealt, so dragging
+       it would swipe a card the user cannot see, out of sight beneath the one they can. */
+    const landing=!!gotoCard;
+    stopGoto();
+    if(landing)return;
+    clearTimeout(card._flyT);card._flyT=0;         /* this gesture owns the transition now — see flyIn */
+    drag=true;moved=false;sx=x;sy=y;
     lx=x;lt=performance.now();vx=0;card.style.transition='none';lensArm(target);};
   const move=(x,y)=>{
-    if(!drag)return;
+    if(!drag||card.dataset.gone)return;                  /* thrown mid-gesture (fab/keyboard) — not ours any more */
     if(lensOn)return;                                    /* holding the lens is not a drag */
     dx=x-sx;dy=y-sy;
     const now=performance.now(),dt=now-lt;               /* smoothed finger velocity —
@@ -11340,6 +11405,12 @@ function attachGestures(card){
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
     if(lensOn){lensOn=false;closeLens();card._t=0;dx=dy=0;  /* release closes the lens; the hold
         was never a tap, so it must not arm the double-tap flip either */
+      /* and the card goes back to square. move() writes a transform for ANY finger
+         movement, not just past the 10px tap/drag split, so the few px of drift
+         under a half-second hold were being left on the card: measured
+         translate(6px,3px) rotate(0.33deg) still sitting there after the lens
+         closed, against a stack that had not moved. touchcancel already did this. */
+      card.style.transform='';
       learnStamp.style.opacity=0;skipStamp.style.opacity=0;return;}
     if(!moved){handleTap(card);dx=dy=0;return;}          /* a tap, not a drag */
     if(!card.classList.contains('flipped')){
@@ -11355,7 +11426,14 @@ function attachGestures(card){
     }else{card.style.transform='';}
     dx=dy=0;
   };
-  card.addEventListener('touchstart',e=>start(e.touches[0].clientX,e.touches[0].clientY,e.target),{passive:true});
+  /* ONE finger owns the card. A second finger landing mid-swipe used to re-enter
+     start(), which resets the origin to the first finger's CURRENT position — so a
+     committed 140px swipe collapsed to dx≈0 and moved=false, and letting go was read
+     as a tap. Two-thumb phone handling did it constantly. */
+  card.addEventListener('touchstart',e=>{
+    if(e.touches.length>1)return;
+    start(e.touches[0].clientX,e.touches[0].clientY,e.target);
+  },{passive:true});
   card.addEventListener('touchmove',e=>move(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
   card.addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();end();});  /* preventDefault stops the browser
       synthesising a mouse tap after every touch tap, which would turn single taps into double-taps */
@@ -11375,9 +11453,20 @@ function attachGestures(card){
      swiped-away deck doesn't leave one pair behind per card it ever rendered */
   card._drag=new AbortController();
   window.addEventListener('mousemove',e=>move(e.clientX,e.clientY),{signal:card._drag.signal});
-  window.addEventListener('mouseup',end,{signal:card._drag.signal});
+  /* CAPTURE, so no descendant can hide the end of the gesture. shieldButton() calls
+     stopPropagation on the Listen pill's mouseup — right, so the pill cannot start or
+     tap the card — but that also stopped the event bubbling to this listener, and a
+     release over the pill (a swipe rotates the card, which walks the pill under a
+     cursor that never started on it) left drag=true. The card then followed the mouse
+     around with no button held. Capture runs before the target, so end() always gets
+     its release; it no-ops unless a drag is actually in progress. */
+  window.addEventListener('mouseup',end,{signal:card._drag.signal,capture:true});
 }
-function releaseCard(card){card._drag?.abort();card.remove();}
+/* closeLens because the lens is a document-level element, not a child of the card:
+   hold a panel until the lens opens, then swipe that card away with the keyboard or a
+   fab and end() never runs, so nothing ever closed it. It sat over the deck until the
+   next lens opened. */
+function releaseCard(card){card._drag?.abort();clearTimeout(card._flyT);closeLens();card.remove();}
 
 function handleTap(card){
   if(card.classList.contains('flipped')){card.classList.remove('flipped');card._t=0;return;}
@@ -11386,20 +11475,36 @@ function handleTap(card){
   else{card._t=now;}
 }
 
+const srsQueue=[];
+function flushSRS(){
+  if(!srsQueue.length)return;
+  srsQueue.splice(0).forEach(s=>srsOnSwipe(s.latin,s.learned));   /* in swipe order, as the timers would have */
+  updateReviewMenu();
+}
 function fling(card,dir,learned,ms=350){
-  if(card.dataset.gone)return;card.dataset.gone='1';  /* a card can only be swiped once —
+  if(card.dataset.gone)return;
+  /* a real swipe overrules an auto-run to a card. BEFORE the flag below, not after:
+     stopGoto lands the drawn card, which re-cuts the deck and saves it, and a save
+     taken with this card already marked gone but not yet pushed to history would
+     record it as being in neither place. */
+  stopGoto();
+  card.dataset.gone='1';                          /* a card can only be swiped once —
       guards double fab presses / second-finger taps during the fling animation */
-  stopGoto();                                     /* a real swipe overrules an auto-run to a card */
   const idx=+card.dataset.idx;
   card.classList.remove('flipped');
+  clearTimeout(card._flyT);card._flyT=0;          /* the throw owns the transition now — see flyIn */
   card.style.transition=`transform ${ms}ms cubic-bezier(.2,.8,.2,1),opacity ${ms}ms`;
   card.style.transform=`translate(${dir*140}%,${learned?-40:60}px) rotate(${dir*24}deg)`;
   card.style.opacity='0';setTimeout(()=>releaseCard(card),ms-30);
   order=order.filter(i=>i!==idx);history.push({idx,learned});
   if(learned)learnedCount++;
-  const latin=PLANTS[idx].latin;                   /* SRS bookkeeping (storage I/O + menu text)
-      lands after the fling settles so the animation frame carries zero extra work */
-  setTimeout(()=>{srsOnSwipe(latin,learned);updateReviewMenu();},ms+10);
+  /* SRS bookkeeping (storage I/O + menu text) lands after the fling settles so the
+     animation frame carries zero extra work. QUEUED rather than merely delayed,
+     because pagehide can arrive inside those 360ms — measured: the swipe was in the
+     saved progress and its Leitner box was not, so a card starred as the phone went
+     to sleep was recorded as seen and never scheduled for review. */
+  srsQueue.push({latin:PLANTS[idx].latin,learned});
+  setTimeout(flushSRS,ms+10);
   /* NOTHING below this line may share the frame the throw starts on. markHot() promotes
      the newly revealed card to its own layer and un-hides the card behind it — a layer
      allocation plus a full paint of a whole card (photo, gradients, ~30 stacked shadows),
@@ -11425,10 +11530,15 @@ function afterPresented(fn){
   requestAnimationFrame(()=>requestAnimationFrame(run));
   setTimeout(run,150);
 }
-function flushDeferred(){[...deferred].forEach(run=>run());}
+function flushDeferred(){[...deferred].forEach(run=>run());flushSRS();flushSave();}
 addEventListener('pagehide',flushDeferred);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)flushDeferred();});
-function act(learned){const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
+/* stopGoto FIRST, and the reason is the z-index in .card.drawn: for the last third of
+   a go-to-card arrival the card you are looking at is on top of the deck by z-index
+   alone, and topCard() reads document order — so Learned/Skip and the arrow keys would
+   have starred the card hidden UNDERNEATH it. Landing first puts the two back in
+   agreement (landGoto moves the node), and costs nothing when no run is in flight. */
+function act(learned){stopGoto();const c=topCard();if(!c)return;if(c.classList.contains('flipped')){c.classList.remove('flipped');return;}fling(c,learned?1:-1,learned);}
 const REDUCED_MOTION=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 /* A card comes back the way it left — same offset, same tilt, reversed. fling()'s
    end state is this function's start state, so an undo reads as the swipe running
@@ -11442,7 +11552,12 @@ function flyIn(card,dir,learned,ms){
   void card.offsetWidth;                       /* commit the start frame before animating off it */
   card.style.transition=`transform ${ms}ms cubic-bezier(.2,.8,.2,1),opacity ${ms}ms`;
   card.style.transform='';card.style.opacity='';
-  setTimeout(()=>{card.style.transition='';},ms+40);   /* hand the card back to the stylesheet */
+  /* Keyed to the card, and cancelled by anything that takes it over. Left loose, this
+     timer fires ~280ms into whatever happened NEXT: grab the card as it lands and the
+     reset re-enables the stylesheet's .35s transform transition mid-drag, so the card
+     lags the finger by a third of a second for the rest of the gesture. */
+  clearTimeout(card._flyT);
+  card._flyT=setTimeout(()=>{card._flyT=0;card.style.transition='';},ms+40);   /* hand the card back to the stylesheet */
 }
 function undo(ms){
   const last=history.pop();if(!last)return false;
@@ -11452,7 +11567,7 @@ function undo(ms){
   markHot();                                   /* before the fly-in: a 'deep' card paints nothing */
   const c=topCard();
   if(c)flyIn(c,last.learned?1:-1,last.learned,ms||240);
-  updateCounts();refreshEmpty();saveProgress();
+  updateCounts();refreshEmpty();saveSoon();      /* coalesced — a rewind is 25 of these a second */
   return true;
 }
 function updateCounts(){leftEl.textContent=order.length;doneEl.textContent=learnedCount;doneMenu.textContent=learnedCount;
@@ -11478,6 +11593,7 @@ let rwTimer=null,rwStep=0,rwDidRewind=false;
 function stopRewind(){
   if(rwTimer){clearTimeout(rwTimer);rwTimer=null;}
   backBtn.classList.remove('rewinding');
+  flushSave();                                 /* the run is over — write where it stopped, now */
 }
 function rewindTick(){
   const gap=Math.max(REWIND_TO,REWIND_FROM*Math.pow(REWIND_DECAY,rwStep));
@@ -11717,86 +11833,184 @@ function showCustomer(i){
 }
 
 /* ---------- go to card: from a search hit straight to the physical card ----------
-   The search sheet is a reference; the deck is where the knowledge lives. This is the
-   bridge between them: close the search and run the deck to the card, cards flashing
-   past at the hold-to-rewind tempo. Two situations, one journey:
-   - still in the deck → riffle: each covering card flings out and tucks back UNDER
-     the deck. A cut, not a swipe — no history entry, no SRS write, nothing scored;
-   - already swiped → the real rewind: undo() card by card until it is back on top,
-     exactly as if the ↺ button had been held down.
-   Any hand on the deck stops it — same contract as letting go of ↺. */
-const GOTO_FROM=190,GOTO_TO=40,GOTO_DECAY=.82;   /* the rewind's tempo curve — it should feel like the same machine */
-/* A riffle to the bottom of the deck used to fly EVERY tuck, one card per frame.
-   Re-stacking a card costs ~100ms of layout once the deck is a couple of hundred
-   cards deep (measured, 218 cards), so reaching the deepest card took over half a
-   minute of watching cards you did not ask for. Only the last few tucks read as
-   motion at all: everything above them is closed in one DOM pass, and the riffle
-   proper plays out over the last GOTO_SHOW cards. */
-const GOTO_SHOW=10;                              /* tucks still flown, at the end of the riffle */
-let gotoTimer=null;
-function stopGoto(){if(gotoTimer){clearTimeout(gotoTimer);gotoTimer=null;}}
-function tuckUnder(card,ms){
-  card.dataset.gone='1';                          /* airborne: out of topCard()'s sight, kept painted by markHot */
+   The search sheet is a reference; the deck is where the knowledge lives, and this is
+   the bridge between them. It used to be a journey: the deck riffled past card by
+   card at the hold-to-rewind tempo until the one you asked for came round. That is a
+   fine thing to watch for three cards and a waste of your afternoon at three hundred
+   (Oscar, 2026-09-08: "i dont want it to flip through the whole deck, it can take too
+   long"). So the deck does not run any more. It CUTS, once, and the card is dealt:
+
+     1  DRAWN — the card slides up out from UNDER the stack. Its DOM position is not
+        touched to do this, so every card above it still paints over it and it
+        genuinely appears from underneath, the way a card pulled from the back of a
+        real deck does. That is the whole trick, and it costs nothing.
+     2  SLAPPED — lifted clear of its siblings by z-index (.card.drawn) and dropped
+        straight down onto the top of the deck, landing a hair oversized before it
+        settles.
+
+   A card that was already SWIPED arrives the other way. It is off the deck, so it has
+   nowhere to be drawn from: it flies in from above and takes the same landing. Two
+   approaches, one slap. Nothing else in this app moves a card vertically — every
+   swipe is a sideways throw — so a card falling in from the top of the screen reads
+   as a different act. Dealt, not swiped. Which is what it is.
+
+   The DOM is left ALONE for the whole flight and moved once, at the end, underneath
+   the landed card. The card covers the deck exactly at rest, so the re-stack is
+   invisible.
+
+   The cost of that is the one thing to know before touching this: for as long as the
+   card is up on its z-index, THE CARD YOU CAN SEE ON TOP IS NOT topCard(). Document
+   order still says the card underneath. Anything that acts on "the top card" has to
+   land the arrival first, and two places do: act() (the fabs and the arrow keys, which
+   would otherwise star the hidden card) and a gesture starting on the deck (which
+   would otherwise drag it, invisibly, beneath the card being dealt). landGoto() moves
+   the node, and the two agree again the instant it returns.
+
+   Any hand on the deck stops it, same contract as letting go of ↺, and stopping LANDS
+   the card rather than abandoning it half-way up. Around 800ms door to door, and
+   the same 800ms whether the card was two down or two hundred. */
+const GOTO_RISE=220,GOTO_HOLD=80,GOTO_SLAP=200,GOTO_SETTLE=110;
+/* Hard cap on the wait for the card to be painted before it is allowed to move —
+   see whenPainted. Reached only when a photo is genuinely slow to arrive. */
+const GOTO_PAINT=400;
+/* How far the card is drawn out, as a share of its own height — which is the deck's
+   height, so this scales with the screen instead of guessing at one.
+   The number is a measurement, not a taste: only the part of the card that has
+   cleared the deck's top edge is visible (the stack paints over the rest), and the
+   strip of app above the deck is about a quarter of a card tall. Draw it 24% and what
+   emerges is exactly the card's head — rounded gold corners, name, hardiness shield,
+   the top of the photograph — which is the half of a card you recognise. Draw it
+   further and the head goes off the top of the screen, leaving a nameless slab of
+   panel hanging there: -78% was tried first and looked like a UI glitch. */
+const GOTO_UP='translateY(-24%) scale(.945) rotate(-2.2deg)';
+/* gotoRun is a token, not a counter: a run that has been overruled must not be
+   restarted by a decode() promise that resolves after the fact. */
+let gotoTimer=null,gotoCard=null,gotoRun=0;
+/* Land whatever go-to-card has in the air, wherever it is in its arc, and leave the
+   deck in exactly the state a finished run would have left it in. Every gesture that
+   overrules a run calls this, so it has to be safe at any moment and safe twice. */
+function landGoto(){
+  const card=gotoCard;if(!card)return;
+  gotoCard=null;gotoRun++;
+  /* ONE node moved, not the whole deck. The first build cut the deck at the card —
+     every covering card tucked underneath it — which is 280 elements through a
+     fragment and 630ms of layout measured at full depth, landing as a freeze the
+     moment the animation ended. It was also the wrong move: "pulling that card from
+     the back of the deck and slapping it on top" leaves the rest of the deck exactly
+     where it was, which is both what Oscar asked for and what keeps your place in it.
+     It makes the hand-off invisible for free, too — the card that shows under the
+     landed card is the same one that showed under it all the way down. */
+  if(card.parentNode===deck&&card!==deck.lastElementChild)deck.appendChild(card);
+  card.classList.remove('drawn');                 /* on top by document order now; the z-index has done its job */
+  delete card.dataset.goto;
+  card.style.transition='none';card.style.transform='';
+  void card.offsetWidth;card.style.transition='';  /* hand the card back to the stylesheet */
+  markHot();
+  saveProgress();                                 /* the card really is on top now — keep it */
+}
+function stopGoto(){
+  if(gotoTimer){clearTimeout(gotoTimer);gotoTimer=null;}
+  landGoto();
+}
+function arriveGoto(card){
+  card.classList.add('found');                    /* one gold pulse, so the eye lands where the deck did */
+  setTimeout(()=>card.classList.remove('found'),1000);
+  if(navigator.vibrate)navigator.vibrate(12);
+}
+/* Pay for the card's first paint BEFORE asking it to move.
+   A card that has been buried since it was dealt has no layer, no decoded photo and
+   has never been painted; markHot un-hiding it costs a full card paint (photo,
+   gradients, the stacked shadows) on the very frame the transition is supposed to
+   start on. Measured at the bottom of a 280-card deck: the rise had travelled 15% of
+   its distance by the time the next beat told it to come back down — a jiggle, not a
+   draw. So decode the photo, let one full frame be presented, and only then move.
+   gotoTimer stays set throughout, because it is also the deck's "still running"
+   signal and nothing may observe an idle deck in the middle of a run. */
+function whenPainted(card,fn){
+  const run=gotoRun;let fired=false;
+  const go=()=>{
+    if(fired||run!==gotoRun)return;               /* overruled while we waited — stay landed */
+    fired=true;
+    if(gotoTimer){clearTimeout(gotoTimer);gotoTimer=null;}
+    fn();
+  };
+  gotoTimer=setTimeout(go,GOTO_PAINT);            /* the cap, and the owner of the running signal */
+  Promise.all([...card.querySelectorAll('.tphoto img')].map(i=>i.decode?i.decode().catch(()=>{}):null))
+    .then(()=>requestAnimationFrame(()=>requestAnimationFrame(go)));
+}
+function rewindTo(idx){
+  if(!history.some(h=>h.idx===idx))return false;
+  flushDeal();                                    /* one staged deal at a time */
+  const back=[];                                  /* pop order IS bottom-to-top: undo() stands each restored
+                                                     card on top of the one before it, and so does this */
+  for(let last=history.pop();last;last=history.pop()){
+    order.push(last.idx);
+    if(last.learned)learnedCount=Math.max(0,learnedCount-1);
+    back.push(last.idx);
+    if(last.idx===idx)break;
+  }
+  const first=dealChunk(back.slice(-DEAL_SYNC),null);   /* standing now: the animation needs the card in the deck */
+  stageDeal(back.slice(0,-DEAL_SYNC),first);            /* the rest lands under it, a slice at a time */
+  markHot();updateCounts();refreshEmpty();saveProgress();
+  return true;
+}
+/* the two beats that land a card on the deck: drop it from above, then settle it */
+function slapDown(card){
+  gotoTimer=setTimeout(()=>{
+    card.classList.add('drawn');                  /* on top of every sibling now, whatever the DOM says */
+    card.style.transition=`transform ${GOTO_SLAP}ms cubic-bezier(.4,0,.7,1)`;   /* a dropped card accelerates */
+    card.style.transform='translateY(0) scale(1.03)';
+    gotoTimer=setTimeout(()=>{
+      card.style.transition=`transform ${GOTO_SETTLE}ms cubic-bezier(.2,.8,.2,1)`;
+      card.style.transform='';                    /* the last 3% — the card bedding into the stack */
+      arriveGoto(card);
+      gotoTimer=setTimeout(()=>{gotoTimer=null;landGoto();},GOTO_SETTLE);
+    },GOTO_SLAP);
+  },GOTO_HOLD);
+}
+function drawToTop(idx,fromAbove){
+  const live=[...deck.querySelectorAll('.card:not([data-gone])')];
+  const card=live.find(c=>+c.dataset.idx===idx);
+  if(!card)return;                                /* vanished (deck rebuilt under us) — stop quietly */
   card.classList.remove('flipped');
-  if(REDUCED_MOTION){                             /* cut straight to the bottom of the stack */
-    deck.insertBefore(card,deck.firstChild);delete card.dataset.gone;markHot();return;
-  }
-  card.style.transition=`transform ${ms}ms cubic-bezier(.2,.8,.2,1),opacity ${ms}ms`;
-  card.style.transform='translate(-140%,60px) rotate(-24deg)';
-  card.style.opacity='0';
+  card.dataset.goto='1';                          /* markHot paints and promotes it while it is still buried */
+  primeCard(card);                                /* ...and its photo lands before anybody looks at it */
   markHot();
-  setTimeout(()=>{
-    card.style.transition='none';
-    deck.insertBefore(card,deck.firstChild);      /* back under the deck — membership and counts untouched */
-    card.style.transform='';card.style.opacity='';
-    void card.offsetWidth;card.style.transition='';
-    delete card.dataset.gone;
-    markHot();
-  },ms);
-}
-function cutUnder(n){                             /* move the top n cards under the deck in ONE pass */
-  const live=[...deck.querySelectorAll('.card:not([data-gone])')];
-  const moving=live.slice(-n);                    /* bottom-to-top; tucking them one by one lands them in exactly this order */
-  const frag=document.createDocumentFragment();
-  moving.forEach(c=>{c.classList.remove('flipped');frag.appendChild(c);});
-  deck.insertBefore(frag,deck.firstChild);        /* one reflow, not n */
-  markHot();
-}
-function gotoTick(idx,step){
-  gotoTimer=null;
-  const top=topCard();
-  if(top&&+top.dataset.idx===idx){                /* arrived */
-    top.classList.remove('flipped');
-    top.classList.add('found');setTimeout(()=>top.classList.remove('found'),1000);
-    saveProgress();                               /* a riffle re-cut the deck — keep the cut */
-    return;
+  gotoCard=card;
+  const buried=live.length-1-live.indexOf(card);
+  if(REDUCED_MOTION||(!buried&&!fromAbove)){      /* motion refused, or it is already the top card */
+    landGoto();arriveGoto(card);return;
   }
-  if(step>PLANTS.length*2)return;                 /* can't-happen backstop: never run forever */
-  const live=[...deck.querySelectorAll('.card:not([data-gone])')];
-  const pos=live.findIndex(c=>+c.dataset.idx===idx);
-  const buried=pos>=0?live.length-1-pos:0;        /* cards still lying between the top and the one asked for */
-  if(order.includes(idx)&&buried>GOTO_SHOW){      /* close the gap in one pass, then riffle the last few */
-    cutUnder(buried-GOTO_SHOW);
-    gotoTimer=setTimeout(()=>gotoTick(idx,step+1),0);   /* step keeps climbing: the backstop above stays reachable */
-    return;
-  }
-  const gap=Math.max(GOTO_TO,GOTO_FROM*Math.pow(GOTO_DECAY,step));
-  const ms=Math.min(300,Math.max(90,Math.round(gap*2.4)));
-  if(order.includes(idx)){if(top)tuckUnder(top,ms);}
-  else if(history.some(h=>h.idx===idx)){if(!undo(ms))return;}
-  else return;                                    /* vanished mid-run (deck rebuilt) — stop quietly */
-  gotoTimer=setTimeout(()=>gotoTick(idx,step+1),gap);
+  /* the start state goes on NOW, not when the motion begins: a restored card is
+     standing on top of the deck at rest, and it must never be seen there */
+  card.style.transition='none';
+  card.style.transform=fromAbove?GOTO_UP:'';      /* swiped: waits above the deck · buried: waits under it */
+  void card.offsetWidth;                          /* commit the start frame before animating off it */
+  whenPainted(card,()=>{
+    if(fromAbove){slapDown(card);return;}         /* already up there — straight to the drop */
+    card.style.transition=`transform ${GOTO_RISE}ms cubic-bezier(.22,.61,.36,1)`;
+    card.style.transform=GOTO_UP;
+    gotoTimer=setTimeout(()=>slapDown(card),GOTO_RISE);
+  });
 }
 function goToCard(idx){
-  closeSearch();stopRewind();stopGoto();
+  stopRewind();stopGoto();
   const present=()=>order.includes(idx)||history.some(h=>h.idx===idx);
   /* review and filter are ephemeral views — if the card isn't in this one, it lives
      in the full deck underneath, so drop back to that first */
   if(reviewMode&&!present())exitReview();
   if(activeFilter&&!present())clearFilter();
+  /* Checked BEFORE the sheet is closed. A light-mode or ?cards=N deck holds a slice of
+     the plant list while search still offers every plant in it, so this button can be
+     pressed for a card that is not in the deck at all — and closing the search first
+     meant the sheet vanished and absolutely nothing happened. Leave it open instead:
+     the plant is still there to read, which is the next most useful thing. */
   if(!present())return;
-  flushDeal();                                 /* the riffle walks the DOM deck — the target card must be standing in it */
-  gotoTick(idx,0);
+  closeSearch();
+  flushDeal();                                 /* the cut walks the DOM deck — the target card must be standing in it */
+  const swiped=!order.includes(idx);
+  if(swiped&&!rewindTo(idx))return;
+  drawToTop(idx,swiped);
 }
 
 document.getElementById('searchBtn').onclick=openSearch;
@@ -12086,10 +12300,27 @@ const lightPill=document.getElementById('lightPill');
 if(BOOT.light&&DECK_CAP){
   lightPill.hidden=false;
   document.getElementById('modeTag').textContent=` · light mode: ${DECK_CAP} of ${PLANTS.length} cards`;
+  /* The pill is a flow element ABOVE the deck, so revealing it makes the deck box
+     shorter than the one updateCardScale() measured moments ago — and the card is
+     sized off that measurement. Measured at 360x568 in light mode: --csy stayed at
+     0.665 for a deck that was now 344px tall, so the card rendered 55px TALLER than
+     the box holding it (same at 667 and 740; a tall screen is width-bound and was
+     unaffected, which is why this hid). Short phones are exactly the ones that end
+     up in light mode, so it hid on the only devices that see it. */
+  updateCardScale();
 }
 lightPill.onclick=()=>{
   /* the user's call overrides the evidence: full deck next open, count from zero.
-     bootPending is left true on purpose — if THIS reload dies, it counts. */
+     bootPending is left true on purpose — if THIS reload dies, it counts.
+
+     "THIS reload" is the page location.replace is about to load, and that page arms
+     its own bootPending the moment it boots — so the guarantee costs nothing here.
+     An audit read the comment as a claim about THIS page's flag and suppressed the
+     pagehide bootSurvived to keep it set; edge-test 9c caught it within the hour.
+     It was backwards: this page has plainly survived (you just tapped a button on
+     it), and refusing to vouch for it charges a boot failure to a boot that worked,
+     so the very next crash would drop you back into light mode. Two deaths, not one.
+     Leave bootSurvived alone. */
   saveDiag({lightMode:false,bootFails:0});
   location.replace(location.pathname);       /* also drops any ?cards= diagnostic */
 };

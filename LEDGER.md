@@ -5,6 +5,40 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-08 (go-to-card dealt, not riffled; eleven bugs) — the Go to
+  card button no longer runs the deck past you. Oscar: *"i dont want it to flip
+  through the whole deck, it can take too long"*, and he described what he wanted
+  instead — pull the card from the back of the deck, slap it on top, and have it
+  slot down from the top rather than swipe in from the side. That is now the
+  animation: the card slides up out from UNDER the stack (its DOM position is
+  untouched, so the cards above genuinely paint over it), then drops onto the top
+  of the deck. **~800ms, the same 800ms at any depth** — it was 2.6s at 218 cards
+  and grew with the deck. A card that was already swiped flies in from above
+  instead and takes the same landing; two arrivals, one slap.
+  Three measurements drove the build rather than taste: re-stacking the whole
+  deck cost **630ms** at full depth (replaced by one `appendChild`), a buried
+  card's first paint ate **the first 15% of the rise** (so the motion now waits
+  for one presented frame), and rebuilding 280 cards to rewind cost **688ms of
+  unbroken main thread** (so the restore is staged like the opening deal — 200
+  cards now cost 62ms). A fourth measurement deleted a feature: pre-warming the
+  card behind each search hit saved nothing (700ms vs 699ms) and left the deck
+  holding 52 fetched images instead of 10 after browsing 40 plants.
+  **Twelve defects fixed, every one reproduced as a failing browser test before
+  it was touched**, found by an eight-way parallel audit of the app. Nine were
+  pre-existing: a stuck drag transform after the lens closes; `flyIn`'s stray
+  timer re-enabling the .35s transition mid-drag; a second finger cancelling a
+  committed swipe; the Listen pill swallowing the `mouseup` that ends a drag; the
+  lens surviving its own card; `move()` dragging a thrown card; **"Review due"
+  destroying a 194-card filter when nothing was due**; and **light mode rendering
+  the card 55px taller than the deck box on short phones**. Two were in the new
+  code and are logged the same way, along with `sw.js`. A thirteenth "fix" was
+  wrong and `edge-test` caught it inside the hour — the light-pill boot sentinel was already correct;
+  reverted, with the comment that misled it rewritten. `sw.js` also announced an update before the
+  fresh shell was actually written, so tapping *update* could reload into the
+  stale build.
+  One flaky gate fixed rather than tolerated: `srs-test` drove its first drag
+  after a bare 400ms sleep and raced the staged deal under `--jobs 3`. It waits
+  on `data-dealing` now. Full gate **17/17**. Protocol v14.60.
 progress: 2026-09-06, latest (duplicate Viburnum removed) — **deck 276, hold
   82.** The plain Viburnum × bodnantense card wore the same photo as 'Charles
   Lamont'; Oscar had it removed. Wide frame kept as a renamed spare. Buddleja

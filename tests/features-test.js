@@ -397,12 +397,13 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   });
   check('search detail has a Go to card button', g1.btn);
   check('go-to-card closes the search sheet', !g1.searchOpen);
-  /* Budget, not just a backstop. A riffle to the deepest card takes ~2.6s at 218
-     cards; it took 34s before the far half of the cut was batched in one DOM pass,
-     and this wait silently absorbed the whole slide from one to the other until it
-     finally blew the old 30s cap. 12s is ~4x headroom and fails loudly next time. */
-  await page.waitForFunction(() => gotoTimer === null, null, { timeout: 12000 });
-  await page.waitForTimeout(450); // let the last tuck land
+  /* Budget, not just a backstop. The riffle is gone (v14.60): the card is drawn out
+     of the deck and dealt back onto it in one fixed motion, ~800ms at any depth
+     (measured 772ms to the 280th card down). The riffle it replaced took 2.6s at 218
+     cards and 34s before that, and a 30s wait silently absorbed the whole slide from
+     one to the other. 6s is loud enough to catch a return to anything depth-scaled. */
+  await page.waitForFunction(() => gotoTimer === null && gotoCard === null, null, { timeout: 6000 });
+  await page.waitForTimeout(450); // let the landing settle
   const g2 = await page.evaluate(() => ({
     top: +[...document.querySelectorAll('#deck .card:not([data-gone])')].pop().dataset.idx,
     order: order.length, history: history.length, learned: learnedCount,
@@ -412,6 +413,53 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     g2.order === g1.before.order && g2.history === g1.before.history && g2.learned === g1.before.learned,
     JSON.stringify({ before: g1.before, after: { order: g2.order, history: g2.history, learned: g2.learned } }));
 
+  /* the arrival must leave NOTHING on the card: data-goto keeps it painted and out of
+     markHot's budget, .drawn holds it above its siblings on a z-index, and the inline
+     transform is the animation itself. Any of the three surviving is a stuck card. */
+  const gClean = await page.evaluate(() => ({
+    marked: document.querySelectorAll('.card[data-goto], .card.drawn').length,
+    styled: [...document.querySelectorAll('#deck .card')].filter(c => /transform/.test(c.getAttribute('style') || '')).length,
+  }));
+  check('the arrival leaves no drawn state on the deck',
+    gClean.marked === 0 && gClean.styled === 0, JSON.stringify(gClean));
+
+  /* THE point of the rewrite: the journey no longer scales with how deep the card is.
+     Compared against a card three from the top rather than against a clock, so this
+     says the same thing on any machine and under any parallel load. */
+  const timeGoto = idxPick => page.evaluate(async pick => {
+    const live = [...document.querySelectorAll('#deck .card:not([data-gone])')];
+    const idx = +live[pick === 'deep' ? 0 : live.length - 4].dataset.idx;
+    openSearch(); showPlant(idx);
+    await new Promise(r => setTimeout(r, 250));       // as a reader would: the sheet is up first
+    const t0 = performance.now();
+    document.getElementById('dGoCard').click();
+    while (gotoTimer !== null || gotoCard !== null) await new Promise(r => setTimeout(r, 16));
+    return { idx, ms: Math.round(performance.now() - t0) };
+  }, idxPick);
+  const tShallow = await timeGoto('shallow'); await page.waitForTimeout(200);
+  const tDeep = await timeGoto('deep'); await page.waitForTimeout(200);
+  check(`go-to-card costs the same at any depth (${tShallow.ms}ms three down, ${tDeep.ms}ms at the bottom)`,
+    tDeep.ms <= tShallow.ms + 600, JSON.stringify({ tShallow, tDeep }));
+
+  /* For the last third of the arrival the card on top is on top by z-index alone, and
+     topCard() reads document order — so a fab pressed then must land the arrival
+     first or it stars the card hidden underneath the one you are looking at. */
+  const gFab = await page.evaluate(async () => {
+    const live = [...document.querySelectorAll('#deck .card:not([data-gone])')];
+    const want = +live[0].dataset.idx;
+    openSearch(); showPlant(want);
+    await new Promise(r => setTimeout(r, 250));
+    document.getElementById('dGoCard').click();
+    await new Promise(r => setTimeout(r, 600));       // mid-slap
+    act(true);
+    await new Promise(r => setTimeout(r, 500));
+    return { want, starred: history.length ? history[history.length - 1].idx : null };
+  });
+  check('a fab pressed mid-arrival acts on the card being dealt, not the one under it',
+    gFab.starred === gFab.want, JSON.stringify(gFab));
+  await page.evaluate(() => { undo(0); });            // put it back for the rewind case below
+  await page.waitForTimeout(300);
+
   /* ---- rewind path: skip the surfaced card, then go-to-card must undo it back ---- */
   const g3 = await page.evaluate(() => {
     const t = +[...document.querySelectorAll('#deck .card:not([data-gone])')].pop().dataset.idx;
@@ -420,7 +468,7 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   });
   await page.waitForTimeout(500);
   await page.evaluate(t => { openSearch(); showPlant(t); document.getElementById('dGoCard').click(); }, g3);
-  await page.waitForFunction(() => gotoTimer === null, null, { timeout: 12000 });
+  await page.waitForFunction(() => gotoTimer === null && gotoCard === null, null, { timeout: 6000 });
   await page.waitForTimeout(450);
   const g4 = await page.evaluate(() => {
     const top = +[...document.querySelectorAll('#deck .card:not([data-gone])')].pop().dataset.idx;

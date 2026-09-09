@@ -51,7 +51,14 @@ const seedDue = (page, n) => page.evaluate(count => {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const pageErrors = [];
   page.on('pageerror', e => pageErrors.push(String(e)));
-  await page.goto(URL); await page.waitForTimeout(400);
+  await page.goto(URL);
+  /* The first drag below used to go in after a bare 400ms sleep. A 280-card staged
+     deal is still landing chunks at 400ms, and under a --jobs 3 run it is still
+     landing them well after that — so the drag raced the deal, the fling never
+     started, and the suite failed on "learn creates SRS record" with an empty store.
+     Nothing to do with SRS. This file already waits on the deck's own settle signal
+     three times further down; it just never did it for the first interaction. */
+  await deckSettled(page);
 
   /* ---- 1. fresh state ---- */
   check('menu shows 0 due on fresh state',

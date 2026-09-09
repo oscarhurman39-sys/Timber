@@ -456,6 +456,126 @@ Focal point recorded here when off-centre:
   messages on the card-build branch still say the old numbers; this note is
   the key.
 
+- **v14.60 (go-to-card is dealt, not riffled — and twelve bugs behind it)**:
+  Oscar, on the Go to card button: *"i dont want it to flip through the whole
+  deck, it can take too long ... maybe like a card shuffle, you know how u could
+  be pulling that card from the back of the deck, and then u slap it on top ...
+  id like it to come from underneath the deck at the top of the app and slot
+  down into place from the top rather than the typical side swipes."* Both
+  halves of that are now what happens.
+  - **The riffle is gone.** It ran the deck past you card by card, and the cost
+    grew with the deck: v14.25 got the deepest card in a 218-card deck down from
+    34s to 2.6s and it was still 2.6s of watching cards you did not ask for. The
+    arrival is now **one motion of about 800ms, the same 800ms whether the card
+    is two down or two hundred** (measured at 280: 772ms, and 747ms in the
+    behaviour suite).
+  - **The motion is the ask, literally.** Beat one: the card slides up out from
+    UNDER the stack — its DOM position is not touched, so every card above it
+    still paints over it and it genuinely emerges from underneath. Beat two: it
+    is lifted above its siblings by a z-index (`.card.drawn`) and dropped
+    straight down onto the top of the deck, landing 3% oversized before it
+    settles. A card that was already *swiped* has nowhere to be drawn from, so it
+    flies in from above and takes the same landing — two approaches, one slap.
+    Nothing else in the app moves a card vertically, which is the point: a card
+    falling in from the top reads as a different act. Dealt, not swiped.
+  - **How far to draw it is a measurement, not a taste.** Only the part of the
+    card that has cleared the deck's top edge is visible. The strip of app above
+    the deck is about a quarter of a card tall, so at **-24%** what emerges is
+    exactly the card's head — gold corners, name, hardiness shield, the top of
+    the photograph. -78% was tried first: the head goes off the top of the screen
+    and what hangs there is a nameless slab of panel. It looked like a glitch.
+  - **The cut became one node move.** The old riffle tucked every covering card
+    underneath — 280 elements through a fragment, **630ms of layout measured at
+    full depth**, landing as a freeze the instant the animation ended. Pulling
+    the card to the top instead is one `appendChild`, it is what Oscar described,
+    it keeps your place in the deck, and it makes the hand-off invisible for
+    free: the card showing under the landed card is the same one that showed
+    under it all the way down.
+  - **Paint before you move.** A card buried since it was dealt has never been
+    painted, and un-hiding it costs a full card paint on the frame the transition
+    was supposed to start on. Traced at the bottom of a 280-card deck: **the rise
+    had travelled 15% of its distance before the next beat told it to come back
+    down** — a jiggle, not a draw. `whenPainted()` decodes the photo and lets one
+    frame present before anything moves.
+  - **And a warm-up that was removed on its own evidence.** `showPlant()` briefly
+    also primed and decoded the deck card behind whatever search hit you opened,
+    to take the decode off the front of the animation. It bought **nothing** —
+    700ms vs 699ms to the deepest card, inside the noise — because the detail
+    sheet already fetches that same photo, so the cache is warm either way. What
+    it cost was real: after browsing 40 plants the deck held **52 fetched card
+    images instead of the windowed 10**, each with a forced full-size decode and
+    nothing to release it. That is the exact shape of the memory pressure the
+    photo window exists to prevent, traded for a millisecond. Deleted.
+  - **The rewind stopped being one long task.** Going to a card you already
+    swiped still brings every card between back — same cards, same order, same
+    counts — but it no longer replays them one at a time. Rebuilding 280 cards in
+    one synchronous pass costs **688ms measured on a desktop**, which is seconds
+    on a phone and the shape of thing iOS kills a page for, so the restore is
+    **staged** exactly like the opening deal: 200 cards now cost **62ms of main
+    thread** with the remaining 184 landing in slices. That is what `dealAnchor`
+    is for — a staged deal that lands in the MIDDLE of the stack cannot re-derive
+    its frontier as "the deck's first card" the way a fresh deal can.
+  - **Twelve defects fixed, every one reproduced first.** Found by an eight-way
+    parallel audit of the app, each finding refuted or confirmed against the
+    source, then written as a failing browser reproduction *before* any fix and
+    re-run after. Eight of the nine pre-existing ones were in the app:
+    - releasing the press-and-hold lens left the drag transform on the card
+      (`translate(6px,3px) rotate(0.33deg)` still sitting there, against a stack
+      that had not moved) — `touchcancel` already reset it, `end()` did not;
+    - `flyIn`'s trailing transition reset was not keyed to the card, so it fired
+      ~280ms into whatever happened next: grab a card as it lands and the
+      stylesheet's .35s transform transition came back mid-drag;
+    - a **second finger** landing on the card re-entered `start()`, resetting the
+      origin to the first finger's current position — a committed 140px swipe
+      collapsed to dx≈0 and letting go was read as a tap;
+    - `shieldButton`'s `stopPropagation` on the Listen pill also stopped the
+      window's `mouseup`, so a release over the pill left `drag=true` and the
+      card followed the cursor with no button held. The window listener is on
+      **capture** now, where no descendant can hide the end of a gesture;
+    - the lens is a document-level element, so swiping its card away from the
+      keyboard left it on screen until the next lens opened;
+    - `move()` had no `data-gone` guard, so a card thrown by a fab or a key
+      mid-drag could be dragged back over its own throw;
+    - **"Review due" with nothing due spent the filter anyway** — it cleared a
+      194-card filtered deck and then opened nothing at all. `srsDueIdx()` reads
+      the SRS store, not the deck, so it is asked first now;
+    - in **light mode** the card was scaled to a deck box the pill then shrank:
+      `--csy` 0.665 against a 344px deck at 360x568, a card **55px taller than
+      the box holding it** (same at 667 and 740; a tall screen is width-bound,
+      which is why it hid on everything except the small phones that are the only
+      ones that ever see light mode).
+    Three more were in the new code and are logged because they were found the
+    same way: the fabs and arrow keys read `topCard()` from document order and
+    would have starred the card *underneath* the one arriving (the z-index makes
+    the two disagree for the last third of the arrival); a hand on the deck
+    mid-arrival started a drag on that same hidden card (it now lands the card and
+    does nothing else — the contract the ↺ button has always had); and on a capped
+    or light-mode deck, pressing *Go to card* for a plant the deck does not hold
+    closed the search sheet and then did nothing at all. Presence is checked before
+    the sheet closes now, so the plant you are reading stays on screen.
+  - **The ninth was in `sw.js`**: the `timber-updated` message went out while the fresh shell was
+    still an unresolved `put`. The page's whole response to that message is to
+    reload, back through this worker, where a cache still holding the stale shell
+    serves the stale shell — tapping *update* could hand you the build you were
+    trying to leave. The write is awaited before the announcement now.
+  - **One finding was wrong, and the gate is what said so.** The audit read the
+    light-pill's *"bootPending is left true on purpose"* as a claim about the
+    outgoing page and had `pagehide` stop vouching for it. `edge-test` 9c failed
+    on the next run. It was backwards: that page has obviously survived — you just
+    tapped a button on it — and refusing to vouch charges a boot failure to a boot
+    that worked, so the next single crash would drop you back into light mode. The
+    guarantee the comment describes costs nothing anyway, because the page
+    `location.replace` loads arms its own `bootPending` as it boots. Reverted, and
+    the comment now says which reload it means. **Eleven fixes, one revert — and
+    the revert is the reason none of the other ten are guesses.**
+  - **A flaky gate fixed rather than tolerated.** `srs-test` drove its first drag
+    after a bare 400ms sleep; a 280-card staged deal is still landing chunks then,
+    and under `--jobs 3` it is still landing them well after that. The drag raced
+    the deal and the suite failed on *"learn creates SRS record"* with an empty
+    store — nothing to do with SRS. It waits on `data-dealing` now, as it already
+    did three times further down its own file.
+  - Gate: **17/17**, and the numbers above are measured, not estimated.
+
 - **v14.59 (276 dealt / 82 held — a duplicate Viburnum removed on Oscar's
   call)**: the deck carried *Viburnum* × *bodnantense* (the plain "Bodnant
   Viburnum") beside *V.* × *bodnantense* 'Charles Lamont', and both cards wore

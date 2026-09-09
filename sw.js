@@ -35,15 +35,23 @@ self.addEventListener('fetch', e => {
             /* a fresher app shell just replaced the stale one we already served —
                tell open pages so they can offer a refresh instead of waiting for
                the user's next visit */
+            let fresher = false;
             if (new URL(key).pathname.endsWith('timber.html')) {
-              const prev = await c.match(key);
+              const prev = await c.match(key);                 // must be read BEFORE the put
               const a = prev && prev.headers.get('etag'), b = copy.headers.get('etag');
-              if (prev && a && b && a !== b) {
-                const cs = await self.clients.matchAll();
-                cs.forEach(cl => cl.postMessage('timber-updated'));
-              }
+              fresher = !!(prev && a && b && a !== b);
             }
-            c.put(key, copy);
+            /* The write comes FIRST and is awaited. The announcement used to go out
+               while the put was still only a pending promise, and the page's whole
+               response to it is to reload — straight back through this worker, where
+               a cache still holding the stale shell serves the stale shell. Tapping
+               "update" could hand you the build you were trying to leave, and the
+               pill would come back. Announce a cache that has actually been written. */
+            await c.put(key, copy);
+            if (fresher) {
+              const cs = await self.clients.matchAll();
+              cs.forEach(cl => cl.postMessage('timber-updated'));
+            }
           });
         }
         return res;
