@@ -5,6 +5,24 @@ brick: Photograph the next tranche of the 52 held cards that peak in August —
   `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
   command. The other 46 want a May / March / November / June visit.
 since: 2026-08-11  sessions-unchanged: 3
+progress: 2026-09-09, later (the verification came back) — the adversarial pass
+  finished after v14.61 was pushed. Ten of thirteen findings refuted, nine of those
+  only because the verifier read a tree where the fix was already in. **One survived
+  both skeptics and it was mine.** The v14.60 "one finger owns the card" fix guarded
+  touchstart and not touchend, and touchend fires on the element the touch STARTED
+  on — so a second thumb brushing the card and lifting ran end() with the FIRST
+  finger's state and flung the card mid-swipe: history 0→1, learnedCount 0→1, Leitner
+  written, saved. The old bug turned a committed swipe into a tap; **this one starred
+  a plant nobody had decided on.** My first fix for it then threw on every synthesised
+  touch (empty changedTouches) so nothing committed at all — caught by app-test, not
+  by reading.
+  Three more from chasing it: a filter dealt past the light-mode cap (**24 cards
+  became 136**, walking back into the crash the cap exists to prevent — review mode
+  too); v14.60's debounced undo-save was silently dropped if a view opened inside its
+  120ms window, even across a clean pagehide; and fixing the cap made a fourth bug
+  reachable — goToCard spent an ephemeral view before asking whether the card was
+  anywhere. Regression tests for all four, in app-test and edge-test where they
+  belong. Gate 18/18. Protocol v14.62.
 progress: 2026-09-09 (the follow-up sweep) — v14.60 shipped with two gaps stated
   in writing: the card-rendering audit never ran, and the independent verification
   died on a session limit. Closed both.

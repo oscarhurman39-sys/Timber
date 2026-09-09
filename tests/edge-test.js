@@ -314,6 +314,70 @@ function check(name, cond, extra) {
   check('light pill: tap returns the full deck and clears the mode', dg.lightMode === false && dg.bootFails === 0 && l.cards === NPLANTS && l.pill && errs9c.length === 0, JSON.stringify({ dg, l, errs9c }));
   await ctx.close();
 
+  /* ---- 9d. an ephemeral view must not deal past the cap ----
+     Light mode is only ever on because this phone failed to open the full deck TWICE.
+     A filter chip used to deal every match — 24 cards became 136, measured — walking
+     straight back into the crash the cap exists to prevent. Review mode had the same
+     hole. The cap is not a preference, it is the recovery. ---- */
+  ctx = await browser.newContext(); page = await ctx.newPage();
+  await page.addInitScript(() => {
+    if (localStorage.getItem('seeded9d')) return;
+    localStorage.setItem('seeded9d', '1');
+    localStorage.setItem('timber-diag-v1', JSON.stringify({ bootPending: true, bootFails: 1 }));
+  });
+  await page.goto(URL); await deckSettled(page);
+  const cap9d = await page.evaluate(async () => {
+    const cap = DECK_CAP, capped = document.querySelectorAll('#deck .card').length;
+    renderFilterChips();
+    const chip = [...document.querySelectorAll('#filterChips .chip')].find(c => !c.disabled);
+    chip.click();
+    await new Promise(r => setTimeout(r, 600));
+    const filtered = document.querySelectorAll('#deck .card').length;
+    clearFilter();
+    await new Promise(r => setTimeout(r, 400));
+    const restored = document.querySelectorAll('#deck .card').length;
+    /* review mode too: seed everything due, then it must still respect the cap */
+    const srs = {}; PLANTS.forEach(p => { srs[p.latin] = { box: 1, due: srsDateStr(0) }; });
+    localStorage.setItem('timber-srs-v1', JSON.stringify(srs));
+    enterReview();
+    await new Promise(r => setTimeout(r, 600));
+    const reviewed = document.querySelectorAll('#deck .card').length;
+    exitReview();
+    return { cap, capped, filtered, restored, reviewed };
+  });
+  check(`light mode: a filter stays inside the cap (${cap9d.filtered} cards, cap ${cap9d.cap})`,
+    cap9d.cap > 0 && cap9d.filtered <= cap9d.cap, JSON.stringify(cap9d));
+  check(`light mode: review stays inside the cap (${cap9d.reviewed} cards)`,
+    cap9d.reviewed <= cap9d.cap, JSON.stringify(cap9d));
+  check('light mode: clearing the filter restores the capped deck',
+    cap9d.restored === cap9d.capped, JSON.stringify(cap9d));
+  await ctx.close();
+
+  /* ---- 9e. a pending write must not be stranded by a view switch ----
+     undo()'s save is debounced (a hold-to-rewind ran 25 whole-deck writes a second),
+     and saveProgress() deliberately does nothing while an ephemeral view is up. Enter
+     a filter inside that 120ms window and the write landed where it was ignored: the
+     undo survived in memory and was never persisted, not even across a clean pagehide.
+     The views flush before they switch saving off. ---- */
+  ctx = await browser.newContext(); page = await ctx.newPage();
+  await page.goto(URL); await deckSettled(page);
+  const strand = await page.evaluate(async () => {
+    act(true);
+    await new Promise(r => setTimeout(r, 400));            // a swipe is written at once
+    const afterSwipe = JSON.parse(localStorage.getItem('timber-progress-v1')).history.length;
+    undo(40);                                              // this write is debounced...
+    renderFilterChips();
+    [...document.querySelectorAll('#filterChips .chip')].find(c => !c.disabled).click();
+    await new Promise(r => setTimeout(r, 600));            // ...and a view opens inside the window
+    window.dispatchEvent(new Event('pagehide'));
+    await new Promise(r => setTimeout(r, 100));
+    return { afterSwipe, saved: JSON.parse(localStorage.getItem('timber-progress-v1')).history.length,
+             inMemory: history.length };
+  });
+  check('an undo made just before a filter is still persisted',
+    strand.afterSwipe === 1 && strand.saved === 0, JSON.stringify(strand));
+  await ctx.close();
+
   /* ---- 10. Report a problem: last error is captured, the report reads it back, copy works ---- */
   ctx = await browser.newContext(); ctx.grantPermissions(['clipboard-read', 'clipboard-write']).catch(() => {});
   page = await ctx.newPage();

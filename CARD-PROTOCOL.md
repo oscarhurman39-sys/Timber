@@ -456,6 +456,52 @@ Focal point recorded here when off-centre:
   messages on the card-build branch still say the old numbers; this note is
   the key.
 
+- **v14.62 (the verification came back, and it was right about me)**: v14.61's
+  adversarial verification finished after that commit was pushed. Of thirteen
+  findings, ten were refuted — nine of them because the verifier read a working tree
+  where the fix was already in, which is snapshot skew, not disagreement. One survived
+  both skeptics, and it was a bug **introduced by v14.60**. Three more came out of
+  chasing it.
+  - **"ONE finger owns the card" guarded touchstart and not touchend, and the second
+    version was worse than the bug it fixed.** `touchend` fires on the element a touch
+    STARTED on, and a second finger brushing the card started there too — so its LIFT
+    ran `end()` carrying the FIRST finger's drag state. Measured: mid-swipe, 130px in,
+    still deciding, a stray thumb lifts and the card is flung — `history` 0→1,
+    `learnedCount` 0→1, the Leitner box written, the progress saved, and the rest of
+    the gesture dead because `drag` was now false. The original two-finger bug turned a
+    committed swipe into a tap. **This one starred a plant nobody had decided on.**
+    The owning identifier is tracked now and everybody else's end is ignored.
+  - **And the first fix for THAT threw on every synthesised touch.** `changedTouches`
+    came back empty, `changedTouches[0].identifier` threw through the whole handler,
+    and no swipe committed at all — caught by `app-test` on the next gate, not by
+    reading. The guard is permissive on both sides now: when the platform will not say
+    which finger moved, treat the event as ours, and only ever ignore an end that NAMES
+    a different one. **Never guess in the direction of dropping a real gesture** — the
+    bug the guard exists for is the opposite one.
+  - **A filter dealt straight past the light-mode cap: 24 cards became 136.** `DECK_CAP`
+    is either the `?cards=` diagnostic or light mode, and light mode is only ever on
+    because this phone failed to open the full deck TWICE. `applyFilter` and
+    `enterReview` both ignored it, so one tap on a filter chip walked back into the
+    crash the cap exists to prevent. **The cap is not a preference, it is the recovery.**
+    Both views take the same slice `buildDeck` does now.
+  - **A debounced write, stranded by a view switch.** v14.60 coalesced `undo`'s save
+    (a hold-to-rewind was running 25 whole-deck writes a second, 296KB across 30
+    cards). `saveProgress` deliberately does nothing while an ephemeral view is up — so
+    an undo followed within 120ms by a filter landed its write where it was ignored,
+    and the undo was never persisted, not even across a clean `pagehide`. Both views
+    flush before they switch saving off.
+  - **Fixing the cap made a fourth bug reachable, which is the honest order to report
+    it in.** `goToCard` dropped an ephemeral view and THEN asked whether the card was
+    anywhere — so once the filter was correctly capped, going to a plant outside it
+    spent the whole filtered deck to discover the plant was not in the capped deck
+    either. Same mistake "Review due" used to make. It reads the view's own backup
+    first and only leaps if the card is actually underneath.
+  - Regression tests for all four, in the suites they belong to rather than the one
+    that was easiest: the touch owner in `app-test` (both directions — a stranger's
+    finger must change nothing AND the owner's must still commit), the cap and the
+    stranded write in `edge-test` beside the light-mode section they belong with.
+  - Gate: **18/18**.
+
 - **v14.61 (the follow-up sweep: blank stays blank in the search sheet, and a
   fuzzer that judges the deck instead of a feature)**: v14.60 shipped with two gaps
   admitted in writing — the card-rendering audit never ran, and the independent

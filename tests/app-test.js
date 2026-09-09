@@ -519,6 +519,41 @@ function topFlipped(page) {
   await tctx.close();
 
   /* ---- 16. no JS errors anywhere ---- */
+  /* ---- ONE finger owns the gesture, its END included ----
+     Guarding only touchstart fixed half a bug and opened a worse one. touchend fires
+     on the element a touch STARTED on, and a second finger that brushes the card
+     started here too — so its lift ran end() with the FIRST finger's drag state and
+     flung the card while that finger was still down. Measured when found: history
+     0→1 and learnedCount 0→1 mid-gesture, plus the Leitner write and the save that
+     follow a real swipe. The old bug turned a committed swipe into a tap; that one
+     starred a plant nobody had decided on. Both directions are asserted here: a
+     stranger's finger must change nothing, and the owner's must still commit. ---- */
+  const twoFinger = await page.evaluate(async () => {
+    const card = topCard(), idx = +card.dataset.idx;
+    const bb = document.getElementById('deck').getBoundingClientRect();
+    const cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2;
+    const T = (id, x, y) => new Touch({ identifier: id, target: card, clientX: x, clientY: y });
+    const fire = (type, touches, changed) => card.dispatchEvent(new TouchEvent(type,
+      { touches, targetTouches: touches, changedTouches: changed, bubbles: true, cancelable: true }));
+    const before = { order: order.length, history: history.length, learned: learnedCount };
+
+    const f1 = T(1, cx, cy);            fire('touchstart', [f1], [f1]);
+    const f1b = T(1, cx + 130, cy);     fire('touchmove', [f1b], [f1b]);   // mid-swipe, undecided
+    const f2 = T(2, cx - 40, cy + 60);  fire('touchstart', [f1b, f2], [f2]);
+    fire('touchend', [f1b], [f2]);      // the SECOND finger lifts; the first is still down
+    await new Promise(r => setTimeout(r, 400));
+    const mid = { order: order.length, history: history.length, learned: learnedCount };
+
+    fire('touchend', [], [f1b]);        // now the owner lifts — this one must commit
+    await new Promise(r => setTimeout(r, 500));
+    return { idx, before, mid, after: { order: order.length, history: history.length, learned: learnedCount } };
+  });
+  check('a second finger lifting does not commit the swipe the first is still making',
+    twoFinger.mid.history === twoFinger.before.history && twoFinger.mid.learned === twoFinger.before.learned,
+    JSON.stringify(twoFinger));
+  check('and the owning finger lifting still does',
+    twoFinger.after.history === twoFinger.before.history + 1, JSON.stringify(twoFinger.after));
+
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 
   console.log(`\n${passed} passed, ${failed} failed`);

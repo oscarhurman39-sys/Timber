@@ -1150,7 +1150,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r230 · 2026-09-09 · 4bf13ba';
+const BUILD='r236 · 2026-09-09 · 50f59d1';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10258,7 +10258,10 @@ function updateReviewMenu(){
 }
 function enterReview(){
   stopGoto();                                  /* swapping views overrules an auto-run to a card */
-  const due=srsDueIdx();                       /* asked BEFORE the filter is spent: srsDueIdx reads the
+  flushSave();                                 /* the full deck's pending write, before saving is switched off */
+  const due=srsDueIdx().slice(0,DECK_CAP||undefined);   /* a capped deck stays capped — see applyFilter.
+      srsDueIdx is most-overdue-first, so the slice keeps the cards most worth reviewing. */
+                                               /* asked BEFORE the filter is spent: srsDueIdx reads the
       SRS store, not the deck, so nothing about the answer depends on which view is up. It used to be
       asked after, which meant tapping "Review due" with nothing due threw away a 194-card filtered
       deck and then opened nothing at all — the filter gone, the review not entered, no way back but
@@ -10325,9 +10328,16 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
 function applyFilter(id){
   const def=FILTER_DEFS.find(d=>d.id===id);if(!def)return;
   stopGoto();                                  /* swapping views overrules an auto-run to a card */
+  flushSave();                                 /* the full deck's pending write, before saving is switched off */
   if(reviewMode)exitReview();                  /* one ephemeral view at a time */
-  const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0);
+  let match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0);
   if(!match.length)return;                     /* zero-match chips are disabled in the menu anyway */
+  /* A capped deck stays capped. DECK_CAP is either the ?cards= diagnostic or light
+     mode, and light mode is only ever on because this phone failed to open the full
+     deck TWICE — so dealing every match would walk straight back into the crash the
+     cap exists to prevent. Measured on a light-mode boot: a filter chip turned 24
+     cards into 136. Newest first, the same slice buildDeck takes. */
+  if(DECK_CAP)match=match.slice(-DECK_CAP);
   if(!activeFilter)filterBackup={
     stack:liveStack(),
     order:[...order],history:[...history],learnedCount};
@@ -11449,21 +11459,50 @@ function attachGestures(card){
     }else{card.style.transform='';}
     dx=dy=0;
   };
-  /* ONE finger owns the card. A second finger landing mid-swipe used to re-enter
-     start(), which resets the origin to the first finger's CURRENT position — so a
-     committed 140px swipe collapsed to dx≈0 and moved=false, and letting go was read
-     as a tap. Two-thumb phone handling did it constantly. */
+  /* ONE finger owns the card, and it owns the END of the gesture as well as the start.
+     Guarding only touchstart — which is what the first version of this did — fixed half
+     the bug and opened a worse one. A second finger landing mid-swipe used to re-enter
+     start(), resetting the origin to the first finger's CURRENT position, so a committed
+     140px swipe collapsed to dx≈0 and letting go read as a tap. Guarding touchstart
+     stopped that. But touchend fires on the element a touch STARTED on, and the second
+     finger started here too: so when it lifted, end() ran with the FIRST finger's drag
+     state — moved=true, dx=+130 — and flung the card while that finger was still on the
+     screen. Measured: history 0→1 and learnedCount 0→1 mid-gesture. The old bug turned a
+     committed swipe into a tap; the new one starred a plant nobody had decided on, wrote
+     its Leitner box and saved. Track the owning identifier and ignore everybody else. */
+  /* Defensive on BOTH sides, because changedTouches is not something to count on:
+     a synthesised touch stream can arrive with it empty (Playwright's does, and that
+     threw "cannot read properties of undefined" straight through the whole handler,
+     so no swipe committed at all). When the platform will not say which finger moved,
+     fall back to the old behaviour — treat the event as ours — and only ever ignore an
+     end that NAMES a different finger. Never guess in the direction of dropping a real
+     gesture; the bug this guard exists for is the opposite one. */
+  let ownTouch=null;
+  const ownsEnd=e=>{
+    if(ownTouch===null)return true;
+    const ch=[...(e.changedTouches||[])];
+    return !ch.length||ch.some(t=>t.identifier===ownTouch);
+  };
   card.addEventListener('touchstart',e=>{
-    if(e.touches.length>1)return;
+    if(e.touches.length>1)return;               /* a second finger never starts a gesture */
+    const t=(e.changedTouches&&e.changedTouches[0])||e.touches[0];
+    ownTouch=t?t.identifier:null;
     start(e.touches[0].clientX,e.touches[0].clientY,e.target);
   },{passive:true});
   card.addEventListener('touchmove',e=>move(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
-  card.addEventListener('touchend',e=>{if(e.cancelable)e.preventDefault();end();});  /* preventDefault stops the browser
-      synthesising a mouse tap after every touch tap, which would turn single taps into double-taps */
+  card.addEventListener('touchend',e=>{
+    if(!ownsEnd(e))return;                      /* somebody else's finger left — not our gesture ending */
+    ownTouch=null;
+    if(e.cancelable)e.preventDefault();         /* preventDefault stops the browser synthesising a mouse
+        tap after every touch tap, which would turn single taps into double-taps */
+    end();
+  });
   /* the browser cancels (not ends) a touch when it takes the gesture — scroll takeover,
      notification shade, app switch. Without this the card is stranded mid-drag with its
      transition off, ghosting over the next card until the deck is touched again */
-  card.addEventListener('touchcancel',()=>{
+  card.addEventListener('touchcancel',e=>{
+    if(!ownsEnd(e))return;
+    ownTouch=null;
     lensDisarm();if(lensOn){lensOn=false;closeLens();}
     if(!drag)return;drag=false;
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
@@ -12020,17 +12059,24 @@ function drawToTop(idx,fromAbove){
 }
 function goToCard(idx){
   stopRewind();stopGoto();
-  const present=()=>order.includes(idx)||history.some(h=>h.idx===idx);
-  /* review and filter are ephemeral views — if the card isn't in this one, it lives
-     in the full deck underneath, so drop back to that first */
-  if(reviewMode&&!present())exitReview();
-  if(activeFilter&&!present())clearFilter();
-  /* Checked BEFORE the sheet is closed. A light-mode or ?cards=N deck holds a slice of
-     the plant list while search still offers every plant in it, so this button can be
-     pressed for a card that is not in the deck at all — and closing the search first
-     meant the sheet vanished and absolutely nothing happened. Leave it open instead:
-     the plant is still there to read, which is the next most useful thing. */
-  if(!present())return;
+  const inView=()=>order.includes(idx)||history.some(h=>h.idx===idx);
+  /* Review and filter are ephemeral views: if the card is not in this one it may be in
+     the full deck underneath, and the backup that view took on entry is where the full
+     deck's membership lives while the view is up. LOOK BEFORE LEAPING — dropping the
+     view first and asking afterwards spends a 194-card filtered deck to discover the
+     plant was not in the full deck either, which is exactly what a capped or
+     light-mode deck makes possible: search offers every plant in the list, the deck
+     holds a slice of it. Same mistake "Review due" used to make with the filter. */
+  const under=b=>!!b&&(b.stack.includes(idx)||b.history.some(h=>h.idx===idx));
+  if(!inView()){
+    if(reviewMode&&under(reviewBackup))exitReview();
+    else if(activeFilter&&under(filterBackup))clearFilter();
+  }
+  /* Checked BEFORE the sheet is closed, for the same reason. This button can be
+     pressed for a card the deck does not hold at all, and closing the search first
+     meant the sheet vanished and absolutely nothing happened. Leave it open: the
+     plant is still there to read, which is the next most useful thing. */
+  if(!inView())return;
   closeSearch();
   flushDeal();                                 /* the cut walks the DOM deck — the target card must be standing in it */
   const swiped=!order.includes(idx);
