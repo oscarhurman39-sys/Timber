@@ -64,3 +64,37 @@ Three photos left this folder on 2026-08-13 when cards were written for them —
 are now normal card photos under their latin slugs, staged from the full-resolution
 originals held here. This is the folder working as intended: nothing was lost
 while the cards did not yet exist.
+
+## 2026-09-12 — three photos from the eight-JSON batch
+
+Parked rather than dealt. See VERIFY-QUEUE item 70 for the full reasoning.
+
+### 2026-09-12-yellow-trailing-groundcover-round-leaves.jpg
+
+**No card and no JSON.** Oscar's note was *"the flow ground cover yellow thing"*.
+Trailing stems, opposite rounded yellow-green leaves, nursery pots. `[Inference]`
+that habit and leaf are consistent with *Lysimachia nummularia* 'Aurea' (golden
+creeping Jenny), but nothing in this repo confirms it — the deck has no
+Lysimachia, the wishlist has none, and no label is visible in the frame.
+Nothing was built from a guess. **Needs Oscar to name it, then a JSON.**
+
+### 2026-09-12-actinidia-kolomikta-red-flush-no-variegation.jpg
+
+Oscar's note was *"pinktipped climber"*, and the batch carried an
+*Actinidia kolomikta* JSON. The card is **written and held**. The frame shows
+cordate, bristle-margined leaves with red petioles under a whole-leaf
+red-bronze flush — no silver-white tip and no pink band, which is the
+variegation the card's `visual` line sells. `[Unverified]` whether this is a
+plant that has not yet variegated (young, or the wrong sex — the species is
+dioecious and the research says so) or a different plant. Same shape as the
+'Dark Knight' case in item 69: dealing it would put a picture on the card that
+contradicts the card's own words.
+
+### 2026-09-12-pieris-red-new-growth-cultivar-unconfirmed.jpg
+
+Unmistakably a *Pieris*: scarlet new growth in whorls above glossy, finely
+toothed dark green leaves. The deck holds `Pieris 'Forest Flame'` and that
+card's `visual` describes exactly this. **Not dealt only because Oscar hedged
+the cultivar himself** — *"periis forest flame i think or forest fire"* — and
+'Forest Fire' is a different cultivar with no card. The genus is not in doubt;
+the cultivar is, and the cultivar is what the card names.

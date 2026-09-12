@@ -2433,6 +2433,157 @@ to change — same call as the pine. Nothing else on the card is affected.
 ---
 
 
+### 70. Eight JSONs and seven photographs — three dealt, four held, three photos parked, and three card fields that were being thrown away
+2026-09-12. Oscar sent eight researched JSONs and seven frames, with per-image
+notes: *"image one brunerer jack frost, image 2 the flow ground cover yellow
+thing, image 3 pinktipped climber image 4 secnnco image 5 t -something image 6
+periis forest flame i think or forest fire, it's like the brunera it's in the
+pre built cards, image 7 lavateria"*, and the instruction *"any cards u dont
+have images for hold"*.
+
+**A. The Brunnera JSON was a duplicate of a card already in the deck.**
+`Brunnera macrophylla 'Jack Frost'` was already written and sitting in
+`PLANTS_ON_HOLD` — as Oscar half-said himself about image 6 ("it's like the
+brunera it's in the pre built cards"). Adding the supplied JSON would have made
+a second card for the same plant, which `add-plants-bulk.js` refuses anyway.
+Photo 1 was **dealt onto the existing card** instead; the JSON was not built.
+One field from it *was* carried across — `hardinessNote` ("Hardy throughout the
+UK and northern Europe, approximately -20 to -15°C"), which agrees with the
+card's existing H6 and is purely additive. Nothing else on that card was touched.
+
+**B. Three dealt, four held.**
+
+| card | state | photo |
+|---|---|---|
+| *Teucrium fruticans* — Shrubby Germander | **dealt** | image 5 |
+| *Malva* × *clementii* 'Rosea' — Tree Mallow | **dealt** | image 7 |
+| *Brachyglottis* Walberton's Silver Dormouse ('Walbrach') | **dealt** | image 4 |
+| *Brunnera macrophylla* 'Jack Frost' | **dealt** (already written) | image 1 |
+| *Viburnum plicatum* f. *plicatum* 'Popcorn' | held | none sent |
+| *Abelia* × *grandiflora* 'Sparkling Silver' | held | none sent |
+| *Pyracantha* 'Red Star' | held | none sent |
+| *Actinidia kolomikta* | held | image 3 sent, **not accepted** — see D |
+
+Deck 280 → 284. Hold 84 → 87.
+
+**C. Three photographs parked, not dealt** — all three written up in
+`photos/unidentified/README.md`:
+
+- **image 2, the yellow trailing ground cover.** No JSON and no card. The habit
+  reads as *Lysimachia nummularia* 'Aurea', but that is `[Inference]` from the
+  photograph alone — no label in frame, no Lysimachia anywhere in this repo.
+  **Question for Oscar: what is it?** Then it needs a JSON.
+- **image 3, the Actinidia.** See D.
+- **image 6, the Pieris.** The genus is not in doubt and the held
+  `Pieris 'Forest Flame'` card describes exactly this foliage. It is not dealt
+  because Oscar hedged the cultivar himself — *"forest flame i think or forest
+  fire"* — and 'Forest Fire' is a different cultivar. **Question for Oscar:
+  which one does the bench label say?** One word deals it.
+
+**D. *Actinidia kolomikta* — card written and HELD, because the photograph
+contradicts the card's own words.** The card's `visual` sells the thing the
+plant is grown for: *"Heart-shaped leaves tipped white then flushed pink"*. The
+frame shows a whole-leaf red-bronze flush with no white tip and no pink band.
+`[Unverified]` whether that is a plant too young to have variegated, the wrong
+sex (the species is dioecious and Oscar's own research says the strongest
+variegation goes with mature males), or a different plant. This is the same
+shape as the 'Dark Knight' case in item 69, and the same answer: the card waits
+rather than carrying a picture that argues with its text. **Question for Oscar:
+does this one stand, or does it wait for a variegated frame?**
+
+**E. `toxicity`, `compliance` and `hardinessNote` were being silently dropped by
+every add tool — fixed.** These became card fields in Aug 2026 (`FIELDS` in
+`tools/plant-data.js`), and `tools/check-plant-json.js` already prints them in
+the row it emits — but the row templates in `tools/add-plant.js`,
+`tools/add-plants-bulk.js` and the card literal in `tools/fit-incoming.js` never
+carried them, so a JSON that researched all three had all three thrown away on
+the way in. That is the identical loss the schema comment on `hardinessNote`
+records from 2026-08-25, and `toxicity` is a SAFETY field, so it is the worse
+half. All three tools now emit them, blank stays absent rather than empty, and
+`fit-incoming.js` additionally accepts a batch whose own `soil`/`soilWarning`
+are already inside the 26/44 budgets instead of demanding a duplicate `FIT`
+entry (the length assertions still apply).
+
+**Measured cost of the bug on the batch already ingested.** Re-running
+`fitBatch` over `data/incoming/wishlist-batch-01.json` with the fix produces
+output identical to before except for *added* keys — no value changes — and the
+added keys are: `hardinessNote` on **all 49** cards, and `toxicity` on **23**,
+including *Rhododendron luteum*, *Daphne bholua* 'Jacqueline Postill', *Kalmia
+latifolia* 'Ostbo Red', *Wisteria floribunda* and *Akebia quinata*. Those 49
+cards are in `PLANTS_ON_HOLD` today **without** that text. Re-ingesting them
+would recover it. **Not done in this batch** — it touches 49 cards Oscar did not
+ask about, and it is his call whether to run it.
+
+**F. Conversions made, and why.** Every JSON arrived with `peak` as a season
+word, which `tools/check-plant-json.js` rejects outright (the app parses months).
+Every one also gave `aspect` as a light level, which the compass rule rejects.
+Both are recorded in each card's `uncertain` block as well as here:
+
+| card | supplied peak | set | supplied aspect | set |
+|---|---|---|---|---|
+| Teucrium | "Summer" | **Jun-Aug** | "Full sun; sheltered south- or west-facing" | South / West |
+| Viburnum | "Mid to late spring" | **Apr-May** | "Full sun to partial shade" | East / South / West |
+| Abelia | "Summer to autumn" | **Jul-Oct** | "Full sun; sheltered south- or west-facing" | South / West |
+| Pyracantha | "Autumn" (the berries) | **Sep-Nov** | "Full sun to partial shade" | East / South / West |
+| Malva | "Summer to early autumn" | **Jun-Sep** | "Full sun" | South / West |
+| Brachyglottis | "Summer" | **Jun-Aug** | "Full sun; sheltered" | South / West |
+| Actinidia | "Late spring to summer" | **May-Aug** | "Full sun in a sheltered position" | South / West |
+
+The month bands are UK convention, not a source that stated months — they are
+Oscar's to move. Every facing is either what the research itself named or
+`deriveFacing(sunNeed)`, the same rule `tools/fit-incoming.js` uses for the
+whole wishlist batch.
+
+**G. Cultivars moved into `latin`.** Five JSONs put the cultivar in `cvs` only
+and left `latin` as the bare species or genus (`"Pyracantha"`, `"Brachyglottis"`).
+The deck's identity field is `latin` — it is what the duplicate guard keys on and
+what the photo slug derives from — so the cultivar was moved there, matching
+`Brunnera macrophylla 'Jack Frost'` and the rest of the deck. The Brachyglottis
+is written in the deck's trade-name style,
+`Brachyglottis Walberton’s Silver Dormouse ('Walbrach')`, alongside
+`Pyracantha SAPHYR ORANGE ('Cadange')` and `Geranium Rozanne ('Gerwat')`. Its
+apostrophe is U+2019 deliberately: a straight one would make the quote count odd
+and trip the validator's unbalanced-quote check.
+
+**H. Prose fitted to the panels.** Every supplied `soil`/`soilWarning` pair was
+far over the measured 26/44-character budgets (78/117 at worst) and every
+`visual` was 150–250 characters against a deck median of 77. Short forms were
+written the way `fit-incoming.js` writes them for the wishlist; **the eight
+JSONs are committed verbatim at `data/incoming/batch-2026-09-12-raw.json`** and
+the fitted per-plant files sit beside them, so nothing supplied is lost.
+
+**I. One real contradiction caught by `plant-sense.js` and fixed.** The
+Pyracantha's first `visual` read *"white spring flowers, heavy red autumn
+berries"* against `peak` "Sep-Nov" — a flowering claim outside the flowering
+band, which the tool grades a contradiction rather than a warning. Since Oscar's
+research sets the peak at the berries, the fix was to stop dating the flowers:
+*"white flower heads, then heavy red autumn berries"*. The Viburnum's remaining
+`autumn colour` warning is the tolerated flower-vs-foliage class, the same one
+three Cornus cards already carry.
+
+**J. One text-vs-photo mismatch fixed before it shipped.** The Teucrium card
+first read *"on white woolly stems"*; the photograph shows mature straw-coloured
+wood. Oscar's research says *"white woolly **young** stems"*, so the card now
+says *"white woolly young shoots"* and agrees with its own picture.
+
+**K. The staged photo was invisible on the card until `optimise-photos.js` ran.**
+The app loads `photos/card/<slug>.webp`, not the master JPEG, and neither
+`add-plants-bulk.js` nor `deal-plant.js` builds that derivative — so the first
+screenshot of the Teucrium card showed the leaf-gradient fallback with the photo
+sitting correctly on disk. `node tools/optimise-photos.js` fixed it and wrote
+only the four new files. `tests/run-all.js --fast` would have caught it via
+`--check`; looking at the screenshot caught it sooner. Worth a line in
+NEW-SESSION.md if it bites twice.
+
+**L. Validator warnings accepted as sent.** `pestRisk` 2/3/5 and `thirst` 5 and
+`careLevel` 5 read to the checker as possible unconverted 0–5 ratings. They are
+Oscar's researched 0–20 values and are right for the plants (a Mediterranean
+sub-shrub genuinely is near pest-free). `foliage` and `container` were prose on
+all eight and were reduced to the controlled vocabulary; neither field reaches
+the card.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

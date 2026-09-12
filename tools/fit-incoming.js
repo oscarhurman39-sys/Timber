@@ -26,8 +26,9 @@
      to budgets taken from what the existing deck already carries. A trimmed
      field always ends as a whole sentence.
 
-  Anything the card schema cannot carry (toxicity, compliance, hardinessNote,
-  foliage, container, uncertain) is NOT dropped: the raw batch stays committed
+  toxicity, compliance and hardinessNote ARE carried (they became card fields in
+  Aug 2026). What the card schema still cannot carry (foliage, container,
+  uncertain) is NOT dropped either: the raw batch stays committed
   in data/incoming/ and tools/unmapped-report.js lists what is being left there.
 
   Usage:  node tools/fit-incoming.js data/incoming/wishlist-batch-01.json [--json]
@@ -143,8 +144,14 @@ function makeSize(height, spread) {
 
 function fitCard(p) {
   const problems = [];
-  const fit = FIT[p.latin];
-  if (!fit) { problems.push(`no FIT entry for ${p.latin}`); return { problems }; }
+  /* A batch researched straight into the card's budgets is already pre-fitted:
+     its own soil/soilWarning ARE the short forms the FIT table exists to supply,
+     so use them rather than demanding a duplicate entry here. The length
+     assertions below still apply, so a "pre-fitted" batch that is actually over
+     budget is rejected exactly as a bad FIT entry would be. */
+  const fit = FIT[p.latin] ||
+    (p.soil && p.soilWarning ? { soil: p.soil, warn: p.soilWarning } : null);
+  if (!fit) { problems.push(`no FIT entry for ${p.latin}, and it supplies no soil/soilWarning of its own`); return { problems }; }
   if (fit.soil.length > 26) problems.push(`${p.latin}: soil ${fit.soil.length}>26`);
   if (fit.warn.length > 44) problems.push(`${p.latin}: warn ${fit.warn.length}>44`);
   const size = makeSize(p.height, p.spread);
@@ -172,6 +179,13 @@ function fitCard(p) {
     sunNeed: p.sunNeed,
     sunMin: p.sunMin,
   };
+  /* toxicity, compliance and hardinessNote became card fields in Aug 2026 (see
+     FIELDS in tools/plant-data.js). The header above still said the card could not
+     carry them; it can, and dropping researched safety text on the floor is not a
+     mapping decision worth keeping. Blank stays absent, not empty. */
+  for (const k of ['toxicity', 'compliance', 'hardinessNote']) {
+    if (p[k] != null && String(p[k]).trim()) card[k] = p[k];
+  }
   return { card, problems };
 }
 

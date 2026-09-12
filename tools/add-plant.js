@@ -75,6 +75,17 @@ const count = dealt + 1;
   /* ---- 3. insert row ---- */
   const esc = (v) => JSON.stringify(v == null ? '' : String(v));
   const num = (v) => (v === '' || v == null ? '""' : Number(v));
+  /* toxicity, compliance and hardinessNote are real card fields (the FIELDS list in
+     tools/plant-data.js) and check-plant-json.js already prints them in the row it
+     emits — but this row template never carried them, so a researched JSON had all
+     three silently dropped on the way in. That is the same loss the schema comment
+     on `hardinessNote` records from 2026-08-25, and toxicity is a SAFETY field, so
+     losing it is worse than losing a rating. Emitted only when non-blank, so a card
+     with nothing to say still carries no empty keys. */
+  const extras = (p) => ['toxicity', 'compliance', 'hardinessNote']
+    .filter(k => p[k] != null && String(p[k]).trim())
+    .map(k => `${k}:${esc(p[k])}`);
+  const extraLine = (p) => (extras(p).length ? '   ' + extras(p).join(', ') + ',\n' : '');
   const row = `  {common:${esc(p.common)}, latin:${esc(p.latin)}, hue:${Number(p.hue)},
    visual:${esc(p.visual)},
    water:${esc(p.water)},
@@ -86,7 +97,7 @@ const count = dealt + 1;
    cvs:${esc(p.cvs)},
    hardiness:${esc(p.hardiness)}, resilience:${esc(p.resilience)},
    uses:${esc(p.uses)}, size:${esc(`${p.height || ''} H × ${p.spread || ''} W`)},
-   seasonalImpact:"", growthSpeed:${num(p.growthSpeed)}, pestRisk:${num(p.pestRisk)}, thirst:${num(p.thirst)}, careLevel:${num(p.careLevel)}, sunNeed:${num(p.sunNeed)}, sunMin:${num(p.sunMin)}},
+${extraLine(p)}   seasonalImpact:"", growthSpeed:${num(p.growthSpeed)}, pestRisk:${num(p.pestRisk)}, thirst:${num(p.thirst)}, careLevel:${num(p.careLevel)}, sunNeed:${num(p.sunNeed)}, sunMin:${num(p.sunMin)}},
 `;
   /* Same separator hazard as add-plants-bulk.js: after a plants-tool.js csv round-trip
      the last row has no trailing comma, so appending before the `];` yields
