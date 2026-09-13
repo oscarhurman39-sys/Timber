@@ -39,6 +39,11 @@
    warn  <= 44 chars — a real constraint, not a restatement of soil.
    face  — compass facing; omit to derive from the sun band. */
 const FIT = {
+  'Viburnum davidii':                 { soil: 'Humus-rich, moist, drained', warn: 'Needs a male nearby for berries' },
+  'Luma apiculata':                   { soil: 'Any soil, well-drained',   warn: 'Young plants need shelter from hard frost' },
+  "Euonymus japonicus 'Microphyllus Albovariegatus'":
+                                       { soil: 'Any soil, well-drained',   warn: 'Avoid waterlogging; shade dulls the cream' },
+  "Oxalis triangularis 'Mijke'":       { soil: 'Free-draining compost',    warn: 'Avoid waterlogging; dies back when dormant' },
   "Tetrapanax papyrifer 'Rex'":        { soil: 'Fertile, humus-rich, moist', warn: 'Suckers widely; avoid winter wet' },
   'Dicksonia antarctica':              { soil: 'Humus-rich, moist, acid',    warn: 'Never let trunk or roots dry out' },
   'Rhus typhina':                      { soil: 'Any, well-drained',          warn: 'Suckers metres from the parent plant' },

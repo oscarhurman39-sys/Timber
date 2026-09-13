@@ -16,14 +16,25 @@ function check(name, cond, extra) {
   else { failed++; failures.push(name + (extra ? ' — ' + extra : '')); console.log('FAIL', name, extra || ''); }
 }
 
+/* timber.html's fling() defers the SRS write to setTimeout(ms+10), ms being the
+   200-350ms throw duration it derives from release velocity; Playwright's synthetic
+   drag lands near the 350 ceiling. Measured on this deck: the record becomes
+   readable ~400ms after mouseup on an idle machine and 520ms under three-job
+   contention, so a flat 450ms sleep was racing that timer — and losing once the
+   deck reached 301 cards. Wait for the write itself. On timeout we fall through
+   with whatever is stored, so a swipe that genuinely stopped writing still fails
+   its assertion and still prints the empty object. */
 async function dragCard(page, dxTotal) {
+  const srsBefore = await page.evaluate(() => localStorage.getItem('timber-srs-v1'));
   const box = await page.locator('#deck').boundingBox();
   const x = box.x + box.width / 2, y = box.y + box.height / 2;
   await page.mouse.move(x, y);
   await page.mouse.down();
   for (let i = 1; i <= 8; i++) await page.mouse.move(x + (dxTotal * i) / 8, y);
   await page.mouse.up();
-  await page.waitForTimeout(450);
+  await page.waitForTimeout(450);                      // fling animation + removal
+  await page.waitForFunction(prev => localStorage.getItem('timber-srs-v1') !== prev,
+    srsBefore, { timeout: 4000 }).catch(() => {});     // ...then the deferred SRS write
 }
 
 // click the correct (or a wrong) option in the current quiz round, return the answer plant

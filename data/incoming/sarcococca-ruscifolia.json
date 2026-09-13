@@ -1,0 +1,33 @@
+{
+  "common": "Fragrant Sweet Box",
+  "latin": "Sarcococca ruscifolia",
+  "hue": 0,
+  "visual": "Glossy dark leaves · tiny cream winter flowers you smell before you see",
+  "water": "Moderate while young · takes dry shade after",
+  "aspect": "North / East",
+  "soil": "Humus-rich, moist, drained",
+  "soilWarning": "Avoid prolonged waterlogging",
+  "prune": "Little needed · light trim after flowering if it outgrows its spot",
+  "toxicity": "Fruit is ornamental and should not be eaten. Wear gloves when handling.",
+  "compliance": "",
+  "peak": "Dec-Feb",
+  "cvs": "",
+  "hardiness": "H5",
+  "hardinessNote": "Hardy in most UK locations, approximately -15 to -10°C.",
+  "resilience": "Takes shade, dry shade, pollution and a good deal of neglect",
+  "uses": "Shade gardens · winter scent · ground cover · banks and slopes",
+  "height": "0.5-1m",
+  "spread": "0.5-1m",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 7,
+  "pestRisk": 2,
+  "thirst": 9,
+  "careLevel": 3,
+  "sunNeed": 20,
+  "sunMin": 5,
+  "uncertain": [
+    "Not a duplicate: the deck holds Sarcococca confusa (Christmas Box), a different species.",
+    "peak: research said \"Winter\"; converted to Dec-Feb."
+  ]
+}

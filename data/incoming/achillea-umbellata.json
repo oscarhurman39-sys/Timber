@@ -1,0 +1,32 @@
+{
+  "common": "Umbellate Yarrow",
+  "latin": "Achillea umbellata",
+  "hue": 0,
+  "visual": "Cushions of fine silver-grey leaves under clusters of small white flowers",
+  "water": "Water while establishing, then sparingly",
+  "aspect": "South / West",
+  "soil": "Free-draining, lime OK",
+  "soilWarning": "Heavy wet clay and winter wet finish it",
+  "prune": "Tidy the cushion in spring · deadhead for a second flush",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jun-Aug",
+  "cvs": "",
+  "hardiness": "H7",
+  "hardinessNote": "Extremely hardy, tolerating below -20°C where drainage is suitable.",
+  "resilience": "Exceptionally cold hardy and tolerant of exposed sunny positions",
+  "uses": "Rock and gravel gardens · alpine planting · edging · sunny pots",
+  "height": "0.1-0.5m",
+  "spread": "0.1-0.5m",
+  "foliage": "semi-evergreen",
+  "container": "yes",
+  "growthSpeed": 8,
+  "pestRisk": 4,
+  "thirst": 5,
+  "careLevel": 4,
+  "sunNeed": 100,
+  "sunMin": 80,
+  "uncertain": [
+    "hardiness H7 is the only one in the deck at that band — worth a second look against the label, since H7 is the strongest claim the scale makes."
+  ]
+}

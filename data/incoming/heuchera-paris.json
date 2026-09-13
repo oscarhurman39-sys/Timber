@@ -1,0 +1,33 @@
+{
+  "common": "Heuchera 'Paris'",
+  "latin": "Heuchera 'Paris'",
+  "hue": 345,
+  "visual": "Silvered leaves veined dark green · slender sprays of rose-pink bells",
+  "water": "Keep it evenly damp, especially while young",
+  "aspect": "East / West",
+  "soil": "Moist, drained, any pH",
+  "soilWarning": "Wet soil rots the crown",
+  "prune": "Pull tatty leaves through the year · tidy the clump in spring",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "May-Aug",
+  "cvs": "Paris",
+  "hardiness": "H6",
+  "hardinessNote": "Hardy throughout the UK and northern Europe.",
+  "resilience": "Hardy, compact and long-flowering in suitable well-drained soil",
+  "uses": "Borders · shade planting · edging · woodland gardens · pots",
+  "height": "0.1-0.5m",
+  "spread": "0.1-0.5m",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 10,
+  "pestRisk": 7,
+  "thirst": 11,
+  "careLevel": 5,
+  "sunNeed": 55,
+  "sunMin": 30,
+  "uncertain": [
+    "latin: left as genus + cultivar. The deck's other two Heucheras are both Heuchera villosa; the research does not assign 'Paris' to a species, so none was invented.",
+    "peak: research said \"Late spring to late summer\"; converted to May-Aug."
+  ]
+}

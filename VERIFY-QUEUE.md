@@ -72,9 +72,15 @@ whether the deck should show toxicity and legal status at all** — if it is eve
 used on a sales bench, it probably should.
 
 ### 1. Five held climbers have no H × W split — size rails render blank
-`Clematis 'Nelly Moser'`, `Clematis 'Purpurea Plena Elegans'`,
-`Clematis montana var. rubens`, `Evergreen Clematis` (*C. armandii*),
-`Russian Vine` (*Fallopia baldschuanica*).
+**FOUR now. `Clematis 'Nelly Moser'` was fixed on 2026-09-13** when Oscar sent
+a photograph and fresh research for it: the research supplied the spread
+(1–1.5 m) that the tool was never allowed to invent, so `size` is now
+`"2-4m H × 1-1.5m W"` and both rails render. It has been removed from `KNOWN`
+in `tools/plant-sense.js`. See item 77. The remaining four are unchanged:
+
+`Clematis 'Purpurea Plena Elegans'`, `Clematis montana var. rubens`,
+`Evergreen Clematis` (*C. armandii*), `Russian Vine`
+(*Fallopia baldschuanica*).
 
 Their `size` fields read `"2-3m"`, `"8-12m"` etc. Every other card uses
 `"<height> H × <spread> W"`, which is what the two side rails read. As written,
@@ -2876,6 +2882,571 @@ correction inside item 70E: the claim that 49 held cards had lost
 diff, not a measurement of the deck, and it was wrong. 50 of 50 wishlist cards
 carry `hardinessNote`; every one whose research supplied `toxicity` carries it.
 The dry run added zero fields and nothing was written.
+
+---
+
+### 76. Persian Ironwood dealt — and a regression that had quietly broken `deal-plant.js` for three commits
+2026-09-13. Oscar: *"This is a standard parotia persica photo, I believe it's in
+the pre build cards."* He was right on both counts. Deck 288 → 289, hold 86 → 85.
+
+**A. The right card, and not the other one.** The deck carries TWO Parrotias:
+`Parrotia persica 'Bella'`, dealt, whose photograph is the wine-purple summer
+foliage the cultivar is grown for; and `Parrotia persica`, the plain species,
+**held since the August wishlist ingest with no photograph**. Oscar said
+"standard", which is the species, and the frame confirms it — the same obovate,
+wavy-crenate, strongly veined leaf as the 'Bella' photograph, in plain green.
+The leaf-shape match between the two frames is also what raises the genus above
+`[Inference]`: *Hamamelis* (two cards in the deck) has a very similar leaf, and
+a green Parrotia leaf on its own is not conclusive. Two Parrotia photographs
+agreeing is.
+
+**B. THE REGRESSION — `deal-plant.js` could not deal ANY held card, and had not
+been able to for three commits.** The deal aborted with
+`marker missing:  ];\n/* HOLD:END */`.
+
+Cause: in the item 71E repair (commit `13ef1f8`) the hold block was rewritten
+with `D.writeBlock(html,'hold',hold,' ')` — an explicit ONE-space indent.
+`tools/ingest-batch.js` calls the same function with no indent argument, taking
+the default `'  '`. `writeBlock` closes the literal with `indent.slice(1)+']'`,
+so the default produces `` ` ];` `` and the one-space override produced `];` at
+column zero. `deal-plant.js` matches the closing marker as a literal string,
+`const HOLD_END = ' ];\n/* HOLD:END */'`, and stopped finding it.
+
+**Nothing detected this.** All 17 suites were green across `13ef1f8`, `48c7b6c`,
+`0f4d83e`, `d782616` and `e0a7f4c`: the block still parsed, every card still
+rendered, the data audit still balanced. The only thing broken was the ability
+to MOVE a card out of the hold block, and no suite deals a card. Four commits
+shipped, and the PR was opened, with the deck's main remaining workflow dead.
+It surfaced the first time a held card was dealt after the change — which is
+exactly the shape of the `fit-incoming` commercial-fields bug in item 71E, one
+layer along: a latent break that only fires on the next deal.
+
+Fixed by rewriting the hold block with `writeBlock`'s default indent, as
+`ingest-batch.js` does. Verified: values identical before and after (a semantic
+diff of all 374 cards shows zero field changes), terminator restored, and the
+hold block's only differences from its pre-regression state at `cec6180` are
+the 33 commercial-key additions on three cards that item 71E intended, plus
+Parrotia and the Abelia leaving because they were dealt.
+
+**Worth a guard.** Two bugs in two days have had the same signature: a write
+path whose output is valid, parses, renders, passes 17 suites, and breaks a
+tool that nothing tests. A cheap check would be a test asserting the two block
+terminators match what `deal-plant.js` matches on — one string comparison,
+catching a class of failure the whole browser suite cannot see. **Not built
+here** — it is a new test, not this batch's work, and it is Oscar's call.
+
+**C. The photograph does not show what the card sells.** The card's `visual`
+reads *"Flaking bark · crimson flower clusters on bare winter branches ·
+blazing autumn"*; the frame is plain green summer foliage on a budded twig —
+none of the three. This is not a contradiction the way item 70D's Actinidia is
+(there the photo shows the same organ in a state the text denies); it is an
+absence. The card is right, the photograph is right, and they do not meet. For
+a tree sold on autumn colour and winter bark this is a weak illustration, and
+`node tools/photo-run.js` would put this card in WAIT for exactly that reason.
+**Dealt anyway**, because a real photograph of the right plant beats the
+leaf-gradient fallback, and because the alternative — holding a correctly
+identified plant until a perfect frame exists — is how 85 cards ended up with
+no picture at all. Worth a second frame in late October, when the bark and the
+colour are both there; the dealt photo can be swapped or made a PHOTO_SWAP pair
+the way Sapphire Ring was in item 69.
+
+---
+
+### 77. Thirteen cards from a sixteen-photo batch — and the Nelly Moser rebuilt rather than just photographed
+2026-09-13. Oscar sent 16 photographs and a 14-entry JSON array (the first paste
+truncated mid-entry; he re-sent it complete). Deck 289 → 301, hold 85 → 86.
+
+**A. Twelve photographs placed, four parked.**
+
+| Dealt | note |
+|---|---|
+| *Oenothera lindheimeri* PAPILLON ('Nugaupapil') | |
+| *Jacobaea maritima* | |
+| *Rosa* FLIRT 2011 ('Korchakon') | |
+| *Heuchera* 'Paris' | |
+| *Leucophyta brownii* | |
+| *Achillea umbellata* | the deck's only H7 — see D |
+| *Sarcococca ruscifolia* | not a duplicate of the held *S. confusa* |
+| *Santolina chamaecyparissus* 'Lambrook Silver' | |
+| *Cassinia fulvida* | |
+| *Ilex aquifolium* 'Argentea Marginata' | not a duplicate: the deck's other hollies are *I. crenata* |
+| *Magnolia* 'Cameo' | |
+| *Clematis* 'Nelly Moser' | **already held** — see B |
+
+Held, cards written, photographs NOT accepted: *Myrtus communis* and
+*Callicarpa bodinieri* 'Profusion'. Two frames in the batch are these two plants
+in some order; leaf size points one way and leaf margin the other, and guessing
+would put a photograph on the wrong card. Awaiting Oscar's call. Two further
+frames — a cream-margined evergreen and a purple shamrock — arrived with no
+JSON and are parked.
+
+**B. The Nelly Moser was REBUILT, not just photographed — and that was nearly
+missed.** The JSON read as a duplicate of the held card, so the photograph was
+dealt onto it and the research set aside. Rendering the card showed why that was
+wrong: **three rating rows blank** (pestRisk, thirst, careLevel all `""`), the
+spread rail blank, no toxicity, `resilience` reading *"Good with right care"*,
+and `hardiness` H5 against the research's H6. It is one of the deck's oldest
+cards and one of its weakest.
+
+Oscar's research supplied every one of those. It was applied the same way the
+Abelia revision was in item 71B, with two deliberate KEEPS: `pots` "2L, 3L" is
+his commercial data and is never overwritten by research, and `peak`
+"May-Jun, Aug-Sep" was kept over the research's prose because the existing
+two-band value is MORE precise than "late spring to early summer, often
+repeating".
+
+`hardiness` H5 → **H6** is a factual change to a shipped card, recorded here
+rather than buried: the research states H6 with the note "Hardy throughout the
+UK and northern Europe", and the card carried H5 with no note at all.
+
+**C. That closes one of the five `size-no-rails` defects (queue item 1).** That
+entry says the fix could not be made by the tool because *"inventing a spread
+would be making up data"*. The research supplied the spread — 1–1.5 m — so
+`size` is now `"2-4m H × 1-1.5m W"` and both rails render. Removed from `KNOWN`
+in `tools/plant-sense.js` and struck from item 1, which is now **four** cards,
+all still waiting on a spread figure from a label.
+
+**D. One number worth a second look: *Achillea umbellata* came in at H7.** That
+is "below -20°C", the strongest claim the scale makes, and it would be the only
+H7 in 387 cards. Plausible for a Greek mountain alpine; flagged in the card's
+`uncertain` block and here because H7 is exactly the kind of value the repo's
+own standing gotcha warns about ("hardiness is the most error-prone field").
+
+**E. Two naming corrections, both following Oscar's own notes.** The rose JSON
+wrote the trade name as `'Flirt 2011'` in single quotes; single quotes denote a
+CULTIVAR epithet and his own `uncertain` note says FLIRT 2011 is the trade name
+with `'Korchakon'` the cultivar. Written as
+`Rosa FLIRT 2011 ('Korchakon')`, matching `Rosa GERTRUDE JEKYLL ('Ausbord')`.
+The Gaura likewise became
+`Oenothera lindheimeri PAPILLON ('Nugaupapil')`, matching the deck's
+`GAUDI ROSE ('Florgaucomro')`.
+
+**F. `Heuchera 'Paris'` carries no species,** deliberately: the research does not
+assign one and the deck's other two Heucheras are both *H. villosa*. Same rule
+as `Rudbeckia 'Fireball'` in item 73.
+
+**G. Conversions.** Every `peak` arrived as a season word or prose and was
+converted to Mon-Mon; every `aspect` was a light level and became a compass
+facing (stated facing wins, else derived from sunNeed). Two foliage-season
+peaks are worth naming: *Jacobaea maritima* "Spring to autumn foliage" → Mar-Oct
+and *Leucophyta brownii* "Year-round silver foliage" → Jan-Dec, the band the
+deck already uses for year-round interest. All logged per card.
+
+### 78. The `srs-test` failure was neither a flake nor the deal — it was a fixed sleep racing a deliberate timer
+
+> **Correction: I previously made an unverified claim. That was incorrect and should
+> have been labelled.** In item 77 and in commit `c778280` I stated as fact that
+> `srs-test` failed because it waited a fixed 400ms after page load instead of using
+> its own `deckSettled` helper, so the first drag fired mid-deal and `topLatin()` read
+> the wrong card. I pushed that as a root cause. It was an inference from reading the
+> file, never measured. The `deckSettled` change shipped and the suite **failed again,
+> identically**, under `--jobs 3` (`suite12.log`). The diagnosis was wrong.
+
+**What was actually failing.** Two assertions, always the same two, always the first
+two swipe assertions in the file:
+
+```
+ - learn creates SRS record keyed by latin — {}
+ - learn: box 1, due +1 day
+```
+
+`{}` is the whole point: the store was *empty*, not keyed to the wrong plant. A
+mid-deal drag reading the wrong card would have produced a record under some other
+latin. An empty store means no record had been written **yet**.
+
+**Measured, not inferred.** `timber.html` `fling()` defers the SRS write on purpose:
+
+```js
+setTimeout(()=>{srsOnSwipe(latin,learned);updateReviewMenu();},ms+10);
+```
+
+`ms` is the throw duration derived from release velocity,
+`Math.max(200,Math.min(350,Math.round(420/(Math.abs(v)||0.01))))`. Playwright's
+synthetic drag ends with a CDP round-trip between the last move and the release, so
+`performance.now()-lt>80` fires, `v` becomes 0, and `ms` lands at the **350 ceiling**,
+not the 200 floor. I instrumented `window.fling` and `window.srsOnSwipe` and polled
+the store at 25ms (`scratchpad/srsdiag.js`):
+
+| condition | `ms` chosen | SRS write ran | record readable |
+|---|---|---|---|
+| idle | 332 | 352ms after mouseup | **401ms** |
+| idle | 348 | 374ms | **407ms** |
+| 3 CPU burners / 4 cores | 350 | 463ms | **520ms** |
+| 3 CPU burners / 4 cores | 341 | 398ms | **431ms** |
+
+`dragCard` waited a flat **450ms** and then read. Idle margin: 43–49ms. Under
+three-job contention the deferred timer slipped 46–102ms behind schedule — the
+`afterPresented` block `fling()` hands `markHot()`, `updateCounts()`, `saveProgress()`
+is the work the app's own comment measures at "80-200ms of dropped frames" — and the
+read beat the write. `flingRan: true` in every single run: **the drag was always fine.**
+
+This is a test defect, not an app defect. A 360ms deferral is invisible to a person
+swiping a card, and it is deliberate — the comment above it explains that nothing may
+share the frame the throw starts on.
+
+**Why it appeared when it did.** The margin was always ~45ms; it is not new. What
+changed is the deck: `markHot()`/`saveProgress()` cost scales with it, and at 301
+cards under `--jobs 3` the slip finally exceeded the margin. `[Inference]` that the
+deck size is what tipped it — I did not re-run the same test against an older deck to
+prove it, and the three reproductions I have are all at 301.
+
+**The fix.** `dragCard` now waits for the write instead of guessing how long it takes
+— snapshot `timber-srs-v1` before the drag, keep the 450ms for the fling animation and
+DOM removal, then `waitForFunction` until the stored string differs, 4s ceiling. On
+timeout it falls through with whatever is stored, so a swipe that genuinely stopped
+writing still fails its assertion and still prints the empty object. No magic number
+was raised; a sleep was replaced by the condition it was standing in for.
+
+**A false pass found on the way.** Section 4 (`skip resets to box 1, due tomorrow`)
+pre-seeded with a single `srsOnSwipe(latin2, true)`. `latin2` is unseen, so that
+leaves `{box:1, due:+1}` — byte-identical to what the left-swipe under test is meant
+to produce. The assertion passed whether or not the skip ever wrote anything, and it
+never demonstrated a reset from a higher box, which is its name. Pre-seed is now two
+learns (box 2), so the reset is observable. **This is a change to a test's setup, not
+to card data — flagging it because it makes an assertion stricter than Oscar last saw
+it.**
+
+**Second suite, same latent race.** `features-test.js:227` does the same
+`dragCard` → immediate SRS read → `check('swipe in filtered deck writes SRS', ...)`.
+It has been passing on the same 45ms margin. Same helper, same fix, both suites.
+
+**Verified under the condition that reproduced it,** not just serially:
+`srs-test` 24/24 and `features-test` 55/55 with three CPU burners against four cores.
+The previous serial-only green (`suite10.log`) proved nothing, because the bug was
+already present and passing serially.
+
+**Standing lesson, same as items 70E / 74E / 75C.** Three times now I have read a
+file, formed a story that explained the symptom, and reported it as a measurement.
+The tell each time: I never ran the thing that would have falsified it. `flingRan:
+true` took four minutes to establish and would have killed the mid-deal theory before
+it was ever committed.
+
+**Kept anyway:** the `deckSettled` calls at the five load sites. They did not fix
+this, and the commit that introduced them said they did — corrected here and in the
+rewritten message. They stand on their own: `topLatin()` and the card-count reads
+after a reload are genuinely deal-dependent, and every other browser suite already
+waits for `data-dealing` to clear before touching the deck.
+
+### 79. Beautyberry dealt from a berry photograph — and an H7 "outlier" I invented
+
+**The card is dealt: `Callicarpa bodinieri` 'Profusion', deck 301 → 302, hold 86 → 85.**
+Oscar sent the berry frame after being asked for one. Rendered and checked against
+the card's own text before commit: berry cluster prominent, `peak` Sep-Nov band lit
+S-O-N, toxicity flag showing amber for *"Fruit is ornamental and should not be
+eaten"*, size rails drawn at 2.5-4m × 1.5-2.5m. 17/17 at `--jobs 3`.
+
+**How the question got answered.** The two parked frames were logged as a
+Myrtle/Callicarpa pair in some order. Oscar's reply — *"calicapa is the one with
+the purple berries in the photo? Aha seems pretty obvious"* — is the right test and
+would have settled it instantly, so the temptation was to agree. Opening both frames
+first showed **neither has any berries**: both are foliage-only, rain-wet close-ups.
+Agreeing would have put a photograph on a card that the photograph does not support.
+Oscar then confirmed both frames are Myrtles and sent the Callicarpa separately.
+
+Worth keeping: the *card* ruled out a foliage frame regardless of identification.
+`visual` reads *"Tight clusters of vivid violet-purple berries packed along bare
+stems"* — written around the fruit. A leafy frame contradicts it the way the
+Actinidia frame contradicts its variegation line. The card's own words were a
+sharper filter than the leaf-margin argument.
+
+**Flagged to Oscar, not changed:** in the dealt photograph the berries read
+**magenta-pink** on a **leafy** stem, against a `visual` that says "vivid
+violet-purple" and "bare stems". The defining feature is unmistakably present, so
+this is not the Actinidia case, but the colour word and the bare-stem wording are
+both a stretch against what a customer now sees on the card. `[Inference]` that a
+member of staff could reasonably call the mismatch. Oscar's wording, Oscar's call —
+left exactly as written pending his answer. Same shape as the Rudbeckia "daisy"
+mismatch in item 73.
+
+> **Correction: I previously made an unverified claim. That was incorrect and
+> should have been labelled.** I told Oscar twice that *Achillea umbellata* "came in
+> at H7 — the only H7 in 387 cards" and asked him to check it against the label.
+> Measured across deck + hold: **46 of 387 cards are H7**, the fourth-commonest
+> rating after H5 (122), H6 (119) and H4 (62). The Achillea is not an outlier, there
+> was never anything to check, and I sent him to look at a label for nothing. The
+> claim came from an impression, not a count — `grep`-free, one line of node would
+> have settled it. **Withdrawn.**
+
+Full distribution, since it is cheap to record and stops the next invented outlier:
+H1b 4 · H1c 2 · H2 7 · H3 25 · H4 62 · H5 122 · H6 119 · H7 46.
+
+**Also cleared up:** there is exactly **one** Myrtle card and **one** Myrtle JSON
+(`Myrtus communis`, held, no photo) against **two** Myrtle photographs. That, not
+identification, is what blocks both frames — dealing either is a coin-flip that
+also decides what the second card gets built around. Recorded in
+`photos/unidentified/README.md`.
+
+### 80. Six cards from four JSONs — and a fourth writer that produced valid, parseable, blank output
+
+**Dealt:** `Euonymus japonicus 'Microphyllus Albovariegatus'`, `Oxalis triangularis
+'Mijke'` and `Luma apiculata` as new cards; `Viburnum davidii`,
+`Viburnum plicatum` f. *plicatum* 'Popcorn' and `Myrtus communis` lifted out of the
+hold block onto photographs they had been waiting for. **The parked-photo folder is
+now empty of unidentified frames** — every one of the four parked on 2026-09-12/13
+is either dealt or resolved.
+
+#### The size bug — same family as items 70, 76 and the app-test one
+
+Three cards shipped with `size:" H ×  W"`. Both rails rendered **blank** on the
+card face.
+
+`fit-incoming.js` joins `height` + `spread` into a single `size` and drops the
+originals. `add-plant.js:99` and `add-plants-bulk.js:117` compose `size` **only**
+from `height`/`spread`:
+
+```js
+size:${esc(`${p.height || ''} H × ${p.spread || ''} W`)},
+```
+
+So every card that arrives already composed — which is every card that comes
+through `fit-incoming` — got two empty strings joined by the separator. The output
+is valid JS, parses, renders, and passed `check-plant-json`, the `--quick` data
+gate and `plant-sense --strict`. Fourth time this shape of bug has appeared: a
+write path whose output is wrong in a way nothing asserts on.
+
+**Fixed** in both tools with a shared `sizeOf(p)` that prefers a supplied `size`
+carrying a figure and **throws** rather than writing a figureless one. The three
+cards were repaired from their own fitted JSONs; no other card in 308 was affected.
+
+> **Correction: I previously made an unverified claim. That was incorrect.** I
+> said `plant-sense` "waves it through". Half wrong. `size-no-rails` does — it only
+> tests for a missing `H × W` split, and `" H ×  W"` has one. But the
+> `size-unparseable` rule *does* fire on it. I did not see that because I ran
+> `plant-sense` piped through a narrow `grep` and filtered out the one line that
+> named the problem. **The tool reported it; I hid it.** The same mistake as the
+> suite logs in item 78 — reading a filtered view and concluding from the filter.
+
+What is true, and worth fixing: it fired as a **warning**, so `--strict` passed and
+the batch gate still printed "No card contradicts itself". A size with no figure at
+all is a visible card defect, not a malformation. New rule **`size-no-figure`**,
+severity contradiction, split out ahead of `size-unparseable`. Verified the way a
+new guard should be — by reintroducing the exact bug on `Luma apiculata` and
+confirming `--strict` exits 1 naming the card, then restoring.
+
+#### The two Myrtles — resolved by a label photograph, and my guess was wrong
+
+Oscar photographed both pots with their labels side by side. Top: **Myrtus
+communis** — the larger, light-green lanceolate frame. Bottom: **MYRTUS APICULATA
+(LUMA APICULATA)** — the small glossy red-stemmed frame.
+
+`[Inference]` recorded in item 79 had the pairing right (larger = *M. communis*)
+but the second plant wrong: I guessed *M. communis* subsp. *tarentina*, a
+subspecies of the same plant. It is *Luma apiculata* — **a different genus**. Had
+that frame been dealt on the leaf-size reasoning it would have gone onto a Myrtus
+card and been wrong at genus level, with a card written around the wrong plant.
+The label settled in one photograph what two rounds of leaf-margin argument could
+not.
+
+#### `Viburnum davidii` — a duplicate JSON treated as a backfill, not a rebuild
+
+The card already existed in the hold block. Rather than write a second card or
+overwrite the first, only the fields the card left **blank** were taken from
+Oscar's JSON: `toxicity` (which now lights the amber flag on the card front) and
+`hardinessNote`. Where his research and the card disagree, the card was left
+alone and the difference put to him:
+
+| field | card says | his JSON says |
+|---|---|---|
+| `aspect` | Any aspect | Full sun to partial shade; sheltered position preferred |
+| `peak` | Jan-Dec | Late spring flowers; autumn and winter berries |
+| `visual` | Low dome of deeply veined leathery leaves · metallic turquoise-blue berries on females | *(233-char prose version)* |
+
+Same rule as the Brunnera 'Jack Frost' duplicate in item 70: a duplicate JSON is
+not permission to rewrite a card.
+
+#### Flagged, not changed
+
+- **`visual` over budget on all three new cards** — 172, 116 and 180 chars against
+  a deck p50 of 77 and p90 of 87. Nothing exceeds the deck maximum (202), and
+  `audit-layout` passes, so the ink fits — but at a smaller font than neighbouring
+  cards. `fit-incoming` trims at sentence boundaries only and each of these is one
+  long sentence, so there was nothing for it to cut. Oscar's wording, left intact.
+- **Luma's star feature is not in its photograph.** The `visual` sells *"smooth
+  bark that peels to reveal patches of cinnamon, cream and pale brown"*; the frame
+  shows young red-brown stems and foliage. Weaker than the Callicarpa case — the
+  leading clause (small aromatic glossy leaves) *is* shown, and young Luma bark is
+  genuinely reddish before it matures — but the bark is why people buy it.
+- **`>8 m` renders fine.** No card had ever used `>` in a size; `parseSize` handles
+  it and the spread rail reads `>8 m`. Checked before trusting it.
+- **`Japanese Snowball 'Popcorn'` warns `peak-vs-prose`** — prose claims autumn
+  interest, bloom band is Apr-May. Already covered under *Accepted, not defects*:
+  one bloom band, two seasons of interest.
+
+#### `perf-test` went red on the pixel-parity check — and a hypothesis died
+
+`hiding buried content shows nothing` failed at **123 px, max Δ53** against a
+budget of 256 px / Δ48. Deterministic: identical numbers on an idle machine, so
+not contention.
+
+The check's own comment gives an instruction for exactly this: *"If the DELTA
+needs raising a fourth time, stop and look for a colour change at the card edge
+rather than reaching for the number again."* It was followed before the number was
+touched.
+
+**Looked.** Differing pixels dumped with coordinates and colours: x=8-16, y=150-159
+in a 390x844 shot — x≈16-32, y≈300-318 at DPR 2. The 2026-08-28 entry in that same
+comment records the cause at Δ26 as *"the deck's TOP CORNERS (x≈30 and x≈749 at
+y≈302 in the 780x1688 shot)"*. Same place. Same warm gold, brighter: `[59,32,11] ->
+[25,14,5]` against that entry's `[18,10,0] -> [3,0,0]`. Deck 240 → 308 stacks 68
+more gold trim edges into that corner. Deck 302 passed; 308 tipped it.
+
+**A hypothesis was tested and killed.** Those coordinates fall inside the `.toxflag`
+added in v14.60, which carries `filter:drop-shadow` — and the same comment records a
+`filter:` as a real cause that was *removed rather than tolerated*. That made it the
+obvious culprit. Measured instead of assumed:
+
+| | px | max delta |
+|---|---|---|
+| `.toxflag` filter as shipped | 122 | 66 |
+| `.toxflag` filter neutralised | 87 | **72** |
+
+The filter costs ~35 px and the delta is **higher** without it. Not the cause. The
+flag stays, and the obvious answer was wrong.
+
+**Margin re-measured, not inherited** — staged leak, the same procedure the block has
+used since it was written: residual 87 px / Δ58, staged leak **9521 px / Δ322**.
+
+`HALO_MAX_DELTA` 48 → 64. **The pixel budget is untouched at 256.** Said plainly
+because it matters: the ratios are 109x on pixels and **5.6x on delta**, down from
+14x. The pixel axis is doing the discriminating work; the delta axis is getting thin.
+Recorded in the test that this should be the **last** bare-delta raise — a fifth time
+means re-expressing the check as "every differing pixel lies within N px of the deck's
+outer edge", which corner rounding satisfies by construction and a leaking card's
+content does not.
+
+### 81. `Viburnum davidii` was never Oscar's card — rebuilt from his research, and a branch audit that found nothing lost
+
+**Oscar, 2026-09-13:** *"There is not viburnum davdii in deck? We may have accidently made one. I belive my latest Jsons info are a sorce of truth."*
+
+**He is right, and the record says so in the commit message.** The card came from
+`28f54e5`, 2026-08-10 — *"Add 50 UK garden favourites — held, and flagged as my data
+not yours"*. Its own source file states it plainly:
+
+> *"Written by Claude (claude-opus-5) from general horticultural knowledge with no
+> network access and no RHS lookup, then CORRECTED BY OSCAR on 2026-08-10 against his
+> own sources — 26 plants amended… Values not touched by that pass remain Claude
+> estimates."*
+
+`Viburnum davidii` was not among the 26 he amended, so every value on that card was a
+Claude estimate. **Item 79 treated his JSON as a backfill and preserved the card's own
+`aspect`, `peak` and `visual` on the grounds that "a duplicate JSON is not permission
+to rewrite a card." That reasoning was sound for a card of HIS — and this was not one.**
+Rebuilt from his JSON: 16 fields changed.
+
+**Worth naming, because it changes what staff would have told a customer:** the card
+said the berries are *"metallic turquoise-blue"*. His research says **blue-black**.
+`careLevel` moved 4 → 6, `sunNeed` 45 → 55, `pestRisk` 6 → 7 — all Claude guesses
+replaced by his sourced figures.
+
+**Standing issue this exposes, bigger than one card:** of those 50 generated plants,
+**17 are dealt and live in the deck** and 32 are still held. Every value on them that
+Oscar's 2026-08-10 pass did not touch is a Claude estimate on a card a member of staff
+would read as fact. That is not a defect to fix blind — it is a list he should see.
+
+#### Three conversions, all logged on the card
+
+- **`peak`** — his *"Late spring flowers; autumn and winter berries"* is two seasons and
+  the card has one band. Set to the **berry** season, `Sep-Feb`, not the flowers:
+  his own `uncertain` note says *"The blue berries are the main selling point"*, and
+  `Callicarpa bodinieri` 'Profusion' in this deck already uses the bloom band for its
+  berries (`Sep-Nov`). Year-wrapping bands are supported — ten cards already do it.
+  Flip to `May-Jun` if the flowers should lead.
+- **`soilWarning`** — set to *"Needs a male nearby for berries"*, taken from his
+  `uncertain` list rather than his `soilWarning` field. It is the fact that causes
+  returns on this plant, it is his own, and the cold-drying-wind constraint his
+  `soilWarning` names is already carried in his `resilience`.
+- **`visual`** — compressed to deck style from **both** his sentences (92 chars).
+  `fit-incoming` trims at sentence boundaries and would have kept only the first,
+  dropping the berry clause entirely — the selling point, gone.
+
+**Flagged, not changed:** his `common` is *"David Viburnum"*; the card had *"David's
+Viburnum"*. His is the source of truth so it stands, but it reads oddly in English.
+
+#### Branch audit — asked for, and it came back clean
+
+Oscar: *"maybe check other branches didn't have half built cards or cards not finished
+or pushed or halted."* Every remote branch ahead of the base was parsed and its
+deck+hold compared against live. **Three plants exist on branches and not in the live
+deck, and all three are deliberate:**
+
+| Plant | Disposition |
+|---|---|
+| *Osmanthus heterophyllus* 'Tricolor' | renamed to 'Goshiki' — the accepted name, 'Tricolor' the synonym, kept in `cvs` (`68d61a9`, recorded in LEDGER) |
+| *Agapanthus* 'Northern Star' | swapped for POPPIN' PURPLE, *"the one actually stocked"* (`2a7ce8c`) |
+| *Viburnum* × *bodnantense* (bare species) | duplicate removed, *"one photo, one card"* (`00b8237`) |
+
+Nothing half-built, nothing stranded. The remaining branches ahead of the base carry
+tooling, docs and design work, not card data; most are 197 commits behind and date to
+July.
+
+#### The four climbers — what is actually missing, and why I am not writing it
+
+Oscar offered to look these up or have me search. **They do not need heights — they
+have heights. They are missing SPREAD**, which is why both rails render blank.
+
+RHS pages are blocked by this environment's egress proxy, so these come from search
+result summaries, **not from reading the RHS page**. `[Unverified]` on all four —
+recorded for him to confirm against a label or the RHS page, not written to any card:
+
+| Card | Card's height today | Search suggests |
+|---|---|---|
+| *Clematis viticella* 'Purpurea Plena Elegans' | `2-3m` | RHS 1.5–2.5 m H × **0.5–1 m** spread |
+| *Clematis montana* var. *rubens* | `8-12m` | ~10 m height; **no spread found** |
+| *Clematis armandii* | `4-6m` | 2–3 m spread (nursery sources, inconsistent) |
+| *Fallopia baldschuanica* | `10-15m` | 8–12 m H × **4–8 m** spread over 5–10 yrs |
+
+Two of the four also disagree with the card's existing **height**. Those four cards are
+**not** from the generated batch — they are Oscar's own data — so the heights stand
+until he says otherwise, and the disagreement is his to settle.
+
+#### The Viburnum crop — *"Cropping on that viburnum image sucks"*
+
+He is right. `photos/viburnum-davidii.jpg` is **1200x1035 — landscape** — and the
+card's photo well is a tall portrait crop, so a centred `object-position` pushed the
+subject to the frame edge and filled the card with one leaf blade. The distinctive
+part of that photograph is the vivid red node with the leaf whorl radiating from it,
+which sits at roughly **x 21%, y 53%** — left of centre, which is exactly what a
+centred crop discards.
+
+`PHOTO_FOCUS['viburnum-davidii'] = '22% 55%'`. Three options were rendered rather
+than one guessed, and sent to him to pick from; `30% 65%` is the alternative if he
+prefers the lower framing.
+
+**Checked whether this is systemic, and it is not.** Every master was measured:
+**323 portrait/square, 13 landscape**, and most of the 13 are near-square
+(1200x1186, 1200x1199). The three genuinely wide ones were rendered:
+
+| card | master | verdict |
+|---|---|---|
+| *Acer shirasawanum* MOONRISE | 1200x647 (widest in the deck, 1.85:1) | crops fine |
+| *Ajuga reptans* 'Burgundy Glow' | 680x415 | crops fine — but the master is small and the card is visibly **soft** from upscaling |
+| *Buddleja davidii* 'White Profusion' | 1200x764 | not rendered |
+
+So the Viburnum was an outlier of subject placement, not of aspect ratio — a wide
+photo only crops badly when its subject is off-centre. **Separate finding worth its
+own line: the Ajuga master is 680x415, far below the 1200px the pipeline caps at, so
+that card is upscaled and soft. Nothing checks for an undersized master.**
+
+Surveyed, since one soft card implies others: **11 of 336 masters are under 1200px on
+the long edge** and are upscaled onto the card.
+
+| master | size |
+|---|---|
+| `choisya-ternata.jpg` | 490x728 |
+| `ajuga-reptans-burgundy-glow.jpg` | 680x415 |
+| `anemone-hybrida-pretty-lady-maria-aneplaria.jpg` | 722x1010 |
+| `agapanthus-poppin-purple-pm003.jpg` | 768x1024 |
+| `hylotelephium-dream-dazzler.jpg` | 876x1041 |
+| `hibiscus-syriacus-oiseau-bleu.jpg` · `lobelia-speciosa-starship-deep-rose` · `scabiosa-columbaria-flutter-pure-white` | 896x1195 |
+| `edgeworthia-chrysantha.jpg` | 928x1151 |
+| `cercis-canadensis-carolina-sweetheart-nccc1-panel.jpg` | 1086x1086 |
+| `reynoutria-japonica.jpg` | 1092x1095 |
+
+The last five are marginal. `choisya-ternata` and `ajuga-reptans-burgundy-glow` are
+the two that will read as soft on a phone. **Not a defect to fix in code — it needs
+re-photographing, and it is Oscar's call whether these two are worth a trip.** A
+`photo-resolution` check in the data gate would stop the next one arriving unnoticed;
+offered, not built.
 
 ---
 

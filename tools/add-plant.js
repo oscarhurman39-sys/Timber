@@ -29,6 +29,22 @@ if (!jsonPath || !photoPath) {
   console.error('           Then run: node tests/run-all.js --jobs 3   before pushing.');
   process.exit(1);
 }
+/* A card's size string comes either already composed (fit-incoming.js joins
+   height+spread and drops the originals) or as the two raw fields. Composing
+   blindly from height/spread produced " H ×  W" for every card that arrived
+   pre-composed: valid, parseable, split on "H × W" so plant-sense's
+   size-no-rails check passed it, and both rails rendered blank on the card.
+   Prefer a supplied size that actually carries a figure. */
+const sizeOf = (p) => {
+  const composed = `${p.height || ''} H × ${p.spread || ''} W`;
+  const pick = (p.size && /\d/.test(p.size)) ? p.size : composed;
+  if (!/\d/.test(pick)) throw new Error(
+    `${p.latin}: size carries no figure (size=${JSON.stringify(p.size || '')}, ` +
+    `height=${JSON.stringify(p.height || '')}, spread=${JSON.stringify(p.spread || '')}) ` +
+    `— both rails would render blank`);
+  return pick;
+};
+
 const die = (msg) => { console.error('ABORT: ' + msg); process.exit(1); };
 
 /* ---- 1. validate ---- */
@@ -96,7 +112,7 @@ const count = dealt + 1;
    trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
    cvs:${esc(p.cvs)},
    hardiness:${esc(p.hardiness)}, resilience:${esc(p.resilience)},
-   uses:${esc(p.uses)}, size:${esc(`${p.height || ''} H × ${p.spread || ''} W`)},
+   uses:${esc(p.uses)}, size:${esc(sizeOf(p))},
 ${extraLine(p)}   seasonalImpact:"", growthSpeed:${num(p.growthSpeed)}, pestRisk:${num(p.pestRisk)}, thirst:${num(p.thirst)}, careLevel:${num(p.careLevel)}, sunNeed:${num(p.sunNeed)}, sunMin:${num(p.sunMin)}},
 `;
   /* Same separator hazard as add-plants-bulk.js: after a plants-tool.js csv round-trip

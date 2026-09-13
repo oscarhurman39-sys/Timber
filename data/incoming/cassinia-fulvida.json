@@ -1,0 +1,33 @@
+{
+  "common": "Golden Cottonwood",
+  "latin": "Cassinia fulvida",
+  "hue": 45,
+  "visual": "Golden-downy young shoots over tiny dark leaves · small white flower heads",
+  "water": "Water while establishing, then moderately",
+  "aspect": "South / West",
+  "soil": "Fertile, well-drained loam",
+  "soilWarning": "Wet feet will see it off",
+  "prune": "None needed · take out damaged or unwanted growth",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jun-Aug",
+  "cvs": "",
+  "hardiness": "H5",
+  "hardinessNote": "Hardy in most UK locations, approximately -15 to -10°C.",
+  "resilience": "Pest- and disease-free · stands up to exposed coastal sites",
+  "uses": "Coastal gardens · low-maintenance borders · rock gardens",
+  "height": "1.5-2.5m",
+  "spread": "1.5-2.5m",
+  "foliage": "evergreen",
+  "container": "with care",
+  "growthSpeed": 11,
+  "pestRisk": 2,
+  "thirst": 6,
+  "careLevel": 5,
+  "sunNeed": 95,
+  "sunMin": 75,
+  "uncertain": [
+    "Also encountered under the synonym Cassinia leptophylla subsp. fulvida and Ozothamnus leptophyllus Fulvidus Group. (Oscar's note.)",
+    "peak: research said \"Summer\"; converted to Jun-Aug."
+  ]
+}

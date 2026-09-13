@@ -1,0 +1,35 @@
+[
+  {
+    "common": "Chilean Myrtle",
+    "latin": "Luma apiculata",
+    "hue": 0,
+    "visual": "Large evergreen shrub or small tree with small aromatic glossy green leaves and exceptionally attractive smooth bark that peels to reveal patches of cinnamon, cream and pale brown. Small white bowl-shaped flowers are followed by fleshy purple berries.",
+    "water": "Water regularly during establishment. Once established it is relatively drought tolerant, although young plants benefit from reliable moisture during prolonged dry periods.",
+    "aspect": "Full sun to partial shade",
+    "soil": "Well-drained chalk, clay, loam or sandy soil; tolerant of acid, neutral and alkaline conditions.",
+    "soilWarning": "Avoid persistently waterlogged ground. Young plants are more vulnerable to severe frost and cold exposure.",
+    "prune": "Requires little routine pruning. Remove dead, damaged or unwanted growth and lightly shape where necessary.",
+    "toxicity": "",
+    "compliance": "",
+    "peak": "Jun-Nov",
+    "cvs": "",
+    "hardiness": "H4",
+    "hardinessNote": "Hardy through most of the UK, approximately -10 to -5°C. Young plants and specimens in colder areas benefit from shelter.",
+    "resilience": "Drought resistant once established and generally pest- and disease-free, although caution is advised where honey fungus is present.",
+    "uses": "Specimen tree, architectural shrub, Mediterranean-style gardens, courtyards, wall-side borders and large containers while young.",
+    "height": "8–12 m",
+    "spread": ">8 m",
+    "foliage": "Evergreen; small broadly ovate aromatic green leaves retained throughout the year.",
+    "container": "Suitable for a large container while young, but the species eventually develops into a substantial shrub or small tree and is better planted in the ground.",
+    "growthSpeed": 10,
+    "pestRisk": 2,
+    "thirst": 7,
+    "careLevel": 6,
+    "sunNeed": 70,
+    "sunMin": 40,
+    "uncertain": [
+      "The supplied nursery label uses the older name Myrtus luma/apiculata. RHS currently accepts Luma apiculata; Myrtus apiculata and Myrtus luma are synonyms or older misapplied names.",
+      "peak \"Summer to autumn\" converted to \"Jun-Nov\" to parse as Mon-Mon."
+    ]
+  }
+]

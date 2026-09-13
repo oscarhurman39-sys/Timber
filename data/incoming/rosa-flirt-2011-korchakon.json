@@ -1,0 +1,33 @@
+{
+  "common": "Patio Rose FLIRT 2011",
+  "latin": "Rosa FLIRT 2011 ('Korchakon')",
+  "hue": 340,
+  "visual": "Clusters of small semi-double pink flowers, fading paler as they age",
+  "water": "Water regularly in growth · pots dry out fast",
+  "aspect": "South / West",
+  "soil": "Fertile, humus-rich, moist",
+  "soilWarning": "In pots: feed and water it or it sulks",
+  "prune": "Cut back in late winter to a low framework · deadhead all season",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jun-Oct",
+  "cvs": "Korchakon",
+  "hardiness": "H6",
+  "hardinessNote": "Cold-hardy rose; container-grown plants are more exposed to winter freezing than plants in open ground.",
+  "resilience": "Bred as a compact, repeat-flowering and disease-resistant miniature rose",
+  "uses": "Patio pots · containers · front of borders · small gardens",
+  "height": "0.3-0.5m",
+  "spread": "0.3-0.5m",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 12,
+  "pestRisk": 8,
+  "thirst": 12,
+  "careLevel": 9,
+  "sunNeed": 90,
+  "sunMin": 60,
+  "uncertain": [
+    "FLIRT 2011 is the trade name; 'Korchakon' is the cultivar denomination. Sources describe the flowers as having little or no fragrance despite the OCR label appearing to contain the word 'fragrant'. (Oscar's note.)",
+    "common/latin: the supplied JSON wrote the trade name in single quotes as 'Flirt 2011'. Single quotes denote a CULTIVAR epithet, and Oscar's own note above says FLIRT 2011 is not one. Written instead in the deck's trade-name style, matching Rosa GERTRUDE JEKYLL ('Ausbord') and Rosa ICEBERG ('Korbin')."
+  ]
+}

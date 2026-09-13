@@ -118,3 +118,48 @@ untouched and still has no photograph of its own.
 
 See VERIFY-QUEUE item 72 — including a correction to a size claim this file's
 earlier draft carried as `[Inference]` and Oscar's figures contradicted.
+
+## 2026-09-13 — four photos from the sixteen-frame batch
+
+### The two Myrtle frames — CLEARED 2026-09-13
+
+`2026-09-13-small-glossy-leaves-red-stems-myrtle-or-callicarpa.jpg` -> **Luma apiculata**
+`2026-09-13-larger-glossy-lanceolate-leaves-myrtle-or-callicarpa.jpg` -> **Myrtus communis**
+
+**Neither is a Callicarpa; both are Myrtles, and they are not the same genus.**
+Oscar photographed both pots with their labels: the larger light-green lanceolate
+plant is labelled *Myrtus communis*; the small glossy red-stemmed one is labelled
+*MYRTUS APICULATA (LUMA APICULATA)*. Both dealt.
+
+The `[Inference]` logged here had the pairing right and the plant wrong — it
+guessed the second was *M. communis* subsp. *tarentina*, a subspecies of the same
+species. It is a different **genus**. Dealing that frame on leaf-size reasoning
+would have put it on a Myrtus card and been wrong at genus level. The label
+photograph settled in one frame what two rounds of leaf-margin argument could not.
+
+The step that got the Callicarpa out of this pair was opening both frames and
+finding no berries in either, which made "is the Callicarpa the one with the
+purple berries" unanswerable from what was parked. Oscar then sent a berry
+photograph; that card is dealt. See VERIFY-QUEUE items 79 and 80.
+
+### `2026-09-13-variegated-evergreen-cream-margins-unidentified.jpg` — CLEARED 2026-09-13
+
+**Euonymus japonicus 'Microphyllus Albovariegatus'.** Named by Oscar with a JSON;
+card built and dealt from this exact frame. The `[Inference]` that it read as a
+Pittosporum or Euonymus was half right, and the reason it was not guessed stands:
+the deck already carries eight of those two genera and a wrong guess risked both a
+wrong card and a duplicate. It is a seventh Euonymus, and not a duplicate of any
+of the six already dealt.
+
+### `2026-09-13-purple-shamrock-pink-flowers-unidentified.jpg` — CLEARED 2026-09-13
+
+**Oxalis triangularis 'Mijke'.** Named by Oscar with a JSON; card built and dealt
+from this exact frame. The `[Inference]` that the shape was *Oxalis triangularis*
+was right; the cultivar was not readable from the frame and came off the label.
+First Oxalis in the deck.
+
+The frame is a two-panel collage with a large blurred area filling its lower half,
+which looked likely to crop badly onto the card. Rendered before judging: the card
+crops to the two panels and drops the blur entirely. The prediction was wrong and
+the card is fine.
+
