@@ -2727,6 +2727,51 @@ Oscar's JSON, and the three conversions are logged in its `uncertain` block.
 
 ---
 
+### 73. Rudbeckia 'Fireball' dealt — and the photograph says "double" where the research says "daisy"
+2026-09-13. A JSON and a photograph together, no question attached. Deck 287 → 288.
+
+**Not a duplicate.** The deck already holds `Rudbeckia fulgida var. sullivantii
+'Goldsturm'` — single golden ray florets, a different plant. Nothing else in the
+deck or the hold block is a Rudbeckia.
+
+**A. `latin` deliberately carries NO species.** Oscar's own JSON says so:
+*"'Fireball' is not sufficiently distinctive from the supplied label alone to
+confidently assign a species or hybrid group."* So the card is
+`Rudbeckia 'Fireball'` — genus plus cultivar, the same shape as
+`Pieris 'Forest Flame'`. Inventing *R. hirta* to make the name look complete
+would have put an unsourced species on a customer-facing card. The held
+'Goldsturm' keeps its full species, because that one is known.
+
+**B. The card says "double" because the picture does.** The research describes
+*"daisy-like flowers"*, which implies the single row of ray florets a daisy has.
+The photograph shows three or four whorls — unmistakably double. A card whose
+words and picture disagree is the failure mode items 69, 70 and 71 all turned
+on, so the `visual` was written from the frame: *"Double gold petals with a
+broad mahogany base · near-black central cone"*. Every element of that is
+visible in the photograph. The as-sent research is committed verbatim beside the
+fitted file.
+
+**C. An identification note, flagged rather than acted on.** `[Inference]` the
+dark, granular, conical disc reads Rudbeckia. But the toothed ray-floret tips
+and the gold/mahogany banding are also characteristic of *Gaillardia*, and
+double Gaillardia cultivars exist. **Oscar read the bench label and it says
+Rudbeckia, so the card says Rudbeckia** — a photograph is not evidence against a
+label someone actually read. Recorded only so that if the cultivar is ever
+chased down (A above leaves that open), the genus gets a second look at the same
+time rather than being assumed settled.
+
+**D. Conversions, all logged in the card's `uncertain` block.** `peak` "Summer to
+autumn" → **Jul-Oct**, matching the held 'Goldsturm'. `aspect` "Full sun" is a
+light level the compass rule rejects → **South / West**, derived from sunNeed 95.
+`foliage` "Herbaceous" → **deciduous**, the schema's controlled vocabulary; the
+field does not reach the card either way.
+
+**E. Validator warnings accepted as sent.** `pestRisk` 5 and `careLevel` 5 read
+to the checker as possible unconverted 0-5 ratings. They are Oscar's researched
+0-20 values and are reasonable for a robust border perennial.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
