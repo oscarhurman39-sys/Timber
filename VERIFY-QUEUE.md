@@ -2508,15 +2508,25 @@ half. All three tools now emit them, blank stays absent rather than empty, and
 are already inside the 26/44 budgets instead of demanding a duplicate `FIT`
 entry (the length assertions still apply).
 
-**Measured cost of the bug on the batch already ingested.** Re-running
-`fitBatch` over `data/incoming/wishlist-batch-01.json` with the fix produces
-output identical to before except for *added* keys — no value changes — and the
-added keys are: `hardinessNote` on **all 49** cards, and `toxicity` on **23**,
-including *Rhododendron luteum*, *Daphne bholua* 'Jacqueline Postill', *Kalmia
-latifolia* 'Ostbo Red', *Wisteria floribunda* and *Akebia quinata*. Those 49
-cards are in `PLANTS_ON_HOLD` today **without** that text. Re-ingesting them
-would recover it. **Not done in this batch** — it touches 49 cards Oscar did not
-ask about, and it is his call whether to run it.
+**Effect of the bug on the batch already ingested — and a correction.**
+Re-running `fitBatch` over `data/incoming/wishlist-batch-01.json` with the fix
+produces output identical to before except for *added* keys — no value changes —
+and the added keys are `hardinessNote` on all 49 fitted cards and `toxicity`
+on 23. That is a fact about the TOOL's output.
+
+> **Correction, 2026-09-13: I previously made an unverified claim. That was
+> incorrect and should have been checked before it was written.** This entry
+> first said those 49 cards "are in `PLANTS_ON_HOLD` today **without** that
+> text", and offered a backfill as the fix. That was an INFERENCE from the
+> tool-output diff, never a measurement of the cards. Oscar asked for the
+> backfill to be run; the dry run added **zero** fields, and a direct check of
+> all 50 wishlist cards in `timber.html` shows **50 of 50 carry
+> `hardinessNote`** and **26 of 26 whose batch supplied `toxicity` carry it**.
+> Nothing was lost from the deck. `[Inference]` the fields were restored by a
+> later `plants-tool.js` csv round-trip, which materialises every FIELDS
+> column — the same mechanism noted in item 71E for the commercial keys.
+> **There is no backfill to run.** The tool bug was real and the fix stands;
+> the damage claim did not.
 
 **F. Conversions made, and why.** Every JSON arrived with `peak` as a season
 word, which `tools/check-plant-json.js` rejects outright (the app parses months).
@@ -2806,11 +2816,66 @@ plain red on every flag, so *Handle with care* is amber and does not look like
 "in line with the corner". Bottom-left is a two-number CSS change if the title
 side is wrong.
 
-**E. Item 71E is now more important than it was.** 23 held cards lost their
-researched `toxicity` when they were ingested in August (Daphne, Rhododendron
-luteum, Kalmia, Wisteria, Akebia among them). Those are exactly the cards that
-should flag and currently cannot. The backfill recovers the text; this flag
-then shows it. Still not run — Oscar's call, one command.
+**E. The backfill this entry pointed at does not exist — see the correction in
+item 70E.** This entry said 23 held cards had lost their researched `toxicity`
+in August and "should flag and currently cannot". Measured 2026-09-13 on Oscar's
+instruction to run it: every wishlist card that was researched with a toxicity
+note still carries it, and all 50 carry `hardinessNote`. The cards that do not
+flag are the ones that never had the field researched at all — 322 of them —
+which is section C above, not a recovery job.
+
+---
+
+### 75. Three answers from Oscar — the climber waits, the boot alarm was a false positive, the backfill did not exist
+2026-09-13.
+
+**A. *Actinidia kolomikta* — HELD, confirmed by Oscar.** *"keep the climber
+il just get a new photo at some point."* The card stays in `PLANTS_ON_HOLD`
+and the 2026-09-12 frame stays parked in `photos/unidentified/`, unchanged.
+Item 70D is therefore settled rather than open: the decision is *wait for a
+frame showing the variegation the card sells*, not *the photo was wrong*.
+Nothing to do until a new photograph arrives; then
+`node tools/deal-plant.js "Actinidia kolomikta" <photo>` and
+`node tools/optimise-photos.js`.
+
+**B. The light-mode trigger was a FALSE POSITIVE, and Oscar's answer says so
+plainly.** Asked whether the app showed a blank screen or was swiped away
+mid-load, he answered: *"swipe away mid load."*
+
+That closes the question the diagnostic report could not. The boot sentinel
+clears `bootPending` on one of three signals — `pagehide`, `visibilitychange`
+to hidden, or the 20-second grace timer after `load`. Swiping the app out of
+the Android recents switcher during those first 20 seconds fires none of them
+reliably, so the open is counted as a failure. Twice in a row arms light mode.
+**The app did not crash. Nothing is broken.** This matches every measurement
+taken on 2026-09-13: no JS error ever recorded, 8GB / 10-core device, storage
+at 0.36% of quota, photo decode flat at ~49MB regardless of deck size, JS heap
+9.5MB, deal-complete 10.4s at 8x CPU throttle against a 20s window, and
+`window.load` at 263ms.
+
+**It will happen again, by construction.** A force-close inside 20 seconds is
+indistinguishable from a tab the OS killed — both leave the flag set and no
+error. The code's own comment accepts this: *"Being wrong here is cheap in one
+direction only: a false alarm costs 24 cards instead of 238 for one session; a
+missed one costs the app."* That trade is still right, and **nothing was
+changed** — a fix that made the sentinel less eager would trade a cosmetic
+annoyance for the risk of missing a real crash on the iPhones that started this
+(LEDGER 2026-08-15 and 2026-08-21, still `[Unverified]` as fixed).
+
+If it becomes a nuisance, the cheapest honest options, in order: (1) tap the
+pill, which is what it is for; (2) raise `LIGHT_AFTER` from 2 to 3, so a
+deliberate double force-close does not arm it; (3) clear `bootPending` at
+`DOMContentLoaded` + a short delay *as well as* on `load`, which narrows the
+window but also narrows what the sentinel can catch. **None of these should be
+done on a hunch** — the sentinel exists because two real phones died and the
+cause was never found.
+
+**C. The backfill Oscar asked for turned out to be unnecessary.** See the
+correction inside item 70E: the claim that 49 held cards had lost
+`hardinessNote` and 23 had lost `toxicity` was an inference from a tool-output
+diff, not a measurement of the deck, and it was wrong. 50 of 50 wishlist cards
+carry `hardinessNote`; every one whose research supplied `toxicity` carries it.
+The dry run added zero fields and nothing was written.
 
 ---
 

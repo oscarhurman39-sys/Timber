@@ -97,6 +97,12 @@ dioecious and the research says so) or a different plant. Same shape as the
 'Dark Knight' case in item 69: dealing it would put a picture on the card that
 contradicts the card's own words.
 
+**Oscar's call, 2026-09-13: keep the card held and wait.** *"keep the climber
+il just get a new photo at some point."* So this frame stays parked and the card
+stays in `PLANTS_ON_HOLD` — not because the photograph is of the wrong plant,
+but because it does not show the variegation the card is written around. See
+VERIFY-QUEUE item 75A.
+
 ### 2026-09-12-pieris-japonica-mountain-fire-awaiting-json.jpg — CLEARED 2026-09-13
 
 **Oscar named the cultivar: 'Mountain Fire'** — neither of the two the question
