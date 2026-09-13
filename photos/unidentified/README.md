@@ -136,6 +136,27 @@ put a photograph on a card. **Oscar's call.** Once he says which is which:
 `node tools/deal-plant.js "<latin>" <photo>` for each, then
 `node tools/optimise-photos.js`.
 
+**2026-09-13, checked by opening both frames: NEITHER shows berries.** Oscar
+asked whether the Callicarpa is "the one with the purple berries in the photo" —
+it would be, but there are no berries in either frame. Both are foliage-only,
+rain-wet close-ups. So the berry test cannot settle the pair from what is parked.
+
+**And the Callicarpa card cannot take a foliage frame at all, whichever it is.**
+Its `visual` reads *"Tight clusters of vivid violet-purple berries packed along
+bare stems"* — the card is written around the fruit, `peak` Sep-Nov. Dealing a
+leafy green shot onto it repeats the Actinidia case above: a photograph that
+contradicts the card's own words. That card needs a berry photograph, not an
+identification.
+
+`[Inference]` the larger frame's entire margins and glossy opposite leaves fit
+*Myrtus* better than *Callicarpa*, whose leaves are toothed and matte and which
+is deciduous — which would make **both** frames Myrtle (*M. communis* and the
+small-leaved subsp. *tarentina*). `[Unverified]` whether the two frames are two
+different plants at all; that rests only on the order they arrived in.
+
+Decider offered to Oscar: crush a leaf. Myrtle is unmistakably aromatic,
+Callicarpa is not.
+
 ### `2026-09-13-variegated-evergreen-cream-margins-unidentified.jpg`
 
 No JSON. Thick obovate leaves in whorls at the shoot tips, broadly edged cream.
