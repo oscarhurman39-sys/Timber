@@ -47,7 +47,16 @@ const FIELDS = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', '
   // about -10°C in ideal sheltered sites". Rendered in the hardiness lens
   // (press-and-hold the crest), never inferred. Added 2026-08-25; before that it
   // was researched on 87 cards and thrown away at the schema.
-  'hardinessNote'];
+  'hardinessNote',
+  // "Will it look bare in winter?" — the question CARD-BACK.md section B listed
+  // as asked every day and captured nowhere. Free prose as researched, but it
+  // must NAME one of four classes, because the front reads that word and nothing
+  // else: evergreen / semi-evergreen / deciduous / herbaceous. The first of the
+  // four to appear in the string wins — the prose is never rewritten to suit the
+  // parser. Everything else is the leaf description and renders only on the back:
+  // "deciduous; five-lobed leaves with strong seasonal colour". Added 2026-09-13;
+  // before that 312 researched values sat in data/incoming with nowhere to go.
+  'foliage'];
 /* Nothing speculative belongs in this list. It is exactly the set of fields that
    exist on cards today, which is what makes the "unknown field" guard meaningful:
    a key not listed here is a mistake worth stopping for, not a column nobody

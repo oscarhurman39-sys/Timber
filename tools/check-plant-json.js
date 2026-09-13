@@ -111,8 +111,14 @@ if (p.latin) {
 }
 
 /* ---- controlled vocabularies ---- */
-if (p.foliage && !['evergreen','semi-evergreen','deciduous'].includes(String(p.foliage).toLowerCase()))
-  warnings.push(`"foliage" is "${p.foliage}" — expected evergreen / semi-evergreen / deciduous`);
+/* foliage is prose that must NAME its class, not prose restricted to the class.
+   The card prints the whole string on the back and reads one word for the lens
+   and the customer sheet, so the leaf description is welcome and the class word
+   is compulsory. `herbaceous` joined the vocabulary on 2026-09-13: 13 cards were
+   already carrying it and it is the honest answer for a plant that vanishes to
+   the ground, which "deciduous" does not distinguish from a bare twiggy shrub. */
+if (p.foliage && !/(?:^|[^-\w])(semi-evergreen|evergreen|deciduous|herbaceous)/i.test(String(p.foliage)))
+  errors.push(`"foliage" is ${JSON.stringify(p.foliage)} — it must name one of evergreen / semi-evergreen / deciduous / herbaceous, or the card cannot answer "will it look bare in winter?". A leaf description after it is fine: "deciduous; five-lobed leaves with strong seasonal colour".`);
 if (p.container && !['yes','with care','no'].includes(String(p.container).toLowerCase()))
   warnings.push(`"container" is "${p.container}" — expected yes / with care / no`);
 

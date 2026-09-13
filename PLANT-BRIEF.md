@@ -66,17 +66,18 @@ list are dropped silently, so answering them is wasted work.
   "resilience": "Drought and wind tolerant once established; dislikes winter wet",
   "uses": "Borders · gravel gardens · coastal · cut flowers",
 
-  "foliage": "deciduous",
+  "foliage": "deciduous; narrow grassy grey-green leaves",
   "container": "with care",
   "uncertain": ["every field left blank or judged, and why"],
   "sources": ["where the facts came from"]
 }
 ```
 
-**Record only — answer briefly, they render nowhere:** `foliage`, `container`,
-`uncertain`, `sources`. `uncertain` is the most valuable of the four and is read by a
-human every batch; `foliage` and `container` are kept in case a card row is built for
-them.
+**Record only — answer briefly, they render nowhere:** `container`, `uncertain`,
+`sources`. `uncertain` is the most valuable of the three and is read by a human every
+batch; `container` is kept in case a card row is built for it.
+
+`foliage` left that list on 2026-09-13 and is now **on the card** — see FIELD RULES.
 
 **Never send these.** `source`, `order`, `bench`, `root`, `trade`, `retail`, `margin`,
 `type`, `shrink`, `returnRisk`, `pots` are the owner's buying and trade data. The
@@ -209,6 +210,14 @@ If none apply, leave it `""`. Unlike `toxicity`, blank is a fine answer here.
   year-round foliage — use the months of **that** feature and say which in `visual`.
   A plant with two seasons gets **one** band: choose the season it is *sold* on and
   name the other in `visual`.
+- **`foliage`** — answers "will it look bare in winter?", which the shop floor is
+  asked every day. It **must name one of four words**, because the app reads that
+  word and nothing else: `evergreen` · `semi-evergreen` · `deciduous` ·
+  `herbaceous`. Use `herbaceous` when the plant disappears to the ground, not just
+  loses its leaves — that is the case customers ring up about thinking it died.
+  A leaf description after the word is welcome and prints on the back:
+  `"deciduous; five-lobed leaves with strong seasonal colour"`. A value that names
+  none of the four is **rejected** — "dark green" is a leaf colour, not an answer.
 - **`visual`** — one line, **about 90 characters**, separated by `·`. What it looks
   like and when. This is the line that sells the plant, so lead with the feature
   someone buys it for.
