@@ -116,12 +116,24 @@ const check = (name, ok, detail = '') => {
     cx.drawImage(A, 0, 0); const da = new Uint8ClampedArray(cx.getImageData(0, 0, A.width, A.height).data);
     cx.clearRect(0, 0, A.width, A.height); cx.drawImage(B, 0, 0);
     const db = cx.getImageData(0, 0, A.width, A.height).data;
-    let n = 0, max = 0;
+    /* WHERE a pixel differs is what separates halo rounding from a real leak.
+       Corner rounding hugs the deck's outer edge; a buried card becoming visible
+       puts CONTENT inside the card's rectangle. Measure both. */
+    const dpr = window.devicePixelRatio || 1;
+    const r = [...document.querySelectorAll('.deck .card')].pop().getBoundingClientRect();
+    const box = { l: r.left * dpr, t: r.top * dpr, r: r.right * dpr, b: r.bottom * dpr };
+    const BAND = 24;                       /* px of the card edge treated as halo */
+    let n = 0, max = 0, inside = 0;
     for (let i = 0; i < da.length; i += 4) {
       const d = Math.abs(da[i] - db[i]) + Math.abs(da[i + 1] - db[i + 1]) + Math.abs(da[i + 2] - db[i + 2]);
-      if (d > 0) { n++; if (d > max) max = d; }
+      if (d > 0) {
+        n++; if (d > max) max = d;
+        const px = (i / 4) % A.width, py = Math.floor((i / 4) / A.width);
+        const inset = Math.min(px - box.l, box.r - px, py - box.t, box.b - py);
+        if (inset > BAND) inside++;
+      }
     }
-    return { px: n, max, pct: +(100 * n / (da.length / 4)).toFixed(3) };
+    return { px: n, max, inside, pct: +(100 * n / (da.length / 4)).toFixed(3) };
   }, [refShot, liveShot]);
   /* This asserted diff.px === 0 until 2026-08-16, when it went red at deck 173
      and stayed red. It was NOT a defect, and the evidence is worth keeping so
@@ -256,11 +268,32 @@ const check = (name, ok, detail = '') => {
      untouched (31 of 256). If the count climbs into the hundreds, or the pixels
      stop being on the card outline, that is a different phenomenon. */
   const HALO_MAX_PX = 256;     /* 98 at deck 217 with two themed cards; 31 at deck 240 */
-  const HALO_MAX_DELTA = 64;   /* sum across r+g+b; 13 at 217, 26 at 240, 53 at 308 — corner rounding only */
-  check(`hiding buried content shows nothing (${diff.px}px, max Δ${diff.max}; halo shadows round at the edge)`,
-    diff.px <= HALO_MAX_PX && diff.max <= HALO_MAX_DELTA,
-    `${diff.px}px differ (${diff.pct}%), max channel delta ${diff.max} ` +
-    `— budget ${HALO_MAX_PX}px / Δ${HALO_MAX_DELTA}`);
+  /* RE-EXPRESSED 2026-09-13, exactly as the note above said a fifth raise should be
+     handled: the bare delta had stopped discriminating, so it is no longer a gate.
+
+     The delta failed again at Δ79 the moment Oscar's research changed `hue` on 48
+     cards — the stacked trim at the corner is literally a different colour now. That
+     is not a leak and never was, and raising 64 to 96 would have been the fifth
+     loosening of a number that had gone 3 -> 5 -> 9 -> 26 -> 53 -> 79 while the thing
+     it was meant to catch never moved.
+
+     WHERE the pixels sit discriminates where their brightness does not. Measured, both
+     runs on deck 310, staged leak by the same procedure this block has always used:
+
+                      total px    max delta    px >24px INSIDE the card edge
+       residual ....       123           79                              39
+       staged leak .    36,575          375                          16,687
+
+     Halo rounding hugs the deck's outer edge; a buried card becoming visible puts
+     CONTENT inside the card rectangle. That is 428x on the inside-count against 4.7x
+     on the delta. So the gates are now total pixels (297x headroom) and inside-count
+     (428x), and the max delta is REPORTED on every run so drift stays visible without
+     gating on a number that no longer means anything. */
+  const HALO_MAX_INSIDE = 256; /* differing px more than 24px inside the card rect; 39 observed, 16687 on a staged leak */
+  check(`hiding buried content shows nothing (${diff.px}px, ${diff.inside} inside the card, max Δ${diff.max}; halo rounds at the edge)`,
+    diff.px <= HALO_MAX_PX && diff.inside <= HALO_MAX_INSIDE,
+    `${diff.px}px differ (${diff.pct}%), ${diff.inside} of them more than 24px inside the card rect, ` +
+    `max channel delta ${diff.max} — budget ${HALO_MAX_PX}px / ${HALO_MAX_INSIDE} inside`);
 
   /* ---- 4. a drag must not force layout ---- */
   /* settle the photo pipeline first: the background trickle loader (tricklePhotos)

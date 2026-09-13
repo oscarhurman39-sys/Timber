@@ -101,6 +101,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acer-palmatum-orangeola.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-palmatum-oridono-nishiki.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2554,6 +2564,16 @@
   },
   {
    "file": "oxalis-triangularis-mijke.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "paeonia-lactiflora-tom-cat.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",

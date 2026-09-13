@@ -39,6 +39,106 @@
    warn  <= 44 chars — a real constraint, not a restatement of soil.
    face  — compass facing; omit to derive from the sun band. */
 const FIT = {
+  "Acer palmatum 'Sango-kaku'":
+    { soil: 'Fertile, drained, acidic', warn: 'Wind and drought scorch the leaves' },
+  "Alchemilla mollis":
+    { soil: 'Any, moist but drained', warn: "Self-seeds freely where it's happy" },
+  "Anemone × hybrida 'Honorine Jobert'":
+    { soil: 'Humus-rich, moist, drained', warn: 'Spreads by rhizome once settled' },
+  "Astilbe 'Fanal'":
+    { soil: 'Fertile, humus-rich, moist', warn: 'Never let it bake dry' },
+  "Astrantia 'Roma'":
+    { soil: 'Fertile, humus-rich, moist', warn: 'Struggles in hot dry positions' },
+  "Berberis darwinii":
+    { soil: 'Any soil, well-drained', warn: 'Spines injure; gloves when pruning' },
+  "Brunnera macrophylla 'Jack Frost'":
+    { soil: 'Humus-rich, moist, drained', warn: 'Sun and dry soil scorch the foliage' },
+  "Buxus sempervirens":
+    { soil: 'Any, moist but drained', warn: 'Box blight and box tree moth' },
+  "Clematis 'Jackmanii'":
+    { soil: 'Fertile, moist, drained', warn: 'Keep the root zone cool and shaded' },
+  "Cornus sanguinea 'Midwinter Fire'":
+    { soil: 'Any, moist but drained', warn: 'Shade dulls the winter stems' },
+  "Cotoneaster horizontalis":
+    { soil: 'Any soil, well-drained', warn: 'Schedule 9; do not spread in the wild' },
+  "Crataegus laevigata 'Paul's Scarlet'":
+    { soil: 'Any, reasonably drained', warn: 'Avoid permanently wet ground' },
+  "Crocosmia 'Lucifer'":
+    { soil: 'Fertile, moist, drained', warn: 'Winter wet rots the corms' },
+  "Delphinium Black Knight Group":
+    { soil: 'Fertile, moist, drained', warn: 'Stake it; wind snaps the spikes' },
+  "Fagus sylvatica":
+    { soil: 'Fertile, well-drained', warn: 'Dislikes prolonged waterlogging' },
+  "Forsythia × intermedia 'Lynwood Variety'":
+    { soil: 'Any, moist but drained', warn: 'Shade costs you the flowers' },
+  "Fuchsia 'Mrs Popple'":
+    { soil: 'Fertile, moist, drained', warn: 'Late frost damages new growth' },
+  "Hebe 'Red Edge'":
+    { soil: 'Any, free-draining', warn: 'Cold wet winters are the killer' },
+  "Heuchera villosa 'Palace Purple'":
+    { soil: 'Fertile, moist, drained', warn: 'Winter wet and summer drought' },
+  "Hosta × tardiana 'Halcyon'":
+    { soil: 'Fertile, humus-rich, moist', warn: 'Slugs and snails will shred it' },
+  "Hydrangea petiolaris":
+    { soil: 'Humus-rich, moist, drained', warn: 'Slow to start; hates dry soil' },
+  "Hypericum × hidcoteense 'Hidcote'":
+    { soil: 'Any, moist but drained', warn: 'Avoid prolonged waterlogging' },
+  "Jasminum nudiflorum":
+    { soil: 'Any soil, well-drained', warn: 'Avoid waterlogged ground' },
+  "Kerria japonica 'Pleniflora'":
+    { soil: 'Fertile, moist, drained', warn: 'Suckers well beyond where you plant it' },
+  "Laburnum × watereri 'Vossii'":
+    { soil: 'Any soil, well-drained', warn: 'Seeds are highly toxic to children' },
+  "Lamprocapnos spectabilis":
+    { soil: 'Humus-rich, moist, drained', warn: 'Dies back in summer; mark the crown' },
+  "Laurus nobilis":
+    { soil: 'Fertile, well-drained', warn: 'Winter wet and freezing wind' },
+  "Lavandula angustifolia 'Hidcote'":
+    { soil: 'Free-draining, alkaline', warn: 'Winter wet kills it, not the cold' },
+  "Ligustrum ovalifolium":
+    { soil: 'Any, reasonably drained', warn: "Berries spread it where it isn't wanted" },
+  "Lonicera ligustrina var. yunnanensis 'Baggesen's Gold'":
+    { soil: 'Any, moist but drained', warn: 'Shade turns the gold leaves green' },
+  "Lupinus 'The Governor' (Band of Nobles Series)":
+    { soil: 'Fertile, drained, acidic', warn: 'Slugs and aphids; dislikes lime' },
+  "Magnolia stellata":
+    { soil: 'Humus-rich, acid-neutral', warn: 'Late frost browns the flower buds' },
+  "Mahonia × media 'Charity'":
+    { soil: 'Fertile, moist, drained', warn: 'Shelter from severe drying winds' },
+  "Parthenocissus tricuspidata":
+    { soil: 'Any, moist but drained', warn: 'Will cover gutters, roofs and windows' },
+  "Prunus 'Kanzan'":
+    { soil: 'Fertile, moist, drained', warn: 'Never prune in winter; silver leaf' },
+  "Prunus laurocerasus 'Rotundifolia'":
+    { soil: 'Any, reasonably drained', warn: 'Cut with secateurs, not a trimmer' },
+  "Prunus serrula":
+    { soil: 'Fertile, moist, drained', warn: 'Avoid waterlogged soil' },
+  "Pyracantha SAPHYR ORANGE ('Cadange')":
+    { soil: 'Any, moist but drained', warn: 'Thorns injure; gloves when pruning' },
+  "Rosa 'New Dawn'":
+    { soil: 'Fertile, humus-rich, moist', warn: 'Never plant into old rose soil' },
+  "Rosa GERTRUDE JEKYLL ('Ausbord')":
+    { soil: 'Fertile, humus-rich, moist', warn: 'Never plant into old rose soil' },
+  "Rosa ICEBERG ('Korbin')":
+    { soil: 'Fertile, humus-rich, moist', warn: 'Old rose soil; black spot risk' },
+  "Rosa rugosa":
+    { soil: 'Any, even poor and sandy', warn: 'Suckers vigorously into a thicket' },
+  "Rudbeckia fulgida var. sullivantii 'Goldsturm'":
+    { soil: 'Fertile, moist, drained', warn: 'Shade costs you the flowers' },
+  "Salvia rosmarinus 'Miss Jessopp's Upright'":
+    { soil: 'Poor, very free-draining', warn: 'Winter wet kills it, not the cold' },
+  "Spiraea japonica 'Goldflame'":
+    { soil: 'Any, moist but drained', warn: 'Shade dulls the foliage colour' },
+  "Verbena bonariensis":
+    { soil: 'Any, well-drained', warn: 'Winter wet; self-seeds everywhere' },
+  "Viburnum opulus 'Roseum'":
+    { soil: 'Fertile, moist, drained', warn: 'Shade reduces the flower heads' },
+  "Weigela 'Bristol Ruby'":
+    { soil: 'Fertile, moist, drained', warn: 'Shade costs you the flowers' },
+  "Acer palmatum 'Orangeola'":
+    { soil: 'Fertile, drained, acidic', warn: 'Wind and dry soil scorch the lace leaf' },
+  "Paeonia lactiflora 'Tom Cat'":
+    { soil: 'Deep, fertile, humus-rich', warn: "Plant the crown shallow or it won't flower" },
   'Viburnum davidii':                 { soil: 'Humus-rich, moist, drained', warn: 'Needs a male nearby for berries' },
   'Luma apiculata':                   { soil: 'Any soil, well-drained',   warn: 'Young plants need shelter from hard frost' },
   "Euonymus japonicus 'Microphyllus Albovariegatus'":

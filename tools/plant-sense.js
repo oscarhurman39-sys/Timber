@@ -39,6 +39,13 @@ const cards = deck.concat(hold);
    Same discipline as tests/deck-audit.js: never add a line to silence a new
    defect — add it only alongside an entry in VERIFY-QUEUE.md that says why. */
 const KNOWN = new Set([
+  /* Two seasons of interest, one bloom band. Oscar's 2026-09-13 research states the
+     peak explicitly as the season the plant is SOLD on — the bark, the berries — while
+     his own visual also names the spring blossom. The card cannot show both. See
+     VERIFY-QUEUE item 82; same shape as Kousa Dogwood 'Flower Tower' and Japanese
+     Snowball 'Popcorn' under "Accepted, not defects". */
+  'Prunus serrula|peak-vs-prose',
+  "Pyracantha SAPHYR ORANGE ('Cadange')|peak-vs-prose",
   "Clematis viticella 'Purpurea Plena Elegans'|size-no-rails",
   'Clematis montana var. rubens|size-no-rails',
   "Clematis armandii|size-no-rails",
