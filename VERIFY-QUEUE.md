@@ -2879,6 +2879,73 @@ The dry run added zero fields and nothing was written.
 
 ---
 
+### 76. Persian Ironwood dealt — and a regression that had quietly broken `deal-plant.js` for three commits
+2026-09-13. Oscar: *"This is a standard parotia persica photo, I believe it's in
+the pre build cards."* He was right on both counts. Deck 288 → 289, hold 86 → 85.
+
+**A. The right card, and not the other one.** The deck carries TWO Parrotias:
+`Parrotia persica 'Bella'`, dealt, whose photograph is the wine-purple summer
+foliage the cultivar is grown for; and `Parrotia persica`, the plain species,
+**held since the August wishlist ingest with no photograph**. Oscar said
+"standard", which is the species, and the frame confirms it — the same obovate,
+wavy-crenate, strongly veined leaf as the 'Bella' photograph, in plain green.
+The leaf-shape match between the two frames is also what raises the genus above
+`[Inference]`: *Hamamelis* (two cards in the deck) has a very similar leaf, and
+a green Parrotia leaf on its own is not conclusive. Two Parrotia photographs
+agreeing is.
+
+**B. THE REGRESSION — `deal-plant.js` could not deal ANY held card, and had not
+been able to for three commits.** The deal aborted with
+`marker missing:  ];\n/* HOLD:END */`.
+
+Cause: in the item 71E repair (commit `13ef1f8`) the hold block was rewritten
+with `D.writeBlock(html,'hold',hold,' ')` — an explicit ONE-space indent.
+`tools/ingest-batch.js` calls the same function with no indent argument, taking
+the default `'  '`. `writeBlock` closes the literal with `indent.slice(1)+']'`,
+so the default produces `` ` ];` `` and the one-space override produced `];` at
+column zero. `deal-plant.js` matches the closing marker as a literal string,
+`const HOLD_END = ' ];\n/* HOLD:END */'`, and stopped finding it.
+
+**Nothing detected this.** All 17 suites were green across `13ef1f8`, `48c7b6c`,
+`0f4d83e`, `d782616` and `e0a7f4c`: the block still parsed, every card still
+rendered, the data audit still balanced. The only thing broken was the ability
+to MOVE a card out of the hold block, and no suite deals a card. Four commits
+shipped, and the PR was opened, with the deck's main remaining workflow dead.
+It surfaced the first time a held card was dealt after the change — which is
+exactly the shape of the `fit-incoming` commercial-fields bug in item 71E, one
+layer along: a latent break that only fires on the next deal.
+
+Fixed by rewriting the hold block with `writeBlock`'s default indent, as
+`ingest-batch.js` does. Verified: values identical before and after (a semantic
+diff of all 374 cards shows zero field changes), terminator restored, and the
+hold block's only differences from its pre-regression state at `cec6180` are
+the 33 commercial-key additions on three cards that item 71E intended, plus
+Parrotia and the Abelia leaving because they were dealt.
+
+**Worth a guard.** Two bugs in two days have had the same signature: a write
+path whose output is valid, parses, renders, passes 17 suites, and breaks a
+tool that nothing tests. A cheap check would be a test asserting the two block
+terminators match what `deal-plant.js` matches on — one string comparison,
+catching a class of failure the whole browser suite cannot see. **Not built
+here** — it is a new test, not this batch's work, and it is Oscar's call.
+
+**C. The photograph does not show what the card sells.** The card's `visual`
+reads *"Flaking bark · crimson flower clusters on bare winter branches ·
+blazing autumn"*; the frame is plain green summer foliage on a budded twig —
+none of the three. This is not a contradiction the way item 70D's Actinidia is
+(there the photo shows the same organ in a state the text denies); it is an
+absence. The card is right, the photograph is right, and they do not meet. For
+a tree sold on autumn colour and winter bark this is a weak illustration, and
+`node tools/photo-run.js` would put this card in WAIT for exactly that reason.
+**Dealt anyway**, because a real photograph of the right plant beats the
+leaf-gradient fallback, and because the alternative — holding a correctly
+identified plant until a perfect frame exists — is how 85 cards ended up with
+no picture at all. Worth a second frame in late October, when the bark and the
+colour are both there; the dealt photo can be swapped or made a PHOTO_SWAP pair
+the way Sapphire Ring was in item 69.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
