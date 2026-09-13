@@ -1,10 +1,22 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Photograph the next tranche of the 52 held cards that peak in August —
-  `node tools/deal-plant.js "<latin>" <photo>` now deals each one in a single
-  command. The other 46 want a May / March / November / June visit.
-since: 2026-08-11  sessions-unchanged: 3
+brick: Run `CHATGPT-TOXICITY-BRIEF.md` over the first 50 names in
+  `data/incoming/toxicity-todo-2026-09-13.txt` and send the JSON back — 305 of 392
+  cards have a blank toxicity field, and blank renders identically to "safe".
+since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-13 — **deck 310, hold 82.** Twenty-three cards dealt across the
+  day. Oscar supplied research replacing ALL 49 Claude-written cards from the
+  2026-08-10 batch: 808 field values changed, 26 cards gained a toxicity note
+  (Laburnum, Delphinium, Prunus laurocerasus, Ligustrum, Buxus, Parthenocissus…),
+  12 hardiness ratings corrected, Cotoneaster gained a Schedule 9 note. Zero cards
+  now carry Claude-written text. Toxicity flag shipped on the card front (v14.60).
+  Four tooling/test defects found and fixed: size written as " H ×  W" with blank
+  rails (new `size-no-figure` contradiction), two fixed-sleep races (srs-test,
+  edge-test), and the hardiness lens opening under the thumb holding it — nothing
+  had ever tested the lens. perf-test's pixel-parity delta was re-expressed as an
+  inside-the-card-rect count rather than loosened a fifth time. A bystander was
+  cropped out of the Paeonia 'Tom Cat' photo. PR #18 open, 17/17 at --jobs 3.
 progress: 2026-09-06, latest (duplicate Viburnum removed) — **deck 276, hold
   82.** The plain Viburnum × bodnantense card wore the same photo as 'Charles
   Lamont'; Oscar had it removed. Wide frame kept as a renamed spare. Buddleja
