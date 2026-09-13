@@ -1,0 +1,32 @@
+{
+  "common": "Shrubby Germander",
+  "latin": "Teucrium fruticans",
+  "hue": 210,
+  "visual": "Small aromatic leaves, silver beneath · white woolly young shoots · pale blue flowers",
+  "water": "Regular while establishing, then sparingly",
+  "aspect": "South / West",
+  "soil": "Free-draining, alkaline OK",
+  "soilWarning": "Heavy winter wet kills it; needs shelter",
+  "prune": "Trim in spring to shape · do not cut back into old bare wood",
+  "toxicity": "Harmful if eaten. Wear gloves and protective equipment when handling.",
+  "compliance": "",
+  "peak": "Jun-Aug",
+  "cvs": "",
+  "hardiness": "H3",
+  "hardinessNote": "Hardy in coastal and relatively mild parts of the UK, approximately -5 to 1°C. In colder areas grow against a warm sheltered wall or provide winter protection.",
+  "resilience": "Drought tolerant and near pest-free · cold and winter wet are the risks",
+  "uses": "Mediterranean and coastal planting · sunny borders · warm wall-side",
+  "height": "1-1.5m",
+  "spread": "1-1.5m",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 12,
+  "pestRisk": 2,
+  "thirst": 5,
+  "careLevel": 8,
+  "sunNeed": 100,
+  "sunMin": 80,
+  "uncertain": [
+    "peak: supplied research said \"Summer\"; converted to Jun-Aug so the app can parse it. Not from a source that stated months."
+  ]
+}

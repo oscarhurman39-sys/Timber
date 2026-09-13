@@ -1,0 +1,33 @@
+{
+  "common": "Japanese Snowball 'Popcorn'",
+  "latin": "Viburnum plicatum f. plicatum 'Popcorn'",
+  "hue": 0,
+  "visual": "Tiered horizontal branches hung with white snowball heads · red-purple autumn leaf",
+  "water": "Regular while establishing · never let it bake dry",
+  "aspect": "East / South / West",
+  "soil": "Humus-rich, moist, drained",
+  "soilWarning": "Avoid prolonged waterlogging",
+  "prune": "Little needed · take out crossing or dead wood after flowering",
+  "toxicity": "Ornamental fruits should not be eaten. Wear gloves when handling.",
+  "compliance": "",
+  "peak": "Apr-May",
+  "cvs": "Popcorn",
+  "hardiness": "H6",
+  "hardinessNote": "Hardy throughout the UK and northern Europe, approximately -20 to -15°C.",
+  "resilience": "Very hardy and adaptable once established",
+  "uses": "Specimen shrub · mixed borders · cottage gardens · autumn colour",
+  "height": "1.5-2.5m",
+  "spread": "1.5-2.5m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 12,
+  "pestRisk": 7,
+  "thirst": 11,
+  "careLevel": 6,
+  "sunNeed": 65,
+  "sunMin": 35,
+  "uncertain": [
+    "peak: supplied research said \"Mid to late spring\"; converted to Apr-May so the app can parse it. Not from a source that stated months.",
+    "latin: the supplied JSON put the cultivar in cvs only. The deck carries the cultivar in latin (Brunnera macrophylla 'Jack Frost'), so it was moved there."
+  ]
+}

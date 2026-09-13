@@ -64,3 +64,57 @@ Three photos left this folder on 2026-08-13 when cards were written for them —
 are now normal card photos under their latin slugs, staged from the full-resolution
 originals held here. This is the folder working as intended: nothing was lost
 while the cards did not yet exist.
+
+## 2026-09-12 — three photos from the eight-JSON batch
+
+Parked rather than dealt. See VERIFY-QUEUE item 70 for the full reasoning.
+
+### 2026-09-12-yellow-trailing-groundcover-round-leaves.jpg — CLEARED 2026-09-13
+
+**Was:** no card and no JSON. Oscar's note was *"the flow ground cover yellow
+thing"*. Trailing stems, opposite rounded yellow-green leaves, nursery pots.
+`[Inference]` at the time was *Lysimachia nummularia* 'Aurea' (golden creeping
+Jenny) from habit and leaf alone, with nothing in the repo to confirm it — no
+Lysimachia in the deck, none on the wishlist, no label in the frame. Nothing was
+built from it.
+
+**Oscar sent the JSON on 2026-09-13 and the inference was right.** The card is
+dealt as `Lysimachia nummularia 'Aurea'` and the photo is now
+`photos/lysimachia-nummularia-aurea.jpg`, staged from the full-resolution
+original held here. Same pattern as the Aronia / Lotus / Begonia clearances of
+2026-08-13: the folder held the frame until the card existed, and nothing was
+lost or guessed in between.
+
+### 2026-09-12-actinidia-kolomikta-red-flush-no-variegation.jpg
+
+Oscar's note was *"pinktipped climber"*, and the batch carried an
+*Actinidia kolomikta* JSON. The card is **written and held**. The frame shows
+cordate, bristle-margined leaves with red petioles under a whole-leaf
+red-bronze flush — no silver-white tip and no pink band, which is the
+variegation the card's `visual` line sells. `[Unverified]` whether this is a
+plant that has not yet variegated (young, or the wrong sex — the species is
+dioecious and the research says so) or a different plant. Same shape as the
+'Dark Knight' case in item 69: dealing it would put a picture on the card that
+contradicts the card's own words.
+
+**Oscar's call, 2026-09-13: keep the card held and wait.** *"keep the climber
+il just get a new photo at some point."* So this frame stays parked and the card
+stays in `PLANTS_ON_HOLD` — not because the photograph is of the wrong plant,
+but because it does not show the variegation the card is written around. See
+VERIFY-QUEUE item 75A.
+
+### 2026-09-12-pieris-japonica-mountain-fire-awaiting-json.jpg — CLEARED 2026-09-13
+
+**Oscar named the cultivar: 'Mountain Fire'** — neither of the two the question
+offered. He had hedged between 'Forest Flame' and 'Forest Fire', and the label
+said neither, which is the whole argument for asking rather than dealing it onto
+the held card it superficially fitted.
+
+It needed a **new** card, not the held `Pieris 'Forest Flame'`: those are two
+different plants, not two names for one. The JSON arrived the same day and the
+card is dealt as `Pieris japonica 'Mountain Fire'`, with the photo now at
+`photos/pieris-japonica-mountain-fire.jpg`. The held 'Forest Flame' card is
+untouched and still has no photograph of its own.
+
+See VERIFY-QUEUE item 72 — including a correction to a size claim this file's
+earlier draft carried as `[Inference]` and Oscar's figures contradicted.

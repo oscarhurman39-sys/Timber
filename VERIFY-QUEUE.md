@@ -2433,6 +2433,452 @@ to change — same call as the pine. Nothing else on the card is affected.
 ---
 
 
+### 70. Eight JSONs and seven photographs — three dealt, four held, three photos parked, and three card fields that were being thrown away
+2026-09-12. Oscar sent eight researched JSONs and seven frames, with per-image
+notes: *"image one brunerer jack frost, image 2 the flow ground cover yellow
+thing, image 3 pinktipped climber image 4 secnnco image 5 t -something image 6
+periis forest flame i think or forest fire, it's like the brunera it's in the
+pre built cards, image 7 lavateria"*, and the instruction *"any cards u dont
+have images for hold"*.
+
+**A. The Brunnera JSON was a duplicate of a card already in the deck.**
+`Brunnera macrophylla 'Jack Frost'` was already written and sitting in
+`PLANTS_ON_HOLD` — as Oscar half-said himself about image 6 ("it's like the
+brunera it's in the pre built cards"). Adding the supplied JSON would have made
+a second card for the same plant, which `add-plants-bulk.js` refuses anyway.
+Photo 1 was **dealt onto the existing card** instead; the JSON was not built.
+One field from it *was* carried across — `hardinessNote` ("Hardy throughout the
+UK and northern Europe, approximately -20 to -15°C"), which agrees with the
+card's existing H6 and is purely additive. Nothing else on that card was touched.
+
+**B. Three dealt, four held.**
+
+| card | state | photo |
+|---|---|---|
+| *Teucrium fruticans* — Shrubby Germander | **dealt** | image 5 |
+| *Malva* × *clementii* 'Rosea' — Tree Mallow | **dealt** | image 7 |
+| *Brachyglottis* Walberton's Silver Dormouse ('Walbrach') | **dealt** | image 4 |
+| *Brunnera macrophylla* 'Jack Frost' | **dealt** (already written) | image 1 |
+| *Viburnum plicatum* f. *plicatum* 'Popcorn' | held | none sent |
+| *Abelia* × *grandiflora* 'Sparkling Silver' | held | none sent — **dealt 2026-09-13, item 71** |
+| *Pyracantha* 'Red Star' | held | none sent |
+| *Actinidia kolomikta* | held | image 3 sent, **not accepted** — see D |
+
+Deck 280 → 284. Hold 84 → 87.
+
+**C. Three photographs parked, not dealt** — all three written up in
+`photos/unidentified/README.md`:
+
+- **image 2, the yellow trailing ground cover.** No JSON and no card. The habit
+  reads as *Lysimachia nummularia* 'Aurea', but that is `[Inference]` from the
+  photograph alone — no label in frame, no Lysimachia anywhere in this repo.
+  **Question for Oscar: what is it?** Then it needs a JSON.
+  **RESOLVED 2026-09-13 — the inference was right; Oscar sent the JSON and the
+  card is dealt. See item 71.**
+- **image 3, the Actinidia.** See D.
+- **image 6, the Pieris.** The genus is not in doubt and the held
+  `Pieris 'Forest Flame'` card describes exactly this foliage. It is not dealt
+  because Oscar hedged the cultivar himself — *"forest flame i think or forest
+  fire"* — and 'Forest Fire' is a different cultivar. **Question for Oscar:
+  which one does the bench label say?** One word deals it.
+  **ANSWERED 2026-09-13: neither — it is 'Mountain Fire'.** It does not deal onto
+  the held card at all; it needs a new one. See item 72.
+
+**D. *Actinidia kolomikta* — card written and HELD, because the photograph
+contradicts the card's own words.** The card's `visual` sells the thing the
+plant is grown for: *"Heart-shaped leaves tipped white then flushed pink"*. The
+frame shows a whole-leaf red-bronze flush with no white tip and no pink band.
+`[Unverified]` whether that is a plant too young to have variegated, the wrong
+sex (the species is dioecious and Oscar's own research says the strongest
+variegation goes with mature males), or a different plant. This is the same
+shape as the 'Dark Knight' case in item 69, and the same answer: the card waits
+rather than carrying a picture that argues with its text. **Question for Oscar:
+does this one stand, or does it wait for a variegated frame?**
+
+**E. `toxicity`, `compliance` and `hardinessNote` were being silently dropped by
+every add tool — fixed.** These became card fields in Aug 2026 (`FIELDS` in
+`tools/plant-data.js`), and `tools/check-plant-json.js` already prints them in
+the row it emits — but the row templates in `tools/add-plant.js`,
+`tools/add-plants-bulk.js` and the card literal in `tools/fit-incoming.js` never
+carried them, so a JSON that researched all three had all three thrown away on
+the way in. That is the identical loss the schema comment on `hardinessNote`
+records from 2026-08-25, and `toxicity` is a SAFETY field, so it is the worse
+half. All three tools now emit them, blank stays absent rather than empty, and
+`fit-incoming.js` additionally accepts a batch whose own `soil`/`soilWarning`
+are already inside the 26/44 budgets instead of demanding a duplicate `FIT`
+entry (the length assertions still apply).
+
+**Effect of the bug on the batch already ingested — and a correction.**
+Re-running `fitBatch` over `data/incoming/wishlist-batch-01.json` with the fix
+produces output identical to before except for *added* keys — no value changes —
+and the added keys are `hardinessNote` on all 49 fitted cards and `toxicity`
+on 23. That is a fact about the TOOL's output.
+
+> **Correction, 2026-09-13: I previously made an unverified claim. That was
+> incorrect and should have been checked before it was written.** This entry
+> first said those 49 cards "are in `PLANTS_ON_HOLD` today **without** that
+> text", and offered a backfill as the fix. That was an INFERENCE from the
+> tool-output diff, never a measurement of the cards. Oscar asked for the
+> backfill to be run; the dry run added **zero** fields, and a direct check of
+> all 50 wishlist cards in `timber.html` shows **50 of 50 carry
+> `hardinessNote`** and **26 of 26 whose batch supplied `toxicity` carry it**.
+> Nothing was lost from the deck. `[Inference]` the fields were restored by a
+> later `plants-tool.js` csv round-trip, which materialises every FIELDS
+> column — the same mechanism noted in item 71E for the commercial keys.
+> **There is no backfill to run.** The tool bug was real and the fix stands;
+> the damage claim did not.
+
+**F. Conversions made, and why.** Every JSON arrived with `peak` as a season
+word, which `tools/check-plant-json.js` rejects outright (the app parses months).
+Every one also gave `aspect` as a light level, which the compass rule rejects.
+Both are recorded in each card's `uncertain` block as well as here:
+
+| card | supplied peak | set | supplied aspect | set |
+|---|---|---|---|---|
+| Teucrium | "Summer" | **Jun-Aug** | "Full sun; sheltered south- or west-facing" | South / West |
+| Viburnum | "Mid to late spring" | **Apr-May** | "Full sun to partial shade" | East / South / West |
+| Abelia | "Summer to autumn" | **Jul-Oct** | "Full sun; sheltered south- or west-facing" | South / West |
+| Pyracantha | "Autumn" (the berries) | **Sep-Nov** | "Full sun to partial shade" | East / South / West |
+| Malva | "Summer to early autumn" | **Jun-Sep** | "Full sun" | South / West |
+| Brachyglottis | "Summer" | **Jun-Aug** | "Full sun; sheltered" | South / West |
+| Actinidia | "Late spring to summer" | **May-Aug** | "Full sun in a sheltered position" | South / West |
+
+The month bands are UK convention, not a source that stated months — they are
+Oscar's to move. Every facing is either what the research itself named or
+`deriveFacing(sunNeed)`, the same rule `tools/fit-incoming.js` uses for the
+whole wishlist batch.
+
+**G. Cultivars moved into `latin`.** Five JSONs put the cultivar in `cvs` only
+and left `latin` as the bare species or genus (`"Pyracantha"`, `"Brachyglottis"`).
+The deck's identity field is `latin` — it is what the duplicate guard keys on and
+what the photo slug derives from — so the cultivar was moved there, matching
+`Brunnera macrophylla 'Jack Frost'` and the rest of the deck. The Brachyglottis
+is written in the deck's trade-name style,
+`Brachyglottis Walberton’s Silver Dormouse ('Walbrach')`, alongside
+`Pyracantha SAPHYR ORANGE ('Cadange')` and `Geranium Rozanne ('Gerwat')`. Its
+apostrophe is U+2019 deliberately: a straight one would make the quote count odd
+and trip the validator's unbalanced-quote check.
+
+**H. Prose fitted to the panels.** Every supplied `soil`/`soilWarning` pair was
+far over the measured 26/44-character budgets (78/117 at worst) and every
+`visual` was 150–250 characters against a deck median of 77. Short forms were
+written the way `fit-incoming.js` writes them for the wishlist; **the eight
+JSONs are committed verbatim at `data/incoming/batch-2026-09-12-raw.json`** and
+the fitted per-plant files sit beside them, so nothing supplied is lost.
+
+**I. One real contradiction caught by `plant-sense.js` and fixed.** The
+Pyracantha's first `visual` read *"white spring flowers, heavy red autumn
+berries"* against `peak` "Sep-Nov" — a flowering claim outside the flowering
+band, which the tool grades a contradiction rather than a warning. Since Oscar's
+research sets the peak at the berries, the fix was to stop dating the flowers:
+*"white flower heads, then heavy red autumn berries"*. The Viburnum's remaining
+`autumn colour` warning is the tolerated flower-vs-foliage class, the same one
+three Cornus cards already carry.
+
+**J. One text-vs-photo mismatch fixed before it shipped.** The Teucrium card
+first read *"on white woolly stems"*; the photograph shows mature straw-coloured
+wood. Oscar's research says *"white woolly **young** stems"*, so the card now
+says *"white woolly young shoots"* and agrees with its own picture.
+
+**K. The staged photo was invisible on the card until `optimise-photos.js` ran.**
+The app loads `photos/card/<slug>.webp`, not the master JPEG, and neither
+`add-plants-bulk.js` nor `deal-plant.js` builds that derivative — so the first
+screenshot of the Teucrium card showed the leaf-gradient fallback with the photo
+sitting correctly on disk. `node tools/optimise-photos.js` fixed it and wrote
+only the four new files. `tests/run-all.js --fast` would have caught it via
+`--check`; looking at the screenshot caught it sooner. Worth a line in
+NEW-SESSION.md if it bites twice.
+
+**L. Validator warnings accepted as sent.** `pestRisk` 2/3/5 and `thirst` 5 and
+`careLevel` 5 read to the checker as possible unconverted 0–5 ratings. They are
+Oscar's researched 0–20 values and are right for the plants (a Mediterranean
+sub-shrub genuinely is near pest-free). `foliage` and `container` were prose on
+all eight and were reduced to the controlled vocabulary; neither field reaches
+the card.
+
+---
+
+### 71. The Creeping Jenny named, the Abelia photographed — and a re-sent JSON that withdrew a fact
+2026-09-13. Two answers to item 70, one day later. Deck 284 → 286, hold 87 → 86.
+
+**A. Item 70's unidentified ground cover WAS the golden creeping Jenny.** The
+`[Inference]` recorded on 2026-09-12 — *Lysimachia nummularia* 'Aurea', from
+habit and leaf alone, with no label in frame and no Lysimachia anywhere in the
+repo — was right, and Oscar's JSON confirmed it. Recorded here because the
+inference was labelled as one and nothing was built on it while it stood: the
+frame sat in `photos/unidentified/` for a day and the card was written only once
+the research arrived. That is the folder working as designed, not a near-miss.
+
+Cultivar moved into `latin` as usual: the plain species is the green creeping
+Jenny, and both the photograph and Oscar's own common name are the golden one.
+`peak` "Summer" → **Jun-Aug**, UK convention, logged in the card's `uncertain`.
+
+**`compliance` deliberately left blank, with the reason recorded.** Creeping
+Jenny is a vigorous spreader — the card says so in its soil warning — and is
+listed as invasive in parts of North America. Whether any UK statutory duty
+attaches was **not** verified here, so the field stays blank, which in this
+schema means *nothing is known to apply*, not *nothing applies*. Worth a proper
+check before the card is shown commercially.
+
+**B. Abelia 'Sparkling Silver' — dealt, and rebuilt from a SECOND JSON.** Oscar
+re-sent the research alongside the photograph, revised in seven fields:
+`visual`, `water`, `soilWarning`, `prune`, `resilience`, `uses` and
+`hardinessNote`. The held card was rebuilt from the revision before the photo
+was dealt, so what shipped is the newer text, not the batch-70 text.
+
+**One fact was withdrawn by the revision, and the card no longer claims it.**
+The first version said renovation pruning *"every three to four years"*. The
+revision says only *"Older plants can be renovated by removing some older
+stems"* — no interval. The card now says *"take out some old stems to
+renovate"*. A withdrawn number is not a formatting change, so it is written down
+rather than quietly dropped.
+
+The revision also added a real fact the card did not carry: good light drives
+the variegation and the flowering. That is now the second half of the soil
+warning — *"Cold wet sites set it back · shade dulls it"* — inside the measured
+44-character budget.
+
+Both versions survive: the first in `data/incoming/batch-2026-09-12-raw.json`,
+the revision verbatim in
+`data/incoming/abelia-grandiflora-sparkling-silver-as-sent.json`.
+
+**C. The photograph matches the card's own words, which is the point.** Cream to
+white leaf margins, new growth flushed pink, dark red-brown stems, pale pink
+tubular flowers open on the shoot. Every clause of the rebuilt `visual` is
+visible in the frame. Contrast item 70D, where the Actinidia frame argues with
+its card and the card is therefore still held.
+
+**E. A held card built by `fit-incoming.js` could not be dealt without failing
+app-test — found by dealing one, fixed.** `tests/app-test.js` asserts that every
+card in `PLANTS` carries all 25 required field names, the eleven commercial ones
+(`source`, `order`, `bench`, `root`, `trade`, `retail`, `margin`, `type`,
+`shrink`, `returnRisk`, `pots`) included. `add-plant.js` and
+`add-plants-bulk.js` have always written them as `""`. `fitCard()` in
+`tools/fit-incoming.js` never did.
+
+That gap is invisible while a card sits in `PLANTS_ON_HOLD` — the hold block is
+not what app-test walks — and surfaces the moment the card is dealt. Dealing the
+Abelia turned the suite red on exactly that assertion, 16/17, with every other
+check green including the whole-deck render audit.
+
+The commercial block is never researched (`check-plant-json.js` REFUSES a JSON
+that fills any of it: those figures come from Oscar and nowhere else) but the
+KEYS still have to exist. `fitCard` now emits them empty, and the four cards
+already written through that path were repaired in place — the dealt Abelia and
+the three still held (Viburnum 'Popcorn', Pyracantha 'Red Star', Actinidia). Each
+of those three would have turned the suite red on its own deal day.
+
+Nothing else in the deck was affected: a semantic diff of all 372 cards before
+and after shows 44 additions of `undefined` → `""` across those four cards and
+no value changed anywhere. The 49 wishlist cards ingested in August already
+carry the keys — a later csv round-trip through `plants-tool.js` materialises
+every column — which is why the bug survived a month without being seen.
+
+**F. Item 70's Pieris question was answered — with a third cultivar. See item
+72.** What is still open from item 70 is the Actinidia: whether that frame
+stands or waits for one showing the variegation its card sells. It remains
+parked in `photos/unidentified/`.
+
+---
+
+### 72. The Pieris is 'Mountain Fire' — a third cultivar, so it needs a new card, not the held one
+2026-09-13. Item 70 asked which of two cultivars the Pieris photograph showed,
+because Oscar had hedged between them himself (*"periis forest flame i think or
+forest fire"*). The answer was **neither**: *"Sorry the peris is mountain fire"*.
+
+**Nothing was dealt, and that is the point of the item.** The held
+`Pieris 'Forest Flame'` card's `visual` reads *"Scarlet new foliage fading
+through pink and cream · drooping white flower chains"*, which fits the
+photograph well enough that dealing it would have looked right and been wrong.
+Two of the three candidate names were on the table when the question was asked
+and the real answer was not among them — which is the argument for asking
+rather than picking the likelier of two.
+
+**'Mountain Fire' and 'Forest Flame' are different plants, not two names for
+one.** 'Forest Flame' is the hybrid *P. japonica* × *P. formosa* var.
+*forrestii*, and its new growth is the scarlet → pink → cream sequence the held
+card sells. 'Mountain Fire' is a *Pieris japonica* cultivar — confirmed by
+Oscar's JSON, which gives the species.
+
+> **Correction: I previously made an unverified claim. That was incorrect and
+> should have been left out.** This entry first said, as `[Inference]`, that
+> 'Mountain Fire' is *"more compact"* and *"larger"* applied to 'Forest Flame'.
+> Oscar's researched figures say the opposite way round on this bench: Mountain
+> Fire **2.5–4 m**, the held Forest Flame card **1.5–2.5 m**. The size claim
+> was mine, not from a source, and it is withdrawn. The cards carry Oscar's
+> figures; nothing was written into the deck from the wrong inference. What
+> stands, because it is what the JSON states, is that they are different plants
+> — different species status, different sizes, different aspect handling
+> (Mountain Fire E/S/W, Forest Flame "Any aspect").
+
+**State.** `Pieris 'Forest Flame'` stays in `PLANTS_ON_HOLD` and still has no
+photograph. The frame is re-parked as
+`photos/unidentified/2026-09-12-pieris-japonica-mountain-fire-awaiting-json.jpg`
+and nothing about this plant has been written into the deck.
+
+**RESOLVED the same day — Oscar sent the JSON and the card is DEALT.**
+`Pieris japonica 'Mountain Fire'` is in the deck with the photograph that had
+been parked. Deck 286 → **287**; hold stays at 86, because the held
+`Pieris 'Forest Flame'` is untouched and still waiting on a photograph of its
+own. Validator output was clean — no errors and no warnings, the first JSON in
+this run to manage that.
+
+The cultivar went into `latin` as usual, and here it earns its keep twice over:
+the deck's other Pieris is the hybrid with no species name, so
+`Pieris japonica 'Mountain Fire'` and `Pieris 'Forest Flame'` cannot be
+confused by the duplicate guard, the photo slug, or a member of staff reading
+the card. `peak` "Spring" → **Mar-May**, matching the held card's band.
+`aspect` used the facings the research actually named (east, south, west);
+deriving from `sunNeed` 55 alone would have given East / West, and a stated
+facing wins.
+
+The card asserts nothing this repo cannot source: every figure on it is from
+Oscar's JSON, and the three conversions are logged in its `uncertain` block.
+
+---
+
+### 73. Rudbeckia 'Fireball' dealt — and the photograph says "double" where the research says "daisy"
+2026-09-13. A JSON and a photograph together, no question attached. Deck 287 → 288.
+
+**Not a duplicate.** The deck already holds `Rudbeckia fulgida var. sullivantii
+'Goldsturm'` — single golden ray florets, a different plant. Nothing else in the
+deck or the hold block is a Rudbeckia.
+
+**A. `latin` deliberately carries NO species.** Oscar's own JSON says so:
+*"'Fireball' is not sufficiently distinctive from the supplied label alone to
+confidently assign a species or hybrid group."* So the card is
+`Rudbeckia 'Fireball'` — genus plus cultivar, the same shape as
+`Pieris 'Forest Flame'`. Inventing *R. hirta* to make the name look complete
+would have put an unsourced species on a customer-facing card. The held
+'Goldsturm' keeps its full species, because that one is known.
+
+**B. The card says "double" because the picture does.** The research describes
+*"daisy-like flowers"*, which implies the single row of ray florets a daisy has.
+The photograph shows three or four whorls — unmistakably double. A card whose
+words and picture disagree is the failure mode items 69, 70 and 71 all turned
+on, so the `visual` was written from the frame: *"Double gold petals with a
+broad mahogany base · near-black central cone"*. Every element of that is
+visible in the photograph. The as-sent research is committed verbatim beside the
+fitted file.
+
+**C. An identification note, flagged rather than acted on.** `[Inference]` the
+dark, granular, conical disc reads Rudbeckia. But the toothed ray-floret tips
+and the gold/mahogany banding are also characteristic of *Gaillardia*, and
+double Gaillardia cultivars exist. **Oscar read the bench label and it says
+Rudbeckia, so the card says Rudbeckia** — a photograph is not evidence against a
+label someone actually read. Recorded only so that if the cultivar is ever
+chased down (A above leaves that open), the genus gets a second look at the same
+time rather than being assumed settled.
+
+**D. Conversions, all logged in the card's `uncertain` block.** `peak` "Summer to
+autumn" → **Jul-Oct**, matching the held 'Goldsturm'. `aspect` "Full sun" is a
+light level the compass rule rejects → **South / West**, derived from sunNeed 95.
+`foliage` "Herbaceous" → **deciduous**, the schema's controlled vocabulary; the
+field does not reach the card either way.
+
+**E. Validator warnings accepted as sent.** `pestRisk` 5 and `careLevel` 5 read
+to the checker as possible unconverted 0-5 ratings. They are Oscar's researched
+0-20 values and are reasonable for a robust border perennial.
+
+---
+
+### 74. Toxicity flag on the front — built; the 322 blanks are now the open item
+2026-09-13. Oscar asked for a red corner triangle on the card front for toxic
+plants, with a press-and-hold that says what to watch for. Built and verified;
+full record in CARD-PROTOCOL changelog v14.60. Deck 288, hold 86, no card data
+changed.
+
+**A. What the flag will and will not do, so nobody reads it wrong.** It appears
+on exactly the cards the back's SAFETY plaque would tier as a hazard — the same
+`toxTier()` ladder, no new rule — and takes that tier's ink. **No flag means
+one of three things**: the note is an edibility note, the note is a sourced
+all-clear, or **the field is blank**. Blank is 322 of 374 cards. A card without
+a flag is therefore NOT a card that has been checked and found safe, and staff
+should not say so at the till. This is the same "blank prints nothing" rule the
+back has always had, now visible on the front, where its absence is easier to
+misread.
+
+**B. The 45 that flag today** are the cards that already carried researched
+notes: 5 severe, 37 harmful, 3 caution. Nothing was inferred to get there.
+
+**C. The brief.** `CHATGPT-TOXICITY-BRIEF.md` is the prompt for the 322, with
+the plant list at `data/incoming/toxicity-todo-2026-09-13.txt`. It asks for
+RHS "Potentially harmful" wording verbatim, the HTA category, part / route /
+who, a named source per plant, and returns `""` rather than a hedge. It is
+deliberately written against the card's tier ladder so the strength word that
+comes back is the tier that prints. **Before any batch goes into the deck:**
+run each line through the ladder and eyeball the tier — "may be harmful" tiers
+as *Toxic*, which is exactly what rule 6 of the brief forbids.
+
+**D. Two design calls made, both Oscar's to reverse.** (1) Tier ink instead of
+plain red on every flag, so *Handle with care* is amber and does not look like
+*Highly toxic*. (2) Top-left, flush in the frame corner, over the gold border —
+"in line with the corner". Bottom-left is a two-number CSS change if the title
+side is wrong.
+
+**E. The backfill this entry pointed at does not exist — see the correction in
+item 70E.** This entry said 23 held cards had lost their researched `toxicity`
+in August and "should flag and currently cannot". Measured 2026-09-13 on Oscar's
+instruction to run it: every wishlist card that was researched with a toxicity
+note still carries it, and all 50 carry `hardinessNote`. The cards that do not
+flag are the ones that never had the field researched at all — 322 of them —
+which is section C above, not a recovery job.
+
+---
+
+### 75. Three answers from Oscar — the climber waits, the boot alarm was a false positive, the backfill did not exist
+2026-09-13.
+
+**A. *Actinidia kolomikta* — HELD, confirmed by Oscar.** *"keep the climber
+il just get a new photo at some point."* The card stays in `PLANTS_ON_HOLD`
+and the 2026-09-12 frame stays parked in `photos/unidentified/`, unchanged.
+Item 70D is therefore settled rather than open: the decision is *wait for a
+frame showing the variegation the card sells*, not *the photo was wrong*.
+Nothing to do until a new photograph arrives; then
+`node tools/deal-plant.js "Actinidia kolomikta" <photo>` and
+`node tools/optimise-photos.js`.
+
+**B. The light-mode trigger was a FALSE POSITIVE, and Oscar's answer says so
+plainly.** Asked whether the app showed a blank screen or was swiped away
+mid-load, he answered: *"swipe away mid load."*
+
+That closes the question the diagnostic report could not. The boot sentinel
+clears `bootPending` on one of three signals — `pagehide`, `visibilitychange`
+to hidden, or the 20-second grace timer after `load`. Swiping the app out of
+the Android recents switcher during those first 20 seconds fires none of them
+reliably, so the open is counted as a failure. Twice in a row arms light mode.
+**The app did not crash. Nothing is broken.** This matches every measurement
+taken on 2026-09-13: no JS error ever recorded, 8GB / 10-core device, storage
+at 0.36% of quota, photo decode flat at ~49MB regardless of deck size, JS heap
+9.5MB, deal-complete 10.4s at 8x CPU throttle against a 20s window, and
+`window.load` at 263ms.
+
+**It will happen again, by construction.** A force-close inside 20 seconds is
+indistinguishable from a tab the OS killed — both leave the flag set and no
+error. The code's own comment accepts this: *"Being wrong here is cheap in one
+direction only: a false alarm costs 24 cards instead of 238 for one session; a
+missed one costs the app."* That trade is still right, and **nothing was
+changed** — a fix that made the sentinel less eager would trade a cosmetic
+annoyance for the risk of missing a real crash on the iPhones that started this
+(LEDGER 2026-08-15 and 2026-08-21, still `[Unverified]` as fixed).
+
+If it becomes a nuisance, the cheapest honest options, in order: (1) tap the
+pill, which is what it is for; (2) raise `LIGHT_AFTER` from 2 to 3, so a
+deliberate double force-close does not arm it; (3) clear `bootPending` at
+`DOMContentLoaded` + a short delay *as well as* on `load`, which narrows the
+window but also narrows what the sentinel can catch. **None of these should be
+done on a hunch** — the sentinel exists because two real phones died and the
+cause was never found.
+
+**C. The backfill Oscar asked for turned out to be unnecessary.** See the
+correction inside item 70E: the claim that 49 held cards had lost
+`hardinessNote` and 23 had lost `toxicity` was an inference from a tool-output
+diff, not a measurement of the deck, and it was wrong. 50 of 50 wishlist cards
+carry `hardinessNote`; every one whose research supplied `toxicity` carries it.
+The dry run added zero fields and nothing was written.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
