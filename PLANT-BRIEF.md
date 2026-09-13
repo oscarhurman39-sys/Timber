@@ -94,7 +94,8 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
   "winterCare": "",
   "establishing": "",
 
-  "toxicity": "No specific toxicity warning required",
+  "toxicity": "No known hazard.",
+  "compliance": "",
   "wildlife": "Pollinator friendly — bees, butterflies",
   "foliage": "deciduous",
   "container": "with care",
@@ -159,6 +160,61 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
   dark blotch, orange pustules) so they stay distinguishable from insects at that
   size. Deliver square, centred, transparent PNG; 1000px+ is plenty.
 
+### SAFETY — `toxicity` and `compliance`, the two that carry real consequences
+
+**`toxicity` is printed VERBATIM.** It appears on the card back under SAFETY and
+again in the press-and-hold panel on the card front. Whatever sentence you write is
+the sentence a seventeen-year-old reads out to a customer. Write it as prose, not
+notes.
+
+**The card picks the warning tier by keyword, in this order, and anything non-empty
+that matches nothing falls through to an amber "Handle with care".** That is live on
+five cards today: *"Thorns can injure skin"* and *"may cause stomach upset if eaten"*
+both got amber by accident, because neither contains a listed word.
+
+| Tier shown | Flag | The text must contain one of |
+|---|---|---|
+| **Highly toxic** | red | `highly toxic` · `highly poisonous` · `particularly dangerous` · `particularly poisonous` · `potentially dangerous` · `fatal` · `deadly` |
+| **Toxic** | orange | `toxic` · `poison` · `harmful` · `cyanogenic` · `should not be eaten` · `not edible` · `do not eat` |
+| **Handle with care** | amber | `irritant` · `irritat…` · `sap` · `allerg…` · `spine` · `sharp` · `glove` · `hairs` |
+| **Edible parts** | none | `edible` — but any toxic word outranks it, which is the safe order |
+| **No known hazard** | none | the phrase `no known hazard` |
+| *(blank)* | none | **BLANK IS NOT AN ANSWER** — it renders identically to safe |
+
+**A worked example of the trap, from this brief's own previous wording.** Until
+2026-09-13 the example value in the schema above was:
+
+> `"toxicity": "No specific toxicity warning required"`
+
+That sentence declares the plant safe. It contains the letters `toxic` inside
+*toxicity*, which matches the **Toxic** rung — so it would have put an **orange
+hazard flag** on the front of a card that was saying there is nothing to worry about.
+The keyword match does not read your meaning. Write to the table, not around it.
+
+Answer all of these inside the sentence:
+
+- **Which part** — whole plant, berries, seeds, sap, roots, bulb, leaves?
+- **By what route** — eaten, skin contact, eye contact, smoke if burnt?
+- **Who is at risk** — children, dogs, cats, horses, livestock?
+- **What actually happens** — mild stomach upset, blistering, hospital?
+- **If it is genuinely benign, write "No known hazard."** Do not leave it blank and
+  do not hedge. `""` beats "may be harmful"; `"No known hazard."` beats both.
+- Keep it to **one or two sentences**. It is printed, not filed.
+
+**`compliance` is a separate field and it is about the law, not about health.**
+Blank on 373 of 394 cards. Answer:
+
+- Is it listed on **Schedule 9** of the Wildlife and Countryside Act — illegal to
+  plant or cause to grow in the wild?
+- Is it under **plant breeders' rights / PBR**, and therefore illegal to propagate
+  for sale? (Give the number if there is one.)
+- Does it need a **plant passport** to be moved or sold?
+- Is it subject to a **biosecurity restriction** — Xylella host, ash dieback, an
+  import ban?
+- Anything else that could cost the business money or a prosecution.
+
+If none apply, leave it `""`. Unlike `toxicity`, blank here is a fine answer.
+
 - **`aspect`** — a **compass facing only**: `"South / West"`, `"East"`,
   `"Any aspect"`. Never put light levels here — "full sun" is a `sunNeed` value,
   not an aspect. If nothing states a facing, use `"Any aspect"`.
@@ -191,6 +247,38 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
 - **Commercial fields are deliberately absent.** Never produce prices, margins,
   suppliers, order weeks or stock risk — those are the owner's real trade data.
 
+### WHAT REACHES A CARD, AND WHAT DOES NOT
+
+Measured against the live schema on 2026-09-13, 394 cards. Answering a field in the
+left column is work that never appears anywhere.
+
+**Never reaches a card — do not spend effort on these:**
+`id` · `registeredCultivar` · `series` · `maturity` · `bloomMonths` · `feed` ·
+`winterCare` · `establishing` · `wildlife` · `caveat` · `pitch` · `companions` ·
+`confusedWith` · `breeder` · `pbr` · `foliage` · `container` · `sources`
+
+They are kept verbatim in `data/incoming/` as the research record, and
+`tools/unmapped-report.js` lists them — but no card renders them. Two are worth a
+decision rather than silent loss: **`foliage`** (evergreen/deciduous) and
+**`container`** are genuinely useful shop-floor facts with nowhere to go. Either drop
+them from the brief or ask for a home to be built.
+
+**Merged, not dropped:** `height` + `spread` become the single `size` string and both
+size rails; `soil` + `soilWarning` are joined into the one soil panel, which is why
+the 26/44 limits are hard.
+
+**Specified but NOT WIRED — do not add it:** `seasonalImpact` exists as a column and
+`CARD-STATS.md` specs it as a 0–20 rating, but the stat row it feeds
+(`powerSeasonal`) **was never built**. It is blank on all 394 cards and filling it
+would change nothing on the card. Leave it out of the brief until the row exists.
+
+**`cvs` is used two ways in the deck and that is worth knowing.** On most cards it
+lists *sibling cultivars of the species* ("'Sundance' – yellow foliage · 'Aztec Pearl'
+– fine leaves"); on others it carries *this plant's own registration* ("PBR 18358",
+"trade name LITTLE DEVIL; cultivar 'Donna May' (PP22634)"). Both render under
+"Cultivars" on the back and both are searchable. Prefer the sibling-cultivar reading,
+and put registration in `compliance` where it has legal weight.
+
 ### Before you answer, check
 - [ ] Hardiness verified, not assumed
 - [ ] All five ratings are integers within their scale
@@ -203,4 +291,10 @@ card's "wiggle room" marker. Leave `null` if you can't state it.
 - [ ] **No field value ends in a citation number**
 - [ ] `soil` and `soilWarning` don't repeat each other
 - [ ] `bloomMonths` matches `peak`
+- [ ] `toxicity` contains one of the tier keywords, or says "No known hazard."
+      **A non-empty line that matches nothing becomes an amber flag by accident**
+- [ ] `toxicity` names the part, the route and who is at risk, in a sentence a
+      teenager can read out loud
+- [ ] `compliance` checked against Schedule 9, PBR, plant passport and biosecurity
+- [ ] Nothing answered from the "never reaches a card" list
 - [ ] Everything unknown is blank **and** listed in `uncertain`
