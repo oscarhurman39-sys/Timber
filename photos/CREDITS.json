@@ -1442,6 +1442,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "euonymus-japonicus-microphyllus-albovariegatus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "eupatorium-japonicum-pink-frost.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. EXIF Samsung Galaxy S24, 2026-08-22 (current season); orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. No C2PA manifest in the file and no AI or generative marker",
@@ -2222,6 +2232,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "luma-apiculata.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "lupinus-the-governor-band-of-nobles-series.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label burned in. See VERIFY-QUEUE 32.",
@@ -2412,6 +2432,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "myrtus-communis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "nandina-domestica.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2520,6 +2550,16 @@
    "sourceUrl": null,
    "commit": "68d61a9",
    "commitSubject": "Rename Holly Osmanthus 'Tricolor' -> Goshiki Holly Olive; refresh photo and data",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "oxalis-triangularis-mijke.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -3423,9 +3463,29 @@
    "commercialUseCleared": true
   },
   {
+   "file": "viburnum-davidii.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "viburnum-opulus.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Named by Oscar as the Viburnum (2026-09-02); lobed leaves and red berries agree. Cropped export, no camera EXIF, no C2PA.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "viburnum-plicatum-f-plicatum-popcorn.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,

@@ -3176,6 +3176,144 @@ identification, is what blocks both frames — dealing either is a coin-flip tha
 also decides what the second card gets built around. Recorded in
 `photos/unidentified/README.md`.
 
+### 80. Six cards from four JSONs — and a fourth writer that produced valid, parseable, blank output
+
+**Dealt:** `Euonymus japonicus 'Microphyllus Albovariegatus'`, `Oxalis triangularis
+'Mijke'` and `Luma apiculata` as new cards; `Viburnum davidii`,
+`Viburnum plicatum` f. *plicatum* 'Popcorn' and `Myrtus communis` lifted out of the
+hold block onto photographs they had been waiting for. **The parked-photo folder is
+now empty of unidentified frames** — every one of the four parked on 2026-09-12/13
+is either dealt or resolved.
+
+#### The size bug — same family as items 70, 76 and the app-test one
+
+Three cards shipped with `size:" H ×  W"`. Both rails rendered **blank** on the
+card face.
+
+`fit-incoming.js` joins `height` + `spread` into a single `size` and drops the
+originals. `add-plant.js:99` and `add-plants-bulk.js:117` compose `size` **only**
+from `height`/`spread`:
+
+```js
+size:${esc(`${p.height || ''} H × ${p.spread || ''} W`)},
+```
+
+So every card that arrives already composed — which is every card that comes
+through `fit-incoming` — got two empty strings joined by the separator. The output
+is valid JS, parses, renders, and passed `check-plant-json`, the `--quick` data
+gate and `plant-sense --strict`. Fourth time this shape of bug has appeared: a
+write path whose output is wrong in a way nothing asserts on.
+
+**Fixed** in both tools with a shared `sizeOf(p)` that prefers a supplied `size`
+carrying a figure and **throws** rather than writing a figureless one. The three
+cards were repaired from their own fitted JSONs; no other card in 308 was affected.
+
+> **Correction: I previously made an unverified claim. That was incorrect.** I
+> said `plant-sense` "waves it through". Half wrong. `size-no-rails` does — it only
+> tests for a missing `H × W` split, and `" H ×  W"` has one. But the
+> `size-unparseable` rule *does* fire on it. I did not see that because I ran
+> `plant-sense` piped through a narrow `grep` and filtered out the one line that
+> named the problem. **The tool reported it; I hid it.** The same mistake as the
+> suite logs in item 78 — reading a filtered view and concluding from the filter.
+
+What is true, and worth fixing: it fired as a **warning**, so `--strict` passed and
+the batch gate still printed "No card contradicts itself". A size with no figure at
+all is a visible card defect, not a malformation. New rule **`size-no-figure`**,
+severity contradiction, split out ahead of `size-unparseable`. Verified the way a
+new guard should be — by reintroducing the exact bug on `Luma apiculata` and
+confirming `--strict` exits 1 naming the card, then restoring.
+
+#### The two Myrtles — resolved by a label photograph, and my guess was wrong
+
+Oscar photographed both pots with their labels side by side. Top: **Myrtus
+communis** — the larger, light-green lanceolate frame. Bottom: **MYRTUS APICULATA
+(LUMA APICULATA)** — the small glossy red-stemmed frame.
+
+`[Inference]` recorded in item 79 had the pairing right (larger = *M. communis*)
+but the second plant wrong: I guessed *M. communis* subsp. *tarentina*, a
+subspecies of the same plant. It is *Luma apiculata* — **a different genus**. Had
+that frame been dealt on the leaf-size reasoning it would have gone onto a Myrtus
+card and been wrong at genus level, with a card written around the wrong plant.
+The label settled in one photograph what two rounds of leaf-margin argument could
+not.
+
+#### `Viburnum davidii` — a duplicate JSON treated as a backfill, not a rebuild
+
+The card already existed in the hold block. Rather than write a second card or
+overwrite the first, only the fields the card left **blank** were taken from
+Oscar's JSON: `toxicity` (which now lights the amber flag on the card front) and
+`hardinessNote`. Where his research and the card disagree, the card was left
+alone and the difference put to him:
+
+| field | card says | his JSON says |
+|---|---|---|
+| `aspect` | Any aspect | Full sun to partial shade; sheltered position preferred |
+| `peak` | Jan-Dec | Late spring flowers; autumn and winter berries |
+| `visual` | Low dome of deeply veined leathery leaves · metallic turquoise-blue berries on females | *(233-char prose version)* |
+
+Same rule as the Brunnera 'Jack Frost' duplicate in item 70: a duplicate JSON is
+not permission to rewrite a card.
+
+#### Flagged, not changed
+
+- **`visual` over budget on all three new cards** — 172, 116 and 180 chars against
+  a deck p50 of 77 and p90 of 87. Nothing exceeds the deck maximum (202), and
+  `audit-layout` passes, so the ink fits — but at a smaller font than neighbouring
+  cards. `fit-incoming` trims at sentence boundaries only and each of these is one
+  long sentence, so there was nothing for it to cut. Oscar's wording, left intact.
+- **Luma's star feature is not in its photograph.** The `visual` sells *"smooth
+  bark that peels to reveal patches of cinnamon, cream and pale brown"*; the frame
+  shows young red-brown stems and foliage. Weaker than the Callicarpa case — the
+  leading clause (small aromatic glossy leaves) *is* shown, and young Luma bark is
+  genuinely reddish before it matures — but the bark is why people buy it.
+- **`>8 m` renders fine.** No card had ever used `>` in a size; `parseSize` handles
+  it and the spread rail reads `>8 m`. Checked before trusting it.
+- **`Japanese Snowball 'Popcorn'` warns `peak-vs-prose`** — prose claims autumn
+  interest, bloom band is Apr-May. Already covered under *Accepted, not defects*:
+  one bloom band, two seasons of interest.
+
+#### `perf-test` went red on the pixel-parity check — and a hypothesis died
+
+`hiding buried content shows nothing` failed at **123 px, max Δ53** against a
+budget of 256 px / Δ48. Deterministic: identical numbers on an idle machine, so
+not contention.
+
+The check's own comment gives an instruction for exactly this: *"If the DELTA
+needs raising a fourth time, stop and look for a colour change at the card edge
+rather than reaching for the number again."* It was followed before the number was
+touched.
+
+**Looked.** Differing pixels dumped with coordinates and colours: x=8-16, y=150-159
+in a 390x844 shot — x≈16-32, y≈300-318 at DPR 2. The 2026-08-28 entry in that same
+comment records the cause at Δ26 as *"the deck's TOP CORNERS (x≈30 and x≈749 at
+y≈302 in the 780x1688 shot)"*. Same place. Same warm gold, brighter: `[59,32,11] ->
+[25,14,5]` against that entry's `[18,10,0] -> [3,0,0]`. Deck 240 → 308 stacks 68
+more gold trim edges into that corner. Deck 302 passed; 308 tipped it.
+
+**A hypothesis was tested and killed.** Those coordinates fall inside the `.toxflag`
+added in v14.60, which carries `filter:drop-shadow` — and the same comment records a
+`filter:` as a real cause that was *removed rather than tolerated*. That made it the
+obvious culprit. Measured instead of assumed:
+
+| | px | max delta |
+|---|---|---|
+| `.toxflag` filter as shipped | 122 | 66 |
+| `.toxflag` filter neutralised | 87 | **72** |
+
+The filter costs ~35 px and the delta is **higher** without it. Not the cause. The
+flag stays, and the obvious answer was wrong.
+
+**Margin re-measured, not inherited** — staged leak, the same procedure the block has
+used since it was written: residual 87 px / Δ58, staged leak **9521 px / Δ322**.
+
+`HALO_MAX_DELTA` 48 → 64. **The pixel budget is untouched at 256.** Said plainly
+because it matters: the ratios are 109x on pixels and **5.6x on delta**, down from
+14x. The pixel axis is doing the discriminating work; the delta axis is getting thin.
+Recorded in the test that this should be the **last** bare-delta raise — a fifth time
+means re-expressing the check as "every differing pixel lies within N px of the deck's
+outer edge", which corner rounding satisfies by construction and a leaking card's
+content does not.
+
 ---
 
 ## Accepted, not defects

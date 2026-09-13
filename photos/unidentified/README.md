@@ -121,52 +121,45 @@ earlier draft carried as `[Inference]` and Oscar's figures contradicted.
 
 ## 2026-09-13 — four photos from the sixteen-frame batch
 
-### The two Myrtle frames — RESOLVED as a pair, still blocked on a name
+### The two Myrtle frames — CLEARED 2026-09-13
 
-`2026-09-13-small-glossy-leaves-red-stems-myrtle-or-callicarpa.jpg`
-`2026-09-13-larger-glossy-lanceolate-leaves-myrtle-or-callicarpa.jpg`
+`2026-09-13-small-glossy-leaves-red-stems-myrtle-or-callicarpa.jpg` -> **Luma apiculata**
+`2026-09-13-larger-glossy-lanceolate-leaves-myrtle-or-callicarpa.jpg` -> **Myrtus communis**
 
-**The filenames are stale. Neither is a Callicarpa.** Oscar, 2026-09-13:
-*"both thoes photos you brought up a diffrent mertles, the calicapa i may have
-not send the pic."* Which confirms the `[Inference]` recorded below — the larger
-frame's entire margins and glossy opposite leaves fit *Myrtus*, not the toothed
-matte deciduous leaf of *Callicarpa bodinieri* — and disposes of the
-`[Unverified]` note: they are two different plants, both Myrtles.
+**Neither is a Callicarpa; both are Myrtles, and they are not the same genus.**
+Oscar photographed both pots with their labels: the larger light-green lanceolate
+plant is labelled *Myrtus communis*; the small glossy red-stemmed one is labelled
+*MYRTUS APICULATA (LUMA APICULATA)*. Both dealt.
 
-The step that got here was opening both frames and finding **no berries in
-either**, which is what made "is the Callicarpa the one with the purple berries"
-unanswerable from what was parked. The Callicarpa card is written around the
-fruit (`visual` *"Tight clusters of vivid violet-purple berries packed along bare
-stems"*, `peak` Sep-Nov), so a leafy frame would have contradicted the card's own
-words whichever plant it was — the Actinidia case above. Oscar then sent a berry
-photograph and the card was **dealt** from it; see the deck entry for
-*Callicarpa bodinieri* 'Profusion'.
+The `[Inference]` logged here had the pairing right and the plant wrong — it
+guessed the second was *M. communis* subsp. *tarentina*, a subspecies of the same
+species. It is a different **genus**. Dealing that frame on leaf-size reasoning
+would have put it on a Myrtus card and been wrong at genus level. The label
+photograph settled in one frame what two rounds of leaf-margin argument could not.
 
-**Still blocked, and not on identification.** There is exactly **one** Myrtle
-card and **one** Myrtle JSON — `Myrtus communis`, held, no photo. Two frames,
-one card. Dealing either one now is a coin-flip that would also leave the second
-card to be built around whichever plant was left over. Needed from Oscar:
+The step that got the Callicarpa out of this pair was opening both frames and
+finding no berries in either, which made "is the Callicarpa the one with the
+purple berries" unanswerable from what was parked. Oscar then sent a berry
+photograph; that card is dealt. See VERIFY-QUEUE items 79 and 80.
 
-1. which frame is the plain `Myrtus communis` — `[Inference]` the larger
-   lanceolate one, with the small red-stemmed frame being subsp. *tarentina*,
-   but that is not enough to put a photograph on a card;
-2. the second plant's name off the label, and a JSON for it.
+### `2026-09-13-variegated-evergreen-cream-margins-unidentified.jpg` — CLEARED 2026-09-13
 
-Then `node tools/deal-plant.js "<latin>" <photo>` for each and
-`node tools/optimise-photos.js`.
+**Euonymus japonicus 'Microphyllus Albovariegatus'.** Named by Oscar with a JSON;
+card built and dealt from this exact frame. The `[Inference]` that it read as a
+Pittosporum or Euonymus was half right, and the reason it was not guessed stands:
+the deck already carries eight of those two genera and a wrong guess risked both a
+wrong card and a duplicate. It is a seventh Euonymus, and not a duplicate of any
+of the six already dealt.
 
-Decider if the label is gone: crush a leaf. Myrtle is unmistakably aromatic.
+### `2026-09-13-purple-shamrock-pink-flowers-unidentified.jpg` — CLEARED 2026-09-13
 
-### `2026-09-13-variegated-evergreen-cream-margins-unidentified.jpg`
+**Oxalis triangularis 'Mijke'.** Named by Oscar with a JSON; card built and dealt
+from this exact frame. The `[Inference]` that the shape was *Oxalis triangularis*
+was right; the cultivar was not readable from the frame and came off the label.
+First Oxalis in the deck.
 
-No JSON. Thick obovate leaves in whorls at the shoot tips, broadly edged cream.
-`[Inference]` reads as a Pittosporum or a Euonymus, but the deck already carries
-**eight** of those between them, so a guess here risks both a wrong card and a
-duplicate. **Needs Oscar to name it, then a JSON.**
+The frame is a two-panel collage with a large blurred area filling its lower half,
+which looked likely to crop badly onto the card. Rendered before judging: the card
+crops to the two panels and drops the blur entirely. The prediction was wrong and
+the card is fine.
 
-### `2026-09-13-purple-shamrock-pink-flowers-unidentified.jpg`
-
-No JSON. Deep purple triangular trifoliate leaves with pale pink funnel flowers.
-`[Inference]` the shape is *Oxalis triangularis*, but nothing in the deck is an
-Oxalis and the cultivar is not readable from the frame. **Needs Oscar to name
-it, then a JSON.**

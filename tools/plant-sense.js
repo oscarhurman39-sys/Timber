@@ -218,6 +218,13 @@ for (const c of cards) {
   /* The rails need "<height> H × <spread> W". Anything else leaves them blank. */
   if (c.size && !/\bH\b/.test(String(c.size)) && !/\bW\b/.test(String(c.size)))
     flag(c, 'size-no-rails', `size "${c.size}" has no "H × W" split, so both size rails render blank`);
+  else if (c.size && !/\d/.test(String(c.size)))
+    /* A size carrying NO figure at all ("​ H ×  W") still has the H/W split, so the
+       size-no-rails rule above passes it and the card ships with BOTH rails blank.
+       add-plant/add-plants-bulk composed size from height+spread and produced
+       exactly this for every card that arrived from fit-incoming already composed.
+       That is a visible card defect, not a malformation — it fails strict. */
+    flag(c, 'size-no-figure', `size ${JSON.stringify(c.size)} carries no figure at all, so both size rails render blank`);
   else if (c.size && dims.length < 2)
     flag(c, 'size-unparseable', `size "${c.size}" does not give two dimensions for the H/S rails`, 'warning');
   /* "dwarf" is an absolute claim; "compact" is often relative (a compact citrus is
