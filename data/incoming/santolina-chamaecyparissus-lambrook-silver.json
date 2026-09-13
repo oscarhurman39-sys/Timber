@@ -1,0 +1,32 @@
+{
+  "common": "Cotton Lavender 'Lambrook Silver'",
+  "latin": "Santolina chamaecyparissus 'Lambrook Silver'",
+  "hue": 55,
+  "visual": "Aromatic silver-grey filigree foliage · bright yellow button flowers",
+  "water": "Water while establishing, then sparingly",
+  "aspect": "South / West",
+  "soil": "Poor, drained, lime OK",
+  "soilWarning": "Rich or wet ground makes it flop and rot",
+  "prune": "Trim after flowering to keep it dense · never into old bare wood",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jul-Aug",
+  "cvs": "Lambrook Silver",
+  "hardiness": "H5",
+  "hardinessNote": "Hardy in most UK locations, approximately -15 to -10°C, where drainage is good.",
+  "resilience": "Drought resistant, evergreen and generally pest-free",
+  "uses": "Gravel and rock gardens · Mediterranean planting · edging",
+  "height": "0.5-1m",
+  "spread": "0.5-1m",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 10,
+  "pestRisk": 2,
+  "thirst": 4,
+  "careLevel": 5,
+  "sunNeed": 100,
+  "sunMin": 80,
+  "uncertain": [
+    "peak: research said \"Mid to late summer\"; converted to Jul-Aug."
+  ]
+}

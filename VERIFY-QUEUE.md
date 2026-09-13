@@ -72,9 +72,15 @@ whether the deck should show toxicity and legal status at all** — if it is eve
 used on a sales bench, it probably should.
 
 ### 1. Five held climbers have no H × W split — size rails render blank
-`Clematis 'Nelly Moser'`, `Clematis 'Purpurea Plena Elegans'`,
-`Clematis montana var. rubens`, `Evergreen Clematis` (*C. armandii*),
-`Russian Vine` (*Fallopia baldschuanica*).
+**FOUR now. `Clematis 'Nelly Moser'` was fixed on 2026-09-13** when Oscar sent
+a photograph and fresh research for it: the research supplied the spread
+(1–1.5 m) that the tool was never allowed to invent, so `size` is now
+`"2-4m H × 1-1.5m W"` and both rails render. It has been removed from `KNOWN`
+in `tools/plant-sense.js`. See item 77. The remaining four are unchanged:
+
+`Clematis 'Purpurea Plena Elegans'`, `Clematis montana var. rubens`,
+`Evergreen Clematis` (*C. armandii*), `Russian Vine`
+(*Fallopia baldschuanica*).
 
 Their `size` fields read `"2-3m"`, `"8-12m"` etc. Every other card uses
 `"<height> H × <spread> W"`, which is what the two side rails read. As written,
@@ -2943,6 +2949,88 @@ identified plant until a perfect frame exists — is how 85 cards ended up with
 no picture at all. Worth a second frame in late October, when the bark and the
 colour are both there; the dealt photo can be swapped or made a PHOTO_SWAP pair
 the way Sapphire Ring was in item 69.
+
+---
+
+### 77. Thirteen cards from a sixteen-photo batch — and the Nelly Moser rebuilt rather than just photographed
+2026-09-13. Oscar sent 16 photographs and a 14-entry JSON array (the first paste
+truncated mid-entry; he re-sent it complete). Deck 289 → 301, hold 85 → 86.
+
+**A. Twelve photographs placed, four parked.**
+
+| Dealt | note |
+|---|---|
+| *Oenothera lindheimeri* PAPILLON ('Nugaupapil') | |
+| *Jacobaea maritima* | |
+| *Rosa* FLIRT 2011 ('Korchakon') | |
+| *Heuchera* 'Paris' | |
+| *Leucophyta brownii* | |
+| *Achillea umbellata* | the deck's only H7 — see D |
+| *Sarcococca ruscifolia* | not a duplicate of the held *S. confusa* |
+| *Santolina chamaecyparissus* 'Lambrook Silver' | |
+| *Cassinia fulvida* | |
+| *Ilex aquifolium* 'Argentea Marginata' | not a duplicate: the deck's other hollies are *I. crenata* |
+| *Magnolia* 'Cameo' | |
+| *Clematis* 'Nelly Moser' | **already held** — see B |
+
+Held, cards written, photographs NOT accepted: *Myrtus communis* and
+*Callicarpa bodinieri* 'Profusion'. Two frames in the batch are these two plants
+in some order; leaf size points one way and leaf margin the other, and guessing
+would put a photograph on the wrong card. Awaiting Oscar's call. Two further
+frames — a cream-margined evergreen and a purple shamrock — arrived with no
+JSON and are parked.
+
+**B. The Nelly Moser was REBUILT, not just photographed — and that was nearly
+missed.** The JSON read as a duplicate of the held card, so the photograph was
+dealt onto it and the research set aside. Rendering the card showed why that was
+wrong: **three rating rows blank** (pestRisk, thirst, careLevel all `""`), the
+spread rail blank, no toxicity, `resilience` reading *"Good with right care"*,
+and `hardiness` H5 against the research's H6. It is one of the deck's oldest
+cards and one of its weakest.
+
+Oscar's research supplied every one of those. It was applied the same way the
+Abelia revision was in item 71B, with two deliberate KEEPS: `pots` "2L, 3L" is
+his commercial data and is never overwritten by research, and `peak`
+"May-Jun, Aug-Sep" was kept over the research's prose because the existing
+two-band value is MORE precise than "late spring to early summer, often
+repeating".
+
+`hardiness` H5 → **H6** is a factual change to a shipped card, recorded here
+rather than buried: the research states H6 with the note "Hardy throughout the
+UK and northern Europe", and the card carried H5 with no note at all.
+
+**C. That closes one of the five `size-no-rails` defects (queue item 1).** That
+entry says the fix could not be made by the tool because *"inventing a spread
+would be making up data"*. The research supplied the spread — 1–1.5 m — so
+`size` is now `"2-4m H × 1-1.5m W"` and both rails render. Removed from `KNOWN`
+in `tools/plant-sense.js` and struck from item 1, which is now **four** cards,
+all still waiting on a spread figure from a label.
+
+**D. One number worth a second look: *Achillea umbellata* came in at H7.** That
+is "below -20°C", the strongest claim the scale makes, and it would be the only
+H7 in 387 cards. Plausible for a Greek mountain alpine; flagged in the card's
+`uncertain` block and here because H7 is exactly the kind of value the repo's
+own standing gotcha warns about ("hardiness is the most error-prone field").
+
+**E. Two naming corrections, both following Oscar's own notes.** The rose JSON
+wrote the trade name as `'Flirt 2011'` in single quotes; single quotes denote a
+CULTIVAR epithet and his own `uncertain` note says FLIRT 2011 is the trade name
+with `'Korchakon'` the cultivar. Written as
+`Rosa FLIRT 2011 ('Korchakon')`, matching `Rosa GERTRUDE JEKYLL ('Ausbord')`.
+The Gaura likewise became
+`Oenothera lindheimeri PAPILLON ('Nugaupapil')`, matching the deck's
+`GAUDI ROSE ('Florgaucomro')`.
+
+**F. `Heuchera 'Paris'` carries no species,** deliberately: the research does not
+assign one and the deck's other two Heucheras are both *H. villosa*. Same rule
+as `Rudbeckia 'Fireball'` in item 73.
+
+**G. Conversions.** Every `peak` arrived as a season word or prose and was
+converted to Mon-Mon; every `aspect` was a light level and became a compass
+facing (stated facing wins, else derived from sunNeed). Two foliage-season
+peaks are worth naming: *Jacobaea maritima* "Spring to autumn foliage" → Mar-Oct
+and *Leucophyta brownii* "Year-round silver foliage" → Jan-Dec, the band the
+deck already uses for year-round interest. All logged per card.
 
 ---
 

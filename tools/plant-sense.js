@@ -39,7 +39,6 @@ const cards = deck.concat(hold);
    Same discipline as tests/deck-audit.js: never add a line to silence a new
    defect — add it only alongside an entry in VERIFY-QUEUE.md that says why. */
 const KNOWN = new Set([
-  "Clematis 'Nelly Moser'|size-no-rails",
   "Clematis viticella 'Purpurea Plena Elegans'|size-no-rails",
   'Clematis montana var. rubens|size-no-rails',
   "Clematis armandii|size-no-rails",

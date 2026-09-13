@@ -1,0 +1,33 @@
+{
+  "common": "Magnolia 'Cameo'",
+  "latin": "Magnolia 'Cameo'",
+  "hue": 330,
+  "visual": "Upright tulip flowers, deep pink outside and pale blush within",
+  "water": "Regular while establishing and in long droughts",
+  "aspect": "East / South / West",
+  "soil": "Fertile, humus-rich, moist",
+  "soilWarning": "Late frost and exposure spoil the flowers",
+  "prune": "Barely any · take out damaged or crossing wood in summer",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Mar-May",
+  "cvs": "Cameo",
+  "hardiness": "H5",
+  "hardinessNote": "Hardy in most UK locations; breeder information reports tolerance to approximately -22°C, though exposed sites can damage flowers.",
+  "resilience": "Cold-hardy and compact · the flower buds still fear a late frost",
+  "uses": "Small gardens · specimen planting · courtyards · large containers",
+  "height": "3m",
+  "spread": "1-1.5m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 8,
+  "pestRisk": 5,
+  "thirst": 11,
+  "careLevel": 8,
+  "sunNeed": 75,
+  "sunMin": 50,
+  "uncertain": [
+    "Vance Hooper-bred protected hybrid. Parentage is reported as Magnolia × soulangeana 'Sweet Simplicity' × Magnolia 'Jurmag1'. The OCR fragment '(Jqd)' does not appear to be part of the accepted cultivar name. (Oscar's note.)",
+    "height: research said \"Approximately 3 m\"; written as 3m so the size rail parses."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "common": "Beautyberry 'Profusion'",
+  "latin": "Callicarpa bodinieri 'Profusion'",
+  "hue": 280,
+  "visual": "Tight clusters of vivid violet-purple berries packed along bare stems",
+  "water": "Regular while establishing and in long droughts",
+  "aspect": "East / South / West",
+  "soil": "Fertile and well-drained",
+  "soilWarning": "Shade costs you the berries",
+  "prune": "Prune in late winter · thin the older stems when it crowds",
+  "toxicity": "Fruit is ornamental and should not be eaten. Wear gloves when handling.",
+  "compliance": "",
+  "peak": "Sep-Nov",
+  "cvs": "Profusion",
+  "hardiness": "H6",
+  "hardinessNote": "Hardy throughout the UK and northern Europe, approximately -20 to -15°C.",
+  "resilience": "Very hardy and generally pest-free",
+  "uses": "Autumn berries · mixed shrub borders · cottage gardens · cutting",
+  "height": "2.5-4m",
+  "spread": "1.5-2.5m",
+  "foliage": "deciduous",
+  "container": "with care",
+  "growthSpeed": 12,
+  "pestRisk": 2,
+  "thirst": 9,
+  "careLevel": 5,
+  "sunNeed": 70,
+  "sunMin": 40,
+  "uncertain": [
+    "HELD, no photograph accepted yet — see the Myrtus entry: two frames in this batch are these two plants in some order and leaf size alone cannot settle which. Awaiting Oscar's call.",
+    "peak: research said \"Autumn\" (the berries); converted to Sep-Nov."
+  ]
+}

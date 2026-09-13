@@ -1,0 +1,33 @@
+{
+  "common": "Silver Leaf Cineraria",
+  "latin": "Jacobaea maritima",
+  "hue": 0,
+  "visual": "Deeply cut leaves under dense white felt · almost white in the border",
+  "water": "Moderate at first · let it dry between waterings",
+  "aspect": "South / West",
+  "soil": "Drained, chalk to sand",
+  "soilWarning": "Cold wet winters rot it",
+  "prune": "Trim untidy growth · take the flower stems off to keep it silver",
+  "toxicity": "Potentially harmful if eaten; sap may irritate sensitive skin.",
+  "compliance": "",
+  "peak": "Mar-Oct",
+  "cvs": "",
+  "hardiness": "H3",
+  "hardinessNote": "Hardy in coastal and relatively mild UK locations, approximately -5 to 1°C; often treated as seasonal bedding in colder areas.",
+  "resilience": "Drought and coastal tolerant but dislikes cold wet winters",
+  "uses": "Bedding · edging · pots · coastal planting · silver schemes",
+  "height": "0.5-1m",
+  "spread": "0.5-1m",
+  "foliage": "semi-evergreen",
+  "container": "yes",
+  "growthSpeed": 14,
+  "pestRisk": 4,
+  "thirst": 5,
+  "careLevel": 5,
+  "sunNeed": 95,
+  "sunMin": 75,
+  "uncertain": [
+    "Nursery label 'Cineraria Silver Leaf' appears to be a generic trade description rather than a securely identifiable cultivar. (Oscar's note.)",
+    "peak: research said \"Spring to autumn foliage\" — a FOLIAGE season, not a bloom season. Converted to Mar-Oct because that is what the research states and the card's band is the season of interest; the plant's yellow daisies are usually removed on a silver-foliage plant anyway (see prune)."
+  ]
+}

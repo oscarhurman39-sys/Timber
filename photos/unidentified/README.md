@@ -118,3 +118,34 @@ untouched and still has no photograph of its own.
 
 See VERIFY-QUEUE item 72 — including a correction to a size claim this file's
 earlier draft carried as `[Inference]` and Oscar's figures contradicted.
+
+## 2026-09-13 — four photos from the sixteen-frame batch
+
+### The Myrtle / Callicarpa pair
+
+`2026-09-13-small-glossy-leaves-red-stems-myrtle-or-callicarpa.jpg`
+`2026-09-13-larger-glossy-lanceolate-leaves-myrtle-or-callicarpa.jpg`
+
+Both cards are **written and held**: *Myrtus communis* and
+*Callicarpa bodinieri* 'Profusion'. These two frames are those two plants in
+some order and **the order is not settled**. Leaf size says the small
+red-stemmed one is the Myrtle and the larger lanceolate one the Callicarpa;
+leaf margin says otherwise, because Callicarpa leaves are normally toothed and
+the larger frame's look entire. `[Inference]` either way, which is not enough to
+put a photograph on a card. **Oscar's call.** Once he says which is which:
+`node tools/deal-plant.js "<latin>" <photo>` for each, then
+`node tools/optimise-photos.js`.
+
+### `2026-09-13-variegated-evergreen-cream-margins-unidentified.jpg`
+
+No JSON. Thick obovate leaves in whorls at the shoot tips, broadly edged cream.
+`[Inference]` reads as a Pittosporum or a Euonymus, but the deck already carries
+**eight** of those between them, so a guess here risks both a wrong card and a
+duplicate. **Needs Oscar to name it, then a JSON.**
+
+### `2026-09-13-purple-shamrock-pink-flowers-unidentified.jpg`
+
+No JSON. Deep purple triangular trifoliate leaves with pale pink funnel flowers.
+`[Inference]` the shape is *Oxalis triangularis*, but nothing in the deck is an
+Oxalis and the cultivar is not readable from the frame. **Needs Oscar to name
+it, then a JSON.**
