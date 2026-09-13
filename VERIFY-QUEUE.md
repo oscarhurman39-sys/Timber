@@ -3588,6 +3588,63 @@ with photographs. `peak` on the Acer was *"Spring and autumn foliage"* — two s
 again — set to **Sep-Nov**, the autumn flush, which is what the supplied photograph
 shows and when the plant sells; flip to Mar-May if the spring flush should lead.
 
+### 83. The hardiness lens opened under the thumb holding it — and nothing tested the lens at all
+
+**Oscar, 2026-09-13, with a screenshot:** *"When u hold down on the hardiness shield it
+opens the box up high, it should open the box in the centre of the card, or at leased
+low enough it's beneath the shield so ur thumb or finger doesn't block it."*
+
+`openLens` anchors the panel **above the touch point** — `bottom = innerHeight - y + 14`,
+a rule Oscar asked for and which is right for the plaque, the soil panel and the band,
+all of which sit low on the card. **The hardiness crest and the toxicity flag sit at the
+very TOP of the card**, so there is no room above, and the fallback was:
+
+```js
+if(r.top<8)lensEl.style.bottom=Math.max(12,innerHeight-8-r.height)+'px';
+```
+
+which pins the panel to `top: 8` — *directly under the finger still holding the crest*.
+
+**Measured with the old code in place, which is worse than the report:** pressing the
+crest at y=207 produced a panel spanning **-10 .. 210**. It covered the press point AND
+still ran off the top of the screen, because a 220px panel does not fit above a crest
+that starts 8px from the top. The clamp could not save it.
+
+**Fix:** when there is no room above, centre the panel on the **card** rather than
+pinning it to the viewport top — Oscar's own first suggestion, and always clear of a
+press made at the card's top edge. The panel then lands over the photograph where it
+reads cleanly. The card element is passed into `openLens` for this; it falls back to
+`topCard()`.
+
+Measured after, all four front panels, press point vs panel rect:
+
+| panel | press y | panel | covers the finger |
+|---|---|---|---|
+| `.crest` | 207 | 330..549 (card mid 449, panel mid 440) | no |
+| `.toxflag` | 167 | 17..153 | no — still opens above, and fits |
+| `.soilp` | 613 | 253..598 | no |
+| `.plaque` | 593 | 234..579 | no |
+
+**Only the crest case changed.** The other three keep the above-the-finger behaviour
+exactly as Oscar specified it.
+
+#### Nothing tested the lens. That is why this shipped.
+
+`grep -rn "\.lens" tests/*.js` returned **nothing** — no suite touched the press-and-hold
+panel in any way, so a panel that opened on top of the user's own thumb was invisible to
+a 17-suite gate. Six checks added to `features-test`, holding `.crest`, `.soilp` and
+`.plaque` on a card that actually carries each one, asserting the panel opens **and that
+the pressed point is not inside it**. That is the rule that matters to a thumb, and it
+holds however the panel is anchored.
+
+**The guard was verified by reintroducing the bug**, not by assuming: with the old
+`top:8` fallback restored, `features-test` goes to 60/1 with
+*"press y=207 sits inside the panel -10..210"*; with the fix, 61/0. Then restored.
+
+`[Inference]` the toxicity flag would have hit the same fallback on a shorter screen or
+a longer note — its panel fits today at 17..153 with 9px to spare. The centring branch
+now catches it if it ever stops fitting, and the new test would fail if it did not.
+
 ---
 
 ## Accepted, not defects

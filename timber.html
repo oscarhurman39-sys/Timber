@@ -1163,7 +1163,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r227 · 2026-09-13 · ff8299b';
+const BUILD='r228 · 2026-09-13 · bfef9ae';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -12671,16 +12671,28 @@ function buildLensTox(p){
     +lensRow('Watch for',`<b>${t}</b>`,'warn')
     +lensRow('Also on','the back of this card, under Safety');
 }
-function openLens(idx,y,kind){
+function openLens(idx,y,kind,cardEl){
   const p=PLANTS[idx];if(!p)return;
   if(!lensEl){lensEl=document.createElement('div');lensEl.className='lens';document.body.appendChild(lensEl);}
   lensEl.innerHTML=kind==='hardy'?buildLensHardy(p):kind==='tox'?buildLensTox(p):buildLens(p);
   lensEl.style.bottom=Math.max(12,innerHeight-y+14)+'px';  /* above the finger, per Oscar */
   void lensEl.offsetWidth;                                 /* commit the hidden frame so .show transitions */
   lensEl.classList.add('show');
-  const r=lensEl.getBoundingClientRect();                  /* pressed high on the plaque of a short
-      screen: re-anchor down rather than run off the top */
-  if(r.top<8)lensEl.style.bottom=Math.max(12,innerHeight-8-r.height)+'px';
+  const r=lensEl.getBoundingClientRect();
+  /* NO ROOM ABOVE. The hardiness crest and the toxicity flag both sit at the very
+     TOP of the card, so "above the finger" runs the panel off the screen. The old
+     fallback pinned it to top:8 — which put it directly under the thumb still
+     holding the crest, and Oscar could not read his own panel (2026-09-13:
+     "it should open the box in the centre of the card, or at least low enough
+     it's beneath the shield so ur thumb or finger doesn't block it").
+     Centre it on the CARD instead: always clear of a press made at the card's top
+     edge, and the panel lands over the photograph where it reads cleanly. */
+  if(r.top<8){
+    const cr=(cardEl||topCard())&&(cardEl||topCard()).getBoundingClientRect();
+    const mid=cr?cr.top+cr.height/2:innerHeight/2;
+    const lo=12,hi=Math.max(12,innerHeight-8-r.height);
+    lensEl.style.bottom=Math.min(Math.max(lo,innerHeight-(mid+r.height/2)),hi)+'px';
+  }
   if(navigator.vibrate)navigator.vibrate(8);               /* the hold has fired — a tap of confirmation */
 }
 function closeLens(){if(lensEl)lensEl.classList.remove('show');}
@@ -12705,7 +12717,7 @@ function attachGestures(card){
     if(kind==='tox'){const pl=PLANTS[+card.dataset.idx];if(!pl||!String(pl.toxicity||'').trim())return;}
     lensTimer=setTimeout(()=>{lensTimer=null;
       if(!drag||moved||card.dataset.gone)return;         /* lifted, swiping, or flung meanwhile */
-      lensOn=true;openLens(+card.dataset.idx,sy,kind);
+      lensOn=true;openLens(+card.dataset.idx,sy,kind,card);
     },LENS_HOLD);
   };
   const start=(x,y,target)=>{if(card.dataset.gone)return;stopGoto();drag=true;moved=false;sx=x;sy=y;

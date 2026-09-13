@@ -441,6 +441,48 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     `top ${g4.top} want ${g3} inHistory ${g4.stillInHistory}`);
 
   /* ---- no JS errors anywhere ---- */
+  /* ---- press-and-hold lens: it must never open under the finger ----
+     Nothing covered the lens at all until 2026-09-13, which is how it shipped
+     opening ON TOP of the thumb. openLens anchors the panel above the touch, but
+     the hardiness crest and the toxicity flag sit at the very TOP of the card, so
+     there is no room above and the old fallback pinned the panel to top:8 —
+     directly under the finger still holding the crest. Oscar could not read his
+     own panel. The rule this locks in is the one that matters to a thumb: however
+     the panel is anchored, the point being pressed must not be inside it. */
+  await page.evaluate(() => localStorage.clear());
+  await page.reload({ waitUntil: 'networkidle' });
+  await deckSettled(page);
+  for (const [sel, label] of [['.crest', 'hardiness crest'], ['.soilp', 'soil panel'], ['.plaque', 'name plaque']]) {
+    const ok = await page.evaluate(async (sel) => {           /* walk to a card carrying the panel */
+      for (let i = 0; i < 40; i++) {
+        const live = [...document.querySelectorAll('.deck .card:not([data-gone])')];
+        if (live.length && live[live.length - 1].querySelector('.face.front ' + sel)) return true;
+        document.getElementById('skip').click();
+        await new Promise(r => setTimeout(r, 420));
+      }
+      return false;
+    }, sel);
+    if (!ok) { check(`lens: a card carrying ${label} was found`, false, 'none in 40 cards'); continue; }
+    await page.waitForTimeout(700);
+    const box = await page.locator('.deck .card:not([data-gone])').last().locator('.face.front ' + sel).boundingBox();
+    const px = box.x + box.width / 2, py = box.y + box.height / 2;
+    await page.mouse.move(px, py);
+    await page.mouse.down();
+    await page.waitForTimeout(900);                            /* LENS_HOLD is 500 */
+    const r = await page.evaluate(([px, py]) => {
+      const l = document.querySelector('.lens');
+      if (!l || !l.classList.contains('show')) return { open: false };
+      const b = l.getBoundingClientRect();
+      return { open: true, covers: py >= b.top && py <= b.bottom && px >= b.left && px <= b.right,
+               top: Math.round(b.top), bottom: Math.round(b.bottom) };
+    }, [px, py]);
+    await page.mouse.up();
+    await page.waitForTimeout(250);
+    check(`lens opens on a hold of the ${label}`, r.open);
+    check(`lens does not open under the finger (${label})`, r.open && !r.covers,
+      r.open ? `press y=${Math.round(py)} sits inside the panel ${r.top}..${r.bottom}` : 'lens never opened');
+  }
+
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 
   console.log(`\n${passed} passed, ${failed} failed`);
