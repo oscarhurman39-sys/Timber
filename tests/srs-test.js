@@ -16,14 +16,25 @@ function check(name, cond, extra) {
   else { failed++; failures.push(name + (extra ? ' — ' + extra : '')); console.log('FAIL', name, extra || ''); }
 }
 
+/* timber.html's fling() defers the SRS write to setTimeout(ms+10), ms being the
+   200-350ms throw duration it derives from release velocity; Playwright's synthetic
+   drag lands near the 350 ceiling. Measured on this deck: the record becomes
+   readable ~400ms after mouseup on an idle machine and 520ms under three-job
+   contention, so a flat 450ms sleep was racing that timer — and losing once the
+   deck reached 301 cards. Wait for the write itself. On timeout we fall through
+   with whatever is stored, so a swipe that genuinely stopped writing still fails
+   its assertion and still prints the empty object. */
 async function dragCard(page, dxTotal) {
+  const srsBefore = await page.evaluate(() => localStorage.getItem('timber-srs-v1'));
   const box = await page.locator('#deck').boundingBox();
   const x = box.x + box.width / 2, y = box.y + box.height / 2;
   await page.mouse.move(x, y);
   await page.mouse.down();
   for (let i = 1; i <= 8; i++) await page.mouse.move(x + (dxTotal * i) / 8, y);
   await page.mouse.up();
-  await page.waitForTimeout(450); // fling animation + removal
+  await page.waitForTimeout(450);                      // fling animation + removal
+  await page.waitForFunction(prev => localStorage.getItem('timber-srs-v1') !== prev,
+    srsBefore, { timeout: 4000 }).catch(() => {});     // ...then the deferred SRS write
 }
 
 const getSRS = page => page.evaluate(() => {
@@ -51,7 +62,7 @@ const seedDue = (page, n) => page.evaluate(count => {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const pageErrors = [];
   page.on('pageerror', e => pageErrors.push(String(e)));
-  await page.goto(URL); await page.waitForTimeout(400);
+  await page.goto(URL); await page.waitForTimeout(400); await deckSettled(page);
 
   /* ---- 1. fresh state ---- */
   check('menu shows 0 due on fresh state',
@@ -86,7 +97,11 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 4. swipe left resets to box 1, due tomorrow ---- */
   const latin2 = await topLatin(page);
-  await page.evaluate(lat => srsOnSwipe(lat, true), latin2); // pre-existing box
+  /* Two learns, not one. latin2 is unseen, so a single srsOnSwipe leaves it at
+     box 1 due +1 — byte-identical to what the skip below is supposed to produce,
+     so this check passed whether or not the skip ever wrote, and dragCard's watch
+     for a changed record would have had nothing to see. Box 2 makes the reset real. */
+  await page.evaluate(lat => { srsOnSwipe(lat, true); srsOnSwipe(lat, true); }, latin2);
   await dragCard(page, -160);
   srs = await getSRS(page);
   check('skip resets to box 1, due tomorrow',
@@ -108,7 +123,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 6. corrupt / invalid storage tolerated ---- */
   await page.evaluate(() => localStorage.setItem('timber-srs-v1', '{"broken'));
-  await page.reload(); await page.waitForTimeout(400);
+  await page.reload(); await page.waitForTimeout(400); await deckSettled(page);
   check('corrupt SRS JSON → treated as empty, app boots',
     await page.evaluate(() => document.getElementById('reviewDueMenu').textContent) === '0');
   const filtered = await page.evaluate(() => {
@@ -123,7 +138,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 7. due count + review filter ---- */
   await seedDue(page, 3);
-  await page.reload(); await page.waitForTimeout(400);
+  await page.reload(); await page.waitForTimeout(400); await deckSettled(page);
   check('menu shows due count 3',
     await page.evaluate(() => document.getElementById('reviewDueMenu').textContent) === '3');
   const progressBefore = await page.evaluate(() => localStorage.getItem('timber-progress-v1'));
@@ -160,7 +175,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 10. review auto-exits when the last due card is swiped ---- */
   await seedDue(page, 1);
-  await page.reload(); await page.waitForTimeout(400);
+  await page.reload(); await page.waitForTimeout(400); await deckSettled(page);
   await openReview(page);
   await dragCard(page, 160);
   await page.waitForTimeout(200);
@@ -170,7 +185,7 @@ const seedDue = (page, n) => page.evaluate(count => {
 
   /* ---- 11. all caught up ---- */
   await seedDue(page, 0); // everything due 2099
-  await page.reload(); await page.waitForTimeout(400);
+  await page.reload(); await page.waitForTimeout(400); await deckSettled(page);
   await openReview(page);
   await deckSettled(page);
   const caught = await page.evaluate(() => ({

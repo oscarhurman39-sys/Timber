@@ -3032,6 +3032,101 @@ peaks are worth naming: *Jacobaea maritima* "Spring to autumn foliage" → Mar-O
 and *Leucophyta brownii* "Year-round silver foliage" → Jan-Dec, the band the
 deck already uses for year-round interest. All logged per card.
 
+### 78. The `srs-test` failure was neither a flake nor the deal — it was a fixed sleep racing a deliberate timer
+
+> **Correction: I previously made an unverified claim. That was incorrect and should
+> have been labelled.** In item 77 and in commit `c778280` I stated as fact that
+> `srs-test` failed because it waited a fixed 400ms after page load instead of using
+> its own `deckSettled` helper, so the first drag fired mid-deal and `topLatin()` read
+> the wrong card. I pushed that as a root cause. It was an inference from reading the
+> file, never measured. The `deckSettled` change shipped and the suite **failed again,
+> identically**, under `--jobs 3` (`suite12.log`). The diagnosis was wrong.
+
+**What was actually failing.** Two assertions, always the same two, always the first
+two swipe assertions in the file:
+
+```
+ - learn creates SRS record keyed by latin — {}
+ - learn: box 1, due +1 day
+```
+
+`{}` is the whole point: the store was *empty*, not keyed to the wrong plant. A
+mid-deal drag reading the wrong card would have produced a record under some other
+latin. An empty store means no record had been written **yet**.
+
+**Measured, not inferred.** `timber.html` `fling()` defers the SRS write on purpose:
+
+```js
+setTimeout(()=>{srsOnSwipe(latin,learned);updateReviewMenu();},ms+10);
+```
+
+`ms` is the throw duration derived from release velocity,
+`Math.max(200,Math.min(350,Math.round(420/(Math.abs(v)||0.01))))`. Playwright's
+synthetic drag ends with a CDP round-trip between the last move and the release, so
+`performance.now()-lt>80` fires, `v` becomes 0, and `ms` lands at the **350 ceiling**,
+not the 200 floor. I instrumented `window.fling` and `window.srsOnSwipe` and polled
+the store at 25ms (`scratchpad/srsdiag.js`):
+
+| condition | `ms` chosen | SRS write ran | record readable |
+|---|---|---|---|
+| idle | 332 | 352ms after mouseup | **401ms** |
+| idle | 348 | 374ms | **407ms** |
+| 3 CPU burners / 4 cores | 350 | 463ms | **520ms** |
+| 3 CPU burners / 4 cores | 341 | 398ms | **431ms** |
+
+`dragCard` waited a flat **450ms** and then read. Idle margin: 43–49ms. Under
+three-job contention the deferred timer slipped 46–102ms behind schedule — the
+`afterPresented` block `fling()` hands `markHot()`, `updateCounts()`, `saveProgress()`
+is the work the app's own comment measures at "80-200ms of dropped frames" — and the
+read beat the write. `flingRan: true` in every single run: **the drag was always fine.**
+
+This is a test defect, not an app defect. A 360ms deferral is invisible to a person
+swiping a card, and it is deliberate — the comment above it explains that nothing may
+share the frame the throw starts on.
+
+**Why it appeared when it did.** The margin was always ~45ms; it is not new. What
+changed is the deck: `markHot()`/`saveProgress()` cost scales with it, and at 301
+cards under `--jobs 3` the slip finally exceeded the margin. `[Inference]` that the
+deck size is what tipped it — I did not re-run the same test against an older deck to
+prove it, and the three reproductions I have are all at 301.
+
+**The fix.** `dragCard` now waits for the write instead of guessing how long it takes
+— snapshot `timber-srs-v1` before the drag, keep the 450ms for the fling animation and
+DOM removal, then `waitForFunction` until the stored string differs, 4s ceiling. On
+timeout it falls through with whatever is stored, so a swipe that genuinely stopped
+writing still fails its assertion and still prints the empty object. No magic number
+was raised; a sleep was replaced by the condition it was standing in for.
+
+**A false pass found on the way.** Section 4 (`skip resets to box 1, due tomorrow`)
+pre-seeded with a single `srsOnSwipe(latin2, true)`. `latin2` is unseen, so that
+leaves `{box:1, due:+1}` — byte-identical to what the left-swipe under test is meant
+to produce. The assertion passed whether or not the skip ever wrote anything, and it
+never demonstrated a reset from a higher box, which is its name. Pre-seed is now two
+learns (box 2), so the reset is observable. **This is a change to a test's setup, not
+to card data — flagging it because it makes an assertion stricter than Oscar last saw
+it.**
+
+**Second suite, same latent race.** `features-test.js:227` does the same
+`dragCard` → immediate SRS read → `check('swipe in filtered deck writes SRS', ...)`.
+It has been passing on the same 45ms margin. Same helper, same fix, both suites.
+
+**Verified under the condition that reproduced it,** not just serially:
+`srs-test` 24/24 and `features-test` 55/55 with three CPU burners against four cores.
+The previous serial-only green (`suite10.log`) proved nothing, because the bug was
+already present and passing serially.
+
+**Standing lesson, same as items 70E / 74E / 75C.** Three times now I have read a
+file, formed a story that explained the symptom, and reported it as a measurement.
+The tell each time: I never ran the thing that would have falsified it. `flingRan:
+true` took four minutes to establish and would have killed the mid-deal theory before
+it was ever committed.
+
+**Kept anyway:** the `deckSettled` calls at the five load sites. They did not fix
+this, and the commit that introduced them said they did — corrected here and in the
+rewritten message. They stand on their own: `topLatin()` and the card-count reads
+after a reload are genuinely deal-dependent, and every other browser suite already
+waits for `data-dealing` to clear before touching the deck.
+
 ---
 
 ## Accepted, not defects
