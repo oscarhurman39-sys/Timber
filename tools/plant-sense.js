@@ -46,10 +46,6 @@ const KNOWN = new Set([
      Snowball 'Popcorn' under "Accepted, not defects". */
   'Prunus serrula|peak-vs-prose',
   "Pyracantha SAPHYR ORANGE ('Cadange')|peak-vs-prose",
-  "Clematis viticella 'Purpurea Plena Elegans'|size-no-rails",
-  'Clematis montana var. rubens|size-no-rails',
-  "Clematis armandii|size-no-rails",
-  'Fallopia baldschuanica|size-no-rails',
 ]);
 
 const issues = [];

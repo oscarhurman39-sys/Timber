@@ -3645,6 +3645,69 @@ holds however the panel is anchored.
 a longer note — its panel fits today at 17..153 with 9px to spare. The centring branch
 now catches it if it ever stops fitting, and the new test would fail if it did not.
 
+### 84. The last four `size-no-rails` defects closed, and a card whose photograph does not show what the card sells
+
+#### Four climbers sized — the defect class is gone, not silenced
+
+Oscar supplied verified figures for the four climbers that had a height-only `size`
+string with no `H × W` split, so **both rails rendered blank** on every one:
+
+| card | was | now |
+|---|---|---|
+| *Clematis viticella* 'Purpurea Plena Elegans' | `2-3m` | `1.5–2.5 m H × 0.5–1 m W` |
+| *Clematis montana* var. *rubens* | `8-12m` | `8–12 m H × 4–8 m W` |
+| *Clematis armandii* | `4-6m` | `4–8 m H × 1.5–2.5 m W` |
+| *Fallopia baldschuanica* | `10-15m` | `8–12 m H × 4–8 m W` |
+
+**Three of the four heights changed too.** Those cards were not from the
+Claude-generated batch — they were Oscar's own earlier data — and his verified figures
+supersede them. The Russian Vine in particular came down from `10-15m` to `8–12 m`.
+
+His *Clematis montana* note, recorded because it qualifies the number: *8–12 m is for
+standard forms.*
+
+**All four `size-no-rails` lines were REMOVED from `plant-sense`'s `KNOWN` set**, not
+left sitting there. That list exists to hold defects waiting on a horticultural call,
+and this call has been made — `plant-sense` now reports **zero** `size-no-rails`
+findings on 392 cards. The earlier search I ran for these figures matched Oscar's on
+two of four and was `[Unverified]` on the rest; his label figures were the ones used.
+
+#### `Phlox paniculata` 'David' — the photograph does not show the flowers
+
+Parked since **2026-08-09**, identified by Oscar on 08-13, and the JSON arrived
+2026-09-13 — a month in `photos/unidentified/` waiting on stats, the only case in the
+folder running photo-waiting-for-card rather than card-waiting-for-photo.
+
+Card built and dealt. **Rendered and checked before saying it was fine, and it is not
+quite fine:** the frame is dominated by dark green lanceolate foliage — textbook
+*P. paniculata*, opposite leaves on upright stems, unmistakably the right plant — while
+the white panicles sit at the very top, **soft-focus and cut off**. On the card they
+read as a pale blur behind the title, not as flowers.
+
+The `visual` leads with *"Fragrant pure-white flower panicles"*. That clause is the
+reason someone buys 'David', and it is the one thing the photograph does not deliver.
+
+**Weaker than the Actinidia case** — that frame *contradicted* its card's variegation
+line, and Oscar's call was to hold it. This one does not contradict anything; it simply
+under-sells. So the card is dealt rather than held, and the gap is flagged instead.
+
+**Timing, which is the actionable part:** `peak` is Jul-Sep and today is 13 September.
+The flowering window is open and closes within weeks. Exactly the Callicarpa situation
+in item 79 — that card was blocked on a berry photograph, Oscar took one the same day,
+and it is now one of the strongest cards in the deck. A flower shot this week would do
+the same here; next year is the alternative.
+
+No crop can fix it: the panicles are out of focus in the source, so `PHOTO_FOCUS` would
+only enlarge the blur. Not attempted for that reason.
+
+#### Also
+
+Oscar's `latin` on this JSON already carried the cultivar (`Phlox paniculata 'David'`)
+**and** supplied `cvs: "'David'"`. The batch preparer joins `latin + cvs`, which would
+have produced `Phlox paniculata 'David' 'David'` — a card name, a photo slug and a
+duplicate check all built on a doubled cultivar. Guarded: the join is skipped when the
+latin already contains the cultivar. Worth knowing the incoming shape varies on this.
+
 ---
 
 ## Accepted, not defects

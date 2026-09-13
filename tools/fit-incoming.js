@@ -39,6 +39,8 @@
    warn  <= 44 chars — a real constraint, not a restatement of soil.
    face  — compass facing; omit to derive from the sun band. */
 const FIT = {
+  "Phlox paniculata 'David'":
+    { soil: 'Fertile, moist, drained', warn: 'Never let it dry out; keep air moving' },
   "Stachys byzantina 'Silver Carpet'":
     { soil: 'Any soil, well-drained', warn: 'Winter wet rots the crown' },
   "Acer palmatum 'Sango-kaku'":
