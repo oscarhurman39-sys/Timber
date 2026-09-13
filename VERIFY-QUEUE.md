@@ -2460,7 +2460,7 @@ card's existing H6 and is purely additive. Nothing else on that card was touched
 | *Brachyglottis* Walberton's Silver Dormouse ('Walbrach') | **dealt** | image 4 |
 | *Brunnera macrophylla* 'Jack Frost' | **dealt** (already written) | image 1 |
 | *Viburnum plicatum* f. *plicatum* 'Popcorn' | held | none sent |
-| *Abelia* × *grandiflora* 'Sparkling Silver' | held | none sent |
+| *Abelia* × *grandiflora* 'Sparkling Silver' | held | none sent — **dealt 2026-09-13, item 71** |
 | *Pyracantha* 'Red Star' | held | none sent |
 | *Actinidia kolomikta* | held | image 3 sent, **not accepted** — see D |
 
@@ -2473,6 +2473,8 @@ Deck 280 → 284. Hold 84 → 87.
   reads as *Lysimachia nummularia* 'Aurea', but that is `[Inference]` from the
   photograph alone — no label in frame, no Lysimachia anywhere in this repo.
   **Question for Oscar: what is it?** Then it needs a JSON.
+  **RESOLVED 2026-09-13 — the inference was right; Oscar sent the JSON and the
+  card is dealt. See item 71.**
 - **image 3, the Actinidia.** See D.
 - **image 6, the Pieris.** The genus is not in doubt and the held
   `Pieris 'Forest Flame'` card describes exactly this foliage. It is not dealt
@@ -2581,6 +2583,88 @@ Oscar's researched 0–20 values and are right for the plants (a Mediterranean
 sub-shrub genuinely is near pest-free). `foliage` and `container` were prose on
 all eight and were reduced to the controlled vocabulary; neither field reaches
 the card.
+
+---
+
+### 71. The Creeping Jenny named, the Abelia photographed — and a re-sent JSON that withdrew a fact
+2026-09-13. Two answers to item 70, one day later. Deck 284 → 286, hold 87 → 86.
+
+**A. Item 70's unidentified ground cover WAS the golden creeping Jenny.** The
+`[Inference]` recorded on 2026-09-12 — *Lysimachia nummularia* 'Aurea', from
+habit and leaf alone, with no label in frame and no Lysimachia anywhere in the
+repo — was right, and Oscar's JSON confirmed it. Recorded here because the
+inference was labelled as one and nothing was built on it while it stood: the
+frame sat in `photos/unidentified/` for a day and the card was written only once
+the research arrived. That is the folder working as designed, not a near-miss.
+
+Cultivar moved into `latin` as usual: the plain species is the green creeping
+Jenny, and both the photograph and Oscar's own common name are the golden one.
+`peak` "Summer" → **Jun-Aug**, UK convention, logged in the card's `uncertain`.
+
+**`compliance` deliberately left blank, with the reason recorded.** Creeping
+Jenny is a vigorous spreader — the card says so in its soil warning — and is
+listed as invasive in parts of North America. Whether any UK statutory duty
+attaches was **not** verified here, so the field stays blank, which in this
+schema means *nothing is known to apply*, not *nothing applies*. Worth a proper
+check before the card is shown commercially.
+
+**B. Abelia 'Sparkling Silver' — dealt, and rebuilt from a SECOND JSON.** Oscar
+re-sent the research alongside the photograph, revised in seven fields:
+`visual`, `water`, `soilWarning`, `prune`, `resilience`, `uses` and
+`hardinessNote`. The held card was rebuilt from the revision before the photo
+was dealt, so what shipped is the newer text, not the batch-70 text.
+
+**One fact was withdrawn by the revision, and the card no longer claims it.**
+The first version said renovation pruning *"every three to four years"*. The
+revision says only *"Older plants can be renovated by removing some older
+stems"* — no interval. The card now says *"take out some old stems to
+renovate"*. A withdrawn number is not a formatting change, so it is written down
+rather than quietly dropped.
+
+The revision also added a real fact the card did not carry: good light drives
+the variegation and the flowering. That is now the second half of the soil
+warning — *"Cold wet sites set it back · shade dulls it"* — inside the measured
+44-character budget.
+
+Both versions survive: the first in `data/incoming/batch-2026-09-12-raw.json`,
+the revision verbatim in
+`data/incoming/abelia-grandiflora-sparkling-silver-as-sent.json`.
+
+**C. The photograph matches the card's own words, which is the point.** Cream to
+white leaf margins, new growth flushed pink, dark red-brown stems, pale pink
+tubular flowers open on the shoot. Every clause of the rebuilt `visual` is
+visible in the frame. Contrast item 70D, where the Actinidia frame argues with
+its card and the card is therefore still held.
+
+**E. A held card built by `fit-incoming.js` could not be dealt without failing
+app-test — found by dealing one, fixed.** `tests/app-test.js` asserts that every
+card in `PLANTS` carries all 25 required field names, the eleven commercial ones
+(`source`, `order`, `bench`, `root`, `trade`, `retail`, `margin`, `type`,
+`shrink`, `returnRisk`, `pots`) included. `add-plant.js` and
+`add-plants-bulk.js` have always written them as `""`. `fitCard()` in
+`tools/fit-incoming.js` never did.
+
+That gap is invisible while a card sits in `PLANTS_ON_HOLD` — the hold block is
+not what app-test walks — and surfaces the moment the card is dealt. Dealing the
+Abelia turned the suite red on exactly that assertion, 16/17, with every other
+check green including the whole-deck render audit.
+
+The commercial block is never researched (`check-plant-json.js` REFUSES a JSON
+that fills any of it: those figures come from Oscar and nowhere else) but the
+KEYS still have to exist. `fitCard` now emits them empty, and the four cards
+already written through that path were repaired in place — the dealt Abelia and
+the three still held (Viburnum 'Popcorn', Pyracantha 'Red Star', Actinidia). Each
+of those three would have turned the suite red on its own deal day.
+
+Nothing else in the deck was affected: a semantic diff of all 372 cards before
+and after shows 44 additions of `undefined` → `""` across those four cards and
+no value changed anywhere. The 49 wishlist cards ingested in August already
+carry the keys — a later csv round-trip through `plants-tool.js` materialises
+every column — which is why the bug survived a month without being seen.
+
+**F. Two of item 70's three questions are still open.** The Pieris cultivar
+('Forest Flame' vs 'Forest Fire') and whether the Actinidia frame stands. Both
+photographs remain parked in `photos/unidentified/`.
 
 ---
 

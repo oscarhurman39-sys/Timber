@@ -166,6 +166,15 @@ function fitCard(p) {
     aspect: fit.face || STATED[p.latin] || deriveFacing(p.sunNeed),
     soil: `${fit.soil}; ${fit.warn}`,
     prune: trimSentences(p.prune, BUDGET.prune),
+    /* The commercial block, empty. It is never researched — tools/check-plant-json.js
+       REFUSES a JSON that fills any of it, because those figures come from Oscar and
+       nowhere else. But the keys still have to EXIST: tests/app-test.js asserts that
+       every card in PLANTS carries all 25 required field names, and add-plant.js has
+       always written them as "". A card built here without them passes every check
+       while it sits in PLANTS_ON_HOLD and fails app-test the moment it is dealt —
+       which is exactly how it was found, on Abelia Sparkling Silver, 2026-09-13. */
+    source: "", order: "", bench: "", root: "", trade: "", retail: "",
+    margin: "", type: "", shrink: "", returnRisk: "", pots: "",
     peak: p.peak,
     cvs: p.cvs || '',
     hardiness: p.hardiness,

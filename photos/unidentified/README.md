@@ -69,14 +69,21 @@ while the cards did not yet exist.
 
 Parked rather than dealt. See VERIFY-QUEUE item 70 for the full reasoning.
 
-### 2026-09-12-yellow-trailing-groundcover-round-leaves.jpg
+### 2026-09-12-yellow-trailing-groundcover-round-leaves.jpg — CLEARED 2026-09-13
 
-**No card and no JSON.** Oscar's note was *"the flow ground cover yellow thing"*.
-Trailing stems, opposite rounded yellow-green leaves, nursery pots. `[Inference]`
-that habit and leaf are consistent with *Lysimachia nummularia* 'Aurea' (golden
-creeping Jenny), but nothing in this repo confirms it — the deck has no
-Lysimachia, the wishlist has none, and no label is visible in the frame.
-Nothing was built from a guess. **Needs Oscar to name it, then a JSON.**
+**Was:** no card and no JSON. Oscar's note was *"the flow ground cover yellow
+thing"*. Trailing stems, opposite rounded yellow-green leaves, nursery pots.
+`[Inference]` at the time was *Lysimachia nummularia* 'Aurea' (golden creeping
+Jenny) from habit and leaf alone, with nothing in the repo to confirm it — no
+Lysimachia in the deck, none on the wishlist, no label in the frame. Nothing was
+built from it.
+
+**Oscar sent the JSON on 2026-09-13 and the inference was right.** The card is
+dealt as `Lysimachia nummularia 'Aurea'` and the photo is now
+`photos/lysimachia-nummularia-aurea.jpg`, staged from the full-resolution
+original held here. Same pattern as the Aronia / Lotus / Begonia clearances of
+2026-08-13: the folder held the frame until the card existed, and nothing was
+lost or guessed in between.
 
 ### 2026-09-12-actinidia-kolomikta-red-flush-no-variegation.jpg
 

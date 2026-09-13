@@ -31,6 +31,16 @@
  "generated": "2026-08-09",
  "photos": [
   {
+   "file": "abelia-grandiflora-sparkling-silver.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "abelia-raspberry-profusion.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2135,6 +2145,16 @@
    "file": "lupinus-the-governor-band-of-nobles-series.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. C2PA: c2pa.edited, softwareAgent 'Photo assist', digitalSourceType compositeWithTrainedAlgorithmicMedia (Galaxy AI generative edit); visible 'AI-generated content' label burned in. See VERIFY-QUEUE 32.",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "lysimachia-nummularia-aurea.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
