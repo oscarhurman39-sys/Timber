@@ -1,0 +1,37 @@
+[
+  {
+    "common": "David Viburnum",
+    "latin": "Viburnum davidii",
+    "hue": 220,
+    "visual": "Deeply veined leathery dark green leaves · metallic blue-black berries on pollinated females",
+    "water": "Maintain moderate moisture during establishment and prolonged dry periods.",
+    "aspect": "Full sun to partial shade; sheltered position preferred",
+    "soil": "Moderately fertile, humus-rich, moist but well-drained soil; tolerant of chalk, clay, loam and sand and acid, neutral or alkaline conditions.",
+    "soilWarning": "Avoid waterlogging and protect from cold, drying winds.",
+    "prune": "Requires little routine pruning. Remove damaged, crossing or unwanted shoots and lightly shape evergreen growth where necessary.",
+    "toxicity": "Fruit is ornamental and should not be eaten. Wear gloves and protective equipment when handling.",
+    "compliance": "",
+    "peak": "Sep-Feb",
+    "cvs": "",
+    "hardiness": "H5",
+    "hardinessNote": "Hardy in most places throughout the UK, approximately -15 to -10°C.",
+    "resilience": "Slow-growing, hardy evergreen with good shade tolerance, though shelter from cold drying winds is beneficial.",
+    "uses": "Ground cover, shrub borders, woodland-style planting, underplanting and low-maintenance evergreen schemes.",
+    "height": "1–1.5 m",
+    "spread": "1–1.5 m",
+    "foliage": "Evergreen; leathery deep green elliptic leaves with three conspicuous longitudinal veins.",
+    "container": "Suitable for a substantial container while young, though ultimately performs best planted in the ground.",
+    "growthSpeed": 7,
+    "pestRisk": 7,
+    "thirst": 11,
+    "careLevel": 6,
+    "sunNeed": 55,
+    "sunMin": 25,
+    "uncertain": [
+      "Viburnum davidii plants can be predominantly male or female. Reliable metallic blue-black berry production requires a female-dominant plant to be cross-pollinated by a compatible predominantly male plant; the supplied label does not specify sex.",
+      "visual compressed to deck style from both supplied sentences (91 chars); the tool trims at sentence boundaries and would have dropped the berry clause.",
+      "peak \"Late spring flowers; autumn and winter berries\" is two seasons and the card has one band. Set to the BERRY season (Sep-Feb) rather than the flowers, matching Callicarpa bodinieri Profusion in this deck and the supplied note that the berries are the main selling point. Flip to May-Jun if the flowers should lead.",
+      "soilWarning set to the male-pollinator requirement, taken from the supplied uncertain list rather than the supplied soilWarning: it is the fact that causes returns. The cold-drying-wind constraint is carried in resilience, which states it."
+    ]
+  }
+]

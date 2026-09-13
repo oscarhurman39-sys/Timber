@@ -3314,6 +3314,140 @@ means re-expressing the check as "every differing pixel lies within N px of the 
 outer edge", which corner rounding satisfies by construction and a leaking card's
 content does not.
 
+### 81. `Viburnum davidii` was never Oscar's card — rebuilt from his research, and a branch audit that found nothing lost
+
+**Oscar, 2026-09-13:** *"There is not viburnum davdii in deck? We may have accidently made one. I belive my latest Jsons info are a sorce of truth."*
+
+**He is right, and the record says so in the commit message.** The card came from
+`28f54e5`, 2026-08-10 — *"Add 50 UK garden favourites — held, and flagged as my data
+not yours"*. Its own source file states it plainly:
+
+> *"Written by Claude (claude-opus-5) from general horticultural knowledge with no
+> network access and no RHS lookup, then CORRECTED BY OSCAR on 2026-08-10 against his
+> own sources — 26 plants amended… Values not touched by that pass remain Claude
+> estimates."*
+
+`Viburnum davidii` was not among the 26 he amended, so every value on that card was a
+Claude estimate. **Item 79 treated his JSON as a backfill and preserved the card's own
+`aspect`, `peak` and `visual` on the grounds that "a duplicate JSON is not permission
+to rewrite a card." That reasoning was sound for a card of HIS — and this was not one.**
+Rebuilt from his JSON: 16 fields changed.
+
+**Worth naming, because it changes what staff would have told a customer:** the card
+said the berries are *"metallic turquoise-blue"*. His research says **blue-black**.
+`careLevel` moved 4 → 6, `sunNeed` 45 → 55, `pestRisk` 6 → 7 — all Claude guesses
+replaced by his sourced figures.
+
+**Standing issue this exposes, bigger than one card:** of those 50 generated plants,
+**17 are dealt and live in the deck** and 32 are still held. Every value on them that
+Oscar's 2026-08-10 pass did not touch is a Claude estimate on a card a member of staff
+would read as fact. That is not a defect to fix blind — it is a list he should see.
+
+#### Three conversions, all logged on the card
+
+- **`peak`** — his *"Late spring flowers; autumn and winter berries"* is two seasons and
+  the card has one band. Set to the **berry** season, `Sep-Feb`, not the flowers:
+  his own `uncertain` note says *"The blue berries are the main selling point"*, and
+  `Callicarpa bodinieri` 'Profusion' in this deck already uses the bloom band for its
+  berries (`Sep-Nov`). Year-wrapping bands are supported — ten cards already do it.
+  Flip to `May-Jun` if the flowers should lead.
+- **`soilWarning`** — set to *"Needs a male nearby for berries"*, taken from his
+  `uncertain` list rather than his `soilWarning` field. It is the fact that causes
+  returns on this plant, it is his own, and the cold-drying-wind constraint his
+  `soilWarning` names is already carried in his `resilience`.
+- **`visual`** — compressed to deck style from **both** his sentences (92 chars).
+  `fit-incoming` trims at sentence boundaries and would have kept only the first,
+  dropping the berry clause entirely — the selling point, gone.
+
+**Flagged, not changed:** his `common` is *"David Viburnum"*; the card had *"David's
+Viburnum"*. His is the source of truth so it stands, but it reads oddly in English.
+
+#### Branch audit — asked for, and it came back clean
+
+Oscar: *"maybe check other branches didn't have half built cards or cards not finished
+or pushed or halted."* Every remote branch ahead of the base was parsed and its
+deck+hold compared against live. **Three plants exist on branches and not in the live
+deck, and all three are deliberate:**
+
+| Plant | Disposition |
+|---|---|
+| *Osmanthus heterophyllus* 'Tricolor' | renamed to 'Goshiki' — the accepted name, 'Tricolor' the synonym, kept in `cvs` (`68d61a9`, recorded in LEDGER) |
+| *Agapanthus* 'Northern Star' | swapped for POPPIN' PURPLE, *"the one actually stocked"* (`2a7ce8c`) |
+| *Viburnum* × *bodnantense* (bare species) | duplicate removed, *"one photo, one card"* (`00b8237`) |
+
+Nothing half-built, nothing stranded. The remaining branches ahead of the base carry
+tooling, docs and design work, not card data; most are 197 commits behind and date to
+July.
+
+#### The four climbers — what is actually missing, and why I am not writing it
+
+Oscar offered to look these up or have me search. **They do not need heights — they
+have heights. They are missing SPREAD**, which is why both rails render blank.
+
+RHS pages are blocked by this environment's egress proxy, so these come from search
+result summaries, **not from reading the RHS page**. `[Unverified]` on all four —
+recorded for him to confirm against a label or the RHS page, not written to any card:
+
+| Card | Card's height today | Search suggests |
+|---|---|---|
+| *Clematis viticella* 'Purpurea Plena Elegans' | `2-3m` | RHS 1.5–2.5 m H × **0.5–1 m** spread |
+| *Clematis montana* var. *rubens* | `8-12m` | ~10 m height; **no spread found** |
+| *Clematis armandii* | `4-6m` | 2–3 m spread (nursery sources, inconsistent) |
+| *Fallopia baldschuanica* | `10-15m` | 8–12 m H × **4–8 m** spread over 5–10 yrs |
+
+Two of the four also disagree with the card's existing **height**. Those four cards are
+**not** from the generated batch — they are Oscar's own data — so the heights stand
+until he says otherwise, and the disagreement is his to settle.
+
+#### The Viburnum crop — *"Cropping on that viburnum image sucks"*
+
+He is right. `photos/viburnum-davidii.jpg` is **1200x1035 — landscape** — and the
+card's photo well is a tall portrait crop, so a centred `object-position` pushed the
+subject to the frame edge and filled the card with one leaf blade. The distinctive
+part of that photograph is the vivid red node with the leaf whorl radiating from it,
+which sits at roughly **x 21%, y 53%** — left of centre, which is exactly what a
+centred crop discards.
+
+`PHOTO_FOCUS['viburnum-davidii'] = '22% 55%'`. Three options were rendered rather
+than one guessed, and sent to him to pick from; `30% 65%` is the alternative if he
+prefers the lower framing.
+
+**Checked whether this is systemic, and it is not.** Every master was measured:
+**323 portrait/square, 13 landscape**, and most of the 13 are near-square
+(1200x1186, 1200x1199). The three genuinely wide ones were rendered:
+
+| card | master | verdict |
+|---|---|---|
+| *Acer shirasawanum* MOONRISE | 1200x647 (widest in the deck, 1.85:1) | crops fine |
+| *Ajuga reptans* 'Burgundy Glow' | 680x415 | crops fine — but the master is small and the card is visibly **soft** from upscaling |
+| *Buddleja davidii* 'White Profusion' | 1200x764 | not rendered |
+
+So the Viburnum was an outlier of subject placement, not of aspect ratio — a wide
+photo only crops badly when its subject is off-centre. **Separate finding worth its
+own line: the Ajuga master is 680x415, far below the 1200px the pipeline caps at, so
+that card is upscaled and soft. Nothing checks for an undersized master.**
+
+Surveyed, since one soft card implies others: **11 of 336 masters are under 1200px on
+the long edge** and are upscaled onto the card.
+
+| master | size |
+|---|---|
+| `choisya-ternata.jpg` | 490x728 |
+| `ajuga-reptans-burgundy-glow.jpg` | 680x415 |
+| `anemone-hybrida-pretty-lady-maria-aneplaria.jpg` | 722x1010 |
+| `agapanthus-poppin-purple-pm003.jpg` | 768x1024 |
+| `hylotelephium-dream-dazzler.jpg` | 876x1041 |
+| `hibiscus-syriacus-oiseau-bleu.jpg` · `lobelia-speciosa-starship-deep-rose` · `scabiosa-columbaria-flutter-pure-white` | 896x1195 |
+| `edgeworthia-chrysantha.jpg` | 928x1151 |
+| `cercis-canadensis-carolina-sweetheart-nccc1-panel.jpg` | 1086x1086 |
+| `reynoutria-japonica.jpg` | 1092x1095 |
+
+The last five are marginal. `choisya-ternata` and `ajuga-reptans-burgundy-glow` are
+the two that will read as soft on a phone. **Not a defect to fix in code — it needs
+re-photographing, and it is Oscar's call whether these two are worth a trip.** A
+`photo-resolution` check in the data gate would stop the next one arriving unnoticed;
+offered, not built.
+
 ---
 
 ## Accepted, not defects
