@@ -97,11 +97,18 @@ dioecious and the research says so) or a different plant. Same shape as the
 'Dark Knight' case in item 69: dealing it would put a picture on the card that
 contradicts the card's own words.
 
-### 2026-09-12-pieris-red-new-growth-cultivar-unconfirmed.jpg
+### 2026-09-12-pieris-japonica-mountain-fire-awaiting-json.jpg — CLEARED 2026-09-13
 
-Unmistakably a *Pieris*: scarlet new growth in whorls above glossy, finely
-toothed dark green leaves. The deck holds `Pieris 'Forest Flame'` and that
-card's `visual` describes exactly this. **Not dealt only because Oscar hedged
-the cultivar himself** — *"periis forest flame i think or forest fire"* — and
-'Forest Fire' is a different cultivar with no card. The genus is not in doubt;
-the cultivar is, and the cultivar is what the card names.
+**Oscar named the cultivar: 'Mountain Fire'** — neither of the two the question
+offered. He had hedged between 'Forest Flame' and 'Forest Fire', and the label
+said neither, which is the whole argument for asking rather than dealing it onto
+the held card it superficially fitted.
+
+It needed a **new** card, not the held `Pieris 'Forest Flame'`: those are two
+different plants, not two names for one. The JSON arrived the same day and the
+card is dealt as `Pieris japonica 'Mountain Fire'`, with the photo now at
+`photos/pieris-japonica-mountain-fire.jpg`. The held 'Forest Flame' card is
+untouched and still has no photograph of its own.
+
+See VERIFY-QUEUE item 72 — including a correction to a size claim this file's
+earlier draft carried as `[Inference]` and Oscar's figures contradicted.

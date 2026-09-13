@@ -2481,6 +2481,8 @@ Deck 280 → 284. Hold 84 → 87.
   because Oscar hedged the cultivar himself — *"forest flame i think or forest
   fire"* — and 'Forest Fire' is a different cultivar. **Question for Oscar:
   which one does the bench label say?** One word deals it.
+  **ANSWERED 2026-09-13: neither — it is 'Mountain Fire'.** It does not deal onto
+  the held card at all; it needs a new one. See item 72.
 
 **D. *Actinidia kolomikta* — card written and HELD, because the photograph
 contradicts the card's own words.** The card's `visual` sells the thing the
@@ -2662,9 +2664,66 @@ no value changed anywhere. The 49 wishlist cards ingested in August already
 carry the keys — a later csv round-trip through `plants-tool.js` materialises
 every column — which is why the bug survived a month without being seen.
 
-**F. Two of item 70's three questions are still open.** The Pieris cultivar
-('Forest Flame' vs 'Forest Fire') and whether the Actinidia frame stands. Both
-photographs remain parked in `photos/unidentified/`.
+**F. Item 70's Pieris question was answered — with a third cultivar. See item
+72.** What is still open from item 70 is the Actinidia: whether that frame
+stands or waits for one showing the variegation its card sells. It remains
+parked in `photos/unidentified/`.
+
+---
+
+### 72. The Pieris is 'Mountain Fire' — a third cultivar, so it needs a new card, not the held one
+2026-09-13. Item 70 asked which of two cultivars the Pieris photograph showed,
+because Oscar had hedged between them himself (*"periis forest flame i think or
+forest fire"*). The answer was **neither**: *"Sorry the peris is mountain fire"*.
+
+**Nothing was dealt, and that is the point of the item.** The held
+`Pieris 'Forest Flame'` card's `visual` reads *"Scarlet new foliage fading
+through pink and cream · drooping white flower chains"*, which fits the
+photograph well enough that dealing it would have looked right and been wrong.
+Two of the three candidate names were on the table when the question was asked
+and the real answer was not among them — which is the argument for asking
+rather than picking the likelier of two.
+
+**'Mountain Fire' and 'Forest Flame' are different plants, not two names for
+one.** 'Forest Flame' is the hybrid *P. japonica* × *P. formosa* var.
+*forrestii*, and its new growth is the scarlet → pink → cream sequence the held
+card sells. 'Mountain Fire' is a *Pieris japonica* cultivar — confirmed by
+Oscar's JSON, which gives the species.
+
+> **Correction: I previously made an unverified claim. That was incorrect and
+> should have been left out.** This entry first said, as `[Inference]`, that
+> 'Mountain Fire' is *"more compact"* and *"larger"* applied to 'Forest Flame'.
+> Oscar's researched figures say the opposite way round on this bench: Mountain
+> Fire **2.5–4 m**, the held Forest Flame card **1.5–2.5 m**. The size claim
+> was mine, not from a source, and it is withdrawn. The cards carry Oscar's
+> figures; nothing was written into the deck from the wrong inference. What
+> stands, because it is what the JSON states, is that they are different plants
+> — different species status, different sizes, different aspect handling
+> (Mountain Fire E/S/W, Forest Flame "Any aspect").
+
+**State.** `Pieris 'Forest Flame'` stays in `PLANTS_ON_HOLD` and still has no
+photograph. The frame is re-parked as
+`photos/unidentified/2026-09-12-pieris-japonica-mountain-fire-awaiting-json.jpg`
+and nothing about this plant has been written into the deck.
+
+**RESOLVED the same day — Oscar sent the JSON and the card is DEALT.**
+`Pieris japonica 'Mountain Fire'` is in the deck with the photograph that had
+been parked. Deck 286 → **287**; hold stays at 86, because the held
+`Pieris 'Forest Flame'` is untouched and still waiting on a photograph of its
+own. Validator output was clean — no errors and no warnings, the first JSON in
+this run to manage that.
+
+The cultivar went into `latin` as usual, and here it earns its keep twice over:
+the deck's other Pieris is the hybrid with no species name, so
+`Pieris japonica 'Mountain Fire'` and `Pieris 'Forest Flame'` cannot be
+confused by the duplicate guard, the photo slug, or a member of staff reading
+the card. `peak` "Spring" → **Mar-May**, matching the held card's band.
+`aspect` used the facings the research actually named (east, south, west);
+deriving from `sunNeed` 55 alone would have given East / West, and a stated
+facing wins.
+
+The card asserts nothing this repo cannot source: every figure on it is from
+Oscar's JSON, and the three conversions are logged in its `uncertain` block.
 
 ---
 
