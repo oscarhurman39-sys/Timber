@@ -456,6 +456,41 @@ Focal point recorded here when off-centre:
   messages on the card-build branch still say the old numbers; this note is
   the key.
 
+- **v14.60 (288 dealt / 86 held — TOXICITY FLAG on the front, and a
+  press-and-hold to read it)**: Oscar's spec, 2026-09-13: *"a minimalist banner
+  that shows it's toxic, maybe on front of card just a red corner triangle left
+  corner… then a hold down on that image that pops up like the hardiness hold
+  down, and says briefly what part of the plant is toxic or how it's toxic or
+  what to watch out for."*
+  **What was built.** A corner-fold triangle flush in the top-left of the frame,
+  legs 8.6% × 6% of the template (36 × 36 px), stopping short of the painted
+  rosette that starts ~5% in; a small "!" in its fold. Press-and-hold on it
+  (the same `LENS_HOLD` gesture as the crest, same `openLens` path, new kind
+  `'tox'`) raises a three-row lens: *Safety · <tier>* / *Watch for* / *Also on
+  the back of this card, under Safety*. Release closes it, as with the others.
+  **The rule that decides who gets a flag is the back's rule, not a new one.**
+  `toxFlag()` runs the prose through the same `toxTier()` ladder the SAFETY
+  plaque uses, and only the three hazard tiers get a flag — severe (red
+  `#ef5f5f`), harmful (orange `#f08a3c`), caution (amber `#f5c451`), the
+  plaque's own inks. The other two tiers get none: an *edibility* note
+  ("ripe berries are edible", 6 cards) or a sourced *all-clear* (1 card)
+  must not put a coloured corner on a shop card, because a coloured corner
+  reads as a hazard and a green one reads as "safe to eat" — neither of which
+  the field claims. Blank stays blank: 322 cards carry no note, and they get
+  nothing, because *not recorded* is not *safe*. Oscar asked for red; the tier
+  ink is used instead so the front can never shout what the back would not.
+  **Count today: 45 cards flag** (5 severe, 37 harmful, 3 caution) out of 374.
+  Verified by rendering one card per tier plus one edible and one blank:
+  presence, absence, position (0 / 0 / 8.6%), hold-opens, release-closes, no
+  page errors. Nothing checked by `audit-layout` (`.val-ink`, title, latin,
+  band, plaque, growth) is touched; a semantic diff of all 374 cards shows zero
+  field changes — this is code only.
+  **The 322 blanks are the real work, and a brief now exists for them:**
+  `CHATGPT-TOXICITY-BRIEF.md`, with the list to paste at
+  `data/incoming/toxicity-todo-2026-09-13.txt`. The brief is written against
+  the ladder above so what comes back tiers the way the card expects, and it
+  refuses hedges: a blank is always better than "may be harmful".
+
 - **v14.59 (276 dealt / 82 held — a duplicate Viburnum removed on Oscar's
   call)**: the deck carried *Viburnum* × *bodnantense* (the plain "Bodnant
   Viburnum") beside *V.* × *bodnantense* 'Charles Lamont', and both cards wore

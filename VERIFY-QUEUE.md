@@ -2772,6 +2772,48 @@ to the checker as possible unconverted 0-5 ratings. They are Oscar's researched
 
 ---
 
+### 74. Toxicity flag on the front — built; the 322 blanks are now the open item
+2026-09-13. Oscar asked for a red corner triangle on the card front for toxic
+plants, with a press-and-hold that says what to watch for. Built and verified;
+full record in CARD-PROTOCOL changelog v14.60. Deck 288, hold 86, no card data
+changed.
+
+**A. What the flag will and will not do, so nobody reads it wrong.** It appears
+on exactly the cards the back's SAFETY plaque would tier as a hazard — the same
+`toxTier()` ladder, no new rule — and takes that tier's ink. **No flag means
+one of three things**: the note is an edibility note, the note is a sourced
+all-clear, or **the field is blank**. Blank is 322 of 374 cards. A card without
+a flag is therefore NOT a card that has been checked and found safe, and staff
+should not say so at the till. This is the same "blank prints nothing" rule the
+back has always had, now visible on the front, where its absence is easier to
+misread.
+
+**B. The 45 that flag today** are the cards that already carried researched
+notes: 5 severe, 37 harmful, 3 caution. Nothing was inferred to get there.
+
+**C. The brief.** `CHATGPT-TOXICITY-BRIEF.md` is the prompt for the 322, with
+the plant list at `data/incoming/toxicity-todo-2026-09-13.txt`. It asks for
+RHS "Potentially harmful" wording verbatim, the HTA category, part / route /
+who, a named source per plant, and returns `""` rather than a hedge. It is
+deliberately written against the card's tier ladder so the strength word that
+comes back is the tier that prints. **Before any batch goes into the deck:**
+run each line through the ladder and eyeball the tier — "may be harmful" tiers
+as *Toxic*, which is exactly what rule 6 of the brief forbids.
+
+**D. Two design calls made, both Oscar's to reverse.** (1) Tier ink instead of
+plain red on every flag, so *Handle with care* is amber and does not look like
+*Highly toxic*. (2) Top-left, flush in the frame corner, over the gold border —
+"in line with the corner". Bottom-left is a two-number CSS change if the title
+side is wrong.
+
+**E. Item 71E is now more important than it was.** 23 held cards lost their
+researched `toxicity` when they were ingested in August (Daphne, Rhododendron
+luteum, Kalmia, Wisteria, Akebia among them). Those are exactly the cards that
+should flag and currently cannot. The backfill recovers the text; this flag
+then shows it. Still not run — Oscar's call, one command.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

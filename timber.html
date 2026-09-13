@@ -569,6 +569,25 @@
   .crest .hnum{position:absolute;left:0;right:0;top:29%;text-align:center;font-family:Georgia,serif;
     font-weight:700;font-size:23px;letter-spacing:1px;color:#F2E5C4;
     text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
+  /* TOXICITY FLAG — the front-face half of the back's safety plaque.
+     A corner-fold triangle flush in the top-left of the frame: legs 8.6% x 6%
+     (36px x 36px of the 420x600 template), stopping short of the painted rosette
+     that starts ~5% in. It appears ONLY for the hazard tiers of the same ladder the
+     back uses (toxTier: severe / harmful / caution) and takes that tier's ink, so
+     the front can never shout what the back would not. Edibility notes and a
+     sourced all-clear get no flag — a green corner on a shop card reads "safe to
+     eat" and that is a claim the field does not make. Blank stays blank. z-index 4:
+     above the crest (3), under the stamps (30) and every overlay. */
+  .toxflag{position:absolute;left:0;top:0;width:8.6%;aspect-ratio:1;z-index:4;
+    background:var(--flag-ink);
+    clip-path:polygon(0 0,100% 0,0 100%);           /* the fold: right angle in the corner */
+    border-top-left-radius:15px;                    /* the frame's own radius, so it sits inside the corner */
+    filter:drop-shadow(1px 1px 1px rgba(0,0,0,.45))}
+  .toxflag::after{content:"!";position:absolute;left:18%;top:2%;font-family:Georgia,serif;
+    font-weight:700;font-size:13px;line-height:1;color:rgba(0,0,0,.72)}
+  .toxflag.severe {--flag-ink:#ef5f5f}
+  .toxflag.harmful{--flag-ink:#f08a3c}
+  .toxflag.caution{--flag-ink:#f5c451}
   .railval{position:absolute;z-index:2}
   .railval img{position:absolute;inset:0;width:100%;height:100%}
   .railval .v{position:absolute;inset:0;display:grid;place-items:center;
@@ -1144,7 +1163,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r214 · 2026-09-13 · c5261a2';
+const BUILD='r215 · 2026-09-13 · bfdf30f';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10603,6 +10622,13 @@ function toxPlaque(p){
     </div>
   </div>`;
 }
+/* the front flag: same field, same ladder, hazard tiers only (see .toxflag CSS) */
+const TOX_FLAG_TIERS=new Set(['severe','harmful','caution']);
+function toxFlag(p){
+  const t=String(p.toxicity||'').trim();if(!t)return'';
+  const k=toxTier(t);
+  return TOX_FLAG_TIERS.has(k)?`<div class="toxflag ${k}" aria-label="Safety: ${TOX_TIER[k].word}. Press and hold to read."></div>`:'';
+}
 /* ---------- the LEGAL plaque ----------
    The other half of the safety block, and it needed a different shape rather
    than a second copy of the same one. Reading the deck's own legal notes first
@@ -11294,6 +11320,7 @@ function renderCard(idx,before){
         <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
         <div class="railval rail-s" data-label="Spread"><img src="art/rail-patch-s.png" alt=""><span class="v">${sz.s}</span></div>
         <div class="crest"><img src="art/crest-blank.webp" alt=""><span class="hnum">${p.hardiness}</span></div>
+        ${toxFlag(p)}
         <div class="ppp">Plant Power Points</div>
         <div class="plaque">
           <img src="${ho&&ho.plaque?ho.plaque:'art/plaque-full.webp'}" alt="">
@@ -11484,10 +11511,19 @@ function buildLensHardy(p){
     +lensRow('Survives',sc?`winter lows of <b>${sc[1]}</b>`:'')
     +lensRow('This plant',p.hardinessNote||'');
 }
+/* press-and-hold on the flag: the toxicity prose, verbatim, in the front's language.
+   Same three-row shape as the hardiness lens so the two holds feel like one feature. */
+function buildLensTox(p){
+  const t=String(p.toxicity||'').trim();if(!t)return'';
+  const k=toxTier(t),tier=TOX_TIER[k];
+  return `<div class="lens-head">Safety · ${tier.word}</div>`
+    +lensRow('Watch for',`<b>${t}</b>`,'warn')
+    +lensRow('Also on','the back of this card, under Safety');
+}
 function openLens(idx,y,kind){
   const p=PLANTS[idx];if(!p)return;
   if(!lensEl){lensEl=document.createElement('div');lensEl.className='lens';document.body.appendChild(lensEl);}
-  lensEl.innerHTML=kind==='hardy'?buildLensHardy(p):buildLens(p);
+  lensEl.innerHTML=kind==='hardy'?buildLensHardy(p):kind==='tox'?buildLensTox(p):buildLens(p);
   lensEl.style.bottom=Math.max(12,innerHeight-y+14)+'px';  /* above the finger, per Oscar */
   void lensEl.offsetWidth;                                 /* commit the hidden frame so .show transitions */
   lensEl.classList.add('show');
@@ -11510,11 +11546,12 @@ function attachGestures(card){
   const lensDisarm=()=>{if(lensTimer){clearTimeout(lensTimer);lensTimer=null;}};
   const lensArm=(target)=>{
     if(card.dataset.gone||card.classList.contains('flipped'))return;
-    const panel=target&&target.closest&&target.closest('.face.front .plaque,.face.front .soilp,.face.front .band,.face.front .crest');
+    const panel=target&&target.closest&&target.closest('.face.front .plaque,.face.front .soilp,.face.front .band,.face.front .crest,.face.front .toxflag');
     if(!panel)return;
-    const kind=panel.classList.contains('crest')?'hardy':'ppp';
+    const kind=panel.classList.contains('crest')?'hardy':panel.classList.contains('toxflag')?'tox':'ppp';
     if(kind==='hardy'){const pl=PLANTS[+card.dataset.idx];
       if(!pl||(!(pl.hardiness||'').trim()&&!(pl.hardinessNote||'').trim()))return;}  /* blank stays blank */
+    if(kind==='tox'){const pl=PLANTS[+card.dataset.idx];if(!pl||!String(pl.toxicity||'').trim())return;}
     lensTimer=setTimeout(()=>{lensTimer=null;
       if(!drag||moved||card.dataset.gone)return;         /* lifted, swiping, or flung meanwhile */
       lensOn=true;openLens(+card.dataset.idx,sy,kind);
