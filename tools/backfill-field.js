@@ -7,6 +7,19 @@
     node tools/backfill-field.js foliage --apply            do it
     node tools/backfill-field.js foliage --prefer longest   see "ties" below
     node tools/backfill-field.js foliage --apply --overwrite
+    node tools/backfill-field.js foliage --missing          the cards still blank
+
+  The round trip a flat research pass takes:
+
+    node tools/backfill-field.js toxicity --missing   > ask.txt
+      → research those latin names, one question, many plants
+      → save [{"latin":"<exactly as printed>","toxicity":"…"}, …]
+        into data/incoming/
+    node tools/backfill-field.js toxicity --apply
+
+  --missing prints the latin string the card actually carries, because that is
+  the only thing this tool matches on. A research pass that answers for "Astilbe"
+  cannot be applied to a card called "Astilbe 'Chocolate Shogun'".
 
   Why this exists. tools/ingest-batch.js adds WHOLE CARDS and refuses any latin
   that already exists, which is the right rule for a batch of new plants and the
@@ -41,6 +54,7 @@ const INCOMING = path.join(ROOT, 'data', 'incoming');
 
 const argv = process.argv.slice(2);
 const APPLY = argv.includes('--apply');
+const MISSING = argv.includes('--missing');
 const OVERWRITE = argv.includes('--overwrite');
 const PREFER = (argv[argv.indexOf('--prefer') + 1] || '') === 'longest' && argv.includes('--prefer');
 const field = argv.find(a => !a.startsWith('--') && a !== 'longest');
@@ -50,6 +64,20 @@ if (!D.FIELDS.includes(field)) {
   console.error(`"${field}" is not a card field. A key outside plant-data.js FIELDS is erased by the next
 csv round-trip, so add it to FIELDS first — deliberately — rather than here.`);
   process.exit(2);
+}
+
+/* ---------- --missing: the question list for a flat research pass ----------
+   Deliberately nothing but latin names, one per line, so the output pastes
+   straight into a prompt or a spreadsheet column. Held cards are included: a
+   card waiting for a photograph is still a card, and research does not need
+   the photograph. */
+if (MISSING) {
+  const html0 = fs.readFileSync(HTML, 'utf8');
+  const blank = [...D.readDeck(html0), ...D.readHold(html0)]
+    .filter(p => p[field] === undefined || String(p[field]).trim() === '');
+  console.error(`${blank.length} card(s) carry no ${field}:`);   /* stderr, so a > redirect keeps only the names */
+  blank.forEach(p => console.log(p.latin));
+  process.exit(0);
 }
 
 /* ---------- gather every supplied value, keyed by exact latin ---------- */

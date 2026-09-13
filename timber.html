@@ -1163,7 +1163,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r233 · 2026-09-13 · 3b35ac2';
+const BUILD='r234 · 2026-09-13 · 3f951ab';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -7081,6 +7081,7 @@ const PLANTS = [
    resilience:"part-shade tolerant · urban suitable",
    uses:"containers · shrub borders · cut flowers · woodland gardens",
    size:"1–1.5 m H × 1–1.5 m W",
+   toxicity:"Skin allergen · harmful if eaten by dogs and cats",
    compliance:"PBR protected · commercial propagation restricted",
    hardinessNote:"RHS H5; flowers can be affected by late frosts",
    foliage:"deciduous",
@@ -7357,6 +7358,7 @@ const PLANTS = [
    resilience:"part-shade tolerant · urban suitable",
    uses:"specimen · city gardens · courtyards · cottage gardens",
    size:"2.5–4 m H × 2.5–4 m W",
+   compliance:"PBR protected · commercial propagation restricted",
    hardinessNote:"RHS H5; foliage colour is strongest in full sun",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:11, careLevel:5, sunNeed:82, sunMin:52},
@@ -7491,6 +7493,8 @@ const PLANTS = [
    resilience:"cold hardy · shade tolerant · exposed-site tolerant",
    uses:"woodland gardens · containers · winter borders · wildlife gardens",
    size:"25–35 cm H × 40–45 cm W",
+   toxicity:"Harmful if eaten · skin irritant",
+   compliance:"PBR protected · commercial propagation restricted",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:7, pestRisk:11, thirst:12, careLevel:5, sunNeed:48, sunMin:28},
 
@@ -7517,6 +7521,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal tolerant · heat tolerant",
    uses:"gravel gardens · cottage gardens · wildflower meadows · flower borders",
    size:"60–90 cm H × 30–45 cm W",
+   hardinessNote:"RHS H5",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:12, pestRisk:6, thirst:4, careLevel:5, sunNeed:95, sunMin:80},
 
@@ -7543,6 +7548,7 @@ const PLANTS = [
    resilience:"robust once established · generally pest-free · low maintenance",
    uses:"spring borders · mixed borders · cottage gardens · specimen planting · large containers",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Fully hardy in the UK; RHS H6, to about -20 to -15°C",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:13, pestRisk:3, thirst:11, careLevel:6, sunNeed:75, sunMin:45},
 
@@ -7569,6 +7575,8 @@ const PLANTS = [
    resilience:"easy indoors when warm, humid and well lit · intolerant of frost",
    uses:"houseplant · conservatory · heated greenhouse · tropical indoor displays",
    size:"1.5–2.5 m H × 1–1.5 m W",
+   toxicity:"Harmful if eaten · calcium oxalate irritates mouth and gut",
+   hardinessNote:"Tender tropical; indoors or heated protection in the UK",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:13, pestRisk:9, thirst:13, careLevel:11, sunNeed:55, sunMin:30},
 
@@ -7595,6 +7603,8 @@ const PLANTS = [
    resilience:"adaptable · reasonable drought tolerance once established",
    uses:"shrub borders · banks · wildlife planting · cottage gardens · informal hedging",
    size:"1–1.5 m H × 1–1.5 m W",
+   toxicity:"All parts may be harmful if eaten",
+   hardinessNote:"Hardy in most UK gardens",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:13, pestRisk:4, thirst:8, careLevel:6, sunNeed:75, sunMin:45},
 
@@ -7621,6 +7631,7 @@ const PLANTS = [
    resilience:"robust · adaptable · tolerates urban conditions",
    uses:"specimen tree · wildlife garden · cottage garden · small garden · ornamental fruit",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy throughout most of the UK",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:12, pestRisk:9, thirst:10, careLevel:7, sunNeed:85, sunMin:55},
 
@@ -7647,6 +7658,7 @@ const PLANTS = [
    resilience:"fast growing · coastal tolerant once established",
    uses:"hedging · screening · specimen · containers · formal gardens",
    size:"2.5–4 m H × 1–1.5 m W",
+   hardinessNote:"Reasonably hardy; wind scorch and frost damage on exposed cold sites",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:18, pestRisk:6, thirst:9, careLevel:7, sunNeed:90, sunMin:60},
 
@@ -7673,6 +7685,7 @@ const PLANTS = [
    resilience:"robust once established · tolerates a range of well-drained soils",
    uses:"large gardens · specimen · parks · large landscape schemes",
    size:"4 m+ H × 4 m+ W",
+   hardinessNote:"Hardy in much of the UK; young plants can be damaged in severe exposure",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:14, pestRisk:5, thirst:9, careLevel:6, sunNeed:90, sunMin:60},
 
@@ -7699,6 +7712,7 @@ const PLANTS = [
    resilience:"fast flowering · frost sensitive · dislikes drought",
    uses:"bedding · containers · window boxes · baskets · borders",
    size:"0.1–0.5 m H × 0.1–0.5 m W",
+   hardinessNote:"Grown as a tender annual in the UK",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:18, pestRisk:7, thirst:15, careLevel:9, sunNeed:75, sunMin:45},
 
@@ -7725,6 +7739,7 @@ const PLANTS = [
    resilience:"needs a warm sheltered spot · frost tender",
    uses:"conservatory · greenhouse · sheltered patio · warm-climate containers",
    size:"1.5–2.5 m H × 1–1.5 m W",
+   hardinessNote:"Tender in the UK; frost protection or overwinter indoors",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:14, pestRisk:6, thirst:12, careLevel:14, sunNeed:80, sunMin:55},
 
@@ -7751,6 +7766,7 @@ const PLANTS = [
    resilience:"drought tolerant once established · exposed-site tolerant · very hardy",
    uses:"formal gardens · narrow borders · screening · architectural planting · containers · specimen",
    size:"2.5–4 m H × 0.5–1 m W",
+   hardinessNote:"Very hardy; suits exposed UK sites once established",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:11, pestRisk:4, thirst:6, careLevel:4, sunNeed:90, sunMin:60},
 
@@ -7778,6 +7794,8 @@ const PLANTS = [
    uses:"shrub borders · cottage gardens · cut flowers · containers",
    size:"1.2–1.5 m H × 0.5–1 m W",
    toxicity:"Rose hips ornamental · not to be eaten · wear gloves when handling",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"RHS H6; hardy throughout the UK and northern Europe",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:10, pestRisk:12, thirst:11, careLevel:9, sunNeed:95, sunMin:72},
 
@@ -7804,6 +7822,9 @@ const PLANTS = [
    resilience:"drought tolerant · pollution tolerant · urban suitable",
    uses:"specimen · patio containers · city gardens · architectural planting",
    size:"2.5–4 m H × 2.5–4 m W",
+   toxicity:"Harmful if eaten · skin irritant",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"RHS H6",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:5, pestRisk:6, thirst:6, careLevel:6, sunNeed:82, sunMin:50},
 
@@ -7830,6 +7851,7 @@ const PLANTS = [
    resilience:"cold hardy · spreads by rhizomes · needs cool, moist shade",
    uses:"woodland gardens · shady borders · underplanting · damp shade",
    size:"0.5–1 m H × 0.5–1 m W",
+   hardinessNote:"Hardy in much of the UK in a sheltered, moist position",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:13, pestRisk:6, thirst:17, careLevel:8, sunNeed:30, sunMin:10},
 
@@ -7856,6 +7878,7 @@ const PLANTS = [
    resilience:"heat tolerant · drought tolerant once established",
    uses:"containers · patios · borders · pollinators",
    size:"80–100 cm H × 40–60 cm W",
+   hardinessNote:"RHS H3; hardy to around -5°C in sheltered conditions",
    foliage:"semi-evergreen",
    seasonalImpact:"", growthSpeed:13, pestRisk:7, thirst:8, careLevel:5, sunNeed:95, sunMin:65},
 
@@ -7908,6 +7931,7 @@ const PLANTS = [
    resilience:"urban suitable · heat tolerant",
    uses:"cut flowers · borders · containers · cottage gardens",
    size:"1–1.5 m H × 50–100 cm W",
+   hardinessNote:"RHS H3; lift and store tubers over winter",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:15, pestRisk:12, thirst:13, careLevel:9, sunNeed:95, sunMin:70},
 
@@ -7934,6 +7958,7 @@ const PLANTS = [
    resilience:"cold hardy · coastal tolerant · pollinator friendly",
    uses:"flower borders · containers · cottage gardens · wall-side borders",
    size:"50–100 cm H × 50–100 cm W",
+   hardinessNote:"RHS H5",
    foliage:"semi-evergreen",
    seasonalImpact:"", growthSpeed:13, pestRisk:7, thirst:12, careLevel:5, sunNeed:82, sunMin:48},
 
@@ -7960,6 +7985,8 @@ const PLANTS = [
    resilience:"drought tolerant · heat tolerant",
    uses:"containers · conservatories · subtropical planting · summer bedding",
    size:"1–1.5 m H × 0.5–1 m W",
+   toxicity:"Inedible fruits · harmful if eaten",
+   hardinessNote:"RHS H2; grow outdoors only during summer and overwinter frost-free",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:14, pestRisk:8, thirst:10, careLevel:8, sunNeed:95, sunMin:72},
 
@@ -7986,6 +8013,7 @@ const PLANTS = [
    resilience:"Drought tolerant once established; robust perennial.",
    uses:"Architectural border plant, cottage garden, specimen planting, pollinator planting and cut flower.",
    size:"0.5-1m H × 0.5-1m W",
+   hardinessNote:"Fully hardy in most of the UK; RHS rates H4 (-10 to -5°C).",
    foliage:"Dark green, deeply cut; deciduous to semi-evergreen depending on conditions.",
    seasonalImpact:"", growthSpeed:17, pestRisk:7, thirst:11, careLevel:8, sunNeed:65, sunMin:45},
 
@@ -8012,6 +8040,7 @@ const PLANTS = [
    resilience:"Drought tolerant once established; reasonably hardy when given a warm sheltered position.",
    uses:"Warm wall, climber, Mediterranean or sub-tropical planting and wildlife garden.",
    size:"1.5-2.5m H × 1-1.5m W",
+   hardinessNote:"RHS rates H4 (-10 to -5°C); best grown against a warm, sunny wall.",
    foliage:"Deciduous; mid to dark green leaves divided into 7-9 leaflets.",
    seasonalImpact:"", growthSpeed:15, pestRisk:6, thirst:10, careLevel:10, sunNeed:90, sunMin:75},
 
@@ -8038,6 +8067,7 @@ const PLANTS = [
    resilience:"Generally robust and disease-free; tolerates some drought once established but performs best in moist woodland-type conditions.",
    uses:"Ground cover, woodland planting, underplanting, cottage gardens, wildlife gardens, banks and slopes.",
    size:"0.1-0.5m H × 1-1.5m W",
+   hardinessNote:"Very hardy in the UK; RHS rates it H7, hardy below -20°C.",
    foliage:"Deciduous; bright green, lance-shaped leaves arranged in whorls, pleasantly hay-scented when dried.",
    seasonalImpact:"", growthSpeed:17, pestRisk:2, thirst:14, careLevel:5, sunNeed:35, sunMin:15},
 
@@ -8064,6 +8094,9 @@ const PLANTS = [
    resilience:"long flowering season · compact · all parts harmful",
    uses:"scented borders · entrances and paths · containers · small gardens",
    size:"0.9–1.2 m H × 0.9–1.2 m W",
+   toxicity:"All parts are harmful if eaten and the sap irritates skin. Wear gloves when handling.",
+   compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"H5 taken from the sibling ETERNAL FRAGRANCE ('Blafra') in the same hybrid group — see uncertain",
    foliage:"semi-evergreen",
    seasonalImpact:"", growthSpeed:7, pestRisk:6, thirst:12, careLevel:8, sunNeed:60, sunMin:30},
 
@@ -8118,6 +8151,7 @@ const PLANTS = [
    resilience:"cold hardy · coastal tolerant · drought tolerant once established",
    uses:"ground cover · garden edging · rock gardens · patio containers",
    size:"20–25 cm H × 45–50 cm W",
+   hardinessNote:"RHS H7",
    foliage:"semi-evergreen",
    seasonalImpact:"", growthSpeed:12, pestRisk:3, thirst:9, careLevel:4, sunNeed:78, sunMin:40},
 
@@ -8144,6 +8178,7 @@ const PLANTS = [
    resilience:"cold hardy",
    uses:"herbaceous borders · cottage gardens · architectural planting · pollinator gardens",
    size:"1–1.5 m H × 0.5–1 m W",
+   hardinessNote:"RHS H7",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:12, careLevel:6, sunNeed:82, sunMin:45},
 
@@ -8253,6 +8288,7 @@ const PLANTS = [
    resilience:"Best in warm sheltered sites; flowering can be poor after cool summers.",
    uses:"Patio, containers, Mediterranean-style gardens, wall-side borders and specimen planting.",
    size:"1-1.5m H × 1-1.5m W",
+   hardinessNote:"Hardy in milder UK areas but requires shelter and warmth.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:9, pestRisk:5, thirst:11, careLevel:11, sunNeed:95, sunMin:75},
 
@@ -8279,6 +8315,7 @@ const PLANTS = [
    resilience:"Reliable in moist shady borders; sensitive to drought.",
    uses:"Shady borders, woodland gardens, waterside planting, containers and cottage gardens.",
    size:"0.5-1m H × 0.5-1m W",
+   hardinessNote:"Very hardy perennial suitable for UK conditions.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:17, careLevel:7, sunNeed:40, sunMin:15},
 
@@ -8305,6 +8342,7 @@ const PLANTS = [
    resilience:"Tolerant of coastal conditions and reasonably drought tolerant once established.",
    uses:"Architectural planting, coastal gardens, containers, borders and Mediterranean-style planting.",
    size:"2.5-4m H × 1-1.5m W",
+   hardinessNote:"Hardy in many UK gardens but best in a sheltered position.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:85, sunMin:45},
 
@@ -8331,6 +8369,8 @@ const PLANTS = [
    resilience:"Robust climber with good tolerance of sun and shade.",
    uses:"Walls, fences, wildlife gardens, screening and autumn foliage displays.",
    size:"2.5-4m H × 1.5-2.5m W",
+   toxicity:"Harmful if eaten; sap can irritate skin.",
+   hardinessNote:"Hardy throughout most UK conditions.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:15, pestRisk:5, thirst:10, careLevel:6, sunNeed:60, sunMin:20},
 
@@ -8531,6 +8571,8 @@ const PLANTS = [
    resilience:"Robust and reliable hydrangea; tolerates more sun than many other hydrangeas provided moisture is maintained.",
    uses:"Shrub borders, cottage gardens, woodland-style planting, specimen planting, cut flowers and containers.",
    size:"1.5-2.5m H × 1.5-2.5m W",
+   toxicity:"Harmful if eaten.",
+   hardinessNote:"Hardy throughout the UK.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:13, pestRisk:6, thirst:16, careLevel:8, sunNeed:65, sunMin:35},
 
@@ -8557,6 +8599,8 @@ const PLANTS = [
    resilience:"Good indoor foliage plant when humidity, warmth and consistent moisture are maintained.",
    uses:"Houseplant, terrarium, conservatory and heated greenhouse.",
    size:"0.1-0.5m H × 0.1-0.5m W",
+   toxicity:"Harmful if eaten; sap may irritate the skin.",
+   hardinessNote:"Tender tropical plant; grow indoors or under heated protection in the UK.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:12, pestRisk:10, thirst:15, careLevel:12, sunNeed:35, sunMin:15},
 
@@ -8583,6 +8627,7 @@ const PLANTS = [
    resilience:"Tolerates heat and some drought once established, but young plants need protection and reliable moisture.",
    uses:"Specimen tree, warm sheltered borders, courtyard gardens, patio planting and exotic-style gardens.",
    size:"2.5-4m H × 2.5-4m W",
+   hardinessNote:"Borderline hardy in much of the UK; best grown against a warm sheltered wall or in a protected southern garden.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:10, pestRisk:4, thirst:9, careLevel:10, sunNeed:95, sunMin:75},
 
@@ -9723,7 +9768,7 @@ const PLANTS_ON_HOLD=[
    pots:"",
    cvs:"",
    hardiness:"H6",
-   resilience:"",
+   resilience:"Hardy and vigorous in suitable acidic soil and capable of naturalising where conditions suit it, which is also the reason containment is important.",
    uses:"contained acid borders · woodland gardens · spring fragrance",
    size:"2.5-4m H × 2.5-4m W",
    toxicity:"All parts are poisonous if eaten and are potentially dangerous to people, pets and livestock.",
