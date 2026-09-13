@@ -121,41 +121,41 @@ earlier draft carried as `[Inference]` and Oscar's figures contradicted.
 
 ## 2026-09-13 — four photos from the sixteen-frame batch
 
-### The Myrtle / Callicarpa pair
+### The two Myrtle frames — RESOLVED as a pair, still blocked on a name
 
 `2026-09-13-small-glossy-leaves-red-stems-myrtle-or-callicarpa.jpg`
 `2026-09-13-larger-glossy-lanceolate-leaves-myrtle-or-callicarpa.jpg`
 
-Both cards are **written and held**: *Myrtus communis* and
-*Callicarpa bodinieri* 'Profusion'. These two frames are those two plants in
-some order and **the order is not settled**. Leaf size says the small
-red-stemmed one is the Myrtle and the larger lanceolate one the Callicarpa;
-leaf margin says otherwise, because Callicarpa leaves are normally toothed and
-the larger frame's look entire. `[Inference]` either way, which is not enough to
-put a photograph on a card. **Oscar's call.** Once he says which is which:
-`node tools/deal-plant.js "<latin>" <photo>` for each, then
+**The filenames are stale. Neither is a Callicarpa.** Oscar, 2026-09-13:
+*"both thoes photos you brought up a diffrent mertles, the calicapa i may have
+not send the pic."* Which confirms the `[Inference]` recorded below — the larger
+frame's entire margins and glossy opposite leaves fit *Myrtus*, not the toothed
+matte deciduous leaf of *Callicarpa bodinieri* — and disposes of the
+`[Unverified]` note: they are two different plants, both Myrtles.
+
+The step that got here was opening both frames and finding **no berries in
+either**, which is what made "is the Callicarpa the one with the purple berries"
+unanswerable from what was parked. The Callicarpa card is written around the
+fruit (`visual` *"Tight clusters of vivid violet-purple berries packed along bare
+stems"*, `peak` Sep-Nov), so a leafy frame would have contradicted the card's own
+words whichever plant it was — the Actinidia case above. Oscar then sent a berry
+photograph and the card was **dealt** from it; see the deck entry for
+*Callicarpa bodinieri* 'Profusion'.
+
+**Still blocked, and not on identification.** There is exactly **one** Myrtle
+card and **one** Myrtle JSON — `Myrtus communis`, held, no photo. Two frames,
+one card. Dealing either one now is a coin-flip that would also leave the second
+card to be built around whichever plant was left over. Needed from Oscar:
+
+1. which frame is the plain `Myrtus communis` — `[Inference]` the larger
+   lanceolate one, with the small red-stemmed frame being subsp. *tarentina*,
+   but that is not enough to put a photograph on a card;
+2. the second plant's name off the label, and a JSON for it.
+
+Then `node tools/deal-plant.js "<latin>" <photo>` for each and
 `node tools/optimise-photos.js`.
 
-**2026-09-13, checked by opening both frames: NEITHER shows berries.** Oscar
-asked whether the Callicarpa is "the one with the purple berries in the photo" —
-it would be, but there are no berries in either frame. Both are foliage-only,
-rain-wet close-ups. So the berry test cannot settle the pair from what is parked.
-
-**And the Callicarpa card cannot take a foliage frame at all, whichever it is.**
-Its `visual` reads *"Tight clusters of vivid violet-purple berries packed along
-bare stems"* — the card is written around the fruit, `peak` Sep-Nov. Dealing a
-leafy green shot onto it repeats the Actinidia case above: a photograph that
-contradicts the card's own words. That card needs a berry photograph, not an
-identification.
-
-`[Inference]` the larger frame's entire margins and glossy opposite leaves fit
-*Myrtus* better than *Callicarpa*, whose leaves are toothed and matte and which
-is deciduous — which would make **both** frames Myrtle (*M. communis* and the
-small-leaved subsp. *tarentina*). `[Unverified]` whether the two frames are two
-different plants at all; that rests only on the order they arrived in.
-
-Decider offered to Oscar: crush a leaf. Myrtle is unmistakably aromatic,
-Callicarpa is not.
+Decider if the label is gone: crush a leaf. Myrtle is unmistakably aromatic.
 
 ### `2026-09-13-variegated-evergreen-cream-margins-unidentified.jpg`
 

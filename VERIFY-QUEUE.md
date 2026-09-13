@@ -3127,6 +3127,55 @@ rewritten message. They stand on their own: `topLatin()` and the card-count read
 after a reload are genuinely deal-dependent, and every other browser suite already
 waits for `data-dealing` to clear before touching the deck.
 
+### 79. Beautyberry dealt from a berry photograph — and an H7 "outlier" I invented
+
+**The card is dealt: `Callicarpa bodinieri` 'Profusion', deck 301 → 302, hold 86 → 85.**
+Oscar sent the berry frame after being asked for one. Rendered and checked against
+the card's own text before commit: berry cluster prominent, `peak` Sep-Nov band lit
+S-O-N, toxicity flag showing amber for *"Fruit is ornamental and should not be
+eaten"*, size rails drawn at 2.5-4m × 1.5-2.5m. 17/17 at `--jobs 3`.
+
+**How the question got answered.** The two parked frames were logged as a
+Myrtle/Callicarpa pair in some order. Oscar's reply — *"calicapa is the one with
+the purple berries in the photo? Aha seems pretty obvious"* — is the right test and
+would have settled it instantly, so the temptation was to agree. Opening both frames
+first showed **neither has any berries**: both are foliage-only, rain-wet close-ups.
+Agreeing would have put a photograph on a card that the photograph does not support.
+Oscar then confirmed both frames are Myrtles and sent the Callicarpa separately.
+
+Worth keeping: the *card* ruled out a foliage frame regardless of identification.
+`visual` reads *"Tight clusters of vivid violet-purple berries packed along bare
+stems"* — written around the fruit. A leafy frame contradicts it the way the
+Actinidia frame contradicts its variegation line. The card's own words were a
+sharper filter than the leaf-margin argument.
+
+**Flagged to Oscar, not changed:** in the dealt photograph the berries read
+**magenta-pink** on a **leafy** stem, against a `visual` that says "vivid
+violet-purple" and "bare stems". The defining feature is unmistakably present, so
+this is not the Actinidia case, but the colour word and the bare-stem wording are
+both a stretch against what a customer now sees on the card. `[Inference]` that a
+member of staff could reasonably call the mismatch. Oscar's wording, Oscar's call —
+left exactly as written pending his answer. Same shape as the Rudbeckia "daisy"
+mismatch in item 73.
+
+> **Correction: I previously made an unverified claim. That was incorrect and
+> should have been labelled.** I told Oscar twice that *Achillea umbellata* "came in
+> at H7 — the only H7 in 387 cards" and asked him to check it against the label.
+> Measured across deck + hold: **46 of 387 cards are H7**, the fourth-commonest
+> rating after H5 (122), H6 (119) and H4 (62). The Achillea is not an outlier, there
+> was never anything to check, and I sent him to look at a label for nothing. The
+> claim came from an impression, not a count — `grep`-free, one line of node would
+> have settled it. **Withdrawn.**
+
+Full distribution, since it is cheap to record and stops the next invented outlier:
+H1b 4 · H1c 2 · H2 7 · H3 25 · H4 62 · H5 122 · H6 119 · H7 46.
+
+**Also cleared up:** there is exactly **one** Myrtle card and **one** Myrtle JSON
+(`Myrtus communis`, held, no photo) against **two** Myrtle photographs. That, not
+identification, is what blocks both frames — dealing either is a coin-flip that
+also decides what the second card gets built around. Recorded in
+`photos/unidentified/README.md`.
+
 ---
 
 ## Accepted, not defects
