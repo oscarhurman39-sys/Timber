@@ -492,6 +492,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "bellis-perennis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "berberis-darwinii.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2075,6 +2085,16 @@
    "file": "hydrangea-macrophylla-zorro.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright; reframed by tools/reframe-photo.js from coordinates, no pixels generated. ARCHIVE SHOT: EXIF Samsung Galaxy S21 (SM-G991B), dated 2024-05-22 — an older phone and an older season than this run's Galaxy S24 captures. No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hydrangea-paniculata-breg14.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,

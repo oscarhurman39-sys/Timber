@@ -1180,7 +1180,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r258 · 2026-09-14 · 5dfd3d3';
+const BUILD='r260 · 2026-09-14 · 34b5326';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10700,7 +10700,33 @@ const PLANTS = [
    hardinessNote:"Hardy in most UK gardens, approximately -15 to -10°C",
    foliage:"Deciduous",
    growthSpeed:11, pestRisk:4, thirst:8, careLevel:4, sunNeed:80, sunMin:45},
- ];
+   {common:"Double Bedding Daisy", latin:"Bellis perennis", hue:0,
+   visual:"Double pompon daisies in pink, red or white · compact rosettes · spring colour",
+   water:"Keep evenly moist; water containers when the surface begins to dry.",
+   aspect:"Any aspect",
+   soil:"Moist, well-drained; Avoid waterlogging",
+   prune:"Deadhead to prolong flowering; cut back after flowering.",
+   source:"", peak:"Mar-Jun", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"'Tasso' – compact pompon flowers · 'Pomponette' – small quilled doubles · Bellissima Series – larger double pompons",
+   hardiness:"H5", resilience:"Generally pest-free; rust can occur; established plants tolerate cold conditions well.",
+   uses:"Autumn and spring bedding · edging · containers · window boxes", size:"10-15 cm H × 10-15 cm W",
+   toxicity:"Edible petals are used as garnish, but eating large amounts of the plant may cause stomach upset; children and pets should not eat nursery-grown bedding plants.", hardinessNote:"Hardy in most places throughout the UK, approximately -15 to -10°C.", foliage:"evergreen; compact rosettes of spoon-shaped dark green leaves",
+   seasonalImpact:"", growthSpeed:14, pestRisk:3, thirst:10, careLevel:5, sunNeed:75, sunMin:45},
+  {common:"Panicled Hydrangea 'Switch Ophelia'", latin:"Hydrangea paniculata 'Breg14'", hue:340,
+   visual:"Lacy white blooms turn rose then deep pink · exceptionally compact · long flowering",
+   water:"Water regularly, especially in sun and containers; do not allow the rootball to dry out.",
+   aspect:"Any aspect",
+   soil:"Moist, well-drained; Sun needs reliably moist soil",
+   prune:"In spring cut last year's stems back to a pair of healthy buds.",
+   source:"", peak:"Jun-Oct", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"This plant: 'Breg14' = (S)WITCH 'Ophelia' / POLESTAR · 'Little Lime' – compact green-white · 'Limelight' – larger lime-white panicles",
+   hardiness:"H5", resilience:"Hardy and reliable; may get aphids, capsid bug, hydrangea scale, vine weevil, leaf spot, mildew or Botrytis.",
+   uses:"Patio containers · small gardens · front of borders · courtyards · cut flowers", size:"50 cm H × 50 cm W",
+   toxicity:"Plant material is harmful if eaten and may cause stomach upset; dogs and cats are at risk. Handling may trigger skin allergy, so wear gloves.", compliance:"PBR protected: 'Breg14', CPVO EU52722; commercial propagation requires permission. UK plant passport rules apply to professional movement.", hardinessNote:"Hardy in most places throughout the UK, approximately -15 to -10°C.", foliage:"deciduous; broadly oval, coarsely toothed green leaves",
+   seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:14, careLevel:7, sunNeed:72, sunMin:40},
+];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -14308,6 +14334,13 @@ const PHOTO_FOCUS={
      growth-speed rail. 100% puts the whole head in frame. Measured on four renders,
      same reasoning as the Rhodanthemum above. */
   'symphyotrichum-dumosum-alpha-white':'100% 40%',
+  /* The frame is the plant on a nursery bench and the lower two-thirds is black
+     weed fabric, gravel and the bench edge. Measured: a 1000x2016 master in a
+     310.6x564.2 window leaves only 62px of vertical slack, so there is no crop
+     that hides the ground — but those 62px are the whole difference between the
+     panicles sitting in the top third and filling the top two-thirds. 0% spends
+     all of it upwards. A real crop would do more and is Oscar's call. */
+  'hydrangea-paniculata-breg14':'50% 0%',
   'veronicastrum-red-arrows':'50% 0%',
   'pinus-mugo':'50% 30%',
   'hosta-emerald-charger':'50% 45%',
