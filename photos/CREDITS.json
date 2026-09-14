@@ -1302,6 +1302,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "dianthus-kledg12163.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "dicksonia-antarctica.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1703,6 +1713,16 @@
   },
   {
    "file": "garrya-elliptica-james-roof.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "gaultheria-mucronata.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -2863,6 +2883,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "pentas-lanceolata-starcluster-mix.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "persicaria-affinis-darjeeling-red.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -3090,6 +3120,16 @@
    "sourceUrl": null,
    "commit": "a627b42",
    "commitSubject": "Add Chinese Redbud (Cercis chinensis 'Avondale')",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "primula-polyanthus.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

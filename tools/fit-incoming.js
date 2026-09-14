@@ -210,8 +210,11 @@ const FIT = {
     { soil: 'Well-drained, alkaline', warn: 'Rots where the ground stays wet' },
   "Monarda didyma":
     { soil: 'Fertile, moist, drained', warn: 'Dry roots in summer bring mildew' },
+  /* warn reworded 2026-09-14 when Oscar re-researched this card: the new text
+     names WHY it must not bake dry — drought stress is what brings the mildew on,
+     and mildew resistance is this cultivar's whole selling point. */
   "Monarda didyma 'Balbeemav'":
-    { soil: 'Humus-rich, moist, drained', warn: 'Never bakes dry; no winter waterlogging' },
+    { soil: 'Humus-rich, moist, drained', warn: 'Drought brings mildew; no winter wet' },
   "Cornus sericea 'Flaviramea'":
     { soil: 'Any, moist but drained', warn: 'Young stems carry the winter colour' },
   "Weigela 'Red Prince'":
