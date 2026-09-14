@@ -88,6 +88,19 @@ const count = dealt + 1;
   const photoOut = path.join(ROOT, 'photos', slug + '.jpg');
   fs.writeFileSync(photoOut, Buffer.from(out.jpg.split(',')[1], 'base64'));
   console.log(`photo: ${out.natural} -> ${out.W}x${out.H} staged as photos/${slug}.jpg`);
+  /* The app loads photos/card/<slug>.webp and NEVER the master, so staging the
+     master alone ships a card with no photograph. That shipped twice on
+     2026-09-14 (VERIFY-QUEUE 87) before anyone looked at a render. Build the
+     derivative here, with the same encoder and settings as the full pass so the
+     next full run produces byte-identical output and no spurious diff. */
+  try {
+    execFileSync(process.execPath, [path.join(__dirname, 'optimise-photos.js'), '--only', slug + '.jpg'],
+      { stdio: 'inherit', cwd: ROOT });
+  } catch (e) {
+    console.error('WARNING: card derivative not built for ' + slug + '.jpg — run:');
+    console.error('  NODE_PATH=/opt/node22/lib/node_modules node tools/optimise-photos.js');
+    console.error('  (the card will render with no photograph until you do)');
+  }
 
   /* ---- 3. insert row ---- */
   const esc = (v) => JSON.stringify(v == null ? '' : String(v));

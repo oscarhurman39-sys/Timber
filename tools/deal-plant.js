@@ -88,6 +88,22 @@ console.log(`found held card: ${latinArg}\n  -> photos/${slug}.jpg`);
   if (photoExisted) die(`photos/${slug}.jpg already exists — this card is not waiting for a photo`);
   fs.writeFileSync(photoOut, Buffer.from(out.jpg.split(',')[1], 'base64'));
   console.log(`photo: ${out.natural} -> ${out.W}x${out.H}`);
+  /* The app loads photos/card/<slug>.webp and NEVER the master, so staging the
+     master alone deals a card with no photograph. That is exactly what happened
+     to the Wintersweet on 2026-09-14 — dealt, green suite, blank photo window
+     (VERIFY-QUEUE 87). Build the derivative here, with the same encoder and
+     settings as the full pass so a later full run is byte-identical and shows no
+     spurious diff. Non-fatal: a missing sharp must not strand a staged photo and
+     a half-dealt card, and optimise-photos --check now genuinely fails, so a
+     skipped derivative is still caught before a push. */
+  try {
+    execFileSync(process.execPath, [path.join(__dirname, 'optimise-photos.js'), '--only', slug + '.jpg'],
+      { stdio: 'inherit', cwd: ROOT });
+  } catch (e) {
+    console.error('WARNING: card derivative not built for ' + slug + '.jpg — run:');
+    console.error('  NODE_PATH=/opt/node22/lib/node_modules node tools/optimise-photos.js');
+    console.error('  (the card will render with no photograph until you do)');
+  }
 
   /* ---- move the row: out of hold, in before PLANTS:END ---- */
   let html = original;

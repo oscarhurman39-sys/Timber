@@ -2,6 +2,7 @@
 /* optimise-photos.js — derive the card-sized WebP the app actually loads.
    Run: NODE_PATH=/opt/node22/lib/node_modules node tools/optimise-photos.js
         ... --check   report only, change nothing (used by tests/run-all.js --fast)
+        ... --only <file.jpg>   rebuild one derivative (used by add-plant/deal-plant)
 
    WHY THIS EXISTS
 
@@ -27,6 +28,10 @@ const ROOT = path.join(__dirname, '..');
 const PHOTOS = path.join(ROOT, 'photos');
 const OUT = path.join(PHOTOS, 'card');
 const CHECK = process.argv.includes('--check');
+/* --only <file> builds ONE derivative. It exists so the tools that stage a photo
+   can build the file the app actually loads, in the same pass, with the same
+   encoder — see the note on ONE below. */
+const ONLY = (() => { const i = process.argv.indexOf('--only'); return i === -1 ? null : process.argv[i + 1]; })();
 
 const CARD_WIDTH = 1000;   /* covers the card at 3x and the detail sheet at 2.5x */
 const QUALITY = 80;
@@ -50,8 +55,13 @@ const isMaster = f => /\.jpg$/i.test(f) && !/-cutout\.png$/i.test(f);
   let sharp = null;
   try { sharp = require('sharp'); } catch (e) { /* only the generate path below needs it */ }
 
-  const masters = fs.readdirSync(PHOTOS).filter(isMaster).sort();
+  let masters = fs.readdirSync(PHOTOS).filter(isMaster).sort();
   if (!masters.length) { console.error('no photo masters found in photos/'); process.exit(2); }
+  if (ONLY) {
+    const want = path.basename(ONLY);
+    if (!masters.includes(want)) { console.error('optimise-photos --only: no such master photos/' + want); process.exit(2); }
+    masters = [want];
+  }
 
   if (CHECK) {
     const missing = [], stale = [], orphaned = [];
@@ -89,8 +99,12 @@ const isMaster = f => /\.jpg$/i.test(f) && !/-cutout\.png$/i.test(f);
   }
   /* drop derivatives whose master went away, so photos/card/ never serves a card
      that no longer exists */
-  const want = new Set(masters.map(f => f.replace(/\.jpg$/i, '.webp')));
-  for (const f of fs.readdirSync(OUT)) if (!want.has(f)) { fs.unlinkSync(path.join(OUT, f)); console.log('  dropped orphan photos/card/' + f); }
+  if (!ONLY) {
+    /* Only the FULL pass may sweep orphans. A --only run knows about one master,
+       so every other derivative would look orphaned to it. */
+    const want = new Set(masters.map(f => f.replace(/\.jpg$/i, '.webp')));
+    for (const f of fs.readdirSync(OUT)) if (!want.has(f)) { fs.unlinkSync(path.join(OUT, f)); console.log('  dropped orphan photos/card/' + f); }
+  }
 
   console.log(`${masters.length} photos: ${(before / 1024 / 1024).toFixed(1)} MB -> ${(after / 1024 / 1024).toFixed(1)} MB  (${(100 - after / before * 100).toFixed(1)}% smaller, capped at ${CARD_WIDTH}px)`);
 })();
