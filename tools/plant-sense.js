@@ -46,6 +46,14 @@ const KNOWN = new Set([
      Snowball 'Popcorn' under "Accepted, not defects". */
   'Prunus serrula|peak-vs-prose',
   "Pyracantha SAPHYR ORANGE ('Cadange')|peak-vs-prose",
+  /* 2026-09-14 batch. Both the rating and the sentence that disagrees with it are
+     Oscar's own supplied research, arriving in the same JSON, so neither side can be
+     "corrected" here without overwriting a fact he researched. Honey fungus is a
+     property of the site rather than of Gaultheria, and slug damage on young
+     foxgloves is seasonal — so the low numbers are arguable — but it is his call
+     which side moves. See VERIFY-QUEUE item 85. */
+  "Gaultheria procumbens 'Gaubi'|pest-vs-prose",
+  'Digitalis purpurea Foxy Group|pest-vs-prose',
 ]);
 
 const issues = [];
