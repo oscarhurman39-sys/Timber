@@ -1180,7 +1180,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r257 · 2026-09-14 · 8b9d21d';
+const BUILD='r258 · 2026-09-14 · 5dfd3d3';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -1349,6 +1349,7 @@ const PLANTS = [
    resilience:"Drought & pest tolerant",
    uses:"Urban, patio containers",
    size:"1.5–2.5m H × 1–1.5m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    pollination:"needs partner; berries are unreliable on a lone plant — group several so the flowers cross-pollinate",
    clay:"yes",
@@ -1377,6 +1378,7 @@ const PLANTS = [
    resilience:"Pest-free, drought tolerant once established",
    uses:"Sensory gardens · shrub borders · informal hedging",
    size:"1.5–2.5m H × 1.5–2.5m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    foliage:"evergreen; dark glossy green leaves divided into three broad leaflets",
    pollination:"not applicable",
    clay:"yes",
@@ -1405,6 +1407,7 @@ const PLANTS = [
    resilience:"cold hardy · adaptable · pollinator friendly",
    uses:"shrub borders · cottage gardens · containers",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    pollination:"not applicable",
    seasonalImpact:"", growthSpeed:9, pestRisk:9, thirst:9, careLevel:5, sunNeed:65, sunMin:40},
@@ -1432,6 +1435,7 @@ const PLANTS = [
    resilience:"Drought-tolerant once established",
    uses:"Borders, gravel gardens, pollinators",
    size:"75 cm H × 60 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:12, pestRisk:3, thirst:4, careLevel:6, sunNeed:88, sunMin:""},
 
   {common:"Purple Fountain Grass", latin:"Pennisetum 'Rubrum'", hue:330,
@@ -1457,6 +1461,7 @@ const PLANTS = [
    resilience:"Drought-tolerant; tender — shelter from frost",
    uses:"Containers, seasonal displays, hot borders",
    size:"60–90 cm H × 45–60 cm W",
+   hardinessNote:"Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:12, careLevel:8, sunNeed:90, sunMin:""},
 
   {common:"Sweet Cupcake Hydrangea", latin:"Hydrangea macrophylla 'Sweet Cupcake'", hue:330,
@@ -1482,6 +1487,7 @@ const PLANTS = [
    resilience:"Harmful if eaten; sap may irritate · shelter from drying winds",
    uses:"Borders, containers, shaded patios",
    size:"0.8–1m H × 0.9–1.2m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:11, pestRisk:8, thirst:16, careLevel:8, sunNeed:52, sunMin:34},
 
   {common:"Raspberry Profusion Abelia", latin:"Abelia 'Raspberry Profusion'", hue:340,
@@ -1507,6 +1513,7 @@ const PLANTS = [
    resilience:"Pollinator friendly (bees, butterflies) · shelter from cold drying winds",
    uses:"Borders, sunny shrub beds, pollinator planting",
    size:"0.8–1.2m H × 0.8–1.2m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:11, pestRisk:2, thirst:8, careLevel:6, sunNeed:82, sunMin:46},
 
   {common:"Flower Tower Dogwood", latin:"Cornus kousa 'Flower Tower'", hue:150,
@@ -1532,6 +1539,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"2.5–4 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:11, pestRisk:6, thirst:12, careLevel:10, sunNeed:78, sunMin:48},
 
   {common:"Burgundy Glow Bugle", latin:"Ajuga reptans 'Burgundy Glow'", hue:340,
@@ -1557,6 +1565,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"10–20 cm H × 0.5–1 m W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:16, pestRisk:4, thirst:12, careLevel:6, sunNeed:42, sunMin:12},
 
   {common:"Double Play Doozie Spirea", latin:"Spiraea 'Double Play Doozie'", hue:335,
@@ -1582,6 +1591,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"60–90 cm H × 60–90 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:12, pestRisk:4, thirst:8, careLevel:6, sunNeed:82, sunMin:52},
 
   {common:"Pink Beauty Shrubby Cinquefoil", latin:"Potentilla fruticosa 'Pink Beauty'", hue:330,
@@ -1607,6 +1617,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"0.5–1 m H × 0.5–1 m W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:2, thirst:8, careLevel:6, sunNeed:72, sunMin:42},
 
   {common:"Chinese Redbud", latin:"Cercis chinensis 'Avondale'", hue:315,
@@ -1632,6 +1643,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"2.5–4 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:12, careLevel:10, sunNeed:78, sunMin:52},
 
   {common:"Portuguese Laurel", latin:"Prunus lusitanica 'Angustifolia'", hue:150,
@@ -1657,6 +1669,8 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"4–8 m H × 4–8 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:12, pestRisk:10, thirst:10, careLevel:8, sunNeed:66, sunMin:30},
 
   {common:"Blue Spire Russian Sage", latin:"Salvia 'Blue Spire'", hue:250,
@@ -1682,6 +1696,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"1–1.2 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:12, pestRisk:4, thirst:6, careLevel:8, sunNeed:94, sunMin:72},
 
   {common:"Japanese Mahonia", latin:"Mahonia japonica", hue:55,
@@ -1707,6 +1722,8 @@ const PLANTS = [
    resilience:"Do not eat the berries",
    uses:"",
    size:"1.5–2 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:8, pestRisk:4, thirst:10, careLevel:6, sunNeed:28, sunMin:0},
 
   {common:"Golden Lanterns Himalayan Honeysuckle", latin:"Leycesteria formosa 'Golden Lanterns'", hue:60,
@@ -1732,6 +1749,7 @@ const PLANTS = [
    resilience:"Berries ornamental — do not eat",
    uses:"",
    size:"1.5–2 m H × 1.5–2 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:14, pestRisk:2, thirst:10, careLevel:6, sunNeed:78, sunMin:42},
 
   {common:"Pugster Orchid Butterfly Bush", latin:"Buddleja 'Pugster Orchid'", hue:315,
@@ -1757,6 +1775,7 @@ const PLANTS = [
    resilience:"Nectar-rich — draws butterflies and bees",
    uses:"",
    size:"60–80 cm H × 60–80 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:11, pestRisk:10, thirst:8, careLevel:8, sunNeed:88, sunMin:58},
 
   {common:"Flamingo Willow", latin:"Salix integra 'Hakuro-nishiki'", hue:130,
@@ -1782,6 +1801,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:16, pestRisk:12, thirst:16, careLevel:10, sunNeed:82, sunMin:48},
 
   {common:"Cape Leadwort", latin:"Plumbago auriculata", hue:215,
@@ -1807,6 +1827,7 @@ const PLANTS = [
    resilience:"Wear gloves — sap can irritate skin; harmful if eaten",
    uses:"",
    size:"2.5–4 m H × 1–1.5 m W",
+   hardinessNote:"Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
    seasonalImpact:"", growthSpeed:14, pestRisk:10, thirst:12, careLevel:14, sunNeed:94, sunMin:70},
 
   {common:"Golden Japanese Spindle", latin:"Euonymus japonicus 'Aureomarginatus'", hue:50,
@@ -1832,6 +1853,8 @@ const PLANTS = [
    resilience:"Harmful if eaten",
    uses:"",
    size:"0.5–1 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:11, pestRisk:12, thirst:10, careLevel:8, sunNeed:72, sunMin:38},
 
   {common:"Bubblegum Blast Bee Balm", latin:"Monarda didyma 'Bubblegum Blast'", hue:330,
@@ -1857,6 +1880,7 @@ const PLANTS = [
    resilience:"Nectar-rich — draws bees, butterflies and hummingbird moths",
    uses:"",
    size:"50–70 cm H × 60–80 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:12, pestRisk:8, thirst:14, careLevel:8, sunNeed:82, sunMin:50},
 
   {common:"Common Hornbeam", latin:"Carpinus betulus", hue:120,
@@ -1882,6 +1906,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"15–25 m H × 8–15 m W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:13, pestRisk:8, thirst:10, careLevel:10, sunNeed:68, sunMin:38},
 
   {common:"Ebbinge's Silverberry", latin:"Elaeagnus ×submacrophylla", hue:120,
@@ -1907,6 +1932,8 @@ const PLANTS = [
    resilience:"Wind and coastal tolerant; fixes nitrogen",
    uses:"",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:15, pestRisk:8, thirst:8, careLevel:6, sunNeed:68, sunMin:28},
 
   {common:"Brazilian Giant Rhubarb", latin:"Gunnera manicata", hue:120,
@@ -1933,6 +1960,7 @@ const PLANTS = [
    uses:"",
    size:"2.5–3 m H × 3–4.5 m W",
    compliance:"UK RESTRICTED. Most plants sold as 'manicata' are the banned Gunnera ×cryptica — do not sell, propagate or plant without authoritatively verified ID; do not compost unidentified material.",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:16, pestRisk:6, thirst:20, careLevel:16, sunNeed:58, sunMin:28},
 
   {common:"October Glory Red Maple", latin:"Acer rubrum 'October Glory'", hue:8,
@@ -1958,6 +1986,7 @@ const PLANTS = [
    resilience:"Reliable autumn colour even in mild UK winters",
    uses:"",
    size:"15–18 m H × 8–10 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:12, pestRisk:10, thirst:14, careLevel:10, sunNeed:84, sunMin:48},
 
   {common:"Spider's Web Japanese Aralia", latin:"Fatsia japonica 'Tsumugi-shibori'", hue:120,
@@ -1983,6 +2012,7 @@ const PLANTS = [
    resilience:"Ornamental fruits not for eating; some light keeps the white frosting bold",
    uses:"",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:12, careLevel:10, sunNeed:30, sunMin:5},
 
   {common:"New Zealand Broadleaf", latin:"Griselinia littoralis", hue:95,
@@ -2008,6 +2038,8 @@ const PLANTS = [
    resilience:"Superb salt- and wind-tolerant coastal hedge",
    uses:"",
    size:"4–8 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:15, pestRisk:4, thirst:10, careLevel:6, sunNeed:88, sunMin:58},
 
   {common:"Himalayan Indigo 'Silk Road'", latin:"Indigofera himalayensis 'Silk Road'", hue:330,
@@ -2033,6 +2065,7 @@ const PLANTS = [
    resilience:"coastal · recovers after frost dieback",
    uses:"borders · wall training · containers · pollinators",
    size:"1–1.5 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:3, thirst:9, careLevel:6, sunNeed:92, sunMin:80},
 
   {common:"Cascading Moth Orchid", latin:"Phalaenopsis Hybrid Group", hue:320,
@@ -2058,6 +2091,7 @@ const PLANTS = [
    resilience:"long-lasting flowers · indoor adaptable",
    uses:"houseplant · gifting · bright rooms",
    size:"45–60 cm H × 20–30 cm W",
+   hardinessNote:"Subtropical: needs a heated glasshouse at 10-15C and cannot tolerate frost.",
    seasonalImpact:"", growthSpeed:6, pestRisk:8, thirst:8, careLevel:9, sunNeed:45, sunMin:25},
 
   {common:"Laurustinus 'Eve Price'", latin:"Viburnum tinus 'Eve Price'", hue:330,
@@ -2083,6 +2117,8 @@ const PLANTS = [
    resilience:"coastal · urban tolerant",
    uses:"hedging · screening · wildlife",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:9, pestRisk:9, thirst:8, careLevel:5, sunNeed:70, sunMin:30},
 
   {common:"Orange Victory Itoh Peony", latin:"Paeonia 'Orange Victory'", hue:30,
@@ -2108,6 +2144,7 @@ const PLANTS = [
    resilience:"sturdy stems · long-lived · cold hardy",
    uses:"mixed borders · cut flowers · containers",
    size:"80–90 cm H × 80–90 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:5, pestRisk:6, thirst:8, careLevel:6, sunNeed:88, sunMin:65},
 
   {common:"French Lavender 'Anouk Deluxe Purple'", latin:"Lavandula stoechas 'Anouk Deluxe Purple'", hue:275,
@@ -2133,6 +2170,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal · deer resistant",
    uses:"containers · edging · pollinators",
    size:"40–60 cm H × 40–60 cm W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:4, careLevel:6, sunNeed:95, sunMin:80},
 
   {common:"Meyer's Lemon", latin:"Citrus × meyeri 'Meyer'", hue:45,
@@ -2158,6 +2196,7 @@ const PLANTS = [
    resilience:"self-fertile · compact · fruits young",
    uses:"containers · conservatory · edible fruit",
    size:"2.5–4 m H × 1.5–2.5 m W",
+   hardinessNote:"Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
    seasonalImpact:"", growthSpeed:8, pestRisk:10, thirst:11, careLevel:14, sunNeed:92, sunMin:75},
 
   {common:"Green Spire Japanese Spindle", latin:"Euonymus japonicus 'Green Spire'", hue:120,
@@ -2183,6 +2222,7 @@ const PLANTS = [
    resilience:"coastal · urban tolerant",
    uses:"topiary · edging · containers",
    size:"0.5–1 m H × 0.1–0.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:9, thirst:9, careLevel:6, sunNeed:70, sunMin:40},
 
   {common:"Jenny Japanese Holly", latin:"Ilex crenata 'Jenny'", hue:120,
@@ -2208,6 +2248,7 @@ const PLANTS = [
    resilience:"urban tolerant · clipping tolerant",
    uses:"topiary · low hedging · containers",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:11, careLevel:8, sunNeed:65, sunMin:40},
 
   {common:"Gold Rider Leyland Cypress", latin:"× Cuprocyparis leylandii 'Gold Rider'", hue:55,
@@ -2233,6 +2274,8 @@ const PLANTS = [
    resilience:"coastal · wind tolerant",
    uses:"screening · hedging · golden specimen",
    size:"12–25 m H × 4–8 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:15, pestRisk:9, thirst:7, careLevel:10, sunNeed:90, sunMin:60},
 
   {common:"Horizon Monarch Rhododendron", latin:"Rhododendron 'Horizon Monarch'", hue:48,
@@ -2258,6 +2301,7 @@ const PLANTS = [
    resilience:"disease resistant · shade tolerant",
    uses:"woodland borders · screening · specimen",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:9, pestRisk:11, thirst:14, careLevel:10, sunNeed:45, sunMin:25},
 
   {common:"Ōsakazuki Japanese Maple", latin:"Acer palmatum 'Ōsakazuki'", hue:18,
@@ -2283,6 +2327,7 @@ const PLANTS = [
    resilience:"cold hardy · container tolerant",
    uses:"specimen · autumn colour · containers",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:5, pestRisk:8, thirst:10, careLevel:7, sunNeed:55, sunMin:35},
 
   {common:"Japanese Banana", latin:"Musa basjoo", hue:120,
@@ -2308,6 +2353,7 @@ const PLANTS = [
    resilience:"fast recovery · root-hardy when mulched",
    uses:"exotic borders · screens · large containers",
    size:"2.5–4 m H × 1.5–2.5 m W",
+   hardinessNote:"Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
    seasonalImpact:"", growthSpeed:18, pestRisk:8, thirst:16, careLevel:15, sunNeed:90, sunMin:70},
 
   {common:"Wedding Cake Tree", latin:"Cornus controversa 'Variegata'", hue:85,
@@ -2333,6 +2379,7 @@ const PLANTS = [
    resilience:"cold hardy · generally pest free",
    uses:"architectural specimen · woodland edge",
    size:"4–8 m H × 4–8 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:5, thirst:10, careLevel:6, sunNeed:60, sunMin:35},
 
   {common:"Common Olive", latin:"Olea europaea", hue:75,
@@ -2359,6 +2406,8 @@ const PLANTS = [
    uses:"containers · Mediterranean gardens · fruit",
    size:"4–8 m H × 1.5–2.5 m W",
    compliance:"Xylella fastidiosa high-risk host. Imported olives are subject to plant-health inspection; report suspected symptoms rather than moving affected material.",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:5, pestRisk:9, thirst:4, careLevel:9, sunNeed:95, sunMin:80},
 
   {common:"Bloodgood Japanese Maple", latin:"Acer palmatum 'Bloodgood'", hue:350,
@@ -2384,6 +2433,7 @@ const PLANTS = [
    resilience:"cold hardy · container tolerant",
    uses:"specimen · dark foliage · containers",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:5, pestRisk:8, thirst:10, careLevel:7, sunNeed:60, sunMin:40},
 
   {common:"Hot Lips Sage", latin:"Salvia 'Hot Lips'", hue:0,
@@ -2409,6 +2459,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal",
    uses:"pollinators · gravel gardens · containers",
    size:"0.5–1 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:12, pestRisk:8, thirst:6, careLevel:8, sunNeed:90, sunMin:65},
 
   {common:"Honey Tulip Magnolia", latin:"Magnolia HONEY TULIP ('Jurmag5')", hue:48,
@@ -2434,6 +2485,7 @@ const PLANTS = [
    resilience:"cold hardy once established",
    uses:"specimen · spring colour · small gardens",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:8, thirst:10, careLevel:7, sunNeed:75, sunMin:45},
 
   {common:"Big Blue Sea Holly", latin:"Eryngium × olivierianum BIG BLUE ('Myersblue')", hue:220,
@@ -2460,6 +2512,7 @@ const PLANTS = [
    uses:"pollinators · cut flowers · gravel gardens",
    size:"60–75 cm H × 30–50 cm W",
    compliance:"Plant Breeders' Rights apply: do not propagate 'Myersblue' for resale without a licence.",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:3, careLevel:4, sunNeed:98, sunMin:85},
 
   {common:"Winter Beauty Honeysuckle", latin:"Lonicera × purpusii 'Winter Beauty'", hue:50,
@@ -2485,6 +2538,7 @@ const PLANTS = [
    resilience:"cold hardy · coastal · fruit harmful if eaten",
    uses:"winter scent · pollinators · shrub borders",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:9, pestRisk:8, thirst:8, careLevel:4, sunNeed:65, sunMin:35},
 
   {common:"Winged Spindle", latin:"Euonymus alatus", hue:0,
@@ -2510,6 +2564,7 @@ const PLANTS = [
    resilience:"cold hardy · exposed-site tolerant",
    uses:"specimen · hedge · autumn colour",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:9, thirst:8, careLevel:5, sunNeed:80, sunMin:45},
 
   {common:"Bigleaf golden ray 'Treasure Island'", latin:"Ligularia 'Treasure Island'", hue:50,
@@ -2535,6 +2590,7 @@ const PLANTS = [
    resilience:"cold hardy · wet-soil tolerant",
    uses:"waterside · woodland borders · pollinators",
    size:"1.2–1.5 m H × 60–90 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:14, pestRisk:13, thirst:16, careLevel:10, sunNeed:42, sunMin:25},
 
   {common:"Dream Dazzler Stonecrop", latin:"Hylotelephium 'Dream Dazzler'", hue:330,
@@ -2560,6 +2616,7 @@ const PLANTS = [
    resilience:"drought · heat · mildew resistant",
    uses:"groundcover · rockeries · containers",
    size:"20–25 cm H × 40–50 cm W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:9, pestRisk:7, thirst:3, careLevel:4, sunNeed:95, sunMin:50},
 
   {common:"Rosemary Foster Rough-Leaved Hydrangea", latin:"Hydrangea aspera 'Rosemary Foster'", hue:275,
@@ -2585,6 +2642,7 @@ const PLANTS = [
    resilience:"compact · cold hardy · good autumn colour",
    uses:"woodland borders · containers · pollinators",
    size:"1–1.5 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:9, pestRisk:11, thirst:13, careLevel:8, sunNeed:48, sunMin:30},
 
   {common:"Maidenhair Tree", latin:"Ginkgo biloba", hue:55,
@@ -2610,6 +2668,7 @@ const PLANTS = [
    resilience:"pollution · wind · drought tolerant",
    uses:"specimen · urban tree · autumn colour",
    size:"15–25 m H × 4–8 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:5, pestRisk:2, thirst:6, careLevel:4, sunNeed:92, sunMin:75},
 
   {common:"Cabbage palm Charlie Boy", latin:"Cordyline australis CHARLIE BOY ('Ric01')", hue:335,
@@ -2635,6 +2694,7 @@ const PLANTS = [
    resilience:"drought tolerant · wind tolerant",
    uses:"architectural · gravel gardens · patio containers",
    size:"2.5–4 m H × 1–1.5 m W",
+   hardinessNote:"Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
    seasonalImpact:"", growthSpeed:9, pestRisk:6, thirst:5, careLevel:8, sunNeed:65, sunMin:45},
 
   {common:"Gaura 'Gaudi Rose'", latin:"Oenothera lindheimeri GAUDI ROSE ('Florgaucomro')", hue:335,
@@ -2660,6 +2720,7 @@ const PLANTS = [
    resilience:"drought tolerant · generally pest free",
    uses:"border edging · containers · pollinators",
    size:"30 cm H × 30–40 cm W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:3, thirst:7, careLevel:5, sunNeed:85, sunMin:50},
 
   {common:"Panicled hydrangea 'Wim’s Red'", latin:"Hydrangea paniculata 'Wim’s Red'", hue:350,
@@ -2685,6 +2746,7 @@ const PLANTS = [
    resilience:"cold hardy · heat tolerant · shade tolerant",
    uses:"specimen · mixed borders · flowering hedge · pollinators",
    size:"1.5–2 m H × 1.2–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:13, pestRisk:8, thirst:13, careLevel:7, sunNeed:78, sunMin:42},
 
   {common:"Dwarf rhododendron 'Gartendirektor Glocker'", latin:"Rhododendron 'Gartendirektor Glocker'", hue:345,
@@ -2710,6 +2772,7 @@ const PLANTS = [
    resilience:"cold hardy · shade tolerant",
    uses:"small gardens · woodland borders · containers",
    size:"75–100 cm H × 1–1.2 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:8, thirst:13, careLevel:7, sunNeed:60, sunMin:30},
 
   {common:"Shirasawa maple Moonrise", latin:"Acer shirasawanum MOONRISE ('Munn 001')", hue:5,
@@ -2735,6 +2798,7 @@ const PLANTS = [
    resilience:"cold hardy · improved scorch resistance · disease tolerant",
    uses:"specimen · small gardens · shaded borders · large containers",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:11, pestRisk:5, thirst:10, careLevel:6, sunNeed:55, sunMin:35},
 
   {common:"Crimson bottlebrush 'Splendens'", latin:"Callistemon citrinus 'Splendens'", hue:0,
@@ -2760,6 +2824,7 @@ const PLANTS = [
    resilience:"drought tolerant · salt-spray tolerant",
    uses:"specimen · sunny walls · coastal gardens · pollinators",
    size:"2–4 m H × 2–3 m W",
+   hardinessNote:"Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
    seasonalImpact:"", growthSpeed:12, pestRisk:8, thirst:7, careLevel:9, sunNeed:90, sunMin:72},
 
   {common:"Pink Annabelle Hydrangea", latin:"Hydrangea arborescens 'Pink Annabelle'", hue:330,
@@ -2785,6 +2850,7 @@ const PLANTS = [
    resilience:"Very hardy, reliable once established; takes more sun than most hydrangeas",
    uses:"Borders, mass planting, cut/dried flowers",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:14, pestRisk:8, thirst:16, careLevel:10, sunNeed:50, sunMin:""},
 
   {common:"Pittosporum 'Elizabeth'", latin:"Pittosporum tenuifolium 'Elizabeth'", hue:55,
@@ -2810,6 +2876,7 @@ const PLANTS = [
    resilience:"Generally good; leaf damage possible in hard frost, cold winds or exposed sites",
    uses:"Hedging, mixed borders, foliage contrast, cut foliage",
    size:"1.5–2.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:4, thirst:8, careLevel:6, sunNeed:65, sunMin:""},
 
   {common:"Goshiki Holly Olive", latin:"Osmanthus heterophyllus 'Goshiki'", hue:85,
@@ -2835,6 +2902,7 @@ const PLANTS = [
    resilience:"coastal · generally pest free",
    uses:"hedging · woodland gardens · containers",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:5, pestRisk:3, thirst:7, careLevel:4, sunNeed:65, sunMin:35},
 
   {common:"Eastern Redbud", latin:"Cercis canadensis 'Eternal Flame'", hue:350,
@@ -2860,6 +2928,7 @@ const PLANTS = [
    resilience:"Very resilient once established but dislikes root disturbance",
    uses:"Specimen tree, courtyard gardens, mixed borders",
    size:"4 m H × 4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:11, careLevel:5, sunNeed:70, sunMin:""},
 
   {common:"Giant Hyssop", latin:"Agastache 'Summerlong Coral'", hue:355,
@@ -2885,6 +2954,7 @@ const PLANTS = [
    resilience:"Drought-tolerant once established",
    uses:"Sunny borders, gravel gardens, containers, pollinator planting",
    size:"50 cm H × 50 cm W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:5, careLevel:7, sunNeed:90, sunMin:""},
 
   {common:"Variegated Spanish Dagger", latin:"Yucca gloriosa 'Variegata'", hue:55,
@@ -2910,6 +2980,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:6, careLevel:6, sunNeed:95, sunMin:72},
 
   {common:"Peruvian lily 'Indian Summer'", latin:"Alstroemeria INDIAN SUMMER ('Tesronto')", hue:25,
@@ -2935,6 +3006,7 @@ const PLANTS = [
    resilience:"drought tolerant once established · generally disease-free",
    uses:"cut flowers · borders · patio containers",
    size:"60–90 cm H × 50–60 cm W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:14, pestRisk:8, thirst:10, careLevel:9, sunNeed:82, sunMin:45},
 
   {common:"Kousa Dogwood 'Flower Tower'", latin:"Cornus kousa FLOWER TOWER ('Zuilb1')", hue:150,
@@ -2960,6 +3032,7 @@ const PLANTS = [
    resilience:"resistant to dogwood anthracnose · generally trouble-free",
    uses:"small gardens · narrow spaces · specimen tree",
    size:"3–4 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:4, thirst:12, careLevel:5, sunNeed:70, sunMin:40},
 
   {common:"Everflame Red Hook Sedge", latin:"Uncinia 'Everflame'", hue:5,
@@ -2985,6 +3058,8 @@ const PLANTS = [
    resilience:"generally pest and disease free",
    uses:"containers · edging · rock gardens",
    size:"25–30 cm H × 30–40 cm W",
+   hardinessNote:"Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:6, pestRisk:2, thirst:10, careLevel:8, sunNeed:80, sunMin:55},
 
   {common:"Doctor King Camellia", latin:"Camellia japonica 'Doctor King'", hue:345,
@@ -3010,6 +3085,8 @@ const PLANTS = [
    resilience:"shade tolerant · low maintenance",
    uses:"woodland borders · containers · specimens",
    size:"2.5–4 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:12, careLevel:8, sunNeed:35, sunMin:15},
 
   {common:"Bluebeard 'Worcester Gold'", latin:"Caryopteris × clandonensis 'Worcester Gold'", hue:225,
@@ -3035,6 +3112,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal suitable",
    uses:"borders · gravel gardens · pollinators",
    size:"0.5–1 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:9, pestRisk:8, thirst:5, careLevel:5, sunNeed:95, sunMin:80},
 
   {common:"Summer Fruits Lemon Yarrow", latin:"Achillea millefolium 'Summer Fruits Lemon'", hue:55,
@@ -3060,6 +3138,7 @@ const PLANTS = [
    resilience:"drought tolerant · exposed-site tolerant",
    uses:"pollinators · cut flowers · prairie borders",
    size:"60–80 cm H × 50–60 cm W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:4, careLevel:4, sunNeed:95, sunMin:75},
 
   {common:"Fanal Yarrow", latin:"Achillea 'The Beacon'", hue:350,
@@ -3085,6 +3164,7 @@ const PLANTS = [
    resilience:"drought tolerant · exposed-site tolerant",
    uses:"pollinators · cut flowers · cottage borders",
    size:"60–75 cm H × 30–50 cm W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:5, careLevel:4, sunNeed:90, sunMin:55},
 
   {common:"Whitewater Dog Hobble", latin:"Leucothoe fontanesiana WHITEWATER ('Howw')", hue:120,
@@ -3110,6 +3190,8 @@ const PLANTS = [
    resilience:"shade tolerant · generally pest free",
    uses:"woodland borders · containers · groundcover",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:7, pestRisk:4, thirst:13, careLevel:5, sunNeed:30, sunMin:10},
 
   {common:"Daredevil Hydrangea", latin:"Hydrangea DAREDEVIL ('Jpd01')", hue:350,
@@ -3135,6 +3217,7 @@ const PLANTS = [
    resilience:"compact · repeat flowering · cold hardy",
    uses:"containers · small gardens · shrub borders",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:11, thirst:14, careLevel:8, sunNeed:60, sunMin:35},
 
   {common:"Enchantress Indian Hawthorn", latin:"Rhaphiolepis × delacourii ENCHANTRESS ('Moness')", hue:335,
@@ -3160,6 +3243,8 @@ const PLANTS = [
    resilience:"drought tolerant · coastal · low maintenance",
    uses:"containers · borders · courtyards",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:5, pestRisk:6, thirst:7, careLevel:5, sunNeed:80, sunMin:45},
 
   {common:"Petite Perfume Pink Mock Orange", latin:"Philadelphus PETITE PERFUME PINK ('P1')", hue:335,
@@ -3185,6 +3270,7 @@ const PLANTS = [
    resilience:"drought · coastal · pollution tolerant",
    uses:"containers · scented gardens · shrub borders",
    size:"1–1.5 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:8, thirst:6, careLevel:4, sunNeed:80, sunMin:45},
 
   {common:"Balearic Island Sage", latin:"Phlomis italica", hue:335,
@@ -3210,6 +3296,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal · low maintenance",
    uses:"gravel gardens · pollinators · sunny borders",
    size:"0.5–1 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:6, thirst:5, careLevel:4, sunNeed:95, sunMin:80},
 
   {common:"Flutter Pure White Small Scabious", latin:"Scabiosa columbaria FLUTTER PURE WHITE ('Balflutturite')", hue:0,
@@ -3235,6 +3322,7 @@ const PLANTS = [
    resilience:"generally pest and disease free",
    uses:"pollinators · cut flowers · gravel gardens",
    size:"30–36 cm H × 25–30 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:3, thirst:7, careLevel:4, sunNeed:95, sunMin:65},
 
   {common:"Variegated Wall Cotoneaster", latin:"Cotoneaster atropurpureus 'Variegatus'", hue:85,
@@ -3260,6 +3348,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal · exposed-site tolerant",
    uses:"groundcover · banks · walls · wildlife gardens",
    size:"0.1–0.5 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:9, thirst:4, careLevel:4, sunNeed:95, sunMin:70},
 
   {common:"Chile Lantern Tree", latin:"Crinodendron hookerianum", hue:0,
@@ -3285,6 +3374,7 @@ const PLANTS = [
    resilience:"generally pest and disease free",
    uses:"architectural specimen · wall borders · courtyards",
    size:"4–8 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:2, thirst:12, careLevel:8, sunNeed:60, sunMin:35},
 
   {common:"Kojo-no-mai Fuji Cherry", latin:"Prunus incisa 'Kojo-no-mai'", hue:335,
@@ -3310,6 +3400,7 @@ const PLANTS = [
    resilience:"cold hardy · exposed-site tolerant",
    uses:"containers · courtyards · pollinators",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:8, careLevel:5, sunNeed:85, sunMin:50},
 
   {common:"Pink Elle Escallonia", latin:"Escallonia laevis PINK ELLE ('Lades')", hue:335,
@@ -3335,6 +3426,8 @@ const PLANTS = [
    resilience:"drought tolerant · coastal · exposed-site tolerant",
    uses:"hedging · pollinators · borders · containers",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:8, pestRisk:10, thirst:7, careLevel:6, sunNeed:85, sunMin:45},
 
   {common:"Harlequin Spindle", latin:"Euonymus fortunei 'Harlequin'", hue:90,
@@ -3360,6 +3453,8 @@ const PLANTS = [
    resilience:"coastal · exposed-site tolerant",
    uses:"groundcover · low hedging · containers",
    size:"0.5–0.6 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:7, careLevel:5, sunNeed:70, sunMin:30},
 
   {common:"Morning Light Eulalia", latin:"Miscanthus sinensis 'Morning Light'", hue:105,
@@ -3385,6 +3480,7 @@ const PLANTS = [
    resilience:"exposed-site tolerant · generally pest free",
    uses:"borders · screens · cut flowers",
    size:"1–1.5 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:2, thirst:9, careLevel:3, sunNeed:95, sunMin:80},
 
   {common:"Intense Blue Fescue", latin:"Festuca glauca INTENSE BLUE ('Casblue')", hue:210,
@@ -3410,6 +3506,7 @@ const PLANTS = [
    resilience:"drought tolerant · generally pest free",
    uses:"rockeries · gravel gardens · containers",
    size:"30 cm H × 30 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:3, thirst:3, careLevel:3, sunNeed:98, sunMin:85},
 
   {common:"Orange Ice Japanese Barberry", latin:"Berberis thunbergii 'Orange Ice'", hue:25,
@@ -3435,6 +3532,7 @@ const PLANTS = [
    resilience:"very cold hardy · coastal tolerant",
    uses:"containers · low hedging · foliage colour",
    size:"60–70 cm H × 30–40 cm W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:5, pestRisk:9, thirst:6, careLevel:5, sunNeed:95, sunMin:60},
 
   {common:"Tiny Tails Fountain Grass", latin:"Pennisetum advena TINY TAILS ('TUS022')", hue:350,
@@ -3460,6 +3558,7 @@ const PLANTS = [
    resilience:"drought · heat tolerant",
    uses:"containers · prairie planting · cut flowers",
    size:"50 cm H × 30 cm W",
+   hardinessNote:"Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
    seasonalImpact:"", growthSpeed:11, pestRisk:3, thirst:4, careLevel:9, sunNeed:90, sunMin:60},
 
   {common:"Katsura Tree", latin:"Cercidiphyllum japonicum", hue:35,
@@ -3485,6 +3584,7 @@ const PLANTS = [
    resilience:"generally pest free · cold hardy",
    uses:"large specimen · woodland gardens · autumn colour",
    size:"12–20 m H × 8–12 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:3, thirst:12, careLevel:5, sunNeed:70, sunMin:35},
 
   {common:"Starship Deep Rose Lobelia", latin:"Lobelia × speciosa STARSHIP DEEP ROSE ('Pas905518')", hue:340,
@@ -3510,6 +3610,7 @@ const PLANTS = [
    resilience:"coastal · thrives in reliably moist soil",
    uses:"borders · containers · pond margins · pollinators",
    size:"0.6–0.9 m H × 0.3–0.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:9, thirst:15, careLevel:8, sunNeed:70, sunMin:40},
 
   {common:"White Sands Lomandra", latin:"Lomandra longifolia WHITE SANDS ('Roma 13')", hue:85,
@@ -3535,6 +3636,8 @@ const PLANTS = [
    resilience:"heat · drought · coastal tolerant",
    uses:"containers · groundcover · coastal planting",
    size:"70 cm H × 1 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:12, pestRisk:3, thirst:5, careLevel:4, sunNeed:85, sunMin:50},
 
   {common:"Japanese Loquat", latin:"Eriobotrya japonica", hue:120,
@@ -3560,6 +3663,8 @@ const PLANTS = [
    resilience:"coastal · urban tolerant · low maintenance",
    uses:"architectural specimen · wall borders · conservatory",
    size:"4–8 m H × 4–8 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:9, pestRisk:7, thirst:9, careLevel:9, sunNeed:90, sunMin:75},
 
   {common:"Sapphire Ring Chinese Plumbago", latin:"Ceratostigma willmottianum SAPPHIRE RING ('Lissbrill')", hue:220,
@@ -3585,6 +3690,7 @@ const PLANTS = [
    resilience:"coastal · exposed-site tolerant · generally pest free",
    uses:"gravel gardens · banks · borders · pollinators",
    size:"0.5–1 m H × 0.1–0.5 m W",
+   hardinessNote:"Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
    seasonalImpact:"", growthSpeed:9, pestRisk:4, thirst:7, careLevel:6, sunNeed:95, sunMin:85},
 
   {common:"Fastigiata Robusta Yew", latin:"Taxus baccata 'Fastigiata Robusta'", hue:120,
@@ -3610,6 +3716,8 @@ const PLANTS = [
    resilience:"exposure · shade · urban pollution tolerant",
    uses:"architectural planting · hedging · screening",
    size:"8–12 m H × 2.5–4 m W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:4, pestRisk:8, thirst:6, careLevel:4, sunNeed:60, sunMin:10},
 
   {common:"Big Blue Lilyturf", latin:"Liriope muscari", hue:275,
@@ -3635,6 +3743,8 @@ const PLANTS = [
    resilience:"shade · established drought tolerant",
    uses:"groundcover · underplanting · containers",
    size:"25–45 cm H × 30–50 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:7, pestRisk:6, thirst:8, careLevel:3, sunNeed:30, sunMin:10},
 
   {common:"Copper Shield Fern", latin:"Dryopteris erythrosora", hue:25,
@@ -3660,6 +3770,7 @@ const PLANTS = [
    resilience:"dry-shade tolerant once established · pest free",
    uses:"woodland gardens · underplanting · containers",
    size:"0.5–1 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:2, thirst:10, careLevel:3, sunNeed:35, sunMin:10},
 
   {common:"Grace Smoke Bush", latin:"Cotinus 'Grace'", hue:335,
@@ -3685,6 +3796,7 @@ const PLANTS = [
    resilience:"exposed-site tolerant · generally pest free",
    uses:"specimen · shrub borders · foliage contrast",
    size:"4–8 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:13, pestRisk:5, thirst:7, careLevel:5, sunNeed:85, sunMin:50},
 
   {common:"Damsel's Delight Passion Flower", latin:"Passiflora ‘Damsel’s Delight’", hue:275,
@@ -3710,6 +3822,7 @@ const PLANTS = [
    resilience:"vigorous · fast-growing · relatively cold tolerant",
    uses:"walls · trellises · pergolas · large containers",
    size:"8–12 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:16, pestRisk:10, thirst:10, careLevel:9, sunNeed:85, sunMin:50},
 
   {common:"Miner's Merlot Martin's Spurge", latin:"Euphorbia × martini MINER’S MERLOT ('Km-mm024')", hue:350,
@@ -3735,6 +3848,7 @@ const PLANTS = [
    resilience:"drought · heat tolerant · vigorous",
    uses:"borders · gravel gardens · containers · pollinators",
    size:"50–60 cm H × 50–60 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:11, pestRisk:6, thirst:4, careLevel:4, sunNeed:90, sunMin:50},
 
   {common:"Silver Edge Mediterranean Spurge", latin:"Euphorbia characias 'Silver Edge'", hue:105,
@@ -3760,6 +3874,7 @@ const PLANTS = [
    resilience:"drought tolerant · generally disease free",
    uses:"gravel gardens · borders · containers",
    size:"50–60 cm H × 50–75 cm W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:6, thirst:4, careLevel:5, sunNeed:95, sunMin:80},
 
   {common:"Ascot Rainbow Martin's Spurge", latin:"Euphorbia × martini 'Ascot Rainbow'", hue:55,
@@ -3785,6 +3900,7 @@ const PLANTS = [
    resilience:"drought tolerant · generally pest and disease free",
    uses:"borders · gravel gardens · courtyard planting",
    size:"1–1.5 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:3, thirst:4, careLevel:6, sunNeed:95, sunMin:80},
 
   {common:"Sem False Spirea", latin:"Sorbaria sorbifolia 'Sem'", hue:15,
@@ -3810,6 +3926,7 @@ const PLANTS = [
    resilience:"cold hardy · exposed-site tolerant · pest free",
    uses:"shrub borders · waterside planting · mass planting",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:12, pestRisk:2, thirst:11, careLevel:6, sunNeed:70, sunMin:40},
 
   {common:"Black Cherry Plum", latin:"Prunus cerasifera 'Nigra'", hue:350,
@@ -3835,6 +3952,7 @@ const PLANTS = [
    resilience:"cold hardy · exposed-site tolerant",
    uses:"specimen · wildlife gardens · foliage contrast",
    size:"8–12 m H × 8–10 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:12, thirst:7, careLevel:5, sunNeed:95, sunMin:80},
 
   {common:"Oiseau Bleu Rose of Sharon", latin:"Hibiscus syriacus 'Oiseau Bleu'", hue:220,
@@ -3860,6 +3978,8 @@ const PLANTS = [
    resilience:"heat tolerant · urban suitable",
    uses:"specimen · shrub borders · late colour",
    size:"1.5–2.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"deciduous",
    seasonalImpact:"", growthSpeed:9, pestRisk:10, thirst:8, careLevel:6, sunNeed:95, sunMin:80},
 
   {common:"Charles Lamont Bodnant Viburnum", latin:"Viburnum × bodnantense 'Charles Lamont'", hue:335,
@@ -3885,6 +4005,7 @@ const PLANTS = [
    resilience:"cold hardy · coastal · shade tolerant",
    uses:"winter scent · shrub borders · screening",
    size:"2.5–4 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:9, pestRisk:8, thirst:9, careLevel:4, sunNeed:60, sunMin:20},
 
   {common:"Arnold Promise Witch Hazel", latin:"Hamamelis × intermedia 'Arnold Promise'", hue:55,
@@ -3910,6 +4031,7 @@ const PLANTS = [
    resilience:"cold hardy · low maintenance",
    uses:"winter scent · specimen · woodland edge",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:5, pestRisk:5, thirst:9, careLevel:6, sunNeed:65, sunMin:35},
 
   {common:"Royal Purple Smoke Bush", latin:"Cotinus coggygria 'Royal Purple'", hue:345,
@@ -3962,6 +4084,7 @@ const PLANTS = [
    resilience:"generally pest free · narrow urban footprint",
    uses:"narrow gardens · avenues · autumn colour",
    size:"12–15 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:3, thirst:10, careLevel:5, sunNeed:85, sunMin:50},
 
   {common:"Handkerchief Tree", latin:"Davidia involucrata", hue:0,
@@ -3987,6 +4110,7 @@ const PLANTS = [
    resilience:"cold hardy once established · generally pest free",
    uses:"large specimen · woodland gardens · architectural",
    size:"12–15 m H × 8–12 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:2, thirst:10, careLevel:6, sunNeed:70, sunMin:40},
 
   {common:"Choshu-hizakura Flowering Cherry", latin:"Prunus 'Chōshū-hizakura'", hue:335,
@@ -4012,6 +4136,7 @@ const PLANTS = [
    resilience:"cold hardy · established garden cherry",
    uses:"specimen · spring blossom · autumn colour",
    size:"6–8 m H × 6–8 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:11, thirst:8, careLevel:6, sunNeed:90, sunMin:65},
 
   {common:"Autumn Spire Rowan", latin:"Sorbus AUTUMN SPIRE ('Flanrock')", hue:20,
@@ -4037,6 +4162,7 @@ const PLANTS = [
    resilience:"exposed-site tolerant · urban suitable",
    uses:"small gardens · narrow sites · wildlife gardens",
    size:"4–8 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:10, thirst:8, careLevel:5, sunNeed:75, sunMin:45},
 
   {common:"Golden Weeping Willow", latin:"Salix × sepulcralis var. chrysocoma", hue:55,
@@ -4062,6 +4188,7 @@ const PLANTS = [
    resilience:"wind tolerant · suited to waterside soils",
    uses:"large lawns · waterside planting · specimen",
    size:"12–15 m H × 10–15 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:16, pestRisk:13, thirst:15, careLevel:8, sunNeed:95, sunMin:80},
 
   {common:"French Cancan Bleu Hydrangea", latin:"Hydrangea macrophylla RENDEZ-VOUS FRENCH CANCAN BLEU", hue:220,
@@ -4087,6 +4214,7 @@ const PLANTS = [
    resilience:"compact · container suitable",
    uses:"containers · shrub borders · woodland-style planting",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:11, thirst:14, careLevel:8, sunNeed:45, sunMin:25},
 
   {common:"SunSeekers Rosy Coneflower", latin:"Echinacea SUNSEEKERS ROSY ('Ifecssrosy')", hue:335,
@@ -4112,6 +4240,7 @@ const PLANTS = [
    resilience:"drought tolerant once established · sturdy stems",
    uses:"pollinators · prairie planting · containers",
    size:"0.5–1 m H × 0.1–0.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:7, careLevel:5, sunNeed:95, sunMin:80},
 
   {common:"Cobalus Gayfeather", latin:"Liatris spicata 'Cobalus'", hue:275,
@@ -4137,6 +4266,7 @@ const PLANTS = [
    resilience:"cold hardy · heat tolerant",
    uses:"containers · pollinators · front of prairie borders",
    size:"25 cm H × 20–30 cm W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:9, careLevel:5, sunNeed:98, sunMin:90},
 
   {common:"Delicious Strawberry Coneflower", latin:"Echinacea 'Delicious Strawberry'", hue:335,
@@ -4162,6 +4292,7 @@ const PLANTS = [
    resilience:"hardy · sturdy stems · pollinator friendly",
    uses:"pollinators · cut flowers · containers · prairie borders",
    size:"60 cm H × 45 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:7, careLevel:5, sunNeed:95, sunMin:80},
 
   {common:"Snow Bird Tulip Tree", latin:"Liriodendron tulipifera 'Snow Bird'", hue:95,
@@ -4187,6 +4318,7 @@ const PLANTS = [
    resilience:"stable variegation · drought tolerant once established",
    uses:"large specimen · architectural · foliage contrast",
    size:"15–20 m H × 4–8 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:4, thirst:10, careLevel:6, sunNeed:80, sunMin:45},
 
   {common:"Persian Silk Tree", latin:"Albizia julibrissin", hue:75,
@@ -4212,6 +4344,7 @@ const PLANTS = [
    resilience:"heat tolerant · drought tolerant once established",
    uses:"exotic specimen · courtyards · architectural planting",
    size:"4–8 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:11, pestRisk:8, thirst:7, careLevel:8, sunNeed:95, sunMin:85},
 
   {common:"Devon Cream Summer Jasmine", latin:"Jasminum officinale 'Devon Cream'", hue:50,
@@ -4237,6 +4370,7 @@ const PLANTS = [
    resilience:"vigorous · urban suitable · pollinator friendly",
    uses:"walls · pergolas · scented gardens · large containers",
    size:"4–6 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:13, pestRisk:9, thirst:9, careLevel:7, sunNeed:80, sunMin:45},
 
   {common:"Inferno Looking-glass Plant", latin:"Coprosma 'Inferno'", hue:5,
@@ -4262,6 +4396,7 @@ const PLANTS = [
    resilience:"coastal · wind tolerant in mild sites",
    uses:"containers · coastal planting · foliage colour",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
    seasonalImpact:"", growthSpeed:9, pestRisk:7, thirst:8, careLevel:8, sunNeed:80, sunMin:45},
 
   {common:"White Profusion Butterfly Bush", latin:"Buddleja davidii 'White Profusion'", hue:0,
@@ -4287,6 +4422,7 @@ const PLANTS = [
    resilience:"drought tolerant · vigorous · urban suitable",
    uses:"pollinators · shrub borders · screening",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:16, pestRisk:6, thirst:5, careLevel:4, sunNeed:95, sunMin:70},
 
   {common:"Kinme Japanese Holly", latin:"Ilex crenata 'Kinme'", hue:120,
@@ -4312,6 +4448,7 @@ const PLANTS = [
    resilience:"cold hardy · clipping tolerant · urban suitable",
    uses:"topiary · hedging · screening · containers",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:5, pestRisk:10, thirst:9, careLevel:7, sunNeed:65, sunMin:35},
 
   {common:"Globosa Nana Japanese Cedar", latin:"Cryptomeria japonica 'Globosa Nana'", hue:120,
@@ -4337,6 +4474,7 @@ const PLANTS = [
    resilience:"cold hardy · generally pest free",
    uses:"containers · rock gardens · evergreen structure",
    size:"0.5–1 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:5, pestRisk:3, thirst:9, careLevel:3, sunNeed:70, sunMin:40},
 
   {common:"Paperbush", latin:"Edgeworthia chrysantha", hue:50,
@@ -4362,6 +4500,7 @@ const PLANTS = [
    resilience:"generally pest and disease free",
    uses:"courtyards · containers · wall borders · winter scent",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:2, thirst:10, careLevel:7, sunNeed:55, sunMin:35},
 
   {common:"Pink Marble Christmas Berry", latin:"Photinia × fraseri PINK MARBLE ('Cassini')", hue:345,
@@ -4387,6 +4526,8 @@ const PLANTS = [
    resilience:"exposed-site tolerant · evergreen · low maintenance",
    uses:"hedging · screening · specimen · foliage colour",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:10, pestRisk:11, thirst:8, careLevel:7, sunNeed:75, sunMin:40},
 
   {common:"Sunset Rock Rose", latin:"Cistus × pulverulentus 'Sunset'", hue:335,
@@ -4412,6 +4553,8 @@ const PLANTS = [
    resilience:"drought tolerant · coastal · generally pest free",
    uses:"gravel gardens · groundcover · containers",
    size:"0.3–0.5 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:3, careLevel:4, sunNeed:98, sunMin:90},
 
   {common:"Oleander", latin:"Nerium oleander", hue:335,
@@ -4437,6 +4580,8 @@ const PLANTS = [
    resilience:"heat · drought · coastal tolerant in mild sites",
    uses:"patio containers · conservatory · Mediterranean gardens",
    size:"2–4 m H × 1.5–2.5 m W",
+   hardinessNote:"Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:10, pestRisk:9, thirst:6, careLevel:9, sunNeed:95, sunMin:80},
 
   {common:"Emerald 'n' Gold Spindle", latin:"Euonymus fortunei 'Emerald 'n' Gold'", hue:55,
@@ -4462,6 +4607,7 @@ const PLANTS = [
    resilience:"exposed-site tolerant · adaptable · low maintenance",
    uses:"groundcover · containers · low hedging · wall training",
    size:"0.5–1 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:7, careLevel:5, sunNeed:65, sunMin:25},
 
   {common:"Emerald Gaiety Spindle", latin:"Euonymus fortunei 'Emerald Gaiety'", hue:110,
@@ -4487,6 +4633,7 @@ const PLANTS = [
    resilience:"exposed-site tolerant · adaptable · low maintenance",
    uses:"groundcover · containers · low hedging · wall training",
    size:"0.5–1 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:7, careLevel:5, sunNeed:65, sunMin:40},
 
   {common:"Japanese Knotweed", latin:"Reynoutria japonica", hue:105,
@@ -4513,6 +4660,7 @@ const PLANTS = [
    uses:"ID and report only",
    size:"1.5–2.5 m H × 2.5–4 m+ W",
    compliance:"ILLEGAL TO SPREAD. Must not be planted or caused to grow in the wild, and you must stop it spreading off your property; cut material and contaminated soil are controlled waste — registered carrier and authorised facility only. A 1cm fragment of rhizome regrows after years dormant. Use a specialist contractor.",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:20, pestRisk:2, thirst:8, careLevel:20, sunNeed:70, sunMin:40},
 
   {common:"Jelena Witch Hazel", latin:"Hamamelis × intermedia 'Jelena'", hue:28,
@@ -4538,6 +4686,7 @@ const PLANTS = [
    resilience:"cold hardy · long-lived · low maintenance",
    uses:"winter scent · specimen · woodland edge · beside paths",
    size:"2.5-4m H × 2.5-4m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:4, thirst:11, careLevel:6, sunNeed:80, sunMin:45},
 
   {common:"Mountain Hydrangea", latin:"Hydrangea serrata", hue:220,
@@ -4563,6 +4712,7 @@ const PLANTS = [
    resilience:"cool-climate tolerant · harmful if eaten · may irritate skin",
    uses:"woodland edge · shady borders · containers · small gardens",
    size:"1-1.5m H × 1-1.5m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:10, thirst:15, careLevel:8, sunNeed:55, sunMin:30},
 
   {common:"Pink Kousa Dogwood", latin:"Cornus kousa", hue:335,
@@ -4588,6 +4738,7 @@ const PLANTS = [
    resilience:"anthracnose-resistant · trouble-free · good autumn colour",
    uses:"specimen tree · small gardens · woodland edge",
    size:"4-8m H × 4-8m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:4, thirst:12, careLevel:5, sunNeed:70, sunMin:40},
 
   {common:"Waterlily 'Marliacea Carnea'", latin:"Nymphaea 'Marliacea Carnea'", hue:350,
@@ -4779,6 +4930,7 @@ const PLANTS = [
    resilience:"very hardy · holds its colour all winter · vine weevil in pots is the standard problem",
    uses:"containers · front of borders · shade · foliage contrast · edging",
    size:"0.1-0.5m H × 0.1-0.5m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:9, pestRisk:12, thirst:11, careLevel:6, sunNeed:50, sunMin:15},
 
   {common:"Snowy Mespilus", latin:"Amelanchier lamarckii", hue:20,
@@ -4832,6 +4984,7 @@ const PLANTS = [
    resilience:"very hardy · takes any soil pH · scab-prone, with canker behind it",
    uses:"spring blossom · autumn fruit · jelly · wildlife · pollination partner for apples",
    size:"8-12m H × 4-8m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:12, pestRisk:13, thirst:10, careLevel:7, sunNeed:85, sunMin:45},
 
   {common:"English Oak", latin:"Quercus robur", hue:100,
@@ -4857,6 +5010,7 @@ const PLANTS = [
    resilience:"extremely long-lived and wind-firm · mildew and knopper galls are cosmetic · oak processionary moth is a regulated pest in parts of London and the South East",
    uses:"parkland · large gardens · native and wildlife planting · hedgerow standards",
    size:"12m+ H × 12m+ W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:9, pestRisk:10, thirst:8, careLevel:5, sunNeed:85, sunMin:45},
 
   {common:"Poppin' Purple Agapanthus", latin:"Agapanthus POPPIN’ PURPLE ('PM003')", hue:275,
@@ -4883,6 +5037,7 @@ const PLANTS = [
    uses:"patio containers · sunny borders · coastal · cutting · pollinators",
    size:"0.5-1m H × 0.1-0.5m W",
    pest:"slugs",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:13, pestRisk:7, thirst:9, careLevel:6, sunNeed:95, sunMin:70},
 
   {common:"Black Bamboo", latin:"Phyllostachys nigra", hue:115,
@@ -5268,6 +5423,8 @@ const PLANTS = [
    resilience:"exposed-site tolerant · adaptable · urban suitable",
    uses:"hedging · screening · topiary · foliage colour",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:13, pestRisk:10, thirst:7, careLevel:5, sunNeed:80, sunMin:45},
 
   {common:"Black Chokeberry", latin:"Aronia melanocarpa", hue:5,
@@ -5293,6 +5450,7 @@ const PLANTS = [
    resilience:"very cold-hardy · wet-soil tolerant · wildlife value · low-maintenance",
    uses:"wildlife planting · autumn colour · informal hedging · edible fruit",
    size:"1.5–2.5 m H × 1.5–3 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:2, thirst:11, careLevel:3, sunNeed:75, sunMin:40},
 
   {common:"Hairy Canary Clover", latin:"Lotus hirsutus LITTLE BOY BLUE ('Lisbob')", hue:205,
@@ -5318,6 +5476,7 @@ const PLANTS = [
    resilience:"drought-tolerant · coastal · poor-soil tolerant · pollinator friendly",
    uses:"gravel gardens · containers · sunny edging · coastal planting",
    size:"30 cm H × 30 cm W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:10, pestRisk:2, thirst:3, careLevel:5, sunNeed:95, sunMin:60},
 
   {common:"Bonfire Begonia", latin:"Begonia BONFIRE ('Nzcone')", hue:15,
@@ -5343,6 +5502,7 @@ const PLANTS = [
    resilience:"heat-tolerant · self-cleaning flowers · shade-tolerant",
    uses:"containers · hanging baskets · window boxes · summer bedding",
    size:"30–45 cm H × 30–45 cm W",
+   hardinessNote:"Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
    seasonalImpact:"", growthSpeed:16, pestRisk:10, thirst:13, careLevel:14, sunNeed:50, sunMin:25},
 
   {common:"Virginia Creeper", latin:"Parthenocissus quinquefolia", hue:355,
@@ -5369,6 +5529,7 @@ const PLANTS = [
    uses:"walls · fences · fast screening · autumn colour",
    size:"8–12 m H × 4–8 m W",
    compliance:"Listed on Schedule 9 of the Wildlife and Countryside Act 1981. Sale is not banned, but it must not be planted or otherwise caused to grow in the wild.",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:18, pestRisk:2, thirst:8, careLevel:12, sunNeed:60, sunMin:20},
 
   {common:"Flowering Quince 'Kinshiden'", latin:"Chaenomeles speciosa 'Kinshiden'", hue:50,
@@ -5394,6 +5555,7 @@ const PLANTS = [
    resilience:"very hardy · thorny · wall-trainable · lime-tolerant · shade-tolerant",
    uses:"wall training · informal hedging · early nectar · fruit for jelly",
    size:"1.5–2.5 m H × 2–3 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:8, careLevel:10, sunNeed:70, sunMin:35},
 
   {common:"Obsession Japanese Skimmia", latin:"Skimmia japonica OBSESSION ('Obsbolwi')", hue:0,
@@ -5419,6 +5581,8 @@ const PLANTS = [
    resilience:"self-fertile · shade tolerant · compact",
    uses:"containers · shade borders · winter colour",
    size:"0.5–1 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:11, careLevel:5, sunNeed:25, sunMin:10},
 
   {common:"Black Beauty Elder", latin:"Sambucus nigra f. porphyrophylla 'Gerda'", hue:345,
@@ -5444,6 +5608,7 @@ const PLANTS = [
    resilience:"coastal · exposed-site tolerant · adaptable",
    uses:"foliage contrast · wildlife · screening",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:13, pestRisk:10, thirst:8, careLevel:6, sunNeed:85, sunMin:45},
 
   {common:"Pineapple Broom", latin:"Argyrocytisus battandieri", hue:55,
@@ -5469,6 +5634,7 @@ const PLANTS = [
    resilience:"drought · coastal · lime tolerant",
    uses:"scented borders · wall shrubs · Mediterranean planting",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:8, pestRisk:7, thirst:5, careLevel:6, sunNeed:95, sunMin:85},
 
   {common:"Orange Star Firethorn", latin:"Pyracantha coccinea 'Orange Star'", hue:30,
@@ -5494,6 +5660,8 @@ const PLANTS = [
    resilience:"thornless · fireblight tolerant · disease resistant",
    uses:"walls · hedging · containers · wildlife",
    size:"2 m H × 1 m W",
+   hardinessNote:"Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:9, pestRisk:8, thirst:6, careLevel:5, sunNeed:75, sunMin:35},
 
   {common:"Chinese Wisteria", latin:"Wisteria sinensis", hue:275,
@@ -5519,6 +5687,7 @@ const PLANTS = [
    resilience:"cold hardy · vigorous · very long-lived",
    uses:"walls · pergolas · large trees · trained standards",
    size:"12–15 m H × 8–12 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:16, pestRisk:11, thirst:9, careLevel:13, sunNeed:90, sunMin:50},
 
   {common:"Star Jasmine", latin:"Trachelospermum jasminoides", hue:115,
@@ -5573,6 +5742,7 @@ const PLANTS = [
    uses:"Borders, cottage gardens, city and courtyard gardens, wildlife gardens and containers.",
    size:"40–60 cm H × 40–60 cm W",
    pest:"slugs",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:12, careLevel:6, sunNeed:55, sunMin:25},
 
   {common:"Rosemary 'Miss Jessopp's Upright'", latin:"Salvia rosmarinus 'Miss Jessopp’s Upright'", hue:220,
@@ -5761,6 +5931,7 @@ const PLANTS = [
    uses:"borders · cut flowers · wildlife gardens",
    size:"50–100 cm H × 50–100 cm W",
    compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:8, pestRisk:10, thirst:12, careLevel:5, sunNeed:60, sunMin:35},
 
@@ -5814,6 +5985,7 @@ const PLANTS = [
    resilience:"very cold hardy · deep-shade tolerant",
    uses:"shade borders · underplanting · containers",
    size:"30–50 cm H × 30–50 cm W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:7, pestRisk:13, thirst:13, careLevel:6, sunNeed:25, sunMin:10},
 
@@ -5841,6 +6013,7 @@ const PLANTS = [
    uses:"borders · containers · pollinators",
    size:"50–60 cm H × 30–50 cm W",
    compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:9, pestRisk:10, thirst:11, careLevel:5, sunNeed:65, sunMin:35},
 
@@ -5869,6 +6042,7 @@ const PLANTS = [
    size:"70–80 cm H × 60–75 cm W",
    toxicity:"Fruit ornamental · not to be eaten",
    compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"semi-evergreen",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:42},
 
@@ -5896,6 +6070,7 @@ const PLANTS = [
    uses:"walls · fences · wildlife cover · containers",
    size:"4–8 m H × 1–1.5 m W",
    toxicity:"Harmful if eaten · skin irritant/allergen",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:14, pestRisk:10, thirst:7, careLevel:6, sunNeed:65, sunMin:35},
 
@@ -6007,6 +6182,7 @@ const PLANTS = [
    resilience:"cold hardy",
    uses:"containers · border edging · small gardens · pollinators",
    size:"50–60 cm H × 40–50 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:11, pestRisk:8, thirst:8, careLevel:4, sunNeed:82, sunMin:50},
 
@@ -6033,6 +6209,7 @@ const PLANTS = [
    resilience:"cold hardy · shade tolerant",
    uses:"ground cover · border edging · underplanting · containers",
    size:"30 cm H × 60 cm W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:9, pestRisk:9, thirst:9, careLevel:5, sunNeed:72, sunMin:45},
 
@@ -6090,6 +6267,7 @@ const PLANTS = [
    size:"70–80 cm H × 60–75 cm W",
    toxicity:"Fruit ornamental · not to be eaten",
    compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"semi-evergreen",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:8, careLevel:5, sunNeed:75, sunMin:42},
 
@@ -6144,6 +6322,7 @@ const PLANTS = [
    resilience:"cold hardy · wet-soil tolerant · shade tolerant",
    uses:"winter stems · borders · mass planting · wildlife gardens",
    size:"1.5–2.5 m H × 2.5–4 m W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:14, pestRisk:10, thirst:14, careLevel:6, sunNeed:80, sunMin:45},
 
@@ -6171,6 +6350,7 @@ const PLANTS = [
    uses:"specimen · borders · cottage gardens · pollinators",
    size:"2.5–4 m H × 2.5–4 m W",
    toxicity:"Harmful if eaten",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:15, pestRisk:4, thirst:10, careLevel:5, sunNeed:82, sunMin:48},
 
@@ -6225,6 +6405,7 @@ const PLANTS = [
    uses:"walls · trellis · containers · wildlife gardens",
    size:"1.5–2.5 m H × 1–1.5 m W",
    toxicity:"Fruit ornamental · not to be eaten",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:15, pestRisk:12, thirst:11, careLevel:6, sunNeed:72, sunMin:42},
 
@@ -6333,6 +6514,7 @@ const PLANTS = [
    resilience:"part-shade tolerant · drought tolerant once established",
    uses:"specimen · small gardens · courtyards · pollinators",
    size:"3 m H × 3 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:9, careLevel:7, sunNeed:82, sunMin:52},
 
@@ -6359,6 +6541,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal tolerant · pollution tolerant",
    uses:"hedging · screening · coastal gardens · foliage contrast",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:12, pestRisk:8, thirst:6, careLevel:4, sunNeed:78, sunMin:42},
 
@@ -6385,6 +6568,7 @@ const PLANTS = [
    resilience:"cold hardy · part-shade tolerant · urban suitable",
    uses:"specimen · courtyards · containers · foliage colour",
    size:"4–6 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:7, pestRisk:10, thirst:10, careLevel:7, sunNeed:58, sunMin:40},
 
@@ -6411,6 +6595,7 @@ const PLANTS = [
    resilience:"cold hardy · dry-shade tolerant · shade tolerant",
    uses:"ground cover · woodland gardens · underplanting · containers",
    size:"30–40 cm H × 60–80 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:10, pestRisk:7, thirst:8, careLevel:4, sunNeed:48, sunMin:28},
 
@@ -6492,6 +6677,7 @@ const PLANTS = [
    resilience:"cold hardy · wet-soil tolerant · shade tolerant",
    uses:"ground cover · bog gardens · pond margins · containers",
    size:"20–30 cm H × 50–100 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:16, pestRisk:2, thirst:11, careLevel:7, sunNeed:75, sunMin:45},
 
@@ -6574,6 +6760,7 @@ const PLANTS = [
    uses:"shade borders · woodland gardens · containers · foliage contrast",
    size:"50–60 cm H × 80–100 cm W",
    toxicity:"Toxic to dogs and cats if eaten",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:11, pestRisk:15, thirst:13, careLevel:7, sunNeed:40, sunMin:20},
 
@@ -6629,6 +6816,7 @@ const PLANTS = [
    uses:"walls · trellis · containers · flowering screens",
    size:"1.5–2.5 m H × 1–1.5 m W",
    toxicity:"Skin irritant · harmful to rabbits if eaten",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:14, pestRisk:13, thirst:12, careLevel:10, sunNeed:90, sunMin:60},
 
@@ -6655,6 +6843,7 @@ const PLANTS = [
    resilience:"very cold hardy · drought tolerant · exposed-site tolerant",
    uses:"rock gardens · troughs · containers · ground cover",
    size:"10 cm H × 10–50 cm W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:2, careLevel:3, sunNeed:96, sunMin:80},
 
@@ -6708,6 +6897,7 @@ const PLANTS = [
    resilience:"cold hardy · exposed-site tolerant",
    uses:"shrub borders · cottage gardens · banks · flowering specimen",
    size:"1–1.5 m H × 1–1.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:10, pestRisk:5, thirst:10, careLevel:4, sunNeed:88, sunMin:65},
 
@@ -6734,6 +6924,7 @@ const PLANTS = [
    resilience:"cold hardy · part-shade tolerant",
    uses:"specimen · parkland · shade tree · wildlife gardens",
    size:"15–30 m H × 10–18 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:10, pestRisk:9, thirst:11, careLevel:5, sunNeed:82, sunMin:52},
 
@@ -6788,6 +6979,7 @@ const PLANTS = [
    uses:"containers · small gardens · shrub borders · edging",
    size:"10–50 cm H × 50–100 cm W",
    toxicity:"Harmful if eaten",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:8, pestRisk:13, thirst:11, careLevel:8, sunNeed:50, sunMin:32},
 
@@ -6842,6 +7034,7 @@ const PLANTS = [
    resilience:"cold hardy · drought tolerant · wind tolerant · urban suitable",
    uses:"specimen · autumn colour · woodland gardens · architectural planting",
    size:"6–10 m H × 4–6 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:9, pestRisk:4, thirst:7, careLevel:3, sunNeed:82, sunMin:50},
 
@@ -6869,6 +7062,7 @@ const PLANTS = [
    uses:"containers · gravel gardens · border fronts · pollinators",
    size:"20–25 cm H × 20–30 cm W",
    toxicity:"Toxic to pets if eaten",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:8, pestRisk:10, thirst:6, careLevel:4, sunNeed:94, sunMin:78},
 
@@ -6895,6 +7089,7 @@ const PLANTS = [
    resilience:"cold hardy · part-shade tolerant · urban suitable",
    uses:"specimen · containers · courtyards · autumn colour",
    size:"2.5–4 m H × 2.5–4 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:10, careLevel:7, sunNeed:58, sunMin:40},
 
@@ -6921,6 +7116,7 @@ const PLANTS = [
    resilience:"very cold hardy · drought tolerant · coastal tolerant · wind tolerant",
    uses:"specimen · slopes · coastal gardens · large rock gardens",
    size:"2.5–4 m H × 4–8 m W",
+   hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:6, pestRisk:9, thirst:5, careLevel:3, sunNeed:95, sunMin:75},
 
@@ -6974,6 +7170,7 @@ const PLANTS = [
    resilience:"drought tolerant · coastal tolerant · urban suitable",
    uses:"rock gardens · walls · edging · containers",
    size:"15–30 cm H × 50–100 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"semi-evergreen",
    seasonalImpact:"", growthSpeed:12, pestRisk:3, thirst:4, careLevel:3, sunNeed:92, sunMin:58},
 
@@ -7000,6 +7197,7 @@ const PLANTS = [
    resilience:"drought tolerant once established · coastal tolerant",
    uses:"rock gardens · containers · edging · walls",
    size:"10–15 cm H × 30–50 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:8, pestRisk:5, thirst:6, careLevel:6, sunNeed:90, sunMin:68},
 
@@ -7496,6 +7694,7 @@ const PLANTS = [
    resilience:"shade tolerant · cold hardy",
    uses:"woodland gardens · ground cover · shrub underplanting · cottage gardens",
    size:"30–45 cm H × 50–100 cm W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:8, pestRisk:7, thirst:12, careLevel:4, sunNeed:42, sunMin:20},
 
@@ -7524,6 +7723,7 @@ const PLANTS = [
    size:"25–35 cm H × 40–45 cm W",
    toxicity:"Harmful if eaten · skin irritant",
    compliance:"PBR protected · commercial propagation restricted",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:7, pestRisk:11, thirst:12, careLevel:5, sunNeed:48, sunMin:28},
 
@@ -7934,6 +8134,7 @@ const PLANTS = [
    resilience:"drought tolerant once established · cold hardy · shade tolerant",
    uses:"woodland gardens · underplanting · rock gardens · naturalising",
    size:"To 10 cm H × 15–30 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:7, pestRisk:6, thirst:5, careLevel:4, sunNeed:38, sunMin:18},
 
@@ -8234,6 +8435,7 @@ const PLANTS = [
    resilience:"Robust and adaptable shrub that tolerates exposed positions and a range of soils when moisture is adequate.",
    uses:"Shrub borders, woodland gardens, cottage gardens, wildlife gardens, hedging, informal screening and specimen planting.",
    size:"1-1.5m H × 1-1.5m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"Deciduous; dark green, palmately lobed leaves turning purplish-red in autumn.",
    seasonalImpact:"", growthSpeed:12, pestRisk:7, thirst:14, careLevel:7, sunNeed:65, sunMin:35},
 
@@ -10530,6 +10732,7 @@ const PLANTS_ON_HOLD=[
    resilience:"cold hardy · chalk tolerant",
    uses:"specimen · screening · cut flowers · cottage gardens",
    size:"4–8 m H × 4–8 m W",
+   hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:9, pestRisk:12, thirst:9, careLevel:6, sunNeed:92, sunMin:72},
 
@@ -10556,6 +10759,7 @@ const PLANTS_ON_HOLD=[
    resilience:"generally pest free · woodland-edge suitable",
    uses:"woodland gardens · winter interest · shrub borders",
    size:"2.5–4 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:10, careLevel:5, sunNeed:55, sunMin:30},
 
   {common:"Clematis 'Purpurea Plena Elegans'", latin:"Clematis viticella 'Purpurea Plena Elegans'", hue:290,
@@ -10581,6 +10785,7 @@ const PLANTS_ON_HOLD=[
    resilience:"Very reliable",
    uses:"Trellis, obelisks, through shrubs",
    size:"1.5–2.5 m H × 0.5–1 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:65, sunMin:40},
 
   {common:"Clematis montana var. rubens", latin:"Clematis montana var. rubens", hue:315,
@@ -10606,6 +10811,7 @@ const PLANTS_ON_HOLD=[
    resilience:"Very vigorous",
    uses:"Walls, trees, large structures",
    size:"8–12 m H × 4–8 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:65, sunMin:30},
 
   {common:"Evergreen Clematis", latin:"Clematis armandii", hue:200,
@@ -10631,6 +10837,8 @@ const PLANTS_ON_HOLD=[
    resilience:"Good in sheltered spot",
    uses:"Walls, pergolas, evergreen screen",
    size:"4–8 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:75, sunMin:45},
 
   {common:"Russian Vine", latin:"Fallopia baldschuanica", hue:220,
@@ -10656,6 +10864,7 @@ const PLANTS_ON_HOLD=[
    resilience:"Extremely vigorous - needs space",
    uses:"Covering ugly structures, quick screen",
    size:"8–12 m H × 4–8 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:"", pestRisk:"", thirst:"", careLevel:"", sunNeed:70, sunMin:35},
 
   {common:"Vial's primrose", latin:"Primula vialii", hue:278,
@@ -12554,6 +12763,7 @@ const PLANTS_ON_HOLD=[
    resilience:"shade tolerant · coastal tolerant",
    uses:"ground cover · edging · containers · foliage contrast",
    size:"15–20 cm H × 30–50 cm W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:7, pestRisk:5, thirst:9, careLevel:4, sunNeed:62, sunMin:40},
 

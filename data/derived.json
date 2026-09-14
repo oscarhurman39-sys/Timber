@@ -1,0 +1,1279 @@
+{
+ "_readme": [
+  "Values DEDUCED by tools/derive-field.js, not researched by a human.",
+  "",
+  "Every entry here is true — a band definition transcribed from CARD-STATS.md,",
+  "or a class word read back out of the card's own `visual` line — but none of",
+  "it is plant-specific research, and a sourced answer should replace it.",
+  "",
+  "This file exists because filling a blank HIDES it: backfill-field.js <field>",
+  "--missing stops reporting a card once that field is non-empty. This is the",
+  "recoverable list of what still wants a real answer.",
+  "",
+  "To replace one: put the researched value in data/incoming/ then",
+  "  node tools/backfill-field.js <field> --apply --overwrite"
+ ],
+ "generated": "2026-09-14",
+ "entries": [
+  {
+   "latin": "Nandina domestica",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Choisya ternata",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Weigela florida ‘Nana Variegata’",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Kniphofia 'Pyromania Orange Blaze'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Pennisetum 'Rubrum'",
+   "field": "hardinessNote",
+   "value": "Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
+   "rule": "band-definition:H2"
+  },
+  {
+   "latin": "Hydrangea macrophylla 'Sweet Cupcake'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Abelia 'Raspberry Profusion'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Cornus kousa 'Flower Tower'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Ajuga reptans 'Burgundy Glow'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Spiraea 'Double Play Doozie'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Potentilla fruticosa 'Pink Beauty'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Cercis chinensis 'Avondale'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Prunus lusitanica 'Angustifolia'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Prunus lusitanica 'Angustifolia'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Salvia 'Blue Spire'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Mahonia japonica",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Mahonia japonica",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Leycesteria formosa 'Golden Lanterns'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Buddleja 'Pugster Orchid'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Salix integra 'Hakuro-nishiki'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Plumbago auriculata",
+   "field": "hardinessNote",
+   "value": "Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
+   "rule": "band-definition:H2"
+  },
+  {
+   "latin": "Euonymus japonicus 'Aureomarginatus'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Euonymus japonicus 'Aureomarginatus'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Monarda didyma 'Bubblegum Blast'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Carpinus betulus",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Elaeagnus ×submacrophylla",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Elaeagnus ×submacrophylla",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Gunnera manicata",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Acer rubrum 'October Glory'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Fatsia japonica 'Tsumugi-shibori'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Griselinia littoralis",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Griselinia littoralis",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Indigofera himalayensis 'Silk Road'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Phalaenopsis Hybrid Group",
+   "field": "hardinessNote",
+   "value": "Subtropical: needs a heated glasshouse at 10-15C and cannot tolerate frost.",
+   "rule": "band-definition:H1b"
+  },
+  {
+   "latin": "Viburnum tinus 'Eve Price'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Viburnum tinus 'Eve Price'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Paeonia 'Orange Victory'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Lavandula stoechas 'Anouk Deluxe Purple'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Citrus × meyeri 'Meyer'",
+   "field": "hardinessNote",
+   "value": "Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
+   "rule": "band-definition:H2"
+  },
+  {
+   "latin": "Euonymus japonicus 'Green Spire'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Ilex crenata 'Jenny'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "× Cuprocyparis leylandii 'Gold Rider'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "× Cuprocyparis leylandii 'Gold Rider'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Rhododendron 'Horizon Monarch'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Acer palmatum 'Ōsakazuki'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Musa basjoo",
+   "field": "hardinessNote",
+   "value": "Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
+   "rule": "band-definition:H2"
+  },
+  {
+   "latin": "Cornus controversa 'Variegata'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Olea europaea",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Olea europaea",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Acer palmatum 'Bloodgood'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Salvia 'Hot Lips'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Magnolia HONEY TULIP ('Jurmag5')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Eryngium × olivierianum BIG BLUE ('Myersblue')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Lonicera × purpusii 'Winter Beauty'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Euonymus alatus",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Ligularia 'Treasure Island'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Hylotelephium 'Dream Dazzler'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Hydrangea aspera 'Rosemary Foster'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Ginkgo biloba",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Cordyline australis CHARLIE BOY ('Ric01')",
+   "field": "hardinessNote",
+   "value": "Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   "rule": "band-definition:H3"
+  },
+  {
+   "latin": "Oenothera lindheimeri GAUDI ROSE ('Florgaucomro')",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Hydrangea paniculata 'Wim’s Red'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Rhododendron 'Gartendirektor Glocker'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Acer shirasawanum MOONRISE ('Munn 001')",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Callistemon citrinus 'Splendens'",
+   "field": "hardinessNote",
+   "value": "Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   "rule": "band-definition:H3"
+  },
+  {
+   "latin": "Hydrangea arborescens 'Pink Annabelle'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Pittosporum tenuifolium 'Elizabeth'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Osmanthus heterophyllus 'Goshiki'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Cercis canadensis 'Eternal Flame'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Agastache 'Summerlong Coral'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Yucca gloriosa 'Variegata'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Alstroemeria INDIAN SUMMER ('Tesronto')",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Cornus kousa FLOWER TOWER ('Zuilb1')",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Uncinia 'Everflame'",
+   "field": "hardinessNote",
+   "value": "Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   "rule": "band-definition:H3"
+  },
+  {
+   "latin": "Uncinia 'Everflame'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Camellia japonica 'Doctor King'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Camellia japonica 'Doctor King'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Caryopteris × clandonensis 'Worcester Gold'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Achillea millefolium 'Summer Fruits Lemon'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Achillea 'The Beacon'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Leucothoe fontanesiana WHITEWATER ('Howw')",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Leucothoe fontanesiana WHITEWATER ('Howw')",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Hydrangea DAREDEVIL ('Jpd01')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Rhaphiolepis × delacourii ENCHANTRESS ('Moness')",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Rhaphiolepis × delacourii ENCHANTRESS ('Moness')",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Philadelphus PETITE PERFUME PINK ('P1')",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Phlomis italica",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Scabiosa columbaria FLUTTER PURE WHITE ('Balflutturite')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Cotoneaster atropurpureus 'Variegatus'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Crinodendron hookerianum",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Prunus incisa 'Kojo-no-mai'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Escallonia laevis PINK ELLE ('Lades')",
+   "field": "hardinessNote",
+   "value": "Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   "rule": "band-definition:H3"
+  },
+  {
+   "latin": "Escallonia laevis PINK ELLE ('Lades')",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Euonymus fortunei 'Harlequin'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Euonymus fortunei 'Harlequin'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Miscanthus sinensis 'Morning Light'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Festuca glauca INTENSE BLUE ('Casblue')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Berberis thunbergii 'Orange Ice'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Pennisetum advena TINY TAILS ('TUS022')",
+   "field": "hardinessNote",
+   "value": "Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   "rule": "band-definition:H3"
+  },
+  {
+   "latin": "Cercidiphyllum japonicum",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Lobelia × speciosa STARSHIP DEEP ROSE ('Pas905518')",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Lomandra longifolia WHITE SANDS ('Roma 13')",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Lomandra longifolia WHITE SANDS ('Roma 13')",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Eriobotrya japonica",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Eriobotrya japonica",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Ceratostigma willmottianum SAPPHIRE RING ('Lissbrill')",
+   "field": "hardinessNote",
+   "value": "Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   "rule": "band-definition:H3"
+  },
+  {
+   "latin": "Taxus baccata 'Fastigiata Robusta'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Taxus baccata 'Fastigiata Robusta'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Liriope muscari",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Liriope muscari",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Dryopteris erythrosora",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Cotinus 'Grace'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Passiflora ‘Damsel’s Delight’",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Euphorbia × martini MINER’S MERLOT ('Km-mm024')",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Euphorbia characias 'Silver Edge'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Euphorbia × martini 'Ascot Rainbow'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Sorbaria sorbifolia 'Sem'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Prunus cerasifera 'Nigra'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Hibiscus syriacus 'Oiseau Bleu'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Hibiscus syriacus 'Oiseau Bleu'",
+   "field": "foliage",
+   "value": "deciduous",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Viburnum × bodnantense 'Charles Lamont'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Hamamelis × intermedia 'Arnold Promise'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Liquidambar styraciflua 'Slender Silhouette'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Davidia involucrata",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Prunus 'Chōshū-hizakura'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Sorbus AUTUMN SPIRE ('Flanrock')",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Salix × sepulcralis var. chrysocoma",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Hydrangea macrophylla RENDEZ-VOUS FRENCH CANCAN BLEU",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Echinacea SUNSEEKERS ROSY ('Ifecssrosy')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Liatris spicata 'Cobalus'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Echinacea 'Delicious Strawberry'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Liriodendron tulipifera 'Snow Bird'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Albizia julibrissin",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Jasminum officinale 'Devon Cream'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Coprosma 'Inferno'",
+   "field": "hardinessNote",
+   "value": "Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   "rule": "band-definition:H3"
+  },
+  {
+   "latin": "Buddleja davidii 'White Profusion'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Ilex crenata 'Kinme'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Cryptomeria japonica 'Globosa Nana'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Edgeworthia chrysantha",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Photinia × fraseri PINK MARBLE ('Cassini')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Photinia × fraseri PINK MARBLE ('Cassini')",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Cistus × pulverulentus 'Sunset'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Cistus × pulverulentus 'Sunset'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Nerium oleander",
+   "field": "hardinessNote",
+   "value": "Half-hardy: withstands -5 to 1C. Outdoors in mild or coastal UK gardens; needs shelter or winter protection elsewhere.",
+   "rule": "band-definition:H3"
+  },
+  {
+   "latin": "Nerium oleander",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Euonymus fortunei 'Emerald 'n' Gold'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Euonymus fortunei 'Emerald Gaiety'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Reynoutria japonica",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Hamamelis × intermedia 'Jelena'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Hydrangea serrata",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Cornus kousa",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Heuchera villosa 'Timeless Night'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Malus 'John Downie'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Quercus robur",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Agapanthus POPPIN’ PURPLE ('PM003')",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Ligustrum ovalifolium 'Aureum'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Ligustrum ovalifolium 'Aureum'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Aronia melanocarpa",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Lotus hirsutus LITTLE BOY BLUE ('Lisbob')",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Begonia BONFIRE ('Nzcone')",
+   "field": "hardinessNote",
+   "value": "Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
+   "rule": "band-definition:H2"
+  },
+  {
+   "latin": "Parthenocissus quinquefolia",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Chaenomeles speciosa 'Kinshiden'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Skimmia japonica OBSESSION ('Obsbolwi')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Skimmia japonica OBSESSION ('Obsbolwi')",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Sambucus nigra f. porphyrophylla 'Gerda'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Argyrocytisus battandieri",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Pyracantha coccinea 'Orange Star'",
+   "field": "hardinessNote",
+   "value": "Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
+   "rule": "band-definition:H2"
+  },
+  {
+   "latin": "Pyracantha coccinea 'Orange Star'",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Wisteria sinensis",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Anemone × hybrida Pretty Lady Maria ('Aneplaria')",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Astrantia major 'Star of Love'",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Hosta 'Broadband'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Anemone × hybrida 'Pretty Lady Emily'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Hypericum × inodorum MIRACLE NIGHT ('Allmadne')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Hedera helix 'Oro di Bogliasco'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Weigela PRISM MAGIC CARPET ('VPWG18-06')",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Geranium 'Bob’s Blunder'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Hypericum × inodorum MIRACLE GRANDEUR ('Allgrandeur')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Cornus sericea 'Variegata'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Calycanthus 'Aphrodite'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Lonicera periclymenum 'Rhubarb and Custard'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Cercis canadensis CAROLINA SWEETHEART ('NCCC1')",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Elaeagnus × submacrophylla 'Limelight'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Acer palmatum 'Oridono-nishiki'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Epimedium × perralchicum 'Fröhnleiten'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Houttuynia cordata 'Pied Piper'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Hosta 'Emerald Charger'",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Clematis JOSEPHINE ('Evijohill')",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Sempervivum arachnoideum",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Deutzia × hybrida 'Magicien'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Magnolia acuminata",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Rhododendron 'Hoppy'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Parrotia persica 'Bella'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Allium karataviense 'Red Giant'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Acer palmatum 'Firecracker'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Pinus mugo",
+   "field": "hardinessNote",
+   "value": "Very hardy: withstands below -20C, so hardy anywhere in the UK.",
+   "rule": "band-definition:H7"
+  },
+  {
+   "latin": "Erigeron karvinskianus 'Profusion'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Lithodora diffusa 'Heavenly Blue'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Disporum sessile 'Variegatum'",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Helleborus × ericsmithii 'Winter Moonbeam'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Cyclamen hederifolium var. hederifolium f. albiflorum",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Viburnum opulus",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Syringa vulgaris",
+   "field": "hardinessNote",
+   "value": "Hardy through a very cold UK winter, withstanding -20 to -15C.",
+   "rule": "band-definition:H6"
+  },
+  {
+   "latin": "Stachyurus praecox",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Clematis viticella 'Purpurea Plena Elegans'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Clematis montana var. rubens",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Clematis armandii",
+   "field": "hardinessNote",
+   "value": "Hardy through an average UK winter, withstanding -10 to -5C.",
+   "rule": "band-definition:H4"
+  },
+  {
+   "latin": "Clematis armandii",
+   "field": "foliage",
+   "value": "evergreen",
+   "rule": "own-visual"
+  },
+  {
+   "latin": "Fallopia baldschuanica",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  },
+  {
+   "latin": "Ophiopogon planiscapus 'Kokuryū'",
+   "field": "hardinessNote",
+   "value": "Hardy through a cold UK winter, withstanding -15 to -10C.",
+   "rule": "band-definition:H5"
+  }
+ ]
+}
