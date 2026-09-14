@@ -5,6 +5,24 @@ brick: Run `CHATGPT-TOXICITY-BRIEF.md` over the first 50 names in
   `data/incoming/toxicity-todo-2026-09-13.txt` and send the JSON back — 305 of 392
   cards have a blank toxicity field, and blank renders identically to "safe".
 since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-14, night (Wintersweet dealt, Kousa fruit, and the photo guard
+  actually fixed) — **deck 346, hold 86.** Chimonanthus praecox dealt from the
+  hold block with Oscar's foliage frame; his JSON for it is committed as the
+  as-sent record and differs from the card already written only in small ways
+  (peak Dec-Mar vs Dec-Feb, a cvs note, four ratings within a few points, and a
+  BLANK toxicity where the card carries one — so the card's was kept; blank means
+  not recorded, not safe). Cornus kousa FLOWER TOWER gains its autumn fruit as a
+  PHOTO_SWAP frame, which closes a real `peak-vs-prose` defect rather than just
+  adding a picture: the card promises "red autumn colour" and peak May-Jun lights
+  none of it. **The photo-derivative guard is fixed, not written up this time.**
+  It let a second card ship photo-less the same day — the Wintersweet rendered as
+  a flat colour wash — and the premise in item 87 turned out to be wrong:
+  `optimise-photos --check` never needed sharp at all, it was bailing out with
+  exit 0 before reaching checks that are pure `fs`. Proved by deleting a
+  derivative and watching it fail where it used to pass. Two open questions for
+  Oscar: the deck has TWO Cornus kousa 'Flower Tower' cards, each naming 'Zuilb1'
+  in its own cvs (VQ 88), and the Deutzia foliage frame could belong to either of
+  two held cards, so nothing was dealt (VQ 89).
 progress: 2026-09-14, later (six-photo batch, merged with the deploy branch) —
   **deck 345, hold 87** after merging; this batch itself was +5 dealt, +1 held.
   Dealt: Fuchsia 'Alice Hoffman', Berberis thunbergii 'Desperados',

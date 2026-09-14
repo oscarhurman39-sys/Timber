@@ -36,13 +36,19 @@ const QUALITY = 80;
 const isMaster = f => /\.jpg$/i.test(f) && !/-cutout\.png$/i.test(f);
 
 (async () => {
-  let sharp;
-  try { sharp = require('sharp'); }
-  catch (e) {
-    if (CHECK) { console.log('optimise-photos: sharp not installed — skipping check'); process.exit(0); }
-    console.error('optimise-photos needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)');
-    process.exit(2);
-  }
+  /* --check needs no image library. Every question it asks — does the derivative
+     exist, is it older than its master, is it an orphan — is answered by fs.
+     It used to `process.exit(0)` the instant require('sharp') threw, which made
+     the guard a silent no-op on any machine without sharp installed. The app
+     loads photos/card/<slug>.webp and never the master, while add-plant.js,
+     add-plants-bulk.js and deal-plant.js all stage the master only, so a card
+     dealt on a machine without sharp shipped with NO photograph and a green
+     suite. It happened twice on 2026-09-14 — five cards in one batch, then the
+     Wintersweet — and both times the only thing that caught it was rendering the
+     card and looking at it. See VERIFY-QUEUE 87.
+     Generating derivatives still needs sharp; checking for them never did. */
+  let sharp = null;
+  try { sharp = require('sharp'); } catch (e) { /* only the generate path below needs it */ }
 
   const masters = fs.readdirSync(PHOTOS).filter(isMaster).sort();
   if (!masters.length) { console.error('no photo masters found in photos/'); process.exit(2); }
@@ -65,6 +71,10 @@ const isMaster = f => /\.jpg$/i.test(f) && !/-cutout\.png$/i.test(f);
     return;
   }
 
+  if (!sharp) {
+    console.error('optimise-photos needs sharp to BUILD derivatives:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)');
+    process.exit(2);
+  }
   fs.mkdirSync(OUT, { recursive: true });
   let before = 0, after = 0;
   for (const f of masters) {

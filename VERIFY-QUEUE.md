@@ -3955,13 +3955,28 @@ with no picture and a green suite. Fixed for this batch by installing `sharp` an
 running `node tools/optimise-photos.js` — 346 masters, every derivative current,
 and the cards were re-rendered and checked by eye afterwards.
 
-**Not fixed, and proposed rather than done, because it changes a test's verdict
-rather than a card's data:** either `--check` should fail (not skip) when `sharp`
-is missing *and* a master has no derivative — the missing-derivative half needs no
-image library at all, it is a `fs.existsSync` — or `deck-audit` should treat
-`photo-missing` on a dealt card as an error, since a dealt card is by definition
-one that has a photograph. `[Inference]` the first is the smaller change and
-catches it earlier.
+**FIXED 2026-09-14, after it happened a second time the same day.** It was left
+as a proposal here on the grounds that it changes a test's verdict rather than a
+card's data. Then the Wintersweet was dealt with `deal-plant.js`, which stages
+the master and no derivative, and its card rendered as a flat colour wash — the
+identical failure, caught the identical way, by rendering the card and looking at
+it. Twice in one session is not a proposal any more.
+
+The fix is smaller than the proposal assumed, because the premise was wrong:
+`--check` never needed sharp **at all**. Every question it asks — does the
+derivative exist, is it older than its master, is it an orphan — is answered by
+`fs`. It was bailing out with `process.exit(0)` on the `require('sharp')` throw
+before reaching any of them. So the early bail moved to the generate path, which
+genuinely does need the library, and the check now runs everywhere.
+
+Verified by removing `photos/card/chimonanthus-praecox.webp` and running the
+check with sharp off the path: `FAIL optimise-photos: chimonanthus-praecox.jpg
+has no card derivative`, exit 1. Before the fix that same command printed
+`sharp not installed — skipping check` and exited 0.
+
+`deck-audit` still records `photo-missing` as a warning rather than an error.
+Left alone: the derivative check now catches this earlier and more precisely, and
+a dealt card with a genuinely absent master is a different fault.
 
 #### Merged with the deploy branch, 2026-09-14 — and the two batches overlap
 
@@ -4031,6 +4046,71 @@ cheapest of the three to settle.
 Related but separate: item 85 is the same shape of problem in the other batch — a
 supplied number and a supplied sentence disagreeing, with no code fix available.
 The `careLevel 5` flagged above on the pansy is this branch's version of it.
+
+### 88. Two cards for one Kousa Dogwood, and each says so in its own `cvs` field
+
+The deck carries **both** of these, both dealt, both with photographs:
+
+| latin | common | size | what it fills in |
+|---|---|---|---|
+| `Cornus kousa 'Flower Tower'` | Flower Tower Dogwood | 2.5–4 m × 0.5–1 m | visual, aspect, soil, peak, cvs, hardiness, ratings |
+| `Cornus kousa FLOWER TOWER ('Zuilb1')` | Kousa Dogwood 'Flower Tower' | 3–4 m × 1–1.5 m | all of that **plus** water, prune, resilience, uses |
+
+**They are the same plant and the cards prove it themselves.** The first card's
+`cvs` reads *"'Zuilb1' (registered) · sold as FLOWER TOWER"* — which is the second
+card's latin. The second reads *"Breeder code 'Zuilb1' · Dutch selection,
+introduced 2023"*. Same breeder code, same trade name, same hue, same peak, same
+hardiness, same columnar white-bracted description. This is the Escallonia
+'Gold Brian' / 'Brian's Gold' case in item 86 and the duplicate Viburnum before
+it, except both of these were dealt rather than caught at ingest.
+
+Unlike the Viburnum, the two do **not** share a photograph — different md5, two
+genuinely different frames — which is presumably why no audit flagged it. Nothing
+in the deck checks for two latins naming one cultivar, and a trade name written
+two ways is invisible to a string comparison.
+
+**Not resolved here, because deleting a card is destructive and Oscar's call.**
+The evidence points one way if he wants a recommendation: keep
+`Cornus kousa FLOWER TOWER ('Zuilb1')` — it is the fuller card (four more fields),
+it uses the trade-name-plus-code form the deck uses elsewhere, and its size band
+is the one the breeder publishes. The other card's photograph would be worth
+keeping as a spare or a swap frame rather than deleted with it.
+
+**One thing was done rather than waited on.** The new autumn-fruit frame Oscar sent
+on 2026-09-14 went onto the ('Zuilb1') card, because that is the card whose prose
+promises "red autumn colour" and the card `plant-sense` flags `peak-vs-prose` for
+— peak May-Jun lights up none of the season its own sentence sells. The fruit
+frame is that second season, so the swap closes a real defect rather than just
+adding a picture. If the duplicate is resolved the other way, the PHOTO_SWAP key
+moves with it; that is one line.
+
+### 89. Which Deutzia is the 2026-09-14 foliage frame? — BLOCKED, needs Oscar
+
+A two-panel foliage collage arrived described only as *"that dutzia from early we
+mentioned"*. The deck has three Deutzias and **two of them are held**, waiting on
+exactly this kind of photograph:
+
+- `Deutzia gracilis 'Nikko'` — HELD. Dwarf, 0.5–1 m × 1–1.5 m, *"low spreading
+  mound smothered in small white starry flowers · purplish autumn tints"*.
+- `Deutzia × hybrida 'Mont Rose'` — HELD. 1.5–2 m × 1.5–2 m, arching, blush
+  rose-pink.
+- `Deutzia × hybrida 'Magicien'` — already dealt, has its photograph.
+
+Nothing was dealt. NEW-SESSION.md is explicit that a genus-level near-miss is not
+a match, and this is that exact situation with two candidates.
+
+`[Inference]`, and the reason for asking rather than guessing: the frames show
+fairly large ovate-lanceolate serrated leaves with red margins on a substantial
+bushy plant, which reads closer to one of the larger hybrids than to *D. gracilis*
+'Nikko', a dwarf with notably small narrow leaves. But the two held cards are a
+dwarf species selection and a large hybrid, so getting it wrong puts a picture of
+the wrong plant on a card — worse than no picture, which is the whole point of the
+hold block. `[Unverified]` either way from foliage alone in September with no
+flowers and no label in frame.
+
+**What settles it in one word:** 'Nikko' or 'Mont Rose'. The frame is not parked in
+`photos/unidentified/` because it is not unidentified — the genus is certain and
+the cultivar is a question only Oscar can answer.
 
 ## Accepted, not defects
 

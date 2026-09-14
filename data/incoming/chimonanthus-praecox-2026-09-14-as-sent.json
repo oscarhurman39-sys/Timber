@@ -1,0 +1,33 @@
+{
+  "common": "Wintersweet",
+  "latin": "Chimonanthus praecox",
+  "hue": "Waxy translucent yellowish-green outer tepals with shorter dark reddish-purple inner tepals",
+  "visual": "Large, much-branched deciduous shrub grown chiefly for its intensely fragrant winter flowers. Small waxy, almost translucent yellow flowers appear directly along bare previous-season stems before the foliage emerges.",
+  "water": "Water regularly while establishing. Mature plants prefer consistent moisture but are reasonably tolerant of short dry periods once established.",
+  "aspect": "Full sun in a warm, sheltered position, ideally against a south- or east-facing wall.",
+  "soil": "Moist but well-drained or freely drained fertile soil; tolerant of chalk, clay, loam and sand and a wide range of soil pH.",
+  "soilWarning": "Avoid persistently waterlogged ground and very exposed sites. Shelter and summer warmth help wood ripen and promote reliable flowering.",
+  "prune": "Requires little routine pruning. Immediately after flowering, remove dead, damaged or badly placed shoots and lightly shape established plants if necessary.",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "December to March",
+  "cvs": "Species form. Notable selections include 'Luteus' and 'Grandiflorus', but the supplied plant is Chimonanthus praecox without a named cultivar.",
+  "hardiness": "H5",
+  "hardinessNote": "Hardy in most parts of the UK, tolerating approximately -15 to -10°C when established, though a sheltered position is recommended.",
+  "resilience": "Generally pest-free and reliably hardy in sheltered UK gardens. Rarely susceptible to honey fungus. Established plants are long-lived but perform best where protected from cold winds.",
+  "uses": "Winter gardens, scented gardens, shrub borders, cottage gardens, courtyards and wall-side planting near paths or entrances where its winter fragrance can be appreciated.",
+  "height": "2.5–4 m",
+  "spread": "1.5–2.5 m",
+  "foliage": "Deciduous, lance-shaped to ovate dark green leaves approximately 5–12 cm long, emerging after the winter flowers.",
+  "container": "Possible while young but not ideal as a permanent container shrub because mature plants become large and flower best when well established in the ground.",
+  "growthSpeed": 8,
+  "pestRisk": 3,
+  "thirst": 8,
+  "careLevel": 6,
+  "sunNeed": 90,
+  "sunMin": 70,
+  "uncertain": [
+    "Mature size varies with climate and training. RHS gives approximately 2.5–4 m tall and 1.5–2.5 m wide, while Kew describes typical cultivated plants around 3 m high and wide.",
+    "Flowering performance can vary considerably with site; plants in warm, sunny, sheltered positions generally flower more reliably."
+  ]
+}

@@ -1180,7 +1180,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r252 · 2026-09-14 · a69528d';
+const BUILD='r253 · 2026-09-14 · e8c1468';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10439,7 +10439,34 @@ const PLANTS = [
    hardinessNote:"Tender to frost in the UK and normally grown as a half-hardy annual.",
    foliage:"herbaceous; green, opposite, oblong leaves, often softly hairy, on a bushy annual plant.",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:8, careLevel:5, sunNeed:95, sunMin:80},
- ];
+   {common:"Wintersweet", latin:"Chimonanthus praecox", hue:50,
+   visual:"Bare winter branches studded with waxy translucent yellow flowers · dark purple-red flower centres · intense sweet fragrance",
+   water:"Water during establishment and prolonged dry periods",
+   aspect:"East / South",
+   soil:"Any, moist but drained; Needs a warm sheltered wall to flower",
+   prune:"Minimal pruning; remove damaged or misplaced shoots after flowering",
+   source:"",
+   peak:"Dec-Feb",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"",
+   hardiness:"H5",
+   resilience:"Generally pest-free and hardy once established; honey fungus is an occasional disease risk",
+   uses:"Winter gardens · fragrant gardens · wall-side borders · specimen shrubs",
+   size:"2.5-4m H × 1.5-2.5m W",
+   toxicity:"Seeds and other plant material should not be eaten",
+   hardinessNote:"Hardy in most UK gardens, approximately -15 to -10°C",
+   foliage:"Deciduous",
+   growthSpeed:7, pestRisk:3, thirst:7, careLevel:6, sunNeed:95, sunMin:75},
+];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -12772,33 +12799,6 @@ const PLANTS_ON_HOLD=[
    foliage:"Deciduous",
    growthSpeed:11, pestRisk:4, thirst:8, careLevel:4, sunNeed:80, sunMin:45},
 
-  {common:"Wintersweet", latin:"Chimonanthus praecox", hue:50,
-   visual:"Bare winter branches studded with waxy translucent yellow flowers · dark purple-red flower centres · intense sweet fragrance",
-   water:"Water during establishment and prolonged dry periods",
-   aspect:"East / South",
-   soil:"Any, moist but drained; Needs a warm sheltered wall to flower",
-   prune:"Minimal pruning; remove damaged or misplaced shoots after flowering",
-   source:"",
-   peak:"Dec-Feb",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"",
-   hardiness:"H5",
-   resilience:"Generally pest-free and hardy once established; honey fungus is an occasional disease risk",
-   uses:"Winter gardens · fragrant gardens · wall-side borders · specimen shrubs",
-   size:"2.5-4m H × 1.5-2.5m W",
-   toxicity:"Seeds and other plant material should not be eaten",
-   hardinessNote:"Hardy in most UK gardens, approximately -15 to -10°C",
-   foliage:"Deciduous",
-   growthSpeed:7, pestRisk:3, thirst:7, careLevel:6, sunNeed:95, sunMin:75},
 
   {common:"Super Serie Djix Cyclamen", latin:"Cyclamen persicum Super Serie Djix F1", hue:330,
    visual:"Compact mini cyclamen with heart-shaped, silver-marbled leaves and distinctive flowers whose petals point downwards rather than strongly reflexing upwards, giving Djix its unusual umbrella-like flower shape.",
@@ -14019,6 +14019,27 @@ const PHOTO_SWAP={
   'cotinus-coggygria-royal-purple':{
     alt:'photos/card/cotinus-coggygria-royal-purple-autumn.webp',
     focus:'50% 45%',
+    hold:'3.5s',
+  },
+  /* Oscar, 2026-09-14: "just shows off another area of autumn late summer
+     intrest". It also closes a defect the tools had already found and nobody
+     could fix from the data: plant-sense flags this card `peak-vs-prose` because
+     the visual line promises "red autumn colour" while peak is May-Jun, so the
+     bloom bar lights up none of the season the sentence sells. The card could not
+     show its second season because it only had one photograph. Now it can — the
+     big raspberry-red compound fruit, which is the autumn interest, and the thing
+     a customer in September is actually looking at.
+
+     The frame is Oscar's own three-panel collage and is used whole, per the
+     standing rule that a two-part ID photo stays whole (VQ 59). Its lower half is
+     background blur, which the card crops away on its own.
+
+     NOTE this is the ('Zuilb1') card of the deck's TWO Flower Tower cards — see
+     the duplicate written up in VERIFY-QUEUE 88. If that pair is ever resolved
+     the other way, this key moves with it. */
+  'cornus-kousa-flower-tower-zuilb1':{
+    alt:'photos/card/cornus-kousa-flower-tower-zuilb1-fruit.webp',
+    focus:'50% 30%',
     hold:'3.5s',
   },
   /* THREE frames, and the first card in the deck to use more than two.
