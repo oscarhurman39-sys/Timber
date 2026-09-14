@@ -1,0 +1,22 @@
+{
+  "empty": {
+    "Nandina domestica": {
+      "stockForm": "stockForm — not established; no trade source checked"
+    },
+    "Choisya ternata": {
+      "stockForm": "stockForm — not established"
+    },
+    "Weigela florida ‘Nana Variegata’": {
+      "stockForm": "stockForm — not established",
+      "clay": "clay — NOT ESTABLISHED. The search summary inferred clay tolerance from \"tolerant of many soil types\"; the RHS page itself could not be fetched to read its own soil list, so this is left blank rather than guessed"
+    }
+  },
+  "batches": [
+    {
+      "at": "2026-09-14T18:26:03.981Z",
+      "file": "answers-2026-09-14-18-25-51.json",
+      "rows": 3,
+      "staged": 3
+    }
+  ]
+}
