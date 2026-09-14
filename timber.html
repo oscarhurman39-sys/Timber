@@ -1174,7 +1174,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r248 · 2026-09-14 · 97cd791';
+const BUILD='r249 · 2026-09-14 · c760c72';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10185,7 +10185,8 @@ const PLANTS = [
    hardinessNote:"Fully hardy throughout the UK, approximately -20 to -15°C",
    foliage:"Deciduous",
    growthSpeed:9, pestRisk:6, thirst:3, careLevel:3, sunNeed:95, sunMin:60},
-   {common:"Dianthus Pink Kisses", latin:"Dianthus 'Kledg12163'", hue:340,
+
+  {common:"Dianthus Pink Kisses", latin:"Dianthus 'Kledg12163'", hue:340,
    visual:"Compact grey-green mound · fragrant double pink flowers · darker crimson-pink petal centres",
    water:"Water moderately and allow the surface to dry slightly between waterings",
    aspect:"East / South / West",
@@ -10213,6 +10214,7 @@ const PLANTS = [
    hardinessNote:"Fully hardy throughout the UK, approximately -20 to -15°C",
    foliage:"Evergreen",
    growthSpeed:10, pestRisk:7, thirst:6, careLevel:5, sunNeed:95, sunMin:80},
+
   {common:"Red polyanthus", latin:"Primula polyanthus", hue:355,
    visual:"Compact leafy rosette · clusters of rich red flowers held above dark green crinkled foliage",
    water:"Keep evenly moist and do not allow to dry out during flowering",
@@ -10240,6 +10242,7 @@ const PLANTS = [
    hardinessNote:"Hardy in most UK gardens, approximately -15 to -10°C",
    foliage:"Evergreen",
    growthSpeed:10, pestRisk:10, thirst:12, careLevel:5, sunNeed:55, sunMin:25},
+
   {common:"Prickly heath mixed", latin:"Gaultheria mucronata", hue:340,
    visual:"Dense evergreen foliage · tiny white bell flowers · decorative berries in white, pink, red and wine shades",
    water:"Keep evenly moist, especially in containers and sunny positions",
@@ -10267,6 +10270,7 @@ const PLANTS = [
    hardinessNote:"Fully hardy throughout the UK, approximately -20 to -15°C",
    foliage:"Evergreen",
    growthSpeed:8, pestRisk:4, thirst:11, careLevel:6, sunNeed:30, sunMin:10},
+
   {common:"Egyptian starcluster Starcluster Mix", latin:"Pentas lanceolata Starcluster Mix", hue:330,
    visual:"Compact upright foliage · dense clusters of five-pointed flowers · mixed pink, red, lavender and white shades",
    water:"Water regularly during warm active growth but allow good drainage",
@@ -10293,7 +10297,143 @@ const PLANTS = [
    hardinessNote:"Tender tropical plant requiring temperatures generally above 10°C",
    foliage:"Evergreen",
    growthSpeed:15, pestRisk:8, thirst:12, careLevel:9, sunNeed:95, sunMin:75},
-];
+
+  {common:"Hardy Fuchsia Alice Hoffman", latin:"Fuchsia 'Alice Hoffman'", hue:340,
+   visual:"Small, upright, bushy hardy fuchsia with bronze-green foliage tinged purple and abundant small semi-double flowers combining rose-pink outer parts with white, pink-veined petals.",
+   water:"Keep reasonably moist during active growth, particularly while flowering and when grown in containers, but allow excess water to drain freely.",
+   aspect:"East / South / West",
+   soil:"Fertile, moist, drained; Avoid winter wet and cold drying winds",
+   prune:"Prune in spring once new growth begins, removing dead or frost-damaged stems and cutting established shoots back to strong healthy buds as required.",
+   source:"",
+   peak:"Jun-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"Alice Hoffman; compact semi-double hardy fuchsia cultivar.",
+   hardiness:"H4",
+   resilience:"Reliable hardy fuchsia capable of returning from the base after winter damage, though severe frost and exposed container culture increase risk.",
+   uses:"Flower borders, cottage gardens, courtyard planting, edging and patio containers.",
+   size:"50–60 cm H × 40–60 cm W",
+   hardinessNote:"Hardy through most of the UK to roughly -10 to -5°C when established. Plant slightly deeper, mulch the root area in winter and provide shelter in colder gardens.",
+   foliage:"Deciduous bronze-green leaves with purple tinges on a compact bushy framework.",
+   seasonalImpact:"", growthSpeed:11, pestRisk:10, thirst:12, careLevel:7, sunNeed:70, sunMin:35},
+
+  {common:"Desperados Japanese Barberry", latin:"Berberis thunbergii 'Desperados'", hue:25,
+   visual:"Dense, compact, broadly rounded deciduous shrub with thorny branching and unusually vivid colour-changing foliage. Small pale yellow flowers tinged red are followed by bright red berries.",
+   water:"Water regularly during establishment.",
+   aspect:"East / South / West",
+   soil:"Any soil, well-drained; Dislikes waterlogging; spines injure",
+   prune:"Little pruning is required. Remove misplaced, damaged or congested shoots and trim hedging after flowering if necessary.",
+   source:"",
+   peak:"Mar-Nov",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"Neon Series; compact Polish cultivar introduced commercially in 2021.",
+   hardiness:"H7",
+   resilience:"Very cold hardy, adaptable to a wide range of soils and relatively tolerant once established.",
+   uses:"Shrub borders, colourful foliage schemes, low hedging, urban planting, wildlife gardens and containers.",
+   size:"60–80 cm H × 60–80 cm W",
+   toxicity:"Berries are ornamental and should not be eaten. Stems are thorny, so wear gloves when handling or pruning.",
+   hardinessNote:"Extremely hardy and suitable for even very cold UK gardens.",
+   foliage:"Deciduous oval leaves with striking seasonal colour changes from orange and red to green and finally orange-red.",
+   seasonalImpact:"", growthSpeed:8, pestRisk:6, thirst:7, careLevel:4, sunNeed:85, sunMin:45},
+
+  {common:"Alpha White Bushy Aster", latin:"Symphyotrichum dumosum 'Alpha White'", hue:0,
+   visual:"Compact, rounded and densely branched perennial producing masses of small white daisy-like flowers with bright yellow centres above fresh green foliage.",
+   water:"Water regularly while establishing and during prolonged dry weather.",
+   aspect:"East / South / West",
+   soil:"Fertile, moist, drained; Winter wet; poor airflow brings mildew",
+   prune:"Deadhead to keep plants tidy if required, then cut old stems down to near ground level after flowering or in late winter.",
+   source:"",
+   peak:"Aug-Sep",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"Alpha White; compact white-flowered selection commonly sold within the Alpha range.",
+   hardiness:"H6",
+   resilience:"Reliable hardy perennial with strong late-season flowering and good cold tolerance.",
+   uses:"Front of borders, cottage gardens, containers, mixed perennial displays and late-season pollinator planting.",
+   size:"30–40 cm H × 30–40 cm W",
+   hardinessNote:"Fully hardy through UK winters in well-drained soil, dying back before returning from the crown in spring.",
+   foliage:"Dense fresh to dark green herbaceous foliage, dying back during winter.",
+   seasonalImpact:"", growthSpeed:12, pestRisk:6, thirst:10, careLevel:5, sunNeed:80, sunMin:45},
+
+  {common:"Pansy Rose Blotch", latin:"Viola × wittrockiana 'Rose Blotch'", hue:335,
+   visual:"Compact, mound-forming bedding pansy carrying broad, overlapping rose-pink flowers marked by a dark face or blotch around the flower centre.",
+   water:"Keep evenly moist but not saturated, watering more frequently in containers and during dry flowering periods.",
+   aspect:"East / South / West",
+   soil:"Fertile, humus-rich, moist; Wet compost rots it; hates summer heat",
+   prune:"Deadhead regularly to prolong flowering and trim back tired or leggy growth when necessary.",
+   source:"",
+   peak:"Sep-May",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"Rose Blotch colour selection; commercial Matrix Rose Blotch also exists, but the supplied label does not identify the series.",
+   hardiness:"H6",
+   resilience:"Excellent cool-season bedding performance and tolerant of frost; less resilient in sustained summer heat.",
+   uses:"Bedding, borders, edging, window boxes, patio containers, baskets and seasonal displays.",
+   size:"15–20 cm H × 20–25 cm W",
+   hardinessNote:"Very cold tolerant as a bedding pansy, although prolonged severe weather, saturated soil and exposed containers can still cause losses.",
+   foliage:"Compact green to dark green, scalloped foliage forming a low mound; usually semi-evergreen in mild conditions.",
+   seasonalImpact:"", growthSpeed:14, pestRisk:9, thirst:11, careLevel:5, sunNeed:75, sunMin:40},
+
+  {common:"Globe Amaranth", latin:"Gomphrena globosa", hue:315,
+   visual:"Bushy annual with upright wiry stems, softly hairy green leaves and distinctive rounded, clover-like flower heads formed from papery coloured bracts.",
+   water:"Water regularly while establishing, then moderately.",
+   aspect:"South / West",
+   soil:"Fertile, free-draining; Cold wet soil rots it; frost kills it",
+   prune:"No formal pruning required. Deadhead or regularly cut flower stems to encourage continued flowering.",
+   source:"",
+   peak:"Jul-Oct",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"Species supplied without a named cultivar.",
+   hardiness:"H2",
+   resilience:"Very tolerant of summer heat and increasingly drought tolerant once established, but killed by frost.",
+   uses:"Summer bedding, sunny borders, containers, pollinator planting, fresh cut flowers and everlasting dried flowers.",
+   size:"30–50 cm H × 20–30 cm W",
+   hardinessNote:"Tender to frost in the UK and normally grown as a half-hardy annual.",
+   foliage:"herbaceous; green, opposite, oblong leaves, often softly hairy, on a bushy annual plant.",
+   seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:8, careLevel:5, sunNeed:95, sunMin:80},
+ ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -12404,7 +12544,6 @@ const PLANTS_ON_HOLD=[
    hardinessNote:"Hardy throughout the UK",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:10, careLevel:6, sunNeed:75, sunMin:45},
 
-
   {common:"Copper beech", latin:"Fagus sylvatica (Atropurpurea Group)", hue:275,
    visual:"Deep purple foliage · smooth grey bark · reddish-copper autumn colour",
    water:"Moderate; water in dry spells",
@@ -12518,9 +12657,6 @@ const PLANTS_ON_HOLD=[
    foliage:"Deciduous; ovate green leaves on mature plants develop striking silver-white areas followed by pink flushing.",
    growthSpeed:17, pestRisk:3, thirst:12, careLevel:9, sunNeed:90, sunMin:70},
 
-
-
-
   {common:"Bee balm", latin:"Monarda didyma", hue:350,
    visual:"Upright aromatic stems · shaggy whorled red to pink flowers · fresh green foliage",
    water:"Keep evenly moist during summer and avoid allowing the root zone to dry completely",
@@ -12547,14 +12683,6 @@ const PLANTS_ON_HOLD=[
    hardinessNote:"Hardy in most UK gardens, approximately -15 to -10°C",
    foliage:"Deciduous",
    growthSpeed:12, pestRisk:7, thirst:14, careLevel:7, sunNeed:85, sunMin:55},
-
-
-
-
-
-
-
-
 
   {common:"Arum lily", latin:"Zantedeschia aethiopica", hue:0,
    visual:"Large glossy arrow-shaped leaves · elegant white funnel-shaped spathes · yellow central spadix",
@@ -12584,9 +12712,6 @@ const PLANTS_ON_HOLD=[
    foliage:"Semi-evergreen",
    growthSpeed:12, pestRisk:7, thirst:17, careLevel:7, sunNeed:75, sunMin:40},
 
-
-
-
   {common:"Liquorice plant", latin:"Helichrysum petiolare", hue:0,
    visual:"Trailing white stems · soft rounded silver-grey felted foliage · small dull-white flowerheads",
    water:"Water during prolonged dry spells but avoid constantly wet compost",
@@ -12613,16 +12738,6 @@ const PLANTS_ON_HOLD=[
    hardinessNote:"Hardy in mild coastal areas but vulnerable below roughly -5°C",
    foliage:"Evergreen",
    growthSpeed:14, pestRisk:4, thirst:6, careLevel:6, sunNeed:95, sunMin:80},
-
-
-
-
-
-
-
-
-
-
 
   {common:"Deutzia 'Mont Rose'", latin:"Deutzia × hybrida 'Mont Rose'", hue:340,
    visual:"Arching deciduous shrub · abundant blush rose-pink flowers · fresh green foliage",
@@ -12679,7 +12794,33 @@ const PLANTS_ON_HOLD=[
    foliage:"Deciduous",
    growthSpeed:7, pestRisk:3, thirst:7, careLevel:6, sunNeed:95, sunMin:75},
 
-
+  {common:"Super Serie Djix Cyclamen", latin:"Cyclamen persicum Super Serie Djix F1", hue:330,
+   visual:"Compact mini cyclamen with heart-shaped, silver-marbled leaves and distinctive flowers whose petals point downwards rather than strongly reflexing upwards, giving Djix its unusual umbrella-like flower shape.",
+   water:"Water moderately while actively growing, preferably from below or around the edge of the pot.",
+   aspect:"East / West",
+   soil:"Free-draining loam compost; Never let the tuber sit wet; crown rots",
+   prune:"No pruning required. Remove spent flowers and yellowing leaves cleanly from the base.",
+   source:"",
+   peak:"Sep-Feb",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"Super Serie Djix F1; Schoneveld mini Cyclamen persicum selection bred for unusual downward-facing flowers, heat tolerance and long shelf life.",
+   hardiness:"H1c",
+   resilience:"Unusually heat tolerant for a mini cyclamen and bred for continued bud production and good shelf life, but still vulnerable to frost and prolonged wet compost.",
+   uses:"Indoor pots, cool conservatories, porches and sheltered autumn container displays.",
+   size:"15–20 cm H × 15–20 cm W",
+   toxicity:"Tuber is harmful if eaten; wear gloves if handling causes skin irritation.",
+   hardinessNote:"Tender in the UK and not frost hardy. Best protected indoors, under glass or in very sheltered seasonal containers.",
+   foliage:"herbaceous; dark green, heart-shaped leaves with decorative silver marbling; tuberous perennial with seasonal dormancy.",
+   growthSpeed:10, pestRisk:8, thirst:11, careLevel:10, sunNeed:45, sunMin:25},
  ];
 /* HOLD:END */
 
@@ -13859,6 +14000,11 @@ const PHOTO_FOCUS={
   'viburnum-davidii':'22% 55%',   /* landscape master in a portrait well: a centred crop
      pushed the red node and leaf whorl — the distinctive part — to the frame edge */
   'rhodanthemum-hosmariense-zagora-yellow':'100% 40%',
+  /* The single open flower sits hard against the right edge of Oscar's frame; a
+     centred crop cut its right-hand petals off and pushed the yellow disc under the
+     growth-speed rail. 100% puts the whole head in frame. Measured on four renders,
+     same reasoning as the Rhodanthemum above. */
+  'symphyotrichum-dumosum-alpha-white':'100% 40%',
   'veronicastrum-red-arrows':'50% 0%',
   'pinus-mugo':'50% 30%',
   'hosta-emerald-charger':'50% 45%',

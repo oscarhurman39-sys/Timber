@@ -3819,6 +3819,218 @@ shot, surplus once the three `Dianthus barbatus` entries became one card.
 - **Two `pest-vs-prose` contradictions** from this batch — see item 85.
 
 ---
+### 87. Six photos, six JSONs, and not the same six plants — plus a card that can render with no photograph and pass every suite
+
+**Deck 318, hold 83.** Five cards dealt: Hardy Fuchsia 'Alice Hoffman', *Berberis
+thunbergii* 'Desperados', *Symphyotrichum dumosum* 'Alpha White', *Viola* ×
+*wittrockiana* 'Rose Blotch', *Gomphrena globosa*. One card written and **held**:
+*Cyclamen persicum* Super Serie Djix F1. One photograph **parked**, not dealt.
+
+#### The pairing, and the one that does not pair
+
+Oscar's message named the last two ("Photo 5 and 6 r Berberis then the fushia"),
+which settled the two most easily confused frames. The rest were read off the
+flowers:
+
+| Photo | Card | Basis |
+|---|---|---|
+| 1 | *Viola* × *wittrockiana* 'Rose Blotch' | large-flowered pansy, rose-pink, dark blotch, yellow eye |
+| 2 | *Gomphrena globosa* | rounded clover-like heads of papery magenta bracts, hairy leaves |
+| 3 | **none — parked** | double *Bellis*, `[Inference]` (see below) |
+| 4 | *Symphyotrichum dumosum* 'Alpha White' | white ray florets, yellow disc, lanceolate stem leaves, green buds |
+| 5 | *Berberis thunbergii* 'Desperados' | Oscar's word, and the thorns and orange-to-green leaves agree |
+| 6 | Fuchsia 'Alice Hoffman' | Oscar's word, and the pendent red-and-white flower agrees |
+
+**Photo 3 is not the Cyclamen.** It shows a basal rosette of spoon-shaped crenate
+leaves and solitary leafless stems carrying fully double pompom heads in white and
+pink with yellow discs. `[Inference]` that is a double bedding daisy, ***Bellis
+perennis***; `[Unverified]` which series — Tasso, Habanera, Bellissima and
+Pomponette are indistinguishable at this size and no label is in frame. The sixth
+JSON is a silver-marbled tuberous pot Cyclamen. Different families, not a cultivar
+question, so nothing was built from it. Parked at
+`photos/unidentified/2026-09-14-double-daisy-white-pink-no-json.jpg`.
+
+**Two open ends, and they are separate.** The daisy needs an identification *and*
+a JSON; the Cyclamen card needs only a photograph and then `deal-plant.js` takes it.
+
+#### What was changed on the way in, and why
+
+The batch arrived in prose rather than the card schema, so four kinds of
+conversion were needed. Every one is recorded in that plant's `uncertain` array in
+`data/incoming/batch-2026-09-14.json`, prefixed `CONVERSION (Claude, 2026-09-14)`,
+and the untouched paste is committed beside it as
+`data/incoming/batch-2026-09-14-as-sent.json`.
+
+- **`hue` arrived as prose** on all six ("Rose-pink sepals and tube with white
+  petals…"). The card field is 0–360 degrees. Set from the deck's own bands:
+  340 Fuchsia (matches the deck's other hardy fuchsia, 'Mrs Popple'), 25 Berberis
+  (matches 'Orange Ice'), 0 Aster (the deck's white-flower convention — Phlox
+  'David', Buddleja 'White Profusion', Davidia all carry 0), 335 Viola, 315
+  Gomphrena, 330 Cyclamen. **Judged, not sourced.**
+- **`peak` arrived as seasons.** Converted so the app can parse it: Jun-Oct,
+  Mar-Nov, Aug-Sep, Sep-May, Jul-Oct, Sep-Feb. No source stated months for any of
+  them. Two are worth a second look — the Aster is `Aug-Sep` from a literal reading
+  of "late summer to early autumn" where UK listings usually run to October, and
+  the Berberis is `Mar-Nov` from "spring to autumn" where the deck's own 'Orange
+  Ice' carries `Apr-Nov`.
+- **`foliage` had no class word** on the Gomphrena and the Cyclamen. The validator
+  requires one of evergreen / semi-evergreen / deciduous / herbaceous; both are
+  herbaceous and `herbaceous; ` was prefixed. The rest of each sentence stands.
+- **`hardiness` "H1C" re-cased to "H1c"** on the Cyclamen — the RHS spelling the
+  validator accepts. Same band.
+
+**The Gomphrena colour came off the photograph, not a source.** The JSON says the
+colour was not specified; the frame shows vivid magenta-purple heads, so `hue` is
+315. Same call as the Rudbeckia 'Fireball' "double" in item 73.
+
+#### Open questions on the cards themselves
+
+1. **Four of the six have a blank `toxicity`** — Fuchsia, Aster, Viola, Gomphrena.
+   Blank renders identically to safe. Fuchsia berries and pansy flowers are both
+   commonly described as edible, which would make "No known hazard." or an
+   `edible` note the right answer rather than a blank, but that is exactly the kind
+   of claim this deck does not invent. These four belong in the
+   `CHATGPT-TOXICITY-BRIEF.md` run.
+2. **`Berberis thunbergii` 'Desperados' has a blank `compliance`.** It is a 2021
+   commercial introduction from a Polish breeder, sold in the Neon Series.
+   `[Unverified]` whether it carries plant breeders' rights — if it does, the card
+   should say so, as the deck already does elsewhere. Worth a look at the bench
+   label, which would settle it in one photograph.
+3. **The Viola's latin is `Viola × wittrockiana 'Rose Blotch'`.** Written as
+   supplied. Quoting 'Rose Blotch' asserts a cultivar epithet, and Oscar's own
+   `uncertain` says the series is unconfirmed — Matrix Rose Blotch is a real
+   selection but the label wording does not place this plant in it. The card and
+   its photo slug both carry that name, so changing it later means renaming the
+   photo too.
+4. **Four ratings tripped the validator's 0–5-in-a-0–20-box warning** — Berberis
+   `careLevel` 4, Aster and Viola and Gomphrena `careLevel` 5, Gomphrena `pestRisk`
+   4. They are almost certainly genuine 0–20 values: the same JSONs carry
+   `growthSpeed` 14 and `careLevel` 10, which are impossible on a 0–5 scale. The
+   one worth questioning on horticulture rather than arithmetic is the **pansy at
+   `careLevel` 5** — "Easy, 1.25/5" on a card whose own `prune` line says
+   *"Deadhead regularly to prolong flowering"*. Left as supplied.
+
+#### The pansy photograph carries a redaction that no crop can clear
+
+Oscar's frame has a pixelated block over the bottom-left corner — his own
+redaction, same practice as the Paeonia 'Tom Cat' frame in item 82. A sliver of it
+shows on the card, just above the stats panel.
+
+**No `PHOTO_FOCUS` value removes it, and that is measured rather than guessed.**
+The photo window is 310.6 × 564.2 CSS px against a 1000 × 1358 master: cover
+scales it to 415.5 × 564.2, so **vertical slack is exactly 0 px** — the full source
+height is always on the card and the `Y` half of `object-position` does nothing
+here. Horizontally 74.8% of the width is visible, so the window can start anywhere
+from 0% to 25.2% of the source. The block reaches to roughly 45% of the width, so
+even at `100%` about a fifth of it stays in frame. Eight focus values were rendered
+and every one shows some of it.
+
+So the options are Oscar's, not a tool's: **accept it** (it is small, low-contrast
+and mostly behind the stats panel), or **re-crop the master**, which means losing
+the lower-left of his composition. Left at the default `50% 40%`, which places the
+flower best; no `PHOTO_FOCUS` entry was added.
+
+The Aster's frame *did* respond to focus and was fixed:
+`'symphyotrichum-dumosum-alpha-white':'100% 40%'`. A centred crop cut the right-hand
+petals off and pushed the yellow disc under the growth-speed rail.
+
+#### The tooling finding: a photo-less card passes the whole suite
+
+The five cards were inserted, `node tests/run-all.js --jobs 3` returned **17/17**,
+and **all five rendered with no photograph at all** — a flat hue wash where the
+picture should be. The reason is that two separate guards each decline to fail:
+
+- **`tools/optimise-photos.js --check` exits 0 when `sharp` is not installed.**
+  This container did not have it. The app loads `photos/card/<slug>.webp`, never
+  the `photos/<slug>.jpg` master, and `add-plants-bulk.js` stages only the master.
+  So the derivative the card actually needs was never built, and the check that
+  exists precisely to catch that printed `sharp not installed — skipping check`
+  and passed.
+- **`tests/deck-audit.js` records a missing photo as a WARNING, not an error**
+  (line 123, `photo-missing` → "card falls back to its leaf gradient"). Only
+  `fullart` cards fail on it.
+
+Neither is wrong on its own; together they mean a card can reach the deploy branch
+with no picture and a green suite. Fixed for this batch by installing `sharp` and
+running `node tools/optimise-photos.js` — 346 masters, every derivative current,
+and the cards were re-rendered and checked by eye afterwards.
+
+**Not fixed, and proposed rather than done, because it changes a test's verdict
+rather than a card's data:** either `--check` should fail (not skip) when `sharp`
+is missing *and* a master has no derivative — the missing-derivative half needs no
+image library at all, it is a `fs.existsSync` — or `deck-audit` should treat
+`photo-missing` on a dealt card as an error, since a dealt card is by definition
+one that has a photograph. `[Inference]` the first is the smaller change and
+catches it earlier.
+
+#### Merged with the deploy branch, 2026-09-14 — and the two batches overlap
+
+This branch was built on `47ebd55`; the deploy branch moved six commits ahead
+while it was open (PR #25, item 86's 31-card batch). Merged, not rebased — the
+branch is pushed and rebasing it would invalidate any checkout of it.
+
+**Four files conflicted, and none was resolved by hand-editing the conflict.**
+`timber.html` conflicted inside the `PLANTS` and `HOLD` arrays, which is exactly
+where a hand-resolution corrupts a card. Instead the deploy side was taken whole
+and this branch's six rows were re-inserted through `tools/plant-data.js`
+(`readDeck`/`readHold`/`writeBlock`) — the one reader/writer, so the rows went back
+in the format the tool itself emits. Verified afterwards by parsing both sides and
+comparing field by field: **all 426 deploy-branch cards present, zero field
+changes, exactly 6 added.** The only textual difference beyond the new rows is one
+row's indentation and a run of blank lines the writer normalised.
+`plants.csv` was regenerated (`plants-tool.js export`), not merged — it is
+generated. `photos/CREDITS.json` was union-merged on `file`. `VERIFY-QUEUE.md`
+kept both sides; the deploy branch had also claimed item 85, so this item was
+renumbered 85 → 87 and the references in `LEDGER.md` and
+`photos/unidentified/README.md` were updated with it.
+
+Result: **deck 345, hold 87.** No latin collides across the two batches.
+
+#### Three places the two batches disagree with each other
+
+None is a duplicate card, and all three are live on the same deck.
+
+**1. There are now two pink *Cyclamen persicum* cards, and their `visual` lines
+contradict each other on the one feature that separates them.** Item 86 records
+that batch's Cyclamen arriving with the same `"H1C"` mis-casing this one had, so
+both came from the same writer on the same day, and the first read was that this
+branch's held card was a duplicate of a card already dealt.
+
+**It is not, and the photograph settles it rather than an argument.** The dealt
+card `Cyclamen persicum` ("Pink Persian cyclamen") says *"upswept vivid pink
+flowers"*; `photos/cyclamen-persicum.jpg` shows exactly that — vivid magenta
+flowers with petals swept strongly back and upward, the ordinary cyclamen shape,
+on tall arching stems over silver-marbled leaves. The held card
+`Cyclamen persicum Super Serie Djix F1` is written around the opposite: *"petals
+point downwards rather than strongly reflexing upwards, giving Djix its unusual
+umbrella-like flower shape"* — that is the whole point of the Djix selection.
+The photograph matches the dealt card and not the held one.
+
+So the held Djix card was **kept held, not dropped and not dealt**. Held costs
+nothing and shows nobody a wrong picture; dropping it would throw away research on
+what the evidence says is a second plant. `[Unverified]` whether Oscar has two
+cyclamen or described one twice — that is the question, and a photograph of the
+Djix answers it. If it turns out to be one plant, the Djix card is the one to
+delete, because the other has the photograph.
+
+**2. The deck now names the same aster series under two genera.** This branch
+dealt `Symphyotrichum dumosum 'Alpha White'`; the deploy branch dealt
+`Aster 'Alpha Light Purple'`. Same commercial Alpha series, two genus names on two
+cards sitting in one deck. Both are defensible — `Symphyotrichum` is the current
+accepted genus and Oscar's own `uncertain` note says UK retailers sell it as
+`Aster` — but the deck should pick one. A card's latin is also its photo slug, so
+renaming either means renaming its photograph too. **Oscar's call.**
+
+**3. The same two cards disagree on when the Alpha asters flower.**
+`Alpha Light Purple` carries `Aug-Oct`; `Alpha White` carries `Aug-Sep`, converted
+here from "late summer to early autumn" and already flagged above as the narrower
+reading. The sibling card is direct evidence for `Aug-Oct`. Not changed, because
+changing it is a second reinterpretation of supplied research, but this is the
+cheapest of the three to settle.
+
+Related but separate: item 85 is the same shape of problem in the other batch — a
+supplied number and a supplied sentence disagreeing, with no code fix available.
+The `careLevel 5` flagged above on the pansy is this branch's version of it.
 
 ## Accepted, not defects
 
