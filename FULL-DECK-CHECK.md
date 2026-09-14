@@ -213,18 +213,22 @@ this pass is about the gaps, not a rewrite.
 
 ---
 
-## PREREQUISITE — read this before running the pass
+## ALL EIGHT IMPORT TODAY
 
-Four of the eight questions are **new fields that do not exist in the card schema yet**:
-`rootSize`, `stockForm`, `pollination`, `clay`.
+`rootSize`, `stockForm`, `pollination` and `clay` were added to the card schema on
+2026-09-14, **with a place on the card each**, so every answer in this file lands the
+moment it comes back. Where each one shows up:
 
-`tools/backfill-field.js` refuses any field not listed in `plant-data.js` `FIELDS`,
-by design — that guard is why a key outside the schema cannot be silently erased by
-the next csv round-trip. So those four answers **cannot be imported until the columns
-are added and given somewhere on the card to render.**
+| Field | Where it renders |
+|---|---|
+| `rootSize` | card back beside Size, and the customer sheet as **Roots to** |
+| `stockForm` | card back as **Sold as**, and a `📦 Sold as` filter group — Container / Bare-root |
+| `pollination` | press-and-hold lens, card back, and the customer sheet as **To get berries** when a partner is needed |
+| `clay` | card back as **Clay**, and the `📍 Site` filter as **Heavy clay** |
 
-The other four — `foliage`, `toxicity`, `hardinessNote`, `cvs` — import today with no
-changes at all.
+`not applicable` on `pollination` prints on the back and stays off the front: "this
+plant is not grown for fruit" is the absence of a story, not a power point. A blank is
+a different thing again — it means nobody has looked.
 
 ---
 

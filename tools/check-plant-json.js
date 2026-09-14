@@ -119,6 +119,19 @@ if (p.latin) {
    the ground, which "deciduous" does not distinguish from a bare twiggy shrub. */
 if (p.foliage && !/(?:^|[^-\w])(semi-evergreen|evergreen|deciduous|herbaceous)/i.test(String(p.foliage)))
   errors.push(`"foliage" is ${JSON.stringify(p.foliage)} — it must name one of evergreen / semi-evergreen / deciduous / herbaceous, or the card cannot answer "will it look bare in winter?". A leaf description after it is fine: "deciduous; five-lobed leaves with strong seasonal colour".`);
+/* The three controlled answers added with the columns on 2026-09-14. Same shape as
+   foliage: the class word is compulsory because the card reads it, and free prose
+   after it is welcome and prints on the back. */
+if (p.pollination && !/(?:^|[^-\w])(needs partner|self-fertile|not applicable)/i.test(String(p.pollination)))
+  errors.push(`"pollination" is ${JSON.stringify(p.pollination)} — it must name one of "needs partner" / "self-fertile" / "not applicable". Detail after a semicolon is fine: "needs partner; female plants only berry with a male nearby".`);
+if (p.stockForm && !['container','bare-root','bare root','both'].includes(String(p.stockForm).trim().toLowerCase()))
+  errors.push(`"stockForm" is ${JSON.stringify(p.stockForm)} — expected container / bare-root / both`);
+if (p.clay && !['yes','no'].includes(String(p.clay).trim().toLowerCase()))
+  errors.push(`"clay" is ${JSON.stringify(p.clay)} — expected yes / no. Leave it BLANK when it is not established; a blank already means "not known" and "unknown" is not a third answer.`);
+/* rootSize is prose, but a value carrying no figure at all renders as an empty rail,
+   which is the exact defect `size` shipped three times before sizeOf() threw on it. */
+if (p.rootSize && !/\d/.test(String(p.rootSize)))
+  errors.push(`"rootSize" is ${JSON.stringify(p.rootSize)} — it carries no figure, so it would print an empty row. Leave it blank instead and say why in "uncertain".`);
 if (p.container && !['yes','with care','no'].includes(String(p.container).toLowerCase()))
   warnings.push(`"container" is "${p.container}" — expected yes / with care / no`);
 

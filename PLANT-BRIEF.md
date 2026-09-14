@@ -67,6 +67,10 @@ list are dropped silently, so answering them is wasted work.
   "uses": "Borders · gravel gardens · coastal · cut flowers",
 
   "foliage": "deciduous; narrow grassy grey-green leaves",
+  "rootSize": "",
+  "stockForm": "container",
+  "pollination": "not applicable",
+  "clay": "yes",
   "container": "with care",
   "uncertain": ["every field left blank or judged, and why"],
   "sources": ["where the facts came from"]
@@ -218,6 +222,18 @@ If none apply, leave it `""`. Unlike `toxicity`, blank is a fine answer here.
   A leaf description after the word is welcome and prints on the back:
   `"deciduous; five-lobed leaves with strong seasonal colour"`. A value that names
   none of the four is **rejected** — "dark green" is a leaf colour, not an answer.
+- **`rootSize`** — root depth × spread, mirroring the stature line's `H × W` as
+  `"0.3-0.5m D × 1-1.5m W"`. **Expect to leave this blank and leave it blank**: root
+  architecture is far worse published than height and spread, and it is the one figure
+  on the card somebody digs a hole to. A value carrying no digit is rejected.
+- **`stockForm`** — how the TRADE sells it: `container` · `bare-root` · `both`. A fact
+  about the plant, not about one shop, which is why it is researchable where bench
+  weeks and order dates are not.
+- **`pollination`** — must **name one** of `needs partner` · `self-fertile` ·
+  `not applicable`, prose after a semicolon. `not applicable` is the honest answer for
+  anything not grown for fruit, and it is NOT the same as blank.
+- **`clay`** — `yes` or `no`, blank when not established. Do not write "unknown"; a
+  blank already says that.
 - **`visual`** — one line, **about 90 characters**, separated by `·`. What it looks
   like and when. This is the line that sells the plant, so lead with the feature
   someone buys it for.
