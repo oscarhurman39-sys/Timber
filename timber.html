@@ -1180,7 +1180,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r254 · 2026-09-14 · 7e6f972';
+const BUILD='r255 · 2026-09-14 · fcd9d52';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -12797,36 +12797,6 @@ const PLANTS_ON_HOLD=[
    hardinessNote:"Hardy in mild coastal areas but vulnerable below roughly -5°C",
    foliage:"Evergreen",
    growthSpeed:14, pestRisk:4, thirst:6, careLevel:6, sunNeed:95, sunMin:80},
-
-
-
-  {common:"Super Serie Djix Cyclamen", latin:"Cyclamen persicum Super Serie Djix F1", hue:330,
-   visual:"Compact mini cyclamen with heart-shaped, silver-marbled leaves and distinctive flowers whose petals point downwards rather than strongly reflexing upwards, giving Djix its unusual umbrella-like flower shape.",
-   water:"Water moderately while actively growing, preferably from below or around the edge of the pot.",
-   aspect:"East / West",
-   soil:"Free-draining loam compost; Never let the tuber sit wet; crown rots",
-   prune:"No pruning required. Remove spent flowers and yellowing leaves cleanly from the base.",
-   source:"",
-   peak:"Sep-Feb",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"Super Serie Djix F1; Schoneveld mini Cyclamen persicum selection bred for unusual downward-facing flowers, heat tolerance and long shelf life.",
-   hardiness:"H1c",
-   resilience:"Unusually heat tolerant for a mini cyclamen and bred for continued bud production and good shelf life, but still vulnerable to frost and prolonged wet compost.",
-   uses:"Indoor pots, cool conservatories, porches and sheltered autumn container displays.",
-   size:"15–20 cm H × 15–20 cm W",
-   toxicity:"Tuber is harmful if eaten; wear gloves if handling causes skin irritation.",
-   hardinessNote:"Tender in the UK and not frost hardy. Best protected indoors, under glass or in very sheltered seasonal containers.",
-   foliage:"herbaceous; dark green, heart-shaped leaves with decorative silver marbling; tuberous perennial with seasonal dormancy.",
-   growthSpeed:10, pestRisk:8, thirst:11, careLevel:10, sunNeed:45, sunMin:25},
  ];
 /* HOLD:END */
 
@@ -13126,6 +13096,12 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
   const site=[
     {id:'site:pots',label:'Containers',test:p=>/\bcontainers?\b|\bpots?\b|\bpatio\b/i.test([p.uses,p.visual].filter(Boolean).join(' '))},
     {id:'site:ground',label:'Ground cover',test:p=>/ground[- ]?cover|carpet|mat[- ]forming|edging/i.test([p.uses,p.visual,p.resilience].filter(Boolean).join(' '))},
+    /* Oscar, 2026-09-14: revising bedding for an interview and there was no way
+       to pull the bedding cards out of 347. Matches the card's own CLAIM, the
+       same principle as the drought chip above — a plant is bedding here because
+       its `uses` says so, not because a habit was inferred from its ratings.
+       Twelve cards at the time of writing, and it grows as the deck does. */
+    {id:'site:bedding',label:'Bedding',test:p=>/\bbedding\b|\bseasonal (?:display|bedding|colour|color)\b|\bwindow box(?:es)?\b|\bhanging basket/i.test([p.uses,p.visual].filter(Boolean).join(' '))},
     {id:'site:shade',label:'Shade',test:p=>{const v=num(p.sunMin);return v!=null&&v<=35;}},
     /* the `clay` COLUMN, not a keyword read of the soil line. It stays at zero until
        the research lands, and a chip reading 0 is the honest state of that question —
@@ -14018,6 +13994,17 @@ const PHOTO_SWAP={
      the card's own sentence the deck could not show until now. */
   'cotinus-coggygria-royal-purple':{
     alt:'photos/card/cotinus-coggygria-royal-purple-autumn.webp',
+    focus:'50% 45%',
+    hold:'3.5s',
+  },
+  /* The card's sentence is "Heart-shaped silver-marbled leaves · upswept vivid
+     pink flowers · compact rounded habit" and its photograph shows only the
+     second clause — flowers filling the frame with the leaves behind them. This
+     frame is the first clause: the silver-marbled foliage, which is how the plant
+     is identified on a bench when it is not in flower, and half of why anyone
+     buys it. Flower, then leaf. */
+  'cyclamen-persicum':{
+    alt:'photos/card/cyclamen-persicum-foliage.webp',
     focus:'50% 45%',
     hold:'3.5s',
   },

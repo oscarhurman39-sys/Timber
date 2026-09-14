@@ -51,6 +51,15 @@
       "commit": "7cb1262",
       "date": "2026-09-14",
       "why": "Same plant, same card, same photograph — spelling only. Oscar's instruction: the plant in front of him is labelled 'Palmeter', and the deck is a floor reference, so it carries the name staff will see on the bench. The card arrived from the 2026-09-14 31-card batch as 'Pal Maleter'; that was a disclosed decision, not a typo — the supplied JSON's own uncertain note said the label read 'Palmeter' and chose the accepted name over it. RHS Plant Finder lists Pinus mugo 'Pal Maleter' (v) and no source was found that states 'Palmeter' as a formal synonym, so the accepted spelling is preserved in the card's cvs field rather than lost. The photo moved with the slug (photos/pinus-mugo-palmeter.jpg) and its CREDITS entry with it."
+    },
+    {
+      "from": "Super Serie Djix Cyclamen",
+      "to": "Pink Persian cyclamen",
+      "fromLatin": "Cyclamen persicum Super Serie Djix F1",
+      "toLatin": "Cyclamen persicum",
+      "commit": "pending",
+      "date": "2026-09-14",
+      "why": "MERGE, not a rename. Two Cyclamen persicum cards existed: this branch held a Super Serie Djix F1 card with no photograph, and the deploy branch had already dealt a generic Cyclamen persicum with one. VERIFY-QUEUE 87 kept both because their visual lines contradict on flower shape (Djix points its petals DOWN, the dealt card and its photograph show them swept up), which is real evidence they are two different plants. Oscar's call on 2026-09-14 overrides that for now: \"just make it a genus card generic for now\" — he is revising bedding for an interview and does not need the cultivar split. The held card was removed rather than dealt; its full research survives in data/incoming/batch-2026-09-14-as-sent.json and batch-2026-09-14.json, so restoring it is a paste, not a re-research. The Djix photograph question in item 87 is therefore parked, not answered."
     }
   ]
 }
