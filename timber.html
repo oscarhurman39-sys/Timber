@@ -540,8 +540,14 @@
      that buried cards neither paint nor take a GPU layer. */
   .tphoto>img.alt,.tphoto>.pblack{opacity:0}
   .tphoto>.pblack{position:absolute;inset:0;background:#000}
-  .card.hot .tphoto.swap>img.alt{animation:holoAlt calc(var(--holo-swap,3.5s)*2) steps(1,end) infinite}
-  .card.hot .tphoto.swap>.pblack{animation:holoBlack calc(var(--holo-swap,3.5s)*2) linear infinite}
+  /* Generalised from a hard pair to N frames on 2026-09-14, for the Rhaphiolepis
+     (foliage / flower cluster / bronze new growth). The NAME of the keyframes and
+     the frame COUNT are variables so the two-frame cards above are untouched:
+     default --holo-n:2 and the original holoAlt/holoBlack, exactly as before. An
+     N-frame card sets --holo-n, --black-anim on the .tphoto and --alt-anim per
+     alt image; buildSwapCSS() emits those keyframes at boot. */
+  .card.hot .tphoto.swap>img.alt{animation:var(--alt-anim,holoAlt) calc(var(--holo-swap,3.5s)*var(--holo-n,2)) steps(1,end) infinite}
+  .card.hot .tphoto.swap>.pblack{animation:var(--black-anim,holoBlack) calc(var(--holo-swap,3.5s)*var(--holo-n,2)) linear infinite}
   /* the alt image switches instantly (steps) at the exact moment black is opaque */
   @keyframes holoAlt{0%,49.99%{opacity:0}50%,99.99%{opacity:1}100%{opacity:0}}
   /* 1.5% of a 7s cycle ≈ 105ms each way — the fastest fade that still renders as
@@ -1174,7 +1180,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r251 · 2026-09-14 · da3a10f';
+const BUILD='r252 · 2026-09-14 · a69528d';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -13905,6 +13911,44 @@ function holoStyle(ho){
    image and itself); the rest were a second take of the same subject rather than
    a second story. A swap that shows the same thing twice reads as a glitch, not
    as a feature. */
+/* buildSwapCSS — the @keyframes an N-frame swap needs, emitted once at boot.
+   Two-frame cards do NOT come through here: holoAlt/holoBlack are hand-written
+   in the stylesheet above and stay the default, so nothing about the existing
+   four changes. Only N>2 generates anything.
+
+   The shape is the two-frame one generalised. Frames share the cycle equally, so
+   frame k owns [k/N, (k+1)/N). The alt images are stacked in DOM order and each
+   is opaque for its own slot only; with the base photo underneath, slot 0 shows
+   through when every alt is transparent. steps(1,end) makes each change a cut,
+   not a dissolve, and the cut happens while the black overlay is opaque.
+
+   The black fade is 3/N percent of the cycle, which is the arithmetic behind the
+   hand-written 1.5% for N=2: at the default 3.5s hold the cycle is 3.5N seconds,
+   so 3/N percent is 105ms whatever N is — the same fade the pair cards use, and
+   still above the ~17ms floor where a fade stops reading as one. */
+function buildSwapCSS(){
+  const need=new Set();
+  for(const sw of Object.values(PHOTO_SWAP)){const n=swapFrames(sw).length+1;if(n>2)need.add(n);}
+  if(!need.size)return;
+  let css=``;
+  for(const n of need){
+    const slot=100/n, fade=3/n, r=x=>(+x.toFixed(4));
+    for(let k=1;k<n;k++){
+      const a=r(k*slot), b=r((k+1)*slot);
+      css+=`@keyframes holoAlt${n}-${k}{0%,${r(a-0.01)}%{opacity:0}${a}%,${r(Math.min(b,99.99)-0.01)}%{opacity:1}${k===n-1?`100`:`${b}%,100`}%{opacity:0}}
+`;
+    }
+    const stops=[`0%{opacity:1}`,`${r(fade)}%{opacity:0}`];
+    for(let j=1;j<n;j++){const b=r(j*slot);stops.push(`${r(b-fade)}%{opacity:0}`,`${b}%{opacity:1}`,`${r(b+fade)}%{opacity:0}`);}
+    stops.push(`${r(100-fade)}%{opacity:0}`,`100%{opacity:1}`);
+    css+=`@keyframes holoBlack${n}{${stops.join(``)}}
+`;
+  }
+  const el=document.createElement(`style`);el.textContent=css;document.head.appendChild(el);
+}
+/* One entry may carry a single `alt` (the original pair form) or an `alts` array.
+   Everything downstream reads this, so neither form is special-cased twice. */
+function swapFrames(sw){return sw?(sw.alts||(sw.alt?[sw.alt]:[])):[];}
 const PHOTO_SWAP={
   /* Oscar's ask, 2026-09-02: "flash between the current card photo and this one,
      as it has a flower". The card photo is the plant's gold, red-edged foliage
@@ -13977,7 +14021,38 @@ const PHOTO_SWAP={
     focus:'50% 45%',
     hold:'3.5s',
   },
+  /* THREE frames, and the first card in the deck to use more than two.
+     Oscar's ask, 2026-09-14: "I want this card to flash between these 2 photos
+     aswell as the existing one."
+
+     It clears the bar the note above sets — each frame says something the others
+     cannot. The card's sentence is "Rose-pink scented flower clusters · glossy
+     evergreen leaves · compact rounded habit", and its own photograph shows the
+     leaves and one tight unopened bud: the clause the card LEADS with had no
+     picture at all. Frame 2 is the flower cluster. Frame 3 is the wider shot —
+     paler open flowers with red centres over bronze new growth, the plant as it
+     looks on the bench rather than a macro of it.
+
+     Judged on the CARDS, not the files — the Doozie lesson at the foot of this
+     map. Read as two source images, frames 2 and 3 are both "flowering shots" and
+     looked too close together to earn a third slot. Rendered at card size they
+     are not: the window crops frame 3 to its bronze-orange new growth, with the
+     pale flowers pushed up behind the title. What actually alternates is foliage,
+     flower, new growth — three different answers to "what does it look like".
+
+     If it still reads as a glitch on a phone, delete the 'bronze-shoots' line and
+     it is an ordinary pair again with no code change — an `alts` of length one
+     behaves exactly like the old `alt`. */
+  'rhaphiolepis-delacourii-enchantress-moness':{
+    alts:[
+      'photos/card/rhaphiolepis-delacourii-enchantress-moness-flowers.webp',
+      'photos/card/rhaphiolepis-delacourii-enchantress-moness-bronze-shoots.webp',
+    ],
+    focus:'50% 45%',
+    hold:'3.5s',
+  },
 };
+buildSwapCSS();
 /* Spiraea 'Double Play Doozie' was configured here and then removed, which is
    worth recording so it is not re-tried. Reading the two files, the pair looked
    obvious: the card photo is nearly all tight buds, the spare has an open
@@ -14099,10 +14174,10 @@ function renderCard(idx,before){
         ${fa.aura?`<i class="say-aura"${lateBG(`background-image:url(${fa.aura.src})`)} style="left:${fa.aura.left};top:${fa.aura.top};width:${fa.aura.width};height:${fa.aura.height}" aria-hidden="true"></i>`:''}
       </div>`:`
       <div class="tcard${ho?' holo':''}${themed?' edition':''}${ed&&ed.mirror?' mirrored':''}"${ed?` style="${editionStyle(ed)}"`:''}${ed&&ed.mirror?lateBG(`--mir-src:url(${photoSrc(slug)})`):(ho?lateBG(holoStyle(ho)):'')}>
-        <div class="tphoto${swap?' swap':''}"${swap&&swap.hold?` style="--holo-swap:${swap.hold}"`:''}>
+        <div class="tphoto${swap?' swap':''}"${swap?` style="${swap.hold?`--holo-swap:${swap.hold};`:''}--holo-n:${swapFrames(swap).length+1};--black-anim:holoBlack${swapFrames(swap).length+1>2?swapFrames(swap).length+1:''}"`:''}>
           <div class="pfall" style="background:${bg};color:hsl(${p.hue} 60% 55%)">${leafSVG()}</div>
           <img data-psrc="${photoSrc(slug)}" style="object-position:${PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
-          ${swap?`<img class="alt" data-psrc="${swap.alt}" style="object-position:${swap.focus||PHOTO_FOCUS[slug]||'50% 40%'}" alt="" onerror="this.style.display='none'">
+          ${swap?swapFrames(swap).map((src,i,a)=>`<img class="alt" data-psrc="${src}" style="object-position:${swap.focus||PHOTO_FOCUS[slug]||'50% 40%'};--alt-anim:holoAlt${a.length+1>2?`${a.length+1}-${i+1}`:''}" alt="" onerror="this.style.display='none'">`).join('')+`
           <div class="pblack" aria-hidden="true"></div>`:''}
         </div>
         ${ho&&ho.overframe?`<div class="overframe" aria-hidden="true"${lateBG(`background-image:url(${ho.overframe})`)}></div>`:''}
