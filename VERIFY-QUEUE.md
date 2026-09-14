@@ -3752,6 +3752,26 @@ Oscar sent 35 plant JSONs and 25 photographs on 2026-09-14. The raw batch is com
 verbatim as `data/incoming/new-plant-builds-2026-09-14-as-sent.json`; the 31 entries
 actually built are `new-plant-builds-2026-09-14.json`. Deck 313 → 334, hold 82 → 92.
 
+#### The counts, stated unambiguously
+
+The commit subject for this batch says "21 dealt, 10 held". Those are the **deck and
+hold deltas**, not the new-card split, and reading them as the split is wrong by one
+either way. The honest breakdown:
+
+| | |
+|---|---|
+| New cards built | **31** |
+| — of those, dealt with a photograph | **20** |
+| — of those, held awaiting a photograph | **11** |
+| Pre-existing `Escallonia 'Gold Brian'` card dealt from hold with this batch's photo | 1 |
+| **Deck delta** (20 new dealt + 1 existing dealt) | **+21**, 313 → 334 |
+| **Hold delta** (31 ingested − 20 dealt − 1 Escallonia) | **+10**, 82 → 92 |
+
+Photographs: 25 sent, 22 used (21 dealt + the Cotinus swap frame), 3 unused — the
+yellow mum (wrong upload, confirmed), the narrow silver-leaved plant whose picture
+does not match its `Helichrysum petiolare` research, and the second Sweet William
+shot, surplus once the three `Dianthus barbatus` entries became one card.
+
 #### The four entries not built, and why
 
 | Entry | Why |
