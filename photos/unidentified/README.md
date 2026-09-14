@@ -223,4 +223,4 @@ Nothing was built from it. Two things are needed before it can become a card:
 `node tools/add-plant.js --quick bellis.json photos/unidentified/2026-09-14-double-daisy-white-pink-no-json.jpg`
 
 The reverse gap is also open: the **Cyclamen 'Djix' card is written and held** in
-`PLANTS_ON_HOLD` with no photograph. See VERIFY-QUEUE item 85.
+`PLANTS_ON_HOLD` with no photograph. See VERIFY-QUEUE item 87.

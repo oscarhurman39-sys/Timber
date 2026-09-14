@@ -3710,7 +3710,116 @@ latin already contains the cultivar. Worth knowing the incoming shape varies on 
 
 ---
 
-### 85. Six photos, six JSONs, and not the same six plants — plus a card that can render with no photograph and pass every suite
+### 85. Two cards in the 2026-09-14 batch rate a plant trouble-free and then name its trouble
+
+`plant-sense` `pest-vs-prose` fires when `resilience` says "susceptible to" and
+`pestRisk` is 5 or under. Two cards from Oscar's 31-card batch trip it, and **both
+sides are his own supplied research** — the number and the sentence came in the same
+JSON, so this is a horticultural call, not a code fix. Nothing was changed on either
+card; they are listed in `KNOWN` in `tools/plant-sense.js` pending that call.
+
+| Card | `pestRisk` | The sentence that fires the rule |
+|---|---|---|
+| Checkerberry Big Berry (`Gaultheria procumbens 'Gaubi'`) | 3 | "Generally pest-free and hardy; may be **susceptible to** honey fungus where present" |
+| Foxy Cream foxglove (`Digitalis purpurea` Foxy Group) | 5 | "generally easy but **susceptible to** slugs and occasional leaf diseases" |
+
+**The reading that argues the numbers are right and the rule is over-reading.**
+Honey fungus is a property of the *site*, not of Gaultheria — almost any woody plant
+on infected ground is at risk, so it says little about how much trouble this plant is
+per se. Slug damage on young foxgloves is real but seasonal and confined to new
+growth, which is some way from the 14–16 band the brief reserves for roses. On that
+reading 3 and 5 are defensible and the prose is simply being thorough.
+
+**The reading that argues the prose is right.** If a member of staff reads the
+sentence out to a customer, "susceptible to" is what they will hear, and a card
+showing under one icon of five contradicts them on the same face. The brief's own
+scale puts "occasional aphid or mildew" at 8–10; a named, expected problem arguably
+belongs there rather than at 3.
+
+**What decides it:** Oscar picks a side per card — either nudge `pestRisk` into the
+6–10 band, or soften the `resilience` wording away from "susceptible to". Then delete
+that card's line from `KNOWN` in `tools/plant-sense.js` and this item from here.
+
+**Not a candidate for a rule change.** The regex is doing its job: a card that says
+"trouble-free" in a number and "susceptible to X" in a sentence is worth a human
+look, which is exactly what has happened.
+
+---
+
+### 86. Thirty-five researched entries, thirty-one cards, twenty-one photographs — and two duplicate plants the deck already owned
+
+Oscar sent 35 plant JSONs and 25 photographs on 2026-09-14. The raw batch is committed
+verbatim as `data/incoming/new-plant-builds-2026-09-14-as-sent.json`; the 31 entries
+actually built are `new-plant-builds-2026-09-14.json`. Deck 313 → 334, hold 82 → 92.
+
+#### The counts, stated unambiguously
+
+The commit subject for this batch says "21 dealt, 10 held". Those are the **deck and
+hold deltas**, not the new-card split, and reading them as the split is wrong by one
+either way. The honest breakdown:
+
+| | |
+|---|---|
+| New cards built | **31** |
+| — of those, dealt with a photograph | **20** |
+| — of those, held awaiting a photograph | **11** |
+| Pre-existing `Escallonia 'Gold Brian'` card dealt from hold with this batch's photo | 1 |
+| **Deck delta** (20 new dealt + 1 existing dealt) | **+21**, 313 → 334 |
+| **Hold delta** (31 ingested − 20 dealt − 1 Escallonia) | **+10**, 82 → 92 |
+
+Photographs: 25 sent, 22 used (21 dealt + the Cotinus swap frame), 3 unused — the
+yellow mum (wrong upload, confirmed), the narrow silver-leaved plant whose picture
+does not match its `Helichrysum petiolare` research, and the second Sweet William
+shot, surplus once the three `Dianthus barbatus` entries became one card.
+
+#### The four entries not built, and why
+
+| Entry | Why |
+|---|---|
+| `Cotinus coggygria 'Royal Purple'` | Already **dealt**, with a photograph. Oscar's call: do not replace. Its new photo became a `PHOTO_SWAP` frame instead (below). |
+| `Escallonia 'Brian's Gold'` | The same plant as `Escallonia 'Gold Brian'`, already **held** — RHS treats the two as synonyms, and Oscar's own `uncertain` note says so. The held card was dealt with his photo rather than a second card being created. |
+| `Dianthus barbatus` ("White Picotee") | Three entries shared one `latin`. A card's identity *is* its latin — and so is its photo slug — so three cards cannot hold it. |
+| `Dianthus barbatus` ("Pink and White") | As above. Oscar's call: keep the plain species card only. Both dropped entries said in their own `uncertain` field that the name was a retail colour description, not a cultivar, so no plant fact was lost. |
+
+#### Four changes made to the incoming data, each disclosed
+
+1. **`hardiness` case.** `"H1C"` (Cyclamen) and `"H1B"` (Pentas) → `H1c` / `H1b`.
+   `check-plant-json.js` matches the band list exactly and **rejects** the uppercase
+   form, so this was mandatory, not stylistic. Same band either way.
+2. **`soil` / `soilWarning` short forms.** All 31 entries were over the measured
+   panel budgets — the worst at 85 and 112 characters against 26 and 44. Written as
+   hand-authored pairs in the `FIT` table in `tools/fit-incoming.js`, which is the
+   one reviewable place for this, with the full research prose kept in
+   `data/incoming/`. Machine truncation was not used: a clipped clause on a printed
+   card is worse than a short sentence written to be short.
+3. **Viola spread unit.** `0.15-0.25m` overran its size rail by 3.6px and crossed the
+   baked label (`design/audit-layout.js`). Changed to `10-20 cm H × 15-25 cm W` —
+   the same measurement in the unit 71 other cards already use for this size class.
+4. **Nothing else.** Every rating, every prose field and every `peak` is as sent.
+
+#### Open, needing Oscar
+
+- **Escallonia 'Gold Brian' hardiness disagrees with itself across two records.** The
+  held card carries **H5** ("Hardy in sheltered UK gardens"); this batch's research for
+  the same plant says **H3** ("Best in mild or coastal parts of the UK"). Two bands
+  apart, on the field `NEW-SESSION.md` names as the most error-prone in the deck.
+  His photo was dealt to the existing card and **no stat was changed**, on his
+  instruction to flag it rather than overwrite. `growthSpeed` also differs, 15 vs 10.
+  Neither value has been independently verified here.
+- **The existing Cotinus card is not identical to the new research**, which was the
+  condition Oscar put on leaving it alone. It differs on `hue` (345 vs 300), `peak`
+  (Apr-Oct vs Jun-Nov), `pestRisk` (7 vs 4), `growthSpeed`, `careLevel` and most of
+  the prose — and the existing card carries **no** `hardinessNote`, `cvs` or
+  `foliage` where the new research supplies all three. Left untouched pending his call.
+- **Two photographs deliberately unused.** A bright yellow pompon mum (no yellow-mum
+  card exists; Oscar confirmed it was uploaded in error) and a narrow silver-leaved
+  plant that does not match the `Helichrysum petiolare` research it arrived with —
+  rounded felted foliage in the text, needle-like leaves in the picture, closer to
+  *H. italicum*. His instruction: build the card, hold it, wait on the label. Done.
+- **Two `pest-vs-prose` contradictions** from this batch — see item 85.
+
+---
+### 87. Six photos, six JSONs, and not the same six plants — plus a card that can render with no photograph and pass every suite
 
 **Deck 318, hold 83.** Five cards dealt: Hardy Fuchsia 'Alice Hoffman', *Berberis
 thunbergii* 'Desperados', *Symphyotrichum dumosum* 'Alpha White', *Viola* ×
@@ -3853,6 +3962,75 @@ image library at all, it is a `fs.existsSync` — or `deck-audit` should treat
 `photo-missing` on a dealt card as an error, since a dealt card is by definition
 one that has a photograph. `[Inference]` the first is the smaller change and
 catches it earlier.
+
+#### Merged with the deploy branch, 2026-09-14 — and the two batches overlap
+
+This branch was built on `47ebd55`; the deploy branch moved six commits ahead
+while it was open (PR #25, item 86's 31-card batch). Merged, not rebased — the
+branch is pushed and rebasing it would invalidate any checkout of it.
+
+**Four files conflicted, and none was resolved by hand-editing the conflict.**
+`timber.html` conflicted inside the `PLANTS` and `HOLD` arrays, which is exactly
+where a hand-resolution corrupts a card. Instead the deploy side was taken whole
+and this branch's six rows were re-inserted through `tools/plant-data.js`
+(`readDeck`/`readHold`/`writeBlock`) — the one reader/writer, so the rows went back
+in the format the tool itself emits. Verified afterwards by parsing both sides and
+comparing field by field: **all 426 deploy-branch cards present, zero field
+changes, exactly 6 added.** The only textual difference beyond the new rows is one
+row's indentation and a run of blank lines the writer normalised.
+`plants.csv` was regenerated (`plants-tool.js export`), not merged — it is
+generated. `photos/CREDITS.json` was union-merged on `file`. `VERIFY-QUEUE.md`
+kept both sides; the deploy branch had also claimed item 85, so this item was
+renumbered 85 → 87 and the references in `LEDGER.md` and
+`photos/unidentified/README.md` were updated with it.
+
+Result: **deck 345, hold 87.** No latin collides across the two batches.
+
+#### Three places the two batches disagree with each other
+
+None is a duplicate card, and all three are live on the same deck.
+
+**1. There are now two pink *Cyclamen persicum* cards, and their `visual` lines
+contradict each other on the one feature that separates them.** Item 86 records
+that batch's Cyclamen arriving with the same `"H1C"` mis-casing this one had, so
+both came from the same writer on the same day, and the first read was that this
+branch's held card was a duplicate of a card already dealt.
+
+**It is not, and the photograph settles it rather than an argument.** The dealt
+card `Cyclamen persicum` ("Pink Persian cyclamen") says *"upswept vivid pink
+flowers"*; `photos/cyclamen-persicum.jpg` shows exactly that — vivid magenta
+flowers with petals swept strongly back and upward, the ordinary cyclamen shape,
+on tall arching stems over silver-marbled leaves. The held card
+`Cyclamen persicum Super Serie Djix F1` is written around the opposite: *"petals
+point downwards rather than strongly reflexing upwards, giving Djix its unusual
+umbrella-like flower shape"* — that is the whole point of the Djix selection.
+The photograph matches the dealt card and not the held one.
+
+So the held Djix card was **kept held, not dropped and not dealt**. Held costs
+nothing and shows nobody a wrong picture; dropping it would throw away research on
+what the evidence says is a second plant. `[Unverified]` whether Oscar has two
+cyclamen or described one twice — that is the question, and a photograph of the
+Djix answers it. If it turns out to be one plant, the Djix card is the one to
+delete, because the other has the photograph.
+
+**2. The deck now names the same aster series under two genera.** This branch
+dealt `Symphyotrichum dumosum 'Alpha White'`; the deploy branch dealt
+`Aster 'Alpha Light Purple'`. Same commercial Alpha series, two genus names on two
+cards sitting in one deck. Both are defensible — `Symphyotrichum` is the current
+accepted genus and Oscar's own `uncertain` note says UK retailers sell it as
+`Aster` — but the deck should pick one. A card's latin is also its photo slug, so
+renaming either means renaming its photograph too. **Oscar's call.**
+
+**3. The same two cards disagree on when the Alpha asters flower.**
+`Alpha Light Purple` carries `Aug-Oct`; `Alpha White` carries `Aug-Sep`, converted
+here from "late summer to early autumn" and already flagged above as the narrower
+reading. The sibling card is direct evidence for `Aug-Oct`. Not changed, because
+changing it is a second reinterpretation of supplied research, but this is the
+cheapest of the three to settle.
+
+Related but separate: item 85 is the same shape of problem in the other batch — a
+supplied number and a supplied sentence disagreeing, with no code fix available.
+The `careLevel 5` flagged above on the pansy is this branch's version of it.
 
 ## Accepted, not defects
 

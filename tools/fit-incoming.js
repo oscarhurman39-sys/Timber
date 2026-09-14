@@ -212,6 +212,73 @@ const FIT = {
   "Nepeta racemosa 'Walker's Low'":    { soil: 'Well-drained, lean',         warn: 'Rich wet soil makes it flop' },
   "Helleborus (Rodney Davey Marbled Group) Anna's Red ('Abcrd02')": { soil: 'Fertile, moist, drained', warn: 'No winter standing water at the crown' },
   "Hakonechloa macra 'Aureola'":       { soil: 'Humus-rich, moist',          warn: 'Emerges very late — do not dig it up' },
+
+  /* --- 2026-09-14 batch: data/incoming/new-plant-builds-2026-09-14.json --- */
+  "Mentha × piperita f. citrata 'Chocolate'":
+    { soil: 'Fertile, moist, drained', warn: 'Runners take over; confine it to a pot' },
+  "Salvia officinalis 'Tricolor'":
+    { soil: 'Any, free-draining', warn: 'Winter wet kills it, not the cold' },
+  "Origanum vulgare 'Compactum'":
+    { soil: 'Well-drained, alkaline', warn: 'Rots where the ground stays wet' },
+  "Monarda didyma":
+    { soil: 'Fertile, moist, drained', warn: 'Dry roots in summer bring mildew' },
+  /* warn reworded 2026-09-14 when Oscar re-researched this card: the new text
+     names WHY it must not bake dry — drought stress is what brings the mildew on,
+     and mildew resistance is this cultivar's whole selling point. */
+  "Monarda didyma 'Balbeemav'":
+    { soil: 'Humus-rich, moist, drained', warn: 'Drought brings mildew; no winter wet' },
+  "Cornus sericea 'Flaviramea'":
+    { soil: 'Any, moist but drained', warn: 'Young stems carry the winter colour' },
+  "Weigela 'Red Prince'":
+    { soil: 'Fertile, moist, drained', warn: 'Bone-dry or boggy soil costs you flowers' },
+  "Chrysanthemum × morifolium Garden Mum Group":
+    { soil: 'Fertile, moist, drained', warn: 'Winter hardiness varies by cultivar' },
+  "Skimmia japonica 'Mystic Marlot'":
+    { soil: 'Humus-rich, moist, acidic', warn: 'Dry lime yellows it; strong sun scorches' },
+  "Gaultheria procumbens 'Gaubi'":
+    { soil: 'Humus-rich, acid, drained', warn: 'Lime kills it; ericaceous compost in pots' },
+  "Solanum pseudocapsicum":
+    { soil: 'Loam-based, fertile, moist', warn: 'Frost kills it; keep it under glass' },
+  "Digitalis purpurea Foxy Group":
+    { soil: 'Any, moist but drained', warn: 'Avoid ground that stays waterlogged' },
+  "Zantedeschia aethiopica":
+    { soil: 'Fertile, reliably moist', warn: 'Protect the crown in a cold garden' },
+  "Cyclamen persicum":
+    { soil: 'Humus-rich, free-draining', warn: 'Frost, dry air and a wet crown kill it' },
+  "Chamaecyparis pisifera 'Baby Blue'":
+    { soil: 'Moist but drained, acidic', warn: 'Chalk and standing water both check it' },
+  "Olearia × haastii":
+    { soil: 'Any soil, well-drained', warn: 'Waterlogging and hard inland frost' },
+  "Helichrysum petiolare":
+    { soil: 'Any, moist but drained', warn: 'Needs sharp drainage and frost shelter' },
+  "Dianthus 'Kledg12163'":
+    { soil: 'Well-drained, alkaline', warn: 'Heavy winter wet rots the crown' },
+  "Gaultheria mucronata":
+    { soil: 'Moist but drained, acidic', warn: 'No lime; females need a male to berry' },
+  "Pentas lanceolata Starcluster Mix":
+    { soil: 'Fertile, moist, drained', warn: 'Frost kills it; lift or bin in autumn' },
+  "Primula polyanthus":
+    { soil: 'Humus-rich, moist, drained', warn: 'Hates baking dry and standing water' },
+  "Viola Babyface Series 'White'":
+    { soil: 'Fertile, humus-rich, moist', warn: 'Heat stops it; wet winter soil rots it' },
+  "Dianthus barbatus":
+    { soil: 'Well-drained, alkaline', warn: 'Waterlogged winter ground rots it' },
+  "Calluna vulgaris 'Zilly'":
+    { soil: 'Acid, humus-rich, drained', warn: 'Lime-hating; use ericaceous compost' },
+  "Hylotelephium ewersii var. homophyllum 'Rosenteppich'":
+    { soil: 'Well-drained, alkaline', warn: 'Damp heavy ground rots the crown' },
+  "Aster 'Alpha Light Purple'":
+    { soil: 'Fertile, moist, drained', warn: 'Avoid ground that stays wet for long' },
+  "Garrya elliptica 'James Roof'":
+    { soil: 'Any soil, well-drained', warn: 'Cold inland wind scorches the leaves' },
+  "Deutzia × hybrida 'Mont Rose'":
+    { soil: 'Fertile, moist, drained', warn: 'Deep shade and wet feet both cost you' },
+  "Chimonanthus praecox":
+    { soil: 'Any, moist but drained', warn: 'Needs a warm sheltered wall to flower' },
+  "Heptacodium miconioides":
+    { soil: 'Fertile, moist, drained', warn: 'Warmth and shelter bring the best bark' },
+  "Pinus mugo 'Pal Maleter'":
+    { soil: 'Any, free-draining sandy', warn: 'Waterlogging kills it; open sun for tips' },
 };
 
 /* Entries deliberately NOT built, with the reason. An excluded plant is not a

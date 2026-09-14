@@ -5,22 +5,29 @@ brick: Run `CHATGPT-TOXICITY-BRIEF.md` over the first 50 names in
   `data/incoming/toxicity-todo-2026-09-13.txt` and send the JSON back — 305 of 392
   cards have a blank toxicity field, and blank renders identically to "safe".
 since: 2026-09-13  sessions-unchanged: 0
-progress: 2026-09-14, later (six-photo batch) — **deck 318, hold 83.** Five cards
-  dealt (Fuchsia 'Alice Hoffman', Berberis thunbergii 'Desperados', Symphyotrichum
-  dumosum 'Alpha White', Viola × wittrockiana 'Rose Blotch', Gomphrena globosa),
-  the Cyclamen 'Djix' held for want of a photograph, and one frame parked: six
-  photos and six JSONs arrived but they are not the same six plants — photo 3 is a
-  double Bellis with no card and no JSON. The batch came as prose, so hue (prose →
-  degrees), peak (seasons → months), two missing foliage class words and one
-  mis-cased hardiness band were converted, every change logged in `uncertain` with
-  the untouched paste committed beside it. **A tooling hole found the hard way:**
-  all five cards rendered with NO photograph and `run-all --jobs 3` still returned
-  17/17 — the app loads `photos/card/*.webp`, `add-plants-bulk.js` stages only the
-  jpg master, `optimise-photos --check` exits 0 when sharp is absent, and
-  deck-audit treats a missing photo as a warning. Derivatives built and the cards
-  checked by eye; the guard itself is written up, not patched. Four of the six
-  cards carry a blank toxicity, so the brick below grew rather than shrank.
-  VERIFY-QUEUE item 85.
+progress: 2026-09-14, later (six-photo batch, merged with the deploy branch) —
+  **deck 345, hold 87** after merging; this batch itself was +5 dealt, +1 held.
+  Dealt: Fuchsia 'Alice Hoffman', Berberis thunbergii 'Desperados',
+  Symphyotrichum dumosum 'Alpha White', Viola × wittrockiana 'Rose Blotch',
+  Gomphrena globosa. Six photos and six JSONs arrived but they are not the same
+  six plants — photo 3 is a double Bellis with no card and no JSON, parked; the
+  Cyclamen 'Djix' is held for want of a photograph. The batch came as prose, so
+  hue (prose → degrees), peak (seasons → months), two missing foliage class words
+  and one mis-cased hardiness band were converted, every change logged in
+  `uncertain` with the untouched paste committed beside it. **A tooling hole found
+  the hard way:** all five cards rendered with NO photograph and `run-all --jobs 3`
+  still returned 17/17 — the app loads `photos/card/*.webp`, `add-plants-bulk.js`
+  stages only the jpg master, `optimise-photos --check` exits 0 when sharp is
+  absent, and deck-audit treats a missing photo as a warning. Derivatives built and
+  the cards checked by eye; the guard is written up, not patched. **The merge**
+  (deploy branch six commits ahead, PR #25) conflicted in four files; timber.html
+  was resolved through `plant-data.js` rather than by hand and verified card by
+  card — 426 deploy cards intact, zero field changes, 6 added. It also surfaced
+  three disagreements between the two 2026-09-14 batches: two pink Cyclamen
+  persicum cards whose visuals contradict (the photograph settles it — they are
+  two plants, not a duplicate), the Alpha aster series named under two genera, and
+  the same series given two flowering windows. Four of the six cards carry a blank
+  toxicity, so the brick below grew rather than shrank. VERIFY-QUEUE item 87.
 progress: 2026-09-13 — **deck 310, hold 82.** Twenty-three cards dealt across the
   day. Oscar supplied research replacing ALL 49 Claude-written cards from the
   2026-08-10 batch: 808 field values changed, 26 cards gained a toxicity note
