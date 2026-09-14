@@ -61,7 +61,7 @@ The answers staff give at the till. **This is where the currently-invisible fiel
 |---|---|---|
 | **Toxicity / pet safety** | *new* `toxicity` | Asked constantly ("is it safe for my dog?"). Both hydrangea and abelia JSONs supplied this and we discarded it. Must state plainly, including "no specific warning required". |
 | **Wildlife value** | *new* `wildlife` | Bees/butterflies/birds. Sells plants and is asked for by name. RHS Plants for Pollinators badge if it holds one. |
-| **Evergreen / deciduous** | *new* `foliage` | "Will it look bare in winter?" Not currently captured anywhere. |
+| **Evergreen / deciduous** | `foliage` — **built 2026-09-13** | "Will it look bare in winter?" Now a schema column and on the card in three places: the back prints the value whole, the press-and-hold lens gives the class and what it means, and the customer sheet gives the plain answer under "In winter". Four words, one compulsory: evergreen / semi-evergreen / deciduous / **herbaceous** (the plant vanishes to the ground — the case customers ring up about thinking it died). |
 | **Container suitable?** | *new* `container` | Yes / yes-with-care / not really. Huge for the patio-plant conversation. |
 | **Time to full size** | *new* `maturity` | The stature rail says *how big*; this says *how long*. Hydrangea JSON gave "about 3 years". |
 | **Honest downside** | *new* `caveat` | Where it disappoints: "flops without support", "hates cold winds", "black spot in a wet year". Builds trust and cuts returns. |
@@ -130,9 +130,11 @@ feed, winterCare, establishing, toxicity, wildlife, foliage, container,
 maturity, caveat, pitch, companions, confusedWith, breeder, series, pbr
 ```
 
-Rules: free text, no controlled vocabulary except `foliage`
-(`evergreen` / `semi-evergreen` / `deciduous`) and `container`
-(`yes` / `with care` / `no`). `pbr` holds the registration number or `none`.
+Rules: free text, no controlled vocabulary except `foliage` and `container`
+(`yes` / `with care` / `no`). `foliage` turned out to want both: the class word is
+compulsory and checked (`evergreen` / `semi-evergreen` / `deciduous` / `herbaceous`),
+and free prose after it is welcome and prints — "deciduous; five-lobed leaves with
+strong seasonal colour". `pbr` holds the registration number or `none`.
 Everything blank-safe — the importer already only requires common/latin/hue/hardiness.
 
 ---

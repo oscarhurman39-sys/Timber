@@ -105,7 +105,12 @@ function check(name, cond, extra) {
   /* ---- 6. flip stays locked after undo re-adds a previously flipped card ---- */
   ctx = await browser.newContext();
   page = await ctx.newPage();
-  await page.goto(URL); await page.waitForTimeout(300);
+  /* Every other load site in this file settles the deal before touching the deck
+     (lines above); this one did not, and at 310 cards a flat 300ms no longer covers
+     it. Clicks fired mid-deal land on a deck that is still being built, which is what
+     made this section fail under three-job contention while passing alone. Same
+     defect, same shape, as the srs-test fixed-sleep in VERIFY-QUEUE item 78. */
+  await page.goto(URL); await page.waitForTimeout(300); await deckSettled(page);
   const deckBox = await page.locator('#deck').boundingBox();
   const x = deckBox.x + deckBox.width / 2, y = deckBox.y + deckBox.height / 2;
   // flip top card, unflip via star (act() unflips), then star again to swipe, then undo

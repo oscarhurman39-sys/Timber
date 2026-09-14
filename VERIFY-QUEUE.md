@@ -3448,6 +3448,266 @@ re-photographing, and it is Oscar's call whether these two are worth a trip.** A
 `photo-resolution` check in the data gate would stop the next one arriving unnoticed;
 offered, not built.
 
+### 82. Oscar's research replaces 48 Claude-written cards — and a stranger's face came off a card
+
+**Oscar supplied research for all 48 live cards whose text Claude generated**, plus two
+new plants with photographs. He had already settled the principle in item 81: *"I belive
+my latest Jsons info are a sorce of truth."*
+
+**808 field values changed across 48 cards.** Deck 308 → 310, hold 82.
+
+#### What that actually fixed, beyond tidiness
+
+**26 cards gained a toxicity note** where the card had none — and because blank means no
+flag, those 26 cards previously showed a customer-facing plaque with nothing on it for
+plants including *Laburnum* ("all parts, especially seeds, are highly toxic"),
+*Delphinium* ("all parts harmful"), *Prunus laurocerasus*, *Ligustrum*, *Buxus* and
+*Parthenocissus*. Every one now carries the note and the corner flag.
+
+**12 hardiness ratings were wrong.** Not blank — *wrong*, on a number staff quote:
+
+| card | was | now |
+|---|---|---|
+| *Anemone* × *hybrida* 'Honorine Jobert' | H6 | H7 |
+| *Cotoneaster horizontalis* | H7 | H6 |
+| *Crataegus laevigata* 'Paul's Scarlet' | H6 | H7 |
+| *Fagus sylvatica* | H6 | H7 |
+| *Heuchera villosa* 'Palace Purple' | H7 | H6 |
+| *Jasminum nudiflorum* | H6 | H5 |
+| *Kerria japonica* 'Pleniflora' | H5 | H6 |
+| *Lamprocapnos spectabilis* | H7 | H6 |
+| *Lonicera ligustrina* var. *yunnanensis* 'Baggesen's Gold' | H5 | H6 |
+| *Parthenocissus tricuspidata* | H6 | H5 |
+| *Rosa* 'New Dawn' | H7 | H6 |
+| *Rudbeckia* 'Goldsturm' | H7 | H6 |
+
+Also: **`Cotoneaster horizontalis` gained a Schedule 9 compliance note** it did not have.
+
+**Never overwritten:** each card's `latin` (the photo filename is derived from it, and
+the deck uses U+2019 so cultivar quotes stay balanced — taking his straight-quote
+spelling would have been a silent rename) and every commercial/shop field.
+
+#### Three contradictions the gate caught, one of them mine
+
+- **`Astilbe 'Fanal'` — my wording, not his data.** The short soil warning I hand-wrote,
+  *"Dry soil scorches it; never let it bake"*, opens with the bare phrase "Dry soil",
+  which `plant-sense`'s drought rule reads as a boast of drought tolerance against a
+  thirst of 17/20. The rule already strips *negated* phrases ("never let it dry out"
+  passes on the Chocolate Shogun) but cannot see a negation expressed as a consequence.
+  Reworded to **"Never let it bake dry"** — same meaning, no trap, and it matches the
+  idiom the deck already uses. The rule was right and my sentence was the problem.
+- **`Prunus serrula`** and **`Pyracantha SAPHYR ORANGE ('Cadange')`** — genuine
+  dual-season. His `peak` names the season the plant is *sold* on (the mahogany bark,
+  the orange berries) while his own `visual` also names the spring blossom. One band,
+  two seasons. Added to `plant-sense`'s `KNOWN` **with this entry as the reason**, per
+  that list's own rule; same shape as Kousa Dogwood 'Flower Tower' and Japanese
+  Snowball 'Popcorn' under *Accepted, not defects*.
+
+#### A stranger's face was on a card
+
+`Paeonia lactiflora` 'Tom Cat' was photographed on the nursery and **an identifiable
+member of the public is in the frame** — grey hair, blue top, face in profile at the
+top right. Rendered on the card they sat just left of the hardiness crest, plainly
+visible. That is someone who did not agree to appear on a card staff hold up to
+customers.
+
+`PHOTO_FOCUS` could not solve it: the source is portrait in a portrait well, so there
+is no vertical overflow to pan and `50% 80%` rendered **identically** to `50% 40%`.
+Checked rather than assumed. The master was cropped instead — top 16% removed,
+1200x1622 → 1200x1362 — which takes the person out entirely and, as it happens, makes
+a better card by letting the hero flower fill the frame.
+
+**Nothing of Oscar's was destroyed:** the uncropped original is kept at
+`photos/unidentified/2026-09-13-paeonia-tom-cat-UNCROPPED-bystander.jpg`.
+
+**Acted rather than asked, and the reasoning is worth recording:** the crop is trivially
+reversible, is not outward-facing, changes no plant content, and the alternative was
+leaving a real person's face on a shop-floor card while waiting for a reply. Flagged to
+him immediately with both frames.
+
+`[Inference]` that this is the only card with a bystander — masters were not swept for
+faces. A `photo-privacy` check is not something a script can do reliably; it wants eyes.
+
+#### `perf-test` — the fifth raise did not happen, the check was re-expressed instead
+
+Pixel parity failed again at **127 px / Δ79** against the 64 set only hours earlier in
+item 80. The cause is this batch: **Oscar's research changed `hue` on 48 cards**, so the
+stacked card trim at the deck's corner is literally a different colour now. Not a leak,
+and never was.
+
+Item 80 left an instruction for exactly this moment — *"this should be the last time the
+bare delta is raised; a fifth time means the delta has stopped discriminating, and the
+check should be re-expressed as 'every differing pixel lies within N px of the deck's
+outer edge'."* That instruction was followed rather than the number moved. The delta had
+gone 3 → 5 → 9 → 26 → 53 → **79** while the thing it guards never moved once.
+
+**The re-expression was measured before it was written, and the first idea was wrong.**
+"every differing pixel lies near the edge" does not hold — the residual has 39 pixels
+well inside the card. What separates them is *how many*:
+
+| | total px | max Δ | px >24px **inside** the card rect |
+|---|---|---|---|
+| residual (deck 310) | 123 | 79 | **39** |
+| staged leak, same procedure | 36,575 | 375 | **16,687** |
+
+**428x on the inside-count against 4.7x on the delta.** Halo rounding hugs the deck's
+outer edge; a buried card becoming visible puts CONTENT inside the card rectangle, which
+is the actual invariant. So the gates are now **total pixels** (256, 297x headroom) and
+**inside-count** (256, 428x headroom), and the max delta is **reported on every run but
+no longer gated** — the drift stays visible without a number that has stopped meaning
+anything deciding whether the suite is green.
+
+This is the check getting sharper, not looser: the previous version would pass a leak of
+200 dim pixels sitting in the middle of the card, and this one will not.
+
+#### `edge-test` — a second fixed sleep of the same family
+
+`undone card returns unflipped with correct counts` failed at `--jobs 3` and passed
+28/28 alone. That is the signature item 78 warned about, so it was read rather than
+re-run until green.
+
+`undo()` calls `updateCounts()` **synchronously**, so a deferred count update was ruled
+out as the cause. What is actually wrong is upstream: the flip/undo section loads the
+page with `goto` + a flat **300ms** and then immediately measures `#deck` and starts
+clicking — **the only load site in the file that does not call `deckSettled`**, while
+the two above it both do. At 310 cards that sleep no longer covers the deal, so the
+double-tap flip, the two `#learn` clicks and the `#back` click all land on a deck still
+being built.
+
+Settle wait added. Verified where it broke, not just serially: **28/28 under three CPU
+burners against four cores.**
+
+Two suites have now had the same defect, and the shape is always the same — a fixed
+sleep standing in for a condition, which holds until the deck grows.
+
+#### The two new cards
+
+`Acer palmatum` 'Orangeola' (a seventh *A. palmatum*, none of the other six is this
+cultivar) and `Paeonia lactiflora` 'Tom Cat' (the deck's second *Paeonia*). Both dealt
+with photographs. `peak` on the Acer was *"Spring and autumn foliage"* — two seasons
+again — set to **Sep-Nov**, the autumn flush, which is what the supplied photograph
+shows and when the plant sells; flip to Mar-May if the spring flush should lead.
+
+### 83. The hardiness lens opened under the thumb holding it — and nothing tested the lens at all
+
+**Oscar, 2026-09-13, with a screenshot:** *"When u hold down on the hardiness shield it
+opens the box up high, it should open the box in the centre of the card, or at leased
+low enough it's beneath the shield so ur thumb or finger doesn't block it."*
+
+`openLens` anchors the panel **above the touch point** — `bottom = innerHeight - y + 14`,
+a rule Oscar asked for and which is right for the plaque, the soil panel and the band,
+all of which sit low on the card. **The hardiness crest and the toxicity flag sit at the
+very TOP of the card**, so there is no room above, and the fallback was:
+
+```js
+if(r.top<8)lensEl.style.bottom=Math.max(12,innerHeight-8-r.height)+'px';
+```
+
+which pins the panel to `top: 8` — *directly under the finger still holding the crest*.
+
+**Measured with the old code in place, which is worse than the report:** pressing the
+crest at y=207 produced a panel spanning **-10 .. 210**. It covered the press point AND
+still ran off the top of the screen, because a 220px panel does not fit above a crest
+that starts 8px from the top. The clamp could not save it.
+
+**Fix:** when there is no room above, centre the panel on the **card** rather than
+pinning it to the viewport top — Oscar's own first suggestion, and always clear of a
+press made at the card's top edge. The panel then lands over the photograph where it
+reads cleanly. The card element is passed into `openLens` for this; it falls back to
+`topCard()`.
+
+Measured after, all four front panels, press point vs panel rect:
+
+| panel | press y | panel | covers the finger |
+|---|---|---|---|
+| `.crest` | 207 | 330..549 (card mid 449, panel mid 440) | no |
+| `.toxflag` | 167 | 17..153 | no — still opens above, and fits |
+| `.soilp` | 613 | 253..598 | no |
+| `.plaque` | 593 | 234..579 | no |
+
+**Only the crest case changed.** The other three keep the above-the-finger behaviour
+exactly as Oscar specified it.
+
+#### Nothing tested the lens. That is why this shipped.
+
+`grep -rn "\.lens" tests/*.js` returned **nothing** — no suite touched the press-and-hold
+panel in any way, so a panel that opened on top of the user's own thumb was invisible to
+a 17-suite gate. Six checks added to `features-test`, holding `.crest`, `.soilp` and
+`.plaque` on a card that actually carries each one, asserting the panel opens **and that
+the pressed point is not inside it**. That is the rule that matters to a thumb, and it
+holds however the panel is anchored.
+
+**The guard was verified by reintroducing the bug**, not by assuming: with the old
+`top:8` fallback restored, `features-test` goes to 60/1 with
+*"press y=207 sits inside the panel -10..210"*; with the fix, 61/0. Then restored.
+
+`[Inference]` the toxicity flag would have hit the same fallback on a shorter screen or
+a longer note — its panel fits today at 17..153 with 9px to spare. The centring branch
+now catches it if it ever stops fitting, and the new test would fail if it did not.
+
+### 84. The last four `size-no-rails` defects closed, and a card whose photograph does not show what the card sells
+
+#### Four climbers sized — the defect class is gone, not silenced
+
+Oscar supplied verified figures for the four climbers that had a height-only `size`
+string with no `H × W` split, so **both rails rendered blank** on every one:
+
+| card | was | now |
+|---|---|---|
+| *Clematis viticella* 'Purpurea Plena Elegans' | `2-3m` | `1.5–2.5 m H × 0.5–1 m W` |
+| *Clematis montana* var. *rubens* | `8-12m` | `8–12 m H × 4–8 m W` |
+| *Clematis armandii* | `4-6m` | `4–8 m H × 1.5–2.5 m W` |
+| *Fallopia baldschuanica* | `10-15m` | `8–12 m H × 4–8 m W` |
+
+**Three of the four heights changed too.** Those cards were not from the
+Claude-generated batch — they were Oscar's own earlier data — and his verified figures
+supersede them. The Russian Vine in particular came down from `10-15m` to `8–12 m`.
+
+His *Clematis montana* note, recorded because it qualifies the number: *8–12 m is for
+standard forms.*
+
+**All four `size-no-rails` lines were REMOVED from `plant-sense`'s `KNOWN` set**, not
+left sitting there. That list exists to hold defects waiting on a horticultural call,
+and this call has been made — `plant-sense` now reports **zero** `size-no-rails`
+findings on 392 cards. The earlier search I ran for these figures matched Oscar's on
+two of four and was `[Unverified]` on the rest; his label figures were the ones used.
+
+#### `Phlox paniculata` 'David' — the photograph does not show the flowers
+
+Parked since **2026-08-09**, identified by Oscar on 08-13, and the JSON arrived
+2026-09-13 — a month in `photos/unidentified/` waiting on stats, the only case in the
+folder running photo-waiting-for-card rather than card-waiting-for-photo.
+
+Card built and dealt. **Rendered and checked before saying it was fine, and it is not
+quite fine:** the frame is dominated by dark green lanceolate foliage — textbook
+*P. paniculata*, opposite leaves on upright stems, unmistakably the right plant — while
+the white panicles sit at the very top, **soft-focus and cut off**. On the card they
+read as a pale blur behind the title, not as flowers.
+
+The `visual` leads with *"Fragrant pure-white flower panicles"*. That clause is the
+reason someone buys 'David', and it is the one thing the photograph does not deliver.
+
+**Weaker than the Actinidia case** — that frame *contradicted* its card's variegation
+line, and Oscar's call was to hold it. This one does not contradict anything; it simply
+under-sells. So the card is dealt rather than held, and the gap is flagged instead.
+
+**Timing, which is the actionable part:** `peak` is Jul-Sep and today is 13 September.
+The flowering window is open and closes within weeks. Exactly the Callicarpa situation
+in item 79 — that card was blocked on a berry photograph, Oscar took one the same day,
+and it is now one of the strongest cards in the deck. A flower shot this week would do
+the same here; next year is the alternative.
+
+No crop can fix it: the panicles are out of focus in the source, so `PHOTO_FOCUS` would
+only enlarge the blur. Not attempted for that reason.
+
+#### Also
+
+Oscar's `latin` on this JSON already carried the cultivar (`Phlox paniculata 'David'`)
+**and** supplied `cvs: "'David'"`. The batch preparer joins `latin + cvs`, which would
+have produced `Phlox paniculata 'David' 'David'` — a card name, a photo slug and a
+duplicate check all built on a doubled cultivar. Guarded: the join is skipped when the
+latin already contains the cultivar. Worth knowing the incoming shape varies on this.
+
 ---
 
 ## Accepted, not defects

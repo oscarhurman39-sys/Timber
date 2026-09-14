@@ -1,0 +1,32 @@
+[
+{
+  "common": "Persian shallot",
+  "latin": "Allium stipitatum",
+  "hue": 285,
+  "visual": "Tall architectural stems · dense spherical lilac-pink flowerheads · broad grey-green basal leaves",
+  "water": "Water during active growth if conditions are dry; reduce watering once dormant",
+  "aspect": "East / South / West",
+  "soil": "Fertile, well-drained; acid, neutral or alkaline",
+  "soilWarning": "Requires free drainage; avoid wet or waterlogged soil, particularly during winter",
+  "prune": "No pruning required; remove spent flower stems if desired and clear foliage once it has yellowed naturally",
+  "toxicity": "Allium species can be harmful if eaten, particularly to pets; ornamental bulbs are not for consumption",
+  "compliance": "",
+  "peak": "May-Jun",
+  "cvs": "",
+  "hardiness": "H7",
+  "hardinessNote": "Very hardy; tolerates temperatures below -20°C",
+  "resilience": "Very hardy and generally pest-free; may be affected by onion white rot and downy mildew",
+  "uses": "Architectural borders · gravel gardens · wildlife gardens · cut flowers · dried seedheads",
+  "height": "1-1.5m",
+  "spread": "0.1-0.5m",
+  "foliage": "Deciduous",
+  "container": "Suitable for large, deep containers with excellent drainage",
+  "growthSpeed": 10,
+  "pestRisk": 4,
+  "thirst": 6,
+  "careLevel": 4,
+  "sunNeed": 95,
+  "sunMin": 70,
+  "uncertain": []
+}
+]

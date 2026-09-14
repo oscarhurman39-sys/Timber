@@ -441,6 +441,98 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     `top ${g4.top} want ${g3} inHistory ${g4.stillInHistory}`);
 
   /* ---- no JS errors anywhere ---- */
+  /* ---- press-and-hold lens: it must never open under the finger ----
+     Nothing covered the lens at all until 2026-09-13, which is how it shipped
+     opening ON TOP of the thumb. openLens anchors the panel above the touch, but
+     the hardiness crest and the toxicity flag sit at the very TOP of the card, so
+     there is no room above and the old fallback pinned the panel to top:8 —
+     directly under the finger still holding the crest. Oscar could not read his
+     own panel. The rule this locks in is the one that matters to a thumb: however
+     the panel is anchored, the point being pressed must not be inside it. */
+  await page.evaluate(() => localStorage.clear());
+  await page.reload({ waitUntil: 'networkidle' });
+  await deckSettled(page);
+  for (const [sel, label] of [['.crest', 'hardiness crest'], ['.soilp', 'soil panel'], ['.plaque', 'name plaque']]) {
+    const ok = await page.evaluate(async (sel) => {           /* walk to a card carrying the panel */
+      for (let i = 0; i < 40; i++) {
+        const live = [...document.querySelectorAll('.deck .card:not([data-gone])')];
+        if (live.length && live[live.length - 1].querySelector('.face.front ' + sel)) return true;
+        document.getElementById('skip').click();
+        await new Promise(r => setTimeout(r, 420));
+      }
+      return false;
+    }, sel);
+    if (!ok) { check(`lens: a card carrying ${label} was found`, false, 'none in 40 cards'); continue; }
+    await page.waitForTimeout(700);
+    const box = await page.locator('.deck .card:not([data-gone])').last().locator('.face.front ' + sel).boundingBox();
+    const px = box.x + box.width / 2, py = box.y + box.height / 2;
+    await page.mouse.move(px, py);
+    await page.mouse.down();
+    await page.waitForTimeout(900);                            /* LENS_HOLD is 500 */
+    const r = await page.evaluate(([px, py]) => {
+      const l = document.querySelector('.lens');
+      if (!l || !l.classList.contains('show')) return { open: false };
+      const b = l.getBoundingClientRect();
+      return { open: true, covers: py >= b.top && py <= b.bottom && px >= b.left && px <= b.right,
+               top: Math.round(b.top), bottom: Math.round(b.bottom) };
+    }, [px, py]);
+    await page.mouse.up();
+    await page.waitForTimeout(250);
+    check(`lens opens on a hold of the ${label}`, r.open);
+    check(`lens does not open under the finger (${label})`, r.open && !r.covers,
+      r.open ? `press y=${Math.round(py)} sits inside the panel ${r.top}..${r.bottom}` : 'lens never opened');
+  }
+
+  /* ---- foliage: "will it look bare in winter?" ----
+     Added 2026-09-13. The field is researched prose and the card reads ONE word
+     out of it, so the two things worth locking are the classifier's answers on
+     the shapes research actually produces, and the rule that an unclassifiable
+     or absent value prints nothing at all rather than a cheerful guess. */
+  const fol = await page.evaluate(() => {
+    const cases = [
+      ['deciduous', 'deciduous'],
+      ['Evergreen; small aromatic dark green leaves.', 'evergreen'],
+      /* semi- must win over the bare word it contains */
+      ['semi-evergreen', 'semi-evergreen'],
+      ['evergreen to semi-evergreen', 'evergreen'],
+      ['semi-evergreen to deciduous depending on winter conditions.', 'semi-evergreen'],
+      /* the class need not lead the sentence */
+      ['dark green, deeply cut; deciduous to semi-evergreen depending on conditions.', 'deciduous'],
+      /* herbaceous is the most specific of the four and settles it wherever it sits */
+      ['deciduous herbaceous foliage; dies completely back in autumn.', 'herbaceous'],
+      ['herbaceous to semi-evergreen in mild winters', 'herbaceous'],
+      /* no class named — blank, not a guess */
+      ['dark green', ''], ['', ''], [undefined, ''],
+    ];
+    const wrong = cases.filter(([inp, want]) => foliageClass(inp) !== want)
+                       .map(([inp, want]) => `${JSON.stringify(inp)} -> ${JSON.stringify(foliageClass(inp))}, wanted ${JSON.stringify(want)}`);
+    const withF = PLANTS.filter(p => p.foliage), without = PLANTS.filter(p => !p.foliage);
+    return {
+      wrong,
+      unclassified: withF.filter(p => !foliageClass(p.foliage)).map(p => `${p.latin}: ${JSON.stringify(p.foliage)}`),
+      n: withF.length,
+      /* rendered in all three homes, and in none of them when the card has no value */
+      shownBack: withF.length ? tradeBlocks(withF[0]).includes('Foliage') : false,
+      shownLens: withF.length ? buildLens(withF[0]).includes('Foliage') : false,
+      backBlank: without.length ? without.some(p => tradeBlocks(p).includes('Foliage')) : false,
+      lensBlank: without.length ? without.some(p => buildLens(p).includes('Foliage')) : false,
+      /* the gloss is a fact of the word, so it must ride with it */
+      gloss: withF.length ? buildLens(withF[0]).includes(FOLIAGE_MEAN[foliageClass(withF[0].foliage)]) : false,
+      /* the customer sheet drops the jargon: the heading already says "In winter" */
+      winter: foliageWinter('deciduous; five-lobed leaves') === 'Bare over winter'
+           && foliageWinter('evergreen') === 'Leaves all year'
+           && foliageWinter('dark green') === '',
+      sample: withF.length ? withF[0].latin + ' -> ' + foliageClass(withF[0].foliage) : '',
+    };
+  });
+  check('foliage: classifier agrees on every research shape', fol.wrong.length === 0, fol.wrong.join(' | '));
+  check(`foliage: all ${fol.n} dealt cards carrying a value classify`, fol.unclassified.length === 0,
+    fol.unclassified.slice(0, 5).join(' | '));
+  check('foliage: the back prints it', fol.shownBack, fol.sample);
+  check('foliage: the lens prints it with what the word means', fol.shownLens && fol.gloss, fol.sample);
+  check('foliage: a card without one prints nothing anywhere', !fol.backBlank && !fol.lensBlank);
+  check('foliage: the customer sheet gives the answer without the word', fol.winter);
+
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 
   console.log(`\n${passed} passed, ${failed} failed`);

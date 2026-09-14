@@ -6,7 +6,18 @@ identified but waiting on a card. Nothing here is wired into the app.
 `photos/` is scanned non-recursively by `tools/data-audit.js`, so this
 subdirectory is invisible to the audit and cannot be mistaken for a card photo.
 
-## 2026-08-09-white-panicles-lanceolate-leaves.jpg
+## 2026-08-09-white-panicles-lanceolate-leaves.jpg — CLEARED 2026-09-13
+
+**Dealt as `Phlox paniculata` 'David'.** Oscar sent the JSON on 2026-09-13, a month
+after confirming the identification. The card is built and in the deck.
+
+**Flagged on the card, not a blocker:** the panicles are soft-focus and cut off at the
+top of this frame, so the card's leading clause — *"Fragrant pure-white flower
+panicles"* — reads as a pale blur. The foliage is unmistakably right. `peak` is Jul-Sep
+and the flowering window closes within weeks; a flower shot this season would replace
+it. See VERIFY-QUEUE item 84.
+
+### Original record
 
 **Confirmed *Phlox paniculata* by Oscar on 2026-08-13** — the guess made at the
 time it arrived, from leaf and inflorescence shape alone, was correct. **Awaiting

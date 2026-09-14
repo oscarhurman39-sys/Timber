@@ -19,6 +19,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync, spawn } = require('child_process');
+const D = require('./plant-data.js');
 const ROOT = path.resolve(__dirname, '..');
 
 const QUICK = process.argv.includes('--quick');
@@ -107,14 +108,13 @@ console.log(`\nall ${pairs.length} plants validated — proceeding to write\n`);
   /* ---- 3. insert every row (same format as add-plant.js) ---- */
   const esc = (v) => JSON.stringify(v == null ? '' : String(v));
   const num = (v) => (v === '' || v == null ? '""' : Number(v));
-  /* toxicity, compliance and hardinessNote are real card fields (the FIELDS list in
-     tools/plant-data.js) and check-plant-json.js already prints them in the row it
-     emits — but this row template never carried them, so a researched JSON had all
-     three silently dropped on the way in. That is the same loss the schema comment
-     on `hardinessNote` records from 2026-08-25, and toxicity is a SAFETY field, so
-     losing it is worse than losing a rating. Emitted only when non-blank, so a card
-     with nothing to say still carries no empty keys. */
-  const extras = (p) => ['toxicity', 'compliance', 'hardinessNote']
+  /* Every card field the row template above does not spell out, written only when
+     the JSON has something to say about it. The list is DERIVED from FIELDS in
+     plant-data.js (EXTRA_FIELDS) rather than typed here: this was three separate
+     hand-kept copies of ['toxicity','compliance','hardinessNote'], and each field
+     added to the schema after them was dropped by whichever copy nobody edited —
+     `pest` by all of them, `foliage` the day after it was built. */
+  const extras = (p) => D.EXTRA_FIELDS
     .filter(k => p[k] != null && String(p[k]).trim())
     .map(k => `${k}:${esc(p[k])}`);
   const extraLine = (p) => (extras(p).length ? '   ' + extras(p).join(', ') + ',\n' : '');

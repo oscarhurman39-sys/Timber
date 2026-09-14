@@ -1,0 +1,35 @@
+[
+  {
+    "common": "Lamb's Ear 'Silver Carpet'",
+    "latin": "Stachys byzantina 'Silver Carpet'",
+    "hue": 105,
+    "visual": "Low, vigorous evergreen carpeting perennial forming a dense mat of exceptionally soft, woolly silver-grey leaves. 'Silver Carpet' is grown mainly for foliage and flowers only sparsely compared with typical lamb's ear.",
+    "water": "Water during establishment, then only during prolonged dry periods.",
+    "aspect": "Full sun",
+    "soil": "Moderately fertile, well-drained chalk, loam or sandy soil; tolerant of acid, neutral or alkaline conditions.",
+    "soilWarning": "Protect from excessive winter wet. Poor drainage can cause foliage and crown deterioration.",
+    "prune": "No routine pruning required. Remove damaged or untidy foliage as needed.",
+    "toxicity": "",
+    "compliance": "",
+    "peak": "Jan-Dec",
+    "cvs": "'Silver Carpet'",
+    "hardiness": "H7",
+    "hardinessNote": "Extremely hardy, below -20°C; RHS rates this cultivar H7.",
+    "resilience": "Exceptionally cold hardy, drought tolerant once established and effective as dense weed-suppressing ground cover, but less tolerant of prolonged winter wet.",
+    "uses": "Ground cover, gravel gardens, border edging, sensory planting, rose underplanting and sunny dry borders.",
+    "height": "0.1–0.5 m",
+    "spread": "0.5–1 m",
+    "foliage": "Evergreen; dense, soft, elliptic grey-white to silver leaves up to around 10 cm long.",
+    "container": "Suitable for sunny containers with very free-draining compost.",
+    "growthSpeed": 15,
+    "pestRisk": 5,
+    "thirst": 5,
+    "careLevel": 3,
+    "sunNeed": 95,
+    "sunMin": 75,
+    "uncertain": [
+      "'Silver Carpet' is notably less floriferous than typical Stachys byzantina and is primarily selected for its dense silver foliage.",
+      "peak \"Year-round silver foliage\" converted to \"Jan-Dec\" to parse as Mon-Mon, the band the deck already uses for year-round foliage interest."
+    ]
+  }
+]
