@@ -2052,6 +2052,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hylotelephium-ewersii-var-homophyllum-rosenteppich.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "hypericum-inodorum-miracle-grandeur-allgrandeur.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2996,6 +3006,16 @@
    "file": "pinus-koraiensis-jack-corbit.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Uncropped: orientation 6, rotation baked in by tools/reframe-photo.js at verdict as-is, no crop, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "pinus-mugo-pal-maleter.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
