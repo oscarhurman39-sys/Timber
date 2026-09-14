@@ -8,3 +8,8 @@ node_modules/
 
 # generated shooting sheet — regenerate with tools/photo-run.js --html, never commit
 photo-run.html
+
+# research-run.js task files are regenerated from the deck on demand; the
+# .asked.json manifest beside each is NOT ignored — `take` needs it to know
+# which questions a batch actually put, and a later session may do the taking.
+data/research-tasks/*.md
