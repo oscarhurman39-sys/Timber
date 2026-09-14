@@ -26,9 +26,9 @@
      to budgets taken from what the existing deck already carries. A trimmed
      field always ends as a whole sentence.
 
-  toxicity, compliance and hardinessNote ARE carried (they became card fields in
-  Aug 2026). What the card schema still cannot carry (foliage, container,
-  uncertain) is NOT dropped either: the raw batch stays committed
+  toxicity, compliance, hardinessNote and foliage ARE carried (they became card
+  fields in Aug 2026, foliage on 2026-09-13). What the card schema still cannot
+  carry (container, uncertain) is NOT dropped either: the raw batch stays committed
   in data/incoming/ and tools/unmapped-report.js lists what is being left there.
 
   Usage:  node tools/fit-incoming.js data/incoming/wishlist-batch-01.json [--json]
@@ -39,6 +39,8 @@
    warn  <= 44 chars — a real constraint, not a restatement of soil.
    face  — compass facing; omit to derive from the sun band. */
 const FIT = {
+  "Allium stipitatum":
+    { soil: 'Fertile, drained, any pH', warn: 'Winter wet rots the bulb' },
   "Phlox paniculata 'David'":
     { soil: 'Fertile, moist, drained', warn: 'Never let it dry out; keep air moving' },
   "Stachys byzantina 'Silver Carpet'":
@@ -225,6 +227,24 @@ const STATED = {
   'Wisteria floribunda f. multijuga': 'South / West',
   "Aucuba japonica 'Crotonifolia'": 'North / East',
 };
+/* Point 2 above says a facing the research actually stated wins over the
+   derivation. Until 2026-09-14 that was only true of the four latins hand-typed
+   into STATED: every other incoming `aspect` was thrown away and replaced by
+   deriveFacing(sunNeed), stated facing or not. Allium stipitatum arrived saying
+   "East / South / West" and was filed as "South / West" — sunNeed 95 rounding a
+   researched answer off the card without anyone being asked.
+   So read it. A COMPASS FACING is compass words joined by / or , (plus the
+   deck's own "Any aspect"); prose is not, and "Full sun" is a light level, not a
+   facing, so both still fall through to the derivation as before. */
+const COMPASS = /^(north|south|east|west)(-?(east|west))?$/i;
+function statedFacing(aspect) {
+  const t = String(aspect || '').trim();
+  if (!t) return null;
+  if (/^any aspect$/i.test(t)) return 'Any aspect';
+  const parts = t.split(/\s*[/,]\s*/).filter(Boolean);
+  if (!parts.length || !parts.every(w => COMPASS.test(w))) return null;
+  return parts.map(w => w[0].toUpperCase() + w.slice(1).toLowerCase()).join(' / ');
+}
 
 /* Budgets from what the deck already carries, not invented. Trimming happens on
    sentence boundaries so a card never shows a clipped clause. The first sentence
@@ -272,7 +292,7 @@ function fitCard(p) {
     hue: p.hue,
     visual: trimSentences(p.visual, BUDGET.visual),
     water: trimSentences(p.water, BUDGET.water),
-    aspect: fit.face || STATED[p.latin] || deriveFacing(p.sunNeed),
+    aspect: fit.face || STATED[p.latin] || statedFacing(p.aspect) || deriveFacing(p.sunNeed),
     soil: `${fit.soil}; ${fit.warn}`,
     prune: trimSentences(p.prune, BUDGET.prune),
     /* The commercial block, empty. It is never researched — tools/check-plant-json.js
@@ -298,10 +318,11 @@ function fitCard(p) {
     sunMin: p.sunMin,
   };
   /* toxicity, compliance and hardinessNote became card fields in Aug 2026 (see
-     FIELDS in tools/plant-data.js). The header above still said the card could not
-     carry them; it can, and dropping researched safety text on the floor is not a
-     mapping decision worth keeping. Blank stays absent, not empty. */
-  for (const k of ['toxicity', 'compliance', 'hardinessNote']) {
+     FIELDS in tools/plant-data.js), and foliage on 2026-09-13. The header above
+     still said the card could not carry them; it can, and dropping researched
+     safety text on the floor is not a mapping decision worth keeping. Blank
+     stays absent, not empty. */
+  for (const k of ['toxicity', 'compliance', 'hardinessNote', 'foliage']) {
     if (p[k] != null && String(p[k]).trim()) card[k] = p[k];
   }
   return { card, problems };

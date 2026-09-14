@@ -62,6 +62,22 @@ const FIELDS = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', '
    a key not listed here is a mistake worth stopping for, not a column nobody
    filled in. Photo licensing lives in photos/CREDITS.json, not on the card. */
 
+/* The keys the add-plant / add-plants-bulk row templates spell out by hand. Every
+   OTHER field in FIELDS is written only when the incoming JSON has something to
+   say about it — see EXTRA_FIELDS below. */
+const ROW_EXPLICIT = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', 'prune',
+  'source', 'peak', 'order', 'bench', 'root', 'trade', 'retail', 'margin', 'type', 'shrink',
+  'returnRisk', 'pots', 'cvs', 'hardiness', 'resilience', 'uses', 'size',
+  'seasonalImpact', 'growthSpeed', 'pestRisk', 'thirst', 'careLevel', 'sunNeed', 'sunMin'];
+/* DERIVED, not hand-listed, and that is the whole point. Three files each kept
+   their own copy of this list as the literal ['toxicity','compliance','hardinessNote'],
+   so every field added to FIELDS after Aug 2026 was silently dropped on the way
+   in by whichever copy nobody remembered to edit: `pest` never reached a card at
+   all, and `foliage` was dropped by both writers the day after it was built.
+   Deriving it means a new field in FIELDS is carried by default and has to be
+   deliberately opted OUT of, which is the safe direction for the mistake to run. */
+const EXTRA_FIELDS = FIELDS.filter(k => !ROW_EXPLICIT.includes(k));
+
 const SCORE_MAX = { seasonalImpact: 20, growthSpeed: 20, pestRisk: 20, thirst: 20, careLevel: 20, sunNeed: 100, sunMin: 100 };
 const SCORE_FIELDS = new Set(Object.keys(SCORE_MAX));
 const REQUIRED = ['common', 'latin', 'hardiness'];
@@ -237,5 +253,5 @@ function csvParse(text) {
   return rows;
 }
 
-module.exports = { DECK, HOLD, FIELDS, SCORE_MAX, SCORE_FIELDS, REQUIRED,
+module.exports = { DECK, HOLD, FIELDS, ROW_EXPLICIT, EXTRA_FIELDS, SCORE_MAX, SCORE_FIELDS, REQUIRED,
   readDeck, readHold, bounds, writeBlock, formatCard, csvEscape, csvParse };
