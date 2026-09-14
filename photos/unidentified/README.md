@@ -174,3 +174,20 @@ which looked likely to crop badly onto the card. Rendered before judging: the ca
 crops to the two panels and drops the blur entirely. The prediction was wrong and
 the card is fine.
 
+
+### `2026-09-13-paeonia-tom-cat-UNCROPPED-bystander.jpg` — ARCHIVE, not a parked frame
+
+Not unidentified: this is the original of `photos/paeonia-lactiflora-tom-cat.jpg`,
+kept because the card's copy is edited and the edit should be reversible.
+
+A member of the public stands in the top right, out of focus but readable. The
+first attempt cropped the frame below them, which decapitated the upper flower and
+threw away the better half of Oscar's composition — he said so on 2026-09-14. The
+card now carries the WHOLE frame with that one area blurred out: a redaction, not a
+crop and not a fill. Every pixel is still his photograph, and nothing generative
+went near it (see the note at the top of `tools/reframe-photo.js` for why that
+matters).
+
+This file still holds the un-redacted face and ships in every clone. Worth deleting
+once Oscar is happy with the card's copy; kept for now because it is his original
+and deleting someone's original is his call, not a tool's.
