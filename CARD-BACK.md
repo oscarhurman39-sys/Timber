@@ -63,6 +63,10 @@ The answers staff give at the till. **This is where the currently-invisible fiel
 | **Wildlife value** | *new* `wildlife` | Bees/butterflies/birds. Sells plants and is asked for by name. RHS Plants for Pollinators badge if it holds one. |
 | **Evergreen / deciduous** | `foliage` — **built 2026-09-13** | "Will it look bare in winter?" Now a schema column and on the card in three places: the back prints the value whole, the press-and-hold lens gives the class and what it means, and the customer sheet gives the plain answer under "In winter". Four words, one compulsory: evergreen / semi-evergreen / deciduous / **herbaceous** (the plant vanishes to the ground — the case customers ring up about thinking it died). |
 | **Container suitable?** | *new* `container` | Yes / yes-with-care / not really. Huge for the patio-plant conversation. |
+| **Bare-root or container?** | `stockForm` — **built 2026-09-14** | How the trade sells it. Back cell "Sold as", plus a `📦 Sold as` filter group. Decides whether it is a dormant-window order or an any-week one. |
+| **Pollination partner?** | `pollination` — **built 2026-09-14** | "Will it berry on its own?" Lens row, back cell, and a customer-sheet line when a partner is needed. Holly and both Skimmia had a right answer the card could not say. |
+| **Heavy clay?** | `clay` — **built 2026-09-14** | `soil` is texture and drainage, never clay tolerance, so a keyword filter found 11 cards of 395. This is the column that answers it. |
+| **Root depth and spread** | `rootSize` — **built 2026-09-14** | Oscar's ask. Back cell beside Size, customer sheet as "Roots to". Expected blank far more often than `size`. |
 | **Time to full size** | *new* `maturity` | The stature rail says *how big*; this says *how long*. Hydrangea JSON gave "about 3 years". |
 | **Honest downside** | *new* `caveat` | Where it disappoints: "flops without support", "hates cold winds", "black spot in a wet year". Builds trust and cuts returns. |
 

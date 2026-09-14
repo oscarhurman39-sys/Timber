@@ -56,7 +56,32 @@ const FIELDS = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', '
   // parser. Everything else is the leaf description and renders only on the back:
   // "deciduous; five-lobed leaves with strong seasonal colour". Added 2026-09-13;
   // before that 312 researched values sat in data/incoming with nowhere to go.
-  'foliage'];
+  'foliage',
+  // The four questions FULL-DECK-CHECK.md asks that the schema could not carry.
+  // Added 2026-09-14 WITH a place on the card, deliberately in one change: a
+  // column with nowhere to render is how `foliage` came to sit in data/incoming
+  // for a month, and adding four of them on spec would be that mistake ×4.
+  //
+  // ROOTSIZE. Root depth × spread, mirroring `size`'s "H × W" as "D × W" —
+  // "0.3-0.5m D × 1-1.5m W". Oscar's ask: the figure you want before you plant
+  // against a wall, a drive or a drain. Expected to be blank far more often than
+  // `size` is; root architecture is poorly published for garden cultivars, and a
+  // guess here is one somebody digs a hole to.
+  'rootSize',
+  // STOCKFORM. How the trade sells it: container / bare-root / both. A property
+  // of the plant and the trade, not of one shop, which is why it is researchable
+  // where `bench` and `order` are not. Decides whether something is a
+  // November-to-March order or an any-week one.
+  'stockForm',
+  // POLLINATION. "Will it berry on its own?" Must name one of `needs partner`,
+  // `self-fertile`, `not applicable`; prose after a semicolon renders too. The
+  // deck carries Ilex aquifolium and two Skimmia, where this has a right answer
+  // and the card could not say it.
+  'pollination',
+  // CLAY. `yes` or `no`, blank when not established. `soil` is written as texture
+  // and drainage and never as clay tolerance, so "what grows in my clay?" matched
+  // 11 cards of 395 by keyword. This is the column that answers it.
+  'clay'];
 /* Nothing speculative belongs in this list. It is exactly the set of fields that
    exist on cards today, which is what makes the "unknown field" guard meaningful:
    a key not listed here is a mistake worth stopping for, not a column nobody

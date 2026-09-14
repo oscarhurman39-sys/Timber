@@ -624,6 +624,54 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   check('foliage: a card without one prints nothing anywhere', !fol.backBlank && !fol.lensBlank);
   check('foliage: the customer sheet gives the answer without the word', fol.winter);
 
+  /* ---- the four columns added 2026-09-14 with FULL-DECK-CHECK.md ----
+     Every one of them is blank across the deck until the research pass lands, so what
+     is testable today is the CONTRACT: each renders where it was promised when a value
+     exists, prints nothing when it does not, and the two classified ones refuse to
+     guess. Built against a synthetic card rather than a real one precisely because no
+     real card carries these yet — inventing values on a live card is the defect this
+     whole schema is arranged to prevent. */
+  const nf = await page.evaluate(() => {
+    const base = PLANTS[0];
+    const card = x => Object.assign({}, base, x);
+    const full = card({ rootSize:'0.4-0.8m D × 1.5-2.5m W', stockForm:'both',
+                        pollination:'needs partner; female plants only berry with a male nearby',
+                        clay:'yes' });
+    const bare = card({ rootSize:'', stockForm:'', pollination:'', clay:'' });
+    const na   = card({ pollination:'not applicable' });
+    const back = tradeBlocks(full), backBare = tradeBlocks(bare);
+    return {
+      /* classifier: names one of three, or nothing */
+      cls: pollinationClass('needs partner; female only') === 'needs partner'
+        && pollinationClass('Self-fertile') === 'self-fertile'
+        && pollinationClass('not applicable') === 'not applicable'
+        && pollinationClass('probably fine') === ''
+        && pollinationClass('') === '',
+      /* clay is stored bare and spelled out on the card; blank stays blank */
+      clay: clayLabel('yes') === 'Takes heavy clay' && clayLabel('no') === 'Not for heavy clay'
+         && clayLabel('') === '' && clayLabel('maybe') === '',
+      /* the exact cell label, not a loose substring: the back also carries a
+         "Bench · Root" cell, and PLANTS[0] happens to be the one card in the deck
+         that fills it — so a bare search for "Root" matched the wrong cell and
+         failed a rule the code was keeping */
+      backAll: ['Root','Sold as','Clay','Pollination'].every(l => back.includes('>' + l + '<')),
+      backNone: ['Root','Sold as','Clay','Pollination'].every(l => !backBare.includes('>' + l + '<')),
+      lensYes: buildLens(full).includes('Pollination'),
+      lensNo: !buildLens(bare).includes('Pollination'),
+      /* "not applicable" is the absence of a story: back yes, front no */
+      naBack: tradeBlocks(na).includes('Pollination'),
+      naLens: !buildLens(na).includes('Pollination'),
+    };
+  });
+  check('pollination: classifier names one of three or nothing', nf.cls);
+  check('clay: stored bare, spelled out on the card, blank stays blank', nf.clay);
+  check('new fields: all four print on the back when set', nf.backAll);
+  check('new fields: none of the four prints when blank', nf.backNone);
+  check('pollination: the lens carries it when it says something', nf.lensYes);
+  check('pollination: the lens stays silent when blank', nf.lensNo);
+  check('pollination "not applicable": on the back, off the front', nf.naBack && nf.naLens,
+    JSON.stringify({ back: nf.naBack, lens: nf.naLens }));
+
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 
   console.log(`\n${passed} passed, ${failed} failed`);

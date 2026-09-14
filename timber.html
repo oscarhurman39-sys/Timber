@@ -1174,7 +1174,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r238 · 2026-09-14 · 83131a6';
+const BUILD='r241 · 2026-09-14 · 55c4cf7';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -12096,8 +12096,22 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
     {id:'site:pots',label:'Containers',test:p=>/\bcontainers?\b|\bpots?\b|\bpatio\b/i.test([p.uses,p.visual].filter(Boolean).join(' '))},
     {id:'site:ground',label:'Ground cover',test:p=>/ground[- ]?cover|carpet|mat[- ]forming|edging/i.test([p.uses,p.visual,p.resilience].filter(Boolean).join(' '))},
     {id:'site:shade',label:'Shade',test:p=>{const v=num(p.sunMin);return v!=null&&v<=35;}},
+    /* the `clay` COLUMN, not a keyword read of the soil line. It stays at zero until
+       the research lands, and a chip reading 0 is the honest state of that question —
+       the same thing the order chip has been saying about bench weeks all along. */
+    {id:'site:clay',label:'Heavy clay',test:p=>String(p.clay||'').trim().toLowerCase()==='yes'},
   ];
   defs.push({id:'site',label:'📍 Site',test:kidsUnion(site),kids:site});
+
+  /* How the trade sells it. Worth a group of its own rather than a line on the back
+     only, because bare-root is a BUYING WINDOW — "what can I order dormant this
+     winter" is a different question from "what is on the bench", and it is the half
+     of the buying rule Timber could not answer at all. */
+  const stock=[
+    {id:'stock:container',label:'Container',test:p=>/container|both/i.test(p.stockForm||'')},
+    {id:'stock:bare',label:'Bare-root',test:p=>/bare[- ]?root|both/i.test(p.stockForm||'')},
+  ];
+  defs.push({id:'stock',label:'📦 Sold as',test:kidsUnion(stock),kids:stock});
 
   [...new Set(PLANTS.map(typeCategory).filter(Boolean))].sort().forEach(t=>
     defs.push({id:'type:'+t,label:'🪴 '+t,test:p=>typeCategory(p)===t}));
@@ -12353,7 +12367,13 @@ function tradeBlocks(p){
     +cellIf('g','Order',p.order)+cellIf('g','Bench · Root',dots(p.bench,p.root))
     +cellIf('g full','Type',p.type)+cellIf('g full','Shrink',p.shrink)
     +cellIf('g full','Return risk',p.returnRisk)+cellIf('g','Pot sizes',p.pots)
-    +cellIf('g','Size',p.size)+cellIf('g full','Foliage',p.foliage)
+    /* the four half-width cells run together on purpose: the grid flows two to a
+       row and a `g full` between them strands whichever half came last in a row of
+       its own — which is exactly what Root did on the first cut */
+    +cellIf('g','Size',p.size)+cellIf('g','Root',p.rootSize)
+    +cellIf('g','Sold as',p.stockForm)+cellIf('g','Clay',clayLabel(p.clay))
+    +cellIf('g full','Foliage',p.foliage)
+    +cellIf('g full','Pollination',p.pollination)
     +cellIf('g full','Cultivars',p.cvs)
     +cellIf('g','Resilience',p.resilience)+cellIf('g','Uses',p.uses);
   const buyer=[p.trade,p.retail,p.margin,p.source,p.order,p.bench,p.root,p.type,p.shrink,p.returnRisk,p.pots];
@@ -12452,6 +12472,33 @@ function foliageWinter(v){
   const k=foliageClass(v);
   return k?cap(FOLIAGE_MEAN[k]):'';
 }
+/* POLLINATION — "will it berry on its own?". The deck carries Ilex aquifolium and
+   two Skimmia, where the answer decides whether a customer goes home with one plant
+   or two, and the card had nowhere to say it until 2026-09-14. Classified the same
+   way foliage is: the value must NAME one of three, prose after it renders on the
+   back, and anything else returns '' so the row disappears rather than guessing.
+   `not applicable` deliberately renders NOTHING on the front — "this plant is not
+   grown for fruit" is the absence of a story, not a power point. It still prints on
+   the back, where a blank and an answered "no partner needed" are different facts. */
+const POLL_MEAN={
+  'needs partner':'plant a partner nearby or it will not fruit',
+  'self-fertile':'fruits on its own',
+};
+function pollinationClass(v){
+  const m=String(v||'').match(/(?:^|[^-\w])(needs partner|self-fertile|not applicable)/i);
+  return m?m[1].toLowerCase():'';
+}
+function pollinationLine(v){
+  const k=pollinationClass(v);
+  return POLL_MEAN[k]?`<b>${cap(k)}</b> · ${POLL_MEAN[k]}`:'';
+}
+/* CLAY is stored as the bare answer so it can drive a filter; the card spells it out,
+   because a cell reading "Heavy clay — yes" is a worse sentence than the one a staff
+   member would actually say. Blank stays blank: not established is not "no". */
+const clayLabel=v=>{
+  const t=String(v||'').trim().toLowerCase();
+  return t==='yes'?'Takes heavy clay':t==='no'?'Not for heavy clay':'';
+};
 /* fold diacritics first (ō→o, ā→a…) so Japanese cultivar names slug sensibly */
 const slugLatin=l=>l.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 /* One place that knows where the app's photographs live: the card-sized WebP that
@@ -13191,6 +13238,7 @@ function buildLens(p){
   return `<div class="lens-head">Plant power points</div>`
     +lensRow('Bloom',p.peak?`<b>${p.peak}</b>${strip}`:'')
     +lensRow('Foliage',foliageLine(p.foliage))
+    +lensRow('Pollination',pollinationLine(p.pollination))
     +lensRow('Pests & diseases',pest==null?'':`<span class="wrow pest">${wRow('spray',pest)}</span><b>${fmt5(pest)}</b>`)
     +lensRow('Thirst',thirst==null?'':`<span class="wrow thirst">${wRow('drop',thirst)}</span><b>${fmt5(thirst)}</b>`)
     +lensRow('Care level',care==null?'':`<span class="wrow care">${wRow('seca',care)}</span><b>${careLabel(care)} · ${fmt5(care)}</b>`)
@@ -13662,6 +13710,8 @@ function showCustomer(i){
       <li><span class="k">❄️</span><span class="v"><b>Hardiness</b>${p.hardiness}</span></li>
       ${foliageWinter(p.foliage)?`<li><span class="k">🍃</span><span class="v"><b>In winter</b>${foliageWinter(p.foliage)}</span></li>`:''}
       <li><span class="k">📏</span><span class="v"><b>Grows to</b>${p.size}</span></li>
+      ${has(p.rootSize)?`<li><span class="k">🌾</span><span class="v"><b>Roots to</b>${p.rootSize}</span></li>`:''}
+      ${pollinationClass(p.pollination)==='needs partner'?`<li><span class="k">🐝</span><span class="v"><b>To get berries</b>Needs a partner plant nearby</span></li>`:''}
       <li><span class="k">🌿</span><span class="v"><b>Great for</b>${p.uses}</span></li>
       <li><span class="k">✨</span><span class="v"><b>Varieties</b>${p.cvs}</span></li>
     </ul>
