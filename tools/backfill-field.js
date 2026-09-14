@@ -8,6 +8,8 @@
     node tools/backfill-field.js foliage --prefer longest   see "ties" below
     node tools/backfill-field.js foliage --apply --overwrite
     node tools/backfill-field.js foliage --missing          the cards still blank
+    node tools/backfill-field.js foliage --paste            ready-to-paste research prompt
+    node tools/backfill-field.js foliage --paste --chunk 40 smaller batches (default 50)
 
   The round trip a flat research pass takes:
 
@@ -55,6 +57,8 @@ const INCOMING = path.join(ROOT, 'data', 'incoming');
 const argv = process.argv.slice(2);
 const APPLY = argv.includes('--apply');
 const MISSING = argv.includes('--missing');
+const PASTE = argv.includes('--paste');
+const CHUNK = Math.max(1, Number(argv[argv.indexOf('--chunk') + 1]) || 50);
 const OVERWRITE = argv.includes('--overwrite');
 const PREFER = (argv[argv.indexOf('--prefer') + 1] || '') === 'longest' && argv.includes('--prefer');
 const field = argv.find(a => !a.startsWith('--') && a !== 'longest');
@@ -64,6 +68,138 @@ if (!D.FIELDS.includes(field)) {
   console.error(`"${field}" is not a card field. A key outside plant-data.js FIELDS is erased by the next
 csv round-trip, so add it to FIELDS first — deliberately — rather than here.`);
   process.exit(2);
+}
+
+/* ---------- --paste: the whole ask, ready for a chat window ----------
+   --missing gives names one per line, which is right for a spreadsheet column and
+   wrong for a chat prompt. This prints the RULES for the field and then the names
+   as one comma-separated paragraph, chunked, so a batch pastes in and the answer
+   pastes back.
+
+   The rules below are not opinion. Each is a constraint tools/check-plant-json.js
+   already enforces or PLANT-BRIEF.md already states. If a validator rule changes,
+   change it here too, or the research comes back failing the check it was written
+   to pass. */
+const SPEC = {
+  toxicity: { rule: [
+    'PASTE CHATGPT-TOXICITY-BRIEF.md FROM THIS REPO ABOVE THIS LIST. It is the full',
+    'brief for this field and carries the source order, the tier keyword table and the',
+    'worked traps. What follows is only the plant list for one batch.',
+  ] },
+  compliance: { rule: [
+    'compliance is about the LAW, not health. For each plant, does any of these apply,',
+    'and what is the detail: Schedule 9 of the Wildlife and Countryside Act (illegal to',
+    'plant or cause to grow in the wild); plant breeders rights / PBR / PVR (give the',
+    'grant number if you can find it); a plant passport requirement to move or sell it;',
+    'a biosecurity restriction (Xylella host, ash dieback, an import ban).',
+    'If none apply return "" — blank is a perfectly good answer for this field.',
+    'Never guess a PBR number. If a cultivar looks protected but you cannot find the',
+    'grant, say exactly that in prose rather than inventing a reference.',
+  ] },
+  hardinessNote: { rule: [
+    'One or two sentences saying what the RHS hardiness band MEANS for a UK gardener:',
+    'the approximate temperature range, and any siting condition that comes with it',
+    '(a sheltered wall, a winter mulch, protection in a cold garden).',
+    'The card ALREADY carries the band. Do not contradict it — if your research',
+    'disagrees with the band, say so in uncertain rather than writing a note that',
+    'fights the shield printed beside it.',
+    'Bands: H1a/H1b/H1c glasshouse - H2 tender, no frost - H3 half-hardy, -5 to 1C -',
+    'H4 hardy, average winter, -10 to -5C - H5 cold winter, -15 to -10C - H6 very cold,',
+    '-20 to -15C - H7 below -20C.',
+  ] },
+  foliage: { rule: [
+    'foliage MUST NAME one of exactly these four words or the validator rejects it:',
+    'evergreen, semi-evergreen, deciduous, herbaceous.',
+    '"herbaceous" is the honest answer for a plant that dies to the ground, which',
+    '"deciduous" does not distinguish from a bare twiggy shrub.',
+    'A leaf description after the class word is welcome and prints on the card back:',
+    '"deciduous; five-lobed leaves with strong red autumn colour".',
+  ] },
+  cvs: { rule: [
+    'cvs is the cultivar / synonym / series note. Useful content: the breeder code behind',
+    'a trade name (sold as FLOWER TOWER, registered as Zuilb1), accepted-name and synonym',
+    'pairs, the series a colour selection belongs to, sibling cultivars worth knowing.',
+    'Free prose, keep it short — it prints on the card.',
+    'A straight species with nothing to say gets "".',
+  ] },
+  pollination: { rule: [
+    'pollination MUST NAME one of exactly these three or the validator rejects it:',
+    '"needs partner", "self-fertile", "not applicable".',
+    'Detail after a semicolon is fine: "needs partner; female plants only berry with a',
+    'male nearby". Use "not applicable" for anything not grown for fruit or seed.',
+  ] },
+  clay: { rule: [
+    'clay is strictly "yes" or "no" — will it grow acceptably on heavy clay?',
+    'There is no third answer. Leave it BLANK ("") where there is no sourced statement:',
+    'blank already means "not established", and "unknown" is rejected.',
+  ] },
+  stockForm: { rule: [
+    'stockForm is how the plant is normally SOLD in UK retail. Exactly one of:',
+    '"container", "bare-root", "both". Nothing else is accepted.',
+  ] },
+  rootSize: { rule: [
+    'rootSize is the pot or root size the plant is typically sold at in UK retail and it',
+    'MUST CARRY A FIGURE: "9 cm pot", "2 L", "60-80 cm bare-root". A value with no digit',
+    'is rejected because it would print an empty row on the card.',
+    'No typical size found? Return "" and say why.',
+  ] },
+  uses: { rule: ['uses is where the plant goes, as a short mid-dot list: "Borders - gravel gardens - coastal - cut flowers". Aim under 150 characters.'] },
+  water: { rule: ['water is the watering regime in one short sentence, under 120 characters. Do NOT repeat the soil drainage line — drainage belongs in soil, not here.'] },
+  prune: { rule: ['prune is when and how to prune, one or two short sentences, under 165 characters. If it needs none, say so plainly.'] },
+  resilience: { rule: ['resilience is what the plant shrugs off and what troubles it, one or two sentences under 165 characters. Name the actual pest or disease where there is one.'] },
+  sunMin: { rule: ['sunMin is an INTEGER 0-100: the LOWEST light the plant tolerates, where 0 is deep shade, 50 part shade, 100 the most sun possible in the open. It must not exceed the sunNeed already on the card. Return null if you cannot state it.'] },
+};
+const RATING_SCALE = {
+  pestRisk:    '0-3 bulletproof - 8-10 occasional aphid or mildew - 14-16 needs watching (roses) - 18-20 chronic (box blight).',
+  thirst:      '0-3 drought-proof - 4-6 low - 10-12 average border - 16-20 constantly moist.',
+  careLevel:   '0-3 plant-and-forget - 6-8 light annual tidy - 12-14 regular pruning - 18-20 high-maintenance.',
+  growthSpeed: '0-4 very slow - 8-12 steady - 16-18 fast - 20 rampant.',
+};
+for (const [k, scale] of Object.entries(RATING_SCALE)) {
+  SPEC[k] = { rule: [
+    k + ' is a 0-20 INTEGER, higher = more of the named thing. Not 0-5. ' + scale,
+    'The validator warns on any value of 1-5, because that is almost always a 0-5 answer',
+    'left in a 0-20 box. If you mean "quite prone", that is 14, not 4.',
+  ] };
+}
+
+if (PASTE) {
+  if (!field) { console.error('usage: node tools/backfill-field.js <field> --paste [--chunk 50]'); process.exit(2); }
+  const html0 = fs.readFileSync(HTML, 'utf8');
+  const blank = [...D.readDeck(html0), ...D.readHold(html0)]
+    .filter(p => p[field] === undefined || String(p[field]).trim() === '');
+  if (!blank.length) { console.log('nothing blank: every card already carries "' + field + '".'); process.exit(0); }
+  const spec = SPEC[field];
+  const parts = [];
+  for (let i = 0; i < blank.length; i += CHUNK) parts.push(blank.slice(i, i + CHUNK));
+
+  console.log('### ' + field + ' — ' + blank.length + ' card(s) blank, ' + parts.length +
+              ' batch(es) of up to ' + CHUNK + '\n');
+  parts.forEach((part, k) => {
+    const bar = '='.repeat(72);
+    console.log(bar);
+    console.log('BATCH ' + (k + 1) + ' OF ' + parts.length + ' — ' + field + ' — ' + part.length + ' plants');
+    console.log(bar + '\n');
+    console.log('You are filling ONE field, "' + field + '", for plants already in a UK');
+    console.log('garden-centre card deck. Do not research anything else about them.\n');
+    console.log('THE RULES');
+    console.log('  Never invent. If you cannot find a specific, citable statement for a plant,');
+    console.log('  return "' + field + '": "" for it and say why in that entry\'s uncertain.');
+    console.log('  A blank is correct. A plausible guess reaches a customer.');
+    console.log('  UK context throughout: RHS first, then Kew, then the trade.');
+    (spec ? spec.rule : ['(no field-specific rules recorded — see PLANT-BRIEF.md)'])
+      .forEach(l => console.log('  ' + l));
+    console.log('');
+    console.log('OUTPUT — one JSON array and nothing else. Copy each latin name EXACTLY as');
+    console.log('given, including any curly apostrophe or × sign: it is the only thing the');
+    console.log('importer matches on, so a retyped name silently fails to apply.\n');
+    console.log('[{"latin":"<exactly as given>","' + field + '":"…","uncertain":["…"],"sources":["…"]}, …]\n');
+    console.log('THE PLANTS\n');
+    console.log(part.map(p => p.latin).join(', ') + '\n');
+  });
+  console.error('\n(save the answer into data/incoming/ then: node tools/backfill-field.js ' +
+                field + ' --apply)');
+  process.exit(0);
 }
 
 /* ---------- --missing: the question list for a flat research pass ----------
