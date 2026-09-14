@@ -3710,6 +3710,96 @@ latin already contains the cultivar. Worth knowing the incoming shape varies on 
 
 ---
 
+### 85. Two cards in the 2026-09-14 batch rate a plant trouble-free and then name its trouble
+
+`plant-sense` `pest-vs-prose` fires when `resilience` says "susceptible to" and
+`pestRisk` is 5 or under. Two cards from Oscar's 31-card batch trip it, and **both
+sides are his own supplied research** — the number and the sentence came in the same
+JSON, so this is a horticultural call, not a code fix. Nothing was changed on either
+card; they are listed in `KNOWN` in `tools/plant-sense.js` pending that call.
+
+| Card | `pestRisk` | The sentence that fires the rule |
+|---|---|---|
+| Checkerberry Big Berry (`Gaultheria procumbens 'Gaubi'`) | 3 | "Generally pest-free and hardy; may be **susceptible to** honey fungus where present" |
+| Foxy Cream foxglove (`Digitalis purpurea` Foxy Group) | 5 | "generally easy but **susceptible to** slugs and occasional leaf diseases" |
+
+**The reading that argues the numbers are right and the rule is over-reading.**
+Honey fungus is a property of the *site*, not of Gaultheria — almost any woody plant
+on infected ground is at risk, so it says little about how much trouble this plant is
+per se. Slug damage on young foxgloves is real but seasonal and confined to new
+growth, which is some way from the 14–16 band the brief reserves for roses. On that
+reading 3 and 5 are defensible and the prose is simply being thorough.
+
+**The reading that argues the prose is right.** If a member of staff reads the
+sentence out to a customer, "susceptible to" is what they will hear, and a card
+showing under one icon of five contradicts them on the same face. The brief's own
+scale puts "occasional aphid or mildew" at 8–10; a named, expected problem arguably
+belongs there rather than at 3.
+
+**What decides it:** Oscar picks a side per card — either nudge `pestRisk` into the
+6–10 band, or soften the `resilience` wording away from "susceptible to". Then delete
+that card's line from `KNOWN` in `tools/plant-sense.js` and this item from here.
+
+**Not a candidate for a rule change.** The regex is doing its job: a card that says
+"trouble-free" in a number and "susceptible to X" in a sentence is worth a human
+look, which is exactly what has happened.
+
+---
+
+### 86. Thirty-five researched entries, thirty-one cards, twenty-one photographs — and two duplicate plants the deck already owned
+
+Oscar sent 35 plant JSONs and 25 photographs on 2026-09-14. The raw batch is committed
+verbatim as `data/incoming/new-plant-builds-2026-09-14-as-sent.json`; the 31 entries
+actually built are `new-plant-builds-2026-09-14.json`. Deck 313 → 334, hold 82 → 92.
+
+#### The four entries not built, and why
+
+| Entry | Why |
+|---|---|
+| `Cotinus coggygria 'Royal Purple'` | Already **dealt**, with a photograph. Oscar's call: do not replace. Its new photo became a `PHOTO_SWAP` frame instead (below). |
+| `Escallonia 'Brian's Gold'` | The same plant as `Escallonia 'Gold Brian'`, already **held** — RHS treats the two as synonyms, and Oscar's own `uncertain` note says so. The held card was dealt with his photo rather than a second card being created. |
+| `Dianthus barbatus` ("White Picotee") | Three entries shared one `latin`. A card's identity *is* its latin — and so is its photo slug — so three cards cannot hold it. |
+| `Dianthus barbatus` ("Pink and White") | As above. Oscar's call: keep the plain species card only. Both dropped entries said in their own `uncertain` field that the name was a retail colour description, not a cultivar, so no plant fact was lost. |
+
+#### Four changes made to the incoming data, each disclosed
+
+1. **`hardiness` case.** `"H1C"` (Cyclamen) and `"H1B"` (Pentas) → `H1c` / `H1b`.
+   `check-plant-json.js` matches the band list exactly and **rejects** the uppercase
+   form, so this was mandatory, not stylistic. Same band either way.
+2. **`soil` / `soilWarning` short forms.** All 31 entries were over the measured
+   panel budgets — the worst at 85 and 112 characters against 26 and 44. Written as
+   hand-authored pairs in the `FIT` table in `tools/fit-incoming.js`, which is the
+   one reviewable place for this, with the full research prose kept in
+   `data/incoming/`. Machine truncation was not used: a clipped clause on a printed
+   card is worse than a short sentence written to be short.
+3. **Viola spread unit.** `0.15-0.25m` overran its size rail by 3.6px and crossed the
+   baked label (`design/audit-layout.js`). Changed to `10-20 cm H × 15-25 cm W` —
+   the same measurement in the unit 71 other cards already use for this size class.
+4. **Nothing else.** Every rating, every prose field and every `peak` is as sent.
+
+#### Open, needing Oscar
+
+- **Escallonia 'Gold Brian' hardiness disagrees with itself across two records.** The
+  held card carries **H5** ("Hardy in sheltered UK gardens"); this batch's research for
+  the same plant says **H3** ("Best in mild or coastal parts of the UK"). Two bands
+  apart, on the field `NEW-SESSION.md` names as the most error-prone in the deck.
+  His photo was dealt to the existing card and **no stat was changed**, on his
+  instruction to flag it rather than overwrite. `growthSpeed` also differs, 15 vs 10.
+  Neither value has been independently verified here.
+- **The existing Cotinus card is not identical to the new research**, which was the
+  condition Oscar put on leaving it alone. It differs on `hue` (345 vs 300), `peak`
+  (Apr-Oct vs Jun-Nov), `pestRisk` (7 vs 4), `growthSpeed`, `careLevel` and most of
+  the prose — and the existing card carries **no** `hardinessNote`, `cvs` or
+  `foliage` where the new research supplies all three. Left untouched pending his call.
+- **Two photographs deliberately unused.** A bright yellow pompon mum (no yellow-mum
+  card exists; Oscar confirmed it was uploaded in error) and a narrow silver-leaved
+  plant that does not match the `Helichrysum petiolare` research it arrived with —
+  rounded felted foliage in the text, needle-like leaves in the picture, closer to
+  *H. italicum*. His instruction: build the card, hold it, wait on the label. Done.
+- **Two `pest-vs-prose` contradictions** from this batch — see item 85.
+
+---
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.
