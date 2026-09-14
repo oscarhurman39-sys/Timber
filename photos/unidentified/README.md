@@ -191,3 +191,36 @@ matters).
 This file still holds the un-redacted face and ships in every clone. Worth deleting
 once Oscar is happy with the card's copy; kept for now because it is his original
 and deleting someone's original is his call, not a tool's.
+
+## 2026-09-14 — one frame from the six-photo batch
+
+### `2026-09-14-double-daisy-white-pink-no-json.jpg`
+
+**Parked because the batch has no JSON for it, not because the plant is a mystery.**
+
+Six photographs arrived with six plant JSONs, and they are not the same six plants.
+Five paired cleanly and are dealt (Fuchsia 'Alice Hoffman', *Berberis thunbergii*
+'Desperados', *Symphyotrichum dumosum* 'Alpha White', *Viola* × *wittrockiana*
+'Rose Blotch', *Gomphrena globosa*). The sixth JSON is *Cyclamen persicum* Super
+Serie Djix F1 — a silver-marbled tuberous pot plant — and this frame is not that.
+It is not a near miss or a cultivar question; they are different families.
+
+`[Inference]` the frame shows a **double bedding daisy, *Bellis perennis***, read from
+a basal rosette of spoon-shaped crenate leaves, solitary leafless flower stems, and
+fully double pompom heads in white and pink with yellow discs. That habit is
+characteristic of the double *Bellis* sold as bedding. `[Unverified]` which series
+or cultivar — Tasso, Habanera, Bellissima, Pomponette and several others all look
+like this at retail, and nothing in the frame settles it. No label is visible.
+
+Nothing was built from it. Two things are needed before it can become a card:
+
+1. **Confirmation of the plant** — ideally the bench label.
+2. **A plant JSON** via `PLANT-BRIEF.md`, as for every other card. There is no
+   *Bellis* in the deck and none on the wishlist, so there is no held card this
+   could be dealt onto.
+
+**To use it:** once the JSON arrives,
+`node tools/add-plant.js --quick bellis.json photos/unidentified/2026-09-14-double-daisy-white-pink-no-json.jpg`
+
+The reverse gap is also open: the **Cyclamen 'Djix' card is written and held** in
+`PLANTS_ON_HOLD` with no photograph. See VERIFY-QUEUE item 85.

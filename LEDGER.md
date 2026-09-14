@@ -5,6 +5,22 @@ brick: Run `CHATGPT-TOXICITY-BRIEF.md` over the first 50 names in
   `data/incoming/toxicity-todo-2026-09-13.txt` and send the JSON back — 305 of 392
   cards have a blank toxicity field, and blank renders identically to "safe".
 since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-14, later (six-photo batch) — **deck 318, hold 83.** Five cards
+  dealt (Fuchsia 'Alice Hoffman', Berberis thunbergii 'Desperados', Symphyotrichum
+  dumosum 'Alpha White', Viola × wittrockiana 'Rose Blotch', Gomphrena globosa),
+  the Cyclamen 'Djix' held for want of a photograph, and one frame parked: six
+  photos and six JSONs arrived but they are not the same six plants — photo 3 is a
+  double Bellis with no card and no JSON. The batch came as prose, so hue (prose →
+  degrees), peak (seasons → months), two missing foliage class words and one
+  mis-cased hardiness band were converted, every change logged in `uncertain` with
+  the untouched paste committed beside it. **A tooling hole found the hard way:**
+  all five cards rendered with NO photograph and `run-all --jobs 3` still returned
+  17/17 — the app loads `photos/card/*.webp`, `add-plants-bulk.js` stages only the
+  jpg master, `optimise-photos --check` exits 0 when sharp is absent, and
+  deck-audit treats a missing photo as a warning. Derivatives built and the cards
+  checked by eye; the guard itself is written up, not patched. Four of the six
+  cards carry a blank toxicity, so the brick below grew rather than shrank.
+  VERIFY-QUEUE item 85.
 progress: 2026-09-13 — **deck 310, hold 82.** Twenty-three cards dealt across the
   day. Oscar supplied research replacing ALL 49 Claude-written cards from the
   2026-08-10 batch: 808 field values changed, 26 cards gained a toxicity note

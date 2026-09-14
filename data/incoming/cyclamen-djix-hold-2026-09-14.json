@@ -1,0 +1,39 @@
+[
+  {
+    "common": "Super Serie Djix Cyclamen",
+    "latin": "Cyclamen persicum Super Serie Djix F1",
+    "hue": 330,
+    "visual": "Compact mini cyclamen with heart-shaped, silver-marbled leaves and distinctive flowers whose petals point downwards rather than strongly reflexing upwards, giving Djix its unusual umbrella-like flower shape.",
+    "water": "Water moderately while actively growing, preferably from below or around the edge of the pot. Allow excess water to drain and reduce watering markedly as the plant enters dormancy.",
+    "aspect": "Bright filtered light or partial shade in a cool, sheltered position. Avoid hot, dry indoor air and intense midday sun behind glass.",
+    "soil": "Free-draining, peat-free loam-based potting compost with good aeration.",
+    "soilWarning": "Do not leave the tuber or crown sitting wet. Waterlogging encourages root and crown rots.",
+    "prune": "No pruning required. Remove spent flowers and yellowing leaves cleanly from the base.",
+    "toxicity": "Tuber is harmful if eaten; wear gloves if handling causes skin irritation.",
+    "compliance": "",
+    "peak": "Sep-Feb",
+    "cvs": "Super Serie Djix F1; Schoneveld mini Cyclamen persicum selection bred for unusual downward-facing flowers, heat tolerance and long shelf life.",
+    "hardiness": "H1c",
+    "hardinessNote": "Tender in the UK and not frost hardy. Best protected indoors, under glass or in very sheltered seasonal containers.",
+    "resilience": "Unusually heat tolerant for a mini cyclamen and bred for continued bud production and good shelf life, but still vulnerable to frost and prolonged wet compost.",
+    "uses": "Indoor pots, cool conservatories, porches and sheltered autumn container displays.",
+    "height": "15–20 cm",
+    "spread": "15–20 cm",
+    "foliage": "herbaceous; dark green, heart-shaped leaves with decorative silver marbling; tuberous perennial with seasonal dormancy.",
+    "container": "Excellent; specifically bred as a compact pot cyclamen.",
+    "growthSpeed": 10,
+    "pestRisk": 8,
+    "thirst": 11,
+    "careLevel": 10,
+    "sunNeed": 45,
+    "sunMin": 25,
+    "uncertain": [
+      "The supplied label says 'Djix Pink', but Schoneveld's current Super Serie Djix range lists Red, Wine Red and Salmon with Eye rather than a formal Pink colour. The exact colour selection should therefore be confirmed from the plant or original grower label.",
+      "P7 appears to refer to approximately a 7 cm nursery pot rather than part of the cultivar name.",
+      "CONVERSION (Claude, 2026-09-14) — hue: supplied as prose (\"Pink to rose-pink on the supplied nursery label\"); set to 330, the deck's pink band. Judged, not sourced, and the colour itself is already flagged unconfirmed below.",
+      "CONVERSION (Claude, 2026-09-14) — peak: supplied as \"Autumn to winter\"; converted to Sep-Feb so the app can parse it. No source stated months.",
+      "CONVERSION (Claude, 2026-09-14) — hardiness: supplied as \"H1C\"; re-cased to \"H1c\", the RHS band spelling the validator accepts. Same band, no change of meaning.",
+      "CONVERSION (Claude, 2026-09-14) — foliage: the class word was added (\"herbaceous; ...\"). The card validator requires one of evergreen / semi-evergreen / deciduous / herbaceous and the supplied wording had none; the rest of the sentence is unchanged."
+    ]
+  }
+]

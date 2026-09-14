@@ -39,6 +39,18 @@
    warn  <= 44 chars — a real constraint, not a restatement of soil.
    face  — compass facing; omit to derive from the sun band. */
 const FIT = {
+  "Fuchsia 'Alice Hoffman'":
+    { soil: 'Fertile, moist, drained', warn: 'Avoid winter wet and cold drying winds' },
+  "Berberis thunbergii 'Desperados'":
+    { soil: 'Any soil, well-drained', warn: 'Dislikes waterlogging; spines injure' },
+  "Symphyotrichum dumosum 'Alpha White'":
+    { soil: 'Fertile, moist, drained', warn: 'Winter wet; poor airflow brings mildew' },
+  "Viola \u00d7 wittrockiana 'Rose Blotch'":
+    { soil: 'Fertile, humus-rich, moist', warn: 'Wet compost rots it; hates summer heat' },
+  "Gomphrena globosa":
+    { soil: 'Fertile, free-draining', warn: 'Cold wet soil rots it; frost kills it' },
+  "Cyclamen persicum Super Serie Djix F1":
+    { soil: 'Free-draining loam compost', warn: 'Never let the tuber sit wet; crown rots' },
   "Allium stipitatum":
     { soil: 'Fertile, drained, any pH', warn: 'Winter wet rots the bulb' },
   "Phlox paniculata 'David'":
