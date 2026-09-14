@@ -5,6 +5,21 @@ brick: Run `CHATGPT-TOXICITY-BRIEF.md` over the first 50 names in
   `data/incoming/toxicity-todo-2026-09-13.txt` and send the JSON back — 305 of 392
   cards have a blank toxicity field, and blank renders identically to "safe".
 since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-14, late (the toxicity corner redone) — the flat CSS corner-fold
+  is gone. Oscar: `looks pretty shit and not classy at all`, and four things were
+  wrong with it: it sat OUTSIDE the gold frame (anchored to the card box at 0,0
+  while the painted frame starts inset), its `!` was a Georgia text glyph jammed
+  into the thin tip of a triangle, its fill was one flat saturated web colour
+  against gold leaf, and its border-radius was guessing at the frame corner and
+  missing. Replaced with a gold-edged cartouche — a rotated square, not a
+  clip-path diamond, so it can carry a real border — carrying the SAME drawn
+  glyph the card back already uses instead of a text character. Geometry measured
+  from the running app, not eyeballed, and the position picked from a rendered
+  sweep. The caution ink had to be pushed yellower: at the first value it was
+  within a hair of the frame gold and read as decoration rather than a warning,
+  which only showed up by rendering it against the frame. Four variants were
+  built and shown before any was committed; the wax seal lost, it rendered as a
+  plastic button.
 progress: 2026-09-14, night (Wintersweet dealt, Kousa fruit, and the photo guard
   actually fixed) — **deck 346, hold 86.** Chimonanthus praecox dealt from the
   hold block with Oscar's foliage frame; his JSON for it is committed as the

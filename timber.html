@@ -586,25 +586,50 @@
   .crest .hnum{position:absolute;left:0;right:0;top:29%;text-align:center;font-family:Georgia,serif;
     font-weight:700;font-size:23px;letter-spacing:1px;color:#F2E5C4;
     text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
-  /* TOXICITY FLAG — the front-face half of the back's safety plaque.
-     A corner-fold triangle flush in the top-left of the frame: legs 8.6% x 6%
-     (36px x 36px of the 420x600 template), stopping short of the painted rosette
-     that starts ~5% in. It appears ONLY for the hazard tiers of the same ladder the
-     back uses (toxTier: severe / harmful / caution) and takes that tier's ink, so
-     the front can never shout what the back would not. Edibility notes and a
-     sourced all-clear get no flag — a green corner on a shop card reads "safe to
-     eat" and that is a claim the field does not make. Blank stays blank. z-index 4:
-     above the crest (3), under the stamps (30) and every overlay. */
-  .toxflag{position:absolute;left:0;top:0;width:8.6%;aspect-ratio:1;z-index:4;
-    background:var(--flag-ink);
-    clip-path:polygon(0 0,100% 0,0 100%);           /* the fold: right angle in the corner */
-    border-top-left-radius:15px;                    /* the frame's own radius, so it sits inside the corner */
-    filter:drop-shadow(1px 1px 1px rgba(0,0,0,.45))}
-  .toxflag::after{content:"!";position:absolute;left:18%;top:2%;font-family:Georgia,serif;
-    font-weight:700;font-size:13px;line-height:1;color:rgba(0,0,0,.72)}
-  .toxflag.severe {--flag-ink:#ef5f5f}
-  .toxflag.harmful{--flag-ink:#f08a3c}
-  .toxflag.caution{--flag-ink:#f5c451}
+  /* TOXICITY FLAG — a painted cartouche on the frame's top-left corner.
+     Replaces the flat CSS corner-fold that shipped until 2026-09-14. Oscar's
+     verdict on that one was blunt and correct: it read as a UI sticker dropped
+     on an oil painting. Four things were wrong with it and all four are fixed
+     here. It sat OUTSIDE the gold frame, anchored to the card box at 0,0 while
+     the painted frame starts inset, so it floated in the dark margin. Its "!"
+     was a Georgia text glyph jammed into the thin tip of a triangle, baseline-
+     positioned, nearly clipped by the hypotenuse. Its fill was one flat
+     saturated web colour against gold leaf. And its border-radius was guessing
+     at the frame's corner and missing.
+
+     The cartouche is a ROTATED SQUARE, not a clip-path diamond, so it can carry
+     a real border: clip-path would cut the border and the drop shadow off with
+     everything else outside the polygon. The glyph is counter-rotated inside it.
+
+     It borrows the frame's own line-work — a gold hairline over a dark one,
+     which is how the painted frame edges everything else — so the mark reads as
+     part of the furniture rather than applied to it. Inks keep the universal
+     red/orange/yellow ladder, because a safety mark that is tasteful and
+     unreadable is worse than an ugly one, but drop to the saturation the rest
+     of the card is painted at.
+
+     Geometry measured, not guessed (see the note in CARD-PROTOCOL): .tcard is
+     374x598 at render size, the photo starts at x 13.96%, and the painted
+     rosette in the left rail centres near x 7.7% y 6.1% with a ~4.8% diameter.
+     The cartouche centres above it on the corner elbow. z-index 4: above the
+     crest (3), under the stamps (30) and every overlay. */
+  .toxflag{position:absolute;left:3.8%;top:3%;width:4.2%;aspect-ratio:1;z-index:4;
+    transform:rotate(45deg);
+    background:linear-gradient(160deg,var(--flag-hi) 0%,var(--flag-lo) 100%);
+    border:1px solid #d3b264;
+    box-shadow:0 0 0 1px rgba(38,25,8,.78),1px 2px 3px rgba(0,0,0,.5);
+    display:grid;place-items:center}
+  /* pointer-events:none so the press-and-hold target stays the .toxflag div itself
+     — the panel handler reads the class off whatever was pressed. */
+  .toxflag svg{width:58%;height:58%;transform:rotate(-45deg);pointer-events:none;
+    fill:#f6ecd2;filter:drop-shadow(0 1px 0 rgba(0,0,0,.45))}
+  .toxflag.severe {--flag-hi:#c03a2b;--flag-lo:#6e1811}
+  .toxflag.harmful{--flag-hi:#c2761f;--flag-lo:#71400a}
+  /* the caution ink is pushed yellower and more saturated than the other two on
+     purpose: at #c9a52f it was within a hair of the frame gold (#d3b264) and read
+     as a decorative lozenge rather than a warning. Rendered against the frame to
+     check, which is the only way to tell. */
+  .toxflag.caution{--flag-hi:#ecd23a;--flag-lo:#7a5c0b}
   .railval{position:absolute;z-index:2}
   .railval img{position:absolute;inset:0;width:100%;height:100%}
   .railval .v{position:absolute;inset:0;display:grid;place-items:center;
@@ -1180,7 +1205,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r260 · 2026-09-14 · 34b5326';
+const BUILD='r263 · 2026-09-14 · de968e0';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -13546,7 +13571,14 @@ const TOX_FLAG_TIERS=new Set(['severe','harmful','caution']);
 function toxFlag(p){
   const t=String(p.toxicity||'').trim();if(!t)return'';
   const k=toxTier(t);
-  return TOX_FLAG_TIERS.has(k)?`<div class="toxflag ${k}" aria-label="Safety: ${TOX_TIER[k].word}. Press and hold to read."></div>`:'';
+  /* the glyph is TOX_GLYPH — the SAME drawn path the back plaque uses for this
+     tier, not a second copy and not a text character. The old flag printed a
+     Georgia "!", which is why the front and back disagreed about what a hazard
+     looks like. Inline rather than a CSS mask so there is one source for the
+     artwork, and so it still draws with no network. */
+  if(!TOX_FLAG_TIERS.has(k))return'';
+  const g=TOX_GLYPH[TOX_TIER[k].glyph]||TOX_GLYPH.hazard;
+  return `<div class="toxflag ${k}" aria-label="Safety: ${TOX_TIER[k].word}. Press and hold to read."><svg viewBox="0 0 24 24" aria-hidden="true">${g}</svg></div>`;
 }
 /* ---------- the LEGAL plaque ----------
    The other half of the safety block, and it needed a different shape rather
