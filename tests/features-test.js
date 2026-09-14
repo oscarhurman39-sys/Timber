@@ -209,14 +209,21 @@ const answerRound = (page, correctly) => page.evaluate(right => {
   await page.click('#menuBtn'); await page.waitForTimeout(350);
   const chips = await page.evaluate(() =>
     [...document.querySelectorAll('#filterChips .chip')].map(c => ({
-      id: c.dataset.f, n: +c.querySelector('small').textContent, disabled: c.disabled })));
+      id: c.dataset.f, n: +c.querySelector('small').textContent, disabled: c.disabled,
+      hasKids: c.classList.contains('has-kids'), kid: c.classList.contains('kid') })));
   check('filter chips render from data', chips.length >= 4, JSON.stringify(chips.map(c => c.id)));
   check('zero-match chips are disabled, others enabled',
     chips.every(c => c.disabled === (c.n === 0)), JSON.stringify(chips));
+  check('no child chips are showing until a group is opened', chips.every(c => !c.kid),
+    JSON.stringify(chips.filter(c => c.kid).map(c => c.id)));
 
-  /* need n >= 2: swiping a 1-card filtered view empties it, which auto-clears the
+  /* A LEAF, deliberately: the assertions below include "applying a filter closes
+     the menu", which is true only of a chip with nothing left underneath it. A
+     group keeps the menu open on purpose (2026-09-14) so its children are
+     reachable, and picking one here would fail that check for the right reason.
+     need n >= 2: swiping a 1-card filtered view empties it, which auto-clears the
      filter — the toggle-off steps below assume the filter is still active */
-  const typeChip = chips.find(c => (c.id.startsWith('type:') || c.id.startsWith('hard:')) && c.n > 1 && c.n < NPLANTS);
+  const typeChip = chips.find(c => !c.hasKids && !c.kid && c.n > 1 && c.n < NPLANTS);
   const progressSnap = await page.evaluate(() => localStorage.getItem('timber-progress-v1'));
   if (typeChip) {
     await page.click(`#filterChips .chip[data-f="${typeChip.id}"]`); await page.waitForTimeout(350);
@@ -257,6 +264,90 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     await page.click('.sheet .scrim', { position: { x: 15, y: 300 } }); await page.waitForTimeout(350);
   } else {
     check('data chip filters the deck to its count', false, 'no chip with 2<=n<NPLANTS in data — inspect FILTER_DEFS');
+  }
+
+  /* ---- two-level chips: a group opens its children, a child narrows ----
+     Oscar's ask, 2026-09-14: click a season and the months appear beside it, so
+     the chip row stays short but can still be honed. The rules worth locking are
+     that a group does NOT close the menu (that would hide what it just revealed),
+     that a child filters to parent AND child rather than to the child alone, and
+     that pressing an active child steps back to its parent instead of dropping
+     the whole filter. */
+  await page.evaluate(() => { localStorage.clear(); });
+  await page.reload(); await page.waitForTimeout(400);
+  await page.click('#menuBtn'); await page.waitForTimeout(350);
+  const group = await page.evaluate(() => {
+    const g = [...document.querySelectorAll('#filterChips .chip.has-kids')]
+      .find(c => !c.disabled && +c.querySelector('small').textContent > 1);
+    return g ? { id: g.dataset.f, n: +g.querySelector('small').textContent } : null;
+  });
+  if (!group) {
+    check('a chip group with kids exists', false, 'no enabled .has-kids chip — inspect FILTER_DEFS');
+  } else {
+    await page.click(`#filterChips .chip[data-f="${group.id}"]`); await page.waitForTimeout(400);
+    await deckSettled(page);
+    const opened = await page.evaluate(id => ({
+      cards: document.querySelectorAll('.card').length,
+      sheetOpen: document.getElementById('sheet').classList.contains('open'),
+      kids: [...document.querySelectorAll('#filterChips .chip.kid')].map(c => ({
+        id: c.dataset.f, n: +c.querySelector('small').textContent })),
+      parentOn: document.querySelector(`#filterChips .chip[data-f="${id}"]`).classList.contains('on'),
+    }), group.id);
+    check('a group chip filters the deck to its own count', opened.cards === group.n,
+      JSON.stringify({ got: opened.cards, want: group.n }));
+    check('a group chip leaves the menu OPEN so its children are reachable', opened.sheetOpen);
+    check('opening a group reveals its children', opened.kids.length >= 2, JSON.stringify(opened.kids));
+    check('the open group stays marked on', opened.parentOn);
+    /* every child is a subset of its parent — that is what filterTest() guarantees */
+    check('no child claims more cards than its parent',
+      opened.kids.every(k => k.n <= group.n),
+      JSON.stringify({ parent: group.n, kids: opened.kids }));
+
+    const kid = opened.kids.find(k => k.n > 1 && k.n < group.n) || opened.kids.find(k => k.n > 1);
+    if (!kid) {
+      check('a usable child chip exists', false, JSON.stringify(opened.kids));
+    } else {
+      await page.click(`#filterChips .chip[data-f="${kid.id}"]`); await page.waitForTimeout(400);
+      await deckSettled(page);
+      const narrowed = await page.evaluate(() => ({
+        cards: document.querySelectorAll('.card').length,
+        sheetOpen: document.getElementById('sheet').classList.contains('open'),
+        f: activeFilter, g: openGroup,
+      }));
+      check('a child chip narrows the deck to its count', narrowed.cards === kid.n,
+        JSON.stringify({ got: narrowed.cards, want: kid.n }));
+      check('a child chip closes the menu — nothing left below it', !narrowed.sheetOpen);
+      check('the parent group stays open behind an active child',
+        narrowed.f === kid.id && narrowed.g === group.id, JSON.stringify(narrowed));
+
+    /* The menu is open or shut depending on whether the last chip had children,
+       which is the behaviour under test — so ask, rather than clicking #menuBtn
+       blind and having the click swallowed by an already-open sheet's scrim. */
+      const ensureMenu = async () => {
+        if (await page.evaluate(() => document.getElementById('sheet').classList.contains('open'))) return;
+        await page.click('#menuBtn'); await page.waitForTimeout(350);
+      };
+      /* pressing the active child steps OUT to the parent, not to the whole deck */
+      await ensureMenu();
+      await page.click(`#filterChips .chip[data-f="${kid.id}"]`); await page.waitForTimeout(400);
+      await deckSettled(page);
+      const steppedOut = await page.evaluate(() => ({
+        cards: document.querySelectorAll('.card').length, f: activeFilter }));
+      check('pressing an active child steps back to its parent',
+        steppedOut.f === group.id && steppedOut.cards === group.n, JSON.stringify(steppedOut));
+
+      /* and pressing the active parent clears out entirely */
+      await ensureMenu();
+      await page.click(`#filterChips .chip[data-f="${group.id}"]`); await page.waitForTimeout(400);
+      await deckSettled(page);
+      const cleared = await page.evaluate(() => ({
+        cards: document.querySelectorAll('.card').length, f: activeFilter, g: openGroup,
+        kids: document.querySelectorAll('#filterChips .chip.kid').length }));
+      check('pressing the active parent clears the filter and closes the group',
+        cleared.f === null && cleared.g === null && cleared.kids === 0 && cleared.cards === NPLANTS,
+        JSON.stringify(cleared));
+      await page.click('.sheet .scrim', { position: { x: 15, y: 300 } }); await page.waitForTimeout(350);
+    }
   }
 
   /* filter ↔ review: one ephemeral view at a time */

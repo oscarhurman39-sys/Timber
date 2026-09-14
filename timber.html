@@ -409,6 +409,17 @@
   .chip.on{background:var(--leaf1);border-color:var(--leaf1);color:#04120a}
   .chip.on small{opacity:.8}
   .chip[disabled]{opacity:.35;cursor:default}
+  /* two-level chips: a group whose children are showing is outlined rather than
+     filled, so "this drawer is open" never looks like "this is the filter". The
+     children sit in the same wrapping row, which is what puts them to the right. */
+  .chip.open{border-color:var(--leaf1);color:var(--leaf1);background:rgba(255,255,255,.05)}
+  .chip.has-kids::after{content:"\2039";display:inline-block;margin-left:5px;opacity:.5;
+    transform:rotate(-90deg);transition:transform .15s}
+  .chip.has-kids.on::after,.chip.has-kids.open::after{transform:rotate(90deg);opacity:.8}
+  .chip.kid{font-size:11px;padding:4px 10px;background:rgba(0,0,0,.35);
+    border-color:rgba(255,255,255,.09);border-style:dashed;color:var(--muted)}
+  .chip.kid.on{background:var(--leaf1);border-color:var(--leaf1);border-style:solid;color:#04120a}
+  .f-break{flex-basis:100%;height:0;margin:0}
 
   /* stats overlay — same top-sheet pattern as the quiz */
   .stats{position:fixed;inset:0;z-index:60;visibility:hidden}
@@ -1163,7 +1174,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r237 · 2026-09-14 · 0acff85';
+const BUILD='r238 · 2026-09-14 · 83131a6';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -11911,6 +11922,7 @@ function buildDeck(){
   stopGoto();                                    /* a reset overrules an auto-run to a card */
   if(reviewMode){reviewMode=false;reviewBackup=null;}  /* a reset always lands on the full deck */
   if(activeFilter){activeFilter=null;filterBackup=null;}
+  openGroup=null;                                /* a reset closes an open chip group too */
   deck.querySelectorAll('.card').forEach(releaseCard);
   /* newest addition deals first — PLANTS appends chronologically, so reversing
      puts fresh cards on top instead of burying them behind the whole back-catalogue */
@@ -12004,7 +12016,7 @@ function exitReview(){
 
 /* ---------- deck filters: ephemeral views over the full deck (same model as review mode;
    swipes update SRS but never persist over saved full-deck progress) ---------- */
-let activeFilter=null,filterBackup=null;
+let activeFilter=null,filterBackup=null,openGroup=null;
 function isoWeek(){                            /* ISO-8601 week number, local time */
   const t=new Date();t.setHours(0,0,0,0);
   t.setDate(t.getDate()+3-((t.getDay()+6)%7));
@@ -12028,17 +12040,99 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
     {id:'order',label:'📦 Order in next 4 wks',test:p=>{const wk=parseOrderWeek(p.order),now=isoWeek();
       return wk!==null&&wk>=now&&wk<=now+4;}},  /* unparseable order strings simply don't match */
   ];
+  /* ---------- TWO LEVELS, Oscar's ask 2026-09-14 ----------
+     "if spring summer autumn and winter were all 4 categories, you click one, it
+     brings up plants with interest in that window, but also appears another few
+     filters to the right — to not have the filter section too cluttered but also
+     allow honing in with that accuracy if needed."
+
+     So a def may carry `kids`. The parent filters on its own; selecting it also
+     reveals its children, which filter to parent AND child. 13 chips were already
+     on screen and the retail categories would have pushed it past 20 flat — this
+     is 14 at rest and 4 more only while you are inside a group.
+
+     Every parent has a real test, including the two whose children are a list
+     rather than a range: their test is the UNION of their children, so clicking
+     "Interest" gives everything with any of the four, and clicking "Berries"
+     narrows it. No chip is a dead drawer. */
+  const kidsUnion=kids=>p=>kids.some(k=>k.test(p));
+
+  /* Seasons as a garden centre says them, each opening into its own three months.
+     A month belongs to exactly one season, so the child ids stay unique. */
+  const MON=['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  /* PEAKS HERE, and it is the first child of every season for a measured reason.
+     57 of the 313 dealt cards carry peak Jan-Dec — year-round foliage, which is a
+     habit, not a season. They are in "Winter" honestly (an evergreen IS winter
+     interest) but they swamp it: 77 winter cards, 57 of them year-round, leaving
+     17 plants that actually peak in winter — Hamamelis, Edgeworthia, Mahonia,
+     Lonicera purpusii, Cornus 'Midwinter Fire' — buried under the shrubs that look
+     the same in July. The six-month line is where the deck's own distribution
+     breaks: 23 cards sit at six months, 20 at seven, then it falls to 1 and 1
+     before the spike of 57 at twelve. A band longer than half the year is not a
+     season. */
+  const peaksIn=ms=>p=>{const a=parseMonths(p.peak);return a.length<=6&&ms.some(m=>a.includes(m));};
+  [['Spring','🌱',[3,4,5]],['Summer','☀️',[6,7,8]],
+   ['Autumn','🍂',[9,10,11]],['Winter','❄️',[12,1,2]]].forEach(([name,icon,ms])=>{
+    const id='season:'+name.toLowerCase();
+    const kids=[{id:id+':peak',label:'★ Peaks here',test:peaksIn(ms)}]
+      .concat(ms.map(m=>({id:'month:'+m,label:MON[m],test:p=>parseMonths(p.peak).includes(m)})));
+    defs.push({id,label:icon+' '+name,test:kidsUnion(kids),kids});
+  });
+
+  /* What the card is worth looking at FOR. Evergreen and bare read the `foliage`
+     column, which is a controlled answer; berries and bark read the card's own
+     prose, the same way the drought chip does, and claim nothing the card doesn't
+     already say in words. */
+  const interest=[
+    {id:'int:berries',label:'Berries',test:p=>/\bberr(?:y|ies)\b|\bhips?\b/i.test([p.visual,p.uses,p.resilience].filter(Boolean).join(' '))},
+    {id:'int:stems',label:'Bark & stems',test:p=>/\bbark\b|\bstems?\b/i.test([p.visual,p.uses].filter(Boolean).join(' '))},
+    {id:'int:evergreen',label:'Evergreen',test:p=>foliageClass(p.foliage)==='evergreen'},
+    {id:'int:bare',label:'Bare in winter',test:p=>['deciduous','herbaceous'].includes(foliageClass(p.foliage))},
+  ];
+  defs.push({id:'interest',label:'🍁 Interest',test:kidsUnion(interest),kids:interest});
+
+  /* Where it goes — the three questions asked most at the till. */
+  const site=[
+    {id:'site:pots',label:'Containers',test:p=>/\bcontainers?\b|\bpots?\b|\bpatio\b/i.test([p.uses,p.visual].filter(Boolean).join(' '))},
+    {id:'site:ground',label:'Ground cover',test:p=>/ground[- ]?cover|carpet|mat[- ]forming|edging/i.test([p.uses,p.visual,p.resilience].filter(Boolean).join(' '))},
+    {id:'site:shade',label:'Shade',test:p=>{const v=num(p.sunMin);return v!=null&&v<=35;}},
+  ];
+  defs.push({id:'site',label:'📍 Site',test:kidsUnion(site),kids:site});
+
   [...new Set(PLANTS.map(typeCategory).filter(Boolean))].sort().forEach(t=>
     defs.push({id:'type:'+t,label:'🪴 '+t,test:p=>typeCategory(p)===t}));
-  [...new Set(PLANTS.map(p=>(p.hardiness||'').trim()).filter(Boolean))].sort().forEach(h=>
-    defs.push({id:'hard:'+h,label:'❄️ '+h,test:p=>(p.hardiness||'').trim()===h}));
+
+  /* Hardiness was eight flat chips, which is where most of the clutter was. The
+     three bands are H_SCALE's own wording, not a new judgement: H4-H7 are the
+     ratings it describes as hardy, H3 is the one it calls half hardy, and H1-H2
+     are the ones that need glass or a windowsill. The individual ratings are
+     still there, one level down, and only the ones the deck actually carries. */
+  const inDeck=re=>[...new Set(PLANTS.map(p=>(p.hardiness||'').trim()).filter(h=>re.test(h)))]
+    .sort().map(h=>({id:'hard:'+h,label:h,test:p=>(p.hardiness||'').trim()===h}));
+  [['🛡️ Fully hardy',/^H[4-7]$/],['🌥️ Half hardy',/^H3$/],
+   ['🏠 Tender · under cover',/^H(?:1[abc]?|2)$/]].forEach(([label,re],i)=>{
+    const kids=inDeck(re);
+    if(kids.length)defs.push({id:'hardband:'+i,label,test:kidsUnion(kids),kids});
+  });
   return defs;
 })();
+/* A chip id resolves to its def and, for a child, the parent it narrows. */
+function findFilter(id){
+  for(const d of FILTER_DEFS){
+    if(d.id===id)return{def:d,parent:null};
+    for(const k of (d.kids||[]))if(k.id===id)return{def:k,parent:d};
+  }
+  return null;
+}
+/* A child filters to parent AND child, so the count under a chip is always the
+   count you get when you press it. */
+const filterTest=(def,parent)=>p=>(!parent||parent.test(p))&&def.test(p);
 function applyFilter(id){
-  const def=FILTER_DEFS.find(d=>d.id===id);if(!def)return;
+  const hit=findFilter(id);if(!hit)return;
+  const {def,parent}=hit,test=filterTest(def,parent);
   stopGoto();                                  /* swapping views overrules an auto-run to a card */
   if(reviewMode)exitReview();                  /* one ephemeral view at a time */
-  const match=PLANTS.map((p,i)=>def.test(p)?i:-1).filter(i=>i>=0);
+  const match=PLANTS.map((p,i)=>test(p)?i:-1).filter(i=>i>=0);
   if(!match.length)return;                     /* zero-match chips are disabled in the menu anyway */
   if(!activeFilter)filterBackup={
     stack:liveStack(),
@@ -12047,9 +12141,13 @@ function applyFilter(id){
   order=[...match];history=[];
   dealCards([...match].reverse());
   activeFilter=id;
+  /* the group that stays open underneath: a parent opens its own, a child keeps
+     its parent's open so the sibling months are still one tap away */
+  openGroup=parent?parent.id:(def.kids?def.id:null);
   markHot();updateCounts();refreshEmpty();
 }
 function clearFilter(){
+  openGroup=null;
   if(!activeFilter)return;
   activeFilter=null;
   deck.querySelectorAll('.card').forEach(releaseCard);
@@ -12058,16 +12156,35 @@ function clearFilter(){
   filterBackup=null;
   markHot();updateCounts();refreshEmpty();
 }
+/* Pressing the chip that is already on steps OUT one level rather than straight to
+   the whole deck: off a month lands you back on the season you were reading, which
+   is where you wanted to be if the month was a dead end. */
+function stepOutFilter(id){
+  const hit=findFilter(id);
+  if(hit&&hit.parent)applyFilter(hit.parent.id);
+  else clearFilter();
+}
 function renderFilterChips(){
   const box=document.getElementById('filterChips');
-  box.innerHTML=FILTER_DEFS.map(d=>{
-    const n=PLANTS.filter(d.test).length;
-    return `<button class="chip${activeFilter===d.id?' on':''}" data-f="${d.id}" ${n?'':'disabled'}>${d.label} <small>${n}</small></button>`;
-  }).join('');
+  const chip=(d,parent,cls)=>{
+    const n=PLANTS.filter(filterTest(d,parent)).length;
+    const on=activeFilter===d.id?' on':(openGroup===d.id&&!parent?' open':'');
+    return `<button class="chip${cls}${on}" data-f="${d.id}" ${n?'':'disabled'}>${d.label} <small>${n}</small></button>`;
+  };
+  box.innerHTML=FILTER_DEFS.map(d=>
+    chip(d,null,d.kids?' has-kids':'')
+    /* the children run on to the RIGHT of their parent, which is what Oscar asked
+       for, and then a zero-height flex break closes the group so the next
+       top-level chip starts a fresh row instead of looking like a fifth sibling */
+    +(openGroup===d.id&&d.kids?d.kids.map(k=>chip(k,d,' kid')).join('')+'<i class="f-break"></i>':'')
+  ).join('');
   box.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
-    if(activeFilter===b.dataset.f)clearFilter();else applyFilter(b.dataset.f);
+    if(activeFilter===b.dataset.f)stepOutFilter(b.dataset.f);else applyFilter(b.dataset.f);
     renderFilterChips();
-    if(activeFilter)closeSheet();
+    /* Only a chip with nothing left below it closes the menu. A group has just
+       put its children on screen; closing over them is the clutter he was
+       avoiding, in a more annoying form. */
+    if(activeFilter&&!(findFilter(activeFilter)||{}).def.kids)closeSheet();
   });
 }
 
