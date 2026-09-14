@@ -924,8 +924,8 @@
     "uncertain": []
   },
   {
-    "common": "Dwarf mountain pine 'Pal Maleter'",
-    "latin": "Pinus mugo 'Pal Maleter'",
+    "common": "Dwarf mountain pine 'Palmeter'",
+    "latin": "Pinus mugo 'Palmeter'",
     "hue": 85,
     "visual": "Slow-growing broad-conical dwarf pine · dense paired green needles · distinctive cream-white tips developing on young needles in winter",
     "water": "Water regularly while establishing; drought tolerant once established",
@@ -936,7 +936,7 @@
     "toxicity": "",
     "compliance": "",
     "peak": "Nov-Mar",
-    "cvs": "'Pal Maleter'",
+    "cvs": "'Palmeter' · RHS accepted name 'Pal Maleter'",
     "hardiness": "H7",
     "hardinessNote": "Extremely frost hardy and suitable throughout the UK",
     "resilience": "Very cold hardy, drought tolerant and undemanding once established; possible pine sawfly, scale, tip blight or needle disease",
@@ -952,7 +952,8 @@
     "sunNeed": 100,
     "sunMin": 75,
     "uncertain": [
-      "Sometimes sold under the shortened or misspelled retail name 'Palmeter'; accepted cultivar name is 'Pal Maleter'."
+      "Sometimes sold under the shortened or misspelled retail name 'Palmeter'; accepted cultivar name is 'Pal Maleter'.",
+      "RENAME (Claude, 2026-09-14) — card renamed to 'Palmeter' on Oscar's instruction: that is the spelling on the plant in front of him. RHS Plant Finder lists 'Pal Maleter' (v) as the accepted name and no source found states 'Palmeter' as a formal synonym, so the accepted spelling is kept in cvs rather than dropped. See data/renames.json."
     ]
   }
 ]

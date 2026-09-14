@@ -42,6 +42,15 @@
       "commit": "57bca8b",
       "date": "2026-08-13",
       "why": "Same plant and card, same-day rename as the two above. Oscar's supplied JSON also fixed a peak-vs-prose contradiction in the visual text (VERIFY-QUEUE 31), applied in the same commit as this rename."
+    },
+    {
+      "from": "Dwarf mountain pine 'Pal Maleter'",
+      "to": "Dwarf mountain pine 'Palmeter'",
+      "fromLatin": "Pinus mugo 'Pal Maleter'",
+      "toLatin": "Pinus mugo 'Palmeter'",
+      "commit": "pending",
+      "date": "2026-09-14",
+      "why": "Same plant, same card, same photograph — spelling only. Oscar's instruction: the plant in front of him is labelled 'Palmeter', and the deck is a floor reference, so it carries the name staff will see on the bench. The card arrived from the 2026-09-14 31-card batch as 'Pal Maleter'; that was a disclosed decision, not a typo — the supplied JSON's own uncertain note said the label read 'Palmeter' and chose the accepted name over it. RHS Plant Finder lists Pinus mugo 'Pal Maleter' (v) and no source was found that states 'Palmeter' as a formal synonym, so the accepted spelling is preserved in the card's cvs field rather than lost. The photo moved with the slug (photos/pinus-mugo-palmeter.jpg) and its CREDITS entry with it."
     }
   ]
 }

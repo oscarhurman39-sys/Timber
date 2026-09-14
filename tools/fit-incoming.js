@@ -277,7 +277,7 @@ const FIT = {
     { soil: 'Any, moist but drained', warn: 'Needs a warm sheltered wall to flower' },
   "Heptacodium miconioides":
     { soil: 'Fertile, moist, drained', warn: 'Warmth and shelter bring the best bark' },
-  "Pinus mugo 'Pal Maleter'":
+  "Pinus mugo 'Palmeter'":
     { soil: 'Any, free-draining sandy', warn: 'Waterlogging kills it; open sun for tips' },
 };
 
