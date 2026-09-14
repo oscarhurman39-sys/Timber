@@ -1180,7 +1180,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r256 · 2026-09-14 · fcd9d52';
+const BUILD='r257 · 2026-09-14 · 8b9d21d';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -3930,11 +3930,13 @@ const PLANTS = [
    shrink:"",
    returnRisk:"",
    pots:"",
-   cvs:"",
+   cvs:"'Royal Purple'",
    hardiness:"H5",
    resilience:"drought tolerant once established · exposed-site tolerant",
    uses:"specimen · foliage contrast · shrub borders",
    size:"4–5 m H × 4–5 m W",
+   hardinessNote:"Hardy in most UK gardens, approximately -15 to -10°C",
+   foliage:"Deciduous",
    seasonalImpact:"", growthSpeed:12, pestRisk:7, thirst:7, careLevel:5, sunNeed:90, sunMin:55},
 
   {common:"Slender Silhouette Sweet Gum", latin:"Liquidambar styraciflua 'Slender Silhouette'", hue:5,
@@ -5597,6 +5599,7 @@ const PLANTS = [
    uses:"Herb gardens, Mediterranean planting, hedging and containers.",
    size:"1–1.5 m H × 1–1.5 m W",
    hardinessNote:"Hardy through much of the UK where drainage is excellent.",
+   foliage:"Evergreen; narrow aromatic dark green leaves with pale undersides.",
    seasonalImpact:"", growthSpeed:11, pestRisk:3, thirst:4, careLevel:5, sunNeed:100, sunMin:80},
 
   {common:"Coral-bark Maple", latin:"Acer palmatum 'Sango-kaku'", hue:15,
@@ -7330,6 +7333,7 @@ const PLANTS = [
    size:"0.5-1m H × 0.5-1m W",
    toxicity:"Potentially harmful if eaten; grow as an ornamental rather than an edible plant.",
    hardinessNote:"Generally hardy in well-drained UK gardens but severe cold and winter wet can shorten its life.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:10, pestRisk:6, thirst:6, careLevel:7, sunNeed:100, sunMin:85},
 
   {common:"Japanese cedar 'Serama'", latin:"Cryptomeria japonica Serama ('FM5')", hue:120,
@@ -10439,7 +10443,8 @@ const PLANTS = [
    hardinessNote:"Tender to frost in the UK and normally grown as a half-hardy annual.",
    foliage:"herbaceous; green, opposite, oblong leaves, often softly hairy, on a bushy annual plant.",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:8, careLevel:5, sunNeed:95, sunMin:80},
-   {common:"Wintersweet", latin:"Chimonanthus praecox", hue:50,
+
+  {common:"Wintersweet", latin:"Chimonanthus praecox", hue:50,
    visual:"Bare winter branches studded with waxy translucent yellow flowers · dark purple-red flower centres · intense sweet fragrance",
    water:"Water during establishment and prolonged dry periods",
    aspect:"East / South",
@@ -10457,7 +10462,7 @@ const PLANTS = [
    shrink:"",
    returnRisk:"",
    pots:"",
-   cvs:"",
+   cvs:"Species form. Notable selections include 'Luteus' and 'Grandiflorus', but the supplied plant is Chimonanthus praecox without a named cultivar.",
    hardiness:"H5",
    resilience:"Generally pest-free and hardy once established; honey fungus is an occasional disease risk",
    uses:"Winter gardens · fragrant gardens · wall-side borders · specimen shrubs",
@@ -10466,6 +10471,7 @@ const PLANTS = [
    hardinessNote:"Hardy in most UK gardens, approximately -15 to -10°C",
    foliage:"Deciduous",
    growthSpeed:7, pestRisk:3, thirst:7, careLevel:6, sunNeed:95, sunMin:75},
+
   {common:"Deutzia 'Mont Rose'", latin:"Deutzia × hybrida 'Mont Rose'", hue:340,
    visual:"Arching deciduous shrub · abundant blush rose-pink flowers · fresh green foliage",
    water:"Water regularly during establishment and prolonged dry weather",
@@ -10492,7 +10498,7 @@ const PLANTS = [
    hardinessNote:"Hardy in most UK gardens, approximately -15 to -10°C",
    foliage:"Deciduous",
    growthSpeed:11, pestRisk:4, thirst:8, careLevel:4, sunNeed:80, sunMin:45},
-];
+ ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -11557,6 +11563,7 @@ const PLANTS_ON_HOLD=[
    uses:"pollinator borders · path edging · gravel · with roses",
    size:"0.5-1m H × 0.5-1m W",
    hardinessNote:"Exceptionally hardy throughout the UK.",
+   foliage:"deciduous",
    seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:6, careLevel:4, sunNeed:95, sunMin:70},
 
   {common:"Hellebore 'Anna's Red'", latin:"Helleborus (Rodney Davey Marbled Group) Anna’s Red ('Abcrd02')", hue:345,
@@ -11584,6 +11591,7 @@ const PLANTS_ON_HOLD=[
    size:"0.5-1m H × 0.5-1m W",
    toxicity:"All parts are harmful if eaten and sap may irritate skin; wear gloves when cutting foliage.",
    hardinessNote:"Very hardy throughout the UK.",
+   foliage:"evergreen",
    seasonalImpact:"", growthSpeed:8, pestRisk:8, thirst:12, careLevel:6, sunNeed:50, sunMin:20},
 
   {common:"Japanese Forest Grass 'Aureola'", latin:"Hakonechloa macra 'Aureola'", hue:65,
@@ -11665,6 +11673,7 @@ const PLANTS_ON_HOLD=[
    uses:"Small gardens, avenues, wildlife gardens and specimen planting.",
    size:"4–8 m H × 4–8 m W",
    hardinessNote:"Extremely hardy, below -20°C.",
+   foliage:"Deciduous; lobed dark green leaves.",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:6, careLevel:6, sunNeed:75, sunMin:40},
 
   {common:"Golden Chain 'Vossii'", latin:"Laburnum × watereri 'Vossii'", hue:55,
@@ -11748,6 +11757,7 @@ const PLANTS_ON_HOLD=[
    size:"1.5–2.5 m H × 1.5–2.5 m W",
    toxicity:"Berries should not be eaten.",
    hardinessNote:"Hardy throughout the UK.",
+   foliage:"Evergreen; tiny golden-yellow leaves.",
    seasonalImpact:"", growthSpeed:15, pestRisk:6, thirst:7, careLevel:5, sunNeed:75, sunMin:35},
 
   {common:"Double-flowered Japanese Kerria", latin:"Kerria japonica 'Pleniflora'", hue:50,

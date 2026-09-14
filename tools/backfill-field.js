@@ -264,13 +264,51 @@ function resolve(values) {
 /* ---------- match against the cards that exist ---------- */
 let html = fs.readFileSync(HTML, 'utf8');
 const deck = D.readDeck(html), hold = D.readHold(html);
+
+/* An APOSTROPHE is not a difference of opinion about the plant.
+   Cards carry the typographer's curly quote — Nepeta racemosa 'Walker’s Low' —
+   because that is what the deck was typed with. Research comes back with the
+   straight ASCII one, because that is what a keyboard and most chat windows
+   produce. Matched byte-for-byte those are two different plants, so the value
+   was dropped on the floor with no error: it landed in "no card for", which
+   reads like a genus-level answer being correctly refused, and is how six
+   researched foliage values sat unapplied without anyone noticing.
+
+   This normalises ONLY typography — the four apostrophe glyphs and runs of
+   whitespace. It does NOT relax the rule that matters: a genus answer still
+   cannot reach a cultivar card, because "Astilbe" and "Astilbe 'Fanal'" differ
+   by more than punctuation. Exact matches are still preferred; the loose key is
+   a fallback, and it refuses to guess when two cards share one. */
+const typographicKey = (l) => String(l)
+  .replace(/[\u2018\u2019\u02BC\u00B4]/g, "'")
+  .replace(/\s+/g, ' ')
+  .trim();
+
 const index = new Map();
 for (const p of deck) index.set(p.latin, { card: p, block: 'deck' });
 for (const p of hold) index.set(p.latin, { card: p, block: 'hold' });
 
+const looseIndex = new Map();
+for (const [latin, entry] of index) {
+  const k = typographicKey(latin);
+  if (k === latin) { if (!looseIndex.has(k)) looseIndex.set(k, entry); continue; }
+  looseIndex.set(k, entry);
+}
+/* a loose key that two different cards share is ambiguous — refuse it rather
+   than pick one, which is the same rule the tie handling below applies */
+{
+  const seen = new Map();
+  for (const latin of index.keys()) {
+    const k = typographicKey(latin);
+    seen.set(k, (seen.get(k) || 0) + 1);
+  }
+  for (const [k, n] of seen) if (n > 1) looseIndex.delete(k);
+}
+const lookup = (latin) => index.get(latin) || looseIndex.get(typographicKey(latin)) || undefined;
+
 const fill = [], held = [], conflicts = [], nocard = [], ties = [];
 for (const [latin, values] of supplied) {
-  const hit = index.get(latin);
+  const hit = lookup(latin);
   if (!hit) { nocard.push(latin); continue; }
   const r = resolve(values);
   if (r.conflict) { conflicts.push({ latin, values: r.conflict }); continue; }
