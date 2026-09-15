@@ -60,6 +60,15 @@
       "commit": "pending",
       "date": "2026-09-14",
       "why": "MERGE, not a rename. Two Cyclamen persicum cards existed: this branch held a Super Serie Djix F1 card with no photograph, and the deploy branch had already dealt a generic Cyclamen persicum with one. VERIFY-QUEUE 87 kept both because their visual lines contradict on flower shape (Djix points its petals DOWN, the dealt card and its photograph show them swept up), which is real evidence they are two different plants. Oscar's call on 2026-09-14 overrides that for now: \"just make it a genus card generic for now\" — he is revising bedding for an interview and does not need the cultivar split. The held card was removed rather than dealt; its full research survives in data/incoming/batch-2026-09-14-as-sent.json and batch-2026-09-14.json, so restoring it is a paste, not a re-research. The Djix photograph question in item 87 is therefore parked, not answered."
+    },
+    {
+      "from": "Flower Tower Dogwood",
+      "to": "Kousa Dogwood 'Flower Tower'",
+      "fromLatin": "Cornus kousa 'Flower Tower'",
+      "toLatin": "Cornus kousa FLOWER TOWER ('Zuilb1')",
+      "commit": "pending",
+      "date": "2026-09-15",
+      "why": "MERGE of a duplicate pair, resolved by Oscar on 2026-09-15 after he went through the deck: \"the first flower tower has a shit photo, second flower tower is much better\". They were always one plant and the cards said so themselves — the dropped card's cvs read \"'Zuilb1' (registered) - sold as FLOWER TOWER\", which is the surviving card's latin. See VERIFY-QUEUE 88 for how the pair got past every audit: they did NOT share a photograph, so nothing automated saw it, and a trade name written two ways is invisible to a string comparison. The survivor is also the fuller card: water, prune, resilience and uses are all filled on it and were all blank on the one dropped. ONE thing was lost rather than merged, and is written up in item 88 rather than silently carried: the dropped card gave aspect \"East / South / West\" where the survivor says \"Any aspect\", which shows no compass bearing. Those are two different research passes disagreeing, not a typo, so picking one would be arbitration rather than a merge. The dropped card's full data is in git at 9381e53."
     }
   ]
 }

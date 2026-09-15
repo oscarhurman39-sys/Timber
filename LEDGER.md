@@ -5,6 +5,18 @@ brick: Run `CHATGPT-TOXICITY-BRIEF.md` over the first 50 names in
   `data/incoming/toxicity-todo-2026-09-13.txt` and send the JSON back — 305 of 392
   cards have a blank toxicity field, and blank renders identically to "safe".
 since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-15 (Kousa duplicate resolved, deck deployed) — **deck 348, hold
+  84.** Oscar went through the deck and called it: the plain
+  `Cornus kousa 'Flower Tower'` card had the worse photograph, so it is gone and
+  `Cornus kousa FLOWER TOWER ('Zuilb1')` stays, carrying the autumn fruit swap.
+  They were always one plant — the dropped card's own cvs named the survivor's
+  breeder code. Recorded in renames.json as a merge, not a vanish. One field was
+  lost on purpose rather than arbitrated: the two cards disagreed on aspect
+  (E/S/W against "Any aspect"), which is two research passes differing, so it is
+  written up in VQ 88 instead of silently carried. VQ 88 closes. Also shipped
+  `backfill-field.js --verify`, which asks a researcher to check values already
+  ON the cards rather than fill blanks — the gap that let this duplicate live,
+  since a trade name written two ways defeats any string comparison.
 progress: 2026-09-14, late (the toxicity corner redone) — the flat CSS corner-fold
   is gone. Oscar: `looks pretty shit and not classy at all`, and four things were
   wrong with it: it sat OUTSIDE the gold frame (anchored to the card box at 0,0

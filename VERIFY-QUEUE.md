@@ -4069,7 +4069,34 @@ genuinely different frames — which is presumably why no audit flagged it. Noth
 in the deck checks for two latins naming one cultivar, and a trade name written
 two ways is invisible to a string comparison.
 
-**Not resolved here, because deleting a card is destructive and Oscar's call.**
+**RESOLVED 2026-09-15 by Oscar, who went through the deck: "the first flower
+tower has a shit photo, second flower tower is much better".**
+`Cornus kousa 'Flower Tower'` is gone; `Cornus kousa FLOWER TOWER ('Zuilb1')`
+stays, with the autumn fruit swap already on it. Deck 349 → 348. The removal is
+in `data/renames.json` as a merge so `data-audit --history` does not read it as
+a card that silently vanished, and the dropped card's full data is in git at
+9381e53.
+
+**One thing was lost rather than merged, deliberately.** The dropped card gave
+`aspect` as "East / South / West"; the survivor says "Any aspect", which draws no
+compass bearing at all. Those are two research passes disagreeing, not a typo, so
+carrying one across would be arbitration dressed up as a merge. Everything else
+the survivor already had, and had better — water, prune, resilience and uses are
+filled on it and were blank on the one dropped. If the facing matters, it is a
+one-field edit and the `--verify` pass on `aspect` would settle it.
+
+**What let this pair through, which is the part worth keeping.** They did NOT
+share a photograph — different md5, two genuinely different frames — so the
+duplicate-photo check that caught the Viburnum saw nothing. And a trade name
+written two ways is invisible to a string comparison, so no audit could match
+"'Flower Tower'" to "FLOWER TOWER ('Zuilb1')". That gap is now covered by
+`backfill-field.js latin --verify`, which asks a researcher the question no
+regex can: are any two entries on this list the same plant. This pair is written
+into that prompt as the worked example.
+
+#### Original note, kept for the reasoning
+
+**Was not resolved at the time, because deleting a card is destructive and Oscar's call.**
 The evidence points one way if he wants a recommendation: keep
 `Cornus kousa FLOWER TOWER ('Zuilb1')` — it is the fuller card (four more fields),
 it uses the trade-name-plus-code form the deck uses elsewhere, and its size band
