@@ -4171,3 +4171,50 @@ item 5 above. See the README's *Photo provenance* section for the full reasoning
 including why EXIF can't corroborate it (the photos are re-encoded on the way in,
 which strips metadata).
 
+
+### 90. `optimise-art.js --check` has both of the faults just fixed in `optimise-photos.js`
+
+Not found by an audit — found by fixing the same two lines in its sibling, and
+then reading across. Pre-existing, not caused by that work, so it was left out
+of the deploy rather than widening it. Recorded here because two attempts to
+queue it as a separate task timed out.
+
+**Fault 1 — the check skips itself on every CI runner.** `tools/optimise-art.js`
+line 66:
+
+```js
+if (CHECK) { console.log('optimise-art: sharp not installed — skipping check'); process.exit(0); }
+```
+
+sharp is not in the repo's dependencies, so this branch is taken on every runner
+and the check has never actually run in CI. It does not need sharp: a check is
+`fs.existsSync` on both sides of a filename map. Only the *generate* path needs
+sharp. This is the exact fault that let five cards reach the live site with no
+photograph while all 17 suites reported green — see item 87.
+
+**Fault 2 — the staleness test compares mtimes**, line ~87:
+
+```js
+else if (fs.statSync(webp).mtimeMs < src.mtimeMs) stale.push(... + ' older than its .png');
+```
+
+Git does not preserve mtimes. On a fresh checkout every file carries the checkout
+time, so which of a pair looks newer is arbitrary. Fixing fault 1 *alone* is what
+turned deploy run 98 red with ~300 bogus staleness lines on a tree where nothing
+was stale. The two have to be fixed in one commit.
+
+**The shape of the fix is already in git** — `git log -p tools/optimise-photos.js`,
+commit `8e250f2`. Missing and orphaned stay fatal (`fs.existsSync` means the same
+thing in every checkout, and *missing* is the one that ships a blank card); stale
+becomes a loud warning that does not touch the exit code.
+
+**Verify against the real CI condition, not by reasoning about it.** Touch every
+master newer than its derivative → must warn and exit 0. Delete one derivative →
+must FAIL and exit 1. Read node's exit code directly (`node tools/optimise-art.js
+--check; echo $?`); piping into `grep` and reading that status reports the grep's
+code and proves nothing. That mistake was already made once on the photos version.
+
+**Also worth checking while in there:** whether anything stages an art master
+without building its derivative, which is the gap behind item 87. The three plant
+staging tools now call `optimise-photos.js --only <file>`; the art path may need
+the same wiring.
