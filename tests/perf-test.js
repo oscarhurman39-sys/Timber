@@ -92,6 +92,59 @@ const check = (name, ok, detail = '') => {
   check(`painted photos stay inside the window (${ph.visible} visible, ceiling ${photoCeiling})`,
     ph.visible <= photoCeiling, `${ph.visible} > ${photoCeiling}`);
 
+  /* ---- 2c. CARD CHROME IS CSS, NOT <img> ----
+     Every card wears the same painted furniture: the parchment plaque, the soil
+     panel, the aspect band, the hardiness crest, the two spine patches, the sun
+     pip, the growth diamond and fifteen rating widgets. Until 2026-09-15 each of
+     those was an <img>, so the deck built 38 image elements per card for 15
+     shared files — 13,546 <img> at deck 348, against 360 now. They are CSS
+     backgrounds instead, which is what .wisp has always done.
+
+     Why this is worth a permanent check rather than a one-off cleanup: the
+     regression is invisible. Adding `<img src="art/...">` to renderCard looks
+     harmless in a diff and renders identically — it costs nothing until the deck
+     is a few hundred cards deep on a phone, which is exactly where this app has
+     already hit Safari's "A problem repeatedly occurred", and the deck only ever
+     grows.
+
+     The photograph is the one image a card is SUPPOSED to own. .pesticon is the
+     documented opt-in exception (one card carries it today). Everything else
+     under art/ belongs in the stylesheet. */
+  const chrome = await page.evaluate(() => {
+    const cards = [...document.querySelectorAll('.deck .card')];
+    const imgs = [...document.querySelectorAll('.deck .card img')];
+    /* A card's photo <img> carries its URL in data-psrc until the photo window
+       promotes it to src, so BOTH have to be read — a buried card with a null
+       src would otherwise slip past whatever this asserts.
+       .tphoto is excluded from the art/ test rather than the whole card: a
+       FULLART card's painting IS an art/ file and IS legitimately an <img>,
+       because on those cards the artwork replaces the photograph. Chrome is
+       everything OUTSIDE the photo frame. */
+    const url = (i) => i.getAttribute('src') || i.getAttribute('data-psrc') || '';
+    const keep = (i) => i.closest('.tphoto') || i.classList.contains('pesticon');
+    const art = imgs.filter((i) => url(i).startsWith('art/') && !keep(i));
+    const stray = imgs.filter((i) => !keep(i));
+    return {
+      cards: cards.length,
+      imgs: imgs.length,
+      art: art.length,
+      srcs: [...new Set(art.map(url))].slice(0, 6),
+      stray: stray.length,
+      straySrcs: [...new Set(stray.map((i) => url(i) || '(no src)'))].slice(0, 6),
+    };
+  });
+  check(`card chrome is drawn in CSS, not <img> (${chrome.art} art images in the deck)`,
+    chrome.art === 0, `${chrome.art} still <img>: ${chrome.srcs.join(', ')}`);
+  /* The second half of the invariant, and the exact one: every <img> a card owns
+     must be its PHOTOGRAPH (inside .tphoto — PHOTO_SWAP legitimately puts several
+     frames there and cross-fades them) or the documented .pesticon opt-in.
+     Stated this way rather than as a per-card ceiling on purpose: a ratio has to
+     guess how many swap frames the deck will grow, and would either go slack
+     enough to miss a real leak or fail a card behaving exactly as designed — the
+     mistake the photo-window check above already made once and records. */
+  check(`every card <img> is a photograph or the pest icon (${chrome.imgs} images across ${chrome.cards} cards, ${chrome.stray} stray)`,
+    chrome.stray === 0, `${chrome.stray} <img> outside .tphoto: ${chrome.straySrcs.join(', ')}`);
+
   /* ---- 3. hiding buried content must be pixel-identical ----
      Freeze animations first. This assertion is about ONE thing: whether the deep
      toggle changes a visible pixel. A holo card's wisp layers animate whenever

@@ -51,6 +51,70 @@ const Q_PHOTO = 0.80;
 const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
   .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
+/* EVERY ANCHOR THIS BUILD DEPENDS ON, IN ONE PLACE.
+   The build works by substituting literal strings in timber.html. Each one is a
+   silent dependency on wording that lives in another file, and a refactor that
+   renames any of them does not fail anything — it fails the NEXT person who tries
+   to build, which can be weeks later. `--check` resolves all of them in about a
+   tenth of a second and is in tests/run-all.js --fast for exactly that reason.
+   Hoisted to module scope so the check and the build cannot drift apart. */
+const PHOTO_FN = 'const photoSrc=slug=>`photos/card/${slug}.webp`;';
+const SLUG_ANCHOR = '/* fold diacritics first';
+const SW = "if('serviceWorker' in navigator";
+const H = 'height:100dvh;user-select:none;';
+const ART_REF = /art\/[a-z0-9/-]+\.(?:png|webp)/g;
+
+const CHECK = process.argv.includes('--check');
+
+function check() {
+  const html = fs.readFileSync(path.join(ROOT, 'timber.html'), 'utf8');
+  const bad = [];
+
+  /* the deck, through the canonical parser (CARD-PROTOCOL rule 0b) */
+  let plants = null;
+  try {
+    const { readDeck } = require(path.join(__dirname, 'plant-data.js'));
+    plants = readDeck(html);
+    if (!Array.isArray(plants) || !plants.length) bad.push('readDeck returned no plants');
+    else if (plants.some((p) => !p)) bad.push('PLANTS contains an empty slot (array elision)');
+  } catch (e) { bad.push('readDeck threw: ' + e.message); }
+
+  /* every literal the build substitutes */
+  /* String.replace takes the FIRST match, so an anchor that appears twice means
+     the build edits the wrong one and says nothing. That is not hypothetical: the
+     service-worker guard had two occurrences and the build neutered the harmless
+     one. These three must be unique; SW is handled with split/join and may repeat. */
+  const occurrences = (lit) => html.split(lit).length - 1;
+  for (const [label, lit] of [
+    ['photoSrc() helper', PHOTO_FN],
+    ['slugLatin anchor comment', SLUG_ANCHOR],
+    ['body height rule', H],
+  ]) {
+    const n = occurrences(lit);
+    if (n === 0) bad.push(`${label} not found — the build substitutes it by exact text`);
+    else if (n > 1) bad.push(`${label} appears ${n} times — the build replaces only the first`);
+  }
+  if (!html.includes(SW)) bad.push('service worker guard not found');
+
+  for (const name of ['ICON192', 'ICON512'])
+    if (!new RegExp(`const ${name}="data:image/png;base64,([A-Za-z0-9+/=]+)";`).test(html))
+      bad.push(`${name} not found`);
+
+  /* every art token must have a PNG master to encode from */
+  const refs = [...new Set([...html.matchAll(ART_REF)].map((m) => m[0]))];
+  if (!refs.length) bad.push('no art/ references found — is timber.html already built?');
+  for (const ref of refs) {
+    const master = path.join(ROOT, 'art', ref.replace(/^art\//, '').replace(/\.(png|webp)$/, '') + '.png');
+    if (!fs.existsSync(master)) bad.push('missing asset master for ' + ref);
+  }
+
+  if (bad.length) { bad.forEach((b) => console.error('FAIL build-standalone: ' + b)); process.exit(1); }
+  const withPhoto = plants.filter((p) => fs.existsSync(path.join(ROOT, 'photos', slugLatin(p.latin) + '.jpg'))).length;
+  console.log(`build-standalone: every anchor resolves — ${plants.length} plants (${withPhoto} with a photo master), ${refs.length} art refs`);
+}
+
+if (CHECK) { check(); process.exit(0); }
+
 (async () => {
   let html = fs.readFileSync(path.join(ROOT, 'timber.html'), 'utf8');
   const { chromium } = require('playwright');
@@ -82,7 +146,7 @@ const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
      loss on the artwork for no reason. The path class allows "/" so the holo and
      anim subdirectories are inlined too; without it their assets stayed as
      relative URLs that nothing can resolve inside the artifact frame. */
-  const artRefs = [...new Set([...html.matchAll(/art\/[a-z0-9/-]+\.(?:png|webp)/g)].map((m) => m[0]))];
+  const artRefs = [...new Set([...html.matchAll(ART_REF)].map((m) => m[0]))];
   if (!artRefs.length) die('no art/ references found — is timber.html already built?');
   for (const ref of artRefs) {
     const name = ref.replace(/^art\//, '').replace(/\.(png|webp)$/, '');
@@ -97,9 +161,19 @@ const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
   }
 
   /* ---- 2. photos: keyed by slug, exactly as the card looks them up ---- */
-  const arr = html.match(/const PLANTS = \[[\s\S]*?\n\];/);
-  if (!arr) die('PLANTS array not found');
-  const PLANTS = eval(arr[0].replace('const PLANTS = ', ''));
+  /* CARD-PROTOCOL rule 0b: use tools/plant-data.js, never re-implement the parsing.
+     This file used to, with /const PLANTS = \[[\s\S]*?\n\];/ — and it had been
+     BROKEN for as long as the deck's closing bracket carried a leading space
+     (" ];", not "];"). The lazy match then ran past the array's real end, past the
+     whole hold block, and stopped at the first line-initial "];" some 3,000 lines
+     into the app code — so the eval below was handed live source and died on
+     `document is not defined`. The standalone build could not be produced at all,
+     silently, which matters because README says the single-file build is what gets
+     published to an artifact or a USB stick. readDeck() reads the marker pair that
+     plants-tool.js maintains and does not care how the bracket is indented. */
+  const { readDeck } = require(path.join(__dirname, 'plant-data.js'));
+  const PLANTS = readDeck(html);
+  if (!Array.isArray(PLANTS) || !PLANTS.length) die('PLANTS array not found');
   if (PLANTS.some((p) => !p)) die('PLANTS contains an empty slot (array elision)');
   const photoMap = {};
   let missing = 0;
@@ -120,13 +194,11 @@ const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
      detail sheet's literal src= instead, which String.replace only substitutes
      once — the second sheet and the card (which carries its path on data-psrc,
      not src) kept relative URLs the artifact frame cannot resolve. */
-  const PHOTO_FN = 'const photoSrc=slug=>`photos/card/${slug}.webp`;';
   if (!html.includes(PHOTO_FN)) die('photoSrc() not found — has the photo path helper moved?');
   html = html.replace(PHOTO_FN, 'const photoSrc=slug=>PHOTO_DATA[slug]||"";');
   // declare the map just above the slug helper that keys it
-  const anchor = '/* fold diacritics first';
-  if (!html.includes(anchor)) die('slugLatin anchor comment not found');
-  html = html.replace(anchor, photoConst + anchor);
+  if (!html.includes(SLUG_ANCHOR)) die('slugLatin anchor comment not found');
+  html = html.replace(SLUG_ANCHOR, photoConst + SLUG_ANCHOR);
 
   /* ---- 3. icons: same treatment, and the manifest must agree on the type ---- */
   for (const name of ['ICON192', 'ICON512']) {
@@ -141,9 +213,22 @@ const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
      active hazard, so it goes. The manifest <link> stays: the PWA block sets its
      href at runtime and would throw on a null element, taking the rest of the
      script — and so the whole deck — down with it. An unused manifest is inert. ---- */
-  const SW = "if('serviceWorker' in navigator";
+  /* ALL of them, not the first. There are two `if('serviceWorker' in navigator`
+     blocks: the update-pill message listener, and the one that actually calls
+     navigator.serviceWorker.register('./sw.js'). String.replace takes the first,
+     so the build used to neuter the harmless listener and ship the REGISTRATION
+     live — exactly the "stale worker is an active hazard" this step exists to
+     prevent. Found 2026-09-15 by reading the built file rather than the log. */
   if (!html.includes(SW)) die('service worker guard not found');
-  html = html.replace(SW, "if(false && 'serviceWorker' in navigator");
+  html = html.split(SW).join("if(false && 'serviceWorker' in navigator");
+  /* The replacement does not itself contain the anchor (`if(` is followed by
+     `false`), so a survivor here means a guard the split did not reach — and the
+     register() call inside a neutered block is dead code, which is the point.
+     An earlier version of this also tried to assert that no
+     `navigator.serviceWorker.register` remained "unguarded" by looking at the
+     character before it; that matched the `{` of the guarded block's own body and
+     aborted a correct build. The guard is the thing to check, not the call. */
+  if (html.includes(SW)) die('a serviceWorker guard survived the build');
 
   /* ---- 5. the artifact frame auto-sizes its iframe to the content's
      scrollHeight, while the app sizes itself from the frame via 100dvh. Left
@@ -151,7 +236,6 @@ const slugLatin = (l) => l.normalize('NFD').replace(/[̀-ͯ]/g, '')
      derived from viewport WIDTH, which the frame does not auto-size, gives the
      loop a stable fixed point. It stays out of source because on a real phone in
      landscape it would force the app taller than the screen. ---- */
-  const H = 'height:100dvh;user-select:none;';
   if (!html.includes(H)) die('body height rule not found');
   html = html.replace(H, 'height:100dvh;min-height:clamp(560px,195vw,920px);user-select:none;');
 
