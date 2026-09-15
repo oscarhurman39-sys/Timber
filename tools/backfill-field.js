@@ -9,6 +9,7 @@
     node tools/backfill-field.js foliage --apply --overwrite
     node tools/backfill-field.js foliage --missing          the cards still blank
     node tools/backfill-field.js foliage --paste            ready-to-paste research prompt
+    node tools/backfill-field.js hardiness --verify         CHECK the values already on cards
     node tools/backfill-field.js foliage --paste --chunk 40 smaller batches (default 50)
 
   The round trip a flat research pass takes:
@@ -58,6 +59,7 @@ const argv = process.argv.slice(2);
 const APPLY = argv.includes('--apply');
 const MISSING = argv.includes('--missing');
 const PASTE = argv.includes('--paste');
+const VERIFY = argv.includes('--verify');
 const CHUNK = Math.max(1, Number(argv[argv.indexOf('--chunk') + 1]) || 50);
 const OVERWRITE = argv.includes('--overwrite');
 const PREFER = (argv[argv.indexOf('--prefer') + 1] || '') === 'longest' && argv.includes('--prefer');
@@ -68,6 +70,134 @@ if (!D.FIELDS.includes(field)) {
   console.error(`"${field}" is not a card field. A key outside plant-data.js FIELDS is erased by the next
 csv round-trip, so add it to FIELDS first — deliberately — rather than here.`);
   process.exit(2);
+}
+
+/* ---------- --verify: check what is ALREADY on the cards ----------
+   --paste asks for values that are missing. --verify asks whether the values
+   that are present are RIGHT, which is a different question and the one the
+   deck has actually been bitten by: 'Pal Maleter' vs the label, two Cornus
+   kousa 'Flower Tower' cards that each named the other's code in their own cvs,
+   and CARD-STATS' own warning that hardiness is "the single most error-prone
+   field (the mock-ups all carried H5 from the template)".
+
+   So this prints latin + current value and asks for DISAGREEMENTS ONLY. A pass
+   over 431 cards that returns "all fine" in 431 objects is unreadable and
+   expensive; one that returns the twelve that are wrong is a to-do list. */
+const VERIFY_SPEC = {
+  hardiness: {
+    ask: [
+      'For each plant, does the RHS hardiness band shown match what RHS publishes?',
+      'Bands: H1a >15C - H1b 10-15C - H1c 5-10C - H2 1-5C - H3 -5 to 1C -',
+      'H4 -10 to -5C - H5 -15 to -10C - H6 -20 to -15C - H7 below -20C.',
+      'CARD-STATS.md calls this the deck\'s most error-prone field: an early template',
+      'put H5 on everything, so H5 in particular deserves a hard look.',
+      'Where RHS rates the SPECIES but not the cultivar, say so rather than treating',
+      'the species rating as confirmation of the cultivar.',
+    ],
+    answer: ['currentBand','rhsBand','note'],
+  },
+  latin: {
+    ask: [
+      'Three questions per plant, and a fourth about the list as a whole.',
+      '1. Is this the currently ACCEPTED botanical name (RHS Plant Finder first, then',
+      '   Kew/POWO)? If not, give the accepted name and mark this one a synonym.',
+      '2. For a trade name, is the cultivar code right and correctly formatted —',
+      '   Genus species TRADE NAME (\'code\')?',
+      '3. Is the spelling right, including the cultivar epithet inside the quotes?',
+      '4. ACROSS THE WHOLE LIST: are any TWO entries the same plant under different',
+      '   names? This is the one that matters most. The deck currently carries',
+      '   Cornus kousa \'Flower Tower\' AND Cornus kousa FLOWER TOWER (\'Zuilb1\') as two',
+      '   cards, and each names the other in its own cvs field. Nothing automated',
+      '   catches that, because a trade name written two ways is invisible to a',
+      '   string comparison. Report every pair you find.',
+    ],
+    answer: ['currentLatin','acceptedName','isSynonym','duplicateOf','note'],
+    context: ['common', 'cvs'],
+  },
+  peak: {
+    ask: [
+      'Does the flowering/interest window match what RHS gives for UK conditions?',
+      'The card shows Mon-Mon and wraps the year where it needs to (Sep-May is',
+      'September through to the following May).',
+      'A card whose PROSE sells a second season the peak does not cover is worth',
+      'flagging too — "red autumn colour" on a May-Jun peak, for instance.',
+    ],
+    answer: ['currentPeak','rhsPeak','note'],
+    context: ['visual'],
+  },
+  size: {
+    ask: [
+      'Does the ultimate size match RHS, for UK garden conditions rather than native',
+      'range? The card shows "H x W".',
+      'RHS gives bands and a time-to-ultimate-height; a card claiming a 10-year size',
+      'where RHS gives a 20-year one is the common error, so say which you are using.',
+      'Flag anything where the size fights the card\'s own wording — "compact" on a',
+      'plant reaching 4m, for instance.',
+    ],
+    answer: ['currentSize','rhsSize','note'],
+    context: ['visual'],
+  },
+  toxicity: {
+    ask: [
+      'These values are ALREADY on cards and are read out to customers, so this pass',
+      'is about wrongness, not gaps. For each, does the statement match the RHS',
+      '"Potentially harmful" line or the HTA category?',
+      'Flag three things specifically:',
+      ' - anything stated as harmful that no UK source supports',
+      ' - anything a UK source calls harmful that this wording downplays',
+      ' - anything naming an animal or a plant part the source does not name',
+      'Also flag any wording that would MISLEAD a reader even if technically true.',
+    ],
+    answer: ['currentText','verdict','suggestedText','source'],
+  },
+};
+
+if (VERIFY) {
+  if (!field) { console.error('usage: node tools/backfill-field.js <field> --verify [--chunk 50]'); process.exit(2); }
+  const html0 = fs.readFileSync(HTML, 'utf8');
+  const filled = [...D.readDeck(html0), ...D.readHold(html0)]
+    .filter(p => String(p[field] ?? '').trim());
+  if (!filled.length) { console.log('no card carries "' + field + '" — nothing to verify.'); process.exit(0); }
+  const spec = VERIFY_SPEC[field];
+  const ctx = (spec && spec.context) || [];
+  const parts = [];
+  for (let i = 0; i < filled.length; i += CHUNK) parts.push(filled.slice(i, i + CHUNK));
+
+  console.log('### VERIFY ' + field + ' — ' + filled.length + ' card(s) carry a value, ' +
+              parts.length + ' batch(es) of up to ' + CHUNK + '\n');
+  parts.forEach((part, k) => {
+    const bar = '='.repeat(72);
+    console.log(bar);
+    console.log('BATCH ' + (k + 1) + ' OF ' + parts.length + ' — VERIFY ' + field + ' — ' + part.length + ' plants');
+    console.log(bar + '\n');
+    console.log('You are CHECKING one field, "' + field + '", on plants in a UK garden-centre');
+    console.log('card deck. The values below are already printed on cards. Do not rewrite the');
+    console.log('deck and do not research anything else.\n');
+    console.log('THE RULES');
+    console.log('  REPORT DISAGREEMENTS ONLY. Return nothing for a plant you agree with.');
+    console.log('  An empty array is a valid and welcome answer.');
+    console.log('  Never invent. If you cannot find a source, say so in "note" and set the');
+    console.log('  verdict to "unverified" rather than guessing at a correction.');
+    console.log('  UK context: RHS first, then Kew, then the trade.');
+    (spec ? spec.ask : ['(no checking rules recorded for this field — see PLANT-BRIEF.md)'])
+      .forEach(l => console.log('  ' + l));
+    console.log('');
+    console.log('OUTPUT — one JSON array of ONLY the disagreements. Copy each latin EXACTLY as');
+    console.log('given, curly apostrophe and × sign included.\n');
+    const keys=(spec?spec.answer:['current','corrected','note']).map(k=>'"'+k+'":"…"').join(',');
+    console.log('[{"latin":"<exactly as given>",'+keys+',"sources":["…"]}, …]\n');
+    console.log('THE CARDS\n');
+    for (const p of part) {
+      const extra = ctx.map(c => String(p[c] ?? '').trim()).filter(Boolean).map(v => '  [' + v + ']').join('');
+      /* for latin the value IS the name, so printing it twice is noise */
+      const shown = field === 'latin' ? '' : '  =  ' + String(p[field]).replace(/\s+/g, ' ').trim();
+      console.log('  ' + p.latin + shown + extra);
+    }
+    console.log('');
+  });
+  console.error('\n(disagreements come back as a to-do list, not a patch — read them, then fix' +
+                '\n cards by hand or via data/incoming + backfill-field.js --apply --overwrite)');
+  process.exit(0);
 }
 
 /* ---------- --paste: the whole ask, ready for a chat window ----------
