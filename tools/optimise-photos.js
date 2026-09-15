@@ -73,11 +73,40 @@ const isMaster = f => /\.jpg$/i.test(f) && !/-cutout\.png$/i.test(f);
     /* a renamed or dropped card leaves a derivative nothing can reach */
     const want = new Set(masters.map(f => f.replace(/\.jpg$/i, '.webp')));
     if (fs.existsSync(OUT)) for (const f of fs.readdirSync(OUT)) if (!want.has(f)) orphaned.push(f);
+    /* MISSING and ORPHANED are fatal; STALE is not, and the difference is whether
+       the test is sound off this machine.
+
+       Missing and orphaned are answered by fs.existsSync, which means the same
+       thing in every checkout. Stale is answered by comparing mtimes — and git
+       does not preserve mtimes. On a fresh clone every file is stamped with the
+       checkout time, so which of a master and its derivative looks "newer" is
+       arbitrary noise.
+
+       That went unnoticed for as long as this check quietly exited 0 whenever
+       sharp was absent, which is every CI runner. Making the check actually run
+       (2026-09-14, so a photo-less card could not ship green) turned the noise
+       into a hard failure and broke the deploy on the very next push: 300-odd
+       "derivative is older than its master" lines on a tree where nothing was
+       stale at all. The gate did its job — nothing was published — but the gate
+       was wrong.
+
+       So stale now warns. It is still worth printing: in a working tree where
+       the files were really generated the mtimes are real, and "you edited a
+       master and forgot to rebuild" is a thing that happens. It is just not
+       evidence anywhere else, and it is not the failure that ships a broken
+       card. Missing is, and missing stays fatal everywhere. */
     const bad = [...missing.map(f => f + ' has no card derivative'),
-                 ...stale.map(f => f + ' derivative is older than its master'),
                  ...orphaned.map(f => 'photos/card/' + f + ' has no master')];
+    if (stale.length) {
+      console.error(`optimise-photos: ${stale.length} derivative(s) older than their master by mtime.`);
+      console.error('  Not failing on it: git does not preserve mtimes, so this is only');
+      console.error('  meaningful in a tree where the derivatives were actually generated.');
+      console.error('  If you edited a master here, run: node tools/optimise-photos.js');
+      if (stale.length <= 8) stale.forEach(f => console.error('    ' + f));
+    }
     if (bad.length) { bad.forEach(b => console.error('FAIL optimise-photos: ' + b)); process.exit(1); }
-    console.log(`optimise-photos: ${masters.length} masters, every card derivative current`);
+    console.log(`optimise-photos: ${masters.length} masters, every derivative present` +
+                (stale.length ? ` (${stale.length} flagged stale by mtime — see above)` : ''));
     return;
   }
 
