@@ -1205,7 +1205,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r266 · 2026-09-15 · aa4945c';
+const BUILD='r268 · 2026-09-16 · 9495722';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -10756,7 +10756,32 @@ const PLANTS = [
    hardinessNote:"Hardy in most places throughout the UK, approximately -15 to -10°C.",
    foliage:"deciduous; broadly oval, coarsely toothed green leaves",
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:14, careLevel:7, sunNeed:72, sunMin:40},
- ];
+  {common:"Early Stachyurus", latin:"Stachyurus praecox", hue:55,
+   visual:"Drooping chains of pale yellow-green bells hang from bare red-purple shoots",
+   water:"Moderate; water during dry spells",
+   aspect:"East / South / West",
+   soil:"Moist, well-drained; Shelter from cold drying winds",
+   prune:"Prune minimally after flowering if required",
+   source:"",
+   peak:"Feb-Apr",
+   order:"",
+   bench:"",
+   root:"",
+   trade:"",
+   retail:"",
+   margin:"",
+   type:"",
+   shrink:"",
+   returnRisk:"",
+   pots:"",
+   cvs:"syn. Stachyurus japonicus",
+   hardiness:"H5",
+   resilience:"generally pest free · woodland-edge suitable",
+   uses:"woodland gardens · winter interest · shrub borders",
+   size:"2.5–4 m H × 1.5–2.5 m W",
+   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
+   seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:10, careLevel:5, sunNeed:55, sunMin:30},
+];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
    ON HOLD — no photo yet (Oscar, 2026-08-07): these render as leaf-gradient
@@ -10792,31 +10817,6 @@ const PLANTS_ON_HOLD=[
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:9, pestRisk:12, thirst:9, careLevel:6, sunNeed:92, sunMin:72},
 
-  {common:"Early Stachyurus", latin:"Stachyurus praecox", hue:55,
-   visual:"Drooping chains of pale yellow-green bells hang from bare red-purple shoots",
-   water:"Moderate; water during dry spells",
-   aspect:"East / South / West",
-   soil:"Moist, well-drained; Shelter from cold drying winds",
-   prune:"Prune minimally after flowering if required",
-   source:"",
-   peak:"Feb-Apr",
-   order:"",
-   bench:"",
-   root:"",
-   trade:"",
-   retail:"",
-   margin:"",
-   type:"",
-   shrink:"",
-   returnRisk:"",
-   pots:"",
-   cvs:"syn. Stachyurus japonicus",
-   hardiness:"H5",
-   resilience:"generally pest free · woodland-edge suitable",
-   uses:"woodland gardens · winter interest · shrub borders",
-   size:"2.5–4 m H × 1.5–2.5 m W",
-   hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
-   seasonalImpact:"", growthSpeed:7, pestRisk:3, thirst:10, careLevel:5, sunNeed:55, sunMin:30},
 
   {common:"Clematis 'Purpurea Plena Elegans'", latin:"Clematis viticella 'Purpurea Plena Elegans'", hue:290,
    visual:"Double dusky purple-mauve flowers · summer/autumn",
@@ -14340,6 +14340,33 @@ const PHOTO_SWAP={
       'photos/card/rhaphiolepis-delacourii-enchantress-moness-bronze-shoots.webp',
     ],
     focus:'50% 45%',
+    hold:'3.5s',
+  },
+  /* Oscar, 2026-09-16, dealing this card out of the hold block: "two collages of
+     the plant to flash between, younger growth and end of year growth".
+
+     Both frames are Oscar's own two-up composites rather than single exposures —
+     a first for the deck, and it only survives the card because the masters were
+     re-cut to 0.75. A phone collage arrives at 9:16, and the photo window is
+     0.6165 with furniture over the bottom 38%: staged as sent, the autumn pair
+     lost a third of its width to the side crop and the young-growth inset was
+     sliced in half at the right edge. Re-cut, both panels and the inset sit
+     inside the visible zone. The bottom 36% of the autumn collage was the blur
+     its phone app padded the frame with, and is gone — cut, not repainted.
+
+     Why the pair earns the bar above: NEITHER frame shows the catkins. The card's
+     visual line sells "drooping chains of pale yellow-green bells ... on bare
+     red-purple shoots", peak Feb-Apr, and both photographs are honest that they
+     were taken in another season. What they do show is the two states a customer
+     actually meets on a bench for the other ten months, and they disagree on
+     everything except the plant: fresh green leaves on coral-red petioles in
+     hard sun, then the whole shrub gone scarlet and wet against a yellow conifer.
+     Same serrated leaf, same red shoot, opposite ends of the year. A catkin frame
+     would still be the better card and is a March job — see photo-run.js, which
+     files this one under MARCH. */
+  'stachyurus-praecox':{
+    alt:'photos/card/stachyurus-praecox-young-growth.webp',
+    focus:'50% 40%',
     hold:'3.5s',
   },
 };
