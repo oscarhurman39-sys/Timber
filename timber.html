@@ -321,6 +321,9 @@
   .row .ic{width:24px;height:24px;flex:0 0 24px;display:inline-flex;align-items:center;justify-content:center;color:var(--gold)}
   .row .ic svg{width:22px;height:22px;display:block}
   .row small{margin-left:auto;color:var(--leaf1);font-weight:700}
+  /* #liveRow is the only .row that is an <a>; keep it looking like its siblings */
+  a.row{color:inherit;text-decoration:none}
+  a.row small{color:var(--muted);font-weight:600}
   .sheet .foot{margin-top:auto;font-size:12px;color:rgba(255,255,255,.35);line-height:1.5}
 
   /* keep header/fabs clear of the notch & home indicator in installed iOS standalone mode */
@@ -1183,6 +1186,17 @@
     <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v9"/><path d="M8 9.5l4 4 4-4"/><path d="M5 19h14"/></svg></span> Install app</div>
     <div class="row" id="diagRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21 19.5H3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg></span> Report a problem</div>
     <div class="row" id="resetRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg></span> Reset progress</div>
+    <!-- THE LIVE LINK, LAST IN THE PANEL. A full navigation to the site is not the
+         same as the "Update ready" pill's location.reload(): the pill reloads the
+         page you are on, this re-requests the app from its own URL. Oscar's
+         observation, 2026-09-16, is that tapping through to the link is what
+         "lodges the update into effect across the app" after a push. [Inference]
+         a hard navigation is what lets a waiting service worker take control on
+         the next load — the mechanism is not verified here, and no phone-side
+         measurement of it exists in this repo. It is a plain <a> either way, it
+         costs nothing, and it is the one thing in this panel that always fetches
+         the newest shell. rel=noopener because target is a normal navigation. -->
+    <a class="row" id="liveRow" href="https://oscarhurman39-sys.github.io/Timber/" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/><path d="M12 8v4l2.5 2.5"/></svg></span> Open the live app <small id="liveBuild"></small></a>
     <div class="foot">Grow your knowledge, one swipe at a time.<br>v0 prototype · buyer data is your own portfolio. Front = learn layer · double-tap = trade sheet.<br>Keyboard: ← skip · → learned · Backspace undo.<br>Tip: works offline once installed — use your browser's “Add to Home Screen” / “Install app”.<br><span id="buildTag"></span><span id="modeTag"></span></div>
   </div>
 </div>
@@ -1251,7 +1265,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r269 · 2026-09-16 · 67b5197';
+const BUILD='r270 · 2026-09-16 · 0c18539';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -13434,12 +13448,42 @@ const FILTER_DEFS=(()=>{                       /* chip values discovered from PL
        Twelve cards at the time of writing, and it grows as the deck does. */
     {id:'site:bedding',label:'Bedding',test:p=>/\bbedding\b|\bseasonal (?:display|bedding|colour|color)\b|\bwindow box(?:es)?\b|\bhanging basket/i.test([p.uses,p.visual].filter(Boolean).join(' '))},
     {id:'site:shade',label:'Shade',test:p=>{const v=num(p.sunMin);return v!=null&&v<=35;}},
-    /* the `clay` COLUMN, not a keyword read of the soil line. It stays at zero until
-       the research lands, and a chip reading 0 is the honest state of that question —
-       the same thing the order chip has been saying about bench weeks all along. */
-    {id:'site:clay',label:'Heavy clay',test:p=>String(p.clay||'').trim().toLowerCase()==='yes'},
   ];
   defs.push({id:'site',label:'📍 Site',test:kidsUnion(site),kids:site});
+
+  /* ---------- SOIL, Oscar's ask 2026-09-16 ----------
+     "a filter for plants that like sandy soil clay soil boggy wet areas … wet
+     could also be a drop down category in shade as often people have a wet shady
+     area. … acidic or alkaline soil drop down would be good."
+
+     Every one of these reads a COLUMN. Not one of them reads the `soil` line, and
+     that is the whole design, because the soil line cannot answer these questions.
+     Measured 2026-09-16 across all 432 cards: matching "wet" against the prose
+     returns 113; stripping negations the way the drought chip does still leaves 18,
+     and EIGHT of those say the plant dies in wet ground — Heuchera "wet soil rots
+     the crown", Melianthus "cold wet ground is what kills it", Nepeta "rich wet
+     ground makes it flop", Dianthus "waterlogged winter ground rots it". Those are
+     consequences, not negations, and no strip catches them. The filter would have
+     sent someone with a boggy corner home with a lavender.
+
+     So these chips read `sand` / `clay` / `wet` / `ph`, and they sit at 0 until the
+     research lands — exactly what `clay` has been doing since it was added, and the
+     honest state of a question nobody has answered yet. `SOIL-BRIEF.md` is the ask;
+     `node tools/backfill-field.js wet --paste --one` prints it with the plant list.
+
+     DAMP SHADE is the combination Oscar named, and it is the one people describe
+     rather than name: a wet corner that never gets sun. It is `wet` AND the same
+     sunMin<=35 the Shade chip uses, so it can never disagree with its parents. */
+  const soil=[
+    {id:'soil:sand',label:'Sandy · free-draining',test:p=>String(p.sand||'').trim().toLowerCase()==='yes'},
+    {id:'soil:clay',label:'Heavy clay',test:p=>String(p.clay||'').trim().toLowerCase()==='yes'},
+    {id:'soil:wet',label:'Boggy · wet ground',test:p=>String(p.wet||'').trim().toLowerCase()==='yes'},
+    {id:'soil:wetshade',label:'Damp shade',test:p=>{const v=num(p.sunMin);
+      return String(p.wet||'').trim().toLowerCase()==='yes'&&v!=null&&v<=35;}},
+    {id:'soil:acid',label:'Acid · ericaceous',test:p=>/^(acid|any)$/i.test(String(p.ph||'').trim())},
+    {id:'soil:alkaline',label:'Alkaline · chalk',test:p=>/^(alkaline|any)$/i.test(String(p.ph||'').trim())},
+  ];
+  defs.push({id:'soil',label:'🪨 Soil',test:kidsUnion(soil),kids:soil});
 
   /* How the trade sells it. Worth a group of its own rather than a line on the back
      only, because bare-root is a BUYING WINDOW — "what can I order dormant this
@@ -15559,6 +15603,9 @@ if(savedProgress)restoreDeck(savedProgress);else buildDeck();
 updateQuizStats();
 updateReviewMenu();
 document.getElementById('buildTag').textContent='build '+BUILD;
+/* the same number beside the live link, so the panel says what you are ON right
+   before offering the thing that fetches the newest shell */
+document.getElementById('liveBuild').textContent=(String(BUILD).split(' ')[0]||'');  /* the revision only — the full stamp wraps the row onto two lines */
 
 /* ---------- light mode surface + the problem report (menu → Report a problem) ---------- */
 const lightPill=document.getElementById('lightPill');

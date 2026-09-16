@@ -45,6 +45,8 @@ node tools/deal-plant.js "<latin>" photo.jpg   # a photo arrived -> deal that ca
 | File | Purpose |
 |---|---|
 | `PLANT-BRIEF.md` | Paste into ChatGPT/Gemini; produces a plant JSON in our exact schema |
+| `CHATGPT-TOXICITY-BRIEF.md` | The toxicity field, one question across the whole deck |
+| `SOIL-BRIEF.md` | The four soil columns (`sand`/`clay`/`wet`/`ph`) that drive the Soil filters |
 | `tools/check-plant-json.js` | Validates that JSON and prints the row to paste in |
 | `CARD-STATS.md` | Rating scales, hardiness table, compass rule |
 | `CARD-BACK.md` | Card-back spec + per-plant question checklist |
@@ -164,7 +166,8 @@ the repo fork. If they do drift, reconcile back into the repo first, then rebuil
 | 🔍 top right | **Search** — common/latin/cultivar/use, typo-tolerant ("choysia" finds Choisya); exact matches always rank above fuzzy ones. Arrow keys walk results; recently-viewed chips resurface till lookups; info sheets show the plant photo, a 12-month peak strip and a Share button (where supported) |
 | 👥 Show customer | From a search result: big plain-language view with retail price only — safe to hand over |
 | 🔊 next to latin name | Speaks the latin name aloud (built-in speech engine, Italian phonology; no files, works for every plant you add). Hidden on devices without speech support |
-| ☰ menu | Learned count, Dictionary mode, **Quiz mode**, **Review due** (spaced repetition), **My progress** (stats), **Filter deck** chips, Install app, **Report a problem**, Reset progress |
+| ☰ menu | Learned count, Dictionary mode, **Quiz mode**, **Review due** (spaced repetition), **My progress** (stats), **Filter deck** chips, Install app, **Report a problem**, Reset progress, **Open the live app** |
+| ☰ foot | **Open the live app** — a plain link to the hosted URL, last in the panel under every filter. Not the same as the *Update ready* pill: the pill reloads the page you are on, this re-requests the app from its own URL. It carries the build number you are currently running. The panel scrolls (it has since the chip list outgrew a phone), so it is always reachable. |
 
 **Spaced repetition:** every swipe schedules the plant in a Leitner box (`timber-srs-v1`,
 keyed by latin name so it survives deck changes). Learn = box up, next review 1/3/7/16/35
@@ -200,7 +203,31 @@ edge suite exercises the whole path in Chromium.
 
 **Filter deck:** chips discovered from the data at runtime — "In season now" (peak months
 vs today), "Order in next 4 wks" (order week vs current ISO week), type category and
-hardiness. Filters are ephemeral views: swipes update review scheduling but your saved
+hardiness. A **🪨 Soil** group answers the questions asked at a till — *Sandy ·
+free-draining*, *Heavy clay*, *Boggy · wet ground*, *Damp shade*, *Acid · ericaceous*,
+*Alkaline · chalk*.
+
+⚠ **Every soil chip reads a COLUMN (`sand` / `clay` / `wet` / `ph`), never the `soil`
+line, and that is the whole design.** Measured across all 432 cards on 2026-09-16:
+matching "wet" against the soil prose returns 113 cards; stripping negations the way the
+drought chip does still leaves 18, and **eight of those eighteen say the plant dies in wet
+ground** — Heuchera *"wet soil rots the crown"*, Melianthus *"cold wet ground is what kills
+it"*, Nepeta *"rich wet ground makes it flop"*. Those are consequences, not negations, and
+no strip catches them: the filter would send someone with a boggy corner home with a
+lavender. So the chips sit at **0 until the research lands**, which is the honest state of
+a question nobody has answered yet. Fill them with `SOIL-BRIEF.md`:
+
+```sh
+node tools/backfill-field.js wet --paste --one > SOIL-ASK.md   # brief + all 432 names
+# ...paste into a chat window, save the JSON into data/incoming/, then:
+node tools/backfill-field.js sand --apply
+node tools/backfill-field.js clay --apply
+node tools/backfill-field.js wet  --apply
+node tools/backfill-field.js ph   --apply
+```
+
+One brief covers all four columns, so it is one research pass and four applies against the
+same answer file. Filters are ephemeral views: swipes update review scheduling but your saved
 full-deck progress is untouched, and clearing the chip restores the deck exactly.
 
 Progress (learned/skipped/undo history), your best quiz streak, and the boot/report record

@@ -224,6 +224,16 @@ if (VERIFY) {
    is the source of truth; nothing here restates it. */
 const BRIEF = {
   toxicity: 'CHATGPT-TOXICITY-BRIEF.md',
+  /* One brief, four columns. SOIL-BRIEF.md asks for sand / clay / wet / ph in a
+     single pass, so the answer file carries all four keys and --apply is run once
+     per field against the same file. Asking four times over the same 432 plants
+     would be four times the work for the same reading. --paste on any of the four
+     prints the same brief; use `wet`, which is the emptiest and so lists the most
+     plants, and the one the soil prose actually gets backwards. */
+  sand: 'SOIL-BRIEF.md',
+  clay: 'SOIL-BRIEF.md',
+  wet:  'SOIL-BRIEF.md',
+  ph:   'SOIL-BRIEF.md',
 };
 
 const SPEC = {
@@ -280,6 +290,21 @@ const SPEC = {
     'clay is strictly "yes" or "no" — will it grow acceptably on heavy clay?',
     'There is no third answer. Leave it BLANK ("") where there is no sourced statement:',
     'blank already means "not established", and "unknown" is rejected.',
+  ] },
+  sand: { rule: [
+    'sand is strictly "yes" or "no" — will it grow acceptably in a light, sharply',
+    'drained sandy soil? Blank where there is no sourced statement.',
+  ] },
+  wet: { rule: [
+    'wet is strictly "yes" or "no" — will it take ground that is reliably WET or slow',
+    'to drain: a bog margin, a damp corner, heavy ground that sits wet in winter?',
+    'A plant that wants "moist but well-drained" is a NO — that phrase means the',
+    'opposite of this question, and it is the mistake the card prose already makes.',
+  ] },
+  ph: { rule: [
+    'ph must be exactly one of "acid", "alkaline", "any" or blank.',
+    '"any" is a REAL answer and the most common one — most shrubs do not mind — and',
+    'it is not the same as blank. Blank means you could not establish it.',
   ] },
   stockForm: { rule: [
     'stockForm is how the plant is normally SOLD in UK retail. Exactly one of:',

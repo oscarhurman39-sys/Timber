@@ -456,6 +456,49 @@ Focal point recorded here when off-centre:
   messages on the card-build branch still say the old numbers; this note is
   the key.
 
+- **v14.63 (348 dealt / 84 held — THREE SOIL COLUMNS, and a filter group that
+  refuses to guess)**: Oscar, 2026-09-16: *"a filter for plants that like sandy
+  soil clay soil boggy wet areas … wet could also be a drop down category in shade
+  as often people have a wet shady area … acidic or alkaline soil drop down would
+  be good."*
+
+  **`sand`, `wet` and `ph` added to `FIELDS` in `tools/plant-data.js`** (rule 0a,
+  same change), joining `clay`. `ph` is `acid` / `alkaline` / `any` / blank —
+  `any` is a real answer and the commonest one, and is not the same as blank.
+
+  **Every chip reads a COLUMN, never the `soil` line, and the measurement is the
+  reason.** `soil` is prose about texture and drainage, and it is full of what a
+  plant CANNOT take. Across all 432 cards: "wet" matches the prose on **113**;
+  stripping negations the way the drought chip does leaves **18**; and **eight of
+  those eighteen say the plant dies in wet ground** — Heuchera *"wet soil rots the
+  crown"*, Melianthus *"cold wet ground is what kills it"*, Nepeta *"rich wet
+  ground makes it flop"*, Dianthus *"waterlogged winter ground rots it"*. Those are
+  **consequences, not negations**, so the negation strip that saved the drought
+  chip does not see them. A boggy-corner filter built on that prose hands someone a
+  lavender for their bog. Clay is the same shape: 11 prose matches, 6 of them
+  negative.
+
+  So the six chips — Sandy · free-draining, Heavy clay, Boggy · wet ground, Damp
+  shade, Acid · ericaceous, Alkaline · chalk — read `sand` / `clay` / `wet` / `ph`
+  and **sit at 0 until the research lands**, which is what `clay` has done since it
+  was added and the honest state of a question nobody has answered. Damp shade is
+  `wet` AND the same `sunMin<=35` the Shade chip uses, so it can never disagree
+  with its parents. `SOIL-BRIEF.md` is the ask; one brief covers all four columns,
+  so it is one research pass and four `--apply` runs against the same answer file.
+
+  `site:clay` moved to `soil:clay`. Filter ids are in-memory only — nothing
+  persists them — so the rename costs nothing.
+
+  **Also, the live-app link**, last in the menu panel under every filter, carrying
+  the build you are running. Not the same as the *Update ready* pill: the pill
+  reloads the page you are on, this re-requests the app from its own URL. Oscar's
+  observation is that tapping it is what lodges an update across the app after a
+  push; [Inference] a hard navigation is what lets a waiting service worker take
+  control, and that mechanism is not verified here. The panel was already
+  scrollable and measured as such (scrollHeight 1150 against 844, nothing squeezed)
+  — unlike `.backfit` in v14.62, none of its children can be squeezed, so no fix
+  was needed there.
+
 - **v14.62 (348 dealt / 84 held — THE BUYER TRADE SHEET HAS NEVER SCROLLED, and
   half of it was invisible)**: one line of CSS, found by screenshotting a card
   after filling its toxicity field rather than trusting that the value had landed.

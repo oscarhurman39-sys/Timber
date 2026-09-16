@@ -81,7 +81,32 @@ const FIELDS = ['common', 'latin', 'hue', 'visual', 'water', 'aspect', 'soil', '
   // CLAY. `yes` or `no`, blank when not established. `soil` is written as texture
   // and drainage and never as clay tolerance, so "what grows in my clay?" matched
   // 11 cards of 395 by keyword. This is the column that answers it.
-  'clay'];
+  'clay',
+  // SAND, WET, PH — the rest of the soil questions asked at a till, added
+  // 2026-09-16 for the same reason as `clay` and with the same shape: a controlled
+  // value, never a keyword read of the `soil` line.
+  //
+  // The measurement that settled it. `soil` is prose about texture and drainage,
+  // and it is full of what a plant CANNOT take. Matching "wet" against it returns
+  // 113 of 432 cards; stripping negations the way the drought chip does still
+  // leaves 18, and EIGHT of those eighteen say the plant dies in wet ground —
+  // Heuchera "wet soil rots the crown", Melianthus "cold wet ground is what kills
+  // it", Nepeta "rich wet ground makes it flop", Dianthus "waterlogged winter
+  // ground rots it". Those are not negations, they are consequences, and no
+  // negation strip catches them. A boggy-corner filter built on that prose hands
+  // someone a lavender for their bog. So it is a column, and the chip reads 0
+  // until the research lands.
+  //
+  // SAND: `yes` or `no` — does it grow acceptably on a light, sharply drained
+  //   sandy soil? Blank when not established.
+  // WET:  `yes` or `no` — will it take ground that is reliably wet or slow to
+  //   drain: a bog margin, a damp corner, heavy ground that sits wet in winter?
+  //   This is the one a negation-matched keyword filter gets backwards, so blank
+  //   means blank; it never means "probably fine".
+  // PH:   `acid`, `alkaline`, `any`, or blank. `any` is a real and common answer
+  //   and is not the same as blank — most shrubs genuinely do not mind, and the
+  //   card should be able to say so.
+  'sand', 'wet', 'ph'];
 /* Nothing speculative belongs in this list. It is exactly the set of fields that
    exist on cards today, which is what makes the "unknown field" guard meaningful:
    a key not listed here is a mistake worth stopping for, not a column nobody

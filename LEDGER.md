@@ -6,7 +6,41 @@ brick: Send ChatGPT the next batch from `TOXICITY-ASK.md` — **308 of 432** car
   reads as "safe". Batch 1 (25 asked, 9 landed) is in. Regenerate the file first so
   the list is current:
   `node tools/backfill-field.js toxicity --paste --one > TOXICITY-ASK.md`
+  (Queued behind it, same loop, same machinery: `SOIL-ASK.md` fills the four soil
+  columns that light up the new Soil filter group. Don't run both at once — one
+  research thread at a time is what has been working.)
 since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-16 (evening) — **the live link, and a Soil filter group that
+  refuses to guess.** Two asks. The link is last in the menu panel under every
+  filter, carrying the build you are on; it is a plain `<a>` to the hosted URL, not
+  the *Update ready* pill's `location.reload()`. The panel did NOT need making
+  scrollable — measured before changing anything: scrollHeight 1150 against a height
+  of 844, nothing squeezed. Unlike `.backfit` this morning, none of its children can
+  be squeezed, so the same bug is not here.
+  **The filters are the real work, and the answer was a schema change, not a regex.**
+  `sand`, `wet` and `ph` join `clay` in FIELDS (rule 0a, same change), and the six
+  new chips read those COLUMNS, never the `soil` line. Why, measured across 432
+  cards: "wet" matches the soil prose on 113; the drought chip's negation strip
+  leaves 18; and EIGHT of those eighteen say the plant dies in wet ground — Heuchera
+  "wet soil rots the crown", Melianthus "cold wet ground is what kills it", Nepeta
+  "rich wet ground makes it flop". Consequences, not negations, so no strip catches
+  them. That filter would have sent someone with a boggy corner home with a lavender,
+  which in a garden centre is real money and real trust. Clay is the same: 11 matches,
+  6 negative. So the chips sit at 0 (Heavy clay at 2) until `SOIL-ASK.md` comes back
+  — the honest state, and exactly what `clay` has been doing all along. One brief
+  covers all four columns: one research pass, four applies against the same file.
+  `site:clay` became `soil:clay`; filter ids are in-memory only so the rename is free.
+  plants.csv re-exported at 45 columns — verified the diff is the header gaining three
+  names and every one of the 432 rows gaining three empty cells, nothing else.
+  End-to-end: tapping Heavy clay takes the deck 348 -> 2 and clearing restores 348
+  exactly, no page errors. **One thing to know about those 2**: both `clay:"yes"`
+  values (Nandina, Choisya) came in with `research-run.js` at 574cccb, not from a
+  soil pass, and `--apply` never overwrites a value a card already carries — so the
+  new research will ANSWER for them and then skip them. Worth a
+  `backfill-field.js clay --verify` on the pair, or `--apply --overwrite` if the
+  soil pass is trusted over that earlier run. Neither was done here; it is a call
+  about whose research wins, which is Oscar's.
+  Build r270.
 progress: 2026-09-16 (later still) — **the ornamental-fruit flag: decided, and the
   answer is don't touch it.** Oscar left the call to me. `TOX_LADDER` tiers
   "Fruit ornamental · not to be eaten" as **Toxic** with a hazard triangle on 32
