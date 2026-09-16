@@ -4172,7 +4172,29 @@ including why EXIF can't corroborate it (the photos are re-encoded on the way in
 which strips metadata).
 
 
-### 90. `optimise-art.js --check` has both of the faults just fixed in `optimise-photos.js`
+### 90. `optimise-art.js --check` has both of the faults just fixed in `optimise-photos.js` — **CLOSED 2026-09-16**
+
+**Both fixed, in one commit, as this item insisted.** Fault 1: sharp is loaded only
+for the encode path, so the check runs everywhere. Fault 2: MISSING (and the new
+card-shape check) are fatal; STALE prints a loud warning and does not touch the
+exit code, exactly as `optimise-photos` resolved it in `8e250f2`.
+
+Worth recording that the trap in this item is real and was walked into: fault 1 was
+fixed alone earlier the same day, which is precisely the state that turned deploy
+run 98 red with ~300 bogus staleness lines. It was caught before it reached a deploy
+only because closing this item meant re-reading it. Verified by the procedure this
+item specifies, reading node's exit code directly rather than through a pipe:
+every master touched newer than its derivative → warns, **exit 0** (32 flagged);
+one derivative deleted → **exit 1**; a card shape that no longer matches its
+master → **exit 1**.
+
+Still open from the last paragraph of this item, and NOT done: whether anything
+stages an art master without building its derivative. The three plant staging tools
+call `optimise-photos.js --only <file>`; the art path may still need the same wiring.
+
+---
+
+#### Original report (90). `optimise-art.js --check` has both of the faults just fixed in `optimise-photos.js`
 
 Not found by an audit — found by fixing the same two lines in its sibling, and
 then reading across. Pre-existing, not caused by that work, so it was left out
@@ -4218,3 +4240,48 @@ code and proves nothing. That mistake was already made once on the photos versio
 without building its derivative, which is the gap behind item 87. The three plant
 staging tools now call `optimise-photos.js --only <file>`; the art path may need
 the same wiring.
+
+
+### 91. "Fruit ornamental · not to be eaten" tiers as **Toxic**, on 23 cards that are not all the same thing
+
+Oscar asked, 2026-09-16, whether an ornamental-fruit note should keep raising an
+orange hazard flag. **Decision: the ladder is NOT changing, and this is why.**
+
+`TOX_LADDER` tests the negation (`not to be eaten`) before it looks for `edible`,
+so a note with no hazard word in it still lands on `harmful` → the pill reads
+**Toxic** and the card wears a hazard triangle. 32 cards tier that way on a
+negation alone. For `Potentilla fruticosa 'Pink Beauty'` that over-states it: HTA
+places Potentilla under its **ornamental-fruit standard, not category A, B or C**,
+which is a real sourced distinction from the trade body itself.
+
+**But it cannot be fixed from the wording, because the wording does not carry the
+distinction.** A rule keyed on "ornamental" + a fruit word catches 23 of the 32,
+and that list is not one class:
+
+```
+Potentilla · Mahonia · Leycesteria · Fatsia · Hypericum ×2 · Gaultheria ×2
+Lonicera ×2 · Sarcococca ×2 · Viburnum ×2 · Callicarpa · Rosa hips
+     ...alongside...
+Solanum laxum · Ilex aquifolium · Pyracantha ×2 · Berberis · Aucuba · Skimmia
+```
+
+Those last six carry **word-for-word the same note** as Potentilla, and they are
+the genera whose berries are usually described as harmful rather than merely
+inedible. [Inference, from the genus — not checked against a source for these
+cards, which is the point: nothing on the card records it either.] Any rule that
+calms the flag for Potentilla calms it for Solanum too, and the ladder's governing
+principle is that the cautious reading always wins. Over-flagging errs in the safe
+direction; this change would not.
+
+**What would settle it is evidence, not a regex.** The distinction already exists
+in the research: every entry in `data/incoming/toxicity-2026-09-16-batch1.json`
+carries `htaCategory`, and the four ornamental-fruit plants came back blank with
+"HTA places X under the ornamental-fruit standard rather than categories A, B or C"
+in `uncertain`, while the five genuinely harmful ones came back `C`. We have that
+signal for 9 cards and not for the other 23.
+
+**Next step when this is picked up:** `node tools/backfill-field.js toxicity --verify`
+over those 23 names, asking specifically for the HTA category. With a category on
+each, a fifth tier keyed on sourced evidence — not on wording — becomes safe. Adding
+`htaCategory` as a card field would mean adding it to `FIELDS` in
+`tools/plant-data.js` in the same change (rule 0a).

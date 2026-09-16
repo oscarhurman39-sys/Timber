@@ -7,6 +7,35 @@ brick: Send ChatGPT the next batch from `TOXICITY-ASK.md` — **308 of 432** car
   the list is current:
   `node tools/backfill-field.js toxicity --paste --one > TOXICITY-ASK.md`
 since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-16 (later still) — **the ornamental-fruit flag: decided, and the
+  answer is don't touch it.** Oscar left the call to me. `TOX_LADDER` tiers
+  "Fruit ornamental · not to be eaten" as **Toxic** with a hazard triangle on 32
+  cards, and for Potentilla that over-states it — HTA places it under its
+  ornamental-fruit standard, not category A/B/C. But it cannot be fixed from the
+  wording, because the wording does not carry the distinction: a rule keyed on
+  "ornamental" + a fruit word catches 23 cards, and sitting in that list under
+  word-for-word the same note as Potentilla are **Solanum laxum, Ilex aquifolium,
+  Pyracantha ×2, Berberis, Aucuba and Skimmia** — the genera whose berries are
+  usually described as harmful rather than merely inedible. Any rule that calms
+  the flag for one calms it for the other, and over-flagging at least errs the
+  safe way. Written up as VQ 91 with the route that WOULD settle it: the research
+  already carries `htaCategory` (the four ornamental ones came back blank with
+  "ornamental-fruit standard, not A/B/C"; the five harmful ones came back `C`), so
+  a `--verify` pass over those 23 names asking for the category would let a fifth
+  tier key on sourced evidence instead of on keywords.
+  **And closing VQ 90 caught a deploy-breaker I had just created.** That item says
+  optimise-art's two faults MUST be fixed in one commit, because fixing only the
+  first — making the check actually run without sharp — is what turned deploy run
+  98 red with ~300 bogus staleness lines. Earlier today I fixed exactly the first
+  and left `stale` fatal. Git does not preserve mtimes, so on a fresh clone that
+  would have failed the Pages build on ~32 art pairs where nothing is stale. Now
+  matching optimise-photos: MISSING and the card-shape check are fatal, STALE warns
+  and does not touch the exit code. Verified by that item's own procedure, reading
+  node's exit code directly rather than through a pipe — every master touched newer
+  than its derivative → exit 0 with 32 warnings; one derivative deleted → exit 1;
+  a card shape that no longer matches its master → exit 1. VQ 90 closed, one
+  paragraph of it still open (whether anything stages an art master without
+  building its derivative).
 progress: 2026-09-16 (later) — **the buyer trade sheet has never scrolled, and
   half of it was invisible.** Found by screenshotting a card after filling its
   toxicity, instead of trusting the value had landed: the SAFETY plaque showed

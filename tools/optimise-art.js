@@ -117,7 +117,7 @@ function checkShapes() {
   try { sharp = require('sharp'); } catch (e) { /* only the generate path needs it */ }
 
   const pngs = walk(ART).sort();
-  let before = 0, after = 0, written = 0, stale = [];
+  let before = 0, after = 0, written = 0, stale = [], missing = [];
 
   for (const png of pngs) {
     const webp = png.replace(/\.png$/, '.webp');
@@ -129,10 +129,10 @@ function checkShapes() {
     }
 
     if (CHECK) {
-      /* the only thing a check can prove cheaply: the app's .webp exists and is
-         not older than the master it was derived from */
-      if (!fs.existsSync(webp)) stale.push(path.relative(ROOT, webp) + ' missing');
-      else if (fs.statSync(webp).mtimeMs < src.mtimeMs) stale.push(path.relative(ROOT, webp) + ' older than its .png');
+      /* MISSING and STALE are kept apart because they are not equally trustworthy
+         off this machine — see the note at the check below. */
+      if (!fs.existsSync(webp)) missing.push(path.relative(ROOT, webp) + ' missing');
+      else if (fs.statSync(webp).mtimeMs < src.mtimeMs) stale.push(path.relative(ROOT, webp));
       continue;
     }
 
@@ -155,10 +155,37 @@ function checkShapes() {
   }
 
   if (CHECK) {
+    /* MISSING is fatal; STALE is not, and the difference is whether the test is
+       sound off this machine. This is the second of the two faults recorded in
+       VERIFY-QUEUE item 90, and the item is explicit that they have to be fixed
+       together: fixing only the first — making the check actually run without
+       sharp — is what turned deploy run 98 red with ~300 bogus staleness lines on
+       a tree where nothing was stale. It was fixed alone here on 2026-09-16 and
+       this is the same-session correction, before it ever reached the deploy.
+
+       Missing is answered by fs.existsSync, which means the same thing in every
+       checkout, and missing is the failure that ships a card with no artwork.
+       Stale is answered by comparing mtimes, and git does not preserve mtimes: on
+       a fresh clone every file carries the checkout time, so which of a master and
+       its derivative looks newer is arbitrary noise. It is still worth PRINTING —
+       in a working tree where the derivatives were really generated the mtimes are
+       real, and "edited a master, forgot to rebuild" happens — it is just not
+       evidence anywhere else. Same resolution as optimise-photos (commit 8e250f2).
+
+       The shape check joins MISSING as fatal: it reads PNG headers and CSS text,
+       both of which mean the same thing in every checkout. */
     const shapes = checkShapes();
-    const problems = [...stale, ...shapes];
-    if (problems.length) { problems.forEach((s) => console.error('FAIL optimise-art: ' + s)); process.exit(1); }
-    console.log(`optimise-art: every art master has a current .webp, and all ${SHAPES.length} hardcoded card shapes match their masters`);
+    if (stale.length) {
+      console.error(`optimise-art: ${stale.length} derivative(s) older than their master by mtime.`);
+      console.error('  Not failing on it: git does not preserve mtimes, so this is only');
+      console.error('  meaningful in a tree where the derivatives were actually generated.');
+      console.error('  If you repainted a master here, run: node tools/optimise-art.js');
+      if (stale.length <= 8) stale.forEach((f) => console.error('    ' + f));
+    }
+    const bad = [...missing, ...shapes];
+    if (bad.length) { bad.forEach((m) => console.error('FAIL optimise-art: ' + m)); process.exit(1); }
+    console.log(`optimise-art: every art master has a current .webp, and all ${SHAPES.length} hardcoded card shapes match their masters` +
+                (stale.length ? ` (${stale.length} flagged stale by mtime — see above)` : ''));
     return;
   }
 
