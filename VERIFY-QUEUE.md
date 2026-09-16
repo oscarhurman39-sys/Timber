@@ -4280,6 +4280,20 @@ carries `htaCategory`, and the four ornamental-fruit plants came back blank with
 in `uncertain`, while the five genuinely harmful ones came back `C`. We have that
 signal for 9 cards and not for the other 23.
 
+**2026-09-16, batch 2 — the same gap from the other direction.** `Ginkgo biloba`
+arrived as the deck's first **HTA category B**, and it renders as an orange
+**Toxic** — byte-identical in tier to the seven category **C** plants beside it in
+the same batch. The ladder cannot see the difference because the difference is not
+in the words: "Seeds are harmful if eaten by people and toxic to pets" carries no
+`highly toxic` / `fatal` / `deadly`, so it lands on `harmful` and that is a correct
+reading of the sentence.
+
+So the tier ladder now demonstrably under-states one card and over-states
+twenty-three, both for the same reason — it reads wording where the research holds
+a sourced classification. `htaCategory` is in every batch file: A / B / C, blank
+for the ornamental-fruit standard. Two batches in, the spread is 1 B, 12 C and the
+rest ornamental-or-none. That is the column a fifth and a sixth tier would key on.
+
 **Next step when this is picked up:** `node tools/backfill-field.js toxicity --verify`
 over those 23 names, asking specifically for the HTA category. With a category on
 each, a fifth tier keyed on sourced evidence — not on wording — becomes safe. Adding

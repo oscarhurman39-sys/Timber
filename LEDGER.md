@@ -10,6 +10,32 @@ brick: Send ChatGPT the next batch from `TOXICITY-ASK.md` — **308 of 432** car
   columns that light up the new Soil filter group. Don't run both at once — one
   research thread at a time is what has been working.)
 since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-16 (night) — **toxicity batch 2 applied: 11 cards, 124 -> 135
+  carrying a value, 297 blank.** 25 asked, 11 sourced, **14 deliberately blank** —
+  RHS carries no "Potentially harmful" line and HTA has no entry for Indigofera,
+  Phalaenopsis, Lavandula, Acer (x2), Musa, Cornus, Olea, Salvia, Magnolia,
+  Eryngium, Ligularia, Hylotelephium or Cordyline. Two are worth noting as blanks
+  that a lazier pass would have filled: Cornus controversa and Cordyline both
+  produce berries and RHS says so, and neither carries an ornamental-fruit warning,
+  so no warning was inferred from the mere presence of fruit. That is the brief's
+  rule 4 working.
+  **Checked before applying, as ever:** all **25** names matched cards byte-exact —
+  not just the 11 carrying values, because a wrong name on a blank fails silently in
+  a later batch — and five of them carry a macron or a × sign
+  (`Acer palmatum 'Ōsakazuki'`, `Citrus × meyeri`, `× Cuprocyparis leylandii`,
+  `Eryngium × olivierianum`, `Lonicera × purpusii`). No empty `sources`, none over
+  ~140 chars. Every value run through the app's own `toxTier()`: 8 Toxic, 3 Handle
+  with care, 0 Highly toxic. The three ambers are right and worth naming — Paeonia,
+  Leyland cypress and Citrus are skin hazards, not ingestion ones, and the Citrus
+  line ("can harm skin in sunlight") reaches `caution` through "allerg" rather than
+  through "harm", which is the correct reading of a phototoxicity warning.
+  **Ginkgo is the find.** It is the deck's first **HTA category B**, and it tiers as
+  an orange Toxic — identical to the seven category C cards in the same batch. The
+  ladder cannot see the difference because the difference is not in the words. So
+  VQ 91 now has the gap from BOTH directions: the ladder under-states one card and
+  over-states twenty-three, for the same reason. `htaCategory` is in every batch
+  file and is the column a sourced tier would key on. Recorded there, not built.
+  Build r271.
 progress: 2026-09-16 (evening) — **the live link, and a Soil filter group that
   refuses to guess.** Two asks. The link is last in the menu panel under every
   filter, carrying the build you are on; it is a plain `<a>` to the hosted URL, not
