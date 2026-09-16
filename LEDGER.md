@@ -1,14 +1,70 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Paste `TOXICITY-ASK.md` into ChatGPT and send the JSON back — **317 of 432**
-  cards carry no toxicity value, and a blank prints nothing at all, which a customer
-  reads as "safe". Regenerate the file with
-  `node tools/backfill-field.js toxicity --paste --one > TOXICITY-ASK.md`; it is the
-  brief and the current list in one paste, so there is no list to assemble by hand.
-  (Was "the first 50 names in data/incoming/toxicity-todo-2026-09-13.txt" against
-  305 of 392 — that file was a 2026-09-13 snapshot and the deck has moved since.)
-since: 2026-09-13  sessions-unchanged: 1
+brick: Send ChatGPT the next batch from `TOXICITY-ASK.md` — **308 of 432** cards
+  still carry no toxicity value, and a blank prints nothing at all, which a customer
+  reads as "safe". Batch 1 (25 asked, 9 landed) is in. Regenerate the file first so
+  the list is current:
+  `node tools/backfill-field.js toxicity --paste --one > TOXICITY-ASK.md`
+since: 2026-09-13  sessions-unchanged: 0
+progress: 2026-09-16 (later) — **the buyer trade sheet has never scrolled, and
+  half of it was invisible.** Found by screenshotting a card after filling its
+  toxicity, instead of trusting the value had landed: the SAFETY plaque showed
+  "TOXIC" and no prose. `.backfit` is a fixed-height column flex box with
+  `overflow-y:auto`, and `.card.flipped{touch-action:pan-y}` is in the stylesheet
+  expressly to let a finger scroll it — it has never worked. A column flex item
+  defaults to `flex-shrink:1`, so the children were SQUEEZED to fit rather than
+  overflowing; scrollHeight always equalled clientHeight, so there was nothing to
+  scroll to, and the two children with `overflow:hidden` — `.tox` and `.grid` —
+  had their content cut off. Nandina: `.grid` wanted 749px and got 346, `.tox`
+  wanted 79px and got 38. Deck-wide, 92 cards lost part of the buyer sheet (median
+  47px, worst 404px), 52 of them losing safety text; measured the way a person
+  meets it, one card flipped at a time, **31 of the 85 deck cards with a toxicity
+  value showed a truncated warning** — `Digitalis purpurea` Foxy Group among them,
+  whose line is "Highly toxic if eaten; all parts contain cardiac glycosides".
+  Fix: `.backfit>*{flex-shrink:0}`. One line. 85 of 85 now print in full and the
+  sheet has 448px of real scroll range. **18/18 was green through all of it** —
+  `audit-layout` checks the FRONT's ink fits its zones, and `deck-audit` checked
+  the back's DATA (every caption has a value) but never asked whether the rendered
+  block could be SEEN. deck-audit gains both rules now: nothing with
+  `overflow:hidden` may exceed its box, and no `.backfit` child may carry
+  `flex-shrink` other than 0. Proved by deleting the fix and watching 440 errors
+  appear where it had passed. Build r269.
+progress: 2026-09-16 — **toxicity batch 1 applied: 9 cards, 115 -> 124 carrying a
+  value, 308 still blank.** Oscar ran the brief and sent 25 answers back. 9 carried a
+  sourced value and landed; **16 came back deliberately blank** and that is the brief
+  working, not failing — RHS carries no "Potentially harmful" line and HTA has no
+  entry for Choisya, Weigela, Kniphofia, Abelia, Ajuga, Spiraea, Cercis, Salix,
+  Monarda, Carpinus, Elaeagnus, Gunnera or Acer, so a blank is the honest answer and
+  the card prints nothing rather than a hedge. Two were blanked for ambiguity instead:
+  `Salvia 'Blue Spire'` (more than one Salvia carries that epithet) and
+  `Buddleja 'Pugster Orchid'` (identity resolved to 'SMNBDO', no toxicity source).
+  **Checked before applying, not after:** all 25 names matched cards byte-exact, no
+  entry had an empty `sources` array, none exceeded the ~140-character card limit, and
+  every value was run through the app's OWN `toxTier()` in the running page rather
+  than by reading the regexes. Result: 8 Toxic (orange), 1 Handle with care (amber),
+  0 Highly toxic. The case worth the check was `Prunus lusitanica 'Angustifolia'` —
+  "Leaves are harmful if eaten. Ripe fruit is edible…" contains both a hazard word and
+  "edible", and the ladder resolved it to Toxic, which is the cautious reading the
+  TOX_LADDER comment promises.
+  **Open question for Oscar, deck-wide not batch-wide.** Four of the nine (Potentilla
+  'Pink Beauty', Mahonia japonica, Leycesteria 'Golden Lanterns', Fatsia
+  'Tsumugi-shibori') say only "Fruit is ornamental · not to be eaten" and render as an
+  ORANGE **Toxic** flag with a hazard triangle, because the ladder tests the
+  "not to be eaten" negation before it looks for "edible". That is deliberate and it
+  is already how **28 other cards** render, so this batch joins a convention rather
+  than starting one — 32 cards now carry a hazard triangle for inedible ornamental
+  fruit. If that over-states it, the fix is a fifth tier in TOX_LADDER, not an edit to
+  these lines.
+  **Brief fixed from what the answers revealed:** `parts` had no "fruit" value, though
+  the brief's own ornamental-fruit rule produces fruit warnings — three plants came
+  back with `parts:""` for that reason alone, and two dropped the sourced poultry /
+  rabbit / rodent detail from `affects` for the same reason. Both lists widened, and
+  the brief now says outright they are examples, not a closed set: write what the
+  source says and note it. Only `toxicity` reaches the card, but the rest is the
+  evidence a human checks against, and a dropped detail is lost evidence.
+  Pre-existing and still blocking one card: `data/incoming` holds two answers for
+  `Viburnum opulus` that disagree, so the tool skips it. Build r268.
 progress: 2026-09-15 (later — **the deck stops building 13,546 images**, and three
   checks that were lying get fixed) — no cards added; this was the app itself.
   **The card's shared furniture is CSS now, not `<img>`.** Every card wore the

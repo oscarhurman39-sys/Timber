@@ -1,0 +1,180 @@
+[
+  {
+    "latin": "Nandina domestica",
+    "toxicity": "Harmful if eaten by people; also harmful if eaten by dogs and poultry.",
+    "parts": "",
+    "route": "eaten",
+    "affects": "people · dogs",
+    "rhsWording": "Harmful if eaten. Wear gloves and other protective equipment when handling Pets (dogs, poultry): Harmful if eaten. For further information and contact numbers regarding pets, see the HTA guide to potentially harmful plants",
+    "htaCategory": "C",
+    "sources": ["RHS Plant Profile — Nandina domestica", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS and HTA do not identify a specific plant part in the ingestion warning, so parts is blank.", "RHS and HTA also name poultry; poultry is not an available value in the affects schema, so it is retained in the card wording but not the affects field."]
+  },
+  {
+    "latin": "Choisya ternata",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Choisya ternata", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Choisya entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Weigela florida ‘Nana Variegata’",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Weigela florida 'Nana Variegata'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Weigela entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Kniphofia 'Pyromania Orange Blaze'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Kniphofia 'Orange Blaze' (Pyromania Series)", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS lists the matching plant as Kniphofia 'Orange Blaze' (Pyromania Series); its profile carries no Potentially harmful line.", "No Kniphofia entry was found in the HTA guide, so no toxicity statement is made."]
+  },
+  {
+    "latin": "Pennisetum 'Rubrum'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Pennisetum advena 'Rubrum'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["The supplied name omits the species; RHS treats the familiar ornamental cultivar as Pennisetum advena 'Rubrum'.", "The RHS profile carries no Potentially harmful line and no Pennisetum entry was found in the HTA guide."]
+  },
+  {
+    "latin": "Hydrangea macrophylla 'Sweet Cupcake'",
+    "toxicity": "Skin allergen in people; harmful if eaten by dogs and cats.",
+    "parts": "", "route": "skin · eaten", "affects": "people · dogs · cats",
+    "rhsWording": "Skin allergen. Wear gloves and other protective equipment when handling. Pets (dogs, cats): Harmful if eaten. For further information and contact numbers regarding pets, see the HTA guide to potentially harmful plants",
+    "htaCategory": "C",
+    "sources": ["RHS Plant Profile — Hydrangea macrophylla [Sweet Cupcake] (Flair & Favours Series)", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["Neither RHS nor HTA identifies a particular plant part for either warning, so parts is blank."]
+  },
+  {
+    "latin": "Abelia 'Raspberry Profusion'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Abelia 'Raspberry Profusion'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Abelia entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Ajuga reptans 'Burgundy Glow'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Ajuga reptans 'Burgundy Glow'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Ajuga entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Spiraea 'Double Play Doozie'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Spiraea DOUBLE PLAY DOOZIE ('Ncsx2')", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Spiraea entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Potentilla fruticosa 'Pink Beauty'",
+    "toxicity": "Fruit is ornamental · not to be eaten by people or pets.",
+    "parts": "", "route": "eaten", "affects": "people · pets",
+    "rhsWording": "Fruit are ornamental - not to be eaten. Wear gloves and other protective equipment when handling. Pets: Fruit are ornamental - not to be eaten - see the HTA guide to potentially harmful plants for further information and useful contact numbers",
+    "htaCategory": "",
+    "sources": ["RHS Plant Profile — Potentilla fruticosa 'Pink Beauty'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022) — Ornamental fruit standard label"],
+    "uncertain": ["HTA lists Potentilla under its ornamental-fruit standard rather than categories A, B or C.", "The source says fruit, but fruit is not an available parts value in the schema, so parts is blank."]
+  },
+  {
+    "latin": "Cercis chinensis 'Avondale'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Cercis chinensis 'Avondale'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Cercis entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Prunus lusitanica 'Angustifolia'",
+    "toxicity": "Leaves are harmful if eaten. Ripe fruit is edible, but bitter fruit may be harmful; pets can be harmed if they eat it.",
+    "parts": "leaves", "route": "eaten", "affects": "people · pets",
+    "rhsWording": "Leaves harmful if eaten; fruit edible if ripe, but may be harmful if bitter. Wear gloves and other protective equipment when handling Pets (dogs, rabbits, rodents): Harmful if eaten - for further information and contact numbers regarding pets, see the HTA guide to potentially harmful plants",
+    "htaCategory": "C",
+    "sources": ["RHS Plant Profile — Prunus lusitanica 'Pyramidalis', with 'Angustifolia' treated as a synonym", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS treats 'Angustifolia' as a synonym of 'Pyramidalis'.", "HTA gives the broader category C wording 'Humans/Pets: Harmful if eaten' for ornamental-fruiting Prunus, while RHS gives the more specific leaf and fruit distinction; both are represented in the card wording.", "RHS specifically names dogs, rabbits and rodents. Rabbits and rodents are not available affects values in this schema, so the sourced umbrella term pets is used."]
+  },
+  {
+    "latin": "Salvia 'Blue Spire'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Salvia 'Blue Spire' corresponding to the former Perovskia cultivar", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["The bare cultivar name 'Blue Spire' is ambiguous because RHS contains more than one Salvia using that cultivar epithet.", "The likely former Perovskia plant profile carries no Potentially harmful line. HTA entries for other Salvia taxa do not establish a hazard for this plant, so toxicity is blank."]
+  },
+  {
+    "latin": "Mahonia japonica",
+    "toxicity": "Berries are ornamental · not to be eaten by people or pets.",
+    "parts": "berries", "route": "eaten", "affects": "people · pets",
+    "rhsWording": "Berries are ornamental; not to be eaten. Wear gloves and other protective equipment when handling",
+    "htaCategory": "",
+    "sources": ["RHS Plant Profile — Mahonia japonica", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022) — Ornamental fruit standard label under Berberis (syn. Mahonia)"],
+    "uncertain": ["HTA places Mahonia under the ornamental-fruit standard rather than categories A, B or C."]
+  },
+  {
+    "latin": "Leycesteria formosa 'Golden Lanterns'",
+    "toxicity": "Fruit is ornamental · not to be eaten by people or pets.",
+    "parts": "berries", "route": "eaten", "affects": "people · pets",
+    "rhsWording": "Fruit are ornamental - not to be eaten. Wear gloves and other protective equipment when handling Pets: Fruit are ornamental - not to be eaten - see the HTA guide to potentially harmful plants for further information and useful contact numbers",
+    "htaCategory": "",
+    "sources": ["RHS Plant Profile — Leycesteria formosa [Golden Lanterns] ('Notbruce')", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022) — Ornamental fruit standard label"],
+    "uncertain": ["HTA places Leycesteria formosa under the ornamental-fruit standard rather than categories A, B or C.", "The warning says fruit; the RHS genus description identifies the fruit as fleshy berries, so berries is used in parts."]
+  },
+  {
+    "latin": "Buddleja 'Pugster Orchid'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["Valkplant cultivar profile — Buddleja × 'SMNBDO' Pugster Orchid", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["The cultivar was resolved to Buddleja × 'SMNBDO' Pugster Orchid, but no RHS cultivar toxicity profile was found.", "No Buddleja entry was found in the HTA guide. The cultivar source establishes identity but does not provide a sufficiently explicit toxicity statement, so toxicity is blank."]
+  },
+  {
+    "latin": "Salix integra 'Hakuro-nishiki'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Salix integra 'Hakuro-nishiki'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Salix entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Plumbago auriculata",
+    "toxicity": "Skin irritant to people and pets.",
+    "parts": "", "route": "skin", "affects": "people · pets",
+    "rhsWording": "", "htaCategory": "C",
+    "sources": ["HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)", "RHS Plant Profile — Plumbago auriculata f. alba"],
+    "uncertain": ["The exact RHS species profile with a Potentially harmful field was not retrieved, so rhsWording is blank.", "HTA category C gives a genus-level warning of skin irritation for people and pets. The RHS profile for P. auriculata f. alba gives the same skin-irritant warning but adds pet ingestion detail; that extra form-level detail has not been promoted to the species card."]
+  },
+  {
+    "latin": "Euonymus japonicus 'Aureomarginatus'",
+    "toxicity": "Harmful if eaten by people and pets.",
+    "parts": "", "route": "eaten", "affects": "people · pets",
+    "rhsWording": "Humans/Pets: Harmful if eaten; wear gloves and other protective equipment when handling. For further information and contact numbers regarding pets, see the HTA guide to potentially harmful plants",
+    "htaCategory": "C",
+    "sources": ["RHS Plant Profile — Euonymus japonicus 'Aureomarginatus'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["Neither RHS nor HTA identifies a specific plant part in the ingestion warning, so parts is blank."]
+  },
+  {
+    "latin": "Monarda didyma 'Bubblegum Blast'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Monarda didyma 'Bubblegum Blast'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Monarda entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Carpinus betulus",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Carpinus betulus", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Carpinus entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Elaeagnus ×submacrophylla",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Elaeagnus × submacrophylla", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Elaeagnus entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Gunnera manicata",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Gunnera manicata", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS provides taxonomic and invasive-status information for this name but no Potentially harmful toxicity line; legal or invasive status is outside this field.", "No Gunnera entry was found in the HTA guide, so toxicity is blank."]
+  },
+  {
+    "latin": "Acer rubrum 'October Glory'",
+    "toxicity": "", "parts": "", "route": "", "affects": "", "rhsWording": "", "htaCategory": "",
+    "sources": ["RHS Plant Profile — Acer rubrum 'October Glory'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022)"],
+    "uncertain": ["RHS profile carries no Potentially harmful line and no Acer entry was found in the HTA guide; no specific citable toxicity statement was found."]
+  },
+  {
+    "latin": "Fatsia japonica 'Tsumugi-shibori'",
+    "toxicity": "Fruit is ornamental · not to be eaten by people or pets.",
+    "parts": "berries", "route": "eaten", "affects": "people · pets",
+    "rhsWording": "Fruit are ornamental - not to be eaten. Wear gloves and other protective equipment when handling Pets: Fruit are ornamental - not to be eaten - see the HTA guide to potentially harmful plants for further information and useful contact numbers",
+    "htaCategory": "",
+    "sources": ["RHS Plant Profile — Fatsia japonica 'Tsumugi-shibori'", "HTA Guide to Potentially Harmful Plants, 3rd Edition (2022) — Ornamental fruit standard label"],
+    "uncertain": ["RHS lists 'Spider's Web' as a synonym of 'Tsumugi-shibori'.", "HTA places Fatsia under the ornamental-fruit standard rather than categories A, B or C.", "The warning says fruit; the RHS profile identifies these as black berries, so berries is used in parts."]
+  }
+]

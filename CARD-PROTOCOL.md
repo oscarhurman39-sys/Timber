@@ -456,6 +456,48 @@ Focal point recorded here when off-centre:
   messages on the card-build branch still say the old numbers; this note is
   the key.
 
+- **v14.62 (348 dealt / 84 held — THE BUYER TRADE SHEET HAS NEVER SCROLLED, and
+  half of it was invisible)**: one line of CSS, found by screenshotting a card
+  after filling its toxicity field rather than trusting that the value had landed.
+
+  **What was wrong.** `.backfit` — the whole back of the card — is a fixed-height
+  column flex box with `overflow-y:auto`, and `.card.flipped{touch-action:pan-y}`
+  exists in the stylesheet for the express purpose of letting a finger scroll it.
+  It has never scrolled. A column flex item defaults to `flex-shrink:1`, so when
+  the content was taller than the box the CHILDREN were squeezed to fit instead of
+  overflowing. `scrollHeight` therefore always equalled `clientHeight` — there was
+  nothing to scroll to — and the two children carrying `overflow:hidden`, `.tox`
+  and `.grid`, simply had their content cut off.
+
+  Measured on Nandina domestica: `.grid` wanted 749px and was given 346, and `.tox`
+  wanted 79px and was given 38. Across the deck, 92 cards lost part of the buyer
+  sheet (median 47px, worst 404px) and **52 of them lost part of the safety line**.
+  Measured the way a person actually meets it — one card flipped at a time —
+  **31 of the 85 deck cards carrying a toxicity value showed a truncated warning**,
+  including `Digitalis purpurea` Foxy Group, whose line is *"Highly toxic if eaten;
+  all parts contain cardiac glycosides"*. After the fix: 85 of 85 show it in full.
+
+  This is the field the whole toxicity brief exists to fill, printed under a red
+  hazard rule and read aloud across a counter, and it was being silently truncated
+  by a flexbox default. Nothing failed. 18/18 was green the whole time.
+
+  **The fix.** `.backfit>*{flex-shrink:0}`. The children keep their natural height,
+  the overflow becomes real, and `overflow-y:auto` finally has something to do —
+  448px of scroll range on Nandina, with `touch-action:pan-y` already in place to
+  drive it. No other change; the design was right, one default defeated it.
+
+  **The check.** `tests/deck-audit.js` gains two rules, because either alone can
+  pass while the sheet is still broken: no `.backfit` child carrying
+  `overflow:hidden` may have `scrollHeight` beyond its box (content clipped and
+  unreachable), and no `.backfit` child may have `flex-shrink` other than 0 (the
+  structural cause). Proved by deleting the fix and watching the audit raise 440
+  errors where it had passed.
+
+  **Why nothing caught it.** `design/audit-layout.js` checks that ink fits its zones
+  on the FRONT. `deck-audit` read the back's DATA — that every caption has a value —
+  but never asked whether the rendered block could be SEEN. A value can be correct,
+  present in the DOM, and still not reach the person holding the phone.
+
 - **v14.61 (348 dealt / 84 held — THE CARD'S PAINTED FURNITURE BECOMES CSS,
   and the deck stops building 13,546 images)**: no visual change at all — this
   is the same card, drawn the same way, costing a fraction of what it cost.

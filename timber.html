@@ -143,6 +143,21 @@
     background:#0a160e url(art/back-600.webp) center/100% 100% no-repeat;
     padding:26px 24px 22px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
     box-shadow:0 10px 24px rgba(0,0,0,.4)}
+  /* THE TRADE SHEET SCROLLS — THIS IS WHAT MAKES IT ABLE TO.
+     .backfit is a fixed-height column flex box with overflow-y:auto, and
+     `.card.flipped{touch-action:pan-y}` exists to let a finger scroll it. None of
+     that worked, because a column flex item defaults to flex-shrink:1: the children
+     were SQUEEZED to fit instead of overflowing, so scrollHeight always equalled
+     clientHeight and there was never anything to scroll to. What got squeezed was
+     simply clipped, because .tox and .grid both carry overflow:hidden.
+     Measured on Nandina domestica, 2026-09-16, before this line: .grid wanted 749px
+     and was given 346 — over half the buyer sheet invisible AND unreachable — and
+     .tox wanted 79px and was given 38, which cut the safety line, the one block on
+     the card that is read aloud to a customer. 31 of the 85 cards carrying a
+     toxicity value were losing part of it.
+     flex-shrink:0 makes the children keep their natural height, so the overflow is
+     real and overflow-y:auto finally has something to do. */
+  .backfit>*{flex-shrink:0}
   .back-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;
     border-bottom:1px solid rgba(216,189,120,.28);padding-bottom:10px}
   .back-head h3{margin:0;font-size:18px;font-weight:800;letter-spacing:-.3px}
@@ -1236,7 +1251,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r267 · 2026-09-15 · 579c52b';
+const BUILD='r269 · 2026-09-16 · 67b5197';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -1405,6 +1420,7 @@ const PLANTS = [
    resilience:"Drought & pest tolerant",
    uses:"Urban, patio containers",
    size:"1.5–2.5m H × 1–1.5m W",
+   toxicity:"Harmful if eaten by people; also harmful if eaten by dogs and poultry.",
    hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    pollination:"needs partner; berries are unreliable on a lone plant — group several so the flowers cross-pollinate",
@@ -1543,6 +1559,7 @@ const PLANTS = [
    resilience:"Harmful if eaten; sap may irritate · shelter from drying winds",
    uses:"Borders, containers, shaded patios",
    size:"0.8–1m H × 0.9–1.2m W",
+   toxicity:"Skin allergen in people; harmful if eaten by dogs and cats.",
    hardinessNote:"Hardy through a very cold UK winter, withstanding -20 to -15C.",
    seasonalImpact:"", growthSpeed:11, pestRisk:8, thirst:16, careLevel:8, sunNeed:52, sunMin:34},
 
@@ -1647,6 +1664,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"0.5–1 m H × 0.5–1 m W",
+   toxicity:"Fruit is ornamental · not to be eaten by people or pets.",
    hardinessNote:"Very hardy: withstands below -20C, so hardy anywhere in the UK.",
    seasonalImpact:"", growthSpeed:10, pestRisk:2, thirst:8, careLevel:6, sunNeed:72, sunMin:42},
 
@@ -1699,6 +1717,7 @@ const PLANTS = [
    resilience:"",
    uses:"",
    size:"4–8 m H × 4–8 m W",
+   toxicity:"Leaves are harmful if eaten. Ripe fruit is edible, but bitter fruit may be harmful; pets can be harmed if they eat it.",
    hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:12, pestRisk:10, thirst:10, careLevel:8, sunNeed:66, sunMin:30},
@@ -1752,6 +1771,7 @@ const PLANTS = [
    resilience:"Do not eat the berries",
    uses:"",
    size:"1.5–2 m H × 1.5–2.5 m W",
+   toxicity:"Berries are ornamental · not to be eaten by people or pets.",
    hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:8, pestRisk:4, thirst:10, careLevel:6, sunNeed:28, sunMin:0},
@@ -1779,6 +1799,7 @@ const PLANTS = [
    resilience:"Berries ornamental — do not eat",
    uses:"",
    size:"1.5–2 m H × 1.5–2 m W",
+   toxicity:"Fruit is ornamental · not to be eaten by people or pets.",
    hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    seasonalImpact:"", growthSpeed:14, pestRisk:2, thirst:10, careLevel:6, sunNeed:78, sunMin:42},
 
@@ -1857,6 +1878,7 @@ const PLANTS = [
    resilience:"Wear gloves — sap can irritate skin; harmful if eaten",
    uses:"",
    size:"2.5–4 m H × 1–1.5 m W",
+   toxicity:"Skin irritant to people and pets.",
    hardinessNote:"Tender: withstands 1-5C and no frost at all. Outdoors in summer only, or under glass.",
    seasonalImpact:"", growthSpeed:14, pestRisk:10, thirst:12, careLevel:14, sunNeed:94, sunMin:70},
 
@@ -1883,6 +1905,7 @@ const PLANTS = [
    resilience:"Harmful if eaten",
    uses:"",
    size:"0.5–1 m H × 0.5–1 m W",
+   toxicity:"Harmful if eaten by people and pets.",
    hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    foliage:"evergreen",
    seasonalImpact:"", growthSpeed:11, pestRisk:12, thirst:10, careLevel:8, sunNeed:72, sunMin:38},
@@ -2042,6 +2065,7 @@ const PLANTS = [
    resilience:"Ornamental fruits not for eating; some light keeps the white frosting bold",
    uses:"",
    size:"1.5–2.5 m H × 1.5–2.5 m W",
+   toxicity:"Fruit is ornamental · not to be eaten by people or pets.",
    hardinessNote:"Hardy through a cold UK winter, withstanding -15 to -10C.",
    seasonalImpact:"", growthSpeed:6, pestRisk:10, thirst:12, careLevel:10, sunNeed:30, sunMin:5},
 

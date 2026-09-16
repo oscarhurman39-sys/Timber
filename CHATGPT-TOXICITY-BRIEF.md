@@ -76,9 +76,9 @@ Bad:
   {
     "latin": "exactly the name I gave you, unchanged",
     "toxicity": "the line as it will print — or \"\" if unsourced",
-    "parts": "all parts | sap | berries | bulbs | seeds | leaves | hairs | spines | \"\"",
+    "parts": "all parts | sap | berries | fruit | bulbs | seeds | leaves | roots | hairs | spines | \"\"",
     "route": "eaten | skin | eyes | inhaled | mechanical | \"\" (list more than one with ' · ')",
-    "affects": "people | dogs | cats | livestock | pets | \"\" (only what the source states)",
+    "affects": "people | dogs | cats | rabbits | rodents | poultry | horses | livestock | pets | \"\" (only what the source states; 'pets' where the source is general)",
     "rhsWording": "the RHS 'Potentially harmful' text verbatim, or \"\" if the profile carries none",
     "htaCategory": "A | B | C | \"\"",
     "sources": ["name each source actually consulted for THIS plant"],
@@ -103,6 +103,14 @@ Bad:
 - **Ornamental fruit** on a plant that is not otherwise documented as toxic
   gets `Fruit ornamental · not to be eaten` only if a source says the fruit
   should not be eaten. Otherwise blank.
+- **Do not blank a field because the list looks short.** `parts` and `affects`
+  are lists of the values seen so far, not a closed set — 2026-09-16 returned
+  three plants with `parts: ""` because "fruit" was not listed, and two with the
+  poultry / rabbit / rodent detail dropped from `affects` for the same reason,
+  while the sources named all of them. If the source names something the list
+  does not, **write what the source says** and note it in `uncertain`. Only
+  `toxicity` is printed on the card; these fields exist so a human can check
+  where the line came from, and a dropped detail is lost evidence.
 
 ---
 

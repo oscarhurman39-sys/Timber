@@ -65,6 +65,30 @@ const errors = [], warnings = [], known = [];
         blankRatings: ['pestRisk', 'thirst', 'careLevel', 'growthSpeed', 'sunNeed', 'sunMin']
           .filter(f => p[f] === '' || p[f] == null).length,
         sizeH: txt('.rail-h .v').trim(), sizeS: txt('.rail-s .v').trim(),
+        /* THE TRADE SHEET SCROLLS — NOTHING ON IT MAY BE CLIPPED INSTEAD.
+           .backfit is a fixed-height column flex box with overflow-y:auto, and
+           .card.flipped{touch-action:pan-y} exists to let a finger scroll it. A
+           column flex item defaults to flex-shrink:1, which squeezed the children
+           to fit so scrollHeight always equalled clientHeight — nothing to scroll
+           to — and whatever carried overflow:hidden simply lost its content. On
+           2026-09-16 that was .grid losing 403px of the buyer sheet and .tox losing
+           the safety line on 31 of 85 cards. Two rules, because either alone can be
+           satisfied while the sheet is still broken. */
+        backClipped: (() => {
+          const fit = c.querySelector('.backfit');
+          if (!fit) return [];
+          return [...fit.children].filter((el) => {
+            const cs = getComputedStyle(el);
+            return (cs.overflow === 'hidden' || cs.overflowY === 'hidden')
+              && el.scrollHeight > el.getBoundingClientRect().height + 1;
+          }).map((el) => `${(el.className || '').toString().split(' ')[0] || el.tagName.toLowerCase()} loses ${Math.round(el.scrollHeight - el.getBoundingClientRect().height)}px`);
+        })(),
+        backCanShrink: (() => {
+          const fit = c.querySelector('.backfit');
+          if (!fit) return '';
+          return [...fit.children].filter((el) => getComputedStyle(el).flexShrink !== '0')
+            .map((el) => (el.className || '').toString().split(' ')[0] || el.tagName.toLowerCase()).join(', ');
+        })(),
         /* a caption with nothing under it reads as broken, not as "not entered yet" */
         orphanCells: [...c.querySelectorAll('.back .g, .back .cell')]
           .filter(e => !((e.querySelector('.n') || {}).textContent || '').trim())
@@ -118,6 +142,10 @@ const errors = [], warnings = [], known = [];
     /* the trade sheet must omit a field it has no value for, never print a bare caption */
     if (c.orphanCells.length)
       err(c, 'orphan-trade-cells', `${c.orphanCells.length} caption(s) with no value: ${c.orphanCells.join(', ')}`);
+    if (c.backClipped && c.backClipped.length)
+      err(c, 'back-content-clipped', c.backClipped.join('; ') + ' — clipped, and not reachable by scrolling');
+    if (c.backCanShrink)
+      err(c, 'back-child-can-shrink', `${c.backCanShrink} — a .backfit child with flex-shrink:1 is squeezed to fit instead of overflowing, so the sheet never scrolls`);
 
     /* soft: honest gaps, reported not enforced */
     if (!c.photoOk && !c.fullart) warn(c, 'photo-missing', 'card falls back to its leaf gradient');
