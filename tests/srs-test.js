@@ -6,8 +6,8 @@ const NPLANTS = require('../tools/plant-data.js')
    them made the rest fail for the wrong reason. */
 
 const URL = 'http://localhost:8477/timber.html';
-/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
-   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+/* the deal is synchronous now (timber.html dealCards deals shells), so this resolves at
+   once; kept so every suite waits on the same signal if a staged deal ever returns */
 const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 let passed = 0, failed = 0;
 const failures = [];

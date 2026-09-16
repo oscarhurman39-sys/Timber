@@ -6,8 +6,8 @@ const NPLANTS = require('../tools/plant-data.js')
    them made the rest fail for the wrong reason. */
 
 const URL = 'http://localhost:8477/timber.html';
-/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
-   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+/* the deal is synchronous now (timber.html dealCards deals shells), so this resolves at
+   once; kept so every suite waits on the same signal if a staged deal ever returns */
 const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 let passed = 0, failed = 0;
 const failures = [];
@@ -71,7 +71,10 @@ const answerRound = (page, correctly) => page.evaluate(right => {
      deck; the deck is reset to fresh afterwards so nothing below sees the skips. */
   const toSkip = await page.evaluate(() => {
     const live = [...document.querySelectorAll('#deck .card:not([data-gone])')];
-    const fromTop = live.map((c, i) => c.querySelector('.tphoto.swap') ? live.length - 1 - i : Infinity);
+    /* by DATA, not by DOM: a buried card is a shell (timber.html dealCards) with no
+       .tphoto to query, so the nearest two-photo card is found from PHOTO_SWAP */
+    const isSwap = c => !!PHOTO_SWAP[slugLatin(PLANTS[+c.dataset.idx].latin)];
+    const fromTop = live.map((c, i) => isSwap(c) ? live.length - 1 - i : Infinity);
     const nearest = Math.min(...fromTop);
     return Number.isFinite(nearest) ? Math.max(0, nearest - FETCH_DEPTH + 1) : 0;
   });
@@ -85,7 +88,8 @@ const answerRound = (page, correctly) => page.evaluate(right => {
     const near = live.slice(-FETCH_DEPTH);
     const swaps = near.filter(c => c.querySelector('.tphoto.swap'));
     const bad = swaps.filter(c => [...c.querySelectorAll('.tphoto img')].some(i => !i.getAttribute('src')));
-    return { total: document.querySelectorAll('.tphoto.swap').length, near: swaps.length,
+    const isSwap = c => !!PHOTO_SWAP[slugLatin(PLANTS[+c.dataset.idx].latin)];
+    return { total: live.filter(isSwap).length, near: swaps.length,
              bad: bad.map(c => c.querySelector('h2')?.textContent) };
   });
   check('deck has at least one two-photo card to test', swapLoad.total >= 1, JSON.stringify(swapLoad));
