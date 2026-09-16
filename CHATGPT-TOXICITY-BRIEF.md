@@ -1,4 +1,10 @@
-# Timber — Toxicity Research Brief (paste this whole file, then paste the plant list)
+# Timber — Toxicity Research Brief
+
+<!-- Do not paste this file by hand with a list copied from somewhere else.
+     `node tools/backfill-field.js toxicity --paste --one > TOXICITY-ASK.md`
+     prints this brief VERBATIM with the current plant list appended, as one
+     file. The list is read from timber.html at that moment, so it cannot be
+     stale and cannot miss a card added since. -->
 
 You are researching the **toxicity** of plants sold in a UK garden centre, for
 **Timber**, a card app that garden-centre staff read out to customers. Each

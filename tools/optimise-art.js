@@ -59,14 +59,62 @@ function walk(dir) {
   });
 }
 
-(async () => {
-  let sharp;
-  try { sharp = require('sharp'); }
-  catch (e) {
-    if (CHECK) { console.log('optimise-art: sharp not installed — skipping check'); process.exit(0); }
-    console.error('optimise-art needs sharp:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)');
-    process.exit(2);
+/* Read a PNG's pixel dimensions from its IHDR header — 24 bytes, no decoder and
+   no dependency. Used by the shape check below, which has to run on machines
+   without sharp (which is all of them here) or it is not a check. */
+function pngSize(file) {
+  const b = Buffer.alloc(24);
+  const fd = fs.openSync(file, 'r');
+  try { fs.readSync(fd, b, 0, 24, 0); } finally { fs.closeSync(fd); }
+  if (b.toString('ascii', 12, 16) !== 'IHDR') return null;
+  return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+}
+
+/* THE CARD'S CSS HARDCODES THE SHAPE OF THIS ARTWORK.
+   Since CARD-PROTOCOL v14.61 the shared card furniture is drawn with
+   background-image rather than <img>, which took away the one thing an <img>
+   gave for free: the element's height, derived from the file. Those ratios are
+   written into timber.html as `aspect-ratio` now, so a master that gets
+   re-cropped no longer moves the layout — it DISTORTS the artwork inside a box
+   that is still the old shape, on every card, silently.
+   This maps each hardcoded ratio back to the master it was taken from. */
+const SHAPES = [
+  ['crest-blank',     /\.crest\{[^}]*?aspect-ratio:(\d+)\/(\d+)/s],
+  ['plaque-full',     /\.plaque\{[^}]*?aspect-ratio:(\d+)\/(\d+)/s],
+  ['soil-full',       /\.soilp\{[^}]*?aspect-ratio:(\d+)\/(\d+)/s],
+  ['band-full',       /\.band\{[^}]*?aspect-ratio:(\d+)\/(\d+)/s],
+  ['growth-diamond',  /\.growth \.mk\{[^}]*?aspect-ratio:(\d+)\/(\d+)/s],
+  ['widget-drop-out',  /\.ricon-drop\{--w-ar:(\d+)\/(\d+)/],
+  ['widget-seca-out',  /\.ricon-seca\{--w-ar:(\d+)\/(\d+)/],
+  ['widget-spray-out', /\.ricon-spray\{--w-ar:(\d+)\/(\d+)/],
+];
+
+function checkShapes() {
+  const html = fs.readFileSync(path.join(ROOT, 'timber.html'), 'utf8');
+  const bad = [];
+  for (const [name, re] of SHAPES) {
+    const master = path.join(ART, name + '.png');
+    if (!fs.existsSync(master)) { bad.push(`${name}.png missing — nothing to check the CSS shape against`); continue; }
+    const m = re.exec(html);
+    if (!m) { bad.push(`no aspect-ratio found in timber.html for ${name} — did the rule get renamed?`); continue; }
+    const size = pngSize(master);
+    if (!size) { bad.push(`${name}.png is not a readable PNG`); continue; }
+    if (+m[1] !== size.w || +m[2] !== size.h)
+      bad.push(`${name}.png is ${size.w}x${size.h} but timber.html draws it at aspect-ratio:${m[1]}/${m[2]} — the art would stretch`);
   }
+  return bad;
+}
+
+(async () => {
+  /* SHARP IS NOT NEEDED TO CHECK, ONLY TO BUILD. This used to `process.exit(0)`
+     the moment require('sharp') threw, so --check printed nothing and passed on
+     every machine without sharp — which is every machine that runs the gate here.
+     tests/run-all.js reported "every art master has a current .webp derivative"
+     while proving no such thing. That is the same shape of bug as the
+     optimise-photos one that shipped five blank cards, and the same fix: the
+     check path below is pure fs, so it runs first and on its own. */
+  let sharp = null;
+  try { sharp = require('sharp'); } catch (e) { /* only the generate path needs it */ }
 
   const pngs = walk(ART).sort();
   let before = 0, after = 0, written = 0, stale = [];
@@ -107,9 +155,16 @@ function walk(dir) {
   }
 
   if (CHECK) {
-    if (stale.length) { stale.forEach(s => console.error('FAIL optimise-art: ' + s)); process.exit(1); }
-    console.log('optimise-art: every art master has a current .webp');
+    const shapes = checkShapes();
+    const problems = [...stale, ...shapes];
+    if (problems.length) { problems.forEach((s) => console.error('FAIL optimise-art: ' + s)); process.exit(1); }
+    console.log(`optimise-art: every art master has a current .webp, and all ${SHAPES.length} hardcoded card shapes match their masters`);
     return;
+  }
+
+  if (!sharp) {
+    console.error('optimise-art needs sharp to BUILD derivatives:  npm i -g sharp   (then run with NODE_PATH=/opt/node22/lib/node_modules)');
+    process.exit(2);
   }
   console.log(`\n${written} files: ${(before / 1024 / 1024).toFixed(1)} MB -> ${(after / 1024 / 1024).toFixed(2)} MB  (${(100 - after / before * 100).toFixed(1)}% smaller)`);
 })();

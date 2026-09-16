@@ -134,12 +134,22 @@ To share Timber as one file with no server — a Claude Artifact, an email attac
 build it:
 
 ```sh
-node tools/build-standalone.js        # -> dist/timber-standalone.html (~3.7MB)
+node tools/build-standalone.js        # -> dist/timber-standalone.html
+node tools/build-standalone.js --check   # ~0.1s: can the build still find everything it substitutes?
 ```
 
 That re-encodes `art/` and `photos/` to WebP and inlines every one of them as a `data:` URI, so the
-output has no external requests at all. **Always publish the build output, never a hand-edited
-copy** — the repo is the source of truth, and editing a published copy directly is how the app and
+output has no external requests at all.
+
+⚠ **It is 41MB at deck 348** (3.95MB of art + 35.07MB of photographs), against the ~3.7MB this
+section used to quote from deck 47 and the tool's own 9.5MB warning. That is no longer an email
+attachment. Lowering `PHOTO_WIDTH` (760) or `Q_PHOTO` (0.80) in the tool is the lever, but both
+are judgements about the photographs, so neither has been touched. **The build also could not run
+at all until 2026-09-15** — it re-implemented the deck parsing instead of using
+`tools/plant-data.js` (CARD-PROTOCOL rule 0b) and broke whenever the deck's closing bracket picked
+up a leading space. `--check` is in `run-all --fast` now so that cannot go unnoticed again.
+
+**Always publish the build output, never a hand-edited copy** — the repo is the source of truth, and editing a published copy directly is how the app and
 the repo fork. If they do drift, reconcile back into the repo first, then rebuild.
 
 ## How it works
@@ -208,6 +218,12 @@ state; adding or changing plants in `PLANTS` automatically starts a fresh deck.
   masters by `tools/optimise-art.js` and `tools/optimise-photos.js`. Re-run the matching tool
   after repainting artwork or adding a photo — `run-all --fast` fails if a derivative is
   missing or older than its master.
+- **The card's shared artwork is drawn in CSS, not as `<img>`.** The plaque, soil panel,
+  band, crest, spine patches, sun pip, growth diamond and the fifteen rating widgets are
+  the same painting on every card, so they are `background-image` (the pattern `.wisp`
+  has always used). Only the **photograph** is an image element. Putting one back costs
+  38 `<img>` per card — at deck 348 that was 13,546 image elements against 360 now — and
+  `tests/perf-test.js` fails if any reappears. See CARD-PROTOCOL v14.61.
 - `tools/build-standalone.js` — inlines those assets into `dist/timber-standalone.html`, the
   single-file build to publish. Not needed for local development.
 - `sw.js` — service worker (offline app-shell cache when hosted).

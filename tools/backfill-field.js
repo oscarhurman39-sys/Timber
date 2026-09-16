@@ -11,6 +11,8 @@
     node tools/backfill-field.js foliage --paste            ready-to-paste research prompt
     node tools/backfill-field.js hardiness --verify         CHECK the values already on cards
     node tools/backfill-field.js foliage --paste --chunk 40 smaller batches (default 50)
+    node tools/backfill-field.js toxicity --paste --one     ONE list, brief included, markdown
+        > TOXICITY-ASK.md                                   — the whole ask as a single file
 
   The round trip a flat research pass takes:
 
@@ -61,6 +63,11 @@ const MISSING = argv.includes('--missing');
 const PASTE = argv.includes('--paste');
 const VERIFY = argv.includes('--verify');
 const CHUNK = Math.max(1, Number(argv[argv.indexOf('--chunk') + 1]) || 50);
+/* --one: every blank card in a single list instead of batches. Whether that is a
+   good idea depends on the field's brief: CHATGPT-TOXICITY-BRIEF.md already tells
+   the model to answer in replies of 25, so one paste in does not mean one reply
+   back, and the batching lands where it belongs — on the ANSWER, not the ask. */
+const ONE = argv.includes('--one');
 const OVERWRITE = argv.includes('--overwrite');
 const PREFER = (argv[argv.indexOf('--prefer') + 1] || '') === 'longest' && argv.includes('--prefer');
 const field = argv.find(a => !a.startsWith('--') && a !== 'longest');
@@ -210,11 +217,22 @@ if (VERIFY) {
    already enforces or PLANT-BRIEF.md already states. If a validator rule changes,
    change it here too, or the research comes back failing the check it was written
    to pass. */
+/* A field can have a full brief written for it. When one exists, --paste prints it
+   VERBATIM at the top of the output instead of telling you to go and paste it
+   yourself — that instruction was the whole friction, and a brief that has to be
+   assembled by hand every time is a brief that gets pasted half the time. The file
+   is the source of truth; nothing here restates it. */
+const BRIEF = {
+  toxicity: 'CHATGPT-TOXICITY-BRIEF.md',
+};
+
 const SPEC = {
+  /* Only reached if CHATGPT-TOXICITY-BRIEF.md has gone missing — normally the brief
+     itself is printed instead of this, see BRIEF above. */
   toxicity: { rule: [
-    'PASTE CHATGPT-TOXICITY-BRIEF.md FROM THIS REPO ABOVE THIS LIST. It is the full',
-    'brief for this field and carries the source order, the tier keyword table and the',
-    'worked traps. What follows is only the plant list for one batch.',
+    'CHATGPT-TOXICITY-BRIEF.md is missing from this repo. It carries the source order,',
+    'the tier keyword table and the worked traps, and this list is not a substitute for',
+    'it. Restore the file before running the research pass.',
   ] },
   compliance: { rule: [
     'compliance is about the LAW, not health. For each plant, does any of these apply,',
@@ -300,11 +318,49 @@ if (PASTE) {
     .filter(p => p[field] === undefined || String(p[field]).trim() === '');
   if (!blank.length) { console.log('nothing blank: every card already carries "' + field + '".'); process.exit(0); }
   const spec = SPEC[field];
+  const size = ONE ? blank.length : CHUNK;
   const parts = [];
-  for (let i = 0; i < blank.length; i += CHUNK) parts.push(blank.slice(i, i + CHUNK));
+  for (let i = 0; i < blank.length; i += size) parts.push(blank.slice(i, i + size));
+
+  /* ---- a field with a written brief: emit the brief AND the list as one document ----
+     The brief goes out verbatim — it is the source of truth for this field and
+     nothing here paraphrases it. The names follow one per line, which is the shape
+     CHATGPT-TOXICITY-BRIEF.md asks for, inside a fenced block so a curly apostrophe
+     or a × survives the round trip through a chat window. `latin` is the only thing
+     --apply matches on, so a name that comes back retyped silently fails to land. */
+  const briefFile = BRIEF[field] ? path.join(ROOT, BRIEF[field]) : null;
+  const brief = briefFile && fs.existsSync(briefFile) ? fs.readFileSync(briefFile, 'utf8').trimEnd() : null;
+  if (brief) {
+    console.log(brief);
+    console.log('');
+    console.log('---');
+    console.log('');
+    /* NOT "THE PLANT LIST" — the brief already has a section under that name, which
+       is the instructions ABOUT the list. This heading is the list itself. */
+    console.log('# THE ' + blank.length + ' PLANTS — one latin name per line');
+    console.log('');
+    console.log('Generated from `timber.html` on ' + new Date().toISOString().slice(0, 10) +
+                ' — ' + blank.length + ' of ' + (D.readDeck(html0).length + D.readHold(html0).length) +
+                ' cards (dealt and held together) carry no `' + field + '`.');
+    console.log('Copy each name EXACTLY, including any curly apostrophe or × sign.');
+    console.log('');
+    parts.forEach((part, k) => {
+      if (parts.length > 1) {
+        console.log('## Batch ' + (k + 1) + ' of ' + parts.length + ' — ' + part.length + ' plants');
+        console.log('');
+      }
+      console.log('```');
+      part.forEach(p => console.log(p.latin));
+      console.log('```');
+      console.log('');
+    });
+    console.error('\n(save the answer into data/incoming/ then: node tools/backfill-field.js ' +
+                  field + ' --apply)');
+    process.exit(0);
+  }
 
   console.log('### ' + field + ' — ' + blank.length + ' card(s) blank, ' + parts.length +
-              ' batch(es) of up to ' + CHUNK + '\n');
+              ' batch(es) of up to ' + size + '\n');
   parts.forEach((part, k) => {
     const bar = '='.repeat(72);
     console.log(bar);

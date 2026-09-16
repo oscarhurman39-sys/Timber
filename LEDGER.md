@@ -1,10 +1,71 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Run `CHATGPT-TOXICITY-BRIEF.md` over the first 50 names in
-  `data/incoming/toxicity-todo-2026-09-13.txt` and send the JSON back — 305 of 392
-  cards have a blank toxicity field, and blank renders identically to "safe".
-since: 2026-09-13  sessions-unchanged: 0
+brick: Paste `TOXICITY-ASK.md` into ChatGPT and send the JSON back — **317 of 432**
+  cards carry no toxicity value, and a blank prints nothing at all, which a customer
+  reads as "safe". Regenerate the file with
+  `node tools/backfill-field.js toxicity --paste --one > TOXICITY-ASK.md`; it is the
+  brief and the current list in one paste, so there is no list to assemble by hand.
+  (Was "the first 50 names in data/incoming/toxicity-todo-2026-09-13.txt" against
+  305 of 392 — that file was a 2026-09-13 snapshot and the deck has moved since.)
+since: 2026-09-13  sessions-unchanged: 1
+progress: 2026-09-15 (later — **the deck stops building 13,546 images**, and three
+  checks that were lying get fixed) — no cards added; this was the app itself.
+  **The card's shared furniture is CSS now, not `<img>`.** Every card wore the
+  plaque, soil panel, band, crest, two spine patches, sun pip, growth diamond and
+  fifteen rating widgets as 38 image elements — for 15 distinct files, identical on
+  345 of the 348 cards. Measured at 390x844 @2x, before -> after:
+  `<img>` 13,546 -> 360 · DOM nodes 68,593 -> 50,896 · deck settled 3,820ms ->
+  1,689ms · FCP 640ms -> 372ms. This matters because the `DECK_CAP` note measured
+  ~326MB of renderer memory at 168 cards / 31k nodes / 6.3k images, and the deck
+  had since doubled past all three — the app was heading TOWARD the ceiling two
+  iPhones already hit. [Unverified] whether it clears that crash; no WebKit engine
+  here, same as ever. What is verified is that the axis the note blamed is a
+  quarter of what it was.
+  **Honest about the pixels:** all 348 cards were shot before and after (via the
+  app's own `cutUnder()`, animations frozen) and **347 differ**. Everything except
+  the rating widgets is byte-identical — plaque, crest, band, soil, spine, diamond
+  all came out clean, which is what the `::before` + `aspect-ratio` care was for.
+  The widgets differ on 0.43% of card pixels, mean delta 38, tracing the
+  anti-aliased outlines. It is NOT geometry: every `.ricon` matches before/after to
+  three decimals on x, width, height and `--fill`, on the card and in the lens. The
+  card carries a non-uniform transform (sx 0.890, sy 0.997) and a 33x50 master
+  resampled into a ~10.6x18 box lands its edges differently as a background than as
+  an image; `background-size:100% 100%` and `auto 100%` give byte-identical output,
+  so it is not a sizing choice that can be tuned away. At 10x zoom the half-filled
+  drop is the same drop, same outline weight, same fill boundary. Oscar's call on
+  his own artwork — crops were produced, not just numbers.
+  **Three checks were passing without checking.** (1) `optimise-art --check`
+  `process.exit(0)`'d the instant `require('sharp')` threw, and sharp is on no
+  machine that runs the gate — so run-all printed "every art master has a current
+  .webp derivative" while proving nothing, through every deploy. Its check path is
+  pure `fs`. Exactly the `optimise-photos` twin recorded this morning; same fix.
+  (2) `tools/build-standalone.js` **could not build at all** — it re-implemented the
+  deck parsing with `/const PLANTS = \[[\s\S]*?\n\];/` against CARD-PROTOCOL rule
+  0b, and the deck's closing bracket carries a leading space (` ];`), so the lazy
+  match ran ~3,000 lines past the array into live code and the eval died on
+  `document is not defined`. Intermittently broken for days — it flips with whichever
+  writer last touched the block — and nobody found out because nobody built. Now uses
+  `readDeck()`. (3) The build neutered the WRONG service worker guard: there are two
+  `if('serviceWorker' in navigator` blocks, `String.replace` takes the first, so it
+  killed the harmless update-pill listener and shipped `serviceWorker.register('./sw.js')`
+  **live** in the standalone — the "stale worker is an active hazard" that step exists
+  to prevent. Found by reading the built file, not the log.
+  **New guards, each proved by breaking it first:** `optimise-art --check` now also
+  maps all 8 hardcoded card `aspect-ratio`s back to their PNG masters (reading IHDR
+  directly, no image library) — because a background does not derive its own height,
+  so a re-cropped master would now STRETCH the art silently instead of moving the
+  layout. `build-standalone --check` resolves every literal anchor the build
+  substitutes, in ~0.1s, and fails an anchor that appears twice; it is in run-all
+  --fast now, so the gate is 18 checks. `perf-test` gains the structural invariant:
+  no `art/` image outside a card's photo frame, and every card `<img>` must be its
+  photograph.
+  **Open, for Oscar:** the standalone now builds — 348/348 photos inlined — at
+  **41.09MB**, against the tool's own 9.5MB warning and the 3.7MB the README still
+  quotes from deck 47. It is no longer emailable. Lowering `PHOTO_WIDTH` (760) or
+  `Q_PHOTO` (0.80) is a quality call on the photographs, so nothing was changed.
+  Build r267. Gate green. NOT deployed — this sits on
+  `claude/eloquent-cannon-9axr1g`; publishing is a fast-forward of the live branch.
 progress: 2026-09-15 (Kousa duplicate resolved, deck deployed) — **deck 348, hold
   84.** Oscar went through the deck and called it: the plain
   `Cornus kousa 'Flower Tower'` card had the worse photograph, so it is gone and

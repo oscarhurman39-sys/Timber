@@ -456,6 +456,136 @@ Focal point recorded here when off-centre:
   messages on the card-build branch still say the old numbers; this note is
   the key.
 
+- **v14.61 (348 dealt / 84 held — THE CARD'S PAINTED FURNITURE BECOMES CSS,
+  and the deck stops building 13,546 images)**: no visual change at all — this
+  is the same card, drawn the same way, costing a fraction of what it cost.
+
+  **What was wrong.** Every card wore its shared artwork as `<img>` elements:
+  the parchment plaque, the soil panel, the aspect band, the hardiness crest,
+  the two spine patches, the sun pip, the growth diamond, and fifteen rating
+  widgets built from an outline image and a wider fill image clipped by a
+  wrapper span. That is **38 image elements per card for 15 distinct files**.
+  Measured on the live deck at 348 cards, 390x844 @2x:
+
+  | | before | after |
+  |---|---|---|
+  | `<img>` elements in the document | 13,546 | 360 |
+  | DOM nodes | 68,593 | 50,895 |
+  | deck settled (wall clock) | 3,820 ms | 1,689 ms |
+  | first contentful paint | 640 ms | 372 ms |
+
+  345 of the 348 cards carried a byte-identical set of those 38 images. The
+  artwork was never per-card; only the photograph is.
+
+  **Why it mattered.** `DECK_CAP` in `timber.html` records the reason light mode
+  exists: two different iPhones hit Safari's *"A problem repeatedly occurred"* on
+  the full deck, and the note beside it measured the cost at **~326 MB of
+  renderer memory with 168 cards, 31k nodes and 6.3k `<img>`**. The deck has
+  since more than doubled — 68.6k nodes and 13.5k `<img>` when this change
+  started — so the app was travelling toward that ceiling, not away from it.
+  [Unverified] whether this stops the iPhone kill; no WebKit engine exists in
+  the build environment and that has not changed. What IS verified is that the
+  thing the note blamed — size — is now a quarter of what it was on the axis
+  that grew fastest.
+
+  **What was built.** The artwork moved into the stylesheet, which is what
+  `.wisp` has always done (`<i>` + `background-image`), so this follows an
+  existing convention rather than inventing one:
+
+  - **Rating icons.** `.ricon` is one span. The outline is its background and
+    sets the box via `aspect-ratio` (the in-flow `<img>` used to do that); the
+    fill is `::after`, whose width does the clipping `.fillwrap`'s `overflow`
+    did. The two halves are NOT the same shape — the fill is a wider drawing —
+    so `background-size:auto 100%` reproduces the original exactly: drop
+    33x50 out against 35x50 fill, seca 39x103 / 42x104, spray 42x80 / 42x82.
+    Four elements became one, fifteen times per card.
+  - **Plaque, soil panel, band.** Painted on `::before`, **not** on the element.
+    `.tcard.edition` gives `.plaque` and `.soilp` a `border-radius`, and a
+    border-radius **clips a background** while it never clipped the in-flow
+    `<img>` — putting the art on the element itself would have quietly rounded
+    the panel corners on every edition card. A `::before` is a child box, so
+    they keep the square corners they have always had. A holo card writes its
+    own artwork into `--panel-art`; the `art/holo/` overrides are byte-for-byte
+    the same three shapes (700x446, 172x344, 900x118), so one `aspect-ratio`
+    serves both.
+  - **Crest, spine patches, sun pip, growth diamond.** Straight backgrounds.
+    `.railval` keeps its background on the element because
+    `.tcard.holo .railval::before` already owns that pseudo-element; the holo
+    rule that hid the green parchment patch is now `background-image:none`.
+
+  **How it was checked, and what the check actually found.** All **348 cards were
+  screenshotted before and after** and compared pixel by pixel, using the app's
+  own `cutUnder()` to bring each card to the top so the deck state at capture N is
+  identical between runs, with animations frozen.
+
+  **It is not bit-identical, and that is worth stating plainly rather than
+  rounding to "no visual change".** 347 of 348 cards differ. The differences are:
+
+  - **confined to the rating widgets.** Nothing else on the card moved a pixel —
+    not the plaque, the crest, the band, the soil panel, the spine patches or the
+    growth diamond. Those came out byte-identical, which is what the `::before`
+    and `aspect-ratio` work above was for.
+  - **not geometry.** Every `.ricon` was measured before and after: x, width,
+    height and `--fill` agree to three decimal places on all fifteen icons, in all
+    three rows, on the card and in the press-and-hold lens.
+  - **0.43% of the card's pixels**, mean delta 38, tracing the anti-aliased
+    OUTLINES of the line art. At 10x zoom on the half-filled drop — the most
+    information-bearing icon on the card, because its fill boundary is the
+    reading — the two are the same drop, same outline weight, same boundary in
+    the same place.
+
+  The cause is the paint path, not the layout: the card carries a NON-UNIFORM
+  transform (measured sx 0.890, sy 0.997), and a 33x50 master resampled into a
+  ~10.6 x 18 px box lands its edge pixels slightly differently as a background
+  than as an `<img>`. [Unverified] as to Chromium's exact filtering difference —
+  what is established is that the boxes are identical and that
+  `background-size:100% 100%` and `auto 100%` give byte-identical output, so the
+  residual is not a sizing choice that could be tuned away.
+
+  **The trade, stated once:** sub-perceptual re-rasterisation of the shared icon
+  artwork, against 13,186 fewer image elements and a deck that settles in 1.7s
+  instead of 3.8s. Worth it on the evidence — but it is an aesthetic call on
+  Oscar's own artwork, so the crops are in the session, not just the numbers.
+
+  A new `perf-test` check locks the structure in: **no `<img>` under `art/` may
+  appear outside a card's photo frame** (the documented `.pesticon` opt-in aside),
+  and every `<img>` a card owns must be its photograph. That check exists because
+  the regression is invisible — adding an `<img>` back to `renderCard` renders
+  identically and costs nothing until the deck is a few hundred cards deep on a
+  phone.
+
+  `tools/build-standalone.js` needed no change: its art regex already matched
+  `art/<name>.<ext>` tokens "in CSS and JS alike".
+
+  **Deliberately NOT changed: `design/card-builder.html`.** It keeps its own copy
+  of the old `<img>`-based `.ricon` markup. That is a design mock rendered from
+  `file://` against the `../art/*.png` MASTERS, where the app loads the `.webp`
+  derivatives — the two were never meant to be byte-identical, and the builder
+  exists to check rating maths (`design/verify-cards.js` reads `--fill` off
+  `.ricon`, which is unchanged). Noting it so the divergence is a decision on the
+  record rather than something missed: if the widget rendering is ever reworked
+  again, both copies need the pass.
+
+  **What this change gave away, and how it is guarded.** An `<img>` derives its
+  own height from the file. A background does not, so the shape of eight art
+  masters is now hardcoded in `timber.html` as `aspect-ratio`. Re-crop one of
+  those masters and the layout no longer moves — the artwork STRETCHES inside a
+  box that is still the old shape, on every card, silently. `optimise-art.js
+  --check` now maps each of those eight ratios back to the master it came from
+  and fails if they disagree, reading the PNG's IHDR header directly so it needs
+  no image library.
+
+  Fixing that check meant fixing the check itself first. `optimise-art --check`
+  was **passing without running**: it did `process.exit(0)` the moment
+  `require('sharp')` threw, and sharp is not installed on any machine that runs
+  the gate here, so `tests/run-all.js` printed *"every art master has a current
+  .webp derivative"* while proving nothing — including through every deploy.
+  Its check path is pure `fs` and never needed sharp. This is the twin of the
+  `optimise-photos` bug that shipped five blank cards, recorded on 2026-09-15 and
+  now fixed the same way: sharp is loaded only for the encode path. Proved by
+  deleting `art/crest-blank.webp` and watching the gate fail where it used to
+  pass, and by rewriting one `aspect-ratio` and watching the shape guard catch it.
+
 - **v14.60 (288 dealt / 86 held — TOXICITY FLAG on the front, and a
   press-and-hold to read it)**: Oscar's spec, 2026-09-13: *"a minimalist banner
   that shows it's toxic, maybe on front of card just a red corner triangle left
