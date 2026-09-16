@@ -54,6 +54,16 @@ const KNOWN = new Set([
      which side moves. See VERIFY-QUEUE item 85. */
   "Gaultheria procumbens 'Gaubi'|pest-vs-prose",
   'Digitalis purpurea Foxy Group|pest-vs-prose',
+  /* 2026-09-16. The third card of the Prunus serrula shape, and the clearest: a
+     medlar is bought for the fruit, so Oscar's peak is Oct-Nov, while his visual
+     correctly also names the white blossom the tree carries in late spring. Both
+     halves are his researched input arriving in one JSON; neither can be moved
+     here without overwriting a fact he sourced. Worth noting the rule is right to
+     call this a contradiction rather than a warning — "spring blossom" is a
+     FLOWERING claim, not a foliage one, so unlike Kousa Dogwood the band is not
+     merely incomplete, it is labelled Bloom and points at the fruit. See
+     VERIFY-QUEUE item 91, which argues the real fix is the card, not the data. */
+  "Mespilus germanica 'Nottingham'|peak-vs-prose",
 ]);
 
 const issues = [];

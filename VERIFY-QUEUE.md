@@ -4139,6 +4139,48 @@ flowers and no label in frame.
 `photos/unidentified/` because it is not unidentified — the genus is certain and
 the cultivar is a question only Oscar can answer.
 
+### 91. A medlar is sold on its fruit, so the band labelled Bloom points at October
+
+`plant-sense` refused the Medlar 'Nottingham' add with one contradiction:
+
+    Medlar 'Nottingham' [peak-vs-prose] prose claims spring interest
+    but peak "Oct-Nov" covers none of spring
+
+Both sides are Oscar's own researched JSON, arriving together on 2026-09-16:
+
+    "peak":   "Oct-Nov"
+    "visual": "Russet-brown medlars ripen in autumn · white spring blossom
+               · golden autumn leaves"
+
+Neither is wrong. *Mespilus germanica* flowers in late spring and ripens its fruit
+in October, and nobody buys a medlar for the blossom — so `peak` names the season
+the plant is sold on, exactly as `Prunus serrula` (bark, Nov-Feb) and Pyracantha
+SAPHYR ORANGE (berries, Sep-Nov) already do in KNOWN.
+
+**Why this one is a contradiction and Kousa Dogwood is only a warning.** The rule
+splits on the noun, not the season: `spring-colour|interest|display` is a foliage
+claim and reports as a warning, because the card simply cannot show a second
+season. `spring blossom` is a *flowering* claim, and the band it disagrees with is
+labelled **Bloom**. So the card does not just fail to show the spring — it puts the
+word Bloom above Oct-Nov, which for this plant is the fruit. The rule is right to
+grade it harder.
+
+**The real fix is the card, not the data, and this is the third instance.**
+Suppressing a third entry makes it a pattern rather than an exception. The options,
+none taken here because all three are Oscar's call:
+
+1. Rename the band **Peak interest** and let `peak` mean what it already means in
+   the data. One label change; fixes all three cards and every future fruit/bark
+   plant at a stroke.
+2. Give the card a second, secondary band for a flowering season distinct from
+   peak. Honest, but it is new card furniture on an already-full front.
+3. Move `peak` to "May-Jun" and let the fruit live only in the prose. Correct for
+   the word Bloom, wrong for what the card is selling.
+
+Filed as KNOWN against `Mespilus germanica 'Nottingham'|peak-vs-prose` so the add
+could complete. The card itself is built and photographed; nothing about it is
+blocked by this.
+
 ## Accepted, not defects
 
 Recorded so the same questions don't get re-litigated every batch.

@@ -1,0 +1,43 @@
+{
+  "common": "Medlar 'Nottingham'",
+  "latin": "Mespilus germanica 'Nottingham'",
+  "hue": 28,
+
+  "hardiness": "H6",
+  "hardinessNote": "Hardy in all of the UK and northern Europe, approximately -20 to -15°C.",
+
+  "height": "4-8 m",
+  "spread": "4-8 m",
+
+  "peak": "Oct-Nov",
+  "visual": "Russet-brown medlars ripen in autumn · white spring blossom · golden autumn leaves",
+
+  "pestRisk": 6,
+  "thirst": 8,
+  "careLevel": 6,
+  "growthSpeed": 7,
+  "sunNeed": 90,
+  "sunMin": 70,
+  "pest": "",
+
+  "aspect": "Any aspect",
+  "soil": "Moist, well-drained",
+  "soilWarning": "Avoid waterlogged ground",
+
+  "water": "Water well while establishing; established trees mainly need water during prolonged dry spells.",
+  "prune": "Remove dead, damaged or crossing growth; otherwise prune lightly in the dormant season.",
+
+  "toxicity": "Fruit flesh is edible after bletting; seeds contain toxic hydrocyanic acid and should not be eaten. Crushed or swallowed seeds may cause poisoning in people or pets.",
+  "compliance": "UK plant passport required for professional movement of plants for planting.",
+
+  "cvs": "'Royal' – compact, good cropping · 'Westerveld' – larger fruit, reliable crops · 'Dutch' – spreading, larger-fruited",
+  "resilience": "Generally robust; may get aphids or caterpillars and can be affected by quince leaf blight, brown rot, powdery mildew or honey fungus.",
+  "uses": "Edible fruit · preserves and jelly · wildlife gardens · cottage gardens · specimen tree",
+
+  "foliage": "deciduous; large leathery green leaves developing yellow-brown autumn colour",
+  "rootSize": "",
+  "stockForm": "both",
+  "pollination": "self-fertile; no pollination partner required for fruit",
+  "clay": "yes",
+  "container": "with care"
+}
