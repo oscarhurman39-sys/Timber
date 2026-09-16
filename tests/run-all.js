@@ -44,10 +44,17 @@ const CHECKS = [
     why: 'app syntax and special-card assets/config cannot brick boot' },
   /* The app loads derived WebP, not the masters beside them. Nothing else notices
      if a master is repainted and its derivative is not re-run, so the deployed
-     card would quietly keep showing the old artwork. Both checks no-op with a
-     note where sharp is not installed, which includes the Pages runner. */
+     card would quietly keep showing the old artwork. Neither check needs sharp —
+     both are pure fs, and optimise-art used to exit 0 without running when sharp
+     was absent, which is every runner here. */
   { name: 'optimise-art', cmd: ['node', 'tools/optimise-art.js', '--check'], browser: false,
-    why: 'every art master has a current .webp derivative' },
+    why: 'art derivatives are current, and the card shapes match their masters' },
+  /* The standalone build substitutes literal strings in timber.html, so a rename
+     anywhere breaks it silently — and only the next person to build finds out.
+     It was broken on and off for days before anyone tried. This resolves every
+     anchor without encoding anything. */
+  { name: 'standalone', cmd: ['node', 'tools/build-standalone.js', '--check'], browser: false,
+    why: 'the single-file build can still find everything it substitutes' },
   { name: 'optimise-photos', cmd: ['node', 'tools/optimise-photos.js', '--check'], browser: false,
     why: 'every photo master has a current card-sized derivative' },
   { name: 'app-test', cmd: ['node', 'tests/app-test.js'], browser: true,

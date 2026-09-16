@@ -579,10 +579,12 @@
   .growth .lab{position:absolute;writing-mode:vertical-rl;transform:rotate(180deg) translateX(-50%);
     transform-origin:center;font-size:8px;letter-spacing:1.5px;color:#efe0b4;text-transform:uppercase;
     text-align:center;text-shadow:0 1px 4px rgba(0,0,0,.9),0 0 6px rgba(0,0,0,.7)}
-  .growth .mk{position:absolute;width:17px;filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+  .growth .mk{position:absolute;width:17px;aspect-ratio:44/40;
+    background:url("art/growth-diamond.png") no-repeat center/100% 100%;
+    filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
   .crest{position:absolute;left:80.33%;top:2.92%;width:17.23%;z-index:3;text-align:center;
+    aspect-ratio:190/212;background:url("art/crest-blank.webp") no-repeat center/100% 100%;
     filter:drop-shadow(0 2px 5px rgba(0,0,0,.35))}
-  .crest img{width:100%}
   .crest .hnum{position:absolute;left:0;right:0;top:29%;text-align:center;font-family:Georgia,serif;
     font-weight:700;font-size:23px;letter-spacing:1px;color:#F2E5C4;
     text-shadow:0 -1px 1px rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.55)}
@@ -630,21 +632,34 @@
      as a decorative lozenge rather than a warning. Rendered against the frame to
      check, which is the only way to tell. */
   .toxflag.caution{--flag-hi:#ecd23a;--flag-lo:#7a5c0b}
-  .railval{position:absolute;z-index:2}
-  .railval img{position:absolute;inset:0;width:100%;height:100%}
+  .railval{position:absolute;z-index:2;background-repeat:no-repeat;background-size:100% 100%}
   .railval .v{position:absolute;inset:0;display:grid;place-items:center;
     writing-mode:vertical-rl;transform:rotate(180deg);
     font-size:12px;letter-spacing:1px;color:#e7ddb9;white-space:nowrap}
-  .rail-h{left:2.72%;top:43.77%;width:7.62%;height:10.16%}
-  .rail-s{left:2.72%;top:68.52%;width:7.62%;height:10.28%}
+  .rail-h{left:2.72%;top:43.77%;width:7.62%;height:10.16%;background-image:url("art/rail-patch-h.png")}
+  .rail-s{left:2.72%;top:68.52%;width:7.62%;height:10.28%;background-image:url("art/rail-patch-s.png")}
   .ppp{position:absolute;left:15.14%;width:63.46%;top:58.28%;z-index:4;text-align:center;
     font-family:Georgia,serif;font-size:9.5px;font-weight:700;letter-spacing:3.5px;
     text-transform:uppercase;color:#ecd7a0;
     text-shadow:0 1px 3px rgba(10,20,10,.92),0 0 8px rgba(10,20,10,.7)}
-  .plaque{position:absolute;left:15.14%;top:60.02%;width:63.46%;z-index:3}
-  .plaque>img,.soilp>img,.band>img{width:100%}
-  .soilp{position:absolute;left:80.33%;top:66.55%;width:15.59%;z-index:3}
-  .band{position:absolute;left:14.32%;top:88.33%;width:81.60%;z-index:3}
+  /* PANEL ART ON ::before, NOT ON THE ELEMENT. Until 2026-09-15 each of these three
+     panels carried its own <img> — 3 per card, 1,038 across the deck, all pointing at
+     the same three files. They are backgrounds now, but they are NOT set on .plaque /
+     .soilp / .band themselves: .tcard.edition gives .plaque and .soilp a border-radius,
+     and a border-radius CLIPS a background while it never clipped the in-flow <img>.
+     A ::before is a child box, so the edition cards keep the square panel corners they
+     have always had. aspect-ratio replaces the height the in-flow <img> used to supply:
+     plaque-full 700x446, soil-full 172x344, band-full 900x118 — and the holo overrides
+     in art/holo/ are byte-for-byte the same three shapes, so one ratio serves both.
+     --panel-art is the hook a holo card writes its own artwork into (see renderCard). */
+  .plaque::before,.soilp::before,.band::before{content:'';position:absolute;inset:0;
+    background:var(--panel-art) no-repeat center;background-size:100% 100%;pointer-events:none}
+  .plaque{position:absolute;left:15.14%;top:60.02%;width:63.46%;z-index:3;
+    aspect-ratio:700/446;--panel-art:url("art/plaque-full.webp")}
+  .soilp{position:absolute;left:80.33%;top:66.55%;width:15.59%;z-index:3;
+    aspect-ratio:172/344;--panel-art:url("art/soil-full.webp")}
+  .band{position:absolute;left:14.32%;top:88.33%;width:81.60%;z-index:3;
+    aspect-ratio:900/118;--panel-art:url("art/band-full.webp")}
 
 
   /* ============ EDITION (one-off themed cards) ============
@@ -881,7 +896,7 @@
        just stops moving */
     .card.hot .wisp{animation:none;opacity:calc(var(--wo)*.6)}
   }
-  .tcard.holo .railval img{display:none}                 /* green parchment patch, wrong on a red spine */
+  .tcard.holo .railval{background-image:none}            /* green parchment patch, wrong on a red spine */
   /* ---- holo ink: the three CSS-supplied pieces are TOKENISED ----
      The spine values, the spine labels and the master strip are set straight
      onto the frame ARTWORK — the parchment patch is hidden above, so there is no
@@ -1044,10 +1059,25 @@
      so the drag block has to cover every one the app renders */
   .face.front{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
   img{-webkit-user-drag:none;-webkit-touch-callout:none}
-  .ricon{position:relative}
-  .ricon>img{height:100%;width:auto}
-  .ricon .fillwrap{position:absolute;left:0;top:0;height:100%;overflow:hidden;width:calc(var(--fill)*100%)}
-  .ricon .fillwrap img{height:100%;width:auto;max-width:none}
+  /* RATING ICONS ARE BACKGROUNDS, NOT IMAGES. Each card draws 15 of these (5 each of
+     thirst / pests / care) and each one used to be four elements: a span, an outline
+     <img>, a .fillwrap span and a fill <img>. At 348 cards that was 10,440 <img>
+     elements pointing at six files, and 5,220 wrapper spans, for artwork that is
+     identical on every card in the deck.
+     The geometry is preserved exactly, and the two halves are NOT interchangeable:
+     the outline sets the box (aspect-ratio from the OUT master, since the in-flow
+     <img> used to size the span), while the fill is a WIDER drawing that used to be
+     clipped by .fillwrap's overflow. background-size:auto 100% reproduces that — the
+     fill paints at its own aspect against the box height, left-aligned, and the
+     ::after's width does the clipping .fillwrap did.
+     Masters: drop 33x50 out / 35x50 fill · seca 39x103 / 42x104 · spray 42x80 / 42x82. */
+  .ricon{position:relative;aspect-ratio:var(--w-ar);
+    background:var(--w-out) no-repeat left center;background-size:auto 100%}
+  .ricon::after{content:'';position:absolute;left:0;top:0;height:100%;width:calc(var(--fill)*100%);
+    background:var(--w-fill) no-repeat left center;background-size:auto 100%}
+  .ricon-drop{--w-ar:33/50;--w-out:url("art/widget-drop-out.png");--w-fill:url("art/widget-drop-fill.png")}
+  .ricon-seca{--w-ar:39/103;--w-out:url("art/widget-seca-out.png");--w-fill:url("art/widget-seca-fill.png")}
+  .ricon-spray{--w-ar:42/80;--w-out:url("art/widget-spray-out.png");--w-fill:url("art/widget-spray-fill.png")}
   .wrow.pest .ricon{height:31px}
   .wrow.thirst .ricon{height:18px}
   .wrow.care .ricon{height:39px}
@@ -1065,7 +1095,8 @@
   .t-baspect{left:13%;top:45.8%;width:25.5%;height:23.7%}
   .b-aspect-ink{font-size:9.5px;display:flex;align-items:center}
   .b-div{position:absolute;left:38.9%;top:16%;height:68%;width:1px;background:rgba(92,74,40,.5)}
-  .band>img.b-sun{position:absolute;left:88.4%;top:4%;width:5.2%}
+  .band>.b-sun{position:absolute;left:88.4%;top:4%;width:5.2%;aspect-ratio:1;
+    background:url("art/sun-small.png") no-repeat center/100% 100%}
   .b-pointer-cover{left:78.7%;top:13.6%;width:16%;height:33.9%}
   .b-tri{position:absolute;width:0;height:0;border-left:5px solid transparent;
     border-right:5px solid transparent;border-top:8px solid #1c3a26;
@@ -1205,7 +1236,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r268 · 2026-09-16 · 9495722';
+const BUILD='r269 · 2026-09-16 · 43c4072';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -13672,7 +13703,9 @@ function tradeBlocks(p){
     +(buyer.some(has)?'':'<div class="nodata">Buyer data not entered for this plant yet</div>')
     +(grid?`<div class="grid">${grid}</div>`:'');
 }
-const wIcon=kind=>fill=>`<span class="ricon" style="--fill:${fill}"><img src="${ART[`widget-${kind}-out`]}" alt=""><span class="fillwrap"><img src="${ART[`widget-${kind}-fill`]}" alt=""></span></span>`;
+/* one element per rating icon; the artwork and the box shape come from .ricon-<kind>
+   in the stylesheet (see the RATING ICONS note there for why it is not two <img>s). */
+const wIcon=kind=>fill=>`<span class="ricon ricon-${kind}" style="--fill:${fill}"></span>`;
 const wRow=(kind,score)=>score==null?'':getRatingSegments(score/4).map(wIcon(kind)).join('');
 const MONTHS={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
 function parseMonths(str){                    /* "Jul-Oct" -> [7,8,9,10]; wraps Oct-Feb */
@@ -13798,7 +13831,6 @@ const slugLatin=l=>l.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().repla
    a third of it. tools/build-standalone.js rewrites this one line to inline the
    photographs as data URIs. */
 const photoSrc=slug=>`photos/card/${slug}.webp`;
-const ART={"widget-drop-fill":"art/widget-drop-fill.png","widget-drop-out":"art/widget-drop-out.png","widget-seca-fill":"art/widget-seca-fill.png","widget-seca-out":"art/widget-seca-out.png","widget-spray-fill":"art/widget-spray-fill.png","widget-spray-out":"art/widget-spray-out.png"};
 
 /* PEST — the icon on the "Pests & diseases" row, when the baked one is wrong.
    The plaque art paints a red spider mite, which is a fair default and flatly
@@ -14446,7 +14478,7 @@ function growthRailHTML(growthSpeed){          /* scale = capped segment, inner 
     /* sprite's visible diamond sits +0.8px right of its bitmap centre at 17px
        display width (alpha bbox 7..40 in 44px) — compensate so the visual
        centre rides the axis; audited by design/audit-layout.js */
-    h+=`<img class="mk" src="art/growth-diamond.png" style="right:${ax}px;top:${fy-7.5}px;transform:translateX(calc(50% - 0.8px))" alt="">`;
+    h+=`<i class="mk" style="right:${ax}px;top:${fy-7.5}px;transform:translateX(calc(50% - 0.8px))"></i>`;
   }
   return h;
 }
@@ -14515,13 +14547,12 @@ function renderCard(idx,before){
           ${wispsHTML(ho)}${ho&&ho.edging?`<div class="edging" aria-hidden="true"${lateBG(`background-image:url(${ho.edging})`)}></div>`:''}${groveHTML(slug)}
           <div class="growth" aria-hidden="true">${growthRailHTML(growth)}</div>
         </div>
-        <div class="railval rail-h" data-label="Height"><img src="art/rail-patch-h.png" alt=""><span class="v">${sz.h}</span></div>
-        <div class="railval rail-s" data-label="Spread"><img src="art/rail-patch-s.png" alt=""><span class="v">${sz.s}</span></div>
-        <div class="crest"><img src="art/crest-blank.webp" alt=""><span class="hnum">${p.hardiness}</span></div>
+        <div class="railval rail-h" data-label="Height"><span class="v">${sz.h}</span></div>
+        <div class="railval rail-s" data-label="Spread"><span class="v">${sz.s}</span></div>
+        <div class="crest"><span class="hnum">${p.hardiness}</span></div>
         ${toxFlag(p)}
         <div class="ppp">Plant Power Points</div>
-        <div class="plaque">
-          <img src="${ho&&ho.plaque?ho.plaque:'art/plaque-full.webp'}" alt="">
+        <div class="plaque"${ho&&ho.plaque?` style="--panel-art:url(${ho.plaque})"`:''}>
           ${pestIcon?`<div class="patch tiny p-pest-icon"></div><img class="pesticon" src="${pestIcon}" alt="">`:''}
           <div class="patch lbl p-bloom-val"></div><div class="val-ink pval t-bloom">${p.peak||''}</div>
           <div class="patch lbl p-pest-val"></div><div class="val-ink pval t-pest">${pest==null?'':fmt5(pest)}</div>
@@ -14532,17 +14563,15 @@ function renderCard(idx,before){
           <div class="patch p-thirst-w"></div><div class="val-ink p-thirst-w"><div class="wrow thirst">${wRow('drop',thirst)}</div></div>
           <div class="patch tightv p-care-w"></div><div class="val-ink p-care-w"><div class="wrow care">${wRow('seca',care)}</div></div>
         </div>
-        <div class="soilp">
-          <img src="${ho&&ho.soil?ho.soil:'art/soil-full.webp'}" alt="">
+        <div class="soilp"${ho&&ho.soil?` style="--panel-art:url(${ho.soil})"`:''}>
           <div class="patch s-val"></div><div class="val-ink s-val s-val-ink">${soil.val}</div>
           ${soil.warn
             ?`<div class="patch s-warn"></div><div class="val-ink s-warn s-warn-ink">${soil.warn}</div>`
             :`<div class="patch s-tri-cover"></div><div class="patch s-warn"></div>`}
         </div>
-        <div class="band">
-          <img src="${ho&&ho.band?ho.band:'art/band-full.webp'}" alt="">
+        <div class="band"${ho&&ho.band?` style="--panel-art:url(${ho.band})"`:''}>
           <div class="patch b-aspect"></div><div class="patch b-sun-cover"></div>
-          <div class="b-div"></div><img class="b-sun" src="art/sun-small.png" alt="">
+          <div class="b-div"></div><div class="b-sun"></div>
           <div class="val-ink t-baspect b-aspect-ink">${extractFacing(p.aspect)}</div>
           <div class="patch sharpb b-pointer-cover"></div>
           ${sunMin!=null?`<span class="b-wiggle${lightX(sunMin)<51?' flip':''}" style="left:${lightX(sunMin)}%">wiggle room</span><div class="b-leader" style="left:${lightX(sunMin)}%"></div>`:''}

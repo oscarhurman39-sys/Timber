@@ -9,6 +9,12 @@ node_modules/
 # generated shooting sheet — regenerate with tools/photo-run.js --html, never commit
 photo-run.html
 
+# generated research ask — brief + the plant list as it stands RIGHT NOW. Committing
+# one would mean pasting a stale list at some later date, which is the whole failure
+# mode it exists to avoid. Regenerate:
+#   node tools/backfill-field.js <field> --paste --one > <FIELD>-ASK.md
+*-ASK.md
+
 # research-run.js task files are regenerated from the deck on demand; the
 # .asked.json manifest beside each is NOT ignored — `take` needs it to know
 # which questions a batch actually put, and a later session may do the taking.
