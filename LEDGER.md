@@ -1,9 +1,13 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Run `CHATGPT-TOXICITY-BRIEF.md` over the first 50 names in
-  `data/incoming/toxicity-todo-2026-09-13.txt` and send the JSON back — 305 of 392
-  cards have a blank toxicity field, and blank renders identically to "safe".
+brick: Paste `TOXICITY-ASK.md` into ChatGPT and send the JSON back — **317 of 432**
+  cards carry no toxicity value, and a blank prints nothing at all, which a customer
+  reads as "safe". Regenerate the file with
+  `node tools/backfill-field.js toxicity --paste --one > TOXICITY-ASK.md`; it is the
+  brief and the current list in one paste, so there is no list to assemble by hand.
+  (Was "the first 50 names in data/incoming/toxicity-todo-2026-09-13.txt" against
+  305 of 392 — that file was a 2026-09-13 snapshot and the deck has moved since.)
 since: 2026-09-13  sessions-unchanged: 1
 progress: 2026-09-15 (later — **the deck stops building 13,546 images**, and three
   checks that were lying get fixed) — no cards added; this was the app itself.
