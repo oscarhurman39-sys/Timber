@@ -616,7 +616,16 @@
      rosette in the left rail centres near x 7.7% y 6.1% with a ~4.8% diameter.
      The cartouche centres above it on the corner elbow. z-index 4: above the
      crest (3), under the stamps (30) and every overlay. */
-  .toxflag{position:absolute;left:3.8%;top:3%;width:4.2%;aspect-ratio:1;z-index:4;
+  /* 4.2% -> 10.43% wide (2026-09-18): the flag rendered at ~27px on a 420 card, ~23 CSS px
+     on a phone — a warning nobody could press. It is a square rotated 45deg, so the
+     visual box is w*sqrt2 = 14.75%: x 1.5..16.25%, mirroring the hardiness crest and
+     keeping the crest's own 1.45% gap to the title at x 17.70%. Vertical extent 2.4..12.7%.
+     No DOM element sits below it until the HEIGHT value at 43.77% — but the frame art
+     has a painted fleur at roughly y 4.6..9.2% of the spine, and this size covers it.
+     Rendered and checked: any flag still big enough to press covers that ornament, so
+     clearing it means re-rendering frame-600 without it, not shrinking the flag.
+     CARD-LAYOUT.md L5. */
+  .toxflag{position:absolute;left:3.66%;top:3.91%;width:10.43%;aspect-ratio:1;z-index:4;
     transform:rotate(45deg);
     background:linear-gradient(160deg,var(--flag-hi) 0%,var(--flag-lo) 100%);
     border:1px solid #d3b264;
@@ -659,7 +668,11 @@
     aspect-ratio:700/446;--panel-art:url("art/plaque-full.webp")}
   .soilp{position:absolute;left:80.33%;top:66.55%;width:15.59%;z-index:3;
     aspect-ratio:172/344;--panel-art:url("art/soil-full.webp")}
-  .band{position:absolute;left:14.32%;top:88.33%;width:81.60%;z-index:3;
+  /* left 14.32 -> 15.14 and width 81.60 -> 80.78 (2026-09-18): the band overhung the
+     plaque by 0.82% on the LEFT only — box and painted edge alike, since both PNGs
+     carry an 8px transparent margin. Right edge untouched: it already met the soil
+     panel at 95.92% (paint 95.01% = 95.01%). CARD-LAYOUT.md L2. */
+  .band{position:absolute;left:15.14%;top:88.33%;width:80.78%;z-index:3;
     aspect-ratio:900/118;--panel-art:url("art/band-full.webp")}
 
 
@@ -1237,7 +1250,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r270 · 2026-09-16 · 70ecfe7';
+const BUILD='r272 · 2026-09-18 · b236594';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
