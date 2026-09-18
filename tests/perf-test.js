@@ -1,9 +1,11 @@
 /* perf-test.js — locks in the deck's compositing budget.
    Run: NODE_PATH=/opt/node22/lib/node_modules node tests/perf-test.js  (server on :8477)
 
-   The deck holds every plant in the DOM at once. That is fine — audit-layout.js relies
-   on it — but only the top few cards are ever visible, so only those may be PAINTED and
-   only the ones that MOVE may be promoted to their own GPU layer.
+   The deck holds every plant in the DOM at once — as SHELLS. A buried card is one
+   empty element that keeps its place in the stack; only the top BUILD_DEPTH carry
+   their ~145 nodes of content (timber.html dealCards / buildCard). Of those, only the
+   top few are ever visible, so only those may be PAINTED and only the ones that MOVE
+   may be promoted to their own GPU layer.
 
    Two regressions this catches, both of which shipped once and glitched swiping on a
    real phone:
@@ -15,8 +17,8 @@
 const { chromium } = require('playwright');
 
 const URL = 'http://localhost:8477/timber.html';
-/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
-   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+/* the deal is synchronous now (timber.html dealCards deals shells), so this resolves at
+   once; kept so every suite waits on the same signal if a staged deal ever returns */
 const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 const MAX_LAYERS = 4;       /* mid-fling card + top three live — one deeper than visible motion,
                                so a swipe never promotes a card the user can see (phone tearing) */
@@ -144,6 +146,38 @@ const check = (name, ok, detail = '') => {
      mistake the photo-window check above already made once and records. */
   check(`every card <img> is a photograph or the pest icon (${chrome.imgs} images across ${chrome.cards} cards, ${chrome.stray} stray)`,
     chrome.stray === 0, `${chrome.stray} <img> outside .tphoto: ${chrome.straySrcs.join(', ')}`);
+
+  /* ---- 2d. BURIED CARDS ARE SHELLS ----
+     The memory a deck costs must not grow with the deck. Measured in Chromium at
+     390x844 @3x on 2026-09-16, every card built: 345MB of renderer RSS and 51,038
+     DOM nodes at 349 cards, against 200MB / 3,798 nodes at 24 — ~145MB that scaled
+     with the deck, on a page that has already been killed on two iPhones. With
+     shells the same deck measured 201MB / 2,031 nodes, the 24-card figure.
+     Two assertions keep it that way: only the top BUILD_DEPTH cards (plus any still
+     flying out) carry content, and the deck's whole DOM stays under a ceiling that a
+     deck of 1,000 shells would still clear. The observed numbers print on every run. */
+  const BUILD_DEPTH = await page.evaluate(() => BUILD_DEPTH);
+  const MAX_DECK_NODES = 4000;   /* 2,031 observed at deck 349: ~1,500 of content + one node per shell */
+  const shellsOf = () => page.evaluate(() => {
+    const cards = [...document.querySelectorAll('.deck .card')];
+    const built = cards.filter(c => c.dataset.built);
+    return {
+      cards: cards.length, built: built.length,
+      going: cards.filter(c => c.dataset.gone).length,
+      nodes: document.getElementById('deck').querySelectorAll('*').length,
+      /* how far from the top each built card sits — every one must be inside the window */
+      depths: built.map(c => cards.length - 1 - cards.indexOf(c)),
+      emptyShells: cards.filter(c => !c.dataset.built && c.childNodes.length === 0).length,
+    };
+  });
+  const sh = await shellsOf();
+  check(`only the top ${BUILD_DEPTH} cards carry content (${sh.built} built of ${sh.cards})`,
+    sh.built <= BUILD_DEPTH + sh.going && sh.depths.every(d => d < BUILD_DEPTH + sh.going),
+    `${sh.built} built, depths ${JSON.stringify(sh.depths)}`);
+  check(`every unbuilt card is an empty shell (${sh.emptyShells} of ${sh.cards - sh.built})`,
+    sh.emptyShells === sh.cards - sh.built, JSON.stringify(sh));
+  check(`the deck's DOM stays small however many cards it holds (${sh.nodes} nodes)`,
+    sh.nodes <= MAX_DECK_NODES, `${sh.nodes} > ${MAX_DECK_NODES}`);
 
   /* ---- 3. hiding buried content must be pixel-identical ----
      Freeze animations first. This assertion is about ONE thing: whether the deep
@@ -479,6 +513,37 @@ const check = (name, ok, detail = '') => {
     return { hot: top ? top.classList.contains('hot') : false, deep: top ? top.classList.contains('deep') : true };
   });
   check('the deferred promotion still lands', settled.hot && !settled.deep, JSON.stringify(settled));
+
+  /* ---- 7. the content window must FOLLOW the deck, not accumulate ----
+     Everything that reorders the stack goes through markHot(), which builds what
+     came into reach and drops what left it. The two moves that push built cards
+     down are a goto cut (cutUnder — the riffle's one-pass close of a long gap) and
+     a rewind (undo puts a fresh card on top, every time). If either leaked, the
+     deck would quietly grow back toward the all-built DOM this file exists to
+     forbid, one riffle or one held undo at a time. */
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForTimeout(900);
+  await deckSettled(page);
+  const cut = await page.evaluate(() => { cutUnder(Math.floor(document.querySelectorAll('.deck .card').length / 2)); return true; });
+  await page.waitForTimeout(300);
+  const afterCut = await shellsOf();
+  check(`a goto cut rebuilds the new top and drops the old (${afterCut.built} built after cutting half the deck under)`,
+    cut && afterCut.built <= BUILD_DEPTH + afterCut.going && afterCut.depths.every(d => d < BUILD_DEPTH + afterCut.going),
+    JSON.stringify(afterCut));
+  for (let i = 0; i < 14; i++) { await page.click('#learn'); await page.waitForTimeout(120); }
+  await page.waitForTimeout(500);
+  for (let i = 0; i < 14; i++) { await page.evaluate(() => undo(60)); await page.waitForTimeout(90); }
+  await page.waitForTimeout(500);
+  const afterRewind = await shellsOf();
+  check(`a rewind keeps the window bounded (${afterRewind.built} built after 14 swipes and 14 undos)`,
+    afterRewind.built <= BUILD_DEPTH + afterRewind.going && afterRewind.depths.every(d => d < BUILD_DEPTH + afterRewind.going),
+    JSON.stringify(afterRewind));
+  const topOk = await page.evaluate(() => {
+    const live = [...document.querySelectorAll('.deck .card:not([data-gone])')];
+    const top = live[live.length - 1];
+    return !!(top && top.dataset.built && top.querySelector('.thead h2, .tcard.fullart') && !top.classList.contains('deep'));
+  });
+  check('after all that, the top card is built, painted and readable', topOk);
 
   check('no page errors', pageErrors.length === 0, pageErrors.join(' | '));
 

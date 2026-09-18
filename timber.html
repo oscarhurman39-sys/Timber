@@ -69,7 +69,8 @@
      washed over the action bar), so hiding buried contents is pixel-identical (asserted
      by tests/perf-test.js) while the browser stops painting — and so stops holding decoded
      bitmaps for — every buried photo. visibility:hidden keeps layout intact, so
-     design/audit-layout.js still measures all 57 cards. */
+     design/audit-layout.js (which builds every card first — buildAllCards) measures
+     them all. */
   .card.deep .tcard>*{visibility:hidden}
   /* Only a card that can flip needs its 3D machinery. perspective + preserve-3d +
      two hidden backfaces force ~4 REAL compositing layers per card — 228 layers /
@@ -1236,7 +1237,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r269 · 2026-09-16 · 43c4072';
+const BUILD='r270 · 2026-09-16 · 70ecfe7';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -1249,8 +1250,8 @@ const BUILD='r269 · 2026-09-16 · 43c4072';
    2026-08-15, 2026-08-21) and nothing in this environment can run WebKit to see why.
    That message is Safari killing the tab, reloading it, and giving up — so the page
    itself can tell: it writes bootPending before doing anything heavy and clears it
-   only when the boot demonstrably ended well (deck settled and still alive after
-   BOOT_GRACE, or a clean pagehide / background). A boot that finds the flag still
+   only when the boot demonstrably ended well (still alive BOOT_GRACE after load, or
+   a clean pagehide / background). A boot that finds the flag still
    set was preceded by an open that never got that far. After LIGHT_AFTER of those in
    a row the app deals only the newest LIGHT_CAP cards — the ?cards=N diagnostic,
    switched on by evidence instead of by hand — and says so in a pill that swaps
@@ -1277,11 +1278,7 @@ function bootSurvived(){                                    /* idempotent: which
 window.addEventListener('pagehide',bootSurvived);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')bootSurvived();});
 /* the grace timer is armed from load, not from now: a slow network must not count as a crash */
-window.addEventListener('load',()=>setTimeout(()=>{
-  const deckEl=document.getElementById('deck');
-  if(deckEl&&deckEl.hasAttribute('data-dealing'))return;   /* still dealing at 20s — do not vouch for it; pagehide will */
-  bootSurvived();
-},BOOT_GRACE));
+window.addEventListener('load',()=>setTimeout(bootSurvived,BOOT_GRACE));
 
 /* last uncaught error, kept for the report — registered first so a throw anywhere
    later in this script (the 2026-08-17 TDZ bug bricked every load) still leaves a trace */
@@ -13120,7 +13117,7 @@ function saveProgress(){
   if(reviewMode||activeFilter)return;  /* review/filter are ephemeral views — never persist over the full deck */
   if(DECK_CAP)return;                  /* ?cards=N is a diagnostic deck — it must not overwrite the real one */
   try{
-    const stack=liveStack();           /* pending-aware: a save mid staged deal must not drop the buried cards */
+    const stack=liveStack();           /* the DOM deck is the truth: every unswiped card is standing in it */
     localStorage.setItem(STORE_KEY,JSON.stringify({fp:FINGERPRINT,stack,history,learnedCount}));
   }catch(e){/* private mode / storage full — app still works, just won't persist */}
 }
@@ -13145,62 +13142,47 @@ function restoreDeck(d){
   markHot();updateCounts();refreshEmpty();
 }
 
-/* Every bulk deal goes through here so the ink is fitted ONCE for the whole stack
-   instead of once per card: one card at a time is one forced layout of the entire
-   deck per card, and the deck is the most expensive thing on the page to lay out.
-   A lone renderCard (undo) still fits inline — one card is not worth a batch.
+/* ---------- the deck is SHELLS: a card's content exists only while it is near the top ----------
+   dealCards() deals every plant as a bare <div class="card deep" data-idx> — one
+   element, no children — so the DOM still holds the whole stack (document order IS
+   stack order, which topCard(), the goto riffle, saves and view backups all rely
+   on) at about one node per card. A card's ~145 nodes of content are built by
+   buildCard() only once it comes within BUILD_DEPTH of the top, and dropped again by
+   unbuildCard() when it falls back out of reach (a goto riffle cuts the deck; a
+   rewind pushes cards down). markHot() owns that window, the same place that already
+   owns painting (PAINT_DEPTH) and photo fetching (FETCH_DEPTH).
 
-   STAGED, because boot used to build all 168 cards inside the opening script run —
-   one unbroken main-thread task (12.5s measured at 8x CPU throttle, ~1 old-iPhone
-   of slowdown), and iOS kills a page whose main thread never yields, reloads it,
-   kills it again, and settles on "A problem repeatedly occurred". Only the top
-   DEAL_SYNC cards are dealt synchronously — more than markHot's FETCH_DEPTH, so
-   the opening swipes see a finished deck — and the buried rest lands underneath
-   in DEAL_CHUNK timer slices the watchdog can breathe between. Everything that
-   needs the WHOLE deck goes through liveStack() (membership: saves and view
-   backups) or flushDeal() (DOM: the goto riffle); the DOM-order invariant —
-   document order IS stack order — holds mid-deal because chunks are spliced off
-   the pending list top-first and inserted below the cards already standing. */
+   WHY. Two iPhones hit Safari's "A problem repeatedly occurred" on the full deck
+   (LEDGER 2026-08-15, 08-21; reported still failing 2026-09-16). That screen is iOS
+   having killed the tab's WebContent process twice in a row, which is what it does to
+   a page over its memory limit — and every fix so far (staged deal r78, decode
+   targets r79, light mode r192, furniture to CSS r267) left the one axis that grows
+   with the deck untouched. Measured in Chromium at 390x844 @3x, all cards built: the
+   renderer sat at 345MB / 51,038 DOM nodes for 349 cards against 200MB / 3,798 nodes
+   for 24 — ~145MB that scaled with the deck, and the deck only ever grows. With
+   shells the deck's DOM is a few thousand nodes at 349 cards and stays there at 500
+   (numbers in LEDGER 2026-09-16; asserted by tests/perf-test.js).
+   [Unverified] on a real iPhone — no WebKit engine exists in this environment, same
+   as every entry above. What is verified is that the axis is gone.
+
+   This also retires the staged deal (r78): dealing 349 shells is one synchronous
+   pass costing well under a frame, so there is nothing left to stage, and a save or
+   a view backup reads the DOM directly instead of a pending list. Ink is still
+   fitted in BATCHES (fitInkAll): a window of cards arriving together — a fresh deal,
+   a goto cut — is measured in one layout, not one per card. */
 let inkBatch=null;
-let dealPending=null,dealTimer=null;   /* bottom of the deck, not yet in the DOM (bottom→top) */
-const DEAL_SYNC=16,DEAL_CHUNK=24;
-function dealCards(idxs){
-  if(dealTimer){clearTimeout(dealTimer);dealTimer=null;}   /* a new deal owns the deck outright */
-  dealPending=null;
-  dealChunk(idxs.slice(-DEAL_SYNC),null);
-  const rest=idxs.slice(0,-DEAL_SYNC);
-  if(rest.length){dealPending=rest;dealTimer=setTimeout(dealStep,16);}
-  /* data-dealing marks the deck while buried chunks are still landing — the
-     deterministic "deck settled" signal for the test suites, which count DOM
-     cards and must not race a staged deal */
-  deck.toggleAttribute('data-dealing',!!dealPending);
-}
-function dealChunk(idxs,before){
+function dealCards(idxs){idxs.forEach(i=>renderCard(i,null));}   /* bottom→top: each shell lands on top of the last */
+function buildCards(cards){
   inkBatch=[];
-  try{idxs.forEach(i=>renderCard(i,before));}
+  try{cards.forEach(buildCard);}
   finally{const b=inkBatch;inkBatch=null;fitInkAll(b);}  /* never leave a batch open — a stuck one silently stops all fitting */
 }
-function dealStep(){
-  dealTimer=null;
-  if(!dealPending)return;
-  const take=dealPending.splice(-DEAL_CHUNK);
-  if(!dealPending.length)dealPending=null;
-  dealChunk(take,deck.querySelector('.card'));           /* under everything already dealt */
-  if(dealPending)dealTimer=setTimeout(dealStep,16);
-  else deck.removeAttribute('data-dealing');
-}
-function flushDeal(){                  /* synchronous finish, for consumers that walk the DOM deck */
-  if(!dealPending)return;
-  if(dealTimer){clearTimeout(dealTimer);dealTimer=null;}
-  const rest=dealPending;dealPending=null;
-  dealChunk(rest,deck.querySelector('.card'));
-  deck.removeAttribute('data-dealing');
-}
-/* the deck's true membership while a staged deal is in flight: pending cards are all
-   below any dealt card and cannot have been swiped, so pending-then-DOM is exact */
-function liveStack(){
-  return[...(dealPending||[]),...[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx)];
-}
+/* every card built, for the audits that measure the whole deck (design/audit-layout.js,
+   tests/deck-audit.js). Nothing in the app calls it, and the next markHot() drops the
+   content again — it is the old "every card in the DOM" world, on demand. */
+function buildAllCards(){buildCards([...deck.querySelectorAll('.card')].filter(c=>!c.dataset.built));}
+/* the deck's true membership: every card standing in the DOM that has not been swiped, bottom→top */
+function liveStack(){return[...deck.querySelectorAll('.card:not([data-gone])')].map(c=>+c.dataset.idx);}
 
 function leafSVG(){return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22c7-3 9-9 9-16-6 0-11 4-11 12 0-6-3-9-7-10 0 6 3 11 9 14Z"/></svg>';}
 
@@ -14495,12 +14477,20 @@ function editionStyle(e){
           e.masterText?`--ed-master-text:${q(e.masterText)}`:'']
     .filter(Boolean).join(';');
 }
+/* A card is born a SHELL: the element that holds its place in the stack, its
+   gestures and its swipe state, with no content. buildCard() fills it — see
+   dealCards for why. Born buried too: markHot() reveals the few cards that are
+   actually on top, so a freshly dealt deck never paints — and so never decodes the
+   photo of — the cards sitting behind the top one. */
 function renderCard(idx,before){
-  const p=PLANTS[idx];
-  /* born buried: markHot() reveals the few cards that are actually on top. Cards are
-     created hidden so a freshly dealt deck never paints — and so never decodes the
-     photo of — the 50-odd cards sitting behind the top one. */
   const c=document.createElement('div');c.className='card deep';c.dataset.idx=idx;
+  deck.insertBefore(c,before||null);                   /* null ref appends — the top of the deck */
+  attachGestures(c);
+}
+/* the card's content, built from PLANTS into an existing shell. Idempotent. */
+function buildCard(c){
+  if(c.dataset.built)return;
+  const idx=+c.dataset.idx,p=PLANTS[idx];
   const bg=`linear-gradient(160deg,hsl(${p.hue} 45% 22%),hsl(${p.hue+20} 55% 12%))`;
   const slug=slugLatin(p.latin);
   const fa=FULLART[slug]||null;
@@ -14591,12 +14581,23 @@ function renderCard(idx,before){
       <div class="fliphint">⇅ Tap to flip back</div>
     </div></div>
    </div>`;
-  deck.insertBefore(c,before||null);                   /* null ref appends — the top of the deck */
-  if(inkBatch)inkBatch.push(c);else fitInk(c);         /* a whole deal fits in one batch — see dealCards */
-  attachGestures(c);
+  c.dataset.built='1';
+  if(inkBatch)inkBatch.push(c);else fitInk(c);         /* a window of cards fits in one batch — see buildCards */
   const say=c.querySelector('.say');
   shieldButton(say);
   say.onclick=()=>speakLatin(p.latin,say);
+}
+/* drop a card's content once it is out of reach. The shell keeps its place in the
+   stack, its idx and its gestures; buildCard() rebuilds the same content from PLANTS
+   if it ever comes back within reach, ink fitted afresh (the fit is deterministic).
+   A flipped card must not carry the class down the deck: rebuilt content is the
+   front, and the class would show its back. Only a top card can be flipped, and
+   fling/cutUnder already clear it — this is the guard, not the rule. */
+function unbuildCard(c){
+  if(!c.dataset.built)return;
+  delete c.dataset.built;
+  c.classList.remove('flipped');
+  c.textContent='';
 }
 
 /* shrink any live ink that overflows its measured zone — safety net for long
@@ -14652,6 +14653,9 @@ function topCard(){return [...deck.querySelectorAll('.card:not([data-gone])')].p
    under the thumb and the one about to be revealed). Everything below stays unpromoted
    so the browser can cull it. Cheap enough to re-run on every deck change. */
 const FETCH_DEPTH=10;  /* cards this close to the top get their photo fetched (window slides per swipe) */
+const BUILD_DEPTH=FETCH_DEPTH;  /* cards this close to the top carry their content (see dealCards); everything
+                                   deeper is a shell. Never below FETCH_DEPTH — that window sets src on the
+                                   content, so a card must be built before it is fetched. */
 const PAINT_DEPTH=4;   /* deep enough that a swipe never promotes or first-paints a VISIBLE card:
                           the card a swipe reveals was already painted (and decoding) while fully
                           occluded, and the newly promoted card sits two opaque cards down. Layer/
@@ -14663,6 +14667,10 @@ function markHot(){
   const going=cards.filter(c=>c.dataset.gone);          /* still animating out */
   const hot=new Set([...going,...live.slice(-3)]);      /* one deeper than visible motion */
   const shown=new Set([...going,...live.slice(-PAINT_DEPTH)]);
+  const near=new Set([...going,...live.slice(-BUILD_DEPTH)]);  /* carries content; everything below is a shell */
+  cards.forEach(c=>{if(!near.has(c))unbuildCard(c);});  /* drop first, so the fit below lays out a smaller deck */
+  const fresh=[...near].filter(c=>!c.dataset.built);
+  if(fresh.length)buildCards(fresh);                    /* one batch, one ink fit, however many arrived */
   cards.forEach(c=>{
     c.classList.toggle('hot',hot.has(c));
     c.classList.toggle('deep',!shown.has(c));
@@ -14778,7 +14786,12 @@ function closeLens(){if(lensEl)lensEl.classList.remove('show');}
 function attachGestures(card){
   let sx=0,sy=0,dx=0,dy=0,drag=false,moved=false,lx=0,lt=0,vx=0;
   let lensTimer=null,lensOn=false;
-  const learnStamp=card.querySelector('.stamp.learn'),skipStamp=card.querySelector('.stamp.skip');
+  /* the stamps are CONTENT, and a card's content comes and goes (buildCard/unbuildCard)
+     while the shell and its gestures live on — so they are looked up per use, never held */
+  const stamps=(learn,skip)=>{
+    const l=card.querySelector('.stamp.learn'),s=card.querySelector('.stamp.skip');
+    if(l)l.style.opacity=learn;if(s)s.style.opacity=skip;
+  };
   /* Press-and-hold on a front panel opens the lens. Armed only when the touch
      STARTS on the plaque/soil/band; a real drag (>10px, the same threshold that
      separates tap from swipe) disarms it, so the two gestures cannot collide —
@@ -14810,8 +14823,7 @@ function attachGestures(card){
     if(Math.hypot(dx,dy)>10){moved=true;lensDisarm();}
     if(card.classList.contains('flipped'))return;       /* no drag while flipped */
     card.style.transform=`translate(${dx}px,${dy}px) rotate(${dx/18}deg)`;
-    learnStamp.style.opacity=dx>0?Math.min(dx/SWIPE_DIST,1):0;
-    skipStamp.style.opacity=dx<0?Math.min(-dx/SWIPE_DIST,1):0;
+    stamps(dx>0?Math.min(dx/SWIPE_DIST,1):0,dx<0?Math.min(-dx/SWIPE_DIST,1):0);
   };
   const end=()=>{
     if(!drag)return;drag=false;
@@ -14819,7 +14831,7 @@ function attachGestures(card){
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
     if(lensOn){lensOn=false;closeLens();card._t=0;dx=dy=0;  /* release closes the lens; the hold
         was never a tap, so it must not arm the double-tap flip either */
-      learnStamp.style.opacity=0;skipStamp.style.opacity=0;return;}
+      stamps(0,0);return;}
     if(!moved){handleTap(card);dx=dy=0;return;}          /* a tap, not a drag */
     if(!card.classList.contains('flipped')){
       /* every real drag commits — no snap-back to centre, whatever the distance.
@@ -14845,7 +14857,7 @@ function attachGestures(card){
     lensDisarm();if(lensOn){lensOn=false;closeLens();}
     if(!drag)return;drag=false;
     card.style.transition='transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s';
-    card.style.transform='';learnStamp.style.opacity=0;skipStamp.style.opacity=0;
+    card.style.transform='';stamps(0,0);
     dx=dy=0;
   });
   card.addEventListener('mousedown',e=>start(e.clientX,e.clientY,e.target));
@@ -15277,8 +15289,7 @@ function goToCard(idx){
   if(reviewMode&&!present())exitReview();
   if(activeFilter&&!present())clearFilter();
   if(!present())return;
-  flushDeal();                                 /* the riffle walks the DOM deck — the target card must be standing in it */
-  gotoTick(idx,0);
+  gotoTick(idx,0);                             /* the riffle walks the DOM deck — every card is standing in it */
 }
 
 document.getElementById('searchBtn').onclick=openSearch;
@@ -15581,14 +15592,14 @@ function diagReport(){
   const standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
   const store=[];
   try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);store.push(`${k} ${(localStorage.getItem(k)||'').length}ch`);}}catch(x){store.push('unreadable');}
-  const dealt=deck.querySelectorAll('.card').length+(dealPending?dealPending.length:0);
+  const dealt=deck.querySelectorAll('.card').length,built=deck.querySelectorAll('.card[data-built]').length;
   const lines=[
     'Timber report',
     `build      ${BUILD}`,
     `time       ${new Date().toISOString()}`,
     `page       ${location.href.slice(0,120)}`,
     `opened as  ${standalone?'installed app':'browser tab'}${navigator.onLine===false?' · offline':''}${navigator.serviceWorker&&navigator.serviceWorker.controller?' · offline cache active':''}`,
-    `deck       ${dealt} in play of ${PLANTS.length}${DECK_CAP?` · ${BOOT.light?'LIGHT MODE':'capped'} to ${DECK_CAP}`:''}${reviewMode?' · review':''}${activeFilter?' · filtered':''}`,
+    `deck       ${dealt} in play of ${PLANTS.length} · ${built} built${DECK_CAP?` · ${BOOT.light?'LIGHT MODE':'capped'} to ${DECK_CAP}`:''}${reviewMode?' · review':''}${activeFilter?' · filtered':''}`,
     `learned    ${learnedCount}`,
     `boot       failed opens in a row: ${BOOT.fails}${d.lastBoot?` · this open ${d.lastBoot}`:''}`,
     `last error ${e?`${e.msg} (${e.src||'?'}:${e.line}:${e.col}) at ${e.at} on ${e.build}`:'none recorded'}`,
@@ -15637,14 +15648,19 @@ document.getElementById('diagShare').onclick=()=>{navigator.share({title:'Timber
    WebKit is not obliged to make the same choice, and iOS is where the app died.
    fetch() puts the identical bytes in the identical Cache Storage entry — the service
    worker caches any ok same-origin GET, whoever asked for it — while decoding nothing
-   and holding nothing. Offline still ends up with the whole deck; the buried cards
-   keep their data-psrc and decode only if they ever reach the top. */
+   and holding nothing. Offline still ends up with the whole deck; a buried card is a
+   shell and decodes its photo only if it ever reaches the top. */
 function tricklePhotos(){
-  const pend=[...deck.querySelectorAll('.card .tphoto img')].filter(i=>!i.getAttribute('src')&&i.dataset.psrc)
-    .map(i=>i.dataset.psrc);
-  /* undealt cards have no <img> yet, so ask the deal backlog for its photos too */
-  const backlog=(dealPending||[]).map(idx=>photoSrc(slugLatin(PLANTS[idx].latin)));
-  const want=[...new Set([...pend,...backlog])].filter(u=>!trickled.has(u));
+  /* every photograph a standing card can show, nearest the top first. Buried cards
+     are shells (see dealCards) with no <img> to read, so the list comes from PLANTS —
+     the same three sources buildCard puts in a .tphoto: the FULLART painting, or the
+     photo and its PHOTO_SWAP frames. The top FETCH_DEPTH already carry their own src. */
+  const urls=[];
+  liveStack().slice(0,-FETCH_DEPTH).reverse().forEach(idx=>{
+    const slug=slugLatin(PLANTS[idx].latin),fa=FULLART[slug];
+    if(fa)urls.push(fa.art);else urls.push(photoSrc(slug),...swapFrames(PHOTO_SWAP[slug]));
+  });
+  const want=[...new Set(urls)].filter(u=>!trickled.has(u));
   if(!want.length)return;                      /* every photo is in the cache — stop the timer for good */
   want.slice(0,2).forEach(u=>{
     trickled.add(u);

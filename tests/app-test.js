@@ -13,8 +13,8 @@ function check(name, cond, extra) {
   else { failed++; failures.push(name + (extra ? ' — ' + extra : '')); console.log('FAIL', name, extra || ''); }
 }
 
-/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
-   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+/* the deal is synchronous now (timber.html dealCards deals shells), so this resolves at
+   once; kept so every suite waits on the same signal if a staged deal ever returns */
 const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 
 async function counts(page) {

@@ -1,14 +1,68 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Paste `TOXICITY-ASK.md` into ChatGPT and send the JSON back — **317 of 432**
-  cards carry no toxicity value, and a blank prints nothing at all, which a customer
-  reads as "safe". Regenerate the file with
-  `node tools/backfill-field.js toxicity --paste --one > TOXICITY-ASK.md`; it is the
-  brief and the current list in one paste, so there is no list to assemble by hand.
-  (Was "the first 50 names in data/incoming/toxicity-todo-2026-09-13.txt" against
-  305 of 392 — that file was a 2026-09-13 snapshot and the deck has moved since.)
-since: 2026-09-13  sessions-unchanged: 1
+brick: Get r270 (the shell deck, branch `claude/safari-compatibility-ufr5jx`) live
+  and open it on an iPhone that crashed, then paste back the *Report a problem*
+  text — that one sheet says whether it opened, how many cards it built, and what
+  last threw. Live is a fast-forward of the deploy branch: merge this branch into
+  `claude/timber-plant-pwa-j69h5e` (or `git push origin HEAD:refs/heads/claude/timber-plant-pwa-j69h5e`
+  from it) and the workflow does the rest.
+  (Displaced, not dropped: the toxicity paste — `node tools/backfill-field.js toxicity
+  --paste --one > TOXICITY-ASK.md` into ChatGPT, 317 of 432 cards blank — unchanged
+  since 2026-09-13.)
+since: 2026-09-16  sessions-unchanged: 0
+progress: 2026-09-16 (Safari — **buried cards become shells, so the deck's memory no
+  longer grows with the deck**) — Oscar: "works fine on android but on apple has a
+  melt down", with his own Android's report pasted (r269, 8GB, 10 cores, boot
+  fine). No WebKit here, same as every entry before: the proxy refuses the
+  Playwright CDN, so not even Linux WebKit could be installed. So the method was to
+  rule out the cheap explanations, then find the one axis that still scaled with
+  the deck and cut it.
+  RULED OUT, so the fix is not aimed at the wrong layer: the inline script parses as
+  ES2020 under acorn and esbuild accepts it for every Safari target from 11 up, so
+  no iPhone on iOS 13.1 or later is hitting a syntax wall (a syntax error would be a
+  blank page, not a crash loop); no lookbehind, replaceAll, at(), structuredClone or
+  class fields anywhere; every navigator.* call is feature-detected; no image in
+  art/ or photos/card exceeds 1386px on a side. The CSS needs Safari 15.4 for
+  `dvh` and 15 for `aspect-ratio` — a layout degrade on older iOS, not a kill.
+  MEASURED FIRST (Chromium 390x844 @3x, renderer RSS read from /proc, real
+  composited layers via CDP), before any change: **349 cards = 345MB / 51,038 DOM
+  nodes / 2,158ms to settle; ?cards=24 = 200MB / 3,798 nodes.** So ~145MB scaled
+  with the deck, and every earlier iOS fix — r78 staged deal, r79 fetch(), r192
+  light mode, r267 furniture-to-CSS — left that axis standing; r267 cut nodes
+  68k -> 51k and the crash is reported regardless. "A problem repeatedly occurred"
+  is iOS having killed the tab's WebContent process twice in a row, and memory is
+  what iOS kills a page for. [Inference] that this is the cause — nothing here can
+  read an iPhone's limit or say which device it is.
+  THE CHANGE: dealCards() deals SHELLS — one empty `<div class="card" data-idx>`
+  per plant, so document order is still stack order and nothing that walks the deck
+  (topCard, the goto riffle, saves, view backups) changed — and a card's ~145 nodes
+  of content are built by buildCard() only inside BUILD_DEPTH (= FETCH_DEPTH, 10)
+  of the top and dropped by unbuildCard() when it falls out of reach (a goto cut, a
+  rewind). markHot() owns that window, beside painting and fetching. The staged
+  deal is retired: 349 shells deal in one pass, so flushDeal/dealPending/
+  data-dealing are gone and liveStack() reads the DOM. tricklePhotos lists the
+  offline warm-up from PLANTS (a shell has no <img>), nearest the top first; the
+  swipe stamps are looked up per use because a shell's gestures outlive its
+  content; a card leaving the window also drops `flipped`, or its rebuilt front
+  would show as a back. The two audits that need every card (audit-layout,
+  deck-audit) call buildAllCards() first. The report's deck line now prints
+  "N built", so a phone can show the window is holding.
+  AFTER, same rig: **349 cards = 201MB / 2,031 nodes / 325ms to settle — the
+  24-card figure (196MB / 1,706).** Real composited layers 17 before and after;
+  photo requests at load unchanged. perf-test asserts it from now on: built ≤
+  BUILD_DEPTH (+ cards still flying out), every unbuilt card an empty shell, deck
+  DOM ≤ 4,000 nodes, and the window still bounded after a goto cut of half the
+  deck and after 14 swipes + 14 undos. features-test finds its two-photo card by
+  data rather than by DOM. Gate 18/18 under --jobs 3. Build r270.
+  [Unverified] whether either iPhone now opens — that is the phone's to say, and
+  the Report a problem sheet is how it says it. If one still dies with ten cards
+  built, size was never the cause, and the next place to LOOK (not guess) is what
+  the top card composites: backdrop-filter on edition cards, the masks, the 3D
+  flip. Light mode still exists but now sheds almost nothing; it remains the
+  crash-loop detector.
+  NOT deployed: this sits on `claude/safari-compatibility-ufr5jx`; live is a
+  fast-forward of `claude/timber-plant-pwa-j69h5e`.
 progress: 2026-09-15 (later — **the deck stops building 13,546 images**, and three
   checks that were lying get fixed) — no cards added; this was the app itself.
   **The card's shared furniture is CSS now, not `<img>`.** Every card wore the

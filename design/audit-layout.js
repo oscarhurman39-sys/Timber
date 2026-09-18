@@ -40,8 +40,11 @@ const BAR = { start: 40.4, end: 93.2 };   // light bar span, % of band (locked m
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await page.goto('http://localhost:8477/timber.html');
   await page.waitForTimeout(800);
-  /* the staged deal lands buried cards in timer chunks — the audit measures every card */
-  await page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
+  /* buried cards are SHELLS in the live app (timber.html dealCards) — only the top
+     BUILD_DEPTH carry content. The audit measures every card, so build them all first;
+     one batch, one ink fit, exactly as a dealt window is fitted. */
+  await page.evaluate(() => buildAllCards());
+  await page.waitForTimeout(200);
 
   const violations = await page.evaluate(({ SPRITE_BIAS, BAR }) => {
     const out = [];

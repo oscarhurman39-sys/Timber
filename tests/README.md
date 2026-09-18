@@ -58,9 +58,11 @@ fail for the wrong reason.
 All must pass before pushing. The layout audit's rules and defect log
 live in `CORRECTION-PROTOCOL.md`.
 
-`perf-test.js` guards the deck's compositing budget: every plant stays in the DOM (the
-layout audit needs that), but only the top few cards may paint and only the ones that
-move may get a GPU layer. It also asserts that hiding buried content changes **no pixel**
+`perf-test.js` guards the deck's compositing and memory budget: every plant stays in the DOM
+as a one-element **shell** (document order is stack order), but only the top `BUILD_DEPTH`
+cards carry their content, only the top few may paint, and only the ones that move may get a
+GPU layer. The whole-deck audits (`audit-layout.js`, `deck-audit.js`) call `buildAllCards()`
+first to get the old every-card DOM back on demand. It also asserts that hiding buried content changes **no pixel**
 — only hot cards carry the drop shadow (an always-on shadow stacked ~57 deep once built
 a heavy black halo), and the `deep` toggle must never touch what's visible.
 

@@ -18,8 +18,8 @@
 const { chromium } = require('playwright');
 
 const URL = 'http://localhost:8477/timber.html';
-/* the staged deal (timber.html dealCards) lands buried cards in timer chunks; the deck
-   carries data-dealing until the last chunk is in, so counting DOM cards must wait it out */
+/* the deal is synchronous now (timber.html dealCards deals shells), so this resolves at
+   once; kept so every suite waits on the same signal if a staged deal ever returns */
 const deckSettled = page => page.waitForFunction(() => !document.getElementById('deck').hasAttribute('data-dealing'));
 
 /* latin name -> why it is knowingly broken. Delete a line once the card is fixed. */
@@ -40,7 +40,9 @@ const errors = [], warnings = [], known = [];
   await page.waitForTimeout(1000);
   await deckSettled(page);
 
-  /* photos fetch in a sliding window in the live app — reveal them all for the audit */
+  /* buried cards are SHELLS in the live app (timber.html dealCards) and photos fetch
+     in a sliding window — build every card and reveal every photo for the audit */
+  await page.evaluate(() => buildAllCards());
   await page.evaluate(() =>
     document.querySelectorAll('.tphoto img').forEach(i => { if (!i.getAttribute('src') && i.dataset.psrc) i.src = i.dataset.psrc; }));
   await page.waitForTimeout(2500);
