@@ -1164,6 +1164,7 @@
     <div class="row" id="quizRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.4 9.2a2.7 2.7 0 0 1 5.2.85c0 1.7-2.6 2.05-2.6 3.55"/><path d="M12 17h.01"/></svg></span> Quiz mode <small id="quizBestMenu"></small></div>
     <div class="row" id="reviewRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9.5h16"/><path d="M8 3v4"/><path d="M16 3v4"/></svg></span> Review due <small id="reviewDueMenu">0</small></div>
     <div class="row" id="statsRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V11"/><path d="M12 20V4"/><path d="M19 20v-6"/></svg></span> My progress</div>
+    <div class="row" id="browserRow" role="button" tabindex="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></span> Open in browser</div>
     <div class="f-label" id="filterLabel">Filter deck</div>
     <div class="f-chips" id="filterChips" role="group" aria-labelledby="filterLabel"></div>
     <div class="row" id="installRow" role="button" tabindex="0" hidden><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v9"/><path d="M8 9.5l4 4 4-4"/><path d="M5 19h14"/></svg></span> Install app</div>
@@ -1237,7 +1238,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r272 · 2026-09-23 · 7ce38cf';
+const BUILD='r274 · 2026-09-23 · 8655a13';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -15753,6 +15754,20 @@ trapFocus(diagEl);
 const diagRow=document.getElementById('diagRow');
 diagRow.onclick=()=>{closeSheet();openDiag();};
 diagRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();diagRow.onclick();}};
+/* Open the live page in the phone's browser. The installed app and a browser tab share
+   one service worker, so loading the page there fetches the newest build and brings up
+   the update pill: a one-tap way to check for a deploy. On Android an intent: URL
+   hands the page to Chrome (the app window would otherwise keep in-scope links to
+   itself), with the plain URL as fallback if Chrome is missing; elsewhere, a new tab. */
+const browserRow=document.getElementById('browserRow');
+browserRow.onclick=()=>{
+  closeSheet();
+  const url=location.origin+location.pathname;
+  if(/Android/i.test(navigator.userAgent)&&/^https:$/.test(location.protocol)){
+    location.href='intent://'+location.host+location.pathname+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(url)+';end';
+  }else window.open(url,'_blank','noopener');
+};
+browserRow.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();browserRow.onclick();}};
 document.getElementById('diagClose').onclick=closeDiag;
 diagEl.querySelectorAll('[data-dgclose]').forEach(el=>el.onclick=closeDiag);
 const diagCopy=document.getElementById('diagCopy');
