@@ -54,6 +54,10 @@ const KNOWN = new Set([
      which side moves. See VERIFY-QUEUE item 85. */
   "Gaultheria procumbens 'Gaubi'|pest-vs-prose",
   'Digitalis purpurea Foxy Group|pest-vs-prose',
+  /* 2026-09-23 batch: the same "may be susceptible to honey fungus" sentence with a
+     pestRisk of 4 on both cards, both from Oscar's supplied JSON. Same call, same item: VQ 85. */
+  "Gaultheria mucronata 'Snow White'|pest-vs-prose",
+  "Abelia × grandiflora 'Kaleidoscope'|pest-vs-prose",
 ]);
 
 const issues = [];

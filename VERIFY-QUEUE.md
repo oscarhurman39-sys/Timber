@@ -3722,6 +3722,8 @@ card; they are listed in `KNOWN` in `tools/plant-sense.js` pending that call.
 |---|---|---|
 | Checkerberry Big Berry (`Gaultheria procumbens 'Gaubi'`) | 3 | "Generally pest-free and hardy; may be **susceptible to** honey fungus where present" |
 | Foxy Cream foxglove (`Digitalis purpurea` Foxy Group) | 5 | "generally easy but **susceptible to** slugs and occasional leaf diseases" |
+| Prickly heath 'Snow White' (`Gaultheria mucronata 'Snow White'`, 2026-09-23 batch) | 4 | "generally pest-free; naturally suckering and may be **susceptible to** honey fungus where the disease is already present" |
+| Abelia 'Kaleidoscope' (`Abelia × grandiflora 'Kaleidoscope'`, 2026-09-23 batch, held — no photo yet) | 4 | "Drought tolerant once established and generally pest-free; may be **susceptible to** honey fungus." |
 
 **The reading that argues the numbers are right and the rule is over-reading.**
 Honey fungus is a property of the *site*, not of Gaultheria — almost any woody plant
