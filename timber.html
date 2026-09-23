@@ -1238,7 +1238,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r274 · 2026-09-23 · 8655a13';
+const BUILD='r276 · 2026-09-23 · 7d69f5f';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -15658,6 +15658,21 @@ if('serviceWorker' in navigator){
   });
 }
 document.getElementById('updatePill').onclick=()=>location.reload();
+/* The worker's 'timber-updated' message can miss: when the background check finishes
+   before a just-opened page is registered as a client, the message goes nowhere and no
+   pill ever shows. So the page also asks the cache itself: once the worker has stored
+   a newer shell, the cached copy carries a different build stamp from the one running.
+   Checked a few seconds after opening and whenever the app returns to the foreground. */
+function checkCachedBuild(){
+  if(!('caches' in window)||!navigator.serviceWorker||!navigator.serviceWorker.controller)return;
+  const key=location.href.replace(/[?#].*$/,'');
+  caches.match(key).then(r=>r&&r.text()).then(t=>{
+    const m=t&&t.match(new RegExp('const '+'BUILD='+"'([^']+)'"));
+    if(m&&m[1]!==BUILD)document.getElementById('updatePill').hidden=false;
+  }).catch(()=>{});
+}
+window.addEventListener('load',()=>setTimeout(checkCachedBuild,4000));
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(checkCachedBuild,3000);});
 
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
   window.addEventListener('load',()=>{
