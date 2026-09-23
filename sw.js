@@ -9,7 +9,7 @@ const EXTRA = ['./', './index.html'];
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE)
-      .then(c => c.add(CORE)                                // the app itself must cache, or install fails and retries
+      .then(c => c.add(new Request(CORE, { cache: 'reload' }))                                // the app itself must cache, or install fails and retries
         .then(() => Promise.allSettled(EXTRA.map(u => c.add(u)))))
       .then(() => self.skipWaiting())
   );
@@ -28,7 +28,16 @@ self.addEventListener('fetch', e => {
   const key = e.request.url.replace(/[?#].*$/, '');        // one cache entry per resource, query-stripped
   e.respondWith(
     caches.match(key).then(hit => {
-      const refresh = fetch(e.request).then(res => {
+      /* The app shell is revalidated WITH THE SERVER, not the browser's HTTP cache.
+         A plain fetch() honours GitHub Pages' short max-age, so for minutes after a
+         deploy the "refresh" got the phone's own stale copy back: same ETag, no
+         update pill, and the old build re-cached. cache:'no-cache' sends a
+         conditional request, so an unchanged page costs a 304, not a download. */
+      const path = new URL(key).pathname;
+      const shell = new URL(e.request.url).origin === location.origin &&
+        (path.endsWith('timber.html') || path.endsWith('index.html') || path.endsWith('/'));
+      const req = shell ? new Request(e.request.url, { cache: 'no-cache', credentials: 'same-origin' }) : e.request;
+      const refresh = fetch(req).then(res => {
         if (res.ok && !res.redirected && new URL(e.request.url).origin === location.origin) {
           const copy = res.clone();
           caches.open(CACHE).then(async c => {
