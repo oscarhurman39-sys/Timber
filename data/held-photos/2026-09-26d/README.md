@@ -125,3 +125,10 @@ confirmed it is the right plant; renamed from the -as-sent file). Soil "Fertile,
 + "No stagnant wet; keep air moving", 15-25 / 25-35 cm. Text kept as supplied; the photo shows
 magenta-violet, not "light pink" (hue 335) — offered to Oscar, not changed.
 Batch now 43 of 45: #13 Ruby paused, #39 Kissing Smileyz skipped.
+
+**Card 13 Flower Carpet Ruby dealt** from `rosa-noafeuer.jpg` (Oscar: publish with the best of
+his two photos; the sharper, bud-in-focus one; byte-identical to the earlier -as-sent file,
+which is removed as a duplicate). `rosa-noafeuer-alt.jpg` is the second, softer shot, kept
+unused. Soil rose default, 50-60 cm tall. Oscar plans a further photo; the app has no
+multi-photo/flash feature today (searched timber.html), so a new photo would replace this one.
+Batch now 44 of 45: only #39 Kissing Smileyz (skipped) remains.
