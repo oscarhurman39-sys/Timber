@@ -1902,6 +1902,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "goeppertia-lietzei-stella.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "gomphrena-globosa.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -3670,6 +3680,16 @@
    "sourceUrl": null,
    "commit": "ee6acfd",
    "commitSubject": "Add Hot Lips Sage (first JSON with new toxicity + compliance fields)",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "salvia-jamensis-magical-mississippi.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
