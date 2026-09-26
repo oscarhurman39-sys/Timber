@@ -82,3 +82,15 @@ double"; #24 leaves carry pale spots, possibly spray residue.
 Flagged, not changed: #26 bloom is cerise/red-pink, no paler centre visible; #27 shows leaves
 only (no flowers, Dec-Mar peak); #28 one collage panel shows yellow-green leaves with brown
 spots; #30 lower leaf shows dark spotting (leaf spot possible, not confirmed).
+
+**Cards 31-35 dealt** (Oscar's photos, Galaxy S24 2026-09-26).
+- #31 latin and cvs use a curly apostrophe, `'Kramer’s Rote'` (Oscar agreed; the checker
+  rejects a straight one inside the cultivar quotes; 12 existing cards do the same). The common
+  name keeps Oscar's straight apostrophe.
+- soil/warning: #31 "Drained, acid to neutral" + "No waterlogging or strong lime"; #32 same soil
+  + "No strong lime or winter waterlogging"; #33/#34 "Light, well-drained" + "Winter wet rots
+  roots; keep it sunny"; #35 "Light, well-drained" + "Heavy wet winter soil kills it".
+- sizes: #31 30-50 / 30-50 cm; #32 30 / 60 cm. Others unchanged.
+Flagged, not changed: #31 shows yellow-green buds, not the magenta flowers (peak Jan-Apr);
+#32 photo shows the gold foliage only; #33 has a few dark spots on one leaf; #35 is soft-focus
+and shows no flowers.
