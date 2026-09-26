@@ -9,3 +9,8 @@
   this plant, with a photo, as `Aster 'Alpha Light Purple'`. The latin differs, so the
   duplicate check would not have caught it. It waits on Oscar: replace the old card's
   text with this JSON, or skip it.
+
+**Update, same day:** Aster 'Rose Crystal' was dealt from `symphyotrichum-dumosum-rose-crystal.jpg`
+(Oscar's photo, taken 2026-09-23, Galaxy S24), with the focus set to `50% 20%`. Oscar identified
+it as Rose Crystal from the label. The flowers show bright violet-magenta, while the card's
+`visual` says "dusky rose-pink" and its hue is 335. That is flagged to Oscar, not changed.
