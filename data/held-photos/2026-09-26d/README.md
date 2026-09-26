@@ -61,3 +61,13 @@ Flagged, not changed: #18 shows only a crimson bud (card: deep pink) and leaves 
 blotches (possibly black spot); #19 shows only buds with red petal tips (card: bright pink),
 no open flower; #20 new growth is pink-red over green mature leaves, while the card says
 foliage deepens to dark red through summer.
+
+**Cards 21-25 dealt** (Oscar's photos; #22-25 Galaxy S24 2026-09-26, #21 his collage).
+- soil "Fertile, drained, any pH" on the roses; warnings "No waterlogging; renew old rose soil",
+  except #23 "Pots must not dry out; never waterlog". #25 "Any pH, well-drained" +
+  "Cut out plain green reverted shoots".
+- sizes: #21 1.5 m tall; #22 1.1 m / 1.25 m; #23 40-50 cm / 40-50 cm; #24 60-70 cm / 40-60 cm.
+- #25 peak "Year-round foliage" -> Jan-Dec (Oscar: yes).
+Flagged, not changed: #22 shows only an apricot bud (no open flower) and leaves with a pale
+powdery film (cause not confirmed); #23 bloom looks semi-double with open stamens vs "frilled
+double"; #24 leaves carry pale spots, possibly spray residue.
