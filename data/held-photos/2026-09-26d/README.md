@@ -71,3 +71,14 @@ foliage deepens to dark red through summer.
 Flagged, not changed: #22 shows only an apricot bud (no open flower) and leaves with a pale
 powdery film (cause not confirmed); #23 bloom looks semi-double with open stamens vs "frilled
 double"; #24 leaves carry pale spots, possibly spray residue.
+
+**Cards 26-30 dealt** (Oscar's photos; #26, #27, #30 Galaxy S24 2026-09-26, #28/#29 his collages).
+- soil/warning: #26 rose default; #27 "Humus-rich, free-draining" + "Tuber rots if left wet;
+  part shade best"; #28 "Any soil, acid to neutral" + "Cut hard in spring for brightest stems";
+  #29 "Rich, drained, not acid" + "No winter wet; best in part shade"; #30 "Fertile, drained,
+  any pH" + "Never let it dry out; keep air moving".
+- sizes: #26 60-80 / 60-90 cm; #27 10-15 / 10-15 cm; #29 40 / 40-50 cm; #30 90 / 30-50 cm
+  ("up to 0.9 m" -> 90 cm, same as White Patio).
+Flagged, not changed: #26 bloom is cerise/red-pink, no paler centre visible; #27 shows leaves
+only (no flowers, Dec-Mar peak); #28 one collage panel shows yellow-green leaves with brown
+spots; #30 lower leaf shows dark spotting (leaf spot possible, not confirmed).

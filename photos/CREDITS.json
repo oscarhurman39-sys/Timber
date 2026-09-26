@@ -1102,6 +1102,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cornus-alba-minbat.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "cornus-controversa-variegata.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -1299,6 +1309,16 @@
    "sourceUrl": null,
    "commit": "48a3eff",
    "commitSubject": "Add Gold Rider Leyland Cypress (first conifer); fix checker for × nothogenus latin",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cyclamen-coum-cyberia-rose-silver.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -2035,6 +2055,16 @@
    "file": "helleborus-ericsmithii-winter-moonbeam.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Uncropped, verdict as-is, no pixels generated. C2PA: a full signed Galaxy S24 CAPTURE manifest (JUMBF box, c2pa.ingredient.v2, relationship parentOf, claim generator Galaxy S24) with NO digitalSourceType and no Photo assist marker — the untouched-original signature, the strongest provenance in the deck this month. EXIF 2026-08-25",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "helleborus-hybridus-viv-celestina.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
@@ -3203,6 +3233,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "phlox-paniculata-bright-eyes.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "phlox-paniculata-david.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -3764,6 +3804,16 @@
   },
   {
    "file": "rosa-meirivoui.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rosa-noa200051.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
