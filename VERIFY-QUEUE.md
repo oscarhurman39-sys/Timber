@@ -3724,6 +3724,7 @@ card; they are listed in `KNOWN` in `tools/plant-sense.js` pending that call.
 | Foxy Cream foxglove (`Digitalis purpurea` Foxy Group) | 5 | "generally easy but **susceptible to** slugs and occasional leaf diseases" |
 | Prickly heath 'Snow White' (`Gaultheria mucronata 'Snow White'`, 2026-09-23 batch) | 4 | "generally pest-free; naturally suckering and may be **susceptible to** honey fungus where the disease is already present" |
 | Abelia 'Kaleidoscope' (`Abelia × grandiflora 'Kaleidoscope'`, 2026-09-23 batch, held — no photo yet) | 4 | "Drought tolerant once established and generally pest-free; may be **susceptible to** honey fungus." |
+| Prickly heath 'Signaal' (`Gaultheria mucronata 'Signaal'`, 2026-09-26 batch) | 3 | "Very cold hardy and generally pest-free; may be **susceptible to** honey fungus where the disease is already present." |
 
 **The reading that argues the numbers are right and the rule is over-reading.**
 Honey fungus is a property of the *site*, not of Gaultheria — almost any woody plant
@@ -4220,3 +4221,18 @@ code and proves nothing. That mistake was already made once on the photos versio
 without building its derivative, which is the gap behind item 87. The three plant
 staging tools now call `optimise-photos.js --only <file>`; the art path may need
 the same wiring.
+
+---
+
+### 91. Blueberry 'Brigitta': the bloom band shows the berries, the prose also names spring flowers
+
+`plant-sense` `peak-vs-prose` fires on `Vaccinium corymbosum 'Brigitta'` (held, 2026-09-26
+batch): `peak` is `Aug-Sep`, the fruit season, and the `visual` opens with "white
+bell-shaped spring flowers". Both came in Oscar's supplied JSON. It has the same shape as
+Tibetan Cherry and Firethorn SAPHYR ORANGE: two seasons of interest, one bloom band.
+Nothing was changed; the card is listed in `KNOWN` in `tools/plant-sense.js`.
+
+**What decides it:** Oscar either keeps `Aug-Sep` (it is sold on the fruit, and the
+flowers are a minor feature) or widens the peak to cover spring flowering. Then delete
+the line from `KNOWN` and this item.
+

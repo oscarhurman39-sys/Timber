@@ -422,7 +422,7 @@
    "commercialUseCleared": true
   },
   {
-   "file": "aster-alpha-light-purple.jpg",
+   "file": "symphyotrichum-dumosum-alpha-light-purple.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -529,6 +529,26 @@
    "sourceUrl": null,
    "commit": "09770ce",
    "commitSubject": "Add Orange Ice Japanese Barberry to deck: 83 -> 84",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "bergenia-bressingham-ruby.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "bistorta-amplexicaulis-bokrafire.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -1832,6 +1852,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "gaultheria-mucronata-signaal.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "gaultheria-mucronata-snow-white.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2013,6 +2043,16 @@
   },
   {
    "file": "heuchera-villosa-timeless-night.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "heucherella-solar-eclipse.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -3853,6 +3893,26 @@
    "commercialUseCleared": true
   },
   {
+   "file": "symphyotrichum-dumosum-granat.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "symphyotrichum-dumosum-rose-crystal.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "syringa-vulgaris-znamya-lenina.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -3910,6 +3970,16 @@
    "sourceUrl": null,
    "commit": "c210f80",
    "commitSubject": "Restore nine displaced plants: deck 57 -> 66",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "vaccinium-corymbosum-brigitta.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
