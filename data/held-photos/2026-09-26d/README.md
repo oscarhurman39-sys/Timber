@@ -119,3 +119,9 @@ no smoke plumes; #45 bloom reads mid-yellow with a double form, matching the car
 **Batch status:** 42 of 45 dealt. Outstanding: #13 Flower Carpet Ruby (paused by Oscar),
 #37 Aster Alpha Light Pink (photo is magenta-violet; awaiting label check), #39 Rudbeckia
 Kissing Smileyz (skipped by Oscar, no photo).
+
+**Card 37 Aster Alpha Light Pink dealt** from `symphyotrichum-alpha-light-pink.jpg` (Oscar
+confirmed it is the right plant; renamed from the -as-sent file). Soil "Fertile, drained, any pH"
++ "No stagnant wet; keep air moving", 15-25 / 25-35 cm. Text kept as supplied; the photo shows
+magenta-violet, not "light pink" (hue 335) — offered to Oscar, not changed.
+Batch now 43 of 45: #13 Ruby paused, #39 Kissing Smileyz skipped.
