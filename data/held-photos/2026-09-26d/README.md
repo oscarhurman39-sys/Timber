@@ -34,3 +34,13 @@ show dark spots that may be black spot.
 - sizes: #6 80-90 cm tall, #10 75 cm tall. Others unchanged.
 Flagged to Oscar, not changed: #6 blooms look crimson/deep red rather than "deep coral-red";
 #10 leaves show fine orange-brown speckling and some yellowing (possibly rust; not confirmed).
+
+**Cards 11, 14, 15 dealt** (Oscar's photos, Galaxy S24 2026-09-26). Same convention.
+- soil "Fertile, drained, any pH" on all three; warnings #11 "Pots need steady water, never
+  sit wet", #14 "No waterlogging; renew old rose soil", #15 "Wall-side soil stays dry; water more".
+- size: #11 60 cm tall. Others unchanged.
+Flagged, not changed: #11 bloom reads peach/salmon rather than "light shell-pink"; #14 leaves
+show yellowing with pale spotting (cause not confirmed); #15 bloom is mid-pink vs "pale pink".
+**Held, not dealt: #12 Flower Carpet Sunset and #13 Flower Carpet Ruby.** Both photos
+(`rosa-deseo-as-sent.jpg`, `rosa-noafeuer-as-sent.jpg`) show plain red flowers, and #12's
+card says orange-red sunset tones. Waiting on Oscar to confirm which photo is which plant.
