@@ -13,3 +13,14 @@ Checks run on 2026-09-26:
   - #31 Erica 'Kramer's Rote': the apostrophe inside the cultivar quotes fails the latin checker.
 - Soil / soil-warning length warnings on most cards (the panel fits ~26 / ~44 chars).
   Earlier batches were shortened on Oscar's say-so; not applied here yet.
+
+**Cards 1-5 dealt** (Oscar's photos, Galaxy S24 2026-09-26; #4 and #5 are his collages).
+Oscar said "go" to shortening the layout fields only; every other field is as supplied:
+- soil + warning: "Rich, drained, not acid" (#1), "Fertile, drained, any pH" (#2-5);
+  warning "No waterlogging; renew old rose soil", except #3 "Pots dry fast but must never sit wet".
+- sizes in cm: #1 70 / 50 cm, #3 50 cm / 0.5-1 m ("up to 50 cm" collided with the HEIGHT
+  label, so 50 cm is the stated maximum), #4 60 / 50 cm, #5 75 / 50-90 cm. #2 unchanged.
+- #25 Euonymus peak will be Jan-Dec (Oscar: yes). #31 apostrophe still open.
+Flagged to Oscar, not changed: #1 photo does not show the dark eye/stamens the text
+describes; #4 blooms look double with no stamens visible vs "semi-double"; #5 leaves
+show dark spots that may be black spot.
