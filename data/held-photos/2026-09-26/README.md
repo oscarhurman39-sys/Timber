@@ -28,3 +28,12 @@ it as Rose Crystal from the label. The flowers show bright violet-magenta, while
 - Not used: the first photo in the drop was byte-identical to the Rose Crystal photo
   already dealt. `unassigned-light-violet-aster.jpg` (2026-09-23 16:18) is kept for the
   Alpha Light Purple decision and is not on any card.
+
+**Decisions applied (Oscar: "go do everything"):**
+- Alpha Light Purple: the dealt card `Aster 'Alpha Light Purple'` was replaced in place by
+  Oscar's new JSON as `Symphyotrichum dumosum Alpha® Light Purple` (same conventions). Its
+  existing photo moved with it (photo and card file renamed, CREDITS entry updated). The
+  light-violet photo in this folder is still unused.
+- Rose Crystal: `visual` rewritten to match the photo (vivid violet-magenta, semi-double),
+  and hue changed from 335 to 300.
+- Brigitta's peak stays Aug-Sep (VQ 91). The honey-fungus pest ratings (VQ 85) are unchanged.
