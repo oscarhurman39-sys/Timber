@@ -14,3 +14,17 @@
 (Oscar's photo, taken 2026-09-23, Galaxy S24), with the focus set to `50% 20%`. Oscar identified
 it as Rose Crystal from the label. The flowers show bright violet-magenta, while the card's
 `visual` says "dusky rose-pink" and its hue is 335. That is flagged to Oscar, not changed.
+
+**Second drop, same day** (`batch-2.json` as supplied, `batch-2-corrected.json` as added):
+
+- Dealt with photos: Gaultheria mucronata 'Signaal', Bergenia 'Bressingham Ruby' (Oscar's PNG
+  cutout, placed with `tools/composite-hero.js` at hue 335; both files are kept here),
+  Bistorta amplexicaulis 'Bokrafire', × Heucherella 'Solar Eclipse', plus the held
+  Aster 'Granat' and Blueberry 'Brigitta'.
+- Held without photos: Salvia × jamensis Magical® Mississippi, Goeppertia lietzei 'Stella'.
+  The Goeppertia had two corrections: `H1A` → `H1a` (the only form the validator
+  accepts), and peak "Year-round foliage" → `Jan-Dec` (a peak with no month in it
+  renders a blank season row; PLANT-BRIEF.md says to use Jan-Dec).
+- Not used: the first photo in the drop was byte-identical to the Rose Crystal photo
+  already dealt. `unassigned-light-violet-aster.jpg` (2026-09-23 16:18) is kept for the
+  Alpha Light Purple decision and is not on any card.

@@ -58,6 +58,8 @@ const KNOWN = new Set([
      pestRisk of 4 on both cards, both from Oscar's supplied JSON. Same call, same item: VQ 85. */
   "Gaultheria mucronata 'Snow White'|pest-vs-prose",
   "Abelia × grandiflora 'Kaleidoscope'|pest-vs-prose",
+  /* 2026-09-26: same honey-fungus sentence, pestRisk 3, Oscar's JSON. VQ 85. */
+  "Gaultheria mucronata 'Signaal'|pest-vs-prose",
   /* 2026-09-26 batch: peak is the fruit season the plant is sold on (Aug-Sep), while
      Oscar's own visual also names the spring flowers. See VERIFY-QUEUE item 91. */
   "Vaccinium corymbosum 'Brigitta'|peak-vs-prose",
