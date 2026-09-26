@@ -422,16 +422,6 @@
    "commercialUseCleared": true
   },
   {
-   "file": "symphyotrichum-dumosum-alpha-light-purple.jpg",
-   "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright",
-   "author": "Oscar Hurman",
-   "sourceUrl": null,
-   "commit": null,
-   "commitSubject": "staged after CREDITS.json was created — not yet committed",
-   "commercialUseCleared": true
-  },
-  {
    "file": "astilbe-chocolate-shogun.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Supplied as a two-frame side-by-side COMPOSITE (leaf close-up left, clump right) kept whole; no pixels generated",
@@ -1912,6 +1902,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "goeppertia-lietzei-stella.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "gomphrena-globosa.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2252,6 +2252,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hylotelephium-coraljade.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "hylotelephium-dream-dazzler.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2263,6 +2273,26 @@
   },
   {
    "file": "hylotelephium-ewersii-var-homophyllum-rosenteppich.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hylotelephium-telephium-conga-line.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "hylotelephium-telephium-dolseb.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -2403,6 +2433,16 @@
   },
   {
    "file": "laurus-nobilis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "lavandula-angustifolia-munstead.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -3643,6 +3683,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "salvia-jamensis-magical-mississippi.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "salvia-officinalis-tricolor.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -3876,6 +3926,16 @@
    "file": "styrax-japonicus-evening-light.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Uncropped: passed through tools/reframe-photo.js at verdict as-is, no pixels generated. EXIF Samsung Galaxy S24, 2026-08-22 (current season). No C2PA manifest in the file and no AI or generative marker",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "symphyotrichum-dumosum-alpha-light-purple.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
    "sourceUrl": null,
    "commit": null,
