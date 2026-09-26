@@ -24,3 +24,13 @@ Oscar said "go" to shortening the layout fields only; every other field is as su
 Flagged to Oscar, not changed: #1 photo does not show the dark eye/stamens the text
 describes; #4 blooms look double with no stamens visible vs "semi-double"; #5 leaves
 show dark spots that may be black spot.
+
+**Cards 6-10 dealt** (Oscar's photos; #6, #7, #9, #10 are his collages, #8 Galaxy S24
+2026-09-26). Same convention as 1-5 (Oscar's "go"): only soil and sub-metre sizes change.
+- soil "Fertile, drained, any pH" (#6-8, #10), "Humus-rich, well-drained" (#9; "moist" is
+  already in its water text, which the checker flags).
+- warnings: #6 "Avoid exposed sites; renew old rose soil", #7/#8/#10 "No waterlogging; renew
+  old rose soil", #9 "Wind and drought scorch the leaves".
+- sizes: #6 80-90 cm tall, #10 75 cm tall. Others unchanged.
+Flagged to Oscar, not changed: #6 blooms look crimson/deep red rather than "deep coral-red";
+#10 leaves show fine orange-brown speckling and some yellowing (possibly rust; not confirmed).
