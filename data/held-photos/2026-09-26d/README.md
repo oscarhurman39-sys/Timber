@@ -44,3 +44,10 @@ show yellowing with pale spotting (cause not confirmed); #15 bloom is mid-pink v
 **Held, not dealt: #12 Flower Carpet Sunset and #13 Flower Carpet Ruby.** Both photos
 (`rosa-deseo-as-sent.jpg`, `rosa-noafeuer-as-sent.jpg`) show plain red flowers, and #12's
 card says orange-red sunset tones. Waiting on Oscar to confirm which photo is which plant.
+
+**Card 12 Flower Carpet Sunset dealt** from `rosa-deseo.jpg` (Oscar confirmed it is the second
+photo of that drop; renamed from `rosa-deseo-as-sent.jpg`). Soil "Fertile, drained, any pH",
+warning "No waterlogging; renew old rose soil"; sizes unchanged. Text kept as supplied, though
+the photo shows clear red while the visual says orange-red sunset tones (hue 18).
+**#13 Flower Carpet Ruby stays held** at Oscar's request; its bud photo is kept as
+`rosa-noafeuer-as-sent.jpg` and is not on any card.
