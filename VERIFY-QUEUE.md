@@ -4220,3 +4220,18 @@ code and proves nothing. That mistake was already made once on the photos versio
 without building its derivative, which is the gap behind item 87. The three plant
 staging tools now call `optimise-photos.js --only <file>`; the art path may need
 the same wiring.
+
+---
+
+### 91. Blueberry 'Brigitta': the bloom band shows the berries, the prose also names spring flowers
+
+`plant-sense` `peak-vs-prose` fires on `Vaccinium corymbosum 'Brigitta'` (held, 2026-09-26
+batch): `peak` is `Aug-Sep`, the fruit season, and the `visual` opens with "white
+bell-shaped spring flowers". Both came in Oscar's supplied JSON. It has the same shape as
+Tibetan Cherry and Firethorn SAPHYR ORANGE: two seasons of interest, one bloom band.
+Nothing was changed; the card is listed in `KNOWN` in `tools/plant-sense.js`.
+
+**What decides it:** Oscar either keeps `Aug-Sep` (it is sold on the fruit, and the
+flowers are a minor feature) or widens the peak to cover spring flowering. Then delete
+the line from `KNOWN` and this item.
+
