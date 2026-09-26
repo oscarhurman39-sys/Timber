@@ -106,3 +106,16 @@ turning reddish-purple in autumn); #36 a few leaves have brown spots.
 **#37 Aster Alpha Light Pink held:** `symphyotrichum-alpha-light-pink-as-sent.jpg` shows a vivid
 magenta-violet double, not "light pink", and the deck already deals Alpha Light Purple.
 Waiting on Oscar to confirm the label.
+
+**Cards 41-45 dealt** (Oscar's photos, Galaxy S24 2026-09-26). This closes the batch.
+- #41 "Fertile, drained, any pH" + "Best dark leaf colour in good light", 40-50 cm tall.
+- #42 "Humus-rich, acid-neutral" + "No chalk; shelter from drying winds".
+- #43 "Any well-drained soil" + "No waterlogging; sun deepens purple".
+- #44 "Fertile, well-drained" + "Suffers in drought; keep pots watered", 50 cm tall.
+- #45 rose default.
+Flagged, not changed: #42 shows autumn leaves only (flowers Jan-Feb); #43 shows foliage only,
+no smoke plumes; #45 bloom reads mid-yellow with a double form, matching the card.
+
+**Batch status:** 42 of 45 dealt. Outstanding: #13 Flower Carpet Ruby (paused by Oscar),
+#37 Aster Alpha Light Pink (photo is magenta-violet; awaiting label check), #39 Rudbeckia
+Kissing Smileyz (skipped by Oscar, no photo).
