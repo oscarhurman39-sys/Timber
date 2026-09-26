@@ -94,3 +94,15 @@ spots; #30 lower leaf shows dark spotting (leaf spot possible, not confirmed).
 Flagged, not changed: #31 shows yellow-green buds, not the magenta flowers (peak Jan-Apr);
 #32 photo shows the gold foliage only; #33 has a few dark spots on one leaf; #35 is soft-focus
 and shows no flowers.
+
+**Cards 36, 38, 40 dealt** (Oscar's photos; #36/#40 Galaxy S24 2026-09-26, #38 his collage).
+- #36 "Sharply drained, any pH" + "Heavy wet winter soil rots it", 20-40 / 30-50 cm.
+- #38 "Fertile, well-drained" + "Winter wet rots it; hates root disturbance", 40-50 / 30-50 cm.
+- #40 "Any well-drained soil" + "Berries need a second Viburnum nearby".
+Flagged, not changed: #38 bloom reads salmon/coral-pink rather than "vivid tangerine-orange",
+cone dark brown not lime-green; #40 photo shows red/burgundy foliage only (card: glossy green
+turning reddish-purple in autumn); #36 a few leaves have brown spots.
+**#39 Rudbeckia Kissing Smileyz skipped** at Oscar's request (no photo sent).
+**#37 Aster Alpha Light Pink held:** `symphyotrichum-alpha-light-pink-as-sent.jpg` shows a vivid
+magenta-violet double, not "light pink", and the deck already deals Alpha Light Purple.
+Waiting on Oscar to confirm the label.
