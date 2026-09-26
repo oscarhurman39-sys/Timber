@@ -151,6 +151,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acer-palmatum-shaina.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-palmatum-taylor.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Supplied as a three-panel vertical COLLAGE (pink new growth over the pink-margined mature leaves) kept WHOLE under the one-rule of protocol v14.49; no pixels generated; no EXIF orientation tag",
@@ -3603,7 +3613,37 @@
    "commercialUseCleared": true
   },
   {
+   "file": "rosa-auscrowd.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "rosa-ausearnshaw.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rosa-auseasel.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rosa-ausmerchant.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",
@@ -3654,6 +3694,16 @@
   },
   {
    "file": "rosa-korhulth-004.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rosa-macoranlem.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Oscar Hurman",

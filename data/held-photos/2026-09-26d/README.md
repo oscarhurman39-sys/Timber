@@ -51,3 +51,13 @@ warning "No waterlogging; renew old rose soil"; sizes unchanged. Text kept as su
 the photo shows clear red while the visual says orange-red sunset tones (hue 18).
 **#13 Flower Carpet Ruby stays held** at Oscar's request; its bud photo is kept as
 `rosa-noafeuer-as-sent.jpg` and is not on any card.
+
+**Cards 16-20 dealt** (Oscar's photos; #18 and #20 Galaxy S24 2026-09-26, the rest his collages).
+- soil "Fertile, drained, any pH" + "No waterlogging; renew old rose soil" on #16-19;
+  #20 "Drained, acid to neutral" + "Wind, drought and hot sun scorch leaves".
+- sizes: #18 "about 1.2 m" -> 1.2 m / 1.2 m; #19 "about 1.2 m / about 1 m" -> 1.2 m / 1 m
+  ("about" collided with the rail label on My Mum). Others unchanged.
+Flagged, not changed: #18 shows only a crimson bud (card: deep pink) and leaves with dark
+blotches (possibly black spot); #19 shows only buds with red petal tips (card: bright pink),
+no open flower; #20 new growth is pink-red over green mature leaves, while the card says
+foliage deepens to dark red through summer.
