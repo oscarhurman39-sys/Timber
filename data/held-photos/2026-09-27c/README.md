@@ -28,3 +28,10 @@ audit sampling images before they finish loading under 3-job load. See 2026-09-2
   in its `uncertain` list — Claude-derived plus T&M / Proven Winners retail text, not RHS-checked.
   The plain species card stays held. add-plant.js does not write a CREDITS entry (deal-plant.js
   does); added by hand. run-all 18/18.
+
+- **Ophiopogon planiscapus 'Kokuryū'** — dealt from `ophiopogon-kokuryu-collage.jpg`, a
+  three-panel collage Oscar asked for: his bud spray (top left) and white flowers (top right)
+  with the foliage full-width below, cropped to keep the pink pots and label out. Built with
+  sharp from the three originals kept here (`-buds`, `-flowers`, `-foliage`); plain crops and
+  resizes, nothing blended or generated. Text and ratings unchanged. Deck 428 -> 429,
+  hold 80 -> 79. run-all 18/18.
