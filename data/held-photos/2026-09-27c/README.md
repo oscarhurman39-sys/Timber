@@ -20,3 +20,11 @@ audit sampling images before they finish loading under 3-job load. See 2026-09-2
 - **Loropetalum chinense var. rubrum 'Fede'** — dealt from `loropetalum-fede.jpg` (15:41).
   Purple foliage with one pink tassel flower; matches the held card. Text and ratings
   unchanged. Deck 426 -> 427, hold 81 -> 80. run-all 18/18 first time.
+
+- **Ficus elastica 'Belize'** — NEW card (deck 427 -> 428), not the held species card. Oscar's
+  photo (15:57) is the variegated cultivar, so he asked for the JSON re-run. `ficus-elastica-belize.json`
+  here is what went in: the held `Ficus elastica` JSON with only visual, hue (120 -> 345), cvs,
+  soilWarning and resilience changed for the cultivar; every rating carried over. Provenance is
+  in its `uncertain` list — Claude-derived plus T&M / Proven Winners retail text, not RHS-checked.
+  The plain species card stays held. add-plant.js does not write a CREDITS entry (deal-plant.js
+  does); added by hand. run-all 18/18.
