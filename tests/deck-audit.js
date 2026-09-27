@@ -45,7 +45,17 @@ const errors = [], warnings = [], known = [];
   await page.evaluate(() => buildAllCards());
   await page.evaluate(() =>
     document.querySelectorAll('.tphoto img').forEach(i => { if (!i.getAttribute('src') && i.dataset.psrc) i.src = i.dataset.psrc; }));
-  await page.waitForTimeout(2500);
+  /* Wait for every photo to finish loading before sampling, instead of a fixed sleep.
+     A 2.5s sleep read a real image as missing four times on 2026-09-27 whenever
+     three suites shared the machine and ~430 webps were still decoding: a false
+     `fullart-art-missing` or `photo-missing`, green on re-run, nothing changed.
+     `complete` goes true for a 404 as well (naturalWidth stays 0), so a genuinely
+     missing file still fails below; only a slow one now waits. Ceiling of 60s so a
+     hung fetch cannot stall the suite — past it we sample what we have. */
+  await page.waitForFunction(
+    () => [...document.querySelectorAll('.tphoto img')].every(i => !i.getAttribute('src') || i.complete),
+    null, { timeout: 60000 }).catch(() => console.warn('deck-audit: photos still loading after 60s — sampling anyway'));
+  await page.waitForTimeout(300);
 
   const cards = await page.evaluate(() => {
     /* read each card as the user sees it: the rendered ink, not the source field */
