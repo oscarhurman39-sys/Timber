@@ -16,3 +16,7 @@ call: confirm and deal it, or send a shot with the blush panicles (peak Jul-Nov)
 reported two dealt cards as photo-missing and one fullart error. Standalone deck-audit passed
 twice immediately after; the derivatives exist and serve 200. Third occurrence today of the
 audit sampling images before they finish loading under 3-job load. See 2026-09-27b README.
+
+- **Loropetalum chinense var. rubrum 'Fede'** — dealt from `loropetalum-fede.jpg` (15:41).
+  Purple foliage with one pink tassel flower; matches the held card. Text and ratings
+  unchanged. Deck 426 -> 427, hold 81 -> 80. run-all 18/18 first time.
