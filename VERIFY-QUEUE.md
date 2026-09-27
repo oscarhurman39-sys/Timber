@@ -2227,6 +2227,8 @@ unclaimed; the copper beech position is unchanged.
 
 
 ### 67. Persicaria and Veronicastrum dealt; Groundbreaker Blush hydrangea held — photo 1 is a shrub with no flower
+
+**Resolved 2026-09-27:** Oscar confirmed the foliage photo is Groundbreaker Blush and said to use it for now. Dealt from it (renamed to the card slug); the `-unconfirmed` file and its credit entry are retired. A panicle photo can replace it later.
 2026-09-02. Three researched cards and three photographs from one bench visit
 (EXIF 11:31:17, 11:32:05, 11:32:14 on 2026-08-29). All three JSONs pass
 `check-plant-json.js` and are kept verbatim in `data/incoming/`.
