@@ -43,3 +43,8 @@ audit sampling images before they finish loading under 3-job load. See 2026-09-2
   entry are retired. Foliage only — the card text describes blush panicles, so a flowering shot
   would be an upgrade later. Text and ratings unchanged. Deck 429 -> 430, hold 79 -> 78.
   run-all 18/18.
+
+- **Abelia × grandiflora 'Kaleidoscope'** — dealt from `abelia-kaleidoscope.jpg` (16:38), the
+  card held since the 2026-09-23 batch. Variegated foliage with bronze-pink new growth and
+  buds; matches the card. Text and ratings unchanged. Deck 430 -> 431, hold 78 -> 77.
+  run-all 18/18.
