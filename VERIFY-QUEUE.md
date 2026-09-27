@@ -2227,6 +2227,8 @@ unclaimed; the copper beech position is unchanged.
 
 
 ### 67. Persicaria and Veronicastrum dealt; Groundbreaker Blush hydrangea held — photo 1 is a shrub with no flower
+
+**Resolved 2026-09-27:** Oscar confirmed the foliage photo is Groundbreaker Blush and said to use it for now. Dealt from it (renamed to the card slug); the `-unconfirmed` file and its credit entry are retired. A panicle photo can replace it later.
 2026-09-02. Three researched cards and three photographs from one bench visit
 (EXIF 11:31:17, 11:32:05, 11:32:14 on 2026-08-29). All three JSONs pass
 `check-plant-json.js` and are kept verbatim in `data/incoming/`.
@@ -4236,3 +4238,27 @@ Nothing was changed; the card is listed in `KNOWN` in `tools/plant-sense.js`.
 flowers are a minor feature) or widens the peak to cover spring flowering. Then delete
 the line from `KNOWN` and this item.
 
+
+---
+
+### 92. Deferred card adjustments from the 2026-09-26/27 batches — Oscar: "all in one, later"
+
+Oscar chose (2026-09-27) to batch every text/rating tweak from the last 55 cards into one
+pass rather than answer them one at a time. Nothing below is changed yet. Each batch README
+under `data/held-photos/` lists its own photo/text mismatches in full; these are the ones
+that were put to him as questions and are waiting on a yes/no:
+
+- **Clematis 'Bees’ Jubilee'** — card says "pale pink with a deeper stripe"; photo is vivid
+  magenta-pink. Rewrite `visual` (and hue 335 → ~320) to match, as done for Alpha Light Pink?
+- **Malus 'Evereste'** — dealt with the *held* card's stricter ratings (pest 11, thirst 10,
+  care 7, sun 90/70). Oscar's JSON had 9 / 7 / 6 / 80 / 45. Which set stands?
+- **Rosa 'Tanellis' Fragrant Cloud** — "deep coral-red" vs crimson in the photo.
+- **Rosa 'Deseo' Flower Carpet Sunset** — "orange-red sunset tones", hue 18, vs plain red.
+- **Echinacea SunSeekers Mineola** — "vivid tangerine-orange", lime cone, vs salmon-pink, dark cone.
+- **Rosa 'Noa200051' Rosy Cheeks** — no paler centre visible; reads cerise.
+- **Rosa 'Meiratcan' Lovely Bride** — "light shell-pink" vs peach/salmon.
+- **Cotinus Golden Spirit, Parthenocissus (Boston Ivy)** — spring/early photos; card text is
+  right, a later-season reshoot would suit better. Not a text change.
+
+**What decides it:** Oscar goes through the list once and says which follow the photo and
+which keep the text. One commit, then delete this item.

@@ -132,3 +132,7 @@ which is removed as a duplicate). `rosa-noafeuer-alt.jpg` is the second, softer 
 unused. Soil rose default, 50-60 cm tall. Oscar plans a further photo; the app has no
 multi-photo/flash feature today (searched timber.html), so a new photo would replace this one.
 Batch now 44 of 45: only #39 Kissing Smileyz (skipped) remains.
+
+**2026-09-27, Aster Alpha Light Pink:** on Oscar's instruction the text now matches his photo.
+`visual` says "vivid magenta-violet" instead of "light pink", and hue 335 -> 300 (same as
+Rose Crystal, the deck's other violet-magenta aster). Nothing else on the card changed.
