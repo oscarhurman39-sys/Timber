@@ -88,8 +88,71 @@
     "sunNeed": 85,
     "sunMin": 45,
     "uncertain": [
-      "The RHS currently lists 'City Knights' but does not publish a cultivar-specific hardiness or mature size. H3 is inferred from comparable RHS-rated Coprosma cultivars and UK growing guidance.",
-      "UK sources give mature dimensions from approximately 0.6 m to 0.9 m."
+      "Published mature dimensions vary from approximately 0.6 m to 0.9 m."
+    ]
+  },
+  {
+    "common": "Temple of Bloom Seven-Son Flower",
+    "latin": "Heptacodium miconioides [Temple of Bloom] (SMNHMRF)",
+    "hue": 350,
+    "visual": "Compact multi-stemmed deciduous shrub or small tree with dark green curled foliage, fragrant white late-summer flowers, vivid red-pink persistent bracts in autumn and attractive peeling bark in winter.",
+    "water": "Water regularly while establishing; once established it is relatively drought tolerant and usually needs watering only during prolonged dry spells.",
+    "aspect": "East / South / West",
+    "soil": "Moderately fertile, moist but well-drained or well-drained chalk, clay, loam or sand; acid, neutral or alkaline.",
+    "soilWarning": "Avoid prolonged waterlogging; flowering and autumn bract colour are best in a sunny position.",
+    "prune": "Little pruning is required; remove dead or badly positioned growth and lightly shape in early spring if necessary.",
+    "toxicity": "",
+    "compliance": "",
+    "peak": "Aug-Nov",
+    "cvs": "",
+    "hardiness": "H7",
+    "hardinessNote": "Extremely hardy; the breeder reports frost resistance to around -25°C and the species is rated H7 by the RHS.",
+    "resilience": "Very cold hardy, relatively drought tolerant once established and generally pest- and disease-free.",
+    "uses": "Specimen shrub, small multi-stemmed tree, mixed borders, pollinator planting and containers.",
+    "height": "1.5–1.8 m",
+    "spread": "1.2–1.5 m",
+    "foliage": "deciduous",
+    "container": "yes",
+    "growthSpeed": 10,
+    "pestRisk": 2,
+    "thirst": 6,
+    "careLevel": 4,
+    "sunNeed": 80,
+    "sunMin": 45,
+    "uncertain": [
+      "The breeder gives a mature height of approximately 1.5–1.8 m, while some North American material gives larger eventual dimensions."
+    ]
+  },
+  {
+    "common": "Eclipse Looking-Glass Plant",
+    "latin": "Coprosma repens [Eclipse] (Aldawn)",
+    "hue": 340,
+    "visual": "Compact upright evergreen shrub with exceptionally glossy dark brown-purple to near-black foliage edged in vivid pink, with the colours intensifying in cooler conditions.",
+    "water": "Keep evenly moist while establishing, then water during prolonged dry periods; container plants require more regular watering.",
+    "aspect": "East / South / West",
+    "soil": "Free-draining loam or sandy soil or compost; acid to neutral conditions are suitable.",
+    "soilWarning": "Requires free drainage and protection from hard frost; in frost-prone areas grow in a container and overwinter under protection.",
+    "prune": "Little pruning is needed; lightly trim in spring to maintain shape and remove any frost-damaged growth.",
+    "toxicity": "",
+    "compliance": "",
+    "peak": "Jan-Dec",
+    "cvs": "",
+    "hardiness": "H3",
+    "hardinessNote": "Half-hardy in the UK, tolerating approximately -5°C to 1°C; protect from harder frost and cold winter exposure.",
+    "resilience": "Tolerates coastal conditions and some drought once established but is vulnerable to hard frost.",
+    "uses": "Patio containers, summer bedding, sheltered borders, coastal gardens and foliage displays.",
+    "height": "0.5–0.6 m",
+    "spread": "0.3–0.45 m",
+    "foliage": "evergreen",
+    "container": "yes",
+    "growthSpeed": 8,
+    "pestRisk": 3,
+    "thirst": 7,
+    "careLevel": 8,
+    "sunNeed": 85,
+    "sunMin": 45,
+    "uncertain": [
+      "Retail sources vary slightly on mature dimensions, generally placing Eclipse around 50–60 cm high and 30–45 cm wide."
     ]
   }
 ]
