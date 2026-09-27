@@ -48,3 +48,10 @@ audit sampling images before they finish loading under 3-job load. See 2026-09-2
   card held since the 2026-09-23 batch. Variegated foliage with bronze-pink new growth and
   buds; matches the card. Text and ratings unchanged. Deck 430 -> 431, hold 78 -> 77.
   run-all 18/18.
+
+- **Primula vialii** — dealt from `primula-vialii.jpg`, a crop of Oscar's own
+  `primula-vialii-original.jpg` (EXIF 2025-12-02; note the photo is from last season, the
+  plant is Jun-Aug). Crop removes the pot label at lower left; nothing else changed. Oscar
+  first sent a copy with the label removed by an AI eraser, which carried an AI-content
+  watermark; that copy was refused and is not in the repo. The CREDITS entry carries the
+  note. Text and ratings unchanged. Deck 431 -> 432, hold 77 -> 76. run-all 18/18.

@@ -3663,6 +3663,17 @@
    "commercialUseCleared": true
   },
   {
+   "file": "primula-vialii.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Oscar Hurman",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true,
+   "note": "Oscar's own photo (EXIF 2025-12-02); cropped by Claude to remove the pot label at lower left. An earlier copy Oscar sent had the label removed with an AI eraser and carried an AI-content watermark; that copy is not used."
+  },
+  {
    "file": "prunus-cerasifera-nigra.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
