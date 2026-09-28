@@ -86,7 +86,7 @@ if (argv.includes('--init')) {
       file: f,
       source: oscar ? 'oscar' : 'unrecorded',
       licence: oscar ? "Oscar's own photograph — owned outright" : 'unknown',
-      author: oscar ? 'Oscar Hurman' : 'unknown',
+      author: oscar ? 'Scion Studios' : 'unknown',
       sourceUrl: null,
       commit: o.commit || null,
       commitSubject: o.subject || null,

@@ -148,7 +148,7 @@ console.log(`found held card: ${latinArg}\n  -> photos/${slug}.jpg`);
   execFileSync(process.execPath, [path.join(__dirname, 'photo-credits.js'),
     '--set', slug + '.jpg', '--source', 'oscar',
     '--licence', "Oscar's own photograph — owned outright",
-    '--author', 'Oscar Hurman'], { stdio: 'inherit' });
+    '--author', 'Scion Studios'], { stdio: 'inherit' });
 
   console.log('\nnow run:  node plants-tool.js export && node tools/build-stamp.js --write && node tests/run-all.js --jobs 3');
 })();
