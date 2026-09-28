@@ -19,3 +19,8 @@ photo-run.html
 # .asked.json manifest beside each is NOT ignored — `take` needs it to know
 # which questions a batch actually put, and a later session may do the taking.
 data/research-tasks/*.md
+
+# Play upload keystores never go in the repo (the workflow generates or restores them)
+*.keystore
+*.jks
+build-twa/
