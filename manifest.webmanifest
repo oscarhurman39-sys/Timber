@@ -1,6 +1,6 @@
 {
-  "name": "Timber",
-  "short_name": "Timber",
+  "name": "Plant Cards",
+  "short_name": "Plant Cards",
   "description": "Learn plants by swiping — grow your knowledge, one swipe at a time.",
   "id": "./timber.html",
   "start_url": "./timber.html",

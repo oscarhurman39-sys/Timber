@@ -15,10 +15,13 @@ upload when the wrapper itself changes (package name, icon, splash, min SDK).
 
 ## What is NOT decided yet (Oscar)
 
+- **Display name** on Play: **Plant Cards** (Oscar, 2026-09-28 — "gets the
+  general idea across as quickly as possible, could always rebrand to Timber
+  once it's going well"). `manifest.webmanifest` carries that name; the in-page
+  manifest and the browser-installed PWA still say Timber.
 - **Package name** — permanent once published. Must not reference Knights.
-  Candidates: `com.oscarhurman.timber`, `uk.co.oscarhurman.timber`,
-  `app.timber.cards`. Bubblewrap `init` asks for it.
-- **Display name** on Play — can differ from the web manifest's "Timber".
+  Proposed `com.oscarhurman.plantcards` (not yet confirmed by Oscar). A later
+  rebrand to Timber changes only the display name, never the package.
 
 ## Steps (once the package name is fixed)
 
