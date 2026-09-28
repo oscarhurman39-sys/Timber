@@ -19,9 +19,16 @@ upload when the wrapper itself changes (package name, icon, splash, min SDK).
   general idea across as quickly as possible, could always rebrand to Timber
   once it's going well"). `manifest.webmanifest` carries that name; the in-page
   manifest and the browser-installed PWA still say Timber.
-- **Package name** — permanent once published. Must not reference Knights.
-  Proposed `com.oscarhurman.plantcards` (not yet confirmed by Oscar). A later
-  rebrand to Timber changes only the display name, never the package.
+- **Package name**: `com.plantcards.app` — permanent once published. Must not
+  reference Knights or Oscar's surname (Oscar, 2026-09-28: the package name is
+  public — it sits in the Play Store URL `play.google.com/store/apps/details?id=…`,
+  in Android's app-info screen and in `assetlinks.json`). No domain ownership is
+  needed for a reverse-domain package name. A later rebrand to Timber changes
+  only the display name, never the package.
+- **Other public surfaces to check before upload**: the Play Console
+  *developer name* prints on every listing, and the app's origin
+  `oscarhurman39-sys.github.io` shows if a user taps "open in browser" or
+  shares a link from inside the app.
 
 ## Steps (once the package name is fixed)
 
