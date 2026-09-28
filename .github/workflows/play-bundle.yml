@@ -58,7 +58,8 @@ jobs:
           SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
           test -x "$SDKMANAGER"
           sudo ln -sfn "$ANDROID_HOME/cmdline-tools/latest/bin" "$ANDROID_HOME/bin"
-          BT="$(node -e 'console.log(require("/usr/local/lib/node_modules/@bubblewrap/cli/node_modules/@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools.js").BUILD_TOOLS_VERSION)' 2>/dev/null || node -e 'console.log(require("@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools.js").BUILD_TOOLS_VERSION)')"
+          # pinned inside @bubblewrap/cli@1.25.0 (core/dist/lib/androidSdk/AndroidSdkTools.js)
+          BT="36.1.0"
           echo "Bubblewrap pins build-tools $BT"
           yes | "$SDKMANAGER" --licenses > /dev/null || true
           "$SDKMANAGER" --install "build-tools;$BT" "platforms;android-35" > /dev/null
