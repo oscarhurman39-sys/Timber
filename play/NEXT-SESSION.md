@@ -7,7 +7,9 @@ on repo **plantcards-app/Timber**, branch **claude/plant-card-database-7749ux**.
 
 - Environment settings → Network access: allow `dl.google.com` and
   `api.adoptium.net` (Android SDK + JDK 17 downloads). Without these the
-  build cannot run in the cloud container.
+  build cannot run in the cloud container. The phone app's session menu
+  does not show this; edit the environment (the one called "Default") from
+  a desktop browser at claude.ai/code.
 - Confirm the Claude GitHub App is installed on the `plantcards-app` org
   (done 2026-09-28).
 

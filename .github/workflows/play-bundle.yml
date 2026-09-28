@@ -1,0 +1,126 @@
+name: Build Play Store bundle
+
+# Builds the Trusted Web Activity wrapper for the Play Store on a GitHub runner
+# (which has JDK + Android SDK; the Claude cloud container cannot download them).
+#
+# Run it from the Actions tab: "Run workflow". Outputs land as run artifacts:
+#   play-bundle       app-release-bundle.aab (upload this to Play) + the signed .apk
+#   upload-keystore   ONLY on a first run with no PLAY_KEYSTORE_B64 secret: the
+#                     generated upload keystore + its password. Download it, keep
+#                     it somewhere safe, then store it as repository secrets so
+#                     later builds sign with the SAME key:
+#                       PLAY_KEYSTORE_B64       base64 of upload.keystore
+#                       PLAY_KEYSTORE_PASSWORD  the password (store + key)
+#                     A bundle signed with a different upload key is rejected by
+#                     Play once the first one is registered.
+#
+# Bubblewrap is driven non-interactively: `update --skipVersionUpgrade` generates
+# the Android project from play/twa/twa-manifest.json (no prompts), and `build`
+# reads the key passwords from BUBBLEWRAP_KEYSTORE_PASSWORD / BUBBLEWRAP_KEY_PASSWORD.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: "appVersionCode (must rise on every Play upload; blank = value in twa-manifest.json)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Bubblewrap
+        run: npm i -g @bubblewrap/cli@1.25.0
+
+      - name: Point Bubblewrap at the runner's JDK and Android SDK
+        run: |
+          test -n "$JAVA_HOME" && test -d "$ANDROID_HOME"
+          mkdir -p ~/.bubblewrap
+          printf '{"jdkPath":"%s","androidSdkPath":"%s"}\n' "$JAVA_HOME" "$ANDROID_HOME" > ~/.bubblewrap/config.json
+          cat ~/.bubblewrap/config.json
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+
+      - name: Prepare build directory
+        run: |
+          mkdir -p build-twa
+          cp play/twa/twa-manifest.json build-twa/twa-manifest.json
+          if [ -n "${{ github.event.inputs.version_code }}" ]; then
+            node -e '
+              const fs=require("fs"); const p="build-twa/twa-manifest.json";
+              const m=JSON.parse(fs.readFileSync(p,"utf8"));
+              m.appVersionCode=Number(process.argv[1]); m.appVersionName=String(process.argv[1]);
+              fs.writeFileSync(p, JSON.stringify(m,null,2));
+            ' "${{ github.event.inputs.version_code }}"
+          fi
+          node -e 'const m=require("./build-twa/twa-manifest.json"); console.log("package", m.packageId, "versionCode", m.appVersionCode)'
+
+      - name: Restore or create the upload keystore
+        id: keystore
+        env:
+          KS_B64: ${{ secrets.PLAY_KEYSTORE_B64 }}
+          KS_PASS: ${{ secrets.PLAY_KEYSTORE_PASSWORD }}
+        run: |
+          cd build-twa
+          if [ -n "$KS_B64" ] && [ -n "$KS_PASS" ]; then
+            echo "$KS_B64" | base64 -d > upload.keystore
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+            echo "using the upload keystore from repository secrets"
+          else
+            KS_PASS="$(openssl rand -base64 24 | tr -d '/+=' | cut -c1-24)"
+            echo "::add-mask::$KS_PASS"
+            keytool -genkeypair -v -keystore upload.keystore -alias upload \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass "$KS_PASS" -keypass "$KS_PASS" \
+              -dname "CN=Scion Studios, O=Scion Studios, C=GB"
+            mkdir -p ../keystore-out
+            cp upload.keystore ../keystore-out/upload.keystore
+            printf 'alias: upload\nkeystore password: %s\nkey password: %s\n' "$KS_PASS" "$KS_PASS" > ../keystore-out/PASSWORD.txt
+            echo "generated=true" >> "$GITHUB_OUTPUT"
+            echo "no PLAY_KEYSTORE_B64 secret: generated a new upload keystore (see the upload-keystore artifact)"
+          fi
+          echo "KS_PASS=$KS_PASS" >> "$GITHUB_ENV"
+          echo "upload key SHA-256 (for reference only — Play's App signing key is the one assetlinks.json needs):"
+          keytool -list -v -keystore upload.keystore -alias upload -storepass "$KS_PASS" | grep -E "SHA256|SHA-256"
+
+      - name: Generate the Android project
+        working-directory: build-twa
+        run: bubblewrap update --skipVersionUpgrade --manifest=./twa-manifest.json
+
+      - name: Build and sign
+        working-directory: build-twa
+        env:
+          BUBBLEWRAP_KEYSTORE_PASSWORD: ${{ env.KS_PASS }}
+          BUBBLEWRAP_KEY_PASSWORD: ${{ env.KS_PASS }}
+        run: |
+          bubblewrap build --skipPwaValidation --manifest=./twa-manifest.json
+          ls -la app-release-bundle.aab app-release-signed.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: play-bundle
+          path: |
+            build-twa/app-release-bundle.aab
+            build-twa/app-release-signed.apk
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        if: steps.keystore.outputs.generated == 'true'
+        with:
+          name: upload-keystore
+          path: keystore-out/
+          if-no-files-found: error
