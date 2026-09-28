@@ -1,7 +1,7 @@
 # Google Play wrapper (Trusted Web Activity)
 
 Timber ships on Play as a TWA: a thin Android app that opens the live PWA at
-https://oscarhurman39-sys.github.io/Timber/timber.html in full-screen Chrome.
+https://plantcards-app.github.io/Timber/timber.html in full-screen Chrome.
 Updating the app is just deploying the PWA — the Play listing only needs a new
 upload when the wrapper itself changes (package name, icon, splash, min SDK).
 
@@ -19,23 +19,23 @@ upload when the wrapper itself changes (package name, icon, splash, min SDK).
   general idea across as quickly as possible, could always rebrand to Timber
   once it's going well"). `manifest.webmanifest` carries that name; the in-page
   manifest and the browser-installed PWA still say Timber.
-- **Package name**: `com.plantcards.app` — permanent once published. Must not
+- **Package name**: `com.scionstudios.plantcards` — permanent once published. Must not
   reference Knights or Oscar's surname (Oscar, 2026-09-28: the package name is
   public — it sits in the Play Store URL `play.google.com/store/apps/details?id=…`,
   in Android's app-info screen and in `assetlinks.json`). No domain ownership is
   needed for a reverse-domain package name. A later rebrand to Timber changes
   only the display name, never the package.
-- **Other public surfaces to check before upload**: the Play Console
-  *developer name* prints on every listing, and the app's origin
-  `oscarhurman39-sys.github.io` shows if a user taps "open in browser" or
-  shares a link from inside the app.
+- **Publisher identity**: Scion Studios (Oscar, 2026-09-28). The repo moved to
+  the `plantcards-app` GitHub organisation so the site origin is
+  `plantcards-app.github.io`, and the Play developer name + contact email are
+  the Scion Studios ones. Nothing public carries Oscar's surname.
 
 ## Steps (once the package name is fixed)
 
 1. `npm i -g @bubblewrap/cli` (needs JDK 17 + Android cmdline tools; Bubblewrap
    offers to download both on first run — the download hosts are
    `dl.google.com` and `api.adoptium.net`).
-2. `bubblewrap init --manifest=https://oscarhurman39-sys.github.io/Timber/manifest.webmanifest`
+2. `bubblewrap init --manifest=https://plantcards-app.github.io/Timber/manifest.webmanifest`
    Answer: package name (above), app name, launcher name, theme `#0c1810`,
    start URL `/Timber/timber.html`, create a NEW signing key (keep the
    keystore + passwords somewhere safe; losing them means a new package name).
