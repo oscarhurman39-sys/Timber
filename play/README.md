@@ -30,29 +30,53 @@ upload when the wrapper itself changes (package name, icon, splash, min SDK).
   `plantcards-app.github.io`, and the Play developer name + contact email are
   the Scion Studios ones. Nothing public carries Oscar's surname.
 
-## Steps (once the package name is fixed)
+## How the bundle is built (working since 2026-09-28, run #3)
 
-1. `npm i -g @bubblewrap/cli` (needs JDK 17 + Android cmdline tools; Bubblewrap
-   offers to download both on first run — the download hosts are
-   `dl.google.com` and `api.adoptium.net`).
-2. `bubblewrap init --manifest=https://plantcards-app.github.io/Timber/manifest.webmanifest`
-   Answer: package name (above), app name, launcher name, theme `#0c1810`,
-   start URL `/Timber/timber.html`, create a NEW signing key (keep the
-   keystore + passwords somewhere safe; losing them means a new package name).
-3. `bubblewrap build` → `app-release-bundle.aab` + `app-release-signed.apk`.
-4. Play Console → Create app → upload the `.aab` to a **closed testing** track.
-   Personal accounts created after 13 Nov 2023 must run a closed test with at
-   least 12 testers for 14 days before production is unlocked.
-5. Play Console → App integrity → copy the **App signing key certificate**
-   SHA-256 (Play re-signs the app, so this is NOT the upload key's print).
-6. Put it in `.well-known/assetlinks.json` on the deploy branch:
+`.github/workflows/play-bundle.yml` — Actions tab → "Build Play Store bundle"
+→ Run workflow. About two minutes. It runs Bubblewrap on a GitHub runner
+(JDK 17 + Android SDK are already there; the Claude cloud container cannot
+download them). Outputs are run artifacts:
+
+- `play-bundle` — `app-release-bundle.aab` (upload this to Play) and the
+  signed `.apk` (sideload it on a phone to test).
+- `upload-keystore` — only when no `PLAY_KEYSTORE_B64` secret exists: the
+  freshly generated upload keystore + `PASSWORD.txt`.
+
+**Do this once, before the second build:** download `upload-keystore` from
+run #3 (the run whose .aab went to Play), keep both files somewhere safe,
+then add two repository secrets (Settings → Secrets and variables → Actions):
+
+- `PLAY_KEYSTORE_B64` = the keystore file base64-encoded
+  (`base64 -w0 upload.keystore` on Linux/Mac, or any base64 tool)
+- `PLAY_KEYSTORE_PASSWORD` = the password from PASSWORD.txt
+
+Without the secrets every run mints a new key, and Play rejects a bundle
+signed with a different upload key once the first one is registered. If the
+key is lost, Play Console → App integrity → "Request upload key reset".
+
+Each Play upload needs a higher `appVersionCode`: either bump it in
+`play/twa/twa-manifest.json` or type it into the workflow's `version_code`
+box when running it.
+
+## Remaining steps
+
+1. Play Console → Create app: name **Plant Cards**, default language
+   English (UK), app, free. Set the public developer name to Scion Studios
+   under Account details first.
+2. Testing → Closed testing → create a track, upload `app-release-bundle.aab`,
+   add testers (email list). Personal accounts created after 13 Nov 2023
+   need 12 testers opted in for 14 days before production unlocks.
+3. Play Console → Test and release → App integrity → copy the **App signing
+   key certificate** SHA-256 (Play re-signs the app, so this is NOT the
+   upload key's fingerprint printed in the workflow log).
+4. Put it in `.well-known/assetlinks.json` on the deploy branch:
    ```json
    [{"relation":["delegate_permission/common.handle_all_urls"],
-     "target":{"namespace":"android_app","package_name":"<PACKAGE>",
-     "sha256_cert_fingerprints":["<SHA256 FROM STEP 5>"]}}]
+     "target":{"namespace":"android_app","package_name":"com.scionstudios.plantcards",
+     "sha256_cert_fingerprints":["<SHA256 FROM STEP 3>"]}}]
    ```
    Without it the app opens with a Chrome URL bar instead of full screen.
-7. Listing needs: 512×512 icon (`art/icons/icon-512.png`), 1024×500 feature
+5. Listing needs: 512×512 icon (`art/icons/icon-512.png`), 1024×500 feature
    graphic, at least 2 phone screenshots, privacy-policy URL, content rating
-   questionnaire, data-safety form (Timber stores progress in localStorage
-   only — no accounts, no analytics).
+   questionnaire, data-safety form (Plant Cards stores progress in
+   localStorage only — no accounts, no analytics).
