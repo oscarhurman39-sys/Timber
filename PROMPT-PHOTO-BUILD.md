@@ -89,7 +89,7 @@ two AI-generated images have already reached the deck. deal-plant.js writes the
 entry; if you need to set one by hand:
 
     node tools/photo-credits.js --set <file> --source oscar \
-      --licence "own photo" --author "Oscar Hurman"
+      --licence "own photo" --author "Scion Studios"
 
 Never invent a licence. An unknown licence recorded as unknown is correct; an
 invented one is a liability. Do NOT run photo-credits.js --init — it re-derives
