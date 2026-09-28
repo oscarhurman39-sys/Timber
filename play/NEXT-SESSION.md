@@ -5,13 +5,12 @@ on repo **plantcards-app/Timber**, branch **claude/plant-card-database-7749ux**.
 
 ## Before starting the session
 
-- Environment settings → Network access: allow `dl.google.com` and
-  `api.adoptium.net` (Android SDK + JDK 17 downloads). Without these the
-  build cannot run in the cloud container. The phone app's session menu
-  does not show this; edit the environment (the one called "Default") from
-  a desktop browser at claude.ai/code.
-- Confirm the Claude GitHub App is installed on the `plantcards-app` org
-  (done 2026-09-28).
+- No network change is needed any more: the bundle is built by the
+  `play-bundle` GitHub workflow on a GitHub runner, not in the Claude
+  container. Run #3 on 2026-09-28 produced the first signed .aab.
+- The Claude GitHub App is installed on the `plantcards-app` org (done
+  2026-09-28); pushes and workflow dispatches work from a session opened on
+  either repo name.
 
 ## Decisions already made (do not re-ask)
 
@@ -40,24 +39,23 @@ on repo **plantcards-app/Timber**, branch **claude/plant-card-database-7749ux**.
 Repo plantcards-app/Timber, branch claude/plant-card-database-7749ux.
 Read play/NEXT-SESSION.md and play/README.md first.
 
-1. Merge the open PR from this branch into claude/timber-plant-pwa-j69h5e
-   (Oscar says "merge" per PR — ask, then merge and watch the deploy).
-2. Confirm https://plantcards-app.github.io/Timber/manifest.webmanifest is
-   live (use the Pages workflow log or WebFetch — the container proxy
-   blocks github.io directly).
-3. npm i -g @bubblewrap/cli, then bubblewrap init with that manifest URL:
-   package com.scionstudios.plantcards, app name "Plant Cards", theme
-   #0c1810, start URL /Timber/timber.html, create a NEW signing keystore.
-   Store the keystore + passwords OUTSIDE the repo and hand them to Oscar
-   (losing them means a new package name forever).
-4. bubblewrap build → app-release-bundle.aab. Send the .aab to Oscar.
-5. After Oscar uploads to a closed-testing track and copies the App
-   signing key SHA-256 from Play Console → App integrity, write
-   .well-known/assetlinks.json (template in play/README.md step 6) on the
-   deploy branch and push.
-6. Listing assets still needed: 1024×500 feature graphic, 2+ phone
-   screenshots, privacy-policy URL, data-safety answers (localStorage
-   only, no accounts, no analytics).
+State: the Play bundle workflow works (run #3). Oscar has / will have
+uploaded app-release-bundle.aab to a closed-testing track.
+
+1. If Oscar has not yet stored the upload keystore as repository secrets
+   (PLAY_KEYSTORE_B64 + PLAY_KEYSTORE_PASSWORD), remind him before any
+   second build — see play/README.md.
+2. When Oscar sends the App signing key SHA-256 from Play Console → App
+   integrity, write .well-known/assetlinks.json on the deploy branch
+   (template in play/README.md), push, and confirm it is served at
+   https://plantcards-app.github.io/Timber/.well-known/assetlinks.json
+   (use the Pages workflow log or WebFetch — the container proxy blocks
+   github.io directly).
+3. Listing assets still needed: 1024×500 feature graphic, 2+ phone
+   screenshots (Oscar's own screenshots of the live app, or Playwright
+   captures of timber.html at 390×844), privacy-policy page, data-safety
+   answers (localStorage only, no accounts, no analytics).
+4. For a new build: bump version_code, run the workflow, send the .aab.
 
 Rules: reality filter (label [Unverified]/[Inference]), never guess, no
 AI-generated images in the repo, no Knights or Oscar's surname anywhere
