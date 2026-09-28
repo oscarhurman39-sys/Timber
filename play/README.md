@@ -46,9 +46,21 @@ download them). Outputs are run artifacts:
 run #3 (the run whose .aab went to Play), keep both files somewhere safe,
 then add two repository secrets (Settings → Secrets and variables → Actions):
 
-- `PLAY_KEYSTORE_B64` = the keystore file base64-encoded
-  (`base64 -w0 upload.keystore` on Linux/Mac, or any base64 tool)
+- `PLAY_KEYSTORE_B64` = the keystore file base64-encoded, as ONE line with
+  no line breaks. Run this in the folder that holds `upload.keystore`, then
+  paste the clipboard into the secret:
+  - Windows PowerShell:
+    `[Convert]::ToBase64String([IO.File]::ReadAllBytes((Get-Item upload.keystore).FullName)) | Set-Clipboard`
+  - macOS: `base64 -i upload.keystore | tr -d '\n' | pbcopy`
+    (macOS base64 has no `-w0`; `tr` strips the line breaks)
+  - Linux: `base64 -w0 upload.keystore | xclip -selection clipboard`
 - `PLAY_KEYSTORE_PASSWORD` = the password from PASSWORD.txt
+
+Never paste the encoded keystore or the password into a chat. Clear the
+clipboard afterwards. On the next run the "Restore or create the upload
+keystore" step must log *using the upload keystore from repository
+secrets*; if it logs *generated a new upload keystore*, the secrets were
+not picked up and that bundle is signed with the wrong key.
 
 Without the secrets every run mints a new key, and Play rejects a bundle
 signed with a different upload key once the first one is registered. If the
