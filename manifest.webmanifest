@@ -1,0 +1,17 @@
+{
+  "name": "Plant Cards",
+  "short_name": "Plant Cards",
+  "description": "Learn plants by swiping — grow your knowledge, one swipe at a time.",
+  "id": "./timber.html",
+  "start_url": "./timber.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0c1810",
+  "background_color": "#0c1810",
+  "icons": [
+    { "src": "art/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "art/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "art/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
