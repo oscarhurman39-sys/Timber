@@ -48,12 +48,24 @@ jobs:
         run: npm i -g @bubblewrap/cli@1.25.0
 
       - name: Point Bubblewrap at the runner's JDK and Android SDK
+        # Bubblewrap validates androidSdkPath by looking for <sdk>/bin/sdkmanager
+        # (the layout its own installer produces). The runner's SDK keeps it at
+        # <sdk>/cmdline-tools/latest/bin, so expose it at <sdk>/bin as well, and
+        # pre-install the build-tools version Bubblewrap pins so it never has to
+        # run sdkmanager interactively itself.
         run: |
           test -n "$JAVA_HOME" && test -d "$ANDROID_HOME"
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          test -x "$SDKMANAGER"
+          sudo ln -sfn "$ANDROID_HOME/cmdline-tools/latest/bin" "$ANDROID_HOME/bin"
+          BT="$(node -e 'console.log(require("/usr/local/lib/node_modules/@bubblewrap/cli/node_modules/@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools.js").BUILD_TOOLS_VERSION)' 2>/dev/null || node -e 'console.log(require("@bubblewrap/core/dist/lib/androidSdk/AndroidSdkTools.js").BUILD_TOOLS_VERSION)')"
+          echo "Bubblewrap pins build-tools $BT"
+          yes | "$SDKMANAGER" --licenses > /dev/null || true
+          "$SDKMANAGER" --install "build-tools;$BT" "platforms;android-35" > /dev/null
+          ls "$ANDROID_HOME/build-tools/"
           mkdir -p ~/.bubblewrap
           printf '{"jdkPath":"%s","androidSdkPath":"%s"}\n' "$JAVA_HOME" "$ANDROID_HOME" > ~/.bubblewrap/config.json
           cat ~/.bubblewrap/config.json
-          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
       - name: Prepare build directory
         run: |
