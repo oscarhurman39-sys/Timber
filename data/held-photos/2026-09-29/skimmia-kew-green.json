@@ -1,0 +1,31 @@
+{
+  "common": "Kew Green Skimmia",
+  "latin": "Skimmia × confusa 'Kew Green'",
+  "hue": 78,
+  "visual": "Compact spreading evergreen with large aromatic green leaves and dense conical clusters of strongly fragrant creamy green to greenish-yellow flowers in spring.",
+  "water": "Keep moderately moist but well drained; water containers and newly planted specimens during dry spells.",
+  "aspect": "North / East / West",
+  "soil": "Humus-rich, moist, drained",
+  "soilWarning": "Hot dry sun scorches and yellows leaves",
+  "prune": "Requires little routine pruning; remove damaged or misplaced shoots after flowering if necessary.",
+  "toxicity": "Skimmia fruit is considered ornamental and should not be eaten, although this male cultivar does not itself produce berries.",
+  "compliance": "",
+  "peak": "Mar-May",
+  "cvs": "",
+  "hardiness": "H5",
+  "hardinessNote": "H5 · −15 to −10°C",
+  "resilience": "Hardy, shade tolerant and relatively tolerant of atmospheric pollution and neglect once established.",
+  "uses": "Shady borders, woodland gardens, fragrant spring planting, evergreen structure, containers and pollinating female Skimmias.",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 5,
+  "pestRisk": 7,
+  "thirst": 10,
+  "careLevel": 5,
+  "sunNeed": 25,
+  "sunMin": 5,
+  "uncertain": [
+    "'Kew Green' is a male cultivar and therefore does not produce its own berries; it can pollinate compatible female Skimmias."
+  ],
+  "size": "0.5–1 m H × 1–1.5 m W"
+}

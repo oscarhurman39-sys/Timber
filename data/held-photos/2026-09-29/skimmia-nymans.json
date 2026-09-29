@@ -1,0 +1,31 @@
+{
+  "common": "Nymans Skimmia",
+  "latin": "Skimmia japonica 'Nymans'",
+  "hue": 3,
+  "visual": "Low spreading evergreen shrub with glossy dark green aromatic leaves, clusters of small white spring flowers and conspicuous bright red berries on female plants.",
+  "water": "Keep moderately moist, especially while establishing and during prolonged dry weather.",
+  "aspect": "North / East / West",
+  "soil": "Humus-rich, moist, drained",
+  "soilWarning": "Hot dry sun scorches and yellows leaves",
+  "prune": "Little pruning required; remove damaged, congested or unwanted shoots after flowering.",
+  "toxicity": "Fruit is ornamental and should not be eaten; ingestion may cause stomach upset.",
+  "compliance": "",
+  "peak": "Oct-Mar",
+  "cvs": "",
+  "hardiness": "H5",
+  "hardinessNote": "H5 · −15 to −10°C",
+  "resilience": "Reliable hardy evergreen tolerant of shade, atmospheric pollution and some neglect once established.",
+  "uses": "Shady borders, woodland-style planting, evergreen ground structure, winter berry displays and containers.",
+  "foliage": "evergreen",
+  "container": "yes",
+  "growthSpeed": 5,
+  "pestRisk": 7,
+  "thirst": 10,
+  "careLevel": 5,
+  "sunNeed": 25,
+  "sunMin": 5,
+  "uncertain": [
+    "'Nymans' is female and requires a compatible male Skimmia nearby for reliable berry production."
+  ],
+  "size": "0.5–1 m H × 1–1.5 m W"
+}

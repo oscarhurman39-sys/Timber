@@ -1147,9 +1147,10 @@
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
    "author": "Scion Studios",
    "sourceUrl": null,
-   "commit": "ff494ba",
-   "commitSubject": "Sync the 10 artifact-only cards back into the deck (47 -> 57)",
-   "commercialUseCleared": true
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true,
+   "note": "Replaced 2026-09-29 with Oscar's own photo (Galaxy S24, top-down rosette), cropped by Claude to remove a purple marker scribble at the bottom edge; nothing else changed. The previous file carried an \"AI-generated content\" watermark at lower left and is retired."
   },
   {
    "file": "cordyline-australis-torbay-dazzler.jpg",
@@ -1985,6 +1986,16 @@
    "file": "fuchsia-alice-hoffman.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "fuchsia-dollar-princess.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
    "sourceUrl": null,
    "commit": null,
@@ -3874,6 +3885,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "rhododendron-scarlet-wonder.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "rhus-typhina-dissecta.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -4364,7 +4385,27 @@
    "commercialUseCleared": true
   },
   {
+   "file": "skimmia-confusa-kew-green.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "skimmia-japonica-mystic-marlot.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "skimmia-japonica-nymans.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
