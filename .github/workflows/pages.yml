@@ -88,3 +88,15 @@ jobs:
           done
           echo "::error::the deployed page never matched this commit"
           exit 1
+
+      # The Play app (a TWA) opens full-screen only if this file is served with the
+      # Play app-signing fingerprint in it. Pages skips nothing for dotfolders via
+      # deploy-pages, but that is the assumption this step exists to check.
+      - name: Verify assetlinks.json is served
+        run: |
+          base="${{ steps.deployment.outputs.page_url }}"
+          case "$base" in */) ;; *) base="$base/" ;; esac
+          url="${base}.well-known/assetlinks.json"
+          echo "checking $url"
+          curl -fsS "$url" | grep -q "0B:DA:0D:1C:11:D6:1E:E9" && echo "assetlinks.json is live with the Play signing key" || {
+            echo "::error::assetlinks.json not served, or missing the Play app-signing fingerprint"; exit 1; }
