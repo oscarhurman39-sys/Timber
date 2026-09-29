@@ -1,0 +1,31 @@
+{
+  "common": "Hardy Fuchsia 'Dollar Princess'",
+  "latin": "Fuchsia 'Dollar Princess'",
+  "hue": 332,
+  "visual": "Compact bushy fuchsia with dark green leaves and masses of small double flowers; cerise-crimson recurved sepals surround rich purple petals flushed red at the base.",
+  "water": "Water regularly during active growth; keep evenly moist but never waterlogged.",
+  "aspect": "South / East / West",
+  "soil": "Fertile, moist, drained",
+  "soilWarning": "No waterlogging; shelter from cold winds",
+  "prune": "In spring, cut back dead or frost-damaged growth to healthy buds; established plants can be pruned harder to maintain a dense framework.",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Jul-Oct",
+  "cvs": "",
+  "hardiness": "H4",
+  "hardinessNote": "H4 · −10 to −5°C",
+  "resilience": "Hardy through much of the UK when planted deeply and mulched, but exposed growth can be damaged by severe frost and cold drying winds.",
+  "uses": "Containers, cottage gardens, mixed borders, courtyard gardens and long-season summer colour.",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 14,
+  "pestRisk": 10,
+  "thirst": 13,
+  "careLevel": 8,
+  "sunNeed": 65,
+  "sunMin": 30,
+  "uncertain": [
+    "RHS currently lists 'Dollar Princess' as a synonym associated with the cultivar name 'Dollar Prinzessin'; 'Dollar Princess' remains the common UK trade and garden name."
+  ],
+  "size": "40–50 cm H × 40–50 cm W"
+}
