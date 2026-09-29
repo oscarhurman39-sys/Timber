@@ -1,7 +1,7 @@
 # Handover: Play Store build session
 
 Paste this file's "Prompt" section into the new Claude Code session, started
-on repo **plantcards-app/Timber**, branch **claude/plant-card-database-7749ux**.
+on repo **plantcards-app/Timber**, branch **claude/timber-plant-pwa-j69h5e** (the deploy branch).
 
 ## Before starting the session
 
@@ -16,12 +16,12 @@ on repo **plantcards-app/Timber**, branch **claude/plant-card-database-7749ux**.
 
 | Item | Value |
 |---|---|
-| Play display name | Plant Cards (rebrand to Timber later is a listing edit only) |
+| Play display name | Oscar set the listing name to **Timber** on 2026-09-29 (the release is labelled "Plant Cards" internally; the launcher name in the bundle is still "Plant Cards" — a new build fixes that if he wants it to match). Changeable any time; only the package name is fixed |
 | Package name | `com.scionstudios.plantcards` — permanent, never contains Oscar's surname or Knights |
 | Publisher | Scion Studios — Play developer name and contact email use the Scion Studios Gmail |
 | Site origin | `https://plantcards-app.github.io/Timber/` (repo transferred to the org; confirmed loading 2026-09-28) |
 | Theme colour | `#0c1810` |
-| Icons | `art/icons/icon-192.png`, `icon-512.png`, `icon-512-maskable.png` (plain resizes of `art/app-logo.png`, nothing AI-generated) |
+| Icons | `art/icons/icon-192.png`, `icon-512.png`, `icon-512-maskable.png` (plain resizes of `art/app-logo.png`). Oscar ticked the icon and feature graphic as AI-generated in Play's asset declaration on 2026-09-29, so the logo itself is; the no-AI-images rule is about plant photos |
 | Static manifest | `manifest.webmanifest` at repo root (name "Plant Cards"); the in-page data: manifest stays untouched because tests/app-test.js asserts on it |
 
 ## State of the branches
@@ -31,34 +31,49 @@ on repo **plantcards-app/Timber**, branch **claude/plant-card-database-7749ux**.
   branch yet**, so `manifest.webmanifest` is not live until the PR merges.
 - Deploy branch `claude/timber-plant-pwa-j69h5e` — GitHub Pages deploys on
   push; the workflow's verify step prints the live URL it checked.
-- Deck: 432 dealt, 76 on hold. Photo credits complete.
+- Deck: 436 dealt, 76 on hold. Photo credits complete.
+- `.well-known/assetlinks.json` is live on the deploy branch with the Play
+  app-signing SHA-256 and the upload key; the Pages workflow verifies it is
+  served on every deploy (run #122, 2026-09-29).
+
+## Play Console state (2026-09-29, done from Oscar's phone)
+
+- App created, package `com.scionstudios.plantcards`, developer name Scion Studios.
+- Bundle v1 (workflow run #3) uploaded to closed track **"Testers"** (a second
+  empty track "Alpha" exists; ignore it). Play App Signing on.
+- Listing, all ten App content declarations, category, countries (UK) done.
+- **Submitted for review 2026-09-29 13:55 BST** (submission 1: closed track,
+  listing, app content, store settings). Check Publishing overview →
+  Submission activity for the verdict; Google quotes up to seven days.
+- **Testers not yet added.** 12 opted-in for 14 continuous days before
+  production; the clock starts at the 12th opt-in.
+- Upload keystore: `PLAY_KEYSTORE_B64` + `PLAY_KEYSTORE_PASSWORD` secrets
+  verified working (run #4 restored the same key as run #3).
 
 ## Prompt
 
 ```
-Repo plantcards-app/Timber, branch claude/plant-card-database-7749ux.
+Repo plantcards-app/Timber, branch claude/timber-plant-pwa-j69h5e (the
+deploy branch; open a feature branch off it and PR back, Oscar says "merge").
 Read play/NEXT-SESSION.md and play/README.md first.
 
-State: the Play bundle workflow works (run #3). Oscar has / will have
-uploaded app-release-bundle.aab to a closed-testing track.
+State: Play app created and bundle v1 on the closed "Testers" track; listing
+and declarations filled; assetlinks.json live and verified. See "Play Console
+state" above for what was mid-flight.
 
-1. If Oscar has not yet stored the upload keystore as repository secrets
-   (PLAY_KEYSTORE_B64 + PLAY_KEYSTORE_PASSWORD), remind him before any
-   second build — see play/README.md.
-2. When Oscar sends the App signing key SHA-256 from Play Console → App
-   integrity, write .well-known/assetlinks.json on the deploy branch
-   (template in play/README.md), push, and confirm it is served at
-   https://plantcards-app.github.io/Timber/.well-known/assetlinks.json
-   (use the Pages workflow log or WebFetch — the container proxy blocks
-   github.io directly).
-3. Listing assets still needed: 1024×500 feature graphic, 2+ phone
-   screenshots (Oscar's own screenshots of the live app, or Playwright
-   captures of timber.html at 390×844), privacy-policy page, data-safety
-   answers (localStorage only, no accounts, no analytics).
-4. For a new build: bump version_code, run the workflow, send the .aab.
+1. Ask Oscar what Submission activity says (in review / approved / rejected)
+   and whether the 12 testers are added and opted in. Nothing on our side
+   blocks either.
+2. Any new bundle: bump version_code (v1 is used), run the play-bundle
+   workflow, send the .aab. The launcher name is still "Plant Cards" while
+   the listing says "Timber"; ask Oscar if he wants them to match before the
+   next build.
+3. Cards: deal from photos as before (data/held-photos/<date>/README.md is
+   the record; conventions in the 2026-09-27b and 2026-09-29 READMEs).
+4. After the 14-day test: Play Console -> apply for production access.
 
 Rules: reality filter (label [Unverified]/[Inference]), never guess, no
-AI-generated images in the repo, no Knights or Oscar's surname anywhere
+AI-generated plant photos in the repo, no Knights or Oscar's surname anywhere
 public, ask for photos in order 5 at a time when dealing cards.
 ```
 
