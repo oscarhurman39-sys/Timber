@@ -38,7 +38,7 @@ const path = require('path');
 const API = 'https://commons.wikimedia.org/w/api.php';
 // Wikimedia asks all API clients to identify themselves — see
 // https://meta.wikimedia.org/wiki/User-Agent_policy
-const UA = 'Timber-PlantImagesTool/1.0 (garden-centre plant ID app; contact: oscarhurman39@gmail.com)';
+const UA = 'Timber-PlantImagesTool/1.0 (garden-centre plant ID app; contact: https://github.com/plantcards-app/Timber)';
 const OUT_DIR = path.join(__dirname, 'plant-images');
 const THUMB_WIDTH = 640; // review-size thumbnail; "pick" downloads at this width, not the multi-MB original
 

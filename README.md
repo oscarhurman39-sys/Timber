@@ -13,7 +13,7 @@ point is `timber.html`; `index.html` redirects to it.
 
 The employee-facing command-centre dashboard — Customer Match, Today, Plant Intelligence,
 Team Learning, Curator Queue and Value Proof — is a **separate product in a separate
-repository**: [Plantatron](https://github.com/oscarhurman39-sys/plantatron). It was
+repository**: Plantatron (a separate repository). It was
 developed here for a while and moved out on 2026-07-28.
 
 | | Timber (here) | Plantatron |
@@ -69,7 +69,7 @@ node tests/run-all.js                           # everything, one command
 
 ### Publishing
 
-The live app is <https://oscarhurman39-sys.github.io/Timber/>. **`claude/timber-plant-pwa-j69h5e`
+The live app is <https://plantcards-app.github.io/Timber/>. **`claude/timber-plant-pwa-j69h5e`
 is the live branch** — whatever is on it is what the world sees.
 
 Publishing is **one command**, from a session or anywhere else:
