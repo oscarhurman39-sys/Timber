@@ -1,0 +1,11 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.scionstudios.plantcards",
+    "sha256_cert_fingerprints": [
+      "0B:DA:0D:1C:11:D6:1E:E9:4E:78:77:71:52:AF:53:56:89:53:FB:31:7A:5E:1C:05:51:F6:E4:99:D2:0D:E5:6F",
+      "0B:13:5D:CE:3C:32:F5:54:14:7A:2F:94:E2:25:C4:3B:98:64:BA:46:1E:57:08:B9:A2:DD:6B:97:38:45:20:49"
+    ]
+  }
+}]
