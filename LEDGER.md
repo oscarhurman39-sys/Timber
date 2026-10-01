@@ -1,16 +1,25 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Send photos for cards 1–5 of batch 2026-10-01 — Saxifraga Dancing Pixies Toni,
-  Stipa 'Pony Tails', Rosa ROYAL WILLIAM, Rosa PRECIOUS LOVE, Leucothoe 'Little Flames' —
-  so they can be dealt with `node tools/add-plants-bulk.js --quick` from
-  `data/held-photos/2026-10-01/batch-corrected.json`; then the next five, in batch order
-  (the README there lists all 20 with the slug each photo should match).
+brick: Send photos for cards 6–10 of batch 2026-10-01 — Anemone 'Fantasy Aurora',
+  Eucalyptus gunnii France Bleu, Gaultheria mucronata 'Lilian', Sambucus nigra LACED UP,
+  Clematis cirrhosa 'Freckles' — then deal them exactly as cards 1–5 were (the README in
+  `data/held-photos/2026-10-01/` is the recipe); then the next five, in batch order.
   (Displaced, not dropped: the r270 iPhone check. The shell deck IS live — the deploy
   branch carries it, build r309 on 2026-09-29 — so what remains is Oscar opening the app
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, later (**cards 1–5 dealt, deck 436 -> 441**) — Oscar sent the five
+  photos (Galaxy S24, 09-30, no AI markers). All five paired without doubt: grass, dark-leaved
+  saxifrage in flower, high-centred red Hybrid Tea, fully double orange-red floribunda, red-tipped
+  Leucothoe. Precious Love carried a pixelated label block at the bottom of the frame — cropped
+  off (top 3040 of 4000 rows, nothing else), original kept as -original.jpg. Saxifraga got a
+  PHOTO_FOCUS of 100% because its flowers hug the right edge and the 0.62 well cut them off.
+  add-plants-bulk --quick, credits --set x5, restamped r310; deck-audit PASS on 441;
+  run-all --jobs 3 run before the push. Flagged, not changed: #1 colours deeper than its prose,
+  #4 fully double vs "semi-double" with spotted leaves, both roses' outer petal tips outside the
+  well, #2 still printing the orange Toxic rung until Oscar OKs the rewrite.
 progress: 2026-10-01 (**26-card batch stored; 20 to deal as photos arrive, five at a
   time**) — Oscar pasted 26 pre-built cards (label-photo research, same shape as the
   2026-09-29 as-sent file) and asked for photos to be requested five at a time. Routine

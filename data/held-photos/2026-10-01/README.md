@@ -130,3 +130,34 @@ Asked for five at a time, in this order. The slug is what `photos/<slug>.jpg` wi
 18. #23 Camellia 'Fairy Blush' → `camellia-fairy-blush`
 19. #24 Ajuga reptans 'Black Scallop' → `ajuga-reptans-black-scallop`
 20. #26 Physocarpus opulifolius FIRESIDE ('UMNHarpell') → `physocarpus-opulifolius-fireside-umnharpell`
+
+**Cards 1–5 dealt** (Oscar's photos, Galaxy S24, 2026-09-30; byte scan found no C2PA or
+`trainedAlgorithmicMedia` markers in any file). Conventions exactly as in `batch-corrected.json`;
+every other field as supplied. Deck 436 -> 441, hold 76 unchanged. Added with
+`add-plants-bulk.js --quick` (data audit, plant-sense, deck audit green); CREDITS entries with
+`photo-credits.js --set`, since the bulk tool does not write them; build restamped to r310.
+The originals here are byte-identical to the files Oscar sent.
+
+| # | card | photo as sent | staged | notes |
+|---|---|---|---|---|
+| 1 | Saxifraga Dancing Pixies Toni ('Sh 1925') | 3000x3750 | 1200x1500 | `PHOTO_FOCUS` '100% 40%': the flower cluster sits against the right edge and a centred crop lost the right-hand flowers. Not the same photograph as the dealt Tini card (that one is a green-leaf collage). |
+| 2 | Stipa tenuissima 'Pony Tails' | 4000x3000, EXIF orientation 6 | 1200x1600 (upright) | matches: fine green threads with buff strands. |
+| 3 | Rosa ROYAL WILLIAM ('Korzaun') | 4000x3000, EXIF orientation 6 | 1200x1600 (upright) | matches: high-centred velvety deep red, dark glossy leaves. A blurred pot label at lower right is unreadable. |
+| 4 | Rosa PRECIOUS LOVE ('Kirlowo') | 3000x4000 (`-original.jpg`) | crop 3000x3040 -> 1200x1216 | Oscar pixelated the label at the bottom of the frame; the staged file is the top 3040 rows of the original (sharp extract, quality 92), which removes the pixelated block and nothing else. |
+| 5 | Leucothoe 'Little Flames' | 3000x4000 | 1200x1600 | matches: red new growth, petioles and stems over green. |
+
+Flagged to Oscar, not changed:
+- #1 flowers read vivid magenta-pink rather than "delicate rose-pink edged darker pink", and the
+  leaves read dark bronze-purple with a silvery sheen rather than "dark green flushed purple".
+- #2 SAFETY prints the orange **Toxic** rung from the supplied sentence (see the toxicity section
+  above); the rewrite waits on Oscar's go. One `plants.csv` row when he gives it.
+- #3 and #4: both blooms are wider than the 0.62 photo well, so the outermost petal tips at each
+  side fall just outside the frame. The whole head is in the detail view.
+- #4 bloom is fully double with no stamens visible, against "semi-double"; the leaves at the right
+  carry pale spots (spray residue or mildew, not confirmed).
+
+**Test note.** `tests/run-all.js --jobs 3` returned 17/18 on this tree (599 s): edge-test timed
+out clicking `#reset2` after its 441-click "clear the whole deck" walk, i.e. the deck was not
+empty when it reloaded, with app-test (229 s) and features-test running beside it. Re-run alone,
+edge-test passes 28/28. Same shape as the 2026-09-27c note: a fixed 420 ms settle per click under
+3-job load, not a card defect; the 17 other checks, deck-audit included, were green in the same run.
