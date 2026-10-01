@@ -10,6 +10,11 @@ brick: Send photos for cards 11–15 of batch 2026-10-01 — Leucothoe 'Burning 
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, later still (**Nerine bowdenii 'Isabel' added, deck 446 -> 447**) —
+  a one-off outside the 26-card batch: JSON + two-panel collage, stored as
+  `data/held-photos/2026-10-01b/`. Fitted, added with add-plant --quick, credits, restamp
+  r313, deck-audit PASS on 447. Flagged: Oscar's own note that 'Isabel' was named
+  from the photo, not a label; the collage's pink fill strip at the lower right of the well.
 progress: 2026-10-01, late (**Clematis photo swapped**) — Oscar: "this might be a better
   photo for that Clematis", a second collage with the bells sharp. Staged through the same
   canvas pipeline, derivative rebuilt, first collage kept as -alt, PHOTO_FOCUS 100% -> 0%
