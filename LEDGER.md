@@ -11,6 +11,11 @@ brick: Answer the five open calls on batch 2026-10-01 so its README closes clean
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, after close (**five-card JSON batch stored as 2026-10-01c, three to
+  deal when photos come**) — Berberis 'Atropurpurea Nana', a species-level Camellia sasanqua
+  (label said only "Les Camélias d'Automne"), Ceratostigma FOREST BLUE. Fiber Optics (sent
+  twice today) and Viburnum tinus 'Eve Price' are already dealt with photos — not added.
+  Fitted and validated 3/3; nothing in timber.html until the photos arrive.
 progress: 2026-10-01, close (**cards 16–20 dealt, deck 452 -> 457 — batch complete**) —
   Hydrangea 'Quick Fire Fab', Camellia sasanqua 'Bonanza', Camellia 'Fairy Blush', Ajuga
   'Black Scallop', Physocarpus FIRESIDE. Bulk add, credits, restamp r316, deck-audit PASS on
