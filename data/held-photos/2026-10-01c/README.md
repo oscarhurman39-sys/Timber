@@ -58,3 +58,29 @@ here as `cephalanthus-occidentalis-bailoptics-alt.jpg`. Swapping is the Clematis
 2026-10-01: stage through the canvas pipeline, rebuild the derivative, note it in CREDITS.
 
 **Batch status:** 1 of 3 dealt. Still to come: #2 Camellia sasanqua, #4 Ceratostigma FOREST BLUE.
+
+**Cards 2 and 4 dealt, Eve Price photo replaced** (all Oscar's; no AI markers in any file).
+Conventions exactly as in `batch-corrected.json`; every other field as supplied. Deck 458 -> 460,
+hold 76 unchanged. `add-plants-bulk.js --quick`; credits with `photo-credits.js --set`; restamped
+r318. Originals here are byte-identical to the files sent.
+
+| # | card | photo as sent | staged | notes |
+|---|---|---|---|---|
+| 2 | Camellia sasanqua | two-panel collage 2160x2425 (collage app, no camera EXIF) | 1200x1347 | left: a pink double over a pot and wooden decking; right: a white semi-double with golden stamens and pink-flushed buds. Two forms in one picture, which suits a species-level card. Both panels in the well. |
+| 4 | Ceratostigma willmottianum FOREST BLUE ('Lice') | 4000x3000, EXIF orientation 6 (Galaxy S24) | 1200x1600 (upright) | one open blue flower at the left, bristly leaves, spent brown seed heads top and right. Matches. |
+
+**Viburnum tinus 'Eve Price' photo replaced** at Oscar's request ("Better photo for viburnum
+eves price"): his two-panel collage, 2160x3122, staged 1200x1734 through the same canvas pipeline
+as the bulk tool, derivative rebuilt, CREDITS note added. Left: open white flowers with pink buds;
+right: a deep-pink bud cluster over the leaves. The previous master, his berry close-up of
+2026-08-23 (commit 533b0fa), is retired and lives in git history. `PHOTO_FOCUS` stays at
+'50% 45%'; the render shows both panels. Card text and ratings unchanged.
+
+Flagged to Oscar, not changed:
+- #2 the left panel shows the pot rim and decking below the flower.
+- #4 shot in early October with most heads gone over; the leaves are green, not yet the "vivid
+  red autumn colour" the card promises.
+
+**Batch complete: 3 of 3 dealt** (#1, #2, #4). Deck 457 -> 460 across the batch. Not added: #3
+Fiber Optics and #5 Eve Price, both already dealt; Eve Price now wears the new photo, Fiber
+Optics keeps its 08-21 photo with the new shot held as `-alt` pending Oscar's call.

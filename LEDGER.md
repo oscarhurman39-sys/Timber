@@ -1,16 +1,22 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Answer the five open calls on batch 2026-10-01 so its README closes clean — go/no
-  on the Pony Tails and Laced Up safety rewrites (one plants.csv row each), the Viburnum
-  species off the label, Rose Quartz vs the dealt Rose Crystal (replace / second card /
-  skip), and whether Little Devil keeps its held text or takes the new JSON. Five one-word
-  answers; Claude applies them.
+brick: Answer the open calls from today's batches, five one-word answers Claude then applies —
+  go/no on the Pony Tails and Laced Up safety rewrites (one plants.csv row each), Rose Quartz
+  vs the dealt Rose Crystal (replace / second card / skip), Little Devil (keep the held text or
+  take the new JSON), and Fiber Optics (keep the 08-21 photo or swap to the 09-30 one held as
+  -alt in data/held-photos/2026-10-01c/). The Viburnum-genus question is closed if the label
+  was Eve Price; say so.
   (Displaced, not dropped: the r270 iPhone check. The shell deck IS live — the deploy
   branch carries it, build r309 on 2026-09-29 — so what remains is Oscar opening the app
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, last of the day (**batch c complete, deck 458 -> 460; Eve Price photo
+  swapped**) — Camellia sasanqua (species card, Oscar's two-flower collage) and Ceratostigma
+  FOREST BLUE dealt; Viburnum tinus 'Eve Price' re-photographed at Oscar's ask with his
+  flower-and-bud collage, the 08-23 berry shot retired to git history. Restamp r318, deck-audit
+  PASS on 460. Day total: deck 436 -> 460, 24 cards dealt, three photos replaced.
 progress: 2026-10-01, night (**Berberis 'Atropurpurea Nana' dealt, deck 457 -> 458**) — card 1
   of batch c, from Oscar's photo. The Fiber Optics photo sent with it is kept unused: that card
   already wears his own foliage shot from 08-21 and the new one is foliage too — his call which.
