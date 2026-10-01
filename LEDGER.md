@@ -1,15 +1,19 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Send photos for cards 13–17 of batch 2026-10-01 — Coprosma 'Lemon and Lime',
-  Berberis 'Admiration', Escallonia 'Red Dream', Hydrangea 'Quick Fire Fab', Camellia
-  sasanqua 'Bonanza' — then deal them exactly as cards 1–12 were (the README in
-  `data/held-photos/2026-10-01/` is the recipe); then the last three (#23, #24, #26).
+brick: Send photos for the last five of batch 2026-10-01 — Hydrangea 'Quick Fire Fab',
+  Camellia sasanqua 'Bonanza', Camellia 'Fairy Blush', Ajuga 'Black Scallop', Physocarpus
+  FIRESIDE — then deal them exactly as cards 1–15 were (the README in
+  `data/held-photos/2026-10-01/` is the recipe). That closes the batch.
   (Displaced, not dropped: the r270 iPhone check. The shell deck IS live — the deploy
   branch carries it, build r309 on 2026-09-29 — so what remains is Oscar opening the app
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, later again (**cards 13–15 dealt, deck 449 -> 452**) — Coprosma
+  'Lemon and Lime' (collage), Berberis 'Admiration', Escallonia 'Red Dream'. Bulk add,
+  credits, restamp r315, deck-audit PASS on 452. Flagged: the Coprosma's orange autumn tints,
+  the Escallonia's single October flower. 15 of 20 dealt; five photos to come.
 progress: 2026-10-01, last (**cards 11–12 dealt, deck 447 -> 449**) — the two Leucothoes,
   'Curly Red' and 'Burning Love', from Oscar's photos. Bulk add, credits, restamp r314,
   deck-audit PASS on 449. Nothing to flag. 12 of 20 dealt; eight photos to come.

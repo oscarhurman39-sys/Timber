@@ -222,3 +222,25 @@ Nothing flagged on either beyond what the card already says.
 **Batch status:** 12 of 20 dealt (#1–4, 6, 9–15). Next five in order: #17 Coprosma 'Lemon and
 Lime', #18 Berberis thunbergii 'Admiration', #20 Escallonia 'Red Dream', #21 Hydrangea paniculata
 'Quick Fire Fab', #22 Camellia sasanqua 'Bonanza'. Then #23, #24, #26.
+
+**Cards 13–15 dealt** (Oscar's photos, "Lemlime, Admiration and the Escallonia in order":
+#18 and #20 Galaxy S24, #17 his two-panel collage; no AI markers). Conventions exactly as in
+`batch-corrected.json`; every other field as supplied. Deck 449 -> 452, hold 76 unchanged.
+`add-plants-bulk.js --quick`; credits with `photo-credits.js --set`; restamped r315. Originals
+here are byte-identical to the files Oscar sent; the collage is kept whole.
+
+| # | card | photo as sent | staged | notes |
+|---|---|---|---|---|
+| 17 | Coprosma 'Lemon and Lime' | collage 2160x3840 | 1200x2133 | both panels in the well, default framing; the collage app's fill sits behind the stats panel bar a sliver at the right. |
+| 18 | Berberis thunbergii 'Admiration' | 4000x3000, EXIF orientation 6 | 1200x1600 (upright) | matches: coral-red to burgundy leaves with the fine yellow margin. |
+| 20 | Escallonia 'Red Dream' | 4000x3000, EXIF orientation 6 | 1200x1600 (upright) | glossy small leaves on red stems, one red flower cluster at the right edge of the frame, partly under the growth rail. |
+
+Flagged to Oscar, not changed:
+- #17 the leaves carry orange and coral tints as well as the lime, lemon and green the card
+  describes (autumn colouring in the shot).
+- #20 one flower cluster only, shot in October against a Jun-Sep band; a summer shot in full
+  bloom would be an upgrade.
+
+**Batch status:** 15 of 20 dealt (#1–4, 6, 9–15, 17, 18, 20). Last five in order: #21 Hydrangea
+paniculata 'Quick Fire Fab', #22 Camellia sasanqua 'Bonanza', #23 Camellia 'Fairy Blush', #24 Ajuga
+reptans 'Black Scallop', #26 Physocarpus opulifolius FIRESIDE ('UMNHarpell').
