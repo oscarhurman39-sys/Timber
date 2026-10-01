@@ -2774,6 +2774,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "leucothoe-axillaris-curly-red.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "leucothoe-fontanesiana-whitewater-howw.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2781,6 +2791,16 @@
    "sourceUrl": null,
    "commit": "98e2bad",
    "commitSubject": "Add Whitewater Dog Hobble to deck: 70 -> 71",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "leucothoe-keiskei-burning-love.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

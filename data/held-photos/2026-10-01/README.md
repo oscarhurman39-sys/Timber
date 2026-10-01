@@ -205,3 +205,20 @@ data-audit, check-boot and deck-audit re-run green after the swap.
 **Test note, second run.** `run-all --jobs 3` on the cards 6–10 tree: 17/18 again, edge-test only,
 the same `#reset2` timeout after the whole-deck walk (now 446 clicks); app-test ran beside it at
 229 s. Re-run alone it passes — see the ledger line for the result that was in hand at the push.
+
+**Cards 11–12 dealt** (Oscar's photos, Galaxy S24, 2026-09-30; "both leucothoe, starting with
+curly, image 1"; no AI markers). Conventions exactly as in `batch-corrected.json`; every other
+field as supplied. Deck 447 -> 449 (the Nerine one-off of 2026-10-01b sits between), hold 76
+unchanged. `add-plants-bulk.js --quick`; credits with `photo-credits.js --set`; restamped r314.
+Originals here are byte-identical to the files Oscar sent.
+
+| # | card | photo as sent | staged | notes |
+|---|---|---|---|---|
+| 15 | Leucothoe axillaris 'Curly Red' | 4000x3000, EXIF orientation 6 | 1200x1600 (upright) | matches: tightly curled glossy leaves, red margins over green. |
+| 14 | Leucothoe keiskei 'Burning Love' | 3000x3484 | 1200x1394 | matches: lance-shaped glossy leaves, red-purple new growth on red stems over green. A nursery label at the far left edge of the frame (part-shade pictogram text, no plant name) falls outside the card's well. |
+
+Nothing flagged on either beyond what the card already says.
+
+**Batch status:** 12 of 20 dealt (#1–4, 6, 9–15). Next five in order: #17 Coprosma 'Lemon and
+Lime', #18 Berberis thunbergii 'Admiration', #20 Escallonia 'Red Dream', #21 Hydrangea paniculata
+'Quick Fire Fab', #22 Camellia sasanqua 'Bonanza'. Then #23, #24, #26.
