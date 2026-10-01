@@ -1,16 +1,41 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Get r270 (the shell deck, branch `claude/safari-compatibility-ufr5jx`) live
-  and open it on an iPhone that crashed, then paste back the *Report a problem*
-  text — that one sheet says whether it opened, how many cards it built, and what
-  last threw. Live is a fast-forward of the deploy branch: merge this branch into
-  `claude/timber-plant-pwa-j69h5e` (or `git push origin HEAD:refs/heads/claude/timber-plant-pwa-j69h5e`
-  from it) and the workflow does the rest.
-  (Displaced, not dropped: the toxicity paste — `node tools/backfill-field.js toxicity
-  --paste --one > TOXICITY-ASK.md` into ChatGPT, 317 of 432 cards blank — unchanged
-  since 2026-09-13.)
-since: 2026-09-16  sessions-unchanged: 0
+brick: Send photos for cards 1–5 of batch 2026-10-01 — Saxifraga Dancing Pixies Toni,
+  Stipa 'Pony Tails', Rosa ROYAL WILLIAM, Rosa PRECIOUS LOVE, Leucothoe 'Little Flames' —
+  so they can be dealt with `node tools/add-plants-bulk.js --quick` from
+  `data/held-photos/2026-10-01/batch-corrected.json`; then the next five, in batch order
+  (the README there lists all 20 with the slug each photo should match).
+  (Displaced, not dropped: the r270 iPhone check. The shell deck IS live — the deploy
+  branch carries it, build r309 on 2026-09-29 — so what remains is Oscar opening the app
+  on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
+  paste, 317 of 432 blank, is unchanged since 2026-09-13.)
+since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01 (**26-card batch stored; 20 to deal as photos arrive, five at a
+  time**) — Oscar pasted 26 pre-built cards (label-photo research, same shape as the
+  2026-09-29 as-sent file) and asked for photos to be requested five at a time. Routine
+  of 2026-09-26d: `data/held-photos/2026-10-01/batch-as-sent.json` is the paste verbatim,
+  nothing is in timber.html until a photo lands. Checked against deck 436 / hold 76:
+  FOUR ARE ALREADY DEALT and three of them under a different latin form the exact-match
+  dedup would miss — Laurus nobilis; Rosa [Vanessa Bell] = `Rosa 'Auseasel'`; Cephalanthus
+  [Fiber Optics] = `'Bailoptics'`; Aster 'Rose Quartz' (common "Rose Crystal Aster") =
+  `Symphyotrichum dumosum 'Rose Crystal'`, found only by a genus-independent cultivar-word
+  search ([Unverified] that Rose Quartz and Rose Crystal are one cultivar; Oscar's own
+  note says the names co-occur). ONE IS HELD — Physocarpus LITTLE DEVIL ('Donna May'), a
+  photo deals it; his new JSON differs from the held text (H7 vs H6, size, peak, ratings),
+  his call which text goes in. ONE IS NOT A CARD — "Viburnum sp.", genus only, four hard
+  validator errors; needs the label's species/cultivar. The 20 that remain pass
+  check-plant-json 20/20 with the standing conventions applied in `batch-corrected.json`
+  (soil ≤26 + warning ≤44, sub-metre sizes in cm, deck-form aspect, CAPS trade names or
+  the dealt sibling's form); everything else as supplied, including the 3–5 ratings the
+  checker calls suspicious (same call as the 09-29 Skimmias). TOXICITY, run through the
+  card's real TOX_LADDER rather than the brief's description of it: Stipa's "not
+  generally considered poisonous" would print the orange Toxic rung ("poison" matches),
+  and Sambucus's cyanogenic warning matches nothing and would print the amber default —
+  one over-warns, one under-warns; both flagged with a one-line rewrite, neither changed.
+  No photo, no deck change, no test run needed: timber.html is untouched. Ledger had not
+  been written since 09-16 though batches landed on 09-23, 09-26 (×4), 09-27 (×3), 09-29
+  (deck 348 -> 436); the r270 brick's "get it live" half happened in that gap (r309 live).
 progress: 2026-09-16 (Safari — **buried cards become shells, so the deck's memory no
   longer grows with the deck**) — Oscar: "works fine on android but on apple has a
   melt down", with his own Android's report pasted (r269, 8GB, 10 cores, boot
