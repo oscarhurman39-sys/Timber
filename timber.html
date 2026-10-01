@@ -1238,7 +1238,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r318 · 2026-10-01 · 4febc3e';
+const BUILD='r319 · 2026-10-01 · 3aa31bf';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -2129,7 +2129,7 @@ const PLANTS = [
    soil:"Humus-rich, well-drained; Shelter from cold winds · fruit not edible",
    prune:"Trim after flowering",
    source:"",
-   peak:"Dec-Apr",
+   peak:"Nov-Apr",
    order:"",
    bench:"",
    root:"",
@@ -2147,7 +2147,7 @@ const PLANTS = [
    size:"1.5–2.5 m H × 1.5–2.5 m W",
    hardinessNote:"Hardy through an average UK winter, withstanding -10 to -5C.",
    foliage:"evergreen",
-   seasonalImpact:"", growthSpeed:9, pestRisk:9, thirst:8, careLevel:5, sunNeed:70, sunMin:30},
+   toxicity:"Fruit is ornamental and should not be eaten; gloves are advisable when handling.", seasonalImpact:"", growthSpeed:9, pestRisk:9, thirst:8, careLevel:5, sunNeed:70, sunMin:30},
 
   {common:"Orange Victory Itoh Peony", latin:"Paeonia 'Orange Victory'", hue:30,
    visual:"Apricot-orange semi-double blooms · red flares · yellow centres · sturdy stems",
@@ -5148,7 +5148,7 @@ const PLANTS = [
    size:"8–12 m H × 4–8 m W",
    hardinessNote:"Hardy through much of the UK, approximately -10 to -5°C.",
    foliage:"Evergreen; aromatic glossy dark green leaves.",
-   seasonalImpact:"", growthSpeed:9, pestRisk:8, thirst:6, careLevel:6, sunNeed:70, sunMin:35},
+   toxicity:"Leaves are widely used as a culinary herb; fruits are ornamental and should not be eaten. Gloves are advisable when handling.", seasonalImpact:"", growthSpeed:9, pestRisk:8, thirst:6, careLevel:6, sunNeed:70, sunMin:35},
 
   {common:"Dogwood 'Midwinter Fire'", latin:"Cornus sanguinea 'Midwinter Fire'", hue:25,
    visual:"Deciduous suckering shrub prized for brilliant yellow-orange and fiery red winter stems.",
@@ -7423,7 +7423,7 @@ const PLANTS = [
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:13, pestRisk:3, thirst:9, careLevel:4, sunNeed:95, sunMin:68},
 
-  {common:"Button bush 'Fiber Optics'", latin:"Cephalanthus occidentalis 'Bailoptics'", hue:0,
+  {common:"Button bush 'Fiber Optics'", latin:"Cephalanthus occidentalis 'Bailoptics'", hue:48,
    visual:"Creamy-white spherical flowers · glossy green leaves · coppery autumn colour",
    water:"Keep evenly moist; tolerates flooding",
    aspect:"East / South / West",
@@ -7442,12 +7442,12 @@ const PLANTS = [
    returnRisk:"",
    pots:"",
    cvs:"trade name Fiber Optics; First Editions Series; cultivar code 'Bailoptics'",
-   hardiness:"H5",
+   hardiness:"H6",
    resilience:"wet-soil tolerant · flood tolerant · pollinator friendly",
    uses:"pond margins · rain gardens · wet borders · wildlife gardens",
    size:"1.5–2 m H × 1.5–2 m W",
    compliance:"PBR protected · commercial propagation restricted",
-   hardinessNote:"USDA zone 4; UK hardiness is inferred from cold tolerance",
+   hardinessNote:"H6 · approximately −20 to −15°C",
    foliage:"deciduous",
    seasonalImpact:"", growthSpeed:10, pestRisk:3, thirst:15, careLevel:5, sunNeed:82, sunMin:48},
 
@@ -12138,7 +12138,7 @@ const PLANTS = [
    cvs:"",
    hardiness:"H4", resilience:"Tolerates drought, wind and exposed sunny positions once established.",
    uses:"Gravel gardens, prairie planting, borders, containers, movement planting and architectural schemes.", size:"50–70 cm H × 30–50 cm W",
-   toxicity:"Not generally considered poisonous, but fine leaves and awns may irritate skin, eyes or animals.", hardinessNote:"H4 · −10 to −5°C", foliage:"deciduous",
+   toxicity:"Fine leaves and seed awns can irritate the skin and eyes of people and animals.", hardinessNote:"H4 · −10 to −5°C", foliage:"deciduous",
    seasonalImpact:"", growthSpeed:12, pestRisk:3, thirst:5, careLevel:4, sunNeed:90, sunMin:60},
   {common:"Royal William Rose", latin:"Rosa ROYAL WILLIAM ('Korzaun')", hue:355,
    visual:"Compact Hybrid Tea rose with dark glossy foliage and large, shapely, high-centred, fully double velvety deep-red flowers opening from pointed buds.",
@@ -12203,7 +12203,7 @@ const PLANTS = [
    cvs:"SNR1292",
    hardiness:"H6", resilience:"Very hardy, vigorous and tolerant of a broad range of garden soils.",
    uses:"Architectural borders, narrow spaces, wildlife gardens, dark-foliage schemes and informal screening.", size:"2–3 m H × 0.8–1.2 m W",
-   toxicity:"Raw leaves, stems and unripe fruit contain compounds that can cause illness if eaten; ripe berries should be cooked before consumption.", hardinessNote:"H6 · −20 to −15°C", foliage:"deciduous",
+   toxicity:"Raw leaves, stems and unripe berries are harmful if eaten; ripe berries must be cooked before eating.", hardinessNote:"H6 · −20 to −15°C", foliage:"deciduous",
    seasonalImpact:"", growthSpeed:14, pestRisk:7, thirst:8, careLevel:5, sunNeed:70, sunMin:30},
   {common:"Freckles Clematis", latin:"Clematis cirrhosa var. purpurascens 'Freckles'", hue:44,
    visual:"Evergreen climbing clematis producing nodding creamy bell-shaped winter flowers heavily spotted and freckled maroon-purple inside.",
@@ -12426,6 +12426,19 @@ const PLANTS = [
    uses:"Border fronts, cottage gardens, gravel gardens, containers, wall-side planting and late-season colour.", size:"50–60 cm H × 0.5–1 m W",
    hardinessNote:"H4 · −10 to −5°C", foliage:"deciduous",
    seasonalImpact:"", growthSpeed:8, pestRisk:4, thirst:7, careLevel:5, sunNeed:75, sunMin:35},
+  {common:"Dancing Pixies Twinkie Saxifrage", latin:"Saxifraga Dancing Pixies Twinkie ('Sh 1923')", hue:335,
+   visual:"Dwarf clump-forming saxifrage with scalloped dark green foliage showing pinkish-red tones and variegation, topped in autumn by masses of bright pink star-shaped flowers with contrasting yellow centres.",
+   water:"Keep consistently moist during active growth, but ensure excess water drains freely.",
+   aspect:"East / South / West",
+   soil:"Moist, drained, any pH; Shelter it; no drought or winter wet",
+   prune:"No routine pruning required; remove spent flower stems and damaged foliage when necessary.",
+   source:"", peak:"Sep-Nov", order:"", bench:"", root:"",
+   trade:"", retail:"", margin:"", type:"", shrink:"", returnRisk:"", pots:"",
+   cvs:"SH1923",
+   hardiness:"H4", resilience:"Hardy through most of the UK when grown in a sheltered, moisture-retentive but well-drained position.",
+   uses:"Shady borders, woodland gardens, rock gardens, containers, courtyard planting and autumn colour.", size:"15–25 cm H × 15–25 cm W",
+   hardinessNote:"H4 · −10 to −5°C", foliage:"evergreen",
+   seasonalImpact:"", growthSpeed:9, pestRisk:8, thirst:11, careLevel:7, sunNeed:20, sunMin:5},
 ];
 /* PLANTS:END */
 /* HOLD:BEGIN — managed by plants-tool.js; keep this marker pair.
@@ -14361,13 +14374,13 @@ const PLANTS_ON_HOLD=[
    seasonalImpact:"", growthSpeed:10, pestRisk:8, thirst:8, careLevel:5, sunNeed:60, sunMin:35},
 
   {common:"Ninebark 'Little Devil'", latin:"Physocarpus opulifolius LITTLE DEVIL ('Donna May')", hue:280,
-   visual:"Compact rounded shrub · small dark purple leaves · clusters of pale flowers in summer",
-   water:"Keep moist, not waterlogged",
+   visual:"Compact upright deciduous shrub with finely textured deep burgundy-purple foliage and rounded clusters of small pinkish-white flowers in early summer.",
+   water:"Water regularly while establishing; mature plants tolerate moderate drought.",
    aspect:"East / South / West",
    soil:"Any, fertile; Avoid drought and waterlogging while young",
-   prune:"Pruning group 1; remove older stems after flowering to keep it compact",
+   prune:"Remove older stems after flowering or renovate gradually by cutting selected stems to the base.",
    source:"",
-   peak:"May-Aug",
+   peak:"May-Jul",
    order:"",
    bench:"",
    root:"",
@@ -14379,14 +14392,14 @@ const PLANTS_ON_HOLD=[
    returnRisk:"",
    pots:"",
    cvs:"trade name LITTLE DEVIL; cultivar 'Donna May' (PP22634); the deck previously carried 'Minall2', which is ALL BLACK's code",
-   hardiness:"H6",
-   resilience:"robust · adaptable · tolerates urban conditions",
-   uses:"shrub borders · mixed planting · hedging · screening · containers",
-   size:"1–1.5 m H × 1–1.5 m W",
+   hardiness:"H7",
+   resilience:"Extremely cold hardy, adaptable and relatively tolerant of drought and urban conditions.",
+   uses:"Compact shrub borders, dark-foliage schemes, containers, low hedging and wildlife gardens.",
+   size:"0.9–1.2 m H × 0.8–1.2 m W",
    toxicity:"",
    compliance:"",
-   hardinessNote:"Hardy throughout the UK",
-   seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:10, careLevel:6, sunNeed:75, sunMin:45},
+   hardinessNote:"H7 · below −20°C",
+   foliage:"deciduous", seasonalImpact:"", growthSpeed:14, pestRisk:4, thirst:10, careLevel:6, sunNeed:75, sunMin:45},
 
   {common:"Copper beech", latin:"Fagus sylvatica (Atropurpurea Group)", hue:275,
    visual:"Deep purple foliage · smooth grey bark · reddish-copper autumn colour",
@@ -15812,6 +15825,24 @@ const PHOTO_SWAP={
   'stachyurus-praecox':{
     alt:'photos/card/stachyurus-praecox-young-growth.webp',
     focus:'50% 40%',
+    hold:'3.5s',
+  },
+  /* Oscar's 2026-09-30 frame, sent as a second photo: the same glossy opposite leaves in low sun with the red stems lit; the card photo is his 08-21 shot of the foliage in flat light. Two moods of the one plant, no flower heads in either. */
+  'cephalanthus-occidentalis-bailoptics':{
+    alt:'photos/card/cephalanthus-occidentalis-bailoptics-sunlit.webp',
+    focus:'50% 45%',
+    hold:'3.5s',
+  },
+  /* Oscar's third sasanqua form, 2026-10-01: one single rose-pink flower with a boss of golden stamens, buds below. The card's own collage shows a pink double and a white semi-double; this frame adds the single form, so the species card shows the range it promises. */
+  'camellia-sasanqua':{
+    alt:'photos/card/camellia-sasanqua-pink-single.webp',
+    focus:'50% 45%',
+    hold:'3.5s',
+  },
+  /* Oscar's 2026-10-01 frame, sent with a re-researched JSON: leaves backlit with the yellow midribs and stems glowing and one young leaf curled, the aromatic foliage a customer is buying. Alternates with the card's own foliage photo. */
+  'laurus-nobilis':{
+    alt:'photos/card/laurus-nobilis-sunlit.webp',
+    focus:'50% 45%',
     hold:'3.5s',
   },
 };

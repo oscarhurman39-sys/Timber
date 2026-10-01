@@ -272,3 +272,32 @@ day, with the Nerine of 2026-10-01b in between. Not added, as recorded at the to
 (already dealt), #25 (held, a photo deals it), #19 (genus only). Still waiting on Oscar: the two
 toxicity rewrites (#2, #12), the Viburnum species, Rose Quartz vs the dealt Rose Crystal, and
 whether Little Devil keeps its held text.
+
+## Doubles and safety text resolved under the 2026-10-01 protocol (see NEW-SESSION.md)
+
+Oscar, on being asked: "we wanna beef up this app not waste time nit picking questions" —
+compare the stats, decide, flash between double photos. `tools/compare-double.js` and
+`tools/add-swap.js` were built for it and these are the first cards through them.
+
+- **#8 Aster 'Rose Quartz' = `Symphyotrichum dumosum 'Rose Crystal'`.** Oscar: "it was defo
+  called Rose Crystal". Every rating within an icon, hue and size a call that the dealt card
+  keeps; the research tool's "Rose Quartz" synonym is not added to `cvs` ([Unverified]).
+  Nothing changed.
+- **#7 Rosa [Vanessa Bell] = `Rosa 'Auseasel'`.** pestRisk 7 vs 11 and sunMin 55 vs 40 are an
+  icon apart; the deck's 31 other roses sit at 5–9 and 45–65, so the card keeps both. Nothing
+  changed.
+- **#5 Laurus nobilis.** Card had no toxicity text; the incoming sentence was taken, then
+  superseded the same evening by the 2026-10-01e re-send (see that README).
+- **#25 Physocarpus LITTLE DEVIL (held).** hardiness H6 → **H7** (siblings Diabolo and ALL
+  BLACK are H7) with the H7 note; `foliage` deciduous (was blank); size 1–1.5 m → 0.9–1.2 m,
+  peak May-Aug → May-Jul and the five prose fields from the newer research (held card, nobody
+  has seen it). growthSpeed 14 and sunMin 45 kept — siblings 12/13/15 and 45/45. Still held:
+  **it has no photo at all**, which is why it is held; Oscar read "keep or swap" as a photo
+  question. A photo deals it.
+- **#16 Fiber Optics** — see the 2026-10-01c README (that batch re-sent it with a photo).
+- **#2 Stipa 'Pony Tails' SAFETY** → "Fine leaves and seed awns can irritate the skin and eyes
+  of people and animals." Prints Handle with care (amber), which is what Oscar's sentence
+  meant; the original printed Toxic because it contained "poisonous".
+- **#12 Sambucus LACED UP SAFETY** → "Raw leaves, stems and unripe berries are harmful if
+  eaten; ripe berries must be cooked before eating." Prints Toxic (orange); the original
+  matched no keyword and printed the amber default.

@@ -84,3 +84,19 @@ Flagged to Oscar, not changed:
 **Batch complete: 3 of 3 dealt** (#1, #2, #4). Deck 457 -> 460 across the batch. Not added: #3
 Fiber Optics and #5 Eve Price, both already dealt; Eve Price now wears the new photo, Fiber
 Optics keeps its 08-21 photo with the new shot held as `-alt` pending Oscar's call.
+
+## Doubles resolved under the 2026-10-01 protocol (see NEW-SESSION.md)
+
+- **#3 Fiber Optics** (`Cephalanthus occidentalis 'Bailoptics'`): hue 0 → **48** (0 was an
+  unset default on a cream-flowered plant); hardiness H5 → **H6** with the "H6 · approximately
+  −20 to −15°C" note — the card's own note admitted its H5 was "inferred from cold tolerance"
+  of USDA zone 4, which is colder than H6 needs ([Inference]); peak Jul-Sep, size 1.5–2 m and
+  sunNeed/sunMin 82/48 kept (dealt card, no siblings, incoming 70/35 an icon apart). The
+  2026-09-30 photo is now the card's **second frame** (`-sunlit`, `tools/add-swap.js`), not
+  held as -alt any more.
+- **#5 Viburnum tinus 'Eve Price'**: toxicity "Fruit is ornamental and should not be eaten;
+  gloves are advisable when handling." taken (card was blank; prints Toxic as meant); peak
+  Dec-Apr → **Nov-Apr** — Oscar's own photo, now on the card, has it in open flower on
+  1 October, so the later band was wrong by his own evidence; sunNeed 70 / sunMin 30 kept
+  (siblings 55–65 / 20–35; incoming 45 / 5 is an icon away). `cvs` "Eve Price" not added, it
+  is the plant's own name.

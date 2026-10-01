@@ -782,6 +782,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "camellia-sasanqua-pink-single.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Autumn Camellia card (PHOTO_SWAP alt): Oscar's third sasanqua form, 2026-10-01: one single rose-pink flower with a boss of golden stamens, buds below. The card's own collage shows a pink double and a white semi-double; this frame adds the single form, so the species card shows the range it promises..",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "camellia-sasanqua-sasanqua-variegata.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -915,6 +925,16 @@
    "file": "cedrus-deodara.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Uncropped, verdict as-is, 3000x4000 at 0.750. No pixels generated. EXIF Samsung Galaxy S24, current season. No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map (2026-09-01)",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "cephalanthus-occidentalis-bailoptics-sunlit.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Button bush 'Fiber Optics' card (PHOTO_SWAP alt): Oscar's 2026-09-30 frame, sent as a second photo: the same glossy opposite leaves in low sun with the red stems lit; the card photo is his 08-21 shot of the foliage in flat light. Two moods of the one plant, no flower heads in either..",
    "author": "Scion Studios",
    "sourceUrl": null,
    "commit": null,
@@ -2824,6 +2844,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "laurus-nobilis-sunlit.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Bay Laurel card (PHOTO_SWAP alt): Oscar's 2026-10-01 frame, sent with a re-researched JSON: leaves backlit with the yellow midribs and stems glowing and one young leaf curled, the aromatic foliage a customer is buying. Alternates with the card's own foliage photo..",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "laurus-nobilis.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -4587,6 +4617,16 @@
   },
   {
    "file": "saxifraga-dancing-pixies-toni-sh-1925.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "saxifraga-dancing-pixies-twinkie-sh-1923.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",

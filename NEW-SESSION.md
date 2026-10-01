@@ -53,6 +53,68 @@ photo lands.
 > `node tools/add-plants-bulk.js --quick`, then `node tests/run-all.js --jobs 3`
 > once before pushing.
 
+## Doubles and second photos — the standing protocol (Oscar, 2026-10-01)
+
+> "Compare stats procedure for any doubles I ever send should be something we build and
+> you figure out what seems correct. If you get a double photo always make it a flash
+> between — that should be the go-to protocol. We wanna beef up this app, not waste time
+> nit-picking questions."
+
+So neither case is a question for Oscar any more. Both are tools, and the batch README
+records what was done.
+
+**A JSON for a card the deck already has** (dealt or held):
+
+```sh
+node tools/compare-double.js batch.json --only "Rose"        # find the card, diff every field, verdicts
+node tools/compare-double.js batch.json --only "Rose" --apply hardiness,toxicity,peak
+node tools/compare-double.js --card "<latin>" --set toxicity="..."   # one field, no incoming file
+```
+
+It finds the card by exact latin, then latin with brackets/quotes/case stripped, then
+same genus + the same quoted cultivar or code (`Rosa [Vanessa Bell] ('Auseasel')` is
+`Rosa 'Auseasel'`), then exact common name, then a cultivar word found in one card only
+(reported PROBABLE — confirm with `--card`). A JSON whose code differs is **not** a double
+(Twinkie 'Sh 1923' beside Toni 'Sh 1925' and Tini 'Sh 1914' is a third card).
+
+The rules for "what seems correct", in order — apply them, do not re-litigate them:
+
+1. **Blank on the card, filled incoming → take it.** Never lose data. For `toxicity` the
+   tool runs both sentences through the card's real `TOX_LADDER`; take the incoming only
+   if the tier it prints is the tier it means.
+2. **Ratings within one icon → keep the card.** 3 points on a 0–20 field, 10 on
+   sunNeed/sunMin. Two research runs a few points apart is noise, not a correction.
+3. **An icon or more apart, or hardiness / peak / size / foliage class disagreeing → the
+   deck decides.** The tool prints the genus siblings' values; where they agree with one
+   side, that side wins. Where they do not: a **dealt** card keeps its value (it has been
+   live and looked at), a **held** card takes the newer research (nobody has seen it).
+   A photograph is evidence too — Eve Price went Dec-Apr → Nov-Apr because Oscar's own
+   photo had it in flower on 1 October.
+4. **Prose on a dealt card stays.** On a held card the newer research replaces the old
+   terse `·` style, so the card reads like the rest of this month's deck when it is dealt.
+5. **`hue` stays** unless the card's is 0, which is an unset default (Fiber Optics was).
+6. **`common` and `cvs` stay.** A `cvs` that is only the plant's own name adds nothing.
+7. **Layout fields never go through `--apply`** — `soil`, `soilWarning`, `aspect` are
+   hand-fitted to the panel budgets per batch (see `tools/fit-incoming.js`).
+
+**A second photograph for a card that already has one:**
+
+```sh
+node tools/add-swap.js "<latin>" photo.jpg --as flowers --note "what this frame adds"
+```
+
+It stages the master as `photos/<slug>-<suffix>.jpg`, builds the derivative, adds the
+`PHOTO_SWAP` entry (or appends to an existing one), writes the CREDITS entry and runs
+`check-boot`. The card then flashes between the two. **Never replace, never ask.** The only
+time a photo is replaced is when Oscar says so ("better photo for X"): then the
+Clematis / Eve Price routine of 2026-10-01 — stage through the canvas pipeline, rebuild
+the derivative, CREDITS note, the old master stays in git history.
+
+**A safety sentence that prints the wrong tier** (the card matches keywords, not meaning:
+"not generally considered poisonous" prints the orange Toxic rung because it contains
+"poison") is reworded to keep Oscar's claim and land on the tier it means, with
+`--set toxicity=...`, and the README says what changed. Two cards needed it on 2026-10-01.
+
 ## Matching a photo filename to a held card
 
 The app derives a photo's filename from the card's `latin`, and this is the exact

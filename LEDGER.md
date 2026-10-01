@@ -1,17 +1,32 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Answer the open calls from today's batches, five one-word answers Claude then applies —
-  go/no on the Pony Tails and Laced Up safety rewrites (one plants.csv row each), Rose Quartz
-  vs the dealt Rose Crystal (replace / second card / skip), Little Devil (keep the held text or
-  take the new JSON), and Fiber Optics (keep the 08-21 photo or swap to the 09-30 one held as
-  -alt in data/held-photos/2026-10-01c/). The Viburnum-genus question is closed if the label
-  was Eve Price; say so.
-  (Displaced, not dropped: the r270 iPhone check. The shell deck IS live — the deploy
-  branch carries it, build r309 on 2026-09-29 — so what remains is Oscar opening the app
-  on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
-  paste, 317 of 432 blank, is unchanged since 2026-09-13.)
+brick: Say "PR it" (or merge `ccr-cec53e72-qu49i1` into `claude/timber-plant-pwa-j69h5e`
+  yourself) so today's 25 cards, three flash-betweens and the two tools go live; then one
+  photo of Little Devil deals the last held card of the batch.
+  (Displaced, not dropped: the r270 iPhone check — the shell deck is live as r309, what
+  remains is Oscar opening the app on an iPhone that crashed and pasting back the *Report a
+  problem* text. The toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, after midnight (**doubles and second photos are tools now; deck 460 -> 461**) —
+  Oscar, asked five one-word questions: "we wanna beef up this app not waste time nit picking
+  questions" — compare the stats, decide, flash between double photos. Built
+  `tools/compare-double.js` (finds the card by latin / stripped latin / genus+code / common /
+  single-card cultivar word; diffs every field with a verdict; `--apply` and `--set` write by
+  row surgery with re-parse-or-rollback, csv re-exported) and `tools/add-swap.js` (second
+  photo -> PHOTO_SWAP frame, derivative, credits, check-boot, rolled back together). The rules
+  are in NEW-SESSION.md: blank takes incoming; within an icon keeps the card; wider gaps go
+  with genus siblings, else dealt keeps / held takes newer; prose stays on dealt; layout
+  fields never. Applied: Fiber Optics hue 0->48, H5->H6 (its own note said H5 was inferred
+  from USDA zone 4); Little Devil (held) H6->H7 by siblings, foliage, size, peak, prose from
+  the newer JSON; Laurus toxicity (evening re-send wins); Eve Price toxicity + peak Dec->Nov
+  (his photo has it in flower on 1 Oct); Vanessa Bell and Rose Crystal nothing (siblings kept
+  the card; Oscar: "defo called Rose Crystal"). Safety rewrites on Pony Tails (now amber, was
+  orange from "poisonous") and Laced Up (now orange, was the amber default). Three
+  flash-betweens: Fiber Optics -sunlit, Camellia sasanqua -pink-single, Laurus -sunlit.
+  Twinkie saxifrage dealt — a third Dancing Pixies code (Sh 1923), not the OCR duplicate the
+  morning note assumed; [Unverified] its flowers, pale yellow-green in the photo vs "bright
+  pink" on the card. Restamp r319, deck-audit PASS on 461, PHOTO_SWAP 14.
 progress: 2026-10-01, last of the day (**batch c complete, deck 458 -> 460; Eve Price photo
   swapped**) — Camellia sasanqua (species card, Oscar's two-flower collage) and Ceratostigma
   FOREST BLUE dealt; Viburnum tinus 'Eve Price' re-photographed at Oscar's ask with his
