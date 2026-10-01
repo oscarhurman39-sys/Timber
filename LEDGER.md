@@ -16,7 +16,7 @@ progress: 2026-10-01, last of the day (**batch c complete, deck 458 -> 460; Eve 
   swapped**) — Camellia sasanqua (species card, Oscar's two-flower collage) and Ceratostigma
   FOREST BLUE dealt; Viburnum tinus 'Eve Price' re-photographed at Oscar's ask with his
   flower-and-bud collage, the 08-23 berry shot retired to git history. Restamp r318, deck-audit
-  PASS on 460. Day total: deck 436 -> 460, 24 cards dealt, three photos replaced.
+  PASS on 460. Day total: deck 436 -> 460, 24 cards dealt, two photos replaced (Clematis, Eve Price) and one cropped (Precious Love).
 progress: 2026-10-01, night (**Berberis 'Atropurpurea Nana' dealt, deck 457 -> 458**) — card 1
   of batch c, from Oscar's photo. The Fiber Optics photo sent with it is kept unused: that card
   already wears his own foliage shot from 08-21 and the new one is foliage too — his call which.
