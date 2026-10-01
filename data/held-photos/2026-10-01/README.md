@@ -161,3 +161,34 @@ out clicking `#reset2` after its 441-click "clear the whole deck" walk, i.e. the
 empty when it reloaded, with app-test (229 s) and features-test running beside it. Re-run alone,
 edge-test passes 28/28. Same shape as the 2026-09-27c note: a fixed 420 ms settle per click under
 3-job load, not a card defect; the 17 other checks, deck-audit included, were green in the same run.
+
+**Cards 6–10 dealt** (Oscar's photos: #11 and #12 Galaxy S24 2026-09-30; #9, #10 and #13 are his
+two-panel collages from the collage app, no camera EXIF, no AI markers in any file). Conventions
+exactly as in `batch-corrected.json`; every other field as supplied. Deck 441 -> 446, hold 76
+unchanged. Dealt in two `add-plants-bulk.js --quick` runs (three photos arrived, then the two
+collages); credits with `photo-credits.js --set`; restamped to r311. Originals here are
+byte-identical to the files Oscar sent; the collages are kept whole, as always.
+
+| # | card | photo as sent | staged | notes |
+|---|---|---|---|---|
+| 9 | Anemone 'Fantasy Aurora' | collage 2160x3840 (leaves left, flower and buds right) | 1200x2133 | both panels in the well; the collage app's blurred fill below them sits behind the stats panel bar a sliver at the right, same as the dealt Tini card. |
+| 10 | Eucalyptus gunnii France Bleu ('Rengun') | collage 2160x3840 (buds left, foliage right) | 1200x2133 | both panels in the well, as #9. Cream flower buds visible in the left panel. |
+| 11 | Gaultheria mucronata 'Lilian' | 4000x3000, EXIF orientation 6 | 1200x1600 (upright) | matches: pink berries with the star calyx, spine-tipped glossy leaves, red stems. |
+| 12 | Sambucus nigra LACED UP ('Snr1292') | 4000x3000, EXIF orientation 6 | 1200x1600 (upright) | deeply cut near-black foliage on a red stem. |
+| 13 | Clematis cirrhosa var. purpurascens 'Freckles' | collage 2160x2475 (two portrait panels side by side) | 1200x1375 | `PHOTO_FOCUS` '100% 40%': the sharp freckled bells and leaves are the right panel; a centred crop showed the soft-focus left panel (canes, a nursery label) with the title over it. |
+
+Flagged to Oscar, not changed:
+- #9 the open flower shows a single row of petals and reads vivid magenta-pink, against
+  "semi-double rose-pink". The buds and golden stamens match.
+- #12 the foliage carries bronze-orange late-season tints rather than the near-black of summer.
+  [Unverified] the cultivar from foliage alone — the held Black Lace card looks the same in leaf;
+  this is filed as Laced Up because that is the card the photo was sent for.
+- #12 SAFETY prints the amber **Handle with care** default from the supplied sentence (see the
+  toxicity section above): it under-warns for raw elder. The rewrite waits on Oscar's go.
+- #13 the left panel is soft-focus and carries an unreadable nursery label with a Union Jack;
+  the right panel's older bells have brown-spotted petals. Flowers out at the start of October
+  against a Nov-Feb band.
+
+**Batch status:** 10 of 20 dealt (#1–4, 6, 9–13). Next five in order: #14 Leucothoe keiskei
+'Burning Love', #15 Leucothoe axillaris 'Curly Red', #17 Coprosma 'Lemon and Lime', #18 Berberis
+thunbergii 'Admiration', #20 Escallonia 'Red Dream'.

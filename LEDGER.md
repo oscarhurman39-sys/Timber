@@ -1,15 +1,23 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Send photos for cards 6–10 of batch 2026-10-01 — Anemone 'Fantasy Aurora',
-  Eucalyptus gunnii France Bleu, Gaultheria mucronata 'Lilian', Sambucus nigra LACED UP,
-  Clematis cirrhosa 'Freckles' — then deal them exactly as cards 1–5 were (the README in
-  `data/held-photos/2026-10-01/` is the recipe); then the next five, in batch order.
+brick: Send photos for cards 11–15 of batch 2026-10-01 — Leucothoe 'Burning Love',
+  Leucothoe 'Curly Red', Coprosma 'Lemon and Lime', Berberis 'Admiration', Escallonia
+  'Red Dream' — then deal them exactly as cards 1–10 were (the README in
+  `data/held-photos/2026-10-01/` is the recipe); then the last five, in batch order.
   (Displaced, not dropped: the r270 iPhone check. The shell deck IS live — the deploy
   branch carries it, build r309 on 2026-09-29 — so what remains is Oscar opening the app
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, night (**cards 6–10 dealt, deck 441 -> 446**) — three photos came,
+  then the two missing ones as collages. Gaultheria 'Lilian' (berries), Sambucus LACED UP
+  (cut black foliage, late-season bronze tints), Clematis 'Freckles' (two-panel collage,
+  PHOTO_FOCUS 100% because the sharp bells are the right panel), Anemone 'Fantasy Aurora'
+  and Eucalyptus France Bleu (collages, kept whole). Credits x5, restamped r311,
+  deck-audit PASS on 446. Flagged, not changed: the anemone shows a single row of petals vs
+  "semi-double"; the elder's amber safety default still under-warns until Oscar OKs the
+  rewrite; [Unverified] Laced Up vs the held Black Lace from foliage alone.
 progress: 2026-10-01, later (**cards 1–5 dealt, deck 436 -> 441**) — Oscar sent the five
   photos (Galaxy S24, 09-30, no AI markers). All five paired without doubt: grass, dark-leaved
   saxifrage in flower, high-centred red Hybrid Tea, fully double orange-red floribunda, red-tipped
