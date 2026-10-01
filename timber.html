@@ -1238,7 +1238,7 @@
 
 <script>
 /* ---------- latin pronunciation (built-in speech engine — offline, no files, no deps) ---------- */
-const BUILD='r311 · 2026-10-01 · 5daa01b';
+const BUILD='r312 · 2026-10-01 · 4b936f7';
 /* Shown in the menu foot so a phone's version is checkable at a glance — the SW
    serves the previous build once before swapping, which made "which build am I
    on?" a real question. DO NOT EDIT BY HAND: the trailing hash is a digest of
@@ -15646,10 +15646,11 @@ buildSwapCSS();
    The lesson is the general one: judge a swap on the two CARDS, not the two
    files. */
 const PHOTO_FOCUS={
-  /* Oscar's two-panel collage: the left panel is soft-focus canes and a label, the
-     sharp freckled bells and leaves are the right panel. 100% puts the right panel
-     whole in the 0.62 well, with the left panel's big bell at the edge. */
-  'clematis-cirrhosa-var-purpurascens-freckles':'100% 40%',
+  /* Oscar's second two-panel collage (his first is kept as -alt in the batch folder):
+     the sharp bells and fresh leaves are the LEFT panel, which starts at the edge, so a
+     centred crop in the 0.62 well cut its outer bell. 0% keeps that panel whole with
+     most of the right-hand bell beside it. */
+  'clematis-cirrhosa-var-purpurascens-freckles':'0% 40%',
   /* Oscar's frame has the flower cluster against the right edge over purple-bronze
      leaves; a centred crop (4:5 master in the 0.62 well) lost the right-hand flowers.
      100% keeps every flower in frame with the foliage filling the left. */

@@ -192,3 +192,16 @@ Flagged to Oscar, not changed:
 **Batch status:** 10 of 20 dealt (#1–4, 6, 9–13). Next five in order: #14 Leucothoe keiskei
 'Burning Love', #15 Leucothoe axillaris 'Curly Red', #17 Coprosma 'Lemon and Lime', #18 Berberis
 thunbergii 'Admiration', #20 Escallonia 'Red Dream'.
+
+**#13 Clematis 'Freckles' photo replaced** the same evening: Oscar sent a second two-panel
+collage ("this might be a better photo") with the bells and fresh leaves sharp in the left panel
+and a second bell by a cane in the right. It is the card now (2160x2988, staged 1200x1660 through
+the same canvas pipeline as the bulk tool); the first collage is kept unused as
+`clematis-cirrhosa-var-purpurascens-freckles-alt.jpg`. `PHOTO_FOCUS` moved from '100% 40%' to
+'0% 40%' because the sharp panel is now the left one and starts at the edge. Card text and ratings
+unchanged; CREDITS entry carries the note; restamped r312. optimise-photos, photo-credits,
+data-audit, check-boot and deck-audit re-run green after the swap.
+
+**Test note, second run.** `run-all --jobs 3` on the cards 6–10 tree: 17/18 again, edge-test only,
+the same `#reset2` timeout after the whole-deck walk (now 446 clicks); app-test ran beside it at
+229 s. Re-run alone it passes — see the ledger line for the result that was in hand at the push.

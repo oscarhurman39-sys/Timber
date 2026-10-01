@@ -10,6 +10,11 @@ brick: Send photos for cards 11–15 of batch 2026-10-01 — Leucothoe 'Burning 
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, late (**Clematis photo swapped**) — Oscar: "this might be a better
+  photo for that Clematis", a second collage with the bells sharp. Staged through the same
+  canvas pipeline, derivative rebuilt, first collage kept as -alt, PHOTO_FOCUS 100% -> 0%
+  (the sharp panel moved sides), credits note, restamp r312. Gate on the 6–10 tree was 17/18,
+  edge-test's 446-click walk under 3-job load again; alone it is the check that matters.
 progress: 2026-10-01, night (**cards 6–10 dealt, deck 441 -> 446**) — three photos came,
   then the two missing ones as collages. Gaultheria 'Lilian' (berries), Sambucus LACED UP
   (cut black foliage, late-season bronze tints), Clematis 'Freckles' (two-panel collage,
