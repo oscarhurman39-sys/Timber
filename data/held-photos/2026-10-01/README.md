@@ -244,3 +244,31 @@ Flagged to Oscar, not changed:
 **Batch status:** 15 of 20 dealt (#1–4, 6, 9–15, 17, 18, 20). Last five in order: #21 Hydrangea
 paniculata 'Quick Fire Fab', #22 Camellia sasanqua 'Bonanza', #23 Camellia 'Fairy Blush', #24 Ajuga
 reptans 'Black Scallop', #26 Physocarpus opulifolius FIRESIDE ('UMNHarpell').
+
+**Cards 16–20 dealt** (Oscar's photos, Galaxy S24, all five 4000x3000 with EXIF orientation 6,
+staged upright at 1200x1600; no AI markers). Conventions exactly as in `batch-corrected.json`;
+every other field as supplied. Deck 452 -> 457, hold 76 unchanged. `add-plants-bulk.js --quick`;
+credits with `photo-credits.js --set`; restamped r316. Originals here are byte-identical to the
+files Oscar sent.
+
+| # | card | notes |
+|---|---|---|
+| 21 | Hydrangea paniculata 'Quick Fire Fab' | two big conical panicles, creamy white with a pink flush on the outer florets, over the leaves. |
+| 22 | Camellia sasanqua 'Bonanza' | one open semi-double flower with golden stamens, buds beside it, glossy leaves; a cane and a tie in the background. |
+| 23 | Camellia 'Fairy Blush' | foliage only: copper-orange new leaves over green. |
+| 24 | Ajuga reptans 'Black Scallop' | foliage only: glossy near-black scalloped rosettes, a few bronzing outer leaves. |
+| 26 | Physocarpus opulifolius FIRESIDE ('UMNHarpell') | foliage only: deep purple-maroon lobed leaves on red stalks; a purple label is a blur in the background. |
+
+Flagged to Oscar, not changed:
+- #21 the panicles are at the white-with-a-blush stage; the card leads with the watermelon and
+  reddish-pink they turn later.
+- #22 the flower reads deep cerise-pink rather than "deep crimson-red" (hue 355).
+- #23 no flower in the shot (peak Feb-Apr); a flowering photo in spring would be an upgrade.
+- #26 [Unverified] the cultivar from foliage alone — the deck's other dark ninebarks look the same
+  in leaf; filed as Fireside because that is the card the photo was sent for.
+
+**Batch complete: 20 of 20 dealt** (#1–4, 6, 9–15, 17, 18, 20–24, 26). Deck 436 -> 457 over the
+day, with the Nerine of 2026-10-01b in between. Not added, as recorded at the top: #5, #7, #8, #16
+(already dealt), #25 (held, a photo deals it), #19 (genus only). Still waiting on Oscar: the two
+toxicity rewrites (#2, #12), the Viburnum species, Rose Quartz vs the dealt Rose Crystal, and
+whether Little Devil keeps its held text.

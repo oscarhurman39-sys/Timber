@@ -1,15 +1,25 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Send photos for the last five of batch 2026-10-01 — Hydrangea 'Quick Fire Fab',
-  Camellia sasanqua 'Bonanza', Camellia 'Fairy Blush', Ajuga 'Black Scallop', Physocarpus
-  FIRESIDE — then deal them exactly as cards 1–15 were (the README in
-  `data/held-photos/2026-10-01/` is the recipe). That closes the batch.
+brick: Answer the five open calls on batch 2026-10-01 so its README closes clean — go/no
+  on the Pony Tails and Laced Up safety rewrites (one plants.csv row each), the Viburnum
+  species off the label, Rose Quartz vs the dealt Rose Crystal (replace / second card /
+  skip), and whether Little Devil keeps its held text or takes the new JSON. Five one-word
+  answers; Claude applies them.
   (Displaced, not dropped: the r270 iPhone check. The shell deck IS live — the deploy
   branch carries it, build r309 on 2026-09-29 — so what remains is Oscar opening the app
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, close (**cards 16–20 dealt, deck 452 -> 457 — batch complete**) —
+  Hydrangea 'Quick Fire Fab', Camellia sasanqua 'Bonanza', Camellia 'Fairy Blush', Ajuga
+  'Black Scallop', Physocarpus FIRESIDE. Bulk add, credits, restamp r316, deck-audit PASS on
+  457. Flagged: the hydrangea at its white stage, the Bonanza reading cerise not crimson, Fairy
+  Blush shot without a flower, [Unverified] Fireside from leaf alone. Twenty of twenty dealt in
+  one day from a 26-card paste; four were already in the deck, one held, one genus-only. The
+  deal recipe that held up all day: bulk add --quick, credits --set, render every card and
+  look, restamp, the data gate, then run-all one suite at a time (18/18 four times; --jobs 3
+  failed edge-test's 446-click walk twice under load and passed alone both times).
 progress: 2026-10-01, later again (**cards 13–15 dealt, deck 449 -> 452**) — Coprosma
   'Lemon and Lime' (collage), Berberis 'Admiration', Escallonia 'Red Dream'. Bulk add,
   credits, restamp r315, deck-audit PASS on 452. Flagged: the Coprosma's orange autumn tints,

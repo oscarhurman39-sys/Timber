@@ -291,6 +291,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "ajuga-reptans-black-scallop.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "ajuga-reptans-burgundy-glow.jpg",
    "source": "oscar-ai",
    "licence": "Cropped from an AI-remade card image Oscar supplied (protocol v12.5) — generator not recorded",
@@ -732,6 +742,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "camellia-fairy-blush.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "camellia-japonica-doctor-king.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -739,6 +759,16 @@
    "sourceUrl": null,
    "commit": "5c4681e",
    "commitSubject": "Add Doctor King Camellia to deck: 66 -> 67",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "camellia-sasanqua-bonanza.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -2534,6 +2564,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "hydrangea-paniculata-quick-fire-fab.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "hydrangea-paniculata-wim-s-red.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -3656,6 +3696,16 @@
   },
   {
    "file": "physocarpus-opulifolius-diabolo.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "physocarpus-opulifolius-fireside-umnharpell.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
