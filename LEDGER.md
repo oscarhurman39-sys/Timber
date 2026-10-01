@@ -11,6 +11,10 @@ brick: Answer the five open calls on batch 2026-10-01 so its README closes clean
   on an iPhone that crashed and pasting back the *Report a problem* text. The toxicity
   paste, 317 of 432 blank, is unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-01, night (**Berberis 'Atropurpurea Nana' dealt, deck 457 -> 458**) — card 1
+  of batch c, from Oscar's photo. The Fiber Optics photo sent with it is kept unused: that card
+  already wears his own foliage shot from 08-21 and the new one is foliage too — his call which.
+  Restamp r317, deck-audit PASS on 458. Two of batch c still wait on photos.
 progress: 2026-10-01, after close (**five-card JSON batch stored as 2026-10-01c, three to
   deal when photos come**) — Berberis 'Atropurpurea Nana', a species-level Camellia sasanqua
   (label said only "Les Camélias d'Automne"), Ceratostigma FOREST BLUE. Fiber Optics (sent

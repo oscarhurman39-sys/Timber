@@ -42,3 +42,19 @@ lands on the orange Toxic rung as the sentence means; #2 and #4 are blank and pr
 1. #1 Berberis thunbergii f. atropurpurea 'Atropurpurea Nana' → `berberis-thunbergii-f-atropurpurea-atropurpurea-nana`
 2. #2 Camellia sasanqua → `camellia-sasanqua`
 3. #4 Ceratostigma willmottianum FOREST BLUE ('Lice') → `ceratostigma-willmottianum-forest-blue-lice`
+
+**Card 1 dealt** (Oscar's photo, Galaxy S24, 4000x3000 with EXIF orientation 6, staged upright at
+1200x1600; no AI markers; "Nana and fiber optics"). Conventions exactly as in `batch-corrected.json`;
+every other field as supplied. Deck 457 -> 458, hold 76 unchanged. `add-plant.js --quick`; credits
+with `photo-credits.js --set`; restamped r317. The original here is byte-identical to the file sent.
+Matches: small rounded purple-red leaves in rosettes, brighter red at the shoot tips.
+
+**Fiber Optics photo, not used.** Sent with the Berberis for the already-dealt
+`Cephalanthus occidentalis 'Bailoptics'`. That card carries Oscar's own foliage photo from
+2026-08-21 (CREDITS.json; CARD-PROTOCOL photo register, VQ 58); the new shot (Galaxy S24,
+2026-09-30, 3000x3718) is foliage too, sunlit, red stems more prominent, no flower heads either.
+Which of his two photographs the card wears is his call, so nothing changed; the new file is kept
+here as `cephalanthus-occidentalis-bailoptics-alt.jpg`. Swapping is the Clematis routine of
+2026-10-01: stage through the canvas pipeline, rebuild the derivative, note it in CREDITS.
+
+**Batch status:** 1 of 3 dealt. Still to come: #2 Camellia sasanqua, #4 Ceratostigma FOREST BLUE.
