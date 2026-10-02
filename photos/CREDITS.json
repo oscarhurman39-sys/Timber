@@ -4025,6 +4025,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "physocarpus-opulifolius-little-devil-donna-may.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "picea-glauca-echiniformis.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Single frame, EXIF orientation 6 baked at restaging",
