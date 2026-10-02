@@ -1,13 +1,14 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Say "PR it" (or merge `ccr-cec53e72-qu49i1` into `claude/timber-plant-pwa-j69h5e`
-  yourself) so today's 25 cards, three flash-betweens and the two tools go live; then one
-  photo of Little Devil deals the last held card of the batch.
+brick: Merge PR #50 (https://github.com/plantcards-app/Timber/pull/50) — one tap, it fast-forwards
+  the deploy branch and pages.yml publishes deck 461 with the three flash-betweens and the two
+  tools. Then one photo of Little Devil deals the last held card of the batch, and its label
+  settles the H7.
   (Displaced, not dropped: the r270 iPhone check — the shell deck is live as r309, what
   remains is Oscar opening the app on an iPhone that crashed and pasting back the *Report a
   problem* text. The toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
-since: 2026-10-01  sessions-unchanged: 0
+since: 2026-10-02  sessions-unchanged: 0
 progress: 2026-10-02, morning (**two rule corrections, then the PR**) — Oscar: a bench photo is
   not flowering evidence (stock is forced for the bench), so Eve Price goes back to Dec-Apr
   and NEW-SESSION rule 3 now says a photo shows what, never when. Little Devil H7 double-
