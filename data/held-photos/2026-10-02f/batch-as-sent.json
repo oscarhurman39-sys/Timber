@@ -1,0 +1,33 @@
+{
+  "common": "Japanese maple Dissectum",
+  "latin": "Acer palmatum 'Dissectum'",
+  "hue": 35,
+  "visual": "Low, mound-forming Japanese maple with cascading branches and very finely divided, feathery green leaves that develop vivid yellow, orange and red autumn colour. Small purplish-red spring flowers are followed by red winged fruits.",
+  "water": "Moderate; keep evenly moist while establishing and water during prolonged dry summer weather.",
+  "aspect": "Full sun to partial shade",
+  "soil": "Moist but well-drained, fertile soil; acidic to neutral conditions are preferred.",
+  "soilWarning": "Avoid waterlogging, severe drought and exposed drying positions. Fine foliage can scorch if roots become too dry or plants receive excessive exposure.",
+  "prune": "Minimal pruning required; remove dead, damaged or crossing growth between late autumn and midwinter.",
+  "toxicity": "",
+  "compliance": "",
+  "peak": "Sep-Nov",
+  "cvs": "Dissectum",
+  "hardiness": "H6",
+  "hardinessNote": "−20 to −15°C · hardy throughout the UK and northern Europe.",
+  "resilience": "Excellent cold tolerance but benefits from shelter from strong, drying winds and reliable summer moisture.",
+  "uses": "Specimen shrub, Japanese gardens, courtyard gardens, rock gardens, banks, slopes and large containers.",
+  "height": "1.5-2.5 m",
+  "spread": "1.5-2.5 m",
+  "foliage": "deciduous",
+  "container": "yes",
+  "growthSpeed": 7,
+  "pestRisk": 7,
+  "thirst": 10,
+  "careLevel": 8,
+  "sunNeed": 65,
+  "sunMin": 35,
+  "uncertain": [
+    "The name 'Acer palmatum dissectum' can also be used loosely for the wider Dissectum Group of laceleaf Japanese maples. RHS separately accepts Acer palmatum 'Dissectum' as a named plant, so this entry uses that identity.",
+    "If the plant has red or purple foliage rather than green foliage, it may belong to a different cultivar within the Dissectum Group."
+  ]
+}

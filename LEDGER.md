@@ -1,19 +1,41 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: The next batch, five photos at a time — same routine (store the paste verbatim under
-  `data/held-photos/<date>/`, `compare-double.js` for doubles, fit the layout fields with trade
-  names in the deck's form, `add-plants-bulk.js --quick` as photos land, credits by basename,
-  restamp, the sequential gate, push). Say "not live until merged" on every push; open the PR as
-  soon as a batch is complete rather than waiting to be asked.
+brick: Merge PR #53 — it now carries everything since PR #52: Red Cascade, the Dissectum maple,
+  the honeysuckle and Eternal Flame frames and the Viburnum davidii replacement (deck 489 -> 491,
+  r342, gate 18/18 on its head). Oscar merges, or says "merge". Then the next batch, five photos
+  at a time; say "not live until merged" on every push; a push to the feature branch while a PR
+  is open joins that PR, so update its title and body rather than opening another.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
-progress: 2026-10-02, late (**Little Devil dealt from the hold block, deck 488 -> 489, hold 75**) — the
+progress: 2026-10-02, late (**gate 18/18 on ab8dd7a; pushed; PR #53 updated to carry it**) — a push
+  to the feature branch while PR #53 was open joined that PR (GitHub allows one open PR per head),
+  so its title and body were rewritten to cover all three commits instead of opening a new one.
+progress: 2026-10-02, late (**Acer palmatum 'Dissectum' dealt, deck 490 -> 491; a second frame on Cercis 'Eternal Flame'**) —
+  the maple's "spring flowers" failed plant-sense --strict against its Sep-Nov band and took the
+  Golden King word-order fix via `--set visual=`; the photo settles the JSON's green-or-red doubt
+  (green). The Eternal Flame entry is the frame-art one with no alts, which add-swap refuses, so the
+  alts list went in by hand in the tool's shape; r342. Record under `data/held-photos/2026-10-02f/`.
+  Not live until merged: all of this since PR #53 rides the next PR after the gate.
+progress: 2026-10-02, late (**Euonymus europaeus 'Red Cascade' dealt, deck 489 -> 490**) — one card
+  with its collage, no text; not a double; fitted, bulk tool, credit, r341; record under
+  `data/held-photos/2026-10-02e/`. PR #53 (the frames and the Viburnum) was pushed on Oscar's
+  "Push" with the gate still running and is open; this card rides the next PR after its gate.
+progress: 2026-10-02, late (**three flash-between frames on Honeysuckle 'Rhubarb and Custard'; Viburnum davidii photo replaced**) —
+  Oscar's three photos for a dealt card, no JSON: add-swap three times (entry created, then two
+  appends), card text untouched. Then "Replacement photo for viburnum davidii" — said as a
+  replacement, so swapped (the Eve Price routine), old focus override dropped because the new
+  portrait master frames at the default. Record under `data/held-photos/2026-10-02d/`. Not live
+  until merged: PR after the gate.
+progress: 2026-10-02, late (**Little Devil dealt from the hold block and live: PR #52 merged by Oscar, deck 488 -> 489, hold 75**) — the
   one held card left from the 2026-10-01 batch; `deal-plant.js`, credit, export, r338. No label in the
-  shot, so H7 stays ([Unverified] by direct read). Not live until merged: PR to follow the gate.
+  shot, so H7 stays ([Unverified] by direct read). Pushed on Oscar's "Push" with the gate still in its
+  browser suites; PR #52 opened, merged within a minute; Pages run 125 deployed merge commit 6649723
+  and its served-bytes step passed (r338); the gate then came back 18/18. Feature branch restarted
+  from the merged head, check-in cancelled. Everything Oscar has sent is now a live card.
 progress: 2026-10-02, late (**PR #51 merged by Oscar, deck 488 live**) — merge commit 30886af on the
   deploy branch; Pages run 124 (job 111046421930) deployed it and its served-bytes step passed
   ("Verify the deployed page is this commit", r337), assetlinks.json served. Read from the run,
