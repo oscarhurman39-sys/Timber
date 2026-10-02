@@ -1,15 +1,19 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Merge PR #53 (honeysuckle frames, Viburnum davidii replacement) and the PR that follows the
-  gate on Euonymus 'Red Cascade' — the deploy branch then carries deck 490 at r341. Then the next
-  batch, five photos at a time, same routine; say "not live until merged" on every push; open the
-  PR as soon as a batch is complete.
+brick: Merge PR #53 — it now carries everything since PR #52: Red Cascade, the Dissectum maple,
+  the honeysuckle and Eternal Flame frames and the Viburnum davidii replacement (deck 489 -> 491,
+  r342, gate 18/18 on its head). Oscar merges, or says "merge". Then the next batch, five photos
+  at a time; say "not live until merged" on every push; a push to the feature branch while a PR
+  is open joins that PR, so update its title and body rather than opening another.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**gate 18/18 on ab8dd7a; pushed; PR #53 updated to carry it**) — a push
+  to the feature branch while PR #53 was open joined that PR (GitHub allows one open PR per head),
+  so its title and body were rewritten to cover all three commits instead of opening a new one.
 progress: 2026-10-02, late (**Acer palmatum 'Dissectum' dealt, deck 490 -> 491; a second frame on Cercis 'Eternal Flame'**) —
   the maple's "spring flowers" failed plant-sense --strict against its Sep-Nov band and took the
   Golden King word-order fix via `--set visual=`; the photo settles the JSON's green-or-red doubt
