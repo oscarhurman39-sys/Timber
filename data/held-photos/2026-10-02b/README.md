@@ -61,11 +61,18 @@ prose and all ratings.
 - #2's latin takes the deck's typographic apostrophe inside the cultivar name (`'Cunningham’s White'`,
   as `'Bob’s Blunder'` and `'Veitch’s Scarlet'`): `check-plant-json.js` rejects the straight form as
   unbalanced quotes and the bulk tool would not take it. `common` and `cvs` are untouched.
-- Latin forms kept as supplied. The code-only forms `'Waleulitr'`, `'Ifhepr'` and `'Bremdream'` with the
-  trade name in `common` match the deck's `Cotinus 'Londus'` (Dusky Maiden) and `Cephalanthus
+- Latin forms kept as supplied at first: the code-only forms `'Waleulitr'`, `'Ifhepr'` and `'Bremdream'`
+  with the trade name in `common` match the deck's `Cotinus 'Londus'` (Dusky Maiden) and `Cephalanthus
   occidentalis 'Bailoptics'` (Fiber Optics); nothing arrived in the square-bracket form that the
-  2026-10-01 batch converted. `Sedum 'Surrender Rose'` stays under Sedum although the deck's border
-  stonecrops sit under Hylotelephium.
+  2026-10-01 batch converted. **Changed for #14 on dealing** (Oscar, seeing the photo: "did the json
+  really get made with the name beamland"): a code alone reads as a mistake on the card, so the Geranium
+  takes the deck's trade-name form `Geranium DREAMLAND ('Bremdream')`, as `CHARLIE BOY ('Ric01')` and the
+  held `Geranium Rozanne ('Gerwat')`. The RHS lists it as Geranium [Dreamland] ('Bremdream'), an Alan
+  Bremner introduction, H7 — the name in Oscar's JSON was right. #9 was dealt before this call in the
+  code-only form (its common carries Walberton's Little Treasure); #13 'Ifhepr' is not dealt yet and
+  can take `Heuchera CRANBERRY ('Ifhepr')` (Indian Summer Series) the same way if Oscar wants it.
+  `Sedum 'Surrender Rose'` stays under Sedum although the deck's border stonecrops sit under
+  Hylotelephium.
 - `hue` 0 on #2 (white flowers) kept: 23 white-flowered dealt cards carry hue 0.
 
 | # | latin (as it will go in) | soil | warning | aspect (sunNeed) | size H / W |
@@ -81,7 +88,7 @@ prose and all ratings.
 | 10 | Heuchera 'Black Forest Cake' | Fertile, moist, drained | Crown must drain, especially in winter | East / South / West (70) | 20–30 cm / 30–40 cm |
 | 11 | Heuchera 'Winterberry' | Humus-rich, moist, drained | No winter waterlogging around the crown | East / South / West (60) | 30 cm / 40 cm |
 | 13 | Heuchera 'Ifhepr' | Fertile, moist, drained | No winter wet; never let the roots dry out | East / West (50) | 30 cm / 40 cm |
-| 14 | Geranium 'Bremdream' | Any fertile, well-drained | No persistently waterlogged soil | East / South / West (75) | 30–40 cm / 40–50 cm |
+| 14 | Geranium DREAMLAND ('Bremdream') — trade-name form, see above | Any fertile, well-drained | No persistently waterlogged soil | East / South / West (75) | 30–40 cm / 40–50 cm |
 | 15 | Elaeagnus × submacrophylla 'Viveleg' | Any well-drained soil | No waterlogging; yellows on shallow chalk | East / South / West (75) | 2.5-4 m / 2.5-4 m (unchanged) |
 | 16 | Photinia × fraseri 'Carré Rouge' | Any fertile, well-drained | No wet, heavy or compacted ground | East / South / West (85) | 2-3 m / 1.5-2 m (unchanged) |
 | 18 | Elaeagnus × submacrophylla 'Moonlight' | Any well-drained soil | No waterlogging; yellows on shallow chalk | East / South / West (75) | 2-3 m / 2-3 m (unchanged) |
@@ -144,7 +151,7 @@ Asked for five at a time, in batch order. The slug is what `photos/<slug>.jpg` w
 11. #11 Heuchera 'Winterberry' → `heuchera-winterberry` (name [Unverified], see above)
 12. #12 Heuchera 'Timeless Night' → second frame on the dealt `Heuchera villosa 'Timeless Night'`
 13. #13 Heuchera 'Ifhepr' → `heuchera-ifhepr`
-14. #14 Geranium 'Bremdream' → `geranium-bremdream`
+14. #14 Geranium DREAMLAND ('Bremdream') → `geranium-dreamland-bremdream` (was `geranium-bremdream` before the form change)
 15. #15 Elaeagnus × submacrophylla 'Viveleg' → `elaeagnus-submacrophylla-viveleg`
 16. #16 Photinia × fraseri 'Carré Rouge' → `photinia-fraseri-carre-rouge`
 17. #17 Elaeagnus × submacrophylla → second frame on the dealt `Elaeagnus ×submacrophylla`
@@ -210,6 +217,35 @@ cards 6–7 was stopped a minute in so that one gate covers cards 6, 7, 9 and 10
 | 9 | Euphorbia × martini 'Waleulitr' | matches: narrow lime-to-yellow-green leaves in whorls with rusty-orange new tips, two small panels above one large; all three panels in the well at default framing, the title over the top-left panel. No flowers in the shot. |
 | 10 | Heuchera 'Black Forest Cake' | Oscar wrote "the heuchera" without a cultivar; filed as Black Forest Cake because the near-black ruffled leaves with vivid cherry-red bells match its card and no other heuchera in the batch has red flowers ([Inference] from the flowers — Timeless Night's are pink, Ifhepr's pale). The cluster sits right of centre; its rightmost bells tuck under the growth rail, as on the Escallonia card. Red bells open on the bench in October against a May-Sep band — a bench photo says nothing about flowering time. |
 
-**Batch status:** 8 of 16 dealt (#2–#7, #9, #10). #1 waits on the cultivar. Next five in order: #8
-Cotinus 'Grace' (second frame on the dealt card), #11 Heuchera 'Winterberry' (label in the shot, please
-— the name is unverified), #13 Heuchera 'Ifhepr', #14 Geranium 'Bremdream', #15 Elaeagnus 'Viveleg'.
+**Card 14 dealt** (Oscar's photo, "Its geranium dream land": Galaxy S24, 2026-10-02 11:06, 4000x3000 with
+EXIF orientation 6, staged upright 1200x1600; no AI or C2PA markers). Latin in the trade-name form (see
+the conventions note); every other field as supplied, conventions as in `batch-corrected.json`. Deck 471
+-> 472, hold 76 unchanged. `add-plants-bulk.js --quick` with the one pair, credit by basename, restamped
+r328. The original here is byte-identical to the file Oscar sent.
+
+| # | card | notes |
+|---|---|---|
+| 14 | Geranium DREAMLAND ('Bremdream') | matches: one pale pink cup-shaped flower with darker veins and a cream centre, over deeply lobed mid-green leaves. Flower and a leaf centred at default framing; the nursery label strip at the bottom of the frame ("Planting", "Spread") falls behind the stats panel. One flower open on the bench in October, inside the May-Sep band's tail. |
+
+**#8 Cotinus 'Grace' — second frame added** (Oscar's photo, "continue" in "The heuchera, and continue":
+Galaxy S24, 2026-10-02 12:11, 4000x3000 with EXIF orientation 6, staged upright 1200x1600 as
+`photos/cotinus-grace-backlit.jpg`; no AI or C2PA markers). The card is a double (dealt), so under the
+protocol the photo is a flash-between, never a replacement: `tools/add-swap.js "Cotinus 'Grace'"
+cotinus-grace-backlit.jpg --as backlit` wrote the `PHOTO_SWAP` entry (focus 50% 45%, hold 3.5s) and the
+CREDITS note; restamped r329. The shot: backlit scarlet rounded leaves on dark red stalks, leaf shadows
+showing through — autumn colour starting at the beginning of October, which the card's own prose already
+claims ("fiery autumn colour"). Card text and ratings unchanged. The original here is byte-identical.
+
+**#11 Heuchera 'Winterberry' — photo stored, not dealt** (`heuchera-winterberry-as-sent.jpg`: Galaxy S24,
+2026-10-02 11:07, 4000x3000, orientation 6; no AI markers). The shot shows lime-green ruffled, lobed
+leaves with fine red margins and a silvery overlay between the veins, and no label. It does not settle
+the name: Oscar's own `uncertain` says the cultivar record could not be verified and asks for the label,
+the 2026-10-02 search found no Heuchera 'Winterberry', and the JSON's `hue` 330 (pink) does not describe a
+lime-leaved plant. [Unverified] what this plant is. Waits on the label. When it comes: set `latin`,
+`common` and `hue` in `batch-corrected.json` to the label's name (the slug follows the latin), then deal
+from the stored file.
+
+**Batch status:** 9 of 16 dealt (#2–#7, #9, #10, #14); #8's second frame in. #1 and #11 wait on their
+labels. Next five in order: #13 Heuchera 'Ifhepr', #15 Elaeagnus 'Viveleg', #16 Photinia 'Carré Rouge',
+#18 Elaeagnus 'Moonlight', #19 Euonymus 'Extravaganza'. Then #12 Timeless Night and #17 Elaeagnus ×
+submacrophylla as second frames.

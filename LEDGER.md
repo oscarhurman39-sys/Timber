@@ -1,18 +1,26 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Deal the next five of the 2026-10-02b batch when Oscar's photos land — #8 Cotinus 'Grace'
-  (a second frame on the dealt card via `add-swap.js`, not a new card), #11 Heuchera 'Winterberry'
-  (read its label — the name is unverified), #13 Heuchera 'Ifhepr', #14 Geranium 'Bremdream', #15
-  Elaeagnus 'Viveleg': split them out of `data/held-photos/2026-10-02b/batch-corrected.json`,
+brick: Deal the next five of the 2026-10-02b batch when Oscar's photos land — #13 Heuchera
+  'Ifhepr' (trade-name form `Heuchera CRANBERRY ('Ifhepr')` if Oscar wants it, as the Geranium got),
+  #15 Elaeagnus 'Viveleg', #16 Photinia 'Carré Rouge', #18 Elaeagnus 'Moonlight', #19 Euonymus
+  'Extravaganza': split them out of `data/held-photos/2026-10-02b/batch-corrected.json`,
   `add-plants-bulk.js --quick`, credits by basename, restamp, the sequential gate, update that
-  README's status line. #1 Cordyline waits on Oscar reading the label's cultivar: its photo is a
-  red-leaved form and is stored, unstaged, as `cordyline-australis-as-sent.jpg`.
+  README's status line. Two cards wait on Oscar reading a label: #1 Cordyline (a red-leaved form,
+  photo stored as `cordyline-australis-as-sent.jpg`) and #11 'Winterberry' (lime leaves, name
+  unverified, photo stored as `heuchera-winterberry-as-sent.jpg`).
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, night (**card 14 Geranium DREAMLAND ('Bremdream') dealt, deck 471 -> 472; Cotinus 'Grace' gets a second frame**) —
+  Oscar queried the name ("did the json really get made with the name beamland"); his JSON said
+  'Bremdream', the RHS lists Geranium [Dreamland] ('Bremdream'), so the card takes the deck's
+  trade-name form instead of the code alone. Dealt with the bulk tool, credit, r328. Then "the
+  heuchera, and continue": the Cotinus photo is a flash-between on the dealt card via add-swap
+  (r329); the heuchera photo is lime-leaved with no label, so 'Winterberry' stays undealt and
+  [Unverified] — stored beside the Cordyline. 9 of 16 from the batch are in.
 progress: 2026-10-02, evening, later still (**cards 6, 7, 9 and 10 dealt: Prunus pissardii, Sedum 'Surrender Rose', Euphorbia 'Waleulitr', Heuchera 'Black Forest Cake'; deck 467 -> 471**) —
   photos in three drops, dealt as they came with the bulk tool and credits, r327, one gate for the
   four (two earlier gates stopped within minutes of starting so the later deals could join). The

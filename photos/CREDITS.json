@@ -1444,6 +1444,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cotinus-grace-backlit.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Grace Smoke Bush card (PHOTO_SWAP alt): backlit scarlet leaves on dark red stalks, 2 October; the first frame is the summer purple foliage with plumes.",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "cotinus-grace.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2265,6 +2275,16 @@
   },
   {
    "file": "geranium-bob-s-blunder.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "geranium-dreamland-bremdream.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
