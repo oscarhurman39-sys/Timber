@@ -2734,6 +2734,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "ilex-altaclerensis-golden-king.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "ilex-aquifolium-argentea-marginata.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -5037,6 +5047,16 @@
   },
   {
    "file": "viburnum-le-bois-marquis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "viburnum-odoratissimum-coppertop-brant01.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
