@@ -2054,6 +2054,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "euphorbia-martini-waleulitr.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "exochorda-macrantha-fruit.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. PHOTO_SWAP alt frame for the Exochorda card, not a replacement: the ribbed russet seed capsule that is this genus's signature, with the oblong leaves around it. Shot 22 seconds after the card's own leaf frame (EXIF 15:16:27 and 15:16:49), same plant, same rain. EXIF orientation 6 baked upright (4000x3000 sensor -> 3000x4000 displayed, aspect 0.750), then resized to 1200 wide; nothing cropped, no pixels generated. Samsung Galaxy S24, 2026-08-30 (current season). No C2PA/JUMBF manifest and no AI or generative marker; XMP carries only a Samsung Ultra HDR gain map",
@@ -2435,6 +2445,16 @@
   },
   {
    "file": "heptacodium-miconioides.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "heuchera-black-forest-cake.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
@@ -4006,6 +4026,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "prunus-pissardii.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "pyracantha-coccinea-orange-star.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -4693,6 +4723,16 @@
    "sourceUrl": null,
    "commit": "68e3c57",
    "commitSubject": "Add Flutter Pure White Small Scabious to deck: 75 -> 76",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "sedum-surrender-rose.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {

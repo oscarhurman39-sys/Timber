@@ -177,6 +177,39 @@ hardiness if the label gives one (the dealt Charlie Boy card is H3; the JSON's H
 rating), then deal it from the stored file. A species card under a red-leaf photo would tell a customer
 the species is red.
 
-**Batch status:** 4 of 16 dealt (#2–#5). #1 waits on the cultivar. Next five in order: #6 Prunus
-pissardii, #7 Sedum 'Surrender Rose', #8 Cotinus 'Grace' (second frame on the dealt card), #9 Euphorbia
-× martini 'Waleulitr', #10 Heuchera 'Black Forest Cake'.
+**Card 6 dealt** (Oscar's photo, "The prunus": Galaxy S24, 2026-10-02 12:48, 3000x2804, no AI or C2PA
+markers; staged 1200x1122). Conventions exactly as in `batch-corrected.json`; every other field as
+supplied. Deck 467 -> 468, hold 76 unchanged. `add-plants-bulk.js --quick` with the one pair, credit by
+basename, restamped r325. The original here is byte-identical to the file Oscar sent.
+
+| # | card | notes |
+|---|---|---|
+| 6 | Prunus pissardii | matches: dark red-purple serrated leaves backlit against blue sky, orange-red veins showing through, on a dark stem. The landscape frame crops to the portrait well at default framing with both main leaves and the branch inside it. Foliage only; [Unverified] 'Pissardii' rather than another purple-leaved cherry plum from leaf alone — filed as sent. The "8 m+" spread renders on the rail. |
+
+**Card 7 dealt** (Oscar's photo, "Sedum u asked 4": a two-panel collage from the collage app, 2160x3840,
+no camera EXIF, no AI or C2PA markers; staged 1200x2133). Conventions exactly as in `batch-corrected.json`;
+every other field as supplied. Deck 468 -> 469, hold 76 unchanged. `add-plants-bulk.js --quick` with the
+one pair, credit by basename, restamped r326. The original here is byte-identical to the file Oscar sent;
+the collage is kept whole. (The Prunus gate of the same evening was stopped two minutes in so that one
+gate covers cards 6 and 7.)
+
+| # | card | notes |
+|---|---|---|
+| 7 | Sedum 'Surrender Rose' | matches: broad heads of starry rosy-pink flowers, some heads still in green bud, over fleshy blue-green leaves. Both panels in the well at default framing; the collage app's blurred pink-green fill sits behind the stats panel, as on the other collages. In flower on the bench at the start of October, inside the Aug-Oct band. |
+
+**Cards 9 and 10 dealt** (Oscar's photos, "The heuchera and the euphorbia": the Heuchera a Galaxy S24
+shot of 2026-10-02 11:07, 4000x3000 with EXIF orientation 6, staged upright 1200x1600; the Euphorbia a
+three-panel collage from the collage app, 2160x3840, no camera EXIF, staged 1200x2133; no AI or C2PA
+markers in either). Conventions exactly as in `batch-corrected.json`; every other field as supplied.
+Deck 469 -> 471, hold 76 unchanged. One `add-plants-bulk.js --quick` run, credits by basename, restamped
+r327. Originals here are byte-identical to the files Oscar sent; the collage is kept whole. (The gate for
+cards 6–7 was stopped a minute in so that one gate covers cards 6, 7, 9 and 10.)
+
+| # | card | notes |
+|---|---|---|
+| 9 | Euphorbia × martini 'Waleulitr' | matches: narrow lime-to-yellow-green leaves in whorls with rusty-orange new tips, two small panels above one large; all three panels in the well at default framing, the title over the top-left panel. No flowers in the shot. |
+| 10 | Heuchera 'Black Forest Cake' | Oscar wrote "the heuchera" without a cultivar; filed as Black Forest Cake because the near-black ruffled leaves with vivid cherry-red bells match its card and no other heuchera in the batch has red flowers ([Inference] from the flowers — Timeless Night's are pink, Ifhepr's pale). The cluster sits right of centre; its rightmost bells tuck under the growth rail, as on the Escallonia card. Red bells open on the bench in October against a May-Sep band — a bench photo says nothing about flowering time. |
+
+**Batch status:** 8 of 16 dealt (#2–#7, #9, #10). #1 waits on the cultivar. Next five in order: #8
+Cotinus 'Grace' (second frame on the dealt card), #11 Heuchera 'Winterberry' (label in the shot, please
+— the name is unverified), #13 Heuchera 'Ifhepr', #14 Geranium 'Bremdream', #15 Elaeagnus 'Viveleg'.

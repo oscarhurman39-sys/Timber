@@ -1,18 +1,23 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Deal the next five of the 2026-10-02b batch when Oscar's photos land — #6 Prunus
-  pissardii, #7 Sedum 'Surrender Rose', #8 Cotinus 'Grace' (a second frame on the dealt card via
-  `add-swap.js`, not a new card), #9 Euphorbia × martini 'Waleulitr', #10 Heuchera 'Black Forest
-  Cake': split them out of `data/held-photos/2026-10-02b/batch-corrected.json`, `add-plants-bulk.js
-  --quick`, credits by basename, restamp, the sequential gate, update that README's status line.
-  #1 Cordyline waits on Oscar reading the label's cultivar: its photo is a red-leaved form and is
-  stored, unstaged, as `cordyline-australis-as-sent.jpg`.
+brick: Deal the next five of the 2026-10-02b batch when Oscar's photos land — #8 Cotinus 'Grace'
+  (a second frame on the dealt card via `add-swap.js`, not a new card), #11 Heuchera 'Winterberry'
+  (read its label — the name is unverified), #13 Heuchera 'Ifhepr', #14 Geranium 'Bremdream', #15
+  Elaeagnus 'Viveleg': split them out of `data/held-photos/2026-10-02b/batch-corrected.json`,
+  `add-plants-bulk.js --quick`, credits by basename, restamp, the sequential gate, update that
+  README's status line. #1 Cordyline waits on Oscar reading the label's cultivar: its photo is a
+  red-leaved form and is stored, unstaged, as `cordyline-australis-as-sent.jpg`.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, evening, later still (**cards 6, 7, 9 and 10 dealt: Prunus pissardii, Sedum 'Surrender Rose', Euphorbia 'Waleulitr', Heuchera 'Black Forest Cake'; deck 467 -> 471**) —
+  photos in three drops, dealt as they came with the bulk tool and credits, r327, one gate for the
+  four (two earlier gates stopped within minutes of starting so the later deals could join). The
+  heuchera arrived unnamed and is filed as Black Forest Cake from its cherry-red bells ([Inference]).
+  8 of 16 from the 2026-10-02b batch are in; the Cordyline still waits on its label.
 progress: 2026-10-02, evening, later (**cards 2–5 of the 2026-10-02b batch dealt, deck 463 -> 467**) —
   Oscar's first five photos, no text: Cunningham's White, both maples and the Boskoop apple dealt
   with `add-plants-bulk.js --quick`, credits, r324; all four frame whole at default framing. The
