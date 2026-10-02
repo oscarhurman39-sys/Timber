@@ -1,14 +1,19 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Merge PR #50 (https://github.com/plantcards-app/Timber/pull/50) — one tap, it fast-forwards
-  the deploy branch and pages.yml publishes deck 461 with the three flash-betweens and the two
-  tools. Then one photo of Little Devil deals the last held card of the batch, and its label
-  settles the H7.
-  (Displaced, not dropped: the r270 iPhone check — the shell deck is live as r309, what
-  remains is Oscar opening the app on an iPhone that crashed and pasting back the *Report a
-  problem* text. The toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
+brick: Photograph Little Devil (the one held card left from the 2026-10-01 batch) and read its
+  label's hardiness while you are there — the photo deals it with `tools/deal-plant.js`, and the
+  label settles whether H7 stays or `compare-double.js --set hardiness=H6` runs.
+  (Displaced, not dropped: the r270 iPhone check — the shell deck is live, what remains is
+  Oscar opening the app on an iPhone that crashed and pasting back the *Report a problem*
+  text. The toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, afternoon (**PR #50 merged by Oscar, deck 463 live**) — merge commit 8e11ce6
+  on the deploy branch; pages.yml deploys it. Two days' work shipped: 27 cards, three
+  flash-betweens, two tools and their protocol, two of Oscar's rule corrections. The feature
+  branch is restarted from the deploy head; the PR check-ins are cancelled. [Unverified] from
+  here that the live page carries r322 — the build container cannot reach github.io (403 from
+  the proxy); the Actions run is the check that can be read.
 progress: 2026-10-02, later (**Coppertop viburnum and Golden King holly dealt, deck 461 -> 463**) —
   two more from Oscar with photos, after PR #50 went up; both new (compare-double), both
   dealt onto the same branch so the PR carries them. Golden King's visual reordered by one
