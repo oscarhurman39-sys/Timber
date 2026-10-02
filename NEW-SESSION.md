@@ -118,6 +118,14 @@ the derivative, CREDITS note, the old master stays in git history.
 "poison") is reworded to keep Oscar's claim and land on the tier it means, with
 `--set toxicity=...`, and the README says what changed. Two cards needed it on 2026-10-01.
 
+**A name on the label is the card's name** (Oscar, 2026-10-02: "Why do you need the label,
+wasn't it in the json?"). The JSON is read from the bench label, so the label says what the
+JSON says, and the label is what a customer searches for. When a cultivar record cannot be
+verified (Heuchera 'Winterberry'), or the photo shows a coloured form sold under the species
+name (the red-leaved Cordyline australis), deal the card under the JSON's name and write the
+doubt into the batch README as [Unverified]. Two cards were held for a label question on
+2026-10-02 and should not have been; never hold a card for one.
+
 ## Matching a photo filename to a held card
 
 The app derives a photo's filename from the card's `latin`, and this is the exact

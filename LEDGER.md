@@ -1,14 +1,80 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Merge PR #50 (https://github.com/plantcards-app/Timber/pull/50) — one tap, it fast-forwards
-  the deploy branch and pages.yml publishes deck 461 with the three flash-betweens and the two
-  tools. Then one photo of Little Devil deals the last held card of the batch, and its label
-  settles the H7.
-  (Displaced, not dropped: the r270 iPhone check — the shell deck is live as r309, what
-  remains is Oscar opening the app on an iPhone that crashed and pasting back the *Report a
-  problem* text. The toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
+brick: Merge PR #51 into the deploy branch — Oscar's "New cards aren't on the app" was the ask;
+  the PR carries both 2026-10-02 batches (deck 463 -> 488, r337, every head through the gate) and
+  the live app deploys from the deploy branch on merge. Oscar merges, or says "merge" and the
+  session does it; then confirm the Pages run's served-bytes check. Then the next batch, five
+  photos at a time.
+  (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
+  card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
+  crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
+  unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**PR #51 opened**) — Oscar: "New cards aren't on the app". Right: pushes
+  go to the feature branch and the app deploys only from the deploy branch on a merge, and nothing
+  since PR #50 had been put up for one. PR #51 opened with both batches, subscribed. Lesson: say
+  "not live until merged" in every push message, not "the PR goes up when you say pr".
+progress: 2026-10-02, late (**gate 18/18 on d115a95, pushed on Oscar's "Push" with the browser suites
+  still running**) — the push went out with the fast checks and app-test green; the remaining suites
+  came back green four minutes later. Nothing to fix. Deck 488, r337, both batches fully dealt.
+progress: 2026-10-02, late (**batch 2026-10-02c complete, all nine dealt: Helleborus Ice N’ Roses Early Rose, Chrysanthemum 'Autumn Bronze', Pittosporum BANNOW BAY, both Achilleas, Camellia 'Elfin Rose', Anemone Frilly Knickers, Nepeta 'Cat’s Pajamas', Coreopsis SOLANNA GOLDEN SPHERE; deck 479 -> 488**) —
+  collages and Galaxy shots in four drops, all whole in the well; bulk tool, credits, r337, two gates
+  (cards 1–5, then 6–9). The chrysanthemum reads red rather than bronze in the shot, noted only; the
+  first unnamed Achillea was filed as Sassy Summer Sangria by list order ([Inference]) and the second
+  arrived in New Vintage Red's slot, so that stands. 9 of 9 in.
+progress: 2026-10-02, late (**batch 2026-10-02c stored: 9 entries, 9 fitted, no doubles**) — Oscar's
+  third paste of the day, no photos yet; as-sent, corrected and README under
+  `data/held-photos/2026-10-02c/`. Trade names take the deck's form up front this time (the
+  Geranium lesson): Title Case where the genus has a dealt sibling in it, CAPS otherwise. The
+  Chrysanthemum's "H3-H5" takes H4, the deck's Garden Mum value and the middle of his range, with
+  his note verbatim. Data only, no deck change; fast checks. Photos asked for five at a time.
+progress: 2026-10-02, late (**batch 2026-10-02b complete: Viveleg, Moonlight, Extravaganza, Carré Rouge and Heuchera CRANBERRY dealt; second frames for the Elaeagnus species and Timeless Night; deck 474 -> 479**) —
+  seven photos in four drops; one named by Oscar ("Sorry this is Viveleg"), which also settled the
+  yellow-centred one as Moonlight ([Inference]); the Cranberry takes the trade-name form as the
+  Geranium did. Bulk tool, credits, add-swap, r333, one gate over the whole evening (five earlier
+  gates stopped within minutes so later drops could join). All 16 new cards and 3 second frames in.
+progress: 2026-10-02, late (**Cordyline australis and Heuchera 'Winterberry' dealt on Oscar's call, deck 472 -> 474**) —
+  "Why do you need the label, wasn't it in the json?" It was: the JSON came from the labels, so the
+  label names are the card names and the doubts are flags in the README, not holds. Both dealt from
+  the stored photos, r330. 11 of 16 from the batch are in. Lesson for the rule: a name the label
+  gives is the card's name; verification notes go in the record, the card does not wait on them.
+progress: 2026-10-02, night (**card 14 Geranium DREAMLAND ('Bremdream') dealt, deck 471 -> 472; Cotinus 'Grace' gets a second frame**) —
+  Oscar queried the name ("did the json really get made with the name beamland"); his JSON said
+  'Bremdream', the RHS lists Geranium [Dreamland] ('Bremdream'), so the card takes the deck's
+  trade-name form instead of the code alone. Dealt with the bulk tool, credit, r328. Then "the
+  heuchera, and continue": the Cotinus photo is a flash-between on the dealt card via add-swap
+  (r329); the heuchera photo is lime-leaved with no label, so 'Winterberry' stays undealt and
+  [Unverified] — stored beside the Cordyline. 9 of 16 from the batch are in.
+progress: 2026-10-02, evening, later still (**cards 6, 7, 9 and 10 dealt: Prunus pissardii, Sedum 'Surrender Rose', Euphorbia 'Waleulitr', Heuchera 'Black Forest Cake'; deck 467 -> 471**) —
+  photos in three drops, dealt as they came with the bulk tool and credits, r327, one gate for the
+  four (two earlier gates stopped within minutes of starting so the later deals could join). The
+  heuchera arrived unnamed and is filed as Black Forest Cake from its cherry-red bells ([Inference]).
+  8 of 16 from the 2026-10-02b batch are in; the Cordyline still waits on its label.
+progress: 2026-10-02, evening, later (**cards 2–5 of the 2026-10-02b batch dealt, deck 463 -> 467**) —
+  Oscar's first five photos, no text: Cunningham's White, both maples and the Boskoop apple dealt
+  with `add-plants-bulk.js --quick`, credits, r324; all four frame whole at default framing. The
+  Cordyline collage shows a red-leaved cultivar, not the green species its JSON describes, so that
+  card is not dealt — [Unverified] which cultivar; Oscar's label settles it (the photo is stored
+  under the batch). The Malus is foliage only, [Unverified] from leaf alone, filed as sent.
+progress: 2026-10-02, evening (**batch 2026-10-02b stored: 19 entries, 16 fitted, 3 doubles resolved**) —
+  Oscar's second paste of the day, no photos yet; `batch-as-sent.json`, `batch-corrected.json` and a
+  README of every call under `data/held-photos/2026-10-02b/`. `compare-double.js` found three dealt
+  cards (Cotinus 'Grace', Heuchera villosa 'Timeless Night', Elaeagnus ×submacrophylla) and the
+  dealt card took the incoming only where it was blank — foliage on two, toxicity, water, uses —
+  r323; five PROBABLE word-hits (Korean pine, 'Nigra', Walberton's Silver Dormouse, 'Limelight'
+  twice, PINK MARBLE) were different plants. Facings derived from the sun band because the paste
+  states light levels only. [Unverified] Heuchera 'Winterberry' as a cultivar name — no record
+  found by search; the label photo settles it. Photos asked for five at a time in batch order.
+progress: 2026-10-02, afternoon (**PR #50 merged by Oscar, deck 463 live**) — merge commit 8e11ce6
+  on the deploy branch; pages.yml deploys it. Two days' work shipped: 27 cards, three
+  flash-betweens, two tools and their protocol, two of Oscar's rule corrections. The feature
+  branch is restarted from the deploy head; the PR check-ins are cancelled. Live page verified
+  from the Pages run, not from here: run 123 (job 110882942762) deployed 8e11ce6, and its
+  served-bytes step fetched timber.html from a GitHub runner — "served : r322 · 2026-10-02 ·
+  338bbad … MATCH — the deployed page is byte-identical", verified on attempt 1, and
+  assetlinks.json served with the Play key. Read from the job log; the container itself still
+  cannot reach github.io (403 from the proxy).
 progress: 2026-10-02, later (**Coppertop viburnum and Golden King holly dealt, deck 461 -> 463**) —
   two more from Oscar with photos, after PR #50 went up; both new (compare-double), both
   dealt onto the same branch so the PR carries them. Golden King's visual reordered by one
