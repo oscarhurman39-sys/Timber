@@ -171,6 +171,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "acer-palmatum-seiryu.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "acer-palmatum-shaina.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -184,6 +194,16 @@
    "file": "acer-palmatum-taylor.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Supplied as a three-panel vertical COLLAGE (pink new growth over the pink-margined mature leaves) kept WHOLE under the one-rule of protocol v14.49; no pixels generated; no EXIF orientation tag",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "acer-palmatum-var-coreanum.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
    "sourceUrl": null,
    "commit": null,
@@ -3194,6 +3214,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "malus-domestica-red-belle-de-boskoop.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "malus-evereste.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -4049,6 +4079,16 @@
    "file": "rhodanthemum-hosmariense-zagora-yellow.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright. Supplied as a two-frame COLLAGE (an inset flower panel pasted over a foliage frame). Restored WHOLE on 2026-09-06 on Oscar's call (VQ 57): only the bottom 5.7% trimmed with sharp to meet the 0.75 aspect gate, inset untouched, no pixels generated. Earlier 2026-08-18 staging had reframed it to the foliage frame only. EXIF Samsung Galaxy S24 (firmware S921BXXSGDZG1), 2026-08-18; Ultra HDR capture with a gain map, no C2PA manifest in the file and no AI or generative marker",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "rhododendron-cunningham-s-white.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
    "sourceUrl": null,
    "commit": null,

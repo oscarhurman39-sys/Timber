@@ -1,17 +1,24 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Deal the first five of the 2026-10-02b batch when Oscar's photos land — #1 Cordyline
-  australis, #2 Rhododendron 'Cunningham’s White', #3 Acer palmatum var. coreanum, #4 Acer palmatum
-  'Seiryu', #5 Malus 'Red Belle de Boskoop': split them out of
-  `data/held-photos/2026-10-02b/batch-corrected.json`, `add-plants-bulk.js --quick`, credits,
-  restamp, the sequential gate, update that README's status line. Photos of #8, #12 and #17 are
-  second frames on dealt cards (`add-swap.js`), not new cards.
+brick: Deal the next five of the 2026-10-02b batch when Oscar's photos land — #6 Prunus
+  pissardii, #7 Sedum 'Surrender Rose', #8 Cotinus 'Grace' (a second frame on the dealt card via
+  `add-swap.js`, not a new card), #9 Euphorbia × martini 'Waleulitr', #10 Heuchera 'Black Forest
+  Cake': split them out of `data/held-photos/2026-10-02b/batch-corrected.json`, `add-plants-bulk.js
+  --quick`, credits by basename, restamp, the sequential gate, update that README's status line.
+  #1 Cordyline waits on Oscar reading the label's cultivar: its photo is a red-leaved form and is
+  stored, unstaged, as `cordyline-australis-as-sent.jpg`.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, evening, later (**cards 2–5 of the 2026-10-02b batch dealt, deck 463 -> 467**) —
+  Oscar's first five photos, no text: Cunningham's White, both maples and the Boskoop apple dealt
+  with `add-plants-bulk.js --quick`, credits, r324; all four frame whole at default framing. The
+  Cordyline collage shows a red-leaved cultivar, not the green species its JSON describes, so that
+  card is not dealt — [Unverified] which cultivar; Oscar's label settles it (the photo is stored
+  under the batch). The Malus is foliage only, [Unverified] from leaf alone, filed as sent.
 progress: 2026-10-02, evening (**batch 2026-10-02b stored: 19 entries, 16 fitted, 3 doubles resolved**) —
   Oscar's second paste of the day, no photos yet; `batch-as-sent.json`, `batch-corrected.json` and a
   README of every call under `data/held-photos/2026-10-02b/`. `compare-double.js` found three dealt

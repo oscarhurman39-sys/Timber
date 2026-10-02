@@ -151,4 +151,32 @@ Asked for five at a time, in batch order. The slug is what `photos/<slug>.jpg` w
 18. #18 Elaeagnus × submacrophylla 'Moonlight' → `elaeagnus-submacrophylla-moonlight`
 19. #19 Euonymus japonicus 'Extravaganza' → `euonymus-japonicus-extravaganza`
 
-**Batch status:** 0 of 16 dealt. First five asked for: #1–#5.
+**Photos 1–5 arrived** (Oscar, 2026-10-02 afternoon, no text: #2–#4 Galaxy S24 12:50–12:53, #1 and #5
+two-panel collages from the collage app with no camera EXIF; a byte scan found no C2PA or
+`trainedAlgorithmicMedia` markers in any file). **Cards 2–5 dealt**; conventions exactly as in
+`batch-corrected.json`; every other field as supplied. Deck 463 -> 467, hold 76 unchanged.
+`add-plants-bulk.js --quick` (data audit, plant-sense and deck audit green once the CREDITS entries were
+written — the bulk tool stops on NO ENTRY until `photo-credits.js --set <basename>` runs); restamped r324.
+All four frame whole at default framing, no `PHOTO_FOCUS` entries. Originals here are byte-identical to
+the files Oscar sent; the collages are kept whole.
+
+| # | card | photo as sent | staged | notes |
+|---|---|---|---|---|
+| 2 | Rhododendron 'Cunningham’s White' | 3000x3062 | 1200x1225 | one open flower, white with a mauve-pink inner bud, over dark green leaves; a brown spot on the upper petal and one brown-edged petal (an ageing bloom). Open on the bench in October against a May-Jun band — a bench photo says nothing about flowering time (protocol rule 3). |
+| 3 | Acer palmatum var. coreanum | 2908x3716 | 1200x1533 | matches: green five-to-seven-lobed serrated leaves on red petioles, still green (the Sep-Nov colour not yet on). |
+| 4 | Acer palmatum 'Seiryu' | 2478x3374 | 1200x1634 | matches: finely dissected green leaves with red-tinted tips on yellow-green shoots. |
+| 5 | Malus 'Red Belle de Boskoop' | collage 2160x3840 (leaves and stem left, backlit leaves and the graft union right) | 1200x2133 | foliage only: serrated ovate leaves with felted undersides, no fruit in the shot. [Unverified] the cultivar from leaf alone; filed as Red Belle de Boskoop because that is the card the photo was sent for. Both panels whole; the collage app's blurred fill sits behind the stats panel, as on the Nerine and Coppertop cards. |
+
+**#1 Cordyline — not dealt, photo stored as `cordyline-australis-as-sent.jpg`.** The collage (2160x3840,
+two panels of the same plant) shows a red-leaved cordyline: deep burgundy-red sword leaves with pinker
+midribs on a short trunk. That is a coloured-leaf cultivar, not the plain green species the JSON describes
+(hue 110, no leaf colour in `visual`), and the JSON's own `uncertain` says the label named no cultivar.
+[Unverified] which cultivar it is — nothing in the photo names it. Waits on Oscar reading the label. When
+he does: set `latin` (the slug follows it), `common` and `hue` in `batch-corrected.json`, and
+hardiness if the label gives one (the dealt Charlie Boy card is H3; the JSON's H4 is the species'
+rating), then deal it from the stored file. A species card under a red-leaf photo would tell a customer
+the species is red.
+
+**Batch status:** 4 of 16 dealt (#2–#5). #1 waits on the cultivar. Next five in order: #6 Prunus
+pissardii, #7 Sedum 'Surrender Rose', #8 Cotinus 'Grace' (second frame on the dealt card), #9 Euphorbia
+× martini 'Waleulitr', #10 Heuchera 'Black Forest Cake'.
