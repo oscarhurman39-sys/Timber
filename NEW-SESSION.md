@@ -88,8 +88,11 @@ The rules for "what seems correct", in order — apply them, do not re-litigate 
    deck decides.** The tool prints the genus siblings' values; where they agree with one
    side, that side wins. Where they do not: a **dealt** card keeps its value (it has been
    live and looked at), a **held** card takes the newer research (nobody has seen it).
-   A photograph is evidence too — Eve Price went Dec-Apr → Nov-Apr because Oscar's own
-   photo had it in flower on 1 October.
+   A garden-centre photograph is **not** evidence of flowering time: nursery stock is
+   grown under glass, forced or held back to be in flower on the bench, so a plant in bloom
+   on 1 October says nothing about when it flowers in a garden (Oscar, 2026-10-02 — Eve
+   Price was moved to Nov-Apr on that mistake and moved back). A photo is evidence of what
+   the plant looks like, never of when.
 4. **Prose on a dealt card stays.** On a held card the newer research replaces the old
    terse `·` style, so the card reads like the rest of this month's deck when it is dealt.
 5. **`hue` stays** unless the card's is 0, which is an unset default (Fiber Optics was).

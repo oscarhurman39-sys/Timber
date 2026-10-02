@@ -301,3 +301,16 @@ compare the stats, decide, flash between double photos. `tools/compare-double.js
 - **#12 Sambucus LACED UP SAFETY** → "Raw leaves, stems and unripe berries are harmful if
   eaten; ripe berries must be cooked before eating." Prints Toxic (orange); the original
   matched no keyword and printed the amber default.
+
+**2026-10-02, two corrections from Oscar.**
+- *A bench photo is not flowering evidence.* Eve Price's peak had been moved Dec-Apr → Nov-Apr
+  on his 1 October photo; nursery stock is forced or held to be in flower on the bench, so the
+  photo says nothing about garden flowering time. Put back to Dec-Apr; the rule in
+  NEW-SESSION.md now says the opposite of what it said.
+- *Double-check Little Devil's H7* — a smaller-leaved, smaller plant than Diabolo and ALL
+  BLACK. Checked: the RHS listing for *Physocarpus opulifolius* 'Donna May' is reported as
+  **H7** by two independent web searches (one quoting the listing's "low-growing, compact
+  shrub to 1.2m tall and wide"); the deck's two other ninebarks are H7; Oscar's own newer
+  JSON said H7. The RHS page itself is blocked from the build container, so this is
+  [Unverified] by direct read. H7 stays on the held card, with the label to be read when the
+  plant is photographed — if the label says H6, one `--set hardiness=H6` fixes it.

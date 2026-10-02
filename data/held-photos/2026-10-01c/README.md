@@ -96,7 +96,9 @@ Optics keeps its 08-21 photo with the new shot held as `-alt` pending Oscar's ca
   held as -alt any more.
 - **#5 Viburnum tinus 'Eve Price'**: toxicity "Fruit is ornamental and should not be eaten;
   gloves are advisable when handling." taken (card was blank; prints Toxic as meant); peak
-  Dec-Apr → **Nov-Apr** — Oscar's own photo, now on the card, has it in open flower on
-  1 October, so the later band was wrong by his own evidence; sunNeed 70 / sunMin 30 kept
+  Dec-Apr → Nov-Apr on the strength of his 1 October photo, then **put back to Dec-Apr** the
+  next morning: Oscar's correction — nursery stock is forced or held under different
+  conditions to flower on the bench, so a bench photo is not evidence of garden flowering
+  time. The rule in NEW-SESSION.md now says so; sunNeed 70 / sunMin 30 kept
   (siblings 55–65 / 20–35; incoming 45 / 5 is an icon away). `cvs` "Eve Price" not added, it
   is the plant's own name.

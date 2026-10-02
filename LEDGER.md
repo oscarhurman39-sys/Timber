@@ -8,6 +8,13 @@ brick: Say "PR it" (or merge `ccr-cec53e72-qu49i1` into `claude/timber-plant-pwa
   remains is Oscar opening the app on an iPhone that crashed and pasting back the *Report a
   problem* text. The toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
 since: 2026-10-01  sessions-unchanged: 0
+progress: 2026-10-02, morning (**two rule corrections, then the PR**) — Oscar: a bench photo is
+  not flowering evidence (stock is forced for the bench), so Eve Price goes back to Dec-Apr
+  and NEW-SESSION rule 3 now says a photo shows what, never when. Little Devil H7 double-
+  checked: RHS listing reported H7 by two searches and the deck's siblings agree, but the
+  RHS page is blocked from the container — [Unverified] by direct read, label to confirm
+  when photographed. Then "yeah then PR": the branch (deck 436 -> 461, 3 flash-betweens, 2
+  tools) goes up as a PR into the deploy branch for Oscar to merge.
 progress: 2026-10-01, after midnight (**doubles and second photos are tools now; deck 460 -> 461**) —
   Oscar, asked five one-word questions: "we wanna beef up this app not waste time nit picking
   questions" — compare the stats, decide, flash between double photos. Built
