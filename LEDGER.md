@@ -1,16 +1,21 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Merge PR #51 into the deploy branch — Oscar's "New cards aren't on the app" was the ask;
-  the PR carries both 2026-10-02 batches (deck 463 -> 488, r337, every head through the gate) and
-  the live app deploys from the deploy branch on merge. Oscar merges, or says "merge" and the
-  session does it; then confirm the Pages run's served-bytes check. Then the next batch, five
-  photos at a time.
+brick: The next batch, five photos at a time — same routine (store the paste verbatim under
+  `data/held-photos/<date>/`, `compare-double.js` for doubles, fit the layout fields with trade
+  names in the deck's form, `add-plants-bulk.js --quick` as photos land, credits by basename,
+  restamp, the sequential gate, push). Say "not live until merged" on every push; open the PR as
+  soon as a batch is complete rather than waiting to be asked.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**PR #51 merged by Oscar, deck 488 live**) — merge commit 30886af on the
+  deploy branch; Pages run 124 (job 111046421930) deployed it and its served-bytes step passed
+  ("Verify the deployed page is this commit", r337), assetlinks.json served. Read from the run,
+  not from here (github.io is still blocked from the container). Feature branch restarted from
+  the merged head; the PR check-in cancelled.
 progress: 2026-10-02, late (**PR #51 opened**) — Oscar: "New cards aren't on the app". Right: pushes
   go to the feature branch and the app deploys only from the deploy branch on a merge, and nothing
   since PR #50 had been put up for one. PR #51 opened with both batches, subscribed. Lesson: say
