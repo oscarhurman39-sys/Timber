@@ -1,15 +1,24 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Open the PR for the 2026-10-02b batch into the deploy branch when Oscar says "pr" — the
-  feature branch carries 16 new cards, three second frames and the three doubles' fills (deck 463
-  -> 479, r333); every push went through the sequential gate. Until he says so, nothing on the
-  batch is pending. Then the next batch, five photos at a time.
+brick: Deal the first five of the 2026-10-02c batch when Oscar's photos land — #1 Helleborus Ice
+  N’ Roses Early Rose, #2 Chrysanthemum 'Autumn Bronze', #3 Pittosporum BANNOW BAY, #4 Achillea
+  'Sassy Summer Sangria', #5 Camellia sasanqua 'Elfin Rose': split them out of
+  `data/held-photos/2026-10-02c/batch-corrected.json`, `add-plants-bulk.js --quick`, credits by
+  basename, restamp, the sequential gate, update that README's status line. The PR into the deploy
+  branch (the finished 2026-10-02b batch plus whatever of 2026-10-02c is in) goes up when Oscar
+  says "pr".
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**batch 2026-10-02c stored: 9 entries, 9 fitted, no doubles**) — Oscar's
+  third paste of the day, no photos yet; as-sent, corrected and README under
+  `data/held-photos/2026-10-02c/`. Trade names take the deck's form up front this time (the
+  Geranium lesson): Title Case where the genus has a dealt sibling in it, CAPS otherwise. The
+  Chrysanthemum's "H3-H5" takes H4, the deck's Garden Mum value and the middle of his range, with
+  his note verbatim. Data only, no deck change; fast checks. Photos asked for five at a time.
 progress: 2026-10-02, late (**batch 2026-10-02b complete: Viveleg, Moonlight, Extravaganza, Carré Rouge and Heuchera CRANBERRY dealt; second frames for the Elaeagnus species and Timeless Night; deck 474 -> 479**) —
   seven photos in four drops; one named by Oscar ("Sorry this is Viveleg"), which also settled the
   yellow-centred one as Moonlight ([Inference]); the Cranberry takes the trade-name form as the
