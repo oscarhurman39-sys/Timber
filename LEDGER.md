@@ -1,16 +1,21 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Merge PR #53 — it now carries everything since PR #52: Red Cascade, the Dissectum maple,
-  the honeysuckle and Eternal Flame frames and the Viburnum davidii replacement (deck 489 -> 491,
-  r342, gate 18/18 on its head). Oscar merges, or says "merge". Then the next batch, five photos
-  at a time; say "not live until merged" on every push; a push to the feature branch while a PR
-  is open joins that PR, so update its title and body rather than opening another.
+brick: The next batch, five photos at a time — same routine (store the paste verbatim under
+  `data/held-photos/<date>/`, `compare-double.js` for doubles, fit the layout fields with trade
+  names in the deck's form, `add-plants-bulk.js --quick` as photos land, credits by basename,
+  restamp, the sequential gate, push, PR as soon as the batch is complete). Say "not live until
+  merged" on every push; a push while a PR is open joins that PR, so update its title and body.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**PR #53 merged by Oscar, deck 491 live**) — merge commit 5ebd536; Pages
+  run 126 (job 111066537215) deployed it and its served-bytes step passed (r342), assetlinks.json
+  served. Read from the run, not from here. Feature branch restarted from the merged head, the
+  check-in cancelled. Everything Oscar sent on 2026-10-02 is live: 28 new cards, 7 second frames,
+  3 doubles' fills, one replacement, and the last held card of the 2026-10-01 batch.
 progress: 2026-10-02, late (**gate 18/18 on ab8dd7a; pushed; PR #53 updated to carry it**) — a push
   to the feature branch while PR #53 was open joined that PR (GitHub allows one open PR per head),
   so its title and body were rewritten to cover all three commits instead of opening a new one.
