@@ -130,5 +130,18 @@ Originals here are byte-identical to the files Oscar sent; the collage is kept w
 | 3 | Pittosporum tenuifolium BANNOW BAY ('Breebay') | matches: small rounded grey-green leaves edged cream on dark stems, the older leaves flushed purple-crimson — the card's "pink and crimson tones in colder weather" already showing in early October. All three panels in the well at default framing; the collage app's blurred fill behind the stats panel. |
 | 4 | Achillea millefolium 'Sassy Summer Sangria' | Oscar wrote "Achillea" without a cultivar and the batch has two: this one and NEW VINTAGE RED (#6). Filed as Sassy Summer Sangria because it is the next in the asked-for order; the shot — crimson-red flat clusters with yellow centres over fern-like grey-green leaves on a young plant — fits either card ([Inference]; if the next Achillea photo arrives named New Vintage Red this stands, if it arrives named Sassy Summer Sangria the two swap). A nursery label edge at the lower left of the frame, unreadable. In flower at the start of October, just past the Jun-Sep band. |
 
-**Batch status:** 5 of 9 dealt (#1–#5). Next in order: #6 Achillea NEW VINTAGE RED, #7 Anemone Frilly
-Knickers, #8 Nepeta 'Cat’s Pajamas', #9 Coreopsis SOLANNA GOLDEN SPHERE.
+**Cards 6–9 dealt** (Oscar's four photos, no text, in the asked-for order: #6 and #9 Galaxy S24 shots of
+2026-10-02 15:44–15:45, 4000x3000 with EXIF orientation 6, staged upright 1200x1600; #7 and #8 collages
+from the collage app, 2160x3352 and 2160x3840, no camera EXIF, staged 1200x1862 and 1200x2133; no AI or
+C2PA markers in any). Conventions exactly as in `batch-corrected.json`; every other field as supplied.
+Deck 484 -> 488, hold 76 unchanged. One `add-plants-bulk.js --quick` run, credits by basename, restamped
+r337. Originals here are byte-identical to the files Oscar sent; the collages are kept whole.
+
+| # | card | notes |
+|---|---|---|
+| 6 | Achillea millefolium NEW VINTAGE RED ('Balvinred') | magenta-red flat clusters with yellow centres, older heads softening to pink behind — the card's "rich red flowers that soften in colour as they age". Its arrival in this slot leaves #4 as filed. In flower at the start of October, just past the Jun-Sep band. |
+| 7 | Anemone Frilly Knickers ('Fp007') | collage, toothed leaves above, the ruffled semi-double white flower flushed lilac around a golden centre in two panels; matches. A red label edge at the top left of the lower panel. |
+| 8 | Nepeta 'Cat’s Pajamas' | collage, three panels of dense lilac-blue spikes on dark calyces over aromatic grey-green leaves; matches. In flower at the start of October, just past the May-Sep band. |
+| 9 | Coreopsis SOLANNA GOLDEN SPHERE ('Dcoreo16') | one fully double golden-yellow pompon over narrow lance-shaped leaves; matches. |
+
+**Batch complete: 9 of 9 dealt.** Deck 479 -> 488 over the batch; hold 76 unchanged throughout.

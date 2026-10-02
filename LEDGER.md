@@ -1,20 +1,20 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Deal the last four of the 2026-10-02c batch as Oscar's photos land — #6 Achillea NEW
-  VINTAGE RED, #7 Anemone Frilly Knickers, #8 Nepeta 'Cat’s Pajamas', #9 Coreopsis SOLANNA GOLDEN
-  SPHERE: split them out of `data/held-photos/2026-10-02c/batch-corrected.json`, `add-plants-bulk.js
-  --quick`, credits by basename, restamp, the sequential gate, update that README's status line. The
-  PR into the deploy branch goes up when Oscar says "pr".
+brick: Open the PR into the deploy branch when Oscar says "pr" — the feature branch carries the
+  whole 2026-10-02b batch (16 cards, 3 second frames, 3 doubles' fills) and the whole 2026-10-02c
+  batch (9 cards): deck 463 -> 488, r337, every push through the sequential gate. Until he says so,
+  nothing is pending. Then the next batch, five photos at a time.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
-progress: 2026-10-02, late (**cards 1–5 of 2026-10-02c dealt: Helleborus Ice N’ Roses Early Rose, Chrysanthemum 'Autumn Bronze', Pittosporum BANNOW BAY, Achillea 'Sassy Summer Sangria', Camellia 'Elfin Rose'; deck 479 -> 484**) —
-  three collages and two Galaxy shots, all whole in the well; bulk tool, credits, r336, one gate for
-  the five. The chrysanthemum reads red rather than bronze in the shot, noted only; the unnamed
-  Achillea is filed as Sassy Summer Sangria by list order ([Inference]). 5 of 9 in.
+progress: 2026-10-02, late (**batch 2026-10-02c complete, all nine dealt: Helleborus Ice N’ Roses Early Rose, Chrysanthemum 'Autumn Bronze', Pittosporum BANNOW BAY, both Achilleas, Camellia 'Elfin Rose', Anemone Frilly Knickers, Nepeta 'Cat’s Pajamas', Coreopsis SOLANNA GOLDEN SPHERE; deck 479 -> 488**) —
+  collages and Galaxy shots in four drops, all whole in the well; bulk tool, credits, r337, two gates
+  (cards 1–5, then 6–9). The chrysanthemum reads red rather than bronze in the shot, noted only; the
+  first unnamed Achillea was filed as Sassy Summer Sangria by list order ([Inference]) and the second
+  arrived in New Vintage Red's slot, so that stands. 9 of 9 in.
 progress: 2026-10-02, late (**batch 2026-10-02c stored: 9 entries, 9 fitted, no doubles**) — Oscar's
   third paste of the day, no photos yet; as-sent, corrected and README under
   `data/held-photos/2026-10-02c/`. Trade names take the deck's form up front this time (the
