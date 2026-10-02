@@ -1,15 +1,20 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Open the PR into the deploy branch when Oscar says "pr" — the feature branch carries the
-  whole 2026-10-02b batch (16 cards, 3 second frames, 3 doubles' fills) and the whole 2026-10-02c
-  batch (9 cards): deck 463 -> 488, r337, every push through the sequential gate. Until he says so,
-  nothing is pending. Then the next batch, five photos at a time.
+brick: Merge PR #51 into the deploy branch — Oscar's "New cards aren't on the app" was the ask;
+  the PR carries both 2026-10-02 batches (deck 463 -> 488, r337, every head through the gate) and
+  the live app deploys from the deploy branch on merge. Oscar merges, or says "merge" and the
+  session does it; then confirm the Pages run's served-bytes check. Then the next batch, five
+  photos at a time.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**PR #51 opened**) — Oscar: "New cards aren't on the app". Right: pushes
+  go to the feature branch and the app deploys only from the deploy branch on a merge, and nothing
+  since PR #50 had been put up for one. PR #51 opened with both batches, subscribed. Lesson: say
+  "not live until merged" in every push message, not "the PR goes up when you say pr".
 progress: 2026-10-02, late (**gate 18/18 on d115a95, pushed on Oscar's "Push" with the browser suites
   still running**) — the push went out with the fast checks and app-test green; the remaining suites
   came back green four minutes later. Nothing to fix. Deck 488, r337, both batches fully dealt.
