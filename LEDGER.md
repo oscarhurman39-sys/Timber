@@ -1,16 +1,25 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: The next batch, five photos at a time — same routine (store the paste verbatim under
-  `data/held-photos/<date>/`, `compare-double.js` for doubles, fit the layout fields with trade
-  names in the deck's form, `add-plants-bulk.js --quick` as photos land, credits by basename,
-  restamp, the sequential gate, push). Say "not live until merged" on every push; open the PR as
-  soon as a batch is complete rather than waiting to be asked.
+brick: Merge PR #53 (honeysuckle frames, Viburnum davidii replacement) and the PR that follows the
+  gate on Euonymus 'Red Cascade' — the deploy branch then carries deck 490 at r341. Then the next
+  batch, five photos at a time, same routine; say "not live until merged" on every push; open the
+  PR as soon as a batch is complete.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**Acer palmatum 'Dissectum' dealt, deck 490 -> 491; a second frame on Cercis 'Eternal Flame'**) —
+  the maple's "spring flowers" failed plant-sense --strict against its Sep-Nov band and took the
+  Golden King word-order fix via `--set visual=`; the photo settles the JSON's green-or-red doubt
+  (green). The Eternal Flame entry is the frame-art one with no alts, which add-swap refuses, so the
+  alts list went in by hand in the tool's shape; r342. Record under `data/held-photos/2026-10-02f/`.
+  Not live until merged: all of this since PR #53 rides the next PR after the gate.
+progress: 2026-10-02, late (**Euonymus europaeus 'Red Cascade' dealt, deck 489 -> 490**) — one card
+  with its collage, no text; not a double; fitted, bulk tool, credit, r341; record under
+  `data/held-photos/2026-10-02e/`. PR #53 (the frames and the Viburnum) was pushed on Oscar's
+  "Push" with the gate still running and is open; this card rides the next PR after its gate.
 progress: 2026-10-02, late (**three flash-between frames on Honeysuckle 'Rhubarb and Custard'; Viburnum davidii photo replaced**) —
   Oscar's three photos for a dealt card, no JSON: add-swap three times (entry created, then two
   appends), card text untouched. Then "Replacement photo for viburnum davidii" — said as a
