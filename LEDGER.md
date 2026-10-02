@@ -11,9 +11,12 @@ brick: The next batch, five photos at a time — same routine (store the paste v
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
-progress: 2026-10-02, late (**Little Devil dealt from the hold block, deck 488 -> 489, hold 75**) — the
+progress: 2026-10-02, late (**Little Devil dealt from the hold block and live: PR #52 merged by Oscar, deck 488 -> 489, hold 75**) — the
   one held card left from the 2026-10-01 batch; `deal-plant.js`, credit, export, r338. No label in the
-  shot, so H7 stays ([Unverified] by direct read). Not live until merged: PR to follow the gate.
+  shot, so H7 stays ([Unverified] by direct read). Pushed on Oscar's "Push" with the gate still in its
+  browser suites; PR #52 opened, merged within a minute; Pages run 125 deployed merge commit 6649723
+  and its served-bytes step passed (r338); the gate then came back 18/18. Feature branch restarted
+  from the merged head, check-in cancelled. Everything Oscar has sent is now a live card.
 progress: 2026-10-02, late (**PR #51 merged by Oscar, deck 488 live**) — merge commit 30886af on the
   deploy branch; Pages run 124 (job 111046421930) deployed it and its served-bytes step passed
   ("Verify the deployed page is this commit", r337), assetlinks.json served. Read from the run,
