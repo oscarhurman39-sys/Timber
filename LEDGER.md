@@ -1,16 +1,130 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Get r270 (the shell deck, branch `claude/safari-compatibility-ufr5jx`) live
-  and open it on an iPhone that crashed, then paste back the *Report a problem*
-  text — that one sheet says whether it opened, how many cards it built, and what
-  last threw. Live is a fast-forward of the deploy branch: merge this branch into
-  `claude/timber-plant-pwa-j69h5e` (or `git push origin HEAD:refs/heads/claude/timber-plant-pwa-j69h5e`
-  from it) and the workflow does the rest.
-  (Displaced, not dropped: the toxicity paste — `node tools/backfill-field.js toxicity
-  --paste --one > TOXICITY-ASK.md` into ChatGPT, 317 of 432 cards blank — unchanged
-  since 2026-09-13.)
-since: 2026-09-16  sessions-unchanged: 0
+brick: Merge PR #50 (https://github.com/plantcards-app/Timber/pull/50) — one tap, it fast-forwards
+  the deploy branch and pages.yml publishes deck 461 with the three flash-betweens and the two
+  tools. Then one photo of Little Devil deals the last held card of the batch, and its label
+  settles the H7.
+  (Displaced, not dropped: the r270 iPhone check — the shell deck is live as r309, what
+  remains is Oscar opening the app on an iPhone that crashed and pasting back the *Report a
+  problem* text. The toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
+since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, later (**Coppertop viburnum and Golden King holly dealt, deck 461 -> 463**) —
+  two more from Oscar with photos, after PR #50 went up; both new (compare-double), both
+  dealt onto the same branch so the PR carries them. Golden King's visual reordered by one
+  phrase ("flowers in spring", not "spring flowers") because plant-sense --strict reads the
+  latter as a flowering claim outside the Sep-Dec berry band; pollination "needs partner"
+  added from Oscar's own "Female cultivar" note ([Inference]: hollies are dioecious). The
+  Coppertop collage shows the app's blurred fill under its panels, as the Nerine does.
+progress: 2026-10-02, morning (**two rule corrections, then the PR**) — Oscar: a bench photo is
+  not flowering evidence (stock is forced for the bench), so Eve Price goes back to Dec-Apr
+  and NEW-SESSION rule 3 now says a photo shows what, never when. Little Devil H7 double-
+  checked: RHS listing reported H7 by two searches and the deck's siblings agree, but the
+  RHS page is blocked from the container — [Unverified] by direct read, label to confirm
+  when photographed. Then "yeah then PR": the branch (deck 436 -> 461, 3 flash-betweens, 2
+  tools) goes up as a PR into the deploy branch for Oscar to merge.
+progress: 2026-10-01, after midnight (**doubles and second photos are tools now; deck 460 -> 461**) —
+  Oscar, asked five one-word questions: "we wanna beef up this app not waste time nit picking
+  questions" — compare the stats, decide, flash between double photos. Built
+  `tools/compare-double.js` (finds the card by latin / stripped latin / genus+code / common /
+  single-card cultivar word; diffs every field with a verdict; `--apply` and `--set` write by
+  row surgery with re-parse-or-rollback, csv re-exported) and `tools/add-swap.js` (second
+  photo -> PHOTO_SWAP frame, derivative, credits, check-boot, rolled back together). The rules
+  are in NEW-SESSION.md: blank takes incoming; within an icon keeps the card; wider gaps go
+  with genus siblings, else dealt keeps / held takes newer; prose stays on dealt; layout
+  fields never. Applied: Fiber Optics hue 0->48, H5->H6 (its own note said H5 was inferred
+  from USDA zone 4); Little Devil (held) H6->H7 by siblings, foliage, size, peak, prose from
+  the newer JSON; Laurus toxicity (evening re-send wins); Eve Price toxicity + peak Dec->Nov
+  (his photo has it in flower on 1 Oct); Vanessa Bell and Rose Crystal nothing (siblings kept
+  the card; Oscar: "defo called Rose Crystal"). Safety rewrites on Pony Tails (now amber, was
+  orange from "poisonous") and Laced Up (now orange, was the amber default). Three
+  flash-betweens: Fiber Optics -sunlit, Camellia sasanqua -pink-single, Laurus -sunlit.
+  Twinkie saxifrage dealt — a third Dancing Pixies code (Sh 1923), not the OCR duplicate the
+  morning note assumed; [Unverified] its flowers, pale yellow-green in the photo vs "bright
+  pink" on the card. Restamp r319, deck-audit PASS on 461, PHOTO_SWAP 14.
+progress: 2026-10-01, last of the day (**batch c complete, deck 458 -> 460; Eve Price photo
+  swapped**) — Camellia sasanqua (species card, Oscar's two-flower collage) and Ceratostigma
+  FOREST BLUE dealt; Viburnum tinus 'Eve Price' re-photographed at Oscar's ask with his
+  flower-and-bud collage, the 08-23 berry shot retired to git history. Restamp r318, deck-audit
+  PASS on 460. Day total: deck 436 -> 460, 24 cards dealt, two photos replaced (Clematis, Eve Price) and one cropped (Precious Love).
+progress: 2026-10-01, night (**Berberis 'Atropurpurea Nana' dealt, deck 457 -> 458**) — card 1
+  of batch c, from Oscar's photo. The Fiber Optics photo sent with it is kept unused: that card
+  already wears his own foliage shot from 08-21 and the new one is foliage too — his call which.
+  Restamp r317, deck-audit PASS on 458. Two of batch c still wait on photos.
+progress: 2026-10-01, after close (**five-card JSON batch stored as 2026-10-01c, three to
+  deal when photos come**) — Berberis 'Atropurpurea Nana', a species-level Camellia sasanqua
+  (label said only "Les Camélias d'Automne"), Ceratostigma FOREST BLUE. Fiber Optics (sent
+  twice today) and Viburnum tinus 'Eve Price' are already dealt with photos — not added.
+  Fitted and validated 3/3; nothing in timber.html until the photos arrive.
+progress: 2026-10-01, close (**cards 16–20 dealt, deck 452 -> 457 — batch complete**) —
+  Hydrangea 'Quick Fire Fab', Camellia sasanqua 'Bonanza', Camellia 'Fairy Blush', Ajuga
+  'Black Scallop', Physocarpus FIRESIDE. Bulk add, credits, restamp r316, deck-audit PASS on
+  457. Flagged: the hydrangea at its white stage, the Bonanza reading cerise not crimson, Fairy
+  Blush shot without a flower, [Unverified] Fireside from leaf alone. Twenty of twenty dealt in
+  one day from a 26-card paste; four were already in the deck, one held, one genus-only. The
+  deal recipe that held up all day: bulk add --quick, credits --set, render every card and
+  look, restamp, the data gate, then run-all one suite at a time (18/18 four times; --jobs 3
+  failed edge-test's 446-click walk twice under load and passed alone both times).
+progress: 2026-10-01, later again (**cards 13–15 dealt, deck 449 -> 452**) — Coprosma
+  'Lemon and Lime' (collage), Berberis 'Admiration', Escallonia 'Red Dream'. Bulk add,
+  credits, restamp r315, deck-audit PASS on 452. Flagged: the Coprosma's orange autumn tints,
+  the Escallonia's single October flower. 15 of 20 dealt; five photos to come.
+progress: 2026-10-01, last (**cards 11–12 dealt, deck 447 -> 449**) — the two Leucothoes,
+  'Curly Red' and 'Burning Love', from Oscar's photos. Bulk add, credits, restamp r314,
+  deck-audit PASS on 449. Nothing to flag. 12 of 20 dealt; eight photos to come.
+progress: 2026-10-01, later still (**Nerine bowdenii 'Isabel' added, deck 446 -> 447**) —
+  a one-off outside the 26-card batch: JSON + two-panel collage, stored as
+  `data/held-photos/2026-10-01b/`. Fitted, added with add-plant --quick, credits, restamp
+  r313, deck-audit PASS on 447. Flagged: Oscar's own note that 'Isabel' was named
+  from the photo, not a label; the collage's pink fill strip at the lower right of the well.
+progress: 2026-10-01, late (**Clematis photo swapped**) — Oscar: "this might be a better
+  photo for that Clematis", a second collage with the bells sharp. Staged through the same
+  canvas pipeline, derivative rebuilt, first collage kept as -alt, PHOTO_FOCUS 100% -> 0%
+  (the sharp panel moved sides), credits note, restamp r312. Gate on the 6–10 tree was 17/18,
+  edge-test's 446-click walk under 3-job load again; alone it is the check that matters.
+progress: 2026-10-01, night (**cards 6–10 dealt, deck 441 -> 446**) — three photos came,
+  then the two missing ones as collages. Gaultheria 'Lilian' (berries), Sambucus LACED UP
+  (cut black foliage, late-season bronze tints), Clematis 'Freckles' (two-panel collage,
+  PHOTO_FOCUS 100% because the sharp bells are the right panel), Anemone 'Fantasy Aurora'
+  and Eucalyptus France Bleu (collages, kept whole). Credits x5, restamped r311,
+  deck-audit PASS on 446. Flagged, not changed: the anemone shows a single row of petals vs
+  "semi-double"; the elder's amber safety default still under-warns until Oscar OKs the
+  rewrite; [Unverified] Laced Up vs the held Black Lace from foliage alone.
+progress: 2026-10-01, later (**cards 1–5 dealt, deck 436 -> 441**) — Oscar sent the five
+  photos (Galaxy S24, 09-30, no AI markers). All five paired without doubt: grass, dark-leaved
+  saxifrage in flower, high-centred red Hybrid Tea, fully double orange-red floribunda, red-tipped
+  Leucothoe. Precious Love carried a pixelated label block at the bottom of the frame — cropped
+  off (top 3040 of 4000 rows, nothing else), original kept as -original.jpg. Saxifraga got a
+  PHOTO_FOCUS of 100% because its flowers hug the right edge and the 0.62 well cut them off.
+  add-plants-bulk --quick, credits --set x5, restamped r310; deck-audit PASS on 441;
+  run-all --jobs 3 run before the push. Flagged, not changed: #1 colours deeper than its prose,
+  #4 fully double vs "semi-double" with spotted leaves, both roses' outer petal tips outside the
+  well, #2 still printing the orange Toxic rung until Oscar OKs the rewrite.
+progress: 2026-10-01 (**26-card batch stored; 20 to deal as photos arrive, five at a
+  time**) — Oscar pasted 26 pre-built cards (label-photo research, same shape as the
+  2026-09-29 as-sent file) and asked for photos to be requested five at a time. Routine
+  of 2026-09-26d: `data/held-photos/2026-10-01/batch-as-sent.json` is the paste verbatim,
+  nothing is in timber.html until a photo lands. Checked against deck 436 / hold 76:
+  FOUR ARE ALREADY DEALT and three of them under a different latin form the exact-match
+  dedup would miss — Laurus nobilis; Rosa [Vanessa Bell] = `Rosa 'Auseasel'`; Cephalanthus
+  [Fiber Optics] = `'Bailoptics'`; Aster 'Rose Quartz' (common "Rose Crystal Aster") =
+  `Symphyotrichum dumosum 'Rose Crystal'`, found only by a genus-independent cultivar-word
+  search ([Unverified] that Rose Quartz and Rose Crystal are one cultivar; Oscar's own
+  note says the names co-occur). ONE IS HELD — Physocarpus LITTLE DEVIL ('Donna May'), a
+  photo deals it; his new JSON differs from the held text (H7 vs H6, size, peak, ratings),
+  his call which text goes in. ONE IS NOT A CARD — "Viburnum sp.", genus only, four hard
+  validator errors; needs the label's species/cultivar. The 20 that remain pass
+  check-plant-json 20/20 with the standing conventions applied in `batch-corrected.json`
+  (soil ≤26 + warning ≤44, sub-metre sizes in cm, deck-form aspect, CAPS trade names or
+  the dealt sibling's form); everything else as supplied, including the 3–5 ratings the
+  checker calls suspicious (same call as the 09-29 Skimmias). TOXICITY, run through the
+  card's real TOX_LADDER rather than the brief's description of it: Stipa's "not
+  generally considered poisonous" would print the orange Toxic rung ("poison" matches),
+  and Sambucus's cyanogenic warning matches nothing and would print the amber default —
+  one over-warns, one under-warns; both flagged with a one-line rewrite, neither changed.
+  No photo, no deck change, no test run needed: timber.html is untouched. Ledger had not
+  been written since 09-16 though batches landed on 09-23, 09-26 (×4), 09-27 (×3), 09-29
+  (deck 348 -> 436); the r270 brick's "get it live" half happened in that gap (r309 live).
 progress: 2026-09-16 (Safari — **buried cards become shells, so the deck's memory no
   longer grows with the deck**) — Oscar: "works fine on android but on apple has a
   melt down", with his own Android's report pasted (r269, 8GB, 10 cores, boot

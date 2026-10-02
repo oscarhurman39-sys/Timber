@@ -52,6 +52,8 @@ node tools/deal-plant.js "<latin>" photo.jpg   # a photo arrived -> deal that ca
 | `VERIFY-QUEUE.md` | Card facts that need a horticultural call, and why |
 | `PHOTO-REFRAME-BRIEF.md` | Prompt for cropping/de-labelling a photo with a vision model — returns crop coordinates, never a generated image |
 | `tools/reframe-photo.js` | Applies that crop JSON to the master with sharp — validates it first, refuses rather than guesses, invents no pixels |
+| `tools/compare-double.js` | A JSON for a card the deck already has: finds it, diffs every field with a verdict, writes the fields you pick (`--apply`) or one field (`--set`) |
+| `tools/add-swap.js` | A second photo for a card that already has one: makes the card flash between them (never replace, never ask) |
 | `tests/run-all.js` | One command for every check — run it green before pushing |
 
 ```sh
