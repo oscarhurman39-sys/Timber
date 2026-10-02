@@ -11,6 +11,12 @@ brick: The next batch, five photos at a time — same routine (store the paste v
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**three flash-between frames on Honeysuckle 'Rhubarb and Custard'; Viburnum davidii photo replaced**) —
+  Oscar's three photos for a dealt card, no JSON: add-swap three times (entry created, then two
+  appends), card text untouched. Then "Replacement photo for viburnum davidii" — said as a
+  replacement, so swapped (the Eve Price routine), old focus override dropped because the new
+  portrait master frames at the default. Record under `data/held-photos/2026-10-02d/`. Not live
+  until merged: PR after the gate.
 progress: 2026-10-02, late (**Little Devil dealt from the hold block and live: PR #52 merged by Oscar, deck 488 -> 489, hold 75**) — the
   one held card left from the 2026-10-01 batch; `deal-plant.js`, credit, export, r338. No label in the
   shot, so H7 stays ([Unverified] by direct read). Pushed on Oscar's "Push" with the gate still in its

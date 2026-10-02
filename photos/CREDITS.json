@@ -3284,6 +3284,36 @@
    "commercialUseCleared": true
   },
   {
+   "file": "lonicera-periclymenum-rhubarb-and-custard-buds.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Honeysuckle 'Rhubarb and Custard' card (PHOTO_SWAP alt): a whorl of deep raspberry buds before they open, 26 September.",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "lonicera-periclymenum-rhubarb-and-custard-flowers.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Honeysuckle 'Rhubarb and Custard' card (PHOTO_SWAP alt): open flowers, raspberry-pink tubes with cream lips and long stamens, wet with rain, 26 September.",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "lonicera-periclymenum-rhubarb-and-custard-leaves.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Honeysuckle 'Rhubarb and Custard' card (PHOTO_SWAP alt): glossy paired leaves in the foreground with the flowers behind.",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "lonicera-periclymenum-rhubarb-and-custard.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -5328,7 +5358,7 @@
   {
    "file": "viburnum-davidii.jpg",
    "source": "oscar",
-   "licence": "Oscar's own photograph — owned outright",
+   "licence": "Oscar's own photograph — owned outright. Replaced 2026-10-02 at Oscar's request (\"Replacement photo for viburnum davidii\"): the glossy veined leaves with red stems and a new shoot; the previous master is in git history.",
    "author": "Scion Studios",
    "sourceUrl": null,
    "commit": null,
