@@ -11,9 +11,12 @@ since: 2026-10-02  sessions-unchanged: 0
 progress: 2026-10-02, afternoon (**PR #50 merged by Oscar, deck 463 live**) — merge commit 8e11ce6
   on the deploy branch; pages.yml deploys it. Two days' work shipped: 27 cards, three
   flash-betweens, two tools and their protocol, two of Oscar's rule corrections. The feature
-  branch is restarted from the deploy head; the PR check-ins are cancelled. [Unverified] from
-  here that the live page carries r322 — the build container cannot reach github.io (403 from
-  the proxy); the Actions run is the check that can be read.
+  branch is restarted from the deploy head; the PR check-ins are cancelled. Live page verified
+  from the Pages run, not from here: run 123 (job 110882942762) deployed 8e11ce6, and its
+  served-bytes step fetched timber.html from a GitHub runner — "served : r322 · 2026-10-02 ·
+  338bbad … MATCH — the deployed page is byte-identical", verified on attempt 1, and
+  assetlinks.json served with the Play key. Read from the job log; the container itself still
+  cannot reach github.io (403 from the proxy).
 progress: 2026-10-02, later (**Coppertop viburnum and Golden King holly dealt, deck 461 -> 463**) —
   two more from Oscar with photos, after PR #50 went up; both new (compare-double), both
   dealt onto the same branch so the PR carries them. Golden King's visual reordered by one
