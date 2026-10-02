@@ -1,18 +1,20 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Deal the first five of the 2026-10-02c batch when Oscar's photos land — #1 Helleborus Ice
-  N’ Roses Early Rose, #2 Chrysanthemum 'Autumn Bronze', #3 Pittosporum BANNOW BAY, #4 Achillea
-  'Sassy Summer Sangria', #5 Camellia sasanqua 'Elfin Rose': split them out of
-  `data/held-photos/2026-10-02c/batch-corrected.json`, `add-plants-bulk.js --quick`, credits by
-  basename, restamp, the sequential gate, update that README's status line. The PR into the deploy
-  branch (the finished 2026-10-02b batch plus whatever of 2026-10-02c is in) goes up when Oscar
-  says "pr".
+brick: Deal the last four of the 2026-10-02c batch as Oscar's photos land — #6 Achillea NEW
+  VINTAGE RED, #7 Anemone Frilly Knickers, #8 Nepeta 'Cat’s Pajamas', #9 Coreopsis SOLANNA GOLDEN
+  SPHERE: split them out of `data/held-photos/2026-10-02c/batch-corrected.json`, `add-plants-bulk.js
+  --quick`, credits by basename, restamp, the sequential gate, update that README's status line. The
+  PR into the deploy branch goes up when Oscar says "pr".
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**cards 1–5 of 2026-10-02c dealt: Helleborus Ice N’ Roses Early Rose, Chrysanthemum 'Autumn Bronze', Pittosporum BANNOW BAY, Achillea 'Sassy Summer Sangria', Camellia 'Elfin Rose'; deck 479 -> 484**) —
+  three collages and two Galaxy shots, all whole in the well; bulk tool, credits, r336, one gate for
+  the five. The chrysanthemum reads red rather than bronze in the shot, noted only; the unnamed
+  Achillea is filed as Sassy Summer Sangria by list order ([Inference]). 5 of 9 in.
 progress: 2026-10-02, late (**batch 2026-10-02c stored: 9 entries, 9 fitted, no doubles**) — Oscar's
   third paste of the day, no photos yet; as-sent, corrected and README under
   `data/held-photos/2026-10-02c/`. Trade names take the deck's form up front this time (the

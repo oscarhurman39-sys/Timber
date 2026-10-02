@@ -94,4 +94,41 @@ Asked for five at a time, in batch order. The slug is what `photos/<slug>.jpg` w
 8. #8 Nepeta 'Cat’s Pajamas' → `nepeta-cat-s-pajamas`
 9. #9 Coreopsis SOLANNA GOLDEN SPHERE ('Dcoreo16') → `coreopsis-solanna-golden-sphere-dcoreo16`
 
-**Batch status:** 0 of 9 dealt. First five asked for: #1–#5.
+**Card 1 dealt** (Oscar's photo, no text: a two-panel collage from the collage app, 2160x3324, no camera
+EXIF, a 22:09 timestamp from the collage; no AI or C2PA markers; staged 1200x1847). Conventions exactly as
+in `batch-corrected.json`; every other field as supplied. Deck 479 -> 480, hold 76 unchanged.
+`add-plants-bulk.js --quick`, credit by basename, restamped r334. The original here is byte-identical to
+the file Oscar sent; the collage is kept whole.
+
+| # | card | notes |
+|---|---|---|
+| 1 | Helleborus Ice N’ Roses Early Rose ('Coseh 4000') | matches: rose-pink flowers with a paler edge, still nodding and half-open (no stamens showing yet), over leathery toothed dark green leaves with purple-flushed stems; a greenhouse wall behind. Both panels in the well at default framing; the collage app's blurred pink-green fill behind the stats panel. In flower on the bench at the start of October against a Nov-Apr band — a bench photo says nothing about flowering time. |
+
+**Cards 5 and 2 dealt** (Oscar's photos, "Camellia and Autumn Bronze": the Camellia a two-panel collage from
+the collage app, 2160x3840, no camera EXIF, staged 1200x2133; the Chrysanthemum a Galaxy S24 shot of
+2026-10-02 15:43, 4000x3000 with EXIF orientation 6, staged upright 1200x1600; no AI or C2PA markers in
+either). Conventions exactly as in `batch-corrected.json`; every other field as supplied (#2 at H4, see
+above). Deck 480 -> 482, hold 76 unchanged. One `add-plants-bulk.js --quick` run, credits by basename,
+restamped r335. Originals here are byte-identical to the files Oscar sent; the collage is kept whole. (The
+hellebore's gate was stopped a minute in so that one gate covers cards 1, 2 and 5.)
+
+| # | card | notes |
+|---|---|---|
+| 5 | Camellia sasanqua 'Elfin Rose' | matches: rose-pink semi-double flowers, one fully open with yellow stamens in the top panel, one opening with a green bud beside it in the lower panel, over glossy dark serrated leaves; bark mulch in the pot. Both panels in the well at default framing; the collage app's blurred fill behind the stats panel. In flower at the start of October, inside the Oct-Jan band. |
+| 2 | Chrysanthemum 'Autumn Bronze' | daisy-like flowerheads with dark red centres and orange-red petal tips, more buds behind, over divided green leaves. The open flowers read red rather than the card's "warm bronze to rusty orange-red"; the orange shows at the petal tips. Noted only. In flower at the start of October, inside the Sep-Nov band. |
+
+**Cards 3 and 4 dealt** (Oscar's photos, "Achillea, Pittosporum": the Achillea a Galaxy S24 shot of
+2026-10-02 15:47, 4000x3000 with EXIF orientation 6, staged upright 1200x1600; the Pittosporum a
+three-panel collage from the collage app, 2160x3840, no camera EXIF, staged 1200x2133; no AI or C2PA
+markers in either). Conventions exactly as in `batch-corrected.json`; every other field as supplied. Deck
+482 -> 484, hold 76 unchanged. One `add-plants-bulk.js --quick` run, credits by basename, restamped r336.
+Originals here are byte-identical to the files Oscar sent; the collage is kept whole. (The gate for cards
+1, 2 and 5 was stopped a minute in so that one gate covers all five.)
+
+| # | card | notes |
+|---|---|---|
+| 3 | Pittosporum tenuifolium BANNOW BAY ('Breebay') | matches: small rounded grey-green leaves edged cream on dark stems, the older leaves flushed purple-crimson — the card's "pink and crimson tones in colder weather" already showing in early October. All three panels in the well at default framing; the collage app's blurred fill behind the stats panel. |
+| 4 | Achillea millefolium 'Sassy Summer Sangria' | Oscar wrote "Achillea" without a cultivar and the batch has two: this one and NEW VINTAGE RED (#6). Filed as Sassy Summer Sangria because it is the next in the asked-for order; the shot — crimson-red flat clusters with yellow centres over fern-like grey-green leaves on a young plant — fits either card ([Inference]; if the next Achillea photo arrives named New Vintage Red this stands, if it arrives named Sassy Summer Sangria the two swap). A nursery label edge at the lower left of the frame, unreadable. In flower at the start of October, just past the Jun-Sep band. |
+
+**Batch status:** 5 of 9 dealt (#1–#5). Next in order: #6 Achillea NEW VINTAGE RED, #7 Anemone Frilly
+Knickers, #8 Nepeta 'Cat’s Pajamas', #9 Coreopsis SOLANNA GOLDEN SPHERE.
