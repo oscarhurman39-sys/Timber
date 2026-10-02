@@ -10,6 +10,9 @@ brick: Open the PR into the deploy branch when Oscar says "pr" — the feature b
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**gate 18/18 on d115a95, pushed on Oscar's "Push" with the browser suites
+  still running**) — the push went out with the fast checks and app-test green; the remaining suites
+  came back green four minutes later. Nothing to fix. Deck 488, r337, both batches fully dealt.
 progress: 2026-10-02, late (**batch 2026-10-02c complete, all nine dealt: Helleborus Ice N’ Roses Early Rose, Chrysanthemum 'Autumn Bronze', Pittosporum BANNOW BAY, both Achilleas, Camellia 'Elfin Rose', Anemone Frilly Knickers, Nepeta 'Cat’s Pajamas', Coreopsis SOLANNA GOLDEN SPHERE; deck 479 -> 488**) —
   collages and Galaxy shots in four drops, all whole in the well; bulk tool, credits, r337, two gates
   (cards 1–5, then 6–9). The chrysanthemum reads red rather than bronze in the shot, noted only; the
