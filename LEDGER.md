@@ -1,19 +1,25 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Deal the next five of the 2026-10-02b batch when Oscar's photos land — #13 Heuchera
-  'Ifhepr' (trade-name form `Heuchera CRANBERRY ('Ifhepr')` if Oscar wants it, as the Geranium got),
-  #15 Elaeagnus 'Viveleg', #16 Photinia 'Carré Rouge', #18 Elaeagnus 'Moonlight', #19 Euonymus
-  'Extravaganza': split them out of `data/held-photos/2026-10-02b/batch-corrected.json`,
-  `add-plants-bulk.js --quick`, credits by basename, restamp, the sequential gate, update that
-  README's status line. Two cards wait on Oscar reading a label: #1 Cordyline (a red-leaved form,
-  photo stored as `cordyline-australis-as-sent.jpg`) and #11 'Winterberry' (lime leaves, name
-  unverified, photo stored as `heuchera-winterberry-as-sent.jpg`).
+brick: Open the PR for the 2026-10-02b batch into the deploy branch when Oscar says "pr" — the
+  feature branch carries 16 new cards, three second frames and the three doubles' fills (deck 463
+  -> 479, r333); every push went through the sequential gate. Until he says so, nothing on the
+  batch is pending. Then the next batch, five photos at a time.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, late (**batch 2026-10-02b complete: Viveleg, Moonlight, Extravaganza, Carré Rouge and Heuchera CRANBERRY dealt; second frames for the Elaeagnus species and Timeless Night; deck 474 -> 479**) —
+  seven photos in four drops; one named by Oscar ("Sorry this is Viveleg"), which also settled the
+  yellow-centred one as Moonlight ([Inference]); the Cranberry takes the trade-name form as the
+  Geranium did. Bulk tool, credits, add-swap, r333, one gate over the whole evening (five earlier
+  gates stopped within minutes so later drops could join). All 16 new cards and 3 second frames in.
+progress: 2026-10-02, late (**Cordyline australis and Heuchera 'Winterberry' dealt on Oscar's call, deck 472 -> 474**) —
+  "Why do you need the label, wasn't it in the json?" It was: the JSON came from the labels, so the
+  label names are the card names and the doubts are flags in the README, not holds. Both dealt from
+  the stored photos, r330. 11 of 16 from the batch are in. Lesson for the rule: a name the label
+  gives is the card's name; verification notes go in the record, the card does not wait on them.
 progress: 2026-10-02, night (**card 14 Geranium DREAMLAND ('Bremdream') dealt, deck 471 -> 472; Cotinus 'Grace' gets a second frame**) —
   Oscar queried the name ("did the json really get made with the name beamland"); his JSON said
   'Bremdream', the RHS lists Geranium [Dreamland] ('Bremdream'), so the card takes the deck's

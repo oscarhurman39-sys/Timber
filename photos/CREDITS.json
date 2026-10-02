@@ -1304,6 +1304,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "cordyline-australis.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "cornus-alba-minbat.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -1794,6 +1804,36 @@
    "commercialUseCleared": true
   },
   {
+   "file": "elaeagnus-submacrophylla-moonlight.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "elaeagnus-submacrophylla-silvered.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Ebbinge's Silverberry card (PHOTO_SWAP alt): silver-scaled young leaves in sun, 2 October; the first frame is the mature leathery foliage.",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "elaeagnus-submacrophylla-viveleg.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "elaeagnus-submacrophylla.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright (established by Oscar, 2026-08-09)",
@@ -2001,6 +2041,16 @@
    "sourceUrl": null,
    "commit": "ad26dd4",
    "commitSubject": "Add Golden Japanese Spindle; fix photo-slug bug + add focus-photo audit rule",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "euonymus-japonicus-extravaganza.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
    "commercialUseCleared": true
   },
   {
@@ -2484,6 +2534,16 @@
    "commercialUseCleared": true
   },
   {
+   "file": "heuchera-cranberry-ifhepr.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "heuchera-guacamole.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
@@ -2504,7 +2564,27 @@
    "commercialUseCleared": true
   },
   {
+   "file": "heuchera-villosa-timeless-night-bells.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright. Second frame for the Heuchera 'Timeless Night' card (PHOTO_SWAP alt): a spray of coral-pink bells over the near-black leaves, 2 October; the first frame is the foliage.",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
    "file": "heuchera-villosa-timeless-night.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "heuchera-winterberry.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",
@@ -3776,6 +3856,16 @@
   },
   {
    "file": "phlox-paniculata-david.jpg",
+   "source": "oscar",
+   "licence": "Oscar's own photograph — owned outright",
+   "author": "Scion Studios",
+   "sourceUrl": null,
+   "commit": null,
+   "commitSubject": "staged after CREDITS.json was created — not yet committed",
+   "commercialUseCleared": true
+  },
+  {
+   "file": "photinia-fraseri-carre-rouge.jpg",
    "source": "oscar",
    "licence": "Oscar's own photograph — owned outright",
    "author": "Scion Studios",

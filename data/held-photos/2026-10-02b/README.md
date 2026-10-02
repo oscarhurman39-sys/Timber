@@ -87,7 +87,7 @@ prose and all ratings.
 | 9 | Euphorbia × martini 'Waleulitr' | Drained, neutral to chalky | Sharp drainage; no heavy wet winter soil | East / South / West (85) | 30–40 cm / 30–40 cm |
 | 10 | Heuchera 'Black Forest Cake' | Fertile, moist, drained | Crown must drain, especially in winter | East / South / West (70) | 20–30 cm / 30–40 cm |
 | 11 | Heuchera 'Winterberry' | Humus-rich, moist, drained | No winter waterlogging around the crown | East / South / West (60) | 30 cm / 40 cm |
-| 13 | Heuchera 'Ifhepr' | Fertile, moist, drained | No winter wet; never let the roots dry out | East / West (50) | 30 cm / 40 cm |
+| 13 | Heuchera CRANBERRY ('Ifhepr') — trade-name form on dealing | Fertile, moist, drained | No winter wet; never let the roots dry out | East / West (50) | 30 cm / 40 cm |
 | 14 | Geranium DREAMLAND ('Bremdream') — trade-name form, see above | Any fertile, well-drained | No persistently waterlogged soil | East / South / West (75) | 30–40 cm / 40–50 cm |
 | 15 | Elaeagnus × submacrophylla 'Viveleg' | Any well-drained soil | No waterlogging; yellows on shallow chalk | East / South / West (75) | 2.5-4 m / 2.5-4 m (unchanged) |
 | 16 | Photinia × fraseri 'Carré Rouge' | Any fertile, well-drained | No wet, heavy or compacted ground | East / South / West (85) | 2-3 m / 1.5-2 m (unchanged) |
@@ -150,7 +150,7 @@ Asked for five at a time, in batch order. The slug is what `photos/<slug>.jpg` w
 10. #10 Heuchera 'Black Forest Cake' → `heuchera-black-forest-cake`
 11. #11 Heuchera 'Winterberry' → `heuchera-winterberry` (name [Unverified], see above)
 12. #12 Heuchera 'Timeless Night' → second frame on the dealt `Heuchera villosa 'Timeless Night'`
-13. #13 Heuchera 'Ifhepr' → `heuchera-ifhepr`
+13. #13 Heuchera CRANBERRY ('Ifhepr') → `heuchera-cranberry-ifhepr` (was `heuchera-ifhepr` before the form change)
 14. #14 Geranium DREAMLAND ('Bremdream') → `geranium-dreamland-bremdream` (was `geranium-bremdream` before the form change)
 15. #15 Elaeagnus × submacrophylla 'Viveleg' → `elaeagnus-submacrophylla-viveleg`
 16. #16 Photinia × fraseri 'Carré Rouge' → `photinia-fraseri-carre-rouge`
@@ -174,7 +174,7 @@ the files Oscar sent; the collages are kept whole.
 | 4 | Acer palmatum 'Seiryu' | 2478x3374 | 1200x1634 | matches: finely dissected green leaves with red-tinted tips on yellow-green shoots. |
 | 5 | Malus 'Red Belle de Boskoop' | collage 2160x3840 (leaves and stem left, backlit leaves and the graft union right) | 1200x2133 | foliage only: serrated ovate leaves with felted undersides, no fruit in the shot. [Unverified] the cultivar from leaf alone; filed as Red Belle de Boskoop because that is the card the photo was sent for. Both panels whole; the collage app's blurred fill sits behind the stats panel, as on the Nerine and Coppertop cards. |
 
-**#1 Cordyline — not dealt, photo stored as `cordyline-australis-as-sent.jpg`.** The collage (2160x3840,
+**#1 Cordyline — held at first, photo stored (now `cordyline-australis.jpg`, dealt below).** The collage (2160x3840,
 two panels of the same plant) shows a red-leaved cordyline: deep burgundy-red sword leaves with pinker
 midribs on a short trunk. That is a coloured-leaf cultivar, not the plain green species the JSON describes
 (hue 110, no leaf colour in `visual`), and the JSON's own `uncertain` says the label named no cultivar.
@@ -236,7 +236,7 @@ CREDITS note; restamped r329. The shot: backlit scarlet rounded leaves on dark r
 showing through — autumn colour starting at the beginning of October, which the card's own prose already
 claims ("fiery autumn colour"). Card text and ratings unchanged. The original here is byte-identical.
 
-**#11 Heuchera 'Winterberry' — photo stored, not dealt** (`heuchera-winterberry-as-sent.jpg`: Galaxy S24,
+**#11 Heuchera 'Winterberry' — held at first, then dealt (below)** (`heuchera-winterberry.jpg`: Galaxy S24,
 2026-10-02 11:07, 4000x3000, orientation 6; no AI markers). The shot shows lime-green ruffled, lobed
 leaves with fine red margins and a silvery overlay between the veins, and no label. It does not settle
 the name: Oscar's own `uncertain` says the cultivar record could not be verified and asks for the label,
@@ -245,7 +245,50 @@ lime-leaved plant. [Unverified] what this plant is. Waits on the label. When it 
 `common` and `hue` in `batch-corrected.json` to the label's name (the slug follows the latin), then deal
 from the stored file.
 
-**Batch status:** 9 of 16 dealt (#2–#7, #9, #10, #14); #8's second frame in. #1 and #11 wait on their
-labels. Next five in order: #13 Heuchera 'Ifhepr', #15 Elaeagnus 'Viveleg', #16 Photinia 'Carré Rouge',
-#18 Elaeagnus 'Moonlight', #19 Euonymus 'Extravaganza'. Then #12 Timeless Night and #17 Elaeagnus ×
-submacrophylla as second frames.
+**Cards 1 and 11 dealt after all** (Oscar, on being asked for the labels: "Why do you need the label,
+wasn't it in the json?"). It was: the JSON was read from the labels, so the labels say what the JSON says —
+"Cordyline australis" with no cultivar, and "Heuchera 'Winterberry'" — and the bench label is what a
+customer sees. Both dealt under those names from the photos already stored here (renamed from `-as-sent`
+to the slug names). Every field as supplied, including `hue` (it only colours the fallback behind the
+photo, so the photo colours were not pushed into it). Deck 472 -> 474, hold 76 unchanged. One
+`add-plants-bulk.js --quick` run, credits by basename, restamped r330.
+
+| # | card | notes |
+|---|---|---|
+| 1 | Cordyline australis | collage 2160x3840, staged 1200x2133; both panels whole at default framing, the collage app's blurred fill behind the stats panel. The plant is a red-leaved form sold under the species name — burgundy-red sword leaves with pinker midribs. [Unverified] which cultivar; the card describes the species (no leaf colour in `visual`) and is rated H4 — [Unverified] whether a red-leaved form is as hardy as the species. The dealt Charlie Boy card is H3. |
+| 11 | Heuchera 'Winterberry' | Galaxy S24 shot, staged upright 1200x1600; lime-green ruffled leaves with fine red margins fill the well. The name is the label's; [Unverified] that it is a registered cultivar (no record found by search, see above). The `visual` names no colour, so nothing on the card is contradicted by the photo. |
+
+**Label text, as Oscar typed it afterwards (2026-10-02, evening):** `CORDYLINE idéal en pot et bac` and
+`HEUCHERA WINTERBERRY`. So the Heuchera card carries the bench name exactly. The Cordyline label gives
+the genus only; "australis" is the JSON's identification ([Inference] in Oscar's own `uncertain` note:
+"the most likely identification from the supplied label wording"), kept because the card is found by
+"Cordyline" either way and nothing on the label contradicts it.
+
+**Cards 15, 16, 18 and 19 dealt; #17's second frame added** (Oscar's photos in two drops: three with no
+text, then "Sorry this is Viveleg" with a fourth, then "Photinia carre rouge"; all Galaxy S24, 2026-10-02
+10:59–11:02, 4000x3000 with EXIF orientation 6, staged upright 1200x1600; no AI or C2PA markers).
+Conventions exactly as in `batch-corrected.json`; every other field as supplied. Deck 474 -> 478, hold 76
+unchanged. Two `add-plants-bulk.js --quick` runs, credits by basename, `add-swap.js` for the species,
+restamped r332. Originals here are byte-identical to the files Oscar sent. (The gate for cards 1 and 11
+was stopped a minute in so that one gate covers all of this evening's deals.)
+
+| # | card | notes |
+|---|---|---|
+| 15 | Elaeagnus × submacrophylla 'Viveleg' | named by Oscar ("this is Viveleg"): leathery green leaves with a broad bright yellow margin, silver-speckled, a brown bud at the tip; matches "edged in bright yellow". |
+| 18 | Elaeagnus × submacrophylla 'Moonlight' | arrived without a name; filed as Moonlight because the leaves carry a yellow-to-lime centre with green margins, which is the batch's Moonlight description, and Oscar then named the yellow-edged one Viveleg ([Inference] — the dealt 'Limelight' looks the same in leaf). |
+| 19 | Euonymus japonicus 'Extravaganza' | arrived without a name; the batch's only Euonymus: glossy leaves with dark green centres and broad creamy-yellow margins, young leaves yellower, on a woody stem; matches "fresh growth emerges conspicuously creamy-white". A pink label edge at the far left of the frame. |
+| 16 | Photinia × fraseri 'Carré Rouge' | matches: a shoot of bright red new leaves over dark green mature ones, on red stems; another red flush lower left; a nursery label blurred in the background. |
+| 17 | Elaeagnus ×submacrophylla (dealt) | **second frame** `photos/elaeagnus-submacrophylla-silvered.jpg`: silver-scaled young leaves in sun, the species' plain foliage with no variegation. `add-swap.js --as silvered` (focus 50% 45%, hold 3.5s); card text unchanged. |
+
+**Card 13 dealt; #12's second frame added** (Oscar's photos, "The two last Heucheras in the list": both
+Galaxy S24, 2026-10-02 11:06, 4000x3000 with EXIF orientation 6, staged upright 1200x1600; no AI or C2PA
+markers). Deck 478 -> 479, hold 76 unchanged. Bulk tool, credit by basename, `add-swap.js`, restamped r333.
+Originals here are byte-identical to the files Oscar sent.
+
+| # | card | notes |
+|---|---|---|
+| 13 | Heuchera CRANBERRY ('Ifhepr') | latin in the deck's trade-name form, as the Geranium (the README note above offered it; Oscar did not object): the RHS form in his own `uncertain` is Cranberry ('Ifhepr'), Indian Summer Series; `common` "Heuchera Indian Summer Cranberry" as supplied. Photo: ruffled leaves in coral, peach-orange and cranberry-red, wet from rain, hairy red stems — matches "ruffled cranberry-red to purple-red foliage" with more peach in it than the text says. Filed as this card because it is the batch's only heuchera left and the other photo is unmistakably Timeless Night ([Inference]). |
+| 12 | Heuchera villosa 'Timeless Night' (dealt) | **second frame** `photos/heuchera-villosa-timeless-night-bells.jpg`: a spray of coral-pink bells over near-black ruffled leaves — the card's own "clear rose-pink bells". `add-swap.js --as bells` (focus 50% 45%, hold 3.5s); card text unchanged. Bells open on the bench in October against a May-Sep band — a bench photo says nothing about flowering time. |
+
+**Batch complete: 16 of 16 new cards dealt (#1–#7, #9–#11, #13–#16, #18, #19) and all three doubles
+(#8, #12, #17) carry a second frame.** Deck 463 -> 479 over the batch; hold 76 unchanged throughout.
