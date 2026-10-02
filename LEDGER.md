@@ -1,13 +1,26 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Photograph Little Devil (the one held card left from the 2026-10-01 batch) and read its
-  label's hardiness while you are there — the photo deals it with `tools/deal-plant.js`, and the
-  label settles whether H7 stays or `compare-double.js --set hardiness=H6` runs.
-  (Displaced, not dropped: the r270 iPhone check — the shell deck is live, what remains is
-  Oscar opening the app on an iPhone that crashed and pasting back the *Report a problem*
-  text. The toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
+brick: Deal the first five of the 2026-10-02b batch when Oscar's photos land — #1 Cordyline
+  australis, #2 Rhododendron 'Cunningham’s White', #3 Acer palmatum var. coreanum, #4 Acer palmatum
+  'Seiryu', #5 Malus 'Red Belle de Boskoop': split them out of
+  `data/held-photos/2026-10-02b/batch-corrected.json`, `add-plants-bulk.js --quick`, credits,
+  restamp, the sequential gate, update that README's status line. Photos of #8, #12 and #17 are
+  second frames on dealt cards (`add-swap.js`), not new cards.
+  (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
+  card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
+  crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
+  unchanged since 2026-09-13.)
 since: 2026-10-02  sessions-unchanged: 0
+progress: 2026-10-02, evening (**batch 2026-10-02b stored: 19 entries, 16 fitted, 3 doubles resolved**) —
+  Oscar's second paste of the day, no photos yet; `batch-as-sent.json`, `batch-corrected.json` and a
+  README of every call under `data/held-photos/2026-10-02b/`. `compare-double.js` found three dealt
+  cards (Cotinus 'Grace', Heuchera villosa 'Timeless Night', Elaeagnus ×submacrophylla) and the
+  dealt card took the incoming only where it was blank — foliage on two, toxicity, water, uses —
+  r323; five PROBABLE word-hits (Korean pine, 'Nigra', Walberton's Silver Dormouse, 'Limelight'
+  twice, PINK MARBLE) were different plants. Facings derived from the sun band because the paste
+  states light levels only. [Unverified] Heuchera 'Winterberry' as a cultivar name — no record
+  found by search; the label photo settles it. Photos asked for five at a time in batch order.
 progress: 2026-10-02, afternoon (**PR #50 merged by Oscar, deck 463 live**) — merge commit 8e11ce6
   on the deploy branch; pages.yml deploys it. Two days' work shipped: 27 cards, three
   flash-betweens, two tools and their protocol, two of Oscar's rule corrections. The feature
