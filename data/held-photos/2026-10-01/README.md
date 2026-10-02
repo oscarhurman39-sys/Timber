@@ -314,3 +314,14 @@ compare the stats, decide, flash between double photos. `tools/compare-double.js
   JSON said H7. The RHS page itself is blocked from the build container, so this is
   [Unverified] by direct read. H7 stays on the held card, with the label to be read when the
   plant is photographed — if the label says H6, one `--set hardiness=H6` fixes it.
+
+**#25 Little Devil dealt** (2026-10-02, late: Oscar's photo "Little devil", Galaxy S24, 2026-09-30 13:22,
+4000x3000 with EXIF orientation 6, no AI or C2PA markers; staged upright 900x1200 by `tools/deal-plant.js`,
+which lifted the written card out of PLANTS_ON_HOLD byte-for-byte and staged the photo under its slug;
+credit by basename; `plants-tool.js export`; restamped r338). Deck 488 -> 489, hold 76 -> 75. The original
+here is byte-identical to the file Oscar sent. The shot: small glossy burgundy-purple serrated leaves on
+red stems, a few coppery new tips, the rest of the bush soft behind — matches the card. No label in the
+frame, so the hardiness stays as the card carries it: H7, [Unverified] by direct read of the RHS, kept on
+two search summaries and the H7 of the deck's other Physocarpus cards (Oscar asked that it be checked on
+2026-10-02 because the plant is smaller-leaved than its siblings). With this the whole 2026-10-01 batch is
+done: 20 new cards, 4 doubles, Little Devil, and the one entry that was never a card (#19 "Viburnum sp.").
