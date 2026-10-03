@@ -1,16 +1,50 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: Merge PR #53 — it now carries everything since PR #52: Red Cascade, the Dissectum maple,
-  the honeysuckle and Eternal Flame frames and the Viburnum davidii replacement (deck 489 -> 491,
-  r342, gate 18/18 on its head). Oscar merges, or says "merge". Then the next batch, five photos
-  at a time; say "not live until merged" on every push; a push to the feature branch while a PR
-  is open joins that PR, so update its title and body rather than opening another.
-  (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
-  card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
-  crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
-  unchanged since 2026-09-13.)
-since: 2026-10-02  sessions-unchanged: 0
+brick: Merge PR #54 — the stored 2026-10-03 batch (42 cards) and its first three dealt: Rhododendron
+  'Ramapo', Robinia 'Frisia', Gentiana 'The Caley'; Berrybank Dome resolved as a double of the dealt
+  Gentiana sino-ornata; Alstroemeria 'Valley Beach' named from its label (deck 491 -> 494, r343, gate
+  18/18 on its head b0fe58e). Oscar merges, or says "merge". Then a Little Lime photo he is sure of, and
+  photos for #6–#10 (Princess Citrus, Blue Ice, CUTIE PIE, Gambit Variegata Rose, Evergold), five at a
+  time; say "not live until merged" on every push; a push to the feature branch while a PR is open joins
+  that PR, so update its title and body rather than opening another. Open for Oscar, not blocking:
+  rename the dealt Gentiana sino-ornata card to 'Berrybank Dome' (he says that is the plant), or leave
+  the species name with "Berrybank Dome" in cvs as now.
+  (Displaced, not dropped: Little Devil's label hardiness, H7 [Unverified] by direct read; the r270 iPhone
+  check — Oscar opening the app on an iPhone that crashed and pasting back the *Report a problem* text;
+  the toxicity paste, 317 of 432 blank, unchanged since 2026-09-13.)
+since: 2026-10-03  sessions-unchanged: 0
+progress: 2026-10-03, afternoon (**PR #54 opened on b0fe58e; gate 18/18**) — the sequential gate (app-test
+  254s, edge-test 263s) came back green four minutes after the push; PR #54 carries both commits of the
+  day (the stored batch and the three dealt), subscribed, check-in armed. Not live until merged.
+progress: 2026-10-03, afternoon (**cards 2, 3 and 4 of the 2026-10-03 batch dealt: Rhododendron 'Ramapo', Robinia 'Frisia', Gentiana 'The Caley'; deck 491 -> 494**) —
+  Oscar's three photos with a note. Little Lime paused at his word ("not sure the plant in the photo is
+  right"). The gentian collage filed as The Caley from "the other gentalia in the deck alright is the
+  berrybankdome" ([Inference]; the note is quoted in the batch README and the photo fits either entry), so
+  Berrybank Dome is a double of the dealt Gentiana sino-ornata and took only the card's blank cvs under
+  the NEW-SESSION rules; renaming the card is his call. His label text for the Alstroemeria reads
+  "Alstroem Valley Beach# Paper": entry 37 is `Alstroemeria 'Valley Beach'` now, "Paper" the packaging
+  field GPT predicted. sharp was not in the container, so the bulk tool staged the masters and warned that
+  the card derivatives were unbuilt — `npm i -g sharp`, derivatives built, then all three rendered at
+  phone size from a `?cards=3` deck: whole in the well at default framing, no PHOTO_FOCUS. Credits by
+  basename, restamp r343, originals byte-identical, no AI or C2PA markers. Committed and pushed with the
+  gate still in its browser suites (the stop hook asked for the push; the feature branch does not deploy);
+  the PR waited for the gate.
+progress: 2026-10-03 (**batch 2026-10-03 stored: 42 entries, 42 fitted, no doubles**) — Oscar's paste
+  "strait from gpt", 42 cards from bench labels, no photos; as-sent, corrected and README under
+  `data/held-photos/2026-10-03/`. compare-double: no card for any of the 42 (ten PROBABLE word-hits, all
+  different plants). check-plant-json: 42/42 after the one hard error, #27 "H1C" → H1c. Layout fields
+  fitted by a script that asserts the 26/44 budgets and calls fit-incoming's deriveFacing; eight codes take
+  the CAPS trade-name form their genus already carries (LITTLE LIME, CUTIE PIE, MOOODZ FEARLESS, BIG &
+  EASY PURPLE, SUPERSTAR, MAGIC BALL, LIVING RED VELVET, STARBURST CHIFFON), pairings GPT's and
+  [Unverified] from here. New this batch: the 42 rows appended to a scratch copy's hold block and
+  plant-sense run on it — issue list byte-identical to the live deck's, --strict 0 — so the Dissectum
+  surprise cannot recur at deal time for these cards. Data only, no deck change; fast checks 9/9. Photos
+  asked for five at a time.
+progress: 2026-10-03 (**PR #53 merged by Oscar, deck 491 live**) — merged 2026-10-02 23:09 UTC, merge
+  commit 5ebd536 on the deploy branch; Pages run 126 (job 111066537215) deployed it, conclusion success,
+  and the "Verify the deployed page is this commit" step passed (read from the run's job via the GitHub
+  API; github.io is still blocked from the container). This session's feature branch starts from that head.
 progress: 2026-10-02, late (**gate 18/18 on ab8dd7a; pushed; PR #53 updated to carry it**) — a push
   to the feature branch while PR #53 was open joined that PR (GitHub allows one open PR per head),
   so its title and body were rewritten to cover all three commits instead of opening a new one.
