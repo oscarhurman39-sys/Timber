@@ -116,7 +116,7 @@ entries, `hardiness` on one.
 | 34 | Physocarpus opulifolius MAGIC BALL ('Lp1') — trade-name form | Most soils, moist, drained | No prolonged waterlogging | East / South / West (75) | 0.8-1.2 m / 0.8-1.2 m (unchanged) |
 | 35 | Hydrangea paniculata 'Little Fresco' | Fertile, moist, drained | No prolonged drought | East / South / West (75) | 70–80 cm / 60–70 cm |
 | 36 | Hydrangea paniculata LIVING RED VELVET ('LC NO19') — trade-name form | Fertile, moist, drained | No prolonged drought | East / South / West (75) | 1 m / 80 cm |
-| 37 | Alstroemeria sp. | Fertile, moist, drained | No severe winter waterlogging | East / South / West (80) | 40–80 cm / 30–60 cm |
+| 37 | Alstroemeria 'Valley Beach' — label read 2026-10-03, see below | Fertile, moist, drained | No severe winter waterlogging | East / South / West (80) | 40–80 cm / 30–60 cm |
 | 38 | Euonymus alatus 'Compactus' | Any well-drained soil | Needs good light for autumn colour | East / South / West (75) | 0.5-1 m / 1-1.5 m (unchanged) |
 | 39 | Acer platanoides 'Crimson King' | Moist or well-drained | Needs substantial space at maturity | East / South / West (80) | 8-12 m / 8 m+ (unchanged) |
 | 40 | Acer pseudoplatanus 'Drummondii' | Fertile, moist, drained | Cut out reverted all-green shoots at once | East / South / West (70) | 8-12 m / 8 m+ (unchanged) |
@@ -158,13 +158,10 @@ The JSON was read from bench labels, so the label names are the card names (NEW-
   species **[Unverified]**, confirm from the photo. #9 Gaura filed under Oenothera (the deck's form, four
   Oenothera lindheimeri cards). #26 Heuchera 'Toncka Green & Brown': trade records only, thin
   documentation. #6 Echinacea H6 is GPT's reading of a stated cold-hardiness range.
-- **#37 Alstroemeria "Valley Paper" has no card name yet.** GPT deliberately did not invent one: a nursery
-  production list carries Valley Girl, Valley River, Valley Spring, Valley Time and Valley Wild with
-  "Paper" in an adjacent packaging column, so "Valley Paper" is probably two fields read as one. The
-  entry is stored as `Alstroemeria sp.` with its stats; **before it is dealt the latin must be set from the
-  label in Oscar's photo** (the photo slug follows the latin), in the deck's form `Alstroemeria <TRADE
-  NAME> ('<code>')` if the label gives a code, as `Alstroemeria INDIAN SUMMER ('Tesronto')`. H4 is a
-  genus-level placeholder until then.
+- **#37 Alstroemeria "Valley Paper" was named by the label the same day** — see "Label read" below.
+  GPT had deliberately not invented a cultivar: a nursery production list carries Valley Girl, Valley River,
+  Valley Spring, Valley Time and Valley Wild with "Paper" in an adjacent packaging column, and the label
+  bears that out.
 - #20 'HI Ocean' is kept as a quoted cultivar as supplied; whether HI Ocean is a cultivar or a trade name
   over a code is **[Unverified]** from here.
 
@@ -175,8 +172,7 @@ paniculata (the deck's paniculatas are H5–H6; GPT cites the breeder's −30°C
 
 ## Photo order and the filename each photo should match
 
-Asked for five at a time, in batch order. The slug is what `photos/<slug>.jpg` will be called (#37's
-changes with its latin).
+Asked for five at a time, in batch order. The slug is what `photos/<slug>.jpg` will be called.
 
 1. Hydrangea paniculata LITTLE LIME ('Jane') → `hydrangea-paniculata-little-lime-jane`
 2. Rhododendron 'Ramapo' → `rhododendron-ramapo`
@@ -214,9 +210,63 @@ changes with its latin).
 34. Physocarpus opulifolius MAGIC BALL ('Lp1') → `physocarpus-opulifolius-magic-ball-lp1`
 35. Hydrangea paniculata 'Little Fresco' → `hydrangea-paniculata-little-fresco`
 36. Hydrangea paniculata LIVING RED VELVET ('LC NO19') → `hydrangea-paniculata-living-red-velvet-lc-no19`
-37. Alstroemeria sp. → `alstroemeria-sp`
+37. Alstroemeria 'Valley Beach' → `alstroemeria-valley-beach`
 38. Euonymus alatus 'Compactus' → `euonymus-alatus-compactus`
 39. Acer platanoides 'Crimson King' → `acer-platanoides-crimson-king`
 40. Acer pseudoplatanus 'Drummondii' → `acer-pseudoplatanus-drummondii`
 41. Abelia × grandiflora 'Radiance' → `abelia-grandiflora-radiance`
 42. Hibiscus syriacus STARBURST CHIFFON ('Rwoods6') → `hibiscus-syriacus-starburst-chiffon-rwoods6`
+
+## Label read: #37 is Alstroemeria 'Valley Beach'
+
+Oscar's label text, pasted 2026-10-03: `P40-060 / Alstroem Valley Beach# Paper / 40 / U126 11 01715601`.
+The name on the label is **Valley Beach**; "Paper" is the packaging field GPT predicted sat beside the name
+(the earlier OCR had run the two together as "Valley Paper"). By the label rule the card is `Alstroemeria
+'Valley Beach'`, common "Alstroemeria Valley Beach", slug `alstroemeria-valley-beach`; written into
+`batch-corrected.json` with the label text added to its `uncertain`. [Unverified] whether Valley Beach is a
+cultivar or a trade name over a code (the deck's Alstroemeria INDIAN SUMMER ('Tesronto') form would then
+apply); its H4 and hardiness note are GPT's genus-level values from before the label was read, as supplied.
+The other label fields (P40-060, 40, U126 11 01715601) are kept here as sent and not interpreted.
+
+## Cards 2, 3 and 4 dealt (2026-10-03)
+
+Oscar's three photos, with: "P40-060 … [the label above] … is on the pause on little lime im not sure the
+plant in the photo is right, the other gentalia in the deck alright is the berrybankdome".
+
+- **#1 LITTLE LIME is paused** at Oscar's word: he is not sure the plant he photographed is the right one,
+  so no photo, and the card waits for one he is sure of.
+- **The gentian collage is filed as #4 'The Caley'.** [Inference] from the note: the two missing photos of
+  the five asked for are Little Lime (paused, above) and "the other gentian", which Oscar says is already in
+  the deck as the Berrybank Dome, so the one gentian he sent is The Caley. The photo itself cannot settle
+  it: deep blue trumpets with pale, dark-spotted throats over narrow grassy leaves fit both GPT entries.
+  If the reading is wrong the fix is the photo's name and its CREDITS entry; the card text is untouched.
+- **#5 'Berrybank Dome' is a double of the dealt `Gentiana sino-ornata`** (Oscar's 2026-09-19 photo, batch
+  2026-09-27b), per the same note, and was resolved with `compare-double.js --card "Gentiana sino-ornata"`
+  under the NEW-SESSION rules: `cvs` was blank on the card and is filled incoming, so it took "Berrybank
+  Dome" (rule 1; it also makes the label name searchable, since search reads cultivars). Everything else
+  stays with the dealt card: hue 225 (incoming 220), peak Sep-Nov (Aug-Oct; no sibling settles it), size
+  5–10 cm band (10 cm), hardinessNote, prose, every rating within an icon. Nothing was added for #5.
+  **Not done, Oscar's call:** renaming the card itself to `Gentiana 'Berrybank Dome'`. That is a deliberate
+  rename (`data/renames.json`, photo and CREDITS renamed, saved progress keyed by latin) and the standing
+  rules keep a dealt card's name, so it waits for a "rename it".
+
+The three dealt, in one `add-plants-bulk.js --quick` run (Ramapo and Frisia Galaxy S24 shots of 2026-10-03
+12:20 and 11:51, 4000x3000 with EXIF orientation 6, staged upright 1200x1600; The Caley a two-panel collage
+from the collage app, 2160x3151, no camera EXIF beyond a 14:27 timestamp, staged 1200x1751; byte scans of
+all three found no C2PA, JUMBF or `trainedAlgorithmicMedia` markers). Conventions exactly as in
+`batch-corrected.json`; every other field as supplied. Deck 491 -> 494, hold 75 unchanged; credits by
+basename; card derivatives built with sharp (not present in this container until installed; the bulk tool
+warned and the derivatives were built after); restamped r343. Originals here are byte-identical to the
+files Oscar sent; the collage is kept whole. The bulk run's data checks were green (data-audit, plant-sense
+--strict with the three in the deck: no new contradiction); its credits check failed only because the
+entries had not been written yet, and passed once they were.
+
+| # | card | notes |
+|---|---|---|
+| 2 | Rhododendron 'Ramapo' | matches: one open violet-purple flower with a long pink style and brown anthers over small oval leaves, blue-green with bronze-purple tints; a bench label at the lower left, unreadable. In flower on the bench on 3 October against an Apr-May band — a bench photo says nothing about flowering time. Flower and foliage whole in the well at default framing. |
+| 3 | Robinia pseudoacacia 'Frisia' | matches: golden-yellow pinnate leaves on a staked young tree, a label at the foot of the frame, unreadable. Leaflets fill the well at default framing. |
+| 4 | Gentiana 'The Caley' (reading above) | two-panel collage: a trumpet opening wide at the left, closed and half-open ones at the right, deep blue with pale, dark-spotted throats over narrow grassy leaves; the collage app's blurred fill behind the stats panel. Both panels in the well at default framing. In flower on 3 October, inside the Sep-Nov band. |
+
+Rendered at phone size (390x780, 2x) from a `?cards=3` deck after the derivatives were built: all three frame
+whole, no `PHOTO_FOCUS` override. Next to deal: #1 when Oscar has a photo he is sure of; then #6–#10 in
+batch order (Princess Citrus, Blue Ice, CUTIE PIE, Gambit Variegata Rose, Evergold).
