@@ -1,16 +1,18 @@
 # Next-brick ledger
 
 ## timber  [active]
-brick: The next batch, five photos at a time — same routine (store the paste verbatim under
-  `data/held-photos/<date>/`, `compare-double.js` for doubles, fit the layout fields with trade
-  names in the deck's form, `add-plants-bulk.js --quick` as photos land, credits by basename,
-  restamp, the sequential gate, push, PR as soon as the batch is complete). Say "not live until
-  merged" on every push; a push while a PR is open joins that PR, so update its title and body.
+brick: Deal Gentiana 'The Caley', the Amsonia and the yellow green-edged Echinacea when Oscar's
+  JSONs land — the three photos are stored under `data/held-photos/2026-10-03/` (none is a card; a
+  photo alone cannot make one). Then `add-plants-bulk.js --quick` with those files, credits by
+  basename, restamp, the sequential gate, push, PR. Say "not live until merged" on every push.
   (Displaced, not dropped: Little Devil's photo and label hardiness, which deals the last held
   card of the 2026-10-01 batch; the r270 iPhone check — Oscar opening the app on an iPhone that
   crashed and pasting back the *Report a problem* text; the toxicity paste, 317 of 432 blank,
   unchanged since 2026-09-13.)
-since: 2026-10-02  sessions-unchanged: 0
+since: 2026-10-03  sessions-unchanged: 0
+progress: 2026-10-03 (**three photos stored, waiting on JSONs**) — Gentiana 'The Caley', an Amsonia
+  and a yellow Echinacea with green-edged rays, none in the deck; photos kept byte-identical under
+  `data/held-photos/2026-10-03/` with a README; JSONs asked for. Data only; fast checks.
 progress: 2026-10-02, late (**PR #53 merged by Oscar, deck 491 live**) — merge commit 5ebd536; Pages
   run 126 (job 111066537215) deployed it and its served-bytes step passed (r342), assetlinks.json
   served. Read from the run, not from here. Feature branch restarted from the merged head, the
